@@ -5,12 +5,16 @@ import { useLanguage } from "./LanguageProvider";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function NavTabs() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const links = [
     ["/", t.nav.overview],
     ["/this-week", t.nav.thisWeek],
     ["/travel", t.nav.travel],
+    [
+      "/territory-travel",
+      lang === "es" ? "Travel territorial" : "Territory travel"
+    ],
     ["/fixtures", t.nav.fixtures],
     ["/territories", t.nav.territories],
     ["/signals", t.nav.signals],

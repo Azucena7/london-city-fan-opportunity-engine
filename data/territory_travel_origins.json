@@ -1,0 +1,116 @@
+[
+  {
+    "territory_id": "Bromley 016B",
+    "territory_name": "Bromley 016B",
+    "borough": "Bromley",
+    "origins": [
+      {
+        "label": "Bromley South",
+        "query": "Bromley South"
+      },
+      {
+        "label": "Bickley",
+        "query": "Bickley Station"
+      },
+      {
+        "label": "Chislehurst",
+        "query": "Chislehurst Station"
+      }
+    ]
+  },
+  {
+    "territory_id": "Croydon 045E",
+    "territory_name": "Croydon 045E / Shirley North",
+    "borough": "Croydon",
+    "origins": [
+      {
+        "label": "Shirley",
+        "query": "Shirley, Croydon"
+      },
+      {
+        "label": "East Croydon",
+        "query": "East Croydon Station"
+      },
+      {
+        "label": "Elmers End",
+        "query": "Elmers End Station"
+      }
+    ]
+  },
+  {
+    "territory_id": "Bromley 026A",
+    "territory_name": "Bromley 026A",
+    "borough": "Bromley",
+    "origins": [
+      {
+        "label": "Petts Wood",
+        "query": "Petts Wood Station"
+      },
+      {
+        "label": "Orpington",
+        "query": "Orpington Station"
+      },
+      {
+        "label": "Bromley South",
+        "query": "Bromley South"
+      }
+    ]
+  },
+  {
+    "territory_id": "Bromley 041A",
+    "territory_name": "Bromley 041A / Clock House",
+    "borough": "Bromley",
+    "origins": [
+      {
+        "label": "Clock House",
+        "query": "Clock House Station"
+      },
+      {
+        "label": "Beckenham Junction",
+        "query": "Beckenham Junction"
+      },
+      {
+        "label": "Bromley South",
+        "query": "Bromley South"
+      }
+    ]
+  },
+  {
+    "territory_id": "Croydon 013E",
+    "territory_name": "Croydon 013E / Selhurst",
+    "borough": "Croydon",
+    "origins": [
+      {
+        "label": "Selhurst",
+        "query": "Selhurst Station"
+      },
+      {
+        "label": "Norwood Junction",
+        "query": "Norwood Junction"
+      },
+      {
+        "label": "East Croydon",
+        "query": "East Croydon Station"
+      }
+    ]
+  },
+  {
+    "territory_id": "Lewisham 030A",
+    "territory_name": "Lewisham 030A / Downham",
+    "borough": "Lewisham",
+    "origins": [
+      {
+        "label": "Grove Park",
+        "query": "Grove Park Station"
+      },
+      {
+        "label": "Catford",
+        "query": "Catford Station"
+      },
+      {
+        "label": "Lewisham",
+        "query": "Lewisham Station"
+      }
+    ]
+  }
+]
