@@ -1,13 +1,18 @@
-# Automation placeholders
+# Frontend placeholder
 
-Future jobs:
-- refresh-weather
-- refresh-fixtures
-- refresh-attendance
-- refresh-attention-events
-- refresh-local-market
-- calculate-weekly-decision
-- post-match-learning
+Recommended implementation:
+- Next.js
+- TypeScript
+- Tailwind
+- MapLibre/Leaflet
+- Recharts
 
-Keep each job idempotent and source-aware.
-Every record should include `sourceUrl`, `checkedAt`, and `confidence` where possible.
+Build order:
+1. Weekly Decision Card
+2. Season decision calendar
+3. Territory Play Cards
+4. Competition map
+5. Opportunity map
+6. Ticketing comparison
+7. Local market / trends
+8. Learning loop
