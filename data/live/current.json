@@ -1,0 +1,8 @@
+{
+  "updated_at": "2026-09-01T15:00:00+02:00",
+  "status": "planning",
+  "weather": null,
+  "attendance_momentum": null,
+  "attention_availability": 62,
+  "notes": "Live score remains inactive until both weather and attendance momentum are available."
+}

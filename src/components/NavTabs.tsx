@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const links = [
   ["/", "Overview"],
+  ["/this-week", "This week"],
   ["/fixtures", "Fixtures"],
   ["/territories", "Territories"],
   ["/signals", "Live signals"],
