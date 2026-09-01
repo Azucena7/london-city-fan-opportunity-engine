@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./story.css";
 import "./live.css";
+import "./weather.css";
 
 export const metadata: Metadata = {
   title: "London City Fan Opportunity Lab",

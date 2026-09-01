@@ -2,6 +2,7 @@ import { NavTabs } from "@/components/NavTabs";
 import { ThisWeekHero } from "@/components/ThisWeekHero";
 import { LiveSignalGrid } from "@/components/LiveSignalGrid";
 import { EvidenceList } from "@/components/EvidenceList";
+import { WeatherLiveCard } from "@/components/WeatherLiveCard";
 
 export default function ThisWeekPage() {
   return (
@@ -18,13 +19,15 @@ export default function ThisWeekPage() {
 
       <ThisWeekHero />
 
+      <WeatherLiveCard targetDate="2026-09-04" />
+
       <section className="panel widePanel">
         <div className="sectionHeader">
           <div>
             <div className="eyebrow">SIGNAL STATE</div>
             <h3>Live decision readiness</h3>
           </div>
-          <span className="muted">Updated from current V1 inputs</span>
+          <span className="muted">Weather now refreshes automatically</span>
         </div>
         <LiveSignalGrid />
       </section>
@@ -43,8 +46,8 @@ export default function ThisWeekPage() {
         <div className="eyebrow">RULE</div>
         <h3>Unknown is not zero.</h3>
         <p className="muted">
-          Missing weather or attendance data should not be silently replaced by neutral values.
-          The live score activates only when both inputs are genuinely available.
+          Weather is now live. Attendance momentum remains inactive until a reliable
+          sales / scans / attendance source is available.
         </p>
       </section>
     </main>

@@ -1,0 +1,70 @@
+.weatherCard {
+  margin: 30px 0;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--surface);
+}
+
+.liveWeather {
+  background:
+    radial-gradient(circle at 80% 10%, rgba(216,255,79,.12), transparent 28%),
+    var(--surface);
+}
+
+.weatherGrid {
+  display: grid;
+  grid-template-columns: .65fr 1.6fr;
+  gap: 28px;
+  align-items: end;
+  padding: 28px 0 22px;
+}
+
+.weatherScore {
+  font-size: 92px;
+  line-height: .85;
+  font-weight: 900;
+  letter-spacing: -.07em;
+  color: var(--accent);
+}
+
+.weatherHeadline {
+  font-size: clamp(30px, 5vw, 58px);
+  font-weight: 900;
+  letter-spacing: -.05em;
+}
+
+.weatherFacts {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.weatherFacts span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: #c7d0cb;
+  font-size: 11px;
+}
+
+.weatherMeta {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+@media (max-width: 720px) {
+  .weatherGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .weatherMeta {
+    flex-direction: column;
+  }
+}
