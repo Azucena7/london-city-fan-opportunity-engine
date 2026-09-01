@@ -1,0 +1,225 @@
+.deltaForm {
+  grid-template-columns: 1.5fr .45fr auto;
+}
+
+.arrivalTarget {
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.arrivalTarget span {
+  color: var(--muted);
+  font-size: 9px;
+  margin-bottom: 3px;
+}
+
+.arrivalTarget strong {
+  font-size: 16px;
+}
+
+.deltaComparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 18px;
+  align-items: stretch;
+  padding: 28px 30px;
+}
+
+.deltaArrow {
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+  color: var(--lcl-hyperturq);
+}
+
+.scenarioCard {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  background: rgba(255,255,255,.025);
+}
+
+.waitingScenario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.scenarioTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: start;
+}
+
+.scenarioScore {
+  text-align: right;
+}
+
+.scenarioScore strong,
+.scenarioScore span {
+  display: block;
+}
+
+.scenarioScore strong {
+  font-size: 38px;
+  line-height: .9;
+  letter-spacing: -.05em;
+  color: var(--lcl-hyperturq);
+}
+
+.scenarioScore span {
+  color: var(--muted);
+  font-size: 8px;
+  margin-top: 6px;
+  font-weight: 800;
+}
+
+.scenarioDuration {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -.06em;
+  margin: 30px 0 18px;
+}
+
+.scenarioFacts {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.scenarioFacts div {
+  padding: 13px 10px 13px 0;
+}
+
+.scenarioFacts span,
+.scenarioFacts strong {
+  display: block;
+}
+
+.scenarioFacts span {
+  color: var(--muted);
+  font-size: 9px;
+  margin-bottom: 5px;
+}
+
+.scenarioFacts strong {
+  font-size: 13px;
+}
+
+.scenarioDisruptions {
+  margin-top: 14px;
+}
+
+.scenarioDisruptions p {
+  font-size: 10px;
+  color: #c7d0cb;
+}
+
+.engineResponse {
+  margin: 0 30px 30px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface-2);
+}
+
+.engineResponse.watch {
+  border-color: rgba(242,233,176,.38);
+}
+
+.engineResponse.high {
+  border-color: rgba(242,142,114,.5);
+}
+
+.engineResponseTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 18px;
+}
+
+.engineResponseTop h3 {
+  max-width: 760px;
+}
+
+.responseLabel {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  flex-shrink: 0;
+}
+
+.deltaMetrics {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  margin: 22px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.deltaMetrics div {
+  padding: 16px 14px 16px 0;
+}
+
+.deltaMetrics span,
+.deltaMetrics strong {
+  display: block;
+}
+
+.deltaMetrics span {
+  color: var(--muted);
+  font-size: 9px;
+  margin-bottom: 6px;
+}
+
+.deltaMetrics strong {
+  font-size: 22px;
+}
+
+.engineResponse > p {
+  color: #d7e2e7;
+  line-height: 1.5;
+  max-width: 900px;
+}
+
+.sampleWarning {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+@media (max-width: 860px) {
+  .deltaForm,
+  .deltaComparison {
+    grid-template-columns: 1fr;
+  }
+
+  .deltaArrow {
+    transform: rotate(90deg);
+  }
+
+  .deltaMetrics {
+    grid-template-columns: 1fr;
+  }
+
+  .scenarioFacts {
+    grid-template-columns: 1fr;
+  }
+
+  .engineResponseTop {
+    flex-direction: column;
+  }
+}

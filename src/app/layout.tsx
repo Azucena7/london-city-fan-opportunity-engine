@@ -9,6 +9,7 @@ import "./journey.css";
 import "./national.css";
 import "./i18n.css";
 import "./i18n-fixes.css";
+import "./travel-delta.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 export const metadata: Metadata = {

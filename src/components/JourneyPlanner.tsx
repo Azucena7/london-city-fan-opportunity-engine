@@ -3,6 +3,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import { SignalBadge } from "./SignalBadge";
 import { accessLabel, accessScore } from "@/lib/access";
+import { engineResponse, travelDelta } from "@/lib/travelDelta";
 import { useLanguage } from "./LanguageProvider";
 
 type Journey = {
@@ -39,31 +40,92 @@ type Payload = {
   journeys?: Journey[];
 };
 
-function localTime(value?: string) {
-  if (!value) return "—";
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) return value;
-  return parsed.toLocaleTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit"
+function bestJourney(data: Payload | null) {
+  if (!data?.journeys?.length) return null;
+  return [...data.journeys].sort((a, b) => a.duration - b.duration)[0];
+}
+
+function scoreJourney(journey: Journey | null) {
+  if (!journey) return null;
+
+  return accessScore({
+    duration: journey.duration,
+    changes: journey.changes,
+    walkingMinutes: journey.walkingMinutes,
+    disruptions: journey.disruptions.length
   });
 }
 
-export function JourneyPlanner({ matchDate, matchKickoff }: { matchDate?: string; matchKickoff?: string }) {
-  const { t } = useLanguage();
+function targetArrival(kickoff?: string) {
+  if (!kickoff) return undefined;
+
+  const parts = kickoff.split(":").map(Number);
+  if (parts.length < 2 || parts.some(Number.isNaN)) return undefined;
+
+  const total = parts[0] * 60 + parts[1] - 45;
+  const safe = (total + 24 * 60) % (24 * 60);
+
+  return `${String(Math.floor(safe / 60)).padStart(2, "0")}:${String(
+    safe % 60
+  ).padStart(2, "0")}`;
+}
+
+export function JourneyPlanner({
+  matchDate,
+  matchKickoff
+}: {
+  matchDate?: string;
+  matchKickoff?: string;
+}) {
+  const { t, lang } = useLanguage();
+
   const [origin, setOrigin] = useState("");
-  const [mode, setMode] = useState<"now" | "matchday">("now");
-  const [data, setData] = useState<Payload | null>(null);
   const [resolved, setResolved] = useState<Geocode | null>(null);
+  const [normalData, setNormalData] = useState<Payload | null>(null);
+  const [matchdayData, setMatchdayData] = useState<Payload | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const arrivalTime = targetArrival(matchKickoff);
+
+  async function loadJourney(
+    geo: Geocode,
+    scenario: "normal" | "matchday"
+  ): Promise<Payload> {
+    const params = new URLSearchParams();
+
+    if (scenario === "matchday" && matchDate && arrivalTime) {
+      params.set("date", matchDate);
+      params.set("time", arrivalTime);
+    }
+
+    if (geo.scope === "london") {
+      params.set("from", origin.trim());
+
+      if (scenario === "matchday" && matchDate && arrivalTime) {
+        params.set("timeIs", "Arriving");
+      }
+
+      const response = await fetch(`/api/journey?${params.toString()}`);
+      return response.json();
+    }
+
+    if (geo.postcode) params.set("postcode", geo.postcode);
+
+    const response = await fetch(
+      `/api/national-journey?${params.toString()}`
+    );
+
+    return response.json();
+  }
 
   async function submit(e: FormEvent) {
     e.preventDefault();
     if (!origin.trim()) return;
 
     setLoading(true);
-    setData(null);
     setResolved(null);
+    setNormalData(null);
+    setMatchdayData(null);
 
     try {
       const geoResponse = await fetch(
@@ -73,37 +135,35 @@ export function JourneyPlanner({ matchDate, matchKickoff }: { matchDate?: string
       setResolved(geo);
 
       if (geo.status !== "resolved") {
-        setData({
+        setNormalData({
           status: "unavailable",
           reason: geo.reason ?? t.travel.routeUnavailable
         });
         return;
       }
 
-      const params = new URLSearchParams();
+      const normalPromise = loadJourney(geo, "normal");
 
-      if (mode === "matchday" && matchDate) {
-        params.set("date", matchDate);
-        const [h,m] = (matchKickoff ?? "15:00").split(":").map(Number);
-        const total = h * 60 + m - 45;
-        params.set("time", `${String(Math.floor(total / 60)).padStart(2,"0")}:${String(total % 60).padStart(2,"0")}`);
-      }
+      const canPlanMatchday = Boolean(matchDate && arrivalTime);
+      const matchdayPromise = canPlanMatchday
+        ? loadJourney(geo, "matchday")
+        : Promise.resolve<Payload>({
+            status: "unavailable",
+            reason:
+              lang === "es"
+                ? "Falta fecha o kickoff verificado para calcular el escenario matchday."
+                : "A verified fixture date or kickoff is required for the matchday scenario."
+          });
 
-      let endpoint: string;
+      const [normal, matchday] = await Promise.all([
+        normalPromise,
+        matchdayPromise
+      ]);
 
-      if (geo.scope === "london") {
-        params.set("from", origin.trim());
-        endpoint = `/api/journey?${params.toString()}`;
-      } else {
-        if (geo.postcode) params.set("postcode", geo.postcode);
-        endpoint = `/api/national-journey?${params.toString()}`;
-      }
-
-      const journeyResponse = await fetch(endpoint);
-      const journeyData = await journeyResponse.json();
-      setData(journeyData);
+      setNormalData(normal);
+      setMatchdayData(matchday);
     } catch {
-      setData({
+      setNormalData({
         status: "unavailable",
         reason: t.travel.routeUnavailable
       });
@@ -112,38 +172,51 @@ export function JourneyPlanner({ matchDate, matchKickoff }: { matchDate?: string
     }
   }
 
-  const best = useMemo(() => {
-    if (!data?.journeys?.length) return null;
-    return [...data.journeys].sort((a,b) => a.duration - b.duration)[0];
-  }, [data]);
+  const normal = useMemo(() => bestJourney(normalData), [normalData]);
+  const matchday = useMemo(() => bestJourney(matchdayData), [matchdayData]);
 
-  const provider = data?.source ?? "Journey planner";
+  const normalScore = useMemo(() => scoreJourney(normal), [normal]);
+  const matchdayScore = useMemo(() => scoreJourney(matchday), [matchday]);
 
-  const score = best
-    ? accessScore({
-        duration: best.duration,
-        changes: best.changes,
-        walkingMinutes: best.walkingMinutes,
-        disruptions: best.disruptions.length
-      })
-    : null;
+  const delta =
+    normal &&
+    matchday &&
+    normalScore !== null &&
+    matchdayScore !== null
+      ? travelDelta(normal, matchday, normalScore, matchdayScore)
+      : null;
+
+  const response = delta ? engineResponse(delta, lang) : null;
 
   return (
     <section className="journeyPlanner">
       <div className="journeyIntro">
         <div>
-          <div className="eyebrow">{t.travel.ukToHayes}</div>
-          <h2>{t.travel.whereFrom}</h2>
-          <p className="muted">{t.travel.helper}</p>
+          <div className="eyebrow">
+            {lang === "es" ? "TRAVEL FRICTION DELTA" : "TRAVEL FRICTION DELTA"}
+          </div>
+          <h2>
+            {lang === "es"
+              ? "¿Cambia el viaje cuando llega el matchday?"
+              : "Does the journey get harder on matchday?"}
+          </h2>
+          <p className="muted">
+            {lang === "es"
+              ? "Comparamos el journey actual con el journey planificado para llegar a Hayes Lane 45 minutos antes del kickoff."
+              : "The engine compares the current journey with the scheduled matchday journey arriving at Hayes Lane 45 minutes before kickoff."}
+          </p>
         </div>
+
         <div className="journeyDestination">
           <span>{t.common.destination}</span>
           <strong>Hayes Lane</strong>
-          <small>Bromley · BR2 9EF</small>
+          <small>
+            {matchDate ?? "—"} · {matchKickoff ?? "—"} kickoff
+          </small>
         </div>
       </div>
 
-      <form className="journeyForm" onSubmit={submit}>
+      <form className="journeyForm deltaForm" onSubmit={submit}>
         <label>
           <span>{t.travel.originLabel}</span>
           <input
@@ -153,26 +226,25 @@ export function JourneyPlanner({ matchDate, matchKickoff }: { matchDate?: string
           />
         </label>
 
-        <div className="journeyMode">
-          <button
-            type="button"
-            className={mode === "now" ? "active" : ""}
-            onClick={() => setMode("now")}
-          >
-            {t.travel.travelNow}
-          </button>
-          <button
-            type="button"
-            disabled={!matchDate}
-            className={mode === "matchday" ? "active" : ""}
-            onClick={() => setMode("matchday")}
-          >
-            {t.travel.matchday}
-          </button>
+        <div className="arrivalTarget">
+          <span>
+            {lang === "es" ? "Llegada objetivo" : "Target arrival"}
+          </span>
+          <strong>{arrivalTime ?? "—"}</strong>
         </div>
 
-        <button className="journeySubmit" type="submit" disabled={loading || !origin.trim()}>
-          {loading ? t.travel.resolving : t.travel.check}
+        <button
+          className="journeySubmit"
+          type="submit"
+          disabled={loading || !origin.trim()}
+        >
+          {loading
+            ? lang === "es"
+              ? "Comparando…"
+              : "Comparing…"
+            : lang === "es"
+            ? "Comparar journeys"
+            : "Compare journeys"}
         </button>
       </form>
 
@@ -185,79 +257,171 @@ export function JourneyPlanner({ matchDate, matchKickoff }: { matchDate?: string
           </div>
           <div>
             <span>{t.travel.routingLayer}</span>
-            <strong>{resolved.scope === "london" ? "TfL" : t.travel.gb}</strong>
-            <small>{resolved.postcode ?? t.travel.noPostcode}</small>
+            <strong>
+              {resolved.scope === "london" ? "TfL" : t.travel.gb}
+            </strong>
+            <small>
+              {resolved.scope === "national" && resolved.postcode
+                ? `${lang === "es" ? "Punto representativo" : "Representative routing point"}: ${resolved.postcode}`
+                : resolved.postcode ?? t.travel.noPostcode}
+            </small>
           </div>
         </div>
       )}
 
-      {data?.status === "needs_credentials" && (
+      {(normalData?.status === "needs_credentials" ||
+        matchdayData?.status === "needs_credentials") && (
         <div className="nationalSetup">
           <SignalBadge type="WAITING" />
           <div>
             <strong>{t.travel.nationalSetup}</strong>
-            <p>{data.reason}</p>
+            <p>
+              {lang === "es"
+                ? "El origen está reconocido, pero TransportAPI debe estar activado en Vercel para devolver journeys nacionales."
+                : "The origin is recognised, but TransportAPI credentials must be active in Vercel to return national journeys."}
+            </p>
           </div>
         </div>
       )}
 
-      {(data?.status === "unavailable" || data?.status === "needs_postcode") && (
+      {normalData?.status === "unavailable" && !normal && (
         <div className="journeyError">
           <SignalBadge type="WAITING" />
           <strong>{t.travel.routeUnavailable}</strong>
-          <span>{data.reason}</span>
+          <span>{normalData.reason}</span>
         </div>
       )}
 
-      {best && score !== null && (
-        <div className="journeyResult">
-          <div className="accessScoreBlock">
-            <div className="eyebrow">{t.travel.accessScore}</div>
-            <div className="accessScore">{score}</div>
-            <div className="accessLabel">{accessLabel(score)}</div>
-          </div>
+      {normal && normalScore !== null && (
+        <div className="deltaComparison">
+          <ScenarioCard
+            title={lang === "es" ? "Journey actual" : "Current journey"}
+            subtitle={lang === "es" ? "Baseline observada ahora" : "Observed baseline now"}
+            journey={normal}
+            score={normalScore}
+          />
 
-          <div className="journeySummary">
-            <div className="journeyBig">
-              {best.duration} min
-              <span>
-                {localTime(best.startDateTime)} → {localTime(best.arrivalDateTime)}
-              </span>
-            </div>
+          <div className="deltaArrow">→</div>
 
-            <div className="journeyFacts">
-              <div><span>{t.common.changes}</span><strong>{best.changes}</strong></div>
-              <div><span>{t.common.walking}</span><strong>{best.walkingMinutes} min</strong></div>
-              <div><span>{t.common.provider}</span><strong>{provider}</strong></div>
+          {matchday && matchdayScore !== null ? (
+            <ScenarioCard
+              title={lang === "es" ? "Journey de matchday" : "Matchday journey"}
+              subtitle={
+                arrivalTime
+                  ? `${lang === "es" ? "Llegada objetivo" : "Target arrival"} ${arrivalTime}`
+                  : ""
+              }
+              journey={matchday}
+              score={matchdayScore}
+            />
+          ) : (
+            <div className="scenarioCard waitingScenario">
+              <SignalBadge type="WAITING" />
+              <h3>
+                {lang === "es"
+                  ? "Escenario matchday no disponible"
+                  : "Matchday scenario unavailable"}
+              </h3>
+              <p className="muted">{matchdayData?.reason}</p>
             </div>
-
-            <div className="journeyLegs">
-              {best.legs.map((leg, i) => (
-                <div className="journeyLeg" key={`${leg.mode}-${i}`}>
-                  <span className="legNumber">{i + 1}</span>
-                  <div>
-                    <strong>{leg.mode}{leg.line ? ` · ${leg.line}` : ""}</strong>
-                    <small>
-                      {leg.departurePoint ?? "Start"} → {leg.arrivalPoint ?? "Next"}
-                      {" · "}{leg.duration} min
-                    </small>
-                    {leg.instruction && <p>{leg.instruction}</p>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          )}
         </div>
       )}
 
-      {data?.status === "live" && (
-        <div className="journeySource">
-          <span>{t.common.source}: {provider}</span>
-          <span>
-            {t.common.checked} {data.generated_at ? new Date(data.generated_at).toLocaleString() : "now"}
-          </span>
-        </div>
+      {delta && response && (
+        <section className={`engineResponse ${delta.severity}`}>
+          <div className="engineResponseTop">
+            <div>
+              <div className="eyebrow">
+                {lang === "es" ? "RESPUESTA DEL ENGINE" : "ENGINE RESPONSE"}
+              </div>
+              <h3>{response.title}</h3>
+            </div>
+            <div className="responseLabel">{response.label}</div>
+          </div>
+
+          <div className="deltaMetrics">
+            <div>
+              <span>{lang === "es" ? "Cambio de tiempo" : "Time delta"}</span>
+              <strong>
+                {delta.durationDelta > 0 ? "+" : ""}
+                {delta.durationDelta} min
+              </strong>
+            </div>
+            <div>
+              <span>{lang === "es" ? "Cambio Access Score" : "Access Score delta"}</span>
+              <strong>
+                {delta.scoreDelta > 0 ? "+" : ""}
+                {delta.scoreDelta}
+              </strong>
+            </div>
+            <div>
+              <span>{lang === "es" ? "Severidad" : "Severity"}</span>
+              <strong>{delta.severity.toUpperCase()}</strong>
+            </div>
+          </div>
+
+          <p>{response.text}</p>
+
+          <div className="sampleWarning">
+            {lang === "es"
+              ? "Importante: un journey individual no debe mover presupuesto territorial por sí solo. El cambio de spend requiere que el patrón aparezca de forma consistente en múltiples orígenes del territorio."
+              : "Important: one individual journey should not move territory budget by itself. Spend changes require the pattern to repeat across multiple origins in the territory."}
+          </div>
+        </section>
       )}
     </section>
+  );
+}
+
+function ScenarioCard({
+  title,
+  subtitle,
+  journey,
+  score
+}: {
+  title: string;
+  subtitle: string;
+  journey: Journey;
+  score: number;
+}) {
+  return (
+    <article className="scenarioCard">
+      <div className="scenarioTop">
+        <div>
+          <div className="eyebrow">{title}</div>
+          <span className="muted">{subtitle}</span>
+        </div>
+        <div className="scenarioScore">
+          <strong>{score}</strong>
+          <span>{accessLabel(score)}</span>
+        </div>
+      </div>
+
+      <div className="scenarioDuration">{journey.duration} min</div>
+
+      <div className="scenarioFacts">
+        <div>
+          <span>Changes</span>
+          <strong>{journey.changes}</strong>
+        </div>
+        <div>
+          <span>Walking</span>
+          <strong>{journey.walkingMinutes} min</strong>
+        </div>
+        <div>
+          <span>Disruptions</span>
+          <strong>{journey.disruptions.length}</strong>
+        </div>
+      </div>
+
+      {journey.disruptions.length > 0 && (
+        <div className="scenarioDisruptions">
+          {journey.disruptions.slice(0, 2).map((d, i) => (
+            <p key={i}>{d}</p>
+          ))}
+        </div>
+      )}
+    </article>
   );
 }

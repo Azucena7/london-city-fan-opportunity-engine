@@ -22,6 +22,7 @@ function disruptionText(journey: any) {
         d?.summary ??
         d?.additionalInfo ??
         d?.categoryDescription;
+
       if (text && !messages.includes(text)) messages.push(text);
     }
   }
@@ -31,6 +32,7 @@ function disruptionText(journey: any) {
 
 function summarizeJourney(journey: any) {
   const legs = journey?.legs ?? [];
+
   const walkingMinutes = legs
     .filter((l: any) => String(l?.mode?.id ?? "").toLowerCase() === "walking")
     .reduce((sum: number, l: any) => sum + Number(l?.duration ?? 0), 0);
@@ -39,16 +41,13 @@ function summarizeJourney(journey: any) {
     (l: any) => String(l?.mode?.id ?? "").toLowerCase() !== "walking"
   );
 
-  const changes = Math.max(0, transitLegs.length - 1);
-  const disruptions = disruptionText(journey);
-
   return {
     duration: Number(journey?.duration ?? 0),
     startDateTime: journey?.startDateTime,
     arrivalDateTime: journey?.arrivalDateTime,
-    changes,
+    changes: Math.max(0, transitLegs.length - 1),
     walkingMinutes,
-    disruptions,
+    disruptions: disruptionText(journey),
     legs: legs.map((l: any) => ({
       mode: l?.mode?.name ?? l?.mode?.id ?? "Travel",
       duration: Number(l?.duration ?? 0),
@@ -69,9 +68,16 @@ function summarizeJourney(journey: any) {
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
+
   const from = searchParams.get("from")?.trim();
   const date = compactDate(searchParams.get("date"));
   const time = compactTime(searchParams.get("time"));
+  const requestedTimeIs = searchParams.get("timeIs");
+
+  const timeIs =
+    requestedTimeIs === "Arriving" || requestedTimeIs === "Departing"
+      ? requestedTimeIs
+      : "Departing";
 
   if (!from) {
     return NextResponse.json(
@@ -88,7 +94,10 @@ export async function GET(request: NextRequest) {
 
     if (date) query.set("date", date);
     if (time) query.set("time", time);
-    if (date || time) query.set("timeIs", "Departing");
+
+    if (date || time) {
+      query.set("timeIs", timeIs);
+    }
 
     const appKey = process.env.TFL_API_KEY;
     if (appKey) query.set("app_key", appKey);
@@ -123,9 +132,7 @@ export async function GET(request: NextRequest) {
       status: journeys.length ? "live" : "unavailable",
       source: "Transport for London Unified API",
       destination: "Hayes Lane",
-      origin: raw?.fromLocationDisambiguation?.matchStatus
-        ? from
-        : from,
+      queryMode: timeIs,
       generated_at: new Date().toISOString(),
       journeys
     });
@@ -134,7 +141,9 @@ export async function GET(request: NextRequest) {
       {
         status: "unavailable",
         reason:
-          error instanceof Error ? error.message : "Journey service unavailable."
+          error instanceof Error
+            ? error.message
+            : "Journey service unavailable."
       },
       { status: 500 }
     );
