@@ -36,13 +36,10 @@ export function WeatherLiveCard({
   }, []);
 
   const day = useMemo(() => {
-    if (!data?.daily?.time?.length) return null;
+    if (!targetDate || !data?.daily?.time?.length) return null;
 
-    let index = 0;
-    if (targetDate) {
-      const targetIndex = data.daily.time.indexOf(targetDate);
-      if (targetIndex >= 0) index = targetIndex;
-    }
+    const index = data.daily.time.indexOf(targetDate);
+    if (index < 0) return null;
 
     return {
       date: data.daily.time[index],
@@ -54,6 +51,21 @@ export function WeatherLiveCard({
       wind: data.daily.wind_speed_10m_max?.[index]
     };
   }, [data, targetDate]);
+
+  if (!targetDate) {
+    return (
+      <article className="weatherCard">
+        <div className="liveSignalTop">
+          <span>Weather</span>
+          <SignalBadge type="WAITING" />
+        </div>
+        <div className="weatherHeadline">No fixture date available</div>
+        <div className="muted">
+          Weather remains inactive until the next home fixture can be resolved.
+        </div>
+      </article>
+    );
+  }
 
   if (loading) {
     return (
@@ -74,9 +86,10 @@ export function WeatherLiveCard({
           <span>Weather</span>
           <SignalBadge type="WAITING" />
         </div>
-        <div className="weatherHeadline">Forecast unavailable</div>
+        <div className="weatherHeadline">Outside forecast window</div>
         <div className="muted">
-          The engine will not substitute a guessed weather score.
+          Target: {targetDate}. The engine will activate weather only when that
+          match enters the 7-day forecast horizon.
         </div>
       </article>
     );

@@ -3,6 +3,7 @@ import "./globals.css";
 import "./story.css";
 import "./live.css";
 import "./weather.css";
+import "./fixture-auto.css";
 
 export const metadata: Metadata = {
   title: "London City Fan Opportunity Lab",

@@ -1,0 +1,53 @@
+.nextFixtureContext {
+  margin: 30px 0;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 26px;
+  align-items: end;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface-2);
+}
+
+.nextFixtureContext h2 {
+  font-size: clamp(32px, 5vw, 56px);
+  letter-spacing: -.05em;
+  margin-bottom: 0;
+}
+
+.nextFixtureMeta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.nextFixtureMeta div {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+
+.nextFixtureMeta span,
+.nextFixtureMeta strong {
+  display: block;
+}
+
+.nextFixtureMeta span {
+  color: var(--muted);
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.nextFixtureMeta strong {
+  font-size: 13px;
+}
+
+@media (max-width: 800px) {
+  .nextFixtureContext {
+    grid-template-columns: 1fr;
+  }
+
+  .nextFixtureMeta {
+    grid-template-columns: 1fr;
+  }
+}
