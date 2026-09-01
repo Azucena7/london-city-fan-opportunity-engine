@@ -1,8 +1,13 @@
-# Source artefacts
+# Automation placeholders
 
-The `.xlsx` file in this folder is the current research/workbook source of truth used to design V1.
+Future jobs:
+- refresh-weather
+- refresh-fixtures
+- refresh-attendance
+- refresh-attention-events
+- refresh-local-market
+- calculate-weekly-decision
+- post-match-learning
 
-For the public web app, do **not** parse this workbook client-side.
-Instead, progressively export validated tables into structured JSON under `data/seed/` or a database.
-
-When private club data is introduced, store it outside the public repository.
+Keep each job idempotent and source-aware.
+Every record should include `sourceUrl`, `checkedAt`, and `confidence` where possible.
