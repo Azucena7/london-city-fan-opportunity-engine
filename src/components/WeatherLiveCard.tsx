@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SignalBadge } from "./SignalBadge";
 import { weatherLabel, weatherSuitability } from "@/lib/weather";
+import { useLanguage } from "./LanguageProvider";
 
 type WeatherPayload = {
   status: string;
@@ -19,11 +20,8 @@ type WeatherPayload = {
   };
 };
 
-export function WeatherLiveCard({
-  targetDate
-}: {
-  targetDate?: string;
-}) {
+export function WeatherLiveCard({ targetDate }: { targetDate?: string }) {
+  const { t, lang } = useLanguage();
   const [data, setData] = useState<WeatherPayload | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -37,7 +35,6 @@ export function WeatherLiveCard({
 
   const day = useMemo(() => {
     if (!targetDate || !data?.daily?.time?.length) return null;
-
     const index = data.daily.time.indexOf(targetDate);
     if (index < 0) return null;
 
@@ -56,13 +53,11 @@ export function WeatherLiveCard({
     return (
       <article className="weatherCard">
         <div className="liveSignalTop">
-          <span>Weather</span>
+          <span>{t.common.weather}</span>
           <SignalBadge type="WAITING" />
         </div>
-        <div className="weatherHeadline">No fixture date available</div>
-        <div className="muted">
-          Weather remains inactive until the next home fixture can be resolved.
-        </div>
+        <div className="weatherHeadline">{t.weather.noDate}</div>
+        <div className="muted">{t.weather.noDateText}</div>
       </article>
     );
   }
@@ -71,10 +66,10 @@ export function WeatherLiveCard({
     return (
       <article className="weatherCard">
         <div className="liveSignalTop">
-          <span>Weather</span>
+          <span>{t.common.weather}</span>
           <SignalBadge type="WAITING" />
         </div>
-        <div className="weatherHeadline">Loading live forecast…</div>
+        <div className="weatherHeadline">{t.weather.loading}</div>
       </article>
     );
   }
@@ -83,14 +78,11 @@ export function WeatherLiveCard({
     return (
       <article className="weatherCard">
         <div className="liveSignalTop">
-          <span>Weather</span>
+          <span>{t.common.weather}</span>
           <SignalBadge type="WAITING" />
         </div>
-        <div className="weatherHeadline">Outside forecast window</div>
-        <div className="muted">
-          Target: {targetDate}. The engine will activate weather only when that
-          match enters the 7-day forecast horizon.
-        </div>
+        <div className="weatherHeadline">{t.weather.outside}</div>
+        <div className="muted">{t.weather.outsideText}</div>
       </article>
     );
   }
@@ -106,14 +98,14 @@ export function WeatherLiveCard({
   return (
     <article className="weatherCard liveWeather">
       <div className="liveSignalTop">
-        <span>Weather · Hayes Lane</span>
+        <span>{t.common.weather} · Hayes Lane</span>
         <SignalBadge type="LIVE" />
       </div>
 
       <div className="weatherGrid">
         <div>
           <div className="weatherScore">{suitability}</div>
-          <div className="muted">Weather suitability</div>
+          <div className="muted">{t.weather.suitability}</div>
         </div>
 
         <div>
@@ -130,7 +122,10 @@ export function WeatherLiveCard({
       <div className="weatherMeta">
         <span>{day.date}</span>
         <span>
-          Refreshed automatically · {data.generated_at ? new Date(data.generated_at).toLocaleString() : "live"}
+          {t.weather.refreshed} ·{" "}
+          {data.generated_at
+            ? new Date(data.generated_at).toLocaleString(lang === "es" ? "es-ES" : "en-GB")
+            : t.common.live}
         </span>
       </div>
     </article>

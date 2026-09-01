@@ -1,3 +1,7 @@
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
+
 export function WeeklyDecisionHero({
   opponent,
   date,
@@ -17,10 +21,12 @@ export function WeeklyDecisionHero({
   channel: string;
   message: string;
 }) {
+  const { t } = useLanguage();
+
   return (
     <section className="weeklyHero">
       <div className="weeklyHeroLeft">
-        <div className="eyebrow">WEEKLY DECISION</div>
+        <div className="eyebrow">{t.weekly.eyebrow}</div>
         <div className="weeklyScore">{score}</div>
         <div className="weeklyDecision">{decision}</div>
       </div>
@@ -28,13 +34,13 @@ export function WeeklyDecisionHero({
       <div className="weeklyHeroMain">
         <span className="muted">{date}</span>
         <h2>London City v {opponent}</h2>
-        <blockquote>“{message}”</blockquote>
+        <blockquote>“{message || t.weekly.messageFallback}”</blockquote>
       </div>
 
       <div className="weeklyHeroSide">
-        <div><span>Target</span><strong>{territory}</strong></div>
-        <div><span>Product</span><strong>{product}</strong></div>
-        <div><span>Channel</span><strong>{channel}</strong></div>
+        <div><span>{t.common.target}</span><strong>{territory}</strong></div>
+        <div><span>{t.common.product}</span><strong>{product}</strong></div>
+        <div><span>{t.common.channel}</span><strong>{channel}</strong></div>
       </div>
     </section>
   );

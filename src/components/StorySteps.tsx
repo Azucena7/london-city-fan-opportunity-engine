@@ -1,46 +1,27 @@
-const steps = [
-  {
-    number: "01",
-    label: "Problem",
-    title: "Stars create attention. They do not automatically create habit.",
-    text: "The commercial question is not how much attention a signing creates. It is where recurring attendance can realistically come from."
-  },
-  {
-    number: "02",
-    label: "Where",
-    title: "Find family-rich territories connected to girls’ football.",
-    text: "Families, grassroots nodes and matchday accessibility reveal areas that standard fanbase assumptions can miss."
-  },
-  {
-    number: "03",
-    label: "When",
-    title: "Not every home match deserves the same acquisition budget.",
-    text: "Calendar whitespace, opponent appeal and competing attention create radically different windows across the season."
-  },
-  {
-    number: "04",
-    label: "Action",
-    title: "Turn the score into one specific play.",
-    text: "Target territory, product, channel, message and KPI are selected for the fixture — not left as a dashboard interpretation exercise."
-  },
-  {
-    number: "05",
-    label: "Learn",
-    title: "Replace assumptions with observed repeat behaviour.",
-    text: "Postcode, scan, product, source and repeat-purchase data progressively turn the model from research-led to club-specific."
-  }
-];
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
 
 export function StorySteps() {
+  const { t } = useLanguage();
+
+  const steps = [
+    ["01", t.story.problem, t.story.problemTitle, t.story.problemText],
+    ["02", t.story.where, t.story.whereTitle, t.story.whereText],
+    ["03", t.story.when, t.story.whenTitle, t.story.whenText],
+    ["04", t.story.action, t.story.actionTitle, t.story.actionText],
+    ["05", t.story.learn, t.story.learnTitle, t.story.learnText]
+  ];
+
   return (
     <div className="storySteps">
-      {steps.map((s) => (
-        <article className="storyStep" key={s.number}>
-          <div className="storyNum">{s.number}</div>
+      {steps.map(([number, label, title, text]) => (
+        <article className="storyStep" key={number}>
+          <div className="storyNum">{number}</div>
           <div>
-            <div className="eyebrow">{s.label}</div>
-            <h2>{s.title}</h2>
-            <p>{s.text}</p>
+            <div className="eyebrow">{label}</div>
+            <h2>{title}</h2>
+            <p>{text}</p>
           </div>
         </article>
       ))}

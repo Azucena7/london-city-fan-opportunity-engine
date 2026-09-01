@@ -1,11 +1,14 @@
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
+
 export function ShareCard() {
+  const { t } = useLanguage();
+
   return (
     <section className="shareCard">
-      <div className="shareEyebrow">THE IDEA IN ONE SENTENCE</div>
-      <div className="shareQuote">
-        A four-person team can build capabilities that used to require ten —
-        if AI becomes infrastructure, not the protagonist.
-      </div>
+      <div className="shareEyebrow">{t.story.shareEyebrow}</div>
+      <div className="shareQuote">{t.story.shareQuote}</div>
       <div className="shareFooter">
         <span>Fan Opportunity Engine</span>
         <span>Women’s football × practical AI</span>

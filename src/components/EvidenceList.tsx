@@ -1,51 +1,56 @@
-import { SignalBadge } from "./SignalBadge";
+"use client";
 
-const evidence = [
-  {
-    signal: "Territory opportunity",
-    type: "STRUCTURAL" as const,
-    value: "95 / 100",
-    source: "Families + girls' football network + matchday access",
-    note: "Modelled from the structural V1 dataset."
-  },
-  {
-    signal: "Calendar whitespace",
-    type: "MEASURED" as const,
-    value: "95 / 100",
-    source: "Competitor home fixtures and local inventory",
-    note: "Current schedule-based opportunity layer."
-  },
-  {
-    signal: "Attention pressure",
-    type: "INFERRED" as const,
-    value: "38 / 100",
-    source: "Events, TV, holidays and competing sport",
-    note: "Planning estimate; should be re-checked closer to fixture."
-  },
-  {
-    signal: "Weather",
-    type: "WAITING" as const,
-    value: "—",
-    source: "Reliable forecast window only",
-    note: "Activates 5–7 days before matchday."
-  },
-  {
-    signal: "Attendance momentum",
-    type: "WAITING" as const,
-    value: "—",
-    source: "Sales / scans / recent demand",
-    note: "Requires current club-side or verified attendance data."
-  },
-  {
-    signal: "Fixture appeal",
-    type: "INFERRED" as const,
-    value: "78 / 100",
-    source: "Opponent brand + likely demand + occasion",
-    note: "Expert prior until enough observed club data exists."
-  }
-];
+import { SignalBadge } from "./SignalBadge";
+import { useLanguage } from "./LanguageProvider";
 
 export function EvidenceList() {
+  const { t } = useLanguage();
+
+  const evidence = [
+    {
+      signal: t.transparency.territory,
+      type: "STRUCTURAL" as const,
+      value: "95 / 100",
+      source: t.evidence.territorySource,
+      note: t.evidence.territoryNote
+    },
+    {
+      signal: t.transparency.calendar,
+      type: "MEASURED" as const,
+      value: "95 / 100",
+      source: t.evidence.calendarSource,
+      note: t.evidence.calendarNote
+    },
+    {
+      signal: t.transparency.attention,
+      type: "INFERRED" as const,
+      value: "38 / 100",
+      source: t.evidence.attentionSource,
+      note: t.evidence.attentionNote
+    },
+    {
+      signal: t.transparency.weather,
+      type: "WAITING" as const,
+      value: "—",
+      source: t.evidence.weatherSource,
+      note: t.evidence.weatherNote
+    },
+    {
+      signal: t.transparency.momentum,
+      type: "WAITING" as const,
+      value: "—",
+      source: t.evidence.momentumSource,
+      note: t.evidence.momentumNote
+    },
+    {
+      signal: t.transparency.appeal,
+      type: "INFERRED" as const,
+      value: "78 / 100",
+      source: t.evidence.appealSource,
+      note: t.evidence.appealNote
+    }
+  ];
+
   return (
     <div className="evidenceList">
       {evidence.map((e) => (

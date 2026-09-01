@@ -1,0 +1,13 @@
+.languageSwitcher {
+  position: sticky;
+  top: 10px;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  background: rgba(7,27,51,.72);
+}
+
+html[lang="es"] .fixtureTable,
+html[lang="es"] .territoryCards,
+html[lang="es"] .signalCards {
+  font-feature-settings: "kern";
+}

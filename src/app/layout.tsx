@@ -8,6 +8,7 @@ import "./brand.css";
 import "./journey.css";
 import "./national.css";
 import "./i18n.css";
+import "./i18n-fixes.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

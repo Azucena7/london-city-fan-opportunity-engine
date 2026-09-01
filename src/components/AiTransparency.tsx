@@ -1,19 +1,25 @@
-const rows = [
-  ["Territory opportunity", "STRUCTURAL", "Modelled from families, grassroots network and access."],
-  ["Calendar whitespace", "STRUCTURAL", "Competitor home inventory and local fixture context."],
-  ["Attention pressure", "MONITORED", "Events, TV, holidays and competing sport."],
-  ["Weather", "LIVE", "Only activated inside a reliable forecast window."],
-  ["Attendance momentum", "LIVE", "Requires current sales / scans / recent demand data."],
-  ["Fixture appeal", "HEURISTIC", "Expert prior until enough observed club data replaces it."]
-];
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
 
 export function AiTransparency() {
+  const { t } = useLanguage();
+
+  const rows = [
+    [t.transparency.territory, t.common.structural, t.transparency.territoryDetail],
+    [t.transparency.calendar, t.common.structural, t.transparency.calendarDetail],
+    [t.transparency.attention, t.common.measured, t.transparency.attentionDetail],
+    [t.transparency.weather, t.common.live, t.transparency.weatherDetail],
+    [t.transparency.momentum, t.common.live, t.transparency.momentumDetail],
+    [t.transparency.appeal, t.common.inferred, t.transparency.appealDetail]
+  ];
+
   return (
     <section className="panel">
       <div className="sectionHeader">
         <div>
-          <div className="eyebrow">MODEL TRANSPARENCY</div>
-          <h3>What is automated, measured or inferred?</h3>
+          <div className="eyebrow">{t.transparency.eyebrow}</div>
+          <h3>{t.transparency.title}</h3>
         </div>
       </div>
 
