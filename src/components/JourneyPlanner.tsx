@@ -21,11 +21,19 @@ type Journey = {
   }[];
 };
 
+type Geocode = {
+  status: string;
+  displayName?: string;
+  postcode?: string | null;
+  scope?: "london" | "national";
+  locality?: string;
+  reason?: string;
+};
+
 type Payload = {
   status: string;
   reason?: string;
   source?: string;
-  destination?: string;
   generated_at?: string;
   journeys?: Journey[];
 };
@@ -48,9 +56,8 @@ export function JourneyPlanner({
   const [origin, setOrigin] = useState("");
   const [mode, setMode] = useState<"now" | "matchday">("now");
   const [data, setData] = useState<Payload | null>(null);
+  const [resolved, setResolved] = useState<Geocode | null>(null);
   const [loading, setLoading] = useState(false);
-
-  const matchDateAvailable = Boolean(matchDate);
 
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -58,23 +65,47 @@ export function JourneyPlanner({
 
     setLoading(true);
     setData(null);
-
-    const params = new URLSearchParams({ from: origin.trim() });
-
-    if (mode === "matchday" && matchDate) {
-      params.set("date", matchDate);
-      // Planning assumption until exact kick-off / arrival preference is wired.
-      params.set("time", "12:00");
-    }
+    setResolved(null);
 
     try {
-      const response = await fetch(`/api/journey?${params.toString()}`);
-      const json = await response.json();
-      setData(json);
+      const geoResponse = await fetch(
+        `/api/geocode?q=${encodeURIComponent(origin.trim())}`
+      );
+      const geo: Geocode = await geoResponse.json();
+      setResolved(geo);
+
+      if (geo.status !== "resolved") {
+        setData({
+          status: "unavailable",
+          reason: geo.reason ?? "Origin could not be resolved."
+        });
+        return;
+      }
+
+      const params = new URLSearchParams();
+
+      if (mode === "matchday" && matchDate) {
+        params.set("date", matchDate);
+        params.set("time", "12:00");
+      }
+
+      let endpoint: string;
+
+      if (geo.scope === "london") {
+        params.set("from", origin.trim());
+        endpoint = `/api/journey?${params.toString()}`;
+      } else {
+        if (geo.postcode) params.set("postcode", geo.postcode);
+        endpoint = `/api/national-journey?${params.toString()}`;
+      }
+
+      const journeyResponse = await fetch(endpoint);
+      const journeyData = await journeyResponse.json();
+      setData(journeyData);
     } catch {
       setData({
         status: "unavailable",
-        reason: "Journey service could not be reached."
+        reason: "Journey services could not be reached."
       });
     } finally {
       setLoading(false);
@@ -99,29 +130,27 @@ export function JourneyPlanner({
     <section className="journeyPlanner">
       <div className="journeyIntro">
         <div>
-          <div className="eyebrow">MATCHDAY ACCESS</div>
-          <h2>How hard is it to get to Hayes Lane?</h2>
+          <div className="eyebrow">UK → HAYES LANE</div>
+          <h2>Where are you coming from?</h2>
           <p className="muted">
-            Enter a postcode, station or London location. The engine turns the
-            journey into an accessibility signal rather than treating distance
-            as a proxy for travel friction.
+            The engine now resolves the origin first. London journeys route through
+            TfL; origins elsewhere in Great Britain route through the national layer.
           </p>
         </div>
         <div className="journeyDestination">
           <span>Destination</span>
           <strong>Hayes Lane</strong>
-          <small>Bromley · London City home</small>
+          <small>Bromley · BR2 9EF</small>
         </div>
       </div>
 
       <form className="journeyForm" onSubmit={submit}>
         <label>
-          <span>Where are you travelling from?</span>
+          <span>Postcode, station, town or city</span>
           <input
             value={origin}
             onChange={(e) => setOrigin(e.target.value)}
-            placeholder="e.g. CR0 7AB, Bromley South, London Bridge"
-            aria-label="Journey origin"
+            placeholder="e.g. Cambridge, CR0 7AB, London Bridge"
           />
         </label>
 
@@ -135,31 +164,55 @@ export function JourneyPlanner({
           </button>
           <button
             type="button"
-            disabled={!matchDateAvailable}
+            disabled={!matchDate}
             className={mode === "matchday" ? "active" : ""}
             onClick={() => setMode("matchday")}
           >
-            Matchday forecast
+            Matchday
           </button>
         </div>
 
         <button className="journeySubmit" type="submit" disabled={loading || !origin.trim()}>
-          {loading ? "Checking…" : "Check journey"}
+          {loading ? "Resolving…" : "Check journey"}
         </button>
       </form>
 
-      {mode === "matchday" && matchDate && (
-        <div className="planningNote">
-          Matchday route planning uses {matchDate}. Exact arrival-time logic will
-          activate when verified kick-off times are wired into the fixture feed.
+      {resolved?.status === "resolved" && (
+        <div className="originResolution">
+          <div>
+            <span>Origin recognised</span>
+            <strong>{resolved.locality ?? origin}</strong>
+            <small>{resolved.displayName}</small>
+          </div>
+          <div>
+            <span>Routing layer</span>
+            <strong>
+              {resolved.scope === "london" ? "TfL" : "Great Britain"}
+            </strong>
+            <small>{resolved.postcode ?? "No postcode returned"}</small>
+          </div>
         </div>
       )}
 
-      {data?.status === "unavailable" && (
+      {data?.status === "needs_credentials" && (
+        <div className="nationalSetup">
+          <SignalBadge type="WAITING" />
+          <div>
+            <strong>National origin recognised — routing layer needs activation</strong>
+            <p>{data.reason}</p>
+            <small>
+              Once the two TransportAPI environment variables are added in Vercel,
+              Cambridge and other GB origins can return multimodal routes here.
+            </small>
+          </div>
+        </div>
+      )}
+
+      {(data?.status === "unavailable" || data?.status === "needs_postcode") && (
         <div className="journeyError">
           <SignalBadge type="WAITING" />
           <strong>Journey unavailable</strong>
-          <span>{data.reason ?? "TfL could not resolve this origin."}</span>
+          <span>{data.reason}</span>
         </div>
       )}
 
@@ -183,17 +236,10 @@ export function JourneyPlanner({
               <div><span>Changes</span><strong>{best.changes}</strong></div>
               <div><span>Walking</span><strong>{best.walkingMinutes} min</strong></div>
               <div>
-                <span>Network</span>
-                <strong>{best.disruptions.length ? "Disruption" : "No route disruption"}</strong>
+                <span>Provider</span>
+                <strong>{data.source ?? "Journey planner"}</strong>
               </div>
             </div>
-
-            {best.disruptions.length > 0 && (
-              <div className="disruptionBox">
-                <SignalBadge type="LIVE" />
-                {best.disruptions.map((d, i) => <p key={i}>{d}</p>)}
-              </div>
-            )}
 
             <div className="journeyLegs">
               {best.legs.map((leg, i) => (
