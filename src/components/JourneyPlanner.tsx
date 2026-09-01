@@ -117,6 +117,8 @@ export function JourneyPlanner({
     return [...data.journeys].sort((a,b) => a.duration - b.duration)[0];
   }, [data]);
 
+  const provider = data?.source ?? "Journey planner";
+
   const score = best
     ? accessScore({
         duration: best.duration,
@@ -133,7 +135,7 @@ export function JourneyPlanner({
           <div className="eyebrow">UK → HAYES LANE</div>
           <h2>Where are you coming from?</h2>
           <p className="muted">
-            The engine now resolves the origin first. London journeys route through
+            The engine resolves the origin first. London journeys route through
             TfL; origins elsewhere in Great Britain route through the national layer.
           </p>
         </div>
@@ -237,7 +239,7 @@ export function JourneyPlanner({
               <div><span>Walking</span><strong>{best.walkingMinutes} min</strong></div>
               <div>
                 <span>Provider</span>
-                <strong>{data.source ?? "Journey planner"}</strong>
+                <strong>{provider}</strong>
               </div>
             </div>
 
@@ -262,7 +264,7 @@ export function JourneyPlanner({
 
       {data?.status === "live" && (
         <div className="journeySource">
-          <span>Source: {data.source}</span>
+          <span>Source: {provider}</span>
           <span>
             Checked {data.generated_at ? new Date(data.generated_at).toLocaleString() : "now"}
           </span>
