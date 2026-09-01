@@ -9,10 +9,12 @@ import {
 } from "react";
 import { dictionary, Lang } from "@/lib/i18n";
 
+type Dictionary = (typeof dictionary)[Lang];
+
 type LanguageContextValue = {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  t: typeof dictionary.en;
+  t: Dictionary;
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
@@ -26,6 +28,7 @@ export function LanguageProvider({
 
   useEffect(() => {
     const saved = window.localStorage.getItem("lcl-language");
+
     if (saved === "en" || saved === "es") {
       setLangState(saved);
       document.documentElement.lang = saved;
@@ -33,6 +36,7 @@ export function LanguageProvider({
     }
 
     const browser = navigator.language?.toLowerCase();
+
     if (browser?.startsWith("es")) {
       setLangState("es");
       document.documentElement.lang = "es";
@@ -45,7 +49,7 @@ export function LanguageProvider({
     document.documentElement.lang = next;
   }
 
-  const value = useMemo(
+  const value = useMemo<LanguageContextValue>(
     () => ({
       lang,
       setLang,
@@ -63,8 +67,10 @@ export function LanguageProvider({
 
 export function useLanguage() {
   const ctx = useContext(LanguageContext);
+
   if (!ctx) {
     throw new Error("useLanguage must be used inside LanguageProvider");
   }
+
   return ctx;
 }

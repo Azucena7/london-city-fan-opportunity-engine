@@ -1,7 +1,6 @@
-# Block 10 hotfix
+# Block 11 hotfix
 
-Fixes the TypeScript build error:
-`'data' is possibly 'null'`
+Fixes the TypeScript dictionary union error in LanguageProvider.
 
 Commit:
-`Fix nullable journey provider build error`
+`Fix bilingual dictionary context typing`
