@@ -1,6 +1,8 @@
-# Block 11 hotfix
+# Block 11.1 hotfix
 
-Fixes the TypeScript dictionary union error in LanguageProvider.
+Fixes stale translation keys in LocalizedHome:
+- t.overview.explore -> t.common.exploreAll
+- t.overview.fullCalendar -> t.common.fullCalendar
 
 Commit:
-`Fix bilingual dictionary context typing`
+`Fix bilingual overview translation keys`

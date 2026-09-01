@@ -56,7 +56,7 @@ export function LocalizedHome({
       message:
         f.message ??
         f.campaignMessage ??
-        "Elite women’s football is closer than you think."
+        t.weekly.messageFallback
     };
   }
 
@@ -114,7 +114,7 @@ export function LocalizedHome({
               <div className="eyebrow">{t.overview.where}</div>
               <h3>{t.overview.priorityTerritories}</h3>
             </div>
-            <a className="textLink" href="/territories">{t.overview.explore}</a>
+            <a className="textLink" href="/territories">{t.common.exploreAll}</a>
           </div>
           <TerritoryList items={territories} />
         </div>
@@ -137,7 +137,7 @@ export function LocalizedHome({
             <div className="eyebrow">{t.overview.when}</div>
             <h3>{t.overview.opportunityCalendar}</h3>
           </div>
-          <a className="textLink" href="/fixtures">{t.overview.fullCalendar}</a>
+          <a className="textLink" href="/fixtures">{t.common.fullCalendar}</a>
         </div>
         <OpportunityCalendar items={fixtures} />
       </section>
