@@ -1,0 +1,48 @@
+.navTabsRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 58px;
+}
+
+.navTabsRow .tabs {
+  margin-bottom: 0;
+}
+
+.languageSwitcher {
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid rgba(50,230,212,.22);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.languageSwitcher button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  min-width: 38px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .06em;
+}
+
+.languageSwitcher button.active {
+  background: var(--lcl-hyperturq);
+  color: var(--lcl-navy);
+}
+
+@media (max-width: 760px) {
+  .navTabsRow {
+    flex-direction: column-reverse;
+    margin-bottom: 42px;
+  }
+
+  .languageSwitcher {
+    align-self: flex-end;
+  }
+}

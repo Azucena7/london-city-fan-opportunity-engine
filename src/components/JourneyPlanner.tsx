@@ -3,6 +3,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import { SignalBadge } from "./SignalBadge";
 import { accessLabel, accessScore } from "@/lib/access";
+import { useLanguage } from "./LanguageProvider";
 
 type Journey = {
   duration: number;
@@ -48,11 +49,8 @@ function localTime(value?: string) {
   });
 }
 
-export function JourneyPlanner({
-  matchDate
-}: {
-  matchDate?: string;
-}) {
+export function JourneyPlanner({ matchDate }: { matchDate?: string }) {
+  const { t } = useLanguage();
   const [origin, setOrigin] = useState("");
   const [mode, setMode] = useState<"now" | "matchday">("now");
   const [data, setData] = useState<Payload | null>(null);
@@ -77,7 +75,7 @@ export function JourneyPlanner({
       if (geo.status !== "resolved") {
         setData({
           status: "unavailable",
-          reason: geo.reason ?? "Origin could not be resolved."
+          reason: geo.reason ?? t.travel.routeUnavailable
         });
         return;
       }
@@ -105,7 +103,7 @@ export function JourneyPlanner({
     } catch {
       setData({
         status: "unavailable",
-        reason: "Journey services could not be reached."
+        reason: t.travel.routeUnavailable
       });
     } finally {
       setLoading(false);
@@ -132,15 +130,12 @@ export function JourneyPlanner({
     <section className="journeyPlanner">
       <div className="journeyIntro">
         <div>
-          <div className="eyebrow">UK → HAYES LANE</div>
-          <h2>Where are you coming from?</h2>
-          <p className="muted">
-            The engine resolves the origin first. London journeys route through
-            TfL; origins elsewhere in Great Britain route through the national layer.
-          </p>
+          <div className="eyebrow">{t.travel.ukToHayes}</div>
+          <h2>{t.travel.whereFrom}</h2>
+          <p className="muted">{t.travel.helper}</p>
         </div>
         <div className="journeyDestination">
-          <span>Destination</span>
+          <span>{t.common.destination}</span>
           <strong>Hayes Lane</strong>
           <small>Bromley · BR2 9EF</small>
         </div>
@@ -148,11 +143,11 @@ export function JourneyPlanner({
 
       <form className="journeyForm" onSubmit={submit}>
         <label>
-          <span>Postcode, station, town or city</span>
+          <span>{t.travel.originLabel}</span>
           <input
             value={origin}
             onChange={(e) => setOrigin(e.target.value)}
-            placeholder="e.g. Cambridge, CR0 7AB, London Bridge"
+            placeholder={t.travel.originPlaceholder}
           />
         </label>
 
@@ -162,7 +157,7 @@ export function JourneyPlanner({
             className={mode === "now" ? "active" : ""}
             onClick={() => setMode("now")}
           >
-            Travel now
+            {t.travel.travelNow}
           </button>
           <button
             type="button"
@@ -170,28 +165,26 @@ export function JourneyPlanner({
             className={mode === "matchday" ? "active" : ""}
             onClick={() => setMode("matchday")}
           >
-            Matchday
+            {t.travel.matchday}
           </button>
         </div>
 
         <button className="journeySubmit" type="submit" disabled={loading || !origin.trim()}>
-          {loading ? "Resolving…" : "Check journey"}
+          {loading ? t.travel.resolving : t.travel.check}
         </button>
       </form>
 
       {resolved?.status === "resolved" && (
         <div className="originResolution">
           <div>
-            <span>Origin recognised</span>
+            <span>{t.travel.originRecognised}</span>
             <strong>{resolved.locality ?? origin}</strong>
             <small>{resolved.displayName}</small>
           </div>
           <div>
-            <span>Routing layer</span>
-            <strong>
-              {resolved.scope === "london" ? "TfL" : "Great Britain"}
-            </strong>
-            <small>{resolved.postcode ?? "No postcode returned"}</small>
+            <span>{t.travel.routingLayer}</span>
+            <strong>{resolved.scope === "london" ? "TfL" : t.travel.gb}</strong>
+            <small>{resolved.postcode ?? t.travel.noPostcode}</small>
           </div>
         </div>
       )}
@@ -200,12 +193,8 @@ export function JourneyPlanner({
         <div className="nationalSetup">
           <SignalBadge type="WAITING" />
           <div>
-            <strong>National origin recognised — routing layer needs activation</strong>
+            <strong>{t.travel.nationalSetup}</strong>
             <p>{data.reason}</p>
-            <small>
-              Once the two TransportAPI environment variables are added in Vercel,
-              Cambridge and other GB origins can return multimodal routes here.
-            </small>
           </div>
         </div>
       )}
@@ -213,7 +202,7 @@ export function JourneyPlanner({
       {(data?.status === "unavailable" || data?.status === "needs_postcode") && (
         <div className="journeyError">
           <SignalBadge type="WAITING" />
-          <strong>Journey unavailable</strong>
+          <strong>{t.travel.routeUnavailable}</strong>
           <span>{data.reason}</span>
         </div>
       )}
@@ -221,7 +210,7 @@ export function JourneyPlanner({
       {best && score !== null && (
         <div className="journeyResult">
           <div className="accessScoreBlock">
-            <div className="eyebrow">ACCESS SCORE</div>
+            <div className="eyebrow">{t.travel.accessScore}</div>
             <div className="accessScore">{score}</div>
             <div className="accessLabel">{accessLabel(score)}</div>
           </div>
@@ -235,12 +224,9 @@ export function JourneyPlanner({
             </div>
 
             <div className="journeyFacts">
-              <div><span>Changes</span><strong>{best.changes}</strong></div>
-              <div><span>Walking</span><strong>{best.walkingMinutes} min</strong></div>
-              <div>
-                <span>Provider</span>
-                <strong>{provider}</strong>
-              </div>
+              <div><span>{t.common.changes}</span><strong>{best.changes}</strong></div>
+              <div><span>{t.common.walking}</span><strong>{best.walkingMinutes} min</strong></div>
+              <div><span>{t.common.provider}</span><strong>{provider}</strong></div>
             </div>
 
             <div className="journeyLegs">
@@ -264,9 +250,9 @@ export function JourneyPlanner({
 
       {data?.status === "live" && (
         <div className="journeySource">
-          <span>Source: {provider}</span>
+          <span>{t.common.source}: {provider}</span>
           <span>
-            Checked {data.generated_at ? new Date(data.generated_at).toLocaleString() : "now"}
+            {t.common.checked} {data.generated_at ? new Date(data.generated_at).toLocaleString() : "now"}
           </span>
         </div>
       )}

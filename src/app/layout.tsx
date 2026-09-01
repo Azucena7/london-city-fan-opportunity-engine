@@ -7,6 +7,8 @@ import "./fixture-auto.css";
 import "./brand.css";
 import "./journey.css";
 import "./national.css";
+import "./i18n.css";
+import { LanguageProvider } from "@/components/LanguageProvider";
 
 export const metadata: Metadata = {
   title: "London City Fan Opportunity Lab",
@@ -21,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }
