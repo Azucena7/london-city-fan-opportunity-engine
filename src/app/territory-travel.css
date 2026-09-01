@@ -45,7 +45,7 @@
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 14px;
-  align-items: end;
+  align-items: flex-end;
   padding: 22px 30px;
   border-bottom: 1px solid var(--line);
 }
@@ -121,7 +121,7 @@
   display: flex;
   justify-content: space-between;
   gap: 18px;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .territoryAggregateTop h3 {

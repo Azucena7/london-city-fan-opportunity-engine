@@ -1,8 +1,9 @@
-# Block 11.1 hotfix
+# Block 13 hotfix
 
-Fixes stale translation keys in LocalizedHome:
-- t.overview.explore -> t.common.exploreAll
-- t.overview.fullCalendar -> t.common.fullCalendar
+Fixes:
+- removes non-existent `fixtureKickoff` import
+- reuses existing `matchdayArrivalTime(fixture, 45)` from `src/lib/fixtures.ts`
+- removes the autoprefixer warning by using `flex-start`
 
 Commit:
-`Fix bilingual overview translation keys`
+`Fix territory travel fixture timing import`

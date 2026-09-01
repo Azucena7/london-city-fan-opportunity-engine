@@ -3,30 +3,15 @@ import { TerritoryTravelIntelligence } from "@/components/TerritoryTravelIntelli
 import { territoryTravelSeeds } from "@/lib/territoryTravel";
 import { fixtures } from "@/lib/data";
 import {
-  fixtureKickoff,
   isoDateForWeather,
+  matchdayArrivalTime,
   nextHomeFixture
 } from "@/lib/fixtures";
-
-function arrivalTarget(kickoff?: string) {
-  if (!kickoff) return undefined;
-
-  const [h, m] = kickoff.split(":").map(Number);
-  if (Number.isNaN(h) || Number.isNaN(m)) return undefined;
-
-  const total = h * 60 + m - 45;
-  const safe = (total + 1440) % 1440;
-
-  return `${String(Math.floor(safe / 60)).padStart(2, "0")}:${String(
-    safe % 60
-  ).padStart(2, "0")}`;
-}
 
 export default function TerritoryTravelPage() {
   const fixture = nextHomeFixture(fixtures);
   const matchDate = isoDateForWeather(fixture);
-  const kickoff = fixtureKickoff(fixture);
-  const targetArrival = arrivalTarget(kickoff);
+  const targetArrival = matchdayArrivalTime(fixture, 45);
 
   return (
     <main>
