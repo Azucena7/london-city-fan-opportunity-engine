@@ -1,71 +1,20 @@
 "use client";
-
 import { SignalBadge } from "./SignalBadge";
 import { useLanguage } from "./LanguageProvider";
+import { useLiveMatch } from "./LiveMatchProvider";
 
 export function EvidenceList() {
-  const { t } = useLanguage();
-
-  const evidence = [
-    {
-      signal: t.transparency.territory,
-      type: "STRUCTURAL" as const,
-      value: "95 / 100",
-      source: t.evidence.territorySource,
-      note: t.evidence.territoryNote
-    },
-    {
-      signal: t.transparency.calendar,
-      type: "MEASURED" as const,
-      value: "95 / 100",
-      source: t.evidence.calendarSource,
-      note: t.evidence.calendarNote
-    },
-    {
-      signal: t.transparency.attention,
-      type: "INFERRED" as const,
-      value: "38 / 100",
-      source: t.evidence.attentionSource,
-      note: t.evidence.attentionNote
-    },
-    {
-      signal: t.transparency.weather,
-      type: "WAITING" as const,
-      value: "—",
-      source: t.evidence.weatherSource,
-      note: t.evidence.weatherNote
-    },
-    {
-      signal: t.transparency.momentum,
-      type: "WAITING" as const,
-      value: "—",
-      source: t.evidence.momentumSource,
-      note: t.evidence.momentumNote
-    },
-    {
-      signal: t.transparency.appeal,
-      type: "INFERRED" as const,
-      value: "78 / 100",
-      source: t.evidence.appealSource,
-      note: t.evidence.appealNote
-    }
-  ];
-
-  return (
-    <div className="evidenceList">
-      {evidence.map((e) => (
-        <div className="evidenceRow" key={e.signal}>
-          <div className="evidenceSignal">
-            <strong>{e.signal}</strong>
-            <SignalBadge type={e.type} />
-          </div>
-          <div className="evidenceValue">{e.value}</div>
-          <div>
-            <div className="evidenceSource">{e.source}</div>
-            <div className="muted">{e.note}</div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+ const {t}=useLanguage(); const s=useLiveMatch();
+ const rows=[
+  [t.transparency.territory,"STRUCTURAL",`${s.fixture.territoryOpportunity} / 100`,t.evidence.territorySource,t.evidence.territoryNote],
+  [t.transparency.calendar,"MEASURED",`${s.fixture.calendarWhitespace} / 100`,t.evidence.calendarSource,t.evidence.calendarNote],
+  [t.transparency.attention,"INFERRED",`${s.fixture.attentionAvailability} / 100`,t.evidence.attentionSource,t.evidence.attentionNote],
+  [t.transparency.weather,s.weatherStatus,s.weatherSuitability===null?"—":`${s.weatherSuitability} / 100`,t.evidence.weatherSource,t.evidence.weatherNote],
+  [t.transparency.momentum,"WAITING","—",t.evidence.momentumSource,t.evidence.momentumNote],
+  [t.transparency.appeal,"INFERRED",`${s.fixture.fixtureAppeal} / 100`,t.evidence.appealSource,t.evidence.appealNote]
+ ] as const;
+ return <div className="evidenceList">{rows.map(([signal,type,value,source,note])=><div className="evidenceRow" key={signal}>
+  <div className="evidenceSignal"><strong>{signal}</strong><SignalBadge type={type}/></div>
+  <div className="evidenceValue">{value}</div><div><div className="evidenceSource">{source}</div><div className="muted">{note}</div></div>
+ </div>)}</div>;
 }

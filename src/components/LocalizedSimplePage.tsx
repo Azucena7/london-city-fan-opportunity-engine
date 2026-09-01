@@ -1,41 +1,4 @@
 "use client";
-
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
-
-export function LocalizedSimplePage({
-  page,
-  children
-}: {
-  page: "fixtures" | "territories" | "signals";
-  children: React.ReactNode;
-}) {
-  const { t } = useLanguage();
-
-  const labels = {
-    fixtures: {
-      eyebrow: t.pages.fixturesEyebrow,
-      title: t.pages.fixturesTitle
-    },
-    territories: {
-      eyebrow: t.pages.territoriesEyebrow,
-      title: t.pages.territoriesTitle
-    },
-    signals: {
-      eyebrow: t.pages.signalsEyebrow,
-      title: t.pages.signalsTitle
-    }
-  }[page];
-
-  return (
-    <main>
-      <section className="subHero">
-        <div className="brand">LCL / FAN OPPORTUNITY LAB</div>
-        <NavTabs />
-        <div className="eyebrow">{labels.eyebrow}</div>
-        <h1 className="pageTitle">{labels.title}</h1>
-      </section>
-      {children}
-    </main>
-  );
-}
+export function LocalizedSimplePage({page,children}:{page:'fixtures'|'territories'|'signals';children:React.ReactNode}){const {t,lang}=useLanguage(); const es=lang==='es'; const labels={fixtures:{eyebrow:t.pages.fixturesEyebrow,title:t.pages.fixturesTitle,lede:es?'Cada partido es un entorno comercial distinto, no otra fecha en el calendario.':'Each match is a different commercial environment, not another date on the calendar.'},territories:{eyebrow:t.pages.territoriesEyebrow,title:t.pages.territoriesTitle,lede:es?'La prioridad combina familias, fútbol femenino de base, acceso de matchday y contexto competitivo.':'Priority combines families, girls’ football networks, matchday access and competitive context.'},signals:{eyebrow:t.pages.signalsEyebrow,title:t.pages.signalsTitle,lede:es?'La oportunidad estructural dice dónde jugar. Las señales live dicen con qué agresividad actuar ahora.':'Structural opportunity tells us where to play. Live signals tell us how aggressively to act now.'}}[page]; return <main><section className="subHero"><div className="brand">LCL / FAN OPPORTUNITY LAB</div><NavTabs/><div className="eyebrow">{labels.eyebrow}</div><h1 className="pageTitle">{labels.title}</h1><p className="lede">{labels.lede}</p></section>{children}</main>}

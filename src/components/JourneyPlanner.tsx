@@ -49,7 +49,7 @@ function localTime(value?: string) {
   });
 }
 
-export function JourneyPlanner({ matchDate }: { matchDate?: string }) {
+export function JourneyPlanner({ matchDate, matchKickoff }: { matchDate?: string; matchKickoff?: string }) {
   const { t } = useLanguage();
   const [origin, setOrigin] = useState("");
   const [mode, setMode] = useState<"now" | "matchday">("now");
@@ -84,7 +84,9 @@ export function JourneyPlanner({ matchDate }: { matchDate?: string }) {
 
       if (mode === "matchday" && matchDate) {
         params.set("date", matchDate);
-        params.set("time", "12:00");
+        const [h,m] = (matchKickoff ?? "15:00").split(":").map(Number);
+        const total = h * 60 + m - 45;
+        params.set("time", `${String(Math.floor(total / 60)).padStart(2,"0")}:${String(total % 60).padStart(2,"0")}`);
       }
 
       let endpoint: string;

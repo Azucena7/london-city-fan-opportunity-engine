@@ -1,7 +1,5 @@
 const nextConfig = {
-  experimental: {
-    typedRoutes: false
-  }
+  typedRoutes: false
 };
 
 export default nextConfig;
