@@ -4,7 +4,8 @@ const links = [
   ["/", "Overview"],
   ["/fixtures", "Fixtures"],
   ["/territories", "Territories"],
-  ["/signals", "Live signals"]
+  ["/signals", "Live signals"],
+  ["/story", "Story mode"]
 ];
 
 export function NavTabs() {
