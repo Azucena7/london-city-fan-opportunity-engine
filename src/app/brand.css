@@ -1,0 +1,221 @@
+/*
+  London City-inspired prototype palette.
+  This is NOT an official club brand stylesheet.
+  The official 2026/27 home kit uses Hyperturq with navy details.
+*/
+
+:root {
+  --lcl-hyperturq: #32e6d4;
+  --lcl-hyperturq-soft: #9af5ea;
+  --lcl-navy: #071b33;
+  --lcl-navy-2: #0b2947;
+  --lcl-white: #f8fbfc;
+  --lcl-cloud: #dce7eb;
+  --lcl-ink: #061522;
+
+  --bg: var(--lcl-navy);
+  --surface: #0a223b;
+  --surface-2: #0e2c4a;
+  --ink: var(--lcl-white);
+  --muted: #a9bdc8;
+  --line: rgba(248,251,252,.14);
+  --accent: var(--lcl-hyperturq);
+  --hot: #f28e72;
+}
+
+html, body {
+  background:
+    radial-gradient(circle at 88% 2%, rgba(50,230,212,.08), transparent 24%),
+    var(--bg);
+}
+
+.brand {
+  color: var(--lcl-white);
+}
+
+.eyebrow {
+  color: var(--lcl-hyperturq);
+}
+
+.status span {
+  background: var(--lcl-hyperturq);
+}
+
+.tabs a {
+  border-color: rgba(50,230,212,.18);
+}
+
+.tabs a:hover {
+  color: var(--lcl-navy);
+  background: var(--lcl-hyperturq);
+  border-color: var(--lcl-hyperturq);
+}
+
+.hero,
+.subHero {
+  position: relative;
+}
+
+.hero::after,
+.subHero::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  width: 36%;
+  height: 3px;
+  background: var(--lcl-hyperturq);
+}
+
+.panel,
+.decisionCard,
+.weatherCard,
+.liveSignalCard,
+.territoryCard,
+.mapPanel,
+.thisWeekHero {
+  box-shadow: 0 18px 60px rgba(0,0,0,.12);
+}
+
+.weeklyHeroLeft {
+  background: var(--lcl-hyperturq);
+  color: var(--lcl-navy);
+}
+
+.weeklyHeroLeft .eyebrow {
+  color: var(--lcl-navy);
+  opacity: .72;
+}
+
+.calendarBar {
+  background: linear-gradient(
+    90deg,
+    var(--lcl-hyperturq),
+    var(--lcl-hyperturq-soft)
+  );
+}
+
+.thesis {
+  background: var(--lcl-hyperturq);
+  color: var(--lcl-navy);
+}
+
+.thesis .eyebrow,
+.thesis .muted {
+  color: var(--lcl-navy);
+  opacity: .72;
+}
+
+.shareCard {
+  background:
+    linear-gradient(140deg, rgba(255,255,255,.16), transparent 40%),
+    var(--lcl-hyperturq);
+  color: var(--lcl-navy);
+}
+
+.shareEyebrow {
+  color: var(--lcl-navy);
+  opacity: .72;
+}
+
+.mapScore,
+.hayesDot {
+  background: var(--lcl-hyperturq);
+  color: var(--lcl-navy);
+}
+
+.mapNode.priority {
+  border-color: rgba(50,230,212,.72);
+}
+
+.territoryMap {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(50,230,212,.09), transparent 18%),
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+    #06192c;
+  background-size: auto, 40px 40px, 40px 40px, auto;
+}
+
+.mapRing {
+  border-color: rgba(50,230,212,.2);
+}
+
+.weatherScore,
+.storyNum {
+  color: var(--lcl-hyperturq);
+}
+
+.liveWeather {
+  background:
+    radial-gradient(circle at 80% 10%, rgba(50,230,212,.13), transparent 28%),
+    var(--surface);
+}
+
+.signalBadge.structural {
+  background: rgba(50,230,212,.11);
+  color: var(--lcl-hyperturq);
+}
+
+.signalBadge.live {
+  background: var(--lcl-hyperturq);
+  color: var(--lcl-navy);
+  border-color: var(--lcl-hyperturq);
+}
+
+.signalStatus.active {
+  background: var(--lcl-hyperturq);
+  color: var(--lcl-navy);
+  border-color: var(--lcl-hyperturq);
+}
+
+.strategyLine {
+  color: var(--lcl-hyperturq);
+}
+
+.textLink:hover {
+  color: var(--lcl-hyperturq);
+}
+
+.nextFixtureContext {
+  border-color: rgba(50,230,212,.18);
+}
+
+.brandStripe {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 6px;
+  margin: 0 0 22px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.brandStripe span:nth-child(1),
+.brandStripe span:nth-child(3) {
+  background: var(--lcl-navy-2);
+}
+
+.brandStripe span:nth-child(2) {
+  background: var(--lcl-hyperturq);
+}
+
+.prototypeMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 7px 10px;
+  border: 1px solid rgba(50,230,212,.2);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .04em;
+}
+
+.prototypeMark::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lcl-hyperturq);
+}

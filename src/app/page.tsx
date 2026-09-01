@@ -4,6 +4,7 @@ import { NavTabs } from "@/components/NavTabs";
 import { OpportunityCalendar } from "@/components/OpportunityCalendar";
 import { WeeklyDecisionHero } from "@/components/WeeklyDecisionHero";
 import { AiTransparency } from "@/components/AiTransparency";
+import { BrandStripe } from "@/components/BrandStripe";
 import { fixtures, territories } from "@/lib/data";
 import { decisionFromScore, planningScore } from "@/lib/scoring";
 
@@ -70,6 +71,7 @@ export default function Home() {
               A practical decision engine for turning geography, grassroots football,
               calendar whitespace and matchday signals into concrete acquisition plays.
             </p>
+            <BrandStripe />
           </div>
           <div className="heroStatement">
             <span>AI is not the story.</span>
