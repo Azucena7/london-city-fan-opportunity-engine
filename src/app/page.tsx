@@ -1,7 +1,9 @@
-import { DecisionCard } from "@/components/DecisionCard";
 import { Kpi } from "@/components/Kpi";
 import { TerritoryList } from "@/components/TerritoryList";
 import { NavTabs } from "@/components/NavTabs";
+import { OpportunityCalendar } from "@/components/OpportunityCalendar";
+import { WeeklyDecisionHero } from "@/components/WeeklyDecisionHero";
+import { AiTransparency } from "@/components/AiTransparency";
 import { fixtures, territories } from "@/lib/data";
 import { decisionFromScore, planningScore } from "@/lib/scoring";
 
@@ -56,7 +58,7 @@ export default function Home() {
       <section className="hero">
         <div className="nav">
           <div className="brand">LCL / FAN OPPORTUNITY LAB</div>
-          <div className="status"><span /> V1 PUBLIC PROTOTYPE</div>
+          <div className="status"><span /> PUBLIC PROTOTYPE</div>
         </div>
         <NavTabs />
 
@@ -65,31 +67,31 @@ export default function Home() {
             <div className="eyebrow">THE QUESTION</div>
             <h1>Where are the next 1,000 recurring fans?</h1>
             <p className="lede">
-              A decision engine for turning geography, grassroots football,
+              A practical decision engine for turning geography, grassroots football,
               calendar whitespace and matchday signals into concrete acquisition plays.
             </p>
           </div>
           <div className="heroStatement">
-            <span>Not another dashboard.</span>
-            <strong>A weekly decision.</strong>
+            <span>AI is not the story.</span>
+            <strong>The decision is.</strong>
           </div>
         </div>
       </section>
 
       <section className="kpiGrid">
-        <Kpi label="Territories modelled" value={String(territories.length)} detail="Seed dataset currently loaded" />
+        <Kpi label="Territories modelled" value={String(territories.length)} detail="Seed dataset" />
         <Kpi label="Fixtures scored" value={String(fixtures.length)} detail="Planning layer" />
         <Kpi label="Best current window" value={top?.opponent ?? "TBC"} detail={top?.decision ?? ""} />
-        <Kpi label="Operating logic" value="WHERE × WHEN" detail="+ live matchday signals" />
+        <Kpi label="Operating logic" value="WHERE × WHEN" detail="+ live signals" />
       </section>
 
       {top ? (
-        <DecisionCard
+        <WeeklyDecisionHero
           opponent={top.opponent}
           date={top.date}
-          territory={top.territoryName}
           score={top.score}
           decision={top.decision}
+          territory={top.territoryName}
           product={top.product}
           channel={top.channel}
           message={top.message}
@@ -122,6 +124,19 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <section className="panel widePanel">
+        <div className="sectionHeader">
+          <div>
+            <div className="eyebrow">WHEN</div>
+            <h3>Opportunity calendar</h3>
+          </div>
+          <a className="textLink" href="/fixtures">Full calendar →</a>
+        </div>
+        <OpportunityCalendar items={fixtures} />
+      </section>
+
+      <AiTransparency />
 
       <section className="method">
         <div className="eyebrow">PLANNING SCORE</div>
