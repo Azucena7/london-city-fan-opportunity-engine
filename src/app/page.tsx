@@ -1,6 +1,7 @@
 import { DecisionCard } from "@/components/DecisionCard";
 import { Kpi } from "@/components/Kpi";
 import { TerritoryList } from "@/components/TerritoryList";
+import { NavTabs } from "@/components/NavTabs";
 import { fixtures, territories } from "@/lib/data";
 import { decisionFromScore, planningScore } from "@/lib/scoring";
 
@@ -57,6 +58,7 @@ export default function Home() {
           <div className="brand">LCL / FAN OPPORTUNITY LAB</div>
           <div className="status"><span /> V1 PUBLIC PROTOTYPE</div>
         </div>
+        <NavTabs />
 
         <div className="heroGrid">
           <div>
@@ -101,7 +103,7 @@ export default function Home() {
               <div className="eyebrow">WHERE</div>
               <h3>Priority territories</h3>
             </div>
-            <span className="muted">Opportunity score</span>
+            <a className="textLink" href="/territories">Explore all →</a>
           </div>
           <TerritoryList items={territories} />
         </div>
