@@ -1,0 +1,9 @@
+[
+ {"name":"Hayes Lane girls programmes","operator":"Bromley FC Community Trust","postcode":"BR2 9EF","lat":51.390984,"lon":0.017710,"strength":100,"offer":"Wildcats + Girls Development; ages 4-15","sourceUrl":"https://www.bromleyfc.org/programmes-activities/"},
+ {"name":"Chislehurst girls hub","operator":"Bromley FC Community Trust","postcode":"BR7 6HE","lat":51.418617,"lon":0.089186,"strength":95,"offer":"Wildcats + SQUAD Girls + Girls Development; ages 4-15","sourceUrl":"https://www.bromleyfc.org/news/women-and-girls/new-women-girls-football-sessions-at-chislehurst-school/"},
+ {"name":"Bromley Girls Academy Centre","operator":"South London Girls Football Academy","postcode":"BR1 2TW","lat":51.395300,"lon":0.057102,"strength":85,"offer":"Independent girls academy; ages 4-14","sourceUrl":"https://southlondongirlsfootballacademy.co.uk/"},
+ {"name":"Lewisham Girls Academy Centre","operator":"South London Girls Football Academy","postcode":"SE6 3BB","lat":51.442402,"lon":-0.022719,"strength":85,"offer":"Independent girls academy","sourceUrl":"https://southlondongirlsfootballacademy.co.uk/"},
+ {"name":"Southwark Girls Academy Centre","operator":"South London Girls Football Academy","postcode":"SE5 0JD","lat":51.484796,"lon":-0.076943,"strength":85,"offer":"Independent girls academy","sourceUrl":"https://southlondongirlsfootballacademy.co.uk/"},
+ {"name":"Waddon girls-only sessions","operator":"Palace for Life","postcode":"CR0 4RG","lat":51.363394,"lon":-0.117848,"strength":90,"offer":"Girls-only community football","sourceUrl":"https://www.palaceforlife.org/project/free-girls-football-south-london/"},
+ {"name":"Harris Invictus girls-only sessions","operator":"Palace for Life","postcode":"CR0 2TB","lat":51.379660,"lon":-0.103788,"strength":90,"offer":"Girls-only community football","sourceUrl":"https://www.palaceforlife.org/project/free-girls-football-south-london/"}
+]
