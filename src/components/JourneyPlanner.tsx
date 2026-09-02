@@ -193,12 +193,12 @@ export function JourneyPlanner({
       <div className="journeyIntro">
         <div>
           <div className="eyebrow">
-            {lang === "es" ? "TRAVEL FRICTION DELTA" : "TRAVEL FRICTION DELTA"}
+            {lang === "es" ? "JOURNEY INDIVIDUAL" : "FAN JOURNEY"}
           </div>
           <h2>
             {lang === "es"
-              ? "¿Cambia el viaje cuando llega el matchday?"
-              : "Does the journey get harder on matchday?"}
+              ? "¿Se complica este viaje el día de partido?"
+              : "Does matchday make this journey harder?"}
           </h2>
           <p className="muted">
             {lang === "es"

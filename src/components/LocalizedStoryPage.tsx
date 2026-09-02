@@ -7,14 +7,14 @@ import { TerritoryMap } from "@/components/TerritoryMap";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export function LocalizedStoryPage({ territories }: { territories: any[] }) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const es = lang === "es";
 
   return (
     <main>
-      <section className="subHero storyHero">
-        <div className="brand">LCL / FAN OPPORTUNITY LAB</div>
-        <NavTabs />
-        <div className="eyebrow">{t.pages.storyEyebrow}</div>
+      <NavTabs />
+      <section className="storyHero editorialHero">
+        <div className="eyebrow">{es ? "CASE STUDY" : "CASE STUDY"}</div>
         <h1 className="pageTitle">{t.pages.storyTitle}</h1>
         <p className="lede">{t.pages.storyLede}</p>
       </section>

@@ -5,13 +5,15 @@ import { useLanguage } from "./LanguageProvider";
 export function SignalBadge({
   type
 }: {
-  type: "MEASURED" | "INFERRED" | "LIVE" | "WAITING" | "STRUCTURAL";
+  type: "MEASURED" | "PLANNING" | "DYNAMIC" | "INFERRED" | "LIVE" | "WAITING" | "STRUCTURAL";
 }) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const cls = type.toLowerCase();
 
   const labelMap = {
     MEASURED: t.common.measured,
+    PLANNING: lang === "es" ? "PLANIFICACIÓN" : "PLANNING",
+    DYNAMIC: lang === "es" ? "DINÁMICO" : "DYNAMIC",
     INFERRED: t.common.inferred,
     LIVE: t.common.live,
     WAITING: t.common.waiting,

@@ -1,3 +1,2 @@
-"use client";
-import { fixtures } from "@/lib/data"; import { FixtureTable } from "@/components/FixtureTable"; import { LocalizedSimplePage } from "@/components/LocalizedSimplePage"; import { useLanguage } from "@/components/LanguageProvider";
-export default function FixturesPage(){const {lang}=useLanguage(); const es=lang==='es'; return <LocalizedSimplePage page="fixtures"><section className="panel widePanel"><div className="sectionHeader"><div><div className="eyebrow">2026/27</div><h3>{es?'Calendario de decisión de matchday':'Matchday decision calendar'}</h3></div><span className="muted">{es?'Capa de planificación':'Planning layer'}</span></div><FixtureTable items={fixtures}/></section><section className="method"><div className="eyebrow">{es?'POR QUÉ IMPORTA':'WHY THIS MATTERS'}</div><h3>{es?'Un rival premium puede seguir siendo una mala ventana de captación.':'A premium opponent can still be a poor acquisition window.'}</h3></section></LocalizedSimplePage>}
+import { redirect } from "next/navigation";
+export default function FixturesPage(){ redirect("/opportunities#fixtures"); }

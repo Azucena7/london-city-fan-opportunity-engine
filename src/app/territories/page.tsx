@@ -1,3 +1,2 @@
-"use client";
-import { territories } from "@/lib/data"; import { TerritoryCards } from "@/components/TerritoryCards"; import { LocalizedSimplePage } from "@/components/LocalizedSimplePage"; import { useLanguage } from "@/components/LanguageProvider";
-export default function TerritoriesPage(){const {lang}=useLanguage(); const es=lang==='es'; return <LocalizedSimplePage page="territories"><TerritoryCards items={territories}/><section className="method"><div className="eyebrow">{es?'UNIDAD DE CAPTACIÓN':'ACQUISITION UNIT'}</div><h3>{es?'A veces el cliente no es una familia. Es una organización.':'Sometimes the customer is not a family. It is an organisation.'}</h3><p className="muted">{es?'Un solo club grassroots puede abrir la puerta a decenas de jugadoras, familias y espectadores relacionados.':'One grassroots club can unlock dozens of girls, families and related spectators.'}</p></section></LocalizedSimplePage>}
+import { redirect } from "next/navigation";
+export default function TerritoriesPage(){ redirect("/opportunities#territories"); }

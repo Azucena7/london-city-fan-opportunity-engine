@@ -11,6 +11,7 @@ import "./i18n.css";
 import "./i18n-fixes.css";
 import "./travel-delta.css";
 import "./territory-travel.css";
+import "./block14.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 export const metadata: Metadata = {

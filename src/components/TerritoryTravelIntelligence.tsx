@@ -160,13 +160,13 @@ export function TerritoryTravelIntelligence({
         <div>
           <div className="eyebrow">
             {lang === "es"
-              ? "INTELIGENCIA DE VIAJE TERRITORIAL"
-              : "TERRITORY TRAVEL INTELLIGENCE"}
+              ? "ACCESO TERRITORIAL"
+              : "TERRITORY ACCESS"}
           </div>
           <h2>
             {lang === "es"
-              ? "¿Es un problema individual o un patrón territorial?"
-              : "Is travel friction individual — or territorial?"}
+              ? "¿Puede este territorio llegar realmente a Hayes Lane?"
+              : "Can this territory actually get to Hayes Lane?"}
           </h2>
           <p className="muted">
             {lang === "es"

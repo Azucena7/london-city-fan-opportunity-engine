@@ -3,23 +3,26 @@
 import { useLanguage } from "./LanguageProvider";
 
 export function AiTransparency() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const planning = lang === "es" ? "PLANIFICACIÓN" : "PLANNING";
+  const waiting = lang === "es" ? "EN ESPERA" : "WAITING";
+  const weatherState = lang === "es" ? "LIVE CUANDO DISPONIBLE" : "LIVE WHEN AVAILABLE";
 
   const rows = [
     [t.transparency.territory, t.common.structural, t.transparency.territoryDetail],
-    [t.transparency.calendar, t.common.structural, t.transparency.calendarDetail],
-    [t.transparency.attention, t.common.measured, t.transparency.attentionDetail],
-    [t.transparency.weather, t.common.live, t.transparency.weatherDetail],
-    [t.transparency.momentum, t.common.live, t.transparency.momentumDetail],
-    [t.transparency.appeal, t.common.inferred, t.transparency.appealDetail]
+    [t.transparency.calendar, planning, t.transparency.calendarDetail],
+    [t.transparency.attention, planning, t.transparency.attentionDetail],
+    [t.transparency.appeal, t.common.inferred, t.transparency.appealDetail],
+    [t.transparency.weather, weatherState, t.transparency.weatherDetail],
+    [t.transparency.momentum, waiting, t.transparency.momentumDetail]
   ];
 
   return (
-    <section className="panel">
+    <section className="panel transparencyPanel">
       <div className="sectionHeader">
         <div>
-          <div className="eyebrow">{t.transparency.eyebrow}</div>
-          <h3>{t.transparency.title}</h3>
+          <div className="eyebrow">{lang === "es" ? "ESTADOS DE EVIDENCIA" : "EVIDENCE STATES"}</div>
+          <h3>{lang === "es" ? "Qué sabemos, qué planificamos y qué sigue pendiente" : "What is known, planned, inferred or still waiting"}</h3>
         </div>
       </div>
 

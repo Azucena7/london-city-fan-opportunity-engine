@@ -1,6 +1,5 @@
-import { fixtures, territories } from "@/lib/data";
-import { LocalizedHome } from "@/components/LocalizedHome";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <LocalizedHome fixtures={fixtures} territories={territories} />;
+  redirect("/this-week");
 }
