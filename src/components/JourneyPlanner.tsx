@@ -56,6 +56,15 @@ function scoreJourney(journey: Journey | null) {
   });
 }
 
+function localizedAccessLabel(score: number, lang: "en" | "es") {
+  const label = accessLabel(score);
+  if (lang === "en") return label;
+  if (label === "LOW FRICTION") return "FRICCIÓN BAJA";
+  if (label === "GOOD") return "BUENO";
+  if (label === "MANAGEABLE") return "GESTIONABLE";
+  return "FRICCIÓN ALTA";
+}
+
 function targetArrival(kickoff?: string) {
   if (!kickoff) return undefined;
 
@@ -151,7 +160,7 @@ export function JourneyPlanner({
             status: "unavailable",
             reason:
               lang === "es"
-                ? "Falta fecha o kickoff verificado para calcular el escenario matchday."
+                ? "Falta una fecha u hora de inicio verificadas para calcular el escenario del día de partido."
                 : "A verified fixture date or kickoff is required for the matchday scenario."
           });
 
@@ -193,16 +202,16 @@ export function JourneyPlanner({
       <div className="journeyIntro">
         <div>
           <div className="eyebrow">
-            {lang === "es" ? "JOURNEY INDIVIDUAL" : "FAN JOURNEY"}
+            {lang === "es" ? "TRAYECTO INDIVIDUAL" : "FAN JOURNEY"}
           </div>
           <h2>
             {lang === "es"
-              ? "¿Se complica este viaje el día de partido?"
+              ? "¿Se complica este trayecto el día de partido?"
               : "Does matchday make this journey harder?"}
           </h2>
           <p className="muted">
             {lang === "es"
-              ? "Comparamos el journey actual con el journey planificado para llegar a Hayes Lane 45 minutos antes del kickoff."
+              ? "Comparamos el trayecto actual con el trayecto planificado para llegar a Hayes Lane 45 minutos antes del inicio."
               : "The engine compares the current journey with the scheduled matchday journey arriving at Hayes Lane 45 minutes before kickoff."}
           </p>
         </div>
@@ -211,7 +220,7 @@ export function JourneyPlanner({
           <span>{t.common.destination}</span>
           <strong>Hayes Lane</strong>
           <small>
-            {matchDate ?? "—"} · {matchKickoff ?? "—"} kickoff
+            {matchDate ?? "—"} · {matchKickoff ?? "—"} {lang === "es" ? "hora de inicio" : "kickoff"}
           </small>
         </div>
       </div>
@@ -243,7 +252,7 @@ export function JourneyPlanner({
               ? "Comparando…"
               : "Comparing…"
             : lang === "es"
-            ? "Comparar journeys"
+            ? "Comparar trayectos"
             : "Compare journeys"}
         </button>
       </form>
@@ -277,8 +286,8 @@ export function JourneyPlanner({
             <strong>{t.travel.nationalSetup}</strong>
             <p>
               {lang === "es"
-                ? "El origen está reconocido, pero TransportAPI debe estar activado en Vercel para devolver journeys nacionales."
-                : "The origin is recognised, but TransportAPI credentials must be active in Vercel to return national journeys."}
+                ? "El origen está reconocido. Los trayectos de Londres están disponibles; la capa nacional de rutas todavía no está conectada."
+                : "The origin is recognised. London journeys are available; the national routing layer is not connected yet."}
             </p>
           </div>
         </div>
@@ -295,17 +304,18 @@ export function JourneyPlanner({
       {normal && normalScore !== null && (
         <div className="deltaComparison">
           <ScenarioCard
-            title={lang === "es" ? "Journey actual" : "Current journey"}
-            subtitle={lang === "es" ? "Baseline observada ahora" : "Observed baseline now"}
+            title={lang === "es" ? "Trayecto actual" : "Current journey"}
+            subtitle={lang === "es" ? "Referencia observada ahora" : "Observed baseline now"}
             journey={normal}
             score={normalScore}
+            lang={lang}
           />
 
           <div className="deltaArrow">→</div>
 
           {matchday && matchdayScore !== null ? (
             <ScenarioCard
-              title={lang === "es" ? "Journey de matchday" : "Matchday journey"}
+              title={lang === "es" ? "Trayecto del día de partido" : "Matchday journey"}
               subtitle={
                 arrivalTime
                   ? `${lang === "es" ? "Llegada objetivo" : "Target arrival"} ${arrivalTime}`
@@ -313,13 +323,14 @@ export function JourneyPlanner({
               }
               journey={matchday}
               score={matchdayScore}
+              lang={lang}
             />
           ) : (
             <div className="scenarioCard waitingScenario">
               <SignalBadge type="WAITING" />
               <h3>
                 {lang === "es"
-                  ? "Escenario matchday no disponible"
+                  ? "Escenario del día de partido no disponible"
                   : "Matchday scenario unavailable"}
               </h3>
               <p className="muted">{matchdayData?.reason}</p>
@@ -333,7 +344,7 @@ export function JourneyPlanner({
           <div className="engineResponseTop">
             <div>
               <div className="eyebrow">
-                {lang === "es" ? "RESPUESTA DEL ENGINE" : "ENGINE RESPONSE"}
+                {lang === "es" ? "RESPUESTA DEL SISTEMA" : "ENGINE RESPONSE"}
               </div>
               <h3>{response.title}</h3>
             </div>
@@ -349,7 +360,7 @@ export function JourneyPlanner({
               </strong>
             </div>
             <div>
-              <span>{lang === "es" ? "Cambio Access Score" : "Access Score delta"}</span>
+              <span>{lang === "es" ? "Cambio en la puntuación de acceso" : "Access Score delta"}</span>
               <strong>
                 {delta.scoreDelta > 0 ? "+" : ""}
                 {delta.scoreDelta}
@@ -365,7 +376,7 @@ export function JourneyPlanner({
 
           <div className="sampleWarning">
             {lang === "es"
-              ? "Importante: un journey individual no debe mover presupuesto territorial por sí solo. El cambio de spend requiere que el patrón aparezca de forma consistente en múltiples orígenes del territorio."
+              ? "Importante: un trayecto individual no debe mover presupuesto territorial por sí solo. Cualquier cambio de inversión requiere que el patrón se repita de forma consistente en varios orígenes del territorio."
               : "Important: one individual journey should not move territory budget by itself. Spend changes require the pattern to repeat across multiple origins in the territory."}
           </div>
         </section>
@@ -378,12 +389,14 @@ function ScenarioCard({
   title,
   subtitle,
   journey,
-  score
+  score,
+  lang
 }: {
   title: string;
   subtitle: string;
   journey: Journey;
   score: number;
+  lang: "en" | "es";
 }) {
   return (
     <article className="scenarioCard">
@@ -394,7 +407,7 @@ function ScenarioCard({
         </div>
         <div className="scenarioScore">
           <strong>{score}</strong>
-          <span>{accessLabel(score)}</span>
+          <span>{localizedAccessLabel(score, lang)}</span>
         </div>
       </div>
 
@@ -402,15 +415,15 @@ function ScenarioCard({
 
       <div className="scenarioFacts">
         <div>
-          <span>Changes</span>
+          <span>{lang === "es" ? "Transbordos" : "Changes"}</span>
           <strong>{journey.changes}</strong>
         </div>
         <div>
-          <span>Walking</span>
+          <span>{lang === "es" ? "A pie" : "Walking"}</span>
           <strong>{journey.walkingMinutes} min</strong>
         </div>
         <div>
-          <span>Disruptions</span>
+          <span>{lang === "es" ? "Incidencias" : "Disruptions"}</span>
           <strong>{journey.disruptions.length}</strong>
         </div>
       </div>

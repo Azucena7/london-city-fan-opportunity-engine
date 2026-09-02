@@ -53,7 +53,7 @@ export function engineResponse(
         label: "AJUSTAR",
         title: "La fricción de viaje aumenta de forma material.",
         text:
-          "No aumentes presión de captación basándote solo en este journey. Prioriza información de viaje, rutas alternativas y mensajes de planificación. Solo desplaza presupuesto territorial si el patrón se repite en una muestra suficiente."
+          "No aumentes la presión de captación basándote solo en este trayecto. Prioriza información de viaje, rutas alternativas y mensajes de planificación. Solo desplaza presupuesto territorial si el patrón se repite en una muestra suficiente."
       };
     }
 
@@ -62,7 +62,7 @@ export function engineResponse(
         label: "VIGILAR",
         title: "El viaje empeora, pero todavía no justifica mover presupuesto.",
         text:
-          "Mantén la campaña y añade messaging de acceso. Vuelve a comprobar incidencias y tiempos dentro de las 72 horas previas al partido."
+          "Mantén la campaña y añade información de acceso. Vuelve a comprobar incidencias y tiempos dentro de las 72 horas previas al partido."
       };
     }
 
@@ -71,7 +71,7 @@ export function engineResponse(
         label: "SIN RESTRICCIÓN",
         title: "La fricción prevista mejora frente al viaje actual.",
         text:
-          "Travel no introduce una razón para reducir captación. Mantén la recomendación del engine y monitoriza cambios cercanos al matchday."
+          "El acceso no introduce una razón para reducir captación. Mantén la recomendación actual y revisa cambios cerca del día de partido."
       };
     }
 

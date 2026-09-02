@@ -39,11 +39,11 @@ export function LocalizedOpportunitiesPage({ territories, fixtures }: { territor
 
     {view === "territories" ? <>
       <section className="frameworkStrip">
-        <div><span>WHERE</span><strong>{es ? "Family 35% · Girls network 35% · Access 30%" : "Family 35% · Girls network 35% · Access 30%"}</strong></div>
+        <div><span>WHERE</span><strong>{es ? "Familias 35% · Red femenina 35% · Acceso 30%" : "Family 35% · Girls network 35% · Access 30%"}</strong></div>
         <p>{es ? "Competition Pressure e IDACI son contexto: 0% de peso directo." : "Competition Pressure and IDACI remain context: 0% direct weight."}</p>
       </section>
       <TerritoryCards items={territories}/>
-      <section className="insightNote"><div className="eyebrow">{es ? "UNIDAD DE CAPTACIÓN" : "ACQUISITION UNIT"}</div><h3>{es ? "A veces el cliente no es una familia. Es una organización." : "Sometimes the acquisition unit is an organisation, not one household."}</h3><p>{es ? "Un nodo grassroots puede conectar a decenas de jugadoras, familias y espectadores relacionados." : "One grassroots node can connect dozens of girls, families and related spectators."}</p></section>
+      <section className="insightNote"><div className="eyebrow">{es ? "UNIDAD DE CAPTACIÓN" : "ACQUISITION UNIT"}</div><h3>{es ? "A veces el cliente no es una familia. Es una organización." : "Sometimes the acquisition unit is an organisation, not one household."}</h3><p>{es ? "Un nodo de fútbol base puede conectar a decenas de jugadoras, familias y espectadores relacionados." : "One grassroots node can connect dozens of girls, families and related spectators."}</p></section>
     </> : <>
       <section className="frameworkStrip">
         <div><span>WHEN</span><strong>35% Territory · 25% Calendar · 20% Attention · 20% Appeal</strong></div>

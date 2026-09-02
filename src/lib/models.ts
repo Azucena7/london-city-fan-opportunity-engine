@@ -31,8 +31,12 @@ export type Territory = {
   finalOpportunity?: number;
   score?: number;
   familyScore?: number;
+  householdsWithDependentChildren?: number;
+  familyDensity?: number;
   girlsNetworkScore?: number;
+  sundayTravelMinutes?: number;
   travelMinutes?: number;
+  transfers?: number;
   competitionPressure?: number;
   strategy?: string;
   play?: string;

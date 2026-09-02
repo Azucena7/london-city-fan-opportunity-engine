@@ -1,6 +1,5 @@
 "use client";
 
-import { SignalBadge } from "./SignalBadge";
 import { useLanguage } from "./LanguageProvider";
 import { useLiveMatch } from "./LiveMatchProvider";
 
@@ -18,14 +17,31 @@ export function ThisWeekHero() {
   }).format(new Date(`${state.fixture.date}T12:00:00`));
 
   return (
-    <section className="thisWeekHero decisionFirstHero">
+    <section className="thisWeekHero decisionFirstHero block15ThisWeekHero">
       <div className="decisionLockup">
-        <div className="eyebrow">{es ? "RECOMENDACIÓN" : "RECOMMENDED ACTION"}</div>
+        <div className="eyebrow">{es ? "ACCIÓN RECOMENDADA" : "RECOMMENDED ACTION"}</div>
         <h1 className="thisWeekTitle">{state.decision}</h1>
         <div className="activeScoreLine">
           <strong>{state.activeScore}</strong>
-          <span>{live ? (es ? "score matchweek" : "matchweek score") : (es ? "score de planificación" : "planning score")}</span>
+          <span>
+            {live
+              ? es
+                ? "score de semana de partido"
+                : "matchweek score"
+              : es
+              ? "score de planificación"
+              : "planning score"}
+          </span>
         </div>
+        <p className="decisionModeNote">
+          {live
+            ? es
+              ? "La capa dinámica está resuelta y puede modificar la acción."
+              : "The dynamic layer is resolved and can modify the action."
+            : es
+            ? "Recomendación de planificación. Las señales de semana de partido todavía pueden modificarla."
+            : "Planning recommendation. Matchweek signals can still modify it."}
+        </p>
       </div>
 
       <div className="fixtureDecisionContext">
@@ -40,26 +56,17 @@ export function ThisWeekHero() {
       </div>
 
       <div className="actionBrief">
-        <div><span>{es ? "Objetivo" : "Target"}</span><strong>{state.fixture.targetTerritory}</strong></div>
-        <div><span>{es ? "Producto" : "Product"}</span><strong>{state.fixture.product}</strong></div>
-        <div><span>{es ? "Canal" : "Channel"}</span><strong>{state.fixture.channel}</strong></div>
-      </div>
-
-      <div className="readinessStrip">
         <div>
-          <span>{es ? "Planificación" : "Planning"}</span>
-          <strong>{es ? "4/4 lista" : "4/4 ready"}</strong>
-          <SignalBadge type="PLANNING" />
+          <span>{es ? "Territorio objetivo" : "Target territory"}</span>
+          <strong>{state.fixture.targetTerritory}</strong>
         </div>
         <div>
-          <span>Weather</span>
-          <strong>{state.weatherStatus === "LIVE" ? (es ? "Disponible" : "Available") : (es ? "Pendiente" : "Waiting")}</strong>
-          <SignalBadge type={state.weatherStatus} />
+          <span>{es ? "Producto" : "Product"}</span>
+          <strong>{state.fixture.product}</strong>
         </div>
         <div>
-          <span>{es ? "Momentum de asistencia" : "Attendance momentum"}</span>
-          <strong>{es ? "Pendiente" : "Waiting"}</strong>
-          <SignalBadge type="WAITING" />
+          <span>{es ? "Canal" : "Channel"}</span>
+          <strong>{state.fixture.channel}</strong>
         </div>
       </div>
     </section>

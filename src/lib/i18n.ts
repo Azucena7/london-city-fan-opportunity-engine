@@ -40,7 +40,7 @@ export const dictionary = {
       attention: "Attention",
       fixtureAppeal: "Fixture appeal",
       weather: "Weather",
-      momentum: "Momentum",
+      momentum: "Attendance momentum",
       exploreAll: "Explore all →",
       fullCalendar: "Full calendar →",
       publicPrototype: "Research-led prototype · not an official club product."
@@ -81,8 +81,8 @@ export const dictionary = {
       territoryDetail: "Modelled from families, grassroots network and access.",
       calendar: "Calendar whitespace",
       calendarDetail: "Competitor home inventory and local fixture context.",
-      attention: "Attention pressure",
-      attentionDetail: "Events, TV, holidays and competing sport.",
+      attention: "Attention availability",
+      attentionDetail: "100 minus pressure from events, TV, holidays and competing sport.",
       weather: "Weather",
       weatherDetail: "Only activated inside a reliable forecast window.",
       momentum: "Attendance momentum",
@@ -248,8 +248,8 @@ export const dictionary = {
       calendar: "Calendario",
       attention: "Atención",
       fixtureAppeal: "Atractivo del partido",
-      weather: "Weather",
-      momentum: "Momentum",
+      weather: "Tiempo",
+      momentum: "Tendencia de asistencia",
       exploreAll: "Explorar todos →",
       fullCalendar: "Ver calendario →",
       publicPrototype: "Prototipo basado en investigación · no es un producto oficial del club."
@@ -290,12 +290,12 @@ export const dictionary = {
       territoryDetail: "Modelada con familias, red de fútbol base y acceso.",
       calendar: "Hueco de calendario",
       calendarDetail: "Inventario local y partidos en casa de competidores.",
-      attention: "Presión de atención",
-      attentionDetail: "Eventos, TV, festivos y deporte competidor.",
-      weather: "Weather",
-      weatherDetail: "Solo se activa dentro de una ventana de forecast fiable.",
-      momentum: "Momentum de asistencia",
-      momentumDetail: "Requiere ventas actuales / scans / demanda reciente.",
+      attention: "Disponibilidad de atención",
+      attentionDetail: "100 menos la presión de eventos, TV, festivos y deporte competidor.",
+      weather: "Tiempo",
+      weatherDetail: "Solo se activa dentro de una ventana de previsión fiable.",
+      momentum: "Tendencia de asistencia",
+      momentumDetail: "Requiere ventas actuales, accesos al estadio y demanda reciente.",
       appeal: "Atractivo del partido",
       appealDetail: "Prior experto hasta sustituirlo por suficiente dato observado."
     },
@@ -312,23 +312,23 @@ export const dictionary = {
       rule: "REGLA OPERATIVA",
       ruleTitle: "Primero resuelve el partido. Después activa las señales live.",
       ruleText:
-        "El weather nunca se asocia a una fecha arbitraria. El momentum de asistencia permanece inactivo hasta tener una fuente fiable.",
+        "El tiempo nunca se asocia a una fecha arbitraria. La tendencia de asistencia permanece inactiva hasta tener una fuente fiable.",
       noLive: "Todavía no hay decisión live.",
       noLiveText:
-        "El motor solo pasa de planificación a live cuando weather y momentum de asistencia están disponibles de verdad.",
+        "El sistema solo pasa de planificación a la capa dinámica cuando el tiempo y la tendencia de asistencia están disponibles de verdad.",
       liveInputs: "inputs live disponibles",
       updatedCurrent: "Actualizado con los inputs actuales de V1"
     },
     evidence: {
-      territorySource: "Familias + red de fútbol femenino + acceso de matchday",
+      territorySource: "Familias + red de fútbol femenino + acceso el día de partido",
       territoryNote: "Modelado con el dataset estructural V1.",
       calendarSource: "Partidos en casa de competidores e inventario local",
       calendarNote: "Capa actual de oportunidad basada en calendario.",
       attentionSource: "Eventos, TV, festivos y deporte competidor",
       attentionNote: "Estimación de planificación; revisar cerca del partido.",
-      weatherSource: "Solo ventana de forecast fiable",
-      weatherNote: "Se activa 5–7 días antes del matchday.",
-      momentumSource: "Ventas / scans / demanda reciente",
+      weatherSource: "Solo ventana de previsión fiable",
+      weatherNote: "Se activa 5–7 días antes del partido.",
+      momentumSource: "Ventas / accesos / demanda reciente",
       momentumNote: "Requiere datos actuales del club o asistencia verificada.",
       appealSource: "Marca del rival + demanda probable + ocasión",
       appealNote: "Prior experto hasta contar con suficiente dato observado."
@@ -344,19 +344,19 @@ export const dictionary = {
     weather: {
       loading: "Cargando forecast live…",
       unavailable: "Forecast no disponible",
-      unavailableText: "El motor no sustituirá el weather por un valor inventado.",
+      unavailableText: "El sistema no sustituirá el tiempo por un valor inventado.",
       noDate: "No hay fecha de partido disponible",
-      noDateText: "Weather seguirá inactivo hasta resolver el próximo partido en casa.",
+      noDateText: "El tiempo seguirá inactivo hasta resolver el próximo partido en casa.",
       outside: "Fuera de la ventana de forecast",
-      outsideText: "El motor activará weather cuando el partido entre en el horizonte de 7 días.",
-      suitability: "Suitability de weather",
+      outsideText: "El sistema activará el tiempo cuando el partido entre en el horizonte de 7 días.",
+      suitability: "Adecuación meteorológica",
       refreshed: "Actualizado automáticamente"
     },
     travel: {
       eyebrow: "EXPERIENCIA FAN × SEÑAL DE CAPTACIÓN",
       title: "¿Puedo llegar realmente al partido?",
       lede:
-        "Una herramienta de viaje para el aficionado que también da al growth engine una mejor medida de la fricción de matchday.",
+        "Una herramienta de acceso para el aficionado que también da al sistema una mejor medida de la fricción del día de partido.",
       ukToHayes: "UK → HAYES LANE",
       whereFrom: "¿Desde dónde vienes?",
       helper:
@@ -379,7 +379,7 @@ export const dictionary = {
       whyText:
         "La accesibilidad debe responder al viaje real: duración, cambios, minutos andando e incidencias.",
       nationalSetup:
-        "Origen nacional reconocido — falta activar la capa de rutas"
+        "Origen nacional reconocido — capa de rutas pendiente"
     },
     pages: {
       fixturesEyebrow: "CALENDARIO DE DECISIÓN",
@@ -387,11 +387,11 @@ export const dictionary = {
       territoriesEyebrow: "OPORTUNIDAD TERRITORIAL",
       territoriesTitle: "¿Dónde debería atacar primero London City?",
       signalsEyebrow: "SEÑALES LIVE",
-      signalsTitle: "¿Qué puede cambiar la decisión cerca del matchday?",
+      signalsTitle: "¿Qué puede cambiar la decisión cerca del día de partido?",
       storyEyebrow: "STORY MODE",
       storyTitle: "Alexia no llena estadios. Los llenas tú.",
       storyLede:
-        "Un experimento práctico para convertir atención impulsada por estrellas en hábito de matchday."
+        "Un experimento práctico para convertir atención impulsada por estrellas en hábito de asistencia."
     },
     story: {
       problem: "Problema",
@@ -401,7 +401,7 @@ export const dictionary = {
       where: "Dónde",
       whereTitle: "Encuentra territorios con muchas familias conectados al fútbol femenino de base.",
       whereText:
-        "Familias, nodos grassroots y accesibilidad de matchday revelan zonas que los supuestos clásicos de fanbase pueden pasar por alto.",
+        "Familias, nodos de fútbol base y accesibilidad el día de partido revelan zonas que los supuestos clásicos de audiencia pueden pasar por alto.",
       when: "Cuándo",
       whenTitle: "No todos los partidos en casa merecen el mismo presupuesto de captación.",
       whenText:
@@ -413,7 +413,7 @@ export const dictionary = {
       learn: "Aprender",
       learnTitle: "Sustituye supuestos por comportamiento real de repetición.",
       learnText:
-        "Código postal, scan, producto, fuente y repetición convierten progresivamente el modelo de research-led a club-specific.",
+        "Código postal, acceso al estadio, producto, fuente y repetición convierten progresivamente el modelo basado en investigación en uno específico del club.",
       shareEyebrow: "LA IDEA EN UNA FRASE",
       shareQuote:
         "Un equipo de cuatro personas puede construir capacidades que antes requerían diez — si la IA se convierte en infraestructura y no en protagonista."

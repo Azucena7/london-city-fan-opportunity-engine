@@ -15,19 +15,19 @@ export type TerritoryTravelSeed = {
 export const territoryTravelSeeds = origins as TerritoryTravelSeed[];
 
 export function territoryAction(input: {
-  avgDurationDelta: number;
-  avgScoreDelta: number;
+  medianDurationDelta: number;
+  medianScoreDelta: number;
   highShare: number;
   watchShare: number;
 }, lang: "en" | "es") {
   const high =
-    input.avgDurationDelta >= 15 ||
-    input.avgScoreDelta <= -15 ||
+    input.medianDurationDelta >= 15 ||
+    input.medianScoreDelta <= -15 ||
     input.highShare >= 0.5;
 
   const watch =
-    input.avgDurationDelta >= 8 ||
-    input.avgScoreDelta <= -8 ||
+    input.medianDurationDelta >= 8 ||
+    input.medianScoreDelta <= -8 ||
     input.watchShare + input.highShare >= 0.5;
 
   if (lang === "es") {
@@ -36,24 +36,24 @@ export function territoryAction(input: {
         code: "PROTECT",
         title: "Protege la demanda; no escales captación marginal.",
         text:
-          "La fricción de viaje es suficientemente alta como para justificar messaging específico de acceso y una revisión del spend incremental. No abandones el territorio: protege CRM, grassroots y usuarios ya comprometidos."
+          "La fricción de acceso es suficientemente alta como para justificar información específica de viaje y una revisión de la inversión incremental. No abandones el territorio: protege CRM, fútbol base y audiencias ya comprometidas."
       };
     }
 
     if (watch) {
       return {
         code: "ACCESS MESSAGE",
-        title: "Mantén captación, pero añade información de viaje.",
+        title: "Mantén captación, pero refuerza la información de acceso.",
         text:
-          "El territorio sigue siendo atractivo, aunque matchday añade fricción. Refuerza rutas, hora recomendada de salida y alternativas antes de reducir presupuesto."
+          "El territorio sigue siendo atractivo, aunque el día de partido añade fricción. Refuerza rutas, hora recomendada de salida y alternativas antes de reducir presupuesto."
       };
     }
 
     return {
       code: "MAINTAIN",
-      title: "Travel no limita la recomendación territorial.",
+      title: "El acceso no limita la recomendación territorial.",
       text:
-        "La fricción agregada es estable. Mantén la estrategia de adquisición y vuelve a comprobar el territorio dentro de las 72 horas previas al partido."
+        "La fricción agregada es estable. Mantén la estrategia de captación y vuelve a comprobar el territorio dentro de las 72 horas previas al partido."
     };
   }
 

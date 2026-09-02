@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { NavTabs } from "./NavTabs";
 import { ThisWeekHero } from "./ThisWeekHero";
@@ -9,31 +10,45 @@ import { LiveMatchProvider } from "./LiveMatchProvider";
 import type { Fixture } from "@/lib/models";
 
 export function LocalizedThisWeek({ fixture }: { fixture: Fixture }) {
- const {lang}=useLanguage();
- const es=lang==='es';
- return <LiveMatchProvider fixture={fixture}><main>
-  <NavTabs/>
-  <section className="compactIntro">
-    <div className="eyebrow">{es ? "ESTA SEMANA" : "THIS WEEK"}</div>
-    <h1>{es ? "¿Qué debería hacer el club ahora?" : "What should the club do now?"}</h1>
-    <p className="lede">{es ? "Una recomendación operativa para el próximo partido en casa: acción, territorio, producto y señales que pueden cambiarla." : "One operating recommendation for the next home fixture: action, territory, product and the signals that can still change it."}</p>
-  </section>
+  const { lang } = useLanguage();
+  const es = lang === "es";
 
-  <ThisWeekHero/>
+  return (
+    <LiveMatchProvider fixture={fixture}>
+      <main>
+        <NavTabs />
 
-  <section className="panel widePanel decisionInputsPanel">
-    <div className="sectionHeader"><div><div className="eyebrow">{es ? "INPUTS DE DECISIÓN" : "DECISION INPUTS"}</div><h3>{es ? "Qué sostiene la recomendación" : "What is holding up the recommendation"}</h3></div></div>
-    <LiveSignalGrid/>
-  </section>
+        <ThisWeekHero />
 
-  <details className="evidenceDisclosure">
-    <summary>{es ? "Ver evidencia y fuentes" : "View evidence and sources"}</summary>
-    <div className="evidenceDisclosureBody"><EvidenceList/></div>
-  </details>
+        <section className="panel widePanel decisionInputsPanel block15DecisionPanel">
+          <div className="sectionHeader">
+            <div>
+              <div className="eyebrow">{es ? "POR QUÉ ESTA ACCIÓN" : "WHY THIS ACTION"}</div>
+              <h3>{es ? "Qué impulsa la recomendación" : "What drives the recommendation"}</h3>
+            </div>
+            <span className="muted">
+              {es ? "WHERE → WHEN → MATCHWEEK" : "WHERE → WHEN → MATCHWEEK"}
+            </span>
+          </div>
+          <LiveSignalGrid />
+        </section>
 
-  <div className="methodJump">
-    <span>{es ? "¿Quieres ver pesos, reglas y estados de evidencia?" : "Want the weights, rules and evidence states?"}</span>
-    <Link href="/method">{es ? "Abrir método →" : "Open method →"}</Link>
-  </div>
- </main></LiveMatchProvider>;
+        <details className="evidenceDisclosure">
+          <summary>{es ? "Ver evidencia y fuentes" : "View evidence and sources"}</summary>
+          <div className="evidenceDisclosureBody">
+            <EvidenceList />
+          </div>
+        </details>
+
+        <div className="methodJump">
+          <span>
+            {es
+              ? "Pesos, reglas, estados de evidencia y límites del modelo."
+              : "Weights, rules, evidence states and model limitations."}
+          </span>
+          <Link href="/method">{es ? "Abrir método →" : "Open method →"}</Link>
+        </div>
+      </main>
+    </LiveMatchProvider>
+  );
 }
