@@ -919,3 +919,77 @@ footer {
   .leagueBenchmarkValue { grid-column:3; grid-row:2; }
   .leagueBenchmarkRow .benchmarkTag { grid-column:2 / -1; }
 }
+
+
+/* Audience reach: public discovery to CRM conversion */
+.audienceReach { margin:-18px 0 46px; padding:28px; border:1px solid var(--line); border-radius:24px; background:linear-gradient(145deg,#101f18,#09140f); }
+.audienceReachTop { display:grid; grid-template-columns:1.35fr .7fr; gap:38px; }
+.audienceReachTop h2 { max-width:780px; font-size:clamp(30px,4vw,48px); line-height:1; letter-spacing:-.04em; margin:9px 0 13px; }
+.audienceReachTop > div > p,.audienceReachSummary p { color:#c7d0cb; line-height:1.5; }
+.audienceReachSummary { border-left:1px solid var(--line); padding-left:22px; }
+.audienceReachSummary span,.audienceAction span,.searchDemandGrid span,.audienceFixtureTests article span { display:block; color:var(--muted); font-size:9px; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
+.audienceReachSummary > strong { display:block; margin:8px 0 10px; font-size:24px; line-height:1.08; }
+.audienceKpis { display:grid; grid-template-columns:repeat(4,1fr); margin:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.audienceKpis div { padding:18px 16px 18px 0; }
+.audienceKpis div + div { border-left:1px solid var(--line); padding-left:18px; }
+.audienceKpis strong,.audienceKpis span { display:block; }
+.audienceKpis strong { font-size:28px; letter-spacing:-.04em; }
+.audienceKpis span { color:var(--muted); font-size:11px; margin-top:5px; }
+.audienceExplorer { margin-top:18px; }
+.audienceExplorer > summary { cursor:pointer; padding:13px 15px; border:1px solid var(--line); border-radius:12px; color:var(--ink); font-weight:900; }
+.audienceExplorer[open] > summary { border-color:rgba(216,255,79,.35); color:var(--accent); }
+.audienceFunnel { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; margin:24px 0; overflow:hidden; border:1px solid var(--line); border-radius:14px; background:var(--line); }
+.audienceFunnel div { position:relative; padding:15px; background:var(--surface); }
+.audienceFunnel span,.audienceFunnel strong,.audienceFunnel small { display:block; }
+.audienceFunnel span { color:var(--accent); font-size:9px; }
+.audienceFunnel strong { margin:7px 0 4px; }
+.audienceFunnel small { color:var(--muted); }
+.audienceChannelGrid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+.audienceChannel { padding:18px; border:1px solid var(--line); border-radius:15px; background:rgba(255,255,255,.025); }
+.audienceChannel.search { border-color:rgba(216,255,79,.35); }
+.audienceChannel h3 { font-size:23px; }
+.audienceChannel p { color:#c7d0cb; font-size:12px; line-height:1.45; }
+.audienceChannelTop { display:flex; justify-content:space-between; gap:12px; text-transform:uppercase; color:var(--muted); font-size:9px; letter-spacing:.07em; }
+.audienceChannelTop b { color:var(--accent); font-weight:900; }
+.audienceRole { min-height:34px; }
+.audienceMetrics { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.audienceMetrics div { padding:12px 8px 12px 0; }
+.audienceMetrics div + div { border-left:1px solid var(--line); padding-left:12px; }
+.audienceMetrics strong,.audienceMetrics span { display:block; }
+.audienceMetrics strong { font-size:18px; }
+.audienceMetrics span { color:var(--muted); font-size:9px; margin-top:4px; }
+.audienceChannel details { color:var(--muted); font-size:11px; }
+.audienceChannel summary { cursor:pointer; color:var(--ink); font-weight:800; }
+.audienceAction { margin-top:14px; padding:12px; border-radius:10px; background:rgba(216,255,79,.06); }
+.audienceAction strong { display:block; margin-top:5px; font-size:12px; line-height:1.35; }
+.searchDemand { margin-top:24px; padding:22px; border-radius:18px; background:var(--accent); color:#07110d; }
+.searchDemand .eyebrow,.searchDemandGrid span { color:#34430d; }
+.searchDemandIntro { display:grid; grid-template-columns:1.1fr .8fr; gap:30px; align-items:end; }
+.searchDemandIntro h3 { max-width:650px; font-size:clamp(27px,3.3vw,42px); }
+.searchDemandIntro p { line-height:1.45; }
+.searchDemandGrid { display:grid; grid-template-columns:1.2fr .8fr 1.1fr; gap:18px; margin-top:18px; border-top:1px solid rgba(0,0,0,.2); padding-top:18px; }
+.searchDemandGrid strong,.searchDemandGrid a { display:block; margin-top:7px; font-size:11px; }
+.searchQuestions { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; }
+.searchQuestions div { padding:12px; border-radius:10px; background:rgba(0,0,0,.08); }
+.searchQuestions strong,.searchQuestions span { display:block; }
+.searchQuestions span { margin-top:5px; font-size:11px; line-height:1.35; }
+.audienceFixtureTests { margin-top:26px; }
+.audienceFixtureTests article { display:grid; grid-template-columns:1.1fr 1.25fr .55fr 1fr; gap:14px; align-items:start; padding:16px 0; border-top:1px solid var(--line); }
+.audienceFixtureTests article strong { display:block; margin-top:5px; font-size:12px; line-height:1.35; }
+.audienceFixtureTests article p { grid-column:1 / -1; margin:0; color:var(--accent); font-size:12px; }
+.audienceMethod { margin-top:16px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+.audienceMethod summary { cursor:pointer; color:var(--ink); font-weight:800; }
+.audienceMethod div { display:flex; flex-wrap:wrap; gap:12px; }
+@media (max-width:900px) {
+  .audienceReachTop,.searchDemandIntro { grid-template-columns:1fr; }
+  .audienceReachSummary { border-left:0; border-top:1px solid var(--line); padding:18px 0 0; }
+  .audienceFunnel { grid-template-columns:repeat(3,1fr); }
+  .searchDemandGrid,.audienceFixtureTests article { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:700px) {
+  .audienceReach { padding:20px; }
+  .audienceKpis,.audienceChannelGrid { grid-template-columns:1fr 1fr; }
+  .audienceKpis div:nth-child(3) { border-left:0; padding-left:0; border-top:1px solid var(--line); }
+  .audienceKpis div:nth-child(4) { border-top:1px solid var(--line); }
+  .audienceFunnel,.audienceChannelGrid,.searchDemandGrid,.searchQuestions,.audienceFixtureTests article { grid-template-columns:1fr; }
+}

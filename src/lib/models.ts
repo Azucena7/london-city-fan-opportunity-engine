@@ -118,6 +118,51 @@ export type LeagueAttendanceBenchmark = {
   snapshots: LeagueAttendanceSnapshot[];
 };
 
+export type AudienceMetric = {
+  label: LocalizedText;
+  value: string;
+  state: "measured" | "confirmed" | "pending";
+};
+
+export type AudienceChannel = {
+  id: string;
+  name: string;
+  category: "owned" | "partner" | "broadcast" | "search" | "conversion";
+  state: "measured" | "confirmed" | "ready-to-measure" | "requires-access";
+  role: LocalizedText;
+  metrics: AudienceMetric[];
+  known: LocalizedText;
+  missing: LocalizedText;
+  action: LocalizedText;
+  sourceName: string;
+  sourceUrl: string;
+};
+
+export type AudienceReachData = {
+  checkedAt: string;
+  scope: string;
+  headline: LocalizedText;
+  principle: LocalizedText;
+  channels: AudienceChannel[];
+  funnel: Array<{ id: string; label: LocalizedText; measure: LocalizedText }>;
+  searchPlan: {
+    terms: string[];
+    markets: string[];
+    windows: string[];
+    annotations: Array<{ date: string; event: LocalizedText }>;
+  };
+  fixtureTests: Array<{
+    fixtureId: string;
+    date: string;
+    opponent: string;
+    stage: string;
+    attendance: number | null;
+    distribution: string;
+    conversionState: string;
+    nextAction: LocalizedText;
+  }>;
+};
+
 export type Territory = {
   id?: string;
   name?: string;
