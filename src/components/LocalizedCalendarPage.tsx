@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { NavTabs } from "./NavTabs";
+import { DemandHistory } from "./DemandHistory";
 import { useLanguage } from "./LanguageProvider";
-import type { CalendarFixture, Fixture } from "@/lib/models";
+import type { AttendanceHistory, CalendarFixture, Fixture } from "@/lib/models";
 
 type Scope = "all" | "home" | "away" | "results";
 
@@ -12,7 +13,7 @@ function displayDate(value: string, locale: string) {
     .format(new Date(`${value}T12:00:00`));
 }
 
-export function LocalizedCalendarPage({ calendar, plans }: { calendar: CalendarFixture[]; plans: Fixture[] }) {
+export function LocalizedCalendarPage({ calendar, plans, history }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const locale = es ? "es-ES" : "en-GB";
@@ -40,6 +41,8 @@ export function LocalizedCalendarPage({ calendar, plans }: { calendar: CalendarF
           ? "Partidos oficiales, resultados, señales, trabajo de marketing y análisis postpartido en una única línea temporal."
           : "Official fixtures, results, signals, marketing work and post-match analysis in one timeline."}</p>
       </section>
+
+      <DemandHistory data={history} />
 
       <div className="calendarFilters" role="group" aria-label={es ? "Filtrar calendario" : "Filter calendar"}>
         {filters.map(([value, label]) => <button key={value} type="button" aria-pressed={scope === value} className={scope === value ? "active" : ""} onClick={() => setScope(value)}>{label}</button>)}

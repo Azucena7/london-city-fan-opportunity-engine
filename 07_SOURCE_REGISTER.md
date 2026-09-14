@@ -45,6 +45,15 @@ Core source families used in V1 research.
 
 ## Women's football benchmarks
 - WSL / FA / club official ticketing and fixture pages
+- London City 2025/26 match ledger
+  https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season
+- Sky Sports match records for record and missing-ledger verification
+  https://www.skysports.com/football/london-city-lionesses-vs-arsenal-women/531310
+  https://www.skysports.com/football/london-city-lionesses-vs-leicester-city-women/545722
+- ESPN season analysis (3,176 London City home average)
+  https://www.espn.com/soccer/story/_/id/45717246/london-city-set-sign-queen-alexia-putellas-good-fit
+- WSL Analytics attendance review (conflicting 3,070 aggregate retained as a caveat)
+  https://newsletter.wslanalytics.com/p/inside-the-stands-wsl-attendance-b58
 - Women’s Football Data Centre
   https://womensfootballdatacentre.com/
 

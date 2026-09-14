@@ -8,7 +8,8 @@ import currentRaw from "../../data/live/current.json";
 import signalsRaw from "../../data/live/signals.json";
 import postmatchRaw from "../../data/live/postmatch.json";
 import roadmapRaw from "../../data/live/roadmap.json";
-import type { CalendarFixture, Fixture, LiveSignal, Territory } from "./models";
+import attendanceHistoryRaw from "../../data/history/attendance-2025-26.json";
+import type { AttendanceHistory, CalendarFixture, Fixture, LiveSignal, Territory } from "./models";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -20,3 +21,4 @@ export const currentState = currentRaw;
 export const liveSignals = signalsRaw as LiveSignal[];
 export const postmatchReviews = postmatchRaw;
 export const roadmapItems = roadmapRaw;
+export const attendanceHistory = attendanceHistoryRaw as AttendanceHistory;

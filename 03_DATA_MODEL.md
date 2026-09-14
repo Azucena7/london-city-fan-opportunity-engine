@@ -82,13 +82,20 @@ interface Competitor {
 
 ```ts
 interface AttendanceObservation {
+  id: string
+  season: string
   date: string
   club: string
   opponent: string
+  competition: string
   venue: string
+  venueGroup?: 'hayes-lane' | 'the-den'
   attendance: number
-  capacity?: number
+  attendanceState: 'measured' | 'reported'
+  soldOut?: boolean
+  configuredCapacity?: number
   occupancy?: number
+  sourceName: string
   sourceUrl: string
   confidence: 'HIGH' | 'MEDIUM' | 'LOW'
 }
@@ -128,3 +135,12 @@ interface MatchdayDecision {
   postMatchLearning?: string
 }
 ```
+
+
+### Attendance rules
+
+- League and cup observations remain separate.
+- A missing observation is `pending`, never zero.
+- Physical stadium capacity is not used as configured matchday capacity unless the source confirms it.
+- Public reported attendance remains distinct from internal ticket scans.
+- Season aggregates are derived from the auditable match ledger; conflicting published aggregates remain documented.
