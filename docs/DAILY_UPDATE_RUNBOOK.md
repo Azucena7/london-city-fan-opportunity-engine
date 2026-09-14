@@ -16,12 +16,13 @@ The site now separates code from live content. GitHub Actions refreshes the offi
 - Competing events and media-attention changes.
 - Sponsorship, community and consumer signals.
 - Post-match acquisition, yield, territory and retention data.
+- WSL benchmark snapshots when new published home-attendance observations appear.
 
-Those signals use `data/live/signals.json`, `postmatch.json` and `roadmap.json`. Every entry must include an evidence state, observed time, source and explicit marketing implication. A connected daily research automation can update these files after this pull request is merged. Internal ticketing and CRM fields require an authorised data source; never put credentials in GitHub.
+Those signals use `data/live/signals.json`, `postmatch.json`, `roadmap.json` and `wsl-attendance-benchmark.json`. Every entry must include an evidence state, observed time, source and explicit marketing implication. A connected daily research automation can update these files after this pull request is merged. Internal ticketing and CRM fields require an authorised data source; never put credentials in GitHub.
 
 ## Operating cadence
 
-1. Daily: refresh fixtures and material public signals.
+1. Daily: refresh fixtures and material public signals; check the WSL attendance source and append a benchmark snapshot only when the published sample changes.
 2. Inside T-48 hours: recheck fixture and weather every six hours when a suitable scheduler is connected.
 3. T+1: result, public attendance and incidents.
 4. T+3: scans, no-show, sales and yield.

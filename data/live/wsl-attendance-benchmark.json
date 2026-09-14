@@ -1,0 +1,216 @@
+{
+  "season": "2026/27",
+  "scope": "Barclays Women's Super League home attendance",
+  "checkedAt": "2026-09-14T19:00:00+01:00",
+  "targetClub": "London City Lionesses",
+  "sourceName": "Football Web Pages",
+  "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
+  "methodology": {
+    "en": "Published home-attendance averages are treated as measured observations only when a value is available. A zero on the source table is stored as pending, not as zero attendance. Early-season rankings are directional until clubs have multiple home matches.",
+    "es": "Las medias de asistencia publicadas se tratan como observaciones medidas solo cuando existe una cifra. Un cero en la tabla de origen se guarda como pendiente, no como asistencia cero. El ranking inicial es orientativo hasta que los clubes tengan varios partidos en casa."
+  },
+  "marketingImplication": {
+    "en": "London City currently combines top-three published volume with sold-out intensity. Protect scarcity, measure opener-to-Brighton repeat and benchmark local acquisition without copying the economics of major-stadium fixtures.",
+    "es": "London City combina por ahora un volumen publicado de top 3 con intensidad de sold out. Hay que proteger la escasez, medir la repetición del opener a Brighton y comparar la captación local sin copiar la economía de los partidos en grandes estadios."
+  },
+  "snapshots": [
+    {
+      "id": "mw1",
+      "label": {
+        "en": "After matchweek 1",
+        "es": "Tras la jornada 1"
+      },
+      "throughDate": "2026-09-06",
+      "completeness": {
+        "en": "6 of 7 home-club attendances published",
+        "es": "6 de 7 asistencias de clubes locales publicadas"
+      },
+      "clubs": [
+        {
+          "club": "Chelsea",
+          "attendance": 7900,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": false
+        },
+        {
+          "club": "London City Lionesses",
+          "attendance": 5402,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true,
+          "soldOut": true
+        },
+        {
+          "club": "Brighton & Hove Albion",
+          "attendance": 4104,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": false,
+          "directCohort": false
+        },
+        {
+          "club": "Charlton Athletic",
+          "attendance": 2151,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "attendance": 1675,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true
+        },
+        {
+          "club": "Crystal Palace",
+          "attendance": 1274,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true
+        },
+        {
+          "club": "Manchester City",
+          "attendance": null,
+          "homeMatchesObserved": 0,
+          "state": "pending",
+          "londonMarket": false,
+          "directCohort": false
+        }
+      ]
+    },
+    {
+      "id": "through-mw2",
+      "label": {
+        "en": "Through matchweek 2",
+        "es": "Hasta la jornada 2"
+      },
+      "throughDate": "2026-09-13",
+      "completeness": {
+        "en": "10 of 14 clubs have a published home observation",
+        "es": "10 de 14 clubes tienen una observación local publicada"
+      },
+      "clubs": [
+        {
+          "club": "Arsenal",
+          "attendance": 23900,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": false
+        },
+        {
+          "club": "Chelsea",
+          "attendance": 7900,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": false
+        },
+        {
+          "club": "London City Lionesses",
+          "attendance": 5402,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true,
+          "soldOut": true
+        },
+        {
+          "club": "Manchester United",
+          "attendance": 4327,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": false,
+          "directCohort": false
+        },
+        {
+          "club": "Brighton & Hove Albion",
+          "attendance": 4104,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": false,
+          "directCohort": false
+        },
+        {
+          "club": "Charlton Athletic",
+          "attendance": 2151,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "attendance": 1675,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true
+        },
+        {
+          "club": "West Ham United",
+          "attendance": 1638,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true
+        },
+        {
+          "club": "Birmingham City",
+          "attendance": 1405,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": false,
+          "directCohort": false
+        },
+        {
+          "club": "Crystal Palace",
+          "attendance": 1274,
+          "homeMatchesObserved": 1,
+          "state": "measured",
+          "londonMarket": true,
+          "directCohort": true
+        },
+        {
+          "club": "Aston Villa",
+          "attendance": null,
+          "homeMatchesObserved": 0,
+          "state": "pending",
+          "londonMarket": false,
+          "directCohort": false
+        },
+        {
+          "club": "Everton",
+          "attendance": null,
+          "homeMatchesObserved": 0,
+          "state": "pending",
+          "londonMarket": false,
+          "directCohort": false
+        },
+        {
+          "club": "Liverpool",
+          "attendance": null,
+          "homeMatchesObserved": 0,
+          "state": "pending",
+          "londonMarket": false,
+          "directCohort": false
+        },
+        {
+          "club": "Manchester City",
+          "attendance": null,
+          "homeMatchesObserved": 0,
+          "state": "pending",
+          "londonMarket": false,
+          "directCohort": false
+        }
+      ]
+    }
+  ]
+}
