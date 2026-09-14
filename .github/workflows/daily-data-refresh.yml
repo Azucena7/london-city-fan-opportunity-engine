@@ -1,0 +1,37 @@
+name: Daily data refresh
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub cron uses UTC. Both slots are scheduled so the script can keep 06:30 Europe/London across DST.
+    - cron: "30 5,6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-data-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run refresh:data
+      - name: Commit material updates
+        run: |
+          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json; then
+            echo "No data change to publish"
+            exit 0
+          fi
+          git config user.name "lcl-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/seed/calendar.json data/live/current.json data/live/signals.json
+          git commit -m "data: refresh daily fixture state"
+          git push

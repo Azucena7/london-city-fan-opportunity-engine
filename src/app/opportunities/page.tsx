@@ -1,6 +1,5 @@
-import { fixtures, territories } from "@/lib/data";
-import { LocalizedOpportunitiesPage } from "@/components/LocalizedOpportunitiesPage";
+import { redirect } from "next/navigation";
 
 export default function OpportunitiesPage() {
-  return <LocalizedOpportunitiesPage fixtures={fixtures} territories={territories}/>;
+  redirect("/territories");
 }

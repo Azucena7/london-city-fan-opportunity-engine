@@ -20,6 +20,37 @@ export type Fixture = {
   stadium?: string;
 };
 
+export type CalendarFixture = {
+  id: string;
+  date: string;
+  kickoff?: string;
+  opponent: string;
+  homeAway: "home" | "away";
+  competition: string;
+  venue: string;
+  status: "scheduled" | "final" | "completed-pending-data";
+  result?: { for: number; against: number };
+  attendance?: number;
+  attendanceState?: "measured" | "reported";
+};
+
+export type LocalizedText = { en: string; es: string };
+
+export type LiveSignal = {
+  id: string;
+  fixtureId?: string;
+  category: "demand" | "attention" | "weather" | "sponsorship" | "consumer" | "access";
+  state: "measured" | "confirmed" | "reported" | "forecast" | "inferred" | "waiting";
+  direction: "positive" | "negative" | "mixed" | "neutral";
+  materiality: "high" | "medium" | "low";
+  observedAt: string;
+  title: LocalizedText;
+  summary: LocalizedText;
+  marketingAction: LocalizedText;
+  sourceName: string;
+  sourceUrl: string;
+};
+
 export type Territory = {
   id?: string;
   name?: string;

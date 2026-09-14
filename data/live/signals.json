@@ -1,0 +1,93 @@
+[
+  {
+    "id": "attendance-mun-5402",
+    "fixtureId": "2026-09-04-mun-h",
+    "category": "demand",
+    "state": "measured",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-04T21:30:00+01:00",
+    "title": {
+      "en": "The opener established a new demand ceiling",
+      "es": "El partido inaugural elevó el techo de demanda"
+    },
+    "summary": {
+      "en": "5,402 people attended the sold-out Manchester United fixture. Keep it as a measured opener benchmark, not a universal baseline.",
+      "es": "5.402 personas asistieron al partido agotado ante Manchester United. Debe conservarse como benchmark medido del opener, no como baseline universal."
+    },
+    "marketingAction": {
+      "en": "Target opener buyers who have not yet bought Brighton and measure repeat purchase by territory.",
+      "es": "Impactar a compradores del opener que aún no hayan comprado Brighton y medir repetición por territorio."
+    },
+    "sourceName": "London City match record",
+    "sourceUrl": "https://www.londoncitylionesses.com/fixtures"
+  },
+  {
+    "id": "attention-england-spain",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-14T06:30:00+01:00",
+    "title": {
+      "en": "England v Spain overlaps the Brighton matchday",
+      "es": "Inglaterra–España se solapa con el matchday de Brighton"
+    },
+    "summary": {
+      "en": "The Wembley fixture starts at 19:45, shortly after London City v Brighton. It competes for attention but creates a double-header opportunity.",
+      "es": "El partido de Wembley empieza a las 19:45, poco después de London City–Brighton. Compite por atención, pero crea una oportunidad de doble sesión."
+    },
+    "marketingAction": {
+      "en": "Position Hayes Lane as the first match of the day and connect the post-match experience with local viewing partners.",
+      "es": "Posicionar Hayes Lane como el primer partido del día y conectar el postpartido con partners locales donde ver Inglaterra."
+    },
+    "sourceName": "England Football",
+    "sourceUrl": "https://www.englandfootball.com/articles/2026/Jul/21/whats-next-for-england-after-fifa-world-cup-20262107"
+  },
+  {
+    "id": "partnership-nike",
+    "category": "sponsorship",
+    "state": "confirmed",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-03T09:00:00+01:00",
+    "title": {
+      "en": "Nike partnership raises the commercial benchmark",
+      "es": "El acuerdo con Nike eleva el benchmark comercial"
+    },
+    "summary": {
+      "en": "The multi-year front-of-shirt agreement combines elite sport, culture, community activation and female-athlete R&D.",
+      "es": "El acuerdo multianual de patrocinio principal combina deporte de élite, cultura, comunidad e I+D para atletas femeninas."
+    },
+    "marketingAction": {
+      "en": "Use the partnership as a proof point for premium partners and build smaller local activation packages around community outcomes.",
+      "es": "Usar el acuerdo como prueba para partners premium y crear paquetes locales de activación vinculados a resultados comunitarios."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/london-city-lionesses-and-nike-announce-landmark-multi-year-deal"
+  },
+  {
+    "id": "weather-brighton-waiting",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "weather",
+    "state": "forecast",
+    "direction": "positive",
+    "materiality": "low",
+    "observedAt": "2026-09-14T10:01:06.727Z",
+    "title": {
+      "en": "Matchday weather is currently low risk",
+      "es": "El riesgo meteorológico actual para el matchday es bajo"
+    },
+    "summary": {
+      "en": "12% maximum rain probability, 2 mm and 19.7 km/h maximum wind. Forecast, not measured weather.",
+      "es": "12% de probabilidad máxima de lluvia, 2 mm y viento máximo de 19.7 km/h. Es forecast, no tiempo medido."
+    },
+    "marketingAction": {
+      "en": "Keep normal acquisition active and retain service messaging as a contingency.",
+      "es": "Mantener activa la captación normal y conservar mensajes de servicio como contingencia."
+    },
+    "sourceName": "Open-Meteo",
+    "sourceUrl": "https://open-meteo.com/"
+  }
+]

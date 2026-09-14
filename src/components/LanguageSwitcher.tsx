@@ -6,10 +6,12 @@ export function LanguageSwitcher() {
   const { lang, setLang } = useLanguage();
 
   return (
-    <div className="languageSwitcher" aria-label="Language">
+    <div className="languageSwitcher" role="group" aria-label="Language">
       <button
         type="button"
         className={lang === "en" ? "active" : ""}
+        aria-pressed={lang === "en"}
+        aria-label="English"
         onClick={() => setLang("en")}
       >
         EN
@@ -17,6 +19,8 @@ export function LanguageSwitcher() {
       <button
         type="button"
         className={lang === "es" ? "active" : ""}
+        aria-pressed={lang === "es"}
+        aria-label="Español"
         onClick={() => setLang("es")}
       >
         ES

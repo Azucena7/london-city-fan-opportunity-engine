@@ -1,3 +1,7 @@
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
+
 function getScore(item: any) {
   return item.opportunityScore ?? item.opportunity_score ?? item.finalOpportunity ?? item.score ?? 0;
 }
@@ -18,6 +22,8 @@ const positions = [
 ];
 
 export function TerritoryMap({ items }: { items: any[] }) {
+  const { lang } = useLanguage();
+  const es = lang === "es";
   const ranked = [...items]
     .sort((a,b) => getScore(b) - getScore(a))
     .slice(0,8);
@@ -26,10 +32,10 @@ export function TerritoryMap({ items }: { items: any[] }) {
     <section className="mapPanel">
       <div className="mapHeader">
         <div>
-          <div className="eyebrow">SOUTH LONDON OPPORTUNITY VIEW</div>
-          <h3>Where should acquisition start?</h3>
+          <div className="eyebrow">{es ? "MAPA DE OPORTUNIDAD · SOUTH LONDON" : "SOUTH LONDON OPPORTUNITY VIEW"}</div>
+          <h3>{es ? "¿Dónde debería empezar la captación?" : "Where should acquisition start?"}</h3>
         </div>
-        <span className="muted">Schematic — not to geographic scale</span>
+        <span className="muted">{es ? "Esquema orientativo · no está a escala" : "Schematic — not to geographic scale"}</span>
       </div>
 
       <div className="territoryMap">
@@ -40,7 +46,7 @@ export function TerritoryMap({ items }: { items: any[] }) {
         <div className="hayesLane">
           <div className="hayesDot" />
           <strong>Hayes Lane</strong>
-          <span>Home</span>
+          <span>{es ? "Casa" : "Home"}</span>
         </div>
 
         {ranked.map((t, i) => {
@@ -55,7 +61,7 @@ export function TerritoryMap({ items }: { items: any[] }) {
               <span className="mapScore">{score}</span>
               <div>
                 <strong>{getName(t)}</strong>
-                <small>{t.borough ?? t.area ?? "Priority territory"}</small>
+                <small>{t.borough ?? t.area ?? (es ? "Territorio prioritario" : "Priority territory")}</small>
               </div>
             </div>
           );
@@ -63,8 +69,8 @@ export function TerritoryMap({ items }: { items: any[] }) {
 
         <div className="mapLabel north">NORTH</div>
         <div className="mapLegend">
-          <span><i className="legendDot priorityDot" /> 90+ priority</span>
-          <span><i className="legendDot" /> opportunity territory</span>
+          <span><i className="legendDot priorityDot" /> {es ? "90+ prioritario" : "90+ priority"}</span>
+          <span><i className="legendDot" /> {es ? "territorio de oportunidad" : "opportunity territory"}</span>
         </div>
       </div>
     </section>
