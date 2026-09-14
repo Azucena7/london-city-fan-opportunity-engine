@@ -88,6 +88,36 @@ export type AttendanceHistory = {
   matches: AttendanceHistoryMatch[];
 };
 
+export type LeagueAttendanceClub = {
+  club: string;
+  attendance: number | null;
+  homeMatchesObserved: number;
+  state: "measured" | "pending";
+  londonMarket: boolean;
+  directCohort: boolean;
+  soldOut?: boolean;
+};
+
+export type LeagueAttendanceSnapshot = {
+  id: string;
+  label: LocalizedText;
+  throughDate: string;
+  completeness: LocalizedText;
+  clubs: LeagueAttendanceClub[];
+};
+
+export type LeagueAttendanceBenchmark = {
+  season: string;
+  scope: string;
+  checkedAt: string;
+  targetClub: string;
+  sourceName: string;
+  sourceUrl: string;
+  methodology: LocalizedText;
+  marketingImplication: LocalizedText;
+  snapshots: LeagueAttendanceSnapshot[];
+};
+
 export type Territory = {
   id?: string;
   name?: string;

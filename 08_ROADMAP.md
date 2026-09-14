@@ -29,6 +29,8 @@ Add:
 - auditable 2025/26 home attendance ledger
 - average, median, venue split and record context
 - current-season comparison and retention question
+- WSL and London-market attendance benchmark by matchweek
+- sample-aware trend states: first observation, unchanged sample and comparable movement
 - attendance
 - scans
 - sales by product

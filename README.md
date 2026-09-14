@@ -5,7 +5,7 @@ A decision product for turning London City Lionesses fixtures, audience signals,
 ## Product structure
 
 - **Today** — current decision, next home fixture, material changes and marketing response.
-- **Calendar** — the complete official schedule, results, fixture dossiers and the 2025/26 attendance baseline.
+- **Calendar** — the complete official schedule, results, fixture dossiers, the 2025/26 attendance baseline and a secondary WSL/London-market attendance benchmark.
 - **Territories** — spatial opportunity, ranked evidence and access.
 - **How it works** and **Case study** — secondary explanatory content.
 
@@ -30,3 +30,7 @@ Public and editorial data live under `data/seed` and `data/live`. Internal ticke
 ## Demand history
 
 `data/history/attendance-2025-26.json` stores the auditable home-league ledger used to derive the 3,176 average, 2,982 median, 3,012 Hayes Lane average and 5,414 record. Public aggregate discrepancies remain visible in the interface instead of being silently reconciled.
+
+## WSL attendance benchmark
+
+`data/live/wsl-attendance-benchmark.json` stores successive early-season snapshots. Published values are ranked separately from pending clubs, and the interface only calculates club-level movement when a comparable new home observation exists.

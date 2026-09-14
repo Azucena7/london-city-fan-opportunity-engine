@@ -862,3 +862,60 @@ footer {
   .demandHistoryValue { grid-column: 2; grid-row: 2; }
   .demandHistoryTags { grid-column: 1 / -1; }
 }
+
+
+/* WSL benchmark: secondary market context inside Calendar */
+.leagueBenchmark { margin:-18px 0 46px; padding:28px; border:1px solid var(--line); border-radius:24px; background:var(--surface); }
+.leagueBenchmarkTop { display:grid; grid-template-columns:1.35fr auto; gap:28px; align-items:end; }
+.leagueBenchmarkTop h2 { max-width:800px; font-size:clamp(30px,4vw,48px); line-height:1; letter-spacing:-.04em; margin:9px 0 13px; }
+.leagueBenchmarkTop p,.leagueBenchmarkRead p,.leagueBenchmarkMethod p { color:#c7d0cb; line-height:1.5; }
+.benchmarkView { display:flex; gap:6px; padding:4px; border:1px solid var(--line); border-radius:999px; }
+.benchmarkView button { border:0; border-radius:999px; padding:8px 10px; background:transparent; color:var(--muted); cursor:pointer; }
+.benchmarkView button.active { background:var(--accent); color:#07110d; font-weight:900; }
+.leagueBenchmarkKpis { display:grid; grid-template-columns:repeat(4,1fr); margin:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.leagueBenchmarkKpis div { padding:18px 16px 18px 0; }
+.leagueBenchmarkKpis div + div { border-left:1px solid var(--line); padding-left:18px; }
+.leagueBenchmarkKpis strong,.leagueBenchmarkKpis span { display:block; }
+.leagueBenchmarkKpis strong { font-size:30px; letter-spacing:-.04em; }
+.leagueBenchmarkKpis strong small { color:var(--muted); font-size:14px; }
+.leagueBenchmarkKpis span { color:var(--muted); font-size:11px; margin-top:5px; }
+.leagueBenchmarkGrid { display:grid; grid-template-columns:1.5fr .65fr; gap:26px; }
+.leagueBenchmarkChart { min-width:0; }
+.leagueBenchmarkRow { display:grid; grid-template-columns:20px 170px minmax(120px,1fr) 72px 64px; gap:10px; align-items:center; min-height:48px; border-bottom:1px solid rgba(255,255,255,.07); }
+.leagueBenchmarkRow.current { margin:6px 0; padding:8px; border:1px solid rgba(216,255,79,.4); border-radius:12px; background:rgba(216,255,79,.05); }
+.benchmarkRank,.benchmarkClub small { color:var(--muted); font-size:10px; }
+.benchmarkClub strong,.benchmarkClub small { display:block; }
+.benchmarkClub small { margin-top:4px; }
+.leagueBenchmarkTrack { height:10px; overflow:hidden; border-radius:999px; background:rgba(255,255,255,.06); }
+.leagueBenchmarkBar { height:100%; border-radius:inherit; background:#718078; }
+.leagueBenchmarkRow.current .leagueBenchmarkBar { background:var(--accent); }
+.leagueBenchmarkValue { text-align:right; }
+.benchmarkTag { width:max-content; color:var(--accent); border:1px solid rgba(216,255,79,.35); border-radius:999px; padding:4px 6px; font-size:8px; font-weight:900; text-transform:uppercase; }
+.leagueBenchmarkRead { padding-left:22px; border-left:1px solid var(--line); }
+.leagueBenchmarkRead > span,.leagueBenchmarkRead small { color:var(--accent); font-size:9px; font-weight:900; letter-spacing:.1em; }
+.leagueBenchmarkRead > strong { display:block; margin:9px 0 12px; font-size:25px; line-height:1.05; }
+.leagueBenchmarkRead > div { margin-top:20px; padding:14px; border-radius:12px; background:rgba(255,255,255,.04); }
+.leagueBenchmarkRead b,.leagueBenchmarkRead small { display:block; }
+.leagueBenchmarkRead b { margin-top:6px; }
+.benchmarkPending { display:flex; gap:7px; flex-wrap:wrap; align-items:center; margin-top:18px; color:var(--muted); font-size:10px; }
+.benchmarkPending span { border:1px solid var(--line); border-radius:999px; padding:5px 7px; }
+.leagueBenchmarkMethod { margin-top:16px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+.leagueBenchmarkMethod summary { color:var(--ink); cursor:pointer; font-weight:800; }
+@media (max-width:900px) {
+  .leagueBenchmarkTop,.leagueBenchmarkGrid { grid-template-columns:1fr; }
+  .leagueBenchmarkTop { align-items:start; }
+  .benchmarkView { width:max-content; }
+  .leagueBenchmarkRead { padding:20px 0 0; border-left:0; border-top:1px solid var(--line); }
+  .leagueBenchmarkRow { grid-template-columns:20px 150px 1fr 64px; }
+  .leagueBenchmarkRow .benchmarkTag { grid-column:2 / -1; }
+}
+@media (max-width:700px) {
+  .leagueBenchmark { padding:20px; }
+  .leagueBenchmarkKpis { grid-template-columns:1fr 1fr; }
+  .leagueBenchmarkKpis div:nth-child(3) { border-left:0; padding-left:0; border-top:1px solid var(--line); }
+  .leagueBenchmarkKpis div:nth-child(4) { border-top:1px solid var(--line); }
+  .leagueBenchmarkRow { grid-template-columns:18px 1fr 64px; padding:10px 0; }
+  .leagueBenchmarkTrack { grid-column:2 / 3; }
+  .leagueBenchmarkValue { grid-column:3; grid-row:2; }
+  .leagueBenchmarkRow .benchmarkTag { grid-column:2 / -1; }
+}
