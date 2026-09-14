@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { LocalizedCalendarPage } from "@/components/LocalizedCalendarPage";
-import { attendanceHistory, calendar, fixtures, leagueAttendanceBenchmark } from "@/lib/data";
+import { attendanceHistory, audienceReach, calendar, fixtures, leagueAttendanceBenchmark } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Calendar" };
 
 export default function CalendarPage() {
-  return <LocalizedCalendarPage calendar={calendar} plans={fixtures} history={attendanceHistory} benchmark={leagueAttendanceBenchmark} />;
+  return <LocalizedCalendarPage calendar={calendar} plans={fixtures} history={attendanceHistory} benchmark={leagueAttendanceBenchmark} audience={audienceReach} />;
 }

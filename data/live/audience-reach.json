@@ -1,0 +1,349 @@
+{
+  "checkedAt": "2026-09-14T20:00:00+01:00",
+  "scope": "Public reach, search interest and fixture conversion",
+  "headline": {
+    "en": "Reach matters only when it can be connected to matchday demand",
+    "es": "El alcance solo importa cuando puede conectarse con la demanda de partido"
+  },
+  "principle": {
+    "en": "Keep subscribers, video views, television audience, search interest, ticket buyers and scans as separate measures. Link them through fixture IDs, campaign tags and cohort analysis.",
+    "es": "Mantener separados suscriptores, visualizaciones, audiencia televisiva, interés de búsqueda, compradores y accesos. Conectarlos mediante IDs de partido, etiquetas de campaña y análisis de cohortes."
+  },
+  "channels": [
+    {
+      "id": "lcl-youtube",
+      "name": "London City YouTube",
+      "category": "owned",
+      "state": "measured",
+      "role": {
+        "en": "Owned reach and repeat storytelling",
+        "es": "Alcance propio y narrativa recurrente"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "Public subscribers",
+            "es": "Suscriptores públicos"
+          },
+          "value": "14.6K",
+          "state": "measured"
+        },
+        {
+          "label": {
+            "en": "Published videos",
+            "es": "Vídeos publicados"
+          },
+          "value": "142",
+          "state": "measured"
+        }
+      ],
+      "known": {
+        "en": "Public channel scale, video catalogue and individual public views.",
+        "es": "Escala pública del canal, catálogo de vídeos y visualizaciones públicas por pieza."
+      },
+      "missing": {
+        "en": "Unique viewers, countries, watch time, returning viewers and ticket conversion require channel-owner analytics.",
+        "es": "Usuarios únicos, países, tiempo de visualización, usuarios recurrentes y conversión a entrada requieren acceso del propietario."
+      },
+      "action": {
+        "en": "Tag every fixture video and ticket link with campaign, content and fixture IDs.",
+        "es": "Etiquetar cada vídeo y enlace de entradas con campaña, contenido e ID de partido."
+      },
+      "sourceName": "London City Lionesses on YouTube",
+      "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+    },
+    {
+      "id": "eleven-tv",
+      "name": "Eleven TV by Alexia",
+      "category": "partner",
+      "state": "confirmed",
+      "role": {
+        "en": "Spanish-language distribution and creator-led discovery",
+        "es": "Distribución en castellano y descubrimiento impulsado por creadora"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "WSL rights cadence",
+            "es": "Cadencia de derechos WSL"
+          },
+          "value": "1 match / round",
+          "state": "confirmed"
+        },
+        {
+          "label": {
+            "en": "Confirmed market",
+            "es": "Mercado confirmado"
+          },
+          "value": "Spain",
+          "state": "confirmed"
+        }
+      ],
+      "known": {
+        "en": "Exclusive Spanish rights for one WSL match per round, starting with London City v Manchester United.",
+        "es": "Derechos exclusivos en España para un partido WSL por jornada, comenzando con London City–Manchester United."
+      },
+      "missing": {
+        "en": "Subscribers, live/replay viewers, country mix and referral traffic are not yet available in a reliable public series.",
+        "es": "Suscriptores, audiencia live/replay, mezcla de países y tráfico referido aún no forman una serie pública fiable."
+      },
+      "action": {
+        "en": "Agree a shared post-match data pack and track Eleven-to-ticket traffic with Spanish-language landing pages.",
+        "es": "Acordar un paquete de datos postpartido y medir Eleven→ticket mediante landings en castellano."
+      },
+      "sourceName": "AS",
+      "sourceUrl": "https://as.com/futbol/femenino/alexia-crea-eleven-tv-y-adquiere-los-derechos-de-la-liga-inglesa-f202609-n/"
+    },
+    {
+      "id": "broadcast",
+      "name": "TV & WSL streaming",
+      "category": "broadcast",
+      "state": "confirmed",
+      "role": {
+        "en": "Broad awareness beyond club-owned channels",
+        "es": "Notoriedad amplia fuera de los canales propios"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "Opener UK distribution",
+            "es": "Distribución UK del opener"
+          },
+          "value": "Sky Main Event + Football",
+          "state": "confirmed"
+        },
+        {
+          "label": {
+            "en": "Reported audience",
+            "es": "Audiencia publicada"
+          },
+          "value": "Pending",
+          "state": "pending"
+        }
+      ],
+      "known": {
+        "en": "The opener was carried live on two Sky Sports channels; free highlights remain discoverable.",
+        "es": "El opener se emitió en directo en dos canales de Sky Sports; los highlights gratuitos siguen disponibles."
+      },
+      "missing": {
+        "en": "Linear, streaming, reach, average minute audience and completion should not be inferred from distribution.",
+        "es": "La audiencia lineal, streaming, alcance, minuto medio y finalización no deben inferirse de la distribución."
+      },
+      "action": {
+        "en": "Request fixture-level broadcaster reports and align them with club content and attendance windows.",
+        "es": "Solicitar informes por partido al broadcaster y alinearlos con contenido del club y ventanas de asistencia."
+      },
+      "sourceName": "London City match preview",
+      "sourceUrl": "https://www.londoncitylionesses.com/post/match-preview-london-city-lionesses-vs-manchester-united"
+    },
+    {
+      "id": "search",
+      "name": "Search interest",
+      "category": "search",
+      "state": "ready-to-measure",
+      "role": {
+        "en": "Unaided awareness and high-intent discovery",
+        "es": "Notoriedad espontánea y descubrimiento de alta intención"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "Tracked terms",
+            "es": "Términos a seguir"
+          },
+          "value": "5",
+          "state": "confirmed"
+        },
+        {
+          "label": {
+            "en": "First indexed snapshot",
+            "es": "Primer snapshot indexado"
+          },
+          "value": "Pending",
+          "state": "pending"
+        }
+      ],
+      "known": {
+        "en": "Alexia signing, Nike, fixtures and results provide event dates for annotation.",
+        "es": "El fichaje de Alexia, Nike, partidos y resultados aportan fechas de evento para anotar."
+      },
+      "missing": {
+        "en": "Google Trends is a relative 0–100 index, not search volume; low local samples can be suppressed.",
+        "es": "Google Trends es un índice relativo 0–100, no volumen de búsquedas; las muestras locales pequeñas pueden ocultarse."
+      },
+      "action": {
+        "en": "Track brand, player and ticket-intent queries in GB and Spain; compare peaks, decay and matchweek lift.",
+        "es": "Seguir búsquedas de marca, jugadora e intención de entrada en GB y España; comparar picos, caída y efecto jornada."
+      },
+      "sourceName": "Google Trends comparison",
+      "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&q=London%20City%20Lionesses,Alexia%20Putellas,London%20City%20tickets"
+    },
+    {
+      "id": "crm",
+      "name": "Ticketing + CRM",
+      "category": "conversion",
+      "state": "requires-access",
+      "role": {
+        "en": "Conversion, scans and repeat demand",
+        "es": "Conversión, accesos y demanda repetida"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "Connected source",
+            "es": "Fuente conectada"
+          },
+          "value": "No",
+          "state": "pending"
+        },
+        {
+          "label": {
+            "en": "Target attribution",
+            "es": "Atribución objetivo"
+          },
+          "value": "Fixture + campaign",
+          "state": "confirmed"
+        }
+      ],
+      "known": {
+        "en": "Public attendance can close the top-line result.",
+        "es": "La asistencia pública permite cerrar el resultado agregado."
+      },
+      "missing": {
+        "en": "Orders, realised price, campaign source, scans, postcode and first-time/repeat require authorised club data.",
+        "es": "Pedidos, precio realizado, origen de campaña, accesos, postcode y primera visita/repetición requieren datos autorizados del club."
+      },
+      "action": {
+        "en": "Create consent-safe campaign and fixture keys before connecting private data.",
+        "es": "Crear claves seguras de campaña y partido antes de conectar datos privados."
+      },
+      "sourceName": "Club data required",
+      "sourceUrl": "https://london-city-fan-opportunity-engine.vercel.app/how-it-works"
+    }
+  ],
+  "funnel": [
+    {
+      "id": "reach",
+      "label": {
+        "en": "Reach",
+        "es": "Alcance"
+      },
+      "measure": {
+        "en": "TV, video, search",
+        "es": "TV, vídeo, búsqueda"
+      }
+    },
+    {
+      "id": "engage",
+      "label": {
+        "en": "Engage",
+        "es": "Interacción"
+      },
+      "measure": {
+        "en": "Watch time, return",
+        "es": "Tiempo, retorno"
+      }
+    },
+    {
+      "id": "intent",
+      "label": {
+        "en": "Intent",
+        "es": "Intención"
+      },
+      "measure": {
+        "en": "Ticket clicks",
+        "es": "Clics a entradas"
+      }
+    },
+    {
+      "id": "buy",
+      "label": {
+        "en": "Buy / scan",
+        "es": "Compra / acceso"
+      },
+      "measure": {
+        "en": "Orders, yield, scans",
+        "es": "Pedidos, yield, accesos"
+      }
+    },
+    {
+      "id": "repeat",
+      "label": {
+        "en": "Repeat",
+        "es": "Repetición"
+      },
+      "measure": {
+        "en": "30/60/90 days",
+        "es": "30/60/90 días"
+      }
+    }
+  ],
+  "searchPlan": {
+    "terms": [
+      "London City Lionesses",
+      "Alexia Putellas London City",
+      "London City tickets",
+      "London City fixtures",
+      "London City Brighton"
+    ],
+    "markets": [
+      "GB",
+      "ES"
+    ],
+    "windows": [
+      "90 days",
+      "12 months"
+    ],
+    "annotations": [
+      {
+        "date": "2026-07-08",
+        "event": {
+          "en": "Alexia signing announced",
+          "es": "Anuncio del fichaje de Alexia"
+        }
+      },
+      {
+        "date": "2026-09-03",
+        "event": {
+          "en": "Nike principal shirt partnership",
+          "es": "Patrocinio principal de Nike"
+        }
+      },
+      {
+        "date": "2026-09-04",
+        "event": {
+          "en": "Sold-out opener and Eleven TV launch",
+          "es": "Opener sold out y lanzamiento de Eleven TV"
+        }
+      }
+    ]
+  },
+  "fixtureTests": [
+    {
+      "fixtureId": "2026-09-04-manchester-united-h",
+      "date": "2026-09-04",
+      "opponent": "Manchester United",
+      "stage": "post-match",
+      "attendance": 5402,
+      "distribution": "Sky Sports Main Event + Football · Eleven TV Spain",
+      "conversionState": "Public attendance measured; media-to-ticket attribution unavailable",
+      "nextAction": {
+        "en": "Use as the baseline event; document unavailable fields rather than backfilling estimates.",
+        "es": "Usarlo como evento baseline; documentar campos no disponibles sin rellenarlos con estimaciones."
+      }
+    },
+    {
+      "fixtureId": "2026-09-26-brighton-h",
+      "date": "2026-09-26",
+      "opponent": "Brighton & Hove Albion",
+      "stage": "planning",
+      "attendance": null,
+      "distribution": "Broadcaster / stream assignment to verify",
+      "conversionState": "Measurement plan required before campaign launch",
+      "nextAction": {
+        "en": "Use tagged links, channel-specific QR codes and a first-time/repeat ticket field.",
+        "es": "Usar enlaces etiquetados, QR por canal y un campo de primera visita/repetición."
+      }
+    }
+  ]
+}

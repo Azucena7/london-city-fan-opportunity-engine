@@ -17,12 +17,13 @@ The site now separates code from live content. GitHub Actions refreshes the offi
 - Sponsorship, community and consumer signals.
 - Post-match acquisition, yield, territory and retention data.
 - WSL benchmark snapshots when new published home-attendance observations appear.
+- Public audience and search-interest snapshots when a material threshold or fixture event is reached.
 
 Those signals use `data/live/signals.json`, `postmatch.json`, `roadmap.json` and `wsl-attendance-benchmark.json`. Every entry must include an evidence state, observed time, source and explicit marketing implication. A connected daily research automation can update these files after this pull request is merged. Internal ticketing and CRM fields require an authorised data source; never put credentials in GitHub.
 
 ## Operating cadence
 
-1. Daily: refresh fixtures and material public signals; check the WSL attendance source and append a benchmark snapshot only when the published sample changes.
+1. Daily: refresh fixtures and material public signals; check the WSL attendance source and audience/search sources, appending snapshots only when the sample or signal changes materially.
 2. Inside T-48 hours: recheck fixture and weather every six hours when a suitable scheduler is connected.
 3. T+1: result, public attendance and incidents.
 4. T+3: scans, no-show, sales and yield.
@@ -37,3 +38,12 @@ npm run typecheck
 ```
 
 The workflow also supports **Run workflow** from the GitHub Actions page.
+
+
+## Audience and search cadence
+
+- Public YouTube subscriber and catalogue counts: weekly, or after a material campaign event.
+- Fixture video/live-stream views: T+1 and T+7; keep live, replay and highlights separate where available.
+- Eleven TV and broadcaster distribution: confirm before each fixture; add reported reach only when sourced.
+- Google Trends: preserve matched-query snapshots for GB and Spain at announcement, T-7, T+1, T+7 and T+30. The 0–100 index is relative within a query and must not be treated as search volume.
+- CRM/ticketing: use consent-safe fixture and campaign IDs; never commit personal data or credentials.

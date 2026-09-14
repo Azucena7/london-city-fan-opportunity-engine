@@ -5,7 +5,7 @@ A decision product for turning London City Lionesses fixtures, audience signals,
 ## Product structure
 
 - **Today** — current decision, next home fixture, material changes and marketing response.
-- **Calendar** — the complete official schedule, results, fixture dossiers, the 2025/26 attendance baseline and a secondary WSL/London-market attendance benchmark.
+- **Calendar** — the complete official schedule, results, fixture dossiers, the 2025/26 attendance baseline, a secondary WSL/London-market attendance benchmark, and an audience-to-demand measurement layer.
 - **Territories** — spatial opportunity, ranked evidence and access.
 - **How it works** and **Case study** — secondary explanatory content.
 
@@ -34,3 +34,8 @@ Public and editorial data live under `data/seed` and `data/live`. Internal ticke
 ## WSL attendance benchmark
 
 `data/live/wsl-attendance-benchmark.json` stores successive early-season snapshots. Published values are ranked separately from pending clubs, and the interface only calculates club-level movement when a comparable new home observation exists.
+
+
+## Audience and search demand
+
+`data/live/audience-reach.json` keeps owned-channel, Eleven TV, broadcaster, search-interest and CRM measures separate. The Calendar module connects them through a five-stage measurement chain: reach, engagement, intent, purchase/scan and repeat. Google Trends is treated as a relative awareness signal, never as ticket demand or absolute search volume.

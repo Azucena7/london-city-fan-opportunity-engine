@@ -46,6 +46,9 @@ Add:
 - TV / streaming distribution and reported audience
 - fixture-level reach, engagement and content annotations
 - authenticated YouTube geography, watch time and subscriber conversion when channel-owner access is available
+- Google Trends snapshots for brand, Alexia and ticket-intent searches in GB and Spain
+- fixture annotations for signing, sponsorship, broadcast and matchday events
+- campaign and fixture keys linking reach to ticketing, scans and repeat
 
 Keep stadium attendance, digital views and television audience as separate measures.
 

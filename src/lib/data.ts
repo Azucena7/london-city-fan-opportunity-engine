@@ -10,7 +10,8 @@ import postmatchRaw from "../../data/live/postmatch.json";
 import roadmapRaw from "../../data/live/roadmap.json";
 import attendanceHistoryRaw from "../../data/history/attendance-2025-26.json";
 import leagueAttendanceBenchmarkRaw from "../../data/live/wsl-attendance-benchmark.json";
-import type { AttendanceHistory, CalendarFixture, Fixture, LeagueAttendanceBenchmark, LiveSignal, Territory } from "./models";
+import audienceReachRaw from "../../data/live/audience-reach.json";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, Fixture, LeagueAttendanceBenchmark, LiveSignal, Territory } from "./models";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -24,3 +25,4 @@ export const postmatchReviews = postmatchRaw;
 export const roadmapItems = roadmapRaw;
 export const attendanceHistory = attendanceHistoryRaw as AttendanceHistory;
 export const leagueAttendanceBenchmark = leagueAttendanceBenchmarkRaw as LeagueAttendanceBenchmark;
+export const audienceReach = audienceReachRaw as AudienceReachData;
