@@ -1,0 +1,259 @@
+{
+  "season": "2025/26",
+  "scope": "Barclays Women's Super League home matches",
+  "checkedAt": "2026-09-14",
+  "currentBenchmark": {
+    "season": "2026/27",
+    "date": "2026-09-04",
+    "opponent": "Manchester United",
+    "attendance": 5402,
+    "attendanceState": "measured",
+    "soldOut": true,
+    "sourceName": "London City Lionesses fixture record",
+    "sourceUrl": "https://www.londoncitylionesses.com/fixtures"
+  },
+  "discrepancyNote": {
+    "en": "The match-by-match ledger totals 34,939 (3,176 average), corroborated by ESPN. WSL Analytics reports 33,775 (3,070 average). The product uses the auditable match ledger and keeps the aggregate discrepancy visible.",
+    "es": "El registro partido a partido suma 34.939 (3.176 de media), corroborado por ESPN. WSL Analytics publica 33.775 (3.070 de media). El producto usa el registro auditable y mantiene visible la discrepancia agregada."
+  },
+  "sources": [
+    {
+      "name": "2025/26 London City season match ledger",
+      "url": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "role": "match-by-match compilation"
+    },
+    {
+      "name": "ESPN season analysis",
+      "url": "https://www.espn.com/soccer/story/_/id/45717246/london-city-set-sign-queen-alexia-putellas-good-fit",
+      "role": "3,176 average corroboration"
+    },
+    {
+      "name": "Sky Sports — London City v Arsenal",
+      "url": "https://www.skysports.com/football/london-city-lionesses-vs-arsenal-women/531310",
+      "role": "5,414 record verification"
+    },
+    {
+      "name": "Sky Sports — London City v Leicester",
+      "url": "https://www.skysports.com/football/london-city-lionesses-vs-leicester-city-women/545722",
+      "role": "2,308 missing-ledger verification"
+    },
+    {
+      "name": "WSL Analytics attendance review",
+      "url": "https://newsletter.wslanalytics.com/p/inside-the-stands-wsl-attendance-b58",
+      "role": "conflicting aggregate retained for transparency"
+    }
+  ],
+  "matches": [
+    {
+      "id": "2025-09-14-mun-h",
+      "season": "2025/26",
+      "date": "2025-09-14",
+      "kickoff": "12:00",
+      "opponent": "Manchester United",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 2800,
+      "attendanceState": "reported",
+      "soldOut": true,
+      "result": {
+        "for": 1,
+        "against": 5
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    },
+    {
+      "id": "2025-10-05-liv-h",
+      "season": "2025/26",
+      "date": "2025-10-05",
+      "kickoff": "11:55",
+      "opponent": "Liverpool",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 2471,
+      "attendanceState": "reported",
+      "result": {
+        "for": 1,
+        "against": 0
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    },
+    {
+      "id": "2025-10-12-whu-h",
+      "season": "2025/26",
+      "date": "2025-10-12",
+      "kickoff": "12:00",
+      "opponent": "West Ham United",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 1872,
+      "attendanceState": "reported",
+      "result": {
+        "for": 1,
+        "against": 0
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    },
+    {
+      "id": "2025-11-09-tot-h",
+      "season": "2025/26",
+      "date": "2025-11-09",
+      "kickoff": "11:55",
+      "opponent": "Tottenham Hotspur",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 3302,
+      "attendanceState": "reported",
+      "result": {
+        "for": 4,
+        "against": 2
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    },
+    {
+      "id": "2025-12-07-bha-h",
+      "season": "2025/26",
+      "date": "2025-12-07",
+      "kickoff": "12:00",
+      "opponent": "Brighton & Hove Albion",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 3302,
+      "attendanceState": "reported",
+      "result": {
+        "for": 0,
+        "against": 1
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    },
+    {
+      "id": "2026-01-25-mci-h",
+      "season": "2025/26",
+      "date": "2026-01-25",
+      "kickoff": "11:55",
+      "opponent": "Manchester City",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 3418,
+      "attendanceState": "reported",
+      "result": {
+        "for": 1,
+        "against": 2
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    },
+    {
+      "id": "2026-02-08-eve-h",
+      "season": "2025/26",
+      "date": "2026-02-08",
+      "kickoff": "12:00",
+      "opponent": "Everton",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 2250,
+      "attendanceState": "reported",
+      "result": {
+        "for": 0,
+        "against": 1
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    },
+    {
+      "id": "2026-03-15-ars-h",
+      "season": "2025/26",
+      "date": "2026-03-15",
+      "kickoff": "11:55",
+      "opponent": "Arsenal",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 5414,
+      "attendanceState": "reported",
+      "soldOut": true,
+      "result": {
+        "for": 0,
+        "against": 2
+      },
+      "sourceName": "Sky Sports",
+      "sourceUrl": "https://www.skysports.com/football/london-city-lionesses-vs-arsenal-women/531310",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "2026-03-21-che-h",
+      "season": "2025/26",
+      "date": "2026-03-21",
+      "kickoff": "12:00",
+      "opponent": "Chelsea",
+      "competition": "Barclays Women's Super League",
+      "venue": "The Den",
+      "venueGroup": "the-den",
+      "attendance": 4820,
+      "attendanceState": "reported",
+      "result": {
+        "for": 1,
+        "against": 1
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    },
+    {
+      "id": "2026-04-26-lei-h",
+      "season": "2025/26",
+      "date": "2026-04-26",
+      "kickoff": "12:00",
+      "opponent": "Leicester City",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 2308,
+      "attendanceState": "reported",
+      "result": {
+        "for": 5,
+        "against": 1
+      },
+      "sourceName": "Sky Sports",
+      "sourceUrl": "https://www.skysports.com/football/london-city-lionesses-vs-leicester-city-women/545722",
+      "confidence": "HIGH"
+    },
+    {
+      "id": "2026-05-16-avl-h",
+      "season": "2025/26",
+      "date": "2026-05-16",
+      "kickoff": "13:00",
+      "opponent": "Aston Villa",
+      "competition": "Barclays Women's Super League",
+      "venue": "CopperJax Community Stadium",
+      "venueGroup": "hayes-lane",
+      "attendance": 2982,
+      "attendanceState": "reported",
+      "result": {
+        "for": 2,
+        "against": 1
+      },
+      "sourceName": "Season match record",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season",
+      "confidence": "MEDIUM"
+    }
+  ]
+}

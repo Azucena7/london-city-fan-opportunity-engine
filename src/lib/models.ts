@@ -51,6 +51,43 @@ export type LiveSignal = {
   sourceUrl: string;
 };
 
+export type AttendanceHistoryMatch = {
+  id: string;
+  season: string;
+  date: string;
+  kickoff?: string;
+  opponent: string;
+  competition: string;
+  venue: string;
+  venueGroup: "hayes-lane" | "the-den";
+  attendance: number;
+  attendanceState: "measured" | "reported";
+  soldOut?: boolean;
+  result?: { for: number; against: number };
+  sourceName: string;
+  sourceUrl: string;
+  confidence: "HIGH" | "MEDIUM" | "LOW";
+};
+
+export type AttendanceHistory = {
+  season: string;
+  scope: string;
+  checkedAt: string;
+  currentBenchmark: {
+    season: string;
+    date: string;
+    opponent: string;
+    attendance: number;
+    attendanceState: "measured" | "reported";
+    soldOut?: boolean;
+    sourceName: string;
+    sourceUrl: string;
+  };
+  discrepancyNote: LocalizedText;
+  sources: Array<{ name: string; url: string; role: string }>;
+  matches: AttendanceHistoryMatch[];
+};
+
 export type Territory = {
   id?: string;
   name?: string;
