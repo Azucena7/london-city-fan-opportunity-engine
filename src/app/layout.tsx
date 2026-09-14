@@ -18,12 +18,32 @@ import "./product-v2.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://london-city-fan-opportunity-engine.vercel.app"),
   title: {
     default: "London City Fan Opportunity Lab",
     template: "%s | London City Fan Opportunity Lab"
   },
   description:
-    "A practical audience-growth and matchday decision engine for London City Lionesses."
+    "A practical audience-growth and matchday decision engine for London City Lionesses.",
+  openGraph: {
+    title: "London City Fan Opportunity Lab",
+    description: "Turning fixtures, attendance and market context into clear marketing action.",
+    url: "/today",
+    siteName: "London City Fan Opportunity Lab",
+    type: "website",
+    images: [{
+      url: "/linkedin-card",
+      width: 1200,
+      height: 630,
+      alt: "London City Fan Opportunity Lab — from signals to decisions"
+    }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "London City Fan Opportunity Lab",
+    description: "Turning fixtures, attendance and market context into clear marketing action.",
+    images: ["/linkedin-card"]
+  }
 };
 
 export default function RootLayout({
