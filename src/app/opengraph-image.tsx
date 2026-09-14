@@ -95,8 +95,7 @@ export default function Image() {
             overflow: "hidden",
             border: "1px solid rgba(179, 245, 231, 0.26)",
             background: "#f3f7f5",
-            boxShadow: "0 28px 80px rgba(0,0,0,0.38)",
-            transform: "rotate(1.2deg)"
+            boxShadow: "0 28px 80px rgba(0,0,0,0.38)"
           }}
         >
           <div style={{ height: "42px", display: "flex", alignItems: "center", padding: "0 17px", background: "#dfe8e5", borderBottom: "1px solid #cad7d3" }}>
@@ -126,7 +125,7 @@ export default function Image() {
 
               <div style={{ width: "44%", minHeight: "178px", display: "flex", flexDirection: "column", padding: "18px", borderRadius: "13px", border: "1px solid #cadbd6", background: "#ffffff" }}>
                 <div style={{ fontSize: "11px", letterSpacing: "0.12em", color: "#548178", fontWeight: 800 }}>NEXT HOME FIXTURE</div>
-                <div style={{ fontSize: "23px", lineHeight: 1.05, fontWeight: 800, marginTop: "14px" }}>London City <span style={{ color: "#73918b" }}>v</span> Brighton</div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", fontSize: "23px", lineHeight: 1.05, fontWeight: 800, marginTop: "14px" }}>London City <span style={{ color: "#73918b" }}>v</span> Brighton</div>
                 <div style={{ fontSize: "13px", color: "#54706b", marginTop: "13px" }}>26 SEP · COPPERJAX</div>
                 <div style={{ display: "flex", marginTop: "auto", padding: "8px 10px", borderRadius: "7px", background: "#edf5f2", color: "#24594f", fontSize: "11px", fontWeight: 700 }}>
                   TEST REPEAT DEMAND
