@@ -1,2 +1,2 @@
 import { redirect } from "next/navigation";
-export default function FixturesPage(){ redirect("/opportunities#fixtures"); }
+export default function FixturesPage(){ redirect("/calendar"); }

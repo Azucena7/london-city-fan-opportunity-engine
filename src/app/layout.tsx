@@ -14,10 +14,14 @@ import "./territory-travel.css";
 import "./block14.css";
 import "./block15.css";
 import "./block16.css";
+import "./product-v2.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 export const metadata: Metadata = {
-  title: "London City Fan Opportunity Lab",
+  title: {
+    default: "London City Fan Opportunity Lab",
+    template: "%s | London City Fan Opportunity Lab"
+  },
   description:
     "A practical audience-growth and matchday decision engine for London City Lionesses."
 };

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "refresh:data": "node scripts/refresh-data.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",
