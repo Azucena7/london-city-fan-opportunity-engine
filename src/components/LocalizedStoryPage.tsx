@@ -4,402 +4,204 @@ import Link from "next/link";
 import { NavTabs } from "@/components/NavTabs";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const FULL_CASE_STUDY_URL = "https://gamma.app/docs/kjxuybiifkup0qm";
+type Localized = { en: string; es: string };
 
-type Copy = {
-  eyebrow: string;
-  title: string;
-  lede: string;
-  prototypeCta: string;
-  fullCta: string;
-  disclosure: string;
-  problemEyebrow: string;
-  problemTitle: string;
-  problemText: string;
-  inheritedTitle: string;
-  inheritedText: string;
-  independentTitle: string;
-  independentText: string;
-  operatingQuestion: string;
-  insightEyebrow: string;
-  insightTitle: string;
-  insightQuote: string;
-  insightText: string;
-  competitionTitle: string;
-  competitionText: string;
-  demandTitle: string;
-  demandText: string;
-  contextNote: string;
-  proofEyebrow: string;
-  proofTitle: string;
-  opportunity: string;
-  competition: string;
-  contextOnly: string;
-  decision: string;
-  proofSignals: string[];
-  proofConclusion: string;
-  systemEyebrow: string;
-  systemTitle: string;
-  systemText: string;
-  where: string;
-  whereText: string;
-  when: string;
-  whenText: string;
-  matchweek: string;
-  matchweekText: string;
-  action: string;
-  actionText: string;
-  learn: string;
-  learnText: string;
-  productEyebrow: string;
-  productTitle: string;
-  productText: string;
-  thisWeek: string;
-  operatingDecision: string;
-  target: string;
-  channel: string;
-  message: string;
-  matchweekStatus: string;
-  openThisWeek: string;
-  biggerEyebrow: string;
-  biggerTitle: string;
-  biggerText: string;
-  biggerQuote: string;
-  biggerSupport: string;
-  readFull: string;
-  methodology: string;
-};
-
-const copy: Record<"en" | "es", Copy> = {
-  en: {
-    eyebrow: "CASE STUDY · SHORT VERSION",
-    title: "Where are London City Lionesses’ next 1,000 recurring fans?",
-    lede:
-      "A practical case study in turning local audience data, match context and public-transport access into weekly growth decisions for women’s football.",
-    prototypeCta: "Explore the live prototype",
-    fullCta: "Read the full case study",
-    disclosure:
-      "Independent prototype · London City used as a live case study · ‘Next 1,000’ is a prioritisation question, not a forecast.",
-    problemEyebrow: "THE BUSINESS PROBLEM",
-    problemTitle: "London City starts from a different place.",
-    problemText:
-      "An independent women-first club cannot simply assume an inherited local fanbase or decades of existing matchday behaviour from a men’s club.",
-    inheritedTitle: "Traditional club",
-    inheritedText: "Inherited football habit → existing fanbase → matchday routine",
-    independentTitle: "Independent women-first club",
-    independentText: "Audience has to be found → acquired → converted → retained",
-    operatingQuestion: "Where should a small team spend its next hour and its next £1?",
-    insightEyebrow: "THE INSIGHT",
-    insightTitle: "Maybe you’re competing for Sunday — not allegiance.",
-    insightQuote: "You don’t need to change your club. You just need a great Sunday.",
-    insightText:
-      "High football interest can be competitive pressure, but it can also be evidence of an audience already comfortable with live football.",
-    competitionTitle: "Competition",
-    competitionText: "Existing loyalties and local alternatives.",
-    demandTitle: "Evidence of demand",
-    demandText: "A football-engaged market already primed for matchday attendance.",
-    contextNote: "Competition Pressure is context only — it is not automatically deducted from Territory Opportunity.",
-    proofEyebrow: "THE CROYDON CONTRADICTION",
-    proofTitle: "94 Opportunity. 92 Competition. Still ATTACK.",
-    opportunity: "Opportunity",
-    competition: "Competition context",
-    contextOnly: "Not deducted",
-    decision: "Decision: ATTACK",
-    proofSignals: [
-      "288 dependent-child households",
-      "Girls Network Score 100",
-      "≈25 min Sunday public-transport journey",
-      "0 transfers",
-      "Crystal Palace Women ≈2.3 km away"
-    ],
-    proofConclusion:
-      "High football interest isn’t always just competition. Sometimes it is evidence of demand.",
-    systemEyebrow: "HOW THE SYSTEM WORKS",
-    systemTitle: "From 940 LSOAs to a weekly action.",
-    systemText: "The Lab is a decision loop, not a static dashboard.",
-    where: "WHERE",
-    whereText: "Family potential × girls football network × access",
-    when: "WHEN",
-    whenText: "Calendar × attention × fixture appeal",
-    matchweek: "MATCHWEEK",
-    matchweekText: "Weather × planned travel friction × attendance momentum when verified",
-    action: "ACTION",
-    actionText: "Attack hard · Attack · Test · Defend",
-    learn: "LEARN",
-    learnText: "Ticket → Scan → First-time household → Repeat ≤90d",
-    productEyebrow: "THE PRODUCT",
-    productTitle: "The model does not produce a report. It produces a weekly operating decision.",
-    productText:
-      "This Week turns the model into one clear action, then lets the user drill into opportunities, access and methodology only when needed.",
-    thisWeek: "THIS WEEK",
-    operatingDecision: "Weekly operating decision",
-    target: "Target territory",
-    channel: "Channel focus",
-    message: "Message angle",
-    matchweekStatus: "Matchweek status",
-    openThisWeek: "Open This Week",
-    biggerEyebrow: "THE BIGGER IDEA",
-    biggerTitle: "This isn’t really a London City problem.",
-    biggerText:
-      "Women’s football teams often operate with small commercial, marketing, CRM, ticketing and fan-engagement teams — while every fixture creates dozens of decisions.",
-    biggerQuote: "What if AI could give a 4-person team some of the operating capacity that previously required 10+ people?",
-    biggerSupport: "Not by replacing the team. By helping it decide where to look → when to act → what to learn.",
-    readFull: "Want the methodology, fixture examples, travel logic and validation design?",
-    methodology: "Open the full 10-slide case study"
+const productViews: Array<{ number: string; title: Localized; text: Localized; href: string; cta: Localized }> = [
+  {
+    number: "01", title: { en: "Today", es: "Hoy" }, href: "/today",
+    text: { en: "One current decision, the material signals behind it and the marketing response.", es: "Una decisión vigente, las señales materiales que la explican y la respuesta de marketing." },
+    cta: { en: "Open the operating view", es: "Abrir la vista operativa" }
   },
-  es: {
-    eyebrow: "CASE STUDY · VERSIÓN CORTA",
-    title: "¿Dónde están los próximos 1.000 espectadores recurrentes de London City Lionesses?",
-    lede:
-      "Un case study práctico que convierte datos locales de audiencia, contexto de partido y acceso en transporte público en decisiones semanales de crecimiento para fútbol femenino.",
-    prototypeCta: "Explorar el prototipo",
-    fullCta: "Ver el case study completo",
-    disclosure:
-      "Prototipo independiente · London City se utiliza como caso de estudio · ‘Próximos 1.000’ es una pregunta de priorización, no una predicción.",
-    problemEyebrow: "EL PROBLEMA DE NEGOCIO",
-    problemTitle: "London City parte de un lugar diferente.",
-    problemText:
-      "Un club independiente y centrado en fútbol femenino no puede asumir una base local heredada ni décadas de comportamiento de día de partido procedentes de un club masculino.",
-    inheritedTitle: "Club tradicional",
-    inheritedText: "Hábito heredado → base de aficionados existente → rutina de partido",
-    independentTitle: "Club femenino independiente",
-    independentText: "La audiencia hay que encontrarla → captarla → convertirla → retenerla",
-    operatingQuestion: "¿Dónde debería invertir un equipo pequeño su próxima hora y su próximo £1?",
-    insightEyebrow: "EL INSIGHT",
-    insightTitle: "Quizá compites por el domingo — no por la lealtad.",
-    insightQuote: "No necesitas cambiar de club. Solo necesitas un gran domingo.",
-    insightText:
-      "Un alto interés por el fútbol puede ser presión competitiva, pero también evidencia de una audiencia ya acostumbrada a asistir a fútbol en directo.",
-    competitionTitle: "Competencia",
-    competitionText: "Lealtades existentes y alternativas locales.",
-    demandTitle: "Evidencia de demanda",
-    demandText: "Un mercado futbolero ya preparado para la asistencia presencial.",
-    contextNote: "Competition Pressure es contexto: no se resta automáticamente de Territory Opportunity.",
-    proofEyebrow: "LA CONTRADICCIÓN DE CROYDON",
-    proofTitle: "94 Opportunity. 92 Competition. Aun así: ATTACK.",
-    opportunity: "Oportunidad",
-    competition: "Contexto competitivo",
-    contextOnly: "No se resta",
-    decision: "Decisión: ATTACK",
-    proofSignals: [
-      "288 hogares con menores dependientes",
-      "Girls Network Score 100",
-      "≈25 min en transporte público un domingo",
-      "0 transbordos",
-      "Crystal Palace Women a ≈2,3 km"
-    ],
-    proofConclusion:
-      "Un alto interés por el fútbol no siempre es solo competencia. A veces es evidencia de demanda.",
-    systemEyebrow: "CÓMO FUNCIONA EL SISTEMA",
-    systemTitle: "De 940 LSOAs a una acción semanal.",
-    systemText: "El Lab es un bucle de decisión, no un dashboard estático.",
-    where: "WHERE",
-    whereText: "Potencial familiar × red de fútbol femenino × acceso",
-    when: "WHEN",
-    whenText: "Calendario × atención × atractivo del partido",
-    matchweek: "MATCHWEEK",
-    matchweekText: "Tiempo × fricción de viaje planificada × momentum de asistencia cuando esté verificado",
-    action: "ACTION",
-    actionText: "Attack hard · Attack · Test · Defend",
-    learn: "LEARN",
-    learnText: "Entrada → Acceso → Hogar nuevo → Repetición ≤90d",
-    productEyebrow: "EL PRODUCTO",
-    productTitle: "El modelo no produce un informe. Produce una decisión operativa semanal.",
-    productText:
-      "This Week convierte el modelo en una acción clara y permite profundizar en oportunidades, acceso y método solo cuando hace falta.",
-    thisWeek: "ESTA SEMANA",
-    operatingDecision: "Decisión operativa semanal",
-    target: "Territorio objetivo",
-    channel: "Canal prioritario",
-    message: "Ángulo de mensaje",
-    matchweekStatus: "Estado de la semana de partido",
-    openThisWeek: "Abrir Esta semana",
-    biggerEyebrow: "LA IDEA MÁS GRANDE",
-    biggerTitle: "En realidad, este no es solo un problema de London City.",
-    biggerText:
-      "Muchos equipos de fútbol femenino trabajan con equipos pequeños de comercial, marketing, CRM, ticketing y fan engagement, mientras cada partido genera decenas de decisiones.",
-    biggerQuote: "¿Y si la IA pudiera dar a un equipo de 4 personas parte de la capacidad operativa que antes requería 10+?",
-    biggerSupport: "No sustituyendo al equipo. Ayudándole a decidir dónde mirar → cuándo actuar → qué aprender.",
-    readFull: "¿Quieres ver metodología, ejemplos de partidos, lógica de viaje y diseño de validación?",
-    methodology: "Abrir el case study completo de 10 slides"
+  {
+    number: "02", title: { en: "Calendar", es: "Calendario" }, href: "/calendar",
+    text: { en: "Every fixture becomes a dossier: context, attendance, audience, campaign and post-match learning.", es: "Cada partido se convierte en un expediente: contexto, asistencia, audiencia, campaña y aprendizaje postpartido." },
+    cta: { en: "Explore fixture dossiers", es: "Explorar expedientes" }
+  },
+  {
+    number: "03", title: { en: "Territories", es: "Territorios" }, href: "/territories",
+    text: { en: "Local family potential, girls' football networks and public-transport access become acquisition priorities.", es: "El potencial familiar, las redes de fútbol femenino y el acceso en transporte se convierten en prioridades de captación." },
+    cta: { en: "See the opportunity map", es: "Ver el mapa de oportunidad" }
   }
-};
+];
 
-function Arrow() {
-  return <span className="caseStudyArrow" aria-hidden="true">→</span>;
-}
+const operatingLoop: Array<{ label: Localized; text: Localized }> = [
+  { label: { en: "Find", es: "Localizar" }, text: { en: "Where is qualified local demand?", es: "¿Dónde está la demanda local cualificada?" } },
+  { label: { en: "Read", es: "Interpretar" }, text: { en: "What changed around the fixture?", es: "¿Qué ha cambiado alrededor del partido?" } },
+  { label: { en: "Activate", es: "Activar" }, text: { en: "Which campaign can the team execute?", es: "¿Qué campaña puede ejecutar el equipo?" } },
+  { label: { en: "Measure", es: "Medir" }, text: { en: "Did attention become attendance?", es: "¿La atención se convirtió en asistencia?" } },
+  { label: { en: "Learn", es: "Aprender" }, text: { en: "Who returned within 30/60/90 days?", es: "¿Quién volvió en 30/60/90 días?" } }
+];
+
+const valueCards: Array<{ title: Localized; text: Localized }> = [
+  { title: { en: "Marketing", es: "Marketing" }, text: { en: "Prioritised audiences, messages, channels, assets and execution windows.", es: "Audiencias, mensajes, canales, piezas y ventanas de ejecución priorizadas." } },
+  { title: { en: "Ticketing & CRM", es: "Ticketing y CRM" }, text: { en: "A shared path from campaign ID to ticket, scan, no-show and repeat visit.", es: "Un recorrido común desde el ID de campaña hasta entrada, acceso, no-show y repetición." } },
+  { title: { en: "Fan engagement", es: "Fan engagement" }, text: { en: "Fixture-specific journeys that reduce access, timing and weather friction.", es: "Recorridos específicos por partido que reducen fricción de acceso, horario y tiempo." } },
+  { title: { en: "Commercial", es: "Comercial" }, text: { en: "Evidence-led propositions for local partners, community activation and sponsorship.", es: "Propuestas basadas en evidencia para partners locales, comunidad y patrocinio." } }
+];
 
 export function LocalizedStoryPage() {
   const { lang } = useLanguage();
-  const c = copy[lang === "es" ? "es" : "en"];
+  const es = lang === "es";
+  const pick = (value: Localized) => value[es ? "es" : "en"];
 
   return (
-    <main className="caseStudyPage">
+    <main className="caseStudyPage commercialCaseStudy">
       <NavTabs />
 
-      <section className="caseStudyHero">
-        <div className="eyebrow">{c.eyebrow}</div>
-        <h1>{c.title}</h1>
-        <p className="caseStudyHeroLede">{c.lede}</p>
-        <div className="caseStudyActions">
-          <Link className="caseStudyButton primary" href="/this-week">
-            {c.prototypeCta}
-          </Link>
-          <a
-            className="caseStudyButton secondary"
-            href={FULL_CASE_STUDY_URL}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {c.fullCta} ↗
-          </a>
+      <section className="caseStudyHero caseStudyHeroCommercial">
+        <div className="caseStudyModeNav" aria-label={es ? "Versiones del caso de estudio" : "Case study versions"}>
+          <span className="active">{es ? "Caso comercial" : "Commercial case"}</span>
+          <Link href="/case-study/technical">{es ? "Caso técnico" : "Technical case"}</Link>
         </div>
-        <p className="caseStudyDisclosure">{c.disclosure}</p>
+        <div className="eyebrow">{es ? "CASO DE ESTUDIO · PRODUCTO EN EVOLUCIÓN" : "CASE STUDY · PRODUCT IN MOTION"}</div>
+        <h1>{es ? "De señales dispersas a campañas que un equipo pequeño puede ejecutar." : "From scattered signals to campaigns a small team can actually run."}</h1>
+        <p className="caseStudyHeroLede">
+          {es
+            ? "London City Fan Opportunity Lab conecta territorio, calendario, asistencia, audiencias públicas y contexto de partido para decidir dónde captar, cuándo actuar y qué aprender después."
+            : "London City Fan Opportunity Lab connects territory, calendar, attendance, public audiences and match context to decide where to acquire, when to act and what to learn next."}
+        </p>
+        <div className="caseStudyActions">
+          <Link className="caseStudyButton primary" href="/today">{es ? "Explorar el producto" : "Explore the product"}</Link>
+          <Link className="caseStudyButton secondary" href="/case-study/technical">{es ? "Ver cómo se ha construido" : "See how it is built"} →</Link>
+        </div>
+        <p className="caseStudyDisclosure">
+          {es
+            ? "Prototipo independiente · London City Lionesses se utiliza como caso de estudio vivo · Los resultados internos permanecen pendientes hasta disponer de acceso autorizado."
+            : "Independent prototype · London City Lionesses is used as a live case study · Internal outcomes remain pending until authorised access exists."}
+        </p>
       </section>
 
       <section className="caseStudySection caseStudyProblem">
         <div className="caseStudySectionHead">
-          <div className="eyebrow">{c.problemEyebrow}</div>
-          <h2>{c.problemTitle}</h2>
-          <p>{c.problemText}</p>
+          <div className="eyebrow">{es ? "EL PROBLEMA COMERCIAL" : "THE COMMERCIAL PROBLEM"}</div>
+          <h2>{es ? "Cada partido genera decisiones. Los datos suelen vivir separados." : "Every fixture creates decisions. The data usually lives apart."}</h2>
+          <p>{es
+            ? "Un club femenino independiente necesita construir hábito, no solo vender un partido. Pero calendario, atención digital, asistencia, territorio, transporte, campañas y repetición suelen analizarse en herramientas distintas o demasiado tarde."
+            : "An independent women's club needs to build habit, not only sell one match. Yet fixtures, digital attention, attendance, territory, travel, campaigns and repeat behaviour are often analysed in different tools or too late."}</p>
         </div>
-
-        <div className="caseStudyContrast">
-          <article>
-            <span>01</span>
-            <h3>{c.inheritedTitle}</h3>
-            <p>{c.inheritedText}</p>
-          </article>
-          <Arrow />
-          <article className="accented">
-            <span>02</span>
-            <h3>{c.independentTitle}</h3>
-            <p>{c.independentText}</p>
-          </article>
+        <div className="caseStudyChallengeGrid">
+          <article><span>01</span><strong>{es ? "¿Dónde?" : "Where?"}</strong><p>{es ? "Qué territorios contienen demanda alcanzable y relevante." : "Which territories contain relevant, reachable demand."}</p></article>
+          <article><span>02</span><strong>{es ? "¿Cuándo?" : "When?"}</strong><p>{es ? "Qué señales hacen que una jornada requiera más captación o servicio." : "Which signals make a matchweek require more acquisition or service."}</p></article>
+          <article><span>03</span><strong>{es ? "¿Qué hacer?" : "What next?"}</strong><p>{es ? "Cómo traducir el análisis en una campaña concreta y aprobable." : "How to turn analysis into a concrete, approvable campaign."}</p></article>
+          <article><span>04</span><strong>{es ? "¿Funcionó?" : "Did it work?"}</strong><p>{es ? "Qué generó compra, acceso y repetición, no solo alcance." : "What created purchase, scan and repeat—not just reach."}</p></article>
         </div>
-
-        <blockquote className="caseStudyQuestion">{c.operatingQuestion}</blockquote>
       </section>
 
-      <section className="caseStudySection caseStudyInsight">
-        <div className="eyebrow">{c.insightEyebrow}</div>
-        <h2>{c.insightTitle}</h2>
-        <blockquote className="caseStudyQuote">“{c.insightQuote}”</blockquote>
-        <p className="caseStudyInsightText">{c.insightText}</p>
-        <div className="caseStudyDual">
-          <article>
-            <h3>{c.competitionTitle}</h3>
-            <p>{c.competitionText}</p>
-          </article>
-          <article className="accented">
-            <h3>{c.demandTitle}</h3>
-            <p>{c.demandText}</p>
-          </article>
+      <section className="caseStudySection caseStudyCommercialThesis">
+        <div className="eyebrow">{es ? "LA PROPUESTA" : "THE PROPOSITION"}</div>
+        <h2>{es ? "Un sistema operativo de demanda para cada partido." : "A demand operating system for every fixture."}</h2>
+        <p className="caseStudyInsightText">{es
+          ? "La herramienta no intenta producir otra capa de reporting. Organiza evidencia pública y, cuando exista, información privada del club en un bucle de decisión con responsables, aprobaciones y medición."
+          : "The product is not trying to create another reporting layer. It organises public evidence and, when available, private club data into a decision loop with owners, approvals and measurement."}</p>
+        <div className="caseStudyOperatingLoop">
+          {operatingLoop.map((item, index) => (
+            <article key={item.label.en}><span>{String(index + 1).padStart(2, "0")}</span><strong>{pick(item.label)}</strong><p>{pick(item.text)}</p></article>
+          ))}
         </div>
-        <p className="caseStudyMethodNote">{c.contextNote}</p>
       </section>
 
       <section className="caseStudySection caseStudyProof">
-        <div className="eyebrow">{c.proofEyebrow}</div>
-        <h2>{c.proofTitle}</h2>
-        <div className="caseStudyProofGrid">
-          <div className="caseStudyStat primaryStat">
-            <strong>94</strong>
-            <span>{c.opportunity}</span>
-          </div>
-          <div className="caseStudyStat">
-            <strong>92</strong>
-            <span>{c.competition}</span>
-            <small>{c.contextOnly}</small>
-          </div>
-          <div className="caseStudyDecisionStamp">{c.decision}</div>
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "PRUEBA CONSTRUIDA" : "PROOF BUILT"}</div>
+          <h2>{es ? "El prototipo ya conecta mercado, demanda y ejecución." : "The prototype now connects market, demand and execution."}</h2>
+          <p>{es ? "No es una maqueta conceptual. Cada cifra tiene un estado, una fuente y un uso definido." : "This is not a conceptual mock-up. Every number has a state, a source and a defined use."}</p>
         </div>
-        <div className="caseStudySignalStrip">
-          {c.proofSignals.map((signal) => <span key={signal}>{signal}</span>)}
+        <div className="caseStudyMetricGrid">
+          <article className="featured"><strong>940</strong><span>LSOAs</span><p>{es ? "evaluadas para priorizar oportunidad territorial" : "evaluated for territory opportunity"}</p></article>
+          <article><strong>11</strong><span>{es ? "partidos" : "fixtures"}</span><p>{es ? "de WSL en casa reconstruidos para 2025/26" : "2025/26 home WSL matches reconstructed"}</p></article>
+          <article><strong>34,939</strong><span>{es ? "asistentes" : "attendees"}</span><p>{es ? "en el ledger histórico auditable" : "in the auditable historical ledger"}</p></article>
+          <article><strong>5,414</strong><span>{es ? "récord" : "record"}</span><p>{es ? "benchmark ante Arsenal" : "benchmark against Arsenal"}</p></article>
         </div>
-        <blockquote className="caseStudyProofConclusion">{c.proofConclusion}</blockquote>
+        <div className="caseStudyEvidenceRail">
+          <div><span>{es ? "Media 2025/26" : "2025/26 average"}</span><strong>3,176</strong></div>
+          <div><span>{es ? "Mediana" : "Median"}</span><strong>2,982</strong></div>
+          <div><span>{es ? "Media Hayes Lane" : "Hayes Lane average"}</span><strong>3,012</strong></div>
+          <div><span>{es ? "Opener actual" : "Current opener"}</span><strong>5,402</strong><small>{es ? "+70% sobre la media anterior" : "+70% vs prior average"}</small></div>
+        </div>
       </section>
 
-      <section className="caseStudySection caseStudySystem">
+      <section className="caseStudySection caseStudyCampaignBridge">
         <div className="caseStudySectionHead">
-          <div className="eyebrow">{c.systemEyebrow}</div>
-          <h2>{c.systemTitle}</h2>
-          <p>{c.systemText}</p>
+          <div className="eyebrow">SIGNAL → CAMPAIGN</div>
+          <h2>{es ? "La sugerencia termina en un briefing, no en una frase genérica." : "The recommendation ends in a brief—not a generic sentence."}</h2>
+          <p>{es
+            ? "Brighton es el primer ensayo completo: usa el opener como prueba social, la oportunidad local de Bromley, el alcance de Alexia y la información de servicio de matchday para crear una campaña coordinada."
+            : "Brighton is the first complete rehearsal: opener proof, Bromley opportunity, Alexia-led reach and matchday service information become one coordinated campaign."}</p>
         </div>
-        <div className="caseStudyFlow" aria-label="Fan Opportunity Engine decision flow">
-          <div className="caseStudyFlowStart">
-            <strong>940</strong>
-            <span>LSOAs</span>
+        <div className="caseStudyCampaignCard">
+          <div className="caseStudyCampaignLead">
+            <span>{es ? "CAMPAÑA PILOTO" : "PILOT CAMPAIGN"}</span>
+            <h3>{es ? "Brighton · El primer partido de la doble sesión" : "Brighton · The first match of the double-header"}</h3>
+            <p>{es ? "Objetivo: convertir la atención del opener y la oportunidad local en intención cualificada de entrada." : "Objective: turn opener attention and local opportunity into qualified ticket intent."}</p>
+            <strong>{es ? "Borrador · Sin inversión autorizada" : "Draft · No spend authorised"}</strong>
           </div>
-          <Arrow />
-          {[
-            [c.where, c.whereText],
-            [c.when, c.whenText],
-            [c.matchweek, c.matchweekText],
-            [c.action, c.actionText],
-            [c.learn, c.learnText]
-          ].map(([label, text], index) => (
-            <div className={`caseStudyFlowStep ${index === 4 ? "learn" : ""}`} key={label}>
-              <strong>{label}</strong>
-              <span>{text}</span>
-            </div>
+          <div className="caseStudyCampaignFacts">
+            <div><strong>4</strong><span>{es ? "playbooks reutilizables" : "reusable playbooks"}</span></div>
+            <div><strong>4</strong><span>{es ? "activaciones coordinadas" : "coordinated activations"}</span></div>
+            <div><strong>6</strong><span>{es ? "IDs de atribución" : "attribution IDs"}</span></div>
+            <div><strong>1/4</strong><span>{es ? "aprobaciones listas" : "approvals ready"}</span></div>
+          </div>
+        </div>
+        <div className="caseStudyPlaybooks">
+          {["Back to Bromley", "The next chapter", "Alexia → London City", "Matchday confidence"].map((item, index) => <span key={item}><b>{String(index + 1).padStart(2, "0")}</b>{item}</span>)}
+        </div>
+        <Link className="caseStudyTextLink" href="/today">{es ? "Ver el Campaign Lab en contexto" : "See the Campaign Lab in context"} →</Link>
+      </section>
+
+      <section className="caseStudySection caseStudyAudienceLayer">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "DE ALCANCE A DEMANDA" : "FROM REACH TO DEMAND"}</div>
+          <h2>{es ? "No sumar audiencias distintas. Conectarlas." : "Do not add unlike audiences. Connect them."}</h2>
+          <p>{es ? "YouTube, Eleven TV, televisión, búsquedas, entradas y asistencia se mantienen como métricas diferentes dentro del mismo recorrido." : "YouTube, Eleven TV, broadcast, search, tickets and attendance remain different measures inside the same journey."}</p>
+        </div>
+        <div className="caseStudyFunnel">
+          {[es ? "Alcance" : "Reach", es ? "Interacción" : "Engage", es ? "Intención" : "Intent", es ? "Compra / acceso" : "Buy / scan", es ? "Repetición" : "Repeat"].map((item, index) => (
+            <div key={item} className={index > 2 ? "restricted" : ""}><span>{index + 1}</span><strong>{item}</strong><small>{index > 2 ? (es ? "requiere acceso" : "requires access") : (es ? "señal pública / instrumentable" : "public / instrumentable")}</small></div>
           ))}
         </div>
       </section>
 
       <section className="caseStudySection caseStudyProduct">
         <div className="caseStudySectionHead">
-          <div className="eyebrow">{c.productEyebrow}</div>
-          <h2>{c.productTitle}</h2>
-          <p>{c.productText}</p>
+          <div className="eyebrow">{es ? "EL PRODUCTO" : "THE PRODUCT"}</div>
+          <h2>{es ? "Tres vistas. Una decisión compartida." : "Three views. One shared decision."}</h2>
+          <p>{es ? "La navegación evita otro dashboard infinito y lleva a cada equipo desde la decisión hacia la evidencia necesaria." : "The navigation avoids another endless dashboard and takes each team from the decision to the evidence it needs."}</p>
         </div>
-
-        <div className="caseStudyBrowser" aria-label="Preview of the This Week operating view">
-          <div className="caseStudyBrowserBar">
-            <span />
-            <span />
-            <span />
-            <small>london-city-fan-opportunity-engine.vercel.app/this-week</small>
-          </div>
-          <div className="caseStudyBrowserBody">
-            <div className="caseStudyBrowserDecision">
-              <span>{c.thisWeek}</span>
-              <strong>ATTACK</strong>
-              <small>{c.operatingDecision}</small>
-            </div>
-            <div className="caseStudyBrowserBrief">
-              <div><span>{c.target}</span><strong>Croydon / priority territory</strong></div>
-              <div><span>{c.channel}</span><strong>Grassroots + local digital</strong></div>
-              <div><span>{c.message}</span><strong>“You don’t need to change your club…”</strong></div>
-              <div><span>{c.matchweekStatus}</span><strong>Weather · Travel · Attendance</strong></div>
-            </div>
-          </div>
+        <div className="caseStudyProductGrid">
+          {productViews.map((view) => (
+            <article key={view.href}><span>{view.number}</span><h3>{pick(view.title)}</h3><p>{pick(view.text)}</p><Link href={view.href}>{pick(view.cta)} →</Link></article>
+          ))}
         </div>
-
-        <Link className="caseStudyTextLink" href="/this-week">{c.openThisWeek} →</Link>
       </section>
 
-      <section className="caseStudySection caseStudyBiggerIdea">
-        <div className="eyebrow">{c.biggerEyebrow}</div>
-        <h2>{c.biggerTitle}</h2>
-        <p>{c.biggerText}</p>
-        <blockquote>{c.biggerQuote}</blockquote>
-        <p className="caseStudyBiggerSupport">{c.biggerSupport}</p>
+      <section className="caseStudySection caseStudyValue">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "VALOR PARA EL CLUB" : "VALUE FOR THE CLUB"}</div>
+          <h2>{es ? "Una capa de coordinación para equipos con poco tiempo." : "A coordination layer for teams with limited time."}</h2>
+        </div>
+        <div className="caseStudyValueGrid">
+          {valueCards.map((card) => <article key={card.title.en}><h3>{pick(card.title)}</h3><p>{pick(card.text)}</p></article>)}
+        </div>
+        <blockquote className="caseStudyCommercialQuote">
+          {es ? "La oportunidad no es tener más datos. Es cerrar mejor el recorrido entre señal, decisión, campaña y aprendizaje." : "The opportunity is not more data. It is closing the loop from signal to decision, campaign and learning."}
+        </blockquote>
+      </section>
 
-        <div className="caseStudyFullCta">
-          <div>
-            <span>{c.readFull}</span>
-            <strong>{c.methodology}</strong>
-          </div>
-          <a href={FULL_CASE_STUDY_URL} target="_blank" rel="noreferrer">
-            {c.fullCta} ↗
-          </a>
+      <section className="caseStudySection caseStudyNextLayer">
+        <div>
+          <div className="eyebrow">{es ? "SIGUIENTE CAPA" : "THE NEXT LAYER"}</div>
+          <h2>{es ? "Preparado para CRM. Útil antes del CRM." : "CRM-ready. Useful before CRM."}</h2>
+          <p>{es ? "Con fuentes públicas ya se puede priorizar, contextualizar y diseñar campañas. Con acceso autorizado a ticketing, scans y CRM se podrá cerrar conversión, no-show, coste de adquisición y repetición." : "Public sources already support prioritisation, context and campaign design. Authorised ticketing, scans and CRM access would close conversion, no-show, acquisition cost and repeat behaviour."}</p>
+        </div>
+        <div className="caseStudyNextActions">
+          <Link className="caseStudyButton primary" href="/case-study/technical">{es ? "Abrir el caso técnico" : "Open the technical case"}</Link>
+          <Link className="caseStudyButton secondary" href="/method">{es ? "Revisar la metodología" : "Review the methodology"}</Link>
         </div>
       </section>
 
       <footer className="caseStudyFooter">
         <div>London City Fan Opportunity Lab</div>
-        <div className="muted">Independent prototype · Not affiliated with London City Lionesses.</div>
+        <div className="muted">{es ? "Prototipo independiente · No afiliado a London City Lionesses." : "Independent prototype · Not affiliated with London City Lionesses."}</div>
       </footer>
     </main>
   );

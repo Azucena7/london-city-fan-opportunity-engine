@@ -1,0 +1,241 @@
+"use client";
+
+import Link from "next/link";
+import { NavTabs } from "@/components/NavTabs";
+import { useLanguage } from "@/components/LanguageProvider";
+
+type Localized = { en: string; es: string };
+
+const phases: Array<{ version: string; title: Localized; text: Localized; output: Localized }> = [
+  {
+    version: "V1.0",
+    title: { en: "Territory opportunity", es: "Oportunidad territorial" },
+    text: { en: "940 LSOAs scored through family potential, girls' football networks, access and competition context.", es: "940 LSOAs puntuadas mediante potencial familiar, redes de fútbol femenino, acceso y contexto competitivo." },
+    output: { en: "WHERE to acquire", es: "DÓNDE captar" }
+  },
+  {
+    version: "V1.1",
+    title: { en: "Live fixture context", es: "Contexto vivo de partido" },
+    text: { en: "Canonical calendar, results, weather, travel friction and sourced material-change signals.", es: "Calendario canónico, resultados, meteorología, fricción de viaje y señales materiales con fuente." },
+    output: { en: "WHEN to act", es: "CUÁNDO actuar" }
+  },
+  {
+    version: "V1.2",
+    title: { en: "Demand history", es: "Histórico de demanda" },
+    text: { en: "An auditable 2025/26 attendance ledger, venue split, WSL benchmark and sample-aware trends.", es: "Ledger auditable de asistencia 2025/26, desglose por estadio, benchmark WSL y tendencias sensibles a muestra." },
+    output: { en: "WHAT normal looks like", es: "QUÉ es normal" }
+  },
+  {
+    version: "V1.3",
+    title: { en: "Audience impact", es: "Impacto de audiencias" },
+    text: { en: "Owned channels, Eleven TV, broadcast and Google Trends connected without collapsing unlike metrics.", es: "Canales propios, Eleven TV, televisión y Google Trends conectados sin mezclar métricas no comparables." },
+    output: { en: "WHY attention moved", es: "POR QUÉ cambia la atención" }
+  },
+  {
+    version: "V1.3b",
+    title: { en: "CRM readiness", es: "Preparación para CRM" },
+    text: { en: "Versioned ticket-level contract, synthetic Brighton rehearsal and time-bound post-match closure states.", es: "Contrato versionado por entrada, ensayo sintético de Brighton y estados de cierre postpartido por ventanas." },
+    output: { en: "HOW conversion will close", es: "CÓMO cerrar conversión" }
+  },
+  {
+    version: "V1.4",
+    title: { en: "Signal-to-campaign", es: "De señal a campaña" },
+    text: { en: "CampaignPlan contract, reusable playbooks, activation briefs, UTM joins, approvals and guardrails.", es: "Contrato CampaignPlan, playbooks reutilizables, briefs de activación, UTMs, aprobaciones y guardrails." },
+    output: { en: "WHAT to execute", es: "QUÉ ejecutar" }
+  }
+];
+
+const states: Array<{ state: string; meaning: Localized; example: Localized }> = [
+  { state: "public-verified", meaning: { en: "Observed in a cited public source.", es: "Observado en una fuente pública citada." }, example: { en: "Fixture, published attendance", es: "Partido, asistencia publicada" } },
+  { state: "public-inferred", meaning: { en: "A planning inference, never a known customer fact.", es: "Inferencia de planificación, nunca un dato conocido del cliente." }, example: { en: "Territory or player-led audience", es: "Audiencia territorial o vinculada a jugadora" } },
+  { state: "pending-source", meaning: { en: "Expected but not publicly available yet.", es: "Esperado pero todavía no disponible públicamente." }, example: { en: "TV audience, missing attendance", es: "Audiencia TV, asistencia ausente" } },
+  { state: "demo", meaning: { en: "Synthetic data that proves calculations only.", es: "Datos sintéticos que solo prueban cálculos." }, example: { en: "Brighton ticketing rehearsal", es: "Ensayo de ticketing de Brighton" } },
+  { state: "requires-instrumentation", meaning: { en: "Measurable after UTMs or event tracking are deployed.", es: "Medible tras desplegar UTMs o seguimiento de eventos." }, example: { en: "Landing-page intent", es: "Intención en landing" } },
+  { state: "requires-access", meaning: { en: "Needs an authorised club system.", es: "Necesita un sistema autorizado del club." }, example: { en: "Purchase, scan, no-show, repeat", es: "Compra, acceso, no-show, repetición" } }
+];
+
+const validations: Localized[] = [
+  { en: "Fixture and campaign IDs must resolve to one canonical match.", es: "Los IDs de partido y campaña deben resolver al mismo partido canónico." },
+  { en: "Missing public observations remain pending; they never become zero.", es: "Las observaciones públicas ausentes permanecen pendientes; nunca se convierten en cero." },
+  { en: "A campaign cannot be ready while an approval gate is pending.", es: "Una campaña no puede estar lista mientras haya una aprobación pendiente." },
+  { en: "Repository data cannot mark a campaign live or authorise spend.", es: "Los datos del repositorio no pueden marcar una campaña como live ni autorizar inversión." },
+  { en: "UTM campaign keys must equal the canonical fixture key.", es: "Las claves UTM de campaña deben coincidir con la clave canónica del partido." },
+  { en: "Purchase, scan and repeat cannot be claimed without authorised data.", es: "Compra, acceso y repetición no pueden declararse sin datos autorizados." }
+];
+
+export function LocalizedTechnicalCaseStudy() {
+  const { lang } = useLanguage();
+  const es = lang === "es";
+  const pick = (value: Localized) => value[es ? "es" : "en"];
+
+  return (
+    <main className="caseStudyPage technicalCaseStudy">
+      <NavTabs />
+
+      <section className="caseStudyHero technicalHero">
+        <div className="caseStudyModeNav" aria-label={es ? "Versiones del caso de estudio" : "Case study versions"}>
+          <Link href="/case-study">{es ? "Caso comercial" : "Commercial case"}</Link>
+          <span className="active">{es ? "Caso técnico" : "Technical case"}</span>
+        </div>
+        <div className="eyebrow">{es ? "CASO TÉCNICO · ARQUITECTURA Y CONSTRUCCIÓN" : "TECHNICAL CASE · ARCHITECTURE AND DELIVERY"}</div>
+        <h1>{es ? "Cómo se construye un motor de decisión auditable, paso a paso." : "How an auditable decision engine is built, step by step."}</h1>
+        <p className="caseStudyHeroLede">
+          {es
+            ? "Una explicación de las fuentes, contratos, estados de confianza, automatizaciones y salvaguardas que conectan un partido con una decisión y una campaña medible."
+            : "A walkthrough of the sources, contracts, confidence states, automation and safeguards that connect a fixture to a decision and a measurable campaign."}
+        </p>
+        <div className="caseStudyActions">
+          <Link className="caseStudyButton primary" href="/today">{es ? "Abrir el producto vivo" : "Open the live product"}</Link>
+          <Link className="caseStudyButton secondary" href="/case-study">{es ? "Volver al caso comercial" : "Back to commercial case"}</Link>
+        </div>
+      </section>
+
+      <section className="caseStudySection technicalPrinciples">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "PRINCIPIOS DE DISEÑO" : "DESIGN PRINCIPLES"}</div>
+          <h2>{es ? "Primero trazabilidad. Después automatización." : "Traceability first. Automation second."}</h2>
+        </div>
+        <div className="technicalPrincipleGrid">
+          <article><span>01</span><h3>{es ? "Partido canónico" : "Canonical fixture"}</h3><p>{es ? "Calendario, señal, audiencia, campaña y resultado comparten fixtureId." : "Calendar, signal, audience, campaign and outcome share one fixtureId."}</p></article>
+          <article><span>02</span><h3>{es ? "Estados explícitos" : "Explicit states"}</h3><p>{es ? "Publicado, inferido, pendiente, demo y privado nunca se mezclan." : "Published, inferred, pending, demo and private data never collapse together."}</p></article>
+          <article><span>03</span><h3>{es ? "Último dato válido" : "Last valid observation"}</h3><p>{es ? "Un fallo de fuente se registra sin borrar la última observación correcta." : "A source failure is logged without erasing the last correct observation."}</p></article>
+          <article><span>04</span><h3>{es ? "Humano en el circuito" : "Human in the loop"}</h3><p>{es ? "La herramienta propone; responsables autorizados aprueban oferta, assets y presupuesto." : "The engine proposes; authorised owners approve offer, assets and budget."}</p></article>
+        </div>
+      </section>
+
+      <section className="caseStudySection technicalArchitecture">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "ARQUITECTURA LÓGICA" : "LOGICAL ARCHITECTURE"}</div>
+          <h2>{es ? "Cinco capas unidas por claves, no por suposiciones." : "Five layers joined by keys—not assumptions."}</h2>
+        </div>
+        <div className="technicalStack" role="img" aria-label={es ? "Arquitectura de cinco capas" : "Five-layer architecture"}>
+          <article><span>05</span><strong>{es ? "Decisión y campaña" : "Decision & campaign"}</strong><small>Today · Calendar · CampaignPlan · scorecard</small></article>
+          <article><span>04</span><strong>{es ? "Modelos de decisión" : "Decision models"}</strong><small>Territory · demand · audience · matchweek</small></article>
+          <article><span>03</span><strong>{es ? "Contratos y estados" : "Contracts & states"}</strong><small>fixtureId · campaignId · source · confidence</small></article>
+          <article><span>02</span><strong>{es ? "Datos normalizados" : "Normalised data"}</strong><small>calendar · attendance · signals · journeys</small></article>
+          <article><span>01</span><strong>{es ? "Fuentes" : "Sources"}</strong><small>club · WSL · weather · transport · YouTube · search</small></article>
+        </div>
+        <p className="technicalArchitectureNote">{es ? "La futura conexión CRM entra en la capa de fuentes mediante un contrato versionado; no exige rehacer la lógica superior." : "A future CRM connection enters at the source layer through a versioned contract; it does not require rebuilding the layers above."}</p>
+      </section>
+
+      <section className="caseStudySection technicalTimeline">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "CONSTRUCCIÓN POR FASES" : "BUILD PHASES"}</div>
+          <h2>{es ? "Cada incremento responde una pregunta nueva." : "Each increment answers a new question."}</h2>
+        </div>
+        <div className="technicalPhaseList">
+          {phases.map((phase, index) => (
+            <article key={phase.version}>
+              <div className="technicalPhaseIndex"><span>{phase.version}</span><b>{String(index + 1).padStart(2, "0")}</b></div>
+              <div><h3>{pick(phase.title)}</h3><p>{pick(phase.text)}</p></div>
+              <strong>{pick(phase.output)}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="caseStudySection technicalSources">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "FUENTES Y CADENCIA" : "SOURCES & CADENCE"}</div>
+          <h2>{es ? "Las fuentes públicas ya forman una capa operativa." : "Public sources already form an operating layer."}</h2>
+          <p>{es ? "La automatización consulta y conserva observaciones comparables. Cuando una fuente falla, muestra el fallo y mantiene el último valor válido." : "Automation checks and preserves comparable observations. When a source fails, it exposes the failure and retains the last valid value."}</p>
+        </div>
+        <div className="technicalSourceGrid">
+          <article><span>{es ? "DIARIO" : "DAILY"}</span><h3>{es ? "Calendario y resultados" : "Fixtures & results"}</h3><p>{es ? "Fuente oficial, cambios de horario y cierre postpartido." : "Official source, schedule changes and post-match closure."}</p></article>
+          <article><span>{es ? "DIARIO / VENTANAS" : "DAILY / WINDOWS"}</span><h3>{es ? "Meteorología y viaje" : "Weather & travel"}</h3><p>{es ? "Actualización de matchweek sin convertir forecast en certeza." : "Matchweek refresh without treating a forecast as certainty."}</p></article>
+          <article><span>{es ? "SEMANAL + T±" : "WEEKLY + T±"}</span><h3>{es ? "Audiencia pública" : "Public audience"}</h3><p>{es ? "YouTube, búsquedas, broadcast y anotaciones de eventos." : "YouTube, search, broadcast and event annotations."}</p></article>
+          <article><span>{es ? "POSTPARTIDO" : "POST-MATCH"}</span><h3>{es ? "Asistencia y benchmark" : "Attendance & benchmark"}</h3><p>{es ? "Observación oficial, muestra visible y mediana comparable." : "Official observation, visible sample and comparable median."}</p></article>
+        </div>
+      </section>
+
+      <section className="caseStudySection technicalStates">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "CONTRATO DE CONFIANZA" : "TRUST CONTRACT"}</div>
+          <h2>{es ? "La interfaz dice qué sabemos y qué no." : "The interface says what is—and is not—known."}</h2>
+        </div>
+        <div className="technicalStateTable">
+          <div className="technicalStateHeader"><span>{es ? "Estado" : "State"}</span><span>{es ? "Significado" : "Meaning"}</span><span>{es ? "Ejemplo" : "Example"}</span></div>
+          {states.map((item) => <div className="technicalStateRow" key={item.state}><code>{item.state}</code><p>{pick(item.meaning)}</p><small>{pick(item.example)}</small></div>)}
+        </div>
+      </section>
+
+      <section className="caseStudySection technicalContracts">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "CONTRATOS DE DATOS" : "DATA CONTRACTS"}</div>
+          <h2>{es ? "La integración futura ya tiene forma." : "The future integration already has a shape."}</h2>
+          <p>{es ? "Aunque no exista acceso al CRM real, el producto define exactamente qué necesita, cómo se valida y qué cálculos habilita." : "Even without real CRM access, the product defines exactly what it needs, how it validates and which calculations it unlocks."}</p>
+        </div>
+        <div className="technicalContractGrid">
+          <article>
+            <span>CRM / TICKETING</span>
+            <h3>{es ? "Una entrada por fila" : "One ticket per row"}</h3>
+            <p>fixture → campaign → product → price → purchase → scan → consent-safe geography → repeat</p>
+            <a href="/api/contracts/crm-ticketing" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
+          </article>
+          <article>
+            <span>CAMPAIGN PLAN</span>
+            <h3>{es ? "Una campaña gobernada" : "One governed campaign"}</h3>
+            <p>fixture → signals → audiences → playbooks → activations → UTMs → approvals → measurement</p>
+            <a href="/api/contracts/campaign-plan" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
+          </article>
+        </div>
+        <div className="technicalJoin"><code>fixture_id</code><span>→</span><code>campaign_id</code><span>→</span><code>ticket_id</code><span>→</span><code>scan</code><span>→</span><code>repeat_90d</code></div>
+      </section>
+
+      <section className="caseStudySection technicalCampaign">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">SIGNAL → CAMPAIGN</div>
+          <h2>{es ? "Brighton prueba el recorrido completo sin fingir datos reales." : "Brighton proves the full path without pretending demo data is real."}</h2>
+        </div>
+        <div className="technicalCampaignFlow">
+          <article><span>01</span><strong>{es ? "Señales" : "Signals"}</strong><p>{es ? "Opener, horario, atención y meteorología." : "Opener, kickoff, attention and weather."}</p></article>
+          <article><span>02</span><strong>{es ? "Brief" : "Brief"}</strong><p>{es ? "Audiencia, propuesta, oferta, assets y canales." : "Audience, proposition, offer, assets and channels."}</p></article>
+          <article><span>03</span><strong>{es ? "Gobierno" : "Governance"}</strong><p>{es ? "Responsable, cuatro aprobaciones y ningún gasto automático." : "Owner, four approvals and no automatic spend."}</p></article>
+          <article><span>04</span><strong>{es ? "Atribución" : "Attribution"}</strong><p>{es ? "UTMs y seis campaign IDs ejercitados en demo." : "UTMs and six campaign IDs exercised in demo."}</p></article>
+          <article><span>05</span><strong>{es ? "Cierre" : "Closure"}</strong><p>{es ? "T+1, T+7, T+30, T+60 y T+90." : "T+1, T+7, T+30, T+60 and T+90."}</p></article>
+        </div>
+      </section>
+
+      <section className="caseStudySection technicalValidation">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "VALIDACIÓN Y GUARDRAILS" : "VALIDATION & GUARDRAILS"}</div>
+          <h2>{es ? "El sistema bloquea conclusiones que los datos no soportan." : "The system blocks conclusions the data cannot support."}</h2>
+        </div>
+        <div className="technicalValidationGrid">
+          {validations.map((item, index) => <article key={item.en}><span>✓</span><p>{pick(item)}</p><small>{String(index + 1).padStart(2, "0")}</small></article>)}
+        </div>
+        <div className="technicalChecks">
+          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>typecheck</code><code>Vercel build</code>
+        </div>
+      </section>
+
+      <section className="caseStudySection technicalNoCrm">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "SIN ACCESO AL CRM" : "WITHOUT CRM ACCESS"}</div>
+          <h2>{es ? "Separar valor disponible de valor desbloqueable." : "Separate available value from unlockable value."}</h2>
+        </div>
+        <div className="technicalBoundaryGrid">
+          <article className="available"><span>{es ? "DISPONIBLE AHORA" : "AVAILABLE NOW"}</span><ul><li>{es ? "Priorización territorial" : "Territory prioritisation"}</li><li>{es ? "Contexto de calendario y partido" : "Fixture and matchweek context"}</li><li>{es ? "Histórico y benchmark público" : "Public history and benchmark"}</li><li>{es ? "Audiencia, búsquedas y campañas" : "Audience, search and campaigns"}</li></ul></article>
+          <article><span>{es ? "REQUIERE ACCESO" : "REQUIRES ACCESS"}</span><ul><li>{es ? "Conversión a compra" : "Purchase conversion"}</li><li>{es ? "Scan y no-show" : "Scan and no-show"}</li><li>{es ? "Coste de adquisición real" : "Real acquisition cost"}</li><li>{es ? "Repetición por cohorte" : "Cohort repeat behaviour"}</li></ul></article>
+        </div>
+      </section>
+
+      <section className="caseStudySection technicalStackSummary">
+        <div>
+          <div className="eyebrow">{es ? "IMPLEMENTACIÓN" : "IMPLEMENTATION"}</div>
+          <h2>{es ? "Simple de operar. Preparada para crecer." : "Simple to operate. Ready to grow."}</h2>
+        </div>
+        <div className="technicalTags"><span>Next.js</span><span>TypeScript</span><span>Versioned JSON</span><span>JSON Schema</span><span>GitHub Actions</span><span>Vercel</span><span>Public APIs</span><span>Responsive UI</span></div>
+        <div className="caseStudyNextActions">
+          <Link className="caseStudyButton primary" href="/today">{es ? "Explorar el producto" : "Explore the product"}</Link>
+          <Link className="caseStudyButton secondary" href="/case-study">{es ? "Leer el caso comercial" : "Read the commercial case"}</Link>
+        </div>
+      </section>
+
+      <footer className="caseStudyFooter">
+        <div>London City Fan Opportunity Lab · Technical case study</div>
+        <div className="muted">{es ? "Prototipo independiente · Datos y límites visibles por diseño." : "Independent prototype · Data and limits visible by design."}</div>
+      </footer>
+    </main>
+  );
+}

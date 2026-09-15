@@ -70,6 +70,16 @@ Add:
 Campaign drafts must remain proposals until an authorised club owner approves the offer,
 assets, destination URLs and execution budget.
 
+## V1.5 - Commercial and technical case studies
+
+Add:
+- a commercial narrative connecting the business problem to product value
+- the complete public proof base: territory, attendance, audience and campaign readiness
+- a separate technical walkthrough of the six build phases
+- logical architecture, source cadence, trust states and automated safeguards
+- public links to the CRM/ticketing and CampaignPlan contracts
+- an explicit boundary between value available from public sources and outcomes requiring club access
+
 ## V2 - Club-grade engine
 
 Requires private club data:
