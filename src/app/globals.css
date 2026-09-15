@@ -1090,3 +1090,52 @@ footer {
   .crmFlow,.crmDemoRead,.crmReadinessGrid,.crmDownloads { grid-template-columns:1fr; }
   .crmDownloads > div { grid-column:auto; }
 }
+
+/* Automated post-match scorecard */
+.postMatchScorecard { margin:70px 0 0; padding:clamp(24px,4vw,38px); border:1px solid var(--line); border-radius:22px; background:linear-gradient(145deg,var(--surface),#09130f); }
+.postMatchScorecard.embedded { margin:0 18px 18px; padding:22px; border-radius:15px; }
+.postMatchScorecard.demo { border-color:rgba(245,202,103,.4); }
+.scorecardTop { display:grid; grid-template-columns:1.35fr .55fr; gap:32px; }
+.scorecardTop h3 { margin:8px 0 11px; font-size:clamp(27px,3.5vw,44px); line-height:1.02; letter-spacing:-.04em; }
+.postMatchScorecard.embedded .scorecardTop h3 { font-size:clamp(22px,2.6vw,32px); }
+.scorecardTop > div > p { max-width:750px; color:#c7d0cb; font-size:13px; line-height:1.5; }
+.scorecardMode { padding-left:20px; border-left:1px solid var(--line); }
+.scorecardMode span,.scorecardAction span { display:block; color:var(--muted); font-size:9px; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
+.scorecardMode strong,.scorecardMode small { display:block; }
+.scorecardMode strong { margin-top:8px; color:var(--accent); font-size:20px; }
+.postMatchScorecard.demo .scorecardMode strong { color:#f5ca67; }
+.scorecardMode small { margin-top:5px; color:#f5ca67; }
+.scorecardMetrics { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:22px; }
+.scorecardMetrics article { min-width:0; padding:14px; border:1px solid var(--line); border-radius:11px; background:rgba(255,255,255,.025); }
+.scorecardMetrics article > span,.scorecardMetrics article > strong,.scorecardMetrics article > small { display:block; }
+.scorecardMetrics article > span { overflow:hidden; color:var(--muted); font-size:7px; font-weight:900; letter-spacing:.07em; text-overflow:ellipsis; text-transform:uppercase; white-space:nowrap; }
+.scorecardMetrics article.public-measured > span { color:var(--accent); }
+.scorecardMetrics article.synthetic-demo > span { color:#f5ca67; }
+.scorecardMetrics article.requires-access,.scorecardMetrics article.waiting { opacity:.62; }
+.scorecardMetrics article > strong { margin:9px 0 5px; overflow:hidden; font-size:23px; letter-spacing:-.035em; text-overflow:ellipsis; }
+.scorecardMetrics article > small { color:var(--muted); font-size:9px; line-height:1.3; }
+.scorecardWindows { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:18px; }
+.scorecardWindows article { padding:12px; border-top:2px solid #526159; border-radius:9px; background:rgba(255,255,255,.025); }
+.scorecardWindows article.complete { border-color:var(--accent); }
+.scorecardWindows article.demo { border-color:#f5ca67; }
+.scorecardWindows article.partial { border-color:#65d6c1; }
+.scorecardWindows article > div { display:flex; justify-content:space-between; gap:8px; }
+.scorecardWindows article strong { font-size:13px; }
+.scorecardWindows article span { color:var(--muted); font-size:8px; font-weight:900; text-transform:uppercase; }
+.scorecardWindows article p { margin:8px 0 0; color:#c7d0cb; font-size:9px; line-height:1.35; }
+.scorecardAction { margin-top:18px; padding:15px; border-radius:11px; background:rgba(216,255,79,.06); }
+.postMatchScorecard.demo .scorecardAction { background:rgba(245,202,103,.07); }
+.scorecardAction strong { display:block; margin-top:6px; font-size:13px; line-height:1.4; }
+.postMatchScorecard > details { margin-top:14px; color:var(--muted); font-size:10px; }
+.postMatchScorecard > details summary { cursor:pointer; color:var(--ink); font-weight:800; }
+@media (max-width:900px) {
+  .scorecardTop { grid-template-columns:1fr; }
+  .scorecardMode { padding:16px 0 0; border-top:1px solid var(--line); border-left:0; }
+  .scorecardMetrics { grid-template-columns:repeat(3,1fr); }
+  .scorecardWindows { grid-template-columns:repeat(3,1fr); }
+}
+@media (max-width:700px) {
+  .postMatchScorecard.embedded { margin:0 10px 12px; }
+  .scorecardMetrics { grid-template-columns:1fr 1fr; }
+  .scorecardWindows { grid-template-columns:1fr; }
+}

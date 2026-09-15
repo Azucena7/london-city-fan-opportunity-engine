@@ -122,6 +122,21 @@ Excluded from the contract:
 The public prototype may use `synthetic-demo` records to validate calculations. Synthetic
 records must never be combined with measured club results.
 
+## PostMatchScorecard
+
+Generated per canonical `fixture_id` from the calendar, public post-match observations and,
+where explicitly selected, a synthetic rehearsal dataset.
+
+Each metric carries one evidence state:
+- `public-measured`
+- `public-reported`
+- `synthetic-demo`
+- `requires-access`
+- `waiting`
+
+The scorecard closes five windows independently: T+1, T+7, T+30, T+60 and T+90. Reaching a
+date does not make a window complete when its required evidence is still unavailable.
+
 ## TicketingProduct
 
 ```ts

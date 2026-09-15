@@ -70,6 +70,8 @@ Integration readiness already available without club data:
 - validated Excel import template
 - synthetic Brighton calculation rehearsal
 - explicit `ready`, `demo` and `requires-access` states
+- automated fixture-level post-match scorecard
+- independent T+1, T+7, T+30, T+60 and T+90 closure states
 
 Outputs:
 - propensity by territory
