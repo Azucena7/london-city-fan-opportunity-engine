@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london-city-fan-opportunity-engine.vercel.app/contracts/crm-ticketing/1.0",
+  "title": "CRM and ticketing import record",
+  "description": "Consent-safe, one-ticket-per-row contract. Direct identifiers and payment details are outside scope.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schema_version",
+      "fixture_id",
+      "channel",
+      "supporter_id_hash",
+      "order_id_hash",
+      "ticket_id_hash",
+      "order_timestamp",
+      "ticket_product",
+      "quantity",
+      "realised_unit_price",
+      "currency",
+      "scan_status",
+      "consent_status",
+      "source_system",
+      "extracted_at"
+    ],
+    "properties": {
+      "schema_version": { "const": "1.0" },
+      "fixture_id": { "type": "string", "minLength": 8, "maxLength": 100 },
+      "campaign_id": { "type": ["string", "null"], "maxLength": 100 },
+      "channel": {
+        "enum": ["owned", "partner", "broadcast", "paid", "organic", "direct", "community", "unknown"]
+      },
+      "content_id": { "type": ["string", "null"], "maxLength": 100 },
+      "utm_source": { "type": ["string", "null"], "maxLength": 100 },
+      "utm_medium": { "type": ["string", "null"], "maxLength": 100 },
+      "utm_campaign": { "type": ["string", "null"], "maxLength": 100 },
+      "utm_content": { "type": ["string", "null"], "maxLength": 100 },
+      "supporter_id_hash": { "type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$" },
+      "order_id_hash": { "type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$" },
+      "ticket_id_hash": { "type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$" },
+      "order_timestamp": { "type": "string", "format": "date-time" },
+      "ticket_product": { "type": "string", "minLength": 1, "maxLength": 100 },
+      "quantity": { "const": 1 },
+      "realised_unit_price": { "type": "number", "minimum": 0 },
+      "currency": { "const": "GBP" },
+      "scan_status": { "enum": ["scanned", "not_scanned", "unknown"] },
+      "scan_timestamp": { "type": ["string", "null"], "format": "date-time" },
+      "postcode_sector": {
+        "type": ["string", "null"],
+        "pattern": "^[A-Z]{1,2}[0-9][A-Z0-9]? [0-9]$"
+      },
+      "first_time_buyer": { "type": ["boolean", "null"] },
+      "consent_status": { "enum": ["consented", "not_consented", "unknown"] },
+      "source_system": { "type": "string", "minLength": 1, "maxLength": 100 },
+      "extracted_at": { "type": "string", "format": "date-time" }
+    },
+    "allOf": [
+      {
+        "if": { "properties": { "scan_status": { "const": "scanned" } }, "required": ["scan_status"] },
+        "then": {
+          "required": ["scan_timestamp"],
+          "properties": { "scan_timestamp": { "type": "string", "format": "date-time" } }
+        }
+      }
+    ]
+  }
+}

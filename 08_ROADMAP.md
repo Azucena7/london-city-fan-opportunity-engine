@@ -65,6 +65,12 @@ Requires private club data:
 - realised price
 - consent-safe postcode/geography
 
+Integration readiness already available without club data:
+- versioned one-ticket-per-row contract
+- validated Excel import template
+- synthetic Brighton calculation rehearsal
+- explicit `ready`, `demo` and `requires-access` states
+
 Outputs:
 - propensity by territory
 - recommended budget by fixture

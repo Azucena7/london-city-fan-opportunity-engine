@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-09-15T18:00:00+01:00",
+  "contractVersion": "1.0",
+  "mode": "synthetic-demo",
+  "headline": {
+    "en": "Build the integration before receiving club data",
+    "es": "Construir la integración antes de recibir datos del club"
+  },
+  "principle": {
+    "en": "The demo proves the calculation and import path. It does not estimate London City performance.",
+    "es": "La demo comprueba los cálculos y la importación. No estima el rendimiento de London City."
+  },
+  "templateUrl": "/templates/crm-ticketing-import.xlsx",
+  "schemaUrl": "/api/contracts/crm-ticketing",
+  "coverage": [
+    {"id":"fixture-keys","label":{"en":"Fixture keys","es":"Claves de partido"},"state":"ready","detail":{"en":"Shared across calendar, campaigns and post-match analysis.","es":"Compartidas entre calendario, campañas y análisis postpartido."}},
+    {"id":"ticket-grain","label":{"en":"Ticket-level grain","es":"Granularidad por entrada"},"state":"ready","detail":{"en":"One row per ticket prevents quantity and scan ambiguity.","es":"Una fila por entrada evita ambigüedad entre cantidad y acceso."}},
+    {"id":"campaign-attribution","label":{"en":"Campaign attribution","es":"Atribución de campaña"},"state":"demo","detail":{"en":"UTM and content keys work with synthetic records.","es":"Las claves UTM y de contenido funcionan con registros sintéticos."}},
+    {"id":"scan-logic","label":{"en":"Scan and no-show logic","es":"Lógica de acceso y no-show"},"state":"demo","detail":{"en":"Calculated in demo mode; requires gate data for actuals.","es":"Calculada en demo; necesita datos de tornos para resultados reales."}},
+    {"id":"supporter-identity","label":{"en":"Pseudonymous supporter key","es":"Clave pseudónima de aficionado"},"state":"requires-access","detail":{"en":"The club must generate the stable hash.","es":"El club debe generar el hash estable."}},
+    {"id":"retention","label":{"en":"30/60/90-day retention","es":"Retención a 30/60/90 días"},"state":"requires-access","detail":{"en":"Requires records across multiple fixtures.","es":"Requiere registros de varios partidos."}}
+  ]
+}

@@ -5,8 +5,9 @@ import { NavTabs } from "./NavTabs";
 import { DemandHistory } from "./DemandHistory";
 import { LeagueAttendanceBenchmark } from "./LeagueAttendanceBenchmark";
 import { AudienceReach } from "./AudienceReach";
+import { CrmTicketingReadiness } from "./CrmTicketingReadiness";
 import { useLanguage } from "./LanguageProvider";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, Fixture, LeagueAttendanceBenchmark as BenchmarkData } from "@/lib/models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, Fixture, LeagueAttendanceBenchmark as BenchmarkData } from "@/lib/models";
 
 type Scope = "all" | "home" | "away" | "results";
 
@@ -15,7 +16,7 @@ function displayDate(value: string, locale: string) {
     .format(new Date(`${value}T12:00:00`));
 }
 
-export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData }) {
+export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, crmReadiness, crmDemo }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const locale = es ? "es-ES" : "en-GB";
@@ -47,6 +48,7 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
       <DemandHistory data={history} />
       <LeagueAttendanceBenchmark data={benchmark} />
       <AudienceReach data={audience} />
+      <CrmTicketingReadiness data={crmReadiness} demo={crmDemo} />
 
       <div className="calendarFilters" role="group" aria-label={es ? "Filtrar calendario" : "Filter calendar"}>
         {filters.map(([value, label]) => <button key={value} type="button" aria-pressed={scope === value} className={scope === value ? "active" : ""} onClick={() => setScope(value)}>{label}</button>)}
