@@ -23,3 +23,10 @@ Use `null` with `pending` or `requires-access` when a value is unavailable; neve
 stored in `data/contracts/crm-ticketing.schema.json`; the Brighton dataset in `data/demo/` is
 synthetic and exists only to exercise calculations. Run `npm run validate:crm-demo` before
 publishing changes to the demo. Never mix demo values with public or club actuals.
+
+## Post-match scorecards
+
+`src/lib/postmatch.ts` joins records through the canonical fixture IDs in `calendar.json`.
+Public observations and synthetic rehearsals produce separate scorecards. Every metric retains
+its evidence state, and retention remains `waiting` or `requires-access` until comparable
+fixtures exist.

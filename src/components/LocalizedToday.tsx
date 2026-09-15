@@ -3,24 +3,14 @@
 import Link from "next/link";
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
-import type { CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
+import { PostMatchScorecard } from "./PostMatchScorecard";
+import type { CalendarFixture, Fixture, LiveSignal, PostMatchScorecard as ScorecardData } from "@/lib/models";
 
 type CurrentState = {
   updated_at: string;
   material_changes: number;
   weather: { status: string; reason?: string; [key: string]: string | number | null | undefined };
   attendance_momentum: { score: number; basis: string };
-};
-
-type Review = {
-  fixtureId: string;
-  result: string;
-  attendance: number;
-  occupancy: string;
-  headline: { en: string; es: string };
-  learning: { en: string; es: string };
-  nextAction: { en: string; es: string };
-  dataGaps: string[];
 };
 
 type RoadmapItem = {
@@ -49,14 +39,14 @@ export function LocalizedToday({
   nextMatch,
   signals,
   current,
-  review,
+  scorecard,
   roadmap
 }: {
   fixture: Fixture;
   nextMatch: CalendarFixture | null;
   signals: LiveSignal[];
   current: CurrentState;
-  review: Review | null;
+  scorecard: ScorecardData | null;
   roadmap: RoadmapItem[];
 }) {
   const { lang } = useLanguage();
@@ -148,22 +138,7 @@ export function LocalizedToday({
         </div>
       </section>
 
-      {review ? (
-        <section className="postmatchPanel">
-          <div>
-            <div className="eyebrow">{es ? "APRENDIZAJE POSTPARTIDO" : "POST-MATCH LEARNING"}</div>
-            <h2>{review.headline[lang]}</h2>
-            <p>{review.learning[lang]}</p>
-          </div>
-          <div className="postmatchNumbers">
-            <div><strong>{review.result}</strong><span>{es ? "resultado" : "result"}</span></div>
-            <div><strong>{review.attendance.toLocaleString(locale)}</strong><span>{es ? "asistencia medida" : "measured attendance"}</span></div>
-            <div><strong>{review.occupancy}</strong><span>{es ? "ocupación" : "occupancy"}</span></div>
-          </div>
-          <div className="postmatchNext"><span>{es ? "SIGUIENTE PREGUNTA" : "NEXT QUESTION"}</span><strong>{review.nextAction[lang]}</strong></div>
-          <details><summary>{es ? "Datos internos todavía necesarios" : "Internal data still needed"}</summary><p>{review.dataGaps.join(" · ")}</p></details>
-        </section>
-      ) : null}
+      {scorecard ? <PostMatchScorecard data={scorecard} /> : null}
     </main>
   );
 }

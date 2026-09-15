@@ -251,6 +251,51 @@ export type CrmTicketingReadiness = {
   }>;
 };
 
+export type PostMatchEvidenceState = "public-measured" | "public-reported" | "synthetic-demo" | "requires-access" | "waiting";
+
+export type PostMatchReview = {
+  fixtureId: string;
+  status: string;
+  updatedAt: string;
+  result: string;
+  ticketsSold: number;
+  ticketsSoldQualifier?: string;
+  attendance: number;
+  attendanceState: "measured" | "reported";
+  occupancy: string;
+  headline: LocalizedText;
+  learning: LocalizedText;
+  nextAction: LocalizedText;
+  dataGaps: string[];
+};
+
+export type PostMatchScorecardMetric = {
+  id: string;
+  label: LocalizedText;
+  value: string;
+  state: PostMatchEvidenceState;
+};
+
+export type PostMatchScorecardWindow = {
+  id: "T+1" | "T+7" | "T+30" | "T+60" | "T+90";
+  dueAfterDays: number;
+  status: "complete" | "partial" | "waiting" | "demo";
+  objective: LocalizedText;
+};
+
+export type PostMatchScorecard = {
+  fixtureId: string;
+  fixtureDate: string;
+  opponent: string;
+  mode: "public" | "synthetic-demo";
+  headline: LocalizedText;
+  interpretation: LocalizedText;
+  nextAction: LocalizedText;
+  metrics: PostMatchScorecardMetric[];
+  windows: PostMatchScorecardWindow[];
+  dataGaps: string[];
+};
+
 export type Territory = {
   id?: string;
   name?: string;

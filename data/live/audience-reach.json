@@ -17,7 +17,7 @@
         "en": "First public baseline",
         "es": "Primer baseline público"
       },
-      "fixtureId": "2026-09-04-manchester-united-h",
+      "fixtureId": "2026-09-04-mun-h",
       "metrics": [
         {
           "key": "lcl-youtube-subscribers",
@@ -526,7 +526,7 @@
   },
   "fixtureTests": [
     {
-      "fixtureId": "2026-09-04-manchester-united-h",
+      "fixtureId": "2026-09-04-mun-h",
       "date": "2026-09-04",
       "opponent": "Manchester United",
       "stage": "post-match",
@@ -539,7 +539,7 @@
       }
     },
     {
-      "fixtureId": "2026-09-26-brighton-h",
+      "fixtureId": "2026-09-26-bha-h",
       "date": "2026-09-26",
       "opponent": "Brighton & Hove Albion",
       "stage": "planning",

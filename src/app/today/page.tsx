@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LocalizedToday } from "@/components/LocalizedToday";
-import { calendar, currentState, fixtures, liveSignals, postmatchReviews, roadmapItems } from "@/lib/data";
+import { calendar, currentState, fixtures, liveSignals, postMatchScorecards, roadmapItems } from "@/lib/data";
 import { nextHomeFixture } from "@/lib/fixtures";
 
 export const metadata: Metadata = { title: "Today" };
@@ -20,7 +20,7 @@ export default function TodayPage() {
     nextMatch={nextMatch}
     signals={liveSignals}
     current={currentState}
-    review={postmatchReviews[0] ?? null}
+    scorecard={postMatchScorecards.find((item) => item.mode === "public") ?? null}
     roadmap={roadmapItems}
   />;
 }

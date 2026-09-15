@@ -6,8 +6,9 @@ import { DemandHistory } from "./DemandHistory";
 import { LeagueAttendanceBenchmark } from "./LeagueAttendanceBenchmark";
 import { AudienceReach } from "./AudienceReach";
 import { CrmTicketingReadiness } from "./CrmTicketingReadiness";
+import { PostMatchScorecard } from "./PostMatchScorecard";
 import { useLanguage } from "./LanguageProvider";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, Fixture, LeagueAttendanceBenchmark as BenchmarkData } from "@/lib/models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, Fixture, LeagueAttendanceBenchmark as BenchmarkData, PostMatchScorecard as ScorecardData } from "@/lib/models";
 
 type Scope = "all" | "home" | "away" | "results";
 
@@ -16,12 +17,13 @@ function displayDate(value: string, locale: string) {
     .format(new Date(`${value}T12:00:00`));
 }
 
-export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, crmReadiness, crmDemo }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo }) {
+export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, crmReadiness, crmDemo, scorecards }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo; scorecards: ScorecardData[] }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const locale = es ? "es-ES" : "en-GB";
   const [scope, setScope] = useState<Scope>("all");
   const planByKey = useMemo(() => new Map(plans.map((plan) => [`${plan.date}-${plan.opponent}`, plan])), [plans]);
+  const scorecardByFixture = useMemo(() => new Map(scorecards.map((scorecard) => [scorecard.fixtureId, scorecard])), [scorecards]);
   const rows = calendar.filter((fixture) => {
     if (scope === "home") return fixture.homeAway === "home";
     if (scope === "away") return fixture.homeAway === "away";
@@ -57,6 +59,7 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
       <section className="seasonTimeline" aria-label={es ? "Partidos de la temporada" : "Season fixtures"}>
         {rows.map((fixture) => {
           const plan = planByKey.get(`${fixture.date}-${fixture.opponent}`);
+          const scorecard = scorecardByFixture.get(fixture.id);
           const isResult = fixture.status !== "scheduled";
           return (
             <details className={`seasonFixture ${fixture.homeAway} ${isResult ? "isResult" : ""}`} key={fixture.id}>
@@ -83,6 +86,7 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
                   </>
                 )}
               </div>
+              {scorecard ? <PostMatchScorecard data={scorecard} embedded /> : null}
             </details>
           );
         })}
