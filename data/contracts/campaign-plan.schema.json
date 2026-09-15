@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/campaign-plan",
+  "title": "CampaignPlan",
+  "type": "object",
+  "required": ["version", "checkedAt", "principle", "playbooks", "campaigns"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "checkedAt": { "type": "string", "format": "date-time" },
+    "principle": { "$ref": "#/$defs/localized" },
+    "playbooks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "purpose"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "purpose": { "$ref": "#/$defs/localized" }
+        }
+      }
+    },
+    "campaigns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "fixtureId", "status", "utmCampaign", "title", "objective", "triggerSignalIds", "activations", "schedule", "budgetMix", "measurement", "approvals", "guardrails"],
+        "properties": {
+          "id": { "type": "string" },
+          "fixtureId": { "type": "string" },
+          "status": { "enum": ["suggested", "draft", "ready", "live", "closed"] },
+          "utmCampaign": { "type": "string" },
+          "title": { "$ref": "#/$defs/localized" },
+          "objective": { "$ref": "#/$defs/localized" },
+          "triggerSignalIds": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "activations": { "type": "array", "minItems": 1 },
+          "schedule": { "type": "array", "minItems": 1 },
+          "budgetMix": { "type": "array", "minItems": 1 },
+          "measurement": { "type": "array", "minItems": 1 },
+          "approvals": { "type": "array", "minItems": 1 },
+          "guardrails": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/localized" } }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "required": ["en", "es"],
+      "properties": {
+        "en": { "type": "string", "minLength": 1 },
+        "es": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  }
+}
