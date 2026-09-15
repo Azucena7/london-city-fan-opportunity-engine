@@ -16,3 +16,10 @@ the baseline. A trend is shown only when two snapshots contain the same metric k
 
 Capture public observations weekly and at T+1, T+7 and T+30 after a material event or fixture.
 Use `null` with `pending` or `requires-access` when a value is unavailable; never backfill zero.
+
+## CRM and ticketing readiness
+
+`crm-ticketing-readiness.json` describes integration coverage. The versioned record contract is
+stored in `data/contracts/crm-ticketing.schema.json`; the Brighton dataset in `data/demo/` is
+synthetic and exists only to exercise calculations. Run `npm run validate:crm-demo` before
+publishing changes to the demo. Never mix demo values with public or club actuals.

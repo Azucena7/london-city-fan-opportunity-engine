@@ -200,6 +200,57 @@ export type AudienceReachData = {
   }>;
 };
 
+export type CrmTicketingRecord = {
+  schema_version: "1.0";
+  fixture_id: string;
+  campaign_id: string | null;
+  channel: "owned" | "partner" | "broadcast" | "paid" | "organic" | "direct" | "community" | "unknown";
+  content_id: string | null;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  utm_content: string | null;
+  supporter_id_hash: string;
+  order_id_hash: string;
+  ticket_id_hash: string;
+  order_timestamp: string;
+  ticket_product: string;
+  quantity: 1;
+  realised_unit_price: number;
+  currency: "GBP";
+  scan_status: "scanned" | "not_scanned" | "unknown";
+  scan_timestamp: string | null;
+  postcode_sector: string | null;
+  first_time_buyer: boolean | null;
+  consent_status: "consented" | "not_consented" | "unknown";
+  source_system: string;
+  extracted_at: string;
+};
+
+export type CrmTicketingDemo = {
+  datasetState: "synthetic-demo";
+  fixtureId: string;
+  label: LocalizedText;
+  disclaimer: LocalizedText;
+  records: CrmTicketingRecord[];
+};
+
+export type CrmTicketingReadiness = {
+  checkedAt: string;
+  contractVersion: string;
+  mode: "synthetic-demo";
+  headline: LocalizedText;
+  principle: LocalizedText;
+  templateUrl: string;
+  schemaUrl: string;
+  coverage: Array<{
+    id: string;
+    label: LocalizedText;
+    state: "ready" | "demo" | "requires-access";
+    detail: LocalizedText;
+  }>;
+};
+
 export type Territory = {
   id?: string;
   name?: string;

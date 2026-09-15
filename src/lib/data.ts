@@ -11,7 +11,9 @@ import roadmapRaw from "../../data/live/roadmap.json";
 import attendanceHistoryRaw from "../../data/history/attendance-2025-26.json";
 import leagueAttendanceBenchmarkRaw from "../../data/live/wsl-attendance-benchmark.json";
 import audienceReachRaw from "../../data/live/audience-reach.json";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, Fixture, LeagueAttendanceBenchmark, LiveSignal, Territory } from "./models";
+import crmTicketingReadinessRaw from "../../data/live/crm-ticketing-readiness.json";
+import crmTicketingDemoRaw from "../../data/demo/brighton-crm-ticketing.synthetic.json";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CrmTicketingDemo, CrmTicketingReadiness, Fixture, LeagueAttendanceBenchmark, LiveSignal, Territory } from "./models";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -26,3 +28,5 @@ export const roadmapItems = roadmapRaw;
 export const attendanceHistory = attendanceHistoryRaw as AttendanceHistory;
 export const leagueAttendanceBenchmark = leagueAttendanceBenchmarkRaw as LeagueAttendanceBenchmark;
 export const audienceReach = audienceReachRaw as AudienceReachData;
+export const crmTicketingReadiness = crmTicketingReadinessRaw as CrmTicketingReadiness;
+export const crmTicketingDemo = crmTicketingDemoRaw as CrmTicketingDemo;

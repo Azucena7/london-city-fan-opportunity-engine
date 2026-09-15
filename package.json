@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run validate:crm-demo && next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "refresh:data": "node scripts/refresh-data.mjs"
+    "refresh:data": "node scripts/refresh-data.mjs",
+    "validate:crm-demo": "node scripts/validate-crm-ticketing-demo.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",

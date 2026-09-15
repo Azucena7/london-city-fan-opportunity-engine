@@ -101,6 +101,27 @@ interface AttendanceObservation {
 }
 ```
 
+## CrmTicketingRecord v1.0
+
+Grain: one ticket per row. The stable attribution path is:
+
+`fixture_id → campaign_id → content_id → ticket_id_hash → scan_status → supporter_id_hash`
+
+Required groups:
+- fixture and source keys
+- pseudonymous supporter, order and ticket keys
+- purchase timestamp, product and realised unit price
+- scan state and conditional scan timestamp
+- consent state and extract timestamp
+
+Excluded from the contract:
+- names, email addresses and phone numbers
+- full postcodes and dates of birth
+- payment details
+
+The public prototype may use `synthetic-demo` records to validate calculations. Synthetic
+records must never be combined with measured club results.
+
 ## TicketingProduct
 
 ```ts
