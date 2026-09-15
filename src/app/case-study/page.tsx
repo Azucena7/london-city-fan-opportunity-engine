@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { LocalizedStoryPage } from "@/components/LocalizedStoryPage";
 
 export const metadata: Metadata = {
-  title: "Case Study | London City Fan Opportunity Lab",
+  title: "Commercial Case Study",
   description:
-    "A short public case study on finding, prioritising and converting recurring audiences for London City Lionesses, with a link to the full methodology deck."
+    "How the London City Fan Opportunity Lab turns territory, fixtures, attendance and public audience signals into governed campaigns and repeat-demand learning."
 };
 
 export default function CaseStudyPage() {

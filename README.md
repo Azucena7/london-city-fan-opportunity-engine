@@ -7,7 +7,9 @@ A decision product for turning London City Lionesses fixtures, audience signals,
 - **Today** — current decision, next home fixture, material changes and marketing response.
 - **Calendar** — the complete official schedule, results, fixture dossiers, the 2025/26 attendance baseline, a secondary WSL/London-market attendance benchmark, and an audience-to-demand measurement layer.
 - **Territories** — spatial opportunity, ranked evidence and access.
-- **How it works** and **Case study** — secondary explanatory content.
+- **How it works** — methodology and scoring logic.
+- **Commercial case study** — the business problem, product value, evidence and Brighton campaign rehearsal.
+- **Technical case study** — phased architecture, public-source automation, data contracts, validation and CRM boundaries.
 
 Legacy routes redirect to the new information architecture, so existing shared links continue to work.
 
