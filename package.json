@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run validate:crm-demo && next build",
+    "build": "npm run validate:crm-demo && npm run validate:public-signals && next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "refresh:data": "node scripts/refresh-data.mjs",
-    "validate:crm-demo": "node scripts/validate-crm-ticketing-demo.mjs"
+    "refresh:public-signals": "node scripts/refresh-public-signals.mjs",
+    "validate:crm-demo": "node scripts/validate-crm-ticketing-demo.mjs",
+    "validate:public-signals": "node scripts/validate-public-signals.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",

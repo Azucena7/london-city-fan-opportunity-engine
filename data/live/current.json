@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-15T05:46:00.270Z",
+  "updated_at": "2026-09-15T21:24:09.630Z",
   "status": "active",
   "next_home_fixture_id": "2026-09-26-bha-h",
   "last_completed_home_fixture_id": "2026-09-04-mun-h",
@@ -20,5 +20,36 @@
   },
   "attention_availability": 35,
   "material_changes": 0,
-  "source_failures": []
+  "source_failures": [
+    "YouTube: The operation was aborted due to timeout",
+    "WSL attendance: WSL attendance returned 403"
+  ],
+  "public_signal_changes": 0,
+  "public_signal_refresh": {
+    "automated": true,
+    "cadence": "weekly-and-fixture-windows",
+    "lastAttemptAt": "2026-09-15T21:24:09.630Z",
+    "lastSuccessfulAt": "2026-09-15T16:55:13.242Z",
+    "state": "waiting",
+    "sources": [
+      {
+        "id": "lcl-youtube",
+        "label": "London City YouTube",
+        "state": "waiting",
+        "confidence": "unavailable",
+        "checkedAt": "2026-09-15T21:24:09.630Z",
+        "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en",
+        "message": "The operation was aborted due to timeout"
+      },
+      {
+        "id": "wsl-attendance",
+        "label": "WSL attendance benchmark",
+        "state": "waiting",
+        "confidence": "unavailable",
+        "checkedAt": "2026-09-15T21:24:09.630Z",
+        "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
+        "message": "WSL attendance returned 403"
+      }
+    ]
+  }
 }

@@ -15,6 +15,12 @@ function snapshotStatus(state: string, es: boolean) {
   return es ? "Pendiente" : "Pending";
 }
 
+function refreshLabel(state: string, es: boolean) {
+  if (state === "fresh") return es ? "Actualización completa" : "Refresh complete";
+  if (state === "partial") return es ? "Actualización parcial" : "Partial refresh";
+  return es ? "Esperando fuentes" : "Waiting for sources";
+}
+
 export function AudienceReach({ data }: { data: AudienceReachData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
@@ -48,6 +54,23 @@ export function AudienceReach({ data }: { data: AudienceReachData }) {
         <div><strong>{eleven?.metrics[0].value}</strong><span>{es ? "Eleven TV · España" : "Eleven TV · Spain"}</span></div>
         <div><strong>{search?.metrics[0].value}</strong><span>{es ? "búsquedas a seguir" : "search terms to track"}</span></div>
       </div>
+
+      {data.refresh ? (
+        <div className={`publicRefreshHealth ${data.refresh.state}`}>
+          <div>
+            <span>{es ? "AUTOMATIZACIÓN PÚBLICA" : "PUBLIC AUTOMATION"}</span>
+            <strong>{refreshLabel(data.refresh.state, es)}</strong>
+            <small>{es ? "Semanal y en ventanas T-7, T+1, T+7 y T+30" : "Weekly and at T-7, T+1, T+7 and T+30 windows"}</small>
+          </div>
+          {data.refresh.sources.map((source) => (
+            <a href={source.sourceUrl} target="_blank" rel="noreferrer" key={source.id} className={source.state}>
+              <span>{source.state === "measured" ? (es ? "MEDIDO" : "MEASURED") : (es ? "EN ESPERA" : "WAITING")}</span>
+              <strong>{source.label}</strong>
+              <small>{shortDate(source.checkedAt.slice(0, 10), locale)} · {es ? "confianza" : "confidence"}: {source.confidence} · {source.message ?? (es ? "fuente respondida" : "source responded")}</small>
+            </a>
+          ))}
+        </div>
+      ) : null}
 
       <details className="audienceExplorer">
         <summary>{es ? "Explorar canales, impacto de búsqueda y conversión por partido" : "Explore channels, search impact and fixture conversion"}</summary>

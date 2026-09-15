@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-14T20:00:00+01:00",
+  "checkedAt": "2026-09-15T16:55:13.242Z",
   "scope": "Public reach, search interest and fixture conversion",
   "headline": {
     "en": "Reach matters only when it can be connected to matchday demand",
@@ -44,6 +44,81 @@
           "state": "measured",
           "sourceName": "London City Lionesses on YouTube",
           "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-15",
+      "observedAt": "2026-09-15T16:51:19.700Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14700,
+          "displayValue": "14.7K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2020027,
+          "displayValue": "2.0M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
         },
         {
           "key": "eleven-opener-views",
@@ -174,8 +249,8 @@
       },
       "state": "ready",
       "action": {
-        "en": "Capture weekly and at T+1, T+7 and T+30.",
-        "es": "Capturar semanalmente y en T+1, T+7 y T+30."
+        "en": "Automated checks capture weekly and at T-7, T+1, T+7 and T+30.",
+        "es": "Las comprobaciones automatizadas capturan semanalmente y en T-7, T+1, T+7 y T+30."
       }
     },
     {
@@ -231,7 +306,7 @@
             "en": "Public subscribers",
             "es": "Suscriptores públicos"
           },
-          "value": "14.6K",
+          "value": "14.7K",
           "state": "measured"
         },
         {
@@ -240,6 +315,14 @@
             "es": "Vídeos publicados"
           },
           "value": "142",
+          "state": "measured"
+        },
+        {
+          "label": {
+            "en": "Public channel views",
+            "es": "Visualizaciones públicas del canal"
+          },
+          "value": "2,020,027",
           "state": "measured"
         }
       ],
@@ -542,14 +625,41 @@
       "fixtureId": "2026-09-26-bha-h",
       "date": "2026-09-26",
       "opponent": "Brighton & Hove Albion",
-      "stage": "planning",
+      "stage": "public pilot active",
       "attendance": null,
       "distribution": "Broadcaster / stream assignment to verify",
-      "conversionState": "Measurement plan required before campaign launch",
+      "conversionState": "Public windows scheduled; CRM and scans remain access-dependent",
       "nextAction": {
-        "en": "Use tagged links, channel-specific QR codes and a first-time/repeat ticket field.",
-        "es": "Usar enlaces etiquetados, QR por canal y un campo de primera visita/repetición."
+        "en": "Capture T-7 on 19 Sep, T+1 on 27 Sep, T+7 on 3 Oct and T+30 on 26 Oct; use pending for restricted fields.",
+        "es": "Capturar T-7 el 19 sep, T+1 el 27 sep, T+7 el 3 oct y T+30 el 26 oct; usar pendiente en los campos restringidos."
       }
     }
-  ]
+  ],
+  "refresh": {
+    "automated": true,
+    "cadence": "weekly-and-fixture-windows",
+    "lastAttemptAt": "2026-09-15T21:24:09.630Z",
+    "lastSuccessfulAt": "2026-09-15T16:55:13.242Z",
+    "state": "waiting",
+    "sources": [
+      {
+        "id": "lcl-youtube",
+        "label": "London City YouTube",
+        "state": "waiting",
+        "confidence": "unavailable",
+        "checkedAt": "2026-09-15T21:24:09.630Z",
+        "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en",
+        "message": "The operation was aborted due to timeout"
+      },
+      {
+        "id": "wsl-attendance",
+        "label": "WSL attendance benchmark",
+        "state": "waiting",
+        "confidence": "unavailable",
+        "checkedAt": "2026-09-15T21:24:09.630Z",
+        "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
+        "message": "WSL attendance returned 403"
+      }
+    ]
+  }
 }

@@ -24,14 +24,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run refresh:data
+      - name: Refresh public audience and attendance signals
+        run: npm run refresh:public-signals
       - name: Commit material updates
         run: |
-          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json; then
+          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/wsl-attendance-benchmark.json; then
             echo "No data change to publish"
             exit 0
           fi
           git config user.name "lcl-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/seed/calendar.json data/live/current.json data/live/signals.json
-          git commit -m "data: refresh daily fixture state"
+          git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/wsl-attendance-benchmark.json
+          git commit -m "data: refresh fixture and public signal state"
           git push
