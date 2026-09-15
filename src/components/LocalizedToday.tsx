@@ -4,7 +4,8 @@ import Link from "next/link";
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
 import { PostMatchScorecard } from "./PostMatchScorecard";
-import type { CalendarFixture, Fixture, LiveSignal, PostMatchScorecard as ScorecardData } from "@/lib/models";
+import { CampaignPlan } from "./CampaignPlan";
+import type { CalendarFixture, CampaignPlan as CampaignData, Fixture, LiveSignal, PostMatchScorecard as ScorecardData } from "@/lib/models";
 
 type CurrentState = {
   updated_at: string;
@@ -41,6 +42,7 @@ export function LocalizedToday({
   nextMatch,
   signals,
   current,
+  campaign,
   scorecard,
   roadmap
 }: {
@@ -48,6 +50,7 @@ export function LocalizedToday({
   nextMatch: CalendarFixture | null;
   signals: LiveSignal[];
   current: CurrentState;
+  campaign: CampaignData | null;
   scorecard: ScorecardData | null;
   roadmap: RoadmapItem[];
 }) {
@@ -123,6 +126,8 @@ export function LocalizedToday({
           ))}
         </div>
       </section>
+
+      {campaign ? <CampaignPlan data={campaign} signals={signals} /> : null}
 
       <section className="todaySection">
         <div className="todaySectionHead">

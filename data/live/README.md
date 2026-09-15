@@ -29,3 +29,10 @@ publishing changes to the demo. Never mix demo values with public or club actual
 Public observations and synthetic rehearsals produce separate scorecards. Every metric retains
 its evidence state, and retention remains `waiting` or `requires-access` until comparable
 fixtures exist.
+
+## Campaign plans
+
+`campaign-plans.json` contains planning drafts, not live media instructions. Each campaign
+joins to the canonical fixture, source signals, reusable playbooks, channel attribution IDs and
+the post-match measurement states. Offers, assets, partners, destinations and spend remain
+approval-dependent. Run `npm run validate:campaigns` before publishing changes.

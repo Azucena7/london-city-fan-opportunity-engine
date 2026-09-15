@@ -55,6 +55,21 @@ Add:
 
 Keep stadium attendance, digital views and television audience as separate measures.
 
+## V1.4 - Signal-to-campaign engine
+
+Add:
+- versioned `CampaignPlan` contract joined through canonical fixture and signal IDs
+- reusable local acquisition, next-chapter, player-reach and matchday-service playbooks
+- fixture-level audience, proposition, message, asset and channel briefs
+- approval gates separating `draft`, `ready`, `live` and `closed`
+- UTM and campaign keys compatible with the CRM/ticketing contract
+- directional channel allocation that never authorises spend
+- public, instrumented and access-dependent measurement states
+- Brighton as the first end-to-end campaign rehearsal
+
+Campaign drafts must remain proposals until an authorised club owner approves the offer,
+assets, destination URLs and execution budget.
+
 ## V2 - Club-grade engine
 
 Requires private club data:

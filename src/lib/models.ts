@@ -218,6 +218,51 @@ export type PublicSignalRefresh = {
   }>;
 };
 
+export type CampaignState = "suggested" | "draft" | "ready" | "live" | "closed";
+export type CampaignOperationalState = "complete" | "ready" | "planned" | "briefed" | "requires-approval" | "requires-partner" | "requires-instrumentation" | "requires-access" | "public-inferred" | "public-measurable" | "pending-source";
+
+export type CampaignPlan = {
+  id: string;
+  fixtureId: string;
+  status: CampaignState;
+  utmCampaign: string;
+  title: LocalizedText;
+  objective: LocalizedText;
+  whyNow: LocalizedText;
+  triggerSignalIds: string[];
+  audiences: Array<{ id: string; label: LocalizedText; state: "public-inferred" | "requires-access" }>;
+  proposition: LocalizedText;
+  message: LocalizedText;
+  offer: { description: LocalizedText; state: "requires-approval" | "approved" };
+  activations: Array<{
+    id: string;
+    playbookId: string;
+    title: LocalizedText;
+    channel: string;
+    role: LocalizedText;
+    asset: LocalizedText;
+    trackingCampaignIds: string[];
+    utmSource: string;
+    utmMedium: string;
+    utmContent: string;
+    state: "briefed" | "requires-partner" | "ready";
+  }>;
+  schedule: Array<{ window: string; date: string; action: LocalizedText; state: "complete" | "planned" | "requires-approval" }>;
+  budgetMix: Array<{ channel: string; share: number }>;
+  measurement: Array<{ id: string; label: LocalizedText; state: "public-measurable" | "pending-source" | "requires-instrumentation" | "requires-access"; target: LocalizedText }>;
+  approvals: Array<{ id: string; label: LocalizedText; state: "ready" | "requires-approval" | "requires-instrumentation" | "requires-access" }>;
+  guardrails: LocalizedText[];
+  nextApproval: LocalizedText;
+};
+
+export type CampaignPlanData = {
+  version: "1.0";
+  checkedAt: string;
+  principle: LocalizedText;
+  playbooks: Array<{ id: string; name: string; purpose: LocalizedText }>;
+  campaigns: CampaignPlan[];
+};
+
 export type CrmTicketingRecord = {
   schema_version: "1.0";
   fixture_id: string;

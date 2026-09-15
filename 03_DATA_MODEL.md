@@ -137,6 +137,23 @@ Each metric carries one evidence state:
 The scorecard closes five windows independently: T+1, T+7, T+30, T+60 and T+90. Reaching a
 date does not make a window complete when its required evidence is still unavailable.
 
+## CampaignPlan v1.0
+
+The campaign path is:
+
+`fixture_id → signal_id → playbook_id → activation_id → campaign_id / UTM → measurement → scorecard`
+
+Each plan includes:
+- objective, audience, proposition, message and approval-dependent offer
+- channel-specific activation briefs and required assets
+- execution windows and a directional allocation mix
+- public, pending-source, requires-instrumentation and requires-access KPIs
+- approval gates and guardrails
+
+Repository campaigns default to `draft`. A plan cannot become `ready` while an approval is
+pending, and it cannot become `live` without an authorised execution source outside the public
+prototype. Recommended channel shares are planning guidance, never spend authorisation.
+
 ## TicketingProduct
 
 ```ts

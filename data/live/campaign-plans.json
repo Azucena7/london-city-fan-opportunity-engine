@@ -1,0 +1,354 @@
+{
+  "version": "1.0",
+  "checkedAt": "2026-09-15T22:00:00Z",
+  "principle": {
+    "en": "Public signals create campaign drafts, not automatic media spend. Every activation needs a fixture key, evidence, an owner, approval and a measurement state before it can become live.",
+    "es": "Las señales públicas crean borradores de campaña, no inversión automática. Cada activación necesita una clave de partido, evidencia, responsable, aprobación y estado de medición antes de pasar a live."
+  },
+  "playbooks": [
+    {
+      "id": "back-to-bromley",
+      "name": "Back to Bromley",
+      "purpose": {
+        "en": "Turn local opportunity into family and grassroots attendance.",
+        "es": "Convertir la oportunidad local en asistencia familiar y de fútbol base."
+      }
+    },
+    {
+      "id": "next-chapter",
+      "name": "The next chapter",
+      "purpose": {
+        "en": "Use opener proof without treating a sell-out as the normal baseline.",
+        "es": "Usar la prueba social del opener sin tratar un sold out como baseline normal."
+      }
+    },
+    {
+      "id": "alexia-to-london-city",
+      "name": "Alexia → London City",
+      "purpose": {
+        "en": "Move player-led attention towards club, fixture and owned-channel intent.",
+        "es": "Mover la atención generada por la jugadora hacia el club, el partido y los canales propios."
+      }
+    },
+    {
+      "id": "matchday-confidence",
+      "name": "Matchday confidence",
+      "purpose": {
+        "en": "Reduce timing, travel and weather friction without displacing acquisition.",
+        "es": "Reducir la fricción de horario, transporte y tiempo sin desplazar la captación."
+      }
+    }
+  ],
+  "campaigns": [
+    {
+      "id": "brighton-home-2026-09-26",
+      "fixtureId": "2026-09-26-bha-h",
+      "status": "draft",
+      "utmCampaign": "2026-09-26-bha-h",
+      "title": {
+        "en": "Brighton · The first match of the double-header",
+        "es": "Brighton · El primer partido de la doble sesión"
+      },
+      "objective": {
+        "en": "Convert opener attention and local opportunity into qualified ticket intent for the second home fixture.",
+        "es": "Convertir la atención del opener y la oportunidad local en intención cualificada de entrada para el segundo partido en casa."
+      },
+      "whyNow": {
+        "en": "The opener proved scarcity, YouTube has moved from 14.6K to 14.7K subscribers and England v Spain creates both attention pressure and a same-day football proposition.",
+        "es": "El opener demostró escasez, YouTube ha pasado de 14,6K a 14,7K suscriptores e Inglaterra–España crea presión de atención y una propuesta futbolística para el mismo día."
+      },
+      "triggerSignalIds": [
+        "attention-england-spain",
+        "fixture-time-bst-validation-2026-09-15",
+        "weather-brighton-waiting"
+      ],
+      "audiences": [
+        {
+          "id": "bromley-families",
+          "label": {
+            "en": "Families and girls' football networks in Bromley and South/East London",
+            "es": "Familias y redes de fútbol femenino de Bromley y South/East London"
+          },
+          "state": "public-inferred"
+        },
+        {
+          "id": "opener-cohort",
+          "label": {
+            "en": "Manchester United opener buyers and attendees",
+            "es": "Compradores y asistentes al opener frente a Manchester United"
+          },
+          "state": "requires-access"
+        },
+        {
+          "id": "alexia-audience",
+          "label": {
+            "en": "Alexia-led digital audiences in GB and Spain",
+            "es": "Audiencias digitales vinculadas a Alexia en GB y España"
+          },
+          "state": "public-inferred"
+        }
+      ],
+      "proposition": {
+        "en": "Back London City at 17:00, then keep the football day going with England v Spain from 19:45.",
+        "es": "Apoya a London City a las 17:00 y continúa la jornada de fútbol con Inglaterra–España desde las 19:45."
+      },
+      "message": {
+        "en": "The first night was the beginning. Back the team, then stay local for the evening double-header.",
+        "es": "La primera noche fue el comienzo. Apoya al equipo y continúa cerca la doble sesión de la tarde."
+      },
+      "offer": {
+        "description": {
+          "en": "Family bundle / repeat-visit proposition plus a local viewing-partner extension.",
+          "es": "Propuesta familiar / de repetición más una extensión con un partner local para ver el segundo partido."
+        },
+        "state": "requires-approval"
+      },
+      "activations": [
+        {
+          "id": "brighton-local-acquisition",
+          "playbookId": "back-to-bromley",
+          "title": {
+            "en": "Bromley family acquisition",
+            "es": "Captación familiar en Bromley"
+          },
+          "channel": "paid + community",
+          "role": {
+            "en": "Build qualified local intent around families, schools and grassroots networks.",
+            "es": "Generar intención local cualificada entre familias, colegios y redes de fútbol base."
+          },
+          "asset": {
+            "en": "15-second atmosphere cutdown, family static and grassroots partner pack",
+            "es": "Vídeo de ambiente de 15 segundos, pieza familiar y pack para partners de fútbol base"
+          },
+          "trackingCampaignIds": ["brighton-paid-01", "brighton-community-01"],
+          "utmSource": "bromley_local",
+          "utmMedium": "paid_community",
+          "utmContent": "family_double_header",
+          "state": "briefed"
+        },
+        {
+          "id": "brighton-opener-proof",
+          "playbookId": "next-chapter",
+          "title": {
+            "en": "The next chapter",
+            "es": "El siguiente capítulo"
+          },
+          "channel": "owned + organic",
+          "role": {
+            "en": "Use opener atmosphere as proof while making Brighton the next decision.",
+            "es": "Usar el ambiente del opener como prueba y convertir Brighton en la siguiente decisión."
+          },
+          "asset": {
+            "en": "Opener crowd film, player invitation and fixture countdown",
+            "es": "Vídeo del público del opener, invitación de jugadoras y cuenta atrás"
+          },
+          "trackingCampaignIds": ["brighton-owned-01", "brighton-organic-01"],
+          "utmSource": "lcl_owned",
+          "utmMedium": "organic_social",
+          "utmContent": "opener_next_chapter",
+          "state": "briefed"
+        },
+        {
+          "id": "brighton-alexia-reach",
+          "playbookId": "alexia-to-london-city",
+          "title": {
+            "en": "Alexia reach bridge",
+            "es": "Puente de alcance de Alexia"
+          },
+          "channel": "partner + owned video",
+          "role": {
+            "en": "Move player interest towards London City, the fixture and club-owned content; treat Spain as awareness, not local ticket sales.",
+            "es": "Mover el interés por la jugadora hacia London City, el partido y el contenido propio; tratar España como notoriedad, no como venta local."
+          },
+          "asset": {
+            "en": "Bilingual player-led fixture story and club-channel follow prompt",
+            "es": "Historia bilingüe del partido liderada por la jugadora y llamada a seguir el canal del club"
+          },
+          "trackingCampaignIds": ["brighton-eleven-01"],
+          "utmSource": "eleven_alexia",
+          "utmMedium": "partner_video",
+          "utmContent": "player_to_club",
+          "state": "requires-partner"
+        },
+        {
+          "id": "brighton-service",
+          "playbookId": "matchday-confidence",
+          "title": {
+            "en": "17:00 matchday confidence",
+            "es": "Confianza de matchday a las 17:00"
+          },
+          "channel": "owned service",
+          "role": {
+            "en": "Make the corrected kickoff, access and contingency information impossible to miss.",
+            "es": "Hacer inequívocos el horario corregido, el acceso y la información de contingencia."
+          },
+          "asset": {
+            "en": "Know-before-you-go card, confirmed kickoff lock-up and weather variant",
+            "es": "Guía antes de salir, pieza con horario confirmado y variante meteorológica"
+          },
+          "trackingCampaignIds": ["brighton-owned-02"],
+          "utmSource": "lcl_service",
+          "utmMedium": "owned",
+          "utmContent": "kickoff_access_weather",
+          "state": "briefed"
+        }
+      ],
+      "schedule": [
+        {
+          "window": "T-12",
+          "date": "2026-09-14",
+          "action": {
+            "en": "Lock signals, proposition and baseline.",
+            "es": "Cerrar señales, propuesta y baseline."
+          },
+          "state": "complete"
+        },
+        {
+          "window": "T-7",
+          "date": "2026-09-19",
+          "action": {
+            "en": "Launch local acquisition and next-chapter creative.",
+            "es": "Lanzar captación local y creatividad del siguiente capítulo."
+          },
+          "state": "requires-approval"
+        },
+        {
+          "window": "T-3",
+          "date": "2026-09-23",
+          "action": {
+            "en": "Publish 17:00 access, weather and double-header service message.",
+            "es": "Publicar acceso de las 17:00, tiempo y mensaje de servicio de la doble sesión."
+          },
+          "state": "planned"
+        },
+        {
+          "window": "T+1",
+          "date": "2026-09-27",
+          "action": {
+            "en": "Close public reach, result and attendance.",
+            "es": "Cerrar alcance público, resultado y asistencia."
+          },
+          "state": "planned"
+        },
+        {
+          "window": "T+7/30",
+          "date": "2026-10-03",
+          "action": {
+            "en": "Close attribution evidence and start repeat window.",
+            "es": "Cerrar evidencia de atribución e iniciar ventana de repetición."
+          },
+          "state": "planned"
+        }
+      ],
+      "budgetMix": [
+        { "channel": "Local paid", "share": 45 },
+        { "channel": "Owned content", "share": 20 },
+        { "channel": "Community", "share": 20 },
+        { "channel": "Partner / international", "share": 10 },
+        { "channel": "Contingency", "share": 5 }
+      ],
+      "measurement": [
+        {
+          "id": "owned-reach",
+          "label": {
+            "en": "Owned video reach and engagement",
+            "es": "Alcance y engagement de vídeo propio"
+          },
+          "state": "public-measurable",
+          "target": {
+            "en": "Compare with the T-7 baseline",
+            "es": "Comparar con el baseline T-7"
+          }
+        },
+        {
+          "id": "search-intent",
+          "label": {
+            "en": "Brand and Brighton search interest",
+            "es": "Interés de búsqueda de marca y Brighton"
+          },
+          "state": "pending-source",
+          "target": {
+            "en": "Direction versus matched-query baseline",
+            "es": "Dirección frente al baseline de consulta comparable"
+          }
+        },
+        {
+          "id": "ticket-clicks",
+          "label": {
+            "en": "Ticket-page clicks by UTM",
+            "es": "Clics a ticketing por UTM"
+          },
+          "state": "requires-instrumentation",
+          "target": {
+            "en": "Set after the first measured click baseline",
+            "es": "Fijar después del primer baseline medido de clics"
+          }
+        },
+        {
+          "id": "purchase-scan-repeat",
+          "label": {
+            "en": "Purchase, scan, no-show and repeat",
+            "es": "Compra, acceso, no-show y repetición"
+          },
+          "state": "requires-access",
+          "target": {
+            "en": "No target until authorised club data is connected",
+            "es": "Sin objetivo hasta conectar datos autorizados del club"
+          }
+        }
+      ],
+      "approvals": [
+        {
+          "id": "evidence",
+          "label": {
+            "en": "Signals and 17:00 kickoff verified",
+            "es": "Señales y horario de las 17:00 verificados"
+          },
+          "state": "ready"
+        },
+        {
+          "id": "offer",
+          "label": {
+            "en": "Ticket product and viewing partner approved",
+            "es": "Producto de entrada y partner local aprobados"
+          },
+          "state": "requires-approval"
+        },
+        {
+          "id": "assets",
+          "label": {
+            "en": "Creative assets and player usage approved",
+            "es": "Creatividades y uso de jugadoras aprobados"
+          },
+          "state": "requires-approval"
+        },
+        {
+          "id": "tracking",
+          "label": {
+            "en": "UTMs and ticketing destination validated",
+            "es": "UTMs y destino de ticketing validados"
+          },
+          "state": "requires-instrumentation"
+        }
+      ],
+      "guardrails": [
+        {
+          "en": "Do not describe the family bundle or viewing partner as live until the club approves them.",
+          "es": "No presentar el bundle familiar ni el partner local como activos hasta su aprobación."
+        },
+        {
+          "en": "Use 17:00 in every Brighton asset and validate local time immediately before scheduling.",
+          "es": "Usar las 17:00 en todas las piezas de Brighton y validar la hora local antes de programarlas."
+        },
+        {
+          "en": "Do not report public views, clicks or synthetic records as ticket sales.",
+          "es": "No presentar views, clics ni registros sintéticos como ventas de entradas."
+        }
+      ],
+      "nextApproval": {
+        "en": "Club owner to confirm the ticket product, local viewing partner, creative permissions and destination URLs before T-7 launch.",
+        "es": "El responsable del club debe confirmar producto de entrada, partner local, permisos creativos y URLs de destino antes del lanzamiento T-7."
+      }
+    }
+  ]
+}

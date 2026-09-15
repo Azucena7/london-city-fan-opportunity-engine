@@ -39,3 +39,10 @@ Public and editorial data live under `data/seed` and `data/live`. Internal ticke
 ## Audience and search demand
 
 `data/live/audience-reach.json` keeps owned-channel, Eleven TV, broadcaster, search-interest and CRM measures separate. The Calendar module connects them through a five-stage measurement chain: reach, engagement, intent, purchase/scan and repeat. Google Trends is treated as a relative awareness signal, never as ticket demand or absolute search volume.
+
+## Signal-to-campaign plans
+
+`data/live/campaign-plans.json` turns sourced fixture signals into approval-ready campaign drafts.
+Every brief retains its fixture, signal, playbook, activation and attribution keys. The first
+vertical slice is Brighton: four coordinated activations, T-12 to T+30 windows, directional
+channel allocation and explicit approval gates. Run `npm run validate:campaigns` before publishing.
