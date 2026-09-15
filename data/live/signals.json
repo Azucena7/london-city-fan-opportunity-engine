@@ -1,5 +1,28 @@
 [
   {
+    "id": "fixture-time-bst-validation-2026-09-15",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "access",
+    "state": "confirmed",
+    "direction": "neutral",
+    "materiality": "high",
+    "observedAt": "2026-09-15T09:28:57+01:00",
+    "title": {
+      "en": "Eight BST fixture times required correction",
+      "es": "Ocho horarios en periodo BST requerían corrección"
+    },
+    "summary": {
+      "en": "Cross-checking the automated calendar against WSL Football, the Brighton ticket page and host-club fixture notices found one-hour discrepancies in eight fixtures between 12 September and 21 October. The next league match is Charlton at 12:30 and the next home match is Brighton at 17:00.",
+      "es": "El contraste del calendario automático con WSL Football, la página de entradas de Brighton y los avisos de los clubes anfitriones detectó diferencias de una hora en ocho partidos entre el 12 de septiembre y el 21 de octubre. El próximo partido de liga es Charlton a las 12:30 y el próximo en casa es Brighton a las 17:00."
+    },
+    "marketingAction": {
+      "en": "Replace any scheduled CRM, paid, social, ticketing and matchday assets using the displaced times, and validate local time against the competition or ticket page before each campaign is released.",
+      "es": "Sustituir cualquier pieza programada de CRM, paid, social, ticketing y matchday que use los horarios desplazados, y validar la hora local con la competición o la página de entradas antes de publicar cada campaña."
+    },
+    "sourceName": "WSL Football / London City Lionesses / host clubs",
+    "sourceUrl": "https://www.wslfootball.com/clubs/wsl/london-city-lionesses/schedule"
+  },
+  {
     "id": "attendance-mun-5402",
     "fixtureId": "2026-09-04-mun-h",
     "category": "demand",

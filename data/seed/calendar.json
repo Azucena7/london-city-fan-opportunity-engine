@@ -18,7 +18,7 @@
   {
     "id": "2026-09-12-whu-a",
     "date": "2026-09-12",
-    "kickoff": "13:45",
+    "kickoff": "12:45",
     "opponent": "West Ham United",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
@@ -28,7 +28,7 @@
   {
     "id": "2026-09-19-cha-a",
     "date": "2026-09-19",
-    "kickoff": "13:30",
+    "kickoff": "12:30",
     "opponent": "Charlton",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
@@ -38,7 +38,7 @@
   {
     "id": "2026-09-23-lei-a",
     "date": "2026-09-23",
-    "kickoff": "20:30",
+    "kickoff": "19:30",
     "opponent": "Leicester City",
     "homeAway": "away",
     "competition": "Subway Players Cup",
@@ -48,7 +48,7 @@
   {
     "id": "2026-09-26-bha-h",
     "date": "2026-09-26",
-    "kickoff": "18:00",
+    "kickoff": "17:00",
     "opponent": "Brighton & Hove Albion",
     "homeAway": "home",
     "competition": "Barclays Women's Super League",
@@ -58,7 +58,7 @@
   {
     "id": "2026-09-30-ips-a",
     "date": "2026-09-30",
-    "kickoff": "20:30",
+    "kickoff": "19:30",
     "opponent": "Ipswich Town",
     "homeAway": "away",
     "competition": "Subway Players Cup",
@@ -68,7 +68,7 @@
   {
     "id": "2026-10-04-tot-a",
     "date": "2026-10-04",
-    "kickoff": "13:00",
+    "kickoff": "14:00",
     "opponent": "Tottenham Hotspur",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
@@ -78,7 +78,7 @@
   {
     "id": "2026-10-18-eve-h",
     "date": "2026-10-18",
-    "kickoff": "15:00",
+    "kickoff": "14:00",
     "opponent": "Everton",
     "homeAway": "home",
     "competition": "Barclays Women's Super League",
@@ -88,7 +88,7 @@
   {
     "id": "2026-10-21-whu-a",
     "date": "2026-10-21",
-    "kickoff": "20:00",
+    "kickoff": "19:00",
     "opponent": "West Ham United",
     "homeAway": "away",
     "competition": "Subway Players Cup",

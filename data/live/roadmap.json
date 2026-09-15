@@ -1,6 +1,77 @@
 [
-  {"id":"brighton-repeat","fixtureId":"2026-09-26-bha-h","area":"CRM","status":"next","due":"2026-09-18","title":{"en":"Build the opener-to-Brighton repeat cohort","es":"Crear la cohorte de repetición opener–Brighton"},"reason":{"en":"Tests whether record demand becomes retained demand.","es":"Comprueba si la demanda récord se convierte en demanda retenida."}},
-  {"id":"double-header","fixtureId":"2026-09-26-bha-h","area":"Marketing","status":"next","due":"2026-09-19","title":{"en":"Launch the matchday double-header proposition","es":"Lanzar la propuesta de doble sesión"},"reason":{"en":"Turns the England v Spain overlap into an experience rather than only a threat.","es":"Convierte el solapamiento con Inglaterra–España en una experiencia y no solo en una amenaza."}},
-  {"id":"postmatch-template","fixtureId":"2026-09-26-bha-h","area":"Data","status":"planned","due":"2026-09-27","title":{"en":"Close the T+1 post-match review","es":"Cerrar la revisión postpartido T+1"},"reason":{"en":"Captures result, attendance, incidents and first content signals while they are fresh.","es":"Captura resultado, asistencia, incidencias y primeras señales de contenido cuando todavía son recientes."}},
-  {"id":"retention-review","fixtureId":"2026-09-04-mun-h","area":"CRM","status":"planned","due":"2026-10-04","title":{"en":"Review 30-day opener retention","es":"Revisar la retención del opener a 30 días"},"reason":{"en":"Separates acquired audience from retained audience.","es":"Separa audiencia adquirida de audiencia retenida."}}
+  {
+    "id": "bst-kickoff-parser-validation",
+    "fixtureId": "2026-09-26-bha-h",
+    "area": "Data Operations",
+    "status": "next",
+    "due": "2026-09-16",
+    "title": {
+      "en": "Fix and regression-test local-time parsing",
+      "es": "Corregir y probar la conversión de hora local"
+    },
+    "reason": {
+      "en": "Prevents the daily refresh from reintroducing a one-hour BST offset into campaign, ticketing and access information.",
+      "es": "Evita que la actualización diaria vuelva a introducir una hora de desfase BST en campañas, ticketing e información de acceso."
+    }
+  },
+  {
+    "id": "brighton-repeat",
+    "fixtureId": "2026-09-26-bha-h",
+    "area": "CRM",
+    "status": "next",
+    "due": "2026-09-18",
+    "title": {
+      "en": "Build the opener-to-Brighton repeat cohort",
+      "es": "Crear la cohorte de repetición opener–Brighton"
+    },
+    "reason": {
+      "en": "Tests whether record demand becomes retained demand.",
+      "es": "Comprueba si la demanda récord se convierte en demanda retenida."
+    }
+  },
+  {
+    "id": "double-header",
+    "fixtureId": "2026-09-26-bha-h",
+    "area": "Marketing",
+    "status": "next",
+    "due": "2026-09-19",
+    "title": {
+      "en": "Launch the matchday double-header proposition",
+      "es": "Lanzar la propuesta de doble sesión"
+    },
+    "reason": {
+      "en": "Turns the England v Spain overlap into an experience rather than only a threat.",
+      "es": "Convierte el solapamiento con Inglaterra–España en una experiencia y no solo en una amenaza."
+    }
+  },
+  {
+    "id": "postmatch-template",
+    "fixtureId": "2026-09-26-bha-h",
+    "area": "Data",
+    "status": "planned",
+    "due": "2026-09-27",
+    "title": {
+      "en": "Close the T+1 post-match review",
+      "es": "Cerrar la revisión postpartido T+1"
+    },
+    "reason": {
+      "en": "Captures result, attendance, incidents and first content signals while they are fresh.",
+      "es": "Captura resultado, asistencia, incidencias y primeras señales de contenido cuando todavía son recientes."
+    }
+  },
+  {
+    "id": "retention-review",
+    "fixtureId": "2026-09-04-mun-h",
+    "area": "CRM",
+    "status": "planned",
+    "due": "2026-10-04",
+    "title": {
+      "en": "Review 30-day opener retention",
+      "es": "Revisar la retención del opener a 30 días"
+    },
+    "reason": {
+      "en": "Separates acquired audience from retained audience.",
+      "es": "Separa audiencia adquirida de audiencia retenida."
+    }
+  }
 ]
