@@ -198,6 +198,24 @@ export type AudienceReachData = {
     conversionState: string;
     nextAction: LocalizedText;
   }>;
+  refresh?: PublicSignalRefresh;
+};
+
+export type PublicSignalRefresh = {
+  automated: boolean;
+  cadence: "weekly-and-fixture-windows";
+  lastAttemptAt: string;
+  lastSuccessfulAt: string | null;
+  state: "fresh" | "partial" | "waiting";
+  sources: Array<{
+    id: string;
+    label: string;
+    state: "measured" | "waiting";
+    confidence: "high" | "medium" | "unavailable";
+    checkedAt: string;
+    sourceUrl: string;
+    message?: string;
+  }>;
 };
 
 export type CrmTicketingRecord = {

@@ -9,6 +9,8 @@ import type { CalendarFixture, Fixture, LiveSignal, PostMatchScorecard as Scorec
 type CurrentState = {
   updated_at: string;
   material_changes: number;
+  public_signal_changes?: number;
+  public_signal_refresh?: { state: string };
   weather: { status: string; reason?: string; [key: string]: string | number | null | undefined };
   attendance_momentum: { score: number; basis: string };
 };
@@ -63,6 +65,7 @@ export function LocalizedToday({
         <strong>{es ? "Actualizado" : "Updated"} {formatUpdated(current.updated_at, locale)}</strong>
         <span>{current.material_changes} {es ? "cambios materiales registrados" : "material changes recorded"}</span>
         <span>{signals.length} {es ? "señales con fuente" : "sourced signals"}</span>
+        <span>{es ? "Fuentes públicas" : "Public sources"}: {current.public_signal_refresh?.state ?? (es ? "sin iniciar" : "not started")}</span>
       </section>
 
       <section className="todayHero">

@@ -9,6 +9,9 @@ The site now separates code from live content. GitHub Actions refreshes the offi
 - Next home and last completed home fixture.
 - Matchday weather when the fixture enters the 16-day provider window.
 - A commit only when tracked data changes; Vercel can deploy that commit through the existing Git integration.
+- London City YouTube subscriber and channel-view snapshots, weekly or when a measured value changes.
+- WSL attendance averages when the source returns a comparable table; blocked or incomplete responses are recorded without overwriting the last valid observation.
+- Public-source health, last attempt and last successful refresh.
 
 ## What remains editorial or requires a connected research automation
 
@@ -16,8 +19,8 @@ The site now separates code from live content. GitHub Actions refreshes the offi
 - Competing events and media-attention changes.
 - Sponsorship, community and consumer signals.
 - Post-match acquisition, yield, territory and retention data.
-- WSL benchmark snapshots when new published home-attendance observations appear.
-- Public audience and search-interest snapshots when a material threshold or fixture event is reached.
+- Eleven TV video-level reach until a canonical public video is configured.
+- Google Trends matched-query exports; its relative index must be captured from a consistent comparison rather than scraped as absolute volume.
 
 Those signals use `data/live/signals.json`, `postmatch.json`, `roadmap.json` and `wsl-attendance-benchmark.json`. Every entry must include an evidence state, observed time, source and explicit marketing implication. A connected daily research automation can update these files after this pull request is merged. Internal ticketing and CRM fields require an authorised data source; never put credentials in GitHub.
 
@@ -34,6 +37,8 @@ Those signals use `data/live/signals.json`, `postmatch.json`, `roadmap.json` and
 
 ```bash
 REFRESH_DRY_RUN=1 npm run refresh:data
+REFRESH_DRY_RUN=1 npm run refresh:public-signals
+npm run validate:public-signals
 npm run typecheck
 ```
 
@@ -42,7 +47,7 @@ The workflow also supports **Run workflow** from the GitHub Actions page.
 
 ## Audience and search cadence
 
-- Public YouTube subscriber and catalogue counts: weekly, or after a material campaign event.
+- Public YouTube subscriber and channel-view counts: weekly, at T-7/T+1/T+7/T+30, or after a measured change.
 - Fixture video/live-stream views: T+1 and T+7; keep live, replay and highlights separate where available.
 - Eleven TV and broadcaster distribution: confirm before each fixture; add reported reach only when sourced.
 - Google Trends: preserve matched-query snapshots for GB and Spain at announcement, T-7, T+1, T+7 and T+30. The 0–100 index is relative within a query and must not be treated as search volume.

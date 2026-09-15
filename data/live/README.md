@@ -1,12 +1,9 @@
 # Live state
 
-`current.json` is legacy scaffolding and is no longer consumed by the frontend.
-Runtime match state is now assembled by `LiveMatchProvider` from:
-- the selected next home fixture
-- live weather
-- attendance momentum when a verified source becomes available
-
-This avoids two competing sources of truth.
+`current.json` is the operational freshness summary consumed by Today. It stores the next and
+last home fixture, weather, material-change counts and public-source health. Fixture records,
+audience snapshots and attendance observations remain in their canonical files; `current.json`
+does not duplicate their histories.
 
 ## Audience snapshots
 
@@ -16,6 +13,8 @@ the baseline. A trend is shown only when two snapshots contain the same metric k
 
 Capture public observations weekly and at T+1, T+7 and T+30 after a material event or fixture.
 Use `null` with `pending` or `requires-access` when a value is unavailable; never backfill zero.
+`npm run refresh:public-signals` also schedules a T-7 Brighton observation and preserves the
+last valid value whenever a provider blocks or times out.
 
 ## CRM and ticketing readiness
 

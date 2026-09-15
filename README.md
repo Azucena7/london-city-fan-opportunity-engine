@@ -22,7 +22,7 @@ npm run build
 
 ## Daily data refresh
 
-GitHub Actions runs `npm run refresh:data` every day at 06:30 Europe/London. It refreshes the official fixture calendar, results and matchday weather state, preserves historical observations and commits changed snapshots. See [`docs/DAILY_UPDATE_RUNBOOK.md`](docs/DAILY_UPDATE_RUNBOOK.md) for sources, cadence and post-match responsibilities.
+GitHub Actions runs `npm run refresh:data` and `npm run refresh:public-signals` every day at 06:30 Europe/London. The first refreshes the official fixture calendar, results and matchday weather; the second appends comparable public audience observations and checks the WSL attendance source. Both preserve the last valid observation when a source is unavailable. See [`docs/DAILY_UPDATE_RUNBOOK.md`](docs/DAILY_UPDATE_RUNBOOK.md) for sources, cadence and post-match responsibilities.
 
 Public and editorial data live under `data/seed` and `data/live`. Internal ticketing, scans, CRM and retention data require an authorised connector. Never commit credentials; configure them as GitHub or Vercel secrets.
 
