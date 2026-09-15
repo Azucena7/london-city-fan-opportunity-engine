@@ -48,6 +48,9 @@ Add:
 - authenticated YouTube geography, watch time and subscriber conversion when channel-owner access is available
 - Google Trends snapshots for brand, Alexia and ticket-intent searches in GB and Spain
 - fixture annotations for signing, sponsorship, broadcast and matchday events
+- append-only audience snapshots with first-observation and comparable-change states
+- audience impact timeline separating player, partner, broadcast and fixture effects
+- Brighton measurement-readiness scorecard
 - campaign and fixture keys linking reach to ticketing, scans and repeat
 
 Keep stadium attendance, digital views and television audience as separate measures.

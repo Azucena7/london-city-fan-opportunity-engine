@@ -138,12 +138,49 @@ export type AudienceChannel = {
   sourceUrl: string;
 };
 
+export type AudienceSnapshotMetric = {
+  key: string;
+  label: LocalizedText;
+  value: number | null;
+  displayValue: string;
+  unit: "subscribers" | "videos" | "views" | "index" | "audience";
+  state: "measured" | "confirmed" | "pending" | "requires-access";
+  sourceName: string;
+  sourceUrl: string;
+};
+
+export type AudienceSnapshot = {
+  id: string;
+  observedAt: string;
+  label: LocalizedText;
+  fixtureId?: string;
+  metrics: AudienceSnapshotMetric[];
+};
+
+export type AudienceImpactEvent = {
+  id: string;
+  date: string;
+  category: "player" | "partner" | "broadcast" | "fixture" | "measurement";
+  title: LocalizedText;
+  hypothesis: LocalizedText;
+};
+
+export type AudienceReadinessItem = {
+  id: string;
+  label: LocalizedText;
+  state: "ready" | "planned" | "blocked";
+  action: LocalizedText;
+};
+
 export type AudienceReachData = {
   checkedAt: string;
   scope: string;
   headline: LocalizedText;
   principle: LocalizedText;
   channels: AudienceChannel[];
+  snapshots: AudienceSnapshot[];
+  impactTimeline: AudienceImpactEvent[];
+  measurementReadiness: AudienceReadinessItem[];
   funnel: Array<{ id: string; label: LocalizedText; measure: LocalizedText }>;
   searchPlan: {
     terms: string[];

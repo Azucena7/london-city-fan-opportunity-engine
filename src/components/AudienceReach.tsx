@@ -8,6 +8,13 @@ function shortDate(value: string, locale: string) {
     .format(new Date(value + "T12:00:00"));
 }
 
+function snapshotStatus(state: string, es: boolean) {
+  if (state === "measured") return es ? "Medido" : "Measured";
+  if (state === "confirmed") return es ? "Confirmado" : "Confirmed";
+  if (state === "requires-access") return es ? "Requiere acceso" : "Requires access";
+  return es ? "Pendiente" : "Pending";
+}
+
 export function AudienceReach({ data }: { data: AudienceReachData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
@@ -15,6 +22,10 @@ export function AudienceReach({ data }: { data: AudienceReachData }) {
   const youtube = data.channels.find((channel) => channel.id === "lcl-youtube");
   const eleven = data.channels.find((channel) => channel.id === "eleven-tv");
   const search = data.channels.find((channel) => channel.id === "search");
+  const snapshots = [...data.snapshots].sort((a, b) => a.observedAt.localeCompare(b.observedAt));
+  const latestSnapshot = snapshots.at(-1);
+  const previousSnapshot = snapshots.at(-2);
+  const readyCount = data.measurementReadiness.filter((item) => item.state === "ready").length;
 
   return (
     <section className="audienceReach" aria-labelledby="audience-reach-title">
@@ -50,6 +61,73 @@ export function AudienceReach({ data }: { data: AudienceReachData }) {
           </div>
         ))}
       </div>
+
+      <section className="audienceImpactTimeline">
+        <div className="sectionHeader">
+          <div>
+            <div className="eyebrow">{es ? "AUDIENCE IMPACT TIMELINE" : "AUDIENCE IMPACT TIMELINE"}</div>
+            <h3>{es ? "Qué ocurre, qué debería cambiar y cuándo medirlo" : "What happened, what should move and when to measure"}</h3>
+          </div>
+          <p>{es
+            ? "Las anotaciones evitan atribuir todo el movimiento a Alexia cuando coinciden partido, patrocinio y distribución."
+            : "Annotations prevent every movement being attributed to Alexia when fixture, partner and distribution effects overlap."}</p>
+        </div>
+        <div className="impactEventList">
+          {data.impactTimeline.map((event) => (
+            <article className={event.category} key={event.id}>
+              <time>{shortDate(event.date, locale)}</time>
+              <span>{event.category}</span>
+              <strong>{event.title[lang]}</strong>
+              <p>{event.hypothesis[lang]}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="audienceSnapshots">
+        <div className="sectionHeader">
+          <div>
+            <div className="eyebrow">{es ? "SNAPSHOTS COMPARABLES" : "COMPARABLE SNAPSHOTS"}</div>
+            <h3>{latestSnapshot?.label[lang]}</h3>
+          </div>
+          <div className="snapshotState">
+            <strong>{snapshots.length === 1 ? (es ? "Primera observación" : "First observation") : `${snapshots.length} ${es ? "observaciones" : "observations"}`}</strong>
+            <span>{latestSnapshot ? shortDate(latestSnapshot.observedAt.slice(0, 10), locale) : "—"}</span>
+          </div>
+        </div>
+        <div className="snapshotMetricGrid">
+          {latestSnapshot?.metrics.map((metric) => {
+            const previous = previousSnapshot?.metrics.find((item) => item.key === metric.key);
+            const delta = metric.value !== null && previous?.value != null ? metric.value - previous.value : null;
+            return (
+              <article key={metric.key} className={metric.state}>
+                <div><span>{snapshotStatus(metric.state, es)}</span><b>{delta === null ? "—" : `${delta > 0 ? "+" : ""}${delta.toLocaleString(locale)}`}</b></div>
+                <strong>{metric.displayValue}</strong>
+                <p>{metric.label[lang]}</p>
+                <small>{delta === null
+                  ? (es ? "Se necesita otra observación comparable" : "Another comparable observation is required")
+                  : (es ? "Cambio frente al snapshot anterior" : "Change versus previous snapshot")}</small>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="measurementReadiness">
+        <div className="measurementReadinessIntro">
+          <div><div className="eyebrow">{es ? "BRIGHTON · PREPARACIÓN" : "BRIGHTON · READINESS"}</div><h3>{es ? "Cerrar la medición antes de lanzar la campaña" : "Close the measurement design before campaign launch"}</h3></div>
+          <strong>{readyCount}/{data.measurementReadiness.length}<span>{es ? "puntos listos" : "points ready"}</span></strong>
+        </div>
+        <div className="readinessGrid">
+          {data.measurementReadiness.map((item) => (
+            <article className={item.state} key={item.id}>
+              <span>{item.state}</span>
+              <strong>{item.label[lang]}</strong>
+              <p>{item.action[lang]}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <div className="audienceChannelGrid">
         {data.channels.map((channel) => (
