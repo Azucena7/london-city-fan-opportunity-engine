@@ -1,0 +1,61 @@
+.measurementPage { max-width: 1240px; margin: 0 auto; padding: 0 28px 72px; }
+.measurementHero { display: grid; grid-template-columns: 1.45fr .4fr; gap: 44px; align-items: end; margin: 52px 0 74px; }
+.measurementHero h1 { max-width: 920px; margin: 13px 0 18px; font-size: clamp(43px, 6vw, 74px); line-height: .94; letter-spacing: -.055em; }
+.measurementHero > div:first-child > p { max-width: 760px; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.measurementRuntime { display: inline-flex; gap: 13px; align-items: center; margin-top: 23px; padding: 11px 14px; border: 1px solid rgba(255,184,77,.34); border-radius: 999px; }
+.measurementRuntime span { color: #ffb84d; font-size: 8px; font-weight: 900; letter-spacing: .07em; }
+.measurementRuntime strong { font-size: 10px; }
+.measurementHeroMetric { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.measurementHeroMetric span, .measurementHeroMetric strong, .measurementHeroMetric small { display: block; }
+.measurementHeroMetric span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; }
+.measurementHeroMetric strong { margin: 12px 0 5px; font-size: 58px; line-height: 1; }
+.measurementHeroMetric small { color: var(--muted); font-size: 9px; }
+.measurementSectionHead { display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; margin-bottom: 23px; }
+.measurementSectionHead > div { display: flex; gap: 13px; align-items: baseline; }
+.measurementSectionHead > div > span { color: var(--lcl-hyperturq); font-size: 11px; font-weight: 900; }
+.measurementSectionHead h2 { margin: 0; font-size: clamp(29px, 3.8vw, 45px); line-height: 1; letter-spacing: -.035em; }
+.measurementSectionHead > p { max-width: 390px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.45; text-align: right; }
+.measurementFlow, .measurementCohorts, .measurementEvents { margin: 70px 0; }
+.measurementFlow > div:last-child { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-radius: 15px; overflow: hidden; }
+.measurementFlow article { min-height: 130px; padding: 17px; border-right: 1px solid var(--line); }
+.measurementFlow article:last-child { border-right: 0; }
+.measurementFlow article span, .measurementFlow article strong, .measurementFlow article small { display: block; }
+.measurementFlow article span { color: var(--lcl-hyperturq); font-size: 9px; }
+.measurementFlow article strong { margin: 30px 0 7px; font-size: 13px; }
+.measurementFlow article small { color: var(--muted); font-size: 9px; line-height: 1.35; }
+.measurementCohortGrid, .measurementEventGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+.measurementCohortGrid article, .measurementEventGrid article { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.measurementCohortGrid article > div:first-child { display: flex; justify-content: space-between; }
+.measurementCohortGrid article > div:first-child span { color: #ffb84d; font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.measurementCohortGrid article > div:first-child b { font-size: 42px; line-height: .9; }
+.measurementCohortGrid article > strong { display: block; margin: 26px 0 7px; font-size: 20px; }
+.measurementCohortGrid article > p { min-height: 40px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+.measurementCohortGrid dl { margin: 20px 0 0; border-top: 1px solid var(--line); }
+.measurementCohortGrid dl div { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.measurementCohortGrid dt, .measurementCohortGrid dd { margin: 0; color: var(--muted); font-size: 9px; }
+.measurementCohortGrid dd { color: var(--ink); font-weight: 900; }
+.measurementCohortGrid article.threshold-met { border-color: var(--lcl-hyperturq); }
+.measurementEventGrid article span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.measurementEventGrid article strong { display: block; margin: 25px 0 8px; font-size: 16px; }
+.measurementEventGrid code { color: #fff; font-size: 10px; }
+.measurementEventGrid p { color: var(--muted); font-family: monospace; font-size: 9px; line-height: 1.55; }
+.measurementProvider { display: grid; grid-template-columns: .75fr 1.25fr; gap: 42px; margin: 72px 0; padding: clamp(25px, 4vw, 42px); border: 1px solid rgba(50,230,212,.26); border-radius: 22px; background: linear-gradient(145deg, rgba(50,230,212,.05), rgba(255,255,255,.018)); }
+.measurementProvider h2 { margin: 11px 0; font-size: clamp(29px, 3.8vw, 44px); line-height: 1; }
+.measurementProvider > div:first-child p { color: var(--muted); font-size: 11px; line-height: 1.5; }
+.measurementProviderGrid { display: grid; grid-template-columns: 1fr 1fr; }
+.measurementProviderGrid article { padding: 17px; border: 1px solid var(--line); }
+.measurementProviderGrid span, .measurementProviderGrid strong, .measurementProviderGrid code { display: block; }
+.measurementProviderGrid span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; }
+.measurementProviderGrid strong { margin: 18px 0 6px; font-size: 13px; }
+.measurementProviderGrid code { color: var(--muted); font-size: 8px; }
+.measurementRules { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 55px 0; }
+.measurementRules > div { padding: 25px; border: 1px solid var(--line); border-radius: 18px; }
+.measurementRules p { display: flex; gap: 10px; padding: 9px 0; margin: 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 10px; line-height: 1.4; }
+.measurementRules p span { color: var(--lcl-hyperturq); font-weight: 900; }
+.measurementActions { display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; padding: 30px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.measurementActions h2 { margin: 0 0 8px; font-size: 27px; }
+.measurementActions p { margin: 0; color: var(--muted); font-size: 10px; }
+.measurementActions > div:last-child { display: flex; gap: 8px; flex-wrap: wrap; }
+.measurementActions a { padding: 11px 13px; border: 1px solid var(--lcl-hyperturq); border-radius: 9px; color: var(--lcl-hyperturq); font-size: 9px; font-weight: 900; text-decoration: none; }
+@media (max-width: 980px) { .measurementHero, .measurementProvider { grid-template-columns: 1fr; } .measurementHeroMetric { max-width: 290px; } .measurementFlow > div:last-child { grid-template-columns: repeat(3, 1fr); } .measurementCohortGrid, .measurementEventGrid { grid-template-columns: 1fr; } }
+@media (max-width: 680px) { .measurementPage { padding: 0 16px 55px; } .measurementHero { margin: 34px 0 55px; } .measurementHero h1 { font-size: 41px; } .measurementRuntime, .measurementSectionHead, .measurementActions { align-items: flex-start; flex-direction: column; } .measurementSectionHead > p { text-align: left; } .measurementFlow > div:last-child, .measurementProviderGrid, .measurementRules { grid-template-columns: 1fr; } .measurementFlow article { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); } }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ExperienceDemandValidation } from "@/components/ExperienceDemandValidation";
-import { experienceDemand } from "@/lib/data";
+import { experienceDemand, experimentMeasurement } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Experience Demand Validation",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
-  return <ExperienceDemandValidation data={experienceDemand} />;
+  return <ExperienceDemandValidation data={experienceDemand} measurement={experimentMeasurement} />;
 }

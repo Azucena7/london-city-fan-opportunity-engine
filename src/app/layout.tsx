@@ -17,6 +17,7 @@ import "./block16.css";
 import "./product-v2.css";
 import "./experience.css";
 import "./mobility.css";
+import "./measurement.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 export const metadata: Metadata = {

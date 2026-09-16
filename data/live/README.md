@@ -34,6 +34,13 @@ operator quotes. A corridor can become a partner signal only after at least 20 a
 events; addresses, postcodes and individual movements must never be shared. Run
 `npm run validate:mobility-partnership` after changing pilots, scoring or simulator assumptions.
 
+`experiment-measurement.json` defines the anonymous event allowlists, runtime provider contract,
+three fixture cohorts and evidence thresholds shared by Experience and Mobility. Test mode is the
+default and never contributes to production cohorts. Without an explicitly configured provider,
+events are validated locally but not stored. Raw-event retention is capped at 90 days and partner-
+facing evidence requires at least 20 valid production events. Run
+`npm run validate:experiment-measurement` after changing events, cohorts or provider settings.
+
 ## CRM and ticketing readiness
 
 `crm-ticketing-readiness.json` describes integration coverage. The versioned record contract is

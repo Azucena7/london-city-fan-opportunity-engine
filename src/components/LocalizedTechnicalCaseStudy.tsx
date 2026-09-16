@@ -60,6 +60,12 @@ const phases: Array<{ version: string; title: Localized; text: Localized; output
     title: { en: "Mobility partnership layer", es: "Capa de partnerships de movilidad" },
     text: { en: "Three fixture pilots, corridor scoring, aggregate privacy thresholds and a shuttle economics simulator that never presents assumptions as quotes.", es: "Tres pilotos de partido, scoring de corredores, umbrales agregados de privacidad y un simulador económico que nunca presenta supuestos como cotizaciones." },
     output: { en: "WHETHER mobility merits partner review", es: "SI la movilidad merece revisión de partners" }
+  },
+  {
+    version: "V1.8",
+    title: { en: "Experiment measurement layer", es: "Capa de medición de experimentos" },
+    text: { en: "Allowlisted anonymous events, test/production separation, provider-aware delivery and aggregate fixture cohorts with a minimum evidence threshold.", es: "Eventos anónimos con allowlist, separación test/producción, entrega consciente del proveedor y cohortes agregadas por partido con umbral mínimo." },
+    output: { en: "WHEN a scenario becomes evidence", es: "CUÁNDO un escenario se convierte en evidencia" }
   }
 ];
 
@@ -70,6 +76,7 @@ const states: Array<{ state: string; meaning: Localized; example: Localized }> =
   { state: "source-unavailable", meaning: { en: "A capture failed without overwriting or inventing a value.", es: "Una captura falló sin sobrescribir ni inventar un valor." }, example: { en: "Rate-limited Google Trends baseline", es: "Baseline de Google Trends limitado temporalmente" } },
   { state: "validation-concept", meaning: { en: "A proposition can be tested but is not on sale.", es: "Una propuesta puede probarse, pero no está a la venta." }, example: { en: "Matchday, VIP and international concepts", es: "Conceptos matchday, VIP e internacional" } },
   { state: "modelled-scenario", meaning: { en: "A transparent planning assumption, not measured demand or a supplier quote.", es: "Un supuesto transparente de planificación, no demanda medida ni cotización de proveedor." }, example: { en: "Corridor score and shuttle economics", es: "Score de corredor y economía de shuttle" } },
+  { state: "provider-not-configured", meaning: { en: "Events validate locally but are not stored or counted.", es: "Los eventos se validan localmente, pero no se almacenan ni cuentan." }, example: { en: "Experience and mobility telemetry", es: "Telemetría de experiencias y movilidad" } },
   { state: "demo", meaning: { en: "Synthetic data that proves calculations only.", es: "Datos sintéticos que solo prueban cálculos." }, example: { en: "Brighton ticketing rehearsal", es: "Ensayo de ticketing de Brighton" } },
   { state: "requires-instrumentation", meaning: { en: "Measurable after UTMs or event tracking are deployed.", es: "Medible tras desplegar UTMs o seguimiento de eventos." }, example: { en: "Landing-page intent", es: "Intención en landing" } },
   { state: "requires-access", meaning: { en: "Needs an authorised club system.", es: "Necesita un sistema autorizado del club." }, example: { en: "Purchase, scan, no-show, repeat", es: "Compra, acceso, no-show, repetición" } }
@@ -85,7 +92,9 @@ const validations: Localized[] = [
   { en: "Hospitality gates cannot pass without measured downstream intent.", es: "Los gates de hospitality no pueden superarse sin intención posterior medida." },
   { en: "A validation concept cannot collect personal data, take deposits or claim inventory.", es: "Un concepto de validación no puede recoger datos personales, aceptar depósitos ni afirmar que existe inventario." },
   { en: "A mobility scenario cannot become a pilot without aggregated measured intent and an operator quote.", es: "Un escenario de movilidad no puede convertirse en piloto sin intención agregada medida y cotización del operador." },
-  { en: "Addresses, postcodes and individual movements are prohibited from the partnership contract.", es: "Direcciones, códigos postales y movimientos individuales están prohibidos en el contrato de partnership." }
+  { en: "Addresses, postcodes and individual movements are prohibited from the partnership contract.", es: "Direcciones, códigos postales y movimientos individuales están prohibidos en el contrato de partnership." },
+  { en: "Test events cannot contribute to a production cohort or partner-facing threshold.", es: "Los eventos de prueba no pueden contribuir a una cohorte de producción ni a un umbral para partners." },
+  { en: "Unknown event properties are rejected before any provider delivery.", es: "Las propiedades de evento desconocidas se rechazan antes de cualquier entrega al proveedor." }
 ];
 
 export function LocalizedTechnicalCaseStudy() {
@@ -221,6 +230,12 @@ export function LocalizedTechnicalCaseStudy() {
             <p>fixture → corridor → modelled score → aggregate threshold → quote → approval</p>
             <a href="/api/contracts/mobility-partnership" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
           </article>
+          <article>
+            <span>EXPERIMENT MEASUREMENT</span>
+            <h3>{es ? "Un evento permitido y agregado" : "One allowlisted aggregate event"}</h3>
+            <p>event → validate → deliver → deduplicate → cohort → threshold → review</p>
+            <a href="/api/contracts/experiment-measurement" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
+          </article>
         </div>
         <div className="technicalJoin"><code>fixture_id</code><span>→</span><code>campaign_id</code><span>→</span><code>ticket_id</code><span>→</span><code>scan</code><span>→</span><code>repeat_90d</code></div>
       </section>
@@ -248,7 +263,7 @@ export function LocalizedTechnicalCaseStudy() {
           {validations.map((item, index) => <article key={item.en}><span>✓</span><p>{pick(item)}</p><small>{String(index + 1).padStart(2, "0")}</small></article>)}
         </div>
         <div className="technicalChecks">
-          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>validate:experience-demand</code><code>validate:mobility-partnership</code><code>typecheck</code><code>Vercel build</code>
+          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>validate:experience-demand</code><code>validate:mobility-partnership</code><code>validate:experiment-measurement</code><code>typecheck</code><code>Vercel build</code>
         </div>
       </section>
 

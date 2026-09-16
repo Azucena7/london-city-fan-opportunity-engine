@@ -7,7 +7,7 @@ import { TerritoryTravelIntelligence } from "./TerritoryTravelIntelligence";
 import { MobilityPartnershipLayer } from "./MobilityPartnershipLayer";
 import { useLanguage } from "./LanguageProvider";
 import type { TerritoryTravelSeed } from "@/lib/territoryTravel";
-import type { MobilityPartnershipData } from "@/lib/models";
+import type { ExperimentMeasurementData, MobilityPartnershipData } from "@/lib/models";
 
 type View = "fan" | "territory" | "partner";
 
@@ -16,13 +16,15 @@ export function LocalizedAccessPage({
   matchDate,
   matchKickoff,
   targetArrival,
-  mobility
+  mobility,
+  measurement
 }: {
   territories: TerritoryTravelSeed[];
   matchDate?: string;
   matchKickoff?: string;
   targetArrival?: string;
   mobility: MobilityPartnershipData;
+  measurement: ExperimentMeasurementData;
 }) {
   const { lang } = useLanguage();
   const es = lang === "es";
@@ -65,7 +67,7 @@ export function LocalizedAccessPage({
 
       {view === "fan" ? <JourneyPlanner matchDate={matchDate} matchKickoff={matchKickoff} /> : null}
       {view === "territory" ? <TerritoryTravelIntelligence territories={territories} matchDate={matchDate} targetArrival={targetArrival} /> : null}
-      {view === "partner" ? <MobilityPartnershipLayer data={mobility} /> : null}
+      {view === "partner" ? <MobilityPartnershipLayer data={mobility} measurement={measurement} /> : null}
     </main>
   );
 }

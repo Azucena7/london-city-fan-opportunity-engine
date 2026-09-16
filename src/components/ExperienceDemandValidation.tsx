@@ -4,7 +4,8 @@ import { FormEvent, useMemo, useState } from "react";
 import Link from "next/link";
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
-import type { ExperienceDemandData } from "@/lib/models";
+import { emitMeasurementEvent, type MeasurementDeliveryState } from "@/lib/measurement";
+import type { ExperienceDemandData, ExperimentMeasurementData } from "@/lib/models";
 
 type ValidationPayload = {
   schema_version: "1.0";
@@ -30,7 +31,7 @@ function statusLabel(state: string, es: boolean) {
   return es ? "bloqueado" : "blocked";
 }
 
-export function ExperienceDemandValidation({ data }: { data: ExperienceDemandData }) {
+export function ExperienceDemandValidation({ data, measurement }: { data: ExperienceDemandData; measurement: ExperimentMeasurementData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const [conceptId, setConceptId] = useState("");
@@ -42,6 +43,7 @@ export function ExperienceDemandValidation({ data }: { data: ExperienceDemandDat
   const [transportInterest, setTransportInterest] = useState(false);
   const [spanishHostInterest, setSpanishHostInterest] = useState(false);
   const [completed, setCompleted] = useState<ValidationPayload | null>(null);
+  const [deliveryState, setDeliveryState] = useState<MeasurementDeliveryState | null>(null);
 
   const concept = useMemo(() => data.concepts.find((item) => item.id === conceptId), [conceptId, data.concepts]);
   const origin = useMemo(() => data.origins.find((item) => item.id === originId), [originId, data.origins]);
@@ -51,9 +53,15 @@ export function ExperienceDemandValidation({ data }: { data: ExperienceDemandDat
     setConceptId(id);
     setPriceBand("");
     setCompleted(null);
+    setDeliveryState(null);
+    void emitMeasurementEvent({
+      eventName: "experience_concept_selected",
+      properties: { concept_id: id },
+      locale: lang
+    });
   }
 
-  function submitValidation(event: FormEvent<HTMLFormElement>) {
+  async function submitValidation(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!concept || !origin || !configurationReady) return;
     const params = new URLSearchParams(window.location.search);
@@ -74,10 +82,25 @@ export function ExperienceDemandValidation({ data }: { data: ExperienceDemandDat
       utm_campaign: params.get("utm_campaign") ?? "experience-demand-validation",
       utm_content: params.get("utm_content") ?? concept.id
     };
-    const analyticsWindow = window as Window & { dataLayer?: Array<Record<string, unknown>> };
-    analyticsWindow.dataLayer?.push(payload);
-    window.dispatchEvent(new CustomEvent(data.analytics.eventName, { detail: payload }));
     setCompleted(payload);
+    const experiment = measurement.experiments.find((item) => item.fixtureId === fixtureId);
+    const result = await emitMeasurementEvent({
+      eventName: "experience_validation_complete",
+      fixtureId,
+      experimentId: experiment?.id,
+      locale: lang,
+      properties: {
+        concept_id: concept.id,
+        origin_market: origin.market,
+        origin_id: origin.id,
+        party_size: partySize,
+        price_band: priceBand,
+        hotel_interest: hotelInterest,
+        transport_interest: transportInterest,
+        spanish_host_interest: spanishHostInterest
+      }
+    });
+    setDeliveryState(result.state);
   }
 
   return (
@@ -152,7 +175,10 @@ export function ExperienceDemandValidation({ data }: { data: ExperienceDemandDat
           <div className="experienceCompletion" role="status">
             <span>{es ? "CONFIGURACIÓN COMPLETADA" : "CONFIGURATION COMPLETE"}</span>
             <strong>{concept?.title[lang]} · {data.fixtures.find((item) => item.id === completed.fixture_id)?.label[lang]}</strong>
-            <p>{es ? "El evento se ha emitido en el navegador para instrumentación. Este prototipo no lo almacena ni ha transmitido datos personales." : "The event was emitted in the browser for instrumentation. This prototype does not store it and transmitted no personal data."}</p>
+            <p>{deliveryState === "delivered"
+              ? (es ? "El proveedor configurado ha aceptado el evento anónimo. La cohorte solo será visible después de validación y agregación." : "The configured provider accepted the anonymous event. The cohort will only appear after validation and aggregation.")
+              : (es ? "El evento se ha validado localmente, pero no se ha almacenado porque no existe un proveedor configurado o la entrega no se completó." : "The event was validated locally but was not stored because no provider is configured or delivery did not complete.")}</p>
+            <small>{deliveryState ?? (es ? "comprobando entrega" : "checking delivery")}</small>
           </div>
         ) : null}
       </section>
@@ -171,7 +197,7 @@ export function ExperienceDemandValidation({ data }: { data: ExperienceDemandDat
 
       <section className="experienceMobilityBridge">
         <div><div className="eyebrow">EXPERIENCE → MOBILITY</div><h2>{es ? "¿Puede el interés agregado sostener un shuttle?" : "Can aggregated interest support a shuttle?"}</h2><p>{es ? "La nueva capa convierte el interés por transporte en escenarios de corredor, capacidad y punto de equilibrio, sin reservar ningún servicio." : "The new layer turns transport interest into corridor, capacity and break-even scenarios without booking any service."}</p></div>
-        <Link href="/access#partner">{es ? "Abrir Mobility Partnership Layer" : "Open Mobility Partnership Layer"} →</Link>
+        <div><Link href="/access#partner">{es ? "Abrir Mobility" : "Open Mobility"} →</Link><Link href="/measurement">{es ? "Ver medición" : "View measurement"} →</Link></div>
       </section>
 
       <details className="experienceGuardrails"><summary>{es ? "Guardrails de la validación" : "Validation guardrails"}</summary>{data.guardrails.map((item) => <p key={item.id}>{item.text[lang]}</p>)}</details>
