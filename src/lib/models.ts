@@ -32,6 +32,19 @@ export type CalendarFixture = {
   result?: { for: number; against: number };
   attendance?: number;
   attendanceState?: "measured" | "reported";
+  sourceDiscrepancies?: SourceDiscrepancy[];
+};
+
+export type SourceDiscrepancy = {
+  field: "kickoff" | "date" | "venue";
+  detectedAt: string;
+  state: "unresolved" | "resolved";
+  values: Array<{
+    value: string;
+    sourceName: string;
+    sourceUrl: string;
+    checkedAt: string;
+  }>;
 };
 
 export type LocalizedText = { en: string; es: string };
@@ -357,6 +370,56 @@ export type PostMatchScorecard = {
   metrics: PostMatchScorecardMetric[];
   windows: PostMatchScorecardWindow[];
   dataGaps: string[];
+};
+
+export type ActivationChannel = "website" | "ticketing" | "instagram" | "news" | "matchday" | "partner";
+export type FunnelStage = "awareness" | "consideration" | "conversion" | "experience" | "retention";
+
+export type ClubActivation = {
+  id: string;
+  fixtureId: string;
+  observedAt: string;
+  window: string;
+  channel: ActivationChannel;
+  funnelStage: FunnelStage;
+  audience: LocalizedText;
+  title: LocalizedText;
+  messageAngle: LocalizedText;
+  product: LocalizedText;
+  callToAction: LocalizedText;
+  sourceName: string;
+  sourceUrl: string;
+  evidenceState: "observed" | "partially-observed" | "cannot-verify";
+  confidence: "high" | "medium" | "low";
+};
+
+export type StrategyHypothesis = {
+  id: string;
+  title: LocalizedText;
+  rationale: LocalizedText;
+  confidence: "high" | "medium" | "low";
+  evidenceIds: string[];
+};
+
+export type ActivationAlignment = {
+  id: string;
+  recommendation: LocalizedText;
+  observed: LocalizedText;
+  status: "deployed" | "partially-observed" | "not-publicly-observed" | "cannot-verify";
+};
+
+export type ClubActivationDataset = {
+  fixtureId: string;
+  comparisonFixtureId: string;
+  checkedAt: string;
+  coverage: Array<{
+    channel: ActivationChannel;
+    state: "covered" | "partial" | "unavailable";
+    note: LocalizedText;
+  }>;
+  observations: ClubActivation[];
+  hypotheses: StrategyHypothesis[];
+  alignment: ActivationAlignment[];
 };
 
 export type Territory = {

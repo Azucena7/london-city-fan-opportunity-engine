@@ -4,6 +4,7 @@ import competitorsRaw from "../../data/seed/competitors.json";
 import grassrootsRaw from "../../data/seed/grassroots.json";
 import ticketingRaw from "../../data/seed/ticketing.json";
 import calendarRaw from "../../data/seed/calendar.json";
+import clubActivationsRaw from "../../data/seed/club-activations.json";
 import currentRaw from "../../data/live/current.json";
 import signalsRaw from "../../data/live/signals.json";
 import postmatchRaw from "../../data/live/postmatch.json";
@@ -15,7 +16,7 @@ import crmTicketingReadinessRaw from "../../data/live/crm-ticketing-readiness.js
 import crmTicketingDemoRaw from "../../data/demo/brighton-crm-ticketing.synthetic.json";
 import campaignPlansRaw from "../../data/live/campaign-plans.json";
 import { buildPostMatchScorecards } from "./postmatch";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, CrmTicketingDemo, CrmTicketingReadiness, Fixture, LeagueAttendanceBenchmark, LiveSignal, PostMatchReview, Territory } from "./models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness, Fixture, LeagueAttendanceBenchmark, LiveSignal, PostMatchReview, Territory } from "./models";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -23,6 +24,7 @@ export const competitors = competitorsRaw;
 export const grassroots = grassrootsRaw;
 export const ticketing = ticketingRaw;
 export const calendar = calendarRaw as CalendarFixture[];
+export const clubActivations = clubActivationsRaw as ClubActivationDataset;
 export const currentState = currentRaw;
 export const liveSignals = signalsRaw as LiveSignal[];
 export const postmatchReviews = postmatchRaw as PostMatchReview[];

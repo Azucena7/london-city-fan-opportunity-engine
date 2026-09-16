@@ -189,7 +189,6 @@ interface MatchdayDecision {
 }
 ```
 
-
 ### Attendance rules
 
 - League and cup observations remain separate.
@@ -197,3 +196,70 @@ interface MatchdayDecision {
 - Physical stadium capacity is not used as configured matchday capacity unless the source confirms it.
 - Public reported attendance remains distinct from internal ticket scans.
 - Season aggregates are derived from the auditable match ledger; conflicting published aggregates remain documented.
+
+## ClubActivation
+
+Public, fixture-linked evidence of what the club has activated. Observations and strategy hypotheses remain separate so the product never presents an inference as a club-stated objective.
+
+```ts
+interface ClubActivation {
+  id: string
+  fixtureId: string
+  observedAt: string
+  window: string // T-42 ... T+7
+  channel: 'website' | 'ticketing' | 'instagram' | 'news' | 'matchday' | 'partner'
+  funnelStage: 'awareness' | 'consideration' | 'conversion' | 'experience' | 'retention'
+  audience: LocalizedText
+  title: LocalizedText
+  messageAngle: LocalizedText
+  product: LocalizedText
+  callToAction: LocalizedText
+  sourceName: string
+  sourceUrl: string
+  evidenceState: 'observed' | 'partially-observed' | 'cannot-verify'
+  confidence: 'high' | 'medium' | 'low'
+}
+```
+
+## StrategyHypothesis
+
+```ts
+interface StrategyHypothesis {
+  id: string
+  title: LocalizedText
+  rationale: LocalizedText
+  confidence: 'high' | 'medium' | 'low'
+  evidenceIds: string[] // references ClubActivation.id
+}
+```
+
+## ActivationAlignment
+
+Compares an Engine recommendation with public execution without treating unavailable internal evidence as a negative result.
+
+```ts
+interface ActivationAlignment {
+  id: string
+  recommendation: LocalizedText
+  observed: LocalizedText
+  status: 'deployed' | 'partially-observed' | 'not-publicly-observed' | 'cannot-verify'
+}
+```
+
+## SourceDiscrepancy
+
+Preserves contradictory public observations instead of silently selecting one value.
+
+```ts
+interface SourceDiscrepancy {
+  field: 'kickoff' | 'date' | 'venue'
+  detectedAt: string
+  state: 'unresolved' | 'resolved'
+  values: Array<{
+    value: string
+    sourceName: string
+    sourceUrl: string
+    checkedAt: string
+  }>
+}
+```

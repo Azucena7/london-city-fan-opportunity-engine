@@ -18,6 +18,24 @@ Core source families used in V1 research.
 
 ## London City
 - https://www.londoncitylionesses.com/
+- Official fixtures
+  https://www.londoncitylionesses.com/fixtures
+- Brighton home ticket landing page
+  https://www.londoncitylionesses.com/brighton-h-2627
+- VIP Terrace
+  https://www.londoncitylionesses.com/vip-terrace
+- Matchday hospitality
+  https://www.londoncitylionesses.com/hospitality
+- Hat-Trick three-game bundle
+  https://www.londoncitylionesses.com/lcl-hat-trick
+- Group tickets
+  https://www.londoncitylionesses.com/grouptickets
+- Manchester United fan guide
+  https://www.londoncitylionesses.com/post/fan-guide-london-city-versus-manchester-united
+- LDN City After Dark
+  https://www.londoncitylionesses.com/post/ldn-city-after-dark-post-game-after-party
+- Manchester United fan gallery
+  https://www.londoncitylionesses.com/post/fan-gallery-london-city-lionesses-vs-manchester-united
 - Hayes Lane directions
   https://www.londoncitylionesses.com/hayes-lane-directions
 - Sister Clubs
@@ -66,3 +84,5 @@ Every public claim should carry:
 - observed vs inferred flag
 
 Never present an inferred strategic objective as a club-stated objective.
+
+When public sources disagree, preserve every observed value in `SourceDiscrepancy`, show the conflict in the product and leave it unresolved until an authoritative update is verified. Platform access limits must be reported as partial coverage, never interpreted as inactivity.
