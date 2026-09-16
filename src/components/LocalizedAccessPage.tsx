@@ -4,21 +4,25 @@ import { useEffect, useState } from "react";
 import { NavTabs } from "./NavTabs";
 import { JourneyPlanner } from "./JourneyPlanner";
 import { TerritoryTravelIntelligence } from "./TerritoryTravelIntelligence";
+import { MobilityPartnershipLayer } from "./MobilityPartnershipLayer";
 import { useLanguage } from "./LanguageProvider";
 import type { TerritoryTravelSeed } from "@/lib/territoryTravel";
+import type { MobilityPartnershipData } from "@/lib/models";
 
-type View = "fan" | "territory";
+type View = "fan" | "territory" | "partner";
 
 export function LocalizedAccessPage({
   territories,
   matchDate,
   matchKickoff,
-  targetArrival
+  targetArrival,
+  mobility
 }: {
   territories: TerritoryTravelSeed[];
   matchDate?: string;
   matchKickoff?: string;
   targetArrival?: string;
+  mobility: MobilityPartnershipData;
 }) {
   const { lang } = useLanguage();
   const es = lang === "es";
@@ -27,6 +31,7 @@ export function LocalizedAccessPage({
   useEffect(() => {
     if (window.location.hash === "#territory") setView("territory");
     if (window.location.hash === "#fan") setView("fan");
+    if (window.location.hash === "#partner") setView("partner");
   }, []);
 
   function select(next: View) {
@@ -42,24 +47,25 @@ export function LocalizedAccessPage({
         <h1>{es ? "¿Puede esa audiencia llegar realmente a Hayes Lane?" : "Can that audience actually get to Hayes Lane?"}</h1>
         <p className="lede">
           {es
-            ? "El mismo problema a dos escalas: un trayecto ayuda a una persona; varios trayectos ayudan al club a tomar una decisión territorial."
-            : "The same problem at two scales: one journey helps a fan; multiple journeys help the club make a territory decision."}
+            ? "El mismo problema a tres escalas: ayudar a una persona, orientar una decisión territorial y comprobar si un servicio agregado merece un partner."
+            : "The same problem at three scales: help one fan, guide a territory decision and test whether an aggregated service merits a partner."}
         </p>
       </section>
 
       <div className="viewTabs" role="tablist">
         <button className={view === "fan" ? "active" : ""} onClick={() => select("fan")}>{es ? "Trayecto individual" : "Fan journey"}</button>
         <button className={view === "territory" ? "active" : ""} onClick={() => select("territory")}>{es ? "Acceso territorial" : "Territory access"}</button>
+        <button className={view === "partner" ? "active" : ""} onClick={() => select("partner")}>{es ? "Partnership de movilidad" : "Mobility partnership"}</button>
       </div>
 
       <section className="accessThesis">
-        <strong>{es ? "Un trayecto no es un territorio." : "One journey isn't a territory."}</strong>
-        <span>{es ? "La experiencia individual informa; la evidencia agregada orienta la decisión." : "Individual experience informs; aggregated evidence guides the decision."}</span>
+        <strong>{es ? "Un trayecto no es demanda." : "One journey isn't demand."}</strong>
+        <span>{es ? "La experiencia individual informa; la evidencia agregada orienta territorios y partnerships." : "Individual experience informs; aggregated evidence guides territory and partnership decisions."}</span>
       </section>
 
-      {view === "fan"
-        ? <JourneyPlanner matchDate={matchDate} matchKickoff={matchKickoff} />
-        : <TerritoryTravelIntelligence territories={territories} matchDate={matchDate} targetArrival={targetArrival} />}
+      {view === "fan" ? <JourneyPlanner matchDate={matchDate} matchKickoff={matchKickoff} /> : null}
+      {view === "territory" ? <TerritoryTravelIntelligence territories={territories} matchDate={matchDate} targetArrival={targetArrival} /> : null}
+      {view === "partner" ? <MobilityPartnershipLayer data={mobility} /> : null}
     </main>
   );
 }

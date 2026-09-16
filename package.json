@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run validate:crm-demo && npm run validate:public-signals && npm run validate:campaigns && npm run validate:search-demand && npm run validate:experience-demand && next build",
+    "build": "npm run validate:crm-demo && npm run validate:public-signals && npm run validate:campaigns && npm run validate:search-demand && npm run validate:experience-demand && npm run validate:mobility-partnership && next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
@@ -14,7 +14,8 @@
     "validate:public-signals": "node scripts/validate-public-signals.mjs",
     "validate:campaigns": "node scripts/validate-campaign-plans.mjs",
     "validate:search-demand": "node scripts/validate-search-demand.mjs",
-    "validate:experience-demand": "node scripts/validate-experience-demand.mjs"
+    "validate:experience-demand": "node scripts/validate-experience-demand.mjs",
+    "validate:mobility-partnership": "node scripts/validate-mobility-partnership.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/mobility-partnership",
+  "title": "MobilityPartnershipLayer",
+  "type": "object",
+  "required": ["version", "checkedAt", "status", "demandState", "headline", "principle", "pilots", "corridors", "partnerModels", "scoring", "simulator", "experienceEvent", "guardrails"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "checkedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["planning-scenario", "partner-review", "pilot-approved"] },
+    "demandState": { "enum": ["requires-instrumentation", "measured-aggregate"] },
+    "headline": { "$ref": "#/$defs/localized" },
+    "principle": { "$ref": "#/$defs/localized" },
+    "pilots": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["fixtureId", "label", "appealScore", "purpose"],
+        "properties": {
+          "fixtureId": { "type": "string" },
+          "label": { "$ref": "#/$defs/localized" },
+          "appealScore": { "type": "number", "minimum": 0, "maximum": 100 },
+          "purpose": { "$ref": "#/$defs/localized" }
+        }
+      }
+    },
+    "corridors": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "representativeOrigins", "evidenceState", "territoryOpportunity", "travelFriction", "groupSuitability", "note"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "$ref": "#/$defs/localized" },
+          "representativeOrigins": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+          "evidenceState": { "enum": ["modelled-scenario", "measured-aggregate"] },
+          "territoryOpportunity": { "$ref": "#/$defs/score" },
+          "travelFriction": { "$ref": "#/$defs/score" },
+          "groupSuitability": { "$ref": "#/$defs/score" },
+          "note": { "$ref": "#/$defs/localized" }
+        }
+      }
+    },
+    "partnerModels": { "type": "array", "minItems": 3 },
+    "scoring": { "type": "object", "required": ["weights", "explanation"] },
+    "simulator": {
+      "type": "object",
+      "required": ["currency", "minimumAggregateCohort", "defaultFarePerRider", "capacities", "warning"],
+      "properties": {
+        "currency": { "const": "GBP" },
+        "minimumAggregateCohort": { "type": "integer", "minimum": 10 },
+        "defaultFarePerRider": { "type": "number", "exclusiveMinimum": 0 },
+        "capacities": { "type": "array", "minItems": 1 },
+        "warning": { "$ref": "#/$defs/localized" }
+      }
+    },
+    "experienceEvent": { "type": "object", "required": ["eventName", "demandField", "state"] },
+    "guardrails": { "type": "array", "minItems": 5 }
+  },
+  "$defs": {
+    "score": { "type": "number", "minimum": 0, "maximum": 100 },
+    "localized": {
+      "type": "object",
+      "required": ["en", "es"],
+      "properties": { "en": { "type": "string", "minLength": 1 }, "es": { "type": "string", "minLength": 1 } },
+      "additionalProperties": false
+    }
+  }
+}

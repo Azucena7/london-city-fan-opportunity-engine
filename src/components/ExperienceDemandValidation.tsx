@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import Link from "next/link";
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
 import type { ExperienceDemandData } from "@/lib/models";
@@ -166,6 +167,11 @@ export function ExperienceDemandValidation({ data }: { data: ExperienceDemandDat
       <section className="experienceReadiness">
         <div><div className="eyebrow">{es ? "GATES DE LANZAMIENTO" : "LAUNCH GATES"}</div><h2>{es ? "La demanda puede medirse antes de vender" : "Demand can be measured before selling"}</h2><p>{es ? "Registro, depósitos y venta solo se habilitarán cuando cada responsable apruebe su parte." : "Registration, deposits and sales will only unlock when each owner approves their part."}</p></div>
         <div>{data.launchGates.map((gate) => <article key={gate.id}><span>{gate.state}</span><strong>{gate.label[lang]}</strong><small>{gate.owner[lang]}</small></article>)}</div>
+      </section>
+
+      <section className="experienceMobilityBridge">
+        <div><div className="eyebrow">EXPERIENCE → MOBILITY</div><h2>{es ? "¿Puede el interés agregado sostener un shuttle?" : "Can aggregated interest support a shuttle?"}</h2><p>{es ? "La nueva capa convierte el interés por transporte en escenarios de corredor, capacidad y punto de equilibrio, sin reservar ningún servicio." : "The new layer turns transport interest into corridor, capacity and break-even scenarios without booking any service."}</p></div>
+        <Link href="/access#partner">{es ? "Abrir Mobility Partnership Layer" : "Open Mobility Partnership Layer"} →</Link>
       </section>
 
       <details className="experienceGuardrails"><summary>{es ? "Guardrails de la validación" : "Validation guardrails"}</summary>{data.guardrails.map((item) => <p key={item.id}>{item.text[lang]}</p>)}</details>

@@ -28,6 +28,12 @@ blocked. The public page may emit the declared browser event, but it must not co
 contact details, addresses, payment data or free text until an approved processor and consent
 flow exist. Run `npm run validate:experience-demand` after changing concepts, fixtures or gates.
 
+`mobility-partnership.json` turns three future fixtures and representative travel corridors into
+planning scenarios. Scores and shuttle economics are modelled, not observed demand, prices or
+operator quotes. A corridor can become a partner signal only after at least 20 aggregated intent
+events; addresses, postcodes and individual movements must never be shared. Run
+`npm run validate:mobility-partnership` after changing pilots, scoring or simulator assumptions.
+
 ## CRM and ticketing readiness
 
 `crm-ticketing-readiness.json` describes integration coverage. The versioned record contract is
