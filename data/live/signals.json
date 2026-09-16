@@ -1,5 +1,94 @@
 [
   {
+    "id": "experience-charlton-hospitality-2026-09-16",
+    "fixtureId": "2026-09-19-cha-a",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "medium",
+    "observedAt": "2026-09-16T09:21:51+01:00",
+    "title": {
+      "en": "Charlton released hospitality for the London City fixture",
+      "es": "Charlton lanzó hospitality para el partido ante London City"
+    },
+    "summary": {
+      "en": "Club 1905 hospitality is available at £45 per person plus VAT, including two-hour early access, brunch, a player interview and the Player of the Match presentation; private suites cost £1,250 plus VAT for up to ten guests.",
+      "es": "La hospitality Club 1905 está disponible por £45 por persona más IVA, con acceso dos horas antes, brunch, entrevista a una jugadora y entrega del premio a la mejor del partido; las suites privadas cuestan £1.250 más IVA para hasta diez personas."
+    },
+    "marketingAction": {
+      "en": "Surface the official package selectively to partner guests and high-value away audiences; keep it separate from standard ticket messaging and track clicks rather than treating availability as sales.",
+      "es": "Mostrar el paquete oficial de forma selectiva a invitados de partners y audiencias visitantes de alto valor; separarlo del mensaje estándar de entradas y medir clics sin convertir disponibilidad en ventas."
+    },
+    "sourceName": "Charlton Athletic",
+    "sourceUrl": "https://www.cafc.co.uk/news/london-city-lionesses-matchday-hospitality-packages-available"
+  },
+  {
+    "id": "access-charlton-parking-prebook-2026-09-16",
+    "fixtureId": "2026-09-19-cha-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-09-16T09:21:51+01:00",
+    "title": {
+      "en": "The Valley parking now requires a £7 pre-booking",
+      "es": "El parking de The Valley exige ahora reserva previa de £7"
+    },
+    "summary": {
+      "en": "Charlton confirmed on 15 September that all parking for women's home matches must be pre-booked for £7. Supporters arriving by car without a parking e-ticket will be turned away.",
+      "es": "Charlton confirmó el 15 de septiembre que todo el parking para partidos femeninos debe reservarse previamente por £7. Los aficionados que lleguen en coche sin e-ticket serán rechazados."
+    },
+    "marketingAction": {
+      "en": "Send the parking rule and booking link to away ticket holders and add it to matchday travel content before the final pre-match message.",
+      "es": "Enviar la norma y el enlace de reserva a compradores visitantes y añadirlos al contenido de viaje antes del último mensaje prepartido."
+    },
+    "sourceName": "Charlton Athletic",
+    "sourceUrl": "https://www.cafc.co.uk/news/changes-womens-fans-matchday-parking"
+  },
+  {
+    "id": "fixture-charlton-kickoff-1230-2026-09-16",
+    "fixtureId": "2026-09-19-cha-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-09-16T09:21:51+01:00",
+    "title": {
+      "en": "Charlton kickoff is 12:30, not 13:30",
+      "es": "El partido ante Charlton es a las 12:30, no a las 13:30"
+    },
+    "summary": {
+      "en": "London City ticket information, Charlton and WSL Football all confirm a 12:30 BST kickoff on 19 September. Main had regressed to 13:30 after the earlier BST correction; this is a confirmed schedule correction, not a forecast.",
+      "es": "La información de entradas de London City, Charlton y WSL Football confirman las 12:30 BST del 19 de septiembre. Main había vuelto a las 13:30 tras la corrección BST anterior; es una corrección confirmada de calendario, no un forecast."
+    },
+    "marketingAction": {
+      "en": "Immediately replace 13:30 in scheduled email, social, paid media, calendar links and travel information; use 12:30 BST in every supporter touchpoint.",
+      "es": "Sustituir de inmediato las 13:30 en email, social, paid media, enlaces de calendario e información de viaje programados; usar 12:30 BST en todos los puntos de contacto."
+    },
+    "sourceName": "London City Lionesses / Charlton Athletic / WSL Football",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/charlton-athletic-away-ticket-information",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/charlton-athletic-away-ticket-information",
+        "checkedAt": "2026-09-16"
+      },
+      {
+        "name": "Charlton Athletic",
+        "url": "https://www.cafc.co.uk/news/get-your-tickets-london-city-lionesses-h",
+        "checkedAt": "2026-09-16"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/",
+        "checkedAt": "2026-09-16"
+      }
+    ]
+  },
+  {
     "id": "fixture-time-bst-validation-2026-09-15",
     "fixtureId": "2026-09-26-bha-h",
     "category": "access",

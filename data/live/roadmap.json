@@ -1,5 +1,20 @@
 [
   {
+    "id": "charlton-matchday-comms",
+    "fixtureId": "2026-09-19-cha-a",
+    "area": "Marketing Operations",
+    "status": "next",
+    "due": "2026-09-16",
+    "title": {
+      "en": "Reissue Charlton time and access instructions",
+      "es": "Reemitir horario e instrucciones de acceso para Charlton"
+    },
+    "reason": {
+      "en": "The confirmed kickoff is 12:30 BST and The Valley now rejects cars without a £7 pre-booked parking e-ticket. Correct all scheduled touchpoints and segment the optional hospitality offer.",
+      "es": "El horario confirmado es 12:30 BST y The Valley rechaza ahora coches sin e-ticket de parking reservado por £7. Corregir todos los impactos programados y segmentar la oferta opcional de hospitality."
+    }
+  },
+  {
     "id": "bst-kickoff-parser-validation",
     "fixtureId": "2026-09-26-bha-h",
     "area": "Data Operations",
@@ -10,8 +25,8 @@
       "es": "Corregir y probar la conversión de hora local"
     },
     "reason": {
-      "en": "Prevents the daily refresh from reintroducing a one-hour BST offset into campaign, ticketing and access information.",
-      "es": "Evita que la actualización diaria vuelva a introducir una hora de desfase BST en campañas, ticketing e información de acceso."
+      "en": "The Charlton kickoff regressed to 13:30 in main although three official sources confirm 12:30. Fix and regression-test the refresh before it can overwrite campaign, ticketing or access information again.",
+      "es": "El horario de Charlton volvió a las 13:30 en main aunque tres fuentes oficiales confirman las 12:30. Corregir y probar la actualización antes de que vuelva a sobrescribir información de campaña, ticketing o acceso."
     }
   },
   {
