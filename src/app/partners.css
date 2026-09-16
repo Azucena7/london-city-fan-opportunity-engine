@@ -97,23 +97,54 @@
 @media (max-width: 980px) { .partnerHero, .partnerDossierHeader, .partnerActivation, .partnerGates { grid-template-columns: 1fr; } .partnerSelectorGrid, .partnerEvidenceGrid { grid-template-columns: 1fr 1fr; } .partnerValueExchange { grid-template-columns: 1fr; } .partnerPhases > div:last-child { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 680px) { .partnerPage { padding: 0 16px 55px; } .partnerHero { margin: 34px 0 55px; } .partnerHero h1 { font-size: 41px; } .partnerDraftState, .partnerSectionHead, .partnerPilotChoice { align-items: flex-start; flex-direction: column; } .partnerSectionHead > p { text-align: left; } .partnerSelectorGrid, .partnerEvidenceGrid, .partnerKpis > div:last-child, .partnerActivation > div > div:last-child, .partnerPhases > div:last-child, .partnerGates > div:last-child { grid-template-columns: 1fr; } .partnerComparisonTable .header { display: none; } .partnerComparisonTable > div { grid-template-columns: 1fr; gap: 6px; } .partnerGates article:nth-child(odd) { border-right: 0; } .partnerPrintFooter { flex-direction: column; } }
 @media print {
-  @page { size: A4; margin: 13mm; }
+  @page { size: A4; margin: 13mm 13mm 17mm; }
   body { background: #fff !important; color: #07182b !important; }
-  .partnerPage { max-width: none; padding: 0; color: #07182b; }
-  .partnerScreenNav, .partnerSelector, .partnerComparison, .partnerHeroActions, .partnerGuardrails { display: none !important; }
+  .partnerPage {
+    --ink: #07182b;
+    --muted: #425466;
+    --line: #ccd5dc;
+    --surface: #fff;
+    --surface-2: #fff;
+    --accent: #006f68;
+    --lcl-hyperturq: #006f68;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 9mm;
+    color: #07182b;
+  }
+  .partnerScreenNav, .partnerSelector, .partnerComparison, .partnerHeroActions { display: none !important; }
   .partnerHero { display: block; margin: 0 0 10mm; }
   .partnerHero h1 { max-width: none; color: #07182b; font-size: 34pt; }
-  .partnerHero > div:first-child > p, .partnerPilotChoice p, .partnerEvidenceGrid p, .partnerActivation aside small, .partnerValueExchange p, .partnerPhases article p, .partnerGates p { color: #425466 !important; }
+  .partnerHero > div:first-child > p, .partnerDossierHeader p, .partnerDossierHeader small, .partnerPilotChoice p, .partnerEvidenceGrid p, .partnerActivation aside small, .partnerValueExchange p, .partnerPhases article p, .partnerGates p, .partnerGates small { color: #425466 !important; }
+  .partnerHero .eyebrow, .partnerDossier .eyebrow, .partnerDossierHeader span, .partnerPilotChoice span, .partnerSectionHead > div > span, .partnerActivation article span { color: #006f68 !important; }
   .partnerDraftState { border-color: #d5a039; }
-  .partnerDossier { border: 1px solid #7aa; background: #fff; break-inside: auto; }
+  .partnerDraftState span, .partnerEvidenceGrid article > span, .partnerKpis article span, .partnerPhases article small, .partnerGates article span { color: #7a5000 !important; }
+  .partnerEvidenceGrid article.public-verified > span { color: #006f68 !important; }
+  .partnerDossier { overflow: visible; border: 0; border-radius: 0; background: #fff; break-inside: auto; }
+  .partnerDossierHeader { grid-template-columns: 1.4fr .45fr; }
   .partnerDossierHeader, .partnerDossier > section { padding: 7mm; }
   .partnerDossierHeader h2, .partnerSectionHead h3, .partnerActivation h3, .partnerGates h2 { color: #07182b; }
   .partnerDossierHeader > div:last-child, .partnerValueExchange > div, .partnerEvidenceGrid article, .partnerActivation article, .partnerActivation aside, .partnerKpis article, .partnerPhases article, .partnerGates { background: #fff; border-color: #ccd5dc; }
+  .partnerPilotChoice > div:last-child { display: block; }
+  .partnerPilotChoice button { display: none; }
+  .partnerPilotChoice button.active { display: inline-block; padding: 5px 8px; border-color: #006f68; color: #006f68; cursor: default; }
+  .partnerValueExchange { grid-template-columns: 1fr 1fr; }
   .partnerEvidenceGrid { grid-template-columns: 1fr 1fr; }
   .partnerActivation { grid-template-columns: 1.2fr .8fr; }
+  .partnerKpis > div:last-child { grid-template-columns: repeat(3, 1fr); }
   .partnerPhases { margin: 9mm 0; break-before: page; }
   .partnerPhases > div:last-child { grid-template-columns: repeat(5, 1fr); }
   .partnerGates { grid-template-columns: .8fr 1.2fr; margin: 9mm 0; }
-  .partnerPrintFooter { color: #425466; }
+  .partnerGates > div:last-child { grid-template-columns: 1fr 1fr; }
+  .partnerSectionHead, .partnerDossierHeader, .partnerPilotChoice, .partnerValueExchange > div, .partnerEvidenceGrid article, .partnerActivation article, .partnerActivation aside, .partnerKpis article, .partnerPhases article, .partnerGates article, .partnerGuardrails p { break-inside: avoid; }
+  .partnerSectionHead { break-after: avoid; }
+  .partnerGuardrails { display: block !important; margin: 8mm 0 12mm; padding: 6mm; border: 1px solid #ccd5dc; border-radius: 0; color: #425466; }
+  .partnerGuardrails summary { color: #07182b; font-size: 10px; list-style: none; }
+  .partnerGuardrails summary::-webkit-details-marker { display: none; }
+  .partnerGuardrails > p { display: block !important; margin: 0; padding: 2.5mm 0; }
+  .partnerPrintFooter { position: fixed; right: 0; bottom: -11mm; left: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin: 0; padding: 2.5mm 0 0; color: #425466; background: #fff; }
+  .partnerPrintFooter strong { color: #07182b; font-size: 8px; text-align: center; }
+  .partnerPrintFooter span:last-child { text-align: right; }
   a { color: inherit !important; text-decoration: none !important; }
 }

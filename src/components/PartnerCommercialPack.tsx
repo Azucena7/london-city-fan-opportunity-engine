@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
 import type { PartnerCommercialPackData, PartnerEvidenceState } from "@/lib/models";
@@ -28,11 +28,36 @@ export function PartnerCommercialPack({ data }: { data: PartnerCommercialPackDat
   const [fixtureId, setFixtureId] = useState(pack.recommendedFixtureIds[0] ?? "");
   const fixture = data.fixtures.find((item) => item.fixtureId === fixtureId) ?? data.fixtures[0];
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const requestedPack = data.packs.find((item) => item.id === params.get("pack"));
+    if (!requestedPack) return;
+
+    const requestedFixtureId = params.get("fixture");
+    const requestedFixture = requestedPack.recommendedFixtureIds.find((id) => id === requestedFixtureId);
+    setPackId(requestedPack.id);
+    setFixtureId(requestedFixture ?? requestedPack.recommendedFixtureIds[0]);
+  }, [data.packs]);
+
+  function updateSelectionUrl(nextPackId: string, nextFixtureId: string) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("pack", nextPackId);
+    url.searchParams.set("fixture", nextFixtureId);
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+  }
+
   function selectPack(id: string) {
     const next = data.packs.find((item) => item.id === id);
     if (!next) return;
+    const nextFixtureId = next.recommendedFixtureIds[0];
     setPackId(id);
-    setFixtureId(next.recommendedFixtureIds[0]);
+    setFixtureId(nextFixtureId);
+    updateSelectionUrl(id, nextFixtureId);
+  }
+
+  function selectFixture(id: string) {
+    setFixtureId(id);
+    updateSelectionUrl(pack.id, id);
   }
 
   return (
@@ -62,7 +87,7 @@ export function PartnerCommercialPack({ data }: { data: PartnerCommercialPackDat
 
         <section className="partnerPilotChoice">
           <div><span>{es ? "PARTIDO PILOTO" : "PILOT FIXTURE"}</span><strong>{fixture.label[lang]}</strong><p>{pack.whyFit[lang]}</p></div>
-          <div>{pack.recommendedFixtureIds.map((id) => { const item = data.fixtures.find((candidate) => candidate.fixtureId === id); return <button type="button" aria-pressed={fixtureId === id} className={fixtureId === id ? "active" : ""} key={id} onClick={() => setFixtureId(id)}>{item?.label[lang]}</button>; })}</div>
+          <div>{pack.recommendedFixtureIds.map((id) => { const item = data.fixtures.find((candidate) => candidate.fixtureId === id); return <button type="button" aria-pressed={fixtureId === id} className={fixtureId === id ? "active" : ""} key={id} onClick={() => selectFixture(id)}>{item?.label[lang]}</button>; })}</div>
         </section>
 
         <section className="partnerValueExchange">
@@ -102,7 +127,7 @@ export function PartnerCommercialPack({ data }: { data: PartnerCommercialPackDat
       </section>
 
       <details className="partnerGuardrails"><summary>{es ? "Límites del dossier" : "Pack guardrails"}</summary>{data.guardrails.map((item) => <p key={item.id}>{item.text[lang]}</p>)}</details>
-      <footer className="partnerPrintFooter"><span>London City Fan Opportunity Lab · Partner Commercial Pack</span><span>{es ? "Borrador independiente · no vinculante" : "Independent draft · non-binding"}</span></footer>
+      <footer className="partnerPrintFooter"><span>London City Fan Opportunity Lab · Partner Commercial Pack</span><strong>{pack.candidate}</strong><span>{es ? "Borrador independiente · no vinculante" : "Independent draft · non-binding"}</span></footer>
     </main>
   );
 }
