@@ -76,6 +76,17 @@
 .mobilityGuardrails { color: var(--muted); font-size: 10px; }
 .mobilityGuardrails summary { cursor: pointer; color: var(--ink); font-weight: 900; }
 .mobilityGuardrails p { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.mobilityMeasure { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-top: 13px; }
+.mobilityMeasure button { padding: 11px 14px; border: 0; border-radius: 9px; background: var(--lcl-hyperturq); color: var(--lcl-navy); font: inherit; font-size: 9px; font-weight: 900; cursor: pointer; }
+.mobilityMeasure div { text-align: right; }
+.mobilityMeasure span, .mobilityMeasure small { display: block; }
+.mobilityMeasure span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.mobilityMeasure small { margin-top: 4px; color: var(--muted); font-size: 8px; }
+.mobilityMeasurementLink { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-top: 28px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; }
+.mobilityMeasurementLink span, .mobilityMeasurementLink strong { display: block; }
+.mobilityMeasurementLink span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; }
+.mobilityMeasurementLink strong { margin-top: 5px; font-size: 12px; }
+.mobilityMeasurementLink a { padding: 10px 13px; border: 1px solid var(--lcl-hyperturq); border-radius: 8px; color: var(--lcl-hyperturq); font-size: 9px; font-weight: 900; text-decoration: none; }
 
 @media (max-width: 980px) {
   .mobilityHero, .mobilitySimulatorBody { grid-template-columns: 1fr; }
@@ -94,4 +105,6 @@
   .mobilityPilotGrid, .mobilityCorridorGrid, .mobilityPartners, .mobilityResultGrid, .mobilityBriefFacts { grid-template-columns: 1fr; }
   .mobilityResultGrid article, .mobilityBriefFacts article { border-right: 0; }
   .mobilityScore strong { font-size: 48px; }
+  .mobilityMeasure, .mobilityMeasurementLink { align-items: flex-start; flex-direction: column; }
+  .mobilityMeasure div { text-align: left; }
 }

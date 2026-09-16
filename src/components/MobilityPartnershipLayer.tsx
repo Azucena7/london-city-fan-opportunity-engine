@@ -1,14 +1,23 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useLanguage } from "./LanguageProvider";
-import type { MobilityPartnershipData } from "@/lib/models";
+import { emitMeasurementEvent, type MeasurementDeliveryState } from "@/lib/measurement";
+import type { ExperimentMeasurementData, MobilityPartnershipData } from "@/lib/models";
 
 function money(value: number) {
   return new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(value);
 }
 
-export function MobilityPartnershipLayer({ data }: { data: MobilityPartnershipData }) {
+function band(value: number, cuts: number[]) {
+  const first = cuts.find((cut) => value < cut);
+  if (first === undefined) return `${cuts.at(-1)}+`;
+  const index = cuts.indexOf(first);
+  return index === 0 ? `<${first}` : `${cuts[index - 1]}-${first - 1}`;
+}
+
+export function MobilityPartnershipLayer({ data, measurement }: { data: MobilityPartnershipData; measurement: ExperimentMeasurementData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const [fixtureId, setFixtureId] = useState(data.pilots[0]?.fixtureId ?? "");
@@ -16,6 +25,7 @@ export function MobilityPartnershipLayer({ data }: { data: MobilityPartnershipDa
   const [seats, setSeats] = useState(data.simulator.capacities[1]?.seats ?? data.simulator.capacities[0]?.seats ?? 16);
   const [riders, setRiders] = useState(data.simulator.minimumAggregateCohort);
   const [fare, setFare] = useState(data.simulator.defaultFarePerRider);
+  const [deliveryState, setDeliveryState] = useState<MeasurementDeliveryState | null>(null);
 
   const fixture = data.pilots.find((item) => item.fixtureId === fixtureId) ?? data.pilots[0];
   const corridor = data.corridors.find((item) => item.id === corridorId) ?? data.corridors[0];
@@ -36,6 +46,27 @@ export function MobilityPartnershipLayer({ data }: { data: MobilityPartnershipDa
   const occupancy = Math.round((cappedRiders / seats) * 100);
   const thresholdMet = riders >= data.simulator.minimumAggregateCohort;
   const commercialModelWorks = breakEven <= seats;
+
+  async function measureScenario() {
+    setDeliveryState(null);
+    const experiment = measurement.experiments.find((item) => item.fixtureId === fixture.fixtureId);
+    const result = await emitMeasurementEvent({
+      eventName: "mobility_scenario_evaluated",
+      fixtureId: fixture.fixtureId,
+      experimentId: experiment?.id,
+      locale: lang,
+      properties: {
+        corridor_id: corridor.id,
+        vehicle_seats: seats,
+        rider_band: band(riders, [10, 20, 33, 49]),
+        fare_band: band(fare, [10, 20, 30, 40]),
+        occupancy_band: band(occupancy, [25, 50, 75, 100]),
+        threshold_met: thresholdMet,
+        opportunity_score_band: band(opportunityScore, [50, 65, 80, 90])
+      }
+    });
+    setDeliveryState(result.state);
+  }
 
   return (
     <div className="mobilityLayer">
@@ -84,6 +115,7 @@ export function MobilityPartnershipLayer({ data }: { data: MobilityPartnershipDa
               <article className={balance >= 0 ? "positive" : "negative"}><span>{es ? "Balance escenario" : "Scenario balance"}</span><strong>{balance >= 0 ? "+" : ""}{money(balance)}</strong><small>{es ? "antes de costes no modelados" : "before unmodelled costs"}</small></article>
             </div>
             <div className={`mobilityThreshold ${thresholdMet ? "met" : "below"}`}><span>{thresholdMet ? "✓" : "!"}</span><div><strong>{thresholdMet ? (es ? "El escenario supera el umbral agregado" : "Scenario clears the aggregate threshold") : (es ? "Por debajo del umbral agregado" : "Below the aggregate threshold")}</strong><p>{es ? `Aun así, se necesitan ${data.simulator.minimumAggregateCohort}+ señales reales instrumentadas; el control actual solo mueve una hipótesis.` : `Even so, ${data.simulator.minimumAggregateCohort}+ real instrumented signals are required; this control only changes a hypothesis.`}</p></div></div>
+            <div className="mobilityMeasure"><button type="button" onClick={measureScenario}>{es ? "Registrar escenario de prueba" : "Record test scenario"}</button><div><span>{deliveryState ?? (es ? "AÚN NO EMITIDO" : "NOT EMITTED")}</span><small>{es ? "Solo propiedades agregables; sin origen individual." : "Aggregate-safe properties only; no individual origin."}</small></div></div>
           </div>
         </div>
       </section>
@@ -95,6 +127,7 @@ export function MobilityPartnershipLayer({ data }: { data: MobilityPartnershipDa
       </section>
 
       <details className="mobilityGuardrails"><summary>{es ? "Privacidad, evidencia y límites" : "Privacy, evidence and limits"}</summary>{data.guardrails.map((item) => <p key={item.id}>{item.text[lang]}</p>)}</details>
+      <div className="mobilityMeasurementLink"><div><span>EXPERIMENT MEASUREMENT</span><strong>{es ? "Comprobar entrega, cohortes y umbrales" : "Check delivery, cohorts and thresholds"}</strong></div><Link href="/measurement">{es ? "Abrir medición" : "Open measurement"} →</Link></div>
     </div>
   );
 }

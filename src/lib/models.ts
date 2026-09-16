@@ -358,6 +358,49 @@ export type MobilityPartnershipData = {
   guardrails: Array<{ id: string; text: LocalizedText }>;
 };
 
+export type ExperimentMeasurementData = {
+  version: "1.0";
+  checkedAt: string;
+  status: "provider-not-configured" | "test-collecting" | "production-collecting";
+  headline: LocalizedText;
+  principle: LocalizedText;
+  minimumAggregateCohort: number;
+  experiments: Array<{
+    id: string;
+    fixtureId: string;
+    label: LocalizedText;
+    objective: LocalizedText;
+  }>;
+  events: Array<{
+    name: "experience_concept_selected" | "experience_validation_complete" | "mobility_scenario_evaluated";
+    source: "experience" | "mobility";
+    label: LocalizedText;
+    allowedProperties: string[];
+    requiredProperties: string[];
+    propertyTypes: Partial<Record<string, string>>;
+    state: "provider-ready";
+  }>;
+  cohorts: Array<{
+    fixtureId: string;
+    sampleSize: number | null;
+    transportInterestCount: number | null;
+    mobilityScenarioCount: number | null;
+    state: "not-instrumented" | "insufficient-sample" | "threshold-met";
+  }>;
+  provider: {
+    ingestEnvironmentVariable: string;
+    summaryEnvironmentVariable: string;
+    secretEnvironmentVariable: string;
+    modeEnvironmentVariable: string;
+    defaultMode: "test";
+    maximumRetentionDays: number;
+  };
+  commonFields: string[];
+  prohibitedFields: string[];
+  qualityRules: Array<{ id: string; text: LocalizedText }>;
+  guardrails: Array<{ id: string; text: LocalizedText }>;
+};
+
 export type PublicSignalRefresh = {
   automated: boolean;
   cadence: "weekly-and-fixture-windows";

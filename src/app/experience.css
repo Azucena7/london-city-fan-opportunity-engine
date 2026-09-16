@@ -56,6 +56,7 @@
 .experienceCompletion span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; letter-spacing: .08em; }
 .experienceCompletion strong { margin-top: 7px; font-size: 14px; }
 .experienceCompletion p { margin: 8px 0 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
+.experienceCompletion > small { display: block; margin-top: 7px; color: var(--lcl-hyperturq); font-family: monospace; font-size: 8px; text-transform: uppercase; }
 
 .experienceFunnelGrid { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
 .experienceFunnelGrid article { min-height: 160px; padding: 17px; border-right: 1px solid var(--line); }
@@ -83,7 +84,9 @@
 .experienceMobilityBridge { display: flex; justify-content: space-between; gap: 35px; align-items: flex-end; margin: 30px 0; padding: clamp(25px, 4vw, 40px); border: 1px solid rgba(50,230,212,.28); border-radius: 22px; background: linear-gradient(145deg, rgba(50,230,212,.06), rgba(255,255,255,.018)); }
 .experienceMobilityBridge h2 { max-width: 650px; margin: 10px 0; font-size: clamp(28px, 3.7vw, 43px); line-height: 1; }
 .experienceMobilityBridge p { max-width: 680px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.experienceMobilityBridge > div:last-child { display: flex; gap: 8px; flex-wrap: wrap; }
 .experienceMobilityBridge a { flex: 0 0 auto; padding: 13px 17px; border-radius: 10px; background: var(--lcl-hyperturq); color: var(--lcl-navy); font-size: 10px; font-weight: 900; text-decoration: none; }
+.experienceMobilityBridge a:last-child { border: 1px solid var(--lcl-hyperturq); background: transparent; color: var(--lcl-hyperturq); }
 
 @media (max-width: 980px) {
   .experienceHero { grid-template-columns: 1fr; }

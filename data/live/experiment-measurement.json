@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "checkedAt": "2026-09-16T20:00:00Z",
+  "status": "provider-not-configured",
+  "headline": {
+    "en": "Measure intent before turning a scenario into a product or partnership",
+    "es": "Medir la intención antes de convertir un escenario en producto o partnership"
+  },
+  "principle": {
+    "en": "A browser interaction is not evidence until it is validated, delivered, deduplicated and aggregated into a sufficient cohort.",
+    "es": "Una interacción del navegador no es evidencia hasta que se valida, entrega, deduplica y agrega en una cohorte suficiente."
+  },
+  "minimumAggregateCohort": 20,
+  "experiments": [
+    {
+      "id": "arsenal-mobility-pilot",
+      "fixtureId": "2027-01-24-ars-h",
+      "label": { "en": "Arsenal · 24 Jan", "es": "Arsenal · 24 ene" },
+      "objective": { "en": "Test local group transport under high attention", "es": "Probar transporte local de grupos con alta atención" }
+    },
+    {
+      "id": "chelsea-mobility-pilot",
+      "fixtureId": "2027-02-14-che-h",
+      "label": { "en": "Chelsea · 14 Feb", "es": "Chelsea · 14 feb" },
+      "objective": { "en": "Test rail-to-ground interest for a London derby", "es": "Probar interés tren-estadio para un derbi londinense" }
+    },
+    {
+      "id": "liverpool-mobility-pilot",
+      "fixtureId": "2027-03-14-liv-h",
+      "label": { "en": "Liverpool · 14 Mar", "es": "Liverpool · 14 mar" },
+      "objective": { "en": "Test whether the signal repeats beyond a London opponent", "es": "Probar si la señal se repite más allá de un rival londinense" }
+    }
+  ],
+  "events": [
+    {
+      "name": "experience_concept_selected",
+      "source": "experience",
+      "label": { "en": "Experience concept selected", "es": "Concepto de experiencia elegido" },
+      "allowedProperties": ["concept_id"],
+      "requiredProperties": ["concept_id"],
+      "propertyTypes": { "concept_id": "string" },
+      "state": "provider-ready"
+    },
+    {
+      "name": "experience_validation_complete",
+      "source": "experience",
+      "label": { "en": "Experience configuration completed", "es": "Configuración de experiencia completada" },
+      "allowedProperties": ["concept_id", "origin_market", "origin_id", "party_size", "price_band", "hotel_interest", "transport_interest", "spanish_host_interest"],
+      "requiredProperties": ["concept_id", "origin_market", "origin_id", "party_size", "price_band", "hotel_interest", "transport_interest", "spanish_host_interest"],
+      "propertyTypes": { "concept_id": "string", "origin_market": "string", "origin_id": "string", "party_size": "string", "price_band": "string", "hotel_interest": "boolean", "transport_interest": "boolean", "spanish_host_interest": "boolean" },
+      "state": "provider-ready"
+    },
+    {
+      "name": "mobility_scenario_evaluated",
+      "source": "mobility",
+      "label": { "en": "Mobility scenario evaluated", "es": "Escenario de movilidad evaluado" },
+      "allowedProperties": ["corridor_id", "vehicle_seats", "rider_band", "fare_band", "occupancy_band", "threshold_met", "opportunity_score_band"],
+      "requiredProperties": ["corridor_id", "vehicle_seats", "rider_band", "fare_band", "occupancy_band", "threshold_met", "opportunity_score_band"],
+      "propertyTypes": { "corridor_id": "string", "vehicle_seats": "number", "rider_band": "string", "fare_band": "string", "occupancy_band": "string", "threshold_met": "boolean", "opportunity_score_band": "string" },
+      "state": "provider-ready"
+    }
+  ],
+  "cohorts": [
+    { "fixtureId": "2027-01-24-ars-h", "sampleSize": null, "transportInterestCount": null, "mobilityScenarioCount": null, "state": "not-instrumented" },
+    { "fixtureId": "2027-02-14-che-h", "sampleSize": null, "transportInterestCount": null, "mobilityScenarioCount": null, "state": "not-instrumented" },
+    { "fixtureId": "2027-03-14-liv-h", "sampleSize": null, "transportInterestCount": null, "mobilityScenarioCount": null, "state": "not-instrumented" }
+  ],
+  "provider": {
+    "ingestEnvironmentVariable": "MEASUREMENT_INGEST_URL",
+    "summaryEnvironmentVariable": "MEASUREMENT_SUMMARY_URL",
+    "secretEnvironmentVariable": "MEASUREMENT_WRITE_KEY",
+    "modeEnvironmentVariable": "MEASUREMENT_MODE",
+    "defaultMode": "test",
+    "maximumRetentionDays": 90
+  },
+  "commonFields": ["schema_version", "event_id", "event_name", "occurred_at", "locale", "fixture_id", "experiment_id", "utm_source", "utm_medium", "utm_campaign", "utm_content", "properties"],
+  "prohibitedFields": ["name", "email", "phone", "address", "postcode", "ip_address", "user_agent", "supporter_id", "payment", "free_text"],
+  "qualityRules": [
+    { "id": "test-separation", "text": { "en": "Test events can never count toward a production cohort.", "es": "Los eventos de prueba nunca pueden contar en una cohorte de producción." } },
+    { "id": "event-deduplication", "text": { "en": "The provider must deduplicate by event_id before aggregation.", "es": "El proveedor debe deduplicar por event_id antes de agregar." } },
+    { "id": "canonical-fixture", "text": { "en": "Every fixture-scoped event must resolve to one canonical home fixture.", "es": "Cada evento de partido debe resolver a un único partido local canónico." } },
+    { "id": "null-not-zero", "text": { "en": "Unavailable counts remain null; they never become zero.", "es": "Los recuentos no disponibles permanecen null; nunca se convierten en cero." } },
+    { "id": "minimum-cohort", "text": { "en": "Partner-facing evidence requires at least 20 valid production events.", "es": "La evidencia para partners requiere al menos 20 eventos de producción válidos." } }
+  ],
+  "guardrails": [
+    { "id": "allowlist-only", "text": { "en": "Unknown fields and properties are rejected before delivery.", "es": "Los campos y propiedades desconocidos se rechazan antes del envío." } },
+    { "id": "no-identifiers", "text": { "en": "Direct identifiers, postcodes, IP addresses and user agents are prohibited.", "es": "Identificadores directos, postcodes, direcciones IP y user agents están prohibidos." } },
+    { "id": "provider-explicit", "text": { "en": "No event leaves the application until a provider endpoint is explicitly configured.", "es": "Ningún evento sale de la aplicación hasta configurar explícitamente un endpoint." } },
+    { "id": "retention-cap", "text": { "en": "The approved provider must retain raw events for no more than 90 days.", "es": "El proveedor aprobado no debe conservar eventos brutos más de 90 días." } },
+    { "id": "no-commercial-claim", "text": { "en": "A threshold supports review; it does not prove purchase intent or authorise a launch.", "es": "Un umbral permite revisar; no demuestra intención de compra ni autoriza un lanzamiento." } }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/experiment-measurement",
+  "title": "ExperimentMeasurementLayer",
+  "type": "object",
+  "required": ["version", "checkedAt", "status", "headline", "principle", "minimumAggregateCohort", "experiments", "events", "cohorts", "provider", "commonFields", "prohibitedFields", "qualityRules", "guardrails"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "checkedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["provider-not-configured", "test-collecting", "production-collecting"] },
+    "headline": { "$ref": "#/$defs/localized" },
+    "principle": { "$ref": "#/$defs/localized" },
+    "minimumAggregateCohort": { "type": "integer", "minimum": 10 },
+    "experiments": { "type": "array", "minItems": 3, "maxItems": 3 },
+    "events": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["name", "source", "label", "allowedProperties", "requiredProperties", "propertyTypes", "state"],
+        "properties": {
+          "name": { "enum": ["experience_concept_selected", "experience_validation_complete", "mobility_scenario_evaluated"] },
+          "source": { "enum": ["experience", "mobility"] },
+          "label": { "$ref": "#/$defs/localized" },
+          "allowedProperties": { "type": "array", "items": { "type": "string" } },
+          "requiredProperties": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "propertyTypes": { "type": "object", "additionalProperties": { "enum": ["string", "number", "boolean"] } },
+          "state": { "const": "provider-ready" }
+        }
+      }
+    },
+    "cohorts": { "type": "array", "minItems": 3, "maxItems": 3 },
+    "provider": {
+      "type": "object",
+      "required": ["ingestEnvironmentVariable", "summaryEnvironmentVariable", "secretEnvironmentVariable", "modeEnvironmentVariable", "defaultMode", "maximumRetentionDays"],
+      "properties": {
+        "defaultMode": { "const": "test" },
+        "maximumRetentionDays": { "type": "integer", "minimum": 1, "maximum": 90 }
+      }
+    },
+    "commonFields": { "type": "array", "minItems": 8, "items": { "type": "string" } },
+    "prohibitedFields": { "type": "array", "minItems": 8, "items": { "type": "string" } },
+    "qualityRules": { "type": "array", "minItems": 5 },
+    "guardrails": { "type": "array", "minItems": 5 }
+  },
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "required": ["en", "es"],
+      "properties": { "en": { "type": "string", "minLength": 1 }, "es": { "type": "string", "minLength": 1 } },
+      "additionalProperties": false
+    }
+  }
+}
