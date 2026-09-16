@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/pilot-readiness",
+  "title": "PilotReadiness",
+  "type": "object",
+  "required": ["version", "checkedAt", "status", "recommendationState", "recommendedPackId", "recommendedFixtureId", "headline", "principle", "scoringModel", "candidates", "owners", "checklist", "timeline", "budgetInputs", "outreachDraft", "decision", "guardrails"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "checkedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["decision-draft", "ready-for-review", "approved"] },
+    "recommendationState": { "enum": ["provisional", "approved"] },
+    "recommendedPackId": { "type": "string", "minLength": 1 },
+    "recommendedFixtureId": { "type": "string", "minLength": 1 },
+    "headline": { "$ref": "#/$defs/localized" },
+    "principle": { "$ref": "#/$defs/localized" },
+    "scoringModel": {
+      "type": "object",
+      "required": ["scale", "dimensions"],
+      "properties": {
+        "scale": { "const": "1-5" },
+        "dimensions": { "type": "array", "minItems": 5, "maxItems": 5 }
+      }
+    },
+    "candidates": { "type": "array", "minItems": 4, "maxItems": 4 },
+    "owners": { "type": "array", "minItems": 6 },
+    "checklist": { "type": "array", "minItems": 8 },
+    "timeline": { "type": "array", "minItems": 7, "maxItems": 7 },
+    "budgetInputs": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "currency", "value", "state"],
+        "properties": {
+          "currency": { "const": "GBP" },
+          "value": { "type": "null" },
+          "state": { "const": "required-input" }
+        }
+      }
+    },
+    "outreachDraft": {
+      "type": "object",
+      "required": ["state", "sendEnabled", "subject", "opening", "agenda"],
+      "properties": {
+        "state": { "enum": ["not-approved", "approved"] },
+        "sendEnabled": { "const": false }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": ["state", "blockingChecklistIds", "nextReview"],
+      "properties": {
+        "state": { "enum": ["hold", "ready-for-review", "go", "no-go"] },
+        "blockingChecklistIds": { "type": "array", "items": { "type": "string" } },
+        "nextReview": { "$ref": "#/$defs/localized" }
+      }
+    },
+    "guardrails": { "type": "array", "minItems": 5 }
+  },
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "required": ["en", "es"],
+      "properties": { "en": { "type": "string", "minLength": 1 }, "es": { "type": "string", "minLength": 1 } },
+      "additionalProperties": false
+    }
+  }
+}

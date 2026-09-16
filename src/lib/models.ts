@@ -451,6 +451,79 @@ export type PartnerCommercialPackData = {
   guardrails: Array<{ id: string; text: LocalizedText }>;
 };
 
+export type PilotReadinessState = "ready" | "waiting" | "blocked";
+
+export type PilotReadinessData = {
+  version: "1.0";
+  checkedAt: string;
+  status: "decision-draft" | "ready-for-review" | "approved";
+  recommendationState: "provisional" | "approved";
+  recommendedPackId: string;
+  recommendedFixtureId: string;
+  headline: LocalizedText;
+  principle: LocalizedText;
+  scoringModel: {
+    scale: "1-5";
+    dimensions: Array<{
+      id: "impact" | "feasibility" | "evidence" | "speed" | "control";
+      label: LocalizedText;
+      weight: number;
+    }>;
+  };
+  candidates: Array<{
+    packId: string;
+    fixtureId: string;
+    rank: number;
+    scores: Record<"impact" | "feasibility" | "evidence" | "speed" | "control", number>;
+    weightedScore: number;
+    decision: "recommended-for-review" | "hold" | "not-prioritised";
+    rationale: LocalizedText;
+    blockers: string[];
+  }>;
+  owners: Array<{
+    id: string;
+    label: LocalizedText;
+    remit: LocalizedText;
+    state: "awaiting-assignment" | "assigned";
+  }>;
+  checklist: Array<{
+    id: string;
+    category: "evidence" | "commercial" | "operations" | "rights" | "privacy" | "measurement";
+    label: LocalizedText;
+    ownerId: string;
+    state: PilotReadinessState;
+    sourceRef: string;
+  }>;
+  timeline: Array<{
+    id: string;
+    offset: "T-90" | "T-60" | "T-30" | "T-14" | "T-7" | "MATCHDAY" | "T+7";
+    label: LocalizedText;
+    output: LocalizedText;
+    ownerId: string;
+    state: "planned" | "waiting" | "blocked";
+  }>;
+  budgetInputs: Array<{
+    id: string;
+    label: LocalizedText;
+    currency: "GBP";
+    value: null;
+    state: "required-input";
+  }>;
+  outreachDraft: {
+    state: "not-approved" | "approved";
+    sendEnabled: false;
+    subject: LocalizedText;
+    opening: LocalizedText;
+    agenda: LocalizedText[];
+  };
+  decision: {
+    state: "hold" | "ready-for-review" | "go" | "no-go";
+    blockingChecklistIds: string[];
+    nextReview: LocalizedText;
+  };
+  guardrails: Array<{ id: string; text: LocalizedText }>;
+};
+
 export type PublicSignalRefresh = {
   automated: boolean;
   cadence: "weekly-and-fixture-windows";

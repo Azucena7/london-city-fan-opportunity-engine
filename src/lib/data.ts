@@ -20,8 +20,9 @@ import experienceDemandRaw from "../../data/live/experience-demand-validation.js
 import mobilityPartnershipRaw from "../../data/live/mobility-partnership.json";
 import experimentMeasurementRaw from "../../data/live/experiment-measurement.json";
 import partnerCommercialPackRaw from "../../data/live/partner-commercial-pack.json";
+import pilotReadinessRaw from "../../data/live/pilot-readiness.json";
 import { buildPostMatchScorecards } from "./postmatch";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness, ExperienceDemandData, ExperimentMeasurementData, Fixture, LeagueAttendanceBenchmark, LiveSignal, MobilityPartnershipData, PartnerCommercialPackData, PostMatchReview, SearchDemandData, Territory } from "./models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness, ExperienceDemandData, ExperimentMeasurementData, Fixture, LeagueAttendanceBenchmark, LiveSignal, MobilityPartnershipData, PartnerCommercialPackData, PilotReadinessData, PostMatchReview, SearchDemandData, Territory } from "./models";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -45,4 +46,5 @@ export const experienceDemand = experienceDemandRaw as ExperienceDemandData;
 export const mobilityPartnership = mobilityPartnershipRaw as MobilityPartnershipData;
 export const experimentMeasurement = experimentMeasurementRaw as ExperimentMeasurementData;
 export const partnerCommercialPack = partnerCommercialPackRaw as PartnerCommercialPackData;
+export const pilotReadiness = pilotReadinessRaw as PilotReadinessData;
 export const postMatchScorecards = buildPostMatchScorecards(calendar, postmatchReviews, crmTicketingDemo);

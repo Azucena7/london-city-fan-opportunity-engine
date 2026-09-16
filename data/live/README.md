@@ -47,6 +47,12 @@ scenarios, missing measurement and partner-dependent facts. The repository canno
 operational, rights or privacy gates, contact a candidate, or present assumptions as quotes. Run
 `npm run validate:partner-commercial-pack` after changing candidates, pilots, evidence or KPIs.
 
+`pilot-readiness.json` ranks the four commercial hypotheses with a transparent 1–5 weighted model,
+then joins the provisional recommendation to owners, checklist items, budget inputs and a T−90 to
+T+7 decision route. It is an internal decision draft: owners remain unassigned, budget values remain
+empty, outreach is disabled and blocked gates force `hold`. Run `npm run validate:pilot-readiness`
+after changing scores, owners, blockers, timeline or decision state.
+
 ## CRM and ticketing readiness
 
 `crm-ticketing-readiness.json` describes integration coverage. The versioned record contract is

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { partnerCommercialPack } from "@/lib/data";
+import { partnerCommercialPack, pilotReadiness } from "@/lib/data";
 import { PartnerCommercialPack } from "@/components/PartnerCommercialPack";
 
 export const metadata: Metadata = {
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function PartnersPage() {
-  return <PartnerCommercialPack data={partnerCommercialPack} />;
+  return <PartnerCommercialPack data={partnerCommercialPack} readiness={pilotReadiness} />;
 }
