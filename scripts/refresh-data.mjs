@@ -82,10 +82,17 @@ function normaliseFixtures(warmup, existing) {
     const key = `${date}-${opponent}-${homeAway}`;
     const previous = currentByKey.get(key) ?? {};
     const result = resultByKey.get(key) ?? previous.result;
+    const fetchedKickoff = londonKickoff(date, item.time);
+    const unresolvedKickoff = previous.sourceDiscrepancies?.find(
+      (discrepancy) => discrepancy.field === "kickoff" && discrepancy.state === "unresolved"
+    );
+    const kickoff = unresolvedKickoff?.values?.some((value) => value.value === previous.kickoff)
+      ? previous.kickoff
+      : fetchedKickoff;
     rows.push({
       id: previous.id ?? `${date}-${slug(opponent)}-${homeAway[0]}`,
       date,
-      kickoff: londonKickoff(date, item.time),
+      kickoff,
       opponent,
       homeAway,
       competition: item.leagueStageTitle ?? previous.competition ?? "Competition TBC",
