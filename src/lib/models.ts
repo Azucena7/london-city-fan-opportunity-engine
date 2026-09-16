@@ -304,6 +304,60 @@ export type ExperienceDemandData = {
   guardrails: Array<{ id: string; text: LocalizedText }>;
 };
 
+export type MobilityPartnershipData = {
+  version: "1.0";
+  checkedAt: string;
+  status: "planning-scenario" | "partner-review" | "pilot-approved";
+  demandState: "requires-instrumentation" | "measured-aggregate";
+  headline: LocalizedText;
+  principle: LocalizedText;
+  pilots: Array<{
+    fixtureId: string;
+    label: LocalizedText;
+    appealScore: number;
+    purpose: LocalizedText;
+  }>;
+  corridors: Array<{
+    id: string;
+    label: LocalizedText;
+    representativeOrigins: string[];
+    evidenceState: "modelled-scenario" | "measured-aggregate";
+    territoryOpportunity: number;
+    travelFriction: number;
+    groupSuitability: number;
+    note: LocalizedText;
+  }>;
+  partnerModels: Array<{
+    id: string;
+    category: "journey-technology" | "rail" | "vehicle-operator";
+    candidate: string;
+    state: "candidate-not-contacted" | "under-review" | "approved";
+    role: LocalizedText;
+  }>;
+  scoring: {
+    weights: {
+      territoryOpportunity: number;
+      travelFriction: number;
+      groupSuitability: number;
+      fixtureAppeal: number;
+    };
+    explanation: LocalizedText;
+  };
+  simulator: {
+    currency: "GBP";
+    minimumAggregateCohort: number;
+    defaultFarePerRider: number;
+    capacities: Array<{ seats: number; scenarioCost: number }>;
+    warning: LocalizedText;
+  };
+  experienceEvent: {
+    eventName: string;
+    demandField: string;
+    state: "requires-instrumentation" | "ready";
+  };
+  guardrails: Array<{ id: string; text: LocalizedText }>;
+};
+
 export type PublicSignalRefresh = {
   automated: boolean;
   cadence: "weekly-and-fixture-windows";

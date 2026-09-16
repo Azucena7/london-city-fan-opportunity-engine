@@ -1,0 +1,127 @@
+{
+  "version": "1.0",
+  "checkedAt": "2026-09-16T18:00:00Z",
+  "status": "planning-scenario",
+  "demandState": "requires-instrumentation",
+  "headline": {
+    "en": "Turn travel friction into a testable matchday partnership",
+    "es": "Convertir la fricción de viaje en un partnership de partido comprobable"
+  },
+  "principle": {
+    "en": "Aggregate intent can justify a corridor test; one journey or a modelled score cannot justify a vehicle.",
+    "es": "La intención agregada puede justificar probar un corredor; un trayecto o un score modelado no justifican un vehículo."
+  },
+  "pilots": [
+    {
+      "fixtureId": "2027-01-24-ars-h",
+      "label": { "en": "Arsenal · 24 Jan", "es": "Arsenal · 24 ene" },
+      "appealScore": 92,
+      "purpose": { "en": "High-attention stress test for local group transport", "es": "Prueba de alta atención para transporte de grupos locales" }
+    },
+    {
+      "fixtureId": "2027-02-14-che-h",
+      "label": { "en": "Chelsea · 14 Feb", "es": "Chelsea · 14 feb" },
+      "appealScore": 88,
+      "purpose": { "en": "London derby test for rail-to-ground connection", "es": "Prueba de derbi londinense para conexión tren-estadio" }
+    },
+    {
+      "fixtureId": "2027-03-14-liv-h",
+      "label": { "en": "Liverpool · 14 Mar", "es": "Liverpool · 14 mar" },
+      "appealScore": 84,
+      "purpose": { "en": "Repeatability test beyond a London opponent", "es": "Prueba de repetición más allá de un rival londinense" }
+    }
+  ],
+  "corridors": [
+    {
+      "id": "bromley-local",
+      "label": { "en": "Bromley local connector", "es": "Conector local de Bromley" },
+      "representativeOrigins": ["Bromley South", "Bickley", "Chislehurst"],
+      "evidenceState": "modelled-scenario",
+      "territoryOpportunity": 86,
+      "travelFriction": 45,
+      "groupSuitability": 72,
+      "note": { "en": "Tests the last mile and a visible matchday meeting point.", "es": "Prueba el último tramo y un punto de encuentro visible en matchday." }
+    },
+    {
+      "id": "east-croydon",
+      "label": { "en": "East Croydon corridor", "es": "Corredor East Croydon" },
+      "representativeOrigins": ["East Croydon", "Shirley", "Elmers End"],
+      "evidenceState": "modelled-scenario",
+      "territoryOpportunity": 82,
+      "travelFriction": 78,
+      "groupSuitability": 84,
+      "note": { "en": "Tests whether dispersed southern demand can converge at one hub.", "es": "Prueba si la demanda dispersa del sur puede converger en un único hub." }
+    },
+    {
+      "id": "lewisham-grove-park",
+      "label": { "en": "Lewisham / Grove Park corridor", "es": "Corredor Lewisham / Grove Park" },
+      "representativeOrigins": ["Lewisham", "Catford", "Grove Park"],
+      "evidenceState": "modelled-scenario",
+      "territoryOpportunity": 74,
+      "travelFriction": 70,
+      "groupSuitability": 76,
+      "note": { "en": "Tests a rail-led corridor with a controlled final transfer.", "es": "Prueba un corredor ferroviario con un traslado final controlado." }
+    }
+  ],
+  "partnerModels": [
+    {
+      "id": "journey-tech",
+      "category": "journey-technology",
+      "candidate": "Moovit / Citymapper",
+      "state": "candidate-not-contacted",
+      "role": { "en": "Journey planning, live information and aggregated reporting", "es": "Planificación, información en vivo e informes agregados" }
+    },
+    {
+      "id": "rail",
+      "category": "rail",
+      "candidate": "Southeastern",
+      "state": "candidate-not-contacted",
+      "role": { "en": "Station-led matchday route and disruption messaging", "es": "Ruta de partido desde estaciones y comunicación de incidencias" }
+    },
+    {
+      "id": "vehicle",
+      "category": "vehicle-operator",
+      "candidate": "Big Green Coach / local operator",
+      "state": "candidate-not-contacted",
+      "role": { "en": "Quoted and operated shuttle or coach capacity", "es": "Capacidad cotizada y operada de shuttle o autocar" }
+    }
+  ],
+  "scoring": {
+    "weights": {
+      "territoryOpportunity": 0.3,
+      "travelFriction": 0.25,
+      "groupSuitability": 0.25,
+      "fixtureAppeal": 0.2
+    },
+    "explanation": {
+      "en": "Planning score only: 30% territory opportunity, 25% travel friction, 25% group suitability and 20% fixture appeal.",
+      "es": "Solo score de planificación: 30% oportunidad territorial, 25% fricción, 25% aptitud para grupos y 20% atractivo del partido."
+    }
+  },
+  "simulator": {
+    "currency": "GBP",
+    "minimumAggregateCohort": 20,
+    "defaultFarePerRider": 18,
+    "capacities": [
+      { "seats": 16, "scenarioCost": 550 },
+      { "seats": 33, "scenarioCost": 900 },
+      { "seats": 49, "scenarioCost": 1200 }
+    ],
+    "warning": {
+      "en": "Illustrative assumptions for planning, not operator quotes or customer prices.",
+      "es": "Supuestos ilustrativos para planificación, no cotizaciones de operador ni precios al cliente."
+    }
+  },
+  "experienceEvent": {
+    "eventName": "experience_validation_complete",
+    "demandField": "transport_interest",
+    "state": "requires-instrumentation"
+  },
+  "guardrails": [
+    { "id": "no-booking", "text": { "en": "No service, seat or vehicle is booked by this prototype.", "es": "Este prototipo no reserva servicios, plazas ni vehículos." } },
+    { "id": "no-quote", "text": { "en": "Scenario costs never represent a partner quote.", "es": "Los costes de escenario nunca representan una cotización de partner." } },
+    { "id": "aggregate-only", "text": { "en": "Only cohorts of 20 or more can become a partner signal.", "es": "Solo las cohortes de 20 o más pueden convertirse en señal para partners." } },
+    { "id": "no-individual-movement", "text": { "en": "Never share addresses, postcodes or individual movements.", "es": "Nunca compartir direcciones, códigos postales ni movimientos individuales." } },
+    { "id": "approval-required", "text": { "en": "A real pilot requires measured demand, club approval and an operator quote.", "es": "Un piloto real requiere demanda medida, aprobación del club y cotización del operador." } }
+  ]
+}
