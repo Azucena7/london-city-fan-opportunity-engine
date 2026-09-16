@@ -42,6 +42,12 @@ const phases: Array<{ version: string; title: Localized; text: Localized; output
     title: { en: "Signal-to-campaign", es: "De señal a campaña" },
     text: { en: "CampaignPlan contract, reusable playbooks, activation briefs, UTM joins, approvals and guardrails.", es: "Contrato CampaignPlan, playbooks reutilizables, briefs de activación, UTMs, aprobaciones y guardrails." },
     output: { en: "WHAT to execute", es: "QUÉ ejecutar" }
+  },
+  {
+    version: "V1.5",
+    title: { en: "Search demand observatory", es: "Observatorio de demanda de búsqueda" },
+    text: { en: "Matched GB/Spain comparison sets, an intent ladder, activation links and evidence gates for travel products.", es: "Comparaciones equivalentes GB/España, escalera de intención, enlaces con activaciones y gates de evidencia para productos de viaje." },
+    output: { en: "IF attention becomes demand", es: "SI la atención se convierte en demanda" }
   }
 ];
 
@@ -49,6 +55,7 @@ const states: Array<{ state: string; meaning: Localized; example: Localized }> =
   { state: "public-verified", meaning: { en: "Observed in a cited public source.", es: "Observado en una fuente pública citada." }, example: { en: "Fixture, published attendance", es: "Partido, asistencia publicada" } },
   { state: "public-inferred", meaning: { en: "A planning inference, never a known customer fact.", es: "Inferencia de planificación, nunca un dato conocido del cliente." }, example: { en: "Territory or player-led audience", es: "Audiencia territorial o vinculada a jugadora" } },
   { state: "pending-source", meaning: { en: "Expected but not publicly available yet.", es: "Esperado pero todavía no disponible públicamente." }, example: { en: "TV audience, missing attendance", es: "Audiencia TV, asistencia ausente" } },
+  { state: "source-unavailable", meaning: { en: "A capture failed without overwriting or inventing a value.", es: "Una captura falló sin sobrescribir ni inventar un valor." }, example: { en: "Rate-limited Google Trends baseline", es: "Baseline de Google Trends limitado temporalmente" } },
   { state: "demo", meaning: { en: "Synthetic data that proves calculations only.", es: "Datos sintéticos que solo prueban cálculos." }, example: { en: "Brighton ticketing rehearsal", es: "Ensayo de ticketing de Brighton" } },
   { state: "requires-instrumentation", meaning: { en: "Measurable after UTMs or event tracking are deployed.", es: "Medible tras desplegar UTMs o seguimiento de eventos." }, example: { en: "Landing-page intent", es: "Intención en landing" } },
   { state: "requires-access", meaning: { en: "Needs an authorised club system.", es: "Necesita un sistema autorizado del club." }, example: { en: "Purchase, scan, no-show, repeat", es: "Compra, acceso, no-show, repetición" } }
@@ -60,7 +67,8 @@ const validations: Localized[] = [
   { en: "A campaign cannot be ready while an approval gate is pending.", es: "Una campaña no puede estar lista mientras haya una aprobación pendiente." },
   { en: "Repository data cannot mark a campaign live or authorise spend.", es: "Los datos del repositorio no pueden marcar una campaña como live ni autorizar inversión." },
   { en: "UTM campaign keys must equal the canonical fixture key.", es: "Las claves UTM de campaña deben coincidir con la clave canónica del partido." },
-  { en: "Purchase, scan and repeat cannot be claimed without authorised data.", es: "Compra, acceso y repetición no pueden declararse sin datos autorizados." }
+  { en: "Purchase, scan and repeat cannot be claimed without authorised data.", es: "Compra, acceso y repetición no pueden declararse sin datos autorizados." },
+  { en: "Hospitality gates cannot pass without measured downstream intent.", es: "Los gates de hospitality no pueden superarse sin intención posterior medida." }
 ];
 
 export function LocalizedTechnicalCaseStudy() {
@@ -178,6 +186,12 @@ export function LocalizedTechnicalCaseStudy() {
             <p>fixture → signals → audiences → playbooks → activations → UTMs → approvals → measurement</p>
             <a href="/api/contracts/campaign-plan" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
           </article>
+          <article>
+            <span>SEARCH DEMAND</span>
+            <h3>{es ? "Una comparación reproducible" : "One reproducible comparison"}</h3>
+            <p>market → window → comparison set → term → dated index → activation → decision gate</p>
+            <a href="/api/contracts/search-demand" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
+          </article>
         </div>
         <div className="technicalJoin"><code>fixture_id</code><span>→</span><code>campaign_id</code><span>→</span><code>ticket_id</code><span>→</span><code>scan</code><span>→</span><code>repeat_90d</code></div>
       </section>
@@ -205,7 +219,7 @@ export function LocalizedTechnicalCaseStudy() {
           {validations.map((item, index) => <article key={item.en}><span>✓</span><p>{pick(item)}</p><small>{String(index + 1).padStart(2, "0")}</small></article>)}
         </div>
         <div className="technicalChecks">
-          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>typecheck</code><code>Vercel build</code>
+          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>typecheck</code><code>Vercel build</code>
         </div>
       </section>
 

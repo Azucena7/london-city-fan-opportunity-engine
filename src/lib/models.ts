@@ -214,6 +214,59 @@ export type AudienceReachData = {
   refresh?: PublicSignalRefresh;
 };
 
+export type SearchDemandState = "measured" | "insufficient-sample" | "source-unavailable" | "requires-access";
+
+export type SearchDemandData = {
+  checkedAt: string;
+  status: "baseline-pending" | "baseline-ready";
+  source: {
+    name: string;
+    url: string;
+    access: "public-ui" | "alpha-api";
+    state: SearchDemandState;
+    note: LocalizedText;
+  };
+  methodology: {
+    window: string;
+    normalization: string;
+    rule: LocalizedText;
+  };
+  markets: Array<{
+    code: "GB" | "ES";
+    label: LocalizedText;
+    comparisonSets: Array<{
+      id: string;
+      label: LocalizedText;
+      terms: Array<{ id: string; query: string; stage: "player" | "club" | "fixture" | "ticket" | "travel" }>;
+      exploreUrl: string;
+      snapshots: Array<{
+        observedAt: string;
+        state: SearchDemandState;
+        series: Array<{ date: string; termId: string; value: number }>;
+        note: LocalizedText;
+      }>;
+    }>;
+  }>;
+  ladder: Array<{
+    stage: "player" | "club" | "fixture" | "ticket" | "travel";
+    label: LocalizedText;
+    question: LocalizedText;
+    state: "tracked" | "waiting";
+  }>;
+  activationLinks: Array<{
+    activationId: string;
+    expectedStage: "player" | "club" | "fixture" | "ticket" | "travel";
+    hypothesis: LocalizedText;
+    measurementState: "waiting" | "measurable";
+  }>;
+  experienceGates: Array<{
+    id: string;
+    label: LocalizedText;
+    threshold: LocalizedText;
+    state: "waiting" | "passed" | "failed";
+  }>;
+};
+
 export type PublicSignalRefresh = {
   automated: boolean;
   cadence: "weekly-and-fixture-windows";

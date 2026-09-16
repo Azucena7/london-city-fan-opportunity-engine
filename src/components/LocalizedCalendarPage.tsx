@@ -9,8 +9,9 @@ import { CrmTicketingReadiness } from "./CrmTicketingReadiness";
 import { PostMatchScorecard } from "./PostMatchScorecard";
 import { CampaignPlan } from "./CampaignPlan";
 import { ClubActivationIntelligence } from "./ClubActivationIntelligence";
+import { SearchDemandObservatory } from "./SearchDemandObservatory";
 import { useLanguage } from "./LanguageProvider";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlan as CampaignData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, Fixture, LeagueAttendanceBenchmark as BenchmarkData, LiveSignal, PostMatchScorecard as ScorecardData } from "@/lib/models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlan as CampaignData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, Fixture, LeagueAttendanceBenchmark as BenchmarkData, LiveSignal, PostMatchScorecard as ScorecardData, SearchDemandData } from "@/lib/models";
 
 type Scope = "all" | "home" | "away" | "results";
 
@@ -19,7 +20,7 @@ function displayDate(value: string, locale: string) {
     .format(new Date(`${value}T12:00:00`));
 }
 
-export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, crmReadiness, crmDemo, scorecards, campaigns, signals, activations }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo; scorecards: ScorecardData[]; campaigns: CampaignData[]; signals: LiveSignal[]; activations: ClubActivationDataset }) {
+export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, searchDemand, crmReadiness, crmDemo, scorecards, campaigns, signals, activations }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; searchDemand: SearchDemandData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo; scorecards: ScorecardData[]; campaigns: CampaignData[]; signals: LiveSignal[]; activations: ClubActivationDataset }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const locale = es ? "es-ES" : "en-GB";
@@ -53,6 +54,7 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
       <DemandHistory data={history} />
       <LeagueAttendanceBenchmark data={benchmark} />
       <AudienceReach data={audience} />
+      <SearchDemandObservatory data={searchDemand} />
       <CrmTicketingReadiness data={crmReadiness} demo={crmDemo} />
 
       <div className="calendarFilters" role="group" aria-label={es ? "Filtrar calendario" : "Filter calendar"}>

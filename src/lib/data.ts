@@ -15,8 +15,9 @@ import audienceReachRaw from "../../data/live/audience-reach.json";
 import crmTicketingReadinessRaw from "../../data/live/crm-ticketing-readiness.json";
 import crmTicketingDemoRaw from "../../data/demo/brighton-crm-ticketing.synthetic.json";
 import campaignPlansRaw from "../../data/live/campaign-plans.json";
+import searchDemandRaw from "../../data/live/search-demand.json";
 import { buildPostMatchScorecards } from "./postmatch";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness, Fixture, LeagueAttendanceBenchmark, LiveSignal, PostMatchReview, Territory } from "./models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness, Fixture, LeagueAttendanceBenchmark, LiveSignal, PostMatchReview, SearchDemandData, Territory } from "./models";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -35,4 +36,5 @@ export const audienceReach = audienceReachRaw as AudienceReachData;
 export const crmTicketingReadiness = crmTicketingReadinessRaw as CrmTicketingReadiness;
 export const crmTicketingDemo = crmTicketingDemoRaw as CrmTicketingDemo;
 export const campaignPlans = campaignPlansRaw as CampaignPlanData;
+export const searchDemand = searchDemandRaw as SearchDemandData;
 export const postMatchScorecards = buildPostMatchScorecards(calendar, postmatchReviews, crmTicketingDemo);
