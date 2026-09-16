@@ -18,7 +18,8 @@ export function NavTabs() {
   const primary = [
     ["/today", es ? "Hoy" : "Today"],
     ["/calendar", es ? "Calendario" : "Calendar"],
-    ["/territories", es ? "Territorios" : "Territories"]
+    ["/territories", es ? "Territorios" : "Territories"],
+    ["/experience", es ? "Experiencias" : "Experiences"]
   ] as const;
 
   return (
