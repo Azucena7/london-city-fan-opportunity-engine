@@ -401,6 +401,56 @@ export type ExperimentMeasurementData = {
   guardrails: Array<{ id: string; text: LocalizedText }>;
 };
 
+export type PartnerEvidenceState = "public-verified" | "modelled-scenario" | "requires-measurement" | "requires-partner";
+
+export type PartnerCommercialPackData = {
+  version: "1.0";
+  checkedAt: string;
+  status: "prospecting-draft" | "partner-review" | "approved";
+  measurementState: "provider-not-configured" | "test-collecting" | "production-collecting";
+  headline: LocalizedText;
+  principle: LocalizedText;
+  fixtures: Array<{ fixtureId: string; label: LocalizedText }>;
+  packs: Array<{
+    id: string;
+    category: "journey-technology" | "rail" | "vehicle-operator" | "travel-hospitality";
+    candidate: string;
+    relationshipState: "candidate-not-contacted" | "exploratory" | "approved";
+    title: LocalizedText;
+    proposition: LocalizedText;
+    whyFit: LocalizedText;
+    recommendedFixtureIds: string[];
+    clubOffers: LocalizedText[];
+    partnerContributes: LocalizedText[];
+    activationAssets: LocalizedText[];
+    commercialAsk: LocalizedText;
+    evidence: Array<{
+      id: string;
+      label: LocalizedText;
+      state: PartnerEvidenceState;
+      detail: LocalizedText;
+    }>;
+    kpis: Array<{
+      id: string;
+      label: LocalizedText;
+      state: "public-measurable" | "requires-instrumentation" | "requires-partner" | "requires-access";
+    }>;
+  }>;
+  pilotPhases: Array<{
+    id: string;
+    label: LocalizedText;
+    output: LocalizedText;
+    state: "ready" | "waiting";
+  }>;
+  approvalGates: Array<{
+    id: string;
+    label: LocalizedText;
+    owner: LocalizedText;
+    state: "waiting" | "ready";
+  }>;
+  guardrails: Array<{ id: string; text: LocalizedText }>;
+};
+
 export type PublicSignalRefresh = {
   automated: boolean;
   cadence: "weekly-and-fixture-windows";

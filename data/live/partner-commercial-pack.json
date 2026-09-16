@@ -1,0 +1,187 @@
+{
+  "version": "1.0",
+  "checkedAt": "2026-09-16T22:00:00Z",
+  "status": "prospecting-draft",
+  "measurementState": "provider-not-configured",
+  "headline": {
+    "en": "Four partnership hypotheses, one governed route to a matchday pilot",
+    "es": "Cuatro hipótesis de partnership, una ruta gobernada hacia un piloto de matchday"
+  },
+  "principle": {
+    "en": "This pack prepares an exploratory conversation. It does not claim demand, inventory, pricing, rights or a relationship that has not been verified.",
+    "es": "Este pack prepara una conversación exploratoria. No afirma demanda, inventario, precios, derechos ni relaciones que no se hayan verificado."
+  },
+  "fixtures": [
+    { "fixtureId": "2027-01-24-ars-h", "label": { "en": "Arsenal · 24 Jan", "es": "Arsenal · 24 ene" } },
+    { "fixtureId": "2027-02-14-che-h", "label": { "en": "Chelsea · 14 Feb", "es": "Chelsea · 14 feb" } },
+    { "fixtureId": "2027-03-14-liv-h", "label": { "en": "Liverpool · 14 Mar", "es": "Liverpool · 14 mar" } }
+  ],
+  "packs": [
+    {
+      "id": "journey-technology-pack",
+      "category": "journey-technology",
+      "candidate": "Moovit / Citymapper",
+      "relationshipState": "candidate-not-contacted",
+      "title": { "en": "Official matchday journey layer", "es": "Capa oficial de trayecto de matchday" },
+      "proposition": { "en": "Make planning and disruption confidence part of the matchday experience.", "es": "Convertir planificación y confianza ante incidencias en parte de la experiencia de partido." },
+      "whyFit": { "en": "A technology-led pilot can test journey guidance before any physical service is commissioned.", "es": "Un piloto tecnológico puede probar la orientación de trayectos antes de contratar un servicio físico." },
+      "recommendedFixtureIds": ["2027-02-14-che-h"],
+      "clubOffers": [
+        { "en": "Branded matchday journey surface", "es": "Superficie de trayecto de partido con marca" },
+        { "en": "Fixture context and approved supporter messaging", "es": "Contexto de partido y mensajes aprobados para aficionados" },
+        { "en": "Aggregated experiment reporting when the threshold is met", "es": "Informe agregado del experimento cuando se alcance el umbral" }
+      ],
+      "partnerContributes": [
+        { "en": "Journey-planning capability and live service information", "es": "Capacidad de planificación e información de servicio en vivo" },
+        { "en": "Technical implementation and agreed aggregate measures", "es": "Implementación técnica y métricas agregadas acordadas" }
+      ],
+      "activationAssets": [
+        { "en": "Sponsored journey planner", "es": "Journey planner patrocinado" },
+        { "en": "T−7 and T−3 travel-confidence content", "es": "Contenido de confianza de viaje T−7 y T−3" },
+        { "en": "Matchday disruption module", "es": "Módulo de incidencias en matchday" }
+      ],
+      "commercialAsk": { "en": "A technical feasibility session and one fixture-scoped prototype review.", "es": "Una sesión de viabilidad técnica y revisión de un prototipo para un partido." },
+      "evidence": [
+        { "id": "canonical-fixture", "label": { "en": "Pilot fixture", "es": "Partido piloto" }, "state": "public-verified", "detail": { "en": "Chelsea is present in the canonical home calendar.", "es": "Chelsea figura en el calendario canónico de partidos locales." } },
+        { "id": "journey-layer", "label": { "en": "Journey need", "es": "Necesidad de trayecto" }, "state": "modelled-scenario", "detail": { "en": "Three representative corridors are modelled in the mobility layer.", "es": "Tres corredores representativos están modelados en la capa de movilidad." } },
+        { "id": "usage-proof", "label": { "en": "Supporter usage", "es": "Uso de aficionados" }, "state": "requires-measurement", "detail": { "en": "Planner use and transport intent remain unmeasured.", "es": "El uso del planner y la intención de transporte siguen sin medirse." } },
+        { "id": "technical-scope", "label": { "en": "Integration scope", "es": "Alcance de integración" }, "state": "requires-partner", "detail": { "en": "API, branding and reporting scope require partner agreement.", "es": "API, branding e informes requieren acuerdo con el partner." } }
+      ],
+      "kpis": [
+        { "id": "planner-opens", "label": { "en": "Journey planner opens", "es": "Aperturas del journey planner" }, "state": "requires-instrumentation" },
+        { "id": "route-completes", "label": { "en": "Routes completed", "es": "Rutas completadas" }, "state": "requires-partner" },
+        { "id": "ticket-conversion", "label": { "en": "Ticket conversion", "es": "Conversión a entrada" }, "state": "requires-access" }
+      ]
+    },
+    {
+      "id": "rail-pack",
+      "category": "rail",
+      "candidate": "Southeastern",
+      "relationshipState": "candidate-not-contacted",
+      "title": { "en": "Station-to-stadium matchday corridor", "es": "Corredor de estación a estadio en matchday" },
+      "proposition": { "en": "Turn rail arrival confidence into a visible part of the fixture campaign.", "es": "Convertir la confianza de llegada en tren en parte visible de la campaña del partido." },
+      "whyFit": { "en": "A rail-led test can connect station messaging, planned arrival and the final leg to Hayes Lane.", "es": "Una prueba ferroviaria puede conectar mensajes en estación, llegada planificada y último tramo a Hayes Lane." },
+      "recommendedFixtureIds": ["2027-01-24-ars-h", "2027-02-14-che-h"],
+      "clubOffers": [
+        { "en": "Fixture campaign and owned-channel inventory", "es": "Campaña del partido e inventario de canales propios" },
+        { "en": "Station-to-ground matchday narrative", "es": "Narrativa de estación a estadio" },
+        { "en": "Fanzone visibility subject to approval", "es": "Visibilidad en fanzone sujeta a aprobación" }
+      ],
+      "partnerContributes": [
+        { "en": "Approved rail information and disruption workflow", "es": "Información ferroviaria aprobada y flujo de incidencias" },
+        { "en": "Feasibility of station-led activation", "es": "Viabilidad de activación desde estaciones" }
+      ],
+      "activationAssets": [
+        { "en": "Official rail arrival guide", "es": "Guía oficial de llegada en tren" },
+        { "en": "Station meeting-point concept", "es": "Concepto de punto de encuentro en estación" },
+        { "en": "Live disruption message templates", "es": "Plantillas de mensajes de incidencias" }
+      ],
+      "commercialAsk": { "en": "An exploratory corridor workshop covering information, activation and measurement feasibility.", "es": "Un workshop exploratorio sobre información, activación y viabilidad de medición del corredor." },
+      "evidence": [
+        { "id": "fixtures", "label": { "en": "Pilot fixtures", "es": "Partidos piloto" }, "state": "public-verified", "detail": { "en": "Arsenal and Chelsea resolve to canonical home fixtures.", "es": "Arsenal y Chelsea resuelven a partidos locales canónicos." } },
+        { "id": "corridors", "label": { "en": "Corridor opportunity", "es": "Oportunidad de corredor" }, "state": "modelled-scenario", "detail": { "en": "Bromley, East Croydon and Lewisham / Grove Park are planning scenarios.", "es": "Bromley, East Croydon y Lewisham / Grove Park son escenarios de planificación." } },
+        { "id": "demand", "label": { "en": "Aggregate travel demand", "es": "Demanda agregada de viaje" }, "state": "requires-measurement", "detail": { "en": "No production cohort has reached the evidence threshold.", "es": "Ninguna cohorte de producción ha alcanzado el umbral de evidencia." } },
+        { "id": "rail-terms", "label": { "en": "Rail participation", "es": "Participación ferroviaria" }, "state": "requires-partner", "detail": { "en": "No inventory, media or operational support is agreed.", "es": "No se ha acordado inventario, medios ni soporte operativo." } }
+      ],
+      "kpis": [
+        { "id": "guide-reach", "label": { "en": "Travel-guide reach", "es": "Alcance de la guía" }, "state": "public-measurable" },
+        { "id": "transport-intent", "label": { "en": "Transport-interest cohort", "es": "Cohorte de interés en transporte" }, "state": "requires-instrumentation" },
+        { "id": "rail-journeys", "label": { "en": "Attributed rail journeys", "es": "Viajes ferroviarios atribuidos" }, "state": "requires-partner" }
+      ]
+    },
+    {
+      "id": "vehicle-operator-pack",
+      "category": "vehicle-operator",
+      "candidate": "Big Green Coach / local operator",
+      "relationshipState": "candidate-not-contacted",
+      "title": { "en": "Demand-triggered shuttle pilot", "es": "Piloto de shuttle activado por demanda" },
+      "proposition": { "en": "Commission capacity only after one corridor clears the aggregate evidence and commercial gates.", "es": "Contratar capacidad solo cuando un corredor supere los gates de evidencia agregada y viabilidad comercial." },
+      "whyFit": { "en": "A vehicle operator is required to replace modelled costs with a serviceable route, quote and operating plan.", "es": "Se necesita un operador para sustituir costes modelados por una ruta operable, cotización y plan de servicio." },
+      "recommendedFixtureIds": ["2027-01-24-ars-h"],
+      "clubOffers": [
+        { "en": "Pre-registration experiment and fixture campaign", "es": "Experimento de pre-registro y campaña del partido" },
+        { "en": "Approved meeting-point communication", "es": "Comunicación aprobada del punto de encuentro" },
+        { "en": "On-site visibility subject to rights", "es": "Visibilidad in situ sujeta a derechos" }
+      ],
+      "partnerContributes": [
+        { "en": "Route feasibility, compliant vehicle and operating quote", "es": "Viabilidad de ruta, vehículo conforme y cotización operativa" },
+        { "en": "Driver, insurance, contingency and passenger operations", "es": "Conductor, seguro, contingencia y operación de pasajeros" }
+      ],
+      "activationAssets": [
+        { "en": "One origin-hub to Hayes Lane test", "es": "Prueba desde un hub de origen a Hayes Lane" },
+        { "en": "Branded meeting point", "es": "Punto de encuentro con marca" },
+        { "en": "Pre-departure and return messaging", "es": "Mensajes de salida y regreso" }
+      ],
+      "commercialAsk": { "en": "A non-binding feasibility and quote framework for one threshold-triggered pilot.", "es": "Un marco no vinculante de viabilidad y cotización para un piloto activado por umbral." },
+      "evidence": [
+        { "id": "fixture", "label": { "en": "Pilot fixture", "es": "Partido piloto" }, "state": "public-verified", "detail": { "en": "Arsenal is a canonical home fixture.", "es": "Arsenal es un partido local canónico." } },
+        { "id": "economics", "label": { "en": "Capacity economics", "es": "Economía de capacidad" }, "state": "modelled-scenario", "detail": { "en": "16, 33 and 49-seat assumptions are planning inputs, not quotes.", "es": "Los supuestos de 16, 33 y 49 plazas son inputs de planificación, no cotizaciones." } },
+        { "id": "cohort", "label": { "en": "Corridor cohort", "es": "Cohorte de corredor" }, "state": "requires-measurement", "detail": { "en": "At least 20 valid production events are required.", "es": "Se requieren al menos 20 eventos de producción válidos." } },
+        { "id": "quote", "label": { "en": "Operator quote", "es": "Cotización del operador" }, "state": "requires-partner", "detail": { "en": "Route, availability, cost and terms remain unknown.", "es": "Ruta, disponibilidad, coste y condiciones siguen sin conocerse." } }
+      ],
+      "kpis": [
+        { "id": "qualified-interest", "label": { "en": "Qualified aggregate interest", "es": "Interés agregado cualificado" }, "state": "requires-instrumentation" },
+        { "id": "load-factor", "label": { "en": "Vehicle load factor", "es": "Ocupación del vehículo" }, "state": "requires-partner" },
+        { "id": "ticket-conversion", "label": { "en": "Ticket conversion", "es": "Conversión a entrada" }, "state": "requires-access" }
+      ]
+    },
+    {
+      "id": "travel-hospitality-pack",
+      "category": "travel-hospitality",
+      "candidate": "SportsBreaks / approved travel operator",
+      "relationshipState": "candidate-not-contacted",
+      "title": { "en": "International matchday weekend concept", "es": "Concepto internacional de fin de semana de partido" },
+      "proposition": { "en": "Test whether Spanish interest can become a compliant ticket, hotel and ground-transfer product.", "es": "Probar si el interés español puede convertirse en un producto conforme de entrada, hotel y traslado terrestre." },
+      "whyFit": { "en": "An authorised operator is needed before packaging, deposits, fulfilment or consumer protection can be offered.", "es": "Se necesita un operador autorizado antes de ofrecer paquete, depósitos, operación o protección al consumidor." },
+      "recommendedFixtureIds": ["2027-01-24-ars-h", "2027-03-14-liv-h"],
+      "clubOffers": [
+        { "en": "Approved ticket and hospitality discussion subject to inventory", "es": "Conversación sobre entrada y hospitality sujeta a inventario" },
+        { "en": "Club-led bilingual itinerary concept", "es": "Concepto de itinerario bilingüe liderado por el club" },
+        { "en": "Owned-channel validation campaign", "es": "Campaña de validación en canales propios" }
+      ],
+      "partnerContributes": [
+        { "en": "Regulated packaging, hotel sourcing and fulfilment", "es": "Paquetización regulada, contratación hotelera y operación" },
+        { "en": "Consumer terms, protection and service support", "es": "Condiciones, protección al consumidor y soporte" }
+      ],
+      "activationAssets": [
+        { "en": "Spain-focused bilingual landing concept", "es": "Concepto de landing bilingüe para España" },
+        { "en": "Ticket + hotel + ground-transfer configuration", "es": "Configuración entrada + hotel + traslado terrestre" },
+        { "en": "Spanish-speaking host option", "es": "Opción de anfitrión en español" }
+      ],
+      "commercialAsk": { "en": "A regulatory, inventory and fulfilment feasibility review before any registration or sale.", "es": "Una revisión de viabilidad regulatoria, inventario y operación antes de cualquier registro o venta." },
+      "evidence": [
+        { "id": "concept", "label": { "en": "International concept", "es": "Concepto internacional" }, "state": "public-verified", "detail": { "en": "The product contract defines an international weekend validation concept.", "es": "El contrato de producto define un concepto de validación de fin de semana internacional." } },
+        { "id": "price-bands", "label": { "en": "Research price bands", "es": "Rangos de precio de investigación" }, "state": "modelled-scenario", "detail": { "en": "Displayed ranges test willingness to pay; they are not offers.", "es": "Los rangos mostrados prueban disposición a pagar; no son ofertas." } },
+        { "id": "spain-demand", "label": { "en": "Spanish product demand", "es": "Demanda española del producto" }, "state": "requires-measurement", "detail": { "en": "No sufficient production cohort exists.", "es": "No existe una cohorte de producción suficiente." } },
+        { "id": "operator", "label": { "en": "Approved operator and inventory", "es": "Operador e inventario aprobados" }, "state": "requires-partner", "detail": { "en": "Packaging rights, hotel, ticket allocation and terms are not agreed.", "es": "Derechos de paquete, hotel, cupo de entradas y condiciones no están acordados." } }
+      ],
+      "kpis": [
+        { "id": "spain-configurations", "label": { "en": "Spain-origin configurations", "es": "Configuraciones con origen España" }, "state": "requires-instrumentation" },
+        { "id": "operator-quote", "label": { "en": "Feasible package range", "es": "Rango viable del paquete" }, "state": "requires-partner" },
+        { "id": "booking-conversion", "label": { "en": "Booking conversion", "es": "Conversión a reserva" }, "state": "requires-access" }
+      ]
+    }
+  ],
+  "pilotPhases": [
+    { "id": "evidence", "label": { "en": "Validate aggregate demand", "es": "Validar demanda agregada" }, "output": { "en": "Threshold-qualified cohort", "es": "Cohorte que supera el umbral" }, "state": "waiting" },
+    { "id": "scope", "label": { "en": "Agree pilot scope", "es": "Acordar alcance del piloto" }, "output": { "en": "Roles, route, rights and data boundary", "es": "Roles, ruta, derechos y frontera de datos" }, "state": "waiting" },
+    { "id": "commercial", "label": { "en": "Replace assumptions", "es": "Sustituir supuestos" }, "output": { "en": "Quote, inventory and terms", "es": "Cotización, inventario y condiciones" }, "state": "waiting" },
+    { "id": "approval", "label": { "en": "Approve controlled test", "es": "Aprobar prueba controlada" }, "output": { "en": "Signed-off operating plan", "es": "Plan operativo aprobado" }, "state": "waiting" },
+    { "id": "review", "label": { "en": "Measure and review", "es": "Medir y revisar" }, "output": { "en": "Joint pilot scorecard", "es": "Scorecard conjunto del piloto" }, "state": "waiting" }
+  ],
+  "approvalGates": [
+    { "id": "measurement", "label": { "en": "Sufficient production cohort", "es": "Cohorte de producción suficiente" }, "owner": { "en": "Measurement owner", "es": "Responsable de medición" }, "state": "waiting" },
+    { "id": "commercial", "label": { "en": "Commercial terms and budget", "es": "Condiciones comerciales y presupuesto" }, "owner": { "en": "Club commercial owner", "es": "Responsable comercial del club" }, "state": "waiting" },
+    { "id": "operations", "label": { "en": "Operational feasibility and contingency", "es": "Viabilidad operativa y contingencia" }, "owner": { "en": "Partner operator", "es": "Operador partner" }, "state": "waiting" },
+    { "id": "rights", "label": { "en": "Rights, brand and inventory", "es": "Derechos, marca e inventario" }, "owner": { "en": "Club rights owner", "es": "Responsable de derechos del club" }, "state": "waiting" },
+    { "id": "privacy", "label": { "en": "Privacy and data processing", "es": "Privacidad y tratamiento de datos" }, "owner": { "en": "Privacy owner", "es": "Responsable de privacidad" }, "state": "waiting" }
+  ],
+  "guardrails": [
+    { "id": "no-endorsement", "text": { "en": "Named organisations are research candidates, not partners or endorsers.", "es": "Las organizaciones citadas son candidatas de investigación, no partners ni prescriptoras." } },
+    { "id": "no-outreach", "text": { "en": "This prototype does not contact, email or submit information to any candidate.", "es": "Este prototipo no contacta, envía emails ni remite información a ningún candidato." } },
+    { "id": "no-quote", "text": { "en": "Modelled economics are never presented as a supplier quote or customer price.", "es": "La economía modelada nunca se presenta como cotización ni precio al cliente." } },
+    { "id": "no-inventory", "text": { "en": "No ticket, hospitality, hotel, route, seat or vehicle inventory is claimed.", "es": "No se afirma inventario de entradas, hospitality, hotel, ruta, plazas o vehículos." } },
+    { "id": "aggregate-only", "text": { "en": "Only sufficient production cohorts may enter a partner-facing evidence claim.", "es": "Solo cohortes de producción suficientes pueden formar parte de evidencia para partners." } },
+    { "id": "human-approval", "text": { "en": "Outreach, negotiation, spend and launch require authorised human approval.", "es": "Contacto, negociación, inversión y lanzamiento requieren aprobación humana autorizada." } }
+  ]
+}

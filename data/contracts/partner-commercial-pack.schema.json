@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/partner-commercial-pack",
+  "title": "PartnerCommercialPack",
+  "type": "object",
+  "required": ["version", "checkedAt", "status", "measurementState", "headline", "principle", "fixtures", "packs", "pilotPhases", "approvalGates", "guardrails"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "checkedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["prospecting-draft", "partner-review", "approved"] },
+    "measurementState": { "enum": ["provider-not-configured", "test-collecting", "production-collecting"] },
+    "headline": { "$ref": "#/$defs/localized" },
+    "principle": { "$ref": "#/$defs/localized" },
+    "fixtures": { "type": "array", "minItems": 3, "maxItems": 3 },
+    "packs": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "candidate", "relationshipState", "title", "proposition", "whyFit", "recommendedFixtureIds", "clubOffers", "partnerContributes", "activationAssets", "commercialAsk", "evidence", "kpis"],
+        "properties": {
+          "category": { "enum": ["journey-technology", "rail", "vehicle-operator", "travel-hospitality"] },
+          "relationshipState": { "enum": ["candidate-not-contacted", "exploratory", "approved"] },
+          "title": { "$ref": "#/$defs/localized" },
+          "proposition": { "$ref": "#/$defs/localized" },
+          "whyFit": { "$ref": "#/$defs/localized" },
+          "recommendedFixtureIds": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "clubOffers": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/localized" } },
+          "partnerContributes": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/localized" } },
+          "activationAssets": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/localized" } },
+          "commercialAsk": { "$ref": "#/$defs/localized" },
+          "evidence": { "type": "array", "minItems": 4 },
+          "kpis": { "type": "array", "minItems": 3 }
+        }
+      }
+    },
+    "pilotPhases": { "type": "array", "minItems": 5 },
+    "approvalGates": { "type": "array", "minItems": 5 },
+    "guardrails": { "type": "array", "minItems": 6 }
+  },
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "required": ["en", "es"],
+      "properties": { "en": { "type": "string", "minLength": 1 }, "es": { "type": "string", "minLength": 1 } },
+      "additionalProperties": false
+    }
+  }
+}
