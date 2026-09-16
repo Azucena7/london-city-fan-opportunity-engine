@@ -1,0 +1,353 @@
+{
+  "fixtureId": "2026-09-26-bha-h",
+  "comparisonFixtureId": "2026-09-04-mun-h",
+  "checkedAt": "2026-09-16T09:00:00Z",
+  "coverage": [
+    {
+      "channel": "website",
+      "state": "covered",
+      "note": {
+        "en": "Official fixture, product and matchday pages checked.",
+        "es": "Revisadas las páginas oficiales de partido, producto y matchday."
+      }
+    },
+    {
+      "channel": "ticketing",
+      "state": "covered",
+      "note": {
+        "en": "Public products and calls to action observed; sales and conversion remain private.",
+        "es": "Productos y llamadas a la acción observados; ventas y conversión siguen siendo privadas."
+      }
+    },
+    {
+      "channel": "instagram",
+      "state": "partial",
+      "note": {
+        "en": "Public posts can be sampled, but platform restrictions prevent a complete inventory.",
+        "es": "Se pueden muestrear publicaciones públicas, pero las restricciones impiden un inventario completo."
+      }
+    },
+    {
+      "channel": "news",
+      "state": "covered",
+      "note": {
+        "en": "Club newsroom and public launch stories checked.",
+        "es": "Revisadas la sala de prensa del club y las noticias públicas de lanzamiento."
+      }
+    },
+    {
+      "channel": "matchday",
+      "state": "partial",
+      "note": {
+        "en": "Published experience is visible; delivery on the day requires observation or club data.",
+        "es": "La experiencia publicada es visible; su ejecución exige observación o datos del club."
+      }
+    },
+    {
+      "channel": "partner",
+      "state": "partial",
+      "note": {
+        "en": "Named partner activity is observable, but paid distribution and partner analytics are not.",
+        "es": "La actividad pública de partners es observable, pero no su distribución de pago ni analítica."
+      }
+    }
+  ],
+  "observations": [
+    {
+      "id": "brighton-dedicated-landing",
+      "fixtureId": "2026-09-26-bha-h",
+      "observedAt": "2026-09-15",
+      "window": "T-11",
+      "channel": "website",
+      "funnelStage": "conversion",
+      "audience": {
+        "en": "Families, regular supporters and first-time buyers",
+        "es": "Familias, aficionados habituales y nuevos compradores"
+      },
+      "title": {
+        "en": "Dedicated Brighton conversion page",
+        "es": "Landing específica de conversión para Brighton"
+      },
+      "messageAngle": {
+        "en": "Uses the sold-out opener as proof, then asks supporters to choose a matchday experience.",
+        "es": "Utiliza el sold out del opener como prueba y propone elegir una experiencia de partido."
+      },
+      "product": {
+        "en": "Single tickets, family area and seating zones",
+        "es": "Entrada individual, área familiar y zonas de asiento"
+      },
+      "callToAction": {
+        "en": "Buy Brighton tickets",
+        "es": "Comprar entradas para Brighton"
+      },
+      "sourceName": "London City Lionesses",
+      "sourceUrl": "https://www.londoncitylionesses.com/brighton-h-2627",
+      "evidenceState": "observed",
+      "confidence": "high"
+    },
+    {
+      "id": "brighton-vip-terrace",
+      "fixtureId": "2026-09-26-bha-h",
+      "observedAt": "2026-09-15",
+      "window": "T-11",
+      "channel": "ticketing",
+      "funnelStage": "conversion",
+      "audience": {
+        "en": "Celebrations, groups and corporate buyers",
+        "es": "Celebraciones, grupos y compradores corporativos"
+      },
+      "title": {
+        "en": "£75 VIP Terrace premium upgrade",
+        "es": "Upgrade premium VIP Terrace de £75"
+      },
+      "messageAngle": {
+        "en": "A social WSL experience with premium views, food, drink, gifts and resident DJ.",
+        "es": "Una experiencia social WSL con vistas premium, comida, bebida, regalos y DJ residente."
+      },
+      "product": {
+        "en": "VIP Terrace · £75 per person",
+        "es": "VIP Terrace · £75 por persona"
+      },
+      "callToAction": {
+        "en": "Buy VIP Terrace",
+        "es": "Comprar VIP Terrace"
+      },
+      "sourceName": "London City Lionesses VIP Terrace",
+      "sourceUrl": "https://www.londoncitylionesses.com/vip-terrace",
+      "evidenceState": "observed",
+      "confidence": "high"
+    },
+    {
+      "id": "brighton-product-ladder",
+      "fixtureId": "2026-09-26-bha-h",
+      "observedAt": "2026-09-15",
+      "window": "T-11",
+      "channel": "ticketing",
+      "funnelStage": "retention",
+      "audience": {
+        "en": "Supporters not ready to commit to a full season",
+        "es": "Aficionados que aún no quieren comprometerse toda la temporada"
+      },
+      "title": {
+        "en": "Single match to repeat-attendance ladder",
+        "es": "Escalera desde partido individual hacia repetición"
+      },
+      "messageAngle": {
+        "en": "Brighton is sold alongside season tickets and a flexible three-game bundle.",
+        "es": "Brighton se vende junto al abono y un paquete flexible de tres partidos."
+      },
+      "product": {
+        "en": "Season ticket and Hat-Trick bundle",
+        "es": "Abono de temporada y paquete Hat-Trick"
+      },
+      "callToAction": {
+        "en": "Buy a season ticket or three-game bundle",
+        "es": "Comprar abono o paquete de tres partidos"
+      },
+      "sourceName": "London City Brighton landing page",
+      "sourceUrl": "https://www.londoncitylionesses.com/brighton-h-2627",
+      "evidenceState": "observed",
+      "confidence": "high"
+    },
+    {
+      "id": "opener-after-dark",
+      "fixtureId": "2026-09-04-mun-h",
+      "observedAt": "2026-08-19",
+      "window": "T-16",
+      "channel": "matchday",
+      "funnelStage": "experience",
+      "audience": {
+        "en": "Adult social audience and groups",
+        "es": "Público adulto social y grupos"
+      },
+      "title": {
+        "en": "LDN City After Dark",
+        "es": "LDN City After Dark"
+      },
+      "messageAngle": {
+        "en": "Extends the opener beyond the final whistle with an 18+ after-party, DJ and happy hour.",
+        "es": "Extiende el opener más allá del pitido final con fiesta +18, DJ y happy hour."
+      },
+      "product": {
+        "en": "Post-match entertainment",
+        "es": "Entretenimiento postpartido"
+      },
+      "callToAction": {
+        "en": "Stay after the match",
+        "es": "Quedarse después del partido"
+      },
+      "sourceName": "London City Lionesses newsroom",
+      "sourceUrl": "https://www.londoncitylionesses.com/post/ldn-city-after-dark-post-game-after-party",
+      "evidenceState": "observed",
+      "confidence": "high"
+    },
+    {
+      "id": "opener-fan-guide",
+      "fixtureId": "2026-09-04-mun-h",
+      "observedAt": "2026-09-04",
+      "window": "T-0",
+      "channel": "website",
+      "funnelStage": "experience",
+      "audience": {
+        "en": "Ticket holders and first-time visitors",
+        "es": "Compradores de entrada y visitantes primerizos"
+      },
+      "title": {
+        "en": "Operational fan guide",
+        "es": "Guía operativa para aficionados"
+      },
+      "messageAngle": {
+        "en": "Reduces arrival uncertainty and packages merchandise, player lap and after-party into one journey.",
+        "es": "Reduce la incertidumbre de llegada y une merchandising, vuelta de jugadoras y after-party."
+      },
+      "product": {
+        "en": "Matchday service and experience",
+        "es": "Servicio y experiencia de partido"
+      },
+      "callToAction": {
+        "en": "Plan the visit and stay after full-time",
+        "es": "Planificar la visita y quedarse tras el partido"
+      },
+      "sourceName": "London City Lionesses fan guide",
+      "sourceUrl": "https://www.londoncitylionesses.com/post/fan-guide-london-city-versus-manchester-united",
+      "evidenceState": "observed",
+      "confidence": "high"
+    },
+    {
+      "id": "opener-gallery-retarget",
+      "fixtureId": "2026-09-04-mun-h",
+      "observedAt": "2026-09-07",
+      "window": "T+3",
+      "channel": "news",
+      "funnelStage": "retention",
+      "audience": {
+        "en": "Opener attendees and socially engaged supporters",
+        "es": "Asistentes al opener y aficionados activos en redes"
+      },
+      "title": {
+        "en": "Fan gallery turns memory into the next sale",
+        "es": "La galería convierte el recuerdo en la siguiente venta"
+      },
+      "messageAngle": {
+        "en": "Reuses supporter imagery and the opening-night atmosphere to sustain attention after the event.",
+        "es": "Reutiliza imágenes de aficionados y la atmósfera del opener para mantener la atención."
+      },
+      "product": {
+        "en": "Owned content and next-match conversion",
+        "es": "Contenido propio y conversión al siguiente partido"
+      },
+      "callToAction": {
+        "en": "Relive the opener and continue the journey",
+        "es": "Revivir el opener y continuar el recorrido"
+      },
+      "sourceName": "London City Lionesses fan gallery",
+      "sourceUrl": "https://www.londoncitylionesses.com/post/fan-gallery-london-city-lionesses-vs-manchester-united",
+      "evidenceState": "observed",
+      "confidence": "medium"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "scarcity-to-repeat",
+      "title": {
+        "en": "Scarcity to repeat conversion",
+        "es": "De escasez a repetición"
+      },
+      "rationale": {
+        "en": "The sold-out opener is reused as social proof while Brighton is positioned as the next step.",
+        "es": "El sold out del opener se reutiliza como prueba social y Brighton se presenta como siguiente paso."
+      },
+      "confidence": "high",
+      "evidenceIds": ["brighton-dedicated-landing", "opener-gallery-retarget"]
+    },
+    {
+      "id": "product-ladder",
+      "title": {
+        "en": "Deliberate product ladder",
+        "es": "Escalera deliberada de producto"
+      },
+      "rationale": {
+        "en": "Single tickets, a three-game bundle, season tickets and premium hospitality cover different commitment levels.",
+        "es": "Entrada individual, paquete de tres partidos, abono y hospitality cubren distintos niveles de compromiso."
+      },
+      "confidence": "high",
+      "evidenceIds": ["brighton-dedicated-landing", "brighton-product-ladder", "brighton-vip-terrace"]
+    },
+    {
+      "id": "social-matchday",
+      "title": {
+        "en": "Matchday as social entertainment",
+        "es": "El matchday como entretenimiento social"
+      },
+      "rationale": {
+        "en": "DJ, premium social space and the opener after-party broaden the proposition beyond the match itself.",
+        "es": "DJ, espacio social premium y after-party amplían la propuesta más allá del partido."
+      },
+      "confidence": "high",
+      "evidenceIds": ["brighton-vip-terrace", "opener-after-dark", "opener-fan-guide"]
+    },
+    {
+      "id": "segmented-experience",
+      "title": {
+        "en": "Segmented rather than one-size-fits-all",
+        "es": "Segmentación frente a una oferta única"
+      },
+      "rationale": {
+        "en": "Family seating, flexible bundles, groups and premium buyers receive distinct products.",
+        "es": "Familias, compradores flexibles, grupos y público premium reciben productos distintos."
+      },
+      "confidence": "medium",
+      "evidenceIds": ["brighton-dedicated-landing", "brighton-vip-terrace", "brighton-product-ladder"]
+    }
+  ],
+  "alignment": [
+    {
+      "id": "repeat-opener-buyers",
+      "recommendation": {
+        "en": "Convert opener buyers into Brighton repeat attendance.",
+        "es": "Convertir compradores del opener en repetición para Brighton."
+      },
+      "observed": {
+        "en": "Public pages reuse the sell-out and offer Brighton, but CRM segmentation cannot be verified.",
+        "es": "Las páginas reutilizan el sold out y ofrecen Brighton, pero no puede verificarse la segmentación CRM."
+      },
+      "status": "partially-observed"
+    },
+    {
+      "id": "product-choice",
+      "recommendation": {
+        "en": "Give families, flexible buyers and premium groups distinct propositions.",
+        "es": "Dar propuestas distintas a familias, compradores flexibles y grupos premium."
+      },
+      "observed": {
+        "en": "Family area, single tickets, Hat-Trick, season tickets and VIP are all publicly live.",
+        "es": "Área familiar, entradas, Hat-Trick, abono y VIP están públicamente activos."
+      },
+      "status": "deployed"
+    },
+    {
+      "id": "territory-targeting",
+      "recommendation": {
+        "en": "Target Bromley and high-opportunity territories with tailored media.",
+        "es": "Impactar Bromley y territorios de alta oportunidad con medios adaptados."
+      },
+      "observed": {
+        "en": "Paid-media geography and audience allocation are not public.",
+        "es": "La geografía y asignación de audiencias de pago no son públicas."
+      },
+      "status": "cannot-verify"
+    },
+    {
+      "id": "double-header",
+      "recommendation": {
+        "en": "Package the England v Spain overlap as a local double-header.",
+        "es": "Convertir el solapamiento Inglaterra–España en una doble sesión local."
+      },
+      "observed": {
+        "en": "No public Brighton double-header proposition was found in the checked sources.",
+        "es": "No se encontró una propuesta pública de doble sesión para Brighton."
+      },
+      "status": "not-publicly-observed"
+    }
+  ]
+}

@@ -33,6 +33,17 @@ Those signals use `data/live/signals.json`, `postmatch.json`, `roadmap.json` and
 5. T+7: acquisition, channels, territories and experiment review.
 6. T+30/60/90: repeat purchase and cohort value.
 
+## Club activation intelligence
+
+For the next home fixture, add public activations to `data/seed/club-activations.json` when there is material evidence rather than on a fixed posting quota.
+
+- Store the first observed date, fixture window, channel, funnel stage, audience, product, CTA and source URL.
+- Keep observations separate from strategy hypotheses.
+- Compare the current fixture with the previous home fixture and with the Engine recommendation.
+- Report blocked or incomplete social coverage as `partial`; never infer inactivity from missing access.
+- Use `cannot-verify` for email, paid-media targeting, CRM segmentation and private conversion unless an authorised source is connected.
+- Preserve contradictory fixture details in `sourceDiscrepancies` until the authoritative source resolves them.
+
 ## Manual test
 
 ```bash

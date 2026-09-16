@@ -8,8 +8,9 @@ import { AudienceReach } from "./AudienceReach";
 import { CrmTicketingReadiness } from "./CrmTicketingReadiness";
 import { PostMatchScorecard } from "./PostMatchScorecard";
 import { CampaignPlan } from "./CampaignPlan";
+import { ClubActivationIntelligence } from "./ClubActivationIntelligence";
 import { useLanguage } from "./LanguageProvider";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlan as CampaignData, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, Fixture, LeagueAttendanceBenchmark as BenchmarkData, LiveSignal, PostMatchScorecard as ScorecardData } from "@/lib/models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlan as CampaignData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, Fixture, LeagueAttendanceBenchmark as BenchmarkData, LiveSignal, PostMatchScorecard as ScorecardData } from "@/lib/models";
 
 type Scope = "all" | "home" | "away" | "results";
 
@@ -18,7 +19,7 @@ function displayDate(value: string, locale: string) {
     .format(new Date(`${value}T12:00:00`));
 }
 
-export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, crmReadiness, crmDemo, scorecards, campaigns, signals }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo; scorecards: ScorecardData[]; campaigns: CampaignData[]; signals: LiveSignal[] }) {
+export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, crmReadiness, crmDemo, scorecards, campaigns, signals, activations }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo; scorecards: ScorecardData[]; campaigns: CampaignData[]; signals: LiveSignal[]; activations: ClubActivationDataset }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const locale = es ? "es-ES" : "en-GB";
@@ -91,6 +92,16 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
               </div>
               {campaign ? <CampaignPlan data={campaign} signals={signals} embedded /> : null}
               {scorecard ? <PostMatchScorecard data={scorecard} embedded /> : null}
+              {fixture.sourceDiscrepancies?.map((item) => (
+                <div className="sourceDiscrepancy" role="status" key={`${fixture.id}-${item.field}`}>
+                  <div><span>{es ? "DISCREPANCIA DE FUENTE" : "SOURCE DISCREPANCY"}</span><strong>{es ? "El horario público no coincide entre fuentes oficiales" : "The public kick-off time differs across official sources"}</strong></div>
+                  <div className="sourceValues">
+                    {item.values.map((value) => <a href={value.sourceUrl} target="_blank" rel="noreferrer" key={`${value.sourceName}-${value.value}`}><strong>{value.value}</strong><span>{value.sourceName} ↗</span></a>)}
+                  </div>
+                  <p>{es ? "Estado: sin resolver. Confirmar antes de publicar campañas o rutas." : "Status: unresolved. Confirm before publishing campaigns or journeys."}</p>
+                </div>
+              ))}
+              {fixture.id === activations.fixtureId ? <ClubActivationIntelligence data={activations} /> : null}
             </details>
           );
         })}

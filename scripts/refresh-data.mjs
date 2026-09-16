@@ -92,7 +92,8 @@ function normaliseFixtures(warmup, existing) {
       venue: item.location ?? previous.venue ?? "Venue TBC",
       status: result ? "final" : date < today ? "completed-pending-data" : "scheduled",
       ...(result ? { result } : {}),
-      ...(previous.attendance ? { attendance: previous.attendance, attendanceState: previous.attendanceState } : {})
+      ...(previous.attendance ? { attendance: previous.attendance, attendanceState: previous.attendanceState } : {}),
+      ...(previous.sourceDiscrepancies?.length ? { sourceDiscrepancies: previous.sourceDiscrepancies } : {})
     });
   }
 

@@ -53,7 +53,28 @@
     "homeAway": "home",
     "competition": "Barclays Women's Super League",
     "venue": "The CopperJax Community Stadium, Bromley",
-    "status": "scheduled"
+    "status": "scheduled",
+    "sourceDiscrepancies": [
+      {
+        "field": "kickoff",
+        "detectedAt": "2026-09-15T10:00:00Z",
+        "state": "unresolved",
+        "values": [
+          {
+            "value": "18:00",
+            "sourceName": "London City fixtures list",
+            "sourceUrl": "https://www.londoncitylionesses.com/fixtures",
+            "checkedAt": "2026-09-16"
+          },
+          {
+            "value": "17:00",
+            "sourceName": "Brighton ticket landing page",
+            "sourceUrl": "https://www.londoncitylionesses.com/brighton-h-2627",
+            "checkedAt": "2026-09-16"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "2026-09-30-ips-a",
