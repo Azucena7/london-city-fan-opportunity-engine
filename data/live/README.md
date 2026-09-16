@@ -16,6 +16,12 @@ Use `null` with `pending` or `requires-access` when a value is unavailable; neve
 `npm run refresh:public-signals` also schedules a T-7 Brighton observation and preserves the
 last valid value whenever a provider blocks or times out.
 
+`search-demand.json` keeps Google Trends comparison sets separate by market and intent stage.
+Never compare values across different query groups, windows or geographies. A blocked capture is
+stored as `source-unavailable`; a low-volume result is `insufficient-sample`; neither is zero demand.
+Run `npm run validate:search-demand` after adding an export. A snapshot may be `measured` only when
+it contains dated 0–100 observations for terms declared in that comparison set.
+
 ## CRM and ticketing readiness
 
 `crm-ticketing-readiness.json` describes integration coverage. The versioned record contract is

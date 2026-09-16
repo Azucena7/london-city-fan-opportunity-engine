@@ -1,0 +1,155 @@
+{
+  "checkedAt": "2026-09-16T12:00:00Z",
+  "status": "baseline-pending",
+  "source": {
+    "name": "Google Trends",
+    "url": "https://developers.google.com/search/apis/trends",
+    "access": "public-ui",
+    "state": "source-unavailable",
+    "note": {
+      "en": "The public interface returned a temporary rate limit during the first capture. No index has been estimated or backfilled.",
+      "es": "La interfaz pública devolvió un límite temporal durante la primera captura. No se ha estimado ni rellenado ningún índice."
+    }
+  },
+  "methodology": {
+    "window": "2026-06-16/2026-09-16",
+    "normalization": "Each market and comparison set is independently scaled 0–100",
+    "rule": {
+      "en": "Values are comparable only inside the same market, time window and comparison set. Zero can mean insufficient sample and is never treated as zero demand.",
+      "es": "Los valores solo son comparables dentro del mismo mercado, ventana y grupo de comparación. Un cero puede significar muestra insuficiente y nunca se trata como demanda cero."
+    }
+  },
+  "markets": [
+    {
+      "code": "GB",
+      "label": { "en": "Great Britain · local demand", "es": "Gran Bretaña · demanda local" },
+      "comparisonSets": [
+        {
+          "id": "gb-awareness-bridge",
+          "label": { "en": "Player-to-club bridge", "es": "Puente jugadora→club" },
+          "terms": [
+            { "id": "alexia", "query": "Alexia Putellas", "stage": "player" },
+            { "id": "lcl-brand", "query": "London City Lionesses", "stage": "club" },
+            { "id": "alexia-lcl", "query": "Alexia Putellas London City", "stage": "club" }
+          ],
+          "exploreUrl": "https://trends.google.com/trends/explore?date=2026-06-16%202026-09-16&geo=GB&q=Alexia%20Putellas,London%20City%20Lionesses,Alexia%20Putellas%20London%20City",
+          "snapshots": [
+            {
+              "observedAt": "2026-09-16T12:00:00Z",
+              "state": "source-unavailable",
+              "series": [],
+              "note": { "en": "Capture blocked by a temporary 429 response; preserve as unavailable, not zero.", "es": "Captura bloqueada por una respuesta 429 temporal; conservar como no disponible, no como cero." }
+            }
+          ]
+        },
+        {
+          "id": "gb-ticket-intent",
+          "label": { "en": "Fixture and ticket intent", "es": "Intención de partido y entrada" },
+          "terms": [
+            { "id": "lcl-fixtures", "query": "London City fixtures", "stage": "fixture" },
+            { "id": "lcl-tickets", "query": "London City tickets", "stage": "ticket" },
+            { "id": "lcl-brighton", "query": "London City Brighton", "stage": "fixture" }
+          ],
+          "exploreUrl": "https://trends.google.com/trends/explore?date=2026-06-16%202026-09-16&geo=GB&q=London%20City%20fixtures,London%20City%20tickets,London%20City%20Brighton",
+          "snapshots": [
+            {
+              "observedAt": "2026-09-16T12:00:00Z",
+              "state": "source-unavailable",
+              "series": [],
+              "note": { "en": "Capture blocked by a temporary 429 response; no commercial intent is inferred.", "es": "Captura bloqueada por una respuesta 429 temporal; no se infiere intención comercial." }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "ES",
+      "label": { "en": "Spain · international demand", "es": "España · demanda internacional" },
+      "comparisonSets": [
+        {
+          "id": "es-awareness-bridge",
+          "label": { "en": "Player-to-club bridge", "es": "Puente jugadora→club" },
+          "terms": [
+            { "id": "alexia", "query": "Alexia Putellas", "stage": "player" },
+            { "id": "lcl-brand", "query": "London City Lionesses", "stage": "club" },
+            { "id": "alexia-lcl", "query": "Alexia Putellas London City", "stage": "club" }
+          ],
+          "exploreUrl": "https://trends.google.com/trends/explore?date=2026-06-16%202026-09-16&geo=ES&q=Alexia%20Putellas,London%20City%20Lionesses,Alexia%20Putellas%20London%20City",
+          "snapshots": [
+            {
+              "observedAt": "2026-09-16T12:00:00Z",
+              "state": "source-unavailable",
+              "series": [],
+              "note": { "en": "Capture blocked by a temporary 429 response; preserve as unavailable, not zero.", "es": "Captura bloqueada por una respuesta 429 temporal; conservar como no disponible, no como cero." }
+            }
+          ]
+        },
+        {
+          "id": "es-travel-intent",
+          "label": { "en": "Ticket and travel intent", "es": "Intención de entrada y viaje" },
+          "terms": [
+            { "id": "see-alexia-london", "query": "ver a Alexia en Londres", "stage": "travel" },
+            { "id": "alexia-tickets", "query": "entradas Alexia Putellas", "stage": "ticket" },
+            { "id": "alexia-trip", "query": "viaje Alexia Putellas Londres", "stage": "travel" }
+          ],
+          "exploreUrl": "https://trends.google.com/trends/explore?date=2026-06-16%202026-09-16&geo=ES&q=ver%20a%20Alexia%20en%20Londres,entradas%20Alexia%20Putellas,viaje%20Alexia%20Putellas%20Londres",
+          "snapshots": [
+            {
+              "observedAt": "2026-09-16T12:00:00Z",
+              "state": "source-unavailable",
+              "series": [],
+              "note": { "en": "Capture blocked by a temporary 429 response; a registration test is required even if a later index appears.", "es": "Captura bloqueada por una respuesta 429 temporal; hará falta un test de registro incluso si después aparece índice." }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ladder": [
+    { "stage": "player", "label": { "en": "Alexia", "es": "Alexia" }, "question": { "en": "Does the player create attention?", "es": "¿La jugadora genera atención?" }, "state": "tracked" },
+    { "stage": "club", "label": { "en": "London City", "es": "London City" }, "question": { "en": "Does attention transfer to the club?", "es": "¿La atención se transfiere al club?" }, "state": "tracked" },
+    { "stage": "fixture", "label": { "en": "Fixture", "es": "Partido" }, "question": { "en": "Does the audience look for a date or opponent?", "es": "¿El público busca una fecha o rival?" }, "state": "tracked" },
+    { "stage": "ticket", "label": { "en": "Ticket", "es": "Entrada" }, "question": { "en": "Does discovery become purchase intent?", "es": "¿El descubrimiento se convierte en intención de compra?" }, "state": "tracked" },
+    { "stage": "travel", "label": { "en": "Travel", "es": "Viaje" }, "question": { "en": "Is there evidence for an experience product?", "es": "¿Existe evidencia para un producto de experiencia?" }, "state": "tracked" }
+  ],
+  "activationLinks": [
+    {
+      "activationId": "brighton-dedicated-landing",
+      "expectedStage": "ticket",
+      "hypothesis": { "en": "A dedicated fixture page should move brand discovery towards Brighton and ticket queries.", "es": "Una landing específica debería desplazar el descubrimiento de marca hacia búsquedas de Brighton y entradas." },
+      "measurementState": "waiting"
+    },
+    {
+      "activationId": "brighton-vip-terrace",
+      "expectedStage": "travel",
+      "hypothesis": { "en": "The premium social proposition may create VIP or hospitality intent, but public search alone cannot prove sales.", "es": "La propuesta social premium puede generar intención VIP u hospitality, pero la búsqueda pública no demuestra ventas." },
+      "measurementState": "waiting"
+    },
+    {
+      "activationId": "opener-gallery-retarget",
+      "expectedStage": "fixture",
+      "hypothesis": { "en": "Post-event social proof should sustain club and next-fixture interest after the opener peak.", "es": "La prueba social postevento debería sostener el interés por el club y el siguiente partido tras el pico del opener." },
+      "measurementState": "waiting"
+    }
+  ],
+  "experienceGates": [
+    {
+      "id": "search-bridge",
+      "label": { "en": "Search transfers beyond the player", "es": "La búsqueda avanza más allá de la jugadora" },
+      "threshold": { "en": "Observe club, fixture or ticket lift in at least two comparable event windows.", "es": "Observar crecimiento de club, partido o entradas en al menos dos ventanas de evento comparables." },
+      "state": "waiting"
+    },
+    {
+      "id": "registration-intent",
+      "label": { "en": "Visitors register interest", "es": "Los visitantes registran interés" },
+      "threshold": { "en": "A bilingual validation page reaches at least 3% visit-to-registration conversion.", "es": "Una landing bilingüe de validación alcanza al menos un 3% de conversión visita→registro." },
+      "state": "waiting"
+    },
+    {
+      "id": "product-fit",
+      "label": { "en": "Demand selects a viable product", "es": "La demanda elige un producto viable" },
+      "threshold": { "en": "Collect origin, party size, price band and hotel/transport preference before negotiating inventory.", "es": "Recoger origen, tamaño de grupo, rango de precio y preferencia de hotel/transporte antes de negociar inventario." },
+      "state": "waiting"
+    }
+  ]
+}

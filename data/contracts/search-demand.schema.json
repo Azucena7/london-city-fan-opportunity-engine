@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/search-demand",
+  "title": "SearchDemandObservatory",
+  "type": "object",
+  "required": ["checkedAt", "status", "source", "methodology", "markets", "ladder", "activationLinks", "experienceGates"],
+  "properties": {
+    "checkedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["baseline-pending", "baseline-ready"] },
+    "source": {
+      "type": "object",
+      "required": ["name", "url", "access", "state", "note"],
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "access": { "enum": ["public-ui", "alpha-api"] },
+        "state": { "$ref": "#/$defs/evidenceState" },
+        "note": { "$ref": "#/$defs/localized" }
+      }
+    },
+    "methodology": { "type": "object" },
+    "markets": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["code", "label", "comparisonSets"],
+        "properties": {
+          "code": { "enum": ["GB", "ES"] },
+          "label": { "$ref": "#/$defs/localized" },
+          "comparisonSets": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": ["id", "label", "terms", "exploreUrl", "snapshots"],
+              "properties": {
+                "id": { "type": "string" },
+                "label": { "$ref": "#/$defs/localized" },
+                "terms": { "type": "array", "minItems": 2, "maxItems": 5 },
+                "exploreUrl": { "type": "string", "format": "uri" },
+                "snapshots": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "required": ["observedAt", "state", "series", "note"],
+                    "properties": {
+                      "observedAt": { "type": "string", "format": "date-time" },
+                      "state": { "$ref": "#/$defs/evidenceState" },
+                      "series": { "type": "array" },
+                      "note": { "$ref": "#/$defs/localized" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ladder": { "type": "array", "minItems": 5, "maxItems": 5 },
+    "activationLinks": { "type": "array", "minItems": 1 },
+    "experienceGates": { "type": "array", "minItems": 1 }
+  },
+  "$defs": {
+    "evidenceState": { "enum": ["measured", "insufficient-sample", "source-unavailable", "requires-access"] },
+    "localized": {
+      "type": "object",
+      "required": ["en", "es"],
+      "properties": {
+        "en": { "type": "string", "minLength": 1 },
+        "es": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  }
+}
