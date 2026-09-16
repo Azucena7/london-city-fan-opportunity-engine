@@ -251,6 +251,12 @@ export function LocalizedTechnicalCaseStudy() {
             <p>candidate → fixture → evidence → value exchange → KPIs → gates → review</p>
             <a href="/api/contracts/partner-commercial-pack" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
           </article>
+          <article>
+            <span>PILOT READINESS</span>
+            <h3>{es ? "Una decisión provisional y gobernada" : "One provisional governed decision"}</h3>
+            <p>pack → score → owners → blockers → timeline → hold / go</p>
+            <a href="/api/contracts/pilot-readiness" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
+          </article>
         </div>
         <div className="technicalJoin"><code>fixture_id</code><span>→</span><code>campaign_id</code><span>→</span><code>ticket_id</code><span>→</span><code>scan</code><span>→</span><code>repeat_90d</code></div>
       </section>
@@ -278,7 +284,7 @@ export function LocalizedTechnicalCaseStudy() {
           {validations.map((item, index) => <article key={item.en}><span>✓</span><p>{pick(item)}</p><small>{String(index + 1).padStart(2, "0")}</small></article>)}
         </div>
         <div className="technicalChecks">
-          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>validate:experience-demand</code><code>validate:mobility-partnership</code><code>validate:experiment-measurement</code><code>validate:partner-commercial-pack</code><code>typecheck</code><code>Vercel build</code>
+          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>validate:experience-demand</code><code>validate:mobility-partnership</code><code>validate:experiment-measurement</code><code>validate:partner-commercial-pack</code><code>validate:pilot-readiness</code><code>typecheck</code><code>Vercel build</code>
         </div>
       </section>
 

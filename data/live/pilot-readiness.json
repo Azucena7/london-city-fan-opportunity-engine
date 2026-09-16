@@ -1,0 +1,137 @@
+{
+  "version": "1.0",
+  "checkedAt": "2026-09-16T23:30:00Z",
+  "status": "decision-draft",
+  "recommendationState": "provisional",
+  "recommendedPackId": "journey-technology-pack",
+  "recommendedFixtureId": "2027-02-14-che-h",
+  "headline": {
+    "en": "Choose one governed pilot before opening a partner conversation",
+    "es": "Elegir un piloto gobernado antes de abrir una conversación con un partner"
+  },
+  "principle": {
+    "en": "The score prioritises a review path. It is not an endorsement, approval, forecast or instruction to contact a candidate.",
+    "es": "El score prioriza una ruta de revisión. No es una recomendación comercial, aprobación, previsión ni instrucción para contactar a un candidato."
+  },
+  "scoringModel": {
+    "scale": "1-5",
+    "dimensions": [
+      { "id": "impact", "label": { "en": "Potential impact", "es": "Impacto potencial" }, "weight": 30 },
+      { "id": "feasibility", "label": { "en": "Delivery feasibility", "es": "Viabilidad de ejecución" }, "weight": 25 },
+      { "id": "evidence", "label": { "en": "Evidence readiness", "es": "Madurez de evidencia" }, "weight": 20 },
+      { "id": "speed", "label": { "en": "Speed to prototype", "es": "Velocidad al prototipo" }, "weight": 15 },
+      { "id": "control", "label": { "en": "Operational control", "es": "Control operativo" }, "weight": 10 }
+    ]
+  },
+  "candidates": [
+    {
+      "packId": "journey-technology-pack",
+      "fixtureId": "2027-02-14-che-h",
+      "rank": 1,
+      "scores": { "impact": 4, "feasibility": 4, "evidence": 2, "speed": 4, "control": 4 },
+      "weightedScore": 3.6,
+      "decision": "recommended-for-review",
+      "rationale": {
+        "en": "A journey prototype can be scoped before vehicles, hotel inventory or ticket packaging are commissioned.",
+        "es": "Un prototipo de trayecto puede definirse antes de contratar vehículos, inventario hotelero o paquetes con entrada."
+      },
+      "blockers": ["measurement-baseline", "technical-feasibility", "commercial-budget", "rights-review", "privacy-review"]
+    },
+    {
+      "packId": "rail-pack",
+      "fixtureId": "2027-01-24-ars-h",
+      "rank": 2,
+      "scores": { "impact": 4, "feasibility": 3, "evidence": 2, "speed": 3, "control": 3 },
+      "weightedScore": 3.1,
+      "decision": "hold",
+      "rationale": {
+        "en": "The station-to-stadium narrative is strong, but media, disruption workflow and operational participation require the rail operator.",
+        "es": "La narrativa estación-estadio es sólida, pero medios, incidencias y participación operativa dependen del operador ferroviario."
+      },
+      "blockers": ["measurement-baseline", "partner-scope", "commercial-budget", "rights-review"]
+    },
+    {
+      "packId": "vehicle-operator-pack",
+      "fixtureId": "2027-01-24-ars-h",
+      "rank": 3,
+      "scores": { "impact": 4, "feasibility": 2, "evidence": 1, "speed": 2, "control": 2 },
+      "weightedScore": 2.4,
+      "decision": "hold",
+      "rationale": {
+        "en": "A physical service needs a qualified cohort, route feasibility, a compliant vehicle, a quote and a contingency plan.",
+        "es": "Un servicio físico necesita cohorte cualificada, ruta viable, vehículo conforme, cotización y contingencia."
+      },
+      "blockers": ["measurement-baseline", "operator-quote", "operations-plan", "commercial-budget", "privacy-review"]
+    },
+    {
+      "packId": "travel-hospitality-pack",
+      "fixtureId": "2027-03-14-liv-h",
+      "rank": 4,
+      "scores": { "impact": 5, "feasibility": 1, "evidence": 1, "speed": 1, "control": 1 },
+      "weightedScore": 2.2,
+      "decision": "not-prioritised",
+      "rationale": {
+        "en": "The upside is high, but demand, regulated packaging, ticket allocation, hotel inventory and consumer protection remain unresolved.",
+        "es": "El potencial es alto, pero demanda, paquete regulado, cupo de entradas, hotel y protección al consumidor siguen sin resolverse."
+      },
+      "blockers": ["measurement-baseline", "approved-operator", "ticket-inventory", "commercial-budget", "rights-review", "privacy-review"]
+    }
+  ],
+  "owners": [
+    { "id": "marketing-owner", "label": { "en": "Marketing owner", "es": "Responsable de marketing" }, "remit": { "en": "Audience, proposition and owned-channel plan", "es": "Audiencia, propuesta y plan de canales propios" }, "state": "awaiting-assignment" },
+    { "id": "commercial-owner", "label": { "en": "Commercial owner", "es": "Responsable comercial" }, "remit": { "en": "Partner terms, budget and value exchange", "es": "Condiciones, presupuesto e intercambio de valor" }, "state": "awaiting-assignment" },
+    { "id": "operations-owner", "label": { "en": "Operations owner", "es": "Responsable de operaciones" }, "remit": { "en": "Delivery, service levels and contingency", "es": "Ejecución, niveles de servicio y contingencia" }, "state": "awaiting-assignment" },
+    { "id": "rights-owner", "label": { "en": "Rights owner", "es": "Responsable de derechos" }, "remit": { "en": "Brand, inventory and activation permissions", "es": "Marca, inventario y permisos de activación" }, "state": "awaiting-assignment" },
+    { "id": "privacy-owner", "label": { "en": "Privacy owner", "es": "Responsable de privacidad" }, "remit": { "en": "Data boundary, retention and processing", "es": "Frontera de datos, conservación y tratamiento" }, "state": "awaiting-assignment" },
+    { "id": "measurement-owner", "label": { "en": "Measurement owner", "es": "Responsable de medición" }, "remit": { "en": "Instrumentation, cohorts and scorecard", "es": "Instrumentación, cohortes y scorecard" }, "state": "awaiting-assignment" }
+  ],
+  "checklist": [
+    { "id": "canonical-fixture", "category": "evidence", "label": { "en": "Pilot fixture exists in the canonical calendar", "es": "El partido piloto existe en el calendario canónico" }, "ownerId": "marketing-owner", "state": "ready", "sourceRef": "partner-commercial-pack.fixtures" },
+    { "id": "bounded-prototype", "category": "operations", "label": { "en": "Prototype is limited to one fixture and one journey surface", "es": "El prototipo se limita a un partido y una superficie de trayecto" }, "ownerId": "operations-owner", "state": "ready", "sourceRef": "partner-commercial-pack.activationAssets" },
+    { "id": "measurement-baseline", "category": "measurement", "label": { "en": "Production measurement baseline reaches the aggregate threshold", "es": "El baseline de producción alcanza el umbral agregado" }, "ownerId": "measurement-owner", "state": "blocked", "sourceRef": "experiment-measurement.status" },
+    { "id": "technical-feasibility", "category": "operations", "label": { "en": "API, live-service and prototype scope are technically feasible", "es": "API, servicio en vivo y prototipo son técnicamente viables" }, "ownerId": "operations-owner", "state": "waiting", "sourceRef": "partner-input.required" },
+    { "id": "commercial-budget", "category": "commercial", "label": { "en": "Budget ceiling and commercial terms are approved", "es": "Techo presupuestario y condiciones están aprobados" }, "ownerId": "commercial-owner", "state": "blocked", "sourceRef": "pilot-readiness.budgetInputs" },
+    { "id": "rights-review", "category": "rights", "label": { "en": "Brand, inventory and activation rights are cleared", "es": "Marca, inventario y derechos de activación están autorizados" }, "ownerId": "rights-owner", "state": "blocked", "sourceRef": "club-approval.required" },
+    { "id": "privacy-review", "category": "privacy", "label": { "en": "Aggregate data flow and retention are approved", "es": "Flujo agregado y conservación están aprobados" }, "ownerId": "privacy-owner", "state": "blocked", "sourceRef": "experiment-measurement.guardrails" },
+    { "id": "operating-plan", "category": "operations", "label": { "en": "Matchday owner, escalation path and fallback are documented", "es": "Responsable, escalado y alternativa de matchday están documentados" }, "ownerId": "operations-owner", "state": "waiting", "sourceRef": "partner-input.required" }
+  ],
+  "timeline": [
+    { "id": "decision-brief", "offset": "T-90", "label": { "en": "Internal decision brief", "es": "Brief de decisión interno" }, "output": { "en": "Named owners and review scope", "es": "Responsables y alcance de revisión" }, "ownerId": "commercial-owner", "state": "waiting" },
+    { "id": "feasibility", "offset": "T-60", "label": { "en": "Feasibility review", "es": "Revisión de viabilidad" }, "output": { "en": "Technical, rights and data boundary", "es": "Frontera técnica, de derechos y datos" }, "ownerId": "operations-owner", "state": "blocked" },
+    { "id": "terms", "offset": "T-30", "label": { "en": "Terms and operating plan", "es": "Condiciones y plan operativo" }, "output": { "en": "Budget, responsibilities and fallback", "es": "Presupuesto, responsabilidades y alternativa" }, "ownerId": "commercial-owner", "state": "blocked" },
+    { "id": "go-no-go", "offset": "T-14", "label": { "en": "Go / no-go review", "es": "Revisión go / no-go" }, "output": { "en": "Five signed approval gates", "es": "Cinco gates aprobados" }, "ownerId": "rights-owner", "state": "blocked" },
+    { "id": "launch-check", "offset": "T-7", "label": { "en": "Launch readiness", "es": "Preparación de lanzamiento" }, "output": { "en": "Approved assets, tracking and escalation", "es": "Assets, tracking y escalado aprobados" }, "ownerId": "marketing-owner", "state": "blocked" },
+    { "id": "delivery", "offset": "MATCHDAY", "label": { "en": "Controlled delivery", "es": "Ejecución controlada" }, "output": { "en": "Service log and aggregate events", "es": "Registro de servicio y eventos agregados" }, "ownerId": "operations-owner", "state": "blocked" },
+    { "id": "scorecard", "offset": "T+7", "label": { "en": "Joint scorecard", "es": "Scorecard conjunto" }, "output": { "en": "Evidence, incidents and next decision", "es": "Evidencia, incidencias y siguiente decisión" }, "ownerId": "measurement-owner", "state": "blocked" }
+  ],
+  "budgetInputs": [
+    { "id": "prototype-cost", "label": { "en": "Prototype and integration", "es": "Prototipo e integración" }, "currency": "GBP", "value": null, "state": "required-input" },
+    { "id": "media-value", "label": { "en": "Owned media and activation value", "es": "Valor de medios propios y activación" }, "currency": "GBP", "value": null, "state": "required-input" },
+    { "id": "operations-cost", "label": { "en": "Matchday operations and contingency", "es": "Operaciones y contingencia de matchday" }, "currency": "GBP", "value": null, "state": "required-input" },
+    { "id": "measurement-cost", "label": { "en": "Instrumentation and reporting", "es": "Instrumentación e informes" }, "currency": "GBP", "value": null, "state": "required-input" }
+  ],
+  "outreachDraft": {
+    "state": "not-approved",
+    "sendEnabled": false,
+    "subject": { "en": "Exploratory matchday journey prototype — internal draft", "es": "Prototipo exploratorio de trayecto de matchday — borrador interno" },
+    "opening": { "en": "We are exploring whether a fixture-scoped journey layer could improve supporter travel confidence. This note is a draft for internal approval and has not been sent.", "es": "Estamos explorando si una capa de trayecto limitada a un partido podría mejorar la confianza de viaje. Esta nota es un borrador para aprobación interna y no se ha enviado." },
+    "agenda": [
+      { "en": "Validate the problem and one-fixture scope", "es": "Validar el problema y el alcance de un partido" },
+      { "en": "Understand technical, service and data dependencies", "es": "Entender dependencias técnicas, de servicio y datos" },
+      { "en": "Define evidence required before any commercial proposal", "es": "Definir evidencia necesaria antes de cualquier propuesta comercial" },
+      { "en": "Agree whether a bounded prototype review is worth pursuing", "es": "Acordar si merece la pena revisar un prototipo acotado" }
+    ]
+  },
+  "decision": {
+    "state": "hold",
+    "blockingChecklistIds": ["measurement-baseline", "technical-feasibility", "commercial-budget", "rights-review", "privacy-review", "operating-plan"],
+    "nextReview": { "en": "Assign internal owners and establish a production measurement baseline before approving outreach.", "es": "Asignar responsables internos y establecer un baseline de medición en producción antes de aprobar el contacto." }
+  },
+  "guardrails": [
+    { "id": "provisional-ranking", "text": { "en": "Scores are transparent planning judgements, not forecasts or partner performance claims.", "es": "Los scores son juicios transparentes de planificación, no previsiones ni afirmaciones sobre partners." } },
+    { "id": "no-automatic-go", "text": { "en": "No score can override a blocked approval gate or create a go decision.", "es": "Ningún score puede superar un gate bloqueado ni crear una decisión go." } },
+    { "id": "no-outreach", "text": { "en": "The draft cannot send email, submit forms or contact a candidate.", "es": "El borrador no puede enviar emails, formularios ni contactar a un candidato." } },
+    { "id": "no-budget-assumption", "text": { "en": "Budget fields remain empty until an authorised owner supplies them.", "es": "Los campos presupuestarios permanecen vacíos hasta que los complete un responsable autorizado." } },
+    { "id": "human-approval", "text": { "en": "Outreach, negotiation, spend and launch require authorised human approval.", "es": "Contacto, negociación, inversión y lanzamiento requieren aprobación humana autorizada." } }
+  ]
+}

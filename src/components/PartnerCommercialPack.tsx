@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
-import type { PartnerCommercialPackData, PartnerEvidenceState } from "@/lib/models";
+import { PilotReadinessControlRoom } from "./PilotReadinessControlRoom";
+import type { PartnerCommercialPackData, PartnerEvidenceState, PilotReadinessData } from "@/lib/models";
 
 const evidenceLabels: Record<PartnerEvidenceState, { en: string; es: string }> = {
   "public-verified": { en: "Verified", es: "Verificado" },
@@ -20,7 +21,7 @@ const categoryLabels: Record<string, { en: string; es: string }> = {
   "travel-hospitality": { en: "Travel & hospitality", es: "Travel y hospitality" }
 };
 
-export function PartnerCommercialPack({ data }: { data: PartnerCommercialPackData }) {
+export function PartnerCommercialPack({ data, readiness }: { data: PartnerCommercialPackData; readiness: PilotReadinessData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const [packId, setPackId] = useState(data.packs[0]?.id ?? "");
@@ -116,8 +117,10 @@ export function PartnerCommercialPack({ data }: { data: PartnerCommercialPackDat
         <div className="partnerComparisonTable"><div className="header"><span>{es ? "Modelo" : "Model"}</span><span>{es ? "Candidato" : "Candidate"}</span><span>{es ? "Partido" : "Fixture"}</span><span>{es ? "Siguiente prueba" : "Next proof"}</span></div>{data.packs.map((item) => <div key={item.id}><strong>{categoryLabels[item.category][lang]}</strong><span>{item.candidate}</span><span>{item.recommendedFixtureIds.map((id) => data.fixtures.find((fixtureItem) => fixtureItem.fixtureId === id)?.label[lang]).join(" · ")}</span><span>{item.evidence.find((evidence) => evidence.state === "requires-measurement")?.label[lang]}</span></div>)}</div>
       </section>
 
+      <PilotReadinessControlRoom readiness={readiness} packs={data} />
+
       <section className="partnerPhases">
-        <div className="partnerSectionHead"><div><span>05</span><h2>{es ? "Ruta hacia un piloto autorizado" : "Route to an authorised pilot"}</h2></div><p>{es ? "Ninguna fase avanza automáticamente." : "No phase advances automatically."}</p></div>
+        <div className="partnerSectionHead"><div><span>06</span><h2>{es ? "Ruta hacia un piloto autorizado" : "Route to an authorised pilot"}</h2></div><p>{es ? "Ninguna fase avanza automáticamente." : "No phase advances automatically."}</p></div>
         <div>{data.pilotPhases.map((phase, index) => <article key={phase.id}><span>{String(index + 1).padStart(2, "0")}</span><strong>{phase.label[lang]}</strong><p>{phase.output[lang]}</p><small>{phase.state}</small></article>)}</div>
       </section>
 
