@@ -66,6 +66,12 @@ const phases: Array<{ version: string; title: Localized; text: Localized; output
     title: { en: "Experiment measurement layer", es: "Capa de medición de experimentos" },
     text: { en: "Allowlisted anonymous events, test/production separation, provider-aware delivery and aggregate fixture cohorts with a minimum evidence threshold.", es: "Eventos anónimos con allowlist, separación test/producción, entrega consciente del proveedor y cohortes agregadas por partido con umbral mínimo." },
     output: { en: "WHEN a scenario becomes evidence", es: "CUÁNDO un escenario se convierte en evidencia" }
+  },
+  {
+    version: "V1.9",
+    title: { en: "Partner commercial pack", es: "Partner Commercial Pack" },
+    text: { en: "Four candidate-specific narratives join pilots, evidence states, value exchange, KPIs and approval gates without implying outreach or endorsement.", es: "Cuatro narrativas por candidato conectan pilotos, estados de evidencia, intercambio de valor, KPIs y gates sin sugerir contacto ni endorsement." },
+    output: { en: "HOW to frame an exploratory conversation", es: "CÓMO plantear una conversación exploratoria" }
   }
 ];
 
@@ -77,6 +83,7 @@ const states: Array<{ state: string; meaning: Localized; example: Localized }> =
   { state: "validation-concept", meaning: { en: "A proposition can be tested but is not on sale.", es: "Una propuesta puede probarse, pero no está a la venta." }, example: { en: "Matchday, VIP and international concepts", es: "Conceptos matchday, VIP e internacional" } },
   { state: "modelled-scenario", meaning: { en: "A transparent planning assumption, not measured demand or a supplier quote.", es: "Un supuesto transparente de planificación, no demanda medida ni cotización de proveedor." }, example: { en: "Corridor score and shuttle economics", es: "Score de corredor y economía de shuttle" } },
   { state: "provider-not-configured", meaning: { en: "Events validate locally but are not stored or counted.", es: "Los eventos se validan localmente, pero no se almacenan ni cuentan." }, example: { en: "Experience and mobility telemetry", es: "Telemetría de experiencias y movilidad" } },
+  { state: "prospecting-draft", meaning: { en: "A non-binding narrative for review, not outreach or a relationship.", es: "Una narrativa no vinculante para revisión, no contacto ni relación." }, example: { en: "Mobility and travel partner packs", es: "Packs de partners de movilidad y viaje" } },
   { state: "demo", meaning: { en: "Synthetic data that proves calculations only.", es: "Datos sintéticos que solo prueban cálculos." }, example: { en: "Brighton ticketing rehearsal", es: "Ensayo de ticketing de Brighton" } },
   { state: "requires-instrumentation", meaning: { en: "Measurable after UTMs or event tracking are deployed.", es: "Medible tras desplegar UTMs o seguimiento de eventos." }, example: { en: "Landing-page intent", es: "Intención en landing" } },
   { state: "requires-access", meaning: { en: "Needs an authorised club system.", es: "Necesita un sistema autorizado del club." }, example: { en: "Purchase, scan, no-show, repeat", es: "Compra, acceso, no-show, repetición" } }
@@ -94,7 +101,9 @@ const validations: Localized[] = [
   { en: "A mobility scenario cannot become a pilot without aggregated measured intent and an operator quote.", es: "Un escenario de movilidad no puede convertirse en piloto sin intención agregada medida y cotización del operador." },
   { en: "Addresses, postcodes and individual movements are prohibited from the partnership contract.", es: "Direcciones, códigos postales y movimientos individuales están prohibidos en el contrato de partnership." },
   { en: "Test events cannot contribute to a production cohort or partner-facing threshold.", es: "Los eventos de prueba no pueden contribuir a una cohorte de producción ni a un umbral para partners." },
-  { en: "Unknown event properties are rejected before any provider delivery.", es: "Las propiedades de evento desconocidas se rechazan antes de cualquier entrega al proveedor." }
+  { en: "Unknown event properties are rejected before any provider delivery.", es: "Las propiedades de evento desconocidas se rechazan antes de cualquier entrega al proveedor." },
+  { en: "A partner pack must expose verified, modelled, unmeasured and partner-dependent evidence together.", es: "Un partner pack debe mostrar conjuntamente evidencia verificada, modelada, no medida y dependiente del partner." },
+  { en: "Repository data cannot imply candidate contact, endorsement, inventory, quote or approval.", es: "Los datos del repositorio no pueden sugerir contacto, endorsement, inventario, cotización ni aprobación." }
 ];
 
 export function LocalizedTechnicalCaseStudy() {
@@ -236,6 +245,12 @@ export function LocalizedTechnicalCaseStudy() {
             <p>event → validate → deliver → deduplicate → cohort → threshold → review</p>
             <a href="/api/contracts/experiment-measurement" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
           </article>
+          <article>
+            <span>PARTNER COMMERCIAL PACK</span>
+            <h3>{es ? "Un dossier trazable y no vinculante" : "One traceable non-binding pack"}</h3>
+            <p>candidate → fixture → evidence → value exchange → KPIs → gates → review</p>
+            <a href="/api/contracts/partner-commercial-pack" target="_blank">{es ? "Abrir esquema JSON" : "Open JSON schema"} ↗</a>
+          </article>
         </div>
         <div className="technicalJoin"><code>fixture_id</code><span>→</span><code>campaign_id</code><span>→</span><code>ticket_id</code><span>→</span><code>scan</code><span>→</span><code>repeat_90d</code></div>
       </section>
@@ -263,7 +278,7 @@ export function LocalizedTechnicalCaseStudy() {
           {validations.map((item, index) => <article key={item.en}><span>✓</span><p>{pick(item)}</p><small>{String(index + 1).padStart(2, "0")}</small></article>)}
         </div>
         <div className="technicalChecks">
-          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>validate:experience-demand</code><code>validate:mobility-partnership</code><code>validate:experiment-measurement</code><code>typecheck</code><code>Vercel build</code>
+          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>validate:experience-demand</code><code>validate:mobility-partnership</code><code>validate:experiment-measurement</code><code>validate:partner-commercial-pack</code><code>typecheck</code><code>Vercel build</code>
         </div>
       </section>
 

@@ -41,6 +41,12 @@ events are validated locally but not stored. Raw-event retention is capped at 90
 facing evidence requires at least 20 valid production events. Run
 `npm run validate:experiment-measurement` after changing events, cohorts or provider settings.
 
+`partner-commercial-pack.json` prepares four candidate-specific commercial narratives while keeping
+all relationships at `candidate-not-contacted`. Each pack must disclose public evidence, modelled
+scenarios, missing measurement and partner-dependent facts. The repository cannot pass commercial,
+operational, rights or privacy gates, contact a candidate, or present assumptions as quotes. Run
+`npm run validate:partner-commercial-pack` after changing candidates, pilots, evidence or KPIs.
+
 ## CRM and ticketing readiness
 
 `crm-ticketing-readiness.json` describes integration coverage. The versioned record contract is
