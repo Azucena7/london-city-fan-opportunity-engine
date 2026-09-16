@@ -1,0 +1,129 @@
+{
+  "version": "1.0",
+  "checkedAt": "2026-09-16T14:00:00Z",
+  "status": "validation-concept",
+  "headline": {
+    "en": "Configure the matchday you would consider — without pretending it is on sale",
+    "es": "Configura la experiencia que considerarías — sin fingir que ya está a la venta"
+  },
+  "principle": {
+    "en": "A player-led spike is not enough. Product, fixture, origin, party size and willingness to pay must align before inventory or travel is negotiated.",
+    "es": "Un pico vinculado a una jugadora no basta. Producto, partido, origen, grupo y disposición a pagar deben coincidir antes de negociar inventario o viaje."
+  },
+  "concepts": [
+    {
+      "id": "london-city-matchday",
+      "title": { "en": "London City Matchday", "es": "London City Matchday" },
+      "strapline": { "en": "A confident first visit from anywhere in London", "es": "Una primera visita sencilla desde cualquier punto de Londres" },
+      "audience": { "en": "Families, first-time visitors and local groups", "es": "Familias, nuevos visitantes y grupos locales" },
+      "currency": "GBP",
+      "state": "validation",
+      "includes": [
+        { "en": "Official match ticket, subject to club inventory", "es": "Entrada oficial, sujeta a inventario del club" },
+        { "en": "Personalised route and recommended arrival time", "es": "Ruta personalizada y hora de llegada recomendada" },
+        { "en": "Matchday guide, fanzone plan and local recommendations", "es": "Guía de partido, plan de fanzone y recomendaciones locales" }
+      ],
+      "excludes": [
+        { "en": "No player meeting or guaranteed player access", "es": "Sin encuentro ni acceso garantizado a jugadoras" },
+        { "en": "No transport or ticket has been reserved", "es": "No se ha reservado transporte ni entrada" }
+      ],
+      "priceBands": [
+        { "id": "gbp-under-50", "label": "Under £50 pp" },
+        { "id": "gbp-50-74", "label": "£50–74 pp" },
+        { "id": "gbp-75-99", "label": "£75–99 pp" },
+        { "id": "gbp-100-plus", "label": "£100+ pp" }
+      ]
+    },
+    {
+      "id": "vip-social-matchday",
+      "title": { "en": "VIP Social Matchday", "es": "VIP Social Matchday" },
+      "strapline": { "en": "Premium football, social atmosphere and an easier journey", "es": "Fútbol premium, ambiente social y un trayecto más sencillo" },
+      "audience": { "en": "Celebrations, adult groups and corporate guests", "es": "Celebraciones, grupos adultos e invitados corporativos" },
+      "currency": "GBP",
+      "state": "partner-required",
+      "includes": [
+        { "en": "Premium matchday concept using approved club hospitality inventory", "es": "Concepto premium con inventario de hospitality aprobado por el club" },
+        { "en": "Hosted meeting point and group transfer concept", "es": "Punto de encuentro con anfitrión y concepto de traslado de grupo" },
+        { "en": "Pre- or post-match social experience", "es": "Experiencia social antes o después del partido" }
+      ],
+      "excludes": [
+        { "en": "Hospitality and transport partners are not yet contracted", "es": "Los partners de hospitality y transporte aún no están contratados" },
+        { "en": "No player appearance is included", "es": "No incluye aparición de jugadoras" }
+      ],
+      "priceBands": [
+        { "id": "gbp-75-99", "label": "£75–99 pp" },
+        { "id": "gbp-100-149", "label": "£100–149 pp" },
+        { "id": "gbp-150-199", "label": "£150–199 pp" },
+        { "id": "gbp-200-plus", "label": "£200+ pp" }
+      ]
+    },
+    {
+      "id": "international-weekend",
+      "title": { "en": "London City International Weekend", "es": "London City International Weekend" },
+      "strapline": { "en": "A club-led London weekend designed first for Spanish demand", "es": "Un fin de semana en Londres diseñado primero para la demanda española" },
+      "audience": { "en": "Supporters travelling from Spain and other international markets", "es": "Aficionados que viajan desde España y otros mercados internacionales" },
+      "currency": "EUR",
+      "state": "partner-required",
+      "includes": [
+        { "en": "Official ticket concept, one or two hotel nights and ground transfers", "es": "Concepto con entrada oficial, una o dos noches de hotel y traslados terrestres" },
+        { "en": "Spanish-speaking host and London matchday itinerary", "es": "Anfitrión en español e itinerario de partido en Londres" },
+        { "en": "Optional club experience subject to rights and availability", "es": "Experiencia opcional del club sujeta a derechos y disponibilidad" }
+      ],
+      "excludes": [
+        { "en": "Flights remain outside the concept until an approved operator is appointed", "es": "Los vuelos quedan fuera hasta contar con un operador aprobado" },
+        { "en": "No named player interaction is promised", "es": "No se promete interacción con ninguna jugadora concreta" }
+      ],
+      "priceBands": [
+        { "id": "eur-300-499", "label": "€300–499 pp" },
+        { "id": "eur-500-749", "label": "€500–749 pp" },
+        { "id": "eur-750-999", "label": "€750–999 pp" },
+        { "id": "eur-1000-plus", "label": "€1,000+ pp" }
+      ]
+    }
+  ],
+  "fixtures": [
+    { "id": "2026-11-01-mci-h", "date": "2026-11-01", "opponent": "Manchester City", "label": { "en": "Manchester City · 1 Nov", "es": "Manchester City · 1 nov" } },
+    { "id": "2027-01-24-ars-h", "date": "2027-01-24", "opponent": "Arsenal", "label": { "en": "Arsenal · 24 Jan", "es": "Arsenal · 24 ene" } },
+    { "id": "2027-02-14-che-h", "date": "2027-02-14", "opponent": "Chelsea", "label": { "en": "Chelsea · 14 Feb", "es": "Chelsea · 14 feb" } },
+    { "id": "2027-03-14-liv-h", "date": "2027-03-14", "opponent": "Liverpool", "label": { "en": "Liverpool · 14 Mar", "es": "Liverpool · 14 mar" } }
+  ],
+  "origins": [
+    { "id": "london", "market": "GB", "label": { "en": "London", "es": "Londres" } },
+    { "id": "rest-gb", "market": "GB", "label": { "en": "Rest of Great Britain", "es": "Resto de Gran Bretaña" } },
+    { "id": "spain", "market": "ES", "label": { "en": "Spain", "es": "España" } },
+    { "id": "other-international", "market": "OTHER", "label": { "en": "Other international market", "es": "Otro mercado internacional" } }
+  ],
+  "partySizes": [
+    { "id": "1", "label": { "en": "1 traveller", "es": "1 viajero" } },
+    { "id": "2", "label": { "en": "2 travellers", "es": "2 viajeros" } },
+    { "id": "3-4", "label": { "en": "3–4 travellers", "es": "3–4 viajeros" } },
+    { "id": "5-plus", "label": { "en": "5+ travellers", "es": "5+ viajeros" } }
+  ],
+  "funnel": [
+    { "id": "view", "label": { "en": "Landing view", "es": "Visita a landing" }, "state": "ready", "measure": { "en": "Anonymous page view", "es": "Vista de página anónima" } },
+    { "id": "concept_select", "label": { "en": "Concept selected", "es": "Concepto elegido" }, "state": "requires-instrumentation", "measure": { "en": "Selected proposition", "es": "Propuesta seleccionada" } },
+    { "id": "configuration_complete", "label": { "en": "Configuration complete", "es": "Configuración completada" }, "state": "requires-instrumentation", "measure": { "en": "Non-personal intent event", "es": "Evento de intención sin datos personales" } },
+    { "id": "register_interest", "label": { "en": "Interest registered", "es": "Interés registrado" }, "state": "blocked", "measure": { "en": "Requires approved data processor and consent copy", "es": "Requiere procesador aprobado y texto de consentimiento" } },
+    { "id": "deposit", "label": { "en": "Deposit", "es": "Depósito" }, "state": "blocked", "measure": { "en": "Requires inventory, refund policy and operator", "es": "Requiere inventario, política de devolución y operador" } },
+    { "id": "purchase", "label": { "en": "Purchase", "es": "Compra" }, "state": "blocked", "measure": { "en": "Requires approved commercial and fulfilment stack", "es": "Requiere stack comercial y operativo aprobado" } }
+  ],
+  "searchDemandGateIds": ["search-bridge", "registration-intent", "product-fit"],
+  "launchGates": [
+    { "id": "club-inventory", "label": { "en": "Club inventory and rights", "es": "Inventario y derechos del club" }, "owner": { "en": "Club commercial owner", "es": "Responsable comercial del club" }, "state": "waiting" },
+    { "id": "data-processor", "label": { "en": "Consent-safe registration", "es": "Registro con consentimiento" }, "owner": { "en": "CRM / privacy owner", "es": "Responsable CRM / privacidad" }, "state": "waiting" },
+    { "id": "travel-operator", "label": { "en": "Approved travel operator", "es": "Operador de viajes aprobado" }, "owner": { "en": "Travel partner", "es": "Partner de viajes" }, "state": "waiting" },
+    { "id": "mobility-partner", "label": { "en": "Ground transport capacity", "es": "Capacidad de transporte terrestre" }, "owner": { "en": "Mobility partner", "es": "Partner de movilidad" }, "state": "waiting" }
+  ],
+  "analytics": {
+    "eventName": "experience_validation_complete",
+    "state": "requires-instrumentation",
+    "fields": ["schema_version", "concept_id", "fixture_id", "origin_market", "origin_id", "party_size", "price_band", "hotel_interest", "transport_interest", "spanish_host_interest", "utm_source", "utm_medium", "utm_campaign", "utm_content"],
+    "prohibitedFields": ["name", "email", "phone", "address", "postcode", "payment", "free_text"]
+  },
+  "guardrails": [
+    { "id": "no-sale", "text": { "en": "This page validates demand; it does not sell, reserve inventory or accept payment.", "es": "Esta página valida demanda; no vende, reserva inventario ni acepta pagos." } },
+    { "id": "no-player-guarantee", "text": { "en": "Never promise access to Alexia or any named player.", "es": "No prometer acceso a Alexia ni a ninguna jugadora concreta." } },
+    { "id": "no-personal-data", "text": { "en": "Do not collect personal data until a processor, privacy notice and retention policy are approved.", "es": "No recoger datos personales hasta aprobar procesador, aviso de privacidad y política de conservación." } },
+    { "id": "operator-required", "text": { "en": "International travel remains a concept until an approved operator owns packaging and fulfilment.", "es": "El viaje internacional seguirá siendo un concepto hasta que un operador aprobado gestione paquete y operación." } }
+  ]
+}

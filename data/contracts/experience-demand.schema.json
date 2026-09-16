@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/experience-demand",
+  "title": "ExperienceDemandValidation",
+  "type": "object",
+  "required": ["version", "checkedAt", "status", "headline", "principle", "concepts", "fixtures", "origins", "partySizes", "funnel", "searchDemandGateIds", "launchGates", "analytics", "guardrails"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "checkedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["validation-concept", "collecting-interest", "partner-review", "sellable"] },
+    "headline": { "$ref": "#/$defs/localized" },
+    "principle": { "$ref": "#/$defs/localized" },
+    "concepts": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "strapline", "audience", "currency", "state", "includes", "excludes", "priceBands"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "$ref": "#/$defs/localized" },
+          "strapline": { "$ref": "#/$defs/localized" },
+          "audience": { "$ref": "#/$defs/localized" },
+          "currency": { "enum": ["GBP", "EUR"] },
+          "state": { "enum": ["concept", "validation", "partner-required", "sellable"] },
+          "includes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/localized" } },
+          "excludes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/localized" } },
+          "priceBands": { "type": "array", "minItems": 3 }
+        }
+      }
+    },
+    "fixtures": { "type": "array", "minItems": 1 },
+    "origins": { "type": "array", "minItems": 3 },
+    "partySizes": { "type": "array", "minItems": 3 },
+    "funnel": { "type": "array", "minItems": 6, "maxItems": 6 },
+    "searchDemandGateIds": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "launchGates": { "type": "array", "minItems": 1 },
+    "analytics": {
+      "type": "object",
+      "required": ["eventName", "state", "fields", "prohibitedFields"],
+      "properties": {
+        "eventName": { "const": "experience_validation_complete" },
+        "state": { "enum": ["requires-instrumentation", "ready"] },
+        "fields": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "prohibitedFields": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "guardrails": { "type": "array", "minItems": 4 }
+  },
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "required": ["en", "es"],
+      "properties": { "en": { "type": "string", "minLength": 1 }, "es": { "type": "string", "minLength": 1 } },
+      "additionalProperties": false
+    }
+  }
+}

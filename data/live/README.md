@@ -22,6 +22,12 @@ stored as `source-unavailable`; a low-volume result is `insufficient-sample`; ne
 Run `npm run validate:search-demand` after adding an export. A snapshot may be `measured` only when
 it contains dated 0–100 observations for terms declared in that comparison set.
 
+`experience-demand-validation.json` defines three research concepts and a non-personal analytics
+event. While its status is `validation-concept`, registration, deposits and purchase must remain
+blocked. The public page may emit the declared browser event, but it must not collect names,
+contact details, addresses, payment data or free text until an approved processor and consent
+flow exist. Run `npm run validate:experience-demand` after changing concepts, fixtures or gates.
+
 ## CRM and ticketing readiness
 
 `crm-ticketing-readiness.json` describes integration coverage. The versioned record contract is

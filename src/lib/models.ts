@@ -267,6 +267,43 @@ export type SearchDemandData = {
   }>;
 };
 
+export type ExperienceDemandData = {
+  version: "1.0";
+  checkedAt: string;
+  status: "validation-concept" | "collecting-interest" | "partner-review" | "sellable";
+  headline: LocalizedText;
+  principle: LocalizedText;
+  concepts: Array<{
+    id: string;
+    title: LocalizedText;
+    strapline: LocalizedText;
+    audience: LocalizedText;
+    currency: "GBP" | "EUR";
+    state: "concept" | "validation" | "partner-required" | "sellable";
+    includes: LocalizedText[];
+    excludes: LocalizedText[];
+    priceBands: Array<{ id: string; label: string }>;
+  }>;
+  fixtures: Array<{ id: string; date: string; opponent: string; label: LocalizedText }>;
+  origins: Array<{ id: string; market: "GB" | "ES" | "OTHER"; label: LocalizedText }>;
+  partySizes: Array<{ id: string; label: LocalizedText }>;
+  funnel: Array<{
+    id: "view" | "concept_select" | "configuration_complete" | "register_interest" | "deposit" | "purchase";
+    label: LocalizedText;
+    state: "ready" | "requires-instrumentation" | "blocked";
+    measure: LocalizedText;
+  }>;
+  searchDemandGateIds: string[];
+  launchGates: Array<{ id: string; label: LocalizedText; owner: LocalizedText; state: "waiting" | "ready" }>;
+  analytics: {
+    eventName: string;
+    state: "requires-instrumentation" | "ready";
+    fields: string[];
+    prohibitedFields: string[];
+  };
+  guardrails: Array<{ id: string; text: LocalizedText }>;
+};
+
 export type PublicSignalRefresh = {
   automated: boolean;
   cadence: "weekly-and-fixture-windows";

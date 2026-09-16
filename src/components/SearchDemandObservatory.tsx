@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "./LanguageProvider";
 import type { SearchDemandData } from "@/lib/models";
 
@@ -84,6 +85,11 @@ export function SearchDemandObservatory({ data }: { data: SearchDemandData }) {
         {data.experienceGates.map((gate) => (
           <article key={gate.id} className={gate.state}><span>{gate.state}</span><strong>{gate.label[lang]}</strong><p>{gate.threshold[lang]}</p></article>
         ))}
+      </div>
+
+      <div className="searchExperienceCta">
+        <div><span>{es ? "SIGUIENTE PRUEBA" : "NEXT TEST"}</span><strong>{es ? "Contrastar intención con una configuración real de experiencia" : "Test intent with a real experience configuration"}</strong></div>
+        <Link href="/experience">{es ? "Abrir laboratorio de experiencias" : "Open experience lab"} →</Link>
       </div>
 
       <details className="searchMethod">
