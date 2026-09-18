@@ -186,14 +186,14 @@
     "state": "forecast",
     "direction": "positive",
     "materiality": "low",
-    "observedAt": "2026-09-17T05:44:03.520Z",
+    "observedAt": "2026-09-18T05:42:47.883Z",
     "title": {
       "en": "Matchday weather is currently low risk",
       "es": "El riesgo meteorológico actual para el matchday es bajo"
     },
     "summary": {
-      "en": "8% maximum rain probability, 0 mm and 6.6 km/h maximum wind. Forecast, not measured weather.",
-      "es": "8% de probabilidad máxima de lluvia, 0 mm y viento máximo de 6.6 km/h. Es forecast, no tiempo medido."
+      "en": "8% maximum rain probability, 0 mm and 17.8 km/h maximum wind. Forecast, not measured weather.",
+      "es": "8% de probabilidad máxima de lluvia, 0 mm y viento máximo de 17.8 km/h. Es forecast, no tiempo medido."
     },
     "marketingAction": {
       "en": "Keep normal acquisition active and retain service messaging as a contingency.",

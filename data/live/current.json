@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-09-17T05:44:03.685Z",
+  "updated_at": "2026-09-18T05:42:48.046Z",
   "status": "active",
   "next_home_fixture_id": "2026-09-26-bha-h",
   "last_completed_home_fixture_id": "2026-09-04-mun-h",
   "weather": {
     "status": "forecast",
     "valid_for": "2026-09-26",
-    "generated_at": "2026-09-17T05:44:03.520Z",
+    "generated_at": "2026-09-18T05:42:47.883Z",
     "precipitation_probability_max": 8,
     "precipitation_sum": 0,
-    "temperature_max": 23.8,
-    "temperature_min": 10.9,
-    "wind_speed_max": 6.6,
+    "temperature_max": 20.5,
+    "temperature_min": 14,
+    "wind_speed_max": 17.8,
     "source": "Open-Meteo"
   },
   "attendance_momentum": {
@@ -19,7 +19,7 @@
     "basis": "5,402 measured attendance at the Manchester United opener"
   },
   "attention_availability": 35,
-  "material_changes": 1,
+  "material_changes": 0,
   "source_failures": [
     "WSL attendance: WSL attendance returned 403"
   ],
@@ -27,8 +27,8 @@
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-09-17T05:44:03.685Z",
-    "lastSuccessfulAt": "2026-09-17T05:44:03.685Z",
+    "lastAttemptAt": "2026-09-18T05:42:48.046Z",
+    "lastSuccessfulAt": "2026-09-18T05:42:48.046Z",
     "state": "partial",
     "sources": [
       {
@@ -36,7 +36,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "medium",
-        "checkedAt": "2026-09-17T05:44:03.685Z",
+        "checkedAt": "2026-09-18T05:42:48.046Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
       },
       {
@@ -44,7 +44,7 @@
         "label": "WSL attendance benchmark",
         "state": "waiting",
         "confidence": "unavailable",
-        "checkedAt": "2026-09-17T05:44:03.685Z",
+        "checkedAt": "2026-09-18T05:42:48.046Z",
         "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
         "message": "WSL attendance returned 403"
       }
