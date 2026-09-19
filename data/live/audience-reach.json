@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-18T05:42:48.046Z",
+  "checkedAt": "2026-09-19T05:41:48.445Z",
   "scope": "Public reach, search interest and fixture conversion",
   "headline": {
     "en": "Reach matters only when it can be connected to matchday demand",
@@ -372,6 +372,82 @@
           "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
         }
       ]
+    },
+    {
+      "id": "audience-auto-2026-09-19",
+      "observedAt": "2026-09-19T05:41:48.445Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "fixtureId": "2026-09-26-bha-h",
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14700,
+          "displayValue": "14.7K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2054952,
+          "displayValue": "2.1M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
     }
   ],
   "impactTimeline": [
@@ -547,7 +623,7 @@
             "en": "Public channel views",
             "es": "Visualizaciones públicas del canal"
           },
-          "value": "2,044,174",
+          "value": "2,054,952",
           "state": "measured"
         }
       ],
@@ -863,8 +939,8 @@
   "refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-09-18T05:42:48.046Z",
-    "lastSuccessfulAt": "2026-09-18T05:42:48.046Z",
+    "lastAttemptAt": "2026-09-19T05:41:48.445Z",
+    "lastSuccessfulAt": "2026-09-19T05:41:48.445Z",
     "state": "partial",
     "sources": [
       {
@@ -872,7 +948,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "medium",
-        "checkedAt": "2026-09-18T05:42:48.046Z",
+        "checkedAt": "2026-09-19T05:41:48.445Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
       },
       {
@@ -880,7 +956,7 @@
         "label": "WSL attendance benchmark",
         "state": "waiting",
         "confidence": "unavailable",
-        "checkedAt": "2026-09-18T05:42:48.046Z",
+        "checkedAt": "2026-09-19T05:41:48.445Z",
         "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
         "message": "WSL attendance returned 403"
       }

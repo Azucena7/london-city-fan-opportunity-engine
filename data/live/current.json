@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-09-18T05:42:48.046Z",
+  "updated_at": "2026-09-19T05:41:48.445Z",
   "status": "active",
   "next_home_fixture_id": "2026-09-26-bha-h",
   "last_completed_home_fixture_id": "2026-09-04-mun-h",
   "weather": {
     "status": "forecast",
     "valid_for": "2026-09-26",
-    "generated_at": "2026-09-18T05:42:47.883Z",
+    "generated_at": "2026-09-19T05:41:48.284Z",
     "precipitation_probability_max": 8,
-    "precipitation_sum": 0,
-    "temperature_max": 20.5,
-    "temperature_min": 14,
-    "wind_speed_max": 17.8,
+    "precipitation_sum": 2.4,
+    "temperature_max": 16.7,
+    "temperature_min": 13.7,
+    "wind_speed_max": 6.6,
     "source": "Open-Meteo"
   },
   "attendance_momentum": {
@@ -27,8 +27,8 @@
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-09-18T05:42:48.046Z",
-    "lastSuccessfulAt": "2026-09-18T05:42:48.046Z",
+    "lastAttemptAt": "2026-09-19T05:41:48.445Z",
+    "lastSuccessfulAt": "2026-09-19T05:41:48.445Z",
     "state": "partial",
     "sources": [
       {
@@ -36,7 +36,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "medium",
-        "checkedAt": "2026-09-18T05:42:48.046Z",
+        "checkedAt": "2026-09-19T05:41:48.445Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
       },
       {
@@ -44,7 +44,7 @@
         "label": "WSL attendance benchmark",
         "state": "waiting",
         "confidence": "unavailable",
-        "checkedAt": "2026-09-18T05:42:48.046Z",
+        "checkedAt": "2026-09-19T05:41:48.445Z",
         "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
         "message": "WSL attendance returned 403"
       }
