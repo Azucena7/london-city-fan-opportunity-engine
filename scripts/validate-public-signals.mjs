@@ -1,5 +1,5 @@
 import { parseTicketmasterEvents, parseWslAttendanceAverages, parseYoutubeChannelResponse } from "./refresh-public-signals.mjs";
-import { parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
+import { parseMensFootballFixtures, parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
 
 const youtube = parseYoutubeChannelResponse({
   items: [{ id: "channel-1", statistics: { subscriberCount: "14700", videoCount: "143", viewCount: "2020027" } }]
@@ -34,9 +34,35 @@ if (leagueFixtures.length !== 1 || leagueFixtures[0].competition !== "Barclays W
   throw new Error("Official WSL fixture parser failed");
 }
 
+const mensFootballFixtures = parseMensFootballFixtures([
+  {
+    competition: "Premier League",
+    sourceUrl: "https://example.com/premier-league",
+    matches: [{ MatchNumber: 50, DateUtc: "2026-09-26 16:00:00Z", Location: "Selhurst Park", HomeTeam: "Crystal Palace", AwayTeam: "Liverpool" }]
+  },
+  {
+    competition: "UEFA Nations League",
+    sourceUrl: "https://example.com/england",
+    matches: [{ MatchNumber: 100, DateUtc: "2026-09-26 16:00:00Z", Location: "Wembley Stadium", HomeTeam: "England", AwayTeam: "Spain" }]
+  },
+  {
+    competition: "UEFA Champions League",
+    sourceUrl: "https://example.com/champions-league",
+    matches: [{ MatchNumber: 150, DateUtc: "2026-09-26 16:00:00Z", Location: "Emirates Stadium", HomeTeam: "Arsenal", AwayTeam: "Barcelona" }]
+  }
+], [fixture]);
+if (
+  mensFootballFixtures.length !== 3
+  || mensFootballFixtures.some((event) => event.time !== "17:00:00")
+  || !mensFootballFixtures.some((event) => event.kind === "london-europe-fixture")
+) {
+  throw new Error("Men's football fixture parsing or Europe/London conversion failed");
+}
+
 const ranked = rankEventCompetition([
   ...ticketmaster,
   ...leagueFixtures,
+  ...mensFootballFixtures,
   { ...ticketmaster[0], id: "attraction", name: "London Eye - Standard Experience" },
   ...Array.from({ length: 6 }, (_, index) => ({
     ...ticketmaster[0],
@@ -50,8 +76,8 @@ const directLeagueCompetition = ranked.find((event) => event.kind === "same-leag
 if (!directLeagueCompetition || directLeagueCompetition.level !== "high" || directLeagueCompetition.score < 65) {
   throw new Error("Simultaneous Barclays WSL competition scoring failed");
 }
-if (ranked.some((event) => event.id === "attraction")) {
-  throw new Error("Permanent attraction filtering failed");
+if (ranked.some((event) => event.kind === "public-event")) {
+  throw new Error("Routine cultural and entertainment filtering failed");
 }
 if (ranked.some((event) => event.name === "Repeated exhibition admission")) {
   throw new Error("Repeated miscellaneous admission filtering failed");
@@ -67,4 +93,4 @@ if (attendance.get("Arsenal") !== 23_900 || attendance.get("London City Lionesse
   throw new Error("WSL attendance parser failed");
 }
 
-console.log(JSON.stringify({ youtube, ticketmasterEvents: ticketmaster.length, leagueFixtures: leagueFixtures.length, relevantEvents: ranked.length, attendanceRows: attendance.size }, null, 2));
+console.log(JSON.stringify({ youtube, ticketmasterEvents: ticketmaster.length, leagueFixtures: leagueFixtures.length, mensFootballFixtures: mensFootballFixtures.length, relevantEvents: ranked.length, attendanceRows: attendance.size }, null, 2));
