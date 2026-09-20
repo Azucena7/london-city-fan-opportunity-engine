@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-20T19:35:29.262Z",
+  "checkedAt": "2026-09-20T20:06:13.068Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -49,7 +49,7 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "weekly-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-20T19:35:29.262Z",
+      "lastSuccessfulAt": "2026-09-20T20:06:13.068Z",
       "ownerAction": null,
       "note": {
         "en": "Channel statistics are refreshed through the official YouTube Data API.",
@@ -67,11 +67,11 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-20T19:35:29.262Z",
+      "lastSuccessfulAt": "2026-09-20T20:06:13.068Z",
       "ownerAction": null,
       "note": {
-        "en": "153 relevant events remain after scoring 602 public listings, including simultaneous Barclays WSL fixtures.",
-        "es": "153 eventos relevantes permanecen tras puntuar 602 citas públicas, incluidos partidos simultáneos de Barclays WSL."
+        "en": "165 relevant events remain after scoring 602 public listings, including simultaneous Barclays WSL fixtures.",
+        "es": "165 eventos relevantes permanecen tras puntuar 602 citas públicas, incluidos partidos simultáneos de Barclays WSL."
       }
     },
     {
