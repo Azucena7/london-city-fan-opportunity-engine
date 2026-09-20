@@ -64,6 +64,31 @@ export type LiveSignal = {
   sourceUrl: string;
 };
 
+export type EventLandscapeData = {
+  version: string;
+  checkedAt: string | null;
+  state: "operational" | "degraded" | "waiting";
+  source: { name: string; url: string };
+  window: { startDate: string | null; endDate: string | null; city: string };
+  events: Array<{
+    id: string;
+    name: string;
+    date: string;
+    time: string | null;
+    venue: string;
+    city: string;
+    category: string;
+    genre: string | null;
+    url: string;
+    fixtureIds: string[];
+  }>;
+  refresh: {
+    lastAttemptAt: string | null;
+    lastSuccessfulAt: string | null;
+    message: string | null;
+  };
+};
+
 export type AttendanceHistoryMatch = {
   id: string;
   season: string;

@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "checkedAt": null,
+  "state": "waiting",
+  "source": {
+    "name": "Ticketmaster Discovery API",
+    "url": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
+  },
+  "window": {
+    "startDate": null,
+    "endDate": null,
+    "city": "London"
+  },
+  "events": [],
+  "refresh": {
+    "lastAttemptAt": null,
+    "lastSuccessfulAt": null,
+    "message": "TICKETMASTER_API_KEY must be configured in GitHub Actions before the first scheduled refresh."
+  }
+}

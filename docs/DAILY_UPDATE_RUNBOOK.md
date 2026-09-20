@@ -53,6 +53,8 @@ npm run validate:public-signals
 npm run typecheck
 ```
 
+The public-signal refresh uses the official YouTube Data API and Ticketmaster Discovery API. Configure `YOUTUBE_API_KEY` and `TICKETMASTER_API_KEY` as GitHub Actions repository secrets; Vercel environment variables do not propagate to GitHub-hosted workflows. YouTube channel statistics are read by handle. Ticketmaster events are retained only when they fall within one day of one of the next six home fixtures, so they remain an attention-planning signal rather than a generic event directory.
+
 The workflow also supports **Run workflow** from the GitHub Actions page.
 
 
