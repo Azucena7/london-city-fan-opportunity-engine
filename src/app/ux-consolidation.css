@@ -99,12 +99,29 @@
 .eventLandscapeState span { color: var(--muted); font-size: 9px; letter-spacing: .08em; }
 .eventLandscapeState strong { margin: 7px 0; color: var(--lcl-hyperturq); font-size: 18px; text-transform: uppercase; }
 .eventLandscapeState small { color: var(--muted); font-size: 11px; }
+.eventFixtureGroups { display: grid; gap: 28px; margin-top: 30px; }
+.eventFixtureGroup { padding-top: 22px; border-top: 1px solid var(--line); }
+.eventFixtureTitle { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
+.eventFixtureTitle div span, .eventFixtureTitle div strong { display: block; }
+.eventFixtureTitle span { color: var(--lcl-hyperturq); font-size: 9px; letter-spacing: .1em; }
+.eventFixtureTitle strong { margin-top: 5px; font-size: 20px; }
+.eventFixtureTitle small { color: var(--muted); font-size: 11px; }
 .eventLandscapeGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
-.eventLandscapeGrid article { padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: rgba(0,0,0,.14); }
+.eventLandscapeGrid article { position: relative; padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: rgba(0,0,0,.14); }
+.eventLandscapeGrid article.competition-high { border-color: rgba(255,107,61,.55); }
+.eventLandscapeGrid article.competition-medium { border-color: rgba(50,230,212,.36); }
 .eventLandscapeGrid article > div { display: flex; justify-content: space-between; gap: 12px; color: var(--lcl-hyperturq); font-size: 9px; text-transform: uppercase; }
+.eventLandscapeGrid .competitionScore { position: absolute; top: 45px; right: 17px; display: block; text-align: right; }
+.competitionScore strong, .competitionScore span { display: block; }
+.competitionScore strong { color: var(--white); font-size: 22px; }
+.competitionScore span { margin-top: 2px; color: var(--muted); font-size: 8px; letter-spacing: .08em; }
 .eventLandscapeGrid h3 { margin: 13px 0 7px; font-size: 18px; line-height: 1.15; }
 .eventLandscapeGrid p, .eventLandscapeGrid small { display: block; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.eventLandscapeGrid h3, .eventLandscapeGrid p { padding-right: 48px; }
+.competitionReasons { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+.competitionReasons li { padding: 5px 7px; border-radius: 999px; background: rgba(255,255,255,.055); color: var(--muted); font-size: 9px; line-height: 1.2; }
 .eventLandscapeGrid a, .eventLandscapeSource { display: inline-block; margin-top: 14px; color: var(--lcl-hyperturq); font-size: 11px; font-weight: 900; text-decoration: none; }
+.eventLandscapeSources { display: flex; flex-wrap: wrap; gap: 16px; }
 .eventLandscapeEmpty { margin-top: 28px; padding: 20px; border: 1px dashed var(--line); border-radius: 14px; }
 .eventLandscapeEmpty p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
 .sourceHealthCenter { margin: 54px 0 76px; }

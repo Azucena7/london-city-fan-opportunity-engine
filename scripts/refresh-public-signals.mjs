@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
 
 const AUDIENCE_PATH = new URL("../data/live/audience-reach.json", import.meta.url);
 const BENCHMARK_PATH = new URL("../data/live/wsl-attendance-benchmark.json", import.meta.url);
@@ -11,6 +12,7 @@ const YOUTUBE_URL = "https://www.youtube.com/@LondonCityLionesses";
 const YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/channels";
 const TICKETMASTER_API_URL = "https://app.ticketmaster.com/discovery/v2/events.json";
 const TICKETMASTER_SOURCE_URL = "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/";
+const WSL_FIXTURES_URL = "https://womensleagues.thefa.com/fixtures/";
 const WSL_ATTENDANCE_URL = "https://www.footballwebpages.co.uk/womens-super-league/attendances";
 const DRY_RUN = process.env.REFRESH_DRY_RUN === "1";
 
@@ -128,7 +130,13 @@ export function parseTicketmasterEvents(payload, fixtures) {
       category: classification?.segment?.name ?? "Event",
       genre: classification?.genre?.name ?? null,
       url: event.url,
-      fixtureIds
+      fixtureIds,
+      kind: "public-event",
+      sourceName: "Ticketmaster Discovery API",
+      sourceUrl: TICKETMASTER_SOURCE_URL,
+      latitude: Number.isFinite(Number(venue?.location?.latitude)) ? Number(venue.location.latitude) : null,
+      longitude: Number.isFinite(Number(venue?.location?.longitude)) ? Number(venue.location.longitude) : null,
+      slotCount: 1
     }];
   }).sort((a, b) => `${a.date}-${a.time ?? ""}`.localeCompare(`${b.date}-${b.time ?? ""}`));
 }
@@ -352,12 +360,23 @@ export async function refreshPublicSignals(now = new Date()) {
   const window = ticketmasterWindow(calendar, today);
   if (window) {
     try {
-      const events = await fetchTicketmasterEvents(process.env.TICKETMASTER_API_KEY, window);
+      const [ticketmasterEvents, leagueHtml] = await Promise.all([
+        fetchTicketmasterEvents(process.env.TICKETMASTER_API_KEY, window),
+        fetchText(WSL_FIXTURES_URL, "Official WSL fixtures")
+      ]);
+      const leagueFixtures = parseOfficialLeagueFixtures(leagueHtml, window.fixtures);
+      const events = rankEventCompetition([...ticketmasterEvents, ...leagueFixtures], window.fixtures);
       nextEventLandscape = {
         ...eventLandscape,
         checkedAt: attemptedAt,
         state: "operational",
         window: { startDate: window.startDate, endDate: window.endDate, city: "London" },
+        sources: [
+          { name: "Ticketmaster Discovery API", url: TICKETMASTER_SOURCE_URL },
+          { name: "WSL Football fixtures", url: WSL_FIXTURES_URL }
+        ],
+        rawEventCount: ticketmasterEvents.length + leagueFixtures.length,
+        excludedEventCount: ticketmasterEvents.length + leagueFixtures.length - events.length,
         events,
         refresh: { lastAttemptAt: attemptedAt, lastSuccessfulAt: attemptedAt, message: null }
       };
@@ -366,8 +385,8 @@ export async function refreshPublicSignals(now = new Date()) {
         ok: true,
         secret: "TICKETMASTER_API_KEY",
         note: {
-          en: `${events.length} London events overlap the current home-fixture windows.`,
-          es: `${events.length} eventos de Londres coinciden con las ventanas actuales de partidos en casa.`
+          en: `${events.length} relevant events remain after scoring ${ticketmasterEvents.length + leagueFixtures.length} public listings, including simultaneous Barclays WSL fixtures.`,
+          es: `${events.length} eventos relevantes permanecen tras puntuar ${ticketmasterEvents.length + leagueFixtures.length} citas públicas, incluidos partidos simultáneos de Barclays WSL.`
         }
       };
     } catch (error) {
