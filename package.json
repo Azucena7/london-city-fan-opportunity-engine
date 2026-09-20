@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run validate:crm-demo && npm run validate:public-signals && npm run validate:campaigns && npm run validate:search-demand && npm run validate:experience-demand && npm run validate:mobility-partnership && npm run validate:experiment-measurement && npm run validate:partner-commercial-pack && npm run validate:pilot-readiness && next build",
+    "build": "npm run validate:crm-demo && npm run validate:public-signals && npm run validate:campaigns && npm run validate:search-demand && npm run validate:experience-demand && npm run validate:mobility-partnership && npm run validate:experiment-measurement && npm run validate:partner-commercial-pack && npm run validate:pilot-readiness && npm run validate:source-health && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --max-warnings=0 && npm run typecheck && npm run check:content",
     "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "check:content": "node scripts/check-product-content.mjs",
     "refresh:data": "node scripts/refresh-data.mjs",
     "refresh:public-signals": "node scripts/refresh-public-signals.mjs",
     "validate:crm-demo": "node scripts/validate-crm-ticketing-demo.mjs",
@@ -18,7 +20,8 @@
     "validate:mobility-partnership": "node scripts/validate-mobility-partnership.mjs",
     "validate:experiment-measurement": "node scripts/validate-experiment-measurement.mjs",
     "validate:partner-commercial-pack": "node scripts/validate-partner-commercial-pack.mjs",
-    "validate:pilot-readiness": "node scripts/validate-pilot-readiness.mjs"
+    "validate:pilot-readiness": "node scripts/validate-pilot-readiness.mjs",
+    "validate:source-health": "node scripts/validate-source-health.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",
@@ -29,6 +32,8 @@
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.25",
     "typescript": "^5.7.0"
   }
 }

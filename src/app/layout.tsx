@@ -19,7 +19,9 @@ import "./experience.css";
 import "./mobility.css";
 import "./measurement.css";
 import "./partners.css";
+import "./ux-consolidation.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://london-city-fan-opportunity-engine.vercel.app"),
@@ -50,15 +52,24 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const savedLanguage = cookieStore.get("lcl-language")?.value;
+  const initialLang = savedLanguage === "es" ? "es" : "en";
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={initialLang} suppressHydrationWarning>
       <body>
-        <LanguageProvider>{children}</LanguageProvider>
+        <a className="skipLink" href="#main-content">
+          {initialLang === "es" ? "Saltar al contenido" : "Skip to content"}
+        </a>
+        <LanguageProvider initialLang={initialLang}>
+          <div id="main-content" tabIndex={-1}>{children}</div>
+        </LanguageProvider>
       </body>
     </html>
   );

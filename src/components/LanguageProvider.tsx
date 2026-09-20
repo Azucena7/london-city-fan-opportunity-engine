@@ -20,11 +20,13 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({
-  children
+  children,
+  initialLang = "en"
 }: {
   children: React.ReactNode;
+  initialLang?: Lang;
 }) {
-  const [lang, setLangState] = useState<Lang>("en");
+  const [lang, setLangState] = useState<Lang>(initialLang);
 
   useEffect(() => {
     const saved = window.localStorage.getItem("lcl-language");
@@ -40,12 +42,14 @@ export function LanguageProvider({
     if (browser?.startsWith("es")) {
       setLangState("es");
       document.documentElement.lang = "es";
+      document.cookie = "lcl-language=es; path=/; max-age=31536000; samesite=lax";
     }
   }, []);
 
   function setLang(next: Lang) {
     setLangState(next);
     window.localStorage.setItem("lcl-language", next);
+    document.cookie = `lcl-language=${next}; path=/; max-age=31536000; samesite=lax`;
     document.documentElement.lang = next;
   }
 

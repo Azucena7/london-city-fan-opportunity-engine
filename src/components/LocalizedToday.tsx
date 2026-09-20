@@ -5,7 +5,11 @@ import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
 import { PostMatchScorecard } from "./PostMatchScorecard";
 import { CampaignPlan } from "./CampaignPlan";
+import { ExecutiveOverview } from "./ExecutiveOverview";
+import { SourceHealthCenter } from "./SourceHealthCenter";
 import type { CalendarFixture, CampaignPlan as CampaignData, Fixture, LiveSignal, PostMatchScorecard as ScorecardData } from "@/lib/models";
+import type { ExperimentMeasurementData, PilotReadinessData, SearchDemandData } from "@/lib/models";
+import type { SourceHealthData } from "@/lib/sourceHealth";
 
 type CurrentState = {
   updated_at: string;
@@ -44,7 +48,11 @@ export function LocalizedToday({
   current,
   campaign,
   scorecard,
-  roadmap
+  roadmap,
+  readiness,
+  search,
+  measurement,
+  sources
 }: {
   fixture: Fixture;
   nextMatch: CalendarFixture | null;
@@ -53,6 +61,10 @@ export function LocalizedToday({
   campaign: CampaignData | null;
   scorecard: ScorecardData | null;
   roadmap: RoadmapItem[];
+  readiness: PilotReadinessData;
+  search: SearchDemandData;
+  measurement: ExperimentMeasurementData;
+  sources: SourceHealthData;
 }) {
   const { lang } = useLanguage();
   const es = lang === "es";
@@ -91,7 +103,7 @@ export function LocalizedToday({
           </div>
           <blockquote>“{fixture.message}”</blockquote>
           <div className="heroBrief">
-            <div><span>{es ? "Audiencia" : "Audience"}</span><strong>{fixture.targetTerritory} + compradores del opener</strong></div>
+            <div><span>{es ? "Audiencia" : "Audience"}</span><strong>{fixture.targetTerritory} + {es ? "compradores del opener" : "opener buyers"}</strong></div>
             <div><span>{es ? "Oferta" : "Offer"}</span><strong>{fixture.product}</strong></div>
             <div><span>{es ? "Canales" : "Channels"}</span><strong>{fixture.channel}</strong></div>
           </div>
@@ -105,6 +117,8 @@ export function LocalizedToday({
           <span>{formatDate(nextMatch.date, locale)} · {nextMatch.kickoff} · {nextMatch.venue}</span>
         </section>
       ) : null}
+
+      <ExecutiveOverview readiness={readiness} search={search} measurement={measurement} sources={sources} />
 
       <section className="todaySection">
         <div className="todaySectionHead">
@@ -128,6 +142,8 @@ export function LocalizedToday({
       </section>
 
       {campaign ? <CampaignPlan data={campaign} signals={signals} /> : null}
+
+      <SourceHealthCenter data={sources} compact />
 
       <section className="todaySection">
         <div className="todaySectionHead">
