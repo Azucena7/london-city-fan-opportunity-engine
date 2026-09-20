@@ -69,7 +69,10 @@ export type EventLandscapeData = {
   checkedAt: string | null;
   state: "operational" | "degraded" | "waiting";
   source: { name: string; url: string };
+  sources?: Array<{ name: string; url: string }>;
   window: { startDate: string | null; endDate: string | null; city: string };
+  rawEventCount?: number;
+  excludedEventCount?: number;
   events: Array<{
     id: string;
     name: string;
@@ -79,8 +82,26 @@ export type EventLandscapeData = {
     city: string;
     category: string;
     genre: string | null;
+    competition?: string;
     url: string;
     fixtureIds: string[];
+    kind?: "public-event" | "same-league-fixture";
+    sourceName?: string;
+    sourceUrl?: string;
+    latitude?: number | null;
+    longitude?: number | null;
+    slotCount?: number;
+    score?: number;
+    level?: "high" | "medium" | "context";
+    reasons?: LocalizedText[];
+    fixtureScores?: Array<{
+      fixtureId: string;
+      score: number;
+      level: "high" | "medium" | "context";
+      timeGapMinutes: number | null;
+      distanceKm: number | null;
+      reasons: LocalizedText[];
+    }>;
   }>;
   refresh: {
     lastAttemptAt: string | null;
