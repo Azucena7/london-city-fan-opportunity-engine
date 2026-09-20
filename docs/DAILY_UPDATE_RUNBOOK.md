@@ -16,7 +16,7 @@ The site now separates code from live content. GitHub Actions refreshes the offi
 ## What remains editorial or requires a connected research automation
 
 - Ticket-sales milestones and scans from club systems.
-- Competing events and media-attention changes.
+- Media-attention changes outside the connected event and league-fixture sources.
 - Sponsorship, community and consumer signals.
 - Post-match acquisition, yield, territory and retention data.
 - Eleven TV video-level reach until a canonical public video is configured.
@@ -53,7 +53,9 @@ npm run validate:public-signals
 npm run typecheck
 ```
 
-The public-signal refresh uses the official YouTube Data API and Ticketmaster Discovery API. Configure `YOUTUBE_API_KEY` and `TICKETMASTER_API_KEY` as GitHub Actions repository secrets; Vercel environment variables do not propagate to GitHub-hosted workflows. YouTube channel statistics are read by handle. Ticketmaster events are retained only when they fall within one day of one of the next six home fixtures, so they remain an attention-planning signal rather than a generic event directory.
+The public-signal refresh uses the official YouTube Data API, Ticketmaster Discovery API and official Barclays WSL fixture list. Configure `YOUTUBE_API_KEY` and `TICKETMASTER_API_KEY` as GitHub Actions repository secrets; Vercel environment variables do not propagate to GitHub-hosted workflows. YouTube channel statistics are read by handle.
+
+Ticketmaster events are first grouped by name, venue and date so repeated admission windows do not dominate the result. Permanent attractions and high-frequency miscellaneous listings are excluded. The remaining candidates are scored out of 100 for timing, proximity to the home ground, audience overlap, venue scale and distinctiveness. Football, rugby, tennis, basketball, cricket, athletics, boxing, netball and hockey receive explicit sports-audience consideration. Official Barclays WSL matches on the same date are added as direct attention competition; matches in the same or overlapping kickoff window rank most strongly, including fixtures outside London. The interface shows the four strongest relevant competitors for each upcoming home fixture.
 
 The workflow also supports **Run workflow** from the GitHub Actions page.
 
