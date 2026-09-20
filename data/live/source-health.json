@@ -1,10 +1,13 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-20T05:41:56.167Z",
+  "checkedAt": "2026-09-20T19:35:29.262Z",
   "sources": [
     {
       "id": "club-public-web",
-      "label": { "en": "Club public web", "es": "Web pública del club" },
+      "label": {
+        "en": "Club public web",
+        "es": "Web pública del club"
+      },
       "category": "fixtures-and-activations",
       "access": "public",
       "state": "operational",
@@ -19,7 +22,10 @@
     },
     {
       "id": "open-meteo",
-      "label": { "en": "Open-Meteo forecast", "es": "Predicción Open-Meteo" },
+      "label": {
+        "en": "Open-Meteo forecast",
+        "es": "Predicción Open-Meteo"
+      },
       "category": "weather",
       "access": "public",
       "state": "operational",
@@ -34,43 +40,46 @@
     },
     {
       "id": "youtube-public",
-      "label": { "en": "London City YouTube", "es": "YouTube de London City" },
+      "label": {
+        "en": "London City YouTube",
+        "es": "YouTube de London City"
+      },
       "category": "audience",
       "access": "api-key",
-      "state": "degraded",
+      "state": "operational",
       "method": "official-api",
       "cadence": "weekly-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-20T05:41:56.167Z",
-      "ownerAction": {
-        "en": "Add YOUTUBE_API_KEY as a GitHub Actions secret.",
-        "es": "Añadir YOUTUBE_API_KEY como secreto de GitHub Actions."
-      },
+      "lastSuccessfulAt": "2026-09-20T19:35:29.262Z",
+      "ownerAction": null,
       "note": {
-        "en": "The official API adapter is ready; the latest valid observation is retained until the workflow secret is configured.",
-        "es": "El adaptador oficial está listo; se conserva la última observación válida hasta configurar el secreto del workflow."
+        "en": "Channel statistics are refreshed through the official YouTube Data API.",
+        "es": "Las estadísticas del canal se actualizan mediante la API oficial de YouTube Data."
       }
     },
     {
       "id": "ticketmaster-events",
-      "label": { "en": "London event landscape", "es": "Panorama de eventos de Londres" },
+      "label": {
+        "en": "London event landscape",
+        "es": "Panorama de eventos de Londres"
+      },
       "category": "attention-competition",
       "access": "api-key",
-      "state": "not-configured",
+      "state": "operational",
       "method": "official-api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": null,
-      "ownerAction": {
-        "en": "Add TICKETMASTER_API_KEY as a GitHub Actions secret.",
-        "es": "Añadir TICKETMASTER_API_KEY como secreto de GitHub Actions."
-      },
+      "lastSuccessfulAt": "2026-09-20T19:35:29.262Z",
+      "ownerAction": null,
       "note": {
-        "en": "The adapter will retain London events that fall within one day of the next six home fixtures.",
-        "es": "El adaptador conservará los eventos de Londres que ocurran a un día o menos de los próximos seis partidos en casa."
+        "en": "587 London events overlap the current home-fixture windows.",
+        "es": "587 eventos de Londres coinciden con las ventanas actuales de partidos en casa."
       }
     },
     {
       "id": "wsl-attendance",
-      "label": { "en": "WSL attendance benchmark", "es": "Benchmark de asistencia WSL" },
+      "label": {
+        "en": "WSL attendance benchmark",
+        "es": "Benchmark de asistencia WSL"
+      },
       "category": "attendance",
       "access": "public-fragile",
       "state": "blocked",
@@ -88,7 +97,10 @@
     },
     {
       "id": "google-trends",
-      "label": { "en": "Google Trends", "es": "Google Trends" },
+      "label": {
+        "en": "Google Trends",
+        "es": "Google Trends"
+      },
       "category": "search-demand",
       "access": "application-required",
       "state": "blocked",
@@ -106,7 +118,10 @@
     },
     {
       "id": "measurement-provider",
-      "label": { "en": "Experiment measurement", "es": "Medición de experimentos" },
+      "label": {
+        "en": "Experiment measurement",
+        "es": "Medición de experimentos"
+      },
       "category": "measurement",
       "access": "configuration-required",
       "state": "not-configured",
@@ -124,7 +139,10 @@
     },
     {
       "id": "crm-ticketing",
-      "label": { "en": "CRM and ticketing", "es": "CRM y ticketing" },
+      "label": {
+        "en": "CRM and ticketing",
+        "es": "CRM y ticketing"
+      },
       "category": "conversion",
       "access": "club-access-required",
       "state": "requires-access",
