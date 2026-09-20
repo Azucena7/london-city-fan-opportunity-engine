@@ -53,9 +53,11 @@ npm run validate:public-signals
 npm run typecheck
 ```
 
-The public-signal refresh uses the official YouTube Data API, Ticketmaster Discovery API and official Barclays WSL fixture list. Configure `YOUTUBE_API_KEY` and `TICKETMASTER_API_KEY` as GitHub Actions repository secrets; Vercel environment variables do not propagate to GitHub-hosted workflows. YouTube channel statistics are read by handle.
+The public-signal refresh uses the official YouTube Data API, Ticketmaster Discovery API, official Barclays WSL fixture list and daily structured football feeds for the Premier League, London EFL clubs, England men and UEFA club competitions involving London teams. Configure `YOUTUBE_API_KEY` and `TICKETMASTER_API_KEY` as GitHub Actions repository secrets; Vercel environment variables do not propagate to GitHub-hosted workflows. YouTube channel statistics are read by handle.
 
-Ticketmaster events are first grouped by name, venue and date so repeated admission windows do not dominate the result. Permanent attractions and high-frequency miscellaneous listings are excluded. The remaining candidates are scored out of 100 for timing, proximity to the home ground, audience overlap, venue scale and distinctiveness. Football, rugby, tennis, basketball, cricket, athletics, boxing, netball and hockey receive explicit sports-audience consideration. Official Barclays WSL matches on the same date are added as direct attention competition; matches in the same or overlapping kickoff window rank most strongly, including fixtures outside London. The interface shows the four strongest relevant competitors for each upcoming home fixture.
+The attention model applies a relevance gate before scoring. It admits simultaneous WSL fixtures, England men's internationals, matches involving London men's clubs, nationally prominent men's fixtures and exceptional sports occasions at major venues. A candidate must occur on the same day as the London City fixture. Routine concerts, musicals, theatre, attractions and generic family entertainment are excluded: co-occurrence alone is not treated as competition.
+
+Admitted candidates are scored out of 100 for kickoff overlap (35), audience substitution (35), scale or national salience (20) and proximity or operational impact (10). Scores below 50 are omitted; 50–59 is context, 60–74 medium and 75–100 high. The interface shows the four strongest signals per upcoming home fixture. Fixture Download is a secondary machine-readable feed updated daily; use the linked competition or club source to reconfirm material schedule changes before committing spend.
 
 The workflow also supports **Run workflow** from the GitHub Actions page.
 
