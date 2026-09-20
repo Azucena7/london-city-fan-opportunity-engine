@@ -8,6 +8,16 @@ function displayDate(value: string, locale: string) {
     .format(new Date(`${value}T12:00:00`));
 }
 
+function competitionLabel(kind: EventLandscapeData["events"][number]["kind"], category: string, es: boolean) {
+  if (kind === "same-league-fixture") return es ? "MISMA LIGA" : "SAME LEAGUE";
+  if (kind === "england-men-fixture") return es ? "INGLATERRA" : "ENGLAND";
+  if (kind === "london-premier-league-fixture") return es ? "PREMIER · LONDRES" : "PREMIER · LONDON";
+  if (kind === "london-europe-fixture") return es ? "EUROPA · CLUB LONDINENSE" : "EUROPE · LONDON CLUB";
+  if (kind === "london-efl-fixture") return es ? "EFL · LONDRES" : "EFL · LONDON";
+  if (kind === "national-marquee-fixture") return es ? "FÚTBOL NACIONAL" : "NATIONAL FOOTBALL";
+  return category;
+}
+
 export function EventLandscape({ data, calendar }: { data: EventLandscapeData; calendar: CalendarFixture[] }) {
   const { lang } = useLanguage();
   const es = lang === "es";
@@ -32,8 +42,7 @@ export function EventLandscape({ data, calendar }: { data: EventLandscapeData; c
         }))
         .sort((a, b) => b.assessment.score - a.assessment.score)
         .slice(0, 4)
-    }))
-    .filter((group) => group.events.length);
+    }));
   const rawCount = data.rawEventCount ?? data.events.length;
 
   return (
@@ -41,10 +50,10 @@ export function EventLandscape({ data, calendar }: { data: EventLandscapeData; c
       <div className="eventLandscapeHead">
         <div>
           <div className="eyebrow">{es ? "COMPETENCIA DE ATENCIÓN" : "ATTENTION COMPETITION"}</div>
-          <h2 id="event-landscape-title">{es ? "Qué más ocurre en Londres" : "What else is happening in London"}</h2>
+          <h2 id="event-landscape-title">{es ? "Qué compite realmente por la atención" : "What genuinely competes for attention"}</h2>
           <p>{es
-            ? "Competencia relevante puntuada por horario, proximidad, audiencia, escala y carácter extraordinario. Incluye otros deportes y partidos simultáneos de Barclays WSL."
-            : "Relevant competition scored by timing, proximity, audience, scale and distinctiveness. It includes other sports and simultaneous Barclays WSL fixtures."}</p>
+            ? "Una selección estricta: WSL simultánea, fútbol masculino londinense, Inglaterra y grandes citas deportivas. Los conciertos, musicales y eventos culturales rutinarios se excluyen por defecto."
+            : "A strict selection: simultaneous WSL, London men's football, England and major sports occasions. Routine concerts, musicals and cultural events are excluded by default."}</p>
         </div>
         <div className={`eventLandscapeState state-${data.state}`}>
           <span>{es ? "ESTADO" : "STATUS"}</span>
@@ -61,10 +70,10 @@ export function EventLandscape({ data, calendar }: { data: EventLandscapeData; c
                 <div><span>{es ? "PARTIDO" : "FIXTURE"}</span><strong>{fixtureNames.get(fixture.id)}</strong></div>
                 <small>{displayDate(fixture.date, locale)} · {fixture.kickoff ?? "TBC"}</small>
               </div>
-              <div className="eventLandscapeGrid">
+              {events.length ? <div className="eventLandscapeGrid">
                 {events.map(({ event, assessment }) => (
                   <article className={`competition-${assessment.level}`} key={`${fixture.id}-${event.id}`}>
-                    <div><span>{event.kind === "same-league-fixture" ? (es ? "MISMA LIGA" : "SAME LEAGUE") : event.category}</span><span>{displayDate(event.date, locale)}{event.time ? ` · ${event.time.slice(0, 5)}` : ""}</span></div>
+                    <div><span>{competitionLabel(event.kind, event.category, es)}</span><span>{displayDate(event.date, locale)}{event.time ? ` · ${event.time.slice(0, 5)}` : ""}</span></div>
                     <div className="competitionScore"><strong>{assessment.score}</strong><span>{assessment.level === "high" ? (es ? "Alta" : "High") : assessment.level === "medium" ? (es ? "Media" : "Medium") : (es ? "Contexto" : "Context")}</span></div>
                     <h3>{event.name}</h3>
                     <p>{event.venue} · {event.city}</p>
@@ -75,7 +84,10 @@ export function EventLandscape({ data, calendar }: { data: EventLandscapeData; c
                     <a href={event.url} target="_blank" rel="noreferrer">{event.sourceName ?? "Ticketmaster"} ↗</a>
                   </article>
                 ))}
-              </div>
+              </div> : <div className="competitionWhitespace">
+                <strong>{es ? "Sin competencia material identificada" : "No material competition identified"}</strong>
+                <span>{es ? "Ventana limpia según las fuentes conectadas; no equivale a ausencia total de actividad." : "Clear window in connected sources; this does not mean no other activity exists."}</span>
+              </div>}
             </section>
           ))}
         </div>
