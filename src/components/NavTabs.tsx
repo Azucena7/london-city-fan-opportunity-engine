@@ -22,6 +22,13 @@ export function NavTabs() {
     ["/experience", es ? "Experiencias" : "Experiences"]
   ] as const;
 
+  const operations = [
+    ["/access", es ? "Acceso" : "Access"],
+    ["/measurement", es ? "Medición" : "Measurement"],
+    ["/partners", es ? "Partners" : "Partners"],
+    ["/sources", es ? "Fuentes" : "Sources"]
+  ] as const;
+
   return (
     <header className="labHeader">
       <div className="labTopline">
@@ -63,6 +70,20 @@ export function NavTabs() {
           <LanguageSwitcher />
         </div>
       </div>
+
+      <nav className="operationsNav" aria-label={es ? "Herramientas operativas" : "Operational tools"}>
+        <span>{es ? "Operaciones" : "Operations"}</span>
+        {operations.map(([href, label]) => (
+          <Link
+            key={href}
+            href={href}
+            className={pathname.startsWith(href) ? "active" : ""}
+            aria-current={pathname.startsWith(href) ? "page" : undefined}
+          >
+            {label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

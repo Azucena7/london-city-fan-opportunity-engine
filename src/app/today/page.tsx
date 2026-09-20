@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { LocalizedToday } from "@/components/LocalizedToday";
-import { calendar, campaignPlans, currentState, fixtures, liveSignals, postMatchScorecards, roadmapItems } from "@/lib/data";
+import { calendar, campaignPlans, currentState, experimentMeasurement, fixtures, liveSignals, pilotReadiness, postMatchScorecards, roadmapItems, searchDemand } from "@/lib/data";
 import { nextHomeFixture } from "@/lib/fixtures";
+import { sourceHealth } from "@/lib/sourceHealth";
 
 export const metadata: Metadata = { title: "Today" };
 
@@ -24,5 +25,9 @@ export default function TodayPage() {
     campaign={campaignPlans.campaigns.find((item) => item.fixtureId === campaignFixture?.id) ?? null}
     scorecard={postMatchScorecards.find((item) => item.mode === "public") ?? null}
     roadmap={roadmapItems}
+    readiness={pilotReadiness}
+    search={searchDemand}
+    measurement={experimentMeasurement}
+    sources={sourceHealth}
   />;
 }

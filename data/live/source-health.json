@@ -1,0 +1,123 @@
+{
+  "version": "1.0",
+  "checkedAt": "2026-09-20T05:41:56.167Z",
+  "sources": [
+    {
+      "id": "club-public-web",
+      "label": { "en": "Club public web", "es": "Web pública del club" },
+      "category": "fixtures-and-activations",
+      "access": "public",
+      "state": "operational",
+      "method": "scheduled-public-observation",
+      "cadence": "daily-and-fixture-windows",
+      "lastSuccessfulAt": "2026-09-20T05:41:56.167Z",
+      "ownerAction": null,
+      "note": {
+        "en": "Fixtures and public activations are observed with source-level evidence and discrepancy preservation.",
+        "es": "Los partidos y activaciones públicas se observan con evidencia por fuente y conservación de discrepancias."
+      }
+    },
+    {
+      "id": "open-meteo",
+      "label": { "en": "Open-Meteo forecast", "es": "Predicción Open-Meteo" },
+      "category": "weather",
+      "access": "public",
+      "state": "operational",
+      "method": "api",
+      "cadence": "daily-and-fixture-windows",
+      "lastSuccessfulAt": "2026-09-20T05:41:56.022Z",
+      "ownerAction": null,
+      "note": {
+        "en": "Forecast data is live; it remains a forecast rather than an observed matchday outcome.",
+        "es": "La predicción está activa; sigue siendo una previsión y no un resultado observado de matchday."
+      }
+    },
+    {
+      "id": "youtube-public",
+      "label": { "en": "London City YouTube", "es": "YouTube de London City" },
+      "category": "audience",
+      "access": "public-fragile",
+      "state": "degraded",
+      "method": "public-page-observation",
+      "cadence": "weekly-and-fixture-windows",
+      "lastSuccessfulAt": "2026-09-20T05:41:56.167Z",
+      "ownerAction": {
+        "en": "Create a Google Cloud project and add a YouTube Data API key.",
+        "es": "Crear un proyecto de Google Cloud y añadir una key de YouTube Data API."
+      },
+      "note": {
+        "en": "The latest public value is retained, but the current HTML method should be replaced by the official API.",
+        "es": "Se conserva el último valor público, pero el método HTML actual debe sustituirse por la API oficial."
+      }
+    },
+    {
+      "id": "wsl-attendance",
+      "label": { "en": "WSL attendance benchmark", "es": "Benchmark de asistencia WSL" },
+      "category": "attendance",
+      "access": "public-fragile",
+      "state": "blocked",
+      "method": "public-page-observation",
+      "cadence": "weekly",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Approve a replacement source or licensed sports-data provider.",
+        "es": "Aprobar una fuente alternativa o un proveedor de datos deportivos con licencia."
+      },
+      "note": {
+        "en": "The current source returns 403. Missing data remains unavailable and is never converted to zero.",
+        "es": "La fuente actual devuelve 403. El dato ausente permanece no disponible y nunca se convierte en cero."
+      }
+    },
+    {
+      "id": "google-trends",
+      "label": { "en": "Google Trends", "es": "Google Trends" },
+      "category": "search-demand",
+      "access": "application-required",
+      "state": "blocked",
+      "method": "manual-snapshot-until-api-access",
+      "cadence": "event-windows",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Apply for the official Trends API alpha or provide comparable manual exports.",
+        "es": "Solicitar la API oficial de Trends alpha o aportar exportaciones manuales comparables."
+      },
+      "note": {
+        "en": "The first public capture was rate-limited. No search index has been estimated or backfilled.",
+        "es": "La primera captura pública fue limitada. No se ha estimado ni rellenado ningún índice."
+      }
+    },
+    {
+      "id": "measurement-provider",
+      "label": { "en": "Experiment measurement", "es": "Medición de experimentos" },
+      "category": "measurement",
+      "access": "configuration-required",
+      "state": "not-configured",
+      "method": "provider-adapter",
+      "cadence": "event-driven",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Choose an approved provider and configure its ingest, summary and write-key secrets.",
+        "es": "Elegir un proveedor aprobado y configurar sus secretos de ingestión, resumen y escritura."
+      },
+      "note": {
+        "en": "The event contract is ready, but no production event leaves the application.",
+        "es": "El contrato de eventos está listo, pero ningún evento de producción sale de la aplicación."
+      }
+    },
+    {
+      "id": "crm-ticketing",
+      "label": { "en": "CRM and ticketing", "es": "CRM y ticketing" },
+      "category": "conversion",
+      "access": "club-access-required",
+      "state": "requires-access",
+      "method": "contract-only",
+      "cadence": "not-connected",
+      "lastSuccessfulAt": null,
+      "ownerAction": null,
+      "note": {
+        "en": "Only the synthetic rehearsal is available. No club customer or transaction data is connected.",
+        "es": "Solo está disponible el ensayo sintético. No hay datos de clientes ni transacciones del club conectados."
+      }
+    }
+  ]
+}
