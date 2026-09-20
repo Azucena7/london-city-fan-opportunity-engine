@@ -26,14 +26,17 @@ jobs:
       - run: npm run refresh:data
       - name: Refresh public audience and attendance signals
         run: npm run refresh:public-signals
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
       - name: Commit material updates
         run: |
-          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/wsl-attendance-benchmark.json; then
+          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/wsl-attendance-benchmark.json data/live/event-landscape.json data/live/source-health.json; then
             echo "No data change to publish"
             exit 0
           fi
           git config user.name "lcl-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/wsl-attendance-benchmark.json
+          git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/wsl-attendance-benchmark.json data/live/event-landscape.json data/live/source-health.json
           git commit -m "data: refresh fixture and public signal state"
           git push

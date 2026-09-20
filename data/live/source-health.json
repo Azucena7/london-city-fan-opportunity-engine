@@ -36,18 +36,36 @@
       "id": "youtube-public",
       "label": { "en": "London City YouTube", "es": "YouTube de London City" },
       "category": "audience",
-      "access": "public-fragile",
+      "access": "api-key",
       "state": "degraded",
-      "method": "public-page-observation",
+      "method": "official-api",
       "cadence": "weekly-and-fixture-windows",
       "lastSuccessfulAt": "2026-09-20T05:41:56.167Z",
       "ownerAction": {
-        "en": "Create a Google Cloud project and add a YouTube Data API key.",
-        "es": "Crear un proyecto de Google Cloud y añadir una key de YouTube Data API."
+        "en": "Add YOUTUBE_API_KEY as a GitHub Actions secret.",
+        "es": "Añadir YOUTUBE_API_KEY como secreto de GitHub Actions."
       },
       "note": {
-        "en": "The latest public value is retained, but the current HTML method should be replaced by the official API.",
-        "es": "Se conserva el último valor público, pero el método HTML actual debe sustituirse por la API oficial."
+        "en": "The official API adapter is ready; the latest valid observation is retained until the workflow secret is configured.",
+        "es": "El adaptador oficial está listo; se conserva la última observación válida hasta configurar el secreto del workflow."
+      }
+    },
+    {
+      "id": "ticketmaster-events",
+      "label": { "en": "London event landscape", "es": "Panorama de eventos de Londres" },
+      "category": "attention-competition",
+      "access": "api-key",
+      "state": "not-configured",
+      "method": "official-api",
+      "cadence": "daily-and-fixture-windows",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Add TICKETMASTER_API_KEY as a GitHub Actions secret.",
+        "es": "Añadir TICKETMASTER_API_KEY como secreto de GitHub Actions."
+      },
+      "note": {
+        "en": "The adapter will retain London events that fall within one day of the next six home fixtures.",
+        "es": "El adaptador conservará los eventos de Londres que ocurran a un día o menos de los próximos seis partidos en casa."
       }
     },
     {

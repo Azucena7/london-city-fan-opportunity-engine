@@ -5,7 +5,12 @@ const AUDIENCE_PATH = new URL("../data/live/audience-reach.json", import.meta.ur
 const BENCHMARK_PATH = new URL("../data/live/wsl-attendance-benchmark.json", import.meta.url);
 const CALENDAR_PATH = new URL("../data/seed/calendar.json", import.meta.url);
 const CURRENT_PATH = new URL("../data/live/current.json", import.meta.url);
-const YOUTUBE_URL = "https://www.youtube.com/@LondonCityLionesses/about?hl=en";
+const EVENT_LANDSCAPE_PATH = new URL("../data/live/event-landscape.json", import.meta.url);
+const SOURCE_HEALTH_PATH = new URL("../data/live/source-health.json", import.meta.url);
+const YOUTUBE_URL = "https://www.youtube.com/@LondonCityLionesses";
+const YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/channels";
+const TICKETMASTER_API_URL = "https://app.ticketmaster.com/discovery/v2/events.json";
+const TICKETMASTER_SOURCE_URL = "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/";
 const WSL_ATTENDANCE_URL = "https://www.footballwebpages.co.uk/womens-super-league/attendances";
 const DRY_RUN = process.env.REFRESH_DRY_RUN === "1";
 
@@ -35,7 +40,7 @@ function compactDisplay(value) {
   return value.toLocaleString("en-GB");
 }
 
-async function fetchText(url, source) {
+async function fetchResponse(url, source) {
   const response = await fetch(url, {
     signal: AbortSignal.timeout(45_000),
     headers: {
@@ -44,16 +49,143 @@ async function fetchText(url, source) {
     }
   });
   if (!response.ok) throw new Error(`${source} returned ${response.status}`);
-  return response.text();
+  return response;
 }
 
-export function parseYoutubePublicAbout(html) {
-  const subscribersText = html.match(/subscriberCountText\\?"\s*:\s*\\?"([^"\\]+)["\\]/)?.[1] ?? null;
-  const viewsText = html.match(/viewCountText\\?"\s*:\s*\\?"([^"\\]+)["\\]/)?.[1] ?? null;
-  const subscribers = compactNumber(subscribersText);
-  const channelViews = compactNumber(viewsText);
-  if (subscribers === null) throw new Error("YouTube public subscriber count was not found");
-  return { subscribers, channelViews };
+async function fetchText(url, source) {
+  return (await fetchResponse(url, source)).text();
+}
+
+async function fetchJson(url, source) {
+  return (await fetchResponse(url, source)).json();
+}
+
+function integerOrNull(value) {
+  if (value === undefined || value === null || value === "") return null;
+  const number = Number(value);
+  return Number.isSafeInteger(number) && number >= 0 ? number : null;
+}
+
+export function parseYoutubeChannelResponse(payload) {
+  const channel = payload?.items?.[0];
+  if (!channel) throw new Error("YouTube channel was not found");
+  const subscribers = integerOrNull(channel.statistics?.subscriberCount);
+  const videos = integerOrNull(channel.statistics?.videoCount);
+  const channelViews = integerOrNull(channel.statistics?.viewCount);
+  if (subscribers === null) throw new Error("YouTube subscriber count was not returned");
+  return { channelId: channel.id, subscribers, videos, channelViews };
+}
+
+async function fetchYoutubeChannel(apiKey) {
+  if (!apiKey) throw new Error("YOUTUBE_API_KEY is not configured");
+  const params = new URLSearchParams({
+    part: "statistics",
+    forHandle: "LondonCityLionesses",
+    key: apiKey
+  });
+  return parseYoutubeChannelResponse(await fetchJson(`${YOUTUBE_API_URL}?${params}`, "YouTube Data API"));
+}
+
+function dateDistance(left, right) {
+  return Math.round(Math.abs(new Date(`${left}T12:00:00Z`) - new Date(`${right}T12:00:00Z`)) / 86_400_000);
+}
+
+function addDays(value, days) {
+  const date = new Date(`${value}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
+function ticketmasterWindow(calendar, today) {
+  const fixtures = calendar
+    .filter((fixture) => fixture.homeAway === "home" && fixture.status === "scheduled" && fixture.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(0, 6);
+  if (!fixtures.length) return null;
+  return {
+    fixtures,
+    startDate: addDays(fixtures[0].date, -1),
+    endDate: addDays(fixtures.at(-1).date, 1)
+  };
+}
+
+export function parseTicketmasterEvents(payload, fixtures) {
+  const events = payload?._embedded?.events ?? [];
+  return events.flatMap((event) => {
+    const date = event?.dates?.start?.localDate;
+    if (!event?.id || !event?.name || !date || !event?.url) return [];
+    const fixtureIds = fixtures.filter((fixture) => dateDistance(date, fixture.date) <= 1).map((fixture) => fixture.id);
+    if (!fixtureIds.length) return [];
+    const venue = event?._embedded?.venues?.[0];
+    const classification = event?.classifications?.find((item) => item?.primary) ?? event?.classifications?.[0];
+    return [{
+      id: event.id,
+      name: event.name,
+      date,
+      time: event?.dates?.start?.localTime ?? null,
+      venue: venue?.name ?? "London venue",
+      city: venue?.city?.name ?? "London",
+      category: classification?.segment?.name ?? "Event",
+      genre: classification?.genre?.name ?? null,
+      url: event.url,
+      fixtureIds
+    }];
+  }).sort((a, b) => `${a.date}-${a.time ?? ""}`.localeCompare(`${b.date}-${b.time ?? ""}`));
+}
+
+async function fetchTicketmasterEvents(apiKey, window) {
+  if (!apiKey) throw new Error("TICKETMASTER_API_KEY is not configured");
+  const eventsById = new Map();
+  for (const fixture of window.fixtures) {
+    const params = new URLSearchParams({
+      apikey: apiKey,
+      city: "London",
+      countryCode: "GB",
+      startDateTime: `${addDays(fixture.date, -1)}T00:00:00Z`,
+      endDateTime: `${addDays(fixture.date, 1)}T23:59:59Z`,
+      includeTBA: "no",
+      includeTBD: "no",
+      size: "100",
+      sort: "date,asc"
+    });
+    const events = parseTicketmasterEvents(
+      await fetchJson(`${TICKETMASTER_API_URL}?${params}`, "Ticketmaster Discovery API"),
+      [fixture]
+    );
+    for (const event of events) {
+      const existing = eventsById.get(event.id);
+      eventsById.set(event.id, existing
+        ? { ...existing, fixtureIds: [...new Set([...existing.fixtureIds, ...event.fixtureIds])] }
+        : event);
+    }
+  }
+  return [...eventsById.values()].sort((a, b) => `${a.date}-${a.time ?? ""}`.localeCompare(`${b.date}-${b.time ?? ""}`));
+}
+
+function updateSourceHealth(sourceHealth, attemptedAt, results) {
+  return {
+    ...sourceHealth,
+    checkedAt: attemptedAt,
+    sources: sourceHealth.sources.map((source) => {
+      const result = results[source.id];
+      if (!result) return source;
+      return {
+        ...source,
+        access: "api-key",
+        state: result.ok ? "operational" : "degraded",
+        method: "official-api",
+        lastSuccessfulAt: result.ok ? attemptedAt : source.lastSuccessfulAt,
+        ownerAction: result.ok ? null : {
+          en: `Configure ${result.secret} as a GitHub Actions secret.`,
+          es: `Configurar ${result.secret} como secreto de GitHub Actions.`
+        },
+        note: result.ok ? result.note : {
+          en: `The last valid observation is retained. ${result.message}`,
+          es: `Se conserva la última observación válida. ${result.message}`
+        }
+      };
+    })
+  };
 }
 
 function stripHtml(value) {
@@ -122,13 +254,12 @@ function shouldAppendSnapshot(latest, metrics, today, fixture) {
 function updateYoutubeChannel(audience, publicData) {
   return audience.channels.map((channel) => {
     if (channel.id !== "lcl-youtube") return channel;
-    const catalogue = channel.metrics.find((item) => item.label.en === "Published videos");
     return {
       ...channel,
       state: "measured",
       metrics: [
         { label: { en: "Public subscribers", es: "Suscriptores públicos" }, value: compactDisplay(publicData.subscribers), state: "measured" },
-        ...(catalogue ? [catalogue] : []),
+        ...(publicData.videos === null ? [] : [{ label: { en: "Published videos", es: "Vídeos publicados" }, value: publicData.videos.toLocaleString("en-GB"), state: "measured" }]),
         ...(publicData.channelViews === null ? [] : [{ label: { en: "Public channel views", es: "Visualizaciones públicas del canal" }, value: publicData.channelViews.toLocaleString("en-GB"), state: "measured" }])
       ]
     };
@@ -160,11 +291,13 @@ function appendBenchmarkSnapshot(benchmark, observations, today) {
 }
 
 export async function refreshPublicSignals(now = new Date()) {
-  const [audience, benchmark, calendar, current] = await Promise.all([
+  const [audience, benchmark, calendar, current, eventLandscape, sourceHealth] = await Promise.all([
     readFile(AUDIENCE_PATH, "utf8").then(JSON.parse),
     readFile(BENCHMARK_PATH, "utf8").then(JSON.parse),
     readFile(CALENDAR_PATH, "utf8").then(JSON.parse),
-    readFile(CURRENT_PATH, "utf8").then(JSON.parse)
+    readFile(CURRENT_PATH, "utf8").then(JSON.parse),
+    readFile(EVENT_LANDSCAPE_PATH, "utf8").then(JSON.parse),
+    readFile(SOURCE_HEALTH_PATH, "utf8").then(JSON.parse)
   ]);
   const attemptedAt = now.toISOString();
   const today = londonIsoDate(now);
@@ -172,16 +305,17 @@ export async function refreshPublicSignals(now = new Date()) {
   const failures = [];
   let nextAudience = audience;
   let nextBenchmark = benchmark;
+  let nextEventLandscape = eventLandscape;
   let appendedAudienceSnapshot = false;
   let appendedBenchmarkSnapshot = false;
+  const healthResults = {};
 
   try {
-    const youtube = parseYoutubePublicAbout(await fetchText(YOUTUBE_URL, "YouTube"));
+    const youtube = await fetchYoutubeChannel(process.env.YOUTUBE_API_KEY);
     const latest = audience.snapshots.at(-1);
-    const previousVideos = latest?.metrics.find((item) => item.key === "lcl-youtube-videos")?.value ?? null;
     const metrics = [
       metric("lcl-youtube-subscribers", { en: "London City YouTube subscribers", es: "Suscriptores de YouTube de London City" }, youtube.subscribers, "subscribers", "London City Lionesses on YouTube", YOUTUBE_URL),
-      metric("lcl-youtube-videos", { en: "London City public videos", es: "Vídeos públicos de London City" }, previousVideos, "videos", "London City Lionesses on YouTube", YOUTUBE_URL),
+      metric("lcl-youtube-videos", { en: "London City public videos", es: "Vídeos públicos de London City" }, youtube.videos, "videos", "YouTube Data API", YOUTUBE_URL),
       metric("lcl-youtube-channel-views", { en: "London City public channel views", es: "Visualizaciones públicas del canal de London City" }, youtube.channelViews, "views", "London City Lionesses on YouTube", YOUTUBE_URL),
       ...(latest?.metrics.filter((item) => !item.key.startsWith("lcl-youtube-")) ?? [])
     ];
@@ -199,11 +333,55 @@ export async function refreshPublicSignals(now = new Date()) {
         metrics
       }] : audience.snapshots
     };
-    sources.push({ id: "lcl-youtube", label: "London City YouTube", state: "measured", confidence: "medium", checkedAt: attemptedAt, sourceUrl: YOUTUBE_URL });
+    sources.push({ id: "lcl-youtube", label: "London City YouTube", state: "measured", confidence: "high", checkedAt: attemptedAt, sourceUrl: YOUTUBE_URL });
+    healthResults["youtube-public"] = {
+      ok: true,
+      secret: "YOUTUBE_API_KEY",
+      note: {
+        en: "Channel statistics are refreshed through the official YouTube Data API.",
+        es: "Las estadísticas del canal se actualizan mediante la API oficial de YouTube Data."
+      }
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message : "YouTube refresh failed";
     failures.push(`YouTube: ${message}`);
     sources.push({ id: "lcl-youtube", label: "London City YouTube", state: "waiting", confidence: "unavailable", checkedAt: attemptedAt, sourceUrl: YOUTUBE_URL, message });
+    healthResults["youtube-public"] = { ok: false, secret: "YOUTUBE_API_KEY", message };
+  }
+
+  const window = ticketmasterWindow(calendar, today);
+  if (window) {
+    try {
+      const events = await fetchTicketmasterEvents(process.env.TICKETMASTER_API_KEY, window);
+      nextEventLandscape = {
+        ...eventLandscape,
+        checkedAt: attemptedAt,
+        state: "operational",
+        window: { startDate: window.startDate, endDate: window.endDate, city: "London" },
+        events,
+        refresh: { lastAttemptAt: attemptedAt, lastSuccessfulAt: attemptedAt, message: null }
+      };
+      sources.push({ id: "ticketmaster-events", label: "London event landscape", state: "measured", confidence: "high", checkedAt: attemptedAt, sourceUrl: TICKETMASTER_SOURCE_URL });
+      healthResults["ticketmaster-events"] = {
+        ok: true,
+        secret: "TICKETMASTER_API_KEY",
+        note: {
+          en: `${events.length} London events overlap the current home-fixture windows.`,
+          es: `${events.length} eventos de Londres coinciden con las ventanas actuales de partidos en casa.`
+        }
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Ticketmaster refresh failed";
+      failures.push(`Ticketmaster: ${message}`);
+      nextEventLandscape = {
+        ...eventLandscape,
+        checkedAt: attemptedAt,
+        state: "degraded",
+        refresh: { ...eventLandscape.refresh, lastAttemptAt: attemptedAt, message }
+      };
+      sources.push({ id: "ticketmaster-events", label: "London event landscape", state: "waiting", confidence: "unavailable", checkedAt: attemptedAt, sourceUrl: TICKETMASTER_SOURCE_URL, message });
+      healthResults["ticketmaster-events"] = { ok: false, secret: "TICKETMASTER_API_KEY", message };
+    }
   }
 
   try {
@@ -237,17 +415,20 @@ export async function refreshPublicSignals(now = new Date()) {
     updated_at: attemptedAt,
     public_signal_changes: materialChanges,
     public_signal_refresh: nextAudience.refresh,
-    source_failures: [...new Set([...(current.source_failures ?? []).filter((item) => !/^YouTube:|^WSL attendance:/.test(item)), ...failures])]
+    source_failures: [...new Set([...(current.source_failures ?? []).filter((item) => !/^YouTube:|^Ticketmaster:|^WSL attendance:/.test(item)), ...failures])]
   };
+  const nextSourceHealth = updateSourceHealth(sourceHealth, attemptedAt, healthResults);
 
   if (!DRY_RUN) {
     await Promise.all([
       writeFile(AUDIENCE_PATH, `${JSON.stringify(nextAudience, null, 2)}\n`),
       writeFile(BENCHMARK_PATH, `${JSON.stringify(nextBenchmark, null, 2)}\n`),
-      writeFile(CURRENT_PATH, `${JSON.stringify(nextCurrent, null, 2)}\n`)
+      writeFile(CURRENT_PATH, `${JSON.stringify(nextCurrent, null, 2)}\n`),
+      writeFile(EVENT_LANDSCAPE_PATH, `${JSON.stringify(nextEventLandscape, null, 2)}\n`),
+      writeFile(SOURCE_HEALTH_PATH, `${JSON.stringify(nextSourceHealth, null, 2)}\n`)
     ]);
   }
-  return { today, materialChanges, appendedAudienceSnapshot, appendedBenchmarkSnapshot, failures, sources };
+  return { today, materialChanges, appendedAudienceSnapshot, appendedBenchmarkSnapshot, eventCount: nextEventLandscape.events.length, failures, sources };
 }
 
 if (fileURLToPath(import.meta.url) === process.argv[1]) {
