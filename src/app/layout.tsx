@@ -21,6 +21,7 @@ import "./measurement.css";
 import "./partners.css";
 import "./ux-consolidation.css";
 import "./navigation-v2.css";
+import "./today-cockpit.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
 

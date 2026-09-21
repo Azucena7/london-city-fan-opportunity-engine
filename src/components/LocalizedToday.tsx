@@ -3,11 +3,8 @@
 import Link from "next/link";
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
-import { PostMatchScorecard } from "./PostMatchScorecard";
-import { CampaignPlan } from "./CampaignPlan";
 import { ExecutiveOverview } from "./ExecutiveOverview";
-import { SourceHealthCenter } from "./SourceHealthCenter";
-import type { CalendarFixture, CampaignPlan as CampaignData, Fixture, LiveSignal, PostMatchScorecard as ScorecardData } from "@/lib/models";
+import type { CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
 import type { ExperimentMeasurementData, PilotReadinessData, SearchDemandData } from "@/lib/models";
 import type { SourceHealthData } from "@/lib/sourceHealth";
 
@@ -15,6 +12,7 @@ type CurrentState = {
   updated_at: string;
   material_changes: number;
   public_signal_changes?: number;
+  next_home_fixture_id?: string;
   public_signal_refresh?: { state: string };
   weather: { status: string; reason?: string; [key: string]: string | number | null | undefined };
   attendance_momentum: { score: number; basis: string };
@@ -37,8 +35,31 @@ function formatDate(value: string, locale: string) {
 
 function formatUpdated(value: string, locale: string) {
   return new Intl.DateTimeFormat(locale, {
-    day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/London"
+    day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/London", timeZoneName: "short"
   }).format(new Date(value));
+}
+
+function formatShortDate(value: string, locale: string) {
+  return new Intl.DateTimeFormat(locale, { day: "numeric", month: "short" })
+    .format(new Date(`${value}T12:00:00`));
+}
+
+function decisionLabel(value: Fixture["decision"], es: boolean) {
+  const labels = {
+    "ATTACK HARD": { en: "Accelerate acquisition", es: "Acelerar captación" },
+    ATTACK: { en: "Active acquisition", es: "Captación activa" },
+    "TEST / SELECTIVE": { en: "Selective test", es: "Prueba selectiva" },
+    "DEFEND CORE": { en: "Protect the core", es: "Proteger la base" }
+  };
+  return labels[value][es ? "es" : "en"];
+}
+
+function actionStateLabel(state: string, overdue: boolean, es: boolean) {
+  if (overdue) return es ? "Vencida" : "Overdue";
+  if (state === "next") return es ? "Siguiente" : "Next";
+  if (state === "planned") return es ? "Planificada" : "Planned";
+  if (state === "complete") return es ? "Completa" : "Complete";
+  return state.replaceAll("-", " ");
 }
 
 export function LocalizedToday({
@@ -46,8 +67,6 @@ export function LocalizedToday({
   nextMatch,
   signals,
   current,
-  campaign,
-  scorecard,
   roadmap,
   readiness,
   search,
@@ -58,8 +77,6 @@ export function LocalizedToday({
   nextMatch: CalendarFixture | null;
   signals: LiveSignal[];
   current: CurrentState;
-  campaign: CampaignData | null;
-  scorecard: ScorecardData | null;
   roadmap: RoadmapItem[];
   readiness: PilotReadinessData;
   search: SearchDemandData;
@@ -69,18 +86,38 @@ export function LocalizedToday({
   const { lang } = useLanguage();
   const es = lang === "es";
   const locale = es ? "es-ES" : "en-GB";
-  const highSignals = signals.filter((signal) => signal.materiality === "high");
+  const currentFixtureId = current.next_home_fixture_id ?? "2026-09-26-bha-h";
+  const highSignals = signals
+    .filter((signal) => signal.materiality === "high")
+    .sort((a, b) => {
+      const fixtureDifference = Number(b.fixtureId === currentFixtureId) - Number(a.fixtureId === currentFixtureId);
+      return fixtureDifference || Date.parse(b.observedAt) - Date.parse(a.observedAt);
+    });
+  const visibleSignals = highSignals.slice(0, 3);
+  const olderSignals = highSignals.slice(3);
+  const fixtureActions = roadmap
+    .filter((item) => item.fixtureId === currentFixtureId)
+    .sort((a, b) => a.due.localeCompare(b.due));
+  const visibleActions = fixtureActions.slice(0, 3);
+  const laterActions = fixtureActions.slice(3);
+  const refreshDate = current.updated_at.slice(0, 10);
+  const scoreFactors = [
+    { label: es ? "Territorio" : "Territory", value: fixture.territoryOpportunity, weight: 35 },
+    { label: es ? "Calendario" : "Calendar", value: fixture.calendarWhitespace, weight: 25 },
+    { label: es ? "Atención disponible" : "Attention available", value: fixture.attentionAvailability, weight: 20 },
+    { label: es ? "Atractivo del partido" : "Fixture appeal", value: fixture.fixtureAppeal, weight: 20 }
+  ];
 
   return (
     <main>
       <NavTabs />
 
-      <section className="freshnessBar" aria-label={es ? "Estado de actualización" : "Update status"}>
+      <section className="freshnessBar" aria-label={es ? "Estado de actualización" : "Update status"} aria-live="polite">
         <span className="freshnessDot" />
-        <strong>{es ? "Actualizado" : "Updated"} {formatUpdated(current.updated_at, locale)}</strong>
-        <span>{current.material_changes} {es ? "cambios materiales registrados" : "material changes recorded"}</span>
+        <strong>{es ? "Última actualización" : "Last refresh"}: {formatUpdated(current.updated_at, locale)}</strong>
+        <span>{current.material_changes} {es ? "cambios materiales desde la actualización" : "material changes since refresh"}</span>
+        <span>{current.public_signal_changes ?? 0} {es ? "señales públicas actualizadas" : "public signals updated"}</span>
         <span>{signals.length} {es ? "señales con fuente" : "sourced signals"}</span>
-        <span>{es ? "Fuentes públicas" : "Public sources"}: {current.public_signal_refresh?.state ?? (es ? "sin iniciar" : "not started")}</span>
       </section>
 
       <section className="todayHero">
@@ -90,7 +127,17 @@ export function LocalizedToday({
           <p>{es
             ? "Usar el opener como cohorte, no como baseline. Brighton debe demostrar cuánta demanda vuelve y de qué territorios procede."
             : "Use the opener as a cohort, not a baseline. Brighton must show how much demand returns and which territories it comes from."}</p>
-          <div className="decisionScore"><strong>{fixture.planningScore}</strong><span>{es ? "prioridad de captación" : "acquisition priority"}</span></div>
+          <div className="decisionScore">
+            <strong>{fixture.planningScore}<small>/100</small></strong>
+            <span><b>{decisionLabel(fixture.decision, es)}</b>{es ? "Prioridad de planificación" : "Planning priority"}</span>
+          </div>
+          <details className="scoreExplanation">
+            <summary>{es ? `Por qué ${fixture.planningScore}: ATTACK empieza en 72` : `Why ${fixture.planningScore}: ATTACK starts at 72`}</summary>
+            <div>
+              {scoreFactors.map((factor) => <span key={factor.label}><b>{factor.value}</b>{factor.label}<small>{factor.weight}%</small></span>)}
+            </div>
+            <Link href="/method">{es ? "Ver método de scoring →" : "View scoring method →"}</Link>
+          </details>
         </div>
 
         <div className="todayFixture">
@@ -107,6 +154,7 @@ export function LocalizedToday({
             <div><span>{es ? "Oferta" : "Offer"}</span><strong>{fixture.product}</strong></div>
             <div><span>{es ? "Canales" : "Channels"}</span><strong>{fixture.channel}</strong></div>
           </div>
+          <Link className="fixturePlanLink" href="/calendar">{es ? "Abrir plan del partido →" : "Open fixture plan →"}</Link>
         </div>
       </section>
 
@@ -118,19 +166,37 @@ export function LocalizedToday({
         </section>
       ) : null}
 
-      <ExecutiveOverview readiness={readiness} search={search} measurement={measurement} sources={sources} />
+      <section className="todaySection priorityActions" aria-labelledby="priority-actions-title">
+        <div className="todaySectionHead">
+          <div><div className="eyebrow">{es ? "HACER AHORA" : "DO NEXT"}</div><h2 id="priority-actions-title">{es ? "Tres acciones antes del próximo partido" : "Three actions before the next home fixture"}</h2></div>
+          <Link href="/calendar">{es ? "Abrir planificación completa →" : "Open full fixture plan →"}</Link>
+        </div>
+        <div className="priorityActionGrid">
+          {visibleActions.map((item, index) => {
+            const overdue = item.due < refreshDate && item.status !== "complete";
+            return <article className={overdue ? "overdue" : item.status} key={item.id}>
+              <div><span>{String(index + 1).padStart(2, "0")}</span><b>{actionStateLabel(item.status, overdue, es)}</b></div>
+              <h3>{item.title[lang]}</h3>
+              <p>{item.reason[lang]}</p>
+              <dl><div><dt>{es ? "Área responsable" : "Responsible area"}</dt><dd>{item.area}</dd></div><div><dt>{es ? "Fecha" : "Due"}</dt><dd>{formatShortDate(item.due, locale)}</dd></div></dl>
+            </article>;
+          })}
+        </div>
+        {laterActions.length ? <details className="progressiveDisclosure"><summary>{es ? `Ver ${laterActions.length} acción posterior` : `View ${laterActions.length} later action`}</summary>{laterActions.map((item) => <div key={item.id}><strong>{item.title[lang]}</strong><span>{item.area} · {formatShortDate(item.due, locale)}</span></div>)}</details> : null}
+      </section>
 
       <section className="todaySection">
         <div className="todaySectionHead">
-          <div><div className="eyebrow">{es ? "QUÉ HA CAMBIADO" : "WHAT CHANGED"}</div><h2>{es ? "Señales que modifican la acción" : "Signals that change the action"}</h2></div>
-          <span>{es ? "Solo cambios materiales ocupan la portada" : "Only material changes reach the front page"}</span>
+          <div><div className="eyebrow">{es ? "QUÉ HA CAMBIADO" : "WHAT CHANGED"}</div><h2>{es ? "Tres señales que modifican la acción" : "Three signals that change the action"}</h2></div>
+          <span>{es ? "Primero el próximo partido; después, la observación más reciente" : "Next fixture first, then most recently observed"}</span>
         </div>
         <div className="signalEditorialList">
-          {highSignals.map((signal) => (
+          {visibleSignals.map((signal) => (
             <article key={signal.id} className={`signalEditorial signal-${signal.direction}`}>
               <div className="signalEditorialMeta">
                 <span>{signal.category}</span>
                 <span>{signal.state}</span>
+                <time dateTime={signal.observedAt}>{formatShortDate(signal.observedAt.slice(0, 10), locale)}</time>
               </div>
               <h3>{signal.title[lang]}</h3>
               <p>{signal.summary[lang]}</p>
@@ -139,30 +205,10 @@ export function LocalizedToday({
             </article>
           ))}
         </div>
+        {olderSignals.length ? <details className="progressiveDisclosure signalArchive"><summary>{es ? `Ver ${olderSignals.length} señales materiales anteriores` : `View ${olderSignals.length} earlier material signals`}</summary>{olderSignals.map((signal) => <article key={signal.id}><div><strong>{signal.title[lang]}</strong><span>{formatShortDate(signal.observedAt.slice(0, 10), locale)} · {signal.state}</span></div><p>{signal.marketingAction[lang]}</p><a href={signal.sourceUrl} target="_blank" rel="noreferrer">{signal.sourceName} ↗</a></article>)}</details> : null}
       </section>
 
-      {campaign ? <CampaignPlan data={campaign} signals={signals} /> : null}
-
-      <SourceHealthCenter data={sources} compact />
-
-      <section className="todaySection">
-        <div className="todaySectionHead">
-          <div><div className="eyebrow">{es ? "PLAN DE PARTIDO" : "FIXTURE PLAN"}</div><h2>{es ? "De la señal a la ejecución" : "From signal to execution"}</h2></div>
-          <Link href="/calendar">{es ? "Abrir calendario completo →" : "Open full calendar →"}</Link>
-        </div>
-        <div className="roadmapGrid">
-          {roadmap.filter((item) => item.fixtureId === "2026-09-26-bha-h").map((item) => (
-            <article key={item.id}>
-              <div><span>{item.area}</span><span>{item.due}</span></div>
-              <h3>{item.title[lang]}</h3>
-              <p>{item.reason[lang]}</p>
-              <strong className="roadmapStatus">{item.status}</strong>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {scorecard ? <PostMatchScorecard data={scorecard} /> : null}
+      <ExecutiveOverview readiness={readiness} search={search} measurement={measurement} sources={sources} />
     </main>
   );
 }
