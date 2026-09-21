@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-21T18:00:00Z",
+  "checkedAt": "2026-09-21T20:45:00Z",
   "principle": {
     "en": "Compare a time-stamped engine hypothesis with later observable market action. Alignment is evidence of relevance, not evidence that a club saw, used or was influenced by the engine.",
     "es": "Comparar una hipótesis del engine con sello temporal con una acción de mercado observable posterior. La alineación es evidencia de relevancia, no de que un club viera, utilizara o estuviera influido por el engine."
@@ -101,6 +101,148 @@
       "learning": {
         "en": "Track whether the engine repeatedly surfaces relevant opportunities before comparable club actions become public, and record divergence as carefully as alignment.",
         "es": "Medir si el engine detecta repetidamente oportunidades relevantes antes de que acciones comparables de clubes se hagan públicas, registrando las divergencias con el mismo rigor que las coincidencias."
+      },
+      "liveValidation": {
+        "state": "pre-match-active",
+        "fixtureDate": "2026-09-26",
+        "principle": {
+          "en": "Advance only when new evidence exists. Future phases stay waiting until observed.",
+          "es": "Avanzar solo cuando exista nueva evidencia. Las fases futuras permanecen en espera hasta ser observadas."
+        },
+        "phases": [
+          {
+            "id": "hypothesis",
+            "label": {
+              "en": "Engine hypothesis",
+              "es": "Hipótesis del engine"
+            },
+            "date": "2026-09-15",
+            "state": "complete",
+            "expected": {
+              "en": "Identify a same-day England v Spain opportunity around Brighton.",
+              "es": "Identificar una oportunidad en torno a Inglaterra–España el mismo día de Brighton."
+            },
+            "observed": {
+              "en": "Time-stamped campaign plan created with a viewing-extension proposition.",
+              "es": "Plan de campaña con sello temporal creado con una propuesta de extensión de visionado."
+            },
+            "evidenceRef": "data/live/campaign-plans.json"
+          },
+          {
+            "id": "public-action",
+            "label": {
+              "en": "Public club action",
+              "es": "Acción pública del club"
+            },
+            "date": "2026-09-18",
+            "state": "complete",
+            "expected": {
+              "en": "Look for a comparable public activation without assuming the club will act.",
+              "es": "Buscar una activación pública comparable sin asumir que el club actuará."
+            },
+            "observed": {
+              "en": "London City announced an on-site England v Spain post-match watchalong with discounted drinks.",
+              "es": "London City anunció un watchalong en el estadio de Inglaterra–España después del partido con bebidas rebajadas."
+            },
+            "evidenceRef": "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong"
+          },
+          {
+            "id": "pre-match",
+            "label": {
+              "en": "Pre-match observation",
+              "es": "Observación pre-match"
+            },
+            "date": "2026-09-21",
+            "state": "active",
+            "expected": {
+              "en": "Track whether the proposition remains publicly visible and whether additional service or experience details appear before matchday.",
+              "es": "Seguir si la propuesta continúa visible públicamente y si aparecen más detalles de servicio o experiencia antes del matchday."
+            },
+            "observed": {
+              "en": "Watchalong proposition is publicly documented. Matchday delivery and downstream response are not yet observable.",
+              "es": "La propuesta de watchalong está documentada públicamente. La ejecución en matchday y la respuesta posterior aún no son observables."
+            },
+            "evidenceRef": "data/seed/club-activations.json"
+          },
+          {
+            "id": "matchday",
+            "label": {
+              "en": "Matchday delivery",
+              "es": "Ejecución en matchday"
+            },
+            "date": "2026-09-26",
+            "state": "waiting",
+            "expected": {
+              "en": "Record only observable delivery: whether the watchalong runs, service details and any public attendance or experience evidence.",
+              "es": "Registrar solo ejecución observable: si se realiza el watchalong, detalles de servicio y cualquier evidencia pública de asistencia o experiencia."
+            },
+            "observed": {
+              "en": "Waiting for matchday evidence.",
+              "es": "En espera de evidencia de matchday."
+            },
+            "evidenceRef": null
+          },
+          {
+            "id": "post-match",
+            "label": {
+              "en": "Post-match evidence",
+              "es": "Evidencia post-match"
+            },
+            "date": "2026-09-27",
+            "state": "waiting",
+            "expected": {
+              "en": "Capture attendance, public outcome signals, what aligned or diverged, and the data gaps that still require club access.",
+              "es": "Capturar asistencia, señales públicas de resultado, qué se alineó o divergió y los gaps que aún requieren acceso del club."
+            },
+            "observed": {
+              "en": "Waiting for post-match evidence.",
+              "es": "En espera de evidencia post-match."
+            },
+            "evidenceRef": null
+          }
+        ],
+        "postMatchChecklist": [
+          {
+            "id": "attendance",
+            "label": {
+              "en": "Measured attendance",
+              "es": "Asistencia medida"
+            },
+            "state": "waiting"
+          },
+          {
+            "id": "watchalong-delivery",
+            "label": {
+              "en": "Watchalong delivery",
+              "es": "Ejecución del watchalong"
+            },
+            "state": "waiting"
+          },
+          {
+            "id": "public-response",
+            "label": {
+              "en": "Public response signals",
+              "es": "Señales públicas de respuesta"
+            },
+            "state": "waiting"
+          },
+          {
+            "id": "crm-conversion",
+            "label": {
+              "en": "CRM / ticket conversion",
+              "es": "Conversión CRM / ticketing"
+            },
+            "state": "requires-club-access"
+          },
+          {
+            "id": "repeat",
+            "label": {
+              "en": "Repeat attendance",
+              "es": "Repetición de asistencia"
+            },
+            "state": "requires-club-access"
+          }
+        ]
       }
     }
   ]

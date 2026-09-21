@@ -128,6 +128,24 @@ export function MeasurementDashboard({ data, validation }: { data: ExperimentMea
             </article>
           </div>
 
+          {validationCase.liveValidation ? (
+            <div className="liveValidation">
+              <div className="liveValidationHead"><span>{es ? "BRIGHTON LIVE VALIDATION" : "BRIGHTON LIVE VALIDATION"}</span><strong>{validationCase.liveValidation.state.replaceAll("-", " ")}</strong><small>{validationCase.liveValidation.principle[lang]}</small></div>
+              <div className="liveValidationPhases">
+                {validationCase.liveValidation.phases.map((phase) => <article key={phase.id} className={phase.state}>
+                  <div><span>{phase.state}</span><time>{validationDate(phase.date)}</time></div>
+                  <strong>{phase.label[lang]}</strong>
+                  <small>{phase.observed[lang]}</small>
+                </article>)}
+              </div>
+              <div className="liveValidationChecklist">
+                {validationCase.liveValidation.postMatchChecklist.map((item) => <span className={item.state} key={item.id}>{
+                  item.state === "complete" ? "✓" : item.state === "requires-club-access" ? "🔒" : "○"
+                } {item.label[lang]}</span>)}
+              </div>
+            </div>
+          ) : null}
+
           <div className="decisionValidationDimensions">
             {validationCase.dimensions.map((dimension) => (
               <article key={dimension.id} className={dimension.state}>

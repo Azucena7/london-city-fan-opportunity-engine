@@ -191,6 +191,9 @@ export function LocalizedToday({
             </article>
           </div>
 
+          {realityCheck.liveValidation ? <div className="todayValidationRail">
+            {realityCheck.liveValidation.phases.map((phase) => <span className={phase.state} key={phase.id}><b>{phase.state === "complete" ? "✓" : phase.state === "active" ? "●" : "○"}</b>{phase.label[lang]}</span>)}
+          </div> : null}
           <div className="todayRealityStatus">
             <div><strong>{alignedDimensions}</strong><span>{es ? "alineadas" : "aligned"}</span></div>
             <div><strong>{partialDimensions}</strong><span>{es ? "parcial" : "partial"}</span></div>
