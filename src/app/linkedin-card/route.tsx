@@ -72,7 +72,7 @@ export async function GET() {
             </div>
             <div style={{ width: "48.5%", display: "flex", flexDirection: "column", marginLeft: "3%", padding: "15px", borderRadius: "12px", background: "#ffffff", border: "1px solid #cadbd6" }}>
               <div style={{ display: "flex", color: "#58756f", fontSize: "10px", fontWeight: 800, letterSpacing: "0.1em" }}>INTERPRETATION</div>
-              <div style={{ display: "flex", marginTop: "9px", fontSize: "15px", lineHeight: 1.2, fontWeight: 800 }}>0 causation claimed</div>
+              <div style={{ display: "flex", marginTop: "9px", fontSize: "15px", lineHeight: 1.2, fontWeight: 800 }}>0 CAUSATION CLAIMED</div>
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", marginTop: "15px", padding: "15px", borderRadius: "12px", color: "#123c35", background: "#dff5ee", borderLeft: "5px solid #25a889" }}>
