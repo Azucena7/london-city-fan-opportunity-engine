@@ -123,3 +123,17 @@ test("Partnerships leads with an evidence-gated commercial decision queue", () =
   assert.ok(partners.indexOf("Open opportunity dossier") < partners.indexOf("Evidence ledger"));
   assert.match(partners, /Export dossier/);
 });
+
+
+test("Data & Sources translates technical source health into business decision reliability", () => {
+  const component = read("src/components/SourceHealthCenter.tsx");
+  const page = read("src/components/LocalizedSourcesPage.tsx");
+  const data = JSON.parse(read("data/live/source-health.json"));
+  assert.match(component, /DECISION RELIABILITY/);
+  assert.match(component, /Technical source register/);
+  assert.match(component, /Open decision/);
+  assert.match(page, /Which decisions can we trust today/);
+  assert.ok(data.decisions.length >= 5);
+  assert.ok(data.decisions.some((item) => item.id === "conversion-retention" && item.requiredSourceIds.includes("crm-ticketing")));
+  assert.ok(data.decisions.some((item) => item.id === "attendance-benchmark" && item.requiredSourceIds.includes("wsl-attendance")));
+});
