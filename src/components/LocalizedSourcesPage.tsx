@@ -13,7 +13,7 @@ export function LocalizedSourcesPage({ data }: { data: SourceHealthData }) {
     <main>
       <NavTabs />
       <section className="compactIntro sourceIntro">
-        <div className="eyebrow">{es ? "OPERACIONES DE DATOS PÚBLICOS" : "PUBLIC DATA OPERATIONS"}</div>
+        <div className="eyebrow">{es ? "DATOS Y FUENTES" : "DATA & SOURCES"}</div>
         <h1>{es ? "Salud de fuentes, sin falsa certeza." : "Source health, without false certainty."}</h1>
         <p className="lede">{es
           ? "Un registro operativo de disponibilidad, frescura, método, límites y siguiente acción para cada fuente del Engine."

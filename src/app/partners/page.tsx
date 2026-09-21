@@ -3,7 +3,7 @@ import { partnerCommercialPack, pilotReadiness } from "@/lib/data";
 import { PartnerCommercialPack } from "@/components/PartnerCommercialPack";
 
 export const metadata: Metadata = {
-  title: "Partner Commercial Pack",
+  title: "Partnerships",
   description: "Governed partnership hypotheses for matchday mobility, travel and hospitality pilots."
 };
 

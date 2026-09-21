@@ -197,7 +197,7 @@ export function ExperienceDemandValidation({ data, measurement }: { data: Experi
 
       <section className="experienceMobilityBridge">
         <div><div className="eyebrow">EXPERIENCE → MOBILITY</div><h2>{es ? "¿Puede el interés agregado sostener un shuttle?" : "Can aggregated interest support a shuttle?"}</h2><p>{es ? "La nueva capa convierte el interés por transporte en escenarios de corredor, capacidad y punto de equilibrio, sin reservar ningún servicio." : "The new layer turns transport interest into corridor, capacity and break-even scenarios without booking any service."}</p></div>
-        <div><Link href="/access#partner">{es ? "Abrir Mobility" : "Open Mobility"} →</Link><Link href="/measurement">{es ? "Ver medición" : "View measurement"} →</Link></div>
+        <div><Link href="/access#partner">{es ? "Abrir acceso al partido" : "Open Matchday Access"} →</Link><Link href="/measurement">{es ? "Ver medición" : "View measurement"} →</Link></div>
       </section>
 
       <details className="experienceGuardrails"><summary>{es ? "Guardrails de la validación" : "Validation guardrails"}</summary>{data.guardrails.map((item) => <p key={item.id}>{item.text[lang]}</p>)}</details>

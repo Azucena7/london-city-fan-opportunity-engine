@@ -99,7 +99,7 @@ export function MeasurementDashboard({ data }: { data: ExperimentMeasurementData
         <div><div className="eyebrow">GUARDRAILS</div>{data.guardrails.map((rule) => <p key={rule.id}><span>—</span>{rule.text[lang]}</p>)}</div>
       </section>
 
-      <section className="measurementActions"><div><h2>{es ? "Probar las dos fuentes de señal" : "Test both signal sources"}</h2><p>{es ? "Las interacciones serán locales hasta configurar un proveedor aprobado." : "Interactions remain local until an approved provider is configured."}</p></div><div><Link href="/experience">{es ? "Abrir Experience" : "Open Experience"}</Link><Link href="/access#partner">{es ? "Abrir Mobility" : "Open Mobility"}</Link><Link href="/partners">{es ? "Abrir Partner Pack" : "Open Partner Pack"}</Link><a href="/api/contracts/experiment-measurement" target="_blank">{es ? "Ver contrato" : "View contract"} ↗</a></div></section>
+      <section className="measurementActions"><div><h2>{es ? "Probar las dos fuentes de señal" : "Test both signal sources"}</h2><p>{es ? "Las interacciones serán locales hasta configurar un proveedor aprobado." : "Interactions remain local until an approved provider is configured."}</p></div><div><Link href="/experience">{es ? "Abrir experiencia del aficionado" : "Open Fan Experience"}</Link><Link href="/access#partner">{es ? "Abrir acceso al partido" : "Open Matchday Access"}</Link><Link href="/partners">{es ? "Abrir partnerships" : "Open Partnerships"}</Link><a href="/api/contracts/experiment-measurement" target="_blank">{es ? "Ver contrato" : "View contract"} ↗</a></div></section>
     </main>
   );
 }

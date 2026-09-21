@@ -89,7 +89,7 @@ export function SearchDemandObservatory({ data }: { data: SearchDemandData }) {
 
       <div className="searchExperienceCta">
         <div><span>{es ? "SIGUIENTE PRUEBA" : "NEXT TEST"}</span><strong>{es ? "Contrastar intención con una configuración real de experiencia" : "Test intent with a real experience configuration"}</strong></div>
-        <Link href="/experience">{es ? "Abrir laboratorio de experiencias" : "Open experience lab"} →</Link>
+        <Link href="/experience">{es ? "Abrir experiencia del aficionado" : "Open Fan Experience"} →</Link>
       </div>
 
       <details className="searchMethod">

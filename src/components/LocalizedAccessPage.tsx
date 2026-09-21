@@ -45,7 +45,7 @@ export function LocalizedAccessPage({
     <main>
       <NavTabs />
       <section className="compactIntro">
-        <div className="eyebrow">{es ? "ACCESO" : "ACCESS"}</div>
+        <div className="eyebrow">{es ? "ACCESO AL PARTIDO" : "MATCHDAY ACCESS"}</div>
         <h1>{es ? "¿Puede esa audiencia llegar realmente a Hayes Lane?" : "Can that audience actually get to Hayes Lane?"}</h1>
         <p className="lede">
           {es

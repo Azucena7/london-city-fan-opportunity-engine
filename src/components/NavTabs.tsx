@@ -19,14 +19,14 @@ export function NavTabs() {
     ["/today", es ? "Hoy" : "Today"],
     ["/calendar", es ? "Calendario" : "Calendar"],
     ["/territories", es ? "Territorios" : "Territories"],
-    ["/experience", es ? "Experiencias" : "Experiences"]
+    ["/experience", es ? "Experiencia del aficionado" : "Fan Experience"]
   ] as const;
 
   const operations = [
-    ["/access", es ? "Acceso" : "Access"],
+    ["/access", es ? "Acceso al partido" : "Matchday Access"],
     ["/measurement", es ? "Medición" : "Measurement"],
-    ["/partners", es ? "Partners" : "Partners"],
-    ["/sources", es ? "Fuentes" : "Sources"]
+    ["/partners", es ? "Alianzas" : "Partnerships"],
+    ["/sources", es ? "Datos y fuentes" : "Data & Sources"]
   ] as const;
 
   return (
@@ -41,34 +41,40 @@ export function NavTabs() {
       </div>
 
       <div className="navTabsRow">
-        <nav className="tabs primaryTabs" aria-label={es ? "Navegación principal" : "Primary navigation"}>
-          {primary.map(([href, label]) => (
-            <Link
-              key={href}
-              href={href}
-              className={isActive(pathname, href) ? "active" : ""}
-              aria-current={isActive(pathname, href) ? "page" : undefined}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
+        <div className="productNavigation">
+          <span className="navGroupLabel">{es ? "Producto" : "Product"}</span>
+          <nav className="tabs primaryTabs" aria-label={es ? "Producto" : "Product"}>
+            {primary.map(([href, label]) => (
+              <Link
+                key={href}
+                href={href}
+                className={isActive(pathname, href) ? "active" : ""}
+                aria-current={isActive(pathname, href) ? "page" : undefined}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+        </div>
 
-        <div className="navSecondary">
+        <nav className="navSecondary" aria-label={es ? "Evaluación del producto" : "Product evaluation"}>
+          <span className="navGroupLabel">{es ? "Evaluación" : "Evaluation"}</span>
           <Link
             href="/method"
             className={pathname.startsWith("/method") ? "secondaryLink active" : "secondaryLink"}
+            aria-current={pathname.startsWith("/method") ? "page" : undefined}
           >
             {es ? "Cómo funciona" : "How it works"}
           </Link>
           <Link
             href="/case-study"
             className={pathname.startsWith("/case-study") ? "secondaryLink active" : "secondaryLink"}
+            aria-current={pathname.startsWith("/case-study") ? "page" : undefined}
           >
             {es ? "Caso de estudio" : "Case study"}
           </Link>
           <LanguageSwitcher />
-        </div>
+        </nav>
       </div>
 
       <nav className="operationsNav" aria-label={es ? "Herramientas operativas" : "Operational tools"}>
