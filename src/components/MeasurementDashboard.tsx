@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
-import type { ExperimentMeasurementData } from "@/lib/models";
+import type { DecisionValidationData, ExperimentMeasurementData } from "@/lib/models";
 
 type RuntimeStatus = {
   mode: "test" | "production";
@@ -16,7 +16,7 @@ type RuntimeStatus = {
 
 type Cohort = ExperimentMeasurementData["cohorts"][number];
 
-export function MeasurementDashboard({ data }: { data: ExperimentMeasurementData }) {
+export function MeasurementDashboard({ data, validation }: { data: ExperimentMeasurementData; validation: DecisionValidationData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const [runtime, setRuntime] = useState<RuntimeStatus | null>(null);
@@ -43,6 +43,21 @@ export function MeasurementDashboard({ data }: { data: ExperimentMeasurementData
   const insufficient = useMemo(() => cohorts.filter((item) => item.state === "insufficient-sample").length, [cohorts]);
   const notInstrumented = useMemo(() => cohorts.filter((item) => item.state === "not-instrumented").length, [cohorts]);
   const providerReady = Boolean(runtime?.ingestConfigured && runtime?.summaryConfigured);
+  const validationCase = validation.cases[0];
+  const alignedDimensions = validationCase?.dimensions.filter((item) => item.state === "aligned").length ?? 0;
+  const partialDimensions = validationCase?.dimensions.filter((item) => item.state === "partial").length ?? 0;
+
+  function validationDate(value: string) {
+    return new Intl.DateTimeFormat(es ? "es-ES" : "en-GB", { day: "numeric", month: "short", year: "numeric" })
+      .format(new Date(`${value.slice(0, 10)}T12:00:00Z`));
+  }
+
+  function alignmentLabel(state: DecisionValidationData["cases"][number]["alignment"]) {
+    if (state === "aligned") return es ? "Alineación observada" : "Observed alignment";
+    if (state === "partial") return es ? "Alineación parcial" : "Partial alignment";
+    if (state === "divergent") return es ? "Divergencia" : "Divergent";
+    return es ? "No observable" : "Not observable";
+  }
 
   function stateLabel(state: string) {
     const labels: Record<string, { en: string; es: string }> = {
@@ -79,8 +94,59 @@ export function MeasurementDashboard({ data }: { data: ExperimentMeasurementData
         <article className={providerReady ? "ready" : "waiting"}><span>{es ? "PROVEEDOR" : "PROVIDER"}</span><strong>{providerReady ? (es ? "listo" : "ready") : (es ? "pendiente" : "pending")}</strong><small>{es ? "ingest + summary" : "ingest + summary"}</small></article>
       </section>
 
+      {validationCase ? (
+        <section className="decisionValidation" aria-labelledby="decision-validation-title">
+          <div className="measurementSectionHead">
+            <div><span>01</span><h2 id="decision-validation-title">{es ? "Hipótesis del engine vs realidad observable" : "Engine hypothesis vs observable reality"}</h2></div>
+            <p>{validation.principle[lang]}</p>
+          </div>
+
+          <div className="decisionValidationHeadline">
+            <div>
+              <div className="eyebrow">{es ? "REALITY CHECK" : "REALITY CHECK"}</div>
+              <h3>{es ? "¿Apareció después en el mercado una oportunidad que el engine ya había identificado?" : "Did an opportunity surfaced by the engine later appear in market action?"}</h3>
+              <p>{validationCase.title[lang]}</p>
+            </div>
+            <div className="decisionValidationState">
+              <span>{alignmentLabel(validationCase.alignment)}</span>
+              <strong>{alignedDimensions} {es ? "alineadas" : "aligned"} · {partialDimensions} {es ? "parcial" : "partial"}</strong>
+              <small>{es ? "sobre elementos observables, no causalidad" : "across observable elements, not causation"}</small>
+            </div>
+          </div>
+
+          <div className="decisionValidationTimeline">
+            <article className="engine">
+              <div><span>{es ? "HIPÓTESIS DEL ENGINE" : "ENGINE HYPOTHESIS"}</span><time>{validationDate(validationCase.hypothesisGeneratedAt)}</time></div>
+              <strong>{validationCase.hypothesis[lang]}</strong>
+              <small>{validationCase.hypothesisSource.name}</small>
+            </article>
+            <div className="decisionValidationArrow" aria-hidden="true">→</div>
+            <article className="observed">
+              <div><span>{es ? "ACCIÓN OBSERVADA" : "OBSERVED CLUB ACTION"}</span><time>{validationDate(validationCase.observedAt)}</time></div>
+              <strong>{validationCase.observedAction[lang]}</strong>
+              <a href={validationCase.observedSource.url} target="_blank" rel="noreferrer">{validationCase.observedSource.name} ↗</a>
+            </article>
+          </div>
+
+          <div className="decisionValidationDimensions">
+            {validationCase.dimensions.map((dimension) => (
+              <article key={dimension.id} className={dimension.state}>
+                <span>{dimension.state === "aligned" ? "✓" : dimension.state === "partial" ? "≈" : dimension.state === "divergent" ? "↯" : "—"} {dimension.state.replaceAll("-", " ")}</span>
+                <strong>{dimension.label[lang]}</strong>
+                <small>{dimension.note[lang]}</small>
+              </article>
+            ))}
+          </div>
+
+          <div className="decisionValidationCaveat">
+            <div><span>{es ? "LÍMITE DE INTERPRETACIÓN" : "INTERPRETATION LIMIT"}</span><strong>{validationCase.caveat[lang]}</strong></div>
+            <div><span>{es ? "QUÉ APRENDEMOS" : "WHAT WE LEARN NEXT"}</span><strong>{validationCase.learning[lang]}</strong></div>
+          </div>
+        </section>
+      ) : null}
+
       <section className="measurementCohorts">
-        <div className="measurementSectionHead"><div><span>01</span><h2>{es ? "Cola de decisiones por partido" : "Fixture decision queue"}</h2></div><p>{es ? "Cada cohorte muestra qué se puede hacer ahora, no solo cuántos eventos existen." : "Each cohort shows what can be done now, not just how many events exist."}</p></div>
+        <div className="measurementSectionHead"><div><span>02</span><h2>{es ? "Cola de decisiones por partido" : "Fixture decision queue"}</h2></div><p>{es ? "Cada cohorte muestra qué se puede hacer ahora, no solo cuántos eventos existen." : "Each cohort shows what can be done now, not just how many events exist."}</p></div>
         <div className="measurementCohortGrid">
           {data.experiments.map((experiment) => {
             const cohort = cohorts.find((item) => item.fixtureId === experiment.fixtureId) ?? data.cohorts.find((item) => item.fixtureId === experiment.fixtureId)!;
@@ -96,7 +162,7 @@ export function MeasurementDashboard({ data }: { data: ExperimentMeasurementData
       </section>
 
       <section className="measurementFlow">
-        <div className="measurementSectionHead"><div><span>02</span><h2>{es ? "Cómo una interacción se convierte en evidencia" : "How an interaction becomes evidence"}</h2></div></div>
+        <div className="measurementSectionHead"><div><span>03</span><h2>{es ? "Cómo una interacción se convierte en evidencia" : "How an interaction becomes evidence"}</h2></div></div>
         <div>{[
           [es ? "Evento" : "Event", es ? "Allowlist y esquema" : "Allowlist and schema"],
           [es ? "Entrega" : "Delivery", es ? "Proveedor explícito" : "Explicit provider"],
@@ -109,7 +175,7 @@ export function MeasurementDashboard({ data }: { data: ExperimentMeasurementData
       <details className="measurementTechnical">
         <summary>{es ? "Ver detalle técnico de instrumentación" : "View technical instrumentation detail"}</summary>
         <section className="measurementEvents">
-          <div className="measurementSectionHead"><div><span>03</span><h2>{es ? "Catálogo de eventos" : "Event catalogue"}</h2></div><p>{es ? "Cada evento rechaza cualquier propiedad no declarada." : "Every event rejects any undeclared property."}</p></div>
+          <div className="measurementSectionHead"><div><span>04</span><h2>{es ? "Catálogo de eventos" : "Event catalogue"}</h2></div><p>{es ? "Cada evento rechaza cualquier propiedad no declarada." : "Every event rejects any undeclared property."}</p></div>
           <div className="measurementEventGrid">{data.events.map((event) => <article key={event.name}><span>{event.source} · {event.state}</span><strong>{event.label[lang]}</strong><code>{event.name}</code><p>{event.allowedProperties.join(" · ")}</p></article>)}</div>
         </section>
 
