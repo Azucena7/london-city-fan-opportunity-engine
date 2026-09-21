@@ -25,6 +25,18 @@ test("operational modules are reachable from global navigation", () => {
   }
 });
 
+test("navigation names describe the internal product and fan-facing output", () => {
+  const nav = read("src/components/NavTabs.tsx");
+  for (const label of ["Fan Experience", "Matchday Access", "Partnerships", "Data & Sources"]) {
+    assert.ok(nav.includes(label), `${label} should be visible in English navigation`);
+  }
+  for (const label of ["Experiencia del aficionado", "Acceso al partido", "Alianzas", "Datos y fuentes"]) {
+    assert.ok(nav.includes(label), `${label} should be visible in Spanish navigation`);
+  }
+  assert.match(nav, /Product evaluation/);
+  assert.match(nav, /Operational tools/);
+});
+
 test("document language and keyboard bypass are part of the root shell", () => {
   const layout = read("src/app/layout.tsx");
   assert.match(layout, /lang=\{initialLang\}/);

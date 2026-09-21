@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import { experimentMeasurement, fixtures, mobilityPartnership } from "@/lib/data";
 import { isoDateForWeather, matchdayArrivalTime, nextHomeFixture } from "@/lib/fixtures";
 import { territoryTravelSeeds } from "@/lib/territoryTravel";
 import { LocalizedAccessPage } from "@/components/LocalizedAccessPage";
+
+export const metadata: Metadata = {
+  title: "Matchday Access",
+  description: "Journey, territory and mobility evidence for getting supporters to Hayes Lane."
+};
 
 export default function AccessPage() {
   const fixture = nextHomeFixture(fixtures);

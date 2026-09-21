@@ -1,0 +1,162 @@
+/* PR #25 — audience architecture, navigation and operational typography */
+
+.navTabsRow {
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.productNavigation,
+.navSecondary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.productNavigation {
+  flex: 1 1 auto;
+}
+
+.navGroupLabel {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.primaryTabs {
+  min-width: 0;
+  gap: 25px;
+}
+
+.primaryTabs a {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.secondaryLink {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.operationsNav > span {
+  font-size: 10px;
+}
+
+.operationsNav a {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.languageSwitcher button {
+  min-width: 40px;
+  height: 34px;
+  font-size: 11px;
+}
+
+/* Product screens should read like a working application. The larger editorial
+   scale remains available to the case-study and technical narrative. */
+.compactIntro h1,
+.calendarIntro h1,
+.experienceHero h1,
+.measurementHero h1,
+.partnerHero h1 {
+  max-width: 980px;
+  font-size: clamp(42px, 5vw, 62px);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+
+@media (max-width: 960px) {
+  .navTabsRow {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .productNavigation,
+  .navSecondary {
+    width: 100%;
+  }
+
+  .navSecondary {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 760px) {
+  .productNavigation {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .primaryTabs {
+    width: 100%;
+    padding-bottom: 3px;
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .primaryTabs a {
+    flex: 0 0 auto;
+    font-size: 13px;
+  }
+
+  .navSecondary {
+    display: grid;
+    grid-template-columns: auto auto auto 1fr;
+    align-items: center;
+    gap: 10px 14px;
+  }
+
+  .navSecondary .languageSwitcher {
+    justify-self: end;
+  }
+
+  .operationsNav {
+    gap: 4px;
+  }
+
+  .operationsNav a {
+    font-size: 12px;
+  }
+
+  .compactIntro h1,
+  .calendarIntro h1,
+  .experienceHero h1,
+  .measurementHero h1,
+  .partnerHero h1 {
+    font-size: clamp(36px, 10vw, 44px);
+  }
+}
+
+@media (max-width: 520px) {
+  .navSecondary {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .navSecondary .navGroupLabel {
+    grid-column: 1 / -1;
+  }
+
+  .operationsNav > span {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    padding-right: 8px;
+    background: var(--lcl-navy);
+  }
+}

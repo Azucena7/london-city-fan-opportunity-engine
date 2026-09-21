@@ -3,7 +3,7 @@ import { LocalizedSourcesPage } from "@/components/LocalizedSourcesPage";
 import { sourceHealth } from "@/lib/sourceHealth";
 
 export const metadata: Metadata = {
-  title: "Source Health",
+  title: "Data & Sources",
   description: "Availability, access method, freshness and next action for every source used by the opportunity engine."
 };
 
