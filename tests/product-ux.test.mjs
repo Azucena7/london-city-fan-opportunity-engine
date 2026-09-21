@@ -87,7 +87,6 @@ test("Fan Experience separates internal control from the supporter preview", () 
   assert.match(experience, /This is the test surface, not a commercial offer/);
 });
 
-
 test("Measurement is a decision control room before it is a technical dashboard", () => {
   const measurement = read("src/components/MeasurementDashboard.tsx");
   assert.match(measurement, /EVIDENCE CONTROL ROOM/);
@@ -96,4 +95,19 @@ test("Measurement is a decision control room before it is a technical dashboard"
   assert.match(measurement, /Keep measuring/);
   assert.match(measurement, /Instrument before deciding/);
   assert.match(measurement, /View technical instrumentation detail/);
+});
+
+test("National Rail RDM is registered as approved access awaiting a data product", () => {
+  const data = JSON.parse(read("data/live/source-health.json"));
+  const rdm = data.sources.find((source) => source.id === "national-rail-rdm");
+  assert.ok(rdm);
+  assert.equal(rdm.label.en, "National Rail / Rail Data Marketplace");
+  assert.equal(rdm.access, "account-approved-product-pending");
+  assert.equal(rdm.state, "not-configured");
+  assert.match(rdm.note.en, /TransportAPI remains the temporary national-routing fallback/);
+
+  const env = read(".env.example");
+  assert.match(env, /RDM_DATA_PRODUCT_ID=/);
+  assert.match(env, /RDM_DELIVERY_ENDPOINT=/);
+  assert.match(env, /RDM_AUTH_MODE=/);
 });
