@@ -25,6 +25,8 @@ type ValidationPayload = {
   utm_content: string;
 };
 
+type ExperienceView = "internal" | "preview";
+
 function statusLabel(state: string, es: boolean) {
   if (state === "ready") return es ? "listo" : "ready";
   if (state === "requires-instrumentation") return es ? "requiere medición" : "requires instrumentation";
@@ -34,6 +36,7 @@ function statusLabel(state: string, es: boolean) {
 export function ExperienceDemandValidation({ data, measurement }: { data: ExperienceDemandData; measurement: ExperimentMeasurementData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
+  const [view, setView] = useState<ExperienceView>("internal");
   const [conceptId, setConceptId] = useState("");
   const [fixtureId, setFixtureId] = useState("");
   const [originId, setOriginId] = useState("");
@@ -48,6 +51,7 @@ export function ExperienceDemandValidation({ data, measurement }: { data: Experi
   const concept = useMemo(() => data.concepts.find((item) => item.id === conceptId), [conceptId, data.concepts]);
   const origin = useMemo(() => data.origins.find((item) => item.id === originId), [originId, data.origins]);
   const configurationReady = Boolean(concept && fixtureId && origin && partySize && priceBand);
+  const waitingGates = data.launchGates.filter((gate) => gate.state !== "ready");
 
   function chooseConcept(id: string) {
     setConceptId(id);
@@ -109,17 +113,55 @@ export function ExperienceDemandValidation({ data, measurement }: { data: Experi
 
       <section className="experienceHero">
         <div>
-          <div className="eyebrow">EXPERIENCE DEMAND VALIDATION · V1</div>
-          <h1>{data.headline[lang]}</h1>
-          <p>{data.principle[lang]}</p>
+          <div className="eyebrow">{view === "internal" ? (es ? "LABORATORIO INTERNO DE PRODUCTO" : "INTERNAL PRODUCT LAB") : (es ? "PREVIEW PARA EL AFICIONADO" : "FAN-FACING PREVIEW")}</div>
+          <h1>{view === "internal" ? (es ? "Decide qué experiencia merece una prueba controlada" : "Decide which fan experience deserves a controlled test") : data.headline[lang]}</h1>
+          <p>{view === "internal" ? (es ? "Compara conceptos, define la señal mínima y revisa gates antes de exponer una propuesta al público o negociar inventario." : "Compare concepts, define the minimum signal and review gates before exposing a proposition publicly or negotiating inventory.") : data.principle[lang]}</p>
           <div className="experienceSafety"><span>{es ? "VALIDACIÓN, NO VENTA" : "VALIDATION, NOT SALE"}</span><strong>{es ? "Sin reserva, sin pago y sin datos personales" : "No reservation, no payment and no personal data"}</strong></div>
         </div>
         <div className="experienceHeroMetric">
-          <span>{es ? "CONCEPTOS A CONTRASTAR" : "CONCEPTS TO TEST"}</span>
-          <strong>{data.concepts.length}</strong>
-          <small>{es ? "local · VIP · internacional" : "local · VIP · international"}</small>
+          <span>{view === "internal" ? (es ? "GATES PENDIENTES" : "GATES WAITING") : (es ? "CONCEPTOS A CONTRASTAR" : "CONCEPTS TO TEST")}</span>
+          <strong>{view === "internal" ? waitingGates.length : data.concepts.length}</strong>
+          <small>{view === "internal" ? (es ? "ninguna venta habilitada" : "no sales enabled") : (es ? "local · VIP · internacional" : "local · VIP · international")}</small>
         </div>
       </section>
+
+      <div className="experienceModeTabs" role="tablist" aria-label={es ? "Vista de experiencia" : "Experience view"}>
+        <button type="button" role="tab" aria-selected={view === "internal"} className={view === "internal" ? "active" : ""} onClick={() => setView("internal")}><span>{es ? "PRODUCTO" : "PRODUCT"}</span>{es ? "Control interno" : "Internal control"}</button>
+        <button type="button" role="tab" aria-selected={view === "preview"} className={view === "preview" ? "active" : ""} onClick={() => setView("preview")}><span>{es ? "SUPERFICIE" : "SURFACE"}</span>{es ? "Preview del aficionado" : "Fan preview"}</button>
+      </div>
+
+      {view === "internal" ? <>
+        <section className="experienceControlStrip" aria-label={es ? "Estado de validación" : "Validation status"}>
+          <div><strong>{data.concepts.length}</strong><span>{es ? "conceptos comparables" : "comparable concepts"}</span></div>
+          <div><strong>{data.fixtures.length}</strong><span>{es ? "partidos de prueba" : "test fixtures"}</span></div>
+          <div><strong>{measurement.minimumAggregateCohort}</strong><span>{es ? "eventos mínimos por cohorte" : "minimum events per cohort"}</span></div>
+          <div className="waiting"><strong>{measurement.status.replaceAll("-", " ")}</strong><span>{es ? "estado de medición" : "measurement state"}</span></div>
+        </section>
+
+        <section className="experiencePortfolio" aria-labelledby="experience-portfolio-title">
+          <div className="experienceSectionHead"><div><span>01</span><h2 id="experience-portfolio-title">{es ? "Cartera de conceptos a contrastar" : "Concept portfolio to test"}</h2></div><p>{es ? "Selecciona un concepto para abrir exactamente la superficie que evaluaría el público." : "Select a concept to open the exact surface the audience would evaluate."}</p></div>
+          <div className="experiencePortfolioRows">
+            {data.concepts.map((item, index) => <article key={item.id}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div><strong>{item.title[lang]}</strong><small>{item.audience[lang]}</small></div>
+              <div><b>{item.state.replaceAll("-", " ")}</b><small>{item.priceBands[0]?.label} → {item.priceBands.at(-1)?.label}</small></div>
+              <button type="button" onClick={() => { chooseConcept(item.id); setView("preview"); }}>{es ? "Abrir preview →" : "Open preview →"}</button>
+            </article>)}
+          </div>
+        </section>
+
+        <section className="experienceDecisionModel" aria-labelledby="experience-decision-title">
+          <div className="experienceSectionHead"><div><span>02</span><h2 id="experience-decision-title">{es ? "De interacción a decisión" : "From interaction to decision"}</h2></div></div>
+          <div>
+            <article><span>{es ? "PREGUNTA" : "QUESTION"}</span><strong>{es ? "¿Qué combinación de concepto, partido, origen y precio genera intención?" : "Which combination of concept, fixture, origin and price creates intent?"}</strong></article>
+            <article><span>{es ? "EVIDENCIA MÍNIMA" : "MINIMUM EVIDENCE"}</span><strong>{es ? `${measurement.minimumAggregateCohort} eventos válidos, entregados, deduplicados y agregados` : `${measurement.minimumAggregateCohort} valid, delivered, deduplicated and aggregated events`}</strong></article>
+            <article><span>{es ? "DECISIÓN" : "DECISION"}</span><strong>{es ? "Continuar, revisar la propuesta o detenerla antes de comprometer inventario" : "Continue, revise the proposition or stop before committing inventory"}</strong></article>
+          </div>
+        </section>
+      </> : null}
+
+      {view === "preview" ? <>
+      <section className="fanPreviewNotice" aria-label={es ? "Estado del preview" : "Preview status"}><div><span>{es ? "PREVIEW AFICIONADO" : "FAN PREVIEW"}</span><strong>{es ? "Esta es la superficie de prueba, no una oferta comercial" : "This is the test surface, not a commercial offer"}</strong></div><button type="button" onClick={() => setView("internal")}>{es ? "Volver al control interno" : "Back to internal control"}</button></section>
 
       <section className="experienceConcepts" aria-labelledby="experience-concepts-title">
         <div className="experienceSectionHead">
@@ -183,6 +225,9 @@ export function ExperienceDemandValidation({ data, measurement }: { data: Experi
         ) : null}
       </section>
 
+      </> : null}
+
+      {view === "internal" ? <>
       <section className="experienceFunnel">
         <div className="experienceSectionHead"><div><span>03</span><h2>{es ? "Qué está listo y qué sigue bloqueado" : "What is ready and what remains blocked"}</h2></div></div>
         <div className="experienceFunnelGrid">
@@ -201,6 +246,7 @@ export function ExperienceDemandValidation({ data, measurement }: { data: Experi
       </section>
 
       <details className="experienceGuardrails"><summary>{es ? "Guardrails de la validación" : "Validation guardrails"}</summary>{data.guardrails.map((item) => <p key={item.id}>{item.text[lang]}</p>)}</details>
+      </> : null}
     </main>
   );
 }
