@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-21T05:44:02.456Z",
+  "checkedAt": "2026-09-21T14:30:00.000Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -114,6 +114,27 @@
       "note": {
         "en": "The first public capture was rate-limited. No search index has been estimated or backfilled.",
         "es": "La primera captura pública fue limitada. No se ha estimado ni rellenado ningún índice."
+      }
+    },
+    {
+      "id": "national-rail-rdm",
+      "label": {
+        "en": "National Rail / Rail Data Marketplace",
+        "es": "National Rail / Rail Data Marketplace"
+      },
+      "category": "national-rail-journey-data",
+      "access": "account-approved-product-pending",
+      "state": "not-configured",
+      "method": "official-marketplace-product",
+      "cadence": "fixture-windows",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Select and subscribe to the RDM data product that exposes the required journey, timetable or disruption data, then record its delivery and authentication specification.",
+        "es": "Seleccionar y suscribirse en RDM al producto de datos que exponga los datos necesarios de trayectos, horarios o incidencias y registrar después su especificación de entrega y autenticación."
+      },
+      "note": {
+        "en": "RDM consumer account access is approved. No product-specific endpoint or credentials are connected yet; TransportAPI remains the temporary national-routing fallback until an RDM product is validated.",
+        "es": "El acceso de consumidor a RDM está aprobado. Aún no hay endpoint ni credenciales de un producto concreto; TransportAPI se mantiene como fallback temporal de rutas nacionales hasta validar un producto RDM."
       }
     },
     {
