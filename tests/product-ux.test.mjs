@@ -110,3 +110,16 @@ test("Measurement compares prior engine hypotheses with observable club action w
   assert.match(validation.cases[0].caveat.en, /does not imply causation/i);
   assert.ok(validation.cases[0].dimensions.some((item) => item.state === "partial"));
 });
+
+
+test("Partnerships leads with an evidence-gated commercial decision queue", () => {
+  const partners = read("src/components/PartnerCommercialPack.tsx");
+  assert.match(partners, /PARTNERSHIP DECISION WORKSPACE/);
+  assert.match(partners, /Commercial decision queue/);
+  assert.match(partners, /ADVANCE TO REVIEW/);
+  assert.match(partners, /BLOCKED GATES/);
+  assert.match(partners, /Evidence and blockers first/);
+  assert.ok(partners.indexOf("Commercial decision queue") < partners.indexOf("Open opportunity dossier"));
+  assert.ok(partners.indexOf("Open opportunity dossier") < partners.indexOf("Evidence ledger"));
+  assert.match(partners, /Export dossier/);
+});
