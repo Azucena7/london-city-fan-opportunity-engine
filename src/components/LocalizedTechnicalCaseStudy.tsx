@@ -331,7 +331,7 @@ export function LocalizedTechnicalCaseStudy() {
       </section>
 
       <footer className="caseStudyFooter">
-        <div>London City Fan Opportunity Lab · Technical case study</div>
+        <div>London City Fan Opportunity Engine · Technical case study</div>
         <div className="muted">{es ? "Prototipo independiente · Datos y límites visibles por diseño." : "Independent prototype · Data and limits visible by design."}</div>
       </footer>
     </main>
