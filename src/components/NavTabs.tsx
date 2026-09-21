@@ -33,7 +33,7 @@ export function NavTabs() {
     <header className="labHeader">
       <div className="labTopline">
         <Link className="brand brandLink" href="/today">
-          LCL / FAN OPPORTUNITY LAB
+          LCL / FAN OPPORTUNITY ENGINE
         </Link>
         <span className="prototypeMark">
           {es ? "Prototipo independiente" : "Independent prototype"}

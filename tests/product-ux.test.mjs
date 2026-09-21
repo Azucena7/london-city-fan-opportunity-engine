@@ -230,3 +230,16 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
   assert.match(today, /\/measurement#decision-validation-title/);
   assert.ok(today.indexOf("REALITY CHECK") < today.indexOf("Three actions before the next home fixture"));
 });
+
+
+test("visible product branding consistently uses Fan Opportunity Engine", () => {
+  const nav = read("src/components/NavTabs.tsx");
+  const partners = read("src/components/PartnerCommercialPack.tsx");
+  const story = read("src/components/LocalizedStoryPage.tsx");
+  const technical = read("src/components/LocalizedTechnicalCaseStudy.tsx");
+  assert.match(nav, /LCL \/ FAN OPPORTUNITY ENGINE/);
+  assert.match(partners, /London City Fan Opportunity Engine · Partner Commercial Pack/);
+  assert.match(story, /London City Fan Opportunity Engine/);
+  assert.match(technical, /London City Fan Opportunity Engine · Technical case study/);
+  assert.doesNotMatch(nav, /FAN OPPORTUNITY LAB/);
+});

@@ -176,7 +176,7 @@ export function PartnerCommercialPack({ data, readiness }: { data: PartnerCommer
       </section>
 
       <details className="partnerGuardrails"><summary>{es ? "Límites del dossier" : "Pack guardrails"}</summary>{data.guardrails.map((item) => <p key={item.id}>{item.text[lang]}</p>)}</details>
-      <footer className="partnerPrintFooter"><span>London City Fan Opportunity Lab · Partner Commercial Pack</span><strong>{pack.candidate}</strong><span>{es ? "Borrador independiente · no vinculante" : "Independent draft · non-binding"}</span></footer>
+      <footer className="partnerPrintFooter"><span>London City Fan Opportunity Engine · Partner Commercial Pack</span><strong>{pack.candidate}</strong><span>{es ? "Borrador independiente · no vinculante" : "Independent draft · non-binding"}</span></footer>
     </main>
   );
 }
