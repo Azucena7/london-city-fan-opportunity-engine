@@ -3,24 +3,40 @@
 import Link from "next/link";
 import { NavTabs } from "@/components/NavTabs";
 import { useLanguage } from "@/components/LanguageProvider";
+import type { DecisionValidationData } from "@/lib/models";
 
 type Localized = { en: string; es: string };
 
 const productViews: Array<{ number: string; title: Localized; text: Localized; href: string; cta: Localized }> = [
   {
     number: "01", title: { en: "Today", es: "Hoy" }, href: "/today",
-    text: { en: "One current decision, the material signals behind it and the marketing response.", es: "Una decisión vigente, las señales materiales que la explican y la respuesta de marketing." },
-    cta: { en: "Open the operating view", es: "Abrir la vista operativa" }
+    text: { en: "What matters before the next fixture—and which action deserves attention now.", es: "Qué importa antes del próximo partido y qué acción merece atención ahora." },
+    cta: { en: "Open decision cockpit", es: "Abrir cockpit de decisión" }
   },
   {
     number: "02", title: { en: "Calendar", es: "Calendario" }, href: "/calendar",
-    text: { en: "Every fixture becomes a dossier: context, attendance, audience, campaign and post-match learning.", es: "Cada partido se convierte en un expediente: contexto, asistencia, audiencia, campaña y aprendizaje postpartido." },
-    cta: { en: "Explore fixture dossiers", es: "Explorar expedientes" }
+    text: { en: "A fixture-led operating plan instead of a passive list of dates.", es: "Un plan operativo por partido en lugar de una lista pasiva de fechas." },
+    cta: { en: "Open fixture plan", es: "Abrir plan de partido" }
   },
   {
     number: "03", title: { en: "Territories", es: "Territorios" }, href: "/territories",
-    text: { en: "Local family potential, girls' football networks and public-transport access become acquisition priorities.", es: "El potencial familiar, las redes de fútbol femenino y el acceso en transporte se convierten en prioridades de captación." },
-    cta: { en: "See the opportunity map", es: "Ver el mapa de oportunidad" }
+    text: { en: "Where local acquisition opportunity appears strongest before access friction is tested.", es: "Dónde parece más fuerte la oportunidad de captación local antes de probar la fricción de acceso." },
+    cta: { en: "Open opportunity map", es: "Abrir mapa de oportunidad" }
+  },
+  {
+    number: "04", title: { en: "Matchday Access", es: "Acceso al partido" }, href: "/access",
+    text: { en: "Whether supporters from priority areas can realistically reach the ground on matchday.", es: "Si los aficionados de zonas prioritarias pueden llegar realmente al estadio el día de partido." },
+    cta: { en: "Validate access", es: "Validar acceso" }
+  },
+  {
+    number: "05", title: { en: "Fan Experience", es: "Experiencia del aficionado" }, href: "/experience",
+    text: { en: "Which experience concepts are worth testing before they are treated as products.", es: "Qué conceptos de experiencia merece la pena probar antes de tratarlos como productos." },
+    cta: { en: "Open experience lab", es: "Abrir laboratorio de experiencia" }
+  },
+  {
+    number: "06", title: { en: "Measurement", es: "Medición" }, href: "/measurement",
+    text: { en: "Whether there is enough evidence to act—and how prior hypotheses compare with observable reality.", es: "Si existe suficiente evidencia para actuar y cómo se comparan las hipótesis previas con la realidad observable." },
+    cta: { en: "Open evidence control", es: "Abrir control de evidencia" }
   }
 ];
 
@@ -39,10 +55,13 @@ const valueCards: Array<{ title: Localized; text: Localized }> = [
   { title: { en: "Commercial", es: "Comercial" }, text: { en: "Evidence-led propositions for local partners, community activation and sponsorship.", es: "Propuestas basadas en evidencia para partners locales, comunidad y patrocinio." } }
 ];
 
-export function LocalizedStoryPage() {
+export function LocalizedStoryPage({ validation }: { validation: DecisionValidationData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const pick = (value: Localized) => value[es ? "es" : "en"];
+  const validationCase = validation.cases[0];
+  const aligned = validationCase.dimensions.filter((item) => item.state === "aligned").length;
+  const partial = validationCase.dimensions.filter((item) => item.state === "partial").length;
 
   return (
     <main className="caseStudyPage commercialCaseStudy">
@@ -53,12 +72,12 @@ export function LocalizedStoryPage() {
           <span className="active">{es ? "Caso comercial" : "Commercial case"}</span>
           <Link href="/case-study/technical">{es ? "Caso técnico" : "Technical case"}</Link>
         </div>
-        <div className="eyebrow">{es ? "CASO DE ESTUDIO · PRODUCTO EN EVOLUCIÓN" : "CASE STUDY · PRODUCT IN MOTION"}</div>
-        <h1>{es ? "De señales dispersas a campañas que un equipo pequeño puede ejecutar." : "From scattered signals to campaigns a small team can actually run."}</h1>
+        <div className="eyebrow">{es ? "CASO DE ESTUDIO · EVIDENCIA EN EVOLUCIÓN" : "CASE STUDY · EVIDENCE IN MOTION"}</div>
+        <h1>{es ? "De señales dispersas a decisiones que pueden contrastarse con la realidad." : "From scattered signals to decisions that can be tested against reality."}</h1>
         <p className="caseStudyHeroLede">
           {es
-            ? "London City Fan Opportunity Lab conecta territorio, calendario, asistencia, audiencias públicas y contexto de partido para decidir dónde captar, cuándo actuar y qué aprender después."
-            : "London City Fan Opportunity Lab connects territory, calendar, attendance, public audiences and match context to decide where to acquire, when to act and what to learn next."}
+            ? "El prototipo conecta territorio, calendario, atención, acceso, experiencia y medición para generar hipótesis operativas y comprobar después qué ocurrió realmente."
+            : "The prototype connects territory, calendar, attention, access, experience and measurement to generate operating hypotheses and then check what actually happened."}
         </p>
         <div className="caseStudyActions">
           <Link className="caseStudyButton primary" href="/today">{es ? "Explorar el producto" : "Explore the product"}</Link>
@@ -100,6 +119,55 @@ export function LocalizedStoryPage() {
         </div>
       </section>
 
+      <section className="caseStudySection caseStudyEvidenceMaturity">
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "QUÉ ESTÁ DEMOSTRADO" : "WHAT IS ACTUALLY DEMONSTRATED"}</div>
+          <h2>{es ? "Separar producto construido, evidencia observada e impacto todavía no probado." : "Separate built product, observed evidence and impact that is still unproven."}</h2>
+          <p>{es
+            ? "La evaluación gana credibilidad cuando no trata todas las capas como si tuvieran el mismo nivel de prueba."
+            : "The evaluation is more credible when every layer is not presented as if it carries the same level of proof."}</p>
+        </div>
+
+        <div className="caseStudyEvidenceStates">
+          <article className="built">
+            <span>{es ? "CONSTRUIDO" : "BUILT"}</span>
+            <strong>{es ? "Sistema de decisión operativo" : "Operational decision system"}</strong>
+            <p>{es ? "Flujo desde señales y fixtures hasta campañas, acceso, partnerships, medición y control de fuentes." : "A working flow from signals and fixtures through campaigns, access, partnerships, measurement and source control."}</p>
+          </article>
+          <article className="observed">
+            <span>{es ? "OBSERVADO" : "OBSERVED"}</span>
+            <strong>{es ? "Primera alineación documentada con acción real" : "First documented alignment with real-world action"}</strong>
+            <p>{es ? "La hipótesis Brighton + Inglaterra–España quedó registrada antes de que apareciera una activación pública comparable del club." : "The Brighton + England v Spain hypothesis was time-stamped before a comparable public club activation appeared."}</p>
+          </article>
+          <article className="pending">
+            <span>{es ? "PENDIENTE" : "STILL TO PROVE"}</span>
+            <strong>{es ? "Impacto causal en conversión y repetición" : "Causal impact on conversion and repeat"}</strong>
+            <p>{es ? "Requiere acceso autorizado a ticketing/CRM, instrumentación de producción y comparación controlada." : "Requires authorised ticketing/CRM access, production instrumentation and controlled comparison."}</p>
+          </article>
+        </div>
+
+        <div className="caseStudyRealityCheck">
+          <div className="caseStudyRealityHeader">
+            <div>
+              <span>{es ? "15 SEP · HIPÓTESIS DEL ENGINE" : "15 SEP · ENGINE HYPOTHESIS"}</span>
+              <strong>{validationCase.hypothesis[lang]}</strong>
+            </div>
+            <b>→</b>
+            <div>
+              <span>{es ? "18 SEP · ACCIÓN OBSERVADA" : "18 SEP · OBSERVED CLUB ACTION"}</span>
+              <strong>{validationCase.observedAction[lang]}</strong>
+            </div>
+          </div>
+          <div className="caseStudyRealitySummary">
+            <div><strong>{aligned}</strong><span>{es ? "dimensiones alineadas" : "aligned dimensions"}</span></div>
+            <div><strong>{partial}</strong><span>{es ? "alineación parcial" : "partial alignment"}</span></div>
+            <div><strong>0</strong><span>{es ? "causalidad afirmada" : "causation claimed"}</span></div>
+            <a href={validationCase.observedSource.url} target="_blank" rel="noreferrer">{es ? "Ver fuente pública" : "View public source"} ↗</a>
+          </div>
+          <p>{validationCase.caveat[lang]}</p>
+        </div>
+      </section>
+
       <section className="caseStudySection caseStudyProof">
         <div className="caseStudySectionHead">
           <div className="eyebrow">{es ? "PRUEBA CONSTRUIDA" : "PROOF BUILT"}</div>
@@ -125,8 +193,8 @@ export function LocalizedStoryPage() {
           <div className="eyebrow">SIGNAL → CAMPAIGN</div>
           <h2>{es ? "La sugerencia termina en un briefing, no en una frase genérica." : "The recommendation ends in a brief—not a generic sentence."}</h2>
           <p>{es
-            ? "Brighton es el primer ensayo completo: usa el opener como prueba social, la oportunidad local de Bromley, el alcance de Alexia y la información de servicio de matchday para crear una campaña coordinada."
-            : "Brighton is the first complete rehearsal: opener proof, Bromley opportunity, Alexia-led reach and matchday service information become one coordinated campaign."}</p>
+            ? "Brighton es el primer caso donde el brief generado puede compararse con una acción pública posterior. El valor ya no está solo en producir una campaña, sino en aprender si la hipótesis era relevante."
+            : "Brighton is the first case where a generated brief can be compared with a later public action. The value is no longer only producing a campaign—it is learning whether the hypothesis was relevant."}</p>
         </div>
         <div className="caseStudyCampaignCard">
           <div className="caseStudyCampaignLead">
@@ -164,7 +232,7 @@ export function LocalizedStoryPage() {
       <section className="caseStudySection caseStudyProduct">
         <div className="caseStudySectionHead">
           <div className="eyebrow">{es ? "EL PRODUCTO" : "THE PRODUCT"}</div>
-          <h2>{es ? "Tres vistas. Una decisión compartida." : "Three views. One shared decision."}</h2>
+          <h2>{es ? "Seis preguntas operativas. Un mismo sistema." : "Six operating questions. One system."}</h2>
           <p>{es ? "La navegación evita otro dashboard infinito y lleva a cada equipo desde la decisión hacia la evidencia necesaria." : "The navigation avoids another endless dashboard and takes each team from the decision to the evidence it needs."}</p>
         </div>
         <div className="caseStudyProductGrid">
@@ -189,13 +257,19 @@ export function LocalizedStoryPage() {
 
       <section className="caseStudySection caseStudyNextLayer">
         <div>
-          <div className="eyebrow">{es ? "SIGUIENTE CAPA" : "THE NEXT LAYER"}</div>
-          <h2>{es ? "Preparado para CRM. Útil antes del CRM." : "CRM-ready. Useful before CRM."}</h2>
-          <p>{es ? "Con fuentes públicas ya se puede priorizar, contextualizar y diseñar campañas. Con acceso autorizado a ticketing, scans y CRM se podrá cerrar conversión, no-show, coste de adquisición y repetición." : "Public sources already support prioritisation, context and campaign design. Authorised ticketing, scans and CRM access would close conversion, no-show, acquisition cost and repeat behaviour."}</p>
+          <div className="eyebrow">{es ? "DE PROTOTIPO A PILOTO" : "FROM PROTOTYPE TO PILOT"}</div>
+          <h2>{es ? "El siguiente salto no es más UI. Es cerrar el bucle con datos de club." : "The next leap is not more UI. It is closing the loop with club data."}</h2>
+          <p>{es ? "Un piloto real conectaría datos privados mínimos, instrumentaría una o dos decisiones por partido y revisaría resultados contra un baseline antes de ampliar alcance." : "A real pilot would connect the minimum private data, instrument one or two fixture decisions and review outcomes against a baseline before expanding scope."}</p>
+        </div>
+        <div className="caseStudyPilotSteps">
+          <article><span>01</span><strong>{es ? "Conectar" : "Connect"}</strong><p>{es ? "Ticketing, scans y CRM mediante contratos ya definidos." : "Ticketing, scans and CRM through already-defined contracts."}</p></article>
+          <article><span>02</span><strong>{es ? "Instrumentar" : "Instrument"}</strong><p>{es ? "Una campaña y una experiencia con IDs y eventos trazables." : "One campaign and one experience with traceable IDs and events."}</p></article>
+          <article><span>03</span><strong>{es ? "Comparar" : "Compare"}</strong><p>{es ? "Baseline, resultado, no-show, primera visita y repetición." : "Baseline, outcome, no-show, first visit and repeat."}</p></article>
+          <article><span>04</span><strong>{es ? "Decidir" : "Decide"}</strong><p>{es ? "Escalar, adaptar o parar según evidencia observada." : "Scale, adapt or stop based on observed evidence."}</p></article>
         </div>
         <div className="caseStudyNextActions">
-          <Link className="caseStudyButton primary" href="/case-study/technical">{es ? "Abrir el caso técnico" : "Open the technical case"}</Link>
-          <Link className="caseStudyButton secondary" href="/method">{es ? "Revisar la metodología" : "Review the methodology"}</Link>
+          <Link className="caseStudyButton primary" href="/measurement">{es ? "Ver control de evidencia" : "Open evidence control"}</Link>
+          <Link className="caseStudyButton secondary" href="/method">{es ? "Revisar metodología" : "Review methodology"}</Link>
         </div>
       </section>
 
