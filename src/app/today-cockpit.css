@@ -422,3 +422,10 @@
   .todayRealityFlow { grid-template-columns:1fr; }
   .todayRealityFlow > b { transform:rotate(90deg); justify-self:center; }
 }
+
+.todayValidationRail { grid-column:1/-1; display:grid; grid-template-columns:repeat(5,1fr); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:10px; background:var(--line); }
+.todayValidationRail span { display:flex; gap:6px; align-items:center; padding:8px; background:rgba(0,0,0,.14); color:var(--muted); font-size:8px; }
+.todayValidationRail span.complete b { color:var(--lcl-hyperturq); }
+.todayValidationRail span.active { color:#f5ca67; }
+.todayValidationRail span.active b { color:#f5ca67; }
+@media(max-width:700px){.todayValidationRail{grid-template-columns:1fr}.todayValidationRail span{border-bottom:1px solid var(--line)}}
