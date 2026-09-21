@@ -24,6 +24,7 @@ import "./navigation-v2.css";
 import "./today-cockpit.css";
 import "./calendar-fixture.css";
 import "./territory-access.css";
+import "./experience-internal.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
 

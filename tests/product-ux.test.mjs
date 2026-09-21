@@ -76,3 +76,13 @@ test("Territories flow into aggregated access before the fan preview", () => {
   assert.match(access, /FAN PREVIEW/);
   assert.match(access, /initialTerritoryId=/);
 });
+
+test("Fan Experience separates internal control from the supporter preview", () => {
+  const experience = read("src/components/ExperienceDemandValidation.tsx");
+  assert.match(experience, /useState<ExperienceView>\("internal"\)/);
+  assert.match(experience, /INTERNAL PRODUCT LAB/);
+  assert.match(experience, /FAN-FACING PREVIEW/);
+  assert.match(experience, /Concept portfolio to test/);
+  assert.match(experience, /From interaction to decision/);
+  assert.match(experience, /This is the test surface, not a commercial offer/);
+});

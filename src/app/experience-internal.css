@@ -1,0 +1,294 @@
+/* PR #29 — internal experience control with a distinct fan-facing preview */
+
+.experienceModeTabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  max-width: 630px;
+  margin: -38px 0 34px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--surface);
+}
+
+.experienceModeTabs button {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  padding: 12px 15px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.experienceModeTabs button span {
+  color: var(--lcl-hyperturq);
+  font-size: 7px;
+  letter-spacing: .09em;
+}
+
+.experienceModeTabs button.active {
+  background: var(--lcl-hyperturq);
+  color: var(--lcl-navy);
+}
+
+.experienceModeTabs button.active span {
+  color: rgba(7, 27, 51, .65);
+}
+
+.experienceControlStrip {
+  display: grid;
+  grid-template-columns: .6fr .6fr .8fr 1.3fr;
+  margin-bottom: 70px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.experienceControlStrip > div {
+  min-width: 0;
+  padding: 20px;
+  border-right: 1px solid var(--line);
+}
+
+.experienceControlStrip > div:last-child {
+  border-right: 0;
+}
+
+.experienceControlStrip strong,
+.experienceControlStrip span {
+  display: block;
+}
+
+.experienceControlStrip strong {
+  overflow-wrap: anywhere;
+  font-size: 30px;
+  letter-spacing: -.04em;
+}
+
+.experienceControlStrip .waiting strong {
+  color: #ffb84d;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.experienceControlStrip span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.experiencePortfolio,
+.experienceDecisionModel {
+  margin: 72px 0;
+}
+
+.experiencePortfolioRows {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+
+.experiencePortfolioRows article {
+  display: grid;
+  grid-template-columns: .18fr 1.3fr .75fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 20px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.experiencePortfolioRows article > span {
+  color: var(--lcl-hyperturq);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.experiencePortfolioRows article div strong,
+.experiencePortfolioRows article div small,
+.experiencePortfolioRows article div b {
+  display: block;
+}
+
+.experiencePortfolioRows article div strong {
+  font-size: 18px;
+}
+
+.experiencePortfolioRows article div small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.experiencePortfolioRows article div b {
+  color: #ffb84d;
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.experiencePortfolioRows button,
+.fanPreviewNotice button {
+  padding: 11px 14px;
+  border: 1px solid var(--lcl-hyperturq);
+  border-radius: 9px;
+  background: transparent;
+  color: var(--lcl-hyperturq);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.experienceDecisionModel > div:last-child {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.experienceDecisionModel article {
+  min-height: 145px;
+  padding: 22px;
+  border-right: 1px solid var(--line);
+}
+
+.experienceDecisionModel article:last-child {
+  border-right: 0;
+}
+
+.experienceDecisionModel article span,
+.experienceDecisionModel article strong {
+  display: block;
+}
+
+.experienceDecisionModel article span {
+  margin-bottom: 24px;
+  color: var(--lcl-hyperturq);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.experienceDecisionModel article strong {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.fanPreviewNotice {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: center;
+  margin-bottom: 38px;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 184, 77, .38);
+  border-radius: 14px;
+  background: rgba(255, 184, 77, .055);
+}
+
+.fanPreviewNotice span,
+.fanPreviewNotice strong {
+  display: block;
+}
+
+.fanPreviewNotice span {
+  margin-bottom: 6px;
+  color: #ffb84d;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.fanPreviewNotice strong {
+  font-size: 13px;
+}
+
+.fanPreviewNotice button {
+  border-color: #ffb84d;
+  color: #ffb84d;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .experienceControlStrip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .experienceControlStrip > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .experienceControlStrip > div:nth-child(-n+2) {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .experiencePortfolioRows article {
+    grid-template-columns: .18fr 1.4fr .8fr;
+  }
+
+  .experiencePortfolioRows button {
+    grid-column: 2 / -1;
+    justify-self: start;
+  }
+
+  .experienceDecisionModel > div:last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .experienceDecisionModel article {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .experienceDecisionModel article:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .experienceModeTabs {
+    grid-template-columns: 1fr;
+    max-width: none;
+    margin-top: -25px;
+  }
+
+  .experienceControlStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .experienceControlStrip > div,
+  .experienceControlStrip > div:nth-child(2) {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .experienceControlStrip > div:last-child {
+    border-bottom: 0;
+  }
+
+  .experiencePortfolioRows article {
+    grid-template-columns: auto 1fr;
+  }
+
+  .experiencePortfolioRows article > div:nth-child(3),
+  .experiencePortfolioRows button {
+    grid-column: 2;
+  }
+
+  .fanPreviewNotice {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
