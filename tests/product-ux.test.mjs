@@ -54,3 +54,14 @@ test("Today is a progressive executive cockpit", () => {
   assert.doesNotMatch(today, /<SourceHealthCenter/);
   assert.doesNotMatch(today, /<PostMatchScorecard/);
 });
+
+test("Calendar leads with fixture decisions and defers supporting evidence", () => {
+  const calendar = read("src/components/LocalizedCalendarPage.tsx");
+  assert.match(calendar, /FIXTURE-LED PLANNING/);
+  assert.match(calendar, /NEXT HOME FIXTURE/);
+  assert.match(calendar, /Operating actions/);
+  assert.match(calendar, /className="calendarEvidence"/);
+  assert.match(calendar, /scope === "home"/);
+  assert.match(calendar, /scope === "results"/);
+  assert.ok(calendar.indexOf("seasonTimeline") < calendar.indexOf("<DemandHistory"));
+});

@@ -1,0 +1,529 @@
+/* PR #27 — fixture-led calendar and operating plans */
+
+.fixtureFirstIntro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr);
+  gap: clamp(28px, 5vw, 70px);
+  align-items: flex-end;
+}
+
+.fixtureFirstIntro h1 {
+  max-width: 860px;
+  font-size: clamp(39px, 5vw, 64px);
+}
+
+.nextFixtureJump {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 23px;
+  border: 1px solid rgba(50, 230, 212, .34);
+  border-radius: 17px;
+  background: linear-gradient(145deg, rgba(50, 230, 212, .09), rgba(255, 255, 255, .02));
+  color: inherit;
+  text-decoration: none;
+}
+
+.nextFixtureJump span,
+.nextFixtureJump strong,
+.nextFixtureJump small,
+.nextFixtureJump b {
+  display: block;
+}
+
+.nextFixtureJump span {
+  color: var(--lcl-hyperturq);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .09em;
+}
+
+.nextFixtureJump strong {
+  margin-top: 14px;
+  font-size: 25px;
+  line-height: 1.1;
+}
+
+.nextFixtureJump small {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.nextFixtureJump b {
+  margin-top: 20px;
+  color: var(--lcl-hyperturq);
+  font-size: 12px;
+}
+
+.calendarCommandBar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 8px 0 62px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.calendarCommandBar > div {
+  padding: 20px;
+  border-right: 1px solid var(--line);
+}
+
+.calendarCommandBar > div:last-child {
+  border-right: 0;
+}
+
+.calendarCommandBar strong,
+.calendarCommandBar span {
+  display: block;
+}
+
+.calendarCommandBar strong {
+  font-size: 31px;
+  letter-spacing: -.04em;
+}
+
+.calendarCommandBar span {
+  max-width: 160px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.calendarCommandBar .needsAttention strong {
+  color: #ffb84d;
+}
+
+.calendarToolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.calendarToolbar h2 {
+  margin: 6px 0 0;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -.04em;
+}
+
+.calendarToolbar .calendarFilters {
+  margin: 0;
+}
+
+.calendarFilters button {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.calendarFilters button span {
+  min-width: 18px;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+  font-size: 9px;
+}
+
+.calendarFilters button.active span {
+  background: rgba(7, 27, 51, .14);
+}
+
+.fixtureFirstTimeline .seasonFixture {
+  scroll-margin-top: 100px;
+}
+
+.fixtureFirstTimeline .seasonFixture.isNextHome {
+  margin: 0 0 12px;
+  overflow: hidden;
+  border: 1px solid rgba(50, 230, 212, .35);
+  border-radius: 16px;
+  background: rgba(50, 230, 212, .025);
+}
+
+.fixtureFirstTimeline .seasonFixture > summary {
+  grid-template-columns: .7fr minmax(260px, 2fr) .55fr .52fr;
+  padding-right: 42px;
+}
+
+.fixtureStatusSummary {
+  text-align: right;
+}
+
+.fixtureStatusSummary strong,
+.fixtureStatusSummary span {
+  display: block;
+}
+
+.fixtureStatusSummary strong {
+  font-size: 28px;
+}
+
+.fixtureStatusSummary strong small {
+  margin-left: 2px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.fixtureStatusSummary span {
+  margin-top: 5px;
+  color: var(--lcl-hyperturq);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.fixtureReadiness {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 7px;
+  padding-left: 20px;
+  border-left: 1px solid var(--line);
+}
+
+.fixtureReadiness strong {
+  font-size: 12px;
+}
+
+.fixtureReadiness span {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.fixtureOperatingPlan {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 18px 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .02);
+}
+
+.fixtureOperatingPlan article {
+  min-width: 0;
+  padding: 17px;
+  border-right: 1px solid var(--line);
+}
+
+.fixtureOperatingPlan article:nth-child(4),
+.fixtureOperatingPlan article:last-child {
+  border-right: 0;
+}
+
+.fixtureOperatingPlan .operatingWide {
+  grid-column: span 2;
+  border-top: 1px solid var(--line);
+}
+
+.fixtureOperatingPlan span,
+.fixtureOperatingPlan strong,
+.fixtureOperatingPlan small {
+  display: block;
+}
+
+.fixtureOperatingPlan span {
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .07em;
+}
+
+.fixtureOperatingPlan strong {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.fixtureOperatingPlan small {
+  margin-top: 5px;
+  color: var(--lcl-hyperturq);
+  font-size: 9px;
+}
+
+.fixtureActionList,
+.fixtureSignalStrip {
+  margin: 0 18px 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.fixtureSectionHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 13px 16px;
+  background: rgba(255, 255, 255, .03);
+}
+
+.fixtureSectionHead strong {
+  font-size: 11px;
+}
+
+.fixtureSectionHead span {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.fixtureActionList > article {
+  display: grid;
+  grid-template-columns: .65fr 2fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 13px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.fixtureActionList > article span,
+.fixtureActionList > article time {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.fixtureActionList > article strong {
+  font-size: 12px;
+}
+
+.fixtureActionList > article.overdue time {
+  color: #ff8b82;
+  font-weight: 800;
+}
+
+.fixtureSignalStrip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.fixtureSignalStrip article {
+  padding: 17px;
+  border-right: 1px solid var(--line);
+}
+
+.fixtureSignalStrip article:last-child {
+  border-right: 0;
+}
+
+.fixtureSignalStrip span,
+.fixtureSignalStrip strong,
+.fixtureSignalStrip a {
+  display: block;
+}
+
+.fixtureSignalStrip span {
+  color: var(--lcl-hyperturq);
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.fixtureSignalStrip strong {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.fixtureSignalStrip p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.fixtureSignalStrip a {
+  color: var(--lcl-hyperturq);
+  font-size: 9px;
+  text-decoration: none;
+}
+
+.fixtureDeepDive {
+  margin: 0 18px 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.fixtureDeepDive > summary {
+  padding: 14px 16px;
+  cursor: pointer;
+  color: var(--lcl-hyperturq);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.fixtureDeepDive .postMatchScorecard,
+.fixtureDeepDive .activationIntelligence {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+}
+
+.calendarEvidence {
+  margin: 52px 0 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+.calendarEvidence > summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  align-items: center;
+  padding: 24px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.calendarEvidence > summary::-webkit-details-marker {
+  display: none;
+}
+
+.calendarEvidence > summary span,
+.calendarEvidence > summary strong {
+  display: block;
+}
+
+.calendarEvidence > summary span {
+  margin-bottom: 7px;
+  color: var(--lcl-hyperturq);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.calendarEvidence > summary strong {
+  font-size: 18px;
+}
+
+.calendarEvidence > summary b {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.calendarEvidenceBody {
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--line);
+}
+
+.calendarEvidenceBody > *:first-child {
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .fixtureFirstIntro {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarCommandBar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calendarCommandBar > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .calendarCommandBar > div:nth-child(-n+2) {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .calendarToolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .fixtureFirstTimeline .seasonFixture > summary {
+    grid-template-columns: .75fr 2fr .6fr;
+  }
+
+  .fixtureReadiness {
+    display: none;
+  }
+
+  .fixtureOperatingPlan {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fixtureOperatingPlan article:nth-child(2) {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .calendarCommandBar {
+    margin-bottom: 42px;
+  }
+
+  .fixtureFirstTimeline .seasonFixture > summary {
+    grid-template-columns: 1fr auto;
+    gap: 13px;
+    padding: 18px 38px 18px 15px;
+  }
+
+  .timelineDate {
+    grid-column: 1 / -1;
+  }
+
+  .fixtureStatusSummary {
+    align-self: start;
+  }
+
+  .timelineOpponent strong {
+    font-size: 15px;
+  }
+
+  .fixtureOperatingPlan {
+    grid-template-columns: 1fr;
+    margin: 0 10px 10px;
+  }
+
+  .fixtureOperatingPlan article,
+  .fixtureOperatingPlan article:nth-child(2),
+  .fixtureOperatingPlan article:nth-child(4) {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fixtureOperatingPlan article:last-child {
+    border-bottom: 0;
+  }
+
+  .fixtureOperatingPlan .operatingWide {
+    grid-column: auto;
+    border-top: 0;
+  }
+
+  .fixtureActionList,
+  .fixtureSignalStrip,
+  .fixtureDeepDive {
+    margin: 0 10px 10px;
+  }
+
+  .fixtureActionList > article {
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
+  }
+
+  .fixtureActionList > article span {
+    grid-column: 1 / -1;
+  }
+
+  .fixtureSignalStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .fixtureSignalStrip article {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fixtureSignalStrip article:last-child {
+    border-bottom: 0;
+  }
+
+  .calendarEvidence > summary {
+    align-items: flex-start;
+  }
+}
