@@ -470,6 +470,25 @@ export type DecisionValidationData = {
     }>;
     caveat: LocalizedText;
     learning: LocalizedText;
+    liveValidation?: {
+      state: "pre-match-active" | "matchday-active" | "post-match-active" | "closed";
+      fixtureDate: string;
+      principle: LocalizedText;
+      phases: Array<{
+        id: "hypothesis" | "public-action" | "pre-match" | "matchday" | "post-match";
+        label: LocalizedText;
+        date: string;
+        state: "complete" | "active" | "waiting";
+        expected: LocalizedText;
+        observed: LocalizedText;
+        evidenceRef: string | null;
+      }>;
+      postMatchChecklist: Array<{
+        id: string;
+        label: LocalizedText;
+        state: "waiting" | "complete" | "requires-club-access";
+      }>;
+    };
   }>;
 };
 
