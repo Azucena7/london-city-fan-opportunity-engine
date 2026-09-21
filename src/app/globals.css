@@ -1338,3 +1338,89 @@ footer {
   .partnerDecisionStrip { grid-template-columns:1fr; }
   .partnerDecisionGrid dl { grid-template-columns:1fr; }
 }
+
+
+/* Data & Sources v2: decision reliability before technical source health */
+.sourceIntro { max-width:980px; }
+.sourceHealthCenter { margin:28px 0 0; }
+.sourceHealthHead { display:grid; grid-template-columns:1.3fr .7fr; gap:36px; align-items:end; padding:26px; border:1px solid var(--line); border-radius:20px; background:var(--surface); }
+.sourceHealthHead h2 { margin:8px 0 10px; font-size:clamp(30px,4vw,48px); line-height:1.02; letter-spacing:-.04em; }
+.sourceHealthHead p { max-width:720px; margin:0; color:#c7d0cb; font-size:12px; line-height:1.5; }
+.sourceHealthTotals { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:12px; background:var(--line); }
+.sourceHealthTotals div { padding:13px; background:rgba(0,0,0,.16); }
+.sourceHealthTotals strong,.sourceHealthTotals span { display:block; }
+.sourceHealthTotals strong { font-size:25px; }
+.sourceHealthTotals span { margin-top:4px; color:var(--muted); font-size:8px; text-transform:uppercase; }
+
+.decisionReliability { margin:18px 0 38px; padding:clamp(22px,4vw,32px); border:1px solid rgba(216,255,79,.28); border-radius:22px; background:linear-gradient(145deg,rgba(216,255,79,.045),rgba(255,255,255,.018)); }
+.decisionReliabilityHead { display:grid; grid-template-columns:1.35fr .55fr; gap:30px; align-items:end; }
+.decisionReliabilityHead h3 { max-width:780px; margin:8px 0 8px; font-size:clamp(28px,3.7vw,44px); line-height:1.02; }
+.decisionReliabilityHead p { margin:0; max-width:760px; color:#c7d0cb; font-size:12px; line-height:1.5; }
+.decisionReliabilityTotals { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:12px; background:var(--line); }
+.decisionReliabilityTotals div { padding:14px; background:rgba(0,0,0,.16); }
+.decisionReliabilityTotals strong,.decisionReliabilityTotals span { display:block; }
+.decisionReliabilityTotals strong { font-size:28px; letter-spacing:-.04em; }
+.decisionReliabilityTotals span { margin-top:4px; color:var(--muted); font-size:8px; text-transform:uppercase; }
+
+.decisionReliabilityGrid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:22px; }
+.decisionReliabilityGrid article { padding:18px; border:1px solid var(--line); border-radius:15px; background:rgba(0,0,0,.15); }
+.decisionReliabilityGrid article.reliability-reliable { border-color:rgba(216,255,79,.42); }
+.decisionReliabilityGrid article.reliability-qualified { border-color:rgba(245,202,103,.42); }
+.decisionReliabilityGrid article.reliability-blocked { border-color:rgba(255,107,61,.42); }
+.decisionReliabilityGrid article.reliability-access-limited { border-color:rgba(101,214,193,.32); }
+.decisionReliabilityGrid article > div:first-child { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.decisionReliabilityGrid article > div:first-child span { color:var(--muted); font-size:8px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.decisionReliabilityGrid article.reliability-reliable > div:first-child span { color:var(--accent); }
+.decisionReliabilityGrid article.reliability-qualified > div:first-child span { color:#f5ca67; }
+.decisionReliabilityGrid article.reliability-blocked > div:first-child span { color:var(--hot); }
+.decisionReliabilityGrid article.reliability-access-limited > div:first-child span { color:#65d6c1; }
+.decisionReliabilityGrid article > div:first-child a { color:var(--muted); font-size:9px; text-decoration:none; }
+.decisionReliabilityGrid h4 { margin:14px 0 8px; font-size:20px; letter-spacing:-.02em; }
+.decisionReliabilityGrid article > p { min-height:38px; margin:0 0 14px; color:#c7d0cb; font-size:11px; line-height:1.45; }
+.decisionReliabilityGrid dl { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin:0; overflow:hidden; border:1px solid var(--line); border-radius:10px; background:var(--line); }
+.decisionReliabilityGrid dl div { padding:10px; background:rgba(0,0,0,.16); }
+.decisionReliabilityGrid dt { color:var(--muted); font-size:7px; font-weight:900; text-transform:uppercase; }
+.decisionReliabilityGrid dd { margin:5px 0 0; font-size:16px; font-weight:900; }
+.decisionReliabilityLimits { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+.decisionReliabilityLimits span { padding:6px 8px; border:1px solid rgba(255,107,61,.28); border-radius:999px; color:#ffc0aa; font-size:8px; }
+.decisionReliabilityLimits.clear span { border-color:rgba(216,255,79,.25); color:var(--accent); }
+.decisionReliabilityGrid article > small { display:block; margin-top:12px; color:var(--muted); font-size:9px; line-height:1.45; }
+
+.sourceRegisterHeading { display:grid; grid-template-columns:1fr .7fr; gap:25px; align-items:end; margin:38px 0 14px; padding-top:24px; border-top:1px solid var(--line); }
+.sourceRegisterHeading > div { display:flex; gap:12px; align-items:baseline; }
+.sourceRegisterHeading span { color:var(--accent); font-size:10px; font-weight:900; }
+.sourceRegisterHeading h3 { margin:0; font-size:27px; }
+.sourceRegisterHeading p { margin:0; color:var(--muted); font-size:11px; line-height:1.4; }
+
+.sourceHealthList { display:flex; flex-direction:column; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+.sourceHealthItem { display:grid; grid-template-columns:1.1fr .85fr 1.5fr 1fr; gap:18px; align-items:start; padding:17px; background:rgba(255,255,255,.018); }
+.sourceHealthItem + .sourceHealthItem { border-top:1px solid var(--line); }
+.sourceHealthIdentity span,.sourceHealthIdentity strong,.sourceHealthIdentity small,.sourceHealthMethod span,.sourceHealthMethod strong,.sourceHealthMethod small,.sourceHealthUpdate span,.sourceHealthUpdate strong,.sourceHealthUpdate small { display:block; }
+.sourceState { color:var(--muted); font-size:8px; font-weight:900; letter-spacing:.07em; text-transform:uppercase; }
+.sourceState i { display:inline-block; width:7px; height:7px; margin-right:6px; border-radius:50%; background:#526159; }
+.state-operational .sourceState { color:var(--accent); }
+.state-operational .sourceState i { background:var(--accent); }
+.state-degraded .sourceState,.state-not-configured .sourceState { color:#f5ca67; }
+.state-degraded .sourceState i,.state-not-configured .sourceState i { background:#f5ca67; }
+.state-blocked .sourceState { color:var(--hot); }
+.state-blocked .sourceState i { background:var(--hot); }
+.state-requires-access .sourceState { color:#65d6c1; }
+.state-requires-access .sourceState i { background:#65d6c1; }
+.sourceHealthIdentity strong { margin-top:7px; font-size:13px; }
+.sourceHealthIdentity small,.sourceHealthMethod small,.sourceHealthUpdate small { margin-top:5px; color:var(--muted); font-size:8px; line-height:1.4; }
+.sourceHealthMethod span,.sourceHealthUpdate span { color:var(--muted); font-size:7px; font-weight:900; letter-spacing:.07em; text-transform:uppercase; }
+.sourceHealthMethod strong,.sourceHealthUpdate strong { margin-top:6px; font-size:10px; line-height:1.35; }
+.sourceHealthItem > p { margin:0; color:#c7d0cb; font-size:10px; line-height:1.45; }
+.sourceHealthBoundary { margin-top:16px; padding:15px; border-left:3px solid var(--accent); background:rgba(216,255,79,.045); }
+.sourceHealthBoundary strong { display:block; font-size:11px; }
+.sourceHealthBoundary p { margin:5px 0 0; color:var(--muted); font-size:9px; line-height:1.45; }
+
+@media (max-width:900px) {
+  .sourceHealthHead,.decisionReliabilityHead,.sourceRegisterHeading { grid-template-columns:1fr; }
+  .decisionReliabilityGrid { grid-template-columns:1fr; }
+  .sourceHealthItem { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:650px) {
+  .sourceHealthTotals,.decisionReliabilityTotals { grid-template-columns:1fr; }
+  .sourceHealthItem { grid-template-columns:1fr; }
+}
