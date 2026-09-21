@@ -21,7 +21,7 @@ test("actionable source failures name the next owner action", () => {
 test("operational modules are reachable from global navigation", () => {
   const nav = read("src/components/NavTabs.tsx");
   for (const route of ["/access", "/measurement", "/partners", "/sources"]) {
-    assert.ok(nav.includes(`\"${route}\"`), `${route} should be visible in global navigation`);
+    assert.ok(nav.includes(`"${route}"`), `${route} should be visible in global navigation`);
   }
 });
 
@@ -85,4 +85,15 @@ test("Fan Experience separates internal control from the supporter preview", () 
   assert.match(experience, /Concept portfolio to test/);
   assert.match(experience, /From interaction to decision/);
   assert.match(experience, /This is the test surface, not a commercial offer/);
+});
+
+
+test("Measurement is a decision control room before it is a technical dashboard", () => {
+  const measurement = read("src/components/MeasurementDashboard.tsx");
+  assert.match(measurement, /EVIDENCE CONTROL ROOM/);
+  assert.match(measurement, /Fixture decision queue/);
+  assert.match(measurement, /NEXT DECISION/);
+  assert.match(measurement, /Keep measuring/);
+  assert.match(measurement, /Instrument before deciding/);
+  assert.match(measurement, /View technical instrumentation detail/);
 });
