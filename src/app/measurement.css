@@ -119,3 +119,24 @@
   .measurementTechnical .measurementEvents,
   .measurementTechnical .measurementProvider { margin-left: 14px; margin-right: 14px; }
 }
+
+
+.liveValidation { margin:22px 0 18px; padding:18px; border:1px solid rgba(50,230,212,.24); border-radius:15px; background:rgba(50,230,212,.035); }
+.liveValidationHead span,.liveValidationHead strong,.liveValidationHead small { display:block; }
+.liveValidationHead span { color:var(--lcl-hyperturq); font-size:8px; font-weight:900; letter-spacing:.08em; }
+.liveValidationHead strong { margin-top:6px; font-size:14px; text-transform:uppercase; }
+.liveValidationHead small { margin-top:6px; color:var(--muted); font-size:9px; line-height:1.4; }
+.liveValidationPhases { display:grid; grid-template-columns:repeat(5,1fr); gap:7px; margin-top:15px; }
+.liveValidationPhases article { min-height:135px; padding:12px; border:1px solid var(--line); border-radius:10px; background:rgba(0,0,0,.14); }
+.liveValidationPhases article.complete { border-color:rgba(216,255,79,.28); }
+.liveValidationPhases article.active { border-color:#f5ca67; }
+.liveValidationPhases article > div { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:7px; text-transform:uppercase; }
+.liveValidationPhases article.active > div span { color:#f5ca67; }
+.liveValidationPhases article.complete > div span { color:var(--lcl-hyperturq); }
+.liveValidationPhases article > strong { display:block; margin-top:18px; font-size:11px; }
+.liveValidationPhases article > small { display:block; margin-top:7px; color:var(--muted); font-size:8px; line-height:1.35; }
+.liveValidationChecklist { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+.liveValidationChecklist span { padding:6px 8px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:8px; }
+.liveValidationChecklist span.requires-club-access { color:#65d6c1; border-color:rgba(101,214,193,.28); }
+@media(max-width:900px){.liveValidationPhases{grid-template-columns:1fr 1fr}.liveValidationPhases article:last-child{grid-column:1/-1}}
+@media(max-width:560px){.liveValidationPhases{grid-template-columns:1fr}.liveValidationPhases article:last-child{grid-column:auto}}
