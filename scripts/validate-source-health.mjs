@@ -7,6 +7,9 @@ const ids = new Set();
 if (data.version !== "1.0" || !Array.isArray(data.sources) || data.sources.length === 0) {
   throw new Error("Source health must expose version 1.0 and at least one source");
 }
+if (!Array.isArray(data.decisions) || data.decisions.length === 0) {
+  throw new Error("Source health must expose at least one business decision");
+}
 
 for (const source of data.sources) {
   if (!source.id || ids.has(source.id)) throw new Error(`Invalid or duplicate source id: ${source.id}`);
@@ -23,4 +26,19 @@ for (const source of data.sources) {
   }
 }
 
-console.log(`Source health valid: ${data.sources.length} sources, ${ids.size} unique ids`);
+const decisionIds = new Set();
+for (const decision of data.decisions) {
+  if (!decision.id || decisionIds.has(decision.id)) throw new Error(`Invalid or duplicate decision id: ${decision.id}`);
+  decisionIds.add(decision.id);
+  if (!decision.label?.en || !decision.label?.es || !decision.question?.en || !decision.question?.es || !decision.nextAction?.en || !decision.nextAction?.es) {
+    throw new Error(`Decision ${decision.id} is missing bilingual copy`);
+  }
+  if (!decision.route || !Array.isArray(decision.requiredSourceIds) || decision.requiredSourceIds.length === 0 || !Array.isArray(decision.supportingSourceIds)) {
+    throw new Error(`Decision ${decision.id} has an invalid source mapping`);
+  }
+  for (const sourceId of [...decision.requiredSourceIds, ...decision.supportingSourceIds]) {
+    if (!ids.has(sourceId)) throw new Error(`Decision ${decision.id} references unknown source: ${sourceId}`);
+  }
+}
+
+console.log(`Source health valid: ${data.sources.length} sources, ${decisionIds.size} mapped decisions`);
