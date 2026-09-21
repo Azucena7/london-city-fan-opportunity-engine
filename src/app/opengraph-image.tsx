@@ -143,7 +143,7 @@ export default function Image() {
               </div>
               <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "15px", borderRadius: "12px", background: "#ffffff", border: "1px solid #cadbd6" }}>
                 <div style={{ color: "#58756f", fontSize: "10px", fontWeight: 800, letterSpacing: "0.11em" }}>INTERPRETATION</div>
-                <div style={{ fontSize: "15px", lineHeight: 1.2, fontWeight: 800, marginTop: "9px" }}>0 causation claimed</div>
+                <div style={{ fontSize: "15px", lineHeight: 1.2, fontWeight: 800, marginTop: "9px" }}>0 CAUSATION CLAIMED</div>
               </div>
             </div>
 
