@@ -141,21 +141,34 @@
     "state": "confirmed",
     "direction": "mixed",
     "materiality": "high",
-    "observedAt": "2026-09-14T06:30:00+01:00",
+    "observedAt": "2026-09-21T09:48:30+01:00",
     "title": {
-      "en": "England v Spain overlaps the Brighton matchday",
-      "es": "Inglaterra–España se solapa con el matchday de Brighton"
+      "en": "The Brighton double-header is now a confirmed club activation",
+      "es": "La doble sesión de Brighton ya es una activación confirmada del club"
     },
     "summary": {
-      "en": "The Wembley fixture starts at 19:45, shortly after London City v Brighton. It competes for attention but creates a double-header opportunity.",
-      "es": "El partido de Wembley empieza a las 19:45, poco después de London City–Brighton. Compite por atención, pero crea una oportunidad de doble sesión."
+      "en": "London City has launched an on-site England v Spain post-match watchalong after the Brighton fixture, with discounted drinks and the international kicking off at 19:45. This converts the previously identified attention overlap into a confirmed retention and matchday-spend activation.",
+      "es": "London City ha lanzado un watchalong en el estadio de Inglaterra–España después del partido ante Brighton, con bebidas rebajadas y comienzo del internacional a las 19:45. Esto convierte el solapamiento de atención ya identificado en una activación confirmada de retención y gasto en matchday."
     },
     "marketingAction": {
-      "en": "Position Hayes Lane as the first match of the day and connect the post-match experience with local viewing partners.",
-      "es": "Posicionar Hayes Lane como el primer partido del día y conectar el postpartido con partners locales donde ver Inglaterra."
+      "en": "Promote Brighton plus the watchalong as one extended day out, tag the proposition in CRM and ticket links, and measure ticket conversion, post-match dwell and bar spend separately from attendance.",
+      "es": "Promocionar Brighton más el watchalong como una única jornada ampliada, etiquetar la propuesta en CRM y enlaces de venta, y medir por separado conversión de entradas, permanencia pospartido y gasto en bar, sin confundirlos con asistencia."
     },
-    "sourceName": "England Football",
-    "sourceUrl": "https://www.englandfootball.com/articles/2026/Jul/21/whats-next-for-england-after-fifa-world-cup-20262107"
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong",
+    "confidence": "high",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong",
+        "checkedAt": "2026-09-21"
+      },
+      {
+        "name": "England Football",
+        "url": "https://www.englandfootball.com/articles/2026/Jul/21/whats-next-for-england-after-fifa-world-cup-20262107",
+        "checkedAt": "2026-09-14"
+      }
+    ]
   },
   {
     "id": "partnership-nike",
@@ -201,5 +214,29 @@
     },
     "sourceName": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/"
+  },
+  {
+    "id": "broadcast-brighton-sky-2026-09-21",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-21T09:48:30+01:00",
+    "title": {
+      "en": "Sky Sports is listed for London City v Brighton",
+      "es": "Sky Sports figura para London City–Brighton"
+    },
+    "summary": {
+      "en": "The official WSL schedule lists Sky Sports for the 17:00 BST home fixture on 26 September. Broadcast availability can suppress some marginal in-person demand while extending reach beyond Bromley.",
+      "es": "El calendario oficial de la WSL incluye Sky Sports para el partido en casa del 26 de septiembre a las 17:00 BST. La disponibilidad televisiva puede reducir parte de la demanda presencial marginal, a la vez que amplía el alcance fuera de Bromley."
+    },
+    "marketingAction": {
+      "en": "Keep proximity audiences focused on the extended stadium experience and watchalong; prepare a separate CRM/content path for remote viewers and retarget them toward Everton without using broadcast availability as evidence of ticket sales.",
+      "es": "Mantener a las audiencias de proximidad centradas en la experiencia ampliada en el estadio y el watchalong; preparar una ruta separada de CRM/contenido para espectadores remotos y reimpactarlos hacia Everton sin tratar la retransmisión como evidencia de ventas."
+    },
+    "sourceName": "WSL Football",
+    "sourceUrl": "https://www.wslfootball.com/clubs/wsl/london-city-lionesses/schedule"
   }
 ]
