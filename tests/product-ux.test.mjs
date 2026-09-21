@@ -137,3 +137,12 @@ test("Data & Sources translates technical source health into business decision r
   assert.ok(data.decisions.some((item) => item.id === "conversion-retention" && item.requiredSourceIds.includes("crm-ticketing")));
   assert.ok(data.decisions.some((item) => item.id === "attendance-benchmark" && item.requiredSourceIds.includes("wsl-attendance")));
 });
+
+
+test("production traffic is instrumented with private Vercel Web Analytics", () => {
+  const layout = read("src/app/layout.tsx");
+  const pkg = JSON.parse(read("package.json"));
+  assert.equal(pkg.dependencies["@vercel/analytics"], "^2.0.1");
+  assert.match(layout, /@vercel\/analytics\/next/);
+  assert.match(layout, /<Analytics \/>/);
+});
