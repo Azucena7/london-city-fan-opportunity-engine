@@ -146,3 +146,21 @@ test("production traffic is instrumented with private Vercel Web Analytics", () 
   assert.match(layout, /@vercel\/analytics\/next/);
   assert.match(layout, /<Analytics \/>/);
 });
+
+
+test("Case study separates built product, observed alignment and unproven impact", () => {
+  const page = read("src/app/case-study/page.tsx");
+  const story = read("src/components/LocalizedStoryPage.tsx");
+  const technical = read("src/components/LocalizedTechnicalCaseStudy.tsx");
+  assert.match(page, /decisionValidation/);
+  assert.match(story, /WHAT IS ACTUALLY DEMONSTRATED/);
+  assert.match(story, /ENGINE HYPOTHESIS/);
+  assert.match(story, /OBSERVED CLUB ACTION/);
+  assert.match(story, /causation claimed/);
+  assert.match(story, /FROM PROTOTYPE TO PILOT/);
+  assert.match(story, /Six operating questions\. One system/);
+  assert.match(technical, /V2\.0/);
+  assert.match(technical, /Decision validation/);
+  assert.match(technical, /Decision reliability/);
+  assert.match(technical, /never implies causation/);
+});
