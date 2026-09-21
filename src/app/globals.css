@@ -1238,3 +1238,52 @@ footer {
   .scorecardMetrics { grid-template-columns:1fr 1fr; }
   .scorecardWindows { grid-template-columns:1fr; }
 }
+
+
+/* Decision validation: prior hypothesis vs observable market action */
+.decisionValidation { margin:34px 0 46px; padding:clamp(22px,4vw,34px); border:1px solid rgba(216,255,79,.28); border-radius:22px; background:linear-gradient(145deg,rgba(216,255,79,.055),rgba(255,255,255,.018)); }
+.decisionValidationHeadline { display:grid; grid-template-columns:1.35fr .55fr; gap:30px; align-items:end; margin-top:20px; }
+.decisionValidationHeadline h3 { max-width:760px; margin:8px 0; font-size:clamp(28px,3.8vw,45px); line-height:1.02; letter-spacing:-.04em; }
+.decisionValidationHeadline p { margin:8px 0 0; color:var(--muted); }
+.decisionValidationState { padding-left:20px; border-left:1px solid var(--line); }
+.decisionValidationState span,.decisionValidationState strong,.decisionValidationState small { display:block; }
+.decisionValidationState span { color:var(--accent); font-size:9px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.decisionValidationState strong { margin-top:8px; font-size:25px; line-height:1.05; }
+.decisionValidationState small { margin-top:7px; color:var(--muted); font-size:9px; line-height:1.35; }
+.decisionValidationTimeline { display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:stretch; margin-top:24px; }
+.decisionValidationTimeline article { padding:20px; border:1px solid var(--line); border-radius:15px; background:rgba(0,0,0,.16); }
+.decisionValidationTimeline article.engine { border-color:rgba(216,255,79,.38); }
+.decisionValidationTimeline article.observed { border-color:rgba(245,202,103,.42); }
+.decisionValidationTimeline article > div { display:flex; justify-content:space-between; gap:15px; color:var(--muted); font-size:8px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.decisionValidationTimeline article.engine > div span { color:var(--accent); }
+.decisionValidationTimeline article.observed > div span { color:#f5ca67; }
+.decisionValidationTimeline article > strong { display:block; margin-top:14px; font-size:14px; line-height:1.48; }
+.decisionValidationTimeline article > small,.decisionValidationTimeline article > a { display:block; margin-top:13px; color:var(--muted); font-size:9px; line-height:1.35; }
+.decisionValidationArrow { display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:30px; font-weight:900; }
+.decisionValidationDimensions { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:15px; }
+.decisionValidationDimensions article { padding:13px; border-radius:11px; background:rgba(255,255,255,.028); }
+.decisionValidationDimensions article.aligned { border-top:2px solid var(--accent); }
+.decisionValidationDimensions article.partial { border-top:2px solid #f5ca67; }
+.decisionValidationDimensions article.divergent { border-top:2px solid var(--hot); }
+.decisionValidationDimensions article span,.decisionValidationDimensions article strong,.decisionValidationDimensions article small { display:block; }
+.decisionValidationDimensions article span { color:var(--muted); font-size:7px; font-weight:900; text-transform:uppercase; }
+.decisionValidationDimensions article.aligned span { color:var(--accent); }
+.decisionValidationDimensions article.partial span { color:#f5ca67; }
+.decisionValidationDimensions article strong { margin-top:8px; font-size:11px; line-height:1.25; }
+.decisionValidationDimensions article small { margin-top:6px; color:var(--muted); font-size:9px; line-height:1.35; }
+.decisionValidationCaveat { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px; padding-top:18px; border-top:1px solid var(--line); }
+.decisionValidationCaveat > div { padding:14px; border-radius:11px; background:rgba(255,255,255,.022); }
+.decisionValidationCaveat span,.decisionValidationCaveat strong { display:block; }
+.decisionValidationCaveat span { color:#f5ca67; font-size:8px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.decisionValidationCaveat > div:last-child span { color:var(--accent); }
+.decisionValidationCaveat strong { margin-top:7px; font-size:11px; line-height:1.45; }
+@media (max-width:900px) {
+  .decisionValidationHeadline,.decisionValidationCaveat { grid-template-columns:1fr; }
+  .decisionValidationState { padding:16px 0 0; border-top:1px solid var(--line); border-left:0; }
+  .decisionValidationDimensions { grid-template-columns:repeat(3,1fr); }
+}
+@media (max-width:700px) {
+  .decisionValidationTimeline { grid-template-columns:1fr; }
+  .decisionValidationArrow { transform:rotate(90deg); min-height:24px; }
+  .decisionValidationDimensions { grid-template-columns:1fr 1fr; }
+}
