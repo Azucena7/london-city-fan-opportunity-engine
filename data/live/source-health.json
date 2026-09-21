@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-21T05:44:02.456Z",
+  "checkedAt": "2026-09-21T18:45:00Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -153,6 +153,113 @@
       "note": {
         "en": "Only the synthetic rehearsal is available. No club customer or transaction data is connected.",
         "es": "Solo está disponible el ensayo sintético. No hay datos de clientes ni transacciones del club conectados."
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "id": "fixture-planning",
+      "label": {
+        "en": "Fixture planning",
+        "es": "Planificación de partido"
+      },
+      "question": {
+        "en": "Can we plan the next fixture from verified public context?",
+        "es": "¿Podemos planificar el próximo partido con contexto público verificado?"
+      },
+      "route": "/calendar",
+      "requiredSourceIds": [
+        "club-public-web",
+        "open-meteo",
+        "ticketmaster-events"
+      ],
+      "supportingSourceIds": [],
+      "nextAction": {
+        "en": "Use the current fixture, weather and strategic event context; preserve source discrepancies when they appear.",
+        "es": "Usar el contexto actual de partido, clima y eventos estratégicos; conservar las discrepancias entre fuentes cuando aparezcan."
+      }
+    },
+    {
+      "id": "attention-campaign",
+      "label": {
+        "en": "Attention & campaign timing",
+        "es": "Atención y timing de campaña"
+      },
+      "question": {
+        "en": "Can we act on current attention signals without overstating demand?",
+        "es": "¿Podemos actuar sobre las señales de atención actuales sin sobredimensionar la demanda?"
+      },
+      "route": "/today",
+      "requiredSourceIds": [
+        "youtube-public",
+        "ticketmaster-events"
+      ],
+      "supportingSourceIds": [
+        "google-trends"
+      ],
+      "nextAction": {
+        "en": "Use measured YouTube and strategic event signals, but keep search demand explicitly unverified until Trends access is restored.",
+        "es": "Usar las señales medidas de YouTube y eventos estratégicos, manteniendo la demanda de búsqueda explícitamente no verificada hasta recuperar Trends."
+      }
+    },
+    {
+      "id": "attendance-benchmark",
+      "label": {
+        "en": "League attendance benchmarking",
+        "es": "Benchmark de asistencia de liga"
+      },
+      "question": {
+        "en": "Can we compare London City attendance with a current WSL benchmark?",
+        "es": "¿Podemos comparar la asistencia de London City con un benchmark WSL actual?"
+      },
+      "route": "/measurement",
+      "requiredSourceIds": [
+        "wsl-attendance"
+      ],
+      "supportingSourceIds": [],
+      "nextAction": {
+        "en": "Do not publish a current league comparison until a replacement or licensed source is approved.",
+        "es": "No publicar una comparación actual de liga hasta aprobar una fuente alternativa o licenciada."
+      }
+    },
+    {
+      "id": "experiment-evidence",
+      "label": {
+        "en": "Experiment & pilot evidence",
+        "es": "Evidencia de experimentos y pilotos"
+      },
+      "question": {
+        "en": "Can a test move from hypothesis to production evidence?",
+        "es": "¿Puede una prueba pasar de hipótesis a evidencia de producción?"
+      },
+      "route": "/measurement",
+      "requiredSourceIds": [
+        "measurement-provider"
+      ],
+      "supportingSourceIds": [],
+      "nextAction": {
+        "en": "Configure an approved measurement provider before treating production cohorts as observed evidence.",
+        "es": "Configurar un proveedor de medición aprobado antes de tratar cohortes de producción como evidencia observada."
+      }
+    },
+    {
+      "id": "conversion-retention",
+      "label": {
+        "en": "Conversion & retention",
+        "es": "Conversión y retención"
+      },
+      "question": {
+        "en": "Can we attribute attendance, repeat visits and campaign conversion to supporters?",
+        "es": "¿Podemos atribuir asistencia, repetición y conversión de campaña a aficionados?"
+      },
+      "route": "/measurement",
+      "requiredSourceIds": [
+        "crm-ticketing"
+      ],
+      "supportingSourceIds": [],
+      "nextAction": {
+        "en": "Club-authorised CRM and ticketing access is required; synthetic rehearsal data must remain clearly separated.",
+        "es": "Se requiere acceso autorizado del club a CRM y ticketing; los datos sintéticos de ensayo deben permanecer claramente separados."
       }
     }
   ]
