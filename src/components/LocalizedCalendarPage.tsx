@@ -12,7 +12,7 @@ import { ClubActivationIntelligence } from "./ClubActivationIntelligence";
 import { SearchDemandObservatory } from "./SearchDemandObservatory";
 import { EventLandscape } from "./EventLandscape";
 import { useLanguage } from "./LanguageProvider";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlan as CampaignData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, EventLandscapeData, Fixture, LeagueAttendanceBenchmark as BenchmarkData, LiveSignal, PostMatchScorecard as ScorecardData, SearchDemandData } from "@/lib/models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlan as CampaignData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness as CrmReadinessData, DecisionValidationData, EventLandscapeData, Fixture, LeagueAttendanceBenchmark as BenchmarkData, LiveSignal, PostMatchScorecard as ScorecardData, SearchDemandData } from "@/lib/models";
 
 type Scope = "upcoming" | "home" | "away" | "results";
 type RoadmapItem = {
@@ -45,7 +45,7 @@ function decisionLabel(decision: Fixture["decision"], es: boolean) {
   return labels[decision][es ? "es" : "en"];
 }
 
-export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, eventLandscape, searchDemand, crmReadiness, crmDemo, scorecards, campaigns, signals, activations, roadmap, updatedAt }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; eventLandscape: EventLandscapeData; searchDemand: SearchDemandData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo; scorecards: ScorecardData[]; campaigns: CampaignData[]; signals: LiveSignal[]; activations: ClubActivationDataset; roadmap: RoadmapItem[]; updatedAt: string }) {
+export function LocalizedCalendarPage({ calendar, plans, history, benchmark, audience, eventLandscape, searchDemand, crmReadiness, crmDemo, scorecards, campaigns, signals, activations, roadmap, updatedAt, validation }: { calendar: CalendarFixture[]; plans: Fixture[]; history: AttendanceHistory; benchmark: BenchmarkData; audience: AudienceReachData; eventLandscape: EventLandscapeData; searchDemand: SearchDemandData; crmReadiness: CrmReadinessData; crmDemo: CrmTicketingDemo; scorecards: ScorecardData[]; campaigns: CampaignData[]; signals: LiveSignal[]; activations: ClubActivationDataset; roadmap: RoadmapItem[]; updatedAt: string; validation: DecisionValidationData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
   const locale = es ? "es-ES" : "en-GB";
@@ -116,6 +116,7 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
           const campaign = campaignByFixture.get(fixture.id);
           const fixtureActions = roadmap.filter((item) => item.fixtureId === fixture.id).sort((a, b) => a.due.localeCompare(b.due));
           const fixtureSignals = signals.filter((signal) => signal.fixtureId === fixture.id && signal.materiality === "high");
+          const validationCase = validation.cases.find((item) => item.fixtureId === fixture.id);
           const isResult = fixture.status !== "scheduled";
           const isNextHome = fixture.id === nextHome?.id;
           return (
@@ -148,6 +149,10 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
               </section> : null}
 
               {fixtureSignals.length ? <section className="fixtureSignalStrip" aria-label={es ? "Señales materiales" : "Material signals"}>{fixtureSignals.map((signal) => <article key={signal.id}><span>{signal.category} · {signal.state}</span><strong>{signal.title[lang]}</strong><p>{signal.marketingAction[lang]}</p><a href={signal.sourceUrl} target="_blank" rel="noreferrer">{signal.sourceName} ↗</a></article>)}</section> : null}
+              {validationCase?.liveValidation ? <section className="fixtureValidationLifecycle">
+                <div className="fixtureSectionHead"><strong>{es ? "Validación en vivo" : "Live validation"}</strong><span>{validationCase.liveValidation.state.replaceAll("-", " ")}</span></div>
+                <div>{validationCase.liveValidation.phases.map((phase) => <article className={phase.state} key={phase.id}><span>{phase.state === "complete" ? "✓" : phase.state === "active" ? "●" : "○"}</span><strong>{phase.label[lang]}</strong><small>{shortDate(phase.date, locale)}</small></article>)}</div>
+              </section> : null}
               {campaign ? <CampaignPlan data={campaign} signals={signals} embedded /> : null}
               {scorecard ? <details className="fixtureDeepDive"><summary>{es ? "Abrir scorecard postpartido" : "Open post-match scorecard"}</summary><PostMatchScorecard data={scorecard} embedded /></details> : null}
               {fixture.sourceDiscrepancies?.map((item) => <div className="sourceDiscrepancy" role="status" key={`${fixture.id}-${item.field}`}><div><span>{es ? "DISCREPANCIA DE FUENTE" : "SOURCE DISCREPANCY"}</span><strong>{es ? "El horario público no coincide entre fuentes oficiales" : "The public kick-off time differs across official sources"}</strong></div><div className="sourceValues">{item.values.map((value) => <a href={value.sourceUrl} target="_blank" rel="noreferrer" key={`${value.sourceName}-${value.value}`}><strong>{value.value}</strong><span>{value.sourceName} ↗</span></a>)}</div><p>{es ? "Sin resolver. Confirmar antes de publicar campañas o rutas." : "Unresolved. Confirm before publishing campaigns or journeys."}</p></div>)}
