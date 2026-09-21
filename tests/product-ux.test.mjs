@@ -189,3 +189,17 @@ test("global evidence claims stay consistent with current source availability", 
   assert.match(executive, /Decision reliability/);
   assert.match(executive, /Review confidence/);
 });
+
+
+test("Brighton club activation intelligence includes the observed England v Spain watchalong", () => {
+  const activations = JSON.parse(read("data/seed/club-activations.json"));
+  const watchalong = activations.observations.find((item) => item.id === "brighton-england-spain-watchalong");
+  const alignment = activations.alignment.find((item) => item.id === "double-header");
+  assert.ok(watchalong);
+  assert.equal(watchalong.observedAt, "2026-09-18");
+  assert.equal(watchalong.evidenceState, "observed");
+  assert.equal(watchalong.sourceUrl, "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong");
+  assert.equal(alignment.status, "partially-observed");
+  assert.match(alignment.observed.en, /publicly announced/);
+  assert.match(alignment.observed.en, /not yet verified/);
+});
