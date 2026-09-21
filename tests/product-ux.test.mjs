@@ -164,3 +164,16 @@ test("Case study separates built product, observed alignment and unproven impact
   assert.match(technical, /Decision reliability/);
   assert.match(technical, /never implies causation/);
 });
+
+
+test("How it works leads with the decision lifecycle and keeps scoring secondary", () => {
+  const method = read("src/components/LocalizedMethodPage.tsx");
+  assert.match(method, /DECISION LIFECYCLE/);
+  assert.match(method, /Six stages\. Three chances to stop/);
+  assert.match(method, /Missing data ≠ zero/);
+  assert.match(method, /Score ≠ permission/);
+  assert.match(method, /Alignment ≠ causation/);
+  assert.match(method, /SCORING & PRIORITISATION/);
+  assert.ok(method.indexOf("DECISION LIFECYCLE") < method.indexOf("SCORING & PRIORITISATION"));
+  assert.match(method, /Observe reality/);
+});
