@@ -177,3 +177,15 @@ test("How it works leads with the decision lifecycle and keeps scoring secondary
   assert.ok(method.indexOf("DECISION LIFECYCLE") < method.indexOf("SCORING & PRIORITISATION"));
   assert.match(method, /Observe reality/);
 });
+
+
+test("global evidence claims stay consistent with current source availability", () => {
+  const technical = read("src/components/LocalizedTechnicalCaseStudy.tsx");
+  const executive = read("src/components/ExecutiveOverview.tsx");
+  assert.doesNotMatch(technical, /Google Trends connected/);
+  assert.doesNotMatch(technical, /proves the full path/);
+  assert.match(technical, /benchmark only when its source is available/);
+  assert.match(executive, /decisionReliabilityCounts/);
+  assert.match(executive, /Decision reliability/);
+  assert.match(executive, /Review confidence/);
+});
