@@ -123,3 +123,12 @@ test("Partnerships leads with an evidence-gated commercial decision queue", () =
   assert.ok(partners.indexOf("Open opportunity dossier") < partners.indexOf("Evidence ledger"));
   assert.match(partners, /Export dossier/);
 });
+
+
+test("production traffic is instrumented with private Vercel Web Analytics", () => {
+  const layout = read("src/app/layout.tsx");
+  const pkg = JSON.parse(read("package.json"));
+  assert.equal(pkg.dependencies["@vercel/analytics"], "^2.0.1");
+  assert.match(layout, /@vercel\/analytics\/next/);
+  assert.match(layout, /<Analytics \/>/);
+});
