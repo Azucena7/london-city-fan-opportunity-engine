@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./story.css";
 import "./live.css";
@@ -75,6 +76,7 @@ export default async function RootLayout({
         <LanguageProvider initialLang={initialLang}>
           <div id="main-content" tabIndex={-1}>{children}</div>
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );
