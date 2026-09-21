@@ -22,13 +22,13 @@ const phases: Array<{ version: string; title: Localized; text: Localized; output
   {
     version: "V1.2",
     title: { en: "Demand history", es: "Histórico de demanda" },
-    text: { en: "An auditable 2025/26 attendance ledger, venue split, WSL benchmark and sample-aware trends.", es: "Ledger auditable de asistencia 2025/26, desglose por estadio, benchmark WSL y tendencias sensibles a muestra." },
+    text: { en: "An auditable 2025/26 attendance ledger, venue split and benchmark layer with source-state awareness.", es: "Ledger auditable de asistencia 2025/26, desglose por estadio y capa de benchmark consciente del estado de la fuente." },
     output: { en: "WHAT normal looks like", es: "QUÉ es normal" }
   },
   {
     version: "V1.3",
     title: { en: "Audience impact", es: "Impacto de audiencias" },
-    text: { en: "Owned channels, Eleven TV, broadcast and Google Trends connected without collapsing unlike metrics.", es: "Canales propios, Eleven TV, televisión y Google Trends conectados sin mezclar métricas no comparables." },
+    text: { en: "Owned-channel signals are connected while broadcast and search remain separate evidence states that may be pending or unavailable.", es: "Las señales de canales propios están conectadas, mientras broadcast y búsqueda permanecen como estados de evidencia separados que pueden estar pendientes o no disponibles." },
     output: { en: "WHY attention moved", es: "POR QUÉ cambia la atención" }
   },
   {
@@ -283,7 +283,7 @@ export function LocalizedTechnicalCaseStudy() {
       <section className="caseStudySection technicalCampaign">
         <div className="caseStudySectionHead">
           <div className="eyebrow">SIGNAL → CAMPAIGN</div>
-          <h2>{es ? "Brighton prueba el recorrido completo sin fingir datos reales." : "Brighton proves the full path without pretending demo data is real."}</h2>
+          <h2>{es ? "Brighton ejercita el recorrido completo sin fingir datos reales." : "Brighton exercises the full path without pretending demo data is real."}</h2>
         </div>
         <div className="technicalCampaignFlow">
           <article><span>01</span><strong>{es ? "Señales" : "Signals"}</strong><p>{es ? "Opener, horario, atención y meteorología." : "Opener, kickoff, attention and weather."}</p></article>
@@ -313,7 +313,7 @@ export function LocalizedTechnicalCaseStudy() {
           <h2>{es ? "Separar valor disponible de valor desbloqueable." : "Separate available value from unlockable value."}</h2>
         </div>
         <div className="technicalBoundaryGrid">
-          <article className="available"><span>{es ? "DISPONIBLE AHORA" : "AVAILABLE NOW"}</span><ul><li>{es ? "Priorización territorial" : "Territory prioritisation"}</li><li>{es ? "Contexto de calendario y partido" : "Fixture and matchweek context"}</li><li>{es ? "Histórico y benchmark público" : "Public history and benchmark"}</li><li>{es ? "Audiencia, búsquedas y campañas" : "Audience, search and campaigns"}</li></ul></article>
+          <article className="available"><span>{es ? "DISPONIBLE AHORA" : "AVAILABLE NOW"}</span><ul><li>{es ? "Priorización territorial" : "Territory prioritisation"}</li><li>{es ? "Contexto de calendario y partido" : "Fixture and matchweek context"}</li><li>{es ? "Histórico de asistencia; benchmark actual solo cuando la fuente esté disponible" : "Attendance history; current benchmark only when its source is available"}</li><li>{es ? "Señales de audiencia y campañas; búsqueda solo cuando exista una captura válida" : "Audience signals and campaigns; search only when a valid capture exists"}</li></ul></article>
           <article><span>{es ? "REQUIERE ACCESO" : "REQUIRES ACCESS"}</span><ul><li>{es ? "Conversión a compra" : "Purchase conversion"}</li><li>{es ? "Scan y no-show" : "Scan and no-show"}</li><li>{es ? "Coste de adquisición real" : "Real acquisition cost"}</li><li>{es ? "Repetición por cohorte" : "Cohort repeat behaviour"}</li></ul></article>
         </div>
       </section>
