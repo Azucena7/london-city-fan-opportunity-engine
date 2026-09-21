@@ -243,3 +243,23 @@ test("visible product branding consistently uses Fan Opportunity Engine", () => 
   assert.match(technical, /London City Fan Opportunity Engine · Technical case study/);
   assert.doesNotMatch(nav, /FAN OPPORTUNITY LAB/);
 });
+
+
+test("Brighton live validation preserves future phases as waiting evidence", () => {
+  const validation = JSON.parse(read("data/live/decision-validation.json"));
+  const item = validation.cases.find((entry) => entry.id === "brighton-england-spain-2026-09");
+  assert.equal(item.liveValidation.state, "pre-match-active");
+  assert.deepEqual(item.liveValidation.phases.map((phase) => phase.state), ["complete","complete","active","waiting","waiting"]);
+  assert.ok(item.liveValidation.postMatchChecklist.some((entry) => entry.state === "requires-club-access"));
+  assert.match(item.liveValidation.principle.en, /Future phases stay waiting/);
+});
+
+test("Today Calendar and Measurement share the same Brighton live validation lifecycle", () => {
+  const today = read("src/components/LocalizedToday.tsx");
+  const calendar = read("src/components/LocalizedCalendarPage.tsx");
+  const measurement = read("src/components/MeasurementDashboard.tsx");
+  assert.match(today, /todayValidationRail/);
+  assert.match(calendar, /fixtureValidationLifecycle/);
+  assert.match(measurement, /BRIGHTON LIVE VALIDATION/);
+  assert.match(measurement, /postMatchChecklist/);
+});
