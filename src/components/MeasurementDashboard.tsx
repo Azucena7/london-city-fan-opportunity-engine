@@ -104,7 +104,7 @@ export function MeasurementDashboard({ data, validation }: { data: ExperimentMea
           <div className="decisionValidationHeadline">
             <div>
               <div className="eyebrow">{es ? "REALITY CHECK" : "REALITY CHECK"}</div>
-              <h3>{es ? "¿Apareció después en el mercado una oportunidad que el engine ya había identificado?" : "Did an opportunity surfaced by the engine later appear in market action?"}</h3>
+              <h3>{es ? "¿Apareció después en el mercado una oportunidad que el engine ya había identificado?" : "Did an opportunity the engine surfaced later appear in market action?"}</h3>
               <p>{validationCase.title[lang]}</p>
             </div>
             <div className="decisionValidationState">
