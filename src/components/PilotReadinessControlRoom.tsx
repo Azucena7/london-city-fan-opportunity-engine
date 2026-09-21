@@ -35,7 +35,7 @@ export function PilotReadinessControlRoom({ readiness, packs }: { readiness: Pil
   return (
     <section className="pilotControlRoom" id="pilot-readiness">
       <div className="partnerSectionHead readinessSectionHead">
-        <div><span>05</span><h2>Pilot Readiness Control Room</h2></div>
+        <div><span>07</span><h2>Pilot Readiness Control Room</h2></div>
         <p>{readiness.principle[lang]}</p>
       </div>
 
