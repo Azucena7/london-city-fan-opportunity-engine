@@ -59,3 +59,63 @@
 .measurementActions a { padding: 11px 13px; border: 1px solid var(--lcl-hyperturq); border-radius: 9px; color: var(--lcl-hyperturq); font-size: 9px; font-weight: 900; text-decoration: none; }
 @media (max-width: 980px) { .measurementHero, .measurementProvider { grid-template-columns: 1fr; } .measurementHeroMetric { max-width: 290px; } .measurementFlow > div:last-child { grid-template-columns: repeat(3, 1fr); } .measurementCohortGrid, .measurementEventGrid { grid-template-columns: 1fr; } }
 @media (max-width: 680px) { .measurementPage { padding: 0 16px 55px; } .measurementHero { margin: 34px 0 55px; } .measurementHero h1 { font-size: 41px; } .measurementRuntime, .measurementSectionHead, .measurementActions { align-items: flex-start; flex-direction: column; } .measurementSectionHead > p { text-align: left; } .measurementFlow > div:last-child, .measurementProviderGrid, .measurementRules { grid-template-columns: 1fr; } .measurementFlow article { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); } }
+
+
+/* PR #30 — measurement as an evidence decision control room */
+.measurementControlStrip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: -30px 0 70px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.measurementControlStrip article { padding: 19px; border-right: 1px solid var(--line); }
+.measurementControlStrip article:last-child { border-right: 0; }
+.measurementControlStrip span, .measurementControlStrip strong, .measurementControlStrip small { display: block; }
+.measurementControlStrip span { color: var(--muted); font-size: 8px; font-weight: 900; letter-spacing: .08em; }
+.measurementControlStrip strong { margin: 11px 0 5px; font-size: 28px; letter-spacing: -.03em; }
+.measurementControlStrip small { color: var(--muted); font-size: 9px; }
+.measurementControlStrip .ready strong { color: var(--lcl-hyperturq); }
+.measurementControlStrip .waiting strong { color: #ffb84d; font-size: 17px; text-transform: uppercase; }
+
+.measurementDecision {
+  margin: 18px 0 4px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.measurementDecision span, .measurementDecision b { display: block; }
+.measurementDecision span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; letter-spacing: .07em; }
+.measurementDecision b { margin-top: 5px; font-size: 11px; }
+
+.measurementTechnical {
+  margin: 72px 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255,255,255,.015);
+}
+.measurementTechnical > summary {
+  padding: 18px 22px;
+  color: var(--lcl-hyperturq);
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.measurementTechnical[open] > summary { border-bottom: 1px solid var(--line); }
+.measurementTechnical .measurementEvents,
+.measurementTechnical .measurementProvider { margin-left: 22px; margin-right: 22px; }
+
+@media (max-width: 900px) {
+  .measurementControlStrip { grid-template-columns: repeat(2, 1fr); }
+  .measurementControlStrip article:nth-child(2) { border-right: 0; }
+  .measurementControlStrip article:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 560px) {
+  .measurementControlStrip { grid-template-columns: 1fr; margin-top: -18px; }
+  .measurementControlStrip article,
+  .measurementControlStrip article:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .measurementControlStrip article:last-child { border-bottom: 0; }
+  .measurementTechnical .measurementEvents,
+  .measurementTechnical .measurementProvider { margin-left: 14px; margin-right: 14px; }
+}
