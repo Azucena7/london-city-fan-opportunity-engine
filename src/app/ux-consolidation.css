@@ -122,6 +122,9 @@
 .competitionReasons li { padding: 5px 7px; border-radius: 999px; background: rgba(255,255,255,.055); color: var(--muted); font-size: 9px; line-height: 1.2; }
 .eventLandscapeGrid a, .eventLandscapeSource { display: inline-block; margin-top: 14px; color: var(--lcl-hyperturq); font-size: 11px; font-weight: 900; text-decoration: none; }
 .eventLandscapeSources { display: flex; flex-wrap: wrap; gap: 16px; }
+.competitionWhitespace { display: flex; justify-content: space-between; gap: 18px; margin-top: 16px; padding: 16px 18px; border: 1px dashed rgba(50,230,212,.3); border-radius: 12px; background: rgba(50,230,212,.035); }
+.competitionWhitespace strong { color: var(--lcl-hyperturq); font-size: 12px; }
+.competitionWhitespace span { max-width: 560px; color: var(--muted); font-size: 11px; text-align: right; }
 .eventLandscapeEmpty { margin-top: 28px; padding: 20px; border: 1px dashed var(--line); border-radius: 14px; }
 .eventLandscapeEmpty p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
 .sourceHealthCenter { margin: 54px 0 76px; }

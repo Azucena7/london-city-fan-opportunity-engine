@@ -24,7 +24,7 @@ npm run build
 
 ## Daily data refresh
 
-GitHub Actions runs `npm run refresh:data` and `npm run refresh:public-signals` every day at 06:30 Europe/London. The first refreshes the official fixture calendar, results and matchday weather; the second uses the official YouTube Data and Ticketmaster Discovery APIs plus the official Barclays WSL fixture list, appends comparable public audience observations, and ranks relevant attention competition around each home match. This includes other sports and same-league matches in overlapping kickoff windows. Both preserve the last valid observation when a source is unavailable. See [`docs/DAILY_UPDATE_RUNBOOK.md`](docs/DAILY_UPDATE_RUNBOOK.md) for sources, scoring, secrets, cadence and post-match responsibilities.
+GitHub Actions runs `npm run refresh:data` and `npm run refresh:public-signals` every day at 06:30 Europe/London. The first refreshes the official fixture calendar, results and matchday weather; the second ranks a deliberately narrow set of attention competitors: simultaneous WSL, London men's football, England, nationally prominent men's fixtures and exceptional major sport. Routine culture and entertainment are excluded. Both preserve the last valid observation when a source is unavailable. See [`docs/DAILY_UPDATE_RUNBOOK.md`](docs/DAILY_UPDATE_RUNBOOK.md) for sources, scoring, secrets, cadence and post-match responsibilities.
 
 Public and editorial data live under `data/seed` and `data/live`. Internal ticketing, scans, CRM and retention data require an authorised connector. Never commit credentials; configure them as GitHub or Vercel secrets.
 

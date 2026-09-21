@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
+import { parseMensFootballFixtures, parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
 
 const AUDIENCE_PATH = new URL("../data/live/audience-reach.json", import.meta.url);
 const BENCHMARK_PATH = new URL("../data/live/wsl-attendance-benchmark.json", import.meta.url);
@@ -13,6 +13,15 @@ const YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/channels";
 const TICKETMASTER_API_URL = "https://app.ticketmaster.com/discovery/v2/events.json";
 const TICKETMASTER_SOURCE_URL = "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/";
 const WSL_FIXTURES_URL = "https://womensleagues.thefa.com/fixtures/";
+const MEN_FOOTBALL_FEEDS = [
+  { competition: "Premier League", feedUrl: "https://fixturedownload.com/feed/json/epl-2026", sourceUrl: "https://fixturedownload.com/view/json/epl-2026" },
+  { competition: "EFL Championship", feedUrl: "https://fixturedownload.com/feed/json/championship-2026", sourceUrl: "https://fixturedownload.com/view/json/championship-2026" },
+  { competition: "EFL League One", feedUrl: "https://fixturedownload.com/feed/json/efl-league-one-2026", sourceUrl: "https://fixturedownload.com/view/json/efl-league-one-2026" },
+  { competition: "UEFA Nations League", feedUrl: "https://fixturedownload.com/feed/json/nations-league-2026/england", sourceUrl: "https://fixturedownload.com/view/json/nations-league-2026/england" },
+  { competition: "UEFA Champions League", feedUrl: "https://fixturedownload.com/feed/json/champions-league-2026", sourceUrl: "https://fixturedownload.com/view/json/champions-league-2026" },
+  { competition: "UEFA Europa League", feedUrl: "https://fixturedownload.com/feed/json/europa-league-2026", sourceUrl: "https://fixturedownload.com/view/json/europa-league-2026" },
+  { competition: "UEFA Conference League", feedUrl: "https://fixturedownload.com/feed/json/conference-league-2026", sourceUrl: "https://fixturedownload.com/view/json/conference-league-2026" }
+];
 const WSL_ATTENDANCE_URL = "https://www.footballwebpages.co.uk/womens-super-league/attendances";
 const DRY_RUN = process.env.REFRESH_DRY_RUN === "1";
 
@@ -168,6 +177,18 @@ async function fetchTicketmasterEvents(apiKey, window) {
     }
   }
   return [...eventsById.values()].sort((a, b) => `${a.date}-${a.time ?? ""}`.localeCompare(`${b.date}-${b.time ?? ""}`));
+}
+
+async function fetchMensFootballFeedSets() {
+  const attempts = await Promise.allSettled(MEN_FOOTBALL_FEEDS.map(async (feed) => ({
+    competition: feed.competition,
+    sourceUrl: feed.sourceUrl,
+    matches: await fetchJson(feed.feedUrl, feed.competition)
+  })));
+  return {
+    feedSets: attempts.flatMap((attempt) => attempt.status === "fulfilled" ? [attempt.value] : []),
+    failures: attempts.flatMap((attempt, index) => attempt.status === "rejected" ? [`${MEN_FOOTBALL_FEEDS[index].competition}: ${attempt.reason}`] : [])
+  };
 }
 
 function updateSourceHealth(sourceHealth, attemptedAt, results) {
@@ -360,12 +381,15 @@ export async function refreshPublicSignals(now = new Date()) {
   const window = ticketmasterWindow(calendar, today);
   if (window) {
     try {
-      const [ticketmasterEvents, leagueHtml] = await Promise.all([
+      const [ticketmasterEvents, leagueHtml, footballFeeds] = await Promise.all([
         fetchTicketmasterEvents(process.env.TICKETMASTER_API_KEY, window),
-        fetchText(WSL_FIXTURES_URL, "Official WSL fixtures")
+        fetchText(WSL_FIXTURES_URL, "Official WSL fixtures"),
+        fetchMensFootballFeedSets()
       ]);
       const leagueFixtures = parseOfficialLeagueFixtures(leagueHtml, window.fixtures);
-      const events = rankEventCompetition([...ticketmasterEvents, ...leagueFixtures], window.fixtures);
+      const mensFootballFixtures = parseMensFootballFixtures(footballFeeds.feedSets, window.fixtures);
+      const candidates = [...ticketmasterEvents, ...leagueFixtures, ...mensFootballFixtures];
+      const events = rankEventCompetition(candidates, window.fixtures);
       nextEventLandscape = {
         ...eventLandscape,
         checkedAt: attemptedAt,
@@ -373,20 +397,25 @@ export async function refreshPublicSignals(now = new Date()) {
         window: { startDate: window.startDate, endDate: window.endDate, city: "London" },
         sources: [
           { name: "Ticketmaster Discovery API", url: TICKETMASTER_SOURCE_URL },
-          { name: "WSL Football fixtures", url: WSL_FIXTURES_URL }
+          { name: "WSL Football fixtures", url: WSL_FIXTURES_URL },
+          { name: "Men's football structured feeds", url: "https://fixturedownload.com/" }
         ],
-        rawEventCount: ticketmasterEvents.length + leagueFixtures.length,
-        excludedEventCount: ticketmasterEvents.length + leagueFixtures.length - events.length,
+        rawEventCount: candidates.length,
+        excludedEventCount: candidates.length - events.length,
         events,
-        refresh: { lastAttemptAt: attemptedAt, lastSuccessfulAt: attemptedAt, message: null }
+        refresh: {
+          lastAttemptAt: attemptedAt,
+          lastSuccessfulAt: attemptedAt,
+          message: footballFeeds.failures.length ? `Partial men's football feeds: ${footballFeeds.failures.join("; ")}` : null
+        }
       };
       sources.push({ id: "ticketmaster-events", label: "London event landscape", state: "measured", confidence: "high", checkedAt: attemptedAt, sourceUrl: TICKETMASTER_SOURCE_URL });
       healthResults["ticketmaster-events"] = {
         ok: true,
         secret: "TICKETMASTER_API_KEY",
         note: {
-          en: `${events.length} relevant events remain after scoring ${ticketmasterEvents.length + leagueFixtures.length} public listings, including simultaneous Barclays WSL fixtures.`,
-          es: `${events.length} eventos relevantes permanecen tras puntuar ${ticketmasterEvents.length + leagueFixtures.length} citas públicas, incluidos partidos simultáneos de Barclays WSL.`
+          en: `${events.length} strategically relevant sports events remain from ${candidates.length} candidates; routine culture and entertainment are excluded.`,
+          es: `${events.length} citas deportivas estratégicamente relevantes permanecen de ${candidates.length} candidatas; se excluyen cultura y entretenimiento rutinarios.`
         }
       };
     } catch (error) {

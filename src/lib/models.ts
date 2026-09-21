@@ -85,7 +85,7 @@ export type EventLandscapeData = {
     competition?: string;
     url: string;
     fixtureIds: string[];
-    kind?: "public-event" | "same-league-fixture";
+    kind?: "public-event" | "same-league-fixture" | "england-men-fixture" | "london-premier-league-fixture" | "london-europe-fixture" | "london-efl-fixture" | "national-marquee-fixture";
     sourceName?: string;
     sourceUrl?: string;
     latitude?: number | null;
