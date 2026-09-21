@@ -189,3 +189,17 @@ test("global evidence claims stay consistent with current source availability", 
   assert.match(executive, /Decision reliability/);
   assert.match(executive, /Review confidence/);
 });
+
+
+test("social sharing tells the current decision-validation story", () => {
+  const layout = read("src/app/layout.tsx");
+  const card = read("src/app/linkedin-card/route.tsx");
+  const og = read("src/app/opengraph-image.tsx");
+  assert.match(layout, /London City Fan Opportunity Engine/);
+  assert.match(layout, /From signals to decisions to observed outcomes/);
+  assert.match(card, /Then reality/);
+  assert.match(card, /DECISION VALIDATION · BRIGHTON/);
+  assert.match(card, /CAUSATION CLAIMED/);
+  assert.match(og, /REALITY CHECK · BRIGHTON/);
+  assert.doesNotMatch(card, /A LIVING FAN INTELLIGENCE TOOL/);
+});
