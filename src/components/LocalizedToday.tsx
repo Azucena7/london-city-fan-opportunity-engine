@@ -5,7 +5,7 @@ import { NavTabs } from "./NavTabs";
 import { useLanguage } from "./LanguageProvider";
 import { ExecutiveOverview } from "./ExecutiveOverview";
 import type { CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
-import type { ExperimentMeasurementData, PilotReadinessData, SearchDemandData } from "@/lib/models";
+import type { DecisionValidationData, ExperimentMeasurementData, PilotReadinessData, SearchDemandData } from "@/lib/models";
 import type { SourceHealthData } from "@/lib/sourceHealth";
 
 type CurrentState = {
@@ -71,6 +71,7 @@ export function LocalizedToday({
   readiness,
   search,
   measurement,
+  validation,
   sources
 }: {
   fixture: Fixture;
@@ -81,6 +82,7 @@ export function LocalizedToday({
   readiness: PilotReadinessData;
   search: SearchDemandData;
   measurement: ExperimentMeasurementData;
+  validation: DecisionValidationData;
   sources: SourceHealthData;
 }) {
   const { lang } = useLanguage();
@@ -101,6 +103,9 @@ export function LocalizedToday({
   const visibleActions = fixtureActions.slice(0, 3);
   const laterActions = fixtureActions.slice(3);
   const refreshDate = current.updated_at.slice(0, 10);
+  const realityCheck = validation.cases.find((item) => item.fixtureId === currentFixtureId);
+  const alignedDimensions = realityCheck?.dimensions.filter((item) => item.state === "aligned").length ?? 0;
+  const partialDimensions = realityCheck?.dimensions.filter((item) => item.state === "partial").length ?? 0;
   const scoreFactors = [
     { label: es ? "Territorio" : "Territory", value: fixture.territoryOpportunity, weight: 35 },
     { label: es ? "Calendario" : "Calendar", value: fixture.calendarWhitespace, weight: 25 },
@@ -163,6 +168,35 @@ export function LocalizedToday({
           <span>{es ? "Antes del próximo partido en casa" : "Before the next home fixture"}</span>
           <strong>{es ? "Siguiente partido del equipo:" : "Team's next match:"} {nextMatch.homeAway === "home" ? "London City v" : `${nextMatch.opponent} v`} {nextMatch.homeAway === "home" ? nextMatch.opponent : "London City"}</strong>
           <span>{formatDate(nextMatch.date, locale)} · {nextMatch.kickoff} · {nextMatch.venue}</span>
+        </section>
+      ) : null}
+
+      {realityCheck ? (
+        <section className="todayRealityCheck" aria-labelledby="today-reality-title">
+          <div className="todayRealityIntro">
+            <div className="eyebrow">{es ? "REALITY CHECK" : "REALITY CHECK"}</div>
+            <h2 id="today-reality-title">{es ? "Una hipótesis del engine ya tiene una acción pública comparable." : "An engine hypothesis now has a comparable public club action."}</h2>
+            <p>{es ? "Esto mide relevancia de la hipótesis, no influencia sobre el club." : "This tests the relevance of the hypothesis—not influence on the club."}</p>
+          </div>
+
+          <div className="todayRealityFlow">
+            <article>
+              <span>{es ? "15 SEP · HIPÓTESIS" : "15 SEP · HYPOTHESIS"}</span>
+              <strong>{realityCheck.hypothesis[lang]}</strong>
+            </article>
+            <b aria-hidden="true">→</b>
+            <article className="observed">
+              <span>{es ? "18 SEP · OBSERVADO" : "18 SEP · OBSERVED"}</span>
+              <strong>{realityCheck.observedAction[lang]}</strong>
+            </article>
+          </div>
+
+          <div className="todayRealityStatus">
+            <div><strong>{alignedDimensions}</strong><span>{es ? "alineadas" : "aligned"}</span></div>
+            <div><strong>{partialDimensions}</strong><span>{es ? "parcial" : "partial"}</span></div>
+            <div><strong>0</strong><span>{es ? "causalidad afirmada" : "causation claimed"}</span></div>
+            <Link href="/measurement#decision-validation-title">{es ? "Abrir validación completa →" : "Open full validation →"}</Link>
+          </div>
         </section>
       ) : null}
 

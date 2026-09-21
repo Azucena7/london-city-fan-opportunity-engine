@@ -217,3 +217,16 @@ test("Brighton club activation intelligence includes the observed England v Spai
   assert.match(alignment.observed.en, /publicly announced/);
   assert.match(alignment.observed.en, /not yet verified/);
 });
+
+
+test("Today surfaces a compact engine-versus-reality check for the current fixture", () => {
+  const page = read("src/app/today/page.tsx");
+  const today = read("src/components/LocalizedToday.tsx");
+  assert.match(page, /decisionValidation/);
+  assert.match(today, /REALITY CHECK/);
+  assert.match(today, /comparable public club action/);
+  assert.match(today, /not influence on the club/);
+  assert.match(today, /causation claimed/);
+  assert.match(today, /\/measurement#decision-validation-title/);
+  assert.ok(today.indexOf("REALITY CHECK") < today.indexOf("Three actions before the next home fixture"));
+});
