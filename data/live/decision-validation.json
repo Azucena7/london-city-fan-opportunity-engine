@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "checkedAt": "2026-09-21T18:00:00Z",
+  "principle": {
+    "en": "Compare a time-stamped engine hypothesis with later observable market action. Alignment is evidence of relevance, not evidence that a club saw, used or was influenced by the engine.",
+    "es": "Comparar una hipótesis del engine con sello temporal con una acción de mercado observable posterior. La alineación es evidencia de relevancia, no de que un club viera, utilizara o estuviera influido por el engine."
+  },
+  "cases": [
+    {
+      "id": "brighton-england-spain-2026-09",
+      "fixtureId": "2026-09-26-bha-h",
+      "title": {
+        "en": "Brighton + England v Spain",
+        "es": "Brighton + Inglaterra–España"
+      },
+      "hypothesisGeneratedAt": "2026-09-15T22:00:00Z",
+      "hypothesis": {
+        "en": "Turn the Brighton home fixture into a longer football experience: London City at 17:00, then keep the football day going with England v Spain from 19:45, supported by a viewing extension.",
+        "es": "Convertir el partido en casa ante Brighton en una experiencia futbolística más larga: London City a las 17:00 y continuar la jornada con Inglaterra–España desde las 19:45, apoyado por una extensión para ver el segundo partido."
+      },
+      "hypothesisSource": {
+        "name": "Campaign plan · brighton-home-2026-09-26",
+        "ref": "data/live/campaign-plans.json"
+      },
+      "observedAt": "2026-09-18",
+      "observedAction": {
+        "en": "London City announced an England v Spain post-match watchalong after the Brighton fixture, with discounted drinks and an invitation to keep the evening going.",
+        "es": "London City anunció un watchalong de Inglaterra–España después del partido ante Brighton, con bebidas rebajadas y una invitación a continuar la tarde-noche."
+      },
+      "observedSource": {
+        "name": "London City Lionesses · LDN CITY: ENGLAND V SPAIN WATCHALONG",
+        "url": "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong"
+      },
+      "alignment": "aligned",
+      "dimensions": [
+        {
+          "id": "fixture",
+          "label": {
+            "en": "Brighton fixture context",
+            "es": "Contexto del partido ante Brighton"
+          },
+          "state": "aligned",
+          "note": {
+            "en": "Same home fixture.",
+            "es": "Mismo partido en casa."
+          }
+        },
+        {
+          "id": "signal",
+          "label": {
+            "en": "England v Spain signal",
+            "es": "Señal Inglaterra–España"
+          },
+          "state": "aligned",
+          "note": {
+            "en": "Same same-day football event.",
+            "es": "Mismo evento futbolístico del mismo día."
+          }
+        },
+        {
+          "id": "day-extension",
+          "label": {
+            "en": "Extended matchday",
+            "es": "Matchday extendido"
+          },
+          "state": "aligned",
+          "note": {
+            "en": "Both extend engagement beyond the final whistle.",
+            "es": "Ambos extienden el engagement más allá del pitido final."
+          }
+        },
+        {
+          "id": "watchalong",
+          "label": {
+            "en": "Viewing extension",
+            "es": "Extensión de visionado"
+          },
+          "state": "aligned",
+          "note": {
+            "en": "Both use England v Spain as the continuation of the day.",
+            "es": "Ambos usan Inglaterra–España como continuación de la jornada."
+          }
+        },
+        {
+          "id": "execution",
+          "label": {
+            "en": "Execution model",
+            "es": "Modelo de ejecución"
+          },
+          "state": "partial",
+          "note": {
+            "en": "The engine contemplated a local viewing-partner extension; the club announced an on-site watchalong.",
+            "es": "El engine contemplaba una extensión con un partner local; el club anunció un watchalong en el propio recinto."
+          }
+        }
+      ],
+      "caveat": {
+        "en": "Alignment does not imply causation. There is no evidence that London City saw or used this prototype before announcing its activation.",
+        "es": "La alineación no implica causalidad. No hay evidencia de que London City viera o utilizara este prototipo antes de anunciar su activación."
+      },
+      "learning": {
+        "en": "Track whether the engine repeatedly surfaces relevant opportunities before comparable club actions become public, and record divergence as carefully as alignment.",
+        "es": "Medir si el engine detecta repetidamente oportunidades relevantes antes de que acciones comparables de clubes se hagan públicas, registrando las divergencias con el mismo rigor que las coincidencias."
+      }
+    }
+  ]
+}
