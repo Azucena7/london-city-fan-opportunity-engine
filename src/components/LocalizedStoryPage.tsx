@@ -274,7 +274,7 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
       </section>
 
       <footer className="caseStudyFooter">
-        <div>London City Fan Opportunity Lab</div>
+        <div>London City Fan Opportunity Engine</div>
         <div className="muted">{es ? "Prototipo independiente · No afiliado a London City Lionesses." : "Independent prototype · Not affiliated with London City Lionesses."}</div>
       </footer>
     </main>
