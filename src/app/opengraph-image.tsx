@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "London City Fan Opportunity Lab — live audience intelligence";
+export const alt = "London City Fan Opportunity Engine — from signals to decisions to observed outcomes";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -58,28 +58,28 @@ export default function Image() {
           <div style={{ display: "flex", alignItems: "center", marginBottom: "66px" }}>
             <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#c9ff57", marginRight: "12px" }} />
             <div style={{ fontSize: "17px", fontWeight: 800, letterSpacing: "0.11em" }}>
-              LCL / FAN OPPORTUNITY LAB
+              LCL / FAN OPPORTUNITY ENGINE
             </div>
           </div>
 
           <div style={{ color: "#8ce3d3", fontSize: "16px", fontWeight: 800, letterSpacing: "0.13em", marginBottom: "18px" }}>
-            A LIVING FAN INTELLIGENCE TOOL
+            INDEPENDENT PROTOTYPE
           </div>
           <div style={{ fontSize: "59px", lineHeight: 0.98, fontWeight: 800, letterSpacing: "-0.045em", maxWidth: "500px" }}>
-            From signals to decisions.
+            From signals to decisions. Then reality.
           </div>
           <div style={{ fontSize: "21px", lineHeight: 1.38, color: "#c5d8d5", marginTop: "24px", maxWidth: "475px" }}>
-            Turning fixtures, attendance and market context into clear marketing action.
+            A decision system for sustainable fan growth.
           </div>
 
           <div style={{ display: "flex", gap: "10px", marginTop: "34px" }}>
-            <div style={pill}>ATTENDANCE</div>
-            <div style={pill}>CRM</div>
-            <div style={pill}>FIXTURES</div>
+            <div style={pill}>HYPOTHESIS</div>
+            <div style={pill}>REALITY</div>
+            <div style={pill}>LEARNING</div>
           </div>
 
           <div style={{ display: "flex", marginTop: "auto", color: "#91aaa6", fontSize: "15px" }}>
-            london-city-fan-opportunity-engine.vercel.app/today
+            london-city-fan-opportunity-engine.vercel.app
           </div>
         </div>
 
@@ -110,47 +110,47 @@ export default function Image() {
           <div style={{ display: "flex", flexDirection: "column", padding: "20px", color: "#102321" }}>
             <div style={{ display: "flex", alignItems: "center", padding: "10px 13px", borderRadius: "9px", background: "#e4f1ed", color: "#35625a", fontSize: "12px", fontWeight: 700 }}>
               <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#24a886", marginRight: "8px" }} />
-              UPDATED · 4 MATERIAL CHANGES · SOURCED SIGNALS
+              DECISION VALIDATION · BRIGHTON
             </div>
 
             <div style={{ display: "flex", gap: "13px", marginTop: "14px" }}>
               <div style={{ width: "56%", minHeight: "178px", display: "flex", flexDirection: "column", padding: "18px", borderRadius: "13px", background: "#0d302f", color: "#f6fbfa" }}>
-                <div style={{ fontSize: "11px", letterSpacing: "0.12em", color: "#90d8ca", fontWeight: 800 }}>CURRENT DECISION</div>
-                <div style={{ fontSize: "27px", lineHeight: 1.05, fontWeight: 800, marginTop: "13px" }}>Grow acquisition with a repeat-visit focus</div>
+                <div style={{ fontSize: "11px", letterSpacing: "0.12em", color: "#90d8ca", fontWeight: 800 }}>15 SEP · ENGINE HYPOTHESIS</div>
+                <div style={{ fontSize: "27px", lineHeight: 1.05, fontWeight: 800, marginTop: "13px" }}>Extend Brighton around England v Spain</div>
                 <div style={{ display: "flex", alignItems: "flex-end", marginTop: "auto" }}>
-                  <span style={{ fontSize: "43px", fontWeight: 800, color: "#c9ff57", lineHeight: 1 }}>90</span>
-                  <span style={{ fontSize: "11px", color: "#afc9c5", marginLeft: "9px", marginBottom: "5px" }}>ACQUISITION PRIORITY</span>
+                  <span style={{ fontSize: "43px", fontWeight: 800, color: "#c9ff57", lineHeight: 1 }}>4</span>
+                  <span style={{ fontSize: "11px", color: "#afc9c5", marginLeft: "9px", marginBottom: "5px" }}>ALIGNED DIMENSIONS</span>
                 </div>
               </div>
 
               <div style={{ width: "44%", minHeight: "178px", display: "flex", flexDirection: "column", padding: "18px", borderRadius: "13px", border: "1px solid #cadbd6", background: "#ffffff" }}>
-                <div style={{ fontSize: "11px", letterSpacing: "0.12em", color: "#548178", fontWeight: 800 }}>NEXT HOME FIXTURE</div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", fontSize: "23px", lineHeight: 1.05, fontWeight: 800, marginTop: "14px" }}>London City <span style={{ color: "#73918b" }}>v</span> Brighton</div>
-                <div style={{ fontSize: "13px", color: "#54706b", marginTop: "13px" }}>26 SEP · COPPERJAX</div>
+                <div style={{ fontSize: "11px", letterSpacing: "0.12em", color: "#548178", fontWeight: 800 }}>18 SEP · OBSERVED ACTION</div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", fontSize: "23px", lineHeight: 1.05, fontWeight: 800, marginTop: "14px" }}>England v Spain watchalong</div>
+                <div style={{ fontSize: "13px", color: "#54706b", marginTop: "13px" }}>POST-MATCH · BRIGHTON</div>
                 <div style={{ display: "flex", marginTop: "auto", padding: "8px 10px", borderRadius: "7px", background: "#edf5f2", color: "#24594f", fontSize: "11px", fontWeight: 700 }}>
-                  TEST REPEAT DEMAND
+                  PUBLIC CLUB ACTION
                 </div>
               </div>
             </div>
 
             <div style={{ display: "flex", gap: "13px", marginTop: "14px" }}>
               <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "15px", borderRadius: "12px", background: "#ffffff", border: "1px solid #cadbd6" }}>
-                <div style={{ color: "#58756f", fontSize: "10px", fontWeight: 800, letterSpacing: "0.11em" }}>MEASURED ATTENDANCE</div>
+                <div style={{ color: "#58756f", fontSize: "10px", fontWeight: 800, letterSpacing: "0.11em" }}>ALIGNMENT CHECK</div>
                 <div style={{ display: "flex", alignItems: "baseline", marginTop: "7px" }}>
-                  <span style={{ fontSize: "30px", fontWeight: 800 }}>5,402</span>
-                  <span style={{ marginLeft: "9px", color: "#16866d", fontSize: "11px", fontWeight: 800 }}>SELL-OUT</span>
+                  <span style={{ fontSize: "30px", fontWeight: 800 }}>1</span>
+                  <span style={{ marginLeft: "9px", color: "#16866d", fontSize: "11px", fontWeight: 800 }}>PARTIAL</span>
                 </div>
               </div>
               <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "15px", borderRadius: "12px", background: "#ffffff", border: "1px solid #cadbd6" }}>
-                <div style={{ color: "#58756f", fontSize: "10px", fontWeight: 800, letterSpacing: "0.11em" }}>NEXT QUESTION</div>
-                <div style={{ fontSize: "15px", lineHeight: 1.2, fontWeight: 800, marginTop: "9px" }}>How much opener demand returns?</div>
+                <div style={{ color: "#58756f", fontSize: "10px", fontWeight: 800, letterSpacing: "0.11em" }}>INTERPRETATION</div>
+                <div style={{ fontSize: "15px", lineHeight: 1.2, fontWeight: 800, marginTop: "9px" }}>0 CAUSATION CLAIMED</div>
               </div>
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", marginTop: "14px", padding: "14px 16px", borderRadius: "12px", background: "#dff5ee", borderLeft: "5px solid #25a889" }}>
-              <div style={{ color: "#297062", fontSize: "10px", fontWeight: 800, letterSpacing: "0.11em" }}>MARKETING ACTION</div>
+              <div style={{ color: "#297062", fontSize: "10px", fontWeight: 800, letterSpacing: "0.11em" }}>LEARNING</div>
               <div style={{ color: "#123c35", fontSize: "14px", lineHeight: 1.25, fontWeight: 700, marginTop: "6px" }}>
-                Build the opener-to-Brighton repeat cohort and measure conversion by territory.
+                Signals → decisions → observed outcomes
               </div>
             </div>
           </div>

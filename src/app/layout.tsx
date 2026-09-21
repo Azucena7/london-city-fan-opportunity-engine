@@ -32,28 +32,28 @@ import { cookies } from "next/headers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://london-city-fan-opportunity-engine.vercel.app"),
   title: {
-    default: "London City Fan Opportunity Lab",
-    template: "%s | London City Fan Opportunity Lab"
+    default: "London City Fan Opportunity Engine",
+    template: "%s | London City Fan Opportunity Engine"
   },
   description:
-    "A practical audience-growth and matchday decision engine for London City Lionesses.",
+    "An independent prototype exploring how football clubs can turn fragmented fan, fixture, territory and market signals into decisions—and compare hypotheses with observed outcomes.",
   openGraph: {
-    title: "London City Fan Opportunity Lab",
-    description: "Turning fixtures, attendance and market context into clear marketing action.",
+    title: "London City Fan Opportunity Engine",
+    description: "From signals to decisions to observed outcomes.",
     url: "/today",
-    siteName: "London City Fan Opportunity Lab",
+    siteName: "London City Fan Opportunity Engine",
     type: "website",
     images: [{
       url: "/linkedin-card",
       width: 1200,
       height: 630,
-      alt: "London City Fan Opportunity Lab — from signals to decisions"
+      alt: "London City Fan Opportunity Engine — from signals to decisions to observed outcomes"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "London City Fan Opportunity Lab",
-    description: "Turning fixtures, attendance and market context into clear marketing action.",
+    title: "London City Fan Opportunity Engine",
+    description: "From signals to decisions to observed outcomes.",
     images: ["/linkedin-card"]
   }
 };
