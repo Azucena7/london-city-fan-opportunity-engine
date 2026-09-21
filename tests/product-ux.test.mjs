@@ -43,3 +43,14 @@ test("document language and keyboard bypass are part of the root shell", () => {
   assert.match(layout, /className="skipLink"/);
   assert.match(layout, /href="#main-content"/);
 });
+
+test("Today is a progressive executive cockpit", () => {
+  const today = read("src/components/LocalizedToday.tsx");
+  assert.match(today, /Three actions before the next home fixture/);
+  assert.match(today, /Three signals that change the action/);
+  assert.match(today, /Why \$\{fixture\.planningScore\}/);
+  assert.match(today, /timeZoneName: "short"/);
+  assert.doesNotMatch(today, /<CampaignPlan/);
+  assert.doesNotMatch(today, /<SourceHealthCenter/);
+  assert.doesNotMatch(today, /<PostMatchScorecard/);
+});
