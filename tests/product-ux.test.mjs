@@ -65,3 +65,14 @@ test("Calendar leads with fixture decisions and defers supporting evidence", () 
   assert.match(calendar, /scope === "results"/);
   assert.ok(calendar.indexOf("seasonTimeline") < calendar.indexOf("<DemandHistory"));
 });
+
+test("Territories flow into aggregated access before the fan preview", () => {
+  const territories = read("src/components/LocalizedTerritoriesPage.tsx");
+  const access = read("src/components/LocalizedAccessPage.tsx");
+  assert.match(territories, /\/access\?territory=/);
+  assert.match(territories, /Validate & acquire/);
+  assert.match(access, /useState<View>\("territory"\)/);
+  assert.match(access, /INTERNAL DECISION/);
+  assert.match(access, /FAN PREVIEW/);
+  assert.match(access, /initialTerritoryId=/);
+});

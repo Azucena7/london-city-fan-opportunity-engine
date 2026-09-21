@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { accessScore } from "@/lib/access";
 import { territoryAction, TerritoryTravelSeed } from "@/lib/territoryTravel";
 import { travelDelta } from "@/lib/travelDelta";
@@ -50,11 +50,13 @@ function median(values: number[]) {
 export function TerritoryTravelIntelligence({
   territories,
   matchDate,
-  targetArrival
+  targetArrival,
+  initialTerritoryId
 }: {
   territories: TerritoryTravelSeed[];
   matchDate?: string;
   targetArrival?: string;
+  initialTerritoryId?: string;
 }) {
   const { lang } = useLanguage();
   const es = lang === "es";
@@ -62,6 +64,13 @@ export function TerritoryTravelIntelligence({
   const [selected, setSelected] = useState(territories[0]?.territory_id ?? "");
   const [data, setData] = useState<Payload | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (initialTerritoryId && territories.some((territory) => territory.territory_id === initialTerritoryId)) {
+      setSelected(initialTerritoryId);
+      setData(null);
+    }
+  }, [initialTerritoryId, territories]);
 
   async function run() {
     if (!selected) return;

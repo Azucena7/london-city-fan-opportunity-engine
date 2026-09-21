@@ -16,6 +16,9 @@ export default function AccessPage() {
     matchDate={isoDateForWeather(fixture)}
     matchKickoff={fixture?.kickoff}
     targetArrival={matchdayArrivalTime(fixture, 45)}
+    fixtureOpponent={fixture?.opponent}
+    fixtureScore={fixture?.planningScore}
+    fixtureDecision={fixture?.decision}
     mobility={mobilityPartnership}
     measurement={experimentMeasurement}
   />;
