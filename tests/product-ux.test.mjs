@@ -97,3 +97,16 @@ test("Measurement is a decision control room before it is a technical dashboard"
   assert.match(measurement, /Instrument before deciding/);
   assert.match(measurement, /View technical instrumentation detail/);
 });
+
+
+test("Measurement compares prior engine hypotheses with observable club action without claiming causation", () => {
+  const measurement = read("src/components/MeasurementDashboard.tsx");
+  const validation = JSON.parse(read("data/live/decision-validation.json"));
+  assert.match(measurement, /Engine hypothesis vs observable reality/);
+  assert.match(measurement, /INTERPRETATION LIMIT/);
+  assert.equal(validation.cases[0].hypothesisGeneratedAt.slice(0, 10), "2026-09-15");
+  assert.equal(validation.cases[0].observedAt, "2026-09-18");
+  assert.equal(validation.cases[0].observedSource.url, "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong");
+  assert.match(validation.cases[0].caveat.en, /does not imply causation/i);
+  assert.ok(validation.cases[0].dimensions.some((item) => item.state === "partial"));
+});
