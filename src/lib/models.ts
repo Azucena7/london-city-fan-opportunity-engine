@@ -447,6 +447,32 @@ export type ExperimentMeasurementData = {
   guardrails: Array<{ id: string; text: LocalizedText }>;
 };
 
+export type DecisionValidationData = {
+  version: "1.0";
+  checkedAt: string;
+  principle: LocalizedText;
+  cases: Array<{
+    id: string;
+    fixtureId: string;
+    title: LocalizedText;
+    hypothesisGeneratedAt: string;
+    hypothesis: LocalizedText;
+    hypothesisSource: { name: string; ref: string };
+    observedAt: string;
+    observedAction: LocalizedText;
+    observedSource: { name: string; url: string };
+    alignment: "aligned" | "partial" | "divergent" | "not-observable";
+    dimensions: Array<{
+      id: string;
+      label: LocalizedText;
+      state: "aligned" | "partial" | "divergent" | "not-observable";
+      note: LocalizedText;
+    }>;
+    caveat: LocalizedText;
+    learning: LocalizedText;
+  }>;
+};
+
 export type PartnerEvidenceState = "public-verified" | "modelled-scenario" | "requires-measurement" | "requires-partner";
 
 export type PartnerCommercialPackData = {
