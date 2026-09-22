@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-21T05:44:02.456Z",
+  "checkedAt": "2026-09-22T05:43:29.546Z",
   "state": "operational",
   "source": {
     "name": "Ticketmaster Discovery API",
@@ -169,16 +169,16 @@
       ]
     },
     {
-      "id": "wsl-4177f701a617479e97d04c2bbc91a5e0",
-      "name": "Chelsea v Everton",
+      "id": "wsl-f7898a23d79643e7817c9a58090c215f",
+      "name": "Manchester City v West Ham United",
       "date": "2026-11-07",
       "time": "12:30:00",
-      "venue": "Stamford Bridge",
-      "city": "London",
+      "venue": "Joie Stadium",
+      "city": "Manchester",
       "category": "Sports",
       "genre": "Football",
       "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/4177f701a617479e97d04c2bbc91a5e0/chelsea-vs-everton/",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/f7898a23d79643e7817c9a58090c215f/man-city-vs-west-ham/",
       "fixtureIds": [
         "2026-11-07-bir-h"
       ],
@@ -221,16 +221,16 @@
       ]
     },
     {
-      "id": "wsl-f7898a23d79643e7817c9a58090c215f",
-      "name": "Manchester City v West Ham United",
+      "id": "wsl-4177f701a617479e97d04c2bbc91a5e0",
+      "name": "Chelsea v Everton",
       "date": "2026-11-07",
       "time": "12:30:00",
-      "venue": "Joie Stadium",
-      "city": "Manchester",
+      "venue": "Stamford Bridge",
+      "city": "London",
       "category": "Sports",
       "genre": "Football",
       "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/f7898a23d79643e7817c9a58090c215f/man-city-vs-west-ham/",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/4177f701a617479e97d04c2bbc91a5e0/chelsea-vs-everton/",
       "fixtureIds": [
         "2026-11-07-bir-h"
       ],
@@ -749,6 +749,58 @@
       ]
     },
     {
+      "id": "wsl-909ff58064b0437b959c489a55d0b936",
+      "name": "Crystal Palace v West Ham United",
+      "date": "2026-10-18",
+      "time": "12:00:00",
+      "venue": "Borough Sports Ground",
+      "city": "Sutton, Surrey",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/909ff58064b0437b959c489a55d0b936/crystal-palace-vs-west-ham/",
+      "fixtureIds": [
+        "2026-10-18-eve-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 69,
+      "level": "medium",
+      "reasons": [
+        {
+          "en": "Adjacent matchday window",
+          "es": "Franja próxima en el mismo día"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-10-18-eve-h",
+          "score": 69,
+          "level": "medium",
+          "timeGapMinutes": 180,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Adjacent matchday window",
+              "es": "Franja próxima en el mismo día"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "wsl-9cebd47ddf2b44ad98ba5b078ed9ef88",
       "name": "Chelsea v Tottenham Hotspur",
       "date": "2026-10-18",
@@ -801,115 +853,11 @@
       ]
     },
     {
-      "id": "wsl-909ff58064b0437b959c489a55d0b936",
-      "name": "Crystal Palace v West Ham United",
-      "date": "2026-10-18",
-      "time": "12:00:00",
-      "venue": "VBS Community Stadium",
-      "city": "Sutton, Surrey",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/909ff58064b0437b959c489a55d0b936/crystal-palace-vs-west-ham/",
-      "fixtureIds": [
-        "2026-10-18-eve-h"
-      ],
-      "kind": "same-league-fixture",
-      "sourceName": "WSL Football",
-      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 69,
-      "level": "medium",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "Direct Barclays WSL attention competition",
-          "es": "Competencia directa de atención en Barclays WSL"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-10-18-eve-h",
-          "score": 69,
-          "level": "medium",
-          "timeGapMinutes": 180,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "Direct Barclays WSL attention competition",
-              "es": "Competencia directa de atención en Barclays WSL"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "wsl-bf724ef604af47b59e50749419cc7c9c",
-      "name": "Birmingham City v Tottenham Hotspur",
-      "date": "2026-11-01",
-      "time": "14:00:00",
-      "venue": "St. Andrew's @ Knighthead Park",
-      "city": "Birmingham",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/bf724ef604af47b59e50749419cc7c9c/birmingham-vs-spurs/",
-      "fixtureIds": [
-        "2026-11-01-mci-h"
-      ],
-      "kind": "same-league-fixture",
-      "sourceName": "WSL Football",
-      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 69,
-      "level": "medium",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "Direct Barclays WSL attention competition",
-          "es": "Competencia directa de atención en Barclays WSL"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-11-01-mci-h",
-          "score": 69,
-          "level": "medium",
-          "timeGapMinutes": 120,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "Direct Barclays WSL attention competition",
-              "es": "Competencia directa de atención en Barclays WSL"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "wsl-2460c2f26a8f4426adb7b80afa548ed5",
       "name": "West Ham United v Liverpool",
       "date": "2026-11-01",
       "time": "14:00:00",
-      "venue": "Chigwell Construction Stadium",
+      "venue": "Victoria Road Stadium",
       "city": "Dagenham, Essex",
       "category": "Sports",
       "genre": "Football",
@@ -967,6 +915,58 @@
       "genre": "Football",
       "competition": "Barclays WSL",
       "url": "https://www.wslfootball.com/match/barclays-wsl/8bc32672e79d41f9b44e22202c3bbe9f/brighton-vs-crystal-palace/",
+      "fixtureIds": [
+        "2026-11-01-mci-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 69,
+      "level": "medium",
+      "reasons": [
+        {
+          "en": "Adjacent matchday window",
+          "es": "Franja próxima en el mismo día"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-01-mci-h",
+          "score": 69,
+          "level": "medium",
+          "timeGapMinutes": 120,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Adjacent matchday window",
+              "es": "Franja próxima en el mismo día"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wsl-bf724ef604af47b59e50749419cc7c9c",
+      "name": "Birmingham City v Tottenham Hotspur",
+      "date": "2026-11-01",
+      "time": "14:00:00",
+      "venue": "St. Andrew's @ Knighthead Park",
+      "city": "Birmingham",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/bf724ef604af47b59e50749419cc7c9c/birmingham-vs-spurs/",
       "fixtureIds": [
         "2026-11-01-mci-h"
       ],
@@ -1694,8 +1694,8 @@
     }
   ],
   "refresh": {
-    "lastAttemptAt": "2026-09-21T05:44:02.456Z",
-    "lastSuccessfulAt": "2026-09-21T05:44:02.456Z",
+    "lastAttemptAt": "2026-09-22T05:43:29.546Z",
+    "lastSuccessfulAt": "2026-09-22T05:43:29.546Z",
     "message": null
   },
   "sources": [

@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-09-21T05:44:02.456Z",
+  "updated_at": "2026-09-22T05:43:29.546Z",
   "status": "active",
   "next_home_fixture_id": "2026-09-26-bha-h",
   "last_completed_home_fixture_id": "2026-09-04-mun-h",
   "weather": {
     "status": "forecast",
     "valid_for": "2026-09-26",
-    "generated_at": "2026-09-21T05:44:02.273Z",
-    "precipitation_probability_max": 12,
+    "generated_at": "2026-09-22T05:43:29.366Z",
+    "precipitation_probability_max": 14,
     "precipitation_sum": 0,
-    "temperature_max": 18.6,
-    "temperature_min": 12.2,
-    "wind_speed_max": 7.6,
+    "temperature_max": 20.1,
+    "temperature_min": 14.7,
+    "wind_speed_max": 7.9,
     "source": "Open-Meteo"
   },
   "attendance_momentum": {
@@ -27,8 +27,8 @@
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-09-21T05:44:02.456Z",
-    "lastSuccessfulAt": "2026-09-21T05:44:02.456Z",
+    "lastAttemptAt": "2026-09-22T05:43:29.546Z",
+    "lastSuccessfulAt": "2026-09-22T05:43:29.546Z",
     "state": "partial",
     "sources": [
       {
@@ -36,7 +36,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-09-21T05:44:02.456Z",
+        "checkedAt": "2026-09-22T05:43:29.546Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -44,7 +44,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-09-21T05:44:02.456Z",
+        "checkedAt": "2026-09-22T05:43:29.546Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       },
       {
@@ -52,7 +52,7 @@
         "label": "WSL attendance benchmark",
         "state": "waiting",
         "confidence": "unavailable",
-        "checkedAt": "2026-09-21T05:44:02.456Z",
+        "checkedAt": "2026-09-22T05:43:29.546Z",
         "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
         "message": "WSL attendance returned 403"
       }
