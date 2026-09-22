@@ -238,5 +238,53 @@
     },
     "sourceName": "WSL Football",
     "sourceUrl": "https://www.wslfootball.com/clubs/wsl/london-city-lionesses/schedule"
+  },
+  {
+    "id": "result-charlton-4-1-2026-09-22",
+    "fixtureId": "2026-09-19-cha-a",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-22T10:16:15+01:00",
+    "title": {
+      "en": "The 4–1 Charlton win creates timely Brighton conversion momentum",
+      "es": "El 4–1 ante Charlton crea impulso para convertir hacia Brighton"
+    },
+    "summary": {
+      "en": "London City’s official results page confirms a 4–1 away win at Charlton on 19 September. This is a confirmed sporting result, not evidence of ticket demand or attendance.",
+      "es": "La página oficial de resultados de London City confirma una victoria visitante por 4–1 ante Charlton el 19 de septiembre. Es un resultado deportivo confirmado, no evidencia de demanda de entradas ni de asistencia."
+    },
+    "marketingAction": {
+      "en": "Use the result in Brighton acquisition and CRM creative while keeping ticket-conversion, sales and attendance claims tied only to their own measured sources.",
+      "es": "Usar el resultado en la creatividad de captación y CRM para Brighton, manteniendo las afirmaciones sobre conversión, ventas y asistencia vinculadas únicamente a sus propias fuentes medidas."
+    },
+    "sourceName": "London City Lionesses fixtures and results",
+    "sourceUrl": "https://www.londoncitylionesses.com/fixtures"
+  },
+  {
+    "id": "experience-brighton-vip-terrace-2026-09-22",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "medium",
+    "observedAt": "2026-09-22T10:16:15+01:00",
+    "title": {
+      "en": "Brighton VIP Terrace is available at £75",
+      "es": "La VIP Terrace para Brighton está disponible por £75"
+    },
+    "summary": {
+      "en": "The official Brighton ticket page offers a £75 VIP Terrace package with halfway-line booth seating, premium bar and food service, a complimentary drink, gifts and stewarded access. This records confirmed availability, not sales.",
+      "es": "La página oficial de entradas para Brighton ofrece una VIP Terrace de £75 con asientos tipo booth en la línea de medio campo, bar y comida premium, una bebida incluida, regalos y acceso asistido. Se registra disponibilidad confirmada, no ventas."
+    },
+    "marketingAction": {
+      "en": "Segment the £75 upgrade to high-intent, group and partner audiences; tag standard and VIP journeys separately and measure clicks and conversion without treating availability as demand.",
+      "es": "Segmentar el upgrade de £75 hacia audiencias de alta intención, grupos y partners; etiquetar por separado los recorridos estándar y VIP y medir clics y conversión sin tratar la disponibilidad como demanda."
+    },
+    "sourceName": "London City Lionesses Brighton ticket page",
+    "sourceUrl": "https://www.londoncitylionesses.com/brighton-h-2627"
   }
 ]
