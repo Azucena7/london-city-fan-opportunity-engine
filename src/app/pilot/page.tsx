@@ -112,7 +112,7 @@ export default function PilotPage() {
         <div>
           <span className={styles.eyebrow}>The commercial proposition</span>
           <h2>Six fixtures to show whether the engine creates better decisions and measurable fan growth.</h2>
-          <p>The live London City environment demonstrates the workflow. A club pilot replaces illustrative assumptions with the club's own data and outcomes.</p>
+          <p>The live London City environment demonstrates the workflow. A club pilot replaces illustrative assumptions with measured club data and outcomes.</p>
         </div>
         <div className={styles.ctaActions}>
           <Link className={styles.button} href="/demo">Explore the product flow</Link>
