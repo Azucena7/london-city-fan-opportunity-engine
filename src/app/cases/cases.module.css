@@ -1,0 +1,12 @@
+.shell{min-height:100vh;background:#070806;color:#f5f5f1;font-family:Arial,Helvetica,sans-serif}
+.hero,.grid,.compare{width:min(1120px,calc(100% - 40px));margin:0 auto}
+.hero{padding:72px 0 44px;max-width:1120px}.eyebrow{color:#d8ff4f;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.hero h1{margin:14px 0 18px;max-width:950px;font-size:clamp(46px,6vw,72px);line-height:.98;letter-spacing:-.055em}.hero p{margin:0;max-width:800px;color:#aaa9a2;font-size:19px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:60px}
+.card{padding:24px;border-radius:20px;border:1px solid rgba(255,255,255,.09);background:#111310}.cardTop{display:flex;justify-content:space-between;gap:10px;color:#808179;font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+.live{color:#d8ff4f}.model{color:#a7a89f}.card h2{margin:18px 0 8px;font-size:27px;line-height:1.08;letter-spacing:-.035em}.type{display:inline-flex;padding:6px 9px;border-radius:999px;background:rgba(216,255,79,.08);color:#d8ff4f;font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.scoreRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:22px 0}.scoreRow div{padding:13px;border-radius:13px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025)}.scoreRow span,.detail span{display:block;color:#7f8079;font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px}.scoreRow strong{font-size:16px}
+.detail{padding:13px 0;border-top:1px solid rgba(255,255,255,.08)}.detail strong{font-size:14px;line-height:1.4}.note{margin:18px 0 0;color:#777870;font-size:12px;line-height:1.5}.primary{display:inline-flex;margin-top:18px;color:#d8ff4f;text-decoration:none;font-size:13px;font-weight:900}
+.compare{margin-bottom:44px;padding:38px;border-radius:22px;border:1px solid rgba(216,255,79,.22);background:rgba(216,255,79,.05);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end}.compare h2{margin:10px 0 10px;font-size:38px;letter-spacing:-.04em}.compare p{margin:0;max-width:760px;color:#96978f;line-height:1.5}.button{display:inline-flex;padding:12px 18px;border-radius:999px;background:#d8ff4f;color:#11130c;text-decoration:none;font-size:14px;font-weight:800}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.compare{grid-template-columns:1fr;align-items:start}}
+@media(max-width:600px){.hero,.grid,.compare{width:min(100% - 28px,1120px)}.compare{padding:28px 22px}}
