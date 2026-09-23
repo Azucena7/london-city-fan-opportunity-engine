@@ -114,7 +114,7 @@ export default function BriefPage() {
           <article className={styles.secondaryAction}>
             <span>02 · Resolve blocker</span>
             <h3>{live?.primaryBlocker ?? "No blocking approval gate is currently recorded."}</h3>
-            <Link href="/decision-room">Open Decision Room →</Link>
+            <Link href="/opportunity">Open Opportunity →</Link>
           </article>
 
           <article className={styles.secondaryAction}>
