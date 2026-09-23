@@ -16,6 +16,8 @@ function ItemList({ items, empty }: { items: string[]; empty: string }) {
 
 export default function DecisionRoomPage() {
   const live = getCurrentProductOpportunity();
+  const blocked = (live?.blockers.length ?? 0) > 0;
+  const confidenceWidth = live?.confidence.label === "High" ? "88%" : live?.confidence.label === "Medium" ? "60%" : "32%";
 
   return (
     <main className={styles.shell}>
@@ -24,85 +26,111 @@ export default function DecisionRoomPage() {
       <header className={styles.header}>
         <div>
           <span className={styles.eyebrow}>
-            Decision Room · {live ? "London City vs " + live.fixture.opponent : "London City"}
+            {live ? "London City · " + live.fixture.opponent : "London City"} · Decision
           </span>
-          <h1>{live ? "Should the club act on the current " + live.opportunityLabel.toLowerCase() + "?" : "No current decision is available."}</h1>
+          <h1>{live ? "Should the club act on this " + live.opportunityLabel.toLowerCase() + "?" : "No current decision is available."}</h1>
           <p>
-            This view is generated from the same live fixture, campaign and signal data as the engine.
-            It separates what is known from what is assumed and keeps missing CRM/ticket evidence explicit.
+            The recommendation stays conditional until the evidence, assumptions and missing inputs are explicit enough for a human decision owner to act.
           </p>
+          <div className={styles.headerStatus}>
+            <span className={blocked ? styles.holdChip : styles.readyChip}>{live?.decisionState ?? "HOLD"}</span>
+            <span className={styles.confidenceChip}>{live?.confidence.label ?? "—"} confidence</span>
+            <span className={styles.signalChip}>{live?.liveSignals.length ?? 0} signals</span>
+          </div>
         </div>
-        <aside className={styles.statusCard}>
-          <span>Current decision state</span>
-          <strong>{live?.decisionState ?? "HOLD"}</strong>
-          <p>{live?.primaryBlocker ?? "Waiting for a current product opportunity."}</p>
+
+        <aside className={styles.questionCard}>
+          <span>Primary blocker</span>
+          <strong>{live?.primaryBlocker ?? "Waiting for a current product opportunity."}</strong>
+          <Link href="#next-action">Resolve next →</Link>
         </aside>
       </header>
 
-      <section className={styles.summaryGrid}>
+      <section className={styles.summaryStrip}>
         <article>
           <span>Opportunity</span>
           <strong>{live?.opportunityLabel ?? "Under review"}</strong>
           <p>{live?.opportunity ?? "No current opportunity."}</p>
         </article>
         <article>
-          <span>Potential impact</span>
-          <strong>{live?.impact.ticketsLow !== null && live?.impact.ticketsLow !== undefined ? live.impact.ticketsLow + " tickets" : "Requires club data"}</strong>
-          <p>No impact range is asserted until cohort size and conversion evidence are connected.</p>
-        </article>
-        <article>
-          <span>Decision confidence</span>
+          <span>Confidence</span>
           <strong>{live?.confidence.label ?? "—"}</strong>
+          <div className={styles.confidenceTrack}><span style={{ width: confidenceWidth }} /></div>
           <p>{live?.confidence.rationale ?? "No confidence rationale is available."}</p>
         </article>
         <article>
           <span>Readiness</span>
           <strong>{live?.readiness.label ?? "—"}</strong>
-          <p>{live?.updatedAt ? "Engine updated " + new Date(live.updatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" }) : "Update time unavailable"}</p>
+          <p>{live?.updatedAt ? "Updated " + new Date(live.updatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" }) : "Update time unavailable"}</p>
+        </article>
+        <article>
+          <span>Impact</span>
+          <strong>{live?.impact.ticketsLow !== null && live?.impact.ticketsLow !== undefined ? live.impact.ticketsLow + " tickets" : "Requires club data"}</strong>
+          <p>No impact range is asserted until cohort size and conversion evidence are connected.</p>
         </article>
       </section>
 
-      <section className={styles.board}>
-        <article className={styles.panel}>
-          <div className={styles.panelHead}>
-            <span className={styles.panelTag}>EVIDENCE</span>
-            <strong>What supports the decision</strong>
+      <section className={styles.decisionBody}>
+        <div className={styles.evidenceColumn}>
+          <div className={styles.sectionTitle}>
+            <span>Why the recommendation exists</span>
+            <h2>Evidence quality at a glance</h2>
           </div>
-          <ItemList items={live?.known ?? []} empty="No confirmed evidence loaded." />
-        </article>
 
-        <article className={styles.panel}>
-          <div className={styles.panelHead}>
-            <span className={styles.panelTagAmber}>ASSUMPTIONS</span>
-            <strong>What we currently believe</strong>
-          </div>
-          <ItemList items={live?.assumptions ?? []} empty="No assumptions loaded." />
-        </article>
+          <article className={styles.evidenceBlock}>
+            <div className={styles.blockHead}>
+              <span className={styles.evidenceTag}>CONFIRMED</span>
+              <strong>{live?.known.length ?? 0}</strong>
+            </div>
+            <ItemList items={live?.known ?? []} empty="No confirmed evidence loaded." />
+          </article>
 
-        <article className={styles.panel}>
-          <div className={styles.panelHead}>
-            <span className={styles.panelTagRed}>BLOCKERS</span>
-            <strong>What must be resolved</strong>
-          </div>
-          <ItemList items={live?.blockers ?? []} empty="No blocking approval gate is currently recorded." />
-        </article>
+          <article className={styles.evidenceBlock}>
+            <div className={styles.blockHead}>
+              <span className={styles.assumptionTag}>ASSUMPTIONS</span>
+              <strong>{live?.assumptions.length ?? 0}</strong>
+            </div>
+            <ItemList items={live?.assumptions ?? []} empty="No assumptions loaded." />
+          </article>
 
-        <article className={styles.panel}>
-          <div className={styles.panelHead}>
-            <span className={styles.panelTagBlue}>WHAT WOULD CHANGE THE DECISION</span>
-            <strong>Conditions that invalidate the current plan</strong>
+          <article className={styles.evidenceBlock}>
+            <div className={styles.blockHead}>
+              <span className={styles.missingTag}>MISSING</span>
+              <strong>{live?.missing.length ?? 0}</strong>
+            </div>
+            <ItemList items={live?.missing ?? []} empty="No missing evidence loaded." />
+          </article>
+        </div>
+
+        <aside className={styles.decisionColumn}>
+          <div className={styles.sectionTitle}>
+            <span>Decision control</span>
+            <h2>What can stop or change this?</h2>
           </div>
-          <ItemList items={live?.whatWouldChangeDecision ?? []} empty="No decision-change conditions loaded." />
-        </article>
+
+          <article className={styles.blockerPanel}>
+            <span>Current blockers</span>
+            <ItemList items={live?.blockers ?? []} empty="No blocking approval gate is currently recorded." />
+          </article>
+
+          <article className={styles.changePanel}>
+            <span>What would change the decision</span>
+            <ItemList items={live?.whatWouldChangeDecision ?? []} empty="No decision-change conditions loaded." />
+          </article>
+
+          <article className={styles.lineagePanel}>
+            <span>Evidence lineage</span>
+            <strong>{live ? live.liveSignals.length + " live engine signals" : "No live lineage"}</strong>
+            <Link href="/today">Inspect analyst view →</Link>
+          </article>
+        </aside>
       </section>
 
-      <section className={styles.actionSection}>
+      <section className={styles.actionSection} id="next-action">
         <div className={styles.actionCopy}>
           <span className={styles.eyebrow}>Next required action</span>
           <h2>{live?.recommendedAction ?? "No current action is available."}</h2>
-          <p>
-            The product does not promote this to a ready state until the blocking approval and measurement gaps are resolved.
-          </p>
+          <p>The decision cannot become ready until the primary blocker and measurement gap are resolved.</p>
         </div>
         <div className={styles.actionMeta}>
           <div><span>Owner</span><strong>{live?.nextAction.owner ?? "Pending"}</strong></div>
@@ -111,15 +139,9 @@ export default function DecisionRoomPage() {
         </div>
       </section>
 
-      <section className={styles.footerCard}>
-        <div>
-          <span className={styles.eyebrow}>Live lineage</span>
-          <h2>{live ? live.liveSignals.length + " engine signals currently feed this decision view." : "No live signal lineage is available."}</h2>
-        </div>
-        <div className={styles.navActions}>
-          <Link className={styles.textLink} href="/demo">Back to guided demo</Link>
-          <Link className={styles.button} href="/impact">Open Impact Model</Link>
-        </div>
+      <section className={styles.footerRow}>
+        <Link className={styles.textLink} href="/brief">← Back to Morning Brief</Link>
+        <Link className={styles.button} href="/impact">Test commercial scenario →</Link>
       </section>
     </main>
   );
