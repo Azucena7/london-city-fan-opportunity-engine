@@ -82,10 +82,10 @@ export default function PilotPage() {
         <div className={styles.weekCard}>
           <div><span>Opportunity</span><strong>Retain opener non-returners</strong></div>
           <div><span>Action</span><strong>CRM repeat-visit campaign</strong></div>
-          <div><span>Potential</span><strong>+280–420 tickets*</strong></div>
+          <div><span>Potential</span><strong>Requires club data</strong></div>
           <div><span>Decision</span><strong>Go with conditions</strong></div>
         </div>
-        <p className={styles.note}>*Illustrative demo figure until club data is connected.</p>
+        <p className={styles.note}>Commercial impact is deliberately left unfilled until audience and conversion evidence are connected.</p>
       </section>
 
       <section className={styles.section}>
@@ -110,7 +110,7 @@ export default function PilotPage() {
           <p>The live London City environment demonstrates the workflow. A club pilot replaces illustrative assumptions with measured club data and outcomes.</p>
         </div>
         <div className={styles.ctaActions}>
-          <Link className={styles.button} href="/demo">Explore the product flow</Link>
+          <Link className={styles.button} href="/opportunity">Explore the live opportunity</Link>
           <Link className={styles.secondary} href="/decision-room">See the Decision Room</Link>
           <Link className={styles.secondary} href="/pilot/operating-pack">Open the Pilot Operating Pack</Link>
         </div>
