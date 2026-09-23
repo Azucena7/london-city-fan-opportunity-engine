@@ -167,6 +167,7 @@ export default function GuidedDemoPage() {
                     <li><strong>Blocker:</strong> audience must be matched against existing Brighton buyers</li>
                     <li><strong>Would change the decision:</strong> if organic repeat purchase is already above the target threshold</li>
                   </ul>
+                  <Link className={styles.decisionLink} href="/decision-room">Open Decision Room →</Link>
                 </div>
               ) : null}
 
