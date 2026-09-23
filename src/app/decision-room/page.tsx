@@ -126,7 +126,10 @@ export default function DecisionRoomPage() {
           <span className={styles.eyebrow}>Product principle</span>
           <h2>Make the recommendation auditable. Show why the club can trust the action.</h2>
         </div>
-        <Link className={styles.button} href="/demo">Back to guided demo</Link>
+        <div className={styles.navActions}>
+          <Link className={styles.textLink} href="/demo">Back to guided demo</Link>
+          <Link className={styles.button} href="/results">See Results & Learning</Link>
+        </div>
       </section>
     </main>
   );
