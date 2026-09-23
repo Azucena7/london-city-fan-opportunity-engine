@@ -12,8 +12,8 @@ export default function Home() {
       <nav className="productNav" aria-label="Product navigation">
         <div className="productBrand">Fan Growth Engine</div>
         <div className="productNavActions">
-          <Link className="productNavLink" href="/today">London City live demo</Link>
-          <Link className="productButton" href="/today">Explore the demo</Link>
+          <Link className="productNavLink" href="/demo">London City guided demo</Link>
+          <Link className="productButton" href="/demo">Explore the demo</Link>
         </div>
       </nav>
 
@@ -26,7 +26,7 @@ export default function Home() {
             and learn what worked afterwards.
           </p>
           <div className="productHeroActions">
-            <Link className="productButton" href="/today">Explore London City demo</Link>
+            <Link className="productButton" href="/demo">Explore London City demo</Link>
             <a className="productButtonGhost" href="#how-it-works">See how it works</a>
           </div>
           <div className="productProof" aria-label="Product outcomes">
@@ -39,7 +39,7 @@ export default function Home() {
         <aside className="fixtureCard" aria-label="Example opportunity card">
           <div className="fixtureCardTop">
             <span>Next fixture</span>
-            <span className="fixtureLive">Live prototype</span>
+            <span className="fixtureLive">Guided demo</span>
           </div>
           <p className="fixtureTitle">London City vs Brighton</p>
           <h2 className="fixtureOpportunity">Convert first-time attendees into repeat visitors.</h2>
@@ -115,7 +115,7 @@ export default function Home() {
             After matchday: the result and what changes next.
           </p>
         </div>
-        <Link className="productButton" href="/today">Open the live prototype</Link>
+        <Link className="productButton" href="/demo">Open the guided demo</Link>
       </section>
 
       <footer className="productFooter">
