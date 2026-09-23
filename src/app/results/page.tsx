@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./results.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
   title: "Results & Learning",
@@ -9,86 +10,106 @@ export const metadata: Metadata = {
 };
 
 export default function ResultsLearningPage() {
+  const live = getCurrentProductOpportunity();
+
   return (
     <main className={styles.shell}>
       <ProductJourneyNav active="results" />
 
       <header className={styles.hero}>
         <div>
-          <span className={styles.eyebrow}>Results & Learning · post-match loop</span>
-          <h1>What happened after the recommendation?</h1>
+          <span className={styles.eyebrow}>Results & Learning</span>
+          <h1>What did the action actually change?</h1>
           <p>
-            The product should not stop at the action. It should show the result, explain what we learned
-            and update the next decision with club-specific evidence.
+            Results are only useful when they change the next decision. This view separates measured outcomes from
+            examples and keeps the learning loop visible.
           </p>
         </div>
-        <aside className={styles.resultCard}>
-          <span>Campaign outcome</span>
-          <strong>Illustrative post-match example</strong>
-          <p>Figures below demonstrate the product workflow only. They are replaced by measured club data in a live pilot.</p>
+        <aside className={styles.stateCard}>
+          <span>Current measurement state</span>
+          <strong>Awaiting club conversion data</strong>
+          <p>{live?.nextAction.measurement ?? "Matched ticket conversion is not connected yet."}</p>
         </aside>
       </header>
 
       <section className={styles.kpis}>
-        <article><span>Audience activated</span><strong>1,420</strong><p>Matched opener non-returners</p></article>
-        <article><span>Tickets attributed</span><strong>386</strong><p>Illustrative measured outcome</p></article>
-        <article><span>Repeat rate</span><strong>27%</strong><p>Among the activated cohort</p></article>
-        <article><span>Revenue</span><strong>£5,790</strong><p>Illustrative ticket revenue</p></article>
-      </section>
-
-      <section className={styles.loop}>
-        <article className={styles.loopBlock}>
-          <span>01 · ORIGINAL HYPOTHESIS</span>
-          <h2>Recent first-time attendees will respond better to a repeat-visit message than a cold audience.</h2>
-          <p>We define the hypothesis before launch so the post-match result can actually teach us something.</p>
+        <article>
+          <span>Audience activated</span>
+          <strong>—</strong>
+          <p>Requires campaign audience export.</p>
         </article>
-
-        <div className={styles.arrow}>↓</div>
-
-        <article className={styles.loopBlock}>
-          <span>02 · OBSERVED RESULT</span>
-          <h2>The repeat cohort converted strongly enough to justify keeping retention ahead of cold acquisition.</h2>
-          <p>In a live deployment, this block would use actual ticketing attribution, cost and control-group data.</p>
+        <article>
+          <span>Tickets attributed</span>
+          <strong>—</strong>
+          <p>Requires matched purchase attribution.</p>
         </article>
-
-        <div className={styles.arrow}>↓</div>
-
-        <article className={styles.learning}>
-          <span>03 · CLUB LEARNING</span>
-          <h2>Repeat-attendance propensity is now evidence, not only an assumption.</h2>
-          <div className={styles.learningGrid}>
-            <div><small>Before</small><strong>Hypothesis</strong></div>
-            <div><small>After</small><strong>Measured signal</strong></div>
-            <div><small>Confidence</small><strong>Medium → High</strong></div>
-          </div>
+        <article>
+          <span>Repeat rate</span>
+          <strong>—</strong>
+          <p>Requires cohort-level outcome data.</p>
         </article>
-
-        <div className={styles.arrow}>↓</div>
-
-        <article className={styles.nextDecision}>
-          <span>04 · APPLY TO NEXT FIXTURE</span>
-          <h2>Prioritise the repeat-attendance cohort earlier in the next home-fixture cycle.</h2>
-          <p>The result becomes an input to the next opportunity score, audience priority and channel plan.</p>
+        <article>
+          <span>Revenue</span>
+          <strong>—</strong>
+          <p>Requires attributed ticket value.</p>
         </article>
       </section>
 
-      <section className={styles.compare}>
+      <section className={styles.learningLoop}>
+        <div className={styles.sectionHead}>
+          <span className={styles.eyebrow}>Learning loop</span>
+          <h2>From hypothesis to the next fixture decision.</h2>
+        </div>
+
+        <div className={styles.timeline}>
+          <article>
+            <span>01 · HYPOTHESIS</span>
+            <strong>Repeat opener attendees are more valuable to activate than a cold audience.</strong>
+            <p>Defined before execution.</p>
+          </article>
+          <article>
+            <span>02 · MEASURE</span>
+            <strong>Match audience → campaign → purchase → scan → repeat.</strong>
+            <p>Blocked until club CRM/ticketing data is connected.</p>
+          </article>
+          <article>
+            <span>03 · LEARN</span>
+            <strong>Promote the hypothesis only when the result supports it.</strong>
+            <p>No confidence uplift without evidence.</p>
+          </article>
+          <article>
+            <span>04 · APPLY</span>
+            <strong>Change the next fixture audience, timing or investment decision.</strong>
+            <p>The learning must affect a real choice.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.resultState}>
         <div>
-          <span className={styles.eyebrow}>Why this matters</span>
-          <h2>Most dashboards report. This loop is designed to improve the next decision.</h2>
+          <span className={styles.eyebrow}>What happens when data arrives</span>
+          <h2>Measured results replace placeholders automatically.</h2>
+          <p>
+            The product should never present illustrative outcomes as if they happened. Until attribution exists,
+            the honest result state is “not measured yet”.
+          </p>
         </div>
-        <div className={styles.compareGrid}>
-          <article><span>Traditional reporting</span><strong>What happened?</strong></article>
-          <article><span>Fan Growth Engine</span><strong>What did we learn, and what changes next?</strong></article>
+        <div className={styles.stateList}>
+          <div><span>Current</span><strong>Hypothesis</strong></div>
+          <div><span>After measurement</span><strong>Observed signal</strong></div>
+          <div><span>Decision effect</span><strong>Confidence changes only if supported</strong></div>
         </div>
       </section>
 
-      <section className={styles.footerCard}>
+      <section className={styles.next}>
         <div>
-          <span className={styles.eyebrow}>Closed loop</span>
-          <h2>Discover → Act → Measure → Learn → Decide again.</h2>
+          <span className={styles.eyebrow}>Close the loop</span>
+          <h2>Results should send the user back to the next opportunity, not to a report archive.</h2>
         </div>
-        <Link className={styles.button} href="/pilot">See the 90-day pilot</Link>
+        <div className={styles.actions}>
+          <Link className={styles.primary} href="/brief">Back to Morning Brief</Link>
+          <Link className={styles.secondary} href="/today">Inspect measurement layer</Link>
+        </div>
       </section>
     </main>
   );
