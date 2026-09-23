@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ImpactScenario } from "@/components/ImpactScenario";
+import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import styles from "./impact.module.css";
 
 export const metadata: Metadata = {
@@ -10,6 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function ImpactPage() {
+  const live = getCurrentProductOpportunity();
+  const fixtureLabel = live ? "London City vs " + live.fixture.opponent : "Current opportunity unavailable";
+
   return (
     <main className={styles.shell}>
       <ProductJourneyNav active="impact" />
@@ -35,7 +39,7 @@ export default function ImpactPage() {
           <span className={styles.eyebrow}>Try the scenario</span>
           <h2>Change the inputs. See what drives the value case.</h2>
         </div>
-        <ImpactScenario />
+        <ImpactScenario fixtureLabel={fixtureLabel} liveAudience={live?.audience.value ?? null} liveAudienceState={live?.audience.state ?? "requires-club-data"} />
       </section>
 
       <section className={styles.section}>
