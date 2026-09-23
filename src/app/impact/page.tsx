@@ -58,10 +58,10 @@ export default function ImpactPage() {
       <section className={styles.cta}>
         <div>
           <span className={styles.eyebrow}>Decision connection</span>
-          <h2>The value case should strengthen or weaken the decision — not sit in a separate spreadsheet.</h2>
+          <h2>The value case should strengthen or weaken the live opportunity — not sit in a separate spreadsheet.</h2>
         </div>
         <div className={styles.actions}>
-          <Link className={styles.primary} href="/decision-room">Open Decision Room</Link>
+          <Link className={styles.primary} href="/opportunity">Back to Opportunity</Link>
           <Link className={styles.secondary} href="/pilot">See the 90-day pilot</Link>
         </div>
       </section>
