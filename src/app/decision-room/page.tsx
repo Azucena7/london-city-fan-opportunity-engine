@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./decision-room.module.css";
+import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 
 export const metadata: Metadata = {
   title: "Decision Room",
@@ -10,13 +11,7 @@ export const metadata: Metadata = {
 export default function DecisionRoomPage() {
   return (
     <main className={styles.shell}>
-      <nav className={styles.nav}>
-        <Link className={styles.brand} href="/">Fan Growth Engine</Link>
-        <div className={styles.navActions}>
-          <Link className={styles.textLink} href="/demo">Guided demo</Link>
-          <Link className={styles.button} href="/today">Open full engine</Link>
-        </div>
-      </nav>
+      <ProductJourneyNav active="decision" />
 
       <header className={styles.header}>
         <div>
