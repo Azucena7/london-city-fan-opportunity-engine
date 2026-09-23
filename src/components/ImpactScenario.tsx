@@ -7,8 +7,15 @@ function currency(value: number) {
   return new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(value);
 }
 
-export function ImpactScenario() {
-  const [audience, setAudience] = useState(1420);
+type ImpactScenarioProps = {
+  fixtureLabel: string;
+  liveAudience: number | null;
+  liveAudienceState: "measured" | "requires-club-data";
+};
+
+export function ImpactScenario({ fixtureLabel, liveAudience, liveAudienceState }: ImpactScenarioProps) {
+  const seededAudience = liveAudience ?? 1420;
+  const [audience, setAudience] = useState(seededAudience);
   const [conversion, setConversion] = useState(22);
   const [ticketValue, setTicketValue] = useState(15);
   const [campaignCost, setCampaignCost] = useState(750);
@@ -21,28 +28,41 @@ export function ImpactScenario() {
     return { tickets, grossRevenue, netContribution, returnMultiple };
   }, [audience, conversion, ticketValue, campaignCost]);
 
+  const audienceIsLive = liveAudienceState === "measured" && liveAudience !== null;
+
   return (
     <section className={styles.model} aria-label="Illustrative impact scenario">
+      <div className={styles.context}>
+        <div>
+          <span>Linked opportunity</span>
+          <strong>{fixtureLabel}</strong>
+        </div>
+        <div>
+          <span>Audience input</span>
+          <strong>{audienceIsLive ? "Live measured cohort" : "Illustrative seed — club cohort missing"}</strong>
+        </div>
+      </div>
+
       <div className={styles.controls}>
         <div className={styles.control}>
           <label htmlFor="audience">Addressable audience</label>
           <input id="audience" type="number" min={0} value={audience} onChange={(e) => setAudience(Number(e.target.value))} />
-          <span>fans</span>
+          <span>{audienceIsLive ? "fans · live engine input" : "fans · editable scenario input"}</span>
         </div>
         <div className={styles.control}>
           <label htmlFor="conversion">Scenario conversion</label>
           <input id="conversion" type="number" min={0} max={100} step={1} value={conversion} onChange={(e) => setConversion(Number(e.target.value))} />
-          <span>%</span>
+          <span>% · scenario assumption</span>
         </div>
         <div className={styles.control}>
           <label htmlFor="ticketValue">Average ticket value</label>
           <input id="ticketValue" type="number" min={0} step={1} value={ticketValue} onChange={(e) => setTicketValue(Number(e.target.value))} />
-          <span>GBP</span>
+          <span>GBP · scenario assumption</span>
         </div>
         <div className={styles.control}>
           <label htmlFor="campaignCost">Activation cost</label>
           <input id="campaignCost" type="number" min={0} step={50} value={campaignCost} onChange={(e) => setCampaignCost(Number(e.target.value))} />
-          <span>GBP</span>
+          <span>GBP · scenario assumption</span>
         </div>
       </div>
 
@@ -70,8 +90,8 @@ export function ImpactScenario() {
         <code>audience × scenario conversion × ticket value − activation cost</code>
       </div>
       <p className={styles.note}>
-        This is a scenario tool, not a forecast. In a club deployment, default inputs should be replaced by measured cohort size,
-        observed conversion ranges, ticket economics and actual campaign cost.
+        This is a scenario tool, not a forecast. When the linked live opportunity lacks a measured cohort,
+        1,420 is used only as an editable demonstration seed and is not presented as London City data.
       </p>
     </section>
   );
