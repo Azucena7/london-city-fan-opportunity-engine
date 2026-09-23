@@ -26,6 +26,7 @@ import "./today-cockpit.css";
 import "./calendar-fixture.css";
 import "./territory-access.css";
 import "./experience-internal.css";
+import "./product-system.css";
 import "./product-shell.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
