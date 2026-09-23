@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./demo.module.css";
+import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 
 export const metadata: Metadata = {
   title: "London City Guided Demo",
@@ -43,13 +44,7 @@ const steps = [
 export default function GuidedDemoPage() {
   return (
     <main className={styles.shell}>
-      <nav className={styles.nav}>
-        <Link className={styles.brand} href="/">Fan Growth Engine</Link>
-        <div className={styles.navActions}>
-          <Link className={styles.textLink} href="/today">Open full engine</Link>
-          <Link className={styles.button} href="/">Product home</Link>
-        </div>
-      </nav>
+      <ProductJourneyNav active="demo" />
 
       <header className={styles.hero}>
         <div className={styles.heroCopy}>
