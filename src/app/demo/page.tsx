@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./demo.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
   title: "London City Guided Demo",
-  description: "A guided walkthrough of how Fan Growth Engine turns a fixture opportunity into an action and measurement plan."
+  description: "A guided walkthrough of how Fan Growth Engine turns a live fixture opportunity into an action and measurement plan."
 };
 
 const steps = [
@@ -31,7 +32,7 @@ const steps = [
     number: "04",
     label: "DECIDE",
     title: "Know what could block it",
-    body: "Decision conditions and blockers show whether the club can act now or whether one missing piece of evidence still matters."
+    body: "Decision conditions and blockers show whether the club can act now or whether missing evidence still matters."
   },
   {
     number: "05",
@@ -42,34 +43,36 @@ const steps = [
 ];
 
 export default function GuidedDemoPage() {
+  const live = getCurrentProductOpportunity();
+
   return (
     <main className={styles.shell}>
       <ProductJourneyNav active="demo" />
 
       <header className={styles.hero}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>London City · guided product demo</span>
+          <span className={styles.eyebrow}>London City · live guided product demo</span>
           <h1>From one fixture opportunity to one clear club action.</h1>
           <p>
-            This walkthrough shows the product experience we are building for football clubs:
-            simple enough for a commercial director to understand quickly, with the underlying evidence available when needed.
+            The visible opportunity below is now derived from the same fixture, campaign and signal data used by the full engine.
+            Missing CRM and ticketing evidence stays visibly missing rather than being replaced with demo precision.
           </p>
         </div>
 
         <aside className={styles.summaryCard}>
           <div className={styles.cardTop}>
-            <span>London City vs Brighton</span>
-            <span className={styles.demoTag}>Illustrative demo</span>
+            <span>{live ? "London City vs " + live.fixture.opponent : "London City"}</span>
+            <span className={styles.demoTag}>{live ? "Live engine data" : "Demo unavailable"}</span>
           </div>
           <p className={styles.cardLabel}>Priority opportunity</p>
-          <h2>Convert first-time attendees into repeat visitors.</h2>
+          <h2>{live?.opportunity ?? "No current product opportunity is available."}</h2>
           <div className={styles.metrics}>
-            <div><span>Addressable audience</span><strong>1,420</strong></div>
-            <div><span>Potential</span><strong>+280–420 tickets</strong></div>
-            <div><span>Confidence</span><strong>Medium</strong></div>
+            <div><span>Addressable audience</span><strong>{live?.audience.value ? live.audience.value.toLocaleString("en-GB") : "Requires club data"}</strong></div>
+            <div><span>Opportunity score</span><strong>{live?.score !== null && live?.score !== undefined ? live.score + "/100" : "—"}</strong></div>
+            <div><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
           </div>
           <p className={styles.disclaimer}>
-            Audience and impact figures are illustrative until club CRM and ticketing data are connected.
+            Live public and engine signals are used where available. CRM cohort size and ticket impact remain unfilled until authorised club data is connected.
           </p>
         </aside>
       </header>
@@ -77,35 +80,35 @@ export default function GuidedDemoPage() {
       <section className={styles.decisionStrip} aria-label="Opportunity action impact summary">
         <article className={styles.decisionBlock}>
           <span>OPPORTUNITY</span>
-          <strong>Retain opener attendees before Brighton.</strong>
-          <p>Prioritise the repeat-attendance window created by the opening fixture.</p>
+          <strong>{live?.opportunityLabel ?? "Opportunity under review"}</strong>
+          <p>{live?.whyNow ?? "Waiting for a current engine opportunity."}</p>
         </article>
         <div className={styles.decisionArrow} aria-hidden="true">→</div>
         <article className={styles.decisionBlock}>
           <span>ACTION</span>
-          <strong>Build the non-returner cohort and activate CRM.</strong>
-          <p>Audience, owner, timing and measurement are defined before execution.</p>
+          <strong>{live?.recommendedAction ?? "Define the next action from current evidence."}</strong>
+          <p>{live ? live.nextAction.owner + " · " + live.nextAction.deadline : "Owner and timing pending"}</p>
         </article>
         <div className={styles.decisionArrow} aria-hidden="true">→</div>
         <article className={styles.decisionBlock}>
           <span>IMPACT</span>
-          <strong>+280–420 tickets</strong>
-          <p>Illustrative potential only — replaced by a club-specific model when live data is connected.</p>
+          <strong>{live?.impact.ticketsLow !== null && live?.impact.ticketsLow !== undefined ? live.impact.ticketsLow + " tickets" : "Requires club data"}</strong>
+          <p>No ticket-impact range is asserted until the audience and conversion evidence are connected.</p>
         </article>
       </section>
 
       <section className={styles.readinessBar}>
         <div>
           <span>Decision confidence</span>
-          <strong>Medium</strong>
+          <strong>{live?.confidence.label ?? "—"}</strong>
         </div>
         <div>
           <span>Readiness</span>
-          <strong>2 of 3 gates ready</strong>
+          <strong>{live?.readiness.label ?? "—"}</strong>
         </div>
         <div>
           <span>Primary blocker</span>
-          <strong>CRM cohort not yet matched to Brighton buyers</strong>
+          <strong>{live?.primaryBlocker ?? "No live blocker available"}</strong>
         </div>
       </section>
 
@@ -125,42 +128,42 @@ export default function GuidedDemoPage() {
                 <div className={styles.productMoment}>
                   <div>
                     <span>Opportunity</span>
-                    <strong>Repeat attendance before the next home fixture</strong>
+                    <strong>{live?.opportunity ?? "Waiting for current engine data"}</strong>
                   </div>
                   <div>
                     <span>Why now</span>
-                    <strong>A high-attention opener creates a time-sensitive retention window.</strong>
+                    <strong>{live?.whyNow ?? "Waiting for current engine data"}</strong>
                   </div>
                 </div>
               ) : null}
 
               {step.number === "02" ? (
                 <div className={styles.evidenceGrid}>
-                  <div className={styles.evidenceGood}><span>KNOWN</span><strong>Fixture, venue and current campaign context</strong></div>
-                  <div className={styles.evidenceWarn}><span>ASSUMED</span><strong>First-time visitors are contactable and have not repurchased</strong></div>
-                  <div className={styles.evidenceNeutral}><span>MISSING</span><strong>CRM cohort size and matched Brighton purchase status</strong></div>
+                  <div className={styles.evidenceGood}><span>KNOWN</span><strong>{live?.known[0] ?? "No confirmed evidence loaded"}</strong></div>
+                  <div className={styles.evidenceWarn}><span>ASSUMED</span><strong>{live?.assumptions[0] ?? "No assumptions loaded"}</strong></div>
+                  <div className={styles.evidenceNeutral}><span>MISSING</span><strong>{live?.missing[0] ?? "No missing evidence loaded"}</strong></div>
                 </div>
               ) : null}
 
               {step.number === "03" ? (
                 <div className={styles.actionCard}>
                   <span>Recommended action</span>
-                  <h3>Build the opener non-returner cohort and launch a repeat-visit CRM campaign.</h3>
+                  <h3>{live?.recommendedAction ?? "No current action is available."}</h3>
                   <div className={styles.actionMeta}>
-                    <div><small>Owner</small><strong>CRM / Marketing</strong></div>
-                    <div><small>Deadline</small><strong>Thursday</strong></div>
-                    <div><small>Measure</small><strong>Matched ticket sales</strong></div>
+                    <div><small>Owner</small><strong>{live?.nextAction.owner ?? "Pending"}</strong></div>
+                    <div><small>Deadline</small><strong>{live?.nextAction.deadline ?? "Pending"}</strong></div>
+                    <div><small>Measure</small><strong>{live?.nextAction.measurement ?? "Pending"}</strong></div>
                   </div>
                 </div>
               ) : null}
 
               {step.number === "04" ? (
                 <div className={styles.decisionCard}>
-                  <div className={styles.decisionStatus}>GO WITH CONDITIONS</div>
+                  <div className={styles.decisionStatus}>{live?.decisionState ?? "HOLD"}</div>
                   <ul>
-                    <li><strong>Ready:</strong> ticket inventory and campaign concept</li>
-                    <li><strong>Blocker:</strong> audience must be matched against existing Brighton buyers</li>
-                    <li><strong>Would change the decision:</strong> if organic repeat purchase is already above the target threshold</li>
+                    <li><strong>Readiness:</strong> {live?.readiness.label ?? "Not available"}</li>
+                    <li><strong>Blocker:</strong> {live?.primaryBlocker ?? "Not available"}</li>
+                    <li><strong>Would change the decision:</strong> {live?.whatWouldChangeDecision[0] ?? "Not available"}</li>
                   </ul>
                   <Link className={styles.decisionLink} href="/decision-room">Open Decision Room →</Link>
                 </div>
@@ -168,9 +171,9 @@ export default function GuidedDemoPage() {
 
               {step.number === "05" ? (
                 <div className={styles.learningCard}>
-                  <div><span>Result</span><strong>Measure conversion, revenue and repeat rate</strong></div>
+                  <div><span>Result</span><strong>Measure conversion, revenue and repeat rate after matchday</strong></div>
                   <div className={styles.arrow}>→</div>
-                  <div><span>Learning</span><strong>Update the next fixture recommendation</strong></div>
+                  <div><span>Learning</span><strong>Update the next fixture recommendation with measured evidence</strong></div>
                 </div>
               ) : null}
             </div>
@@ -182,7 +185,7 @@ export default function GuidedDemoPage() {
         <div>
           <span className={styles.eyebrow}>Under the hood</span>
           <h2>Want to see the full intelligence layer?</h2>
-          <p>The existing London City engine remains available with signals, territories, fixtures, evidence and operational detail.</p>
+          <p>The London City engine remains available with signals, territories, fixtures, evidence and operational detail.</p>
         </div>
         <Link className={styles.button} href="/today">Open full London City engine</Link>
       </section>
