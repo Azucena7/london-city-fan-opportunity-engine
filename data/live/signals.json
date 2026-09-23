@@ -286,5 +286,29 @@
     },
     "sourceName": "London City Lionesses Brighton ticket page",
     "sourceUrl": "https://www.londoncitylionesses.com/brighton-h-2627"
+  },
+  {
+    "id": "attention-bromley-mk-dons-postponed-2026-09-23",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "medium",
+    "observedAt": "2026-09-23T10:12:21+01:00",
+    "title": {
+      "en": "Bromley’s 26 September men’s fixture has been postponed",
+      "es": "El partido masculino de Bromley del 26 de septiembre ha sido aplazado"
+    },
+    "summary": {
+      "en": "Bromley FC confirms that its away match at MK Dons, scheduled for 15:00 on 26 September, was postponed because of international call-ups. The removed fixture clash is confirmed; any increase in local availability or Brighton ticket conversion is inferred and remains unmeasured.",
+      "es": "Bromley FC confirma que su partido visitante ante MK Dons, previsto para las 15:00 del 26 de septiembre, fue aplazado por convocatorias internacionales. La eliminación del solapamiento está confirmada; cualquier aumento de disponibilidad local o de conversión de entradas para Brighton es inferido y sigue sin medirse."
+    },
+    "marketingAction": {
+      "en": "Run a time-limited Bromley-area and local-football audience test for Brighton, using separate campaign tags and a holdout where possible; measure clicks and ticket conversion before claiming displaced demand.",
+      "es": "Ejecutar una prueba limitada en el tiempo para audiencias de Bromley y del fútbol local hacia Brighton, con etiquetas de campaña separadas y un grupo de control cuando sea posible; medir clics y conversión antes de atribuir demanda desplazada."
+    },
+    "sourceName": "Bromley FC",
+    "sourceUrl": "https://www.bromleyfc.co.uk/news/2026/september/16/mk-dons--a--and-wycombe--h--postponed-due-to-international-call-ups/"
   }
 ]
