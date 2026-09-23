@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
   title: "Fan Growth Engine",
@@ -8,6 +9,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const live = getCurrentProductOpportunity();
+
   return (
     <main className="productShell">
       <ProductJourneyNav active="product" />
@@ -31,22 +34,22 @@ export default function Home() {
           </div>
         </div>
 
-        <aside className="fixtureCard" aria-label="Example opportunity card">
+        <aside className="fixtureCard" aria-label="Current engine opportunity">
           <div className="fixtureCardTop">
             <span>Next fixture</span>
-            <span className="fixtureLive">Guided demo</span>
+            <span className="fixtureLive">{live ? "Live engine" : "Guided demo"}</span>
           </div>
-          <p className="fixtureTitle">London City vs Brighton</p>
-          <h2 className="fixtureOpportunity">Convert first-time attendees into repeat visitors.</h2>
+          <p className="fixtureTitle">{live ? "London City vs " + live.fixture.opponent : "London City guided demo"}</p>
+          <h2 className="fixtureOpportunity">{live?.opportunity ?? "Convert fan signals into a clear next action."}</h2>
           <div className="fixtureMetrics">
-            <div className="fixtureMetric"><span>Audience</span><strong>1,420 fans</strong></div>
-            <div className="fixtureMetric"><span>Potential</span><strong>+280–420 tickets</strong></div>
-            <div className="fixtureMetric"><span>Confidence</span><strong>Medium</strong></div>
-            <div className="fixtureMetric"><span>Deadline</span><strong>Thursday</strong></div>
+            <div className="fixtureMetric"><span>Audience</span><strong>{live?.audience.value ? live.audience.value.toLocaleString("en-GB") + " fans" : "Requires club data"}</strong></div>
+            <div className="fixtureMetric"><span>Opportunity score</span><strong>{live?.score !== null && live?.score !== undefined ? live.score + "/100" : "—"}</strong></div>
+            <div className="fixtureMetric"><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
+            <div className="fixtureMetric"><span>Readiness</span><strong>{live?.readiness.label ?? "—"}</strong></div>
           </div>
           <div className="fixtureAction">
             <span>Recommended action</span>
-            <strong>Launch a repeat-visit CRM campaign in the primary catchment.</strong>
+            <strong>{live?.recommendedAction ?? "Review the live evidence and define the next action."}</strong>
           </div>
         </aside>
       </section>
