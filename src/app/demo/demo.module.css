@@ -391,3 +391,12 @@
     width:min(100% - 28px,1120px);
   }
 }
+
+.decisionLink{
+  display:inline-flex;
+  margin-top:18px;
+  color:#d8ff4f;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:900;
+}
