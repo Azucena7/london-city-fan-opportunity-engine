@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 
 export const metadata: Metadata = {
   title: "Fan Growth Engine",
@@ -9,13 +10,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="productShell">
-      <nav className="productNav" aria-label="Product navigation">
-        <div className="productBrand">Fan Growth Engine</div>
-        <div className="productNavActions">
-          <Link className="productNavLink" href="/demo">London City guided demo</Link>
-          <Link className="productButton" href="/demo">Explore the demo</Link>
-        </div>
-      </nav>
+      <ProductJourneyNav active="product" />
 
       <section className="productHero">
         <div>

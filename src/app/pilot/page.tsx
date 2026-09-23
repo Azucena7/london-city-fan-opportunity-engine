@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./pilot.module.css";
+import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 
 export const metadata: Metadata = {
   title: "90-Day Fan Growth Pilot",
@@ -17,13 +18,7 @@ const deliverables = [
 export default function PilotPage() {
   return (
     <main className={styles.shell}>
-      <nav className={styles.nav}>
-        <Link className={styles.brand} href="/">Fan Growth Engine</Link>
-        <div className={styles.navActions}>
-          <Link className={styles.textLink} href="/demo">Guided demo</Link>
-          <Link className={styles.button} href="/today">Open full engine</Link>
-        </div>
-      </nav>
+      <ProductJourneyNav active="pilot" />
 
       <header className={styles.hero}>
         <div>
