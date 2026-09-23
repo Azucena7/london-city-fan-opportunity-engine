@@ -1,0 +1,30 @@
+.shell{min-height:100vh;background:#070806;color:#f5f5f1;font-family:Arial,Helvetica,sans-serif}
+.nav,.header,.summaryGrid,.board,.actionSection,.footerCard{width:min(1120px,calc(100% - 40px));margin:0 auto}
+.nav{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{color:#f5f5f1;text-decoration:none;font-size:14px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.navActions{display:flex;align-items:center;gap:12px}.textLink{color:#b7b8b0;text-decoration:none;font-size:14px;font-weight:700}
+.button{display:inline-flex;padding:12px 18px;border-radius:999px;background:#d8ff4f;color:#11130c;text-decoration:none;font-weight:800;font-size:14px}
+.header{padding:72px 0 42px;display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end}
+.eyebrow{color:#d8ff4f;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.header h1{margin:14px 0 18px;font-size:clamp(46px,6vw,74px);line-height:.98;letter-spacing:-.055em}
+.header p{margin:0;color:#aaa9a2;font-size:19px;line-height:1.5;max-width:760px}
+.statusCard{padding:26px;border-radius:22px;border:1px solid rgba(216,255,79,.26);background:rgba(216,255,79,.07)}
+.statusCard span{display:block;color:#8f9088;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.statusCard strong{display:block;color:#d8ff4f;font-size:24px;letter-spacing:-.02em}
+.statusCard p{margin-top:12px;font-size:14px;color:#bcbdb5}
+.summaryGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-bottom:54px}
+.summaryGrid article{padding:20px;border-radius:17px;border:1px solid rgba(255,255,255,.09);background:#111310}
+.summaryGrid span{display:block;color:#7f8079;font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
+.summaryGrid strong{display:block;font-size:21px;line-height:1.2}.summaryGrid p{margin:8px 0 0;color:#8f9089;font-size:13px;line-height:1.45}
+.board{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:54px 0;border-top:1px solid rgba(255,255,255,.1)}
+.panel{padding:24px;border-radius:20px;border:1px solid rgba(255,255,255,.09);background:#0f110e}
+.panelHead{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}.panelHead strong{font-size:22px;letter-spacing:-.02em}
+.panelTag,.panelTagAmber,.panelTagRed,.panelTagBlue{align-self:flex-start;font-size:10px;font-weight:900;letter-spacing:.08em;padding:6px 8px;border-radius:999px}
+.panelTag{background:rgba(216,255,79,.12);color:#d8ff4f}.panelTagAmber{background:rgba(255,216,117,.12);color:#ffd875}.panelTagRed{background:rgba(255,120,120,.12);color:#ff8b8b}.panelTagBlue{background:rgba(142,181,255,.12);color:#9cbcff}
+.panel ul{margin:0;padding-left:19px;color:#c2c3bb;line-height:1.65}
+.actionSection{padding:44px;border-radius:24px;background:#d8ff4f;color:#10120b;display:grid;grid-template-columns:1.1fr .9fr;gap:36px}
+.actionCopy .eyebrow{color:rgba(16,18,11,.55)}.actionCopy h2{margin:10px 0 12px;font-size:42px;line-height:1.02;letter-spacing:-.045em}.actionCopy p{margin:0;max-width:640px;font-size:17px;line-height:1.5}
+.actionMeta{display:grid;gap:12px}.actionMeta div{padding-top:12px;border-top:1px solid rgba(16,18,11,.18)}.actionMeta span{display:block;font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;opacity:.55;margin-bottom:4px}.actionMeta strong{font-size:15px}
+.footerCard{margin-top:44px;margin-bottom:44px;padding:38px;border-radius:22px;border:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:end;gap:24px}.footerCard h2{margin:10px 0 0;font-size:36px;letter-spacing:-.04em;max-width:760px}
+@media(max-width:850px){.header,.actionSection{grid-template-columns:1fr}.summaryGrid{grid-template-columns:1fr 1fr}.board{grid-template-columns:1fr}.footerCard{align-items:flex-start;flex-direction:column}}
+@media(max-width:600px){.nav,.header,.summaryGrid,.board,.actionSection,.footerCard{width:min(100% - 28px,1120px)}.textLink{display:none}.summaryGrid{grid-template-columns:1fr}.actionSection{padding:30px 24px}.footerCard{padding:30px 24px}}
