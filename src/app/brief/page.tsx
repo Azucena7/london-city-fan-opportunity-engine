@@ -27,6 +27,11 @@ export default function BriefPage() {
             A decision-first view for commercial, ticketing and marketing leads. The brief shows only what changed,
             what is blocked and what action deserves attention now.
           </p>
+          <div className={styles.statusLine}>
+            <span className={styles.liveChip}>Live engine</span>
+            <span className={live?.blockers.length ? styles.dangerChip : styles.liveChip}>{live?.blockers.length ?? 0} blockers</span>
+            <span className={styles.warningChip}>{live?.confidence.label ?? "—"} confidence</span>
+          </div>
         </div>
         <aside className={styles.fixtureCard}>
           <span>Next home fixture</span>
@@ -76,6 +81,10 @@ export default function BriefPage() {
           <article>
             <span>Confidence</span>
             <strong>{live?.confidence.label ?? "—"}</strong>
+            <div className={styles.confidenceLine}>
+              <div className={styles.confidenceTrack}><span /></div>
+              <small>{live?.liveSignals.length ?? 0} signals</small>
+            </div>
             <p>{live?.confidence.rationale ?? ""}</p>
           </article>
           <article>
