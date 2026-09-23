@@ -124,7 +124,7 @@ export default function DecisionRoomPage() {
       <section className={styles.footerCard}>
         <div>
           <span className={styles.eyebrow}>Product principle</span>
-          <h2>Don't just recommend. Show why the club can trust the action.</h2>
+          <h2>Make the recommendation auditable. Show why the club can trust the action.</h2>
         </div>
         <Link className={styles.button} href="/demo">Back to guided demo</Link>
       </section>
