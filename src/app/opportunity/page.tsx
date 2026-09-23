@@ -45,14 +45,14 @@ export default function OpportunityPage() {
 
       <section className={styles.summary} id="summary">
         <article>
-          <span>Opportunity score</span>
-          <strong>{live?.score !== null && live?.score !== undefined ? live.score + "/100" : "—"}</strong>
-          <p>{live?.opportunityLabel ?? "No score available"}</p>
+          <span>Opportunity</span>
+          <strong>{live?.opportunityLabel ?? "Under review"}</strong>
+          <p>{live?.score !== null && live?.score !== undefined ? "Model score " + live.score + "/100" : "Score unavailable"}</p>
         </article>
         <article>
           <span>Audience</span>
-          <strong>{live?.audience.value ? live.audience.value.toLocaleString("en-GB") : "Requires club data"}</strong>
-          <p>{live?.audience.label ?? "Audience not connected"}</p>
+          <strong>{live?.audience.value ? live.audience.value.toLocaleString("en-GB") : "Not connected"}</strong>
+          <p>{live?.audience.value ? live.audience.label : "CRM / ticketing required · we do not estimate this value"}</p>
         </article>
         <article>
           <span>Readiness</span>
