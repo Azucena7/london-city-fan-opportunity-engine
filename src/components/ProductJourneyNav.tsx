@@ -2,13 +2,13 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "product" | "brief" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine";
+  active?: "product" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine";
 };
 
 const primaryItems = [
   { key: "product", label: "Product", href: "/" },
   { key: "brief", label: "Morning brief", href: "/brief" },
-  { key: "decision", label: "Decision", href: "/decision-room" },
+  { key: "opportunity", label: "Opportunity", href: "/opportunity" },
   { key: "results", label: "Results", href: "/results" },
   { key: "pilot", label: "Pilot", href: "/pilot" }
 ] as const;
@@ -16,7 +16,8 @@ const primaryItems = [
 const exploreItems = [
   { key: "cases", label: "Use cases", href: "/cases" },
   { key: "demo", label: "Guided demo", href: "/demo" },
-  { key: "impact", label: "Impact model", href: "/impact" }
+  { key: "impact", label: "Impact model", href: "/impact" },
+  { key: "decision", label: "Decision Room", href: "/decision-room" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
@@ -53,7 +54,8 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
                 <span>
                   {item.key === "cases" ? "Compare different fixture decisions" :
                    item.key === "demo" ? "Walk through the product story" :
-                   "Test commercial scenarios"}
+                   item.key === "impact" ? "Test commercial scenarios" :
+                   "Inspect evidence and blockers"}
                 </span>
               </Link>
             ))}
