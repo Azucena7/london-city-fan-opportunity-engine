@@ -2,53 +2,63 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./decision-room.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
   title: "Decision Room",
   description: "A football club decision view showing evidence, assumptions, blockers and what would change the decision."
 };
 
+function ItemList({ items, empty }: { items: string[]; empty: string }) {
+  if (!items.length) return <ul><li>{empty}</li></ul>;
+  return <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>;
+}
+
 export default function DecisionRoomPage() {
+  const live = getCurrentProductOpportunity();
+
   return (
     <main className={styles.shell}>
       <ProductJourneyNav active="decision" />
 
       <header className={styles.header}>
         <div>
-          <span className={styles.eyebrow}>Decision Room · London City vs Brighton</span>
-          <h1>Should we activate a repeat-visit campaign before Brighton?</h1>
+          <span className={styles.eyebrow}>
+            Decision Room · {live ? "London City vs " + live.fixture.opponent : "London City"}
+          </span>
+          <h1>{live ? "Should the club act on the current " + live.opportunityLabel.toLowerCase() + "?" : "No current decision is available."}</h1>
           <p>
-            A decision view designed to show what the club knows, what it is assuming,
-            what still blocks action and what would make us change course.
+            This view is generated from the same live fixture, campaign and signal data as the engine.
+            It separates what is known from what is assumed and keeps missing CRM/ticket evidence explicit.
           </p>
         </div>
         <aside className={styles.statusCard}>
-          <span>Current decision</span>
-          <strong>GO WITH CONDITIONS</strong>
-          <p>Proceed once the opener audience is matched against existing Brighton buyers.</p>
+          <span>Current decision state</span>
+          <strong>{live?.decisionState ?? "HOLD"}</strong>
+          <p>{live?.primaryBlocker ?? "Waiting for a current product opportunity."}</p>
         </aside>
       </header>
 
       <section className={styles.summaryGrid}>
         <article>
           <span>Opportunity</span>
-          <strong>Repeat attendance</strong>
-          <p>Use the post-opener retention window before the next home fixture.</p>
+          <strong>{live?.opportunityLabel ?? "Under review"}</strong>
+          <p>{live?.opportunity ?? "No current opportunity."}</p>
         </article>
         <article>
           <span>Potential impact</span>
-          <strong>+280–420 tickets</strong>
-          <p>Illustrative until live CRM and ticketing data are connected.</p>
+          <strong>{live?.impact.ticketsLow !== null && live?.impact.ticketsLow !== undefined ? live.impact.ticketsLow + " tickets" : "Requires club data"}</strong>
+          <p>No impact range is asserted until cohort size and conversion evidence are connected.</p>
         </article>
         <article>
           <span>Decision confidence</span>
-          <strong>Medium</strong>
-          <p>Strong contextual case, but one key audience validation step is still missing.</p>
+          <strong>{live?.confidence.label ?? "—"}</strong>
+          <p>{live?.confidence.rationale ?? "No confidence rationale is available."}</p>
         </article>
         <article>
-          <span>Decision deadline</span>
-          <strong>Thursday</strong>
-          <p>Latest useful launch point for the recommended CRM action.</p>
+          <span>Readiness</span>
+          <strong>{live?.readiness.label ?? "—"}</strong>
+          <p>{live?.updatedAt ? "Engine updated " + new Date(live.updatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" }) : "Update time unavailable"}</p>
         </article>
       </section>
 
@@ -58,12 +68,7 @@ export default function DecisionRoomPage() {
             <span className={styles.panelTag}>EVIDENCE</span>
             <strong>What supports the decision</strong>
           </div>
-          <ul>
-            <li>Fixture and venue are confirmed.</li>
-            <li>There is a short retention window after the high-attention opener.</li>
-            <li>Ticket inventory is available for the next home fixture.</li>
-            <li>CRM is the lowest-friction channel for a repeat-visit test.</li>
-          </ul>
+          <ItemList items={live?.known ?? []} empty="No confirmed evidence loaded." />
         </article>
 
         <article className={styles.panel}>
@@ -71,11 +76,7 @@ export default function DecisionRoomPage() {
             <span className={styles.panelTagAmber}>ASSUMPTIONS</span>
             <strong>What we currently believe</strong>
           </div>
-          <ul>
-            <li>First-time opener attendees are identifiable in CRM.</li>
-            <li>A meaningful share has not yet purchased Brighton.</li>
-            <li>Repeat-visit propensity is stronger than cold-acquisition propensity.</li>
-          </ul>
+          <ItemList items={live?.assumptions ?? []} empty="No assumptions loaded." />
         </article>
 
         <article className={styles.panel}>
@@ -83,11 +84,7 @@ export default function DecisionRoomPage() {
             <span className={styles.panelTagRed}>BLOCKERS</span>
             <strong>What must be resolved</strong>
           </div>
-          <ul>
-            <li>Build the opener cohort.</li>
-            <li>Remove fans who already purchased Brighton.</li>
-            <li>Confirm addressability and consent.</li>
-          </ul>
+          <ItemList items={live?.blockers ?? []} empty="No blocking approval gate is currently recorded." />
         </article>
 
         <article className={styles.panel}>
@@ -95,35 +92,33 @@ export default function DecisionRoomPage() {
             <span className={styles.panelTagBlue}>WHAT WOULD CHANGE THE DECISION</span>
             <strong>Conditions that invalidate the current plan</strong>
           </div>
-          <ul>
-            <li>Organic repeat purchase is already above the target threshold.</li>
-            <li>The addressable non-returner audience is too small to justify activation.</li>
-            <li>Tracking cannot attribute ticket sales to the campaign.</li>
-          </ul>
+          <ItemList items={live?.whatWouldChangeDecision ?? []} empty="No decision-change conditions loaded." />
         </article>
       </section>
 
       <section className={styles.actionSection}>
         <div className={styles.actionCopy}>
           <span className={styles.eyebrow}>Next required action</span>
-          <h2>Build and validate the opener non-returner cohort.</h2>
-          <p>Once this gate is complete, the decision moves from conditional to ready for execution.</p>
+          <h2>{live?.recommendedAction ?? "No current action is available."}</h2>
+          <p>
+            The product does not promote this to a ready state until the blocking approval and measurement gaps are resolved.
+          </p>
         </div>
         <div className={styles.actionMeta}>
-          <div><span>Owner</span><strong>CRM / Marketing</strong></div>
-          <div><span>Due</span><strong>Thursday 12:00</strong></div>
-          <div><span>Success condition</span><strong>Matched, consented audience ready to activate</strong></div>
+          <div><span>Owner</span><strong>{live?.nextAction.owner ?? "Pending"}</strong></div>
+          <div><span>Due</span><strong>{live?.nextAction.deadline ?? "Pending"}</strong></div>
+          <div><span>Measure</span><strong>{live?.nextAction.measurement ?? "Pending"}</strong></div>
         </div>
       </section>
 
       <section className={styles.footerCard}>
         <div>
-          <span className={styles.eyebrow}>Product principle</span>
-          <h2>Make the recommendation auditable. Show why the club can trust the action.</h2>
+          <span className={styles.eyebrow}>Live lineage</span>
+          <h2>{live ? live.liveSignals.length + " engine signals currently feed this decision view." : "No live signal lineage is available."}</h2>
         </div>
         <div className={styles.navActions}>
           <Link className={styles.textLink} href="/demo">Back to guided demo</Link>
-          <Link className={styles.button} href="/results">See Results & Learning</Link>
+          <Link className={styles.button} href="/impact">Open Impact Model</Link>
         </div>
       </section>
     </main>
