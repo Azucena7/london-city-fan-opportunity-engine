@@ -23,6 +23,11 @@ export type ProductOpportunity = {
   opportunity: string;
   whyNow: string;
   recommendedAction: string;
+  nextAction: {
+    owner: string;
+    deadline: string;
+    measurement: string;
+  };
   audience: {
     label: string;
     value: number | null;
@@ -192,6 +197,10 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
     score >= 60 ? "Promising opportunity" :
     "Selective opportunity";
 
+  const nextScheduledAction = campaign?.schedule.find((item) => item.state !== "complete");
+  const primaryMeasurement = campaign?.measurement.find((item) => item.id === "purchase-scan-repeat")
+    ?? campaign?.measurement[0];
+
   return {
     fixtureId: calendarFixture.id,
     fixture: {
@@ -210,6 +219,13 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
       campaign?.whyNow.en ??
       "The next home fixture has active demand and attention signals that justify review.",
     recommendedAction,
+    nextAction: {
+      owner: "CRM / Marketing",
+      deadline: nextScheduledAction
+        ? `${nextScheduledAction.window} · ${nextScheduledAction.date}`
+        : "Before campaign launch",
+      measurement: primaryMeasurement?.label.en ?? "Matched ticket conversion"
+    },
     audience: {
       label: "Opener buyers who have not yet purchased Brighton",
       value: null,
