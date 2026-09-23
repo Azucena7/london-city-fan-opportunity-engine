@@ -165,7 +165,7 @@ export default function GuidedDemoPage() {
                     <li><strong>Blocker:</strong> {live?.primaryBlocker ?? "Not available"}</li>
                     <li><strong>Would change the decision:</strong> {live?.whatWouldChangeDecision[0] ?? "Not available"}</li>
                   </ul>
-                  <Link className={styles.decisionLink} href="/decision-room">Open Decision Room →</Link>
+                  <Link className={styles.decisionLink} href="/opportunity">Open Opportunity workspace →</Link>
                 </div>
               ) : null}
 
@@ -187,7 +187,7 @@ export default function GuidedDemoPage() {
           <h2>Want to see the full intelligence layer?</h2>
           <p>The London City engine remains available with signals, territories, fixtures, evidence and operational detail.</p>
         </div>
-        <Link className={styles.button} href="/today">Open full London City engine</Link>
+        <Link className={styles.button} href="/today">Open Analyst view</Link>
       </section>
     </main>
   );
