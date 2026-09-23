@@ -26,34 +26,35 @@ import "./today-cockpit.css";
 import "./calendar-fixture.css";
 import "./territory-access.css";
 import "./experience-internal.css";
+import "./product-shell.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://london-city-fan-opportunity-engine.vercel.app"),
   title: {
-    default: "London City Fan Opportunity Engine",
-    template: "%s | London City Fan Opportunity Engine"
+    default: "Fan Growth Engine",
+    template: "%s | Fan Growth Engine"
   },
   description:
-    "An independent prototype exploring how football clubs can turn fragmented fan, fixture, territory and market signals into decisions—and compare hypotheses with observed outcomes.",
+    "Turn fan data into the next best action for every fixture. A live product prototype for football club fan growth and commercial decision intelligence.",
   openGraph: {
-    title: "London City Fan Opportunity Engine",
-    description: "From signals to decisions to observed outcomes.",
-    url: "/today",
-    siteName: "London City Fan Opportunity Engine",
+    title: "Fan Growth Engine",
+    description: "Discover the opportunity. Act before matchday. Learn what worked.",
+    url: "/",
+    siteName: "Fan Growth Engine",
     type: "website",
     images: [{
       url: "/linkedin-card",
       width: 1200,
       height: 630,
-      alt: "London City Fan Opportunity Engine — from signals to decisions to observed outcomes"
+      alt: "Fan Growth Engine — decision intelligence for football clubs"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "London City Fan Opportunity Engine",
-    description: "From signals to decisions to observed outcomes.",
+    title: "Fan Growth Engine",
+    description: "Turn fan data into the next best action for every fixture.",
     images: ["/linkedin-card"]
   }
 };
