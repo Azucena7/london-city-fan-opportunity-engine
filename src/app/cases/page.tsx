@@ -9,14 +9,6 @@ export const metadata: Metadata = {
   description: "Three different fixture decisions showing how Fan Growth Engine adapts to different commercial contexts."
 };
 
-const typeLabels = {
-  repeat: "Repeat attendance",
-  acquisition: "Acquisition",
-  "defend-core": "Defend core",
-  yield: "Yield",
-  other: "Other"
-} as const;
-
 export default function CasesPage() {
   const cases = getFeaturedProductCases();
 
@@ -43,7 +35,7 @@ export default function CasesPage() {
               </span>
             </div>
             <h2>London City vs {item.opponent}</h2>
-            <div className={styles.type}>{typeLabels[item.opportunityType]}</div>
+            <div className={styles.type}>{item.opportunityType}</div>
 
             <div className={styles.scoreRow}>
               <div><span>Planning score</span><strong>{item.planningScore}/100</strong></div>
