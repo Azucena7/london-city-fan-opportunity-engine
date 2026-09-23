@@ -115,7 +115,7 @@ export default function Home() {
             After matchday: the result and what changes next.
           </p>
         </div>
-        <Link className="productButton" href="/demo">Open the guided demo</Link>
+        <Link className="productButton" href="/pilot">See the 90-day pilot</Link>
       </section>
 
       <footer className="productFooter">
