@@ -112,6 +112,7 @@ export default function PilotPage() {
         <div className={styles.ctaActions}>
           <Link className={styles.button} href="/demo">Explore the product flow</Link>
           <Link className={styles.secondary} href="/decision-room">See the Decision Room</Link>
+          <Link className={styles.secondary} href="/pilot/operating-pack">Open the Pilot Operating Pack</Link>
         </div>
       </section>
     </main>
