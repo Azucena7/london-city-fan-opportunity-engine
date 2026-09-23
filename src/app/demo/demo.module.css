@@ -312,3 +312,82 @@
   .learningCard{grid-template-columns:1fr}
   .arrow{transform:rotate(90deg)}
 }
+
+.decisionStrip,.readinessBar{
+  width:min(1120px,calc(100% - 40px));
+  margin:0 auto;
+}
+.decisionStrip{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  gap:16px;
+  align-items:stretch;
+  padding:0 0 22px;
+}
+.decisionBlock{
+  padding:22px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#111310;
+}
+.decisionBlock span,.readinessBar span{
+  display:block;
+  margin-bottom:8px;
+  color:#d8ff4f;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.decisionBlock strong{
+  display:block;
+  font-size:20px;
+  line-height:1.28;
+  letter-spacing:-.02em;
+}
+.decisionBlock p{
+  margin:10px 0 0;
+  color:#8f9089;
+  font-size:13px;
+  line-height:1.5;
+}
+.decisionArrow{
+  align-self:center;
+  color:#d8ff4f;
+  font-size:28px;
+  opacity:.8;
+}
+.readinessBar{
+  display:grid;
+  grid-template-columns:.7fr .9fr 1.6fr;
+  gap:10px;
+  margin-bottom:72px;
+}
+.readinessBar>div{
+  padding:16px 18px;
+  border-top:1px solid rgba(255,255,255,.12);
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.readinessBar span{color:#7f8079}
+.readinessBar strong{
+  display:block;
+  font-size:14px;
+  line-height:1.4;
+}
+@media(max-width:850px){
+  .decisionStrip{
+    grid-template-columns:1fr;
+  }
+  .decisionArrow{
+    transform:rotate(90deg);
+    justify-self:center;
+  }
+  .readinessBar{
+    grid-template-columns:1fr;
+    margin-bottom:54px;
+  }
+}
+@media(max-width:600px){
+  .decisionStrip,.readinessBar{
+    width:min(100% - 28px,1120px);
+  }
+}

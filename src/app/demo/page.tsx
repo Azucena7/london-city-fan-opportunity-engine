@@ -79,6 +79,41 @@ export default function GuidedDemoPage() {
         </aside>
       </header>
 
+      <section className={styles.decisionStrip} aria-label="Opportunity action impact summary">
+        <article className={styles.decisionBlock}>
+          <span>OPPORTUNITY</span>
+          <strong>Retain opener attendees before Brighton.</strong>
+          <p>Prioritise the repeat-attendance window created by the opening fixture.</p>
+        </article>
+        <div className={styles.decisionArrow} aria-hidden="true">→</div>
+        <article className={styles.decisionBlock}>
+          <span>ACTION</span>
+          <strong>Build the non-returner cohort and activate CRM.</strong>
+          <p>Audience, owner, timing and measurement are defined before execution.</p>
+        </article>
+        <div className={styles.decisionArrow} aria-hidden="true">→</div>
+        <article className={styles.decisionBlock}>
+          <span>IMPACT</span>
+          <strong>+280–420 tickets</strong>
+          <p>Illustrative potential only — replaced by a club-specific model when live data is connected.</p>
+        </article>
+      </section>
+
+      <section className={styles.readinessBar}>
+        <div>
+          <span>Decision confidence</span>
+          <strong>Medium</strong>
+        </div>
+        <div>
+          <span>Readiness</span>
+          <strong>2 of 3 gates ready</strong>
+        </div>
+        <div>
+          <span>Primary blocker</span>
+          <strong>CRM cohort not yet matched to Brighton buyers</strong>
+        </div>
+      </section>
+
       <section className={styles.story}>
         {steps.map((step, index) => (
           <article className={styles.step} key={step.number}>
