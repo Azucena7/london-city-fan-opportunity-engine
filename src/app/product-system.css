@@ -1,0 +1,94 @@
+:root{
+  --product-bg:#F3F2EC;
+  --product-surface:#FBFAF6;
+  --product-surface-2:#EEEDE6;
+  --product-ink:#10211B;
+  --product-muted:#64706B;
+  --product-line:#D7D8D1;
+  --product-accent:#C7EA3A;
+  --product-accent-ink:#263400;
+  --product-inverse:#10211B;
+  --product-inverse-muted:#AEB8B3;
+  --product-success:#18714A;
+  --product-warning:#A96500;
+  --product-danger:#A83C3C;
+  --product-info:#2D66A8;
+  --product-missing:#7B8580;
+  --product-radius-sm:12px;
+  --product-radius-md:18px;
+  --product-radius-lg:28px;
+  --product-shadow:0 18px 60px rgba(16,33,27,.08);
+  --product-display:clamp(44px,6.2vw,76px);
+  --product-title:clamp(30px,4vw,48px);
+  --product-body:16px;
+}
+
+.productShell,
+.productAppShell{
+  color:var(--product-ink);
+  background:var(--product-bg);
+  font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+.productDataState{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:26px;
+  padding:5px 9px;
+  border:1px solid var(--product-line);
+  border-radius:999px;
+  background:var(--product-surface);
+  color:var(--product-muted);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+.productDataState::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--product-missing);
+}
+.productDataState.live::before{background:var(--product-success)}
+.productDataState.modelled::before{background:var(--product-warning)}
+.productDataState.missing::before{background:var(--product-missing)}
+
+.productStatus{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+.productStatus.success{background:#E6F4EC;color:var(--product-success)}
+.productStatus.warning{background:#FFF2D8;color:var(--product-warning)}
+.productStatus.danger{background:#FBE6E4;color:var(--product-danger)}
+.productStatus.info{background:#E7EFFA;color:var(--product-info)}
+
+.productConfidence{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.productConfidenceTrack{
+  width:92px;
+  height:6px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#DDE0DA;
+}
+.productConfidenceTrack>span{
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:var(--product-warning);
+}
+
+@media (prefers-reduced-motion:no-preference){
+  a,button{transition:color .16s ease,background-color .16s ease,border-color .16s ease,transform .16s ease}
+}
