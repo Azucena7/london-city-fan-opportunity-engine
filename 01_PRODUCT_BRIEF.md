@@ -1,40 +1,100 @@
 # Product Brief
 
 ## Product name
-London City Fan Opportunity Engine
+Fan Growth Engine
+
+## Live demonstration environment
+London City Lionesses
 
 ## Public positioning
-A practical AI lab for women's football growth.
+Decision intelligence for football clubs.
 
-## Core question
-**Where are the next 1,000 recurring spectators for London City Lionesses, and how would we acquire them?**
+## Core promise
+**Turn fan data into the next best action for every fixture.**
+
+Before each home match, the product should help a club understand:
+
+1. Where is the highest-value fan growth opportunity?
+2. Who should we target?
+3. What should we do?
+4. What could it generate?
+5. Is there enough evidence to act?
+6. What happened afterwards?
+7. What changes for the next fixture?
+
+## Primary commercial entry product
+### 90-Day Fan Growth Pilot
+Six fixture-by-fixture decision cycles combining the platform with a light intelligence service.
+
+The pilot is designed to prove value before asking a club to adopt a broader system.
+
+## Core product flow
+**Opportunity → Action → Impact → Decision → Result → Learning**
+
+### Opportunity
+The most relevant attendance, repeat-visit or revenue opportunity around the next fixture.
+
+### Action
+Audience, channel, owner, timing and measurement plan.
+
+### Impact
+A transparent scenario based on addressable audience, observed or assumed conversion, ticket economics and activation cost.
+
+### Decision
+Evidence, assumptions, blockers, confidence and what would change the decision.
+
+### Result
+Measured campaign and ticketing outcome after matchday.
+
+### Learning
+A club-specific signal that improves the next recommendation.
 
 ## Intended users
-- Public LinkedIn audience
-- Women's football commercial teams
-- Ticketing / CRM / marketing professionals
-- Sponsors and agencies
-- Club executives
 
-## User stories
+### Commercial / revenue leader
+Needs to know what decision deserves attention and the value at stake.
 
-### Public visitor
-I want to understand, in under 60 seconds, why a specific South London territory is attractive and what action the club should take.
-
-### Marketing lead
-I want to know which territory to target for the next home fixture, with what product, message and channel.
+### Marketing / CRM lead
+Needs the audience, action, channel, timing and measurement plan.
 
 ### Ticketing lead
-I want to know whether a fixture should prioritise acquisition, utilisation, premium yield or core retention.
+Needs to know how the decision affects inventory, pricing, utilisation and repeat attendance.
 
-### Commercial lead
-I want to see which local businesses and categories can distribute audience or fund activations.
+### Analyst
+Needs the sources, assumptions, calculations, uncertainty and measurement design.
 
-## Non-goals in V1
-- tactical football analysis
-- player performance modelling
-- automated fan outreach without human approval
-- claiming causal impact before post-match data exists
+### Executive / CEO
+Needs a concise view of opportunity, risk, decision readiness and result.
 
-## Product principle
-**Automate research and prioritisation; keep relationships and final commercial decisions human-led.**
+## Product principles
+
+- Simple on the surface; evidence underneath.
+- Opportunity potential and confidence are different things.
+- Claimed, sourced, confirmed, measured and validated should not be conflated.
+- A recommendation should state what would change it.
+- Decision work and execution work should be visibly different.
+- Scenario models should expose assumptions and should not be presented as forecasts.
+- Post-match learning must feed the next decision.
+- Human decision owners remain accountable for commercial choices.
+
+## Live product routes
+
+- `/` — product / sales front
+- `/demo` — guided London City walkthrough
+- `/decision-room` — auditable decision view
+- `/results` — Results & Learning
+- `/impact` — commercial scenario model
+- `/pilot` — 90-day pilot proposition
+- `/today` — full intelligence engine
+
+## Non-goals
+
+- tactical football analysis;
+- player performance modelling;
+- automated fan outreach without human approval;
+- black-box ROI claims;
+- causal claims without appropriate measurement;
+- replacing a club's CRM, ticketing or BI stack in the initial pilot.
+
+## Long-term product direction
+A club-specific decision layer that becomes more valuable as it learns which audiences, fixtures, territories, offers and activation patterns actually drive attendance, repeat visits and commercial return.
