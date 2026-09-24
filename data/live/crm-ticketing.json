@@ -1,0 +1,10 @@
+{
+  "datasetState": "requires-access",
+  "scope": "club-crm-ticketing",
+  "extractedAt": null,
+  "note": {
+    "en": "No authorised club CRM/ticketing export is connected. Records stay empty until a consent-safe export is provided.",
+    "es": "No hay un export autorizado de CRM/ticketing del club conectado. Los registros permanecen vacíos hasta recibir un export seguro y consentido."
+  },
+  "records": []
+}

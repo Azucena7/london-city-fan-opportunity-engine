@@ -14,6 +14,7 @@ import leagueAttendanceBenchmarkRaw from "../../data/live/wsl-attendance-benchma
 import audienceReachRaw from "../../data/live/audience-reach.json";
 import crmTicketingReadinessRaw from "../../data/live/crm-ticketing-readiness.json";
 import crmTicketingDemoRaw from "../../data/demo/brighton-crm-ticketing.synthetic.json";
+import crmTicketingLiveRaw from "../../data/live/crm-ticketing.json";
 import campaignPlansRaw from "../../data/live/campaign-plans.json";
 import searchDemandRaw from "../../data/live/search-demand.json";
 import experienceDemandRaw from "../../data/live/experience-demand-validation.json";
@@ -24,7 +25,7 @@ import partnerCommercialPackRaw from "../../data/live/partner-commercial-pack.js
 import pilotReadinessRaw from "../../data/live/pilot-readiness.json";
 import eventLandscapeRaw from "../../data/live/event-landscape.json";
 import { buildPostMatchScorecards } from "./postmatch";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingReadiness, EventLandscapeData, ExperienceDemandData, DecisionValidationData, ExperimentMeasurementData, Fixture, LeagueAttendanceBenchmark, LiveSignal, MobilityPartnershipData, PartnerCommercialPackData, PilotReadinessData, PostMatchReview, SearchDemandData, Territory } from "./models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingLiveDataset, CrmTicketingReadiness, EventLandscapeData, ExperienceDemandData, DecisionValidationData, ExperimentMeasurementData, Fixture, LeagueAttendanceBenchmark, LiveSignal, MobilityPartnershipData, PartnerCommercialPackData, PilotReadinessData, PostMatchReview, SearchDemandData, Territory } from "./models";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -42,6 +43,7 @@ export const leagueAttendanceBenchmark = leagueAttendanceBenchmarkRaw as LeagueA
 export const audienceReach = audienceReachRaw as AudienceReachData;
 export const crmTicketingReadiness = crmTicketingReadinessRaw as CrmTicketingReadiness;
 export const crmTicketingDemo = crmTicketingDemoRaw as CrmTicketingDemo;
+export const crmTicketingLive = crmTicketingLiveRaw as CrmTicketingLiveDataset;
 export const campaignPlans = campaignPlansRaw as CampaignPlanData;
 export const searchDemand = searchDemandRaw as SearchDemandData;
 export const experienceDemand = experienceDemandRaw as ExperienceDemandData;

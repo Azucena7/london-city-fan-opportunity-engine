@@ -95,3 +95,55 @@ export function summariseCrmTicketing(records: CrmTicketingRecord[]): CrmTicketi
     channels: [...channelMap.values()].sort((a, b) => b.tickets - a.tickets || a.channel.localeCompare(b.channel))
   };
 }
+
+
+export type RepeatCohortSummary = {
+  sourceFixtureId: string;
+  targetFixtureId: string;
+  sourceBuyers: number;
+  sourceConsentedBuyers: number;
+  alreadyPurchasedTarget: number;
+  addressableConsentedNonReturners: number;
+};
+
+export function buildRepeatCohort(
+  records: CrmTicketingRecord[],
+  sourceFixtureId: string,
+  targetFixtureId: string
+): RepeatCohortSummary {
+  const sourceBuyerIds = new Set<string>();
+  const sourceConsentedIds = new Set<string>();
+  const targetBuyerIds = new Set<string>();
+
+  for (const row of records) {
+    if (row.fixture_id === sourceFixtureId) {
+      sourceBuyerIds.add(row.supporter_id_hash);
+      if (row.consent_status === "consented") {
+        sourceConsentedIds.add(row.supporter_id_hash);
+      }
+    }
+    if (row.fixture_id === targetFixtureId) {
+      targetBuyerIds.add(row.supporter_id_hash);
+    }
+  }
+
+  let alreadyPurchasedTarget = 0;
+  let addressableConsentedNonReturners = 0;
+
+  for (const supporterId of sourceConsentedIds) {
+    if (targetBuyerIds.has(supporterId)) {
+      alreadyPurchasedTarget += 1;
+    } else {
+      addressableConsentedNonReturners += 1;
+    }
+  }
+
+  return {
+    sourceFixtureId,
+    targetFixtureId,
+    sourceBuyers: sourceBuyerIds.size,
+    sourceConsentedBuyers: sourceConsentedIds.size,
+    alreadyPurchasedTarget,
+    addressableConsentedNonReturners
+  };
+}

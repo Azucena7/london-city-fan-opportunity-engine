@@ -712,6 +712,14 @@ export type CrmTicketingDemo = {
   records: CrmTicketingRecord[];
 };
 
+export type CrmTicketingLiveDataset = {
+  datasetState: "requires-access" | "club-live";
+  scope: "club-crm-ticketing";
+  extractedAt: string | null;
+  note: LocalizedText;
+  records: CrmTicketingRecord[];
+};
+
 export type CrmTicketingReadiness = {
   checkedAt: string;
   contractVersion: string;
