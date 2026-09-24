@@ -15,7 +15,7 @@ export default function OpportunityPage() {
   const blocked = (live?.blockers.length ?? 0) > 0;
 
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="opportunity" />
 
       <header className={styles.header}>
