@@ -17,67 +17,75 @@ export default function CasesPage() {
       <ProductJourneyNav active="cases" />
 
       <header className={styles.hero}>
-        <span className={styles.eyebrow}>Opportunity case library</span>
-        <h1>The same engine should make different decisions for different fixtures.</h1>
+        <span className={styles.eyebrow}>Fixture use cases</span>
+        <h1>Different fixtures should produce different commercial decisions.</h1>
         <p>
-          A credible club product cannot be one Brighton story hard-coded three ways. These cases are derived from the fixture planning model,
-          with live campaign evidence clearly distinguished from planning-only cases.
+          The engine should not recommend “push harder” every week. These cases show retention, core protection and acquisition contexts from the existing fixture planning model.
         </p>
       </header>
 
-      <section className={styles.grid}>
+      <section className={styles.tableWrap}>
+        <div className={styles.tableHead}>
+          <span>Fixture</span>
+          <span>Opportunity</span>
+          <span>Mode</span>
+          <span>Score</span>
+          <span>Evidence</span>
+        </div>
+
         {cases.map((item) => (
-          <article className={styles.card} key={item.date + item.opponent}>
-            <div className={styles.cardTop}>
-              <span>{item.date}</span>
+          <article className={styles.caseRow} key={item.date + item.opponent}>
+            <div className={styles.fixture}>
+              <small>{item.date}</small>
+              <strong>{item.opponent}</strong>
+            </div>
+            <div className={styles.opportunity}>
+              <strong>{item.opportunityType}</strong>
+              <small>{item.product}</small>
+            </div>
+            <div><span className={styles.mode}>{item.decision}</span></div>
+            <div className={styles.score}>{item.planningScore}<small>/100</small></div>
+            <div>
               <span className={item.evidenceState === "live-decision-case" ? styles.live : styles.model}>
                 {item.evidenceState === "live-decision-case" ? "Live decision case" : "Planning model"}
               </span>
             </div>
-            <h2>London City vs {item.opponent}</h2>
-            <div className={styles.type}>{item.opportunityType}</div>
 
-            <div className={styles.scoreRow}>
-              <div><span>Planning score</span><strong>{item.planningScore}/100</strong></div>
-              <div><span>Decision mode</span><strong>{item.decision}</strong></div>
+            <div className={styles.detailStrip}>
+              <div><span>Channel</span><strong>{item.channel}</strong></div>
+              <div><span>Message</span><strong>{item.message}</strong></div>
+              <div><span>Territory</span><strong>{item.territory}</strong></div>
+              <div className={styles.detailAction}>
+                {item.evidenceState === "live-decision-case" ? (
+                  <Link href="/opportunity">Open live opportunity →</Link>
+                ) : (
+                  <span>Planning case only</span>
+                )}
+              </div>
             </div>
-
-            <div className={styles.detail}>
-              <span>Product</span>
-              <strong>{item.product}</strong>
-            </div>
-            <div className={styles.detail}>
-              <span>Channel</span>
-              <strong>{item.channel}</strong>
-            </div>
-            <div className={styles.detail}>
-              <span>Message</span>
-              <strong>{item.message}</strong>
-            </div>
-            <div className={styles.detail}>
-              <span>Target territory</span>
-              <strong>{item.territory}</strong>
-            </div>
-
-            {item.evidenceState === "live-decision-case" ? (
-              <Link className={styles.primary} href="/decision-room">Open live Decision Room →</Link>
-            ) : (
-              <p className={styles.note}>This case has planning-model inputs only. It should not be presented as an evidence-complete recommendation.</p>
-            )}
           </article>
         ))}
       </section>
 
-      <section className={styles.compare}>
+      <section className={styles.read}>
         <div>
-          <span className={styles.eyebrow}>Why this matters</span>
-          <h2>Growth is not always “attack harder”.</h2>
+          <span className={styles.eyebrow}>The product point</span>
+          <h2>Growth is not always attack.</h2>
           <p>
-            One fixture may justify retention, another selective acquisition, another protection of the core audience.
-            The product should make those differences visible instead of forcing every match into the same marketing play.
+            A high-opportunity derby may justify acquisition. A weaker fixture may need core protection. A post-opener fixture may favour retention.
+            The user should see that difference before opening any detailed evidence.
           </p>
         </div>
-        <Link className={styles.button} href="/brief">Open Morning Brief</Link>
+        <div className={styles.legend}>
+          <div><span className={styles.legendRepeat}>01</span><strong>Retain</strong><small>Convert recent attendees again</small></div>
+          <div><span className={styles.legendDefend}>02</span><strong>Defend</strong><small>Protect utilisation of the core</small></div>
+          <div><span className={styles.legendAcquire}>03</span><strong>Acquire</strong><small>Use fixture appeal to grow reach</small></div>
+        </div>
+      </section>
+
+      <section className={styles.footerRow}>
+        <Link className={styles.textLink} href="/brief">← Morning Brief</Link>
+        <Link className={styles.button} href="/opportunity">Open current Opportunity →</Link>
       </section>
     </main>
   );
