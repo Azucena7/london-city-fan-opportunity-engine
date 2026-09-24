@@ -379,3 +379,13 @@ test("strategy and operational next action stay separate", () => {
   assert.match(brief, /Strategic recommendation/);
   assert.match(decision, /nextAction\.label/);
 });
+
+
+test("pilot operating pack explains aggregate-only club data handling", () => {
+  const page = read("src/app/pilot/operating-pack/page.tsx");
+  assert.match(page, /Data trust/);
+  assert.match(page, /Club-controlled export/);
+  assert.match(page, /Pseudonymous local processing/);
+  assert.match(page, /Aggregate evidence only/);
+  assert.match(page, /crmTicketingLive\.datasetState/);
+});
