@@ -413,3 +413,15 @@ test("Impact model seeds from measured club history only when aggregate evidence
   assert.match(impact, /Measured historical seed · editable/);
   assert.match(impact, /Scenario, not forecast/);
 });
+
+
+test("Results never equates campaign attribution with incrementality", () => {
+  const results = read("src/app/results/page.tsx");
+  const adapter = read("src/lib/productResults.ts");
+  assert.match(results, /Attribution is not the same as incremental impact/);
+  assert.match(results, /What happened after the action/);
+  assert.match(results, /Not established/);
+  assert.match(adapter, /incrementality: "not-established"/);
+  assert.match(adapter, /causalClaim: false/);
+  assert.match(adapter, /randomized holdout, credible control group, or pre-agreed counterfactual baseline/);
+});
