@@ -35,5 +35,31 @@ if (errors.length) {
   process.exitCode = 1;
 } else {
   const scans = dataset.records.filter((row) => row.scan_status === "scanned").length;
-  console.log(JSON.stringify({ state: dataset.datasetState, records: dataset.records.length, uniqueTickets: ticketIds.size, scans }, null, 2));
+  const noShows = dataset.records.filter((row) => row.scan_status === "not_scanned").length;
+  const buyers = new Set(dataset.records.map((row) => row.supporter_id_hash));
+  const revenue = dataset.records.reduce((sum, row) => sum + row.realised_unit_price, 0);
+  const attributed = dataset.records.filter((row) => row.campaign_id).length;
+
+  if (dataset.records.length !== 12) errors.push("Synthetic rehearsal should contain 12 ticket rows");
+  if (buyers.size !== 10) errors.push("Synthetic rehearsal should contain 10 unique buyers");
+  if (scans !== 10) errors.push("Synthetic rehearsal should contain 10 scans");
+  if (noShows !== 2) errors.push("Synthetic rehearsal should contain 2 no-shows");
+  if (revenue !== 156) errors.push("Synthetic rehearsal gross ticket revenue should equal GBP 156");
+  if (attributed !== 10) errors.push("Synthetic rehearsal should contain 10 campaign-attributed tickets");
+
+  if (errors.length) {
+    console.error(errors.join("\n"));
+    process.exitCode = 1;
+  } else {
+    console.log(JSON.stringify({
+      state: dataset.datasetState,
+      records: dataset.records.length,
+      uniqueTickets: ticketIds.size,
+      uniqueBuyers: buyers.size,
+      scans,
+      noShows,
+      grossTicketRevenue: revenue,
+      campaignAttributedTickets: attributed
+    }, null, 2));
+  }
 }
