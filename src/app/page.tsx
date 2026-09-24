@@ -38,7 +38,7 @@ export default function Home() {
 
         <aside className="fixtureCard" aria-label="Current engine opportunity">
           <div className="fixtureCardTop">
-            <span>Current opportunity</span>
+            <span>{live?.timingLabel ?? "Current opportunity"} · Current opportunity</span>
             <span className="fixtureLive">{live ? "Live engine" : "No live case"}</span>
           </div>
 
