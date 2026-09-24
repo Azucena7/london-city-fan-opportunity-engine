@@ -316,3 +316,19 @@ test("mobile product flow keeps a contextual next action", () => {
   assert.match(briefCss, /position:fixed/);
   assert.match(opportunityCss, /position:fixed/);
 });
+
+
+test("Results switches from missing to measured only through the live CRM slot", () => {
+  const page = read("src/app/results/page.tsx");
+  const adapter = read("src/lib/productResults.ts");
+  const live = JSON.parse(read("data/live/crm-ticketing.json"));
+
+  assert.match(page, /getCurrentProductResults/);
+  assert.match(page, /Club ticketing data connected/);
+  assert.match(page, /Awaiting club conversion data/);
+  assert.match(adapter, /datasetState !== "club-live"/);
+  assert.match(adapter, /campaignAttributedTickets/);
+  assert.match(adapter, /repeatPurchaseRate/);
+  assert.equal(live.datasetState, "requires-access");
+  assert.equal(live.records.length, 0);
+});
