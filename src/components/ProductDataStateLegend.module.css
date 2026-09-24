@@ -1,4 +1,6 @@
 .legend{
+  width:min(1120px,calc(100% - 40px));
+  margin:0 auto 14px;
   display:flex;
   align-items:center;
   flex-wrap:wrap;
@@ -36,3 +38,7 @@
 .live{color:var(--product-success)}
 .modelled{color:var(--product-warning)}
 .missing{color:var(--product-missing)}
+
+@media(max-width:600px){
+  .legend{width:min(100% - 28px,1120px);margin-bottom:12px}
+}
