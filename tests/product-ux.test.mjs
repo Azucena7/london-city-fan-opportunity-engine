@@ -390,3 +390,13 @@ test("fixture lifecycle keeps pre-match and post-match UX distinct", () => {
   assert.match(results, /Measurement starts after matchday/);
   assert.match(results, /Pre-match · outcome not available yet/);
 });
+
+
+test("pilot operating pack explains aggregate-only club data handling", () => {
+  const page = read("src/app/pilot/operating-pack/page.tsx");
+  assert.match(page, /Data trust/);
+  assert.match(page, /Club-controlled export/);
+  assert.match(page, /Pseudonymous local processing/);
+  assert.match(page, /Aggregate evidence only/);
+  assert.match(page, /crmTicketingLive\.datasetState/);
+});
