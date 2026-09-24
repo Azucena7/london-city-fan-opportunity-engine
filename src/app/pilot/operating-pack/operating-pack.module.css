@@ -139,3 +139,63 @@
 @media(max-width:800px){
   .trustGrid{grid-template-columns:1fr}
 }
+
+.measurementGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.measurementGrid article{
+  padding:20px;
+  border:1px solid var(--product-line);
+  border-radius:var(--product-radius-md);
+  background:var(--product-surface);
+}
+.measurementGrid span{
+  display:block;
+  color:#526D00;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.measurementGrid strong{
+  display:block;
+  font-size:18px;
+  line-height:1.3;
+}
+.measurementGrid p{
+  margin:8px 0 0;
+  color:var(--product-muted);
+  font-size:12px;
+  line-height:1.5;
+}
+.measurementRule{
+  margin-top:14px;
+  padding:18px 0;
+  border-top:1px solid var(--product-line);
+  border-bottom:1px solid var(--product-line);
+}
+.measurementRule span{
+  display:block;
+  color:var(--product-danger);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.measurementRule strong{
+  display:block;
+  font-size:17px;
+}
+.measurementRule p{
+  margin:6px 0 0;
+  color:var(--product-muted);
+  font-size:12px;
+  line-height:1.45;
+}
+@media(max-width:800px){
+  .measurementGrid{grid-template-columns:1fr}
+}
