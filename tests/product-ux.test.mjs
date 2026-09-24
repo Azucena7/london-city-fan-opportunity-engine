@@ -437,5 +437,5 @@ test("current product opportunity uses declared campaign evidence instead of Bri
   assert.doesNotMatch(opportunity, /weather-brighton-waiting/);
   assert.match(opportunity, /signals\.map\(\(signal\) => signal\.summary\.en\)/);
   assert.match(opportunity, /strategicActivation/);
-  assert.ok(brighton.triggerSignalIds.includes("attendance-mun-5402"));
+  assert.ok(brighton.contextSignalIds.includes("attendance-mun-5402"));
 });
