@@ -188,7 +188,7 @@ export default function OperatingPackPage() {
           <h2>The next step is to replace demo assumptions with one club&apos;s real fixture and fan data.</h2>
         </div>
         <div className={styles.actions}>
-          <Link className={styles.primary} href="/pilot">Back to pilot proposition</Link>
+          <Link className={styles.primary} href="/pilot/rehearsal">Open pilot rehearsal</Link>
           <Link className={styles.secondary} href="/brief">Open Morning Brief</Link>
         </div>
       </section>
