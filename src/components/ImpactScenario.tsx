@@ -11,13 +11,27 @@ type ImpactScenarioProps = {
   fixtureLabel: string;
   liveAudience: number | null;
   liveAudienceState: "measured" | "requires-club-data";
+  observedConversionRate: number | null;
+  observedConversionLabel: string;
+  observedTicketValue: number | null;
+  observedTicketValueLabel: string;
 };
 
-export function ImpactScenario({ fixtureLabel, liveAudience, liveAudienceState }: ImpactScenarioProps) {
+export function ImpactScenario({
+  fixtureLabel,
+  liveAudience,
+  liveAudienceState,
+  observedConversionRate,
+  observedConversionLabel,
+  observedTicketValue,
+  observedTicketValueLabel
+}: ImpactScenarioProps) {
   const seededAudience = liveAudience ?? 1420;
+  const seededConversion = observedConversionRate === null ? 22 : Math.round(observedConversionRate * 1000) / 10;
+  const seededTicketValue = observedTicketValue ?? 15;
   const [audience, setAudience] = useState(seededAudience);
-  const [conversion, setConversion] = useState(22);
-  const [ticketValue, setTicketValue] = useState(15);
+  const [conversion, setConversion] = useState(seededConversion);
+  const [ticketValue, setTicketValue] = useState(seededTicketValue);
   const [campaignCost, setCampaignCost] = useState(750);
 
   const model = useMemo(() => {
@@ -29,6 +43,8 @@ export function ImpactScenario({ fixtureLabel, liveAudience, liveAudienceState }
   }, [audience, conversion, ticketValue, campaignCost]);
 
   const audienceIsLive = liveAudienceState === "measured" && liveAudience !== null;
+  const conversionIsMeasured = observedConversionRate !== null;
+  const ticketValueIsMeasured = observedTicketValue !== null;
 
   return (
     <section className={styles.model} aria-label="Commercial impact scenario">
@@ -41,6 +57,14 @@ export function ImpactScenario({ fixtureLabel, liveAudience, liveAudienceState }
           <span>Audience input</span>
           <strong>{audienceIsLive ? "Live measured cohort" : "Illustrative seed — club cohort missing"}</strong>
         </div>
+        <div>
+          <span>Conversion baseline</span>
+          <strong>{conversionIsMeasured ? observedConversionLabel : "Illustrative seed — no measured repeat baseline"}</strong>
+        </div>
+        <div>
+          <span>Ticket value baseline</span>
+          <strong>{ticketValueIsMeasured ? observedTicketValueLabel : "Illustrative seed — no measured ticket value"}</strong>
+        </div>
       </div>
 
       <div className={styles.controls}>
@@ -52,12 +76,12 @@ export function ImpactScenario({ fixtureLabel, liveAudience, liveAudienceState }
         <div className={styles.control}>
           <label htmlFor="conversion">Scenario conversion</label>
           <input id="conversion" type="number" min={0} max={100} step={1} value={conversion} onChange={(e) => setConversion(Number(e.target.value))} />
-          <span>Assumption · %</span>
+          <span>{conversionIsMeasured ? "Measured historical seed · editable" : "Illustrative assumption · %"}</span>
         </div>
         <div className={styles.control}>
           <label htmlFor="ticketValue">Average ticket value</label>
           <input id="ticketValue" type="number" min={0} step={1} value={ticketValue} onChange={(e) => setTicketValue(Number(e.target.value))} />
-          <span>Assumption · GBP</span>
+          <span>{ticketValueIsMeasured ? "Measured historical seed · editable" : "Illustrative assumption · GBP"}</span>
         </div>
         <div className={styles.control}>
           <label htmlFor="campaignCost">Activation cost</label>
@@ -123,7 +147,8 @@ export function ImpactScenario({ fixtureLabel, liveAudience, liveAudienceState }
       </div>
 
       <p className={styles.note}>
-        Scenario, not forecast. When the live opportunity lacks a measured cohort, 1,420 is used only as an editable demonstration seed and is not presented as London City data.
+        Scenario, not forecast. Measured audience, repeat-conversion or ticket-value history can seed the model when authorised aggregate club evidence exists.
+        Every input remains editable, and activation cost stays an explicit assumption until the club supplies a measured cost.
       </p>
     </section>
   );
