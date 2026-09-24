@@ -7,7 +7,7 @@ import {
   crmTicketingLive
 } from "@/lib/data";
 import type { CampaignPlan, CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
-import { buildRepeatCohort, summariseCrmTicketing } from "@/lib/crmTicketingMetrics";
+
 
 export type ProductEvidenceState = "known" | "assumption" | "missing";
 
@@ -168,23 +168,25 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   const { calendarFixture, fixture } = current;
   const campaign = currentCampaign(calendarFixture.id);
   const signals = evidenceSignals(calendarFixture.id, campaign);
-  const currentFixtureRecords =
-    crmTicketingLive.datasetState === "club-live"
-      ? crmTicketingLive.records.filter((row) => row.fixture_id === calendarFixture.id)
-      : [];
-  const currentFixtureSummary = summariseCrmTicketing(currentFixtureRecords);
+  const currentFixtureSummary =
+    crmTicketingLive.datasetState === "club-aggregate"
+      ? crmTicketingLive.fixtureSummaries.find((item) => item.fixtureId === calendarFixture.id) ?? null
+      : null;
   const conversionEvidenceConnected =
-    currentFixtureRecords.length > 0 &&
+    currentFixtureSummary !== null &&
     currentFixtureSummary.campaignAttributedTickets > 0;
   const confidence = decisionConfidence(signals, conversionEvidenceConnected);
   const readiness = approvalReadiness(campaign);
   const blockers = blockerLabels(campaign);
   const previousFixture = previousHomeFixture(calendarFixture);
   const cohort =
-    crmTicketingLive.datasetState === "club-live" &&
-    previousFixture &&
-    crmTicketingLive.records.length > 0
-      ? buildRepeatCohort(crmTicketingLive.records, previousFixture.id, calendarFixture.id)
+    crmTicketingLive.datasetState === "club-aggregate" &&
+    previousFixture
+      ? crmTicketingLive.repeatCohorts.find(
+          (item) =>
+            item.sourceFixtureId === previousFixture.id &&
+            item.targetFixtureId === calendarFixture.id
+        ) ?? null
       : null;
 
   const openerSignal = liveSignals.find((signal) => signal.id === "attendance-mun-5402");
@@ -219,7 +221,7 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   ];
 
   const outcomeEvidence = conversionEvidenceConnected
-    ? `${currentFixtureSummary.campaignAttributedTickets.toLocaleString("en-GB")} current-fixture tickets are linked to a campaign id in the authorised export.`
+    ? `${currentFixtureSummary?.campaignAttributedTickets.toLocaleString("en-GB")} current-fixture tickets are linked to a campaign id in the authorised aggregate.`
     : null;
 
   if (outcomeEvidence) known.push(outcomeEvidence);
@@ -255,7 +257,7 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
     ? {
         state: "outcome-measured" as const,
         label: "Outcome measured",
-        detail: `${currentFixtureSummary.campaignAttributedTickets.toLocaleString("en-GB")} campaign-attributed tickets in the authorised current-fixture export.`
+        detail: `${currentFixtureSummary?.campaignAttributedTickets.toLocaleString("en-GB")} campaign-attributed tickets in the authorised current-fixture aggregate.`
       }
     : cohort
       ? {

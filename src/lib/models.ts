@@ -712,12 +712,36 @@ export type CrmTicketingDemo = {
   records: CrmTicketingRecord[];
 };
 
+export type CrmTicketingFixtureAggregate = {
+  fixtureId: string;
+  tickets: number;
+  uniqueBuyers: number;
+  scans: number;
+  noShows: number;
+  grossTicketRevenue: number;
+  averageTicketValue: number | null;
+  firstTimeBuyers: number;
+  consentedBuyers: number;
+  campaignAttributedTickets: number;
+  postcodeSectors: number;
+};
+
+export type CrmTicketingRepeatCohortAggregate = {
+  sourceFixtureId: string;
+  targetFixtureId: string;
+  sourceBuyers: number;
+  sourceConsentedBuyers: number;
+  alreadyPurchasedTarget: number;
+  addressableConsentedNonReturners: number;
+};
+
 export type CrmTicketingLiveDataset = {
-  datasetState: "requires-access" | "club-live";
-  scope: "club-crm-ticketing";
+  datasetState: "requires-access" | "club-aggregate";
+  scope: "club-crm-ticketing-aggregate";
   extractedAt: string | null;
   note: LocalizedText;
-  records: CrmTicketingRecord[];
+  fixtureSummaries: CrmTicketingFixtureAggregate[];
+  repeatCohorts: CrmTicketingRepeatCohortAggregate[];
 };
 
 export type CrmTicketingReadiness = {

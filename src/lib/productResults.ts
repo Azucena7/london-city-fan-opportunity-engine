@@ -1,5 +1,4 @@
 import { calendar, crmTicketingLive } from "@/lib/data";
-import { buildRepeatCohort, summariseCrmTicketing } from "@/lib/crmTicketingMetrics";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export type ProductResultsState = "measured" | "requires-club-data";
@@ -20,7 +19,7 @@ export function getCurrentProductResults(): ProductResults | null {
   const opportunity = getCurrentProductOpportunity();
   if (!opportunity) return null;
 
-  if (crmTicketingLive.datasetState !== "club-live") {
+  if (crmTicketingLive.datasetState !== "club-aggregate") {
     return {
       fixtureId: opportunity.fixtureId,
       state: "requires-club-data",
@@ -34,11 +33,10 @@ export function getCurrentProductResults(): ProductResults | null {
     };
   }
 
-  const currentRecords = crmTicketingLive.records.filter(
-    (row) => row.fixture_id === opportunity.fixtureId
-  );
+  const summary =
+    crmTicketingLive.fixtureSummaries.find((item) => item.fixtureId === opportunity.fixtureId) ?? null;
 
-  if (!currentRecords.length) {
+  if (!summary) {
     return {
       fixtureId: opportunity.fixtureId,
       state: "requires-club-data",
@@ -63,9 +61,12 @@ export function getCurrentProductResults(): ProductResults | null {
         .sort((a, b) => b.date.localeCompare(a.date))[0] ?? null
     : null;
 
-  const summary = summariseCrmTicketing(currentRecords);
   const cohort = previousFixture
-    ? buildRepeatCohort(crmTicketingLive.records, previousFixture.id, opportunity.fixtureId)
+    ? crmTicketingLive.repeatCohorts.find(
+        (item) =>
+          item.sourceFixtureId === previousFixture.id &&
+          item.targetFixtureId === opportunity.fixtureId
+      ) ?? null
     : null;
 
   const scanBase = summary.scans + summary.noShows;
@@ -82,7 +83,7 @@ export function getCurrentProductResults(): ProductResults | null {
     repeatPurchaseRate,
     grossTicketRevenue: summary.grossTicketRevenue,
     scanRate: scanBase > 0 ? summary.scans / scanBase : null,
-    noShowRate: summary.noShowRate,
+    noShowRate: scanBase > 0 ? summary.noShows / scanBase : null,
     extractedAt: crmTicketingLive.extractedAt
   };
 }
