@@ -16,7 +16,7 @@ export default function ImpactPage() {
   const fixtureLabel = live ? "London City vs " + live.fixture.opponent : "Current opportunity unavailable";
 
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="impact" />
 
       <header className={styles.hero}>
