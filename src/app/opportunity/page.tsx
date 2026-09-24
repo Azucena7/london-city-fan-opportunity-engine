@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import styles from "./opportunity.module.css";
 
@@ -35,6 +36,8 @@ export default function OpportunityPage() {
           </div>
         </aside>
       </header>
+
+      <ProductDataStateLegend />
 
       <nav className={styles.localNav} aria-label="Opportunity workspace sections">
         <a href="#summary">Summary</a>

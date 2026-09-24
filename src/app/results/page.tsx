@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./results.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
@@ -31,6 +32,8 @@ export default function ResultsLearningPage() {
           <p>{live?.nextAction.measurement ?? "Matched ticket conversion is not connected yet."}</p>
         </aside>
       </header>
+
+      <ProductDataStateLegend />
 
       <section className={styles.kpis}>
         <article>

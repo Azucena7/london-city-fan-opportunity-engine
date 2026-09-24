@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import styles from "./impact.module.css";
@@ -33,6 +34,8 @@ export default function ImpactPage() {
           <p>The model makes assumptions editable and visible instead of presenting a precise-looking number without context.</p>
         </aside>
       </header>
+
+      <ProductDataStateLegend />
 
       <section className={styles.section}>
         <div className={styles.sectionHead}>
