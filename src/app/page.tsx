@@ -20,105 +20,118 @@ export default function Home() {
           <span className="productEyebrow">Decision intelligence for football clubs</span>
           <h1>Turn fan data into the next best action for every fixture.</h1>
           <p className="productHeroLead">
-            Find the highest-value fan growth opportunity before matchday, turn it into an action plan,
-            and learn what worked afterwards.
+            A decision layer for attendance, repeat visits and matchday revenue — built to show what matters now,
+            what to do next and how much evidence the club really has.
           </p>
+
           <div className="productHeroActions">
-            <Link className="productButton" href="/demo">Explore London City demo</Link>
-            <a className="productButtonGhost" href="#how-it-works">See how it works</a>
+            <Link className="productButton" href="/brief">Open live Morning Brief</Link>
+            <Link className="productButtonGhost" href="/pilot">See the 90-day pilot</Link>
           </div>
+
           <div className="productProof" aria-label="Product outcomes">
-            <div><strong>Find the opportunity</strong><span>Connect fixture, fan, territory and market signals.</span></div>
-            <div><strong>Decide what to do</strong><span>Prioritise the action, audience and timing.</span></div>
-            <div><strong>Learn every match</strong><span>Measure the result and improve the next decision.</span></div>
+            <div><strong>Opportunity</strong><span>Where is the most valuable fan-growth decision?</span></div>
+            <div><strong>Action</strong><span>Who owns the next move, by when, and how is it measured?</span></div>
+            <div><strong>Learning</strong><span>What changed after matchday, and what should change next?</span></div>
           </div>
         </div>
 
         <aside className="fixtureCard" aria-label="Current engine opportunity">
           <div className="fixtureCardTop">
-            <span>Next fixture</span>
-            <span className="fixtureLive">{live ? "Live engine" : "Guided demo"}</span>
+            <span>Current opportunity</span>
+            <span className="fixtureLive">{live ? "Live engine" : "No live case"}</span>
           </div>
-          <p className="fixtureTitle">{live ? "London City vs " + live.fixture.opponent : "London City guided demo"}</p>
-          <h2 className="fixtureOpportunity">{live?.opportunity ?? "Convert fan signals into a clear next action."}</h2>
+
+          <p className="fixtureTitle">{live ? "London City vs " + live.fixture.opponent : "London City"}</p>
+          <h2 className="fixtureOpportunity">{live?.opportunity ?? "No current opportunity is available."}</h2>
+
           <div className="fixtureMetrics">
-            <div className="fixtureMetric"><span>Audience</span><strong>{live?.audience.value ? live.audience.value.toLocaleString("en-GB") + " fans" : "Requires club data"}</strong></div>
-            <div className="fixtureMetric"><span>Opportunity score</span><strong>{live?.score !== null && live?.score !== undefined ? live.score + "/100" : "—"}</strong></div>
-            <div className="fixtureMetric"><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
-            <div className="fixtureMetric"><span>Readiness</span><strong>{live?.readiness.label ?? "—"}</strong></div>
+            <div className="fixtureMetric">
+              <span>Opportunity</span>
+              <strong>{live?.opportunityLabel ?? "Under review"}</strong>
+            </div>
+            <div className="fixtureMetric">
+              <span>Confidence</span>
+              <strong>{live?.confidence.label ?? "—"}</strong>
+            </div>
+            <div className="fixtureMetric">
+              <span>Readiness</span>
+              <strong>{live?.readiness.label ?? "—"}</strong>
+            </div>
+            <div className="fixtureMetric">
+              <span>Audience</span>
+              <strong>{live?.audience.value ? live.audience.value.toLocaleString("en-GB") : "Requires club data"}</strong>
+            </div>
           </div>
+
           <div className="fixtureAction">
-            <span>Recommended action</span>
+            <span>Do next</span>
             <strong>{live?.recommendedAction ?? "Review the live evidence and define the next action."}</strong>
           </div>
+
+          <Link className="fixtureLink" href="/opportunity">Open opportunity workspace →</Link>
         </aside>
       </section>
 
       <section className="productSection" id="how-it-works">
         <div className="productSectionHeader">
-          <span className="productSectionKicker">One simple operating loop</span>
-          <h2>Discover. Act. Learn.</h2>
-          <p>The club sees the decision first. The evidence, assumptions and source detail remain available underneath when needed.</p>
+          <span className="productSectionKicker">The operating loop</span>
+          <h2>Brief. Decide. Act. Learn.</h2>
+          <p>
+            The product keeps the executive view simple, then reveals evidence, assumptions and source detail only when the user needs them.
+          </p>
         </div>
+
         <div className="productSteps">
           <article className="productStep">
-            <span className="productStepNum">01 · DISCOVER</span>
-            <h3>Where is the opportunity?</h3>
-            <p>Surface the most relevant attendance, repeat-visit or revenue opportunity around the next fixture.</p>
+            <span className="productStepNum">01 · BRIEF</span>
+            <h3>What needs attention?</h3>
+            <p>One fixture, one priority opportunity and the material changes around it.</p>
           </article>
           <article className="productStep">
-            <span className="productStepNum">02 · ACT</span>
-            <h3>What should we do?</h3>
-            <p>Translate the opportunity into an audience, action, owner, deadline and decision condition.</p>
+            <span className="productStepNum">02 · DECIDE</span>
+            <h3>Is there enough evidence?</h3>
+            <p>Separate confirmed evidence from assumptions, missing inputs and blockers.</p>
           </article>
           <article className="productStep">
             <span className="productStepNum">03 · LEARN</span>
-            <h3>What actually worked?</h3>
-            <p>Measure the outcome, compare it with the original hypothesis and improve the next fixture decision.</p>
+            <h3>What changes next?</h3>
+            <p>Use measured outcomes to improve the next fixture decision rather than archive another report.</p>
           </article>
         </div>
       </section>
 
-      <section className="productSection">
-        <div className="productSectionHeader">
-          <span className="productSectionKicker">Built for club teams, not analysts only</span>
-          <h2>Simple on the surface. Evidence underneath.</h2>
+      <section className="productProductView">
+        <div>
+          <span className="productSectionKicker">Inside the product</span>
+          <h2>One context. Progressive depth.</h2>
+          <p>
+            Commercial leaders can stay at decision level. Marketing and CRM can move into action. Analysts can inspect the evidence without changing products.
+          </p>
         </div>
-        <div className="productValueGrid">
-          <article className="productValue">
-            <h3>For commercial leaders</h3>
-            <p>Opportunity, expected impact, confidence and the decision that needs attention.</p>
-          </article>
-          <article className="productValue">
-            <h3>For marketing & CRM</h3>
-            <p>The audience, channel, message, timing and measurement plan required to execute.</p>
-          </article>
-          <article className="productValue">
-            <h3>For analysts</h3>
-            <p>Sources, signal quality, assumptions, blockers and the evidence behind each recommendation.</p>
-          </article>
-          <article className="productValue">
-            <h3>For the next fixture</h3>
-            <p>A closed loop that turns every match into new club-specific learning instead of another disconnected report.</p>
-          </article>
+
+        <div className="productViewFlow" aria-label="Progressive product depth">
+          <Link href="/brief"><span>01</span><strong>Morning Brief</strong><small>What needs attention today?</small></Link>
+          <Link href="/opportunity"><span>02</span><strong>Opportunity</strong><small>Action, evidence and impact in one workspace.</small></Link>
+          <Link href="/decision-room"><span>03</span><strong>Decision</strong><small>Blockers, assumptions and what changes the call.</small></Link>
+          <Link href="/today"><span>04</span><strong>Analyst view</strong><small>Signals, sources and operational detail.</small></Link>
         </div>
       </section>
 
       <section className="productPilot">
         <div>
           <span className="productPilotMeta">90-day fan growth pilot · 6 fixtures</span>
-          <h2>See what this could look like with your club.</h2>
+          <h2>Prove it with one club before asking for a platform rollout.</h2>
           <p>
-            Before every home fixture: one priority opportunity, one recommended action plan and one measurement framework.
-            After matchday: the result and what changes next.
+            Six home fixtures. One opportunity before each match, one measurable action plan and one learning loop afterwards.
           </p>
         </div>
-        <Link className="productButton" href="/pilot">See the 90-day pilot</Link>
+        <Link className="productButton" href="/pilot">See how the pilot runs</Link>
       </section>
 
       <footer className="productFooter">
         <span>Fan Growth Engine · Independent product prototype</span>
-        <span>London City is used as the live demonstration environment.</span>
+        <span>London City is the live demonstration environment.</span>
       </footer>
     </main>
   );
