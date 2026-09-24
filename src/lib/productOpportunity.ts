@@ -138,10 +138,13 @@ function previousHomeFixture(current: CalendarFixture): CalendarFixture | null {
 }
 
 function evidenceSignals(fixtureId: string, campaign: CampaignPlan | null) {
-  const triggerIds = new Set(campaign?.triggerSignalIds ?? []);
+  const declaredIds = new Set([
+    ...(campaign?.triggerSignalIds ?? []),
+    ...(campaign?.contextSignalIds ?? [])
+  ]);
   return liveSignals.filter((signal) =>
     signal.fixtureId === fixtureId ||
-    triggerIds.has(signal.id)
+    declaredIds.has(signal.id)
   );
 }
 
