@@ -36,15 +36,16 @@ export default function ResultsLearningPage() {
       <header className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>Results & Learning</span>
-          <h1>What did the action actually change?</h1>
+          <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What did the action actually change?"}</h1>
           <p>
-            Results are only useful when they change the next decision. This view separates measured outcomes from
-            assumptions and keeps the learning loop visible.
+            {live?.fixturePhase === "pre-match"
+              ? "The fixture is still ahead. This screen keeps the measurement plan explicit now, then switches to observed outcomes when authorised post-match evidence arrives."
+              : "Results are only useful when they change the next decision. This view separates measured outcomes from assumptions and keeps the learning loop visible."}
           </p>
         </div>
         <aside className={styles.stateCard}>
-          <span>Current measurement state</span>
-          <strong>{measured ? "Club ticketing data connected" : "Awaiting club conversion data"}</strong>
+          <span>{live?.timingLabel ?? "Measurement"} · Current measurement state</span>
+          <strong>{measured ? "Club ticketing data connected" : live?.fixturePhase === "pre-match" ? "Pre-match · outcome not available yet" : "Awaiting club conversion data"}</strong>
           <p>
             {measured
               ? `Measured export for ${live?.fixture.opponent ?? "the current fixture"}${results?.extractedAt ? ` · extracted ${new Date(results.extractedAt).toLocaleString("en-GB", { timeZone: "Europe/London" })}` : ""}.`

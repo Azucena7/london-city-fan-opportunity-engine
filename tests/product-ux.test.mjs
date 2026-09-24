@@ -379,3 +379,14 @@ test("strategy and operational next action stay separate", () => {
   assert.match(brief, /Strategic recommendation/);
   assert.match(decision, /nextAction\.label/);
 });
+
+
+test("fixture lifecycle keeps pre-match and post-match UX distinct", () => {
+  const opportunity = read("src/lib/productOpportunity.ts");
+  const results = read("src/app/results/page.tsx");
+  assert.match(opportunity, /fixturePhase: "pre-match" \| "matchday" \| "post-match"/);
+  assert.match(opportunity, /timingLabel/);
+  assert.match(opportunity, /T-\$\{daysToFixture\}/);
+  assert.match(results, /Measurement starts after matchday/);
+  assert.match(results, /Pre-match · outcome not available yet/);
+});

@@ -21,7 +21,7 @@ export default function OpportunityPage() {
       <header className={styles.header}>
         <div>
           <span className={styles.eyebrow}>
-            {live ? "London City · " + live.fixture.opponent + " · " + live.fixture.date : "Current fixture"}
+            {live ? "London City · " + live.fixture.opponent + " · " + live.timingLabel : "Current fixture"}
           </span>
           <h1>{live?.opportunity ?? "No current opportunity is available."}</h1>
           <p>{live?.whyNow ?? "Waiting for current engine evidence."}</p>
