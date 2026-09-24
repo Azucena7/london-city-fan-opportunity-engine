@@ -476,3 +476,14 @@ test("product cases keep composite score in the analyst layer", () => {
   assert.match(page, /Decision posture/);
   assert.match(page, /composite score in the analyst layer/);
 });
+
+
+test("pilot weekly example reads the current product opportunity", () => {
+  const page = read("src/app/pilot/page.tsx");
+  assert.match(page, /getCurrentProductOpportunity/);
+  assert.match(page, /live\?\.nextAction\.label/);
+  assert.match(page, /live\?\.decisionState/);
+  assert.match(page, /Requires club data/);
+  assert.match(page, /\/pilot\/rehearsal/);
+  assert.doesNotMatch(page, /Go with conditions/);
+});
