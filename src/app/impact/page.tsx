@@ -4,6 +4,7 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
+import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import styles from "./impact.module.css";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 
 export default function ImpactPage() {
   const live = getCurrentProductOpportunity();
+  const defaults = getCurrentImpactDefaults();
   const fixtureLabel = live ? "London City vs " + live.fixture.opponent : "Current opportunity unavailable";
 
   return (
@@ -42,7 +44,15 @@ export default function ImpactPage() {
           <span className={styles.eyebrow}>Try the scenario</span>
           <h2>Change the inputs. See what drives the value case.</h2>
         </div>
-        <ImpactScenario fixtureLabel={fixtureLabel} liveAudience={live?.audience.value ?? null} liveAudienceState={live?.audience.state ?? "requires-club-data"} />
+        <ImpactScenario
+          fixtureLabel={fixtureLabel}
+          liveAudience={defaults.audience}
+          liveAudienceState={defaults.audienceSource === "measured" ? "measured" : "requires-club-data"}
+          observedConversionRate={defaults.conversionRate}
+          observedConversionLabel={defaults.conversionLabel}
+          observedTicketValue={defaults.ticketValue}
+          observedTicketValueLabel={defaults.ticketValueLabel}
+        />
       </section>
 
       <section className={styles.section}>
