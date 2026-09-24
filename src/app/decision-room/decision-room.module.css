@@ -324,3 +324,39 @@
   font-size:11px;
   line-height:1.4;
 }
+
+.sourceList{
+  display:grid;
+  gap:8px;
+  margin:14px 0;
+}
+.sourceList a{
+  display:block;
+  padding:10px 0;
+  border-top:1px solid var(--product-line);
+  color:var(--product-ink);
+  text-decoration:none;
+}
+.sourceList a:first-child{border-top:0}
+.sourceList a>span{
+  display:block;
+  margin-bottom:4px;
+  color:var(--product-muted);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+.sourceList a>strong{
+  display:block;
+  font-size:13px;
+  line-height:1.3;
+}
+.sourceList a>small{
+  display:block;
+  margin-top:3px;
+  color:var(--product-muted);
+  font-size:10px;
+  line-height:1.35;
+}
+.sourceList a:hover strong{text-decoration:underline}
