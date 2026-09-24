@@ -68,7 +68,7 @@ export default function GuidedDemoPage() {
           <h2>{live?.opportunity ?? "No current product opportunity is available."}</h2>
           <div className={styles.metrics}>
             <div><span>Addressable audience</span><strong>{live?.audience.value ? live.audience.value.toLocaleString("en-GB") : "Requires club data"}</strong></div>
-            <div><span>Opportunity score</span><strong>{live?.score !== null && live?.score !== undefined ? live.score + "/100" : "—"}</strong></div>
+            <div><span>Measurement state</span><strong>{live?.measurementEvidence.label ?? "—"}</strong></div>
             <div><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
           </div>
           <p className={styles.disclaimer}>
