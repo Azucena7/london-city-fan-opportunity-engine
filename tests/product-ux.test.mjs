@@ -400,3 +400,16 @@ test("pilot operating pack explains aggregate-only club data handling", () => {
   assert.match(page, /Aggregate evidence only/);
   assert.match(page, /crmTicketingLive\.datasetState/);
 });
+
+
+test("Impact model seeds from measured club history only when aggregate evidence exists", () => {
+  const defaults = read("src/lib/productImpactDefaults.ts");
+  const impact = read("src/components/ImpactScenario.tsx");
+  assert.match(defaults, /datasetState !== "club-aggregate"/);
+  assert.match(defaults, /repeatCohorts/);
+  assert.match(defaults, /averageTicketValue/);
+  assert.match(impact, /observedConversionRate/);
+  assert.match(impact, /observedTicketValue/);
+  assert.match(impact, /Measured historical seed · editable/);
+  assert.match(impact, /Scenario, not forecast/);
+});
