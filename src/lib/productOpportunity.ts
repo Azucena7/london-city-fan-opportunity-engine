@@ -114,7 +114,6 @@ function evidenceSignals(fixtureId: string, campaign: CampaignPlan | null) {
 
 function decisionConfidence(
   signals: LiveSignal[],
-  campaign: CampaignPlan | null,
   conversionEvidenceConnected: boolean
 ) {
   const strongEvidence = signals.filter((signal) =>
@@ -177,7 +176,7 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   const conversionEvidenceConnected =
     currentFixtureRecords.length > 0 &&
     currentFixtureSummary.campaignAttributedTickets > 0;
-  const confidence = decisionConfidence(signals, campaign, conversionEvidenceConnected);
+  const confidence = decisionConfidence(signals, conversionEvidenceConnected);
   const readiness = approvalReadiness(campaign);
   const blockers = blockerLabels(campaign);
   const previousFixture = previousHomeFixture(calendarFixture);
