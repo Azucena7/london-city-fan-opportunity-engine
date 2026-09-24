@@ -13,6 +13,12 @@ export type ProductResults = {
   scanRate: number | null;
   noShowRate: number | null;
   extractedAt: string | null;
+  interpretation: {
+    attribution: "descriptive";
+    incrementality: "not-established";
+    causalClaim: false;
+    requirement: string;
+  };
 };
 
 export function getCurrentProductResults(): ProductResults | null {
@@ -29,7 +35,13 @@ export function getCurrentProductResults(): ProductResults | null {
       grossTicketRevenue: null,
       scanRate: null,
       noShowRate: null,
-      extractedAt: null
+      extractedAt: null,
+      interpretation: {
+        attribution: "descriptive" as const,
+        incrementality: "not-established" as const,
+        causalClaim: false as const,
+        requirement: "Requires a randomized holdout, credible control group, or pre-agreed counterfactual baseline."
+      }
     };
   }
 
@@ -46,7 +58,13 @@ export function getCurrentProductResults(): ProductResults | null {
       grossTicketRevenue: null,
       scanRate: null,
       noShowRate: null,
-      extractedAt: crmTicketingLive.extractedAt
+      extractedAt: crmTicketingLive.extractedAt,
+      interpretation: {
+        attribution: "descriptive" as const,
+        incrementality: "not-established" as const,
+        causalClaim: false as const,
+        requirement: "Requires a randomized holdout, credible control group, or pre-agreed counterfactual baseline."
+      }
     };
   }
 
@@ -84,6 +102,12 @@ export function getCurrentProductResults(): ProductResults | null {
     grossTicketRevenue: summary.grossTicketRevenue,
     scanRate: scanBase > 0 ? summary.scans / scanBase : null,
     noShowRate: scanBase > 0 ? summary.noShows / scanBase : null,
-    extractedAt: crmTicketingLive.extractedAt
+    extractedAt: crmTicketingLive.extractedAt,
+    interpretation: {
+        attribution: "descriptive" as const,
+        incrementality: "not-established" as const,
+        causalClaim: false as const,
+        requirement: "Requires a randomized holdout, credible control group, or pre-agreed counterfactual baseline."
+      }
   };
 }
