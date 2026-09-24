@@ -4,7 +4,7 @@
   color:var(--product-ink);
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-.hero,.kpis,.learningLoop,.resultState,.next{
+.hero,.kpis,.interpretation,.learningLoop,.resultState,.next{
   width:min(1120px,calc(100% - 40px));
   margin:0 auto;
 }
@@ -138,7 +138,7 @@
   .actions{flex-direction:row}
 }
 @media(max-width:600px){
-  .hero,.kpis,.learningLoop,.resultState,.next{width:min(100% - 28px,1120px)}
+  .hero,.kpis,.interpretation,.learningLoop,.resultState,.next{width:min(100% - 28px,1120px)}
   .hero{padding-top:32px}
   .kpis,.timeline{grid-template-columns:1fr}
   .kpis article,.kpis article+article,.timeline article,.timeline article+article{
@@ -146,4 +146,69 @@
   }
   .kpis article:first-child,.timeline article:first-child{border-top:0}
   .actions{flex-direction:column}
+}
+
+.interpretation{
+  padding:42px 0;
+  border-bottom:1px solid var(--product-line);
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:36px;
+  align-items:start;
+}
+.interpretation h2{
+  margin:8px 0 10px;
+  font-size:32px;
+  line-height:1.05;
+  letter-spacing:-.04em;
+}
+.interpretation>div>p{
+  margin:0;
+  color:var(--product-muted);
+  line-height:1.5;
+}
+.interpretationGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--product-line);
+  border-bottom:1px solid var(--product-line);
+}
+.interpretationGrid article{
+  padding:18px 18px 20px 0;
+}
+.interpretationGrid article+article{
+  padding-left:18px;
+  border-left:1px solid var(--product-line);
+}
+.interpretationGrid span{
+  display:block;
+  color:var(--product-muted);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+.interpretationGrid strong{
+  display:block;
+  font-size:16px;
+  line-height:1.35;
+}
+.interpretationGrid p{
+  margin:7px 0 0;
+  color:var(--product-muted);
+  font-size:11px;
+  line-height:1.45;
+}
+@media(max-width:900px){
+  .interpretation{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .interpretationGrid{grid-template-columns:1fr}
+  .interpretationGrid article,.interpretationGrid article+article{
+    padding:14px 0;
+    border-left:0;
+    border-top:1px solid var(--product-line);
+  }
+  .interpretationGrid article:first-child{border-top:0}
 }
