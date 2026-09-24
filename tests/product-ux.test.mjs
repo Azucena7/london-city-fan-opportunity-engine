@@ -191,17 +191,19 @@ test("global evidence claims stay consistent with current source availability", 
 });
 
 
-test("social sharing tells the current decision-validation story", () => {
+test("social sharing matches the current Fan Growth Engine product story", () => {
   const layout = read("src/app/layout.tsx");
   const card = read("src/app/linkedin-card/route.tsx");
   const og = read("src/app/opengraph-image.tsx");
-  assert.match(layout, /London City Fan Opportunity Engine/);
-  assert.match(layout, /From signals to decisions to observed outcomes/);
-  assert.match(card, /Then reality/);
-  assert.match(card, /DECISION VALIDATION · BRIGHTON/);
-  assert.match(card, /CAUSATION CLAIMED/);
-  assert.match(og, /REALITY CHECK · BRIGHTON/);
-  assert.doesNotMatch(card, /A LIVING FAN INTELLIGENCE TOOL/);
+  assert.match(layout, /Fan Growth Engine/);
+  assert.match(layout, /Turn fan data into the next best action for every fixture/);
+  assert.match(card, /DECISION INTELLIGENCE FOR FOOTBALL CLUBS/);
+  assert.match(card, /Morning Brief/);
+  assert.match(card, /Opportunity/);
+  assert.match(card, /Decision/);
+  assert.match(card, /Results/);
+  assert.match(og, /Live · Modelled · Missing/);
+  assert.doesNotMatch(card, /\+280/);
 });
 
 
@@ -232,16 +234,17 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 });
 
 
-test("visible product branding consistently uses Fan Opportunity Engine", () => {
-  const nav = read("src/components/NavTabs.tsx");
-  const partners = read("src/components/PartnerCommercialPack.tsx");
-  const story = read("src/components/LocalizedStoryPage.tsx");
-  const technical = read("src/components/LocalizedTechnicalCaseStudy.tsx");
-  assert.match(nav, /LCL \/ FAN OPPORTUNITY ENGINE/);
-  assert.match(partners, /London City Fan Opportunity Engine · Partner Commercial Pack/);
-  assert.match(story, /London City Fan Opportunity Engine/);
-  assert.match(technical, /London City Fan Opportunity Engine · Technical case study/);
-  assert.doesNotMatch(nav, /FAN OPPORTUNITY LAB/);
+test("product and analyst branding are intentionally separated", () => {
+  const productNav = read("src/components/ProductJourneyNav.tsx");
+  const analystNav = read("src/components/NavTabs.tsx");
+  assert.match(productNav, /Fan Growth Engine/);
+  assert.match(productNav, /Morning brief/);
+  assert.match(productNav, /Opportunity/);
+  assert.match(productNav, /Analyst view/);
+  assert.match(analystNav, /LONDON CITY \/ ANALYST VIEW/);
+  assert.match(analystNav, /Evidence environment/);
+  assert.match(analystNav, /Back to product/);
+  assert.doesNotMatch(analystNav, /FAN OPPORTUNITY LAB/);
 });
 
 
@@ -262,4 +265,54 @@ test("Today Calendar and Measurement share the same Brighton live validation lif
   assert.match(calendar, /fixtureValidationLifecycle/);
   assert.match(measurement, /BRIGHTON LIVE VALIDATION/);
   assert.match(measurement, /postMatchChecklist/);
+});
+
+
+test("commercial product routes opt into the full-width product shell", () => {
+  const routes = [
+    "src/app/brief/page.tsx",
+    "src/app/opportunity/page.tsx",
+    "src/app/decision-room/page.tsx",
+    "src/app/results/page.tsx",
+    "src/app/impact/page.tsx",
+    "src/app/pilot/page.tsx",
+    "src/app/pilot/operating-pack/page.tsx",
+    "src/app/demo/page.tsx",
+    "src/app/cases/page.tsx"
+  ];
+  for (const route of routes) {
+    assert.match(read(route), /productAppShell/, route + " should use the product app shell");
+  }
+  const system = read("src/app/product-system.css");
+  assert.match(system, /\.productAppShell\{/);
+  assert.match(system, /width:100%/);
+  assert.match(system, /max-width:none/);
+  assert.match(system, /padding-bottom:0/);
+});
+
+test("core product surfaces expose a shared Live Modelled Missing trust language", () => {
+  const legend = read("src/components/ProductDataStateLegend.tsx");
+  assert.match(legend, />Live</);
+  assert.match(legend, />Modelled</);
+  assert.match(legend, />Missing</);
+
+  for (const route of [
+    "src/app/opportunity/page.tsx",
+    "src/app/decision-room/page.tsx",
+    "src/app/impact/page.tsx",
+    "src/app/results/page.tsx"
+  ]) {
+    assert.match(read(route), /ProductDataStateLegend/, route + " should show the shared data-state legend");
+  }
+});
+
+test("mobile product flow keeps a contextual next action", () => {
+  const brief = read("src/app/brief/page.tsx");
+  const opportunity = read("src/app/opportunity/page.tsx");
+  const briefCss = read("src/app/brief/brief.module.css");
+  const opportunityCss = read("src/app/opportunity/opportunity.module.css");
+  assert.match(brief, /Open Opportunity/);
+  assert.match(opportunity, /Review Decision/);
+  assert.match(briefCss, /position:fixed/);
+  assert.match(opportunityCss, /position:fixed/);
 });
