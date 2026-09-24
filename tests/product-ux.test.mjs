@@ -332,3 +332,14 @@ test("Results switches from missing to measured only through the live CRM slot",
   assert.equal(live.datasetState, "requires-access");
   assert.equal(live.records.length, 0);
 });
+
+
+test("decision confidence requires measured conversion evidence before it can become high", () => {
+  const opportunity = read("src/lib/productOpportunity.ts");
+  assert.match(opportunity, /conversionEvidenceConnected/);
+  assert.match(opportunity, /state: "outcome-measured"/);
+  assert.match(opportunity, /state: "audience-measured"/);
+  assert.match(opportunity, /state: "missing"/);
+  assert.match(opportunity, /strongEvidence >= 3 && !accessGap/);
+  assert.match(opportunity, /campaignAttributedTickets > 0/);
+});
