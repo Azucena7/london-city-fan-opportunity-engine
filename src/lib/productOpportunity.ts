@@ -138,11 +138,13 @@ function previousHomeFixture(current: CalendarFixture): CalendarFixture | null {
 }
 
 function evidenceSignals(fixtureId: string, campaign: CampaignPlan | null) {
-  const triggerIds = new Set(campaign?.triggerSignalIds ?? []);
+  const declaredIds = new Set([
+    ...(campaign?.triggerSignalIds ?? []),
+    ...(campaign?.contextSignalIds ?? [])
+  ]);
   return liveSignals.filter((signal) =>
     signal.fixtureId === fixtureId ||
-    triggerIds.has(signal.id) ||
-    signal.id === "attendance-mun-5402"
+    declaredIds.has(signal.id)
   );
 }
 
@@ -225,15 +227,15 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
         ) ?? null
       : null;
 
-  const openerSignal = liveSignals.find((signal) => signal.id === "attendance-mun-5402");
-  const watchalongSignal = liveSignals.find((signal) => signal.id === "attention-england-spain");
-  const weatherSignal = liveSignals.find((signal) => signal.id === "weather-brighton-waiting");
-  const localAvailabilitySignal = liveSignals.find((signal) => signal.id === "attention-bromley-mk-dons-postponed-2026-09-23");
+  const strategicActivation = campaign?.activations.find((item) =>
+    item.state === "ready" || item.state === "briefed"
+  );
 
   const recommendedAction =
-    openerSignal?.marketingAction.en ??
-    campaign?.nextApproval.en ??
-    "Build the highest-priority audience and validate the measurement plan before activation.";
+    cohort && cohort.addressableConsentedNonReturners > 0
+      ? `Activate the measured repeat-attendance cohort for ${calendarFixture.opponent} through authorised owned channels and track purchase, scan and repeat.`
+      : strategicActivation?.role.en ??
+        "Build the highest-priority audience and validate the measurement plan before activation.";
 
   const cohortEvidence = cohort && previousFixture
     ? `${cohort.addressableConsentedNonReturners.toLocaleString("en-GB")} consented ${previousFixture.opponent} buyers have not yet purchased ${calendarFixture.opponent}.`
@@ -242,10 +244,7 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   const known = [
     `${calendarFixture.opponent} is scheduled for ${calendarFixture.date}${calendarFixture.kickoff ? ` at ${calendarFixture.kickoff}` : ""}.`,
     cohortEvidence,
-    openerSignal?.summary.en,
-    watchalongSignal?.summary.en,
-    localAvailabilitySignal?.summary.en,
-    weatherSignal?.summary.en
+    ...signals.map((signal) => signal.summary.en)
   ].filter((item): item is string => Boolean(item));
 
   const assumptions = [
@@ -273,7 +272,7 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   ];
 
   const whatWouldChangeDecision = [
-    "The matched opener non-returner audience is too small to justify activation.",
+    `The matched ${previousFixture?.opponent ?? "previous-home"} non-returner audience is too small to justify activation.`,
     "Organic repeat purchase is already strong enough that incremental CRM spend is unnecessary.",
     "Tracking cannot distinguish campaign-attributed ticket sales from background demand."
   ];

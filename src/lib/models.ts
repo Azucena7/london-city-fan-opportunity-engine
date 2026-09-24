@@ -644,6 +644,7 @@ export type CampaignPlan = {
   objective: LocalizedText;
   whyNow: LocalizedText;
   triggerSignalIds: string[];
+  contextSignalIds?: string[];
   audiences: Array<{ id: string; label: LocalizedText; state: "public-inferred" | "requires-access" }>;
   proposition: LocalizedText;
   message: LocalizedText;
