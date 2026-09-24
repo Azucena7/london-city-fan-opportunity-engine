@@ -16,7 +16,7 @@ export default function BriefPage() {
   const sourceFailures = Array.isArray(currentState.source_failures) ? currentState.source_failures.length : 0;
 
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="brief" />
 
       <header className={styles.hero}>

@@ -14,7 +14,7 @@ export default function ResultsLearningPage() {
   const live = getCurrentProductOpportunity();
 
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="results" />
 
       <header className={styles.hero}>

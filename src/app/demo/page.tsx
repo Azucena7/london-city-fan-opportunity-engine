@@ -46,7 +46,7 @@ export default function GuidedDemoPage() {
   const live = getCurrentProductOpportunity();
 
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="demo" />
 
       <header className={styles.hero}>
