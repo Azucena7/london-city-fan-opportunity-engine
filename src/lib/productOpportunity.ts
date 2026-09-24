@@ -7,7 +7,7 @@ import {
   crmTicketingLive
 } from "@/lib/data";
 import type { CampaignPlan, CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
-import { buildRepeatCohort } from "@/lib/crmTicketingMetrics";
+import { buildRepeatCohort, summariseCrmTicketing } from "@/lib/crmTicketingMetrics";
 
 export type ProductEvidenceState = "known" | "assumption" | "missing";
 
@@ -43,6 +43,11 @@ export type ProductOpportunity = {
   confidence: {
     label: "High" | "Medium" | "Low";
     rationale: string;
+  };
+  measurementEvidence: {
+    state: "missing" | "audience-measured" | "outcome-measured";
+    label: string;
+    detail: string;
   };
   readiness: {
     ready: number;
@@ -107,15 +112,16 @@ function evidenceSignals(fixtureId: string, campaign: CampaignPlan | null) {
   );
 }
 
-function decisionConfidence(signals: LiveSignal[], campaign: CampaignPlan | null) {
+function decisionConfidence(
+  signals: LiveSignal[],
+  conversionEvidenceConnected: boolean
+) {
   const strongEvidence = signals.filter((signal) =>
     (signal.state === "measured" || signal.state === "confirmed") &&
     signal.materiality !== "low"
   ).length;
 
-  const accessGap = campaign?.measurement.some((item) =>
-    item.state === "requires-access" || item.state === "requires-instrumentation"
-  ) ?? true;
+  const accessGap = !conversionEvidenceConnected;
 
   if (strongEvidence >= 3 && !accessGap) {
     return {
@@ -162,7 +168,15 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   const { calendarFixture, fixture } = current;
   const campaign = currentCampaign(calendarFixture.id);
   const signals = evidenceSignals(calendarFixture.id, campaign);
-  const confidence = decisionConfidence(signals, campaign);
+  const currentFixtureRecords =
+    crmTicketingLive.datasetState === "club-live"
+      ? crmTicketingLive.records.filter((row) => row.fixture_id === calendarFixture.id)
+      : [];
+  const currentFixtureSummary = summariseCrmTicketing(currentFixtureRecords);
+  const conversionEvidenceConnected =
+    currentFixtureRecords.length > 0 &&
+    currentFixtureSummary.campaignAttributedTickets > 0;
+  const confidence = decisionConfidence(signals, conversionEvidenceConnected);
   const readiness = approvalReadiness(campaign);
   const blockers = blockerLabels(campaign);
   const previousFixture = previousHomeFixture(calendarFixture);
@@ -204,12 +218,20 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
     "Repeat-visit propensity is stronger than cold acquisition for this fixture."
   ];
 
+  const outcomeEvidence = conversionEvidenceConnected
+    ? `${currentFixtureSummary.campaignAttributedTickets.toLocaleString("en-GB")} current-fixture tickets are linked to a campaign id in the authorised export.`
+    : null;
+
+  if (outcomeEvidence) known.push(outcomeEvidence);
+
   const missing = [
     ...(!cohort ? [
       `Matched previous-home buyers who have not purchased ${calendarFixture.opponent}.`,
       "Authorised CRM addressability and consent coverage."
     ] : []),
-    "Ticket conversion attributable to the recommended activation."
+    ...(!conversionEvidenceConnected ? [
+      "Ticket conversion attributable to the recommended activation."
+    ] : [])
   ];
 
   const whatWouldChangeDecision = [
@@ -228,6 +250,24 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   const nextScheduledAction = campaign?.schedule.find((item) => item.state !== "complete");
   const primaryMeasurement = campaign?.measurement.find((item) => item.id === "purchase-scan-repeat")
     ?? campaign?.measurement[0];
+
+  const measurementEvidence = conversionEvidenceConnected
+    ? {
+        state: "outcome-measured" as const,
+        label: "Outcome measured",
+        detail: `${currentFixtureSummary.campaignAttributedTickets.toLocaleString("en-GB")} campaign-attributed tickets in the authorised current-fixture export.`
+      }
+    : cohort
+      ? {
+          state: "audience-measured" as const,
+          label: "Audience measured",
+          detail: "The addressable repeat cohort is measured, but current-fixture conversion evidence is still missing."
+        }
+      : {
+          state: "missing" as const,
+          label: "Measurement missing",
+          detail: "CRM/ticketing access is still required for audience and conversion evidence."
+        };
 
   return {
     fixtureId: calendarFixture.id,
@@ -267,6 +307,7 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
       state: "requires-club-data"
     },
     confidence,
+    measurementEvidence,
     readiness,
     decisionState: blockers.length > 0 ? "HOLD" : "READY FOR REVIEW",
     primaryBlocker: blockers[0] ?? "No blocking approval gate is currently recorded.",

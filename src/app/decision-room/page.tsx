@@ -62,9 +62,9 @@ export default function DecisionRoomPage() {
           <p>{live?.confidence.rationale ?? "No confidence rationale is available."}</p>
         </article>
         <article>
-          <span>Readiness</span>
-          <strong>{live?.readiness.label ?? "—"}</strong>
-          <p>{live?.updatedAt ? "Updated " + new Date(live.updatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" }) : "Update time unavailable"}</p>
+          <span>Measurement</span>
+          <strong>{live?.measurementEvidence.label ?? "—"}</strong>
+          <p>{live?.measurementEvidence.detail ?? "No measurement state available."}</p>
         </article>
         <article>
           <span>Impact</span>
@@ -124,6 +124,7 @@ export default function DecisionRoomPage() {
           <article className={styles.lineagePanel}>
             <span>Evidence lineage</span>
             <strong>{live ? live.liveSignals.length + " live engine signals" : "No live lineage"}</strong>
+            <p>{live?.updatedAt ? "Engine updated " + new Date(live.updatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" }) : "Update time unavailable"}</p>
             <Link href="/today">Inspect analyst view →</Link>
           </article>
         </aside>
