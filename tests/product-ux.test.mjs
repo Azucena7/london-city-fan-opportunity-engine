@@ -456,3 +456,14 @@ test("pilot rehearsal exercises aggregate audience, results and causal guardrail
   assert.match(helper, /fixtureSummaries/);
   assert.match(helper, /repeatCohorts/);
 });
+
+
+test("pilot rehearsal is clearly synthetic and reachable from the operating pack", () => {
+  const rehearsal = read("src/app/pilot/rehearsal/page.tsx");
+  const pack = read("src/app/pilot/operating-pack/page.tsx");
+  assert.match(rehearsal, /Synthetic rehearsal/);
+  assert.match(rehearsal, /No production claim/);
+  assert.match(rehearsal, /Attribution is visible; incrementality remains unproven/);
+  assert.match(rehearsal, /Raw supporter rows stored/);
+  assert.match(pack, /\/pilot\/rehearsal/);
+});
