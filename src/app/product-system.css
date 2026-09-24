@@ -25,6 +25,10 @@
 
 .productShell,
 .productAppShell{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding-bottom:0;
   color:var(--product-ink);
   background:var(--product-bg);
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
