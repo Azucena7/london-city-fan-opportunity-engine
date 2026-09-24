@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./decision-room.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
@@ -45,6 +46,8 @@ export default function DecisionRoomPage() {
           <Link href="#next-action">Resolve next →</Link>
         </aside>
       </header>
+
+      <ProductDataStateLegend />
 
       <section className={styles.summaryStrip}>
         <article>
