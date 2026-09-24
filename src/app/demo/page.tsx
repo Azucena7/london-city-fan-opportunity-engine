@@ -51,7 +51,7 @@ export default function GuidedDemoPage() {
 
       <header className={styles.hero}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>London City · live guided product demo</span>
+          <span className={styles.eyebrow}>London City · guided live demo</span>
           <h1>From one fixture opportunity to one clear club action.</h1>
           <p>
             The visible opportunity below is now derived from the same fixture, campaign and signal data used by the full engine.
