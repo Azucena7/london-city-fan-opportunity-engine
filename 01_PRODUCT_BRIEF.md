@@ -44,7 +44,7 @@ A transparent scenario based on addressable audience, observed or assumed conver
 Evidence, assumptions, blockers, confidence and what would change the decision.
 
 ### Result
-Measured campaign and ticketing outcome after matchday.
+Observed campaign and ticketing outcome after matchday. Attribution remains descriptive unless the agreed measurement design supports incrementality.
 
 ### Learning
 A club-specific signal that improves the next recommendation.
@@ -74,17 +74,23 @@ Needs a concise view of opportunity, risk, decision readiness and result.
 - A recommendation should state what would change it.
 - Decision work and execution work should be visibly different.
 - Scenario models should expose assumptions and should not be presented as forecasts.
+- Campaign attribution and incremental impact are different claims.
+- Club CRM/ticketing data should be processed locally and persisted as aggregate evidence only.
 - Post-match learning must feed the next decision.
 - Human decision owners remain accountable for commercial choices.
 
 ## Live product routes
 
 - `/` — product / sales front
+- `/brief` — fixture-timed Morning Brief
+- `/opportunity` — current Opportunity workspace
 - `/demo` — guided London City walkthrough
 - `/decision-room` — auditable decision view
 - `/results` — Results & Learning
 - `/impact` — commercial scenario model
 - `/pilot` — 90-day pilot proposition
+- `/pilot/operating-pack` — onboarding, data trust and measurement design
+- `/cases` — product use cases
 - `/today` — full intelligence engine
 
 ## Non-goals
