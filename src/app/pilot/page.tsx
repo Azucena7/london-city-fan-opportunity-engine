@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./pilot.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
   title: "90-Day Fan Growth Pilot",
@@ -16,6 +17,8 @@ const deliverables = [
 ];
 
 export default function PilotPage() {
+  const live = getCurrentProductOpportunity();
+
   return (
     <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="pilot" />
@@ -80,12 +83,12 @@ export default function PilotPage() {
           <h2>By Thursday, the club knows what decision needs to be made.</h2>
         </div>
         <div className={styles.weekCard}>
-          <div><span>Opportunity</span><strong>Retain opener non-returners</strong></div>
-          <div><span>Action</span><strong>CRM repeat-visit campaign</strong></div>
-          <div><span>Potential</span><strong>Requires club data</strong></div>
-          <div><span>Decision</span><strong>Go with conditions</strong></div>
+          <div><span>Opportunity</span><strong>{live?.opportunityLabel ?? "Under review"}</strong></div>
+          <div><span>Action</span><strong>{live?.nextAction.label ?? "Pending current fixture"}</strong></div>
+          <div><span>Audience</span><strong>{live?.audience.value !== null && live?.audience.value !== undefined ? live.audience.value.toLocaleString("en-GB") + " measured" : "Requires club data"}</strong></div>
+          <div><span>Decision</span><strong>{live?.decisionState ?? "HOLD"}</strong></div>
         </div>
-        <p className={styles.note}>Commercial impact is deliberately left unfilled until audience and conversion evidence are connected.</p>
+        <p className={styles.note}>This example reads the same current product state as Morning Brief and Decision Room. Commercial impact remains unfilled until the required audience and conversion evidence exists.</p>
       </section>
 
       <section className={styles.section}>
@@ -106,13 +109,14 @@ export default function PilotPage() {
       <section className={styles.cta}>
         <div>
           <span className={styles.eyebrow}>The commercial proposition</span>
-          <h2>Six fixtures to show whether the engine creates better decisions and measurable fan growth.</h2>
-          <p>The live London City environment demonstrates the workflow. A club pilot replaces illustrative assumptions with measured club data and outcomes.</p>
+          <h2>Six fixtures to test whether the engine improves decision quality and produces measurable fan outcomes.</h2>
+          <p>The live London City environment demonstrates the workflow. A club pilot replaces missing assumptions with authorised club evidence and pre-agreed measurement rules.</p>
         </div>
         <div className={styles.ctaActions}>
           <Link className={styles.button} href="/opportunity">Explore the live opportunity</Link>
           <Link className={styles.secondary} href="/decision-room">See the Decision Room</Link>
           <Link className={styles.secondary} href="/pilot/operating-pack">Open the Pilot Operating Pack</Link>
+          <Link className={styles.secondary} href="/pilot/rehearsal">See the synthetic data rehearsal</Link>
         </div>
       </section>
     </main>
