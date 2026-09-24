@@ -36,7 +36,7 @@ export default function BriefPage() {
         <aside className={styles.fixtureCard}>
           <span>Next home fixture</span>
           <strong>{live ? "London City vs " + live.fixture.opponent : "No current fixture"}</strong>
-          <p>{live ? live.fixture.date + (live.fixture.kickoff ? " · " + live.fixture.kickoff : "") : "Waiting for engine data"}</p>
+          <p>{live ? live.fixture.date + (live.fixture.kickoff ? " · " + live.fixture.kickoff : "") + " · " + live.timingLabel : "Waiting for engine data"}</p>
         </aside>
       </header>
 
