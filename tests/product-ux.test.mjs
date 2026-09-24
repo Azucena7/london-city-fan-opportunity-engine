@@ -467,3 +467,14 @@ test("pilot rehearsal is clearly synthetic and reachable from the operating pack
   assert.match(rehearsal, /Raw supporter rows stored/);
   assert.match(pack, /\/pilot\/rehearsal/);
 });
+
+
+test("pilot weekly example reads the current product opportunity", () => {
+  const page = read("src/app/pilot/page.tsx");
+  assert.match(page, /getCurrentProductOpportunity/);
+  assert.match(page, /live\?\.nextAction\.label/);
+  assert.match(page, /live\?\.decisionState/);
+  assert.match(page, /Requires club data/);
+  assert.match(page, /\/pilot\/rehearsal/);
+  assert.doesNotMatch(page, /Go with conditions/);
+});
