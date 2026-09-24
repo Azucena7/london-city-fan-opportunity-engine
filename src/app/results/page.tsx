@@ -36,11 +36,11 @@ export default function ResultsLearningPage() {
       <header className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>Results & Learning</span>
-          <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What did the action actually change?"}</h1>
+          <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What happened after the action?"}</h1>
           <p>
             {live?.fixturePhase === "pre-match"
               ? "The fixture is still ahead. This screen keeps the measurement plan explicit now, then switches to observed outcomes when authorised post-match evidence arrives."
-              : "Results are only useful when they change the next decision. This view separates measured outcomes from assumptions and keeps the learning loop visible."}
+              : "Results are only useful when they change the next decision. This view separates observed outcomes, attribution and causal claims so the club does not confuse correlation with incrementality."}
           </p>
         </div>
         <aside className={styles.stateCard}>
@@ -79,6 +79,34 @@ export default function ResultsLearningPage() {
         </article>
       </section>
 
+      <section className={styles.interpretation}>
+        <div>
+          <span className={styles.eyebrow}>Interpretation guardrail</span>
+          <h2>Attribution is not the same as incremental impact.</h2>
+          <p>
+            A campaign id can tell us which tickets were associated with an activation. It does not prove that those
+            purchases would not have happened anyway.
+          </p>
+        </div>
+        <div className={styles.interpretationGrid}>
+          <article>
+            <span>Observed</span>
+            <strong>Purchases, scans, revenue and repeat behaviour</strong>
+            <p>Descriptive club evidence.</p>
+          </article>
+          <article>
+            <span>Attributed</span>
+            <strong>Tickets linked to campaign identifiers</strong>
+            <p>Useful for channel analysis, but still descriptive.</p>
+          </article>
+          <article>
+            <span>Incremental</span>
+            <strong>Not established</strong>
+            <p>{results?.interpretation.requirement ?? "Requires a credible counterfactual."}</p>
+          </article>
+        </div>
+      </section>
+
       <section className={styles.learningLoop}>
         <div className={styles.sectionHead}>
           <span className={styles.eyebrow}>Learning loop</span>
@@ -98,7 +126,7 @@ export default function ResultsLearningPage() {
           </article>
           <article>
             <span>03 · LEARN</span>
-            <strong>{measured ? "Use measured repeat, attribution and attendance quality to test the hypothesis." : "Promote the hypothesis only when the result supports it."}</strong>
+            <strong>{measured ? "Use observed repeat, attribution and attendance quality to update the hypothesis without claiming causation." : "Promote the hypothesis only when the result supports it."}</strong>
             <p>No confidence uplift without evidence.</p>
           </article>
           <article>
@@ -115,7 +143,7 @@ export default function ResultsLearningPage() {
           <h2>{measured ? "The product has moved from hypothesis to observed outcome." : "Measured results replace placeholders automatically."}</h2>
           <p>
             {measured
-              ? "The values above come from the authorised club CRM/ticketing slot. They can now strengthen, weaken or redirect the next fixture decision."
+              ? "The values above come from authorised aggregate club CRM/ticketing evidence. They can strengthen, weaken or redirect the next fixture decision, but they do not establish incremental lift on their own."
               : "The product never presents illustrative outcomes as if they happened. Until attribution exists, the honest result state is “not measured yet”."}
           </p>
         </div>
@@ -123,6 +151,7 @@ export default function ResultsLearningPage() {
           <div><span>Current</span><strong>{measured ? "Observed result" : "Hypothesis"}</strong></div>
           <div><span>Evidence state</span><strong>{measured ? "Live club data" : "Missing club data"}</strong></div>
           <div><span>Decision effect</span><strong>Confidence changes only if supported</strong></div>
+          <div><span>Causal claim</span><strong>{results?.interpretation.causalClaim ? "Supported" : "Not established"}</strong></div>
         </div>
       </section>
 
