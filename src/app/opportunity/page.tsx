@@ -124,6 +124,8 @@ export default function OpportunityPage() {
         </div>
       </section>
 
+      <Link className={styles.mobileAction} href="/decision-room">Review Decision →</Link>
+
       <section className={styles.impactSection} id="impact">
         <div>
           <span className={styles.eyebrow}>Impact</span>
