@@ -4,14 +4,30 @@ import styles from "./results.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
+import { getCurrentProductResults } from "@/lib/productResults";
 
 export const metadata: Metadata = {
   title: "Results & Learning",
   description: "Close the loop after matchday: measure the action, capture the learning and update the next fixture decision."
 };
 
+function percent(value: number | null) {
+  return value === null ? "—" : `${(value * 100).toFixed(1)}%`;
+}
+
+function currency(value: number | null) {
+  if (value === null) return "—";
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+    maximumFractionDigits: 0
+  }).format(value);
+}
+
 export default function ResultsLearningPage() {
   const live = getCurrentProductOpportunity();
+  const results = getCurrentProductResults();
+  const measured = results?.state === "measured";
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -23,13 +39,17 @@ export default function ResultsLearningPage() {
           <h1>What did the action actually change?</h1>
           <p>
             Results are only useful when they change the next decision. This view separates measured outcomes from
-            examples and keeps the learning loop visible.
+            assumptions and keeps the learning loop visible.
           </p>
         </div>
         <aside className={styles.stateCard}>
           <span>Current measurement state</span>
-          <strong>Awaiting club conversion data</strong>
-          <p>{live?.nextAction.measurement ?? "Matched ticket conversion is not connected yet."}</p>
+          <strong>{measured ? "Club ticketing data connected" : "Awaiting club conversion data"}</strong>
+          <p>
+            {measured
+              ? `Measured export for ${live?.fixture.opponent ?? "the current fixture"}${results?.extractedAt ? ` · extracted ${new Date(results.extractedAt).toLocaleString("en-GB", { timeZone: "Europe/London" })}` : ""}.`
+              : live?.nextAction.measurement ?? "Matched ticket conversion is not connected yet."}
+          </p>
         </aside>
       </header>
 
@@ -37,24 +57,24 @@ export default function ResultsLearningPage() {
 
       <section className={styles.kpis}>
         <article>
-          <span>Audience activated</span>
-          <strong>—</strong>
-          <p>Requires campaign audience export.</p>
+          <span>Addressable repeat cohort</span>
+          <strong>{results?.addressableRepeatCohort?.toLocaleString("en-GB") ?? "—"}</strong>
+          <p>{measured ? "Consented previous-home buyers who have not purchased this fixture." : "Requires matched club CRM/ticketing data."}</p>
         </article>
         <article>
-          <span>Tickets attributed</span>
-          <strong>—</strong>
-          <p>Requires matched purchase attribution.</p>
+          <span>Campaign-attributed tickets</span>
+          <strong>{results?.campaignAttributedTickets?.toLocaleString("en-GB") ?? "—"}</strong>
+          <p>{measured ? "Tickets with a campaign id in the authorised export." : "Requires matched purchase attribution."}</p>
         </article>
         <article>
-          <span>Repeat rate</span>
-          <strong>—</strong>
-          <p>Requires cohort-level outcome data.</p>
+          <span>Repeat purchase rate</span>
+          <strong>{percent(results?.repeatPurchaseRate ?? null)}</strong>
+          <p>{measured ? "Share of consented previous-home buyers who purchased the current fixture." : "Requires a multi-fixture supporter cohort."}</p>
         </article>
         <article>
-          <span>Revenue</span>
-          <strong>—</strong>
-          <p>Requires attributed ticket value.</p>
+          <span>Ticket revenue</span>
+          <strong>{currency(results?.grossTicketRevenue ?? null)}</strong>
+          <p>{measured ? `Scan rate ${percent(results?.scanRate ?? null)} · no-show ${percent(results?.noShowRate ?? null)}` : "Requires realised ticket value and scan status."}</p>
         </article>
       </section>
 
@@ -67,17 +87,17 @@ export default function ResultsLearningPage() {
         <div className={styles.timeline}>
           <article>
             <span>01 · HYPOTHESIS</span>
-            <strong>Repeat opener attendees are more valuable to activate than a cold audience.</strong>
+            <strong>Repeat recent attendees are more valuable to activate than a cold audience.</strong>
             <p>Defined before execution.</p>
           </article>
           <article>
             <span>02 · MEASURE</span>
             <strong>Match audience → campaign → purchase → scan → repeat.</strong>
-            <p>Blocked until club CRM/ticketing data is connected.</p>
+            <p>{measured ? "Current fixture purchase and scan evidence is connected." : "Blocked until club CRM/ticketing data is connected."}</p>
           </article>
           <article>
             <span>03 · LEARN</span>
-            <strong>Promote the hypothesis only when the result supports it.</strong>
+            <strong>{measured ? "Use measured repeat, attribution and attendance quality to test the hypothesis." : "Promote the hypothesis only when the result supports it."}</strong>
             <p>No confidence uplift without evidence.</p>
           </article>
           <article>
@@ -90,16 +110,17 @@ export default function ResultsLearningPage() {
 
       <section className={styles.resultState}>
         <div>
-          <span className={styles.eyebrow}>What happens when data arrives</span>
-          <h2>Measured results replace placeholders automatically.</h2>
+          <span className={styles.eyebrow}>{measured ? "Measured state" : "What happens when data arrives"}</span>
+          <h2>{measured ? "The product has moved from hypothesis to observed outcome." : "Measured results replace placeholders automatically."}</h2>
           <p>
-            The product should never present illustrative outcomes as if they happened. Until attribution exists,
-            the honest result state is “not measured yet”.
+            {measured
+              ? "The values above come from the authorised club CRM/ticketing slot. They can now strengthen, weaken or redirect the next fixture decision."
+              : "The product never presents illustrative outcomes as if they happened. Until attribution exists, the honest result state is “not measured yet”."}
           </p>
         </div>
         <div className={styles.stateList}>
-          <div><span>Current</span><strong>Hypothesis</strong></div>
-          <div><span>After measurement</span><strong>Observed signal</strong></div>
+          <div><span>Current</span><strong>{measured ? "Observed result" : "Hypothesis"}</strong></div>
+          <div><span>Evidence state</span><strong>{measured ? "Live club data" : "Missing club data"}</strong></div>
           <div><span>Decision effect</span><strong>Confidence changes only if supported</strong></div>
         </div>
       </section>
