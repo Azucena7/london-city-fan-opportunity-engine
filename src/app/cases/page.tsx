@@ -13,7 +13,7 @@ export default function CasesPage() {
   const cases = getFeaturedProductCases();
 
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="cases" />
 
       <header className={styles.hero}>
