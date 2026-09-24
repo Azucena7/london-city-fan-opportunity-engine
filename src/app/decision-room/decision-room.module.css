@@ -317,3 +317,10 @@
   .actionSection{padding:28px 22px}
   .footerRow{align-items:flex-start;flex-direction:column}
 }
+
+.lineagePanel p{
+  margin:7px 0 0;
+  color:var(--product-muted);
+  font-size:11px;
+  line-height:1.4;
+}
