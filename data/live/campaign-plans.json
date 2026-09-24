@@ -58,7 +58,6 @@
         "es": "El opener demostró escasez, YouTube ha pasado de 14,6K a 14,7K suscriptores e Inglaterra–España crea presión de atención y una propuesta futbolística para el mismo día."
       },
       "triggerSignalIds": [
-        "attendance-mun-5402",
         "attention-england-spain",
         "fixture-time-bst-validation-2026-09-15",
         "weather-brighton-waiting"
@@ -374,7 +373,10 @@
       "nextApproval": {
         "en": "Club owner to confirm the ticket product, local viewing partner, creative permissions and destination URLs before T-7 launch.",
         "es": "El responsable del club debe confirmar producto de entrada, partner local, permisos creativos y URLs de destino antes del lanzamiento T-7."
-      }
+      },
+      "contextSignalIds": [
+        "attendance-mun-5402"
+      ]
     }
   ]
 }
