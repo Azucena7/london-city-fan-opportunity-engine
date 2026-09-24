@@ -439,3 +439,12 @@ test("current product opportunity uses declared campaign evidence instead of Bri
   assert.match(opportunity, /strategicActivation/);
   assert.ok(brighton.contextSignalIds.includes("attendance-mun-5402"));
 });
+
+
+test("product cases keep composite score in the analyst layer", () => {
+  const page = read("src/app/cases/page.tsx");
+  assert.doesNotMatch(page, />Score</);
+  assert.doesNotMatch(page, /planningScore/);
+  assert.match(page, /Decision posture/);
+  assert.match(page, /composite score in the analyst layer/);
+});
