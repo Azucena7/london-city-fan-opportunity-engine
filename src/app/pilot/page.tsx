@@ -17,7 +17,7 @@ const deliverables = [
 
 export default function PilotPage() {
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="pilot" />
 
       <header className={styles.hero}>
