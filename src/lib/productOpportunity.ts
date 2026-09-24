@@ -3,9 +3,11 @@ import {
   campaignPlans,
   currentState,
   fixtures,
-  liveSignals
+  liveSignals,
+  crmTicketingLive
 } from "@/lib/data";
 import type { CampaignPlan, CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
+import { buildRepeatCohort } from "@/lib/crmTicketingMetrics";
 
 export type ProductEvidenceState = "known" | "assumption" | "missing";
 
@@ -86,6 +88,16 @@ function currentCampaign(fixtureId: string): CampaignPlan | null {
   return campaignPlans.campaigns.find((campaign) => campaign.fixtureId === fixtureId) ?? null;
 }
 
+function previousHomeFixture(current: CalendarFixture): CalendarFixture | null {
+  return calendar
+    .filter((item) =>
+      item.homeAway === "home" &&
+      item.date < current.date &&
+      (item.status === "final" || item.status === "completed-pending-data")
+    )
+    .sort((a, b) => b.date.localeCompare(a.date))[0] ?? null;
+}
+
 function evidenceSignals(fixtureId: string, campaign: CampaignPlan | null) {
   const triggerIds = new Set(campaign?.triggerSignalIds ?? []);
   return liveSignals.filter((signal) =>
@@ -153,6 +165,13 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   const confidence = decisionConfidence(signals, campaign);
   const readiness = approvalReadiness(campaign);
   const blockers = blockerLabels(campaign);
+  const previousFixture = previousHomeFixture(calendarFixture);
+  const cohort =
+    crmTicketingLive.datasetState === "club-live" &&
+    previousFixture &&
+    crmTicketingLive.records.length > 0
+      ? buildRepeatCohort(crmTicketingLive.records, previousFixture.id, calendarFixture.id)
+      : null;
 
   const openerSignal = liveSignals.find((signal) => signal.id === "attendance-mun-5402");
   const watchalongSignal = liveSignals.find((signal) => signal.id === "attention-england-spain");
@@ -164,8 +183,13 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
     campaign?.nextApproval.en ??
     "Build the highest-priority audience and validate the measurement plan before activation.";
 
+  const cohortEvidence = cohort && previousFixture
+    ? `${cohort.addressableConsentedNonReturners.toLocaleString("en-GB")} consented ${previousFixture.opponent} buyers have not yet purchased ${calendarFixture.opponent}.`
+    : null;
+
   const known = [
     `${calendarFixture.opponent} is scheduled for ${calendarFixture.date}${calendarFixture.kickoff ? ` at ${calendarFixture.kickoff}` : ""}.`,
+    cohortEvidence,
     openerSignal?.summary.en,
     watchalongSignal?.summary.en,
     localAvailabilitySignal?.summary.en,
@@ -173,14 +197,18 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   ].filter((item): item is string => Boolean(item));
 
   const assumptions = [
-    "A meaningful share of opener buyers is still available to convert for Brighton.",
-    "The opener non-returner cohort is contactable through authorised CRM channels.",
+    ...(!cohort ? [
+      `A meaningful share of previous-home buyers is still available to convert for ${calendarFixture.opponent}.`,
+      "The repeat-attendance cohort is contactable through authorised CRM channels."
+    ] : []),
     "Repeat-visit propensity is stronger than cold acquisition for this fixture."
   ];
 
   const missing = [
-    "Matched opener buyers who have not purchased Brighton.",
-    "Authorised CRM addressability and consent coverage.",
+    ...(!cohort ? [
+      `Matched previous-home buyers who have not purchased ${calendarFixture.opponent}.`,
+      "Authorised CRM addressability and consent coverage."
+    ] : []),
     "Ticket conversion attributable to the recommended activation."
   ];
 
@@ -227,9 +255,11 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
       measurement: primaryMeasurement?.label.en ?? "Matched ticket conversion"
     },
     audience: {
-      label: "Opener buyers who have not yet purchased Brighton",
-      value: null,
-      state: "requires-club-data"
+      label: previousFixture
+        ? `Consented ${previousFixture.opponent} buyers who have not purchased ${calendarFixture.opponent}`
+        : "Previous-home buyers who have not purchased the current fixture",
+      value: cohort?.addressableConsentedNonReturners ?? null,
+      state: cohort ? "measured" : "requires-club-data"
     },
     impact: {
       ticketsLow: null,
