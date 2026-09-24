@@ -30,7 +30,7 @@ export default function OperatingPackPage() {
   const requiresAccess = crmTicketingReadiness.coverage.filter((item) => item.state === "requires-access").length;
 
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="pilot" />
 
       <header className={styles.hero}>
