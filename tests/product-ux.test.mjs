@@ -439,3 +439,20 @@ test("current product opportunity uses declared campaign evidence instead of Bri
   assert.match(opportunity, /strategicActivation/);
   assert.ok(brighton.contextSignalIds.includes("attendance-mun-5402"));
 });
+
+
+test("pilot rehearsal exercises aggregate audience, results and causal guardrails", () => {
+  const rehearsal = read("scripts/run-pilot-rehearsal.mjs");
+  const helper = read("scripts/lib/crm-ticketing-aggregate.mjs");
+  const pkg = JSON.parse(read("package.json"));
+
+  assert.equal(pkg.scripts["rehearse:pilot"], "node scripts/run-pilot-rehearsal.mjs");
+  assert.match(rehearsal, /synthetic-rehearsal/);
+  assert.match(rehearsal, /productionClaim: false/);
+  assert.match(rehearsal, /addressableRepeatCohort/);
+  assert.match(rehearsal, /campaignAttributedTickets/);
+  assert.match(rehearsal, /incrementality: "not-established"/);
+  assert.match(helper, /raw supporter|supporter_id_hash/i);
+  assert.match(helper, /fixtureSummaries/);
+  assert.match(helper, /repeatCohorts/);
+});
