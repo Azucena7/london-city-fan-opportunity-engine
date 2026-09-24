@@ -332,3 +332,16 @@ test("Results switches from missing to measured only through the live CRM slot",
   assert.equal(live.datasetState, "requires-access");
   assert.equal(live.records.length, 0);
 });
+
+
+test("authorised CRM importer rejects direct identifiers and only writes the live slot", () => {
+  const importer = read("scripts/import-crm-ticketing.mjs");
+  const pkg = JSON.parse(read("package.json"));
+  assert.equal(pkg.scripts["import:crm"], "node scripts/import-crm-ticketing.mjs");
+  assert.match(importer, /forbidden direct-identifier field/);
+  assert.match(importer, /supporter_id_hash/);
+  assert.match(importer, /duplicate ticket_id_hash/);
+  assert.match(importer, /postcode_sector must be aggregated to sector level/);
+  assert.match(importer, /data\/live\/crm-ticketing\.json/);
+  assert.match(importer, /datasetState: "club-live"/);
+});
