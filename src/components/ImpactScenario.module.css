@@ -1,5 +1,5 @@
 .model{display:grid;gap:18px}
-.context{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
+.context{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
 .context>div{padding:14px 18px 14px 0}
 .context>div+div{padding-left:18px;border-left:1px solid var(--product-line)}
 .context span,.outputs span,.waterfall span{display:block;color:var(--product-muted);font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px}
@@ -46,7 +46,9 @@
   .waterfall .result{grid-column:1 / -1}
 }
 @media(max-width:850px){
-  .controls,.outputs{grid-template-columns:1fr 1fr}
+  .context,.controls,.outputs{grid-template-columns:1fr 1fr}
+  .context>div:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--product-line)}
+  .context>div:nth-child(4){border-top:1px solid var(--product-line)}
   .outputs article:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--product-line)}
   .outputs article:nth-child(4){border-top:1px solid var(--product-line)}
 }
