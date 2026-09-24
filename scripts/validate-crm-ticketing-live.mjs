@@ -3,47 +3,88 @@ import { readFile } from "node:fs/promises";
 const path = new URL("../data/live/crm-ticketing.json", import.meta.url);
 const dataset = JSON.parse(await readFile(path, "utf8"));
 const errors = [];
-const required = ["schema_version","fixture_id","channel","supporter_id_hash","order_id_hash","ticket_id_hash","order_timestamp","ticket_product","quantity","realised_unit_price","currency","scan_status","consent_status","source_system","extracted_at"];
-const forbidden = ["name","email","phone","full_postcode","date_of_birth","payment_details"];
-const channels = new Set(["owned","partner","broadcast","paid","organic","direct","community","unknown"]);
-const scanStates = new Set(["scanned","not_scanned","unknown"]);
-const consentStates = new Set(["consented","not_consented","unknown"]);
-const ticketIds = new Set();
+const forbiddenKeys = new Set([
+  "records","supporter_id_hash","order_id_hash","ticket_id_hash","name","email","phone",
+  "full_postcode","date_of_birth","payment_details"
+]);
 
-if (!["requires-access","club-live"].includes(dataset.datasetState)) {
-  errors.push("datasetState must be requires-access or club-live");
+function scanForbidden(value, ref = "dataset") {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => scanForbidden(item, `${ref}[${index}]`));
+    return;
+  }
+  if (!value || typeof value !== "object") return;
+  for (const [key, child] of Object.entries(value)) {
+    if (forbiddenKeys.has(key)) errors.push(`${ref}: forbidden repository field ${key}`);
+    scanForbidden(child, `${ref}.${key}`);
+  }
 }
-if (dataset.scope !== "club-crm-ticketing") errors.push("scope must be club-crm-ticketing");
-if (!Array.isArray(dataset.records)) errors.push("records must be an array");
+
+scanForbidden(dataset);
+
+if (!["requires-access","club-aggregate"].includes(dataset.datasetState)) {
+  errors.push("datasetState must be requires-access or club-aggregate");
+}
+if (dataset.scope !== "club-crm-ticketing-aggregate") {
+  errors.push("scope must be club-crm-ticketing-aggregate");
+}
+if (!Array.isArray(dataset.fixtureSummaries)) errors.push("fixtureSummaries must be an array");
+if (!Array.isArray(dataset.repeatCohorts)) errors.push("repeatCohorts must be an array");
 
 if (dataset.datasetState === "requires-access") {
-  if (dataset.records.length !== 0) errors.push("requires-access dataset must not contain records");
   if (dataset.extractedAt !== null) errors.push("requires-access dataset must have extractedAt=null");
+  if (dataset.fixtureSummaries?.length) errors.push("requires-access dataset must not contain fixture summaries");
+  if (dataset.repeatCohorts?.length) errors.push("requires-access dataset must not contain repeat cohorts");
 }
 
-if (dataset.datasetState === "club-live") {
-  if (!dataset.extractedAt) errors.push("club-live dataset requires extractedAt");
-  if (!dataset.records.length) errors.push("club-live dataset requires at least one record");
+if (dataset.datasetState === "club-aggregate") {
+  if (!dataset.extractedAt) errors.push("club-aggregate dataset requires extractedAt");
+  if (!dataset.fixtureSummaries?.length) errors.push("club-aggregate dataset requires fixture summaries");
 }
 
-for (const [index, row] of dataset.records.entries()) {
-  const ref = `row ${index + 1}`;
-  for (const field of required) {
-    if (row[field] === undefined || row[field] === null || row[field] === "") errors.push(`${ref}: missing ${field}`);
+const fixtureIds = new Set();
+for (const [index, item] of (dataset.fixtureSummaries ?? []).entries()) {
+  const ref = `fixtureSummaries[${index}]`;
+  if (!item.fixtureId) errors.push(`${ref}: missing fixtureId`);
+  if (fixtureIds.has(item.fixtureId)) errors.push(`${ref}: duplicate fixtureId`);
+  fixtureIds.add(item.fixtureId);
+
+  for (const field of [
+    "tickets","uniqueBuyers","scans","noShows","grossTicketRevenue","firstTimeBuyers",
+    "consentedBuyers","campaignAttributedTickets","postcodeSectors"
+  ]) {
+    if (typeof item[field] !== "number" || item[field] < 0) {
+      errors.push(`${ref}: ${field} must be a non-negative number`);
+    }
   }
-  for (const field of forbidden) if (field in row) errors.push(`${ref}: forbidden field ${field}`);
-  if (row.schema_version !== "1.0") errors.push(`${ref}: unsupported schema_version`);
-  if (!channels.has(row.channel)) errors.push(`${ref}: invalid channel`);
-  if (!scanStates.has(row.scan_status)) errors.push(`${ref}: invalid scan_status`);
-  if (!consentStates.has(row.consent_status)) errors.push(`${ref}: invalid consent_status`);
-  if (row.quantity !== 1) errors.push(`${ref}: quantity must be 1 at ticket grain`);
-  if (row.currency !== "GBP") errors.push(`${ref}: currency must be GBP`);
-  if (row.realised_unit_price < 0) errors.push(`${ref}: negative realised_unit_price`);
-  if (row.scan_status === "scanned" && !row.scan_timestamp) errors.push(`${ref}: scanned ticket requires scan_timestamp`);
-  if (ticketIds.has(row.ticket_id_hash)) errors.push(`${ref}: duplicate ticket_id_hash`);
-  ticketIds.add(row.ticket_id_hash);
-  if (row.postcode_sector && !/^[A-Z]{1,2}[0-9][A-Z0-9]? [0-9]$/.test(row.postcode_sector)) {
-    errors.push(`${ref}: postcode_sector is not aggregated to sector level`);
+  if (item.averageTicketValue !== null &&
+      (typeof item.averageTicketValue !== "number" || item.averageTicketValue < 0)) {
+    errors.push(`${ref}: averageTicketValue must be null or non-negative`);
+  }
+  if (item.scans + item.noShows > item.tickets) errors.push(`${ref}: scans + noShows cannot exceed tickets`);
+  if (item.campaignAttributedTickets > item.tickets) errors.push(`${ref}: attributed tickets cannot exceed tickets`);
+  if (item.consentedBuyers > item.uniqueBuyers) errors.push(`${ref}: consented buyers cannot exceed unique buyers`);
+}
+
+const cohortKeys = new Set();
+for (const [index, item] of (dataset.repeatCohorts ?? []).entries()) {
+  const ref = `repeatCohorts[${index}]`;
+  const key = `${item.sourceFixtureId}->${item.targetFixtureId}`;
+  if (!item.sourceFixtureId || !item.targetFixtureId) errors.push(`${ref}: fixture ids are required`);
+  if (item.sourceFixtureId === item.targetFixtureId) errors.push(`${ref}: source and target fixtures must differ`);
+  if (cohortKeys.has(key)) errors.push(`${ref}: duplicate cohort pair`);
+  cohortKeys.add(key);
+
+  for (const field of [
+    "sourceBuyers","sourceConsentedBuyers","alreadyPurchasedTarget","addressableConsentedNonReturners"
+  ]) {
+    if (typeof item[field] !== "number" || item[field] < 0) {
+      errors.push(`${ref}: ${field} must be a non-negative number`);
+    }
+  }
+  if (item.sourceConsentedBuyers > item.sourceBuyers) errors.push(`${ref}: consented source buyers cannot exceed source buyers`);
+  if (item.alreadyPurchasedTarget + item.addressableConsentedNonReturners !== item.sourceConsentedBuyers) {
+    errors.push(`${ref}: repeat cohort must partition consented source buyers`);
   }
 }
 
@@ -53,7 +94,9 @@ if (errors.length) {
 } else {
   console.log(JSON.stringify({
     state: dataset.datasetState,
-    records: dataset.records.length,
-    extractedAt: dataset.extractedAt
+    fixtureSummaries: dataset.fixtureSummaries.length,
+    repeatCohorts: dataset.repeatCohorts.length,
+    extractedAt: dataset.extractedAt,
+    rawSupporterRecordsStored: false
   }, null, 2));
 }
