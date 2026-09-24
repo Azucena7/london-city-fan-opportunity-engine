@@ -81,9 +81,9 @@ export default function OpportunityPage() {
             <h3>{live?.recommendedAction ?? "No current action."}</h3>
           </div>
           <div className={styles.actionMeta}>
+            <div><span>Next gate</span><strong>{live?.nextAction.label ?? "Pending"}</strong></div>
             <div><span>Owner</span><strong>{live?.nextAction.owner ?? "Pending"}</strong></div>
             <div><span>Due</span><strong>{live?.nextAction.deadline ?? "Pending"}</strong></div>
-            <div><span>Measure</span><strong>{live?.nextAction.measurement ?? "Pending"}</strong></div>
           </div>
         </article>
       </section>
