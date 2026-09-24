@@ -16,6 +16,12 @@ const roles = [
   ["Measurement lead", "Defines attribution, scorecards and post-match learning."]
 ];
 
+const measurementDesign = [
+  ["Strongest", "Randomized holdout", "Keep an eligible slice unexposed so incremental lift can be estimated against the same audience at the same fixture."],
+  ["Strong", "Matched control or stepped rollout", "Use a comparable audience, territory or timing window when randomization is not operationally acceptable."],
+  ["Directional", "Pre-agreed baseline", "Compare against a defined historical or pre-campaign benchmark, while keeping the causal claim explicitly limited."]
+];
+
 const success = [
   "Every fixture has one explicit opportunity and decision owner.",
   "Every recommended action has a measurement plan before launch.",
@@ -125,6 +131,31 @@ export default function OperatingPackPage() {
         </div>
         <div className={styles.roles}>
           {roles.map(([title, body]) => <article key={title}><h3>{title}</h3><p>{body}</p></article>)}
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHead}>
+          <span className={styles.eyebrow}>Measurement design</span>
+          <h2>Decide the strength of evidence before the campaign launches.</h2>
+          <p>
+            The pilot can report attribution with campaign identifiers, but incremental impact needs a counterfactual.
+            Each fixture should choose the strongest practical design in advance.
+          </p>
+        </div>
+        <div className={styles.measurementGrid}>
+          {measurementDesign.map(([strength, title, body]) => (
+            <article key={title}>
+              <span>{strength}</span>
+              <strong>{title}</strong>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+        <div className={styles.measurementRule}>
+          <span>Causal claim rule</span>
+          <strong>No holdout, control or agreed counterfactual = no incremental-lift claim.</strong>
+          <p>Observed purchases and campaign attribution remain useful decision evidence, but they stay descriptive.</p>
         </div>
       </section>
 
