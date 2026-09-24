@@ -58,6 +58,7 @@
         "es": "El opener demostró escasez, YouTube ha pasado de 14,6K a 14,7K suscriptores e Inglaterra–España crea presión de atención y una propuesta futbolística para el mismo día."
       },
       "triggerSignalIds": [
+        "attendance-mun-5402",
         "attention-england-spain",
         "fixture-time-bst-validation-2026-09-15",
         "weather-brighton-waiting"
@@ -120,7 +121,10 @@
             "en": "15-second atmosphere cutdown, family static and grassroots partner pack",
             "es": "Vídeo de ambiente de 15 segundos, pieza familiar y pack para partners de fútbol base"
           },
-          "trackingCampaignIds": ["brighton-paid-01", "brighton-community-01"],
+          "trackingCampaignIds": [
+            "brighton-paid-01",
+            "brighton-community-01"
+          ],
           "utmSource": "bromley_local",
           "utmMedium": "paid_community",
           "utmContent": "family_double_header",
@@ -142,7 +146,10 @@
             "en": "Opener crowd film, player invitation and fixture countdown",
             "es": "Vídeo del público del opener, invitación de jugadoras y cuenta atrás"
           },
-          "trackingCampaignIds": ["brighton-owned-01", "brighton-organic-01"],
+          "trackingCampaignIds": [
+            "brighton-owned-01",
+            "brighton-organic-01"
+          ],
           "utmSource": "lcl_owned",
           "utmMedium": "organic_social",
           "utmContent": "opener_next_chapter",
@@ -164,7 +171,9 @@
             "en": "Bilingual player-led fixture story and club-channel follow prompt",
             "es": "Historia bilingüe del partido liderada por la jugadora y llamada a seguir el canal del club"
           },
-          "trackingCampaignIds": ["brighton-eleven-01"],
+          "trackingCampaignIds": [
+            "brighton-eleven-01"
+          ],
           "utmSource": "eleven_alexia",
           "utmMedium": "partner_video",
           "utmContent": "player_to_club",
@@ -186,7 +195,9 @@
             "en": "Know-before-you-go card, confirmed kickoff lock-up and weather variant",
             "es": "Guía antes de salir, pieza con horario confirmado y variante meteorológica"
           },
-          "trackingCampaignIds": ["brighton-owned-02"],
+          "trackingCampaignIds": [
+            "brighton-owned-02"
+          ],
           "utmSource": "lcl_service",
           "utmMedium": "owned",
           "utmContent": "kickoff_access_weather",
@@ -241,11 +252,26 @@
         }
       ],
       "budgetMix": [
-        { "channel": "Local paid", "share": 45 },
-        { "channel": "Owned content", "share": 20 },
-        { "channel": "Community", "share": 20 },
-        { "channel": "Partner / international", "share": 10 },
-        { "channel": "Contingency", "share": 5 }
+        {
+          "channel": "Local paid",
+          "share": 45
+        },
+        {
+          "channel": "Owned content",
+          "share": 20
+        },
+        {
+          "channel": "Community",
+          "share": 20
+        },
+        {
+          "channel": "Partner / international",
+          "share": 10
+        },
+        {
+          "channel": "Contingency",
+          "share": 5
+        }
       ],
       "measurement": [
         {
