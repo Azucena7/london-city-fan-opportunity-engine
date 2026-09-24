@@ -19,11 +19,15 @@ The commercial product layer is designed around a simple operating loop:
 ## Product routes
 
 - **/** — commercial product home.
+- **/brief** — fixture-timed Morning Brief.
+- **/opportunity** — current Opportunity workspace.
 - **/demo** — guided London City product walkthrough.
 - **/decision-room** — evidence, assumptions, blockers and what would change the decision.
 - **/results** — post-match Results & Learning loop.
 - **/impact** — transparent ticket and revenue scenario model.
 - **/pilot** — 90-day / 6-fixture Fan Growth Pilot proposition.
+- **/pilot/operating-pack** — onboarding, data trust, roles and measurement design.
+- **/cases** — product use cases.
 - **/today** — the full London City intelligence engine.
 
 The deeper London City routes remain available for fixture, territory, signal, source, experience and operational detail.
@@ -67,7 +71,7 @@ Core sources:
 - territory and access;
 - selected public demand and market signals.
 
-Public and editorial data live under `data/seed` and `data/live`. Internal ticketing, scans, CRM and retention data require an authorised connector. Never commit credentials; configure them as GitHub or Vercel secrets.
+Public and editorial data live under `data/seed` and `data/live`. Authorised CRM/ticketing exports remain outside the repository and are processed locally. The repository stores only aggregate fixture summaries and repeat-cohort counts; supporter-, order- and ticket-level hashes are discarded before the live product state is written. Never commit credentials or raw club exports.
 
 ## London City intelligence engine
 
@@ -98,9 +102,13 @@ npm run typecheck
 npm run build
 ```
 
-## Validation
+## Measurement and causal claims
 
-Before publishing meaningful data or logic changes:
+Campaign identifiers support descriptive attribution. They do not, by themselves, establish incremental lift. A causal claim requires a pre-agreed measurement design such as a randomized holdout, credible control group or explicit counterfactual baseline.
+
+## Validation and quality gate
+
+Every pull request runs linting, typechecking, regression tests, data-contract validation and a production build in GitHub Actions. Before publishing meaningful data or logic changes locally:
 
 ```bash
 npm run lint
