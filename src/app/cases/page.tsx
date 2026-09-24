@@ -20,7 +20,7 @@ export default function CasesPage() {
         <span className={styles.eyebrow}>Fixture use cases</span>
         <h1>Different fixtures should produce different commercial decisions.</h1>
         <p>
-          The engine should not recommend “push harder” every week. These cases show retention, core protection and acquisition contexts from the existing fixture planning model.
+          The engine should not recommend “push harder” every week. These cases show three distinct commercial jobs — retention, core protection and acquisition — while keeping the underlying composite score in the analyst layer.
         </p>
       </header>
 
@@ -28,8 +28,7 @@ export default function CasesPage() {
         <div className={styles.tableHead}>
           <span>Fixture</span>
           <span>Opportunity</span>
-          <span>Mode</span>
-          <span>Score</span>
+          <span>Decision posture</span>
           <span>Evidence</span>
         </div>
 
@@ -44,7 +43,6 @@ export default function CasesPage() {
               <small>{item.product}</small>
             </div>
             <div><span className={styles.mode}>{item.decision}</span></div>
-            <div className={styles.score}>{item.planningScore}<small>/100</small></div>
             <div>
               <span className={item.evidenceState === "live-decision-case" ? styles.live : styles.model}>
                 {item.evidenceState === "live-decision-case" ? "Live decision case" : "Planning model"}
