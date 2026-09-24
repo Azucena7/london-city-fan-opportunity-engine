@@ -80,3 +80,62 @@
   .links,.actions{flex-direction:column}
   .cta{padding:28px 22px}
 }
+
+.trustGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.trustGrid article{
+  padding:20px;
+  border:1px solid var(--product-line);
+  border-radius:var(--product-radius-md);
+  background:var(--product-surface);
+}
+.trustGrid span{
+  display:block;
+  margin-bottom:8px;
+  color:#526D00;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.trustGrid strong{
+  display:block;
+  font-size:18px;
+  line-height:1.3;
+}
+.trustGrid p{
+  margin:8px 0 0;
+  color:var(--product-muted);
+  font-size:12px;
+  line-height:1.5;
+}
+.connectionState{
+  margin-top:14px;
+  padding:18px 0;
+  border-top:1px solid var(--product-line);
+  border-bottom:1px solid var(--product-line);
+}
+.connectionState span{
+  display:block;
+  color:var(--product-muted);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.connectionState strong{
+  display:block;
+  font-size:17px;
+}
+.connectionState p{
+  margin:6px 0 0;
+  color:var(--product-muted);
+  font-size:12px;
+  line-height:1.45;
+}
+@media(max-width:800px){
+  .trustGrid{grid-template-columns:1fr}
+}
