@@ -1,4 +1,5 @@
 import type { CalendarFixture, CrmTicketingDemo, LocalizedText, PostMatchReview, PostMatchScorecard, PostMatchScorecardWindow } from "./models";
+import { summariseCrmTicketing } from "./crmTicketingMetrics";
 
 const windows: Array<{ id: PostMatchScorecardWindow["id"]; days: number; objective: LocalizedText }> = [
   { id: "T+1", days: 1, objective: { en: "Close result, attendance and operational facts", es: "Cerrar resultado, asistencia y hechos operativos" } },
@@ -53,12 +54,7 @@ function buildPublicScorecard(fixture: CalendarFixture, review: PostMatchReview,
 
 function buildDemoScorecard(fixture: CalendarFixture, demo: CrmTicketingDemo): PostMatchScorecard {
   const records = demo.records;
-  const scans = records.filter((row) => row.scan_status === "scanned").length;
-  const noShows = records.filter((row) => row.scan_status === "not_scanned").length;
-  const buyers = new Set(records.map((row) => row.supporter_id_hash));
-  const firstTime = new Set(records.filter((row) => row.first_time_buyer).map((row) => row.supporter_id_hash));
-  const attributed = records.filter((row) => row.campaign_id).length;
-  const averagePrice = records.reduce((sum, row) => sum + row.realised_unit_price, 0) / records.length;
+  const summary = summariseCrmTicketing(records);
   return {
     fixtureId: fixture.id,
     fixtureDate: fixture.date,
@@ -74,13 +70,13 @@ function buildDemoScorecard(fixture: CalendarFixture, demo: CrmTicketingDemo): P
       es: "Sustituir el ensayo por un export autorizado después del partido, conservando las mismas claves de partido, campaña, contenido, entrada y aficionado."
     },
     metrics: [
-      { id: "tickets", label: { en: "Demo tickets", es: "Entradas demo" }, value: records.length.toLocaleString("en-GB"), state: "synthetic-demo" },
-      { id: "scans", label: { en: "Demo scans", es: "Accesos demo" }, value: scans.toLocaleString("en-GB"), state: "synthetic-demo" },
-      { id: "no-show", label: { en: "Demo no-show", es: "No-show demo" }, value: `${((noShows / records.length) * 100).toFixed(1)}%`, state: "synthetic-demo" },
-      { id: "buyers", label: { en: "Unique demo buyers", es: "Compradores demo únicos" }, value: buyers.size.toLocaleString("en-GB"), state: "synthetic-demo" },
-      { id: "first-time", label: { en: "First-time demo buyers", es: "Nuevos compradores demo" }, value: firstTime.size.toLocaleString("en-GB"), state: "synthetic-demo" },
-      { id: "yield", label: { en: "Demo average price", es: "Precio medio demo" }, value: `£${averagePrice.toFixed(2)}`, state: "synthetic-demo" },
-      { id: "attribution", label: { en: "Campaign-attributed", es: "Atribuidas a campaña" }, value: `${attributed}/${records.length}`, state: "synthetic-demo" },
+      { id: "tickets", label: { en: "Demo tickets", es: "Entradas demo" }, value: summary.tickets.toLocaleString("en-GB"), state: "synthetic-demo" },
+      { id: "scans", label: { en: "Demo scans", es: "Accesos demo" }, value: summary.scans.toLocaleString("en-GB"), state: "synthetic-demo" },
+      { id: "no-show", label: { en: "Demo no-show", es: "No-show demo" }, value: summary.noShowRate === null ? "Unknown" : `${(summary.noShowRate * 100).toFixed(1)}%`, state: "synthetic-demo" },
+      { id: "buyers", label: { en: "Unique demo buyers", es: "Compradores demo únicos" }, value: summary.uniqueBuyers.toLocaleString("en-GB"), state: "synthetic-demo" },
+      { id: "first-time", label: { en: "First-time demo buyers", es: "Nuevos compradores demo" }, value: summary.firstTimeBuyers.toLocaleString("en-GB"), state: "synthetic-demo" },
+      { id: "yield", label: { en: "Demo average price", es: "Precio medio demo" }, value: summary.averageTicketValue === null ? "Unknown" : `£${summary.averageTicketValue.toFixed(2)}`, state: "synthetic-demo" },
+      { id: "attribution", label: { en: "Campaign-attributed", es: "Atribuidas a campaña" }, value: `${summary.campaignAttributedTickets}/${summary.tickets}`, state: "synthetic-demo" },
       { id: "repeat", label: { en: "30/60/90 repeat", es: "Repetición 30/60/90" }, value: "Requires fixtures", state: "requires-access" }
     ],
     windows: demoWindows(),
