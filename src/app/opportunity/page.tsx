@@ -63,9 +63,9 @@ export default function OpportunityPage() {
           <p>{live?.primaryBlocker ?? "No blocker loaded"}</p>
         </article>
         <article>
-          <span>Live evidence</span>
-          <strong>{live?.liveSignals.length ?? 0} signals</strong>
-          <p>{live?.updatedAt ? "Updated " + new Date(live.updatedAt).toLocaleString("en-GB",{timeZone:"Europe/London"}) : "Refresh unavailable"}</p>
+          <span>Measurement</span>
+          <strong>{live?.measurementEvidence.label ?? "Missing"}</strong>
+          <p>{live?.measurementEvidence.detail ?? "No measurement state available."}</p>
         </article>
       </section>
 
