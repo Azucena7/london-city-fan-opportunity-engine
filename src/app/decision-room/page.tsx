@@ -21,7 +21,7 @@ export default function DecisionRoomPage() {
   const confidenceWidth = live?.confidence.label === "High" ? "88%" : live?.confidence.label === "Medium" ? "60%" : "32%";
 
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="decision" />
 
       <header className={styles.header}>
