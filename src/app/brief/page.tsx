@@ -125,13 +125,15 @@ export default function BriefPage() {
         </div>
       </section>
 
+      <Link className={styles.mobileAction} href="/opportunity">Open Opportunity →</Link>
+
       <section className={styles.evidence}>
         <div>
           <span className={styles.eyebrow}>Evidence freshness</span>
           <h2>{live?.updatedAt ? "Engine refreshed " + new Date(live.updatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" }) : "Refresh time unavailable"}</h2>
           <p>{live ? live.liveSignals.length + " current signals feed the product opportunity." : "No live signal lineage is available."}</p>
         </div>
-        <Link className={styles.button} href="/today">Inspect full engine</Link>
+        <Link className={styles.button} href="/today">Open Analyst view</Link>
       </section>
     </main>
   );
