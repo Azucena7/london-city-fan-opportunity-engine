@@ -1,0 +1,38 @@
+.legend{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0;
+}
+.label{
+  color:var(--product-muted);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-right:2px;
+}
+.live,.modelled,.missing{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 8px;
+  border-radius:999px;
+  background:var(--product-surface);
+  border:1px solid var(--product-line);
+  font-size:9px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.live::before,.modelled::before,.missing::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:currentColor;
+}
+.live{color:var(--product-success)}
+.modelled{color:var(--product-warning)}
+.missing{color:var(--product-missing)}
