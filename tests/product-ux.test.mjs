@@ -467,3 +467,12 @@ test("pilot rehearsal is clearly synthetic and reachable from the operating pack
   assert.match(rehearsal, /Raw supporter rows stored/);
   assert.match(pack, /\/pilot\/rehearsal/);
 });
+
+
+test("product cases keep composite score in the analyst layer", () => {
+  const page = read("src/app/cases/page.tsx");
+  assert.doesNotMatch(page, />Score</);
+  assert.doesNotMatch(page, /planningScore/);
+  assert.match(page, /Decision posture/);
+  assert.match(page, /composite score in the analyst layer/);
+});
