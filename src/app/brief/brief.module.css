@@ -210,3 +210,13 @@
   .meta{grid-template-columns:1fr}
   .fixtureCard{padding-left:16px}
 }
+
+@media(max-width:600px){
+  .primaryAction,.secondaryAction{padding:20px}
+  .primaryAction h3,.secondaryAction h3{font-size:20px}
+  .button{min-height:44px;align-items:center}
+  .evidence{
+    margin-bottom:18px;
+    padding-bottom:22px;
+  }
+}

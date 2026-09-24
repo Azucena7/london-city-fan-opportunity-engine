@@ -92,3 +92,42 @@
 @media (prefers-reduced-motion:no-preference){
   a,button{transition:color .16s ease,background-color .16s ease,border-color .16s ease,transform .16s ease}
 }
+
+/* Product accessibility + interaction baseline */
+.productShell :focus-visible,
+.productAppShell :focus-visible,
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:3px solid #5C7C00;
+  outline-offset:3px;
+}
+
+@media (pointer:coarse){
+  .productShell a,
+  .productShell button,
+  .productAppShell a,
+  .productAppShell button{
+    min-height:44px;
+  }
+}
+
+@media (prefers-contrast:more){
+  :root{
+    --product-line:#ADB1AA;
+    --product-muted:#4F5A55;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important;
+  }
+}
+
+/* Mobile accessibility preview refresh */
