@@ -310,5 +310,29 @@
     },
     "sourceName": "Bromley FC",
     "sourceUrl": "https://www.bromleyfc.co.uk/news/2026/september/16/mk-dons--a--and-wycombe--h--postponed-due-to-international-call-ups/"
+  },
+  {
+    "id": "result-leicester-0-2-brighton-4-0-2026-09-24",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-24T09:34:59+01:00",
+    "title": {
+      "en": "London City and Brighton both arrive from decisive cup wins",
+      "es": "London City y Brighton llegan tras victorias claras en copa"
+    },
+    "summary": {
+      "en": "The official WSL Football live feed confirms London City won 2–0 away to Leicester and Brighton beat Charlton 4–0 on 23 September. The results strengthen the sporting proposition for 26 September but are not evidence of ticket sales or attendance.",
+      "es": "El feed oficial de WSL Football confirma que London City ganó 0–2 a Leicester y Brighton venció 4–0 a Charlton el 23 de septiembre. Los resultados refuerzan la propuesta deportiva del 26 de septiembre, pero no son evidencia de ventas de entradas ni de asistencia."
+    },
+    "marketingAction": {
+      "en": "Refresh Brighton creative around two in-form teams and London City’s consecutive away wins; keep standard, VIP and watchalong journeys separately tagged and judge the change through measured conversion.",
+      "es": "Actualizar la creatividad de Brighton en torno a dos equipos en forma y las victorias visitantes consecutivas de London City; mantener etiquetados por separado los recorridos estándar, VIP y watchalong y evaluar el cambio mediante conversión medida."
+    },
+    "sourceName": "WSL Football official match feed",
+    "sourceUrl": "https://www.wslfootball.com/"
   }
 ]
