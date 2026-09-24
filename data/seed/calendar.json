@@ -51,7 +51,11 @@
     "homeAway": "away",
     "competition": "Subway Players Cup",
     "venue": "Meadow Lane",
-    "status": "scheduled"
+    "status": "final",
+    "result": {
+      "for": 2,
+      "against": 0
+    }
   },
   {
     "id": "2026-09-26-bha-h",
