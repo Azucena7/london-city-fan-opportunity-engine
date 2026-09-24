@@ -60,6 +60,19 @@ stored in `data/contracts/crm-ticketing.schema.json`; the Brighton dataset in `d
 synthetic and exists only to exercise calculations. Run `npm run validate:crm-demo` before
 publishing changes to the demo. Never mix demo values with public or club actuals.
 
+`crm-ticketing.json` is the explicit slot for an authorised club export. It stays
+`requires-access` with an empty `records` array until real data is supplied. To import a
+consent-safe JSON export locally, run:
+
+```bash
+npm run import:crm -- ./path/to/authorised-export.json
+npm run validate:crm-live
+```
+
+The importer rejects direct identifiers, invalid hashes, duplicate ticket IDs, non-ticket grain,
+unsupported consent/scan states and full postcodes. The source file must already use the versioned
+record contract; the importer does not hash or anonymise raw personal data for you.
+
 ## Post-match scorecards
 
 `src/lib/postmatch.ts` joins records through the canonical fixture IDs in `calendar.json`.
