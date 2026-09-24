@@ -123,9 +123,18 @@ export default function DecisionRoomPage() {
 
           <article className={styles.lineagePanel}>
             <span>Evidence lineage</span>
-            <strong>{live ? live.liveSignals.length + " live engine signals" : "No live lineage"}</strong>
+            <strong>{live ? live.liveSignals.length + " declared evidence signals" : "No live lineage"}</strong>
             <p>{live?.updatedAt ? "Engine updated " + new Date(live.updatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" }) : "Update time unavailable"}</p>
-            <Link href="/today">Inspect analyst view →</Link>
+            <div className={styles.sourceList}>
+              {(live?.liveSignals ?? []).map((signal) => (
+                <a key={signal.id} href={signal.sourceUrl} target="_blank" rel="noreferrer">
+                  <span>{signal.state} · {signal.materiality}</span>
+                  <strong>{signal.sourceName}</strong>
+                  <small>{signal.title}</small>
+                </a>
+              ))}
+            </div>
+            <Link href="/today">Inspect full analyst lineage →</Link>
           </article>
         </aside>
       </section>
