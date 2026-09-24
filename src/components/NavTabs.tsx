@@ -33,11 +33,16 @@ export function NavTabs() {
     <header className="labHeader">
       <div className="labTopline">
         <Link className="brand brandLink" href="/today">
-          LCL / FAN OPPORTUNITY ENGINE
+          LONDON CITY / ANALYST VIEW
         </Link>
-        <span className="prototypeMark">
-          {es ? "Prototipo independiente" : "Independent prototype"}
-        </span>
+        <div className="analystBridge">
+          <span className="prototypeMark">
+            {es ? "Entorno de evidencia" : "Evidence environment"}
+          </span>
+          <Link className="backToProduct" href="/brief">
+            {es ? "← Volver al producto" : "← Back to product"}
+          </Link>
+        </div>
       </div>
 
       <div className="navTabsRow">
