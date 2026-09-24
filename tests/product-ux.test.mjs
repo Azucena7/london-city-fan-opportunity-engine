@@ -326,11 +326,13 @@ test("Results switches from missing to measured only through the live CRM slot",
   assert.match(page, /getCurrentProductResults/);
   assert.match(page, /Club ticketing data connected/);
   assert.match(page, /Awaiting club conversion data/);
-  assert.match(adapter, /datasetState !== "club-live"/);
+  assert.match(adapter, /datasetState !== "club-aggregate"/);
   assert.match(adapter, /campaignAttributedTickets/);
   assert.match(adapter, /repeatPurchaseRate/);
   assert.equal(live.datasetState, "requires-access");
-  assert.equal(live.records.length, 0);
+  assert.deepEqual(live.fixtureSummaries, []);
+  assert.deepEqual(live.repeatCohorts, []);
+  assert.equal("records" in live, false);
 });
 
 
@@ -342,4 +344,23 @@ test("decision confidence requires measured conversion evidence before it can be
   assert.match(opportunity, /state: "missing"/);
   assert.match(opportunity, /strongEvidence >= 3 && !accessGap/);
   assert.match(opportunity, /campaignAttributedTickets > 0/);
+});
+
+
+test("repository CRM evidence is aggregate-only and importer never stores supporter hashes", () => {
+  const live = JSON.parse(read("data/live/crm-ticketing.json"));
+  const importer = read("scripts/import-crm-ticketing.mjs");
+  const validator = read("scripts/validate-crm-ticketing-live.mjs");
+  const pkg = JSON.parse(read("package.json"));
+
+  assert.equal(live.scope, "club-crm-ticketing-aggregate");
+  assert.equal("records" in live, false);
+  assert.equal(pkg.scripts["import:crm"], "node scripts/import-crm-ticketing.mjs");
+  assert.match(importer, /must stay outside the repository/);
+  assert.match(importer, /rawRecordsStoredInRepository: false/);
+  assert.match(importer, /fixtureSummaries/);
+  assert.match(importer, /repeatCohorts/);
+  assert.match(validator, /forbidden repository field/);
+  assert.match(validator, /supporter_id_hash/);
+  assert.match(validator, /ticket_id_hash/);
 });
