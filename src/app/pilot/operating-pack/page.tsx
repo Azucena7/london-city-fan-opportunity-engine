@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import { crmTicketingReadiness } from "@/lib/data";
+import { crmTicketingLive, crmTicketingReadiness } from "@/lib/data";
 import styles from "./operating-pack.module.css";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ const roles = [
 const success = [
   "Every fixture has one explicit opportunity and decision owner.",
   "Every recommended action has a measurement plan before launch.",
-  "Ticketing and CRM evidence can be joined at fixture and pseudonymous supporter level.",
+  "Ticketing and CRM evidence can be matched locally with a pseudonymous supporter key and stored as aggregate evidence.",
   "Post-match learning changes at least one subsequent fixture decision.",
   "The club can explain what is measured, assumed and still missing."
 ];
@@ -82,6 +82,39 @@ export default function OperatingPackPage() {
         <div className={styles.links}>
           <a href={crmTicketingReadiness.templateUrl}>CRM/ticketing import template</a>
           <a href={crmTicketingReadiness.schemaUrl}>Data contract schema</a>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHead}>
+          <span className={styles.eyebrow}>Data trust</span>
+          <h2>Use supporter-level data to calculate. Store only what the decision needs.</h2>
+          <p>
+            The pilot workflow keeps authorised ticket-grain data outside this repository. Matching happens locally,
+            and the product stores only fixture-level and repeat-cohort aggregates.
+          </p>
+        </div>
+        <div className={styles.trustGrid}>
+          <article>
+            <span>01 · SOURCE</span>
+            <strong>Club-controlled export</strong>
+            <p>Raw CRM/ticketing files remain outside the product repository and are never used as demo content.</p>
+          </article>
+          <article>
+            <span>02 · MATCH</span>
+            <strong>Pseudonymous local processing</strong>
+            <p>A stable supporter hash can be used to calculate repeat behaviour without names, emails or phone numbers.</p>
+          </article>
+          <article>
+            <span>03 · STORE</span>
+            <strong>Aggregate evidence only</strong>
+            <p>Fixture summaries and cross-fixture cohort counts are the only club evidence written into the live product state.</p>
+          </article>
+        </div>
+        <div className={styles.connectionState}>
+          <span>Current connection</span>
+          <strong>{crmTicketingLive.datasetState === "club-aggregate" ? "Aggregate club evidence connected" : "No club CRM/ticketing aggregate connected"}</strong>
+          <p>{crmTicketingLive.note.en}</p>
         </div>
       </section>
 
