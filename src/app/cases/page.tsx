@@ -17,7 +17,7 @@ export default function CasesPage() {
       <ProductJourneyNav active="cases" />
 
       <header className={styles.hero}>
-        <span className={styles.eyebrow}>Use cases</span>
+        <span className={styles.eyebrow}>Fixture use cases</span>
         <h1>Different fixtures should produce different commercial decisions.</h1>
         <p>
           The engine should not recommend “push harder” every week. These cases show retention, core protection and acquisition contexts from the existing fixture planning model.
