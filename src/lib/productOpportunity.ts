@@ -26,9 +26,11 @@ export type ProductOpportunity = {
   whyNow: string;
   recommendedAction: string;
   nextAction: {
+    label: string;
     owner: string;
     deadline: string;
     measurement: string;
+    status: "overdue" | "planned";
   };
   audience: {
     label: string;
@@ -252,6 +254,15 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   const nextScheduledAction = campaign?.schedule.find((item) => item.state !== "complete");
   const primaryMeasurement = campaign?.measurement.find((item) => item.id === "purchase-scan-repeat")
     ?? campaign?.measurement[0];
+  const referenceDate = ((currentState.updated_at as string | undefined) ?? calendarFixture.date).slice(0, 10);
+  const nextActionStatus =
+    nextScheduledAction && nextScheduledAction.date < referenceDate
+      ? "overdue" as const
+      : "planned" as const;
+  const nextRequiredAction =
+    blockers.length > 0
+      ? campaign?.nextApproval.en ?? `Resolve: ${blockers[0]}`
+      : recommendedAction;
 
   const measurementEvidence = conversionEvidenceConnected
     ? {
@@ -290,11 +301,13 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
       "The next home fixture has active demand and attention signals that justify review.",
     recommendedAction,
     nextAction: {
-      owner: "CRM / Marketing",
+      label: nextRequiredAction,
+      owner: blockers.length > 0 ? "Club decision owner" : "CRM / Marketing",
       deadline: nextScheduledAction
-        ? `${nextScheduledAction.window} · ${nextScheduledAction.date}`
+        ? `${nextScheduledAction.window} · ${nextScheduledAction.date}${nextActionStatus === "overdue" ? " · OVERDUE" : ""}`
         : "Before campaign launch",
-      measurement: primaryMeasurement?.label.en ?? "Matched ticket conversion"
+      measurement: primaryMeasurement?.label.en ?? "Matched ticket conversion",
+      status: nextActionStatus
     },
     audience: {
       label: previousFixture

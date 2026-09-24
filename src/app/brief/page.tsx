@@ -103,7 +103,7 @@ export default function BriefPage() {
         <div className={styles.actions}>
           <article className={styles.primaryAction}>
             <span>01 · Highest priority</span>
-            <h3>{live?.recommendedAction ?? "Review current evidence."}</h3>
+            <h3>{live?.nextAction.label ?? "Review current evidence."}</h3>
             <div className={styles.meta}>
               <div><small>Owner</small><strong>{live?.nextAction.owner ?? "Pending"}</strong></div>
               <div><small>Due</small><strong>{live?.nextAction.deadline ?? "Pending"}</strong></div>
@@ -112,8 +112,8 @@ export default function BriefPage() {
           </article>
 
           <article className={styles.secondaryAction}>
-            <span>02 · Resolve blocker</span>
-            <h3>{live?.primaryBlocker ?? "No blocking approval gate is currently recorded."}</h3>
+            <span>02 · Strategic recommendation</span>
+            <h3>{live?.recommendedAction ?? "No strategic recommendation is available."}</h3>
             <Link href="/opportunity">Open Opportunity →</Link>
           </article>
 

@@ -133,7 +133,7 @@ export default function DecisionRoomPage() {
       <section className={styles.actionSection} id="next-action">
         <div className={styles.actionCopy}>
           <span className={styles.eyebrow}>Next required action</span>
-          <h2>{live?.recommendedAction ?? "No current action is available."}</h2>
+          <h2>{live?.nextAction.label ?? "No current action is available."}</h2>
           <p>The decision cannot become ready until the primary blocker and measurement gap are resolved.</p>
         </div>
         <div className={styles.actionMeta}>

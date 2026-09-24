@@ -364,3 +364,18 @@ test("repository CRM evidence is aggregate-only and importer never stores suppor
   assert.match(validator, /supporter_id_hash/);
   assert.match(validator, /ticket_id_hash/);
 });
+
+
+test("strategy and operational next action stay separate", () => {
+  const opportunity = read("src/lib/productOpportunity.ts");
+  const brief = read("src/app/brief/page.tsx");
+  const decision = read("src/app/decision-room/page.tsx");
+
+  assert.match(opportunity, /recommendedAction/);
+  assert.match(opportunity, /nextRequiredAction/);
+  assert.match(opportunity, /campaign\?\.nextApproval\.en/);
+  assert.match(opportunity, /OVERDUE/);
+  assert.match(brief, /nextAction\.label/);
+  assert.match(brief, /Strategic recommendation/);
+  assert.match(decision, /nextAction\.label/);
+});
