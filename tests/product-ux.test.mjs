@@ -425,3 +425,17 @@ test("Results never equates campaign attribution with incrementality", () => {
   assert.match(adapter, /causalClaim: false/);
   assert.match(adapter, /randomized holdout, credible control group, or pre-agreed counterfactual baseline/);
 });
+
+
+test("current product opportunity uses declared campaign evidence instead of Brighton-specific signal wiring", () => {
+  const opportunity = read("src/lib/productOpportunity.ts");
+  const campaigns = JSON.parse(read("data/live/campaign-plans.json"));
+  const brighton = campaigns.campaigns.find((item) => item.fixtureId === "2026-09-26-bha-h");
+
+  assert.doesNotMatch(opportunity, /signal\.id === "attendance-mun-5402"/);
+  assert.doesNotMatch(opportunity, /attention-england-spain/);
+  assert.doesNotMatch(opportunity, /weather-brighton-waiting/);
+  assert.match(opportunity, /signals\.map\(\(signal\) => signal\.summary\.en\)/);
+  assert.match(opportunity, /strategicActivation/);
+  assert.ok(brighton.triggerSignalIds.includes("attendance-mun-5402"));
+});
