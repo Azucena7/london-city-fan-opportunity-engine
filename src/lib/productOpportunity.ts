@@ -21,6 +21,9 @@ export type ProductOpportunity = {
     venue: string;
   };
   score: number | null;
+  fixturePhase: "pre-match" | "matchday" | "post-match";
+  daysToFixture: number;
+  timingLabel: string;
   opportunityLabel: string;
   opportunity: string;
   whyNow: string;
@@ -74,6 +77,35 @@ export type ProductOpportunity = {
   updatedAt: string | null;
   sourceMode: "live-engine";
 };
+
+function fixtureTiming(referenceIso: string, fixtureDate: string) {
+  const referenceDate = referenceIso.slice(0, 10);
+  const start = new Date(referenceDate + "T00:00:00Z").getTime();
+  const target = new Date(fixtureDate + "T00:00:00Z").getTime();
+  const daysToFixture = Math.round((target - start) / 86400000);
+
+  if (daysToFixture > 0) {
+    return {
+      fixturePhase: "pre-match" as const,
+      daysToFixture,
+      timingLabel: `T-${daysToFixture}`
+    };
+  }
+
+  if (daysToFixture === 0) {
+    return {
+      fixturePhase: "matchday" as const,
+      daysToFixture,
+      timingLabel: "MATCHDAY"
+    };
+  }
+
+  return {
+    fixturePhase: "post-match" as const,
+    daysToFixture,
+    timingLabel: `T+${Math.abs(daysToFixture)}`
+  };
+}
 
 function findCurrentFixture(): { calendarFixture: CalendarFixture; fixture: Fixture | null } | null {
   const fixtureId = currentState.next_home_fixture_id as string | undefined;
@@ -168,6 +200,8 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
   if (!current) return null;
 
   const { calendarFixture, fixture } = current;
+  const engineReference = (currentState.updated_at as string | undefined) ?? calendarFixture.date;
+  const timing = fixtureTiming(engineReference, calendarFixture.date);
   const campaign = currentCampaign(calendarFixture.id);
   const signals = evidenceSignals(calendarFixture.id, campaign);
   const currentFixtureSummary =
@@ -292,6 +326,9 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
       venue: calendarFixture.venue
     },
     score,
+    fixturePhase: timing.fixturePhase,
+    daysToFixture: timing.daysToFixture,
+    timingLabel: timing.timingLabel,
     opportunityLabel,
     opportunity:
       campaign?.objective.en ??
