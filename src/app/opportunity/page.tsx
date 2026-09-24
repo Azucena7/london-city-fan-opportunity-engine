@@ -50,7 +50,7 @@ export default function OpportunityPage() {
         <article>
           <span>Opportunity</span>
           <strong>{live?.opportunityLabel ?? "Under review"}</strong>
-          <p>{live?.score !== null && live?.score !== undefined ? "Model score " + live.score + "/100" : "Score unavailable"}</p>
+          <p>Evidence-led prioritisation · model detail stays in Analyst View.</p>
         </article>
         <article>
           <span>Audience</span>
