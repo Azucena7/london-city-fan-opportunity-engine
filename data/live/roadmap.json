@@ -75,6 +75,21 @@
     }
   },
   {
+    "id": "brighton-cup-momentum-creative",
+    "fixtureId": "2026-09-26-bha-h",
+    "area": "Content & Growth Marketing",
+    "status": "next",
+    "due": "2026-09-24",
+    "title": {
+      "en": "Refresh Brighton creative with cup momentum",
+      "es": "Actualizar la creatividad de Brighton con el impulso de copa"
+    },
+    "reason": {
+      "en": "London City’s 2–0 win at Leicester and Brighton’s 4–0 win over Charlton create a stronger sporting story two days before the match. Update paid, social and CRM variants, retain separate tags for standard, VIP and watchalong journeys, and evaluate only measured clicks and ticket conversion.",
+      "es": "El 0–2 de London City en Leicester y el 4–0 de Brighton ante Charlton crean una historia deportiva más fuerte a dos días del partido. Actualizar variantes de paid, social y CRM, mantener etiquetas separadas para los recorridos estándar, VIP y watchalong, y evaluar únicamente clics y conversión de entradas medidos."
+    }
+  },
+  {
     "id": "postmatch-template",
     "fixtureId": "2026-09-26-bha-h",
     "area": "Data",
