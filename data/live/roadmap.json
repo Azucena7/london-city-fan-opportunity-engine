@@ -47,16 +47,16 @@
   {
     "id": "double-header",
     "fixtureId": "2026-09-26-bha-h",
-    "area": "Growth Marketing & Commercial",
+    "area": "Matchday Operations & CRM",
     "status": "next",
-    "due": "2026-09-23",
+    "due": "2026-09-25",
     "title": {
-      "en": "Segment and instrument the Brighton conversion push",
-      "es": "Segmentar e instrumentar la campaña de conversión para Brighton"
+      "en": "Issue the final Brighton service journey and instrument the Broomfields trial",
+      "es": "Emitir el recorrido final de servicio para Brighton e instrumentar la prueba de Broomfields"
     },
     "reason": {
-      "en": "Use the confirmed 4–1 Charlton result as standard-ticket creative, target the £75 VIP Terrace to high-intent, group and partner audiences, and retain the watchalong as the extended-day proposition. Tag each journey separately and measure clicks, ticket conversion and post-match dwell without converting availability into sales or sales into attendance.",
-      "es": "Usar el 4–1 confirmado ante Charlton como creatividad para la entrada estándar, dirigir la VIP Terrace de £75 a audiencias de alta intención, grupos y partners, y mantener el watchalong como propuesta de jornada ampliada. Etiquetar cada recorrido por separado y medir clics, conversión de entradas y permanencia pospartido sin convertir disponibilidad en ventas ni ventas en asistencia."
+      "en": "The official fan guide now fixes the operational journey: Broomfields 14:00–16:45 before re-entry from kickoff, Fan Zone 15:00, turnstiles 15:30, no on-site parking, a limited 15:00 youth session and a matchday ticket price rise. Segment eligible families, send access guidance, and measure entry timing, retail/bar use and post-match dwell separately from attendance.",
+      "es": "La guía oficial fija ahora el recorrido operativo: Broomfields de 14:00 a 16:45 antes de reabrir desde el inicio, Fan Zone a las 15:00, tornos a las 15:30, sin parking en el estadio, sesión juvenil limitada a las 15:00 y subida del precio de entrada en matchday. Segmentar a familias elegibles, enviar la guía de acceso y medir por separado hora de entrada, uso de retail/bar y permanencia pospartido, sin confundirlos con asistencia."
     }
   },
   {
