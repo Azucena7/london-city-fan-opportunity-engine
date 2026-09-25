@@ -334,5 +334,29 @@
     },
     "sourceName": "WSL Football official match feed",
     "sourceUrl": "https://www.wslfootball.com/"
+  },
+  {
+    "id": "experience-brighton-final-fan-guide-2026-09-25",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-25T09:18:14+01:00",
+    "title": {
+      "en": "Brighton fan guide confirms a new Broomfields access trial and final matchday timings",
+      "es": "La guía de Brighton confirma una nueva prueba de acceso a Broomfields y los horarios finales"
+    },
+    "summary": {
+      "en": "London City confirms Broomfields opens externally to all fans from 14:00 until it is cleared at 16:45, then reopens to supporters inside the stadium from kickoff; the Fan Zone opens at 15:00 and turnstiles at 15:30. A free sister-club session for girls aged 8–12 runs 15:00–15:45 with limited registration, there is no on-site parking, and tickets remain available with prices rising on matchday. Availability is confirmed, not sales.",
+      "es": "London City confirma que Broomfields abre por el exterior a todos los aficionados de 14:00 hasta su desalojo a las 16:45, y reabre desde el inicio a quienes estén dentro del estadio; la Fan Zone abre a las 15:00 y los tornos a las 15:30. Hay una sesión gratuita de clubes hermanos para niñas de 8–12 años de 15:00 a 15:45 con plazas limitadas, no hay parking en el estadio y siguen disponibles entradas cuyo precio sube el día de partido. Es disponibilidad confirmada, no ventas."
+    },
+    "marketingAction": {
+      "en": "Send one final segmented service message with arrival windows, public-transport/parking guidance and the matchday price step; promote the limited youth session only to eligible families. Tag Broomfields, Fan Zone, hospitality and watchalong journeys separately, then measure entry timing, retail/bar use and post-match dwell without treating ticket availability as demand.",
+      "es": "Enviar un último mensaje de servicio segmentado con ventanas de llegada, transporte/parking y la subida de precio en matchday; promocionar la sesión juvenil limitada solo a familias elegibles. Etiquetar por separado Broomfields, Fan Zone, hospitality y watchalong, y medir hora de entrada, uso de retail/bar y permanencia pospartido sin tratar la disponibilidad de entradas como demanda."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/fan-guide-brigton-hove-albion-h"
   }
 ]
