@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-25T05:44:10.130Z",
+  "checkedAt": "2026-09-26T05:42:33.326Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -49,7 +49,7 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "weekly-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-25T05:44:10.130Z",
+      "lastSuccessfulAt": "2026-09-26T05:42:33.326Z",
       "ownerAction": null,
       "note": {
         "en": "Channel statistics are refreshed through the official YouTube Data API.",
@@ -67,11 +67,11 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-25T05:44:10.130Z",
+      "lastSuccessfulAt": "2026-09-26T05:42:33.326Z",
       "ownerAction": null,
       "note": {
-        "en": "32 strategically relevant sports events remain from 619 candidates; routine culture and entertainment are excluded.",
-        "es": "32 citas deportivas estratégicamente relevantes permanecen de 619 candidatas; se excluyen cultura y entretenimiento rutinarios."
+        "en": "33 strategically relevant sports events remain from 618 candidates; routine culture and entertainment are excluded.",
+        "es": "33 citas deportivas estratégicamente relevantes permanecen de 618 candidatas; se excluyen cultura y entretenimiento rutinarios."
       }
     },
     {
