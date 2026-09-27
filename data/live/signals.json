@@ -358,5 +358,41 @@
     },
     "sourceName": "London City Lionesses",
     "sourceUrl": "https://www.londoncitylionesses.com/post/fan-guide-brigton-hove-albion-h"
+  },
+  {
+    "id": "result-brighton-2-0-2026-09-27",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-27T09:52:54+01:00",
+    "title": {
+      "en": "London City beat Brighton 2–0 as Putellas opened her WSL account",
+      "es": "London City venció 2–0 a Brighton y Putellas estrenó su cuenta en la WSL"
+    },
+    "summary": {
+      "en": "The official WSL result confirms a 2–0 home win on 26 September. Alexia Putellas scored her first London City goal and Lucía Corrales added the second in stoppage time. The result is confirmed; attendance, scans, ticket sales and matchday-spend outcomes remain unpublished and must not be inferred.",
+      "es": "El resultado oficial de la WSL confirma la victoria en casa por 2–0 del 26 de septiembre. Alexia Putellas marcó su primer gol con London City y Lucía Corrales añadió el segundo en el descuento. El resultado está confirmado; asistencia, scans, ventas de entradas y resultados de gasto en matchday siguen sin publicarse y no deben inferirse."
+    },
+    "marketingAction": {
+      "en": "Use Putellas’s first goal, the clean sheet and the home win in Ipswich and Tottenham content, while holding all demand, repeat-purchase and Broomfields/watchalong performance claims until ticketing, scans, CRM and venue data are available.",
+      "es": "Usar el primer gol de Putellas, la portería a cero y la victoria en casa en el contenido para Ipswich y Tottenham, manteniendo en espera cualquier afirmación sobre demanda, repetición y rendimiento de Broomfields/watchalong hasta disponer de datos de ticketing, scans, CRM y venue."
+    },
+    "sourceName": "WSL Football / Sky Sports",
+    "sourceUrl": "https://www.wslfootball.com/",
+    "sources": [
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/",
+        "checkedAt": "2026-09-27"
+      },
+      {
+        "name": "Sky Sports",
+        "url": "https://www.skysports.com/football/news/13591747/london-city-lionesses-2-0-brighton-alexia-putellas-first-wsl-goal-helps-send-london-city-into-second",
+        "checkedAt": "2026-09-27"
+      }
+    ]
   }
 ]
