@@ -92,16 +92,16 @@
   {
     "id": "postmatch-template",
     "fixtureId": "2026-09-26-bha-h",
-    "area": "Data",
-    "status": "planned",
-    "due": "2026-09-27",
+    "area": "CRM & Data",
+    "status": "next",
+    "due": "2026-09-28",
     "title": {
-      "en": "Close the T+1 post-match review",
-      "es": "Cerrar la revisión postpartido T+1"
+      "en": "Collect Brighton demand and experience evidence",
+      "es": "Recoger la evidencia de demanda y experiencia de Brighton"
     },
     "reason": {
-      "en": "Captures result, attendance, incidents and first content signals while they are fresh.",
-      "es": "Captura resultado, asistencia, incidencias y primeras señales de contenido cuando todavía son recientes."
+      "en": "The 2–0 result and scorers are confirmed, but attendance, scans, ticket sales, no-show, territory/repeat mix, Broomfields retail/bar use and watchalong dwell remain unpublished. Reconcile ticketing, access-control, CRM and venue data before completing the post-match scorecard or making demand claims.",
+      "es": "El 2–0 y las goleadoras están confirmados, pero siguen sin publicarse asistencia, scans, ventas, no-show, mezcla territorial/repetición, uso de retail/bar en Broomfields y permanencia en el watchalong. Conciliar ticketing, control de acceso, CRM y datos del venue antes de completar el scorecard postpartido o afirmar resultados de demanda."
     }
   },
   {
