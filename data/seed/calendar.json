@@ -65,7 +65,7 @@
     "homeAway": "home",
     "competition": "Barclays Women's Super League",
     "venue": "The CopperJax Community Stadium, Bromley",
-    "status": "completed-pending-data",
+    "status": "final",
     "sourceDiscrepancies": [
       {
         "field": "kickoff",
@@ -86,7 +86,11 @@
           }
         ]
       }
-    ]
+    ],
+    "result": {
+      "for": 2,
+      "against": 0
+    }
   },
   {
     "id": "2026-09-30-ips-a",
