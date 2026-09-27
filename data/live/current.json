@@ -1,25 +1,18 @@
 {
-  "updated_at": "2026-09-26T05:42:33.326Z",
+  "updated_at": "2026-09-27T05:43:07.181Z",
   "status": "active",
-  "next_home_fixture_id": "2026-09-26-bha-h",
-  "last_completed_home_fixture_id": "2026-09-04-mun-h",
+  "next_home_fixture_id": "2026-10-18-eve-h",
+  "last_completed_home_fixture_id": "2026-09-26-bha-h",
   "weather": {
-    "status": "forecast",
-    "valid_for": "2026-09-26",
-    "generated_at": "2026-09-26T05:42:33.155Z",
-    "precipitation_probability_max": 0,
-    "precipitation_sum": 0,
-    "temperature_max": 20,
-    "temperature_min": 12.7,
-    "wind_speed_max": 11.9,
-    "source": "Open-Meteo"
+    "status": "waiting",
+    "reason": "Operational forecast window not yet reliable"
   },
   "attendance_momentum": {
     "score": 90,
     "basis": "5,402 measured attendance at the Manchester United opener"
   },
   "attention_availability": 35,
-  "material_changes": 0,
+  "material_changes": 1,
   "source_failures": [
     "WSL attendance: WSL attendance returned 403"
   ],
@@ -27,8 +20,8 @@
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-09-26T05:42:33.326Z",
-    "lastSuccessfulAt": "2026-09-26T05:42:33.326Z",
+    "lastAttemptAt": "2026-09-27T05:43:07.181Z",
+    "lastSuccessfulAt": "2026-09-27T05:43:07.181Z",
     "state": "partial",
     "sources": [
       {
@@ -36,7 +29,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-09-26T05:42:33.326Z",
+        "checkedAt": "2026-09-27T05:43:07.181Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -44,7 +37,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-09-26T05:42:33.326Z",
+        "checkedAt": "2026-09-27T05:43:07.181Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       },
       {
@@ -52,7 +45,7 @@
         "label": "WSL attendance benchmark",
         "state": "waiting",
         "confidence": "unavailable",
-        "checkedAt": "2026-09-26T05:42:33.326Z",
+        "checkedAt": "2026-09-27T05:43:07.181Z",
         "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
         "message": "WSL attendance returned 403"
       }
