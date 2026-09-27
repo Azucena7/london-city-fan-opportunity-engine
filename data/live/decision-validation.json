@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-21T20:45:00Z",
+  "checkedAt": "2026-09-27T06:30:00Z",
   "principle": {
     "en": "Compare a time-stamped engine hypothesis with later observable market action. Alignment is evidence of relevance, not evidence that a club saw, used or was influenced by the engine.",
     "es": "Comparar una hipótesis del engine con sello temporal con una acción de mercado observable posterior. La alineación es evidencia de relevancia, no de que un club viera, utilizara o estuviera influido por el engine."
@@ -103,7 +103,7 @@
         "es": "Medir si el engine detecta repetidamente oportunidades relevantes antes de que acciones comparables de clubes se hagan públicas, registrando las divergencias con el mismo rigor que las coincidencias."
       },
       "liveValidation": {
-        "state": "pre-match-active",
+        "state": "post-match-active",
         "fixtureDate": "2026-09-26",
         "principle": {
           "en": "Advance only when new evidence exists. Future phases stay waiting until observed.",
@@ -153,16 +153,16 @@
               "es": "Observación pre-match"
             },
             "date": "2026-09-21",
-            "state": "active",
+            "state": "complete",
             "expected": {
               "en": "Track whether the proposition remains publicly visible and whether additional service or experience details appear before matchday.",
               "es": "Seguir si la propuesta continúa visible públicamente y si aparecen más detalles de servicio o experiencia antes del matchday."
             },
             "observed": {
-              "en": "Watchalong proposition is publicly documented. Matchday delivery and downstream response are not yet observable.",
-              "es": "La propuesta de watchalong está documentada públicamente. La ejecución en matchday y la respuesta posterior aún no son observables."
+              "en": "The official fan guide expanded the proposition before matchday: England v Spain watchalong and bingo in Broomfields from 19:45, bingo-card collection from 18:45–19:30, plus a wider fan-zone and post-match journey.",
+              "es": "La guía oficial amplió la propuesta antes del partido: watchalong y bingo de Inglaterra–España en Broomfields desde las 19:45, recogida de cartones de 18:45–19:30, además de una experiencia más amplia de fan zone y postpartido."
             },
-            "evidenceRef": "data/seed/club-activations.json"
+            "evidenceRef": "https://www.londoncitylionesses.com/post/fan-guide-brigton-hove-albion-h"
           },
           {
             "id": "matchday",
@@ -171,16 +171,16 @@
               "es": "Ejecución en matchday"
             },
             "date": "2026-09-26",
-            "state": "waiting",
+            "state": "complete",
             "expected": {
               "en": "Record only observable delivery: whether the watchalong runs, service details and any public attendance or experience evidence.",
               "es": "Registrar solo ejecución observable: si se realiza el watchalong, detalles de servicio y cualquier evidencia pública de asistencia o experiencia."
             },
             "observed": {
-              "en": "Waiting for matchday evidence.",
-              "es": "En espera de evidencia de matchday."
+              "en": "The fixture was played and London City beat Brighton 2–0. Public pre-match material documented the planned watchalong delivery in detail, but no public source checked yet verifies that the watchalong itself actually ran or quantifies participation.",
+              "es": "El partido se disputó y London City venció 2–0 a Brighton. El material público previo documentó con detalle la ejecución prevista del watchalong, pero ninguna fuente pública revisada verifica todavía que el watchalong se realizara ni cuantifica la participación."
             },
-            "evidenceRef": null
+            "evidenceRef": "https://www.skysports.com/football/news/13591747/london-city-lionesses-2-0-brighton-alexia-putellas-first-wsl-goal-helps-send-london-city-into-second"
           },
           {
             "id": "post-match",
@@ -189,16 +189,16 @@
               "es": "Evidencia post-match"
             },
             "date": "2026-09-27",
-            "state": "waiting",
+            "state": "active",
             "expected": {
               "en": "Capture attendance, public outcome signals, what aligned or diverged, and the data gaps that still require club access.",
               "es": "Capturar asistencia, señales públicas de resultado, qué se alineó o divergió y los gaps que aún requieren acceso del club."
             },
             "observed": {
-              "en": "Waiting for post-match evidence.",
-              "es": "En espera de evidencia post-match."
+              "en": "The 2–0 result is independently reported. Measured attendance, verified watchalong delivery, public response signals and downstream conversion remain unverified.",
+              "es": "El resultado 2–0 está publicado de forma independiente. La asistencia medida, la ejecución verificada del watchalong, las señales públicas de respuesta y la conversión posterior siguen sin verificar."
             },
-            "evidenceRef": null
+            "evidenceRef": "https://www.skysports.com/football/news/13591747/london-city-lionesses-2-0-brighton-alexia-putellas-first-wsl-goal-helps-send-london-city-into-second"
           }
         ],
         "postMatchChecklist": [
