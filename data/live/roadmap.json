@@ -118,5 +118,20 @@
       "en": "Separates acquired audience from retained audience.",
       "es": "Separa audiencia adquirida de audiencia retenida."
     }
+  },
+  {
+    "id": "tottenham-time-and-mancity-ticket-comms",
+    "fixtureId": "2026-10-04-tot-a",
+    "area": "Marketing Operations & CRM",
+    "status": "next",
+    "due": "2026-09-29",
+    "title": {
+      "en": "Correct Tottenham kickoff and launch segmented Manchester City ticket communications",
+      "es": "Corregir la hora de Tottenham y lanzar comunicaciones segmentadas de entradas para Manchester City"
+    },
+    "reason": {
+      "en": "The confirmed Tottenham away kickoff is 14:00 BST, not 13:00, and away tickets are available. Manchester City home tickets are also on sale from £14 adult and £6 child. Correct Tottenham service assets immediately; segment the 1 November Manchester City offer by prior purchase and membership, and verify the club's inconsistent price-rise deadline before using urgency copy.",
+      "es": "El horario visitante de Tottenham confirmado es 14:00 BST, no 13:00, y hay entradas disponibles. Las entradas para recibir al Manchester City también están a la venta desde £14 adulto y £6 niño. Corregir de inmediato los materiales de servicio de Tottenham; segmentar la oferta del 1 de noviembre por compra previa y membresía, y verificar el plazo contradictorio de subida de precio antes de usar mensajes de urgencia."
+    }
   }
 ]
