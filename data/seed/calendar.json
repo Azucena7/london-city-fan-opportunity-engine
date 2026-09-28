@@ -105,12 +105,33 @@
   {
     "id": "2026-10-04-tot-a",
     "date": "2026-10-04",
-    "kickoff": "13:00",
+    "kickoff": "14:00",
     "opponent": "Tottenham Hotspur",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
-    "venue": "Brisbane Road",
-    "status": "scheduled"
+    "venue": "BetWright Stadium",
+    "status": "scheduled",
+    "sourceDiscrepancies": [
+      {
+        "field": "kickoff",
+        "detectedAt": "2026-09-28T09:18:00Z",
+        "state": "resolved",
+        "values": [
+          {
+            "value": "13:00",
+            "sourceName": "Existing seed calendar",
+            "sourceUrl": "https://github.com/Azucena7/london-city-fan-opportunity-engine/blob/main/data/seed/calendar.json",
+            "checkedAt": "2026-09-28"
+          },
+          {
+            "value": "14:00",
+            "sourceName": "London City away ticket notice and WSL Football",
+            "sourceUrl": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+            "checkedAt": "2026-09-28"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "2026-10-18-eve-h",
