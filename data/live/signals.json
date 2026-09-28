@@ -394,5 +394,65 @@
         "checkedAt": "2026-09-27"
       }
     ]
+  },
+  {
+    "id": "fixture-tottenham-kickoff-1400-2026-09-28",
+    "fixtureId": "2026-10-04-tot-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-09-28T10:18:00+01:00",
+    "title": {
+      "en": "Tottenham away kickoff is 14:00 BST",
+      "es": "El partido visitante ante Tottenham comienza a las 14:00 BST"
+    },
+    "summary": {
+      "en": "London City's away ticket notice and WSL Football both give 14:00 BST on 4 October at BetWright Stadium. The seed calendar had 13:00. Away tickets are available; availability is not sales.",
+      "es": "La nota de entradas de London City y WSL Football indican las 14:00 BST del 4 de octubre en BetWright Stadium. El calendario tenía las 13:00. Hay entradas visitantes disponibles; disponibilidad no equivale a ventas."
+    },
+    "marketingAction": {
+      "en": "Replace 13:00 in Tottenham CRM, ticketing, calendar links, travel and scheduled content with 14:00 BST; link to the official away ticket route.",
+      "es": "Sustituir las 13:00 por las 14:00 BST en CRM, ticketing, enlaces de calendario, viajes y contenido programado para Tottenham; enlazar la compra oficial de entradas visitantes."
+    },
+    "sourceName": "London City Lionesses / WSL Football",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+        "checkedAt": "2026-09-28"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/clubs/wsl/london-city-lionesses/schedule",
+        "checkedAt": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "tickets-manchester-city-home-sale-2026-09-28",
+    "fixtureId": "2026-11-01-mci-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-28T10:18:00+01:00",
+    "title": {
+      "en": "Manchester City home tickets are on sale",
+      "es": "Las entradas para recibir al Manchester City están a la venta"
+    },
+    "summary": {
+      "en": "The club opened priority access to season ticket and Hat-trick bundle holders on 23 September and to previous buyers and registered prospects on 25 September. Early-bird prices start at £14 adult and £6 child for the 1 November, 12:00 home match. The article gives an internally inconsistent day/date for the later price increase, so that deadline needs confirmation. Availability and pricing are confirmed, not sales.",
+      "es": "El club abrió la prioridad a abonados y compradores del pack Hat-trick el 23 de septiembre, y a compradores anteriores e interesados registrados el 25. Los precios anticipados parten de £14 adulto y £6 niño para el partido en casa del 1 de noviembre a las 12:00. El artículo contiene una inconsistencia entre el día y la fecha de la posterior subida de precio, por lo que ese plazo requiere confirmación. Disponibilidad y precios están confirmados, no ventas."
+    },
+    "marketingAction": {
+      "en": "Start segmented CRM for prior buyers, Hat-trick and season ticket holders, and registered prospects; use the official ticket link and price-from copy. Confirm the price-change deadline before any urgency message, and measure conversion rather than infer attendance.",
+      "es": "Iniciar CRM segmentado para compradores anteriores, titulares del pack Hat-trick y abonos, e interesados registrados; usar el enlace oficial y precios desde. Confirmar el plazo de subida antes de crear urgencia, y medir conversión sin inferir asistencia."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-sales-information-london-city-vs-manchester-city"
   }
 ]
