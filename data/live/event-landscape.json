@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-28T05:46:01.555Z",
+  "checkedAt": "2026-09-29T05:45:57.602Z",
   "state": "operational",
   "source": {
     "name": "Ticketmaster Discovery API",
@@ -693,8 +693,8 @@
       "name": "Aston Villa v Liverpool",
       "date": "2026-10-18",
       "time": "14:00:00",
-      "venue": "Villa Park",
-      "city": "Birmingham",
+      "venue": "Keys Park",
+      "city": "Hednesford, Staffordshire",
       "category": "Sports",
       "genre": "Football",
       "competition": "Barclays WSL",
@@ -1634,8 +1634,8 @@
     }
   ],
   "refresh": {
-    "lastAttemptAt": "2026-09-28T05:46:01.555Z",
-    "lastSuccessfulAt": "2026-09-28T05:46:01.555Z",
+    "lastAttemptAt": "2026-09-29T05:45:57.602Z",
+    "lastSuccessfulAt": "2026-09-29T05:45:57.602Z",
     "message": null
   },
   "sources": [

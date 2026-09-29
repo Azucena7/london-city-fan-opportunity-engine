@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-28T05:46:01.555Z",
+  "checkedAt": "2026-09-29T05:45:57.602Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -49,7 +49,7 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "weekly-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-28T05:46:01.555Z",
+      "lastSuccessfulAt": "2026-09-29T05:45:57.602Z",
       "ownerAction": null,
       "note": {
         "en": "Channel statistics are refreshed through the official YouTube Data API.",
@@ -67,7 +67,7 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-28T05:46:01.555Z",
+      "lastSuccessfulAt": "2026-09-29T05:45:57.602Z",
       "ownerAction": null,
       "note": {
         "en": "31 strategically relevant sports events remain from 616 candidates; routine culture and entertainment are excluded.",
