@@ -148,5 +148,20 @@
       "en": "Tickets for 1 November are on sale from £14 adult and £6 child, with priority windows already open to season ticket, Hat-trick, prior-buyer and registered-interest cohorts. Use the official purchase route and measure conversion by cohort. Confirm the article's inconsistent price-rise day/date before publishing any deadline.",
       "es": "Las entradas del 1 de noviembre están a la venta desde £14 adulto y £6 niño, con ventanas ya abiertas para abonados, pack Hat-trick, compradores previos e interesados registrados. Usar la compra oficial y medir conversión por cohorte. Confirmar la contradicción entre día y fecha de la subida antes de publicar un plazo."
     }
+  },
+  {
+    "id": "ipswich-kickoff-parking-comms-2026-09-29",
+    "fixtureId": "2026-09-30-ips-a",
+    "area": "Marketing Operations & CRM",
+    "status": "next",
+    "due": "2026-09-29",
+    "title": {
+      "en": "Correct Ipswich kickoff and send final access guidance",
+      "es": "Corregir la hora de Ipswich y enviar la guía final de acceso"
+    },
+    "reason": {
+      "en": "Official WSL and host ticketing sources confirm 19:30 BST, while the seed calendar carried 20:30. Replace the time in every supporter touchpoint today, link the official away-ticket page and explain that limited stadium parking is paid on arrival via RingGo. Track clicks and purchases; do not convert ticket availability into attendance.",
+      "es": "Las fuentes oficiales de WSL y ticketing del anfitrión confirman las 19:30 BST, mientras el calendario mostraba las 20:30. Sustituir hoy la hora en todos los puntos de contacto, enlazar la venta visitante oficial y explicar que el parking limitado del estadio se paga al llegar mediante RingGo. Medir clics y compras; no convertir disponibilidad en asistencia."
+    }
   }
 ]
