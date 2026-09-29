@@ -32,7 +32,7 @@
   {
     "id": "2026-09-19-cha-a",
     "date": "2026-09-19",
-    "kickoff": "13:30",
+    "kickoff": "12:30",
     "opponent": "Charlton",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
@@ -46,7 +46,7 @@
   {
     "id": "2026-09-23-lei-a",
     "date": "2026-09-23",
-    "kickoff": "20:30",
+    "kickoff": "19:30",
     "opponent": "Leicester City",
     "homeAway": "away",
     "competition": "Subway Players Cup",
@@ -95,21 +95,42 @@
   {
     "id": "2026-09-30-ips-a",
     "date": "2026-09-30",
-    "kickoff": "20:30",
+    "kickoff": "19:30",
     "opponent": "Ipswich Town",
     "homeAway": "away",
     "competition": "Subway Players Cup",
     "venue": "JobServe Community Stadium",
-    "status": "scheduled"
+    "status": "scheduled",
+    "sourceDiscrepancies": [
+      {
+        "field": "kickoff",
+        "detectedAt": "2026-09-29T09:30:00+01:00",
+        "state": "resolved",
+        "values": [
+          {
+            "value": "20:30",
+            "sourceName": "Existing seed calendar",
+            "sourceUrl": "https://github.com/Azucena7/london-city-fan-opportunity-engine/blob/main/data/seed/calendar.json",
+            "checkedAt": "2026-09-29"
+          },
+          {
+            "value": "19:30",
+            "sourceName": "WSL Football and ITFC Women ticketing",
+            "sourceUrl": "https://www.wslfootball.com/news/2026-27-subway-players-cup-league-phase-fixtures-confirmed",
+            "checkedAt": "2026-09-29"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "2026-10-04-tot-a",
     "date": "2026-10-04",
-    "kickoff": "13:00",
+    "kickoff": "14:00",
     "opponent": "Tottenham Hotspur",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
-    "venue": "Brisbane Road",
+    "venue": "BetWright Stadium",
     "status": "scheduled",
     "sourceDiscrepancies": [
       {
@@ -146,7 +167,7 @@
   {
     "id": "2026-10-21-whu-a",
     "date": "2026-10-21",
-    "kickoff": "20:00",
+    "kickoff": "19:00",
     "opponent": "West Ham United",
     "homeAway": "away",
     "competition": "Subway Players Cup",
