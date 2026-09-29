@@ -454,5 +454,46 @@
     },
     "sourceName": "London City Lionesses",
     "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-sales-information-london-city-vs-manchester-city"
+  },
+  {
+    "id": "fixture-ipswich-kickoff-parking-2026-09-29",
+    "fixtureId": "2026-09-30-ips-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-29T09:30:00+01:00",
+    "title": {
+      "en": "Ipswich away kickoff is 19:30 and paid parking is available on arrival",
+      "es": "El partido ante Ipswich comienza a las 19:30 y hay parking de pago al llegar"
+    },
+    "summary": {
+      "en": "WSL Football and the official ITFC Women away-ticket page confirm a 19:30 BST kickoff on 30 September at JobServe Community Stadium, not 20:30 as held in the seed calendar. Away tickets remain available and some stadium parking can be bought on arrival via RingGo. Availability is confirmed, not sales; no attendance or scans have been published.",
+      "es": "WSL Football y la página oficial de entradas visitantes de ITFC Women confirman el inicio a las 19:30 BST del 30 de septiembre en JobServe Community Stadium, no a las 20:30 como figuraba en el calendario. Siguen disponibles entradas visitantes y parte del parking del estadio puede pagarse al llegar mediante RingGo. Es disponibilidad confirmada, no ventas; no se han publicado asistencia ni scans."
+    },
+    "marketingAction": {
+      "en": "Immediately replace 20:30 with 19:30 in CRM, calendar links, travel and scheduled content; send the official away-ticket route and parking-on-arrival guidance, then measure clicks and purchases without inferring attendance.",
+      "es": "Sustituir de inmediato las 20:30 por las 19:30 en CRM, enlaces de calendario, viajes y contenido programado; enviar la compra oficial visitante y la indicación de parking al llegar, y medir clics y compras sin inferir asistencia."
+    },
+    "sourceName": "WSL Football / ITFC Women ticketing",
+    "sourceUrl": "https://www.wslfootball.com/news/2026-27-subway-players-cup-league-phase-fixtures-confirmed",
+    "sources": [
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/news/2026-27-subway-players-cup-league-phase-fixtures-confirmed",
+        "checkedAt": "2026-09-29"
+      },
+      {
+        "name": "ITFC Women ticketing",
+        "url": "https://itfcwomen.colchesterstadium.com/Tickets/BuyTickets/SeatSelection/40220?away=true",
+        "checkedAt": "2026-09-29"
+      },
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-ipswich-town-away-subway-players-cup",
+        "checkedAt": "2026-09-29"
+      }
+    ]
   }
 ]
