@@ -495,5 +495,41 @@
         "checkedAt": "2026-09-29"
       }
     ]
+  },
+  {
+    "id": "result-ipswich-wolves-3-1-form-2026-09-30",
+    "fixtureId": "2026-09-30-ips-a",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-30T09:55:00+01:00",
+    "title": {
+      "en": "Ipswich and London City both enter tonight's cup tie from wins",
+      "es": "Ipswich y London City llegan al partido de copa de esta noche tras ganar"
+    },
+    "summary": {
+      "en": "Ipswich Town's official match report confirms a 3–1 win over Wolves on 27 September; London City's 2–0 league win over Brighton on 26 September is already confirmed. This strengthens the sporting narrative for tonight's 19:30 cup tie, but it is not evidence of ticket sales, attendance or displaced demand.",
+      "es": "La crónica oficial de Ipswich Town confirma una victoria por 3–1 ante Wolves el 27 de septiembre; la victoria liguera de London City por 2–0 ante Brighton el 26 ya está confirmada. Esto refuerza la narrativa deportiva para el partido de copa de esta noche a las 19:30, pero no constituye evidencia de ventas, asistencia ni demanda desplazada."
+    },
+    "marketingAction": {
+      "en": "Use a 'both teams arrive from wins' frame in same-day social, CRM and live coverage, while keeping the confirmed 19:30 kickoff and parking guidance prominent. Measure clicks and ticket purchases separately and do not infer attendance.",
+      "es": "Usar el enfoque «ambos equipos llegan tras ganar» en social, CRM y cobertura en directo del día de partido, manteniendo visibles la hora confirmada de las 19:30 y la guía de parking. Medir por separado clics y compras sin inferir asistencia."
+    },
+    "sourceName": "Ipswich Town / WSL Football",
+    "sourceUrl": "https://www.itfc.co.uk/news/2026/september/27/town-3-1-wolves/",
+    "sources": [
+      {
+        "name": "Ipswich Town",
+        "url": "https://www.itfc.co.uk/news/2026/september/27/town-3-1-wolves/",
+        "checkedAt": "2026-09-30"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/",
+        "checkedAt": "2026-09-30"
+      }
+    ]
   }
 ]
