@@ -163,5 +163,20 @@
       "en": "Official WSL and host ticketing sources confirm 19:30 BST, while the seed calendar carried 20:30. Replace the time in every supporter touchpoint today, link the official away-ticket page and explain that limited stadium parking is paid on arrival via RingGo. Track clicks and purchases; do not convert ticket availability into attendance.",
       "es": "Las fuentes oficiales de WSL y ticketing del anfitrión confirman las 19:30 BST, mientras el calendario mostraba las 20:30. Sustituir hoy la hora en todos los puntos de contacto, enlazar la venta visitante oficial y explicar que el parking limitado del estadio se paga al llegar mediante RingGo. Medir clics y compras; no convertir disponibilidad en asistencia."
     }
+  },
+  {
+    "id": "ipswich-form-content-2026-09-30",
+    "fixtureId": "2026-09-30-ips-a",
+    "area": "Content & Matchday Social",
+    "status": "next",
+    "due": "2026-09-30",
+    "title": {
+      "en": "Frame Ipswich as a cup tie between two teams coming off wins",
+      "es": "Presentar Ipswich como un duelo de copa entre dos equipos que vienen de ganar"
+    },
+    "reason": {
+      "en": "Ipswich's official 3–1 win over Wolves and London City's confirmed 2–0 win over Brighton give the final same-day creative a current sporting hook. Keep 19:30 kickoff and parking guidance in every service message, tag content and ticket links, and evaluate clicks and purchases without converting results into demand or attendance claims.",
+      "es": "La victoria oficial de Ipswich por 3–1 ante Wolves y el 2–0 confirmado de London City ante Brighton aportan un gancho deportivo actual a la creatividad final del día. Mantener la hora de las 19:30 y la guía de parking en todos los mensajes de servicio, etiquetar contenido y enlaces de venta, y evaluar clics y compras sin convertir resultados en afirmaciones de demanda o asistencia."
+    }
   }
 ]
