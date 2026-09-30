@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T05:45:57.602Z",
+  "updated_at": "2026-09-30T05:47:14.100Z",
   "status": "active",
   "next_home_fixture_id": "2026-10-18-eve-h",
   "last_completed_home_fixture_id": "2026-09-26-bha-h",
@@ -12,7 +12,7 @@
     "basis": "5,402 measured attendance at the Manchester United opener"
   },
   "attention_availability": 35,
-  "material_changes": 1,
+  "material_changes": 3,
   "source_failures": [
     "WSL attendance: WSL attendance returned 403"
   ],
@@ -20,8 +20,8 @@
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-09-29T05:45:57.602Z",
-    "lastSuccessfulAt": "2026-09-29T05:45:57.602Z",
+    "lastAttemptAt": "2026-09-30T05:47:14.100Z",
+    "lastSuccessfulAt": "2026-09-30T05:47:14.100Z",
     "state": "partial",
     "sources": [
       {
@@ -29,7 +29,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-09-29T05:45:57.602Z",
+        "checkedAt": "2026-09-30T05:47:14.100Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -37,7 +37,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-09-29T05:45:57.602Z",
+        "checkedAt": "2026-09-30T05:47:14.100Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       },
       {
@@ -45,7 +45,7 @@
         "label": "WSL attendance benchmark",
         "state": "waiting",
         "confidence": "unavailable",
-        "checkedAt": "2026-09-29T05:45:57.602Z",
+        "checkedAt": "2026-09-30T05:47:14.100Z",
         "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
         "message": "WSL attendance returned 403"
       }

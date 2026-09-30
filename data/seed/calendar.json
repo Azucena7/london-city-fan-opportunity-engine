@@ -95,7 +95,7 @@
   {
     "id": "2026-09-30-ips-a",
     "date": "2026-09-30",
-    "kickoff": "19:30",
+    "kickoff": "20:30",
     "opponent": "Ipswich Town",
     "homeAway": "away",
     "competition": "Subway Players Cup",
@@ -126,11 +126,11 @@
   {
     "id": "2026-10-04-tot-a",
     "date": "2026-10-04",
-    "kickoff": "14:00",
+    "kickoff": "13:00",
     "opponent": "Tottenham Hotspur",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
-    "venue": "BetWright Stadium",
+    "venue": "Brisbane Road",
     "status": "scheduled",
     "sourceDiscrepancies": [
       {
@@ -167,7 +167,7 @@
   {
     "id": "2026-10-21-whu-a",
     "date": "2026-10-21",
-    "kickoff": "19:00",
+    "kickoff": "20:00",
     "opponent": "West Ham United",
     "homeAway": "away",
     "competition": "Subway Players Cup",
