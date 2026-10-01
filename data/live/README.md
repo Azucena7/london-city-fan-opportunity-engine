@@ -60,6 +60,20 @@ stored in `data/contracts/crm-ticketing.schema.json`; the Brighton dataset in `d
 synthetic and exists only to exercise calculations. Run `npm run validate:crm-demo` before
 publishing changes to the demo. Never mix demo values with public or club actuals.
 
+`crm-ticketing.json` stores **aggregate club evidence only**. Raw ticket-level exports — even when
+they use pseudonymous supporter hashes — must never be committed to the repository.
+
+For an authorised pilot export, keep the source JSON outside the repository and aggregate it locally:
+
+```bash
+npm run import:crm -- /secure/path/outside-repo/authorised-export.json
+npm run validate:crm-live
+```
+
+The importer validates the ticket-grain contract in memory, rejects direct identifiers, and writes
+only fixture summaries plus cross-fixture repeat-cohort counts. Supporter, order and ticket hashes
+are discarded before the repository file is written.
+
 ## Post-match scorecards
 
 `src/lib/postmatch.ts` joins records through the canonical fixture IDs in `calendar.json`.

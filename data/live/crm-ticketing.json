@@ -1,0 +1,11 @@
+{
+  "datasetState": "requires-access",
+  "scope": "club-crm-ticketing-aggregate",
+  "extractedAt": null,
+  "note": {
+    "en": "No authorised club CRM/ticketing aggregate is connected. Raw or pseudonymous supporter-level records are never stored in the repository.",
+    "es": "No hay un agregado autorizado de CRM/ticketing del club conectado. Los registros a nivel de aficionado, incluso pseudónimos, nunca se almacenan en el repositorio."
+  },
+  "fixtureSummaries": [],
+  "repeatCohorts": []
+}

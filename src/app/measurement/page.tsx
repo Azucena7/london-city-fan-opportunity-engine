@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { experimentMeasurement } from "@/lib/data";
+import { decisionValidation, experimentMeasurement } from "@/lib/data";
 import { MeasurementDashboard } from "@/components/MeasurementDashboard";
 
 export const metadata: Metadata = {
-  title: "Experiment Measurement",
-  description: "Consent-safe, provider-ready measurement for matchday experience and mobility experiments."
+  title: "Evidence & Decision Validation",
+  description: "Evidence control, real-world decision validation and consent-safe experiment measurement."
 };
 
 export default function MeasurementPage() {
-  return <MeasurementDashboard data={experimentMeasurement} />;
+  return <MeasurementDashboard data={experimentMeasurement} validation={decisionValidation} />;
 }

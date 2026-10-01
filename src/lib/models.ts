@@ -447,6 +447,51 @@ export type ExperimentMeasurementData = {
   guardrails: Array<{ id: string; text: LocalizedText }>;
 };
 
+export type DecisionValidationData = {
+  version: "1.0";
+  checkedAt: string;
+  principle: LocalizedText;
+  cases: Array<{
+    id: string;
+    fixtureId: string;
+    title: LocalizedText;
+    hypothesisGeneratedAt: string;
+    hypothesis: LocalizedText;
+    hypothesisSource: { name: string; ref: string };
+    observedAt: string;
+    observedAction: LocalizedText;
+    observedSource: { name: string; url: string };
+    alignment: "aligned" | "partial" | "divergent" | "not-observable";
+    dimensions: Array<{
+      id: string;
+      label: LocalizedText;
+      state: "aligned" | "partial" | "divergent" | "not-observable";
+      note: LocalizedText;
+    }>;
+    caveat: LocalizedText;
+    learning: LocalizedText;
+    liveValidation?: {
+      state: "pre-match-active" | "matchday-active" | "post-match-active" | "closed";
+      fixtureDate: string;
+      principle: LocalizedText;
+      phases: Array<{
+        id: "hypothesis" | "public-action" | "pre-match" | "matchday" | "post-match";
+        label: LocalizedText;
+        date: string;
+        state: "complete" | "active" | "waiting";
+        expected: LocalizedText;
+        observed: LocalizedText;
+        evidenceRef: string | null;
+      }>;
+      postMatchChecklist: Array<{
+        id: string;
+        label: LocalizedText;
+        state: "waiting" | "complete" | "requires-club-access";
+      }>;
+    };
+  }>;
+};
+
 export type PartnerEvidenceState = "public-verified" | "modelled-scenario" | "requires-measurement" | "requires-partner";
 
 export type PartnerCommercialPackData = {
@@ -599,6 +644,7 @@ export type CampaignPlan = {
   objective: LocalizedText;
   whyNow: LocalizedText;
   triggerSignalIds: string[];
+  contextSignalIds?: string[];
   audiences: Array<{ id: string; label: LocalizedText; state: "public-inferred" | "requires-access" }>;
   proposition: LocalizedText;
   message: LocalizedText;
@@ -665,6 +711,38 @@ export type CrmTicketingDemo = {
   label: LocalizedText;
   disclaimer: LocalizedText;
   records: CrmTicketingRecord[];
+};
+
+export type CrmTicketingFixtureAggregate = {
+  fixtureId: string;
+  tickets: number;
+  uniqueBuyers: number;
+  scans: number;
+  noShows: number;
+  grossTicketRevenue: number;
+  averageTicketValue: number | null;
+  firstTimeBuyers: number;
+  consentedBuyers: number;
+  campaignAttributedTickets: number;
+  postcodeSectors: number;
+};
+
+export type CrmTicketingRepeatCohortAggregate = {
+  sourceFixtureId: string;
+  targetFixtureId: string;
+  sourceBuyers: number;
+  sourceConsentedBuyers: number;
+  alreadyPurchasedTarget: number;
+  addressableConsentedNonReturners: number;
+};
+
+export type CrmTicketingLiveDataset = {
+  datasetState: "requires-access" | "club-aggregate";
+  scope: "club-crm-ticketing-aggregate";
+  extractedAt: string | null;
+  note: LocalizedText;
+  fixtureSummaries: CrmTicketingFixtureAggregate[];
+  repeatCohorts: CrmTicketingRepeatCohortAggregate[];
 };
 
 export type CrmTicketingReadiness = {

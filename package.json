@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run validate:crm-demo && npm run validate:public-signals && npm run validate:campaigns && npm run validate:search-demand && npm run validate:experience-demand && npm run validate:mobility-partnership && npm run validate:experiment-measurement && npm run validate:partner-commercial-pack && npm run validate:pilot-readiness && npm run validate:source-health && next build",
+    "build": "npm run validate:crm-demo && npm run validate:crm-live && npm run validate:public-signals && npm run validate:campaigns && npm run validate:search-demand && npm run validate:experience-demand && npm run validate:mobility-partnership && npm run validate:experiment-measurement && npm run validate:partner-commercial-pack && npm run validate:pilot-readiness && npm run validate:source-health && next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0 && npm run typecheck && npm run check:content",
     "typecheck": "tsc --noEmit",
@@ -12,7 +12,10 @@
     "check:content": "node scripts/check-product-content.mjs",
     "refresh:data": "node scripts/refresh-data.mjs",
     "refresh:public-signals": "node scripts/refresh-public-signals.mjs",
+    "import:crm": "node scripts/import-crm-ticketing.mjs",
+    "rehearse:pilot": "node scripts/run-pilot-rehearsal.mjs",
     "validate:crm-demo": "node scripts/validate-crm-ticketing-demo.mjs",
+    "validate:crm-live": "node scripts/validate-crm-ticketing-live.mjs",
     "validate:public-signals": "node scripts/validate-public-signals.mjs",
     "validate:campaigns": "node scripts/validate-campaign-plans.mjs",
     "validate:search-demand": "node scripts/validate-search-demand.mjs",
@@ -24,6 +27,7 @@
     "validate:source-health": "node scripts/validate-source-health.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

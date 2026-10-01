@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LocalizedToday } from "@/components/LocalizedToday";
-import { calendar, currentState, experimentMeasurement, fixtures, liveSignals, pilotReadiness, roadmapItems, searchDemand } from "@/lib/data";
+import { calendar, currentState, decisionValidation, experimentMeasurement, fixtures, liveSignals, pilotReadiness, roadmapItems, searchDemand } from "@/lib/data";
 import { nextHomeFixture } from "@/lib/fixtures";
 import { sourceHealth } from "@/lib/sourceHealth";
 
@@ -24,6 +24,7 @@ export default function TodayPage() {
     readiness={pilotReadiness}
     search={searchDemand}
     measurement={experimentMeasurement}
+    validation={decisionValidation}
     sources={sourceHealth}
   />;
 }

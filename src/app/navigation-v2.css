@@ -160,3 +160,29 @@
     background: var(--lcl-navy);
   }
 }
+
+.analystBridge{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.backToProduct{
+  color:var(--text);
+  text-decoration:none;
+  font-size:11px;
+  font-weight:800;
+  padding:7px 10px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+}
+.backToProduct:hover{
+  border-color:rgba(216,255,79,.6);
+  color:var(--accent);
+}
+@media(max-width:760px){
+  .analystBridge{
+    align-items:flex-end;
+    flex-direction:column;
+    gap:6px;
+  }
+}

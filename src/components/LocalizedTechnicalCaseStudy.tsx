@@ -22,13 +22,13 @@ const phases: Array<{ version: string; title: Localized; text: Localized; output
   {
     version: "V1.2",
     title: { en: "Demand history", es: "Histórico de demanda" },
-    text: { en: "An auditable 2025/26 attendance ledger, venue split, WSL benchmark and sample-aware trends.", es: "Ledger auditable de asistencia 2025/26, desglose por estadio, benchmark WSL y tendencias sensibles a muestra." },
+    text: { en: "An auditable 2025/26 attendance ledger, venue split and benchmark layer with source-state awareness.", es: "Ledger auditable de asistencia 2025/26, desglose por estadio y capa de benchmark consciente del estado de la fuente." },
     output: { en: "WHAT normal looks like", es: "QUÉ es normal" }
   },
   {
     version: "V1.3",
     title: { en: "Audience impact", es: "Impacto de audiencias" },
-    text: { en: "Owned channels, Eleven TV, broadcast and Google Trends connected without collapsing unlike metrics.", es: "Canales propios, Eleven TV, televisión y Google Trends conectados sin mezclar métricas no comparables." },
+    text: { en: "Owned-channel signals are connected while broadcast and search remain separate evidence states that may be pending or unavailable.", es: "Las señales de canales propios están conectadas, mientras broadcast y búsqueda permanecen como estados de evidencia separados que pueden estar pendientes o no disponibles." },
     output: { en: "WHY attention moved", es: "POR QUÉ cambia la atención" }
   },
   {
@@ -72,6 +72,24 @@ const phases: Array<{ version: string; title: Localized; text: Localized; output
     title: { en: "Partner commercial pack", es: "Partner Commercial Pack" },
     text: { en: "Four candidate-specific narratives join pilots, evidence states, value exchange, KPIs and approval gates without implying outreach or endorsement.", es: "Cuatro narrativas por candidato conectan pilotos, estados de evidencia, intercambio de valor, KPIs y gates sin sugerir contacto ni endorsement." },
     output: { en: "HOW to frame an exploratory conversation", es: "CÓMO plantear una conversación exploratoria" }
+  },
+  {
+    version: "V2.0",
+    title: { en: "Decision validation", es: "Validación de decisiones" },
+    text: { en: "Time-stamped engine hypotheses can now be compared with later observable club action, dimension by dimension and without claiming causation.", es: "Las hipótesis del engine con sello temporal pueden compararse con acciones posteriores observables del club, dimensión por dimensión y sin afirmar causalidad." },
+    output: { en: "WHETHER hypotheses remain relevant in reality", es: "SI las hipótesis siguen siendo relevantes en la realidad" }
+  },
+  {
+    version: "V2.1",
+    title: { en: "Decision-first product architecture", es: "Arquitectura de producto orientada a decisiones" },
+    text: { en: "Today, Calendar, Territories, Access, Experience, Measurement and Partnerships were reorganised around operator questions instead of feature inventory.", es: "Today, Calendar, Territories, Access, Experience, Measurement y Partnerships se reorganizaron alrededor de preguntas operativas en lugar de inventario de funcionalidades." },
+    output: { en: "WHAT deserves attention now", es: "QUÉ merece atención ahora" }
+  },
+  {
+    version: "V2.2",
+    title: { en: "Decision reliability", es: "Fiabilidad de decisión" },
+    text: { en: "Technical source health is mapped to the business decisions it supports, qualifies or blocks.", es: "La salud técnica de las fuentes se mapea a las decisiones de negocio que soporta, matiza o bloquea." },
+    output: { en: "WHICH decisions can be trusted today", es: "QUÉ decisiones pueden confiarse hoy" }
   }
 ];
 
@@ -103,7 +121,8 @@ const validations: Localized[] = [
   { en: "Test events cannot contribute to a production cohort or partner-facing threshold.", es: "Los eventos de prueba no pueden contribuir a una cohorte de producción ni a un umbral para partners." },
   { en: "Unknown event properties are rejected before any provider delivery.", es: "Las propiedades de evento desconocidas se rechazan antes de cualquier entrega al proveedor." },
   { en: "A partner pack must expose verified, modelled, unmeasured and partner-dependent evidence together.", es: "Un partner pack debe mostrar conjuntamente evidencia verificada, modelada, no medida y dependiente del partner." },
-  { en: "Repository data cannot imply candidate contact, endorsement, inventory, quote or approval.", es: "Los datos del repositorio no pueden sugerir contacto, endorsement, inventario, cotización ni aprobación." }
+  { en: "Repository data cannot imply candidate contact, endorsement, inventory, quote or approval.", es: "Los datos del repositorio no pueden sugerir contacto, endorsement, inventario, cotización ni aprobación." },
+  { en: "Observed alignment between an engine hypothesis and later club action never implies causation, access or influence.", es: "La alineación observada entre una hipótesis del engine y una acción posterior del club nunca implica causalidad, acceso ni influencia." }
 ];
 
 export function LocalizedTechnicalCaseStudy() {
@@ -180,7 +199,7 @@ export function LocalizedTechnicalCaseStudy() {
       <section className="caseStudySection technicalSources">
         <div className="caseStudySectionHead">
           <div className="eyebrow">{es ? "FUENTES Y CADENCIA" : "SOURCES & CADENCE"}</div>
-          <h2>{es ? "Las fuentes públicas ya forman una capa operativa." : "Public sources already form an operating layer."}</h2>
+          <h2>{es ? "Las fuentes públicas ya forman una capa operativa, con límites visibles." : "Public sources already form an operating layer—with visible limits."}</h2>
           <p>{es ? "La automatización consulta y conserva observaciones comparables. Cuando una fuente falla, muestra el fallo y mantiene el último valor válido." : "Automation checks and preserves comparable observations. When a source fails, it exposes the failure and retains the last valid value."}</p>
         </div>
         <div className="technicalSourceGrid">
@@ -264,7 +283,7 @@ export function LocalizedTechnicalCaseStudy() {
       <section className="caseStudySection technicalCampaign">
         <div className="caseStudySectionHead">
           <div className="eyebrow">SIGNAL → CAMPAIGN</div>
-          <h2>{es ? "Brighton prueba el recorrido completo sin fingir datos reales." : "Brighton proves the full path without pretending demo data is real."}</h2>
+          <h2>{es ? "Brighton ejercita el recorrido completo sin fingir datos reales." : "Brighton exercises the full path without pretending demo data is real."}</h2>
         </div>
         <div className="technicalCampaignFlow">
           <article><span>01</span><strong>{es ? "Señales" : "Signals"}</strong><p>{es ? "Opener, horario, atención y meteorología." : "Opener, kickoff, attention and weather."}</p></article>
@@ -284,7 +303,7 @@ export function LocalizedTechnicalCaseStudy() {
           {validations.map((item, index) => <article key={item.en}><span>✓</span><p>{pick(item)}</p><small>{String(index + 1).padStart(2, "0")}</small></article>)}
         </div>
         <div className="technicalChecks">
-          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>validate:experience-demand</code><code>validate:mobility-partnership</code><code>validate:experiment-measurement</code><code>validate:partner-commercial-pack</code><code>validate:pilot-readiness</code><code>typecheck</code><code>Vercel build</code>
+          <code>validate:campaigns</code><code>validate:crm-demo</code><code>validate:public-signals</code><code>validate:search-demand</code><code>validate:experience-demand</code><code>validate:mobility-partnership</code><code>validate:experiment-measurement</code><code>validate:partner-commercial-pack</code><code>validate:pilot-readiness</code><code>validate:source-health</code><code>typecheck</code><code>Vercel build</code>
         </div>
       </section>
 
@@ -294,7 +313,7 @@ export function LocalizedTechnicalCaseStudy() {
           <h2>{es ? "Separar valor disponible de valor desbloqueable." : "Separate available value from unlockable value."}</h2>
         </div>
         <div className="technicalBoundaryGrid">
-          <article className="available"><span>{es ? "DISPONIBLE AHORA" : "AVAILABLE NOW"}</span><ul><li>{es ? "Priorización territorial" : "Territory prioritisation"}</li><li>{es ? "Contexto de calendario y partido" : "Fixture and matchweek context"}</li><li>{es ? "Histórico y benchmark público" : "Public history and benchmark"}</li><li>{es ? "Audiencia, búsquedas y campañas" : "Audience, search and campaigns"}</li></ul></article>
+          <article className="available"><span>{es ? "DISPONIBLE AHORA" : "AVAILABLE NOW"}</span><ul><li>{es ? "Priorización territorial" : "Territory prioritisation"}</li><li>{es ? "Contexto de calendario y partido" : "Fixture and matchweek context"}</li><li>{es ? "Histórico de asistencia; benchmark actual solo cuando la fuente esté disponible" : "Attendance history; current benchmark only when its source is available"}</li><li>{es ? "Señales de audiencia y campañas; búsqueda solo cuando exista una captura válida" : "Audience signals and campaigns; search only when a valid capture exists"}</li></ul></article>
           <article><span>{es ? "REQUIERE ACCESO" : "REQUIRES ACCESS"}</span><ul><li>{es ? "Conversión a compra" : "Purchase conversion"}</li><li>{es ? "Scan y no-show" : "Scan and no-show"}</li><li>{es ? "Coste de adquisición real" : "Real acquisition cost"}</li><li>{es ? "Repetición por cohorte" : "Cohort repeat behaviour"}</li></ul></article>
         </div>
       </section>
@@ -312,7 +331,7 @@ export function LocalizedTechnicalCaseStudy() {
       </section>
 
       <footer className="caseStudyFooter">
-        <div>London City Fan Opportunity Lab · Technical case study</div>
+        <div>London City Fan Opportunity Engine · Technical case study</div>
         <div className="muted">{es ? "Prototipo independiente · Datos y límites visibles por diseño." : "Independent prototype · Data and limits visible by design."}</div>
       </footer>
     </main>

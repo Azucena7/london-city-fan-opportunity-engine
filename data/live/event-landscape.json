@@ -1,14 +1,14 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-21T05:44:02.456Z",
+  "checkedAt": "2026-10-01T05:46:46.130Z",
   "state": "operational",
   "source": {
     "name": "Ticketmaster Discovery API",
     "url": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
   },
   "window": {
-    "startDate": "2026-09-25",
-    "endDate": "2026-11-19",
+    "startDate": "2026-10-17",
+    "endDate": "2026-11-23",
     "city": "London"
   },
   "events": [
@@ -169,16 +169,16 @@
       ]
     },
     {
-      "id": "wsl-4177f701a617479e97d04c2bbc91a5e0",
-      "name": "Chelsea v Everton",
+      "id": "wsl-f7898a23d79643e7817c9a58090c215f",
+      "name": "Manchester City v West Ham United",
       "date": "2026-11-07",
       "time": "12:30:00",
-      "venue": "Stamford Bridge",
-      "city": "London",
+      "venue": "Joie Stadium",
+      "city": "Manchester",
       "category": "Sports",
       "genre": "Football",
       "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/4177f701a617479e97d04c2bbc91a5e0/chelsea-vs-everton/",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/f7898a23d79643e7817c9a58090c215f/man-city-vs-west-ham/",
       "fixtureIds": [
         "2026-11-07-bir-h"
       ],
@@ -221,16 +221,16 @@
       ]
     },
     {
-      "id": "wsl-f7898a23d79643e7817c9a58090c215f",
-      "name": "Manchester City v West Ham United",
+      "id": "wsl-4177f701a617479e97d04c2bbc91a5e0",
+      "name": "Chelsea v Everton",
       "date": "2026-11-07",
       "time": "12:30:00",
-      "venue": "Joie Stadium",
-      "city": "Manchester",
+      "venue": "Stamford Bridge",
+      "city": "London",
       "category": "Sports",
       "genre": "Football",
       "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/f7898a23d79643e7817c9a58090c215f/man-city-vs-west-ham/",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/4177f701a617479e97d04c2bbc91a5e0/chelsea-vs-everton/",
       "fixtureIds": [
         "2026-11-07-bir-h"
       ],
@@ -325,6 +325,318 @@
       ]
     },
     {
+      "id": "wsl-93fc89e9cf1047458448acd55d5f4581",
+      "name": "Manchester City v Tottenham Hotspur",
+      "date": "2026-11-22",
+      "time": "14:00:00",
+      "venue": "Joie Stadium",
+      "city": "Manchester",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/93fc89e9cf1047458448acd55d5f4581/man-city-vs-spurs/",
+      "fixtureIds": [
+        "2026-11-22-cry-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 84,
+      "level": "high",
+      "reasons": [
+        {
+          "en": "Same kick-off window",
+          "es": "Misma franja de inicio"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-22-cry-h",
+          "score": 84,
+          "level": "high",
+          "timeGapMinutes": 0,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Same kick-off window",
+              "es": "Misma franja de inicio"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wsl-b5dad0723a7d4a2bbf0f873783ac4f99",
+      "name": "Liverpool v Chelsea",
+      "date": "2026-11-22",
+      "time": "14:00:00",
+      "venue": "St Helens Stadium",
+      "city": "St Helens, Merseyside",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/b5dad0723a7d4a2bbf0f873783ac4f99/liverpool-vs-chelsea/",
+      "fixtureIds": [
+        "2026-11-22-cry-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 84,
+      "level": "high",
+      "reasons": [
+        {
+          "en": "Same kick-off window",
+          "es": "Misma franja de inicio"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-22-cry-h",
+          "score": 84,
+          "level": "high",
+          "timeGapMinutes": 0,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Same kick-off window",
+              "es": "Misma franja de inicio"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wsl-e371ca0b78f44550b1deee274a86b365",
+      "name": "Everton v Brighton & Hove Albion",
+      "date": "2026-11-22",
+      "time": "14:00:00",
+      "venue": "Goodison Park",
+      "city": "Liverpool",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/e371ca0b78f44550b1deee274a86b365/everton-vs-brighton/",
+      "fixtureIds": [
+        "2026-11-22-cry-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 84,
+      "level": "high",
+      "reasons": [
+        {
+          "en": "Same kick-off window",
+          "es": "Misma franja de inicio"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-22-cry-h",
+          "score": 84,
+          "level": "high",
+          "timeGapMinutes": 0,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Same kick-off window",
+              "es": "Misma franja de inicio"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wsl-eb0fccd05ba54d64aae329f80fbe00a0",
+      "name": "Charlton Athletic v Aston Villa",
+      "date": "2026-11-22",
+      "time": "14:00:00",
+      "venue": "The Valley",
+      "city": "London",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/eb0fccd05ba54d64aae329f80fbe00a0/charlton-vs-aston-villa/",
+      "fixtureIds": [
+        "2026-11-22-cry-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 84,
+      "level": "high",
+      "reasons": [
+        {
+          "en": "Same kick-off window",
+          "es": "Misma franja de inicio"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-22-cry-h",
+          "score": 84,
+          "level": "high",
+          "timeGapMinutes": 0,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Same kick-off window",
+              "es": "Misma franja de inicio"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wsl-b1eb2661ddf9444b9313db0ebf22392f",
+      "name": "Birmingham City v Manchester United",
+      "date": "2026-11-22",
+      "time": "14:00:00",
+      "venue": "St. Andrew's @ Knighthead Park",
+      "city": "Birmingham",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/b1eb2661ddf9444b9313db0ebf22392f/birmingham-vs-man-utd/",
+      "fixtureIds": [
+        "2026-11-22-cry-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 84,
+      "level": "high",
+      "reasons": [
+        {
+          "en": "Same kick-off window",
+          "es": "Misma franja de inicio"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-22-cry-h",
+          "score": 84,
+          "level": "high",
+          "timeGapMinutes": 0,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Same kick-off window",
+              "es": "Misma franja de inicio"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mens-premier league-97-2026-11-07",
+      "name": "Leeds v Spurs",
+      "date": "2026-11-07",
+      "time": "12:30:00",
+      "venue": "Elland Road",
+      "city": "United Kingdom",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Premier League",
+      "url": "https://fixturedownload.com/view/json/epl-2026",
+      "fixtureIds": [
+        "2026-11-07-bir-h"
+      ],
+      "kind": "london-premier-league-fixture",
+      "sourceName": "Fixture Download",
+      "sourceUrl": "https://fixturedownload.com/view/json/epl-2026",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 83,
+      "level": "high",
+      "reasons": [
+        {
+          "en": "Same kick-off window",
+          "es": "Misma franja de inicio"
+        },
+        {
+          "en": "London Premier League audience",
+          "es": "Audiencia de Premier League en Londres"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-07-bir-h",
+          "score": 83,
+          "level": "high",
+          "timeGapMinutes": 30,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Same kick-off window",
+              "es": "Misma franja de inicio"
+            },
+            {
+              "en": "London Premier League audience",
+              "es": "Audiencia de Premier League en Londres"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "wsl-ae8ee0c2c93d4555bce4c40fb0d6c39f",
       "name": "Charlton Athletic v Manchester United",
       "date": "2026-10-18",
@@ -381,8 +693,8 @@
       "name": "Aston Villa v Liverpool",
       "date": "2026-10-18",
       "time": "14:00:00",
-      "venue": "Villa Park",
-      "city": "Birmingham",
+      "venue": "Keys Park",
+      "city": "Hednesford, Staffordshire",
       "category": "Sports",
       "genre": "Football",
       "competition": "Barclays WSL",
@@ -414,6 +726,58 @@
           "score": 79,
           "level": "high",
           "timeGapMinutes": 60,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Overlapping matchday window",
+              "es": "Ventana de partido solapada"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wsl-e00d7067a71543ef922a8cf9313cfd35",
+      "name": "Arsenal v West Ham United",
+      "date": "2026-11-22",
+      "time": "12:30:00",
+      "venue": "Emirates Stadium",
+      "city": "London",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/e00d7067a71543ef922a8cf9313cfd35/arsenal-vs-west-ham/",
+      "fixtureIds": [
+        "2026-11-22-cry-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 79,
+      "level": "high",
+      "reasons": [
+        {
+          "en": "Overlapping matchday window",
+          "es": "Ventana de partido solapada"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-22-cry-h",
+          "score": 79,
+          "level": "high",
+          "timeGapMinutes": 90,
           "distanceKm": null,
           "reasons": [
             {
@@ -533,118 +897,6 @@
       ]
     },
     {
-      "id": "mens-premier league-93-2026-11-07",
-      "name": "Crystal Palace v Liverpool",
-      "date": "2026-11-07",
-      "time": "15:00:00",
-      "venue": "Selhurst Park",
-      "city": "London",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "Premier League",
-      "url": "https://fixturedownload.com/view/json/epl-2026",
-      "fixtureIds": [
-        "2026-11-07-bir-h"
-      ],
-      "kind": "london-premier-league-fixture",
-      "sourceName": "Fixture Download",
-      "sourceUrl": "https://fixturedownload.com/view/json/epl-2026",
-      "latitude": 51.3983,
-      "longitude": -0.0859,
-      "slotCount": 1,
-      "score": 76,
-      "level": "high",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "Close to the home-ground catchment",
-          "es": "Cerca del área de influencia del estadio"
-        },
-        {
-          "en": "London Premier League audience",
-          "es": "Audiencia de Premier League en Londres"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-11-07-bir-h",
-          "score": 76,
-          "level": "high",
-          "timeGapMinutes": 180,
-          "distanceKm": 7.3,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "Close to the home-ground catchment",
-              "es": "Cerca del área de influencia del estadio"
-            },
-            {
-              "en": "London Premier League audience",
-              "es": "Audiencia de Premier League en Londres"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "mens-uefa nations league-100-2026-09-26",
-      "name": "England v Spain",
-      "date": "2026-09-26",
-      "time": "19:45:00",
-      "venue": "Wembley Stadium",
-      "city": "London",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "UEFA Nations League",
-      "url": "https://fixturedownload.com/view/json/nations-league-2026/england",
-      "fixtureIds": [
-        "2026-09-26-bha-h"
-      ],
-      "kind": "england-men-fixture",
-      "sourceName": "Fixture Download",
-      "sourceUrl": "https://fixturedownload.com/view/json/nations-league-2026/england",
-      "latitude": 51.556,
-      "longitude": -0.2795,
-      "slotCount": 1,
-      "score": 75,
-      "level": "high",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "England men's national attention",
-          "es": "Atención nacional de la selección masculina"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-09-26-bha-h",
-          "score": 75,
-          "level": "high",
-          "timeGapMinutes": 165,
-          "distanceKm": 27.6,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "England men's national attention",
-              "es": "Atención nacional de la selección masculina"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "mens-premier league-91-2026-11-07",
       "name": "Arsenal v Hull",
       "date": "2026-11-07",
@@ -749,6 +1001,58 @@
       ]
     },
     {
+      "id": "wsl-909ff58064b0437b959c489a55d0b936",
+      "name": "Crystal Palace v West Ham United",
+      "date": "2026-10-18",
+      "time": "12:00:00",
+      "venue": "Borough Sports Ground",
+      "city": "Sutton, Surrey",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/909ff58064b0437b959c489a55d0b936/crystal-palace-vs-west-ham/",
+      "fixtureIds": [
+        "2026-10-18-eve-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 69,
+      "level": "medium",
+      "reasons": [
+        {
+          "en": "Adjacent matchday window",
+          "es": "Franja próxima en el mismo día"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-10-18-eve-h",
+          "score": 69,
+          "level": "medium",
+          "timeGapMinutes": 180,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Adjacent matchday window",
+              "es": "Franja próxima en el mismo día"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "wsl-9cebd47ddf2b44ad98ba5b078ed9ef88",
       "name": "Chelsea v Tottenham Hotspur",
       "date": "2026-10-18",
@@ -801,115 +1105,11 @@
       ]
     },
     {
-      "id": "wsl-909ff58064b0437b959c489a55d0b936",
-      "name": "Crystal Palace v West Ham United",
-      "date": "2026-10-18",
-      "time": "12:00:00",
-      "venue": "VBS Community Stadium",
-      "city": "Sutton, Surrey",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/909ff58064b0437b959c489a55d0b936/crystal-palace-vs-west-ham/",
-      "fixtureIds": [
-        "2026-10-18-eve-h"
-      ],
-      "kind": "same-league-fixture",
-      "sourceName": "WSL Football",
-      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 69,
-      "level": "medium",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "Direct Barclays WSL attention competition",
-          "es": "Competencia directa de atención en Barclays WSL"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-10-18-eve-h",
-          "score": 69,
-          "level": "medium",
-          "timeGapMinutes": 180,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "Direct Barclays WSL attention competition",
-              "es": "Competencia directa de atención en Barclays WSL"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "wsl-bf724ef604af47b59e50749419cc7c9c",
-      "name": "Birmingham City v Tottenham Hotspur",
-      "date": "2026-11-01",
-      "time": "14:00:00",
-      "venue": "St. Andrew's @ Knighthead Park",
-      "city": "Birmingham",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/bf724ef604af47b59e50749419cc7c9c/birmingham-vs-spurs/",
-      "fixtureIds": [
-        "2026-11-01-mci-h"
-      ],
-      "kind": "same-league-fixture",
-      "sourceName": "WSL Football",
-      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 69,
-      "level": "medium",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "Direct Barclays WSL attention competition",
-          "es": "Competencia directa de atención en Barclays WSL"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-11-01-mci-h",
-          "score": 69,
-          "level": "medium",
-          "timeGapMinutes": 120,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "Direct Barclays WSL attention competition",
-              "es": "Competencia directa de atención en Barclays WSL"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "wsl-2460c2f26a8f4426adb7b80afa548ed5",
       "name": "West Ham United v Liverpool",
       "date": "2026-11-01",
       "time": "14:00:00",
-      "venue": "Chigwell Construction Stadium",
+      "venue": "Victoria Road Stadium",
       "city": "Dagenham, Essex",
       "category": "Sports",
       "genre": "Football",
@@ -1009,6 +1209,58 @@
       ]
     },
     {
+      "id": "wsl-bf724ef604af47b59e50749419cc7c9c",
+      "name": "Birmingham City v Tottenham Hotspur",
+      "date": "2026-11-01",
+      "time": "14:00:00",
+      "venue": "St. Andrew's @ Knighthead Park",
+      "city": "Birmingham",
+      "category": "Sports",
+      "genre": "Football",
+      "competition": "Barclays WSL",
+      "url": "https://www.wslfootball.com/match/barclays-wsl/bf724ef604af47b59e50749419cc7c9c/birmingham-vs-spurs/",
+      "fixtureIds": [
+        "2026-11-01-mci-h"
+      ],
+      "kind": "same-league-fixture",
+      "sourceName": "WSL Football",
+      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
+      "latitude": null,
+      "longitude": null,
+      "slotCount": 1,
+      "score": 69,
+      "level": "medium",
+      "reasons": [
+        {
+          "en": "Adjacent matchday window",
+          "es": "Franja próxima en el mismo día"
+        },
+        {
+          "en": "Direct Barclays WSL attention competition",
+          "es": "Competencia directa de atención en Barclays WSL"
+        }
+      ],
+      "fixtureScores": [
+        {
+          "fixtureId": "2026-11-01-mci-h",
+          "score": 69,
+          "level": "medium",
+          "timeGapMinutes": 120,
+          "distanceKm": null,
+          "reasons": [
+            {
+              "en": "Adjacent matchday window",
+              "es": "Franja próxima en el mismo día"
+            },
+            {
+              "en": "Direct Barclays WSL attention competition",
+              "es": "Competencia directa de atención en Barclays WSL"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "wsl-f8f32826f28a43d1b4e22ef48042d098",
       "name": "Charlton Athletic v Chelsea",
       "date": "2026-11-01",
@@ -1061,26 +1313,26 @@
       ]
     },
     {
-      "id": "mens-premier league-92-2026-11-07",
-      "name": "Brighton v Brentford",
-      "date": "2026-11-07",
-      "time": "15:00:00",
-      "venue": "American Express Stadium",
+      "id": "mens-premier league-107-2026-11-22",
+      "name": "Liverpool v Man Utd",
+      "date": "2026-11-22",
+      "time": "16:30:00",
+      "venue": "Anfield",
       "city": "United Kingdom",
       "category": "Sports",
       "genre": "Football",
       "competition": "Premier League",
       "url": "https://fixturedownload.com/view/json/epl-2026",
       "fixtureIds": [
-        "2026-11-07-bir-h"
+        "2026-11-22-cry-h"
       ],
-      "kind": "london-premier-league-fixture",
+      "kind": "national-marquee-fixture",
       "sourceName": "Fixture Download",
       "sourceUrl": "https://fixturedownload.com/view/json/epl-2026",
       "latitude": null,
       "longitude": null,
       "slotCount": 1,
-      "score": 68,
+      "score": 66,
       "level": "medium",
       "reasons": [
         {
@@ -1088,16 +1340,16 @@
           "es": "Franja próxima en el mismo día"
         },
         {
-          "en": "London Premier League audience",
-          "es": "Audiencia de Premier League en Londres"
+          "en": "Nationally prominent men's fixture",
+          "es": "Partido masculino de atención nacional"
         }
       ],
       "fixtureScores": [
         {
-          "fixtureId": "2026-11-07-bir-h",
-          "score": 68,
+          "fixtureId": "2026-11-22-cry-h",
+          "score": 66,
           "level": "medium",
-          "timeGapMinutes": 180,
+          "timeGapMinutes": 150,
           "distanceKm": null,
           "reasons": [
             {
@@ -1105,112 +1357,8 @@
               "es": "Franja próxima en el mismo día"
             },
             {
-              "en": "London Premier League audience",
-              "es": "Audiencia de Premier League en Londres"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "mens-premier league-97-2026-11-07",
-      "name": "Leeds v Spurs",
-      "date": "2026-11-07",
-      "time": "15:00:00",
-      "venue": "Elland Road",
-      "city": "United Kingdom",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "Premier League",
-      "url": "https://fixturedownload.com/view/json/epl-2026",
-      "fixtureIds": [
-        "2026-11-07-bir-h"
-      ],
-      "kind": "london-premier-league-fixture",
-      "sourceName": "Fixture Download",
-      "sourceUrl": "https://fixturedownload.com/view/json/epl-2026",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 68,
-      "level": "medium",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "London Premier League audience",
-          "es": "Audiencia de Premier League en Londres"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-11-07-bir-h",
-          "score": 68,
-          "level": "medium",
-          "timeGapMinutes": 180,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "London Premier League audience",
-              "es": "Audiencia de Premier League en Londres"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "mens-premier league-100-2026-11-07",
-      "name": "Sunderland v Chelsea",
-      "date": "2026-11-07",
-      "time": "15:00:00",
-      "venue": "Stadium of Light",
-      "city": "United Kingdom",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "Premier League",
-      "url": "https://fixturedownload.com/view/json/epl-2026",
-      "fixtureIds": [
-        "2026-11-07-bir-h"
-      ],
-      "kind": "london-premier-league-fixture",
-      "sourceName": "Fixture Download",
-      "sourceUrl": "https://fixturedownload.com/view/json/epl-2026",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 68,
-      "level": "medium",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "London Premier League audience",
-          "es": "Audiencia de Premier League en Londres"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-11-07-bir-h",
-          "score": 68,
-          "level": "medium",
-          "timeGapMinutes": 180,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "London Premier League audience",
-              "es": "Audiencia de Premier League en Londres"
+              "en": "Nationally prominent men's fixture",
+              "es": "Partido masculino de atención nacional"
             }
           ]
         }
@@ -1277,58 +1425,6 @@
       ]
     },
     {
-      "id": "wsl-45fa16f02e3f44e0a6973826d4e9ed00",
-      "name": "Charlton Athletic v Manchester City",
-      "date": "2026-09-26",
-      "time": "13:30:00",
-      "venue": "The Valley",
-      "city": "London",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "Barclays WSL",
-      "url": "https://www.wslfootball.com/match/barclays-wsl/45fa16f02e3f44e0a6973826d4e9ed00/charlton-vs-man-city/",
-      "fixtureIds": [
-        "2026-09-26-bha-h"
-      ],
-      "kind": "same-league-fixture",
-      "sourceName": "WSL Football",
-      "sourceUrl": "https://womensleagues.thefa.com/fixtures/",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 61,
-      "level": "medium",
-      "reasons": [
-        {
-          "en": "Same matchday",
-          "es": "Mismo día de partido"
-        },
-        {
-          "en": "Direct Barclays WSL attention competition",
-          "es": "Competencia directa de atención en Barclays WSL"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-09-26-bha-h",
-          "score": 61,
-          "level": "medium",
-          "timeGapMinutes": 210,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Same matchday",
-              "es": "Mismo día de partido"
-            },
-            {
-              "en": "Direct Barclays WSL attention competition",
-              "es": "Competencia directa de atención en Barclays WSL"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "mens-premier league-87-2026-11-01",
       "name": "Liverpool v Arsenal",
       "date": "2026-11-01",
@@ -1375,162 +1471,6 @@
             {
               "en": "London Premier League audience",
               "es": "Audiencia de Premier League en Londres"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "mens-efl league one-86-2026-09-26",
-      "name": "Cambridge United v AFC Wimbledon",
-      "date": "2026-09-26",
-      "time": "15:00:00",
-      "venue": "Cledara Abbey Stadium",
-      "city": "United Kingdom",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "EFL League One",
-      "url": "https://fixturedownload.com/view/json/efl-league-one-2026",
-      "fixtureIds": [
-        "2026-09-26-bha-h"
-      ],
-      "kind": "london-efl-fixture",
-      "sourceName": "Fixture Download",
-      "sourceUrl": "https://fixturedownload.com/view/json/efl-league-one-2026",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 56,
-      "level": "context",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "Overlapping London football catchment",
-          "es": "Área de afición futbolística londinense coincidente"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-09-26-bha-h",
-          "score": 56,
-          "level": "context",
-          "timeGapMinutes": 120,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "Overlapping London football catchment",
-              "es": "Área de afición futbolística londinense coincidente"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "mens-efl league one-90-2026-09-26",
-      "name": "Mansfield Town v Leyton Orient",
-      "date": "2026-09-26",
-      "time": "15:00:00",
-      "venue": "One Call Stadium",
-      "city": "United Kingdom",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "EFL League One",
-      "url": "https://fixturedownload.com/view/json/efl-league-one-2026",
-      "fixtureIds": [
-        "2026-09-26-bha-h"
-      ],
-      "kind": "london-efl-fixture",
-      "sourceName": "Fixture Download",
-      "sourceUrl": "https://fixturedownload.com/view/json/efl-league-one-2026",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 56,
-      "level": "context",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "Overlapping London football catchment",
-          "es": "Área de afición futbolística londinense coincidente"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-09-26-bha-h",
-          "score": 56,
-          "level": "context",
-          "timeGapMinutes": 120,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "Overlapping London football catchment",
-              "es": "Área de afición futbolística londinense coincidente"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "mens-efl league one-91-2026-09-26",
-      "name": "MK Dons v Bromley",
-      "date": "2026-09-26",
-      "time": "15:00:00",
-      "venue": "Stadium MK",
-      "city": "United Kingdom",
-      "category": "Sports",
-      "genre": "Football",
-      "competition": "EFL League One",
-      "url": "https://fixturedownload.com/view/json/efl-league-one-2026",
-      "fixtureIds": [
-        "2026-09-26-bha-h"
-      ],
-      "kind": "london-efl-fixture",
-      "sourceName": "Fixture Download",
-      "sourceUrl": "https://fixturedownload.com/view/json/efl-league-one-2026",
-      "latitude": null,
-      "longitude": null,
-      "slotCount": 1,
-      "score": 56,
-      "level": "context",
-      "reasons": [
-        {
-          "en": "Adjacent matchday window",
-          "es": "Franja próxima en el mismo día"
-        },
-        {
-          "en": "Overlapping London football catchment",
-          "es": "Área de afición futbolística londinense coincidente"
-        }
-      ],
-      "fixtureScores": [
-        {
-          "fixtureId": "2026-09-26-bha-h",
-          "score": 56,
-          "level": "context",
-          "timeGapMinutes": 120,
-          "distanceKm": null,
-          "reasons": [
-            {
-              "en": "Adjacent matchday window",
-              "es": "Franja próxima en el mismo día"
-            },
-            {
-              "en": "Overlapping London football catchment",
-              "es": "Área de afición futbolística londinense coincidente"
             }
           ]
         }
@@ -1694,8 +1634,8 @@
     }
   ],
   "refresh": {
-    "lastAttemptAt": "2026-09-21T05:44:02.456Z",
-    "lastSuccessfulAt": "2026-09-21T05:44:02.456Z",
+    "lastAttemptAt": "2026-10-01T05:46:46.130Z",
+    "lastSuccessfulAt": "2026-10-01T05:46:46.130Z",
     "message": null
   },
   "sources": [
@@ -1712,6 +1652,6 @@
       "url": "https://fixturedownload.com/"
     }
   ],
-  "rawEventCount": 619,
-  "excludedEventCount": 587
+  "rawEventCount": 615,
+  "excludedEventCount": 584
 }

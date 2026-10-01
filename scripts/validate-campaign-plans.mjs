@@ -30,10 +30,18 @@ for (const campaign of data.campaigns) {
   if (campaign.status === "live") throw new Error(`A repository campaign cannot be live without an authorised execution source: ${campaign.id}`);
   if (campaign.budgetMix.reduce((sum, item) => sum + item.share, 0) !== 100) throw new Error(`Budget mix must total 100: ${campaign.id}`);
 
-  for (const signalId of campaign.triggerSignalIds) {
+  const triggerIds = new Set(campaign.triggerSignalIds);
+  const contextIds = new Set(campaign.contextSignalIds ?? []);
+
+  for (const signalId of triggerIds) {
     const signal = signalById.get(signalId);
     if (!signal) throw new Error(`Unknown signal ${signalId} in ${campaign.id}`);
     if (signal.fixtureId !== campaign.fixtureId) throw new Error(`Signal ${signalId} does not belong to ${campaign.fixtureId}`);
+  }
+
+  for (const signalId of contextIds) {
+    if (triggerIds.has(signalId)) throw new Error(`Signal ${signalId} cannot be both trigger and context evidence in ${campaign.id}`);
+    if (!signalById.has(signalId)) throw new Error(`Unknown context signal ${signalId} in ${campaign.id}`);
   }
 
   for (const activation of campaign.activations) {
@@ -59,5 +67,6 @@ console.log(JSON.stringify({
   campaigns: data.campaigns.length,
   playbooks: data.playbooks.length,
   activations: data.campaigns.reduce((sum, item) => sum + item.activations.length, 0),
+  contextSignals: data.campaigns.reduce((sum, item) => sum + (item.contextSignalIds?.length ?? 0), 0),
   demoCampaignIdsExercised: [...demoCampaignIds].length
 }, null, 2));

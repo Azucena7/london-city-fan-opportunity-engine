@@ -4,7 +4,7 @@ import { PartnerCommercialPack } from "@/components/PartnerCommercialPack";
 
 export const metadata: Metadata = {
   title: "Partnerships",
-  description: "Governed partnership hypotheses for matchday mobility, travel and hospitality pilots."
+  description: "A commercial decision workspace for prioritising evidence-gated matchday partnership opportunities."
 };
 
 export default function PartnersPage() {

@@ -47,31 +47,61 @@
   {
     "id": "double-header",
     "fixtureId": "2026-09-26-bha-h",
-    "area": "Marketing & CRM",
+    "area": "Matchday Operations & CRM",
     "status": "next",
-    "due": "2026-09-22",
+    "due": "2026-09-25",
     "title": {
-      "en": "Amplify and instrument the Brighton watchalong",
-      "es": "Amplificar e instrumentar el watchalong de Brighton"
+      "en": "Issue the final Brighton service journey and instrument the Broomfields trial",
+      "es": "Emitir el recorrido final de servicio para Brighton e instrumentar la prueba de Broomfields"
     },
     "reason": {
-      "en": "The club has launched the England v Spain post-match watchalong with discounted drinks. Promote the extended day out now, tag campaign and ticket links, and define separate measures for ticket conversion, post-match dwell and bar spend.",
-      "es": "El club ha lanzado el watchalong pospartido de Inglaterra–España con bebidas rebajadas. Promocionar ya la jornada ampliada, etiquetar campaña y enlaces de venta, y definir métricas separadas para conversión de entradas, permanencia pospartido y gasto en bar."
+      "en": "The official fan guide now fixes the operational journey: Broomfields 14:00–16:45 before re-entry from kickoff, Fan Zone 15:00, turnstiles 15:30, no on-site parking, a limited 15:00 youth session and a matchday ticket price rise. Segment eligible families, send access guidance, and measure entry timing, retail/bar use and post-match dwell separately from attendance.",
+      "es": "La guía oficial fija ahora el recorrido operativo: Broomfields de 14:00 a 16:45 antes de reabrir desde el inicio, Fan Zone a las 15:00, tornos a las 15:30, sin parking en el estadio, sesión juvenil limitada a las 15:00 y subida del precio de entrada en matchday. Segmentar a familias elegibles, enviar la guía de acceso y medir por separado hora de entrada, uso de retail/bar y permanencia pospartido, sin confundirlos con asistencia."
+    }
+  },
+  {
+    "id": "bromley-attention-window",
+    "fixtureId": "2026-09-26-bha-h",
+    "area": "Growth Marketing & Partnerships",
+    "status": "next",
+    "due": "2026-09-24",
+    "title": {
+      "en": "Test the freed Bromley football attention window",
+      "es": "Probar la ventana de atención liberada en Bromley"
+    },
+    "reason": {
+      "en": "With Bromley’s 15:00 away fixture postponed, run a tagged local-football audience test for London City v Brighton and compare conversion with the existing Brighton campaign. Treat any uplift as measured campaign performance, not as attendance until scans are published.",
+      "es": "Con el partido visitante de Bromley de las 15:00 aplazado, ejecutar una prueba etiquetada para audiencias del fútbol local hacia London City–Brighton y comparar la conversión con la campaña vigente de Brighton. Tratar cualquier mejora como rendimiento medido de campaña, no como asistencia hasta que se publiquen scans."
+    }
+  },
+  {
+    "id": "brighton-cup-momentum-creative",
+    "fixtureId": "2026-09-26-bha-h",
+    "area": "Content & Growth Marketing",
+    "status": "next",
+    "due": "2026-09-24",
+    "title": {
+      "en": "Refresh Brighton creative with cup momentum",
+      "es": "Actualizar la creatividad de Brighton con el impulso de copa"
+    },
+    "reason": {
+      "en": "London City’s 2–0 win at Leicester and Brighton’s 4–0 win over Charlton create a stronger sporting story two days before the match. Update paid, social and CRM variants, retain separate tags for standard, VIP and watchalong journeys, and evaluate only measured clicks and ticket conversion.",
+      "es": "El 0–2 de London City en Leicester y el 4–0 de Brighton ante Charlton crean una historia deportiva más fuerte a dos días del partido. Actualizar variantes de paid, social y CRM, mantener etiquetas separadas para los recorridos estándar, VIP y watchalong, y evaluar únicamente clics y conversión de entradas medidos."
     }
   },
   {
     "id": "postmatch-template",
     "fixtureId": "2026-09-26-bha-h",
-    "area": "Data",
-    "status": "planned",
-    "due": "2026-09-27",
+    "area": "CRM & Data",
+    "status": "next",
+    "due": "2026-09-28",
     "title": {
-      "en": "Close the T+1 post-match review",
-      "es": "Cerrar la revisión postpartido T+1"
+      "en": "Collect Brighton demand and experience evidence",
+      "es": "Recoger la evidencia de demanda y experiencia de Brighton"
     },
     "reason": {
-      "en": "Captures result, attendance, incidents and first content signals while they are fresh.",
-      "es": "Captura resultado, asistencia, incidencias y primeras señales de contenido cuando todavía son recientes."
+      "en": "The 2–0 result and scorers are confirmed, but attendance, scans, ticket sales, no-show, territory/repeat mix, Broomfields retail/bar use and watchalong dwell remain unpublished. Reconcile ticketing, access-control, CRM and venue data before completing the post-match scorecard or making demand claims.",
+      "es": "El 2–0 y las goleadoras están confirmados, pero siguen sin publicarse asistencia, scans, ventas, no-show, mezcla territorial/repetición, uso de retail/bar en Broomfields y permanencia en el watchalong. Conciliar ticketing, control de acceso, CRM y datos del venue antes de completar el scorecard postpartido o afirmar resultados de demanda."
     }
   },
   {
@@ -87,6 +117,81 @@
     "reason": {
       "en": "Separates acquired audience from retained audience.",
       "es": "Separa audiencia adquirida de audiencia retenida."
+    }
+  },
+  {
+    "id": "tottenham-kickoff-comms-2026-09-28",
+    "fixtureId": "2026-10-04-tot-a",
+    "area": "Marketing Operations",
+    "status": "next",
+    "due": "2026-09-29",
+    "title": {
+      "en": "Correct Tottenham kickoff in all supporter communications",
+      "es": "Corregir la hora de Tottenham en todas las comunicaciones"
+    },
+    "reason": {
+      "en": "London City's away ticket notice and WSL Football confirm 14:00 BST on 4 October while the seed calendar carried 13:00. Correct CRM, calendar links, travel, ticketing and scheduled content; direct away buyers to the official ticket link.",
+      "es": "La nota de entradas de London City y WSL Football confirman las 14:00 BST del 4 de octubre mientras el calendario tenía las 13:00. Corregir CRM, enlaces de calendario, viajes, ticketing y contenido programado; dirigir a compradores visitantes al enlace oficial."
+    }
+  },
+  {
+    "id": "mancity-ticket-launch-2026-09-28",
+    "fixtureId": "2026-11-01-mci-h",
+    "area": "CRM & Growth Marketing",
+    "status": "next",
+    "due": "2026-09-29",
+    "title": {
+      "en": "Launch segmented Manchester City home ticket campaign",
+      "es": "Lanzar campaña segmentada de entradas para recibir al Manchester City"
+    },
+    "reason": {
+      "en": "Tickets for 1 November are on sale from £14 adult and £6 child, with priority windows already open to season ticket, Hat-trick, prior-buyer and registered-interest cohorts. Use the official purchase route and measure conversion by cohort. Confirm the article's inconsistent price-rise day/date before publishing any deadline.",
+      "es": "Las entradas del 1 de noviembre están a la venta desde £14 adulto y £6 niño, con ventanas ya abiertas para abonados, pack Hat-trick, compradores previos e interesados registrados. Usar la compra oficial y medir conversión por cohorte. Confirmar la contradicción entre día y fecha de la subida antes de publicar un plazo."
+    }
+  },
+  {
+    "id": "ipswich-kickoff-parking-comms-2026-09-29",
+    "fixtureId": "2026-09-30-ips-a",
+    "area": "Marketing Operations & CRM",
+    "status": "next",
+    "due": "2026-09-29",
+    "title": {
+      "en": "Correct Ipswich kickoff and send final access guidance",
+      "es": "Corregir la hora de Ipswich y enviar la guía final de acceso"
+    },
+    "reason": {
+      "en": "Official WSL and host ticketing sources confirm 19:30 BST, while the seed calendar carried 20:30. Replace the time in every supporter touchpoint today, link the official away-ticket page and explain that limited stadium parking is paid on arrival via RingGo. Track clicks and purchases; do not convert ticket availability into attendance.",
+      "es": "Las fuentes oficiales de WSL y ticketing del anfitrión confirman las 19:30 BST, mientras el calendario mostraba las 20:30. Sustituir hoy la hora en todos los puntos de contacto, enlazar la venta visitante oficial y explicar que el parking limitado del estadio se paga al llegar mediante RingGo. Medir clics y compras; no convertir disponibilidad en asistencia."
+    }
+  },
+  {
+    "id": "ipswich-form-content-2026-09-30",
+    "fixtureId": "2026-09-30-ips-a",
+    "area": "Content & Matchday Social",
+    "status": "next",
+    "due": "2026-09-30",
+    "title": {
+      "en": "Frame Ipswich as a cup tie between two teams coming off wins",
+      "es": "Presentar Ipswich como un duelo de copa entre dos equipos que vienen de ganar"
+    },
+    "reason": {
+      "en": "Ipswich's official 3–1 win over Wolves and London City's confirmed 2–0 win over Brighton give the final same-day creative a current sporting hook. Keep 19:30 kickoff and parking guidance in every service message, tag content and ticket links, and evaluate clicks and purchases without converting results into demand or attendance claims.",
+      "es": "La victoria oficial de Ipswich por 3–1 ante Wolves y el 2–0 confirmado de London City ante Brighton aportan un gancho deportivo actual a la creatividad final del día. Mantener la hora de las 19:30 y la guía de parking en todos los mensajes de servicio, etiquetar contenido y enlaces de venta, y evaluar clics y compras sin convertir resultados en afirmaciones de demanda o asistencia."
+    }
+  },
+  {
+    "id": "ipswich-to-tottenham-momentum-2026-10-01",
+    "fixtureId": "2026-10-04-tot-a",
+    "area": "Content & CRM",
+    "status": "next",
+    "due": "2026-10-01",
+    "title": {
+      "en": "Carry the three-win run into Tottenham messaging",
+      "es": "Trasladar la racha de tres victorias a la comunicación de Tottenham"
+    },
+    "reason": {
+      "en": "The confirmed 1–0 win at Ipswich gives London City three consecutive wins and three clean sheets before Tottenham. Refresh social and CRM, but present form as a content hook rather than evidence of demand; keep 14:00 and BetWright Stadium in every service message and measure engagement and ticket conversion separately.",
+      "es": "El 0–1 confirmado en Ipswich deja a London City con tres victorias consecutivas y tres porterías a cero antes de Tottenham. Actualizar social y CRM, pero presentar la forma como gancho de contenido y no como evidencia de demanda; mantener las 14:00 y el BetWright Stadium en todos los mensajes de servicio y medir por separado engagement y conversión."
     }
   }
 ]

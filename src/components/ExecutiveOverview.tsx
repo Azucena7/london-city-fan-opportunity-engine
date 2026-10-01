@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useLanguage } from "./LanguageProvider";
 import type { ExperimentMeasurementData, PilotReadinessData, SearchDemandData } from "@/lib/models";
-import { sourceHealthCounts, type SourceHealthData } from "@/lib/sourceHealth";
+import { decisionReliabilityCounts, type SourceHealthData } from "@/lib/sourceHealth";
 
 export function ExecutiveOverview({
   readiness,
@@ -22,7 +22,7 @@ export function ExecutiveOverview({
     result[item.state] += 1;
     return result;
   }, { ready: 0, waiting: 0, blocked: 0 });
-  const sourceCounts = sourceHealthCounts(sources);
+  const reliability = decisionReliabilityCounts(sources);
 
   const cards = [
     {
@@ -50,12 +50,14 @@ export function ExecutiveOverview({
       tone: measurement.status === "provider-not-configured" ? "waiting" : "ready"
     },
     {
-      label: es ? "Fuentes públicas" : "Public sources",
-      value: `${sourceCounts.operational}/${sources.sources.length}`,
-      detail: es ? `${sourceCounts.action} requieren acceso o resolución` : `${sourceCounts.action} need access or resolution`,
+      label: es ? "Fiabilidad de decisiones" : "Decision reliability",
+      value: `${reliability.reliable}/${sources.decisions.length}`,
+      detail: es
+        ? `${reliability.qualified} con matices · ${reliability.blocked + reliability["access-limited"]} limitadas`
+        : `${reliability.qualified} qualified · ${reliability.blocked + reliability["access-limited"]} limited`,
       href: "/sources",
-      action: es ? "Ver salud" : "View health",
-      tone: sourceCounts.action ? "waiting" : "ready"
+      action: es ? "Revisar confianza" : "Review confidence",
+      tone: reliability.blocked + reliability["access-limited"] ? "waiting" : "ready"
     }
   ];
 

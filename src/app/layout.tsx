@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./story.css";
 import "./live.css";
@@ -25,34 +26,36 @@ import "./today-cockpit.css";
 import "./calendar-fixture.css";
 import "./territory-access.css";
 import "./experience-internal.css";
+import "./product-system.css";
+import "./product-shell.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://london-city-fan-opportunity-engine.vercel.app"),
   title: {
-    default: "London City Fan Opportunity Lab",
-    template: "%s | London City Fan Opportunity Lab"
+    default: "Fan Growth Engine",
+    template: "%s | Fan Growth Engine"
   },
   description:
-    "A practical audience-growth and matchday decision engine for London City Lionesses.",
+    "Turn fan data into the next best action for every fixture. A live product prototype for football club fan growth and commercial decision intelligence.",
   openGraph: {
-    title: "London City Fan Opportunity Lab",
-    description: "Turning fixtures, attendance and market context into clear marketing action.",
-    url: "/today",
-    siteName: "London City Fan Opportunity Lab",
+    title: "Fan Growth Engine",
+    description: "Discover the opportunity. Act before matchday. Learn what worked.",
+    url: "/",
+    siteName: "Fan Growth Engine",
     type: "website",
     images: [{
       url: "/linkedin-card",
       width: 1200,
       height: 630,
-      alt: "London City Fan Opportunity Lab — from signals to decisions"
+      alt: "Fan Growth Engine — decision intelligence for football clubs"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "London City Fan Opportunity Lab",
-    description: "Turning fixtures, attendance and market context into clear marketing action.",
+    title: "Fan Growth Engine",
+    description: "Turn fan data into the next best action for every fixture.",
     images: ["/linkedin-card"]
   }
 };
@@ -75,6 +78,7 @@ export default async function RootLayout({
         <LanguageProvider initialLang={initialLang}>
           <div id="main-content" tabIndex={-1}>{children}</div>
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );

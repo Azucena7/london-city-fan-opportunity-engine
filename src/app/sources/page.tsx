@@ -4,7 +4,7 @@ import { sourceHealth } from "@/lib/sourceHealth";
 
 export const metadata: Metadata = {
   title: "Data & Sources",
-  description: "Availability, access method, freshness and next action for every source used by the opportunity engine."
+  description: "Decision reliability, source confidence, blockers and next actions across the opportunity engine."
 };
 
 export default function SourcesPage() {

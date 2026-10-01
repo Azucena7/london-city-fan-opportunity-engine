@@ -1,7 +1,7 @@
 {
   "fixtureId": "2026-09-26-bha-h",
   "comparisonFixtureId": "2026-09-04-mun-h",
-  "checkedAt": "2026-09-16T09:00:00Z",
+  "checkedAt": "2026-09-21T17:05:00Z",
   "coverage": [
     {
       "channel": "website",
@@ -150,6 +150,38 @@
       "confidence": "high"
     },
     {
+      "id": "brighton-england-spain-watchalong",
+      "fixtureId": "2026-09-26-bha-h",
+      "observedAt": "2026-09-18",
+      "window": "T-8",
+      "channel": "matchday",
+      "funnelStage": "experience",
+      "audience": {
+        "en": "Brighton matchgoers who can extend their visit after the final whistle",
+        "es": "Asistentes al partido ante Brighton que pueden prolongar su visita después del pitido final"
+      },
+      "title": {
+        "en": "England v Spain post-match watchalong",
+        "es": "Watchalong de Inglaterra–España después del partido"
+      },
+      "messageAngle": {
+        "en": "Turns the Brighton fixture into a longer football day by inviting supporters to stay for England v Spain after the match.",
+        "es": "Convierte el partido ante Brighton en una jornada de fútbol más larga al invitar a los aficionados a quedarse para Inglaterra–España después del encuentro."
+      },
+      "product": {
+        "en": "On-site England v Spain watchalong with discounted drinks",
+        "es": "Watchalong en el estadio de Inglaterra–España con bebidas rebajadas"
+      },
+      "callToAction": {
+        "en": "Stay after Brighton and keep the football day going",
+        "es": "Quédate después de Brighton y continúa la jornada de fútbol"
+      },
+      "sourceName": "London City Lionesses",
+      "sourceUrl": "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong",
+      "evidenceState": "observed",
+      "confidence": "high"
+    },
+    {
       "id": "opener-after-dark",
       "fixtureId": "2026-09-04-mun-h",
       "observedAt": "2026-08-19",
@@ -258,7 +290,10 @@
         "es": "El sold out del opener se reutiliza como prueba social y Brighton se presenta como siguiente paso."
       },
       "confidence": "high",
-      "evidenceIds": ["brighton-dedicated-landing", "opener-gallery-retarget"]
+      "evidenceIds": [
+        "brighton-dedicated-landing",
+        "opener-gallery-retarget"
+      ]
     },
     {
       "id": "product-ladder",
@@ -271,7 +306,11 @@
         "es": "Entrada individual, paquete de tres partidos, abono y hospitality cubren distintos niveles de compromiso."
       },
       "confidence": "high",
-      "evidenceIds": ["brighton-dedicated-landing", "brighton-product-ladder", "brighton-vip-terrace"]
+      "evidenceIds": [
+        "brighton-dedicated-landing",
+        "brighton-product-ladder",
+        "brighton-vip-terrace"
+      ]
     },
     {
       "id": "social-matchday",
@@ -280,11 +319,16 @@
         "es": "El matchday como entretenimiento social"
       },
       "rationale": {
-        "en": "DJ, premium social space and the opener after-party broaden the proposition beyond the match itself.",
-        "es": "DJ, espacio social premium y after-party amplían la propuesta más allá del partido."
+        "en": "DJ, premium social space, the opener after-party and the Brighton England v Spain watchalong broaden the proposition beyond the match itself.",
+        "es": "DJ, espacio social premium, after-party del opener y watchalong de Inglaterra–España tras Brighton amplían la propuesta más allá del partido."
       },
       "confidence": "high",
-      "evidenceIds": ["brighton-vip-terrace", "opener-after-dark", "opener-fan-guide"]
+      "evidenceIds": [
+        "brighton-england-spain-watchalong",
+        "brighton-vip-terrace",
+        "opener-after-dark",
+        "opener-fan-guide"
+      ]
     },
     {
       "id": "segmented-experience",
@@ -297,7 +341,11 @@
         "es": "Familias, compradores flexibles, grupos y público premium reciben productos distintos."
       },
       "confidence": "medium",
-      "evidenceIds": ["brighton-dedicated-landing", "brighton-vip-terrace", "brighton-product-ladder"]
+      "evidenceIds": [
+        "brighton-dedicated-landing",
+        "brighton-vip-terrace",
+        "brighton-product-ladder"
+      ]
     }
   ],
   "alignment": [
@@ -344,10 +392,10 @@
         "es": "Convertir el solapamiento Inglaterra–España en una doble sesión local."
       },
       "observed": {
-        "en": "No public Brighton double-header proposition was found in the checked sources.",
-        "es": "No se encontró una propuesta pública de doble sesión para Brighton."
+        "en": "London City publicly announced an on-site England v Spain post-match watchalong after Brighton. The proposition is observable; matchday delivery and downstream impact are not yet verified.",
+        "es": "London City anunció públicamente un watchalong en el estadio de Inglaterra–España después de Brighton. La propuesta es observable; la ejecución en matchday y el impacto posterior aún no están verificados."
       },
-      "status": "not-publicly-observed"
+      "status": "partially-observed"
     }
   ]
 }
