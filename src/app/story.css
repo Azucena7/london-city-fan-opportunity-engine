@@ -19,7 +19,7 @@
   font-size: 42px;
   line-height: 1;
   font-weight: 900;
-  color: var(--accent);
+  color: #086f67;
   letter-spacing: -.05em;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .storyStep p {
-  color: #c7d0cb;
+  color: var(--ink);
   max-width: 760px;
   line-height: 1.55;
   font-size: 16px;
@@ -61,9 +61,9 @@
   border-radius: 18px;
   background:
     radial-gradient(circle at 50% 50%, rgba(216,255,79,.08), transparent 18%),
-    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px),
-    #09140f;
+    linear-gradient(rgba(16,33,27,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,33,27,.02) 1px, transparent 1px),
+    var(--surface);
   background-size: auto, 40px 40px, 40px 40px, auto;
   border: 1px solid var(--line);
 }
@@ -105,7 +105,7 @@
 .hayesLane strong { font-size: 14px; }
 .hayesLane span {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   margin-top: 3px;
 }
 
@@ -146,14 +146,14 @@
 .mapNode strong { font-size: 12px; }
 .mapNode small {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 14px;
   margin-top: 3px;
 }
 
 .mapLabel {
   position: absolute;
-  color: rgba(255,255,255,.28);
-  font-size: 10px;
+  color: rgba(16,33,27,.28);
+  font-size: 12px;
   letter-spacing: .2em;
 }
 
@@ -170,7 +170,7 @@
   display: flex;
   gap: 16px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   flex-wrap: wrap;
 }
 
@@ -202,7 +202,7 @@
 }
 
 .shareEyebrow {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .13em;
   color: #31411d;
@@ -254,3 +254,4 @@
     flex-direction: column;
   }
 }
+

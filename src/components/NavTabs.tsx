@@ -16,6 +16,7 @@ export function NavTabs() {
   const es = lang === "es";
 
   const primary = [
+    ["/london-city", es ? "Resumen del caso" : "Case overview"],
     ["/today", es ? "Hoy" : "Today"],
     ["/calendar", es ? "Calendario" : "Calendar"],
     ["/territories", es ? "Territorios" : "Territories"],
@@ -32,8 +33,8 @@ export function NavTabs() {
   return (
     <header className="labHeader">
       <div className="labTopline">
-        <Link className="brand brandLink" href="/today">
-          LONDON CITY / ANALYST VIEW
+        <Link className="brand brandLink" href="/london-city">
+          LONDON CITY / CASE
         </Link>
         <div className="analystBridge">
           <span className="prototypeMark">

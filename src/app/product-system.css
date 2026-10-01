@@ -44,7 +44,7 @@
   border-radius:999px;
   background:var(--product-surface);
   color:var(--product-muted);
-  font-size:10px;
+  font-size:12px;
   font-weight:800;
   letter-spacing:.07em;
   text-transform:uppercase;
@@ -66,7 +66,7 @@
   gap:7px;
   padding:6px 10px;
   border-radius:999px;
-  font-size:11px;
+  font-size:12px;
   font-weight:800;
 }
 .productStatus.success{background:#E6F4EC;color:var(--product-success)}
@@ -135,3 +135,4 @@ textarea:focus-visible{
 }
 
 /* Mobile accessibility preview refresh */
+

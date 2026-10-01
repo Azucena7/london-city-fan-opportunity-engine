@@ -54,7 +54,7 @@
 .more{position:relative}
 .more summary{list-style:none;cursor:pointer}
 .more summary::-webkit-details-marker{display:none}
-.more summary::after{content:"⌄";margin-left:6px;font-size:10px}
+.more summary::after{content:"⌄";margin-left:6px;font-size:12px}
 .menu{
   position:absolute;
   z-index:20;
@@ -77,7 +77,7 @@
 .menu a:hover,.menuActive{background:var(--product-surface-2,#EEEDE6)}
 .menu strong,.menu span{display:block}
 .menu strong{font-size:13px}
-.menu span{margin-top:3px;color:var(--product-muted,#64706B);font-size:11px;line-height:1.35}
+.menu span{margin-top:3px;color:var(--product-muted,#64706B);font-size:12px;line-height:1.35}
 .engine{
   display:inline-flex;
   align-items:center;
@@ -143,3 +143,4 @@
   .engine{min-height:40px;padding:8px 11px}
   .link,.more summary{padding:8px 10px}
 }
+

@@ -92,7 +92,7 @@ export function SourceHealthCenter({ data, compact = false }: { data: SourceHeal
         </section>
       ) : null}
 
-      {!compact ? <div className="sourceRegisterHeading"><div><span>02</span><h3>{es ? "Registro técnico de fuentes" : "Technical source register"}</h3></div><p>{es ? "Detalle para diagnosticar disponibilidad, método y siguiente acción." : "Detail for diagnosing availability, method and next action."}</p></div> : null}
+      {!compact ? <div className="sourceRegisterHeading"><div><span>02</span><h3>{es ? "Registro técnico de fuentes" : "Technical source register"}</h3></div><p>{es ? "La disponibilidad técnica no demuestra actualidad. Comprueba la última observación correcta y la siguiente acción." : "Technical availability is not evidence freshness. Check the last successful observation and the next action."}</p></div> : null}
 
       <div className="sourceHealthList">
         {visibleSources.map((source) => (
@@ -128,3 +128,4 @@ export function SourceHealthCenter({ data, compact = false }: { data: SourceHeal
     </section>
   );
 }
+

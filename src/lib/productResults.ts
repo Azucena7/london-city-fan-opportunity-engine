@@ -21,8 +21,8 @@ export type ProductResults = {
   };
 };
 
-export function getCurrentProductResults(): ProductResults | null {
-  const opportunity = getCurrentProductOpportunity();
+export function getCurrentProductResults(requestedFixtureId?: string): ProductResults | null {
+  const opportunity = getCurrentProductOpportunity(requestedFixtureId);
   if (!opportunity) return null;
 
   if (crmTicketingLive.datasetState !== "club-aggregate") {

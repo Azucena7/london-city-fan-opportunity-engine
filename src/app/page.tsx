@@ -114,7 +114,7 @@ export default function Home() {
           <Link href="/brief"><span>01</span><strong>Morning Brief</strong><small>What needs attention today?</small></Link>
           <Link href="/opportunity"><span>02</span><strong>Opportunity</strong><small>Action, evidence and impact in one workspace.</small></Link>
           <Link href="/decision-room"><span>03</span><strong>Decision</strong><small>Blockers, assumptions and what changes the call.</small></Link>
-          <Link href="/today"><span>04</span><strong>Analyst view</strong><small>Signals, sources and operational detail.</small></Link>
+          <Link href="/london-city"><span>04</span><strong>London City case</strong><small>Signals, sources and operational detail.</small></Link>
         </div>
       </section>
 
@@ -136,3 +136,4 @@ export default function Home() {
     </main>
   );
 }
+

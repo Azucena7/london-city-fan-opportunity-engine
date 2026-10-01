@@ -50,7 +50,7 @@ export default function OpportunityPage() {
         <article>
           <span>Opportunity</span>
           <strong>{live?.opportunityLabel ?? "Under review"}</strong>
-          <p>Evidence-led prioritisation · model detail stays in Analyst View.</p>
+          <p>Evidence-led prioritisation · model detail stays in London City case.</p>
         </article>
         <article>
           <span>Audience</span>
@@ -140,3 +140,4 @@ export default function OpportunityPage() {
     </main>
   );
 }
+

@@ -32,6 +32,7 @@ export type CalendarFixture = {
   result?: { for: number; against: number };
   attendance?: number;
   attendanceState?: "measured" | "reported";
+  kickoffVerification?: { value: string; checkedAt: string; sourceUrls: string[] };
   sourceDiscrepancies?: SourceDiscrepancy[];
 };
 

@@ -29,7 +29,7 @@
   gap: 6px;
   margin-top: 13px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,.07);
+  border-top: 1px solid rgba(16,33,27,.07);
   overflow-x: auto;
   scrollbar-width: thin;
 }
@@ -37,7 +37,7 @@
 .operationsNav > span {
   margin-right: 6px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -85,48 +85,48 @@
 .executiveCard.blocked { box-shadow: inset 0 3px #ff6b5f; }
 .executiveCard > span { display: block; color: var(--muted); font-size: 12px; }
 .executiveCard > strong { display: block; min-height: 48px; margin: 20px 0 10px; font-size: clamp(20px, 2vw, 29px); line-height: 1.05; overflow-wrap: anywhere; }
-.executiveCard p { min-height: 39px; margin: 0 0 24px; color: var(--muted); font-size: 13px; line-height: 1.5; }
-.executiveCard a { color: var(--lcl-hyperturq); font-size: 13px; font-weight: 900; text-decoration: none; }
+.executiveCard p { min-height: 39px; margin: 0 0 24px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.executiveCard a { color: #086f67; font-size: 13px; font-weight: 900; text-decoration: none; }
 
 .sourceIntro { padding-bottom: 8px; }
 .sourceIntro h1 { max-width: 940px; }
-.eventLandscape { margin: 54px 0; padding: clamp(24px, 4vw, 42px); border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(145deg, rgba(50,230,212,.055), rgba(255,255,255,.02)); }
+.eventLandscape { margin: 54px 0; padding: clamp(24px, 4vw, 42px); border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(145deg, rgba(50,230,212,.055), rgba(16,33,27,.02)); }
 .eventLandscapeHead { display: grid; grid-template-columns: 1fr 180px; gap: 34px; align-items: start; }
 .eventLandscapeHead h2 { margin: 9px 0 11px; font-size: clamp(31px, 4vw, 48px); line-height: 1; letter-spacing: -.04em; }
 .eventLandscapeHead p { max-width: 760px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
 .eventLandscapeState { padding: 16px; border: 1px solid var(--line); border-radius: 14px; }
 .eventLandscapeState span, .eventLandscapeState strong, .eventLandscapeState small { display: block; }
-.eventLandscapeState span { color: var(--muted); font-size: 9px; letter-spacing: .08em; }
-.eventLandscapeState strong { margin: 7px 0; color: var(--lcl-hyperturq); font-size: 18px; text-transform: uppercase; }
-.eventLandscapeState small { color: var(--muted); font-size: 11px; }
+.eventLandscapeState span { color: var(--muted); font-size: 12px; letter-spacing: .08em; }
+.eventLandscapeState strong { margin: 7px 0; color: #086f67; font-size: 18px; text-transform: uppercase; }
+.eventLandscapeState small { color: var(--muted); font-size: 14px; }
 .eventFixtureGroups { display: grid; gap: 28px; margin-top: 30px; }
 .eventFixtureGroup { padding-top: 22px; border-top: 1px solid var(--line); }
 .eventFixtureTitle { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
 .eventFixtureTitle div span, .eventFixtureTitle div strong { display: block; }
-.eventFixtureTitle span { color: var(--lcl-hyperturq); font-size: 9px; letter-spacing: .1em; }
+.eventFixtureTitle span { color: #086f67; font-size: 12px; letter-spacing: .1em; }
 .eventFixtureTitle strong { margin-top: 5px; font-size: 20px; }
-.eventFixtureTitle small { color: var(--muted); font-size: 11px; }
+.eventFixtureTitle small { color: var(--muted); font-size: 14px; }
 .eventLandscapeGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
 .eventLandscapeGrid article { position: relative; padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: rgba(0,0,0,.14); }
 .eventLandscapeGrid article.competition-high { border-color: rgba(255,107,61,.55); }
 .eventLandscapeGrid article.competition-medium { border-color: rgba(50,230,212,.36); }
-.eventLandscapeGrid article > div { display: flex; justify-content: space-between; gap: 12px; color: var(--lcl-hyperturq); font-size: 9px; text-transform: uppercase; }
+.eventLandscapeGrid article > div { display: flex; justify-content: space-between; gap: 12px; color: #086f67; font-size: 12px; text-transform: uppercase; }
 .eventLandscapeGrid .competitionScore { position: absolute; top: 45px; right: 17px; display: block; text-align: right; }
 .competitionScore strong, .competitionScore span { display: block; }
-.competitionScore strong { color: var(--white); font-size: 22px; }
-.competitionScore span { margin-top: 2px; color: var(--muted); font-size: 8px; letter-spacing: .08em; }
+.competitionScore strong { color: var(--ink); font-size: 22px; }
+.competitionScore span { margin-top: 2px; color: var(--muted); font-size: 12px; letter-spacing: .08em; }
 .eventLandscapeGrid h3 { margin: 13px 0 7px; font-size: 18px; line-height: 1.15; }
-.eventLandscapeGrid p, .eventLandscapeGrid small { display: block; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.eventLandscapeGrid p, .eventLandscapeGrid small { display: block; color: var(--muted); font-size: 14px; line-height: 1.45; }
 .eventLandscapeGrid h3, .eventLandscapeGrid p { padding-right: 48px; }
 .competitionReasons { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
-.competitionReasons li { padding: 5px 7px; border-radius: 999px; background: rgba(255,255,255,.055); color: var(--muted); font-size: 9px; line-height: 1.2; }
-.eventLandscapeGrid a, .eventLandscapeSource { display: inline-block; margin-top: 14px; color: var(--lcl-hyperturq); font-size: 11px; font-weight: 900; text-decoration: none; }
+.competitionReasons li { padding: 5px 7px; border-radius: 999px; background: rgba(16,33,27,.055); color: var(--muted); font-size: 12px; line-height: 1.2; }
+.eventLandscapeGrid a, .eventLandscapeSource { display: inline-block; margin-top: 14px; color: #086f67; font-size: 12px; font-weight: 900; text-decoration: none; }
 .eventLandscapeSources { display: flex; flex-wrap: wrap; gap: 16px; }
 .competitionWhitespace { display: flex; justify-content: space-between; gap: 18px; margin-top: 16px; padding: 16px 18px; border: 1px dashed rgba(50,230,212,.3); border-radius: 12px; background: rgba(50,230,212,.035); }
-.competitionWhitespace strong { color: var(--lcl-hyperturq); font-size: 12px; }
-.competitionWhitespace span { max-width: 560px; color: var(--muted); font-size: 11px; text-align: right; }
+.competitionWhitespace strong { color: #086f67; font-size: 12px; }
+.competitionWhitespace span { max-width: 560px; color: var(--muted); font-size: 12px; text-align: right; }
 .eventLandscapeEmpty { margin-top: 28px; padding: 20px; border: 1px dashed var(--line); border-radius: 14px; }
-.eventLandscapeEmpty p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+.eventLandscapeEmpty p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
 .sourceHealthCenter { margin: 54px 0 76px; }
 .sourceHealthCenter.compact { margin-top: 68px; padding: clamp(24px, 4vw, 42px); border: 1px solid var(--line); border-radius: 22px; background: var(--surface); }
 
@@ -144,8 +144,8 @@
 .sourceHealthTotals > div { padding: 15px; border-right: 1px solid var(--line); }
 .sourceHealthTotals > div:last-child { border-right: 0; }
 .sourceHealthTotals strong, .sourceHealthTotals span { display: block; }
-.sourceHealthTotals strong { color: var(--lcl-hyperturq); font-size: 30px; }
-.sourceHealthTotals span { margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.25; }
+.sourceHealthTotals strong { color: #086f67; font-size: 30px; }
+.sourceHealthTotals span { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.25; }
 
 .sourceHealthList { border-top: 1px solid var(--line); }
 .sourceHealthItem {
@@ -166,24 +166,24 @@
 .sourceHealthUpdate strong,
 .sourceHealthUpdate small { display: block; }
 
-.sourceState { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 12px; color: var(--muted); font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.sourceState { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 12px; color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; }
 .sourceState i { width: 8px; height: 8px; border-radius: 50%; background: #ff6b5f; }
 .state-operational .sourceState i { background: var(--lcl-hyperturq); }
 .state-degraded .sourceState i { background: #ffb84d; }
 .state-requires-access .sourceState i { background: #8e98a2; }
 .sourceHealthIdentity > strong { font-size: 17px; line-height: 1.2; }
 .sourceHealthIdentity > small,
-.sourceHealthMethod small { margin-top: 6px; color: var(--muted); font-size: 11px; text-transform: capitalize; }
+.sourceHealthMethod small { margin-top: 6px; color: var(--muted); font-size: 14px; text-transform: capitalize; }
 .sourceHealthMethod span,
-.sourceHealthUpdate span { margin-bottom: 7px; color: var(--muted); font-size: 11px; }
+.sourceHealthUpdate span { margin-bottom: 7px; color: var(--muted); font-size: 12px; }
 .sourceHealthMethod strong,
 .sourceHealthUpdate strong { font-size: 13px; line-height: 1.4; text-transform: capitalize; }
-.sourceHealthItem > p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
-.sourceHealthUpdate small { margin-top: 10px; color: #ffcf75; font-size: 12px; line-height: 1.45; }
-.sourceHealthLink { display: inline-block; margin-top: 24px; color: var(--lcl-hyperturq); font-size: 13px; font-weight: 900; text-decoration: none; }
+.sourceHealthItem > p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.sourceHealthUpdate small { margin-top: 10px; color: #8a4b00; font-size: 14px; line-height: 1.45; }
+.sourceHealthLink { display: inline-block; margin-top: 24px; color: #086f67; font-size: 13px; font-weight: 900; text-decoration: none; }
 .sourceHealthBoundary { display: grid; grid-template-columns: .35fr 1fr; gap: 26px; margin-top: 28px; padding: 22px; border-radius: 14px; background: rgba(50,230,212,.055); }
 .sourceHealthBoundary strong { font-size: 15px; }
-.sourceHealthBoundary p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.sourceHealthBoundary p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
 
 @media (max-width: 980px) {
   .executiveGrid { grid-template-columns: 1fr 1fr; }
@@ -203,8 +203,8 @@
   .executiveOverview { margin: 46px 0 54px; }
   .sourceHealthCenter.compact { padding: 22px; }
   .sourceHealthItem { grid-template-columns: 1fr; gap: 12px; }
-  .sourceHealthMethod { padding-top: 12px; border-top: 1px solid rgba(255,255,255,.07); }
-  .sourceHealthUpdate { padding-top: 12px; border-top: 1px solid rgba(255,255,255,.07); }
+  .sourceHealthMethod { padding-top: 12px; border-top: 1px solid rgba(16,33,27,.07); }
+  .sourceHealthUpdate { padding-top: 12px; border-top: 1px solid rgba(16,33,27,.07); }
   .sourceHealthBoundary { grid-template-columns: 1fr; gap: 9px; }
   .eventLandscapeHead, .eventLandscapeGrid { grid-template-columns: 1fr; }
 }
@@ -225,3 +225,4 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+

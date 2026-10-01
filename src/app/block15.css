@@ -8,7 +8,7 @@
 .decisionModeNote {
   margin: 24px 0 0;
   max-width: 250px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   font-weight: 700;
   opacity: .68;
@@ -30,7 +30,7 @@
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255,255,255,.018);
+  background: rgba(16,33,27,.018);
 }
 
 .decisionGroupHeader {
@@ -55,8 +55,8 @@
 }
 
 .decisionGroupCode {
-  color: var(--lcl-hyperturq);
-  font-size: 9px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .11em;
 }
@@ -84,7 +84,7 @@
   flex-direction: column;
   gap: 7px;
   align-items: flex-start;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.25;
 }
 
@@ -98,7 +98,7 @@
 
 .decisionMetric small {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 14px;
   line-height: 1.35;
 }
 
@@ -111,7 +111,7 @@
 
 .territoryScoreLockup > span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: .08em;
 }
@@ -136,7 +136,7 @@
   min-height: 24px;
   margin-top: 5px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 14px;
   line-height: 1.3;
 }
 
@@ -150,12 +150,12 @@
   gap: 14px;
   align-items: center;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .territoryMeaning strong {
   color: var(--ink);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* Fixtures: decision first, model detail on demand */
@@ -170,7 +170,7 @@
 .fixtureDecisionHead {
   padding: 12px 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: .08em;
 }
@@ -198,7 +198,7 @@
   right: 2px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--lcl-hyperturq);
+  color: #086f67;
   font-weight: 900;
 }
 
@@ -224,7 +224,7 @@
   margin: 0 0 16px;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: rgba(255,255,255,.02);
+  background: rgba(16,33,27,.02);
 }
 
 .fixtureDecisionBreakdown > div {
@@ -243,7 +243,7 @@
 .fixtureDecisionBreakdown span {
   min-height: 28px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.3;
 }
 
@@ -254,7 +254,7 @@
 
 .fixtureDecisionBreakdown small {
   color: var(--muted);
-  font-size: 8px;
+  font-size: 14px;
   font-weight: 900;
   letter-spacing: .07em;
 }
@@ -267,26 +267,26 @@
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 5px 8px;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .05em;
   white-space: nowrap;
 }
 
 .frictionBadge.stable {
-  color: #bdf8df;
+  color: #086f67;
   background: rgba(104,226,178,.08);
   border-color: rgba(104,226,178,.22);
 }
 
 .frictionBadge.watch {
-  color: #f2e9b0;
+  color: #8a4b00;
   background: rgba(242,233,176,.08);
   border-color: rgba(242,233,176,.25);
 }
 
 .frictionBadge.high {
-  color: #ffb49f;
+  color: #8a4b00;
   background: rgba(242,142,114,.08);
   border-color: rgba(242,142,114,.32);
 }
@@ -304,11 +304,11 @@
   align-items: start;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: rgba(255,255,255,.02);
+  background: rgba(16,33,27,.02);
 }
 
 .territorySampleHold strong { display: block; font-size: 14px; }
-.territorySampleHold p { margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.territorySampleHold p { margin: 6px 0 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
 
 /* METHOD: progressive disclosure instead of another dashboard */
 .methodDetailStack {
@@ -335,7 +335,7 @@
   right: 4px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--lcl-hyperturq);
+  color: #086f67;
   font-size: 18px;
 }
 
@@ -347,8 +347,8 @@
 }
 
 .methodDisclosure > summary span {
-  color: var(--lcl-hyperturq);
-  font-size: 9px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .1em;
 }
@@ -499,26 +499,26 @@
 
 /* Method v2: decision lifecycle before scoring */
 .methodIntro { max-width:1040px; }
-.methodDecisionLifecycle { margin:28px 0 42px; padding:clamp(22px,4vw,34px); border:1px solid rgba(50,230,212,.25); border-radius:22px; background:linear-gradient(145deg,rgba(50,230,212,.045),rgba(255,255,255,.015)); }
+.methodDecisionLifecycle { margin:28px 0 42px; padding:clamp(22px,4vw,34px); border:1px solid rgba(50,230,212,.25); border-radius:22px; background:linear-gradient(145deg,rgba(50,230,212,.045),rgba(16,33,27,.015)); }
 .methodLifecycleHead { display:grid; grid-template-columns:1.35fr .65fr; gap:28px; align-items:end; }
 .methodLifecycleHead h2 { margin:8px 0 0; max-width:780px; font-size:clamp(30px,4vw,48px); line-height:1.02; letter-spacing:-.04em; }
-.methodLifecycleHead p { margin:0; color:var(--muted); font-size:11px; line-height:1.5; }
+.methodLifecycleHead p { margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
 .methodLifecycleGrid { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:24px; }
 .methodLifecycleGrid article { min-height:210px; padding:18px; border:1px solid var(--line); border-radius:15px; background:rgba(0,0,0,.14); }
 .methodLifecycleGrid article.controlStage { border-color:rgba(245,202,103,.36); }
-.methodLifecycleGrid article > span { color:var(--lcl-hyperturq); font-size:9px; font-weight:900; letter-spacing:.08em; }
-.methodLifecycleGrid article.controlStage > span { color:#f5ca67; }
-.methodLifecycleGrid article > strong { display:block; margin-top:28px; color:var(--muted); font-size:9px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.methodLifecycleGrid article > span { color: #086f67; font-size:12px; font-weight:900; letter-spacing:.08em; }
+.methodLifecycleGrid article.controlStage > span { color: #8a4b00; }
+.methodLifecycleGrid article > strong { display:block; margin-top:28px; color:var(--muted); font-size:12px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
 .methodLifecycleGrid h3 { margin:8px 0 9px; font-size:20px; line-height:1.1; }
-.methodLifecycleGrid p { margin:0; color:#c7d2d8; font-size:10px; line-height:1.48; }
+.methodLifecycleGrid p { margin:0; color: var(--ink); font-size:14px; line-height:1.48; }
 .methodStopRules { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:14px; overflow:hidden; border:1px solid var(--line); border-radius:13px; background:var(--line); }
 .methodStopRules article { padding:15px; background:rgba(0,0,0,.16); }
 .methodStopRules span,.methodStopRules strong { display:block; }
-.methodStopRules span { color:#f5ca67; font-size:8px; font-weight:900; letter-spacing:.08em; }
+.methodStopRules span { color: #8a4b00; font-size:12px; font-weight:900; letter-spacing:.08em; }
 .methodStopRules strong { margin-top:7px; font-size:13px; }
-.methodStopRules p { margin:6px 0 0; color:var(--muted); font-size:9px; line-height:1.42; }
+.methodStopRules p { margin:6px 0 0; color:var(--muted); font-size:14px; line-height:1.42; }
 
-.methodScoringDisclosure { margin:0 0 30px; padding:0 22px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.018); }
+.methodScoringDisclosure { margin:0 0 30px; padding:0 22px; border:1px solid var(--line); border-radius:18px; background:rgba(16,33,27,.018); }
 .methodScoringDisclosure > summary { padding-top:21px; padding-bottom:21px; }
 .methodScoringDisclosure .architecturePanel { margin-top:8px; }
 .methodScoringDisclosure .methodLayers { margin-bottom:8px; }
@@ -531,3 +531,4 @@
   .methodLifecycleGrid,.methodStopRules { grid-template-columns:1fr; }
   .methodScoringDisclosure { padding:0 15px; }
 }
+

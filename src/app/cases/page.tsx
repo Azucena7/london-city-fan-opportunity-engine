@@ -47,7 +47,7 @@ export default function CasesPage() {
             <div>
               <span className={styles.mobileLabel}>Evidence</span>
               <span className={item.evidenceState === "live-decision-case" ? styles.live : styles.model}>
-                {item.evidenceState === "live-decision-case" ? "Live decision case" : "Planning model"}
+                {item.evidenceState === "historical-case" ? "Historical case · outcomes pending" : item.evidenceState === "live-decision-case" ? "Draft · approval pending" : "Planning model"}
               </span>
             </div>
 
@@ -56,7 +56,9 @@ export default function CasesPage() {
               <div><span>Message</span><strong>{item.message}</strong></div>
               <div><span>Territory</span><strong>{item.territory}</strong></div>
               <div className={styles.detailAction}>
-                {item.evidenceState === "live-decision-case" ? (
+                {item.evidenceState === "historical-case" ? (
+                  <Link href={`/results?fixture=${item.fixtureId}`}>Review this fixture →</Link>
+                ) : item.evidenceState === "live-decision-case" ? (
                   <Link href="/opportunity">Open live opportunity →</Link>
                 ) : (
                   <span>Planning case only</span>

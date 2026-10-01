@@ -3,60 +3,60 @@
 .measurementHero h1 { max-width: 920px; margin: 13px 0 18px; font-size: clamp(43px, 6vw, 74px); line-height: .94; letter-spacing: -.055em; }
 .measurementHero > div:first-child > p { max-width: 760px; color: var(--muted); font-size: 15px; line-height: 1.55; }
 .measurementRuntime { display: inline-flex; gap: 13px; align-items: center; margin-top: 23px; padding: 11px 14px; border: 1px solid rgba(255,184,77,.34); border-radius: 999px; }
-.measurementRuntime span { color: #ffb84d; font-size: 8px; font-weight: 900; letter-spacing: .07em; }
-.measurementRuntime strong { font-size: 10px; }
+.measurementRuntime span { color: #8a4b00; font-size: 12px; font-weight: 900; letter-spacing: .07em; }
+.measurementRuntime strong { font-size: 12px; }
 .measurementHeroMetric { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
 .measurementHeroMetric span, .measurementHeroMetric strong, .measurementHeroMetric small { display: block; }
-.measurementHeroMetric span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; }
+.measurementHeroMetric span { color: #086f67; font-size: 12px; font-weight: 900; }
 .measurementHeroMetric strong { margin: 12px 0 5px; font-size: 58px; line-height: 1; }
-.measurementHeroMetric small { color: var(--muted); font-size: 9px; }
+.measurementHeroMetric small { color: var(--muted); font-size: 14px; }
 .measurementSectionHead { display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; margin-bottom: 23px; }
 .measurementSectionHead > div { display: flex; gap: 13px; align-items: baseline; }
-.measurementSectionHead > div > span { color: var(--lcl-hyperturq); font-size: 11px; font-weight: 900; }
+.measurementSectionHead > div > span { color: #086f67; font-size: 12px; font-weight: 900; }
 .measurementSectionHead h2 { margin: 0; font-size: clamp(29px, 3.8vw, 45px); line-height: 1; letter-spacing: -.035em; }
-.measurementSectionHead > p { max-width: 390px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.45; text-align: right; }
+.measurementSectionHead > p { max-width: 390px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.45; text-align: right; }
 .measurementFlow, .measurementCohorts, .measurementEvents { margin: 70px 0; }
 .measurementFlow > div:last-child { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-radius: 15px; overflow: hidden; }
 .measurementFlow article { min-height: 130px; padding: 17px; border-right: 1px solid var(--line); }
 .measurementFlow article:last-child { border-right: 0; }
 .measurementFlow article span, .measurementFlow article strong, .measurementFlow article small { display: block; }
-.measurementFlow article span { color: var(--lcl-hyperturq); font-size: 9px; }
+.measurementFlow article span { color: #086f67; font-size: 12px; }
 .measurementFlow article strong { margin: 30px 0 7px; font-size: 13px; }
-.measurementFlow article small { color: var(--muted); font-size: 9px; line-height: 1.35; }
+.measurementFlow article small { color: var(--muted); font-size: 14px; line-height: 1.35; }
 .measurementCohortGrid, .measurementEventGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
 .measurementCohortGrid article, .measurementEventGrid article { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
 .measurementCohortGrid article > div:first-child { display: flex; justify-content: space-between; }
-.measurementCohortGrid article > div:first-child span { color: #ffb84d; font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.measurementCohortGrid article > div:first-child span { color: #8a4b00; font-size: 12px; font-weight: 900; text-transform: uppercase; }
 .measurementCohortGrid article > div:first-child b { font-size: 42px; line-height: .9; }
 .measurementCohortGrid article > strong { display: block; margin: 26px 0 7px; font-size: 20px; }
-.measurementCohortGrid article > p { min-height: 40px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+.measurementCohortGrid article > p { min-height: 40px; color: var(--muted); font-size: 14px; line-height: 1.4; }
 .measurementCohortGrid dl { margin: 20px 0 0; border-top: 1px solid var(--line); }
 .measurementCohortGrid dl div { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line); }
-.measurementCohortGrid dt, .measurementCohortGrid dd { margin: 0; color: var(--muted); font-size: 9px; }
+.measurementCohortGrid dt, .measurementCohortGrid dd { margin: 0; color: var(--muted); font-size: 14px; }
 .measurementCohortGrid dd { color: var(--ink); font-weight: 900; }
 .measurementCohortGrid article.threshold-met { border-color: var(--lcl-hyperturq); }
-.measurementEventGrid article span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.measurementEventGrid article span { color: #086f67; font-size: 12px; font-weight: 900; text-transform: uppercase; }
 .measurementEventGrid article strong { display: block; margin: 25px 0 8px; font-size: 16px; }
-.measurementEventGrid code { color: #fff; font-size: 10px; }
-.measurementEventGrid p { color: var(--muted); font-family: monospace; font-size: 9px; line-height: 1.55; }
-.measurementProvider { display: grid; grid-template-columns: .75fr 1.25fr; gap: 42px; margin: 72px 0; padding: clamp(25px, 4vw, 42px); border: 1px solid rgba(50,230,212,.26); border-radius: 22px; background: linear-gradient(145deg, rgba(50,230,212,.05), rgba(255,255,255,.018)); }
+.measurementEventGrid code { color: var(--ink); font-size: 12px; }
+.measurementEventGrid p { color: var(--muted); font-family: monospace; font-size: 14px; line-height: 1.55; }
+.measurementProvider { display: grid; grid-template-columns: .75fr 1.25fr; gap: 42px; margin: 72px 0; padding: clamp(25px, 4vw, 42px); border: 1px solid rgba(50,230,212,.26); border-radius: 22px; background: linear-gradient(145deg, rgba(50,230,212,.05), rgba(16,33,27,.018)); }
 .measurementProvider h2 { margin: 11px 0; font-size: clamp(29px, 3.8vw, 44px); line-height: 1; }
-.measurementProvider > div:first-child p { color: var(--muted); font-size: 11px; line-height: 1.5; }
+.measurementProvider > div:first-child p { color: var(--muted); font-size: 14px; line-height: 1.5; }
 .measurementProviderGrid { display: grid; grid-template-columns: 1fr 1fr; }
 .measurementProviderGrid article { padding: 17px; border: 1px solid var(--line); }
 .measurementProviderGrid span, .measurementProviderGrid strong, .measurementProviderGrid code { display: block; }
-.measurementProviderGrid span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; }
+.measurementProviderGrid span { color: #086f67; font-size: 12px; font-weight: 900; }
 .measurementProviderGrid strong { margin: 18px 0 6px; font-size: 13px; }
-.measurementProviderGrid code { color: var(--muted); font-size: 8px; }
+.measurementProviderGrid code { color: var(--muted); font-size: 12px; }
 .measurementRules { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 55px 0; }
 .measurementRules > div { padding: 25px; border: 1px solid var(--line); border-radius: 18px; }
-.measurementRules p { display: flex; gap: 10px; padding: 9px 0; margin: 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 10px; line-height: 1.4; }
-.measurementRules p span { color: var(--lcl-hyperturq); font-weight: 900; }
+.measurementRules p { display: flex; gap: 10px; padding: 9px 0; margin: 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 14px; line-height: 1.4; }
+.measurementRules p span { color: #086f67; font-weight: 900; }
 .measurementActions { display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; padding: 30px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
 .measurementActions h2 { margin: 0 0 8px; font-size: 27px; }
-.measurementActions p { margin: 0; color: var(--muted); font-size: 10px; }
+.measurementActions p { margin: 0; color: var(--muted); font-size: 14px; }
 .measurementActions > div:last-child { display: flex; gap: 8px; flex-wrap: wrap; }
-.measurementActions a { padding: 11px 13px; border: 1px solid var(--lcl-hyperturq); border-radius: 9px; color: var(--lcl-hyperturq); font-size: 9px; font-weight: 900; text-decoration: none; }
+.measurementActions a { padding: 11px 13px; border: 1px solid var(--lcl-hyperturq); border-radius: 9px; color: #086f67; font-size: 12px; font-weight: 900; text-decoration: none; }
 @media (max-width: 980px) { .measurementHero, .measurementProvider { grid-template-columns: 1fr; } .measurementHeroMetric { max-width: 290px; } .measurementFlow > div:last-child { grid-template-columns: repeat(3, 1fr); } .measurementCohortGrid, .measurementEventGrid { grid-template-columns: 1fr; } }
 @media (max-width: 680px) { .measurementPage { padding: 0 16px 55px; } .measurementHero { margin: 34px 0 55px; } .measurementHero h1 { font-size: 41px; } .measurementRuntime, .measurementSectionHead, .measurementActions { align-items: flex-start; flex-direction: column; } .measurementSectionHead > p { text-align: left; } .measurementFlow > div:last-child, .measurementProviderGrid, .measurementRules { grid-template-columns: 1fr; } .measurementFlow article { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); } }
 
@@ -74,11 +74,11 @@
 .measurementControlStrip article { padding: 19px; border-right: 1px solid var(--line); }
 .measurementControlStrip article:last-child { border-right: 0; }
 .measurementControlStrip span, .measurementControlStrip strong, .measurementControlStrip small { display: block; }
-.measurementControlStrip span { color: var(--muted); font-size: 8px; font-weight: 900; letter-spacing: .08em; }
+.measurementControlStrip span { color: var(--muted); font-size: 12px; font-weight: 900; letter-spacing: .08em; }
 .measurementControlStrip strong { margin: 11px 0 5px; font-size: 28px; letter-spacing: -.03em; }
-.measurementControlStrip small { color: var(--muted); font-size: 9px; }
-.measurementControlStrip .ready strong { color: var(--lcl-hyperturq); }
-.measurementControlStrip .waiting strong { color: #ffb84d; font-size: 17px; text-transform: uppercase; }
+.measurementControlStrip small { color: var(--muted); font-size: 14px; }
+.measurementControlStrip .ready strong { color: #086f67; }
+.measurementControlStrip .waiting strong { color: #8a4b00; font-size: 17px; text-transform: uppercase; }
 
 .measurementDecision {
   margin: 18px 0 4px;
@@ -86,19 +86,19 @@
   border-top: 1px solid var(--line);
 }
 .measurementDecision span, .measurementDecision b { display: block; }
-.measurementDecision span { color: var(--lcl-hyperturq); font-size: 8px; font-weight: 900; letter-spacing: .07em; }
-.measurementDecision b { margin-top: 5px; font-size: 11px; }
+.measurementDecision span { color: #086f67; font-size: 12px; font-weight: 900; letter-spacing: .07em; }
+.measurementDecision b { margin-top: 5px; font-size: 12px; }
 
 .measurementTechnical {
   margin: 72px 0;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: rgba(255,255,255,.015);
+  background: rgba(16,33,27,.015);
 }
 .measurementTechnical > summary {
   padding: 18px 22px;
-  color: var(--lcl-hyperturq);
-  font-size: 11px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
   cursor: pointer;
 }
@@ -123,20 +123,21 @@
 
 .liveValidation { margin:22px 0 18px; padding:18px; border:1px solid rgba(50,230,212,.24); border-radius:15px; background:rgba(50,230,212,.035); }
 .liveValidationHead span,.liveValidationHead strong,.liveValidationHead small { display:block; }
-.liveValidationHead span { color:var(--lcl-hyperturq); font-size:8px; font-weight:900; letter-spacing:.08em; }
+.liveValidationHead span { color: #086f67; font-size:12px; font-weight:900; letter-spacing:.08em; }
 .liveValidationHead strong { margin-top:6px; font-size:14px; text-transform:uppercase; }
-.liveValidationHead small { margin-top:6px; color:var(--muted); font-size:9px; line-height:1.4; }
+.liveValidationHead small { margin-top:6px; color:var(--muted); font-size:14px; line-height:1.4; }
 .liveValidationPhases { display:grid; grid-template-columns:repeat(5,1fr); gap:7px; margin-top:15px; }
 .liveValidationPhases article { min-height:135px; padding:12px; border:1px solid var(--line); border-radius:10px; background:rgba(0,0,0,.14); }
 .liveValidationPhases article.complete { border-color:rgba(216,255,79,.28); }
-.liveValidationPhases article.active { border-color:#f5ca67; }
-.liveValidationPhases article > div { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:7px; text-transform:uppercase; }
-.liveValidationPhases article.active > div span { color:#f5ca67; }
-.liveValidationPhases article.complete > div span { color:var(--lcl-hyperturq); }
-.liveValidationPhases article > strong { display:block; margin-top:18px; font-size:11px; }
-.liveValidationPhases article > small { display:block; margin-top:7px; color:var(--muted); font-size:8px; line-height:1.35; }
+.liveValidationPhases article.active { border-color:#8a4b00; }
+.liveValidationPhases article > div { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:12px; text-transform:uppercase; }
+.liveValidationPhases article.active > div span { color: #8a4b00; }
+.liveValidationPhases article.complete > div span { color: #086f67; }
+.liveValidationPhases article > strong { display:block; margin-top:18px; font-size:12px; }
+.liveValidationPhases article > small { display:block; margin-top:7px; color:var(--muted); font-size:14px; line-height:1.35; }
 .liveValidationChecklist { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
-.liveValidationChecklist span { padding:6px 8px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:8px; }
-.liveValidationChecklist span.requires-club-access { color:#65d6c1; border-color:rgba(101,214,193,.28); }
+.liveValidationChecklist span { padding:6px 8px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:12px; }
+.liveValidationChecklist span.requires-club-access { color: #086f67; border-color:rgba(101,214,193,.28); }
 @media(max-width:900px){.liveValidationPhases{grid-template-columns:1fr 1fr}.liveValidationPhases article:last-child{grid-column:1/-1}}
 @media(max-width:560px){.liveValidationPhases{grid-template-columns:1fr}.liveValidationPhases article:last-child{grid-column:auto}}
+

@@ -11,7 +11,7 @@ export type ProductCase = {
   channel: string;
   message: string;
   territory: string;
-  evidenceState: "live-decision-case" | "planning-model";
+  evidenceState: "live-decision-case" | "historical-case" | "planning-model";
   campaignState: string | null;
 };
 
@@ -40,7 +40,7 @@ function buildCase(date: string, opponent: string, opportunityType: string): Pro
     channel: fixture.channel,
     message: fixture.message,
     territory: fixture.targetTerritory,
-    evidenceState: campaign ? "live-decision-case" : "planning-model",
+    evidenceState: calendarFixture?.status !== "scheduled" && calendarFixture ? "historical-case" : campaign ? "live-decision-case" : "planning-model",
     campaignState: campaign?.status ?? null
   };
 }

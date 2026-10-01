@@ -107,8 +107,8 @@ function fixtureTiming(referenceIso: string, fixtureDate: string) {
   };
 }
 
-function findCurrentFixture(): { calendarFixture: CalendarFixture; fixture: Fixture | null } | null {
-  const fixtureId = currentState.next_home_fixture_id as string | undefined;
+function findCurrentFixture(requestedFixtureId?: string): { calendarFixture: CalendarFixture; fixture: Fixture | null } | null {
+  const fixtureId = requestedFixtureId ?? currentState.next_home_fixture_id as string | undefined;
   if (!fixtureId) return null;
 
   const calendarFixture = calendar.find((item) => item.id === fixtureId);
@@ -197,8 +197,8 @@ function blockerLabels(campaign: CampaignPlan | null) {
     .map((item) => item.label.en);
 }
 
-export function getCurrentProductOpportunity(): ProductOpportunity | null {
-  const current = findCurrentFixture();
+export function getCurrentProductOpportunity(requestedFixtureId?: string): ProductOpportunity | null {
+  const current = findCurrentFixture(requestedFixtureId);
   if (!current) return null;
 
   const { calendarFixture, fixture } = current;
@@ -334,11 +334,11 @@ export function getCurrentProductOpportunity(): ProductOpportunity | null {
       "Convert current attention and local demand into qualified ticket intent.",
     whyNow:
       campaign?.whyNow.en ??
-      "The next home fixture has active demand and attention signals that justify review.",
+      (signals.length ? "Review the sourced context before approving an activation." : "No fixture-specific signal is connected yet. Validate the context before proposing an activation."),
     recommendedAction,
     nextAction: {
       label: nextRequiredAction,
-      owner: blockers.length > 0 ? "Club decision owner" : "CRM / Marketing",
+      owner: blockers.length > 0 ? "Marketing · club owner to be assigned" : "CRM / Marketing",
       deadline: nextScheduledAction
         ? `${nextScheduledAction.window} · ${nextScheduledAction.date}${nextActionStatus === "overdue" ? " · OVERDUE" : ""}`
         : "Before campaign launch",

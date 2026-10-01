@@ -134,7 +134,7 @@ export default function DecisionRoomPage() {
                 </a>
               ))}
             </div>
-            <Link href="/today">Inspect full analyst lineage →</Link>
+            <Link href="/today">Inspect the London City evidence →</Link>
           </article>
         </aside>
       </section>
@@ -159,3 +159,4 @@ export default function DecisionRoomPage() {
     </main>
   );
 }
+

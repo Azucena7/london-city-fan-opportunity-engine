@@ -4,7 +4,7 @@
   width: max-content;
   border-radius: 999px;
   padding: 5px 8px;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .06em;
   border: 1px solid var(--line);
@@ -12,17 +12,17 @@
 
 .signalBadge.structural {
   background: rgba(216,255,79,.12);
-  color: var(--accent);
+  color: #086f67;
 }
 
 .signalBadge.measured {
   background: rgba(196,255,183,.12);
-  color: #c4ffb7;
+  color: #086f67;
 }
 
 .signalBadge.inferred {
   background: rgba(242,233,176,.12);
-  color: #f2e9b0;
+  color: #8a4b00;
 }
 
 .signalBadge.live {
@@ -90,7 +90,7 @@
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 18px;
-  background: rgba(255,255,255,.02);
+  background: rgba(16,33,27,.02);
 }
 
 .liveSignalTop {
@@ -166,3 +166,4 @@
     grid-template-columns: 1fr;
   }
 }
+

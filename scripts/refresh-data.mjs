@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { reviewedKickoff } from "./lib/fixture-kickoff.mjs";
 
 const FIXTURES_URL = "https://www.londoncitylionesses.com/fixtures";
 const CALENDAR_PATH = new URL("../data/seed/calendar.json", import.meta.url);
@@ -83,16 +84,12 @@ function normaliseFixtures(warmup, existing) {
     const previous = currentByKey.get(key) ?? {};
     const result = resultByKey.get(key) ?? previous.result;
     const fetchedKickoff = londonKickoff(date, item.time);
-    const unresolvedKickoff = previous.sourceDiscrepancies?.find(
-      (discrepancy) => discrepancy.field === "kickoff" && discrepancy.state === "unresolved"
-    );
-    const kickoff = unresolvedKickoff?.values?.some((value) => value.value === previous.kickoff)
-      ? previous.kickoff
-      : fetchedKickoff;
+    const kickoff = reviewedKickoff(previous, date, fetchedKickoff);
     rows.push({
       id: previous.id ?? `${date}-${slug(opponent)}-${homeAway[0]}`,
       date,
       kickoff,
+      ...(previous.kickoffVerification ? { kickoffVerification: previous.kickoffVerification } : {}),
       opponent,
       homeAway,
       competition: item.leagueStageTitle ?? previous.competition ?? "Competition TBC",

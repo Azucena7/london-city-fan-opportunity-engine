@@ -122,7 +122,7 @@ export function ImpactScenario({
         </div>
         <b>=</b>
         <div className={styles.result}>
-          <span>Net contribution</span>
+          <span>Scenario revenue less activation cost</span>
           <strong>{currency(model.netContribution)}</strong>
         </div>
       </div>
@@ -133,23 +133,24 @@ export function ImpactScenario({
           <strong>{model.tickets.toLocaleString("en-GB")}</strong>
         </article>
         <article>
-          <span>Gross ticket revenue</span>
+          <span>Scenario gross ticket revenue</span>
           <strong>{currency(model.grossRevenue)}</strong>
         </article>
         <article>
-          <span>Net contribution</span>
+          <span>Scenario revenue less activation cost</span>
           <strong>{currency(model.netContribution)}</strong>
         </article>
         <article>
-          <span>Gross revenue / cost</span>
+          <span>Scenario revenue / activation cost</span>
           <strong>{model.returnMultiple.toFixed(1)}x</strong>
         </article>
       </div>
 
       <p className={styles.note}>
-        Scenario, not forecast. Measured audience, repeat-conversion or ticket-value history can seed the model when authorised aggregate club evidence exists.
+        Scenario, not forecast or observed results. Revenue less activation cost excludes other operating costs, fees and taxes; it is not club profit. Measured audience, repeat-conversion or ticket-value history can seed the model when authorised aggregate club evidence exists.
         Every input remains editable, and activation cost stays an explicit assumption until the club supplies a measured cost.
       </p>
     </section>
   );
 }
+

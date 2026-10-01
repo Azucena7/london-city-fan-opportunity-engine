@@ -241,7 +241,7 @@ test("product and analyst branding are intentionally separated", () => {
   assert.match(productNav, /Morning brief/);
   assert.match(productNav, /Opportunity/);
   assert.match(productNav, /Caso London City/);
-  assert.match(analystNav, /LONDON CITY \/ ANALYST VIEW/);
+  assert.match(analystNav, /LONDON CITY \/ CASE/);
   assert.match(analystNav, /Evidence environment/);
   assert.match(analystNav, /Back to product/);
   assert.doesNotMatch(analystNav, /FAN OPPORTUNITY LAB/);
@@ -251,8 +251,8 @@ test("product and analyst branding are intentionally separated", () => {
 test("Brighton live validation preserves future phases as waiting evidence", () => {
   const validation = JSON.parse(read("data/live/decision-validation.json"));
   const item = validation.cases.find((entry) => entry.id === "brighton-england-spain-2026-09");
-  assert.equal(item.liveValidation.state, "pre-match-active");
-  assert.deepEqual(item.liveValidation.phases.map((phase) => phase.state), ["complete","complete","active","waiting","waiting"]);
+  assert.equal(item.liveValidation.state, "post-match-active");
+  assert.deepEqual(item.liveValidation.phases.map((phase) => phase.state), ["complete","complete","complete","waiting","active"]);
   assert.ok(item.liveValidation.postMatchChecklist.some((entry) => entry.state === "requires-club-access"));
   assert.match(item.liveValidation.principle.en, /Future phases stay waiting/);
 });
@@ -419,7 +419,7 @@ test("Results never equates campaign attribution with incrementality", () => {
   const results = read("src/app/results/page.tsx");
   const adapter = read("src/lib/productResults.ts");
   assert.match(results, /Attribution is not the same as incremental impact/);
-  assert.match(results, /What happened after the action/);
+  assert.match(results, /What do we know after matchday/);
   assert.match(results, /Not established/);
   assert.match(adapter, /incrementality: "not-established"/);
   assert.match(adapter, /causalClaim: false/);
@@ -511,3 +511,4 @@ test("National Rail RDM is registered as approved access awaiting a data product
   assert.match(env, /RDM_DELIVERY_ENDPOINT=/);
   assert.match(env, /RDM_AUTH_MODE=/);
 });
+
