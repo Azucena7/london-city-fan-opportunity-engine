@@ -80,6 +80,18 @@ test("calendar export contains unique all-day events with recalculated end dates
   assert.ok(ics.split("\r\n").every((line) => Buffer.byteLength(line, "utf8") <= 75));
 });
 
+test("brand campaign and talent context participates in action and creative versions", () => {
+  const action=readyAction();
+  const one={...action,strategyVersion:"brand-v1-campaign-a-no-talent"};
+  const two={...action,strategyVersion:"brand-v2-campaign-b-player-b"};
+  assert.notEqual(actionVersion(one,"2026-10-18",sources),actionVersion(two,"2026-10-18",sources));
+  const creative=generateCreative(one,actionVersion(one,"2026-10-18",sources),"instagram","Demo","Rival","2026-10-18","es",{name:"Campaign Demo",headline:"Un partido para compartir",brief:"Brief demo",talent:"Talento Demo B"});
+  assert.equal(creative.headline,"Un partido para compartir");
+  assert.equal(creative.brief,"Brief demo");
+  assert.ok(creative.storyboard.some((shot)=>shot.includes("Talento Demo B")));
+  assert.notEqual(creativeVersion(creative),creativeVersion({...creative,brief:"Changed"}));
+});
+
 test("sample manifest contains no real identities or live connections", () => {
   assert.equal(sample.synthetic, true);
   assert.equal(sample.schemaVersion, 1);

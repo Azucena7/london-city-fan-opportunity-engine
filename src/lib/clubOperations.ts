@@ -24,7 +24,7 @@ export type Task = { id: string; title: Copy; department: Copy; offset: number; 
 export type Action = {
   id: Goal | "mobility"; title: Copy; reason: Copy; audience: Copy; kpi: Copy;
   sources: SourceId[]; tasks: Task[]; owner: string; measurement: boolean; audienceReviewed: boolean; rights: boolean;
-  approvedVersion: string | null; simulatedVersion: string | null;
+  approvedVersion: string | null; simulatedVersion: string | null; strategyVersion?: string;
 };
 export type Plan = { date: string; goal: Goal; mobility: boolean; comprehensive: boolean; actions: Action[] };
 const task = (id: string, title: Copy, department: Copy, offset: number): Task => ({ id, title, department, offset, owner: "", done: false });
@@ -72,7 +72,7 @@ export function rankFans(fans: Fan[], segment: "all" | Fan["segment"], metric: "
   return fans.filter((fan) => segment === "all" || fan.segment === segment).map((fan) => ({ fan, value: metric === "purchases" ? fan.purchases : fan.reconciled && fan.eligibleMatches > 0 ? fan.visits / fan.eligibleMatches : null })).sort((a, b) => (b.value ?? -1) - (a.value ?? -1) || a.fan.id.localeCompare(b.fan.id));
 }
 export function actionVersion(action: Action, date: string, sources: Record<SourceId, SourceState>): string {
-  return JSON.stringify({ id: action.id, date, owner: action.owner, measurement: action.measurement, audienceReviewed: action.audienceReviewed, rights: action.rights, sources: action.sources.map((id) => [id, sources[id]]) });
+  return JSON.stringify({ id: action.id, date, owner: action.owner, measurement: action.measurement, audienceReviewed: action.audienceReviewed, rights: action.rights, strategyVersion: action.strategyVersion, sources: action.sources.map((id) => [id, sources[id]]) });
 }
 export function approvalBlockers(action: Action, date: string, sources: Record<SourceId, SourceState>, role: Role): string[] {
   const reasons: string[] = [];
@@ -85,20 +85,20 @@ export function approvalBlockers(action: Action, date: string, sources: Record<S
   if (action.sources.some((id) => sources[id] !== "ready")) reasons.push("sources");
   return reasons;
 }
-export type Creative = { actionId: Action["id"]; actionVersion: string; channel: Channel; text: string; headline: string; storyboard: string[]; approvedVersion: string | null };
-export function generateCreative(action: Action, version: string, channel: Channel, club: string, opponent: string, date: string, locale: Locale): Creative {
+export type Creative = { actionId: Action["id"]; actionVersion: string; channel: Channel; text: string; headline: string; storyboard: string[]; approvedVersion: string | null; campaignName?: string; brief?: string; talent?: string };
+export function generateCreative(action: Action, version: string, channel: Channel, club: string, opponent: string, date: string, locale: Locale, campaign?: { name: string; headline: string; brief: string; talent?: string }): Creative {
   const es = locale === "es";
-  const headline = action.id === "mobility" ? (es ? "Prepara tu llegada" : "Plan your journey") : action.id === "loyalty" ? (es ? "Tu próxima visita" : "Your next visit") : (es ? "Vivamos el próximo partido" : "Join the next matchday");
+  const headline = action.id === "mobility" ? (es ? "Prepara tu llegada" : "Plan your journey") : action.id === "loyalty" ? (es ? "Tu próxima visita" : "Your next visit") : campaign?.headline ?? (es ? "Vivamos el próximo partido" : "Join the next matchday");
   const text = `${headline}. ${club} · ${opponent} · ${date}. ${action.id === "mobility" ? (es ? "Consulta la información oficial de transporte y accesos antes de salir." : "Check official travel and access information before you leave.") : (es ? "Consulta las condiciones y la disponibilidad en los canales oficiales del club." : "Check terms and availability through the club’s official channels.")} ${channel === "whatsapp" ? (es ? "En el envío real se incluirá el mecanismo de baja aprobado." : "The live message must include the approved opt-out mechanism.") : ""}`.trim();
-  return { actionId: action.id, actionVersion: version, channel, text, headline, approvedVersion: null, storyboard: [
+  return { actionId: action.id, actionVersion: version, channel, text, headline, campaignName: campaign?.name, brief: campaign?.brief, talent: campaign?.talent, approvedVersion: null, storyboard: [
     es ? "0–3 s · Apertura con material autorizado del club." : "0–3 s · Open with licensed club footage.",
-    `3–7 s · ${headline}.`,
+    `3–7 s · ${headline}.${campaign?.talent ? ` ${campaign.talent} · ${es ? "aparición de prueba reservada; sin rostro generado" : "reserved test appearance; no generated likeness"}` : ""}`,
     `7–11 s · ${club} · ${opponent} · ${date}.`,
     es ? "11–15 s · Información oficial, condiciones y llamada a la acción. Subtítulos." : "11–15 s · Official information, terms and call to action. Captions.",
   ] };
 }
 export function creativeVersion(creative: Creative): string {
-  return JSON.stringify({ actionId: creative.actionId, actionVersion: creative.actionVersion, channel: creative.channel, text: creative.text, headline: creative.headline, storyboard: creative.storyboard });
+  return JSON.stringify({ actionId: creative.actionId, actionVersion: creative.actionVersion, channel: creative.channel, text: creative.text, headline: creative.headline, storyboard: creative.storyboard, campaignName:creative.campaignName, brief:creative.brief, talent:creative.talent });
 }
 export function canSimulate(action: Action, date: string, sources: Record<SourceId, SourceState>, role: Role, creative: Creative | null): boolean {
   const version = actionVersion(action, date, sources);
