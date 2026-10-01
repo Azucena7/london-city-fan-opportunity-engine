@@ -32,7 +32,7 @@ export default function Home() {
           <div className="productProof" aria-label="Product outcomes">
             <div><strong>Opportunity</strong><span>Where is the most valuable fan-growth decision?</span></div>
             <div><strong>Action</strong><span>Who owns the next move, by when, and how is it measured?</span></div>
-            <div><strong>Learning</strong><span>What changed after matchday, and what should change next?</span></div>
+            <div><strong>Learning</strong><span>What happened after matchday, and what should change next?</span></div>
           </div>
         </div>
 
@@ -66,7 +66,7 @@ export default function Home() {
 
           <div className="fixtureAction">
             <span>Do next</span>
-            <strong>{live?.recommendedAction ?? "Review the live evidence and define the next action."}</strong>
+            <strong>{live?.nextAction.label ?? "Review the live evidence and define the next action."}</strong>
           </div>
 
           <Link className="fixtureLink" href="/opportunity">Open opportunity workspace →</Link>

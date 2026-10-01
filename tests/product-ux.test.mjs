@@ -487,3 +487,12 @@ test("pilot weekly example reads the current product opportunity", () => {
   assert.match(page, /\/pilot\/rehearsal/);
   assert.doesNotMatch(page, /Go with conditions/);
 });
+
+
+test("homepage uses the operational next action and causal-safe learning language", () => {
+  const page = read("src/app/page.tsx");
+  assert.match(page, /live\?\.nextAction\.label/);
+  assert.doesNotMatch(page, /live\?\.recommendedAction/);
+  assert.match(page, /What happened after matchday/);
+  assert.doesNotMatch(page, /What changed after matchday/);
+});
