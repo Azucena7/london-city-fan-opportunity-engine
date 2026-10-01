@@ -33,7 +33,7 @@ export function NavTabs() {
   return (
     <header className="labHeader">
       <div className="labTopline">
-        <Link className="brand brandLink" href="/today">
+        <Link className="brand brandLink" href="/london-city">
           LONDON CITY / CASE
         </Link>
         <div className="analystBridge">
@@ -99,4 +99,3 @@ export function NavTabs() {
     </header>
   );
 }
-
