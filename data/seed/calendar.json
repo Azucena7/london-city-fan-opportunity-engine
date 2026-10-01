@@ -95,12 +95,12 @@
   {
     "id": "2026-09-30-ips-a",
     "date": "2026-09-30",
-    "kickoff": "20:30",
+    "kickoff": "19:30",
     "opponent": "Ipswich Town",
     "homeAway": "away",
     "competition": "Subway Players Cup",
     "venue": "JobServe Community Stadium",
-    "status": "completed-pending-data",
+    "status": "final",
     "sourceDiscrepancies": [
       {
         "field": "kickoff",
@@ -121,16 +121,20 @@
           }
         ]
       }
-    ]
+    ],
+    "result": {
+      "for": 1,
+      "against": 0
+    }
   },
   {
     "id": "2026-10-04-tot-a",
     "date": "2026-10-04",
-    "kickoff": "13:00",
+    "kickoff": "14:00",
     "opponent": "Tottenham Hotspur",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
-    "venue": "Brisbane Road",
+    "venue": "BetWright Stadium",
     "status": "scheduled",
     "sourceDiscrepancies": [
       {
