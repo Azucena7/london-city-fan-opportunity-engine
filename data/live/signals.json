@@ -531,5 +531,41 @@
         "checkedAt": "2026-09-30"
       }
     ]
+  },
+  {
+    "id": "result-ipswich-0-1-2026-10-01",
+    "fixtureId": "2026-09-30-ips-a",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-01T09:42:00+01:00",
+    "title": {
+      "en": "London City won 1–0 at Ipswich",
+      "es": "London City ganó 0–1 en Ipswich"
+    },
+    "summary": {
+      "en": "Ipswich Town's official match record confirms London City's 1–0 away win on 30 September. It extends the run to three consecutive wins and three clean sheets. No official attendance, ticket-sales or scan figure has been published, so those measures remain waiting.",
+      "es": "La crónica oficial de Ipswich Town confirma la victoria visitante de London City por 0–1 el 30 de septiembre. Amplía la racha a tres victorias consecutivas y tres porterías a cero. No se ha publicado una cifra oficial de asistencia, ventas o scans, por lo que esas métricas siguen en espera."
+    },
+    "marketingAction": {
+      "en": "Refresh Tottenham content and CRM with the three-win, three-clean-sheet run; keep the confirmed 14:00 kickoff and BetWright Stadium prominent, and measure engagement or ticket conversion without treating form as demand.",
+      "es": "Actualizar el contenido y CRM de Tottenham con la racha de tres victorias y tres porterías a cero; mantener visibles las 14:00 confirmadas y el BetWright Stadium, y medir engagement o conversión sin tratar la forma deportiva como demanda."
+    },
+    "sourceName": "Ipswich Town",
+    "sourceUrl": "https://www.itfc.co.uk/news/2026/september/30/town-0-london-city-lionesses-1/",
+    "sources": [
+      {
+        "name": "Ipswich Town",
+        "url": "https://www.itfc.co.uk/news/2026/september/30/town-0-london-city-lionesses-1/",
+        "checkedAt": "2026-10-01"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/fixtures/index",
+        "checkedAt": "2026-10-01"
+      }
+    ]
   }
 ]
