@@ -35,15 +35,17 @@ export default function CasesPage() {
         {cases.map((item) => (
           <article className={styles.caseRow} key={item.date + item.opponent}>
             <div className={styles.fixture}>
-              <small>{item.date}</small>
-              <strong>{item.opponent}</strong>
+              <time dateTime={item.date}>{new Date(item.date + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })}</time>
+              <h2>{item.opponent}</h2>
             </div>
             <div className={styles.opportunity}>
+              <span className={styles.mobileLabel}>Opportunity</span>
               <strong>{item.opportunityType}</strong>
               <small>{item.product}</small>
             </div>
-            <div><span className={styles.mode}>{item.decision}</span></div>
+            <div><span className={styles.mobileLabel}>Decision posture</span><span className={styles.mode}>{item.decision}</span></div>
             <div>
+              <span className={styles.mobileLabel}>Evidence</span>
               <span className={item.evidenceState === "live-decision-case" ? styles.live : styles.model}>
                 {item.evidenceState === "live-decision-case" ? "Live decision case" : "Planning model"}
               </span>
