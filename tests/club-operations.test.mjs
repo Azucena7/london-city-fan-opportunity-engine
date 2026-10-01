@@ -65,6 +65,8 @@ test("launch requires current action AND creative approval and prevents repeat e
   assert.equal(canSimulate(action, "2026-10-19", sources, "approver", creative), false);
   assert.equal(canSimulate(action, "2026-10-18", { ...sources, crm: "missing" }, "approver", creative), false);
   assert.equal(canSimulate(action, "2026-10-18", sources, "approver", { ...creative, text: "Edited" }), false);
+  const blank = { ...creative, text: " " }; blank.approvedVersion = creativeVersion(blank);
+  assert.equal(canSimulate(action, "2026-10-18", sources, "approver", blank), false);
   assert.equal(canSimulate({ ...action, simulatedVersion: version }, "2026-10-18", sources, "approver", creative), false);
 });
 
@@ -75,6 +77,7 @@ test("calendar export contains unique all-day events with recalculated end dates
   assert.match(ics, /DTSTART;VALUE=DATE:20261011/);
   assert.match(ics, /DTEND;VALUE=DATE:20261012/);
   assert.match(ics, /ENSAYO/);
+  assert.ok(ics.split("\r\n").every((line) => Buffer.byteLength(line, "utf8") <= 75));
 });
 
 test("sample manifest contains no real identities or live connections", () => {

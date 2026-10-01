@@ -102,10 +102,21 @@ export function creativeVersion(creative: Creative): string {
 }
 export function canSimulate(action: Action, date: string, sources: Record<SourceId, SourceState>, role: Role, creative: Creative | null): boolean {
   const version = actionVersion(action, date, sources);
-  return approvalBlockers(action, date, sources, role).length === 0 && action.approvedVersion === version && action.simulatedVersion !== version && Boolean(creative && creative.actionId === action.id && creative.actionVersion === version && creative.approvedVersion === creativeVersion(creative));
+  return approvalBlockers(action, date, sources, role).length === 0 && action.approvedVersion === version && action.simulatedVersion !== version && Boolean(creative && creative.text.trim() && creative.actionId === action.id && creative.actionVersion === version && creative.approvedVersion === creativeVersion(creative));
 }
 export function calendarExport(plan: Plan, locale: Locale): string {
   const escape = (value: string) => value.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/,/g, "\\,").replace(/;/g, "\\;");
   const events = plan.actions.flatMap((action) => action.tasks.map((item) => ["BEGIN:VEVENT", `UID:${plan.date}-${item.id}@club-rehearsal.invalid`, "DTSTAMP:20261001T000000Z", `DTSTART;VALUE=DATE:${relativeDate(plan.date, item.offset).replaceAll("-", "")}`, `DTEND;VALUE=DATE:${relativeDate(plan.date, item.offset + 1).replaceAll("-", "")}`, `SUMMARY:${escape(`${locale === "es" ? "ENSAYO" : "REHEARSAL"} · ${item.title[locale]}`)}`, `DESCRIPTION:${escape(`${action.title[locale]} · ${item.owner || "—"}`)}`, "END:VEVENT"].join("\r\n")));
-  return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Fan Growth Engine//Synthetic rehearsal//EN", "CALSCALE:GREGORIAN", ...events, "END:VCALENDAR", ""].join("\r\n");
+  const fold = (line: string) => {
+    const encoder = new TextEncoder();
+    let current = "";
+    const parts: string[] = [];
+    for (const char of line) {
+      if (encoder.encode(current + char).length > 75) { parts.push(current); current = " " + char; }
+      else current += char;
+    }
+    parts.push(current);
+    return parts.join("\r\n");
+  };
+  return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Fan Growth Engine//Synthetic rehearsal//EN", "CALSCALE:GREGORIAN", ...events, "END:VCALENDAR", ""].join("\r\n").split("\r\n").map(fold).join("\r\n");
 }
