@@ -31,10 +31,7 @@ test("pilot discussion remains local with honest copy and no fabricated contact"
   assert.match(page, /catch \{\s*setCopyState\("manual"\)/);
   assert.match(page, /readOnly value=\{brief\}/);
   assert.match(page, /No request has been sent/);
-  assert.match(page, /const commercialContact = "azu@aidax.io"/);
-  assert.match(page, /mailto:\$\{commercialContact\}/);
-  assert.match(page, /encodeURIComponent\(brief\)/);
-  assert.match(page, /this website does not send it automatically/);
+  assert.doesNotMatch(page, /mailto:|commercialContact|contactHref/);
   assert.match(page, /No guaranteed commercial outcomes/);
   assert.match(page, /No live CRM or ticketing access is connected today/);
   assert.doesNotMatch(page, /fetch\(|onSubmit|type="email"/);
