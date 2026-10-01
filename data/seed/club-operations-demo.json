@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "synthetic": true,
+  "generatedFor": "Client demonstration only",
+  "asOf": "2026-10-01",
+  "sources": [
+    { "id": "ticketing", "kind": "internal", "provenance": "Synthetic orders; no LaLiga or club API connected", "records": 7 },
+    { "id": "crm", "kind": "internal", "provenance": "Synthetic IDs and channel eligibility; no real contact details", "records": 7 },
+    { "id": "access", "kind": "internal", "provenance": "Synthetic reconciled attendance; DEMO-005 remains unresolved", "records": 7 },
+    { "id": "transport", "kind": "external-example", "provenance": "Fictional transport disruption for workflow rehearsal; not travel advice", "records": 1 },
+    { "id": "weather", "kind": "external-example", "provenance": "Fictional weather scenario; no current forecast connected", "records": 1 }
+  ],
+  "fans": [
+    { "id": "DEMO-001", "segment": "subscriber", "purchases": 2, "visits": 4, "eligibleMatches": 5, "spend": 80, "optedIn": true, "hasTicket": false, "entitlement": true, "reconciled": true, "recentContacts": 0 },
+    { "id": "DEMO-002", "segment": "occasional", "purchases": 3, "visits": 2, "eligibleMatches": 4, "spend": 90, "optedIn": true, "hasTicket": false, "entitlement": false, "reconciled": true, "recentContacts": 0 },
+    { "id": "DEMO-003", "segment": "occasional", "purchases": 1, "visits": 1, "eligibleMatches": 4, "spend": 30, "optedIn": false, "hasTicket": false, "entitlement": false, "reconciled": true, "recentContacts": 0 },
+    { "id": "DEMO-004", "segment": "occasional", "purchases": 4, "visits": 3, "eligibleMatches": 4, "spend": 120, "optedIn": true, "hasTicket": true, "entitlement": false, "reconciled": true, "recentContacts": 0 },
+    { "id": "DEMO-005", "segment": "subscriber", "purchases": 1, "visits": 1, "eligibleMatches": 5, "spend": 40, "optedIn": true, "hasTicket": false, "entitlement": true, "reconciled": false, "recentContacts": 0 },
+    { "id": "DEMO-006", "segment": "occasional", "purchases": 2, "visits": 1, "eligibleMatches": 4, "spend": 60, "optedIn": true, "hasTicket": false, "entitlement": false, "reconciled": true, "recentContacts": 2 },
+    { "id": "DEMO-007", "segment": "occasional", "purchases": 2, "visits": 2, "eligibleMatches": 3, "spend": 70, "optedIn": true, "hasTicket": false, "entitlement": false, "reconciled": true, "recentContacts": 0 }
+  ],
+  "partners": [
+    { "id": "PARTNER-DEMO-01", "name": "Movilidad Demo", "category": "mobility", "status": "example-only", "objective": "Facilitate stadium travel", "assets": ["travel information", "club-owned content"], "rightsConfirmed": false, "interestConfirmed": false },
+    { "id": "PARTNER-DEMO-02", "name": "Comercio Demo", "category": "local-retail", "status": "example-only", "objective": "Voluntary participation and repeat visits", "assets": ["reward proposal", "activation landing page"], "rightsConfirmed": false, "interestConfirmed": false }
+  ],
+  "measurementExample": { "synthetic": true, "eligible": 2, "simulatedRecipients": 2, "purchases": 1, "reconciledVisits": 1, "revenue": 30, "incrementalImpact": null },
+  "identityRules": ["Buyer, beneficiary and attendee are separate identities", "No personal names, emails or phone numbers", "Unresolved attendance never earns attendance rewards", "Season entitlement excludes ticket-sales reminders"],
+  "delivery": { "mode": "simulation-only", "crmConnected": false, "turnstilesConnected": false, "messagingConnected": false, "adAccountsConnected": false, "mediaGenerationConnected": false }
+}
