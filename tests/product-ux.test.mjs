@@ -240,7 +240,7 @@ test("product and analyst branding are intentionally separated", () => {
   assert.match(productNav, /Fan Growth Engine/);
   assert.match(productNav, /Morning brief/);
   assert.match(productNav, /Opportunity/);
-  assert.match(productNav, /Analyst view/);
+  assert.match(productNav, /Caso London City/);
   assert.match(analystNav, /LONDON CITY \/ ANALYST VIEW/);
   assert.match(analystNav, /Evidence environment/);
   assert.match(analystNav, /Back to product/);

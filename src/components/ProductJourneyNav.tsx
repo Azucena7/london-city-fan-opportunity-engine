@@ -64,7 +64,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
       </div>
 
       <Link className={[styles.engine, active === "engine" ? styles.activeEngine : ""].join(" ")} href="/today">
-        Analyst view
+        Caso London City
       </Link>
     </nav>
   );
