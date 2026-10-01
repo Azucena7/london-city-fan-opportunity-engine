@@ -23,6 +23,7 @@
 .commercialBrief { display: block; width: 100%; box-sizing: border-box; padding: 18px; border: 1px solid #73836b; border-radius: 10px; background: #f5f6ed; color: #243225; font: inherit; font-size: 16px; line-height: 1.6; resize: vertical; margin-bottom: 20px; }
 .commercialPanel button { cursor: pointer; font: inherit; min-height: 48px; }
 .commercialPanel a, .commercialHero a { overflow-wrap: anywhere; }
+.commercialHero a.productButton { color: #fff; text-decoration: none; }
 .commercialPanel :is(button, select, textarea, a):focus-visible, .commercialHero a:focus-visible { outline: 3px solid #365b26; outline-offset: 4px; }
 #pilot-discussion { scroll-margin-top: 32px; }
 @media (max-width: 760px) {

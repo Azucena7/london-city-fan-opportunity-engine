@@ -49,3 +49,9 @@ test("new commercial views are discoverable from the product and case overview",
   assert.match(overview, /href="\/london-city\/everton"/);
   assert.match(overview, /href="\/london-city\/brighton"/);
 });
+
+test("commercial primary link retains readable text against its dark button", async () => {
+  const css = await source("src/app/commercial-pilot.css");
+  assert.match(css, /\.commercialHero a\.productButton \{ color: #fff;/);
+  assert.match(css, /\.commercialTableWrap \{ overflow-x: auto;/);
+});
