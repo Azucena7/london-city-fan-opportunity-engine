@@ -100,7 +100,7 @@
     "homeAway": "away",
     "competition": "Subway Players Cup",
     "venue": "JobServe Community Stadium",
-    "status": "scheduled",
+    "status": "completed-pending-data",
     "sourceDiscrepancies": [
       {
         "field": "kickoff",
