@@ -29,8 +29,8 @@
 }
 
 .experienceModeTabs button span {
-  color: var(--lcl-hyperturq);
-  font-size: 7px;
+  color: #086f67;
+  font-size: 12px;
   letter-spacing: .09em;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .experienceControlStrip .waiting strong {
-  color: #ffb84d;
+  color: #8a4b00;
   font-size: 17px;
   text-transform: uppercase;
 }
@@ -83,7 +83,7 @@
 .experienceControlStrip span {
   margin-top: 6px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.4;
 }
 
@@ -107,8 +107,8 @@
 }
 
 .experiencePortfolioRows article > span {
-  color: var(--lcl-hyperturq);
-  font-size: 11px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -125,13 +125,13 @@
 .experiencePortfolioRows article div small {
   margin-top: 6px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
 .experiencePortfolioRows article div b {
-  color: #ffb84d;
-  font-size: 8px;
+  color: #8a4b00;
+  font-size: 12px;
   text-transform: uppercase;
 }
 
@@ -141,9 +141,9 @@
   border: 1px solid var(--lcl-hyperturq);
   border-radius: 9px;
   background: transparent;
-  color: var(--lcl-hyperturq);
+  color: #086f67;
   font: inherit;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 900;
   cursor: pointer;
 }
@@ -174,8 +174,8 @@
 
 .experienceDecisionModel article span {
   margin-bottom: 24px;
-  color: var(--lcl-hyperturq);
-  font-size: 8px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .08em;
 }
@@ -204,8 +204,8 @@
 
 .fanPreviewNotice span {
   margin-bottom: 6px;
-  color: #ffb84d;
-  font-size: 8px;
+  color: #8a4b00;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .08em;
 }
@@ -215,8 +215,8 @@
 }
 
 .fanPreviewNotice button {
-  border-color: #ffb84d;
-  color: #ffb84d;
+  border-color: #8a4b00;
+  color: #8a4b00;
   white-space: nowrap;
 }
 
@@ -292,3 +292,4 @@
     flex-direction: column;
   }
 }
+

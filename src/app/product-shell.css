@@ -41,7 +41,7 @@
   align-items:center;
   gap:8px;
   color:#496200;
-  font-size:11px;
+  font-size:12px;
   font-weight:850;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -106,7 +106,7 @@
   justify-content:space-between;
   gap:16px;
   color:var(--product-inverse-muted);
-  font-size:11px;
+  font-size:12px;
   font-weight:800;
   letter-spacing:.07em;
   text-transform:uppercase;
@@ -142,7 +142,7 @@
 .fixtureMetric span{
   display:block;
   color:#96A49D;
-  font-size:9px;
+  font-size:12px;
   text-transform:uppercase;
   letter-spacing:.07em;
   margin-bottom:6px;
@@ -157,7 +157,7 @@
 .fixtureAction span{
   display:block;
   color:var(--product-accent);
-  font-size:10px;
+  font-size:12px;
   font-weight:850;
   letter-spacing:.07em;
   text-transform:uppercase;
@@ -174,7 +174,7 @@
 .productSectionHeader{max-width:760px;margin-bottom:34px}
 .productSectionKicker,.productPilotMeta{
   color:#526D00;
-  font-size:11px;
+  font-size:12px;
   font-weight:850;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -195,7 +195,7 @@
   background:transparent;
 }
 .productStep+.productStep{padding-left:26px;border-left:1px solid var(--product-line)}
-.productStepNum{color:#526D00;font-size:10px;font-weight:900;letter-spacing:.08em}
+.productStepNum{color:#526D00;font-size:12px;font-weight:900;letter-spacing:.08em}
 .productStep h3{font-size:23px;margin:54px 0 9px;letter-spacing:-.03em}
 .productStep p{margin:0;color:var(--product-muted);line-height:1.55}
 .productValueGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -305,13 +305,13 @@
 .productViewFlow a:hover strong{text-decoration:underline;text-underline-offset:3px}
 .productViewFlow span{
   color:#526D00;
-  font-size:10px;
+  font-size:12px;
   font-weight:900;
 }
 .productViewFlow strong{font-size:15px}
 .productViewFlow small{
   color:var(--product-muted);
-  font-size:12px;
+  font-size:14px;
   line-height:1.4;
 }
 @media(max-width:860px){
@@ -325,3 +325,4 @@
   }
   .productViewFlow small{grid-column:2}
 }
+

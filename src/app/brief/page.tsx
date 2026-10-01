@@ -133,8 +133,9 @@ export default function BriefPage() {
           <h2>{live?.updatedAt ? "Engine refreshed " + new Date(live.updatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" }) : "Refresh time unavailable"}</h2>
           <p>{live ? live.liveSignals.length + " current signals feed the product opportunity." : "No live signal lineage is available."}</p>
         </div>
-        <Link className={styles.button} href="/today">Open Analyst view</Link>
+        <Link className={styles.button} href="/today">Open London City case</Link>
       </section>
     </main>
   );
 }
+

@@ -2,15 +2,15 @@
 .context{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
 .context>div{padding:14px 18px 14px 0}
 .context>div+div{padding-left:18px;border-left:1px solid var(--product-line)}
-.context span,.outputs span,.waterfall span{display:block;color:var(--product-muted);font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px}
+.context span,.outputs span,.waterfall span{display:block;color:var(--product-muted);font-size:12px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px}
 .context strong{display:block;font-size:14px;line-height:1.35}
 
 .controls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .control{position:relative;padding:16px;border-radius:var(--product-radius-md);border:1px solid var(--product-line);background:var(--product-surface)}
-.control label{display:block;color:var(--product-muted);font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;margin-bottom:9px}
+.control label{display:block;color:var(--product-muted);font-size:12px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;margin-bottom:9px}
 .control input{width:100%;box-sizing:border-box;border:0;border-bottom:1px solid var(--product-line);background:transparent;color:var(--product-ink);font-size:27px;font-weight:800;outline:none;padding:3px 0 8px}
 .control input:focus{border-bottom-color:var(--product-ink)}
-.control span{display:block;margin-top:7px;color:var(--product-muted);font-size:10px}
+.control span{display:block;margin-top:7px;color:var(--product-muted);font-size:12px}
 
 .waterfall{
   display:grid;
@@ -38,7 +38,7 @@
 .outputs article{padding:18px 20px 18px 0}
 .outputs article+article{padding-left:20px;border-left:1px solid var(--product-line)}
 .outputs strong{font-size:24px;letter-spacing:-.03em}
-.note{margin:0;color:var(--product-muted);font-size:11px;line-height:1.55;max-width:920px}
+.note{margin:0;color:var(--product-muted);font-size:12px;line-height:1.55;max-width:920px}
 
 @media(max-width:980px){
   .waterfall{grid-template-columns:1fr 24px 1fr 24px 1fr}
@@ -59,3 +59,4 @@
   .waterfall{grid-template-columns:1fr 20px 1fr}
   .waterfall .result{grid-column:1 / -1}
 }
+

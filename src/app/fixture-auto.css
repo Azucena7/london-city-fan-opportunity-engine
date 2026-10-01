@@ -34,7 +34,7 @@
 
 .nextFixtureMeta span {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 6px;
 }
 
@@ -51,3 +51,4 @@
     grid-template-columns: 1fr;
   }
 }
+

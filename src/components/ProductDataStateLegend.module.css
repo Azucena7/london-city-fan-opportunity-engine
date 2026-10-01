@@ -23,7 +23,7 @@
   border-radius:999px;
   background:var(--product-surface);
   border:1px solid var(--product-line);
-  font-size:9px;
+  font-size:12px;
   font-weight:850;
   text-transform:uppercase;
   letter-spacing:.03em;
@@ -44,3 +44,4 @@
 @media(max-width:600px){
   .legend{width:min(100% - 28px,1120px);margin-bottom:12px}
 }
+

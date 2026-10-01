@@ -18,7 +18,7 @@
   --surface-2: #0e2c4a;
   --ink: var(--lcl-white);
   --muted: #a9bdc8;
-  --line: rgba(248,251,252,.14);
+  --line: rgba(16,33,27,.14);
   --accent: var(--lcl-hyperturq);
   --hot: #f28e72;
 }
@@ -30,11 +30,11 @@ html, body {
 }
 
 .brand {
-  color: var(--lcl-white);
+  color: var(--ink);
 }
 
 .eyebrow {
-  color: var(--lcl-hyperturq);
+  color: #086f67;
 }
 
 .status span {
@@ -108,7 +108,7 @@ html, body {
 
 .shareCard {
   background:
-    linear-gradient(140deg, rgba(255,255,255,.16), transparent 40%),
+    linear-gradient(140deg, rgba(16,33,27,.16), transparent 40%),
     var(--lcl-hyperturq);
   color: var(--lcl-navy);
 }
@@ -131,9 +131,9 @@ html, body {
 .territoryMap {
   background:
     radial-gradient(circle at 50% 50%, rgba(50,230,212,.09), transparent 18%),
-    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
-    #06192c;
+    linear-gradient(rgba(16,33,27,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,33,27,.022) 1px, transparent 1px),
+    var(--surface);
   background-size: auto, 40px 40px, 40px 40px, auto;
 }
 
@@ -143,7 +143,7 @@ html, body {
 
 .weatherScore,
 .storyNum {
-  color: var(--lcl-hyperturq);
+  color: #086f67;
 }
 
 .liveWeather {
@@ -154,7 +154,7 @@ html, body {
 
 .signalBadge.structural {
   background: rgba(50,230,212,.11);
-  color: var(--lcl-hyperturq);
+  color: #086f67;
 }
 
 .signalBadge.live {
@@ -170,11 +170,11 @@ html, body {
 }
 
 .strategyLine {
-  color: var(--lcl-hyperturq);
+  color: #086f67;
 }
 
 .textLink:hover {
-  color: var(--lcl-hyperturq);
+  color: #086f67;
 }
 
 .nextFixtureContext {
@@ -192,7 +192,7 @@ html, body {
 
 .brandStripe span:nth-child(1),
 .brandStripe span:nth-child(3) {
-  background: var(--lcl-navy-2);
+  background: var(--surface);
 }
 
 .brandStripe span:nth-child(2) {
@@ -208,7 +208,7 @@ html, body {
   border: 1px solid rgba(50,230,212,.2);
   border-radius: 999px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
 }
 
@@ -219,3 +219,4 @@ html, body {
   border-radius: 50%;
   background: var(--lcl-hyperturq);
 }
+

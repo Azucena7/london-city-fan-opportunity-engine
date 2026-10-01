@@ -19,7 +19,7 @@
 
 .navGroupLabel {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -48,7 +48,7 @@
 }
 
 .operationsNav > span {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .operationsNav a {
@@ -62,7 +62,7 @@
 .languageSwitcher button {
   min-width: 40px;
   height: 34px;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* Product screens should read like a working application. The larger editorial
@@ -157,7 +157,7 @@
     left: 0;
     z-index: 1;
     padding-right: 8px;
-    background: var(--lcl-navy);
+    background: var(--surface);
   }
 }
 
@@ -167,17 +167,17 @@
   gap:14px;
 }
 .backToProduct{
-  color:var(--text);
+  color: var(--ink);
   text-decoration:none;
-  font-size:11px;
+  font-size:12px;
   font-weight:800;
   padding:7px 10px;
-  border:1px solid rgba(255,255,255,.16);
+  border:1px solid rgba(16,33,27,.16);
   border-radius:999px;
 }
 .backToProduct:hover{
   border-color:rgba(216,255,79,.6);
-  color:var(--accent);
+  color: #086f67;
 }
 @media(max-width:760px){
   .analystBridge{
@@ -186,3 +186,4 @@
     gap:6px;
   }
 }
+

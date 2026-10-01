@@ -17,7 +17,7 @@
 }
 .eyebrow{
   color:#526D00;
-  font-size:10px;
+  font-size:12px;
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -46,14 +46,14 @@
 .fixtureCard span,.alerts span,.decisionGrid span,.primaryAction>span,.secondaryAction>span{
   display:block;
   color:var(--product-muted);
-  font-size:9px;
+  font-size:12px;
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
   margin-bottom:7px;
 }
 .fixtureCard strong{display:block;font-size:23px;letter-spacing:-.03em}
-.fixtureCard p{margin:7px 0 0;color:var(--product-muted);font-size:13px}
+.fixtureCard p{margin:7px 0 0;color:var(--product-muted);font-size:14px}
 
 .alerts{
   display:grid;
@@ -71,7 +71,7 @@
 }
 .alerts article+article{padding-left:22px;border-left:1px solid var(--product-line)}
 .alerts strong{display:block;font-size:28px;letter-spacing:-.04em}
-.alerts p{margin:5px 0 0;color:var(--product-muted);font-size:12px;line-height:1.4}
+.alerts p{margin:5px 0 0;color:var(--product-muted);font-size:14px;line-height:1.4}
 
 .focus,.doNext{padding:44px 0;border-top:0}
 .sectionHead{max-width:850px;margin-bottom:22px}
@@ -97,7 +97,7 @@
 }
 .decisionGrid article+article{padding-left:22px;border-left:1px solid var(--product-line)}
 .decisionGrid strong{display:block;font-size:17px;line-height:1.35}
-.decisionGrid p{margin:7px 0 0;color:var(--product-muted);font-size:12px;line-height:1.45}
+.decisionGrid p{margin:7px 0 0;color:var(--product-muted);font-size:14px;line-height:1.45}
 
 .actions{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:12px}
 .primaryAction,.secondaryAction{padding:24px;border-radius:var(--product-radius-md)}
@@ -156,7 +156,7 @@
   align-items:end;
 }
 .evidence h2{margin:8px 0 6px;font-size:25px;letter-spacing:-.035em}
-.evidence p{margin:0;color:var(--product-muted);font-size:13px}
+.evidence p{margin:0;color:var(--product-muted);font-size:14px}
 .button{
   display:inline-flex;
   padding:11px 16px;
@@ -174,14 +174,14 @@
   width:82px;height:6px;border-radius:999px;background:#DBDDD7;overflow:hidden
 }
 .confidenceTrack span{display:block;height:100%;width:60%;background:var(--product-warning);border-radius:inherit}
-.confidenceLine small{color:var(--product-muted);font-size:11px}
+.confidenceLine small{color:var(--product-muted);font-size:14px}
 .liveChip,.warningChip,.dangerChip{
   display:inline-flex;
   align-items:center;
   gap:6px;
   padding:5px 8px;
   border-radius:999px;
-  font-size:10px;
+  font-size:12px;
   font-weight:800;
 }
 .liveChip{background:#E5F3EA;color:var(--product-success)}
@@ -244,3 +244,4 @@
     box-shadow:0 16px 40px rgba(16,33,27,.22);
   }
 }
+

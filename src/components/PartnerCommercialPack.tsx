@@ -158,6 +158,8 @@ export function PartnerCommercialPack({ data, readiness }: { data: PartnerCommer
         </section>
       </article>
 
+      <details className="caseExtraDetail">
+        <summary>{es ? "Comparativa y preparación del piloto" : "Comparison and pilot readiness"}</summary>
       <section className="partnerComparison">
         <div className="partnerSectionHead"><div><span>06</span><h2>{es ? "Comparar sin confundir potencial con preparación" : "Compare without confusing potential with readiness"}</h2></div></div>
         <div className="partnerComparisonTable"><div className="header"><span>{es ? "Modelo" : "Model"}</span><span>{es ? "Candidato" : "Candidate"}</span><span>{es ? "Partido" : "Fixture"}</span><span>{es ? "Siguiente prueba" : "Next proof"}</span></div>{data.packs.map((item) => <div key={item.id}><strong>{categoryLabels[item.category][lang]}</strong><span>{item.candidate}</span><span>{item.recommendedFixtureIds.map((id) => data.fixtures.find((fixtureItem) => fixtureItem.fixtureId === id)?.label[lang]).join(" · ")}</span><span>{item.evidence.find((evidence) => evidence.state === "requires-measurement")?.label[lang]}</span></div>)}</div>
@@ -170,6 +172,7 @@ export function PartnerCommercialPack({ data, readiness }: { data: PartnerCommer
         <div>{data.pilotPhases.map((phase, index) => <article key={phase.id}><span>{String(index + 1).padStart(2, "0")}</span><strong>{phase.label[lang]}</strong><p>{phase.output[lang]}</p><small>{phase.state}</small></article>)}</div>
       </section>
 
+      </details>
       <section className="partnerGates">
         <div><div className="eyebrow">APPROVAL GATES</div><h2>{es ? "Cinco responsables antes de activar" : "Five owners before activation"}</h2><p>{es ? "Medición, condiciones comerciales, operaciones, derechos y privacidad permanecen pendientes." : "Measurement, commercial terms, operations, rights and privacy remain pending."}</p></div>
         <div>{data.approvalGates.map((gate) => <article key={gate.id}><span>{gate.state}</span><strong>{gate.label[lang]}</strong><small>{gate.owner[lang]}</small></article>)}</div>
@@ -180,3 +183,4 @@ export function PartnerCommercialPack({ data, readiness }: { data: PartnerCommer
     </main>
   );
 }
+

@@ -187,8 +187,9 @@ export default function GuidedDemoPage() {
           <h2>Want to see the full intelligence layer?</h2>
           <p>The London City engine remains available with signals, territories, fixtures, evidence and operational detail.</p>
         </div>
-        <Link className={styles.button} href="/today">Open Analyst view</Link>
+        <Link className={styles.button} href="/today">Open London City case</Link>
       </section>
     </main>
   );
 }
+

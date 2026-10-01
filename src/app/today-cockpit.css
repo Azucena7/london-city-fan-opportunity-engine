@@ -67,7 +67,7 @@
   padding: 8px;
   border-radius: 8px;
   background: rgba(7, 27, 51, .08);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .scoreExplanation > div b {
@@ -89,7 +89,7 @@
 .fixturePlanLink {
   align-self: flex-start;
   margin-top: 23px;
-  color: var(--lcl-hyperturq);
+  color: #086f67;
   font-size: 13px;
   font-weight: 900;
   text-decoration: none;
@@ -132,21 +132,21 @@
 
 .priorityActionGrid article > div:first-child span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .priorityActionGrid article > div:first-child b {
   padding: 5px 7px;
   border-radius: 999px;
   background: rgba(50, 230, 212, .09);
-  color: var(--lcl-hyperturq);
-  font-size: 9px;
+  color: #086f67;
+  font-size: 12px;
   text-transform: uppercase;
 }
 
 .priorityActionGrid article.overdue > div:first-child b {
   background: rgba(255, 107, 95, .1);
-  color: #ff8b82;
+  color: #8a4b00;
 }
 
 .priorityActionGrid h3 {
@@ -160,7 +160,7 @@
   min-height: 60px;
   margin: 0 0 20px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -180,13 +180,13 @@
 .priorityActionGrid dt {
   margin-bottom: 5px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   text-transform: uppercase;
 }
 
 .priorityActionGrid dd {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
 }
 
@@ -196,20 +196,20 @@
 
 .signalEditorialMeta time {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .progressiveDisclosure {
   margin-top: 14px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: rgba(255, 255, 255, .018);
+  background: rgba(16,33,27,.018);
 }
 
 .progressiveDisclosure > summary {
   padding: 14px 16px;
   cursor: pointer;
-  color: var(--lcl-hyperturq);
+  color: #086f67;
   font-size: 12px;
   font-weight: 900;
 }
@@ -230,7 +230,7 @@
 
 .progressiveDisclosure > div span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .signalArchive > article {
@@ -246,7 +246,7 @@
 .signalArchive > article p,
 .signalArchive > article a {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.45;
 }
 
@@ -255,7 +255,7 @@
 }
 
 .signalArchive > article a {
-  color: var(--lcl-hyperturq);
+  color: #086f67;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -337,7 +337,7 @@
   padding:20px;
   border:1px solid rgba(245,202,103,.34);
   border-radius:18px;
-  background:linear-gradient(145deg,rgba(245,202,103,.055),rgba(255,255,255,.018));
+  background:linear-gradient(145deg,rgba(245,202,103,.055),rgba(16,33,27,.018));
 }
 .todayRealityIntro h2 {
   margin:8px 0;
@@ -348,7 +348,7 @@
 .todayRealityIntro p {
   margin:0;
   color:var(--muted);
-  font-size:10px;
+  font-size:14px;
   line-height:1.45;
 }
 .todayRealityFlow {
@@ -367,20 +367,20 @@
 .todayRealityFlow article > span,
 .todayRealityFlow article > strong { display:block; }
 .todayRealityFlow article > span {
-  color:var(--lcl-hyperturq);
-  font-size:8px;
+  color: #086f67;
+  font-size:12px;
   font-weight:900;
   letter-spacing:.08em;
 }
-.todayRealityFlow article.observed > span { color:#f5ca67; }
+.todayRealityFlow article.observed > span { color: #8a4b00; }
 .todayRealityFlow article > strong {
   margin-top:9px;
-  font-size:10px;
+  font-size:12px;
   line-height:1.42;
 }
 .todayRealityFlow > b {
   align-self:center;
-  color:var(--lcl-hyperturq);
+  color: #086f67;
   font-size:20px;
 }
 .todayRealityStatus {
@@ -403,15 +403,15 @@
 .todayRealityStatus span {
   margin-top:3px;
   color:var(--muted);
-  font-size:7px;
+  font-size:12px;
   text-transform:uppercase;
 }
 .todayRealityStatus > a {
   grid-column:1 / -1;
   padding:11px;
   background:rgba(216,255,79,.055);
-  color:var(--lcl-hyperturq);
-  font-size:9px;
+  color: #086f67;
+  font-size:12px;
   font-weight:900;
   text-decoration:none;
 }
@@ -424,8 +424,9 @@
 }
 
 .todayValidationRail { grid-column:1/-1; display:grid; grid-template-columns:repeat(5,1fr); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:10px; background:var(--line); }
-.todayValidationRail span { display:flex; gap:6px; align-items:center; padding:8px; background:rgba(0,0,0,.14); color:var(--muted); font-size:8px; }
-.todayValidationRail span.complete b { color:var(--lcl-hyperturq); }
-.todayValidationRail span.active { color:#f5ca67; }
-.todayValidationRail span.active b { color:#f5ca67; }
+.todayValidationRail span { display:flex; gap:6px; align-items:center; padding:8px; background:rgba(0,0,0,.14); color:var(--muted); font-size:12px; }
+.todayValidationRail span.complete b { color: #086f67; }
+.todayValidationRail span.active { color: #8a4b00; }
+.todayValidationRail span.active b { color: #8a4b00; }
 @media(max-width:700px){.todayValidationRail{grid-template-columns:1fr}.todayValidationRail span{border-bottom:1px solid var(--line)}}
+

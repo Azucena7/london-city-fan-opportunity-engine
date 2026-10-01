@@ -567,5 +567,29 @@
         "checkedAt": "2026-10-01"
       }
     ]
+  },
+  {
+    "id": "everton-oktoberfest-2026-10-01",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-01T15:15:00Z",
+    "title": {
+      "en": "Everton has an official Oktoberfest matchday proposition",
+      "es": "Everton cuenta con una propuesta oficial de Oktoberfest"
+    },
+    "summary": {
+      "en": "The club is promoting Everton on 18 October at 14:00 as a Bavarian-themed matchday, with match tickets and VIP Terrace tickets available. Block A remains an alcohol-free family area. Availability is not evidence of sales.",
+      "es": "El club promociona Everton el 18 de octubre a las 14:00 como una jornada de temática bávara, con entradas y VIP Terrace disponibles. El bloque A sigue siendo una zona familiar sin alcohol. La disponibilidad no demuestra ventas."
+    },
+    "marketingAction": {
+      "en": "Draft separate messages for returning supporters and families. Link to the official offer, preserve the alcohol-free family option and measure ticket intent before any spend or club execution.",
+      "es": "Preparar mensajes separados para aficionados que repiten y familias. Enlazar la oferta oficial, conservar la opción familiar sin alcohol y medir intención de compra antes de invertir o ejecutar desde el club."
+    },
+    "sourceName": "London City Lionesses · Everton matchday",
+    "sourceUrl": "https://www.londoncitylionesses.com/everton-h-2627"
   }
 ]

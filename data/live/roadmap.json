@@ -193,5 +193,50 @@
       "en": "The confirmed 1–0 win at Ipswich gives London City three consecutive wins and three clean sheets before Tottenham. Refresh social and CRM, but present form as a content hook rather than evidence of demand; keep 14:00 and BetWright Stadium in every service message and measure engagement and ticket conversion separately.",
       "es": "El 0–1 confirmado en Ipswich deja a London City con tres victorias consecutivas y tres porterías a cero antes de Tottenham. Actualizar social y CRM, pero presentar la forma como gancho de contenido y no como evidencia de demanda; mantener las 14:00 y el BetWright Stadium en todos los mensajes de servicio y medir por separado engagement y conversión."
     }
+  },
+  {
+    "id": "everton-review-1",
+    "fixtureId": "2026-10-18-eve-h",
+    "area": "Marketing",
+    "status": "planned",
+    "due": "2026-10-03",
+    "title": {
+      "en": "Review the Everton proposition and assign an owner",
+      "es": "Revisar la propuesta de Everton y asignar responsable"
+    },
+    "reason": {
+      "en": "Use the official 14:00 kickoff and Oktoberfest offer. Draft only; club approval is pending.",
+      "es": "Usar el horario oficial de las 14:00 y la oferta de Oktoberfest. Solo borrador; falta aprobación del club."
+    }
+  },
+  {
+    "id": "everton-review-2",
+    "fixtureId": "2026-10-18-eve-h",
+    "area": "CRM / Data",
+    "status": "planned",
+    "due": "2026-10-07",
+    "title": {
+      "en": "Validate the Brighton-to-Everton return audience",
+      "es": "Validar la audiencia de repetición Brighton–Everton"
+    },
+    "reason": {
+      "en": "Request authorised aggregate audience and consent evidence before selecting recipients.",
+      "es": "Solicitar audiencia agregada autorizada y evidencia de consentimiento antes de seleccionar destinatarios."
+    }
+  },
+  {
+    "id": "everton-review-3",
+    "fixtureId": "2026-10-18-eve-h",
+    "area": "Marketing / Measurement",
+    "status": "planned",
+    "due": "2026-10-11",
+    "title": {
+      "en": "Approve separate messages and ticket measurement",
+      "es": "Aprobar mensajes separados y medición de entradas"
+    },
+    "reason": {
+      "en": "Keep families and themed-matchday audiences distinct; approve tracking before activation.",
+      "es": "Diferenciar familias y público de la jornada temática; aprobar seguimiento antes de activar."
+    }
   }
 ]

@@ -12,6 +12,7 @@ type CurrentState = {
   updated_at: string;
   material_changes: number;
   public_signal_changes?: number;
+  manual_reviewed_at?: string;
   next_home_fixture_id?: string;
   public_signal_refresh?: { state: string };
   weather: { status: string; reason?: string; [key: string]: string | number | null | undefined };
@@ -90,13 +91,13 @@ export function LocalizedToday({
   const locale = es ? "es-ES" : "en-GB";
   const currentFixtureId = current.next_home_fixture_id ?? "2026-09-26-bha-h";
   const highSignals = signals
-    .filter((signal) => signal.materiality === "high")
+    .filter((signal) => signal.materiality === "high" && (!signal.fixtureId || signal.fixtureId.slice(0, 10) >= current.updated_at.slice(0, 10)))
     .sort((a, b) => {
       const fixtureDifference = Number(b.fixtureId === currentFixtureId) - Number(a.fixtureId === currentFixtureId);
       return fixtureDifference || Date.parse(b.observedAt) - Date.parse(a.observedAt);
     });
   const visibleSignals = highSignals.slice(0, 3);
-  const olderSignals = highSignals.slice(3);
+  const olderSignals = signals.filter((signal) => !visibleSignals.some((visible) => visible.id === signal.id));
   const fixtureActions = roadmap
     .filter((item) => item.fixtureId === currentFixtureId)
     .sort((a, b) => a.due.localeCompare(b.due));
@@ -119,19 +120,20 @@ export function LocalizedToday({
 
       <section className="freshnessBar" aria-label={es ? "Estado de actualización" : "Update status"} aria-live="polite">
         <span className="freshnessDot" />
-        <strong>{es ? "Última actualización" : "Last refresh"}: {formatUpdated(current.updated_at, locale)}</strong>
+        <strong>{es ? "Actualización automática" : "Automated refresh"}: {formatUpdated(current.updated_at, locale)}</strong>
         <span>{current.material_changes} {es ? "cambios materiales desde la actualización" : "material changes since refresh"}</span>
         <span>{current.public_signal_changes ?? 0} {es ? "señales públicas actualizadas" : "public signals updated"}</span>
+        {current.manual_reviewed_at ? <span>{es ? "Revisión manual" : "Manual review"}: {formatUpdated(current.manual_reviewed_at, locale)}</span> : null}
         <span>{signals.length} {es ? "señales con fuente" : "sourced signals"}</span>
       </section>
 
       <section className="todayHero">
         <div className="todayDecision">
           <div className="eyebrow">{es ? "DECISIÓN VIGENTE" : "CURRENT DECISION"}</div>
-          <h1>{es ? "Aumentar captación con foco en repetición" : "Grow acquisition with a repeat-visit focus"}</h1>
+          <h1>{es ? `La siguiente decisión para ${fixture.opponent}` : `The next decision for ${fixture.opponent}`}</h1>
           <p>{es
-            ? "Usar el opener como cohorte, no como baseline. Brighton debe demostrar cuánta demanda vuelve y de qué territorios procede."
-            : "Use the opener as a cohort, not a baseline. Brighton must show how much demand returns and which territories it comes from."}</p>
+            ? "Proteger la demanda existente y validar quién puede volver. La audiencia, la aprobación del club y la medición siguen pendientes."
+            : "Protect existing demand and validate who can return. Audience evidence, club approval and measurement are still pending."}</p>
           <div className="decisionScore">
             <strong>{fixture.planningScore}<small>/100</small></strong>
             <span><b>{decisionLabel(fixture.decision, es)}</b>{es ? "Prioridad de planificación" : "Planning priority"}</span>
@@ -208,6 +210,7 @@ export function LocalizedToday({
           <div><div className="eyebrow">{es ? "HACER AHORA" : "DO NEXT"}</div><h2 id="priority-actions-title">{es ? "Tres acciones antes del próximo partido" : "Three actions before the next home fixture"}</h2></div>
           <Link href="/calendar">{es ? "Abrir planificación completa →" : "Open full fixture plan →"}</Link>
         </div>
+        {!visibleActions.length ? <p>{es ? "No hay acciones asignadas. Revisar la propuesta y asignar responsable." : "No actions are assigned. Review the proposal and assign an owner."}</p> : null}
         <div className="priorityActionGrid">
           {visibleActions.map((item, index) => {
             const overdue = item.due < refreshDate && item.status !== "complete";
@@ -249,3 +252,4 @@ export function LocalizedToday({
     </main>
   );
 }
+

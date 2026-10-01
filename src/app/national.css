@@ -19,7 +19,7 @@
 
 .originResolution span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: .08em;
   margin-bottom: 4px;
@@ -56,8 +56,8 @@
 
 .nationalSetup p {
   margin: 7px 0;
-  color: #c7d0cb;
-  font-size: 12px;
+  color: var(--ink);
+  font-size: 14px;
   line-height: 1.45;
 }
 
@@ -71,3 +71,4 @@
     grid-template-columns: 1fr;
   }
 }
+

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-09-15T22:00:00Z",
+  "checkedAt": "2026-10-01T15:15:00Z",
   "principle": {
     "en": "Public signals create campaign drafts, not automatic media spend. Every activation needs a fixture key, evidence, an owner, approval and a measurement state before it can become live.",
     "es": "Las señales públicas crean borradores de campaña, no inversión automática. Cada activación necesita una clave de partido, evidencia, responsable, aprobación y estado de medición antes de pasar a live."
@@ -377,6 +377,185 @@
       "contextSignalIds": [
         "attendance-mun-5402"
       ]
+    },
+    {
+      "id": "everton-home-2026-10-18",
+      "fixtureId": "2026-10-18-eve-h",
+      "status": "draft",
+      "utmCampaign": "2026-10-18-eve-h",
+      "title": {
+        "en": "Everton · Return to Bromley",
+        "es": "Everton · Volver a Bromley"
+      },
+      "objective": {
+        "en": "Test whether the official Oktoberfest matchday proposition can encourage a return visit for Everton.",
+        "es": "Probar si la propuesta oficial de Oktoberfest puede favorecer la repetición ante Everton."
+      },
+      "whyNow": {
+        "en": "Everton is the next home fixture, on 18 October at 14:00. The club has published an Oktoberfest proposition; audience size and incremental demand are not measured.",
+        "es": "Everton es el próximo partido en casa, el 18 de octubre a las 14:00. El club ha publicado una propuesta de Oktoberfest; el tamaño de audiencia y la demanda adicional no están medidos."
+      },
+      "triggerSignalIds": [
+        "everton-oktoberfest-2026-10-01"
+      ],
+      "audiences": [
+        {
+          "id": "previous-home-buyers",
+          "label": {
+            "en": "Consented Brighton buyers who have not purchased Everton",
+            "es": "Compradores de Brighton con consentimiento que aún no han comprado Everton"
+          },
+          "state": "requires-access"
+        },
+        {
+          "id": "local-families",
+          "label": {
+            "en": "Local families interested in the alcohol-free family area",
+            "es": "Familias locales interesadas en la zona familiar sin alcohol"
+          },
+          "state": "public-inferred"
+        }
+      ],
+      "proposition": {
+        "en": "Return for London City v Everton, with a themed matchday and a separate family option.",
+        "es": "Volver para London City–Everton, con una jornada temática y una opción familiar diferenciada."
+      },
+      "message": {
+        "en": "Your next London City matchday: Everton, 18 October, 14:00. Choose the official experience that suits you.",
+        "es": "Tu próxima jornada de London City: Everton, 18 de octubre, 14:00. Elige la experiencia oficial que encaje contigo."
+      },
+      "offer": {
+        "description": {
+          "en": "Use the published official ticket offer. No new discount, package or club commitment is approved by this draft.",
+          "es": "Usar la oferta oficial publicada. Este borrador no aprueba descuentos, paquetes ni compromisos nuevos del club."
+        },
+        "state": "requires-approval"
+      },
+      "activations": [
+        {
+          "id": "everton-return-brief",
+          "playbookId": "next-chapter",
+          "title": {
+            "en": "Brief the return-visit message",
+            "es": "Preparar el mensaje de repetición"
+          },
+          "channel": "Owned CRM · subject to club access and approval",
+          "role": {
+            "en": "Build the consented Brighton-to-Everton audience and review separate family and themed-matchday messages.",
+            "es": "Crear la audiencia Brighton–Everton con consentimiento y revisar mensajes separados para familias y jornada temática."
+          },
+          "asset": {
+            "en": "Draft email and official ticket-page link",
+            "es": "Borrador de email y enlace a la página oficial de entradas"
+          },
+          "trackingCampaignIds": [],
+          "utmSource": "club-crm",
+          "utmMedium": "email",
+          "utmContent": "everton-return-brief",
+          "state": "briefed"
+        }
+      ],
+      "schedule": [
+        {
+          "window": "T−15",
+          "date": "2026-10-03",
+          "action": {
+            "en": "Review the official proposition and assign the club owner",
+            "es": "Revisar la propuesta oficial y asignar responsable del club"
+          },
+          "state": "requires-approval"
+        },
+        {
+          "window": "T−11",
+          "date": "2026-10-07",
+          "action": {
+            "en": "Validate the consented audience and tracking",
+            "es": "Validar audiencia con consentimiento y seguimiento"
+          },
+          "state": "planned"
+        },
+        {
+          "window": "T−7",
+          "date": "2026-10-11",
+          "action": {
+            "en": "Approve the message and measurement before activation",
+            "es": "Aprobar mensaje y medición antes de activar"
+          },
+          "state": "requires-approval"
+        }
+      ],
+      "budgetMix": [
+        {
+          "channel": "Owned channels · proposed allocation only",
+          "share": 100
+        }
+      ],
+      "measurement": [
+        {
+          "id": "ticket-intent",
+          "label": {
+            "en": "Official ticket-page intent",
+            "es": "Intención en la página oficial de entradas"
+          },
+          "state": "requires-instrumentation",
+          "target": {
+            "en": "Measure tagged ticket-link clicks; do not infer purchases from clicks.",
+            "es": "Medir clics etiquetados al enlace de entradas; no inferir compras a partir de clics."
+          }
+        },
+        {
+          "id": "purchase-scan-repeat",
+          "label": {
+            "en": "Matched purchase, scan and repeat attendance",
+            "es": "Compra, acceso y repetición vinculados"
+          },
+          "state": "requires-access",
+          "target": {
+            "en": "Use authorised aggregate CRM and ticketing evidence; no measured target is available yet.",
+            "es": "Usar datos agregados autorizados de CRM y ticketing; todavía no hay objetivo medido."
+          }
+        }
+      ],
+      "approvals": [
+        {
+          "id": "club-owner",
+          "label": {
+            "en": "Assign the club marketing owner and approve the draft",
+            "es": "Asignar responsable de marketing del club y aprobar el borrador"
+          },
+          "state": "requires-approval"
+        },
+        {
+          "id": "audience-access",
+          "label": {
+            "en": "Obtain authorised audience and consent evidence",
+            "es": "Obtener audiencia autorizada y evidencia de consentimiento"
+          },
+          "state": "requires-access"
+        },
+        {
+          "id": "tracking",
+          "label": {
+            "en": "Connect ticket-link and purchase measurement",
+            "es": "Conectar medición de enlaces y compras"
+          },
+          "state": "requires-instrumentation"
+        }
+      ],
+      "guardrails": [
+        {
+          "en": "Independent prototype draft; no club execution, spend or endorsement is claimed.",
+          "es": "Borrador de un prototipo independiente; no se afirma ejecución, inversión ni respaldo del club."
+        },
+        {
+          "en": "Keep the alcohol-free family option distinct from Oktoberfest messaging.",
+          "es": "Mantener la opción familiar sin alcohol diferenciada del mensaje de Oktoberfest."
+        }
+      ],
+      "nextApproval": {
+        "en": "Marketing: assign a club owner and review the Everton draft by 3 October before requesting audience access.",
+        "es": "Marketing: asignar responsable del club y revisar el borrador de Everton antes del 3 de octubre, previo a solicitar acceso a audiencia."
+      }
     }
   ]
 }

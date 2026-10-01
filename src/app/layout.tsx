@@ -28,6 +28,7 @@ import "./territory-access.css";
 import "./experience-internal.css";
 import "./product-system.css";
 import "./product-shell.css";
+import "./readability.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
 
@@ -83,3 +84,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

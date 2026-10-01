@@ -19,7 +19,7 @@
   padding: 23px;
   border: 1px solid rgba(50, 230, 212, .34);
   border-radius: 17px;
-  background: linear-gradient(145deg, rgba(50, 230, 212, .09), rgba(255, 255, 255, .02));
+  background: linear-gradient(145deg, rgba(50, 230, 212, .09), rgba(16,33,27,.02));
   color: inherit;
   text-decoration: none;
 }
@@ -32,8 +32,8 @@
 }
 
 .nextFixtureJump span {
-  color: var(--lcl-hyperturq);
-  font-size: 9px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .09em;
 }
@@ -52,7 +52,7 @@
 
 .nextFixtureJump b {
   margin-top: 20px;
-  color: var(--lcl-hyperturq);
+  color: #086f67;
   font-size: 12px;
 }
 
@@ -89,12 +89,12 @@
   max-width: 160px;
   margin-top: 6px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.35;
 }
 
 .calendarCommandBar .needsAttention strong {
-  color: #ffb84d;
+  color: #8a4b00;
 }
 
 .calendarToolbar {
@@ -125,8 +125,8 @@
   min-width: 18px;
   padding: 2px 5px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, .08);
-  font-size: 9px;
+  background: rgba(16,33,27,.08);
+  font-size: 12px;
 }
 
 .calendarFilters button.active span {
@@ -166,13 +166,13 @@
 .fixtureStatusSummary strong small {
   margin-left: 2px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .fixtureStatusSummary span {
   margin-top: 5px;
-  color: var(--lcl-hyperturq);
-  font-size: 10px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -190,7 +190,7 @@
 
 .fixtureReadiness span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .fixtureOperatingPlan {
@@ -200,7 +200,7 @@
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: rgba(255, 255, 255, .02);
+  background: rgba(16,33,27,.02);
 }
 
 .fixtureOperatingPlan article {
@@ -228,7 +228,7 @@
 .fixtureOperatingPlan span {
   margin-bottom: 7px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .07em;
 }
@@ -240,8 +240,8 @@
 
 .fixtureOperatingPlan small {
   margin-top: 5px;
-  color: var(--lcl-hyperturq);
-  font-size: 9px;
+  color: #086f67;
+  font-size: 14px;
 }
 
 .fixtureActionList,
@@ -257,16 +257,16 @@
   justify-content: space-between;
   gap: 20px;
   padding: 13px 16px;
-  background: rgba(255, 255, 255, .03);
+  background: rgba(16,33,27,.03);
 }
 
 .fixtureSectionHead strong {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .fixtureSectionHead span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .fixtureActionList > article {
@@ -281,7 +281,7 @@
 .fixtureActionList > article span,
 .fixtureActionList > article time {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .fixtureActionList > article strong {
@@ -289,7 +289,7 @@
 }
 
 .fixtureActionList > article.overdue time {
-  color: #ff8b82;
+  color: #8a4b00;
   font-weight: 800;
 }
 
@@ -314,8 +314,8 @@
 }
 
 .fixtureSignalStrip span {
-  color: var(--lcl-hyperturq);
-  font-size: 8px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -327,13 +327,13 @@
 
 .fixtureSignalStrip p {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1.45;
 }
 
 .fixtureSignalStrip a {
-  color: var(--lcl-hyperturq);
-  font-size: 9px;
+  color: #086f67;
+  font-size: 12px;
   text-decoration: none;
 }
 
@@ -347,8 +347,8 @@
 .fixtureDeepDive > summary {
   padding: 14px 16px;
   cursor: pointer;
-  color: var(--lcl-hyperturq);
-  font-size: 11px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -388,8 +388,8 @@
 
 .calendarEvidence > summary span {
   margin-bottom: 7px;
-  color: var(--lcl-hyperturq);
-  font-size: 9px;
+  color: #086f67;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .08em;
 }
@@ -400,7 +400,7 @@
 
 .calendarEvidence > summary b {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .calendarEvidenceBody {
@@ -532,9 +532,10 @@
 .fixtureValidationLifecycle > div:last-child { display:grid; grid-template-columns:repeat(5,1fr); }
 .fixtureValidationLifecycle article { display:grid; grid-template-columns:auto 1fr; gap:5px 8px; padding:12px; border-top:1px solid var(--line); border-right:1px solid var(--line); }
 .fixtureValidationLifecycle article:last-child { border-right:0; }
-.fixtureValidationLifecycle article > span { color:var(--muted); font-size:10px; }
-.fixtureValidationLifecycle article.complete > span { color:var(--lcl-hyperturq); }
-.fixtureValidationLifecycle article.active > span { color:#f5ca67; }
-.fixtureValidationLifecycle article > strong { font-size:9px; }
-.fixtureValidationLifecycle article > small { grid-column:2; color:var(--muted); font-size:8px; }
+.fixtureValidationLifecycle article > span { color:var(--muted); font-size:12px; }
+.fixtureValidationLifecycle article.complete > span { color: #086f67; }
+.fixtureValidationLifecycle article.active > span { color: #8a4b00; }
+.fixtureValidationLifecycle article > strong { font-size:12px; }
+.fixtureValidationLifecycle article > small { grid-column:2; color:var(--muted); font-size:14px; }
 @media(max-width:700px){.fixtureValidationLifecycle{margin:0 10px 10px}.fixtureValidationLifecycle > div:last-child{grid-template-columns:1fr}.fixtureValidationLifecycle article{border-right:0}}
+

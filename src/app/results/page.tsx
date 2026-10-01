@@ -5,6 +5,7 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
+import { calendar, currentState } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Results & Learning",
@@ -24,18 +25,31 @@ function currency(value: number | null) {
   }).format(value);
 }
 
-export default function ResultsLearningPage() {
-  const live = getCurrentProductOpportunity();
-  const results = getCurrentProductResults();
+export default async function ResultsLearningPage({ searchParams }: { searchParams: Promise<{ fixture?: string }> }) {
+  const params = await searchParams;
+  const selectedId = calendar.some((item) => item.id === params.fixture && item.homeAway === "home")
+    ? params.fixture : currentState.last_completed_home_fixture_id;
+  const live = getCurrentProductOpportunity(selectedId);
+  const results = getCurrentProductResults(selectedId);
+  const selected = calendar.find((item) => item.id === selectedId);
   const measured = results?.state === "measured";
 
   return (
     <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="results" />
 
+      <nav className="resultsFixturePicker" aria-label="Choose a fixture to review">
+        <strong>Review a fixture</strong>
+        {calendar.filter((item) => item.homeAway === "home" && (item.status !== "scheduled" || item.id === currentState.next_home_fixture_id)).map((item) => (
+          <Link key={item.id} href={`/results?fixture=${item.id}`} aria-current={item.id === selectedId ? "page" : undefined}>
+            {item.opponent} · {new Date(item.date + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" })}
+          </Link>
+        ))}
+      </nav>
+
       <header className={styles.hero}>
         <div>
-          <span className={styles.eyebrow}>Results & Learning</span>
+          <span className={styles.eyebrow}>Results & Learning · {selected?.opponent} · {selected?.date}</span>
           <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What happened after the action?"}</h1>
           <p>
             {live?.fixturePhase === "pre-match"
@@ -55,6 +69,12 @@ export default function ResultsLearningPage() {
       </header>
 
       <ProductDataStateLegend />
+
+      {selected ? <section className="resultsFixtureFacts" aria-label="Observed fixture facts">
+        <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
+        <article><span>Recorded attendance</span><strong>{selected.attendance?.toLocaleString("en-GB") ?? "Not measured yet"}</strong></article>
+        <article><span>Commercial impact</span><strong>{measured ? "Descriptive club evidence connected" : "Not measured yet"}</strong></article>
+      </section> : null}
 
       <section className={styles.kpis}>
         <article>

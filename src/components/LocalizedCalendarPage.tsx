@@ -155,7 +155,7 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
               </section> : null}
               {campaign ? <CampaignPlan data={campaign} signals={signals} embedded /> : null}
               {scorecard ? <details className="fixtureDeepDive"><summary>{es ? "Abrir scorecard postpartido" : "Open post-match scorecard"}</summary><PostMatchScorecard data={scorecard} embedded /></details> : null}
-              {fixture.sourceDiscrepancies?.map((item) => <div className="sourceDiscrepancy" role="status" key={`${fixture.id}-${item.field}`}><div><span>{es ? "DISCREPANCIA DE FUENTE" : "SOURCE DISCREPANCY"}</span><strong>{es ? "El horario público no coincide entre fuentes oficiales" : "The public kick-off time differs across official sources"}</strong></div><div className="sourceValues">{item.values.map((value) => <a href={value.sourceUrl} target="_blank" rel="noreferrer" key={`${value.sourceName}-${value.value}`}><strong>{value.value}</strong><span>{value.sourceName} ↗</span></a>)}</div><p>{es ? "Sin resolver. Confirmar antes de publicar campañas o rutas." : "Unresolved. Confirm before publishing campaigns or journeys."}</p></div>)}
+              {fixture.sourceDiscrepancies?.filter((item) => item.state === "unresolved").map((item) => <div className="sourceDiscrepancy" role="status" key={`${fixture.id}-${item.field}`}><div><span>{es ? "DISCREPANCIA DE FUENTE" : "SOURCE DISCREPANCY"}</span><strong>{es ? "El horario público no coincide entre fuentes oficiales" : "The public kick-off time differs across official sources"}</strong></div><div className="sourceValues">{item.values.map((value) => <a href={value.sourceUrl} target="_blank" rel="noreferrer" key={`${value.sourceName}-${value.value}`}><strong>{value.value}</strong><span>{value.sourceName} ↗</span></a>)}</div><p>{es ? "Sin resolver. Confirmar antes de publicar campañas o rutas." : "Unresolved. Confirm before publishing campaigns or journeys."}</p></div>)}
               {fixture.id === activations.fixtureId ? <details className="fixtureDeepDive"><summary>{es ? "Abrir inteligencia de activación" : "Open activation intelligence"}</summary><ClubActivationIntelligence data={activations} /></details> : null}
             </details>
           );
@@ -169,7 +169,8 @@ export function LocalizedCalendarPage({ calendar, plans, history, benchmark, aud
         <div className="calendarEvidenceBody"><DemandHistory data={history} /><LeagueAttendanceBenchmark data={benchmark} /><AudienceReach data={audience} /><EventLandscape data={eventLandscape} calendar={calendar} /><SearchDemandObservatory data={searchDemand} /><CrmTicketingReadiness data={crmReadiness} demo={crmDemo} /></div>
       </details>
 
-      <p className="sourceNote">{es ? "Fuente del calendario:" : "Calendar source:"} <a href="https://www.londoncitylionesses.com/fixtures" target="_blank" rel="noreferrer">London City Lionesses ↗</a>. {es ? "Snapshot comprobado el 14 de septiembre de 2026; los cambios futuros deben conservar historial." : "Snapshot checked on 14 September 2026; future changes must preserve history."}</p>
+      <p className="sourceNote">{es ? "Fuente del calendario:" : "Calendar source:"} <a href="https://www.londoncitylionesses.com/fixtures" target="_blank" rel="noreferrer">London City Lionesses ↗</a>. {es ? "La fecha del snapshot aparece arriba; los cambios futuros deben conservar historial." : "Snapshot date is shown above; future changes must preserve history."}</p>
     </main>
   );
 }
+
