@@ -6,8 +6,6 @@ import { ProductJourneyNav } from "./ProductJourneyNav";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLanguage } from "./LanguageProvider";
 
-const commercialContact = "azu@aidax.io";
-
 export function ClubPilotProposition() {
   const { lang } = useLanguage();
   const es = lang === "es";
@@ -26,7 +24,6 @@ export function ClubPilotProposition() {
     es ? "Sin resultados comerciales garantizados. Datos públicos por sí solos no validan conversión o repetición." : "No guaranteed commercial outcomes. Public data alone cannot establish conversion or repeat visits.",
     "https://london-city-fan-opportunity-engine.vercel.app/for-clubs"
   ].join("\n\n");
-  const contactHref = `mailto:${commercialContact}?subject=${encodeURIComponent(es ? "Conversación sobre un piloto para mi club" : "Club pilot discussion")}&body=${encodeURIComponent(brief)}`;
 
   async function copyBrief() {
     try {
@@ -47,7 +44,6 @@ export function ClubPilotProposition() {
       <p className="commercialScope">{es ? "90 días · 6 partidos propuestos · un objetivo prioritario" : "90 days · 6 proposed fixtures · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
       <div className="caseOverviewLinks"><a className="productButton" href="#pilot-discussion">{es ? "Preparar la conversación →" : "Prepare the discussion →"}</a><Link href="/london-city">{es ? "Ver el caso London City →" : "View the London City example →"}</Link></div>
-      <p>{es ? "Contacto comercial: " : "Commercial contact: "}<a href={`mailto:${commercialContact}`}>{commercialContact}</a></p>
     </header>
 
     <section className="commercialPanel">
@@ -94,9 +90,7 @@ export function ClubPilotProposition() {
       <label className="commercialBriefLabel" htmlFor="pilot-brief">{es ? "Resumen listo para copiar" : "Summary ready to copy"}</label>
       <textarea id="pilot-brief" className="commercialBrief" readOnly value={brief} rows={13} />
       <button className="productButton" type="button" onClick={copyBrief}>{es ? "Copiar resumen" : "Copy summary"}</button>
-      <p role="status" aria-live="polite">{copyState === "copied" ? (es ? "Resumen copiado. No se ha enviado ninguna solicitud." : "Summary copied. No request has been sent.") : copyState === "manual" ? (es ? "No se pudo acceder al portapapeles. Selecciona el resumen y cópialo manualmente." : "Clipboard access was unavailable. Select the summary and copy it manually.") : (es ? "Este resumen no reserva ni activa un piloto. Puedes revisarlo antes de enviarlo por email." : "This summary does not book or activate a pilot. You can review it before sending it by email.")}</p>
-      <p><a href={contactHref}>{es ? "Preparar email para " : "Prepare an email to "}{commercialContact} →</a></p>
-      <p>{es ? "El enlace abre tu aplicación de correo con el resumen. Tú revisas y envías el mensaje; esta web no lo envía automáticamente." : "The link opens your email application with the summary. You review and send the message; this website does not send it automatically."}</p>
+      <p role="status" aria-live="polite">{copyState === "copied" ? (es ? "Resumen copiado. No se ha enviado ninguna solicitud." : "Summary copied. No request has been sent.") : copyState === "manual" ? (es ? "No se pudo acceder al portapapeles. Selecciona el resumen y cópialo manualmente." : "Clipboard access was unavailable. Select the summary and copy it manually.") : (es ? "Este resumen no reserva ni activa un piloto. Puedes copiarlo y compartirlo por el canal que prefieras." : "This summary does not book or activate a pilot. You can copy it and share it through your preferred channel.")}</p>
       <Link href="/pilot">{es ? "Consultar el detalle operativo del piloto →" : "Read the pilot operating detail →"}</Link>
     </section>
   </main>;
