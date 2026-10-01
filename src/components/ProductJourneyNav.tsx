@@ -14,6 +14,7 @@ const primaryItems = [
 ] as const;
 
 const exploreItems = [
+  { key: "workspace", label: "Club workspace demo", href: "/club-demo" },
   { key: "clubs", label: "For clubs", href: "/for-clubs" },
   { key: "cases", label: "Use cases", href: "/cases" },
   { key: "demo", label: "Guided demo", href: "/demo" },
@@ -53,7 +54,8 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
               >
                 <strong>{item.label}</strong>
                 <span>
-                  {item.key === "clubs" ? "Explore an authorised club pilot" :
+                  {item.key === "workspace" ? "Try the client workflow with test data" :
+                   item.key === "clubs" ? "Explore an authorised club pilot" :
                    item.key === "cases" ? "Compare different fixture decisions" :
                    item.key === "demo" ? "Walk through the product story" :
                    item.key === "impact" ? "Test commercial scenarios" :
