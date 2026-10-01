@@ -1,0 +1,32 @@
+.commercialShell { padding-bottom: 64px; }
+.commercialLanguage { display: flex; justify-content: flex-end; margin: 18px 0; }
+.commercialHero, .commercialPanel { max-width: 1100px; margin: 24px auto; padding: clamp(22px, 4vw, 44px); background: #fffdf8; border: 1px solid #d8d8ce; border-radius: 20px; color: #243225; }
+.commercialHero h1 { max-width: 20ch; font-size: clamp(32px, 4.5vw, 56px); line-height: 1.1; letter-spacing: -.035em; }
+.commercialHero p, .commercialPanel p { max-width: 72ch; font-size: 16px; line-height: 1.65; }
+.commercialHero .eyebrow { font-size: 12px; }
+.commercialScope { font-weight: 700; }
+.commercialPanel h2 { margin: 0 0 20px; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; }
+.commercialPanel h3, .commercialTwoColumns h3 { font-size: 20px; line-height: 1.35; }
+.commercialTwoColumns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.commercialTwoColumns > * { min-width: 0; }
+.commercialTableWrap { overflow-x: auto; max-width: 100%; margin: 20px 0; }
+.commercialTable { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 16px; line-height: 1.55; }
+.commercialTable caption { text-align: left; padding: 0 0 16px; font-size: 14px; color: #485747; }
+.commercialTable th, .commercialTable td { padding: 16px; vertical-align: top; text-align: left; border-bottom: 1px solid #d4d8cb; overflow-wrap: anywhere; }
+.commercialTable thead th { background: #eef1e5; color: #243225; }
+.commercialSteps { padding-left: 24px; }
+.commercialSteps li { padding-left: 8px; margin-bottom: 24px; font-size: 18px; }
+.commercialSteps p { margin-top: 8px; }
+.commercialFields label { display: grid; gap: 10px; font-size: 16px; font-weight: 600; }
+.commercialFields select { width: 100%; min-height: 48px; padding: 12px; border: 1px solid #73836b; border-radius: 8px; font: inherit; color: #243225; background: white; }
+.commercialBriefLabel { display: block; margin: 24px 0 10px; font-size: 16px; font-weight: 600; }
+.commercialBrief { display: block; width: 100%; box-sizing: border-box; padding: 18px; border: 1px solid #73836b; border-radius: 10px; background: #f5f6ed; color: #243225; font: inherit; font-size: 16px; line-height: 1.6; resize: vertical; margin-bottom: 20px; }
+.commercialPanel button { cursor: pointer; font: inherit; min-height: 48px; }
+.commercialPanel a, .commercialHero a { overflow-wrap: anywhere; }
+.commercialPanel :is(button, select, textarea, a):focus-visible, .commercialHero a:focus-visible { outline: 3px solid #365b26; outline-offset: 4px; }
+#pilot-discussion { scroll-margin-top: 32px; }
+@media (max-width: 760px) {
+  .commercialTwoColumns { grid-template-columns: 1fr; gap: 20px; }
+  .commercialHero, .commercialPanel { border-radius: 14px; padding: 22px; }
+  .commercialTable th, .commercialTable td { padding: 12px; }
+}

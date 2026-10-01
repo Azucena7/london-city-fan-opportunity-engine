@@ -113,6 +113,7 @@ export default function PilotPage() {
           <p>The live London City environment demonstrates the workflow. A club pilot replaces missing assumptions with authorised club evidence and pre-agreed measurement rules.</p>
         </div>
         <div className={styles.ctaActions}>
+          <Link className={styles.button} href="/for-clubs">Prepare a club pilot discussion</Link>
           <Link className={styles.button} href="/opportunity">Explore the live opportunity</Link>
           <Link className={styles.secondary} href="/decision-room">See the Decision Room</Link>
           <Link className={styles.secondary} href="/pilot/operating-pack">Open the Pilot Operating Pack</Link>

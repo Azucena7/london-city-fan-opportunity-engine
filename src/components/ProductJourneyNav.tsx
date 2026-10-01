@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "product" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine";
+  active?: "product" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs";
 };
 
 const primaryItems = [
@@ -14,6 +14,7 @@ const primaryItems = [
 ] as const;
 
 const exploreItems = [
+  { key: "clubs", label: "For clubs", href: "/for-clubs" },
   { key: "cases", label: "Use cases", href: "/cases" },
   { key: "demo", label: "Guided demo", href: "/demo" },
   { key: "impact", label: "Impact model", href: "/impact" },
@@ -52,7 +53,8 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
               >
                 <strong>{item.label}</strong>
                 <span>
-                  {item.key === "cases" ? "Compare different fixture decisions" :
+                  {item.key === "clubs" ? "Explore an authorised club pilot" :
+                   item.key === "cases" ? "Compare different fixture decisions" :
                    item.key === "demo" ? "Walk through the product story" :
                    item.key === "impact" ? "Test commercial scenarios" :
                    "Inspect evidence and blockers"}
@@ -69,4 +71,3 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
     </nav>
   );
 }
-

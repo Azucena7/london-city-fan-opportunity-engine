@@ -29,6 +29,7 @@ import "./experience-internal.css";
 import "./product-system.css";
 import "./product-shell.css";
 import "./readability.css";
+import "./commercial-pilot.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
 
@@ -84,4 +85,3 @@ export default async function RootLayout({
     </html>
   );
 }
-

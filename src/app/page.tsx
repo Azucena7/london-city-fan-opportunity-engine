@@ -26,7 +26,7 @@ export default function Home() {
 
           <div className="productHeroActions">
             <Link className="productButton" href="/brief">Open live Morning Brief</Link>
-            <Link className="productButtonGhost" href="/pilot">See the 90-day pilot</Link>
+            <Link className="productButtonGhost" href="/for-clubs">See the 90-day pilot</Link>
           </div>
 
           <div className="productProof" aria-label="Product outcomes">
@@ -136,4 +136,3 @@ export default function Home() {
     </main>
   );
 }
-
