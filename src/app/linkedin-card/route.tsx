@@ -41,7 +41,7 @@ export async function GET() {
           </div>
 
           <div style={{ display: "flex", marginTop: "24px", color: "#64706B", fontSize: "20px", lineHeight: 1.35 }}>
-            Brief the opportunity. Make the decision. Learn from matchday.
+            Fixture in. Recommended plan out. Learn from matchday.
           </div>
 
           <div style={{ display: "flex", marginTop: "auto", color: "#7A827E", fontSize: "14px" }}>
@@ -65,10 +65,10 @@ export async function GET() {
           </div>
 
           {[
-            ["01", "Morning Brief", "What needs attention today?"],
-            ["02", "Opportunity", "Action, evidence and impact"],
-            ["03", "Decision", "Blockers and confidence"],
-            ["04", "Results", "What changed next?"]
+            ["01", "Matches", "Fixtures trigger monitoring automatically"],
+            ["02", "Match plan", "Action draft, evidence and impact"],
+            ["03", "Review", "Signals, blockers and handoff"],
+            ["04", "Learning", "What changes for the next match?"]
           ].map(([num, label, detail]) => (
             <div key={num} style={{ display: "flex", padding: "16px 0", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
               <div style={{ display: "flex", width: "40px", color: "#C7EA3A", fontSize: "11px", fontWeight: 800 }}>{num}</div>
@@ -94,7 +94,7 @@ export async function GET() {
               90-DAY PILOT · 6 FIXTURES
             </div>
             <div style={{ display: "flex", marginTop: "6px", fontSize: "17px", fontWeight: 800 }}>
-              Opportunity → Action → Result → Learning
+              Fixture → Plan → Review → Learning
             </div>
           </div>
         </div>
