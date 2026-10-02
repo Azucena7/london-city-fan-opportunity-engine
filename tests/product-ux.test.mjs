@@ -235,6 +235,17 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 
 
 
+test("match plan exposes a review-ready activation draft", () => {
+  const draft = read("src/components/ActivationDraft.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  for (const label of ["Audience", "Channel", "Message", "Timing", "Owner", "Measurement", "Next approval"]) {
+    assert.match(draft, new RegExp(label));
+  }
+  assert.match(draft, /Review all drafted activations/);
+  assert.match(page, /ActivationDraft/);
+  assert.match(page, /Review the draft, then execute the next actions/);
+});
+
 test("match signals can be excluded without mutating engine data", () => {
   const controls = read("src/components/MatchSignalControls.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");
