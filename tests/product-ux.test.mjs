@@ -345,7 +345,7 @@ test("club product starts from fixtures instead of requiring a plan first", () =
   assert.match(matches, /The engine starts from the fixture calendar automatically/);
   assert.match(matches, /Fixture → signals → AI interpretation → opportunity → draft plan/);
   assert.match(matches, /Monitoring automatically/);
-  assert.match(matches, /\/matches\/\$\{fixture\.id\}/);
+  assert.match(matches, /\/matches\/\$\{currentFixture\.id\}/);
   assert.match(nav, /href: "\/matches"/);
   assert.match(nav, /label: "Learning"/);
 });
