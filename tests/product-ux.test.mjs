@@ -280,6 +280,17 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
   assert.doesNotMatch(page, /href="\/impact"/);
 });
 
+test("matches behaves like a decision inbox with one priority fixture", () => {
+  const page = read("src/app/matches/page.tsx");
+  const css = read("src/app/matches/matches.module.css");
+  assert.match(page, /Current priority/);
+  assert.match(page, /Future home matches/);
+  assert.match(page, /No action required until evidence becomes material/);
+  assert.match(page, /Open match plan/);
+  assert.match(css, /priorityMatch/);
+  assert.match(css, /futureFixture/);
+});
+
 test("match plan prioritises the decision before deep evidence", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
   const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
