@@ -22,7 +22,7 @@ test("commercial stories distinguish proposals, delivery and commercial outcomes
   assert.match(story, /campaign\.approvals\.map/);
   assert.match(story, /validation\?\.caveat\[lang\]/);
   assert.match(story, /A campaign identifier alone does not establish additional sales/);
-  assert.match(story, /\/results\?fixture=\$\{fixture\.id\}/);
+  assert.match(story, /\/app\/learning\?fixture=\$\{fixture\.id\}/);
 });
 
 test("pilot discussion remains local with honest copy and no fabricated contact", async () => {
@@ -41,13 +41,15 @@ test("pilot discussion remains local with honest copy and no fabricated contact"
 });
 
 test("new commercial views are discoverable from the product and case overview", async () => {
-  const [nav, product, pilot, overview] = await Promise.all([
-    source("src/components/ProductJourneyNav.tsx"), source("src/app/page.tsx"),
-    source("src/app/pilot/page.tsx"), source("src/components/LondonCityCase.tsx")
+  const [marketingNav, appNav, product, pilot, overview] = await Promise.all([
+    source("src/components/MarketingNav.tsx"), source("src/components/ProductJourneyNav.tsx"),
+    source("src/app/page.tsx"), source("src/app/pilot/page.tsx"), source("src/components/LondonCityCase.tsx")
   ]);
-  for (const page of [nav, product, pilot]) assert.match(page, /href[=:]\s*"\/for-clubs"/);
-  assert.match(overview, /href="\/london-city\/everton"/);
-  assert.match(overview, /href="\/london-city\/brighton"/);
+  for (const page of [marketingNav, product, pilot]) assert.match(page, /href[=:]\s*"\/for-clubs"/);
+  assert.doesNotMatch(appNav, /href[=:]\s*"\/for-clubs"/);
+  assert.match(appNav, /href="\/"/);
+  assert.match(overview, /href="\/live\/london-city\/everton"/);
+  assert.match(overview, /href="\/live\/london-city\/brighton"/);
 });
 
 test("commercial primary link retains readable text against its dark button", async () => {

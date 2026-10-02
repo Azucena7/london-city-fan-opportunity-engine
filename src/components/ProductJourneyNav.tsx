@@ -6,14 +6,14 @@ type ProductJourneyNavProps = {
 };
 
 const primaryItems = [
-  { key: "matches", label: "Matches", href: "/matches" },
-  { key: "results", label: "Learning", href: "/results" }
+  { key: "matches", label: "Matches", href: "/app/matches" },
+  { key: "results", label: "Learning", href: "/app/learning" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
   return (
     <nav className={styles.nav} aria-label="Fan Growth Engine navigation">
-      <Link className={styles.brand} href="/matches">
+      <Link className={styles.brand} href="/app/matches">
         <span className={styles.brandMark} aria-hidden="true" />
         Fan Growth Engine
       </Link>
@@ -30,8 +30,8 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
         ))}
       </div>
 
-      <Link className={styles.engine} href="/for-clubs">
-        For clubs
+      <Link className={styles.engine} href="/">
+        Product site
       </Link>
     </nav>
   );

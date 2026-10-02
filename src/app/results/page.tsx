@@ -41,7 +41,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
       <nav className={styles.fixturePicker} aria-label="Choose a fixture to review">
         <strong>Review a fixture</strong>
         {calendar.filter((item) => item.homeAway === "home" && (item.status !== "scheduled" || item.id === currentState.next_home_fixture_id)).map((item) => (
-          <Link key={item.id} href={`/results?fixture=${item.id}`} aria-current={item.id === selectedId ? "page" : undefined}>
+          <Link key={item.id} href={`/app/learning?fixture=${item.id}`} aria-current={item.id === selectedId ? "page" : undefined}>
             {item.opponent} · {new Date(item.date + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" })}
           </Link>
         ))}
@@ -186,8 +186,8 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <h2>Learning should send the user back to the next match, not to a report archive.</h2>
         </div>
         <div className={styles.actions}>
-          <Link className={styles.primary} href="/matches">Back to matches</Link>
-          {selectedId ? <Link className={styles.secondary} href={`/matches/${selectedId}`}>Open match record</Link> : null}
+          <Link className={styles.primary} href="/app/matches">Back to matches</Link>
+          {selectedId ? <Link className={styles.secondary} href={`/app/matches/${selectedId}`}>Open match record</Link> : null}
         </div>
       </section>
     </main>

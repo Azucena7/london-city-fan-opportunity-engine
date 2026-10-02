@@ -81,7 +81,7 @@ export default function MatchesPage() {
               <span>Why now</span>
               <strong>{live?.whyNow ?? "Current fixture evidence is still being assessed."}</strong>
             </div>
-            <Link href={`/matches/${currentFixture.id}`}>Open match plan →</Link>
+            <Link href={`/app/matches/${currentFixture.id}`}>Open match plan →</Link>
           </div>
         </section>
       ) : null}

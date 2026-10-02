@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { NavTabs } from "./NavTabs";
+import { MarketingNav } from "./MarketingNav";
 import { useLanguage } from "./LanguageProvider";
+import styles from "./LondonCityLive.module.css";
 import type { CalendarFixture, DecisionValidationData, LocalizedText } from "@/lib/models";
 import type { ProductOpportunity } from "@/lib/productOpportunity";
 
@@ -16,47 +17,133 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
   const { lang } = useLanguage();
   const es = lang === "es";
   const locale = es ? "es-ES" : "en-GB";
-  const date = (value: string) => new Date(value + "T12:00:00Z").toLocaleDateString(locale, { day: "numeric", month: "long", timeZone: "Europe/London" });
+  const date = (value: string) => new Date(value + "T12:00:00Z").toLocaleDateString(locale, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Europe/London"
+  });
   const reference = reviewedAt.slice(0, 10);
-  const recent = calendar.filter((f) => f.status === "final").sort((a,b) => b.date.localeCompare(a.date)).slice(0,3);
-  const next = calendar.filter((f) => f.status === "scheduled" && f.date >= reference).sort((a,b) => a.date.localeCompare(b.date))[0];
-  const currentActions = actions.filter((a) => a.fixtureId === opportunity?.fixtureId);
+  const latestResult = calendar.filter((item) => item.status === "final").sort((a, b) => b.date.localeCompare(a.date))[0];
+  const currentActions = actions.filter((item) => item.fixtureId === opportunity?.fixtureId).slice(0, 3);
   const historical = validation.cases[0];
-  return <main>
-    <NavTabs />
-    <header className="caseOverviewHero">
-      <span className="eyebrow">{es ? "CASO LONDON CITY · PROTOTIPO INDEPENDIENTE" : "LONDON CITY CASE · INDEPENDENT PROTOTYPE"}</span>
-      <h1>{es ? "Qué sabemos y qué toca hacer ahora." : "What we know. What happens next."}</h1>
-      <p>{es ? "Una propuesta comercial apoyada en fuentes públicas. Todavía sin ejecución del club ni impacto comercial medido." : "A commercial proposal supported by public sources. Club execution and measured commercial impact are still pending."}</p>
-      <p className="caseReviewDate">{es ? "Revisión manual de evidencia:" : "Manual evidence review:"} <time dateTime={reviewedAt}>{date(reference)} 2026</time> · {es ? "Horarios de Londres" : "London local times"}</p>
-    </header>
-    <section className="caseOverviewGrid" aria-label={es ? "Estado del caso" : "Case status"}>
-      <article><span>{es ? "ÚLTIMO RESULTADO" : "LATEST RESULT"}</span><h2>{recent[0]?.opponent}</h2><strong>{recent[0]?.result ? `${recent[0].result.for}–${recent[0].result.against}` : "—"}</strong><p>{recent[0] ? date(recent[0].date) : "—"} · {es ? "marcador a favor de London City" : "score from London City's perspective"}</p></article>
-      <article><span>{es ? "SIGUIENTE PARTIDO" : "NEXT MATCH"}</span><h2>{next?.opponent ?? "—"}</h2><strong>{next ? `${date(next.date)} · ${next.kickoff}` : "—"}</strong><p>{next?.venue} · {next?.homeAway === "home" ? (es ? "en casa" : "home") : (es ? "fuera de casa" : "away")}</p></article>
-      <article><span>{es ? "PRÓXIMO EN CASA" : "NEXT HOME MATCH"}</span><h2>{opportunity?.fixture.opponent ?? "—"}</h2><strong>{opportunity ? `${date(opportunity.fixture.date)} · ${opportunity.fixture.kickoff}` : "—"}</strong><p>{opportunity?.fixture.venue}</p></article>
-    </section>
-    <section className="caseOverviewPanel">
-      <span className="eyebrow">{es ? "OPORTUNIDAD ACTUAL · BORRADOR" : "CURRENT OPPORTUNITY · DRAFT"}</span>
-      <h2>{es ? `${opportunity?.fixture.opponent}: una razón para volver a Bromley.` : `${opportunity?.fixture.opponent}: a reason to return to Bromley.`}</h2>
-      <p>{es ? "El club ya anuncia Oktoberfest y una zona familiar sin alcohol. La propuesta del motor es probar mensajes diferenciados para familias y aficionados que repiten, usando la oferta oficial." : "The club is promoting Oktoberfest and an alcohol-free family area. The engine proposes testing separate messages for families and returning supporters using the official offer."}</p>
-      <p><strong>{es ? "Pendiente:" : "Pending:"}</strong> {es ? "responsable del club, audiencia con consentimiento y medición de compras. No hay campaña activada ni presupuesto aprobado." : "club owner, consented audience and purchase measurement. No campaign is activated and no budget is approved."}</p>
-      <div className="caseOverviewLinks"><Link href="/london-city/everton">{es ? "Ver decisión y medición →" : "View decision and measurement →"}</Link><Link href={opportunity ? `/matches/${opportunity.fixtureId}` : "/matches"}>{es ? "Ver plan del partido →" : "View match plan →"}</Link><a href="https://www.londoncitylionesses.com/everton-h-2627" target="_blank" rel="noreferrer">{es ? "Oferta oficial ↗" : "Official offer ↗"}</a></div>
-    </section>
-    <section className="caseOverviewPanel">
-      <h2>{es ? "Tres pasos para avanzar" : "Three steps to move forward"}</h2>
-      <div className="caseOverviewGrid">{currentActions.map((a) => <article key={a.id}><span>{date(a.due)} · {a.area}</span><h3>{a.title[lang]}</h3><p>{es ? "Propuesto · responsable del club pendiente" : "Proposed · club owner pending"}</p></article>)}</div>
-    </section>
-    <section className="caseOverviewPanel">
-      <span className="eyebrow">{es ? "BRIGHTON · CASO HISTÓRICO" : "BRIGHTON · HISTORICAL CASE"}</span>
-      <h2>{es ? "La hipótesis coincidió con un anuncio posterior del club." : "The hypothesis aligned with a later club announcement."}</h2>
-      <p>{historical.observedAction[lang]}</p><p>{historical.caveat[lang]}</p>
-      <p>{es ? "El partido ya pasó. La ejecución del watchalong, su asistencia y su efecto en ventas siguen pendientes de evidencia." : "The fixture has passed. Watchalong delivery, attendance and sales effects still need evidence."}</p>
-      <div className="caseOverviewLinks"><Link href="/london-city/brighton">{es ? "Ver comparación y aprendizaje →" : "View comparison and learning →"}</Link><Link href={`/results?fixture=${historical.fixtureId}`}>{es ? "Consultar resultados de Brighton →" : "Review Brighton results →"}</Link><a href={historical.observedSource.url} target="_blank" rel="noreferrer">{es ? "Anuncio oficial ↗" : "Official announcement ↗"}</a></div>
-    </section>
-    <section className="caseOverviewPanel">
-      <h2>{es ? "Lo que falta para demostrar valor" : "What is missing to prove value"}</h2>
-      <ul><li>{es ? "Asistencia y ventas de partidos posteriores al estreno." : "Attendance and ticket sales after the opener."}</li><li>{es ? "Compradores con consentimiento y repetición entre partidos." : "Consented buyers and repeat attendance across fixtures."}</li><li>{es ? "Campaña vinculada a compra, acceso y costes reales." : "Campaign links to purchase, scans and actual costs."}</li><li>{es ? "Comparación válida para evaluar impacto adicional." : "A credible comparison to assess incremental impact."}</li></ul>
-      <div className="caseOverviewLinks"><Link href="/measurement">{es ? "Ver estado de medición →" : "View measurement status →"}</Link><Link href="/sources">{es ? "Consultar fuentes →" : "Inspect sources →"}</Link><Link href="/today">{es ? "Abrir seguimiento operativo →" : "Open operational tracking →"}</Link></div>
-    </section>
-  </main>;
+
+  return (
+    <main className={styles.shell}>
+      <MarketingNav />
+      <div className={styles.content}>
+        <header className={styles.hero}>
+          <div>
+            <span className={styles.eyebrow}>{es ? "LONDON CITY LIVE · CASO PÚBLICO" : "LONDON CITY LIVE · PUBLIC CASE"}</span>
+            <h1>{es ? "Lo que vio el motor antes del partido. Lo que ocurrió después." : "What the engine saw before the match. What happened next."}</h1>
+            <p>
+              {es
+                ? "Seguimos un contexto real de club con fuentes públicas: qué detecta el motor, qué recomienda y qué evidencia aparece después. La coincidencia no implica que el club haya visto o utilizado este producto."
+                : "We follow a real club context using public sources: what the engine detects, what it recommends and what evidence appears afterwards. Alignment never implies the club saw or used this product."}
+            </p>
+          </div>
+          <aside className={styles.review}>
+            <span>{es ? "Última revisión de evidencia" : "Latest evidence review"}</span>
+            <strong>{date(reference)}</strong>
+            <small>{latestResult ? `${es ? "Último resultado" : "Latest result"} · ${latestResult.opponent} ${latestResult.result ? `${latestResult.result.for}–${latestResult.result.against}` : ""}` : (es ? "Caso independiente · horarios de Londres" : "Independent case · London local times")}</small>
+          </aside>
+        </header>
+
+        <section className={styles.current}>
+          <div className={styles.currentHead}>
+            <div>
+              <span className={styles.eyebrow}>{es ? "AHORA" : "NOW"}</span>
+              <h2>{opportunity ? `London City v ${opportunity.fixture.opponent}` : (es ? "Siguiente caso en preparación" : "Next case in preparation")}</h2>
+            </div>
+            <span>{opportunity ? `${date(opportunity.fixture.date)} · ${opportunity.fixture.kickoff}` : ""}</span>
+          </div>
+
+          <div className={styles.storyGrid}>
+            <article>
+              <span>{es ? "01 · QUÉ VIO EL MOTOR" : "01 · WHAT THE ENGINE SAW"}</span>
+              <h3>{opportunity?.opportunity ?? (es ? "Sin oportunidad activa." : "No active opportunity.")}</h3>
+              <p>{opportunity?.whyNow ?? ""}</p>
+            </article>
+            <article>
+              <span>{es ? "02 · QUÉ RECOMENDÓ" : "02 · WHAT IT RECOMMENDED"}</span>
+              <h3>{opportunity?.recommendedAction ?? (es ? "Sin recomendación activa." : "No active recommendation.")}</h3>
+              <p>{opportunity?.nextAction.label ?? ""}</p>
+              {opportunity ? <Link href={`/app/matches/${opportunity.fixtureId}`}>{es ? "Ver el plan operativo →" : "See the operational plan →"}</Link> : null}
+            </article>
+            <article>
+              <span>{es ? "03 · QUÉ SABEMOS DE VERDAD" : "03 · WHAT WE ACTUALLY KNOW"}</span>
+              <h3>{opportunity?.confidence.label ?? "—"} {es ? "confianza" : "confidence"}</h3>
+              <p>{opportunity?.primaryBlocker ?? (es ? "Sin bloqueador declarado." : "No declared blocker.")}</p>
+            </article>
+          </div>
+        </section>
+
+        <section className={styles.now}>
+          <article>
+            <span className={styles.eyebrow}>{es ? "CASO ACTUAL" : "CURRENT CASE"}</span>
+            <h2>{es ? "Everton: probar una razón para volver a Bromley." : "Everton: test a reason to return to Bromley."}</h2>
+            <p>
+              {es
+                ? "London City ha publicado una propuesta de Oktoberfest y una zona familiar sin alcohol. El motor plantea comprobar si ese contexto puede ayudar a generar repetición, con mensajes diferenciados y sin asumir demanda que todavía no está medida."
+                : "London City has published an Oktoberfest proposition and an alcohol-free family area. The engine proposes testing whether that context can support repeat attendance, with separate messages and without assuming demand that has not been measured."}
+            </p>
+            <div className={styles.actions}>
+              {currentActions.map((item) => (
+                <div key={item.id}>
+                  <span>{date(item.due)} · {item.area}</span>
+                  <strong>{item.title[lang]}</strong>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article>
+            <span className={styles.eyebrow}>{es ? "ESTADO" : "STATUS"}</span>
+            <h2>{opportunity?.decisionState ?? "HOLD"}</h2>
+            <p>
+              {es
+                ? "No hay campaña activada ni presupuesto aprobado desde este prototipo. El caso muestra una recomendación y los gaps de evidencia necesarios para convertirla en una decisión de club."
+                : "No campaign is activated and no budget is approved from this prototype. The case shows a recommendation and the evidence gaps required to turn it into a club decision."}
+            </p>
+            <div className={styles.actions}>
+              <div><Link href="/live/london-city/everton">{es ? "Leer el caso actual →" : "Read the current case →"}</Link></div>
+              <div><a href="https://www.londoncitylionesses.com/everton-h-2627" target="_blank" rel="noreferrer">{es ? "Ver la oferta oficial ↗" : "See the official offer ↗"}</a></div>
+            </div>
+          </article>
+        </section>
+
+        <section className={styles.history}>
+          <div className={styles.historyHead}>
+            <span className={styles.eyebrow}>{es ? "ARCHIVO DEL CASO" : "CASE JOURNAL"}</span>
+            <h2>{es ? "Hipótesis anteriores y lo que apareció después." : "Earlier hypotheses and what appeared afterwards."}</h2>
+            <p>
+              {es
+                ? "Registramos tanto coincidencias como diferencias. El objetivo es comprobar si el motor detecta oportunidades relevantes antes de acciones públicas comparables."
+                : "We record both alignment and divergence. The goal is to test whether the engine surfaces relevant opportunities before comparable public actions."}
+            </p>
+          </div>
+
+          <article className={styles.historyCard}>
+            <time dateTime={historical.hypothesisGeneratedAt}>{date(historical.hypothesisGeneratedAt.slice(0, 10))}</time>
+            <div>
+              <h3>{historical.title[lang]}</h3>
+              <p>{historical.hypothesis[lang]}</p>
+            </div>
+            <Link href="/live/london-city/brighton">{es ? "Ver caso →" : "Open case →"}</Link>
+          </article>
+
+          <div className={styles.principle}>
+            <span>{es ? "REGLA DE EVIDENCIA" : "EVIDENCE RULE"}</span>
+            <strong>{validation.principle[lang]}</strong>
+            <p>{historical.caveat[lang]}</p>
+          </div>
+        </section>
+
+        <footer className={styles.footer}>
+          <Link href="/">{es ? "← Volver al producto" : "← Back to product"}</Link>
+          <Link href="/for-clubs">{es ? "Ver propuesta para clubes →" : "See the club proposition →"}</Link>
+        </footer>
+      </div>
+    </main>
+  );
 }

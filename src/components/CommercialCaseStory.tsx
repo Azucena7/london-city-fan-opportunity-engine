@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { NavTabs } from "./NavTabs";
+import { MarketingNav } from "./MarketingNav";
 import { useLanguage } from "./LanguageProvider";
 import type { CalendarFixture, CampaignPlan, DecisionValidationData } from "@/lib/models";
 
@@ -24,9 +24,9 @@ export function CommercialCaseStory({ kind, fixture, campaign, validation }: {
     [es ? "Resultado comercial" : "Commercial outcome", es ? "Medir asistencia, ventas y repetición." : "Measure attendance, sales and repeat visits.", es ? "No hay resultados comerciales conectados al prototipo." : "No commercial outcomes are connected to the prototype.", es ? "Sin medir" : "Not measured"]
   ];
   return <main>
-    <NavTabs />
+    <MarketingNav />
     <header className="caseOverviewHero">
-      <Link href="/london-city">← {es ? "Resumen London City" : "London City overview"}</Link>
+      <Link href="/live/london-city">← {es ? "Resumen London City" : "London City overview"}</Link>
       <p className="eyebrow">{everton ? (es ? "DECISIÓN PROPUESTA · NO ACTIVADA" : "PROPOSED DECISION · NOT ACTIVATED") : (es ? "APRENDIZAJE HISTÓRICO · IMPACTO SIN MEDIR" : "HISTORICAL LEARNING · IMPACT NOT MEASURED")}</p>
       <h1>{everton ? (es ? "Everton: probar una razón para volver." : "Everton: test a reason to return.") : (es ? "Brighton: qué coincidió y qué falta demostrar." : "Brighton: what aligned and what remains unproven.")}</h1>
       <p>{date} · {fixture.kickoff} · {fixture.venue} · {es ? "hora local de Londres" : "London local time"}</p>
@@ -70,8 +70,8 @@ export function CommercialCaseStory({ kind, fixture, campaign, validation }: {
         <p><strong>{validation?.caveat[lang]}</strong></p>
       </section>
       <section className="caseOverviewPanel"><h2>{es ? "Comparación sin exagerar la evidencia" : "Compare without overstating the evidence"}</h2><div className="commercialTableWrap"><table className="commercialTable"><caption>{es ? "Propuesta del motor frente al anuncio público del club" : "Engine proposal compared with the public club announcement"}</caption><thead><tr><th>{es ? "Dimensión" : "Dimension"}</th><th>{es ? "Motor" : "Engine"}</th><th>{es ? "Club / evidencia" : "Club / evidence"}</th><th>{es ? "Lectura" : "Interpretation"}</th></tr></thead><tbody>{comparison.map((row) => <tr key={row[0]}><th scope="row">{row[0]}</th>{row.slice(1).map((value,index) => <td key={index}>{value}</td>)}</tr>)}</tbody></table></div></section>
-      <section className="caseOverviewPanel"><h2>{es ? "Qué aprendemos para el siguiente partido" : "What we learn for the next fixture"}</h2><p>{es ? "La coincidencia apoya la relevancia de detectar ocasiones que prolongan la jornada. No valida todavía su rentabilidad. Para Everton, la hipótesis debe definir audiencia, oferta, aprobación y medición antes de activarse." : "Alignment supports the relevance of finding occasions that extend matchday. It does not establish profitability. For Everton, the hypothesis must specify audience, offer, approval and measurement before activation."}</p><p>{es ? "Brighton queda cerrado como ventana de activación previa, pero abierto como revisión de resultados pendientes. No marcamos el watchalong como realizado sin evidencia." : "Brighton's pre-match activation window is closed, but the outcome review remains open. Watchalong delivery is not marked complete without evidence."}</p><Link href={`/results?fixture=${fixture.id}`}>{es ? "Ver resultados disponibles y datos pendientes →" : "View available results and missing evidence →"}</Link></section>
+      <section className="caseOverviewPanel"><h2>{es ? "Qué aprendemos para el siguiente partido" : "What we learn for the next fixture"}</h2><p>{es ? "La coincidencia apoya la relevancia de detectar ocasiones que prolongan la jornada. No valida todavía su rentabilidad. Para Everton, la hipótesis debe definir audiencia, oferta, aprobación y medición antes de activarse." : "Alignment supports the relevance of finding occasions that extend matchday. It does not establish profitability. For Everton, the hypothesis must specify audience, offer, approval and measurement before activation."}</p><p>{es ? "Brighton queda cerrado como ventana de activación previa, pero abierto como revisión de resultados pendientes. No marcamos el watchalong como realizado sin evidencia." : "Brighton's pre-match activation window is closed, but the outcome review remains open. Watchalong delivery is not marked complete without evidence."}</p><Link href={`/app/learning?fixture=${fixture.id}`}>{es ? "Ver resultados disponibles y datos pendientes →" : "View available results and missing evidence →"}</Link></section>
     </>}
-    <section className="caseOverviewPanel"><h2>{es ? "Del ejemplo a un piloto de club" : "From example to a club pilot"}</h2><p>{es ? "London City demuestra el método, no una relación comercial ni resultados causales. Un piloto autorizado permitiría contrastarlo con datos agregados reales." : "London City demonstrates the method, not a commercial relationship or causal outcomes. An authorised pilot would test it with real aggregate club evidence."}</p><div className="caseOverviewLinks"><Link href="/for-clubs">{es ? "Ver propuesta para clubes →" : "View the club proposition →"}</Link><Link href={everton ? "/london-city/brighton" : "/london-city/everton"}>{everton ? (es ? "Comparar con Brighton →" : "Compare with Brighton →") : (es ? "Ver la decisión de Everton →" : "View the Everton decision →")}</Link></div></section>
+    <section className="caseOverviewPanel"><h2>{es ? "Del ejemplo a un piloto de club" : "From example to a club pilot"}</h2><p>{es ? "London City demuestra el método, no una relación comercial ni resultados causales. Un piloto autorizado permitiría contrastarlo con datos agregados reales." : "London City demonstrates the method, not a commercial relationship or causal outcomes. An authorised pilot would test it with real aggregate club evidence."}</p><div className="caseOverviewLinks"><Link href="/for-clubs">{es ? "Ver propuesta para clubes →" : "View the club proposition →"}</Link><Link href={everton ? "/live/london-city/brighton" : "/live/london-city/everton"}>{everton ? (es ? "Comparar con Brighton →" : "Compare with Brighton →") : (es ? "Ver la decisión de Everton →" : "View the Everton decision →")}</Link></div></section>
   </main>;
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { MarketingNav } from "@/components/MarketingNav";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <main className="productShell">
-      <ProductJourneyNav active="product" />
+      <MarketingNav />
 
       <section className="productHero">
         <div>
@@ -25,7 +25,7 @@ export default function Home() {
           </p>
 
           <div className="productHeroActions">
-            <Link className="productButton" href="/matches">Open club workspace</Link>
+            <Link className="productButton" href="/live/london-city">Explore London City live</Link>
             <Link className="productButtonGhost" href="/for-clubs">See the 90-day pilot</Link>
           </div>
 
@@ -69,7 +69,7 @@ export default function Home() {
             <strong>{live?.nextAction.label ?? "Review the live evidence and define the next action."}</strong>
           </div>
 
-          <Link className="fixtureLink" href="/matches">Open upcoming matches →</Link>
+          <Link className="fixtureLink" href="/live/london-city">Follow the live case →</Link>
         </aside>
       </section>
 
@@ -104,15 +104,15 @@ export default function Home() {
       <section className="productProductView">
         <div>
           <span className="productSectionKicker">Inside the product</span>
-          <h2>Two places for the club to work.</h2>
+          <h2>See the product. Then see it working live.</h2>
           <p>
-            Matches holds the live plan. Learning closes the loop after matchday. Signals, evidence and scenarios remain available inside the decision instead of becoming separate destinations.
+            The club app is the operational product. London City Live is the public case study showing how the engine reads fixtures, signals and outcomes in a real environment.
           </p>
         </div>
 
         <div className="productViewFlow" aria-label="Simplified club product">
-          <Link href="/matches"><span>01</span><strong>Matches</strong><small>Upcoming fixtures, recommended focus and what to do next.</small></Link>
-          <Link href="/results"><span>02</span><strong>Learning</strong><small>What happened, what changed and what the engine should carry forward.</small></Link>
+          <Link href="/app/matches"><span>01</span><strong>Club app</strong><small>Matches, recommended plans, review and handoff for club teams.</small></Link>
+          <Link href="/live/london-city"><span>02</span><strong>London City live</strong><small>See the engine applied publicly to a real club context over time.</small></Link>
         </div>
       </section>
 
@@ -129,7 +129,7 @@ export default function Home() {
 
       <footer className="productFooter">
         <span>Fan Growth Engine · Independent product prototype</span>
-        <span>London City is the live demonstration environment.</span>
+        <span>London City Live is the public real-time case study.</span>
       </footer>
     </main>
   );

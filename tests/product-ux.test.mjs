@@ -280,6 +280,35 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
   assert.doesNotMatch(page, /href="\/impact"/);
 });
 
+test("London City Live reads like an editorial case journal", () => {
+  const overview = read("src/components/LondonCityCase.tsx");
+  const detail = read("src/components/CommercialCaseStory.tsx");
+  assert.match(overview, /What the engine saw before the match/);
+  assert.match(overview, /WHAT THE ENGINE SAW/);
+  assert.match(overview, /WHAT IT RECOMMENDED/);
+  assert.match(overview, /CASE JOURNAL/);
+  assert.match(overview, /\/live\/london-city\/brighton/);
+  assert.match(detail, /MarketingNav/);
+  assert.match(detail, /\/live\/london-city/);
+});
+
+test("marketing app and live case have distinct canonical surfaces", () => {
+  const home = read("src/app/page.tsx");
+  const marketingNav = read("src/components/MarketingNav.tsx");
+  const appNav = read("src/components/ProductJourneyNav.tsx");
+  const config = read("next.config.mjs");
+  const liveCase = read("src/components/LondonCityCase.tsx");
+  assert.match(home, /MarketingNav/);
+  assert.match(home, /Explore London City live/);
+  assert.match(home, /href="\/live\/london-city"/);
+  assert.match(marketingNav, /Open club app/);
+  assert.match(marketingNav, /\/app\/matches/);
+  assert.match(appNav, /Product site/);
+  assert.match(appNav, /\/app\/learning/);
+  assert.match(config, /source: "\/london-city", destination: "\/live\/london-city"/);
+  assert.match(liveCase, /MarketingNav/);
+});
+
 test("Learning keeps deep interpretation secondary to observed outcomes", () => {
   const page = read("src/app/results/page.tsx");
   const css = read("src/app/results/results.module.css");
@@ -318,7 +347,7 @@ test("legacy club routes redirect into the fixture-first workspace", () => {
   for (const route of ["/brief", "/opportunity", "/decision-room", "/impact"]) {
     assert.match(config, new RegExp(route.replace("/", "\\/")));
   }
-  assert.match(config, /destination: "\/matches"/);
+  assert.match(config, /destination: "\/app\/matches"/);
   assert.match(config, /permanent: true/);
 });
 
@@ -333,9 +362,9 @@ test("commercial surfaces route users into the simplified club journey", () => {
     assert.doesNotMatch(source, /href="\/opportunity"/);
     assert.doesNotMatch(source, /href="\/decision-room"/);
   }
-  assert.match(pilot, /\/matches/);
-  assert.match(demo, /\/matches\/\$\{live\.fixtureId\}/);
-  assert.match(caseOverview, /\/matches\/\$\{opportunity\.fixtureId\}/);
+  assert.match(pilot, /\/app\/matches/);
+  assert.match(demo, /\/app\/matches\/\$\{live\.fixtureId\}/);
+  assert.match(caseOverview, /\/app\/matches\/\$\{opportunity\.fixtureId\}/);
 });
 
 test("club product starts from fixtures instead of requiring a plan first", () => {
@@ -345,8 +374,8 @@ test("club product starts from fixtures instead of requiring a plan first", () =
   assert.match(matches, /The engine starts from the fixture calendar automatically/);
   assert.match(matches, /Fixture → signals → AI interpretation → opportunity → draft plan/);
   assert.match(matches, /Monitoring automatically/);
-  assert.match(matches, /\/matches\/\$\{currentFixture\.id\}/);
-  assert.match(nav, /href: "\/matches"/);
+  assert.match(matches, /\/app\/matches\/\$\{currentFixture\.id\}/);
+  assert.match(nav, /href: "\/app\/matches"/);
   assert.match(nav, /label: "Learning"/);
 });
 
@@ -356,7 +385,7 @@ test("product and analyst branding are intentionally separated", () => {
   assert.match(productNav, /Fan Growth Engine/);
   assert.match(productNav, /Matches/);
   assert.match(productNav, /Learning/);
-  assert.match(productNav, /For clubs/);
+  assert.match(productNav, /Product site/);
   assert.doesNotMatch(productNav, /Morning brief/);
   assert.doesNotMatch(productNav, /Decision Room/);
   assert.match(analystNav, /LONDON CITY \/ CASE/);
