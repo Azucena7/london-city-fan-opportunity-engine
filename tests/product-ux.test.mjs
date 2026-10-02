@@ -280,6 +280,18 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
   assert.doesNotMatch(page, /href="\/impact"/);
 });
 
+test("London City Live reads like an editorial case journal", () => {
+  const overview = read("src/components/LondonCityCase.tsx");
+  const detail = read("src/components/CommercialCaseStory.tsx");
+  assert.match(overview, /What the engine saw before the match/);
+  assert.match(overview, /WHAT THE ENGINE SAW/);
+  assert.match(overview, /WHAT IT RECOMMENDED/);
+  assert.match(overview, /CASE JOURNAL/);
+  assert.match(overview, /\/live\/london-city\/brighton/);
+  assert.match(detail, /MarketingNav/);
+  assert.match(detail, /\/live\/london-city/);
+});
+
 test("marketing app and live case have distinct canonical surfaces", () => {
   const home = read("src/app/page.tsx");
   const marketingNav = read("src/components/MarketingNav.tsx");
