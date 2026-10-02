@@ -33,6 +33,7 @@ create table if not exists public.credit_ledger (
   club_id uuid not null references public.clubs(id) on delete cascade,
   fixture_id text,
   item_id text,
+  event_key text unique,
   event_type text not null check (event_type in ('commit','release','consume','adjust')),
   credits integer not null check (credits > 0),
   note text,
