@@ -14,6 +14,8 @@ type CampaignItem = {
   baseCredits: number;
   recommended: boolean;
   supportsVariants?: boolean;
+  channels: string[];
+  impact: string;
 };
 
 const tierCredits: Record<Tier, number> = {
@@ -29,16 +31,16 @@ const creditPacks = [
 ] as const;
 
 const catalogue: CampaignItem[] = [
-  { id: "crm-email", label: "CRM email", category: "creation", detail: "Subject line, body copy, CTA and one approval-ready version.", baseCredits: 5, recommended: true, supportsVariants: true },
-  { id: "vertical-video", label: "Vertical video", category: "creation", detail: "Concept, script, shot list and short-form edit direction.", baseCredits: 10, recommended: true, supportsVariants: true },
-  { id: "social-carousel", label: "Social carousel", category: "creation", detail: "Six-frame carousel with copy and visual direction.", baseCredits: 6, recommended: true, supportsVariants: true },
-  { id: "story-set", label: "Story set", category: "adaptation", detail: "Adapt the core campaign into a three-story sequence.", baseCredits: 4, recommended: false, supportsVariants: true },
-  { id: "landing-copy", label: "Landing page copy", category: "creation", detail: "Campaign page structure, copy and conversion CTA.", baseCredits: 7, recommended: false },
-  { id: "channel-adaptation", label: "Channel adaptation pack", category: "adaptation", detail: "Resize/rewrite the core idea for one additional social channel.", baseCredits: 3, recommended: true, supportsVariants: true },
-  { id: "crm-flow", label: "CRM follow-up flow", category: "automation", detail: "Initial message, reminder logic, suppression and exclusion rules.", baseCredits: 9, recommended: true },
-  { id: "organic-scheduling", label: "Organic scheduling", category: "deployment", detail: "Prepare and schedule approved organic assets for one channel.", baseCredits: 3, recommended: true },
-  { id: "paid-social", label: "Paid social launch pack", category: "deployment", detail: "Audience, placements, creative variants and launch configuration.", baseCredits: 8, recommended: true, supportsVariants: true },
-  { id: "sms-push", label: "SMS / push deployment", category: "deployment", detail: "Short-form message, timing and approved send configuration.", baseCredits: 4, recommended: false }
+  { id: "crm-email", label: "CRM email", category: "creation", detail: "Subject line, body copy, CTA and one approval-ready version.", baseCredits: 5, recommended: true, supportsVariants: true, channels: ["CRM"], impact: "Removes the direct reactivation route to known supporters." },
+  { id: "vertical-video", label: "Vertical video", category: "creation", detail: "Concept, script, shot list and short-form edit direction.", baseCredits: 10, recommended: true, supportsVariants: true, channels: ["Instagram", "TikTok"], impact: "Reduces short-form reach and makes the social campaign less distinctive." },
+  { id: "social-carousel", label: "Social carousel", category: "creation", detail: "Six-frame carousel with copy and visual direction.", baseCredits: 6, recommended: true, supportsVariants: true, channels: ["Instagram", "Facebook"], impact: "Removes a low-friction explainer format for the campaign proposition." },
+  { id: "story-set", label: "Story set", category: "adaptation", detail: "Adapt the core campaign into a three-story sequence.", baseCredits: 4, recommended: false, supportsVariants: true, channels: ["Instagram"], impact: "Reduces repeat social exposure close to matchday." },
+  { id: "landing-copy", label: "Landing page copy", category: "creation", detail: "Campaign page structure, copy and conversion CTA.", baseCredits: 7, recommended: false, channels: ["Web"], impact: "Removes a dedicated conversion destination for the campaign." },
+  { id: "channel-adaptation", label: "Channel adaptation pack", category: "adaptation", detail: "Resize/rewrite the core idea for one additional social channel.", baseCredits: 3, recommended: true, supportsVariants: true, channels: ["Social"], impact: "Narrows the number of channels carrying the core idea." },
+  { id: "crm-flow", label: "CRM follow-up flow", category: "automation", detail: "Initial message, reminder logic, suppression and exclusion rules.", baseCredits: 9, recommended: true, channels: ["CRM"], impact: "Removes automated follow-up and leaves the campaign as a one-shot send." },
+  { id: "organic-scheduling", label: "Organic scheduling", category: "deployment", detail: "Prepare and schedule approved organic assets for one channel.", baseCredits: 3, recommended: true, channels: ["Instagram", "Facebook"], impact: "Assets remain prepared but are not scheduled for organic publishing." },
+  { id: "paid-social", label: "Paid social launch pack", category: "deployment", detail: "Audience, placements, creative variants and launch configuration.", baseCredits: 8, recommended: true, supportsVariants: true, channels: ["Instagram", "Facebook"], impact: "Removes paid distribution and limits the campaign to owned reach." },
+  { id: "sms-push", label: "SMS / push deployment", category: "deployment", detail: "Short-form message, timing and approved send configuration.", baseCredits: 4, recommended: false, channels: ["SMS", "Push"], impact: "Removes the highest-urgency reminder channel close to kickoff." }
 ];
 
 const categoryLabels: Record<CreditCategory, string> = {
@@ -84,6 +86,15 @@ export function CampaignCreditBuilder({
 
   const total = pricedItems.reduce((sum, item) => sum + item.totalCredits, 0);
   const remaining = available - total;
+  const selectedCount = pricedItems.length;
+  const activeCategories = (["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).filter((category) => categoryTotals[category] > 0);
+  const campaignCoverage = Math.round((activeCategories.length / 4) * 100);
+  const allRecommended = catalogue.filter((item) => item.recommended);
+  const missingRecommended = allRecommended.filter((item) => !selected.has(item.id));
+  const activeChannels = Array.from(new Set(pricedItems.flatMap((item) => item.channels)));
+  const recommendedChannels = Array.from(new Set(allRecommended.flatMap((item) => item.channels)));
+  const channelCoverage = recommendedChannels.length ? Math.round((activeChannels.filter((channel) => recommendedChannels.includes(channel)).length / recommendedChannels.length) * 100) : 0;
+  const launchQuality = missingRecommended.length === 0 ? "Full recommended scope" : missingRecommended.length <= 2 ? "Reduced scope" : "Thin campaign";
   const explorer = tier === "explorer";
   const canLaunch = !explorer && remaining >= 0 && unresolvedGates === 0;
 
@@ -140,6 +151,45 @@ export function CampaignCreditBuilder({
         </div>
       ) : (
         <>
+          <div className={styles.campaignCanvas}>
+            <div>
+              <span>Proposed campaign</span>
+              <h3>{objective}</h3>
+              <p>{proposition}</p>
+            </div>
+            <div className={styles.campaignStats}>
+              <article><span>Audience</span><strong>{audience}</strong></article>
+              <article><span>Selected items</span><strong>{selectedCount}</strong></article>
+              <article><span>Workflow coverage</span><strong>{campaignCoverage}%</strong></article>
+              <article><span>Estimated cost</span><strong>{total} cr</strong></article>
+            </div>
+            <div className={styles.campaignHealth}>
+              <article><span>Channel coverage</span><strong>{channelCoverage}%</strong><small>{activeChannels.length ? activeChannels.join(" · ") : "No channels selected"}</small></article>
+              <article><span>Campaign quality</span><strong>{launchQuality}</strong><small>{missingRecommended.length ? missingRecommended.length + " recommended item" + (missingRecommended.length === 1 ? "" : "s") + " removed" : "All recommended items included"}</small></article>
+            </div>
+
+            <div className={styles.channelStrip} aria-label="Campaign channels">
+              {recommendedChannels.map((channel) => {
+                const active = activeChannels.includes(channel);
+                return (
+                  <span key={channel} className={active ? styles.channelActive : styles.channelInactive}>
+                    <b>{active ? "✓" : "–"}</b>{channel}
+                  </span>
+                );
+              })}
+            </div>
+
+            <div className={styles.campaignFlow} aria-label="Campaign workflow coverage">
+              {(["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).map((category, index) => (
+                <div key={category} className={categoryTotals[category] > 0 ? styles.flowActive : styles.flowInactive}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{categoryLabels[category]}</strong>
+                  <small>{categoryTotals[category] > 0 ? categoryTotals[category] + " credits" : "Not included"}</small>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className={styles.creditExplainer}>
             {(["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).map((category) => (
               <article key={category}>
@@ -179,7 +229,8 @@ export function CampaignCreditBuilder({
                           {item.recommended ? <span>Recommended</span> : null}
                         </div>
                         <p>{item.detail}</p>
-                        <small>{categoryLabels[item.category]} · base {item.baseCredits} cr</small>
+                        <small>{categoryLabels[item.category]} · {item.channels.join(" · ")} · base {item.baseCredits} cr</small>
+                      {item.recommended && !active ? <p className={styles.impactWarning}>If removed: {item.impact}</p> : null}
                       </div>
                     </label>
 
