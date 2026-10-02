@@ -125,7 +125,7 @@ export async function POST(request: Request) {
       type,
       creditsCommitted: draftCredits[type],
       model,
-      persistence: "session-only"
+      persistence: "device-workspace"
     });
   } catch {
     return NextResponse.json({ error: "The generated draft could not be parsed safely." }, { status: 502 });
