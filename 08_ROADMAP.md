@@ -1,110 +1,158 @@
 # Roadmap
 
-## V1 - Public prototype
+## Product direction
 
-Goal: LinkedIn-ready interactive storytelling.
+Initial go-to-market: **women’s football**.
 
-Deliverables:
-- map
-- top territories
-- weekly decision card
-- calendar view
-- competitor view
-- ticketing comparison
-- methodology
+Technology architecture: **football-wide opportunity engine**.
 
-Data can be static JSON.
+Working product name: **AVELA**.
 
-## V1.1 - Live public signals
+Primary category: **Growth Intelligence for Women’s Football**.
 
-Add:
-- current weather
-- published attendance
-- schedule changes
-- public event conflicts
+Core loop:
 
-## V1.2 - Demand history and post-match learning
+**Fixture → Context → Signals → Opportunity → Recommended Play → Activation → Measurement → Learning**
 
-Add:
-- auditable 2025/26 home attendance ledger
-- average, median, venue split and record context
-- current-season comparison and retention question
-- WSL and London-market attendance benchmark by matchweek
-- sample-aware trend states: first observation, unchanged sample and comparable movement
-- attendance
-- scans
-- sales by product
-- postcode distribution if available
-- first-time / repeat
+## Phase A - Positioning and product shell
 
-Recalibrate Fixture Appeal and Territory weights.
+- Reframe the commercial site around women’s-football growth intelligence.
+- Keep London City Live as the public proof environment.
+- Lead with “Every fixture is a growth opportunity.”
+- Make fixture-first navigation the default.
+- Preserve the existing evidence and trust-state architecture.
 
-## V1.3 - Audience reach
+## Phase B - Women’s-football signal layer
 
-Add:
-- public Eleven TV by Alexia and London City channel metrics
-- TV / streaming distribution and reported audience
-- fixture-level reach, engagement and content annotations
-- authenticated YouTube geography, watch time and subscriber conversion when channel-owner access is available
-- Google Trends snapshots for brand, Alexia and ticket-intent searches in GB and Spain
-- fixture annotations for signing, sponsorship, broadcast and matchday events
-- append-only audience snapshots with first-observation and comparable-change states
-- audience impact timeline separating player, partner, broadcast and fixture effects
-- Brighton measurement-readiness scorecard
-- campaign and fixture keys linking reach to ticketing, scans and repeat
+Add explicit signal families for:
 
-Keep stadium attendance, digital views and television audience as separate measures.
+- national-team windows and return-to-club momentum;
+- player search / social momentum;
+- women’s-football competition overlap;
+- men’s-football fixture overlap;
+- family opportunity;
+- girls’ grassroots / academy density;
+- cultural crossover where evidence supports relevance;
+- international player / opponent demand;
+- sponsor-fit moments;
+- big-stadium transfer potential.
 
-## V1.4 - Signal-to-campaign engine
+Requirements:
 
-Add:
-- versioned `CampaignPlan` contract joined through canonical fixture and signal IDs
-- reusable local acquisition, next-chapter, player-reach and matchday-service playbooks
-- fixture-level audience, proposition, message, asset and channel briefs
-- approval gates separating `draft`, `ready`, `live` and `closed`
-- UTM and campaign keys compatible with the CRM/ticketing contract
-- directional channel allocation that never authorises spend
-- public, instrumented and access-dependent measurement states
-- Brighton as the first end-to-end campaign rehearsal
+- every recommendation must expose the signals used;
+- signal state must remain sourced / inferred / assumed / access-dependent;
+- users should be able to exclude a non-mandatory signal and recalculate where practical.
 
-Campaign drafts must remain proposals until an authorised club owner approves the offer,
-assets, destination URLs and execution budget.
+## Phase C - Opportunity Radar
 
-## V1.5 - Commercial and technical case studies
+- rank upcoming fixtures by opportunity potential, confidence and urgency;
+- show newly changed signals since the previous observation;
+- surface material confidence movements;
+- allow “no meaningful incremental opportunity” as a valid result;
+- create lightweight alert-ready events for important changes.
 
-Add:
-- a commercial narrative connecting the business problem to product value
-- the complete public proof base: territory, attendance, audience and campaign readiness
-- a separate technical walkthrough of the six build phases
-- logical architecture, source cadence, trust states and automated safeguards
-- public links to the CRM/ticketing and CampaignPlan contracts
-- an explicit boundary between value available from public sources and outcomes requiring club access
+## Phase D - Opportunity Brief
 
-## V2 - Club-grade engine
+For each priority fixture, produce:
 
-Requires private club data:
-- CRM
-- ticketing transactions
-- scans
-- campaign source
-- realised price
-- consent-safe postcode/geography
+- opportunity;
+- why now;
+- evidence;
+- audience;
+- expected commercial objective;
+- confidence;
+- recommended play;
+- key risks;
+- what would change the decision;
+- signals used.
 
-Integration readiness already available without club data:
-- versioned one-ticket-per-row contract
-- validated Excel import template
-- synthetic Brighton calculation rehearsal
-- explicit `ready`, `demo` and `requires-access` states
-- automated fixture-level post-match scorecard
-- independent T+1, T+7, T+30, T+60 and T+90 closure states
+## Phase E - Activation builder
 
-Outputs:
-- propensity by territory
-- recommended budget by fixture
-- product recommendation
-- predicted attendance range
+Extend the existing CampaignPlan contract with:
 
-## Future adjacent project
+- recommended channels;
+- content / asset list;
+- human owners;
+- timing;
+- estimated platform credits;
+- editable production scope;
+- directional media / activation budget;
+- UTM and campaign keys;
+- approval gates.
 
-Sponsor Finder should remain a separate product.
-It can consume outputs from the Fan Opportunity Engine, especially local business categories, distribution networks and activation evidence.
+The product may propose. It must not autonomously authorise spend or publish without club approval.
+
+## Phase F - Women’s-football commercial modules
+
+### Attendance intelligence
+- demand-gap detection;
+- venue / big-stadium scenarios;
+- family and first-time audience opportunities;
+- repeat-attendance opportunities;
+- inventory and timing context.
+
+### Sponsor opportunity
+- match / audience / player / cultural context;
+- sponsor-category fit;
+- activation idea;
+- evidence and measurement suggestion.
+
+Sponsor prospecting, lead generation and sales-pipeline management remain a separate adjacent product.
+
+## Phase G - Measurement and Club Opportunity Memory
+
+For each fixture preserve:
+
+- what AVELA predicted;
+- what the club planned;
+- what was executed;
+- what was observed;
+- which assumptions were wrong;
+- which signals were useful;
+- which audience / channel / offer patterns repeated.
+
+Add T+1, T+7, T+30, T+60 and T+90 closure states where data access supports them.
+
+## Phase H - Club-grade integrations
+
+Private club data:
+
+- CRM;
+- ticketing transactions;
+- scans;
+- realised price;
+- campaign source;
+- consent-safe geography;
+- sponsorship inventory / category metadata where authorised.
+
+Integration principle:
+
+**Keep the existing stack. Add the intelligence layer.**
+
+## Phase I - League intelligence
+
+Potential league product:
+
+- cross-club fixture intelligence;
+- league-level audience trends;
+- growth opportunity benchmarking;
+- fixture / venue scenario support;
+- sponsor opportunity patterns;
+- competition-level learning.
+
+Any cross-club benchmarking must respect data rights, privacy and contractual boundaries.
+
+## Live public proof programme
+
+Continue London City Live with:
+
+- published attendance;
+- schedule changes;
+- weather;
+- public event / transport conflicts;
+- public audience and search signals;
+- fixture-level annotations;
+- pre-match recommendation snapshots;
+- post-match evidence comparison.
+
+The public case should always preserve what was known before the event and avoid rewriting the recommendation after the result.
