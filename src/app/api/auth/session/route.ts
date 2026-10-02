@@ -12,7 +12,7 @@ export async function GET() {
   }
 
   const membershipResponse = await supabaseRequest(
-    `/rest/v1/club_members?user_id=eq.${encodeURIComponent(user.id)}&select=club_id,role`
+    `/rest/v1/club_memberships?user_id=eq.${encodeURIComponent(user.id)}&active=eq.true&select=club_id,role`
   );
   const memberships = membershipResponse.ok
     ? await membershipResponse.json() as Array<{ club_id: string; role: string }>
