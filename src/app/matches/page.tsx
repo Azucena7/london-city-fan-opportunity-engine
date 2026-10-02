@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import { calendar, currentState, liveSignals } from "@/lib/data";
+import { calendar, currentState } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
+import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import styles from "./matches.module.css";
 
 export const metadata: Metadata = {
-  title: "Matches · Fan Growth Engine",
-  description: "Upcoming home fixtures and the next recommended action for each match."
+  title: "Opportunity Radar · AVELA",
+  description: "Upcoming home fixtures ranked by opportunity potential, confidence and urgency."
 };
 
 function formatDate(value: string) {
@@ -19,15 +20,21 @@ function formatDate(value: string) {
 }
 
 export default function MatchesPage() {
-  const live = getCurrentProductOpportunity();
-  const currentFixtureId = currentState.next_home_fixture_id;
   const today = currentState.updated_at.slice(0, 10);
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a, b) => a.date.localeCompare(b.date))
-    .slice(0, 6);
-  const currentFixture = upcoming.find((fixture) => fixture.id === currentFixtureId) ?? upcoming[0] ?? null;
-  const futureFixtures = upcoming.filter((fixture) => fixture.id !== currentFixture?.id);
+    .slice(0, 8);
+
+  const radar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id));
+  const priority = radar[0] ?? null;
+  const currentFixture = priority
+    ? upcoming.find((fixture) => fixture.id === priority.fixtureId) ?? null
+    : null;
+  const live = priority ? getCurrentProductOpportunity(priority.fixtureId) : null;
+  const radarWithoutCurrent = priority
+    ? radar.filter((item) => item.fixtureId !== priority.fixtureId)
+    : radar;
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -35,11 +42,11 @@ export default function MatchesPage() {
 
       <header className={styles.header}>
         <div>
-          <span className={styles.eyebrow}>Club workspace</span>
-          <h1>Upcoming home matches</h1>
+          <span className={styles.eyebrow}>AVELA · Opportunity Radar</span>
+          <h1>Where should the club act next?</h1>
           <p>
-            The engine starts from the fixture calendar automatically. Open the next match to see the recommended plan;
-            future fixtures stay in monitoring until the evidence becomes actionable.
+            Upcoming home fixtures are continuously re-prioritised using opportunity potential, evidence confidence
+            and time to act. The ranking is a decision aid, not an attendance forecast.
           </p>
         </div>
         <div className={styles.engineState}>
@@ -48,11 +55,18 @@ export default function MatchesPage() {
         </div>
       </header>
 
+      <section className={styles.radarSummary} aria-label="Opportunity radar summary">
+        <div><span>Fixtures watched</span><strong>{radar.length}</strong></div>
+        <div><span>Act now</span><strong>{radar.filter((item) => item.radarState === "Act now").length}</strong></div>
+        <div><span>Needs review</span><strong>{radar.filter((item) => item.radarState === "Review").length}</strong></div>
+        <div><span>Monitoring</span><strong>{radar.filter((item) => item.radarState === "Monitor").length}</strong></div>
+      </section>
+
       {currentFixture ? (
         <section className={styles.priorityMatch} aria-label="Current priority match">
           <div className={styles.priorityTop}>
             <div>
-              <span className={styles.eyebrow}>Current priority</span>
+              <span className={styles.eyebrow}>Current engine priority</span>
               <div className={styles.fixtureTopline}>
                 <span>{live?.timingLabel ?? "Next home match"}</span>
                 <span>{live?.decisionState ?? "HOLD"} · {live?.confidence.label ?? "—"} confidence</span>
@@ -70,7 +84,7 @@ export default function MatchesPage() {
               <p>{currentFixture.competition} · {currentFixture.venue}</p>
             </div>
             <div className={styles.priorityDecision}>
-              <span>Recommended focus</span>
+              <span>Growth opportunity</span>
               <strong>{live?.opportunity ?? "Review current evidence."}</strong>
               <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
             </div>
@@ -81,44 +95,67 @@ export default function MatchesPage() {
               <span>Why now</span>
               <strong>{live?.whyNow ?? "Current fixture evidence is still being assessed."}</strong>
             </div>
-            <Link href={`/app/matches/${currentFixture.id}`}>Open match plan →</Link>
+            <Link href={`/app/matches/${currentFixture.id}`}>Open opportunity brief →</Link>
           </div>
         </section>
       ) : null}
 
-      <section className={styles.monitoringSection} aria-label="Future fixtures under monitoring">
+      <section className={styles.monitoringSection} aria-label="Upcoming fixture opportunity radar">
         <div className={styles.monitoringHead}>
           <div>
-            <span className={styles.eyebrow}>Monitoring</span>
-            <h2>Future home matches</h2>
+            <span className={styles.eyebrow}>Next opportunities</span>
+            <h2>Ranked by what deserves attention now</h2>
           </div>
-          <span>No action required until evidence becomes material.</span>
+          <span>Potential, evidence and urgency are kept separate inside each fixture workspace.</span>
         </div>
 
-        <div className={styles.futureList}>
-          {futureFixtures.map((fixture) => {
-            const signalCount = liveSignals.filter((signal) => signal.fixtureId === fixture.id).length;
-            return (
-              <article className={styles.futureFixture} key={fixture.id}>
-                <div>
-                  <span>{formatDate(fixture.date)} · {fixture.kickoff ?? "TBC"}</span>
-                  <h3>{fixture.opponent}</h3>
-                  <p>{fixture.competition} · {fixture.venue}</p>
-                </div>
-                <div className={styles.futureState}>
-                  <span>{signalCount} sourced signals</span>
-                  <strong>Monitoring automatically</strong>
-                </div>
-              </article>
-            );
-          })}
+        <div className={styles.radarList}>
+          {radarWithoutCurrent.map((item, index) => (
+            <article className={styles.radarFixture} key={item.fixtureId}>
+              <div className={styles.radarRank}>#{index + 2}</div>
+              <div className={styles.radarMatch}>
+                <span>{formatDate(item.date)} · {item.kickoff ?? "TBC"} · {item.competition}</span>
+                <h3>{item.opponent}</h3>
+                <p>{item.venue}</p>
+              </div>
+              <div className={styles.radarOpportunity}>
+                <span>{item.opportunityLabel}</span>
+                <strong>{item.opportunity}</strong>
+                {item.lens.length ? (
+                  <div className={styles.signalLenses}>
+                    {item.lens.map((lens) => <b key={lens}>{lens}</b>)}
+                  </div>
+                ) : (
+                  <small>No women’s-football-specific public signal classified yet.</small>
+                )}
+              </div>
+              <div className={styles.radarEvidence}>
+                <span className={styles[`state${item.radarState.replace(" ", "")}`]}>{item.radarState}</span>
+                <strong>{item.confidence} confidence</strong>
+                <small>{item.materialSignalCount} material · {item.signalCount} total signals</small>
+                <Link href={`/app/matches/${item.fixtureId}`}>Review →</Link>
+              </div>
+            </article>
+          ))}
         </div>
+      </section>
+
+      <section className={styles.womenLens}>
+        <div>
+          <span className={styles.eyebrow}>Women’s-football lens</span>
+          <h2>Specialisation without inventing evidence.</h2>
+        </div>
+        <p>
+          AVELA classifies sourced signals into women’s-football-relevant lenses such as player momentum,
+          family/grassroots, cultural crossover, fixture overlap, attendance demand and partner fit. A lens appears
+          only when an existing signal supports it.
+        </p>
       </section>
 
       <section className={styles.principle}>
         <span>Product principle</span>
         <strong>The club does not create a plan first.</strong>
-        <p>Fixture → signals → AI interpretation → opportunity → draft plan. The user reviews, adjusts and approves.</p>
+        <p>Fixture → signals → opportunity → recommended play → human review → activation → learning.</p>
       </section>
     </main>
   );
