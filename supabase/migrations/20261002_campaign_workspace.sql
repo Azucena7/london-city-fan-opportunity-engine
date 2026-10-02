@@ -188,3 +188,99 @@ with check (
 );
 
 notify pgrst, 'reload schema';
+
+
+-- Secure pilot access requests. Authentication alone never grants club access.
+create table if not exists public.club_access_requests (
+  id uuid primary key default gen_random_uuid(),
+  club_id uuid not null references public.clubs(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  email text not null,
+  requested_role text not null default 'viewer' check (requested_role in ('viewer','marketing','ticketing','business','communications','compliance','direction')),
+  note text,
+  status text not null default 'pending' check (status in ('pending','approved','rejected','cancelled')),
+  reviewed_by uuid references auth.users(id),
+  reviewed_at timestamptz,
+  created_at timestamptz not null default now(),
+  unique (club_id, user_id)
+);
+
+alter table public.club_access_requests enable row level security;
+revoke all on public.club_access_requests from anon;
+grant select, insert, update on public.club_access_requests to authenticated;
+
+drop policy if exists "authenticated users can discover clubs" on public.clubs;
+create policy "authenticated users can discover clubs"
+on public.clubs for select
+to authenticated
+using (coalesce(((select auth.jwt())->>'is_anonymous')::boolean, false) is false);
+
+drop policy if exists "users can read own access requests" on public.club_access_requests;
+create policy "users can read own access requests"
+on public.club_access_requests for select
+to authenticated
+using (user_id = (select auth.uid()) or public.club_has_permission(club_id, 'campaigns', 'administer'));
+
+drop policy if exists "users can request club access" on public.club_access_requests;
+create policy "users can request club access"
+on public.club_access_requests for insert
+to authenticated
+with check (user_id = (select auth.uid()) and status = 'pending' and reviewed_by is null and reviewed_at is null);
+
+drop policy if exists "club admins can review access requests" on public.club_access_requests;
+create policy "club admins can review access requests"
+on public.club_access_requests for update
+to authenticated
+using (public.club_has_permission(club_id, 'campaigns', 'administer'))
+with check (public.club_has_permission(club_id, 'campaigns', 'administer'));
+
+drop policy if exists "club admins can read memberships" on public.club_memberships;
+create policy "club admins can read memberships"
+on public.club_memberships for select
+to authenticated
+using (user_id = (select auth.uid()) or public.club_has_permission(club_id, 'campaigns', 'administer'));
+
+drop policy if exists "club admins can insert memberships" on public.club_memberships;
+create policy "club admins can insert memberships"
+on public.club_memberships for insert
+to authenticated
+with check (public.club_has_permission(club_id, 'campaigns', 'administer'));
+
+drop policy if exists "club admins can update memberships" on public.club_memberships;
+create policy "club admins can update memberships"
+on public.club_memberships for update
+to authenticated
+using (public.club_has_permission(club_id, 'campaigns', 'administer'))
+with check (public.club_has_permission(club_id, 'campaigns', 'administer'));
+
+create or replace function public.approve_club_access_request(request_id uuid, membership_role text)
+returns public.club_access_requests
+language plpgsql
+security invoker
+set search_path = ''
+as $$
+declare req public.club_access_requests;
+begin
+  if membership_role not in ('viewer','marketing','ticketing','business','communications','compliance','direction','admin') then
+    raise exception 'Unsupported membership role';
+  end if;
+  select * into req from public.club_access_requests where id = request_id and status = 'pending' for update;
+  if req.id is null then raise exception 'Pending access request not found'; end if;
+  if not public.club_has_permission(req.club_id, 'campaigns', 'administer') then raise exception 'Not authorised to approve this club'; end if;
+  insert into public.club_memberships (club_id, user_id, role, active)
+  values (req.club_id, req.user_id, membership_role, true)
+  on conflict (club_id, user_id) do update set role = excluded.role, active = true;
+  update public.club_access_requests
+  set status='approved', reviewed_by=(select auth.uid()), reviewed_at=now(), requested_role=membership_role
+  where id=req.id returning * into req;
+  return req;
+end;
+$$;
+
+revoke all on function public.approve_club_access_request(uuid, text) from public;
+grant execute on function public.approve_club_access_request(uuid, text) to authenticated;
+
+create index if not exists club_access_requests_club_status_idx on public.club_access_requests(club_id, status, created_at desc);
+create index if not exists club_access_requests_user_idx on public.club_access_requests(user_id, created_at desc);
+
+notify pgrst, 'reload schema';
