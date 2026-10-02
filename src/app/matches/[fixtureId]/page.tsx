@@ -89,6 +89,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         audience={campaign?.audiences[0]?.label.en ?? live.audience.label}
         proposition={campaign?.proposition.en ?? live.recommendedAction}
         unresolvedGates={approvals.length}
+        fixtureId={fixture.id}
       />
       </div>
 
