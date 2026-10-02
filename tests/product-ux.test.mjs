@@ -284,6 +284,24 @@ test("club campaign workspace supports authenticated multi-user persistence with
   assert.match(migration, /auth\.uid\(\)/);
 });
 
+test("club app exposes an auditable Credit Center from the persistent ledger", () => {
+  const center = read("src/components/CreditCenter.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const page = read("src/app/app/credits/page.tsx");
+
+  assert.match(center, /Credit Center/);
+  assert.match(center, /Committed/);
+  assert.match(center, /Outstanding/);
+  assert.match(center, /Consumed/);
+  assert.match(center, /Released/);
+  assert.match(center, /\/api\/credit-ledger/);
+  assert.match(center, /\/api\/auth\/session/);
+  assert.match(center, /No credit events yet/);
+  assert.match(nav, /href: "\/app\/credits"/);
+  assert.match(nav, /label: "Credits"/);
+  assert.match(page, /CreditCenter/);
+});
+
 test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const route = read("src/app/api/campaign-draft/route.ts");
