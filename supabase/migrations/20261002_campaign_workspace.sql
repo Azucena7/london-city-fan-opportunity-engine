@@ -1,21 +1,12 @@
--- Pilot-ready multi-user persistence for club campaign workspaces.
--- Apply in Supabase before enabling remote workspace persistence.
+-- Campaign workspace persistence integrated with the existing club membership/permission model.
+-- The project already provides:
+--   public.clubs
+--   public.club_memberships
+--   public.club_role_permissions
+--   public.club_member_permissions
+--   public.club_has_permission(club, area, action)
 
 create extension if not exists pgcrypto;
-
-create table if not exists public.clubs (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  created_at timestamptz not null default now()
-);
-
-create table if not exists public.club_members (
-  club_id uuid not null references public.clubs(id) on delete cascade,
-  user_id uuid not null references auth.users(id) on delete cascade,
-  role text not null default 'editor' check (role in ('viewer','editor','approver','admin')),
-  created_at timestamptz not null default now(),
-  primary key (club_id, user_id)
-);
 
 create table if not exists public.campaign_workspaces (
   id uuid primary key default gen_random_uuid(),
@@ -41,77 +32,73 @@ create table if not exists public.credit_ledger (
   created_at timestamptz not null default now()
 );
 
-alter table public.clubs enable row level security;
-alter table public.club_members enable row level security;
 alter table public.campaign_workspaces enable row level security;
 alter table public.credit_ledger enable row level security;
 
-create policy "members can read clubs"
-on public.clubs for select
-using (exists (
-  select 1 from public.club_members m
-  where m.club_id = clubs.id and m.user_id = auth.uid()
-));
+revoke all on public.campaign_workspaces from anon;
+revoke all on public.credit_ledger from anon;
 
-create policy "members can read memberships"
-on public.club_members for select
-using (user_id = auth.uid() or exists (
-  select 1 from public.club_members m
-  where m.club_id = club_members.club_id
-    and m.user_id = auth.uid()
-    and m.role = 'admin'
-));
+grant select, insert, update on public.campaign_workspaces to authenticated;
+grant select, insert on public.credit_ledger to authenticated;
 
-create policy "members can read workspaces"
+drop policy if exists "campaign viewers can read workspaces" on public.campaign_workspaces;
+create policy "campaign viewers can read workspaces"
 on public.campaign_workspaces for select
-using (exists (
-  select 1 from public.club_members m
-  where m.club_id = campaign_workspaces.club_id and m.user_id = auth.uid()
-));
+to authenticated
+using (public.club_has_permission(club_id, 'campaigns', 'view'));
 
-create policy "editors can insert workspaces"
+drop policy if exists "campaign editors can insert workspaces" on public.campaign_workspaces;
+create policy "campaign editors can insert workspaces"
 on public.campaign_workspaces for insert
+to authenticated
 with check (
-  updated_by = auth.uid()
-  and exists (
-    select 1 from public.club_members m
-    where m.club_id = campaign_workspaces.club_id
-      and m.user_id = auth.uid()
-      and m.role in ('editor','approver','admin')
+  updated_by = (select auth.uid())
+  and (
+    (status <> 'approved' and public.club_has_permission(club_id, 'campaigns', 'edit'))
+    or
+    (status = 'approved' and public.club_has_permission(club_id, 'campaigns', 'approve'))
   )
 );
 
-create policy "editors can update workspaces"
+drop policy if exists "campaign editors can update workspaces" on public.campaign_workspaces;
+create policy "campaign editors can update workspaces"
 on public.campaign_workspaces for update
-using (exists (
-  select 1 from public.club_members m
-  where m.club_id = campaign_workspaces.club_id
-    and m.user_id = auth.uid()
-    and m.role in ('editor','approver','admin')
-))
-with check (updated_by = auth.uid());
-
-create policy "members can read credit ledger"
-on public.credit_ledger for select
-using (exists (
-  select 1 from public.club_members m
-  where m.club_id = credit_ledger.club_id and m.user_id = auth.uid()
-));
-
-create policy "editors can add credit events"
-on public.credit_ledger for insert
+to authenticated
+using (public.club_has_permission(club_id, 'campaigns', 'edit'))
 with check (
-  created_by = auth.uid()
-  and exists (
-    select 1 from public.club_members m
-    where m.club_id = credit_ledger.club_id
-      and m.user_id = auth.uid()
-      and m.role in ('editor','approver','admin')
+  updated_by = (select auth.uid())
+  and (
+    (status <> 'approved' and public.club_has_permission(club_id, 'campaigns', 'edit'))
+    or
+    (status = 'approved' and public.club_has_permission(club_id, 'campaigns', 'approve'))
   )
+);
+
+drop policy if exists "campaign viewers can read credit ledger" on public.credit_ledger;
+create policy "campaign viewers can read credit ledger"
+on public.credit_ledger for select
+to authenticated
+using (public.club_has_permission(club_id, 'campaigns', 'view'));
+
+drop policy if exists "campaign editors can add credit events" on public.credit_ledger;
+create policy "campaign editors can add credit events"
+on public.credit_ledger for insert
+to authenticated
+with check (
+  created_by = (select auth.uid())
+  and public.club_has_permission(club_id, 'campaigns', 'edit')
 );
 
 create index if not exists campaign_workspaces_club_fixture_idx
 on public.campaign_workspaces(club_id, fixture_id);
 
+create index if not exists campaign_workspaces_updated_by_idx
+on public.campaign_workspaces(updated_by);
+
 create index if not exists credit_ledger_club_created_idx
 on public.credit_ledger(club_id, created_at desc);
+
+create index if not exists credit_ledger_created_by_idx
+on public.credit_ledger(created_by);
+
+notify pgrst, 'reload schema';
