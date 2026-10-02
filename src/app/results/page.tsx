@@ -181,8 +181,8 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <h2>Results should send the user back to the next opportunity, not to a report archive.</h2>
         </div>
         <div className={styles.actions}>
-          <Link className={styles.primary} href="/brief">Back to Morning Brief</Link>
-          <Link className={styles.secondary} href="/today">Inspect measurement layer</Link>
+          <Link className={styles.primary} href="/matches">Back to matches</Link>
+          {selectedId ? <Link className={styles.secondary} href={`/matches/${selectedId}`}>Open match record</Link> : null}
         </div>
       </section>
     </main>
