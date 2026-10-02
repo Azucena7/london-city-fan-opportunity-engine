@@ -244,7 +244,15 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /Club · 60 credits/);
   assert.match(builder, /Club Pro · 160 credits/);
   assert.match(builder, /Estimated campaign budget/);
-  assert.match(builder, /additional credits/);
+  assert.match(builder, /Creation/);
+  assert.match(builder, /Adaptation/);
+  assert.match(builder, /Automation/);
+  assert.match(builder, /Deployment/);
+  assert.match(builder, /Extra variants cost less/);
+  assert.match(builder, /\+25 credits/);
+  assert.match(builder, /\+75 credits/);
+  assert.match(builder, /\+200 credits/);
+  assert.match(builder, /additional credits|additional credit|add a credit pack/i);
   assert.match(builder, /Launch campaign/);
   assert.match(builder, /does not publish content, send CRM or spend media yet/);
   assert.match(builder, /specific content\/channel proposal is locked/);
