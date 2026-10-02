@@ -88,7 +88,7 @@ export default function PilotPage() {
           <div><span>Audience</span><strong>{live?.audience.value !== null && live?.audience.value !== undefined ? live.audience.value.toLocaleString("en-GB") + " measured" : "Requires club data"}</strong></div>
           <div><span>Decision</span><strong>{live?.decisionState ?? "HOLD"}</strong></div>
         </div>
-        <p className={styles.note}>This example reads the same current product state as Morning Brief and Decision Room. Commercial impact remains unfilled until the required audience and conversion evidence exists.</p>
+        <p className={styles.note}>This example reads the same current match-plan state used by the club workspace. Commercial impact remains unfilled until the required audience and conversion evidence exists.</p>
       </section>
 
       <section className={styles.section}>
@@ -114,8 +114,8 @@ export default function PilotPage() {
         </div>
         <div className={styles.ctaActions}>
           <Link className={styles.button} href="/for-clubs">Prepare a club pilot discussion</Link>
-          <Link className={styles.button} href="/opportunity">Explore the live opportunity</Link>
-          <Link className={styles.secondary} href="/decision-room">See the Decision Room</Link>
+          <Link className={styles.button} href="/matches">Explore the live club workspace</Link>
+          <Link className={styles.secondary} href={live ? `/matches/${live.fixtureId}` : "/matches"}>Open the current match plan</Link>
           <Link className={styles.secondary} href="/pilot/operating-pack">Open the Pilot Operating Pack</Link>
           <Link className={styles.secondary} href="/pilot/rehearsal">See the synthetic data rehearsal</Link>
         </div>
