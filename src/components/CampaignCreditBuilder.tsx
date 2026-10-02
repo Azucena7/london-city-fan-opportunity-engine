@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./CampaignCreditBuilder.module.css";
 
 type Tier = "explorer" | "club" | "club-pro";
@@ -56,12 +56,14 @@ export function CampaignCreditBuilder({
   objective,
   audience,
   proposition,
-  unresolvedGates
+  unresolvedGates,
+  fixtureId
 }: {
   objective: string;
   audience: string;
   proposition: string;
   unresolvedGates: number;
+  fixtureId: string;
 }) {
   const [tier, setTier] = useState<Tier>("club");
   const [selected, setSelected] = useState(() => new Set(catalogue.filter((item) => item.recommended).map((item) => item.id)));
@@ -70,6 +72,50 @@ export function CampaignCreditBuilder({
   const [drafts, setDrafts] = useState<Partial<Record<GeneratableItem, GeneratedDraft>>>({});
   const [generating, setGenerating] = useState<GeneratableItem | null>(null);
   const [generationError, setGenerationError] = useState<string | null>(null);
+  const [workspaceStatus, setWorkspaceStatus] = useState<"draft" | "review-ready">("draft");
+  const [workspaceLoaded, setWorkspaceLoaded] = useState(false);
+
+  const storageKey = `fan-growth-engine:campaign-workspace:${fixtureId}`;
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(storageKey);
+      if (stored) {
+        const workspace = JSON.parse(stored) as {
+          selected?: string[];
+          variants?: Record<string, number>;
+          extraCredits?: number;
+          drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
+          workspaceStatus?: "draft" | "review-ready";
+        };
+
+        if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
+        if (workspace.variants) setVariants(workspace.variants);
+        if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
+        if (workspace.drafts) setDrafts(workspace.drafts);
+        if (workspace.workspaceStatus === "review-ready") setWorkspaceStatus("review-ready");
+      }
+    } catch {
+      // A corrupt browser workspace should never block the campaign builder.
+    } finally {
+      setWorkspaceLoaded(true);
+    }
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (!workspaceLoaded) return;
+
+    window.localStorage.setItem(storageKey, JSON.stringify({
+      version: 1,
+      fixtureId,
+      selected: Array.from(selected),
+      variants,
+      extraCredits,
+      drafts,
+      workspaceStatus,
+      savedAt: new Date().toISOString()
+    }));
+  }, [drafts, extraCredits, fixtureId, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
 
   const includedCredits = tierCredits[tier];
   const available = includedCredits + extraCredits;
@@ -351,9 +397,20 @@ export function CampaignCreditBuilder({
               <div>
                 <span>Generative production</span>
                 <h3>Approval-ready drafts from the campaign strategy.</h3>
-                <p>Generation commits the creation credits shown on the selected item. Drafts are session-only until campaign persistence is added.</p>
+                <p>Generation commits the creation credits shown on the selected item. Campaign choices and generated drafts are automatically saved on this device for this fixture.</p>
               </div>
-              <strong>{committedCredits} credits committed</strong>
+              <div className={styles.workspaceState}>
+                <span>Workspace</span>
+                <strong>{workspaceLoaded ? "Saved on this device" : "Loading workspace…"}</strong>
+                <small>{workspaceStatus === "review-ready" ? "Marked ready for review" : "Draft in progress"}</small>
+              </div>
+            </div>
+
+            <div className={styles.productionActions}>
+              <span><strong>{committedCredits}</strong> credits committed to generated content</span>
+              <button type="button" onClick={() => setWorkspaceStatus((current) => current === "draft" ? "review-ready" : "draft")}>
+                {workspaceStatus === "review-ready" ? "Return to draft" : "Mark ready for review"}
+              </button>
             </div>
 
             {generationError ? <p className={styles.generationError}>{generationError}</p> : null}
