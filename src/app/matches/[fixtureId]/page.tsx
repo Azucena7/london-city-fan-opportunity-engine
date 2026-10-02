@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
+import { MatchSignalControls } from "@/components/MatchSignalControls";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -103,17 +104,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <span>Evidence is visible without becoming another workspace.</span>
         </div>
 
-        <div className={styles.signalList}>
-          {live.liveSignals.map((signal) => (
-            <article key={signal.id}>
-              <div>
-                <span>{signal.materiality} · {signal.state}</span>
-                <h3>{signal.title}</h3>
-              </div>
-              <a href={signal.sourceUrl} target="_blank" rel="noreferrer">{signal.sourceName} ↗</a>
-            </article>
-          ))}
-        </div>
+        <MatchSignalControls
+          signals={live.liveSignals}
+          baseRecommendation={live.recommendedAction}
+        />
 
         <details className={styles.evidenceDetails}>
           <summary>Inspect evidence, assumptions and missing inputs</summary>
