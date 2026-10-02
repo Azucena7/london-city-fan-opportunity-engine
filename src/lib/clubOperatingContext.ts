@@ -9,6 +9,8 @@ export type ClubOperatingContext = {
   fixtureSource: string;
   approvalOwner?: string;
   approvalRequired?: boolean;
+  brandTone?: string;
+  brandMustAvoid?: string;
 };
 
 export async function getCurrentClubOperatingContext(): Promise<ClubOperatingContext | null> {
@@ -31,7 +33,7 @@ export async function getCurrentClubOperatingContext(): Promise<ClubOperatingCon
       `/rest/v1/clubs?id=eq.${encodeURIComponent(membership.club_id)}&select=id,name&limit=1`
     ),
     supabaseRequest(
-      `/rest/v1/club_setup?club_id=eq.${encodeURIComponent(membership.club_id)}&select=fixture_source,connected_channels,priority_objectives,approval_rules&limit=1`
+      `/rest/v1/club_setup?club_id=eq.${encodeURIComponent(membership.club_id)}&select=fixture_source,connected_channels,priority_objectives,approval_rules,brand_rules&limit=1`
     )
   ]);
 
@@ -47,6 +49,7 @@ export async function getCurrentClubOperatingContext(): Promise<ClubOperatingCon
         connected_channels?: string[];
         priority_objectives?: string[];
         approval_rules?: { owner?: string; required?: boolean };
+        brand_rules?: { tone?: string; mustAvoid?: string };
       }>
     : [];
   const setup = setups[0];
@@ -59,6 +62,8 @@ export async function getCurrentClubOperatingContext(): Promise<ClubOperatingCon
     priorityObjectives: setup?.priority_objectives ?? [],
     fixtureSource: setup?.fixture_source ?? "manual",
     approvalOwner: setup?.approval_rules?.owner,
-    approvalRequired: setup?.approval_rules?.required
+    approvalRequired: setup?.approval_rules?.required,
+    brandTone: setup?.brand_rules?.tone,
+    brandMustAvoid: setup?.brand_rules?.mustAvoid
   };
 }
