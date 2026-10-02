@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     clubId?: string;
     fixtureId?: string;
     itemId?: string;
+    eventKey?: string;
     eventType?: "commit" | "release" | "consume" | "adjust";
     credits?: number;
     note?: string;
@@ -38,13 +39,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Valid clubId, eventType and credits are required." }, { status: 400 });
   }
 
-  const response = await supabaseRequest("/rest/v1/credit_ledger", {
+  const response = await supabaseRequest("/rest/v1/credit_ledger?on_conflict=event_key", {
     method: "POST",
-    headers: { Prefer: "return=representation" },
+    headers: { Prefer: "resolution=ignore-duplicates,return=representation" },
     body: JSON.stringify({
       club_id: clubId,
       fixture_id: typeof body?.fixtureId === "string" ? body.fixtureId.slice(0, 160) : null,
       item_id: typeof body?.itemId === "string" ? body.itemId.slice(0, 160) : null,
+      event_key: typeof body?.eventKey === "string" ? body.eventKey.slice(0, 240) : null,
       event_type: eventType,
       credits,
       note: typeof body?.note === "string" ? body.note.slice(0, 500) : null,
