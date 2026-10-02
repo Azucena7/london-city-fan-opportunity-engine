@@ -100,8 +100,6 @@ export function CampaignCreditBuilder({
           extraCredits?: number;
           drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
           workspaceStatus?: "draft" | "review-ready";
-      reservedCampaignCredits?: number;
-      launchHandoffReady?: boolean;
           reservedCampaignCredits?: number;
           launchHandoffReady?: boolean;
         };
@@ -110,8 +108,6 @@ export function CampaignCreditBuilder({
         if (workspace.variants) setVariants(workspace.variants);
         if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
         if (workspace.drafts) setDrafts(workspace.drafts);
-    if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
-    if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
         if (workspace.workspaceStatus === "review-ready") setWorkspaceStatus("review-ready");
         if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
         if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
