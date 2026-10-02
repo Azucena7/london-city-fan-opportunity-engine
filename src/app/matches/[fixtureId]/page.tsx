@@ -11,6 +11,8 @@ import { CampaignCreditBuilder } from "@/components/CampaignCreditBuilder";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
+import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
+import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import styles from "./match-plan.module.css";
 
 export const metadata: Metadata = {
@@ -27,9 +29,30 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
   if (!live) notFound();
 
   const campaign = campaignPlans.campaigns.find((item) => item.fixtureId === fixtureId) ?? null;
+  const clubContext = await getCurrentClubOperatingContext();
+  const clubFit = buildOpportunityRadar([fixtureId], clubContext)[0]?.clubFit ?? null;
   const defaults = getCurrentImpactDefaults(fixtureId);
   const actions = campaign?.schedule.filter((item) => item.state !== "complete").slice(0, 3) ?? [];
   const approvals = campaign?.approvals.filter((item) => item.state !== "ready") ?? [];
+  const activationChannels = campaign?.activations.map((item) => item.channel) ?? [];
+  const connectedActivationRoutes = clubContext
+    ? Array.from(new Set(clubContext.connectedChannels.filter((channel) => {
+        const text = activationChannels.join(" ");
+        if (channel === "CRM" || channel === "Email") return /crm|email/i.test(text);
+        if (channel === "Instagram" || channel === "Facebook" || channel === "TikTok") return /social|organic|video/i.test(text);
+        if (channel === "Web") return /web|ticket|owned/i.test(text);
+        if (channel === "Push" || channel === "SMS") return /push|sms|reminder/i.test(text);
+        return false;
+      })))
+    : [];
+  const handoffActivations = campaign?.activations.filter((activation) => {
+    if (!clubContext) return false;
+    const channel = activation.channel;
+    if (/crm|email/i.test(channel)) return !clubContext.connectedChannels.some((item) => item === "CRM" || item === "Email");
+    if (/social|organic|video/i.test(channel)) return !clubContext.connectedChannels.some((item) => ["Instagram", "Facebook", "TikTok"].includes(item));
+    if (/web|ticket|owned/i.test(channel)) return !clubContext.connectedChannels.includes("Web");
+    return true;
+  }) ?? [];
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -121,6 +144,56 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           </ul>
         </details>
       </section>
+
+      {clubContext ? (
+        <section className={styles.clubExecutionContext} aria-label="Club execution context">
+          <div className={styles.clubExecutionIntro}>
+            <span className={styles.eyebrow}>Club context · advisory layer</span>
+            <h2>How this play fits the club&apos;s real operating setup.</h2>
+            <p>
+              Evidence still determines the opportunity. Club setup only explains strategic fit, executable routes,
+              approval defaults and brand constraints before the campaign is built.
+            </p>
+          </div>
+
+          <div className={styles.clubExecutionGrid}>
+            <article>
+              <span>Strategic fit</span>
+              <strong>{clubFit?.summary ?? "No saved objective match detected."}</strong>
+              <small>Does not change rank or confidence.</small>
+            </article>
+            <article>
+              <span>Connected execution</span>
+              <strong>{connectedActivationRoutes.length ? connectedActivationRoutes.join(" · ") : "No connected route inferred"}</strong>
+              <small>{handoffActivations.length} activation{handoffActivations.length === 1 ? "" : "s"} still require handoff.</small>
+            </article>
+            <article>
+              <span>Approval default</span>
+              <strong>{clubContext.approvalRequired === false ? "Flexible club default" : "Approval required"}</strong>
+              <small>{clubContext.approvalOwner ? `Default owner · ${clubContext.approvalOwner}` : "Fixture-specific approval gates still apply."}</small>
+            </article>
+            <article>
+              <span>Brand guardrail</span>
+              <strong>{clubContext.brandTone ?? "No saved tone rule"}</strong>
+              <small>{clubContext.brandMustAvoid ?? "No saved must-avoid rule"}</small>
+            </article>
+          </div>
+
+          {handoffActivations.length ? (
+            <div className={styles.handoffList}>
+              <span>Manual / connector handoff</span>
+              <ul>{handoffActivations.map((activation) => <li key={activation.id}>{activation.title.en} · {activation.channel}</li>)}</ul>
+            </div>
+          ) : null}
+        </section>
+      ) : (
+        <section className={styles.clubExecutionEmpty}>
+          <span>Evidence-only brief</span>
+          <strong>No authenticated club setup is available for this workspace.</strong>
+          <p>The recommended play is still evidence-backed, but execution routes, approval defaults and brand rules cannot be personalised yet.</p>
+          <Link href="/app/setup">Configure club setup →</Link>
+        </section>
+      )}
 
       <div id="campaign">
       <CampaignCreditBuilder
