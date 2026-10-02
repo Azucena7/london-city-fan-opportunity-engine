@@ -8,30 +8,30 @@ London City Lionesses is currently used as the live demonstration environment.
 
 **Turn fan data into the next best action for every fixture.**
 
-The commercial product layer is designed around a simple operating loop:
+The club-facing product is designed around one simple operating loop:
 
-1. **Discover** — identify the highest-value fan growth opportunity.
-2. **Act** — turn it into an audience, action, owner, timing and measurement plan.
-3. **Decide** — make evidence, assumptions, blockers and decision conditions explicit.
-4. **Measure** — capture the post-match result.
-5. **Learn** — feed the outcome into the next fixture decision.
+1. **Match detected** — the fixture calendar starts the work automatically.
+2. **Plan generated** — signals are interpreted into one recommended activation draft.
+3. **Review** — the club can inspect evidence, adjust match-level signals and resolve blockers.
+4. **Handoff** — an approved draft passes to the club's execution workflow.
+5. **Learn** — post-match evidence improves the next fixture recommendation.
 
 ## Product routes
 
+### Club-facing flow
 - **/** — commercial product home.
-- **/brief** — fixture-timed Morning Brief.
-- **/opportunity** — current Opportunity workspace.
-- **/demo** — guided London City product walkthrough.
-- **/decision-room** — evidence, assumptions, blockers and what would change the decision.
-- **/results** — post-match Results & Learning loop.
-- **/impact** — transparent ticket and revenue scenario model.
+- **/matches** — upcoming home fixtures and automatic monitoring.
+- **/matches/[fixtureId]** — single match plan: recommendation, activation draft, signals, evidence, impact and handoff review.
+- **/results** — Learning: measured post-match evidence and what changes next.
+
+### Commercial / implementation
 - **/pilot** — 90-day / 6-fixture Fan Growth Pilot proposition.
 - **/pilot/operating-pack** — onboarding, data trust, roles and measurement design.
 - **/pilot/rehearsal** — synthetic end-to-end rehearsal of the privacy-safe club-data path.
 - **/cases** — product use cases.
-- **/today** — the full London City intelligence engine.
+- **/demo** — guided product story.
 
-The deeper London City routes remain available for fixture, territory, signal, source, experience and operational detail.
+Legacy decision surfaces remain available for compatibility and analyst inspection, but are not part of the primary club journey. The deeper London City routes remain available for fixture, territory, signal, source, experience and operational detail.
 
 ## Commercial entry product
 
