@@ -272,7 +272,7 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
   assert.match(page, /Recommended plan/);
   assert.match(page, /Review the draft, then execute the next actions/);
-  assert.match(page, /signals are shaping the recommendation/);
+  assert.match(page, /signals · \{live\.confidence\.label\} confidence/);
   assert.match(page, /Inspect evidence, assumptions and missing inputs/);
   assert.match(page, /Open editable impact scenario/);
   assert.match(page, /Open measurement & learning/);
