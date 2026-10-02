@@ -7,6 +7,7 @@ type ProductJourneyNavProps = {
 
 const primaryItems = [
   { key: "matches", label: "Matches", href: "/app/matches" },
+  { key: "demo", label: "Guided demo", href: "/app/demo" },
   { key: "results", label: "Learning", href: "/app/learning" }
 ] as const;
 

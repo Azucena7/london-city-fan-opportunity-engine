@@ -235,6 +235,23 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 
 
 
+test("club app includes a guided demo that uses the real fixture workflow", () => {
+  const demo = read("src/components/DemoTour.tsx");
+  const page = read("src/app/app/demo/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(demo, /3-minute guided demo/);
+  assert.match(demo, /Fixture detected/);
+  assert.match(demo, /Engine recommends/);
+  assert.match(demo, /Campaign built/);
+  assert.match(demo, /Review & launch/);
+  assert.match(demo, /same live product data/);
+  assert.match(demo, /Open campaign builder/);
+  assert.match(page, /getCurrentProductOpportunity/);
+  assert.match(page, /campaignPlans/);
+  assert.match(nav, /Guided demo/);
+  assert.match(nav, /\/app\/demo/);
+});
+
 test("match plan includes campaign proposal credit budgeting and gated launch", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");
