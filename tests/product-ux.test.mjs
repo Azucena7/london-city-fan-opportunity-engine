@@ -536,7 +536,7 @@ test("Impact model seeds from measured club history only when aggregate evidence
 test("Results never equates campaign attribution with incrementality", () => {
   const results = read("src/app/results/page.tsx");
   const adapter = read("src/lib/productResults.ts");
-  assert.match(results, /Attribution is not the same as incremental impact/);
+  assert.match(results, /Attribution ≠ incremental impact/);
   assert.match(results, /What do we know after matchday/);
   assert.match(results, /Not established/);
   assert.match(adapter, /incrementality: "not-established"/);
