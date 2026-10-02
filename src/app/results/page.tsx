@@ -8,7 +8,7 @@ import { getCurrentProductResults } from "@/lib/productResults";
 import { calendar, currentState } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Results & Learning",
+  title: "Learning",
   description: "Close the loop after matchday: measure the action, capture the learning and update the next fixture decision."
 };
 
@@ -49,12 +49,12 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
 
       <header className={styles.hero}>
         <div>
-          <span className={styles.eyebrow}>Results & Learning · {selected?.opponent} · {selected?.date}</span>
+          <span className={styles.eyebrow}>Learning · {selected?.opponent} · {selected?.date}</span>
           <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What do we know after matchday?"}</h1>
           <p>
             {live?.fixturePhase === "pre-match"
               ? "The fixture is still ahead. This screen keeps the measurement plan explicit now, then switches to observed outcomes when authorised post-match evidence arrives."
-              : "Results are only useful when they change the next decision. This view separates observed outcomes, attribution and causal claims so the club does not confuse correlation with incrementality."}
+              : "Learning is only useful when it changes the next decision. This view separates observed outcomes, attribution and causal claims so the club does not confuse correlation with incrementality."}
           </p>
         </div>
         <aside className={styles.stateCard}>
@@ -178,7 +178,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
       <section className={styles.next}>
         <div>
           <span className={styles.eyebrow}>Close the loop</span>
-          <h2>Results should send the user back to the next opportunity, not to a report archive.</h2>
+          <h2>Learning should send the user back to the next match, not to a report archive.</h2>
         </div>
         <div className={styles.actions}>
           <Link className={styles.primary} href="/matches">Back to matches</Link>
