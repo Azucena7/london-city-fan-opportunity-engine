@@ -191,7 +191,7 @@ export function CampaignCreditBuilder({
 
   useEffect(() => {
     void loadAccountSession();
-  }, [fixtureId]);
+  }, [fixtureId]); // eslint-disable-line react-hooks/exhaustive-deps -- re-check account when the active fixture changes
 
   useEffect(() => {
     if (!workspaceLoaded || !remoteReady || !activeClubId) return;
