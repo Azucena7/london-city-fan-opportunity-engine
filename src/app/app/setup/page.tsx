@@ -4,7 +4,7 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import styles from "./setup.module.css";
 
 export const metadata: Metadata = {
-  title: "Club setup · Fan Growth Engine",
+  title: "Club setup · AVELA",
   description: "Configure fixtures, channels, objectives, brand rules and approvals once for the club."
 };
 
