@@ -22,7 +22,7 @@ test("commercial stories distinguish proposals, delivery and commercial outcomes
   assert.match(story, /campaign\.approvals\.map/);
   assert.match(story, /validation\?\.caveat\[lang\]/);
   assert.match(story, /A campaign identifier alone does not establish additional sales/);
-  assert.match(story, /\/results\?fixture=\$\{fixture\.id\}/);
+  assert.match(story, /\/app\/learning\?fixture=\$\{fixture\.id\}/);
 });
 
 test("pilot discussion remains local with honest copy and no fabricated contact", async () => {
