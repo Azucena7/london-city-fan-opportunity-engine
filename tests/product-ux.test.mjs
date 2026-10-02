@@ -333,6 +333,27 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(env, /AI_GATEWAY_MODEL=/);
 });
 
+test("Opportunity Brief explains execution fit without letting club setup rewrite evidence", () => {
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const context = read("src/lib/clubOperatingContext.ts");
+
+  assert.match(page, /getCurrentClubOperatingContext/);
+  assert.match(page, /buildOpportunityRadar\(\[fixtureId\], clubContext\)/);
+  assert.match(page, /How this play fits the club&apos;s real operating setup/);
+  assert.match(page, /Evidence still determines the opportunity/);
+  assert.match(page, /Does not change rank or confidence/);
+  assert.match(page, /Connected execution/);
+  assert.match(page, /Manual \/ connector handoff/);
+  assert.match(page, /Approval default/);
+  assert.match(page, /Brand guardrail/);
+  assert.match(page, /Evidence-only brief/);
+  assert.match(page, /\/app\/setup/);
+
+  assert.match(context, /brandTone/);
+  assert.match(context, /brandMustAvoid/);
+  assert.match(context, /brand_rules/);
+});
+
 test("Opportunity Radar applies club context as advisory fit without changing evidence rank", () => {
   const radar = read("src/lib/opportunityRadar.ts");
   const matches = read("src/app/matches/page.tsx");
