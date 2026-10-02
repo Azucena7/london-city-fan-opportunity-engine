@@ -54,9 +54,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "A valid club and requested role are required." }, { status: 400 });
   }
 
-  const response = await supabaseRequest("/rest/v1/club_access_requests?on_conflict=club_id,user_id", {
+  const response = await supabaseRequest("/rest/v1/club_access_requests", {
     method: "POST",
-    headers: { Prefer: "resolution=merge-duplicates,return=representation" },
+    headers: { Prefer: "return=representation" },
     body: JSON.stringify({
       club_id: clubId,
       user_id: user.id,
