@@ -351,7 +351,7 @@ test("Learning turns measured evidence into a bounded next-fixture adjustment", 
   assert.match(model, /Requires a randomized holdout|credible comparison group|counterfactual/i);
   assert.match(model, /does not treat attributed tickets as causal lift/);
   assert.match(model, /Do not increase campaign scope or spend based on unmeasured outcomes/);
-  assert.match(model, /Learning confidence/);
+  assert.match(component, /Learning confidence/);
 });
 
 test("Learning compares recorded campaign workflow with measured outcomes without implying causation", () => {
