@@ -6,7 +6,7 @@ export function MarketingNav() {
     <nav className={styles.nav} aria-label="Product website navigation">
       <Link className={styles.brand} href="/">
         <span className={styles.mark} aria-hidden="true" />
-        Fan Growth Engine
+        AVELA
       </Link>
       <div className={styles.links}>
         <Link href="/#how-it-works">Product</Link>
