@@ -14,8 +14,8 @@ import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import styles from "./match-plan.module.css";
 
 export const metadata: Metadata = {
-  title: "Match plan · Fan Growth Engine",
-  description: "One fixture workspace for the recommended plan, actions, evidence, signals and impact."
+  title: "Opportunity Brief · AVELA",
+  description: "One fixture workspace for the opportunity, recommended play, activation, signals, evidence and impact."
 };
 
 export default async function MatchPlanPage({ params }: { params: Promise<{ fixtureId: string }> }) {
@@ -55,7 +55,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
 
       <section className={styles.decisionCockpit} aria-label="Decision at a glance">
         <div className={styles.decisionLead}>
-          <span className={styles.eyebrow}>Recommended campaign</span>
+          <span className={styles.eyebrow}>Recommended play</span>
           <h2>{campaign?.title.en ?? live.opportunity}</h2>
           <p>{live.whyNow}</p>
           <a href="#campaign">Build this campaign →</a>
