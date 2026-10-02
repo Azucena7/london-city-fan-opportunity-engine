@@ -6,6 +6,12 @@ The public operations demo stays separate and contains only synthetic data.
 Access is OFF by default. Enable only after completing these steps in the approved
 Supabase test project:
 
+The installed Vercel integration uses the required custom prefix `CLUB`.
+The server reads `CLUB_SUPABASE_URL`, `CLUB_SUPABASE_PUBLISHABLE_KEY` (preferred)
+or `CLUB_SUPABASE_ANON_KEY`. If any CLUB variable exists, the entire CLUB
+namespace is selected; old unprefixed variables are not mixed or used as fallback.
+The app does not read provider secret keys or Postgres credentials for login or health.
+
 1. Set `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` (or legacy anon key) in Vercel.
 2. Review and apply `supabase/migrations/20261002_club_membership.sql`.
 3. Disable public signup in Supabase. Invite test accounts using trusted project
