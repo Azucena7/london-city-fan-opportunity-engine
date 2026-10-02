@@ -43,13 +43,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Campaign objective, audience and proposition are required." }, { status: 400 });
   }
 
-  const apiKey = process.env.AI_GATEWAY_API_KEY;
-  if (!apiKey) {
+  const gatewayToken = process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN;
+  if (!gatewayToken) {
     return NextResponse.json(
       {
         error: "AI generation is not configured yet.",
         configured: false,
-        requiredEnvironment: "AI_GATEWAY_API_KEY"
+        requiredEnvironment: "AI_GATEWAY_API_KEY or VERCEL_OIDC_TOKEN"
       },
       { status: 503 }
     );
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
   const response = await fetch("https://ai-gateway.vercel.sh/v1/chat/completions", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${gatewayToken}`,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
