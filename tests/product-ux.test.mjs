@@ -546,7 +546,7 @@ test("match signals can be excluded without mutating engine data", () => {
 
 test("single match workspace absorbs plan evidence signals and impact", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
-  assert.match(page, /Recommended campaign/);
+  assert.match(page, /Recommended play/);
   assert.match(page, /Review the draft, then execute the next actions/);
   assert.match(page, /signals · \{live\.confidence\.label\} confidence/);
   assert.match(page, /Inspect evidence, assumptions and missing inputs/);
@@ -575,7 +575,7 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   const config = read("next.config.mjs");
   const liveCase = read("src/components/LondonCityCase.tsx");
   assert.match(home, /MarketingNav/);
-  assert.match(home, /See London City live/);
+  assert.match(home, /See the live case/);
   assert.match(home, /href="\/live\/london-city"/);
   assert.match(marketingNav, /Open app/);
   assert.match(marketingNav, /\/app\/matches/);
@@ -598,10 +598,10 @@ test("Learning keeps deep interpretation secondary to observed outcomes", () => 
 test("matches behaves like a decision inbox with one priority fixture", () => {
   const page = read("src/app/matches/page.tsx");
   const css = read("src/app/matches/matches.module.css");
-  assert.match(page, /Current priority/);
-  assert.match(page, /Future home matches/);
-  assert.match(page, /No action required until evidence becomes material/);
-  assert.match(page, /Open match plan/);
+  assert.match(page, /Current engine priority/);
+  assert.match(page, /Next opportunities/);
+  assert.match(page, /Ranked by what deserves attention now/);
+  assert.match(page, /Open opportunity brief/);
   assert.match(css, /priorityMatch/);
   assert.match(css, /futureFixture/);
 });
@@ -648,10 +648,10 @@ test("commercial surfaces route users into the simplified club journey", () => {
 test("club product starts from fixtures instead of requiring a plan first", () => {
   const matches = read("src/app/matches/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
-  assert.match(matches, /Upcoming home matches/);
-  assert.match(matches, /The engine starts from the fixture calendar automatically/);
-  assert.match(matches, /Fixture → signals → AI interpretation → opportunity → draft plan/);
-  assert.match(matches, /Monitoring automatically/);
+  assert.match(matches, /AVELA · Opportunity Radar/);
+  assert.match(matches, /The club does not create a plan first/);
+  assert.match(matches, /Fixture → signals → opportunity → recommended play → human review → activation → learning/);
+  assert.match(matches, /Monitoring/);
   assert.match(matches, /\/app\/matches\/\$\{currentFixture\.id\}/);
   assert.match(nav, /href: "\/app\/matches"/);
   assert.match(nav, /label: "Learning"/);
@@ -660,7 +660,7 @@ test("club product starts from fixtures instead of requiring a plan first", () =
 test("product and analyst branding are intentionally separated", () => {
   const productNav = read("src/components/ProductJourneyNav.tsx");
   const analystNav = read("src/components/NavTabs.tsx");
-  assert.match(productNav, /Fan Growth Engine/);
+  assert.match(productNav, /AVELA/);
   assert.match(productNav, /Matches/);
   assert.match(productNav, /Learning/);
   assert.match(productNav, /Product site/);
