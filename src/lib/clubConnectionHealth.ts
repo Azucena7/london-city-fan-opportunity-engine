@@ -45,3 +45,20 @@ export async function checkClubConnection(env: Environment, request: typeof fetc
     return result(response.status === 200 ? "available" : "unavailable");
   } catch { return result("unavailable"); }
 }
+
+let cached: { expires: number; value: ClubConnectionHealth } | undefined;
+let pending: Promise<ClubConnectionHealth> | undefined;
+
+export async function getClubConnectionHealth(): Promise<ClubConnectionHealth> {
+  if (!cached || cached.expires < Date.now()) {
+    pending ??= checkClubConnection({
+      SUPABASE_URL: process.env.SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY: process.env.SUPABASE_PUBLISHABLE_KEY,
+      SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+    });
+    const value = await pending;
+    cached = { value, expires: Date.now() + 60_000 };
+    pending = undefined;
+  }
+  return cached.value;
+}
