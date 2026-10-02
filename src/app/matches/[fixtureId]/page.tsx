@@ -53,40 +53,44 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </aside>
       </header>
 
-      <section className={styles.priorityBar} aria-label="Decision at a glance">
-        <div>
-          <span>Decision</span>
-          <strong>{live.decisionState}</strong>
-        </div>
-        <div>
-          <span>Do next</span>
-          <strong>{live.nextAction.label}</strong>
-        </div>
-        <div>
-          <span>Blocking gate</span>
-          <strong>{approvals.length ? live.primaryBlocker : "No blocking gate"}</strong>
-        </div>
-      </section>
-
-      <section className={styles.recommendation}>
-        <div>
-          <span className={styles.eyebrow}>Recommended plan</span>
-          <h2>{live.opportunity}</h2>
+      <section className={styles.decisionCockpit} aria-label="Decision at a glance">
+        <div className={styles.decisionLead}>
+          <span className={styles.eyebrow}>Recommended campaign</span>
+          <h2>{campaign?.title.en ?? live.opportunity}</h2>
           <p>{live.whyNow}</p>
+          <a href="#campaign">Build this campaign →</a>
         </div>
-        <div className={styles.recommendationAction}>
-          <span>What the club should do</span>
-          <strong>{live.recommendedAction}</strong>
-          <p>{live.nextAction.label}</p>
+
+        <div className={styles.decisionFacts}>
+          <article>
+            <span>Opportunity</span>
+            <strong>{live.opportunity}</strong>
+          </article>
+          <article>
+            <span>Audience</span>
+            <strong>{live.audience.value !== null ? live.audience.value.toLocaleString("en-GB") + " measured fans" : campaign?.audiences[0]?.label.en ?? "Requires club data"}</strong>
+          </article>
+          <article>
+            <span>Confidence</span>
+            <strong>{live.confidence.label}</strong>
+            <small>{live.liveSignals.length} sourced signals</small>
+          </article>
+          <article>
+            <span>Next action</span>
+            <strong>{live.nextAction.label}</strong>
+            <small>{approvals.length ? live.primaryBlocker : "No blocking gate"}</small>
+          </article>
         </div>
       </section>
 
+      <div id="campaign">
       <CampaignCreditBuilder
         objective={campaign?.objective.en ?? live.opportunity}
         audience={campaign?.audiences[0]?.label.en ?? live.audience.label}
         proposition={campaign?.proposition.en ?? live.recommendedAction}
         unresolvedGates={approvals.length}
       />
+      </div>
 
       <section className={styles.actionsSection} id="approval-gates">
         <div className={styles.sectionHead}>
