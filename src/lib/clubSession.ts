@@ -19,3 +19,10 @@ export async function currentClubIdentity() {
   const token = (await cookies()).get(clubCookie)?.value;
   return token ? verifyClubIdentity(clubEnvironment(), token) : null;
 }
+
+import { permits, type ClubArea, type ClubAction } from "./clubPermissions";
+export async function requireClubPermission(clubId: string, area: ClubArea, action: ClubAction) {
+  const identity = await currentClubIdentity();
+  const member = identity?.memberships.find(m => m.clubId === clubId);
+  return member && permits(member.permissions, area, action) ? member : null;
+}

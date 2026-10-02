@@ -35,6 +35,7 @@ export default async function ConnectionPage() {
         <li>Permisos y aislamiento entre clubes: sin verificar.</li>
         <li>Guardado de planes y registro de auditoría: sin verificar.</li>
       </ul>
+      <p><Link href="/club-demo/permissions">Explorar los permisos por departamento →</Link></p>
       <Link href="/club/sign-in">Ver el acceso privado del club →</Link>
     </section>
   </main>;

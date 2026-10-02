@@ -4,14 +4,15 @@ import { readFile } from "node:fs/promises";
 import ts from "typescript";
 const compile = source => `data:text/javascript;base64,${Buffer.from(ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText).toString("base64")}`;
 const config = compile(await readFile(new URL("../src/lib/clubConnectionHealth.ts", import.meta.url), "utf8"));
-const source = (await readFile(new URL("../src/lib/clubAuth.ts", import.meta.url), "utf8")).replace('"./clubConnectionHealth"', JSON.stringify(config));
+const permissions = compile((await readFile(new URL("../src/lib/clubPermissions.ts", import.meta.url), "utf8")).replace(/import raw from [^;]+;/, `const raw = ${await readFile(new URL("../data/seed/club-permission-profiles.json", import.meta.url), "utf8")};`));
+const source = (await readFile(new URL("../src/lib/clubAuth.ts", import.meta.url), "utf8")).replace('"./clubConnectionHealth"', JSON.stringify(config)).replace('"./clubPermissions"', JSON.stringify(permissions));
 const auth = await import(compile(source));
 const user = "10000000-0000-0000-0000-000000000001";
 const club = "20000000-0000-0000-0000-000000000001";
 const token = "header.payload.signature";
 const env = { SUPABASE_URL: "https://abcdefghijklmnopqrst.supabase.co", SUPABASE_PUBLISHABLE_KEY: `sb_publishable_${"a".repeat(24)}`, CLUB_PRIVATE_ACCESS_ENABLED: "true" };
-const membership = { club_id: club, role: "operator", clubs: { name: "Test club" } };
-function provider({ users = { id: user }, rows = [membership], session = { access_token: token, expires_in: 7200 }, status = 200 } = {}) {
+const membership = { club_id: club, role: "marketing", clubs: { name: "Test club" } };
+function provider({ users = { id: user }, rows = [membership], session = { access_token: token, expires_in: 7200 }, status = 200, matrix = [{ club_id: club, area: "campaigns", action: "view" }, { club_id: club, area: "campaigns", action: "edit" }] } = {}) {
   return async (url, options) => {
     const u = new URL(url);
     assert.equal(u.origin, env.SUPABASE_URL);
@@ -25,6 +26,7 @@ function provider({ users = { id: user }, rows = [membership], session = { acces
     }
     assert.equal(options.headers.Authorization, `Bearer ${token}`);
     if (u.pathname === "/auth/v1/user") return Response.json(users, { status });
+    if (u.pathname === "/rest/v1/rpc/club_permission_matrix") { assert.equal(options.method, "POST"); return Response.json(matrix, { status }); }
     assert.equal(u.pathname, "/rest/v1/club_memberships");
     assert.equal(u.searchParams.get("user_id"), `eq.${user}`);
     assert.equal(u.searchParams.get("active"), "eq.true");
@@ -40,7 +42,7 @@ test("private login is off by default and rejects unsafe provider config without
 });
 test("server-verified session plus current membership are required; expiry is bounded", async () => {
   assert.deepEqual(await auth.signInClub(env, "test@example.test", "test password", provider()), { token, maxAge: 3600 });
-  assert.deepEqual(await auth.verifyClubIdentity(env, token, provider()), { userId: user, memberships: [{ clubId: club, clubName: "Test club", role: "operator" }] });
+  assert.deepEqual(await auth.verifyClubIdentity(env, token, provider()), { userId: user, memberships: [{ clubId: club, clubName: "Test club", role: "marketing", permissions: [{ area: "campaigns", action: "view" }, { area: "campaigns", action: "edit" }] }] });
 });
 test("JWT claims and user metadata cannot grant club access", async () => {
   assert.equal(await auth.verifyClubIdentity(env, token, provider({ users: { id: user, user_metadata: { role: "admin", club_id: club } }, rows: [] })), null);
@@ -62,4 +64,19 @@ test("invalid provider sessions never produce an app cookie", async () => {
   for (const session of [{ access_token: "invalid", expires_in: 100 }, { access_token: token, expires_in: -1 }, { access_token: token, expires_in: null }]) {
     assert.equal(await auth.signInClub(env, "test@example.test", "test password", provider({ session })), null);
   }
+});
+
+test("permission RPC must return canonical permissions for current memberships", async () => {
+  for (const matrix of [null, [{ club_id: user, area: "campaigns", action: "view" }], [{ club_id: club, area: "bad", action: "view" }], [{ club_id: club, area: "campaigns", action: "bad" }]]) assert.equal(await auth.verifyClubIdentity(env, token, provider({ matrix })), null);
+});
+const permissionsApi = await import(permissions);
+test("read-only profiles and individual restrictions prevent writes", () => {
+ const {previewPermissions, permits} = permissionsApi;
+ assert.equal(permits(previewPermissions("viewer"), "results", "edit"), false);
+ assert.equal(permits(previewPermissions("marketing"), "campaigns", "edit"), true);
+ assert.equal(permits(previewPermissions("marketing"), "campaigns", "approve"), false);
+ assert.equal(permits(previewPermissions("communications"), "studio", "approve"), true);
+ for (const role of Object.keys(permissionsApi.profiles)) for (const action of ["launch","export"]) assert.equal(previewPermissions(role).some(p=>p.action===action), false);
+ assert.equal(permits(previewPermissions("marketing", [{area:"campaigns",action:"launch",allowed:true}]), "campaigns", "launch"), true);
+ assert.equal(permits(previewPermissions("marketing", [{area:"campaigns",action:"launch",allowed:true},{area:"campaigns",action:"view",allowed:false}]), "campaigns", "launch"), false);
 });
