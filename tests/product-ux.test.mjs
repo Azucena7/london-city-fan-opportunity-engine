@@ -333,6 +333,25 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(env, /AI_GATEWAY_MODEL=/);
 });
 
+test("campaign flow reviews scope before reserving credits and never simulates launch", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+
+  assert.match(builder, /Estimate/);
+  assert.match(builder, /Review/);
+  assert.match(builder, /Reserve/);
+  assert.match(builder, /Launch/);
+  assert.match(builder, /Reserve \$\{reservationRequired\} credits/);
+  assert.match(builder, /campaign:reserve/);
+  assert.match(builder, /campaign:release/);
+  assert.match(builder, /Existing generated-draft commitments are excluded/);
+  assert.match(builder, /Scope locked by reservation/);
+  assert.match(builder, /Reopen campaign and release reservation/);
+  assert.match(builder, /Prepare launch handoff/);
+  assert.match(builder, /Launch campaign · connector required/);
+  assert.match(builder, /Launch is not simulated/);
+  assert.match(builder, /No CRM send, social publish or media spend happens/);
+});
+
 test("match plan includes campaign proposal credit budgeting and gated launch", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");
@@ -362,8 +381,9 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /\+75 credits/);
   assert.match(builder, /\+200 credits/);
   assert.match(builder, /additional credits|additional credit|add a credit pack/i);
-  assert.match(builder, /Launch campaign/);
-  assert.match(builder, /launch does not yet publish content, send CRM or spend media/);
+  assert.match(builder, /Prepare launch handoff/);
+  assert.match(builder, /Launch campaign · connector required/);
+  assert.match(builder, /Launch is not simulated/);
   assert.match(builder, /specific campaign recipe is locked/);
   assert.match(page, /CampaignCreditBuilder/);
   assert.match(page, /fixtureId=\{fixture\.id\}/);
