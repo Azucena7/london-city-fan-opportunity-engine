@@ -2,32 +2,18 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "product" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs";
+  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs";
 };
 
 const primaryItems = [
-  { key: "product", label: "Product", href: "/" },
-  { key: "brief", label: "Morning brief", href: "/brief" },
-  { key: "opportunity", label: "Opportunity", href: "/opportunity" },
-  { key: "results", label: "Results", href: "/results" },
-  { key: "pilot", label: "Pilot", href: "/pilot" }
-] as const;
-
-const exploreItems = [
-  { key: "workspace", label: "Club workspace demo", href: "/club-demo" },
-  { key: "clubs", label: "For clubs", href: "/for-clubs" },
-  { key: "cases", label: "Use cases", href: "/cases" },
-  { key: "demo", label: "Guided demo", href: "/demo" },
-  { key: "impact", label: "Impact model", href: "/impact" },
-  { key: "decision", label: "Decision Room", href: "/decision-room" }
+  { key: "matches", label: "Matches", href: "/matches" },
+  { key: "results", label: "Learning", href: "/results" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
-  const exploreActive = exploreItems.some((item) => item.key === active);
-
   return (
     <nav className={styles.nav} aria-label="Fan Growth Engine navigation">
-      <Link className={styles.brand} href="/">
+      <Link className={styles.brand} href="/matches">
         <span className={styles.brandMark} aria-hidden="true" />
         Fan Growth Engine
       </Link>
@@ -42,33 +28,10 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
             {item.label}
           </Link>
         ))}
-
-        <details className={styles.more}>
-          <summary className={exploreActive ? styles.activeSummary : ""}>Explore</summary>
-          <div className={styles.menu}>
-            {exploreItems.map((item) => (
-              <Link
-                key={item.key}
-                href={item.href}
-                className={active === item.key ? styles.menuActive : ""}
-              >
-                <strong>{item.label}</strong>
-                <span>
-                  {item.key === "workspace" ? "Try the client workflow with test data" :
-                   item.key === "clubs" ? "Explore an authorised club pilot" :
-                   item.key === "cases" ? "Compare different fixture decisions" :
-                   item.key === "demo" ? "Walk through the product story" :
-                   item.key === "impact" ? "Test commercial scenarios" :
-                   "Inspect evidence and blockers"}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </details>
       </div>
 
-      <Link className={[styles.engine, active === "engine" ? styles.activeEngine : ""].join(" ")} href="/london-city">
-        Caso London City
+      <Link className={styles.engine} href="/for-clubs">
+        For clubs
       </Link>
     </nav>
   );
