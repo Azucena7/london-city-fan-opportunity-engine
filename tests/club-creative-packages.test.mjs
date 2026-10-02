@@ -1,0 +1,52 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import ts from "typescript";
+const source = await readFile(new URL("../src/lib/clubCreativePackages.ts", import.meta.url), "utf8");
+const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+const { findCreative, storeCreative, clearActionCreatives } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+const creative = (actionId, channel, text = "Test copy") => ({ actionId, channel, text, headline: "Test", storyboard: [], actionVersion: "v1", approvedVersion: null });
+test("packages preserve independent action and channel drafts without state mutation", () => {
+  const original = {};
+  let packages = storeCreative(original, "repeat", "instagram", creative("repeat", "instagram", "Edited Instagram"));
+  packages = storeCreative(packages, "repeat", "whatsapp", creative("repeat", "whatsapp", "WhatsApp draft"));
+  packages = storeCreative(packages, "attendance", "instagram", creative("attendance", "instagram", "Attendance draft"));
+  assert.deepEqual(original, {});
+  assert.equal(findCreative(packages, "repeat", "instagram").text, "Edited Instagram");
+  assert.equal(findCreative(packages, "repeat", "whatsapp").text, "WhatsApp draft");
+  assert.equal(findCreative(packages, "attendance", "instagram").text, "Attendance draft");
+  assert.equal(findCreative(packages, "repeat", "linkedin"), null);
+});
+test("wrong action or channel cannot be stored or retrieved as the selected asset", () => {
+  const packages = {};
+  assert.equal(storeCreative(packages, "repeat", "instagram", creative("attendance", "instagram")), packages);
+  assert.equal(storeCreative(packages, "repeat", "instagram", creative("repeat", "whatsapp")), packages);
+  assert.equal(findCreative({ "repeat:instagram": creative("attendance", "instagram") }, "repeat", "instagram"), null);
+});
+test("regeneration and approval edits affect only one package; action edits clear all its channels", () => {
+  let packages = storeCreative({}, "repeat", "instagram", creative("repeat", "instagram"));
+  packages = storeCreative(packages, "repeat", "whatsapp", creative("repeat", "whatsapp"));
+  packages = storeCreative(packages, "attendance", "instagram", creative("attendance", "instagram"));
+  const prior = JSON.stringify(packages);
+  const edited = storeCreative(packages, "repeat", "instagram", { ...findCreative(packages, "repeat", "instagram"), text: "Changed", approvedVersion: null });
+  assert.equal(findCreative(edited, "repeat", "whatsapp").text, "Test copy");
+  assert.equal(JSON.stringify(packages), prior);
+  const cleared = clearActionCreatives(edited, "repeat");
+  assert.equal(findCreative(cleared, "repeat", "instagram"), null);
+  assert.equal(findCreative(cleared, "repeat", "whatsapp"), null);
+  assert.ok(findCreative(cleared, "attendance", "instagram"));
+});
+test("UI navigation retains drafts while rebuilds and strategy changes clear invalid packages", async () => {
+  const ui = await readFile(new URL("../src/components/ClubOperationsDemo.tsx", import.meta.url), "utf8");
+  const open = ui.slice(ui.indexOf("function openAction"), ui.indexOf("function build"));
+  assert.doesNotMatch(open, /setCreative/);
+  assert.match(ui, /creative.actionVersion === version/);
+  assert.match(ui, /clearActionCreatives\(previous, selected\)/);
+  assert.match(ui, /Regenerar sustituirá el texto editado/);
+  assert.match(ui, /setCreativePackages\(\{\}\)/);
+  assert.match(ui, /disabled=\{!editable\} onChange=\{\(event\) => \{ invalidateControls\(\); setCreative/);
+  const brief = await readFile(new URL("../src/components/ClubCreativeBrief.tsx", import.meta.url), "utf8");
+  assert.match(brief, /Marca del club · kit base/);
+  assert.match(brief, /Campaña · briefing específico/);
+  assert.match(brief, /No se renderiza vídeo/);
+});

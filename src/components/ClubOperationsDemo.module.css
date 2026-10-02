@@ -80,6 +80,11 @@
 .shell th,.shell td { text-align: left; padding: 14px 12px; border-bottom: 1px solid #d3dccb; line-height: 1.6; }
 .shell th { background: #edf3e6; }
 .creativeGrid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; align-items: start; margin-bottom: 20px; }
+.channelCards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 22px 0; }
+.channelCards button { text-align: left; }
+.channelCards strong,.channelCards span { display: block; }
+.channelCards span { font-size: 13px; font-weight: 400; margin-top: 8px; }
+@media(max-width:760px) { .channelCards { grid-template-columns: 1fr; } }
 .graphic { width: 100%; height: auto; max-height: 460px; border-radius: 12px; border: 1px solid #c7d3bc; }
 @media(max-width:1050px) { .layout { grid-template-columns: 210px minmax(0,1fr); gap: 20px; } .cards,.creativeGrid { grid-template-columns: 1fr; } }
 @media(max-width:760px) { .shell { padding: 0 16px 40px; } .layout,.fields,.task { grid-template-columns: 1fr; } .sidebar nav { grid-template-columns: repeat(2,minmax(0,1fr)); } .metrics { grid-template-columns: 1fr; } .panel { padding: 20px; } .notice { padding: 18px; } }
