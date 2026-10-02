@@ -29,5 +29,53 @@
       "territory mix",
       "30/60/90-day repeat"
     ]
+  },
+  {
+    "fixtureId": "2026-09-26-bha-h",
+    "status": "learning",
+    "updatedAt": "2026-10-02T10:00:00+01:00",
+    "result": "2–0",
+    "attendance": 4177,
+    "attendanceState": "reported",
+    "confidence": "medium",
+    "sourceName": "Football Web Pages / FotMob",
+    "sourceUrl": "https://www.footballwebpages.co.uk/match/2026-2027/womens-super-league/london-city-lionesses/brighton-and-hove-albion-women/589072",
+    "sources": [
+      {
+        "name": "Football Web Pages",
+        "url": "https://www.footballwebpages.co.uk/match/2026-2027/womens-super-league/london-city-lionesses/brighton-and-hove-albion-women/589072",
+        "checkedAt": "2026-10-02"
+      },
+      {
+        "name": "FotMob",
+        "url": "https://www.fotmob.com/matches/brighton-vs-london-city-lionesses/awc12a3z",
+        "checkedAt": "2026-10-02"
+      }
+    ],
+    "headline": {
+      "en": "Reported Brighton attendance gives a provisional second-home benchmark",
+      "es": "La asistencia reportada de Brighton ofrece un segundo benchmark provisional"
+    },
+    "learning": {
+      "en": "Reported attendance is 4,177, 22.7% below the measured 5,402 opener. Opponent, kickoff, broadcast and activation differ; aggregate attendance does not identify returning buyers, no-shows or Broomfields/watchalong impact. Direct club confirmation and methodology remain pending.",
+      "es": "La asistencia reportada es 4.177, un 22,7% inferior a los 5.402 medidos del opener. Cambian rival, horario, retransmisión y activación; la asistencia agregada no identifica compradores que repiten, no-shows ni efecto de Broomfields/watchalong. Siguen pendientes confirmación directa del club y metodología."
+    },
+    "nextAction": {
+      "en": "CRM & Data should reconcile the published figure with authorised ticketing, scans and buyer cohorts by 5 October, then adjust Everton segmentation using verified repeat purchase.",
+      "es": "CRM & Data debe conciliar la cifra publicada con ticketing autorizado, scans y cohortes antes del 5 de octubre, y ajustar la segmentación de Everton con repetición de compra verificada."
+    },
+    "dataGaps": [
+      "club/league attendance confirmation",
+      "attendance counting methodology",
+      "tickets sold",
+      "scans",
+      "no-show",
+      "ticket yield",
+      "new households",
+      "territory mix",
+      "repeat buyers",
+      "Broomfields spend",
+      "watchalong dwell"
+    ]
   }
 ]
