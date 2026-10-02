@@ -81,7 +81,7 @@ export default function MatchesPage() {
 
               <div className={styles.fixtureAction}>
                 <span>{index === 0 ? live?.timingLabel ?? "Current" : "Future fixture"}</span>
-                {isCurrent ? <Link href="/opportunity">Open match plan →</Link> : <span>Monitoring automatically</span>}
+                {isCurrent ? <Link href={`/matches/${fixture.id}`}>Open match plan →</Link> : <span>Monitoring automatically</span>}
               </div>
             </article>
           );
