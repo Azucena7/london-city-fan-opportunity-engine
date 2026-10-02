@@ -383,6 +383,42 @@ test("Opportunity Radar applies club context as advisory fit without changing ev
   assert.match(context, /return null/);
 });
 
+test("pilot access separates identity from club membership and supports admin approval", () => {
+  const access = read("src/components/AccessCenter.tsx");
+  const signup = read("src/app/api/auth/signup/route.ts");
+  const accessApi = read("src/app/api/access/route.ts");
+  const approve = read("src/app/api/access/approve/route.ts");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+
+  assert.match(access, /Secure pilot access without opening the club workspace/);
+  assert.match(access, /Authentication proves identity\. Membership grants club access/);
+  assert.match(access, /Create account/);
+  assert.match(access, /Request access/);
+  assert.match(access, /Pending club access/);
+  assert.match(access, /\/api\/access\/approve/);
+
+  assert.match(signup, /\/auth\/v1\/signup/);
+  assert.match(signup, /confirmationRequired: true/);
+  assert.match(signup, /password\.length < 10/);
+
+  assert.match(accessApi, /club_access_requests/);
+  assert.match(accessApi, /user_id: user\.id/);
+  assert.match(accessApi, /status: "pending"/);
+
+  assert.match(approve, /approve_club_access_request/);
+  assert.match(approve, /Authentication required/);
+
+  assert.match(nav, /href: "\/app\/access"/);
+  assert.match(nav, /label: "Access"/);
+
+  assert.match(migration, /create table if not exists public\.club_access_requests/);
+  assert.match(migration, /security invoker/);
+  assert.match(migration, /campaigns', 'administer'/);
+  assert.match(migration, /authenticated users can discover clubs/);
+  assert.match(migration, /Authentication alone never grants club access/);
+});
+
 test("club setup context differentiates the engine from replacement CRM and generic campaign tools", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const draftRoute = read("src/app/api/campaign-draft/route.ts");
