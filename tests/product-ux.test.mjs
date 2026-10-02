@@ -395,6 +395,15 @@ test("first club admin is bootstrapped only by a confirmed private email invite"
   assert.match(migration, /after insert or update of email_confirmed_at, email on auth\.users/);
 });
 
+test("Supabase server config accepts Vercel integration variable names", () => {
+  const helper = read("src/lib/supabaseServer.ts");
+  assert.match(helper, /CLUB_SUPABASE_URL/);
+  assert.match(helper, /NEXT_PUBLIC_CLUB_SUPABASE_URL/);
+  assert.match(helper, /CLUB_SUPABASE_PUBLISHABLE_KEY/);
+  assert.match(helper, /NEXT_PUBLIC_CLUB_SUPABASE_PUBLISHABLE_KEY/);
+  assert.match(helper, /SUPABASE_PUBLISHABLE_KEY/);
+});
+
 test("pilot access separates identity from club membership and supports admin approval", () => {
   const access = read("src/components/AccessCenter.tsx");
   const signup = read("src/app/api/auth/signup/route.ts");
