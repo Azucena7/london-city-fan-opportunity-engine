@@ -198,10 +198,10 @@ test("social sharing matches the current Fan Growth Engine product story", () =>
   assert.match(layout, /Fan Growth Engine/);
   assert.match(layout, /Turn fan data into the next best action for every fixture/);
   assert.match(card, /DECISION INTELLIGENCE FOR FOOTBALL CLUBS/);
-  assert.match(card, /Morning Brief/);
-  assert.match(card, /Opportunity/);
-  assert.match(card, /Decision/);
-  assert.match(card, /Results/);
+  assert.match(card, /Matches/);
+  assert.match(card, /Match plan/);
+  assert.match(card, /Review/);
+  assert.match(card, /Learning/);
   assert.match(og, /Live · Modelled · Missing/);
   assert.doesNotMatch(card, /\+280/);
 });
@@ -278,6 +278,22 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
   assert.match(page, /Open measurement & learning/);
   assert.doesNotMatch(page, /href="\/decision-room"/);
   assert.doesNotMatch(page, /href="\/impact"/);
+});
+
+test("commercial surfaces route users into the simplified club journey", () => {
+  const cases = read("src/app/cases/page.tsx");
+  const pilot = read("src/app/pilot/page.tsx");
+  const demo = read("src/app/demo/page.tsx");
+  const operatingPack = read("src/app/pilot/operating-pack/page.tsx");
+  const caseOverview = read("src/components/LondonCityCase.tsx");
+  for (const source of [cases, pilot, demo, operatingPack, caseOverview]) {
+    assert.doesNotMatch(source, /href="\/brief"/);
+    assert.doesNotMatch(source, /href="\/opportunity"/);
+    assert.doesNotMatch(source, /href="\/decision-room"/);
+  }
+  assert.match(pilot, /\/matches/);
+  assert.match(demo, /\/matches\/\$\{live\.fixtureId\}/);
+  assert.match(caseOverview, /\/matches\/\$\{opportunity\.fixtureId\}/);
 });
 
 test("club product starts from fixtures instead of requiring a plan first", () => {
