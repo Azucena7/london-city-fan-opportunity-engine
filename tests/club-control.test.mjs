@@ -59,5 +59,8 @@ test("UI gates handler and button and clears controls when restoring changed set
   assert.match(ui,/disabled=\{!canSimulate[\s\S]*?launchControlBlockers.length > 0/);
   assert.match(ui,/function invalidateControls\(\) \{ setReviews\(\{\}\); setEpoch/);
   assert.match(ui,/setControl\(value\); invalidateControls\(\)/);
-  assert.match(ui,/invalidateControls\(\); setChannel/);
+  // Channel selection is navigation between independent drafts, not an edit.
+  // Reviews remain bound to the exact selected creative version (includes channel).
+  assert.match(ui,/creative:currentCreative \? creativeVersion\(currentCreative\) : null/);
+  assert.match(ui,/setChannel\(event.target.value as Channel\)/);
 });
