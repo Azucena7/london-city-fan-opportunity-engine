@@ -252,6 +252,30 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
   assert.match(nav, /\/app\/demo/);
 });
 
+test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const route = read("src/app/api/campaign-draft/route.ts");
+  const env = read(".env.example");
+
+  assert.match(builder, /Generate draft/);
+  assert.match(builder, /Generative production/);
+  assert.match(builder, /credits committed/);
+  assert.match(builder, /session-only/);
+  assert.match(builder, /\/api\/campaign-draft/);
+
+  assert.match(route, /AI_GATEWAY_API_KEY/);
+  assert.match(route, /https:\/\/ai-gateway\.vercel\.sh\/v1\/chat\/completions/);
+  assert.match(route, /openai\/gpt-5\.6-sol/);
+  assert.match(route, /crm-email/);
+  assert.match(route, /vertical-video/);
+  assert.match(route, /Never invent ticket prices/);
+  assert.match(route, /creditsCommitted/);
+  assert.match(route, /persistence: "session-only"/);
+
+  assert.match(env, /AI_GATEWAY_API_KEY=/);
+  assert.match(env, /AI_GATEWAY_MODEL=/);
+});
+
 test("match plan includes campaign proposal credit budgeting and gated launch", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");
