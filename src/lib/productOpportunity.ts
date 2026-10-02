@@ -7,6 +7,7 @@ import {
   crmTicketingLive
 } from "@/lib/data";
 import type { CampaignPlan, CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
+import { classifyWomensFootballSignal, type WomensFootballSignalLens } from "@/lib/womensFootballSignals";
 
 
 export type ProductEvidenceState = "known" | "assumption" | "missing";
@@ -73,6 +74,7 @@ export type ProductOpportunity = {
     materiality: LiveSignal["materiality"];
     sourceName: string;
     sourceUrl: string;
+    lens: WomensFootballSignalLens;
   }>;
   updatedAt: string | null;
   sourceMode: "live-engine";
@@ -373,7 +375,8 @@ export function getCurrentProductOpportunity(requestedFixtureId?: string): Produ
       state: signal.state,
       materiality: signal.materiality,
       sourceName: signal.sourceName,
-      sourceUrl: signal.sourceUrl
+      sourceUrl: signal.sourceUrl,
+      lens: classifyWomensFootballSignal(signal)
     })),
     updatedAt: (currentState.updated_at as string | undefined) ?? null,
     sourceMode: "live-engine"
