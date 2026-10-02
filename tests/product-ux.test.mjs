@@ -235,6 +235,18 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 
 
 
+test("match signals can be excluded without mutating engine data", () => {
+  const controls = read("src/components/MatchSignalControls.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  assert.match(controls, /Signals used/);
+  assert.match(controls, /Confidence with this selection/);
+  assert.match(controls, /Recommendation/);
+  assert.match(controls, /The recommendation is unchanged/);
+  assert.match(controls, /Needs review/);
+  assert.match(controls, /does not delete the source or change the underlying engine data/);
+  assert.match(page, /MatchSignalControls/);
+});
+
 test("single match workspace absorbs plan evidence signals and impact", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
   assert.match(page, /Recommended plan/);
