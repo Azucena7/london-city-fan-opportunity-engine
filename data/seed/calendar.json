@@ -130,11 +130,11 @@
   {
     "id": "2026-10-04-tot-a",
     "date": "2026-10-04",
-    "kickoff": "14:00",
+    "kickoff": "13:00",
     "opponent": "Tottenham Hotspur",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
-    "venue": "BetWright Stadium",
+    "venue": "Brisbane Road",
     "status": "scheduled",
     "sourceDiscrepancies": [
       {
@@ -162,11 +162,6 @@
     "id": "2026-10-18-eve-h",
     "date": "2026-10-18",
     "kickoff": "14:00",
-    "opponent": "Everton",
-    "homeAway": "home",
-    "competition": "Barclays Women's Super League",
-    "venue": "The CopperJax Community Stadium",
-    "status": "scheduled",
     "kickoffVerification": {
       "value": "14:00",
       "checkedAt": "2026-10-01T15:15:00Z",
@@ -175,6 +170,11 @@
         "https://www.wslfootball.com/news/wsl/barclays-women-s-super-league-round-five-broadcast-picks-confirmed"
       ]
     },
+    "opponent": "Everton",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium",
+    "status": "scheduled",
     "sourceDiscrepancies": [
       {
         "field": "kickoff",
