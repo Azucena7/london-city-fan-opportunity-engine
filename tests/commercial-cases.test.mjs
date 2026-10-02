@@ -45,7 +45,7 @@ test("new commercial views are discoverable from the product and case overview",
     source("src/components/MarketingNav.tsx"), source("src/components/ProductJourneyNav.tsx"),
     source("src/app/page.tsx"), source("src/app/pilot/page.tsx"), source("src/components/LondonCityCase.tsx")
   ]);
-  for (const page of [marketingNav, product, pilot]) assert.match(page, /href[=:]\s*"\/for-clubs"/);
+  assert.match(marketingNav, /\/for-clubs#demo/);\n  assert.match(product, /\/for-clubs#demo/);\n  assert.match(pilot, /href[=:]\s*"\/for-clubs"/);
   assert.doesNotMatch(appNav, /href[=:]\s*"\/for-clubs"/);
   assert.match(appNav, /href="\/"/);
   assert.match(overview, /href="\/live\/london-city\/everton"/);
