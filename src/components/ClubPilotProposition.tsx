@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ProductJourneyNav } from "./ProductJourneyNav";
+import { MarketingNav } from "./MarketingNav";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLanguage } from "./LanguageProvider";
 
@@ -35,7 +35,7 @@ export function ClubPilotProposition() {
   }
 
   return <main className="productShell commercialShell">
-    <ProductJourneyNav active="clubs" />
+    <MarketingNav />
     <div className="commercialLanguage"><LanguageSwitcher /></div>
     <header className="commercialHero">
       <p className="eyebrow">{es ? "PARA CLUBES · PILOTO PROPUESTO" : "FOR CLUBS · PROPOSED PILOT"}</p>
@@ -43,7 +43,7 @@ export function ClubPilotProposition() {
       <p>{es ? "Conectar calendario, contexto y señales de afición para elegir qué probar, quién lo aprueba y cómo aprender del resultado." : "Connect the calendar, context and supporter signals to choose what to test, who approves it and how to learn from the outcome."}</p>
       <p className="commercialScope">{es ? "90 días · 6 partidos propuestos · un objetivo prioritario" : "90 days · 6 proposed fixtures · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
-      <div className="caseOverviewLinks"><a className="productButton" href="#pilot-discussion">{es ? "Preparar la conversación →" : "Prepare the discussion →"}</a><Link href="/london-city">{es ? "Ver el caso London City →" : "View the London City example →"}</Link></div>
+      <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar la conversación →" : "Prepare the discussion →"}</a><Link href="/live/london-city">{es ? "Ver el caso London City →" : "View the London City example →"}</Link></div>
       <p><Link href="/club-demo">{es ? "Probar el espacio de cliente con datos de prueba →" : "Try the client workspace with test data →"}</Link></p>
     </header>
 
@@ -77,12 +77,12 @@ export function ClubPilotProposition() {
 
     <section className="commercialPanel">
       <h2>{es ? "Dos ejemplos, dos estados distintos" : "Two examples, two different states"}</h2>
-      <div className="commercialTwoColumns"><article><h3>Everton</h3><p>{es ? "Una propuesta de repetición pendiente de audiencia, aprobación y tracking. No está activada." : "A repeat-visit proposal awaiting audience, approval and tracking. Not activated."}</p><Link href="/london-city/everton">{es ? "Ver decisión propuesta →" : "View the proposed decision →"}</Link></article><article><h3>Brighton</h3><p>{es ? "Una coincidencia entre hipótesis y anuncio público. Ejecución e impacto comercial aún no verificados." : "Alignment between a hypothesis and a public announcement. Delivery and commercial impact remain unverified."}</p><Link href="/london-city/brighton">{es ? "Ver comparación histórica →" : "View the historical comparison →"}</Link></article></div>
+      <div className="commercialTwoColumns"><article><h3>Everton</h3><p>{es ? "Una propuesta de repetición pendiente de audiencia, aprobación y tracking. No está activada." : "A repeat-visit proposal awaiting audience, approval and tracking. Not activated."}</p><Link href="/live/london-city/everton">{es ? "Ver decisión propuesta →" : "View the proposed decision →"}</Link></article><article><h3>Brighton</h3><p>{es ? "Una coincidencia entre hipótesis y anuncio público. Ejecución e impacto comercial aún no verificados." : "Alignment between a hypothesis and a public announcement. Delivery and commercial impact remain unverified."}</p><Link href="/live/london-city/brighton">{es ? "Ver comparación histórica →" : "View the historical comparison →"}</Link></article></div>
       <p>{es ? "London City es un caso de demostración independiente. No implica que el club sea cliente, haya visto el prototipo o lo haya utilizado." : "London City is an independent demonstration case. It does not imply the club is a customer or has seen or used the prototype."}</p>
     </section>
 
-    <section className="commercialPanel" id="pilot-discussion" aria-labelledby="discussion-title">
-      <h2 id="discussion-title">{es ? "Preparar una conversación de piloto" : "Prepare a pilot discussion"}</h2>
+    <section className="commercialPanel" id="demo" aria-labelledby="discussion-title">
+      <h2 id="discussion-title">{es ? "Solicitar una demo para el club" : "Request a club demo"}</h2>
       <p>{es ? "Selecciona el punto de partida y copia un resumen para compartir por tu propio canal. Estas selecciones no se envían ni solicitan datos personales." : "Select a starting point and copy a summary to share through your own channel. These selections are not submitted and request no personal data."}</p>
       <div className="commercialTwoColumns commercialFields">
         <label htmlFor="pilot-goal">{es ? "Objetivo prioritario" : "Priority objective"}<select id="pilot-goal" value={goal} onChange={(event) => { setGoal(event.target.value); setCopyState("idle"); }}>{Object.entries(goals).map(([key, value]) => <option key={key} value={key}>{value}</option>)}</select></label>
