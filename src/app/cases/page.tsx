@@ -59,7 +59,7 @@ export default function CasesPage() {
                 {item.evidenceState === "historical-case" ? (
                   <Link href={`/results?fixture=${item.fixtureId}`}>Review this fixture →</Link>
                 ) : item.evidenceState === "live-decision-case" ? (
-                  <Link href={`/matches/${item.fixtureId}`}>Open match plan →</Link>
+                  <Link href={`/app/matches/${item.fixtureId}`}>Open match plan →</Link>
                 ) : (
                   <span>Planning case only</span>
                 )}
@@ -86,8 +86,8 @@ export default function CasesPage() {
       </section>
 
       <section className={styles.footerRow}>
-        <Link className={styles.textLink} href="/matches">← Matches</Link>
-        <Link className={styles.button} href="/matches">Open current match plan →</Link>
+        <Link className={styles.textLink} href="/app/matches">← Matches</Link>
+        <Link className={styles.button} href="/app/matches">Open current match plan →</Link>
       </section>
     </main>
   );
