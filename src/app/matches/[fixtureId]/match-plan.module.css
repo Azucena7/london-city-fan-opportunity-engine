@@ -13,3 +13,28 @@
 .decisionFacts strong{margin-top:8px;font-size:18px;line-height:1.3}
 .decisionFacts small{margin-top:7px;color:#bac4be;line-height:1.35}
 @media(max-width:900px){.decisionCockpit{grid-template-columns:1fr}.decisionFacts{grid-template-columns:1fr}.decisionFacts article,.decisionFacts article:nth-child(2n),.decisionFacts article:nth-child(n+3){border-right:0;border-bottom:1px solid rgba(255,255,255,.1)}.decisionFacts article:last-child{border-bottom:0}}
+
+
+/* AVELA opportunity brief */
+.opportunityBrief{padding:38px 0;border-top:1px solid #d9dfda}
+.briefIntro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(320px,1.2fr);gap:38px;align-items:start;margin-bottom:20px}
+.briefIntro h2{margin:0;font-size:clamp(30px,4vw,44px);line-height:1.04;letter-spacing:-.045em}
+.briefIntro p{margin:0;color:#606c64;font-size:15px;line-height:1.6}
+.briefGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.briefGrid article{min-height:170px;padding:22px;background:#fff;border:1px solid #d9dfda}
+.briefGrid article>span,.briefGrid article>strong,.briefGrid article>small{display:block}
+.briefGrid article>span{font-size:10px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#748078}
+.briefGrid article>strong{margin-top:26px;font-size:18px;line-height:1.4}
+.briefGrid article>small{margin-top:10px;color:#748078;font-size:12px;line-height:1.4}
+.briefRisk{background:#fff9f3!important;border-color:#dfcbbd!important}
+.changeCourse{margin-top:10px;background:#142019;color:#fff;border:1px solid #142019}
+.changeCourse summary{cursor:pointer;padding:18px 20px;font-size:13px;font-weight:900;list-style:none}
+.changeCourse summary::-webkit-details-marker{display:none}
+.changeCourse summary::after{content:"+";float:right;font-size:18px;line-height:1}
+.changeCourse[open] summary::after{content:"−"}
+.changeCourse ul{margin:0;padding:18px 38px 22px;border-top:1px solid rgba(255,255,255,.12);color:#d4dbd6;line-height:1.55}
+@media(max-width:900px){
+  .briefIntro,.briefGrid{grid-template-columns:1fr}
+  .briefGrid article{min-height:0}
+  .briefGrid article>strong{margin-top:14px}
+}
