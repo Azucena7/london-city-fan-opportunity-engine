@@ -41,11 +41,13 @@ test("pilot discussion remains local with honest copy and no fabricated contact"
 });
 
 test("new commercial views are discoverable from the product and case overview", async () => {
-  const [nav, product, pilot, overview] = await Promise.all([
-    source("src/components/ProductJourneyNav.tsx"), source("src/app/page.tsx"),
-    source("src/app/pilot/page.tsx"), source("src/components/LondonCityCase.tsx")
+  const [marketingNav, appNav, product, pilot, overview] = await Promise.all([
+    source("src/components/MarketingNav.tsx"), source("src/components/ProductJourneyNav.tsx"),
+    source("src/app/page.tsx"), source("src/app/pilot/page.tsx"), source("src/components/LondonCityCase.tsx")
   ]);
-  for (const page of [nav, product, pilot]) assert.match(page, /href[=:]\s*"\/for-clubs"/);
+  for (const page of [marketingNav, product, pilot]) assert.match(page, /href[=:]\s*"\/for-clubs"/);
+  assert.doesNotMatch(appNav, /href[=:]\s*"\/for-clubs"/);
+  assert.match(appNav, /href="\/"/);
   assert.match(overview, /href="\/london-city\/everton"/);
   assert.match(overview, /href="\/london-city\/brighton"/);
 });
