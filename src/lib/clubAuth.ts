@@ -1,10 +1,11 @@
 import { getSupabaseConfiguration } from "./clubConnectionHealth";
 
+import { isRole, isArea, isAction, type ClubRole, type ClubPermission } from "./clubPermissions";
+
 type Environment = Parameters<typeof getSupabaseConfiguration>[0] & { CLUB_PRIVATE_ACCESS_ENABLED?: string };
-export type ClubMembership = { clubId: string; clubName: string; role: "admin" | "operator" | "approver" | "viewer" };
+export type ClubMembership = { clubId: string; clubName: string; role: ClubRole; permissions: ClubPermission[] };
 export type ClubIdentity = { userId: string; memberships: ClubMembership[] };
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const roles = new Set(["admin", "operator", "approver", "viewer"]);
 const tokenPattern = /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/;
 
 export function privateAccessConfigured(env: Environment): boolean {
@@ -40,9 +41,20 @@ export async function verifyClubIdentity(env: Environment, token: string, reques
   if (!Array.isArray(rows) || rows.length === 0 || rows.length > 100) return null;
   const memberships: ClubMembership[] = [];
   for (const row of rows) {
-    if (!row || !uuid.test(row.club_id) || !roles.has(row.role)
+    if (!row || !uuid.test(row.club_id) || !isRole(row.role)
       || !row.clubs || typeof row.clubs.name !== "string" || row.clubs.name.length > 120) return null;
-    memberships.push({ clubId: row.club_id, clubName: row.clubs.name, role: row.role });
+    memberships.push({ clubId: row.club_id, clubName: row.clubs.name, role: row.role, permissions: [] });
+  }
+  const matrix = await call("/rest/v1/rpc/club_permission_matrix", token, {});
+  if (!Array.isArray(matrix) || matrix.length > 9000) return null;
+  const seen = new Set<string>();
+  for (const row of matrix) {
+    if (!row || !isArea(row.area) || !isAction(row.action)) return null;
+    const member = memberships.find(m => m.clubId === row.club_id);
+    const key = `${row.club_id}:${row.area}:${row.action}`;
+    if (!member || seen.has(key)) return null;
+    seen.add(key);
+    member.permissions.push({ area: row.area, action: row.action });
   }
   return { userId: user.id, memberships };
 }
