@@ -252,6 +252,38 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
   assert.match(nav, /\/app\/demo/);
 });
 
+test("club campaign workspace supports authenticated multi-user persistence with RLS", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const server = read("src/lib/supabaseServer.ts");
+  const session = read("src/app/api/auth/session/route.ts");
+  const login = read("src/app/api/auth/login/route.ts");
+  const workspace = read("src/app/api/campaign-workspace/[fixtureId]/route.ts");
+  const ledger = read("src/app/api/credit-ledger/route.ts");
+  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+
+  assert.match(builder, /Connect club workspace/);
+  assert.match(builder, /Pilot account sign-in/);
+  assert.match(builder, /Saved to \$\{clubs/);
+  assert.match(builder, /\/api\/campaign-workspace/);
+  assert.match(builder, /\/api\/credit-ledger/);
+  assert.match(builder, /eventKey/);
+  assert.match(builder, /Remote persistence is protected by club membership and row-level security/);
+
+  assert.match(server, /httpOnly: true/);
+  assert.match(server, /sameSite: "lax"/);
+  assert.match(session, /club_members/);
+  assert.match(login, /grant_type=password/);
+  assert.match(workspace, /on_conflict=club_id,fixture_id/);
+  assert.match(ledger, /on_conflict=event_key/);
+
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /viewer','editor','approver','admin/);
+  assert.match(migration, /campaign_workspaces/);
+  assert.match(migration, /credit_ledger/);
+  assert.match(migration, /event_key text unique/);
+  assert.match(migration, /auth\.uid\(\)/);
+});
+
 test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const route = read("src/app/api/campaign-draft/route.ts");
