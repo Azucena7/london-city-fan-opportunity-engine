@@ -83,3 +83,21 @@
 .reopen{width:100%;margin-top:8px;min-height:38px;padding:8px 10px;border:1px solid #cdd5cf;background:#fff;color:#132019;font-size:11px;font-weight:850;cursor:pointer}
 .reopen:disabled{opacity:.55;cursor:default}
 @media(max-width:700px){.reviewFlow{grid-template-columns:1fr 1fr}}
+
+.history{margin-top:14px;padding:24px;background:#fff;border:1px solid #d9dfda}
+.historyHead{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+.historyHead>div>span{font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:#728078}
+.historyHead h3{margin:7px 0 8px;font-size:24px;letter-spacing:-.035em}
+.historyHead p{max-width:760px;margin:0;color:#66736b;line-height:1.5}
+.historyHead>strong{white-space:nowrap;padding:8px 10px;border-radius:999px;background:#eef1ec;font-size:11px}
+.timeline{margin-top:18px;border-top:1px solid #e1e5e2}
+.timeline article{position:relative;display:grid;grid-template-columns:18px 1fr;gap:12px;padding:18px 0;border-bottom:1px solid #e5e8e6}
+.timelineDot{width:9px;height:9px;margin-top:4px;border-radius:50%;background:#6f7c73}
+.timeline article span,.timeline article strong,.timeline article small{display:block}
+.timeline article span{font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#77827b}
+.timeline article strong{margin-top:4px;font-size:14px}
+.timeline article p{margin:6px 0;color:#647168;line-height:1.45;font-size:12px}
+.timeline article small{color:#7b857f;font-size:11px}
+.historyEmpty{margin-top:18px;padding:18px;background:#f7f8f6;border:1px dashed #ced6d0}
+.historyEmpty p{margin:6px 0 0;color:#728078;font-size:13px}
+@media(max-width:760px){.historyHead{flex-direction:column}.historyHead>strong{white-space:normal}}

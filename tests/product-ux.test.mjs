@@ -333,6 +333,31 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(env, /AI_GATEWAY_MODEL=/);
 });
 
+test("campaign history records shared fixture milestones without conflating them with the credit ledger", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const route = read("src/app/api/campaign-history/[fixtureId]/route.ts");
+  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+
+  assert.match(builder, /Campaign history/);
+  assert.match(builder, /One timeline from review to launch handoff/);
+  assert.match(builder, /\/api\/campaign-history/);
+  assert.match(builder, /draft-generated/);
+  assert.match(builder, /Campaign moved to review/);
+  assert.match(builder, /Campaign credits reserved/);
+  assert.match(builder, /Campaign reopened/);
+  assert.match(builder, /Launch handoff prepared/);
+
+  assert.match(route, /campaign_activity/);
+  assert.match(route, /on_conflict=event_key/);
+  assert.match(route, /launch-handoff/);
+  assert.match(route, /Authentication required/);
+
+  assert.match(migration, /create table if not exists public\.campaign_activity/);
+  assert.match(migration, /campaign viewers can read activity/);
+  assert.match(migration, /campaign editors can add activity/);
+  assert.match(migration, /club_has_permission\(club_id, 'campaigns', 'view'\)/);
+});
+
 test("campaign flow reviews scope before reserving credits and never simulates launch", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
 

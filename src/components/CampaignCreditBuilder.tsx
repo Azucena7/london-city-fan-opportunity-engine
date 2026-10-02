@@ -8,6 +8,14 @@ type CreditCategory = "creation" | "adaptation" | "automation" | "deployment";
 type GeneratableItem = "crm-email" | "vertical-video";
 type GeneratedDraft = Record<string, string | string[]>;
 type ClubWorkspaceClub = { id: string; name: string; role: string };
+type CampaignActivityEvent = {
+  id: string;
+  event_type: "review" | "draft-generated" | "reserve" | "release" | "launch-handoff";
+  label: string;
+  detail?: string | null;
+  metadata?: Record<string, unknown>;
+  created_at: string;
+};
 
 type CampaignItem = {
   id: string;
@@ -87,6 +95,7 @@ export function CampaignCreditBuilder({
   const [reservationBusy, setReservationBusy] = useState(false);
   const [reservationError, setReservationError] = useState<string | null>(null);
   const [launchHandoffReady, setLaunchHandoffReady] = useState(false);
+  const [activity, setActivity] = useState<CampaignActivityEvent[]>([]);
 
   const storageKey = `fan-growth-engine:campaign-workspace:${fixtureId}`;
 
@@ -156,6 +165,28 @@ export function CampaignCreditBuilder({
     }
   }
 
+  async function loadCampaignActivity(clubId: string) {
+    const response = await fetch(`/api/campaign-history/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
+    const result = await response.json() as { events?: CampaignActivityEvent[] };
+    setActivity(response.ok && Array.isArray(result.events) ? result.events : []);
+  }
+
+  async function recordActivity(
+    eventType: CampaignActivityEvent["event_type"],
+    eventKey: string,
+    label: string,
+    detail: string,
+    metadata: Record<string, unknown> = {}
+  ) {
+    if (!activeClubId) return;
+    const response = await fetch(`/api/campaign-history/${encodeURIComponent(fixtureId)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ clubId: activeClubId, eventType, eventKey, label, detail, metadata })
+    });
+    if (response.ok) await loadCampaignActivity(activeClubId);
+  }
+
   async function loadClubWorkspace(clubId: string) {
     setRemoteReady(false);
     const response = await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
@@ -168,6 +199,7 @@ export function CampaignCreditBuilder({
       applyWorkspaceState(result.workspace.state, result.workspace.status);
     }
 
+    if (response.ok) await loadCampaignActivity(clubId);
     setRemoteReady(response.ok);
   }
 
@@ -346,6 +378,13 @@ export function CampaignCreditBuilder({
 
       setReservedCampaignCredits(reservationRequired);
       setLaunchHandoffReady(false);
+      await recordActivity(
+        "reserve",
+        `${fixtureId}:campaign:reserve-history`,
+        "Campaign credits reserved",
+        `${reservationRequired} additional credits reserved after review.`,
+        { credits: reservationRequired, totalPlanned: total, existingCommitted: committedCredits }
+      );
     } catch (error) {
       setReservationError(error instanceof Error ? error.message : "Campaign reservation failed.");
     } finally {
@@ -376,6 +415,13 @@ export function CampaignCreditBuilder({
         if (!response.ok) throw new Error("Reserved credits could not be released.");
       }
 
+      await recordActivity(
+        "release",
+        `${fixtureId}:campaign:release-history:${reservedCampaignCredits}`,
+        "Campaign reopened",
+        `${reservedCampaignCredits} reserved credits released and scope reopened for editing.`,
+        { credits: reservedCampaignCredits }
+      );
       setReservedCampaignCredits(0);
       setWorkspaceStatus("draft");
       setLaunchHandoffReady(false);
@@ -386,9 +432,16 @@ export function CampaignCreditBuilder({
     }
   }
 
-  function prepareLaunchHandoff() {
+  async function prepareLaunchHandoff() {
     if (!canPrepareLaunch) return;
     setLaunchHandoffReady(true);
+    await recordActivity(
+      "launch-handoff",
+      `${fixtureId}:campaign:launch-handoff`,
+      "Launch handoff prepared",
+      "Campaign is ready for an external connector or manual execution handoff. No publishing or spend occurred.",
+      { channels: activeChannels, plannedCredits: total }
+    );
   }
 
   async function generateDraft(type: GeneratableItem) {
@@ -409,6 +462,13 @@ export function CampaignCreditBuilder({
       }
 
       setDrafts((current) => ({ ...current, [type]: result.draft }));
+      await recordActivity(
+        "draft-generated",
+        `${fixtureId}:${type}:draft-generated`,
+        `${catalogue.find((item) => item.id === type)?.label ?? type} generated`,
+        "Approval-ready content draft generated from the campaign strategy.",
+        { itemId: type }
+      );
 
       if (activeClubId) {
         const ledgerResponse = await fetch("/api/credit-ledger", {
@@ -673,7 +733,7 @@ export function CampaignCreditBuilder({
               ) : launchHandoffReady ? (
                 <button className={styles.launch} type="button" disabled>Launch campaign · connector required</button>
               ) : (
-                <button className={styles.launch} type="button" disabled={!canPrepareLaunch} onClick={prepareLaunchHandoff}>
+                <button className={styles.launch} type="button" disabled={!canPrepareLaunch} onClick={() => void prepareLaunchHandoff()}>
                   Prepare launch handoff
                 </button>
               )}
@@ -754,7 +814,21 @@ export function CampaignCreditBuilder({
 
             <div className={styles.productionActions}>
               <span><strong>{committedCredits}</strong> credits committed to generated content</span>
-              <button type="button" disabled={hasReservation} onClick={() => setWorkspaceStatus((current) => current === "draft" ? "review-ready" : "draft")}>
+              <button type="button" disabled={hasReservation} onClick={() => {
+                setWorkspaceStatus((current) => {
+                  const next = current === "draft" ? "review-ready" : "draft";
+                  if (next === "review-ready") {
+                    void recordActivity(
+                      "review",
+                      `${fixtureId}:campaign:review:${total}:${selectedCount}`,
+                      "Campaign moved to review",
+                      `${selectedCount} items · ${total} planned credits · ${missingRecommended.length} recommended items removed.`,
+                      { selectedCount, total, missingRecommended: missingRecommended.length, channels: activeChannels }
+                    );
+                  }
+                  return next;
+                });
+              }}>
                 {hasReservation ? "Scope locked by reservation" : workspaceStatus === "review-ready" ? "Return to draft" : "Review campaign"}
               </button>
             </div>
@@ -790,6 +864,38 @@ export function CampaignCreditBuilder({
               <div className={styles.productionEmpty}>
                 <strong>No credits committed yet.</strong>
                 <p>Generate the CRM email or vertical video draft from the campaign builder above.</p>
+              </div>
+            )}
+          </section>
+
+          <section className={styles.history} aria-label="Campaign activity history">
+            <div className={styles.historyHead}>
+              <div>
+                <span>Campaign history</span>
+                <h3>One timeline from review to launch handoff.</h3>
+                <p>Signed-in club activity is written to the shared fixture workspace so teams can see what changed and when.</p>
+              </div>
+              <strong>{activeClubId ? `${activity.length} recorded event${activity.length === 1 ? "" : "s"}` : "Sign in to record shared history"}</strong>
+            </div>
+
+            {activity.length ? (
+              <div className={styles.timeline}>
+                {activity.map((event) => (
+                  <article key={event.id}>
+                    <div className={styles.timelineDot} aria-hidden="true" />
+                    <div>
+                      <span>{event.event_type.replaceAll("-", " ")}</span>
+                      <strong>{event.label}</strong>
+                      {event.detail ? <p>{event.detail}</p> : null}
+                      <small>{new Date(event.created_at).toLocaleString("en-GB")}</small>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className={styles.historyEmpty}>
+                <strong>No shared campaign history yet.</strong>
+                <p>Reviewing scope, generating drafts, reserving credits and preparing launch handoff will create the timeline for authenticated club users.</p>
               </div>
             )}
           </section>
