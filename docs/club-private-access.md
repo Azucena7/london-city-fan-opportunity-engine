@@ -1,6 +1,6 @@
 # Private club access foundation
 
-Routes: `/club/sign-in` (entry) and `/club` (server-protected memberships).
+Routes: `/club/sign-in` (entry) and `/club` (server-protected workspace and effective permissions).
 The public operations demo stays separate and contains only synthetic data.
 
 Access is OFF by default. Enable only after completing these steps in the approved
@@ -12,7 +12,7 @@ or `CLUB_SUPABASE_ANON_KEY`. If any CLUB variable exists, the entire CLUB
 namespace is selected; old unprefixed variables are not mixed or used as fallback.
 The app does not read provider secret keys or Postgres credentials for login or health.
 
-1. Set `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` (or legacy anon key) in Vercel.
+1. Keep the installed `CLUB_SUPABASE_URL` and `CLUB_SUPABASE_PUBLISHABLE_KEY` (or legacy CLUB anon key) in Vercel.
 2. Review and apply `supabase/migrations/20261002_club_membership.sql`.
 3. Disable public signup in Supabase. Invite test accounts using trusted project
    administration; users must finish the provider's invitation/password setup.
@@ -39,8 +39,30 @@ projects need a future CAPTCHA flow and fail closed with this form.
 
 Not yet implemented: private campaign persistence, member administration UI,
 password recovery UI, MFA/SSO, immutable audit, external campaign execution.
-No real user login or SQL test has been run while production configuration is
-missing. Unit tests with mocked provider responses do not prove database RLS.
+On 2026-10-02 the fresh schema was applied to supabase-cyan-xylophone.
+Live SQL tests passed for isolation, read-only access, role escalation prevention,
+individual grants/denials, view-deny precedence and revocation. Synthetic accounts
+and clubs were rolled back; follow-up counts confirmed zero clubs/memberships,
+eight profiles and four RLS-protected tables. No real invited-user login has been
+tested, and production private access remains disabled.
+
+Profiles: admin, marketing, communications, ticketing, business, compliance,
+direction and viewer. No baseline grants launch/export. Application users cannot
+write membership roles, overrides or role templates. Private identity verification
+gets effective permissions from club_permission_matrix using the user token.
+New domain tables must enforce club_has_permission in their RLS; application
+endpoints must also use requireClubPermission. Helpers do not replace domain RLS.
+
+The public /club-demo/permissions preview cannot grant access. Regenerate an
+unapplied schema with node scripts/generate-club-permissions-migration.mjs;
+use --check to detect drift. The 20261002 migration is already applied here:
+do not re-run it or overwrite it to upgrade a deployed database. Future changes
+need a new migration.
+
+The Vercel query editor only accepts one prepared statement. The schema was
+applied as one DO block executing its DDL without outer BEGIN/COMMIT, preserving
+atomicity. Live isolation checks used a DO subtransaction and a distinct caught
+success exception to roll back every test fixture; other errors propagate.
 
 References:
 - https://github.com/supabase/auth/blob/master/openapi.yaml
