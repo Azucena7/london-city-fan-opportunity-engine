@@ -333,6 +333,30 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(env, /AI_GATEWAY_MODEL=/);
 });
 
+test("club setup context differentiates the engine from replacement CRM and generic campaign tools", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const draftRoute = read("src/app/api/campaign-draft/route.ts");
+  const home = read("src/app/page.tsx");
+
+  assert.match(builder, /Built above the club&apos;s existing stack — not instead of it/);
+  assert.match(builder, /Connected stack/);
+  assert.match(builder, /Handoff/);
+  assert.match(builder, /clubId: activeClubId/);
+  assert.match(builder, /\/api\/club-setup/);
+
+  assert.match(draftRoute, /club_setup/);
+  assert.match(draftRoute, /connected_channels/);
+  assert.match(draftRoute, /priority_objectives/);
+  assert.match(draftRoute, /brand_rules/);
+  assert.match(draftRoute, /Follow this club tone/);
+  assert.match(draftRoute, /Respect this club must-avoid rule/);
+
+  assert.match(home, /Decision intelligence layer for football clubs/);
+  assert.match(home, /Works above CRM, ticketing and social/);
+  assert.match(home, /missing layer is not another system of record/);
+  assert.match(home, /women&apos;s-football proving ground/);
+});
+
 test("club setup persists reusable fixture, channel, objective, brand and approval context", () => {
   const setup = read("src/components/ClubSetup.tsx");
   const route = read("src/app/api/club-setup/route.ts");
