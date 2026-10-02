@@ -115,7 +115,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="salesOutcome">
+      <section className="salesOutcome" id="how-it-works">
         <div className="salesSectionIntro">
           <span className="salesKicker">What the club gets</span>
           <h2>One decision workflow for every priority fixture.</h2>
