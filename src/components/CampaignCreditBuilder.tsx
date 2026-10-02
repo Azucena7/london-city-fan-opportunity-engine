@@ -7,6 +7,7 @@ type Tier = "explorer" | "club" | "club-pro";
 type CreditCategory = "creation" | "adaptation" | "automation" | "deployment";
 type GeneratableItem = "crm-email" | "vertical-video";
 type GeneratedDraft = Record<string, string | string[]>;
+type ClubWorkspaceClub = { id: string; name: string; role: string };
 
 type CampaignItem = {
   id: string;
@@ -74,6 +75,14 @@ export function CampaignCreditBuilder({
   const [generationError, setGenerationError] = useState<string | null>(null);
   const [workspaceStatus, setWorkspaceStatus] = useState<"draft" | "review-ready">("draft");
   const [workspaceLoaded, setWorkspaceLoaded] = useState(false);
+  const [remoteConfigured, setRemoteConfigured] = useState<boolean | null>(null);
+  const [clubs, setClubs] = useState<ClubWorkspaceClub[]>([]);
+  const [activeClubId, setActiveClubId] = useState<string | null>(null);
+  const [remoteReady, setRemoteReady] = useState(false);
+  const [remoteSaving, setRemoteSaving] = useState(false);
+  const [accountEmail, setAccountEmail] = useState("");
+  const [accountPassword, setAccountPassword] = useState("");
+  const [accountError, setAccountError] = useState<string | null>(null);
 
   const storageKey = `fan-growth-engine:campaign-workspace:${fixtureId}`;
 
@@ -116,6 +125,135 @@ export function CampaignCreditBuilder({
       savedAt: new Date().toISOString()
     }));
   }, [drafts, extraCredits, fixtureId, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
+
+  function applyWorkspaceState(state: Record<string, unknown>, status?: string) {
+    const workspace = state as {
+      selected?: string[];
+      variants?: Record<string, number>;
+      extraCredits?: number;
+      drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
+      workspaceStatus?: "draft" | "review-ready";
+    };
+
+    if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
+    if (workspace.variants) setVariants(workspace.variants);
+    if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
+    if (workspace.drafts) setDrafts(workspace.drafts);
+    if (status === "review-ready" || workspace.workspaceStatus === "review-ready") {
+      setWorkspaceStatus("review-ready");
+    } else {
+      setWorkspaceStatus("draft");
+    }
+  }
+
+  async function loadClubWorkspace(clubId: string) {
+    setRemoteReady(false);
+    const response = await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
+    const result = await response.json() as {
+      workspace?: { state?: Record<string, unknown>; status?: string } | null;
+      error?: string;
+    };
+
+    if (response.ok && result.workspace?.state) {
+      applyWorkspaceState(result.workspace.state, result.workspace.status);
+    }
+
+    setRemoteReady(response.ok);
+  }
+
+  async function loadAccountSession() {
+    try {
+      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const result = await response.json() as {
+        authenticated?: boolean;
+        configured?: boolean;
+        clubs?: ClubWorkspaceClub[];
+      };
+
+      setRemoteConfigured(Boolean(result.configured));
+      const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
+      setClubs(nextClubs);
+
+      if (result.authenticated && nextClubs.length) {
+        const preferred = nextClubs.some((club) => club.id === activeClubId) ? activeClubId : nextClubs[0].id;
+        setActiveClubId(preferred);
+        if (preferred) await loadClubWorkspace(preferred);
+      } else {
+        setActiveClubId(null);
+        setRemoteReady(false);
+      }
+    } catch {
+      setRemoteConfigured(false);
+      setActiveClubId(null);
+      setRemoteReady(false);
+    }
+  }
+
+  useEffect(() => {
+    void loadAccountSession();
+  }, [fixtureId]);
+
+  useEffect(() => {
+    if (!workspaceLoaded || !remoteReady || !activeClubId) return;
+
+    const timer = window.setTimeout(async () => {
+      setRemoteSaving(true);
+      try {
+        await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            clubId: activeClubId,
+            status: workspaceStatus,
+            state: {
+              version: 1,
+              fixtureId,
+              selected: Array.from(selected),
+              variants,
+              extraCredits,
+              drafts,
+              workspaceStatus
+            }
+          })
+        });
+      } finally {
+        setRemoteSaving(false);
+      }
+    }, 700);
+
+    return () => window.clearTimeout(timer);
+  }, [activeClubId, drafts, extraCredits, fixtureId, remoteReady, selected, variants, workspaceLoaded, workspaceStatus]);
+
+  async function signInToClubWorkspace() {
+    setAccountError(null);
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: accountEmail, password: accountPassword })
+    });
+    const result = await response.json() as { error?: string };
+
+    if (!response.ok) {
+      setAccountError(result.error || "Sign-in failed.");
+      return;
+    }
+
+    setAccountPassword("");
+    await loadAccountSession();
+  }
+
+  async function signOutOfClubWorkspace() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    setClubs([]);
+    setActiveClubId(null);
+    setRemoteReady(false);
+    setAccountError(null);
+  }
+
+  async function switchClub(clubId: string) {
+    setActiveClubId(clubId);
+    await loadClubWorkspace(clubId);
+  }
 
   const includedCredits = tierCredits[tier];
   const available = includedCredits + extraCredits;
@@ -184,6 +322,26 @@ export function CampaignCreditBuilder({
       }
 
       setDrafts((current) => ({ ...current, [type]: result.draft }));
+
+      if (activeClubId) {
+        const ledgerResponse = await fetch("/api/credit-ledger", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            clubId: activeClubId,
+            fixtureId,
+            itemId: type,
+            eventKey: `${fixtureId}:${type}:commit`,
+            eventType: "commit",
+            credits: catalogue.find((item) => item.id === type)?.baseCredits ?? 0,
+            note: "Credits committed when the first approval-ready draft was generated."
+          })
+        });
+
+        if (!ledgerResponse.ok) {
+          setGenerationError("Draft generated, but the club credit ledger could not be updated.");
+        }
+      }
     } catch (error) {
       setGenerationError(error instanceof Error ? error.message : "Draft generation failed.");
     } finally {
@@ -397,14 +555,69 @@ export function CampaignCreditBuilder({
               <div>
                 <span>Generative production</span>
                 <h3>Approval-ready drafts from the campaign strategy.</h3>
-                <p>Generation commits the creation credits shown on the selected item. Campaign choices and generated drafts are automatically saved on this device for this fixture.</p>
+                <p>Generation commits the creation credits shown on the selected item. Signed-in club users sync this workspace across devices; otherwise the current device remains the fallback.</p>
               </div>
               <div className={styles.workspaceState}>
                 <span>Workspace</span>
-                <strong>{workspaceLoaded ? "Saved on this device" : "Loading workspace…"}</strong>
-                <small>{workspaceStatus === "review-ready" ? "Marked ready for review" : "Draft in progress"}</small>
+                <strong>
+                  {activeClubId
+                    ? remoteSaving
+                      ? "Saving to club…"
+                      : `Saved to ${clubs.find((club) => club.id === activeClubId)?.name ?? "club"}`
+                    : workspaceLoaded
+                      ? "Saved on this device"
+                      : "Loading workspace…"}
+                </strong>
+                <small>
+                  {activeClubId
+                    ? `${clubs.find((club) => club.id === activeClubId)?.role ?? "member"} · ${workspaceStatus === "review-ready" ? "ready for review" : "draft in progress"}`
+                    : workspaceStatus === "review-ready" ? "Marked ready for review" : "Draft in progress"}
+                </small>
               </div>
             </div>
+
+            <div className={styles.accountPanel}>
+              {activeClubId ? (
+                <>
+                  <div>
+                    <span>Club workspace</span>
+                    <strong>{clubs.find((club) => club.id === activeClubId)?.name ?? "Connected club"}</strong>
+                    <small>Remote persistence is protected by club membership and row-level security.</small>
+                  </div>
+                  <div className={styles.accountControls}>
+                    {clubs.length > 1 ? (
+                      <select value={activeClubId} onChange={(event) => void switchClub(event.target.value)}>
+                        {clubs.map((club) => <option key={club.id} value={club.id}>{club.name}</option>)}
+                      </select>
+                    ) : null}
+                    <button type="button" onClick={() => void signOutOfClubWorkspace()}>Sign out</button>
+                  </div>
+                </>
+              ) : remoteConfigured ? (
+                <>
+                  <div>
+                    <span>Connect club workspace</span>
+                    <strong>Pilot account sign-in</strong>
+                    <small>Invited club users can restore campaigns, drafts and credit history on any device.</small>
+                  </div>
+                  <div className={styles.signInForm}>
+                    <input type="email" autoComplete="email" placeholder="Work email" value={accountEmail} onChange={(event) => setAccountEmail(event.target.value)} />
+                    <input type="password" autoComplete="current-password" placeholder="Password" value={accountPassword} onChange={(event) => setAccountPassword(event.target.value)} />
+                    <button type="button" onClick={() => void signInToClubWorkspace()}>Sign in</button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <span>Device workspace</span>
+                    <strong>Club sync not configured</strong>
+                    <small>Campaign state stays on this device until Supabase credentials and the club schema are enabled.</small>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {accountError ? <p className={styles.generationError}>{accountError}</p> : null}
 
             <div className={styles.productionActions}>
               <span><strong>{committedCredits}</strong> credits committed to generated content</span>
