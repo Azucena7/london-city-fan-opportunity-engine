@@ -29,7 +29,7 @@ Six fixture-by-fixture decision cycles combining the platform with a light intel
 The pilot is designed to prove value before asking a club to adopt a broader system.
 
 ## Core product flow
-**Opportunity → Action → Impact → Decision → Result → Learning**
+**Fixture → Recommended plan → Review → Handoff → Learning**
 
 ### Opportunity
 The most relevant attendance, repeat-visit or revenue opportunity around the next fixture.
@@ -81,17 +81,19 @@ Needs a concise view of opportunity, risk, decision readiness and result.
 
 ## Live product routes
 
+### Primary club journey
+- `/matches` — fixture-first club workspace
+- `/matches/[fixtureId]` — generated match plan, activation draft, evidence, signal review, impact and handoff
+- `/results` — Learning after matchday
+
+### Commercial / supporting routes
 - `/` — product / sales front
-- `/brief` — fixture-timed Morning Brief
-- `/opportunity` — current Opportunity workspace
-- `/demo` — guided London City walkthrough
-- `/decision-room` — auditable decision view
-- `/results` — Results & Learning
-- `/impact` — commercial scenario model
+- `/demo` — guided product story
 - `/pilot` — 90-day pilot proposition
 - `/pilot/operating-pack` — onboarding, data trust and measurement design
 - `/cases` — product use cases
-- `/today` — full intelligence engine
+
+Legacy decision and analyst routes remain available underneath, but are not primary club navigation.
 
 ## Non-goals
 
