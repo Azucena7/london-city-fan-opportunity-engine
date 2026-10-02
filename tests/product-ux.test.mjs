@@ -333,6 +333,34 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(env, /AI_GATEWAY_MODEL=/);
 });
 
+test("Opportunity Radar applies club context as advisory fit without changing evidence rank", () => {
+  const radar = read("src/lib/opportunityRadar.ts");
+  const matches = read("src/app/matches/page.tsx");
+  const context = read("src/lib/clubOperatingContext.ts");
+
+  assert.match(radar, /clubContext: ClubOperatingContext \| null = null/);
+  assert.match(radar, /affectsRank: false/);
+  assert.match(radar, /matchedObjectives/);
+  assert.match(radar, /activationChannels/);
+  assert.match(radar, /No direct club-priority match detected yet/);
+  assert.match(radar, /const rank = priorityRank/);
+  assert.ok(radar.indexOf("const rank = priorityRank") < radar.indexOf("deriveClubFit"));
+  assert.doesNotMatch(radar.slice(radar.indexOf("function priorityRank"), radar.indexOf("function deriveClubFit")), /ClubOperatingContext|priorityObjectives|connectedChannels/);
+
+  assert.match(matches, /getCurrentClubOperatingContext/);
+  assert.match(matches, /Context explains fit\. Evidence still sets the priority/);
+  assert.match(matches, /This context never changes the radar rank, confidence or evidence state/);
+  assert.match(matches, /Club fit · advisory only/);
+  assert.match(matches, /Club fit does not affect rank/);
+  assert.match(matches, /Evidence-only mode/);
+  assert.match(matches, /\/app\/setup/);
+
+  assert.match(context, /club_memberships/);
+  assert.match(context, /club_setup/);
+  assert.match(context, /currentSupabaseUser/);
+  assert.match(context, /return null/);
+});
+
 test("club setup context differentiates the engine from replacement CRM and generic campaign tools", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const draftRoute = read("src/app/api/campaign-draft/route.ts");
