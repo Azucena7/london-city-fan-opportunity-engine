@@ -43,7 +43,7 @@ export function LearningCampaignTrace({ fixtureId }: { fixtureId: string }) {
         setLoading(false);
       }
     })();
-  }, [fixtureId]);
+  }, [fixtureId]); // eslint-disable-line react-hooks/exhaustive-deps -- reload account state when the selected fixture changes
 
   const trace = useMemo(() => {
     const types = new Set(events.map((event) => event.event_type));
