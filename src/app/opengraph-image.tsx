@@ -62,10 +62,10 @@ export default function Image() {
             </div>
 
             {[
-              ["01", "Morning Brief"],
-              ["02", "Opportunity"],
-              ["03", "Decision"],
-              ["04", "Results"]
+              ["01", "Matches"],
+              ["02", "Match plan"],
+              ["03", "Review"],
+              ["04", "Learning"]
             ].map(([num, label]) => (
               <div key={num} style={{ display: "flex", alignItems: "center", padding: "15px 0", borderBottom: "1px solid rgba(255,255,255,0.09)" }}>
                 <div style={{ display: "flex", width: "38px", color: "#C7EA3A", fontSize: "11px", fontWeight: 800 }}>{num}</div>
