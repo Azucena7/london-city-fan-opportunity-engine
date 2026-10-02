@@ -7,7 +7,7 @@ export function ClubActionOverview({ action, date, lang, sources, onTasks }: { a
   const es = lang === "es";
   const tr = (a: string, b: string) => es ? a : b;
   const progress = actionTaskProgress(action);
-  const owners: Record<string, string> = { marketing: "Marketing", communications: tr("Comunicación", "Communications"), ticketing: "Ticketing", partnerships: "Partners" };
+  const owners: Record<string, string> = { marketing: "Marketing", communications: tr("Comunicación", "Communications"), ticketing: "Ticketing", business: tr("Negocio", "Business"), partnerships: "Partners" };
   const checks: [string, boolean][] = [[tr("Responsable", "Owner"), Boolean(action.owner)], [tr("Audiencia y exclusiones", "Audience and exclusions"), action.audienceReviewed], [tr("Medición", "Measurement"), action.measurement], [tr("Fuentes necesarias", "Required sources"), action.sources.every(id => sources[id] === "ready")], ...(action.id === "partners" ? [[tr("Derechos del partner", "Partner rights"), action.rights] as [string, boolean]] : [])];
   return <div className={styles.actionOverview}>
     <dl className={styles.overviewFacts}>
