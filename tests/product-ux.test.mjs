@@ -280,6 +280,15 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
   assert.doesNotMatch(page, /href="\/impact"/);
 });
 
+test("legacy club routes redirect into the fixture-first workspace", () => {
+  const config = read("next.config.mjs");
+  for (const route of ["/brief", "/opportunity", "/decision-room", "/impact"]) {
+    assert.match(config, new RegExp(route.replace("/", "\\/")));
+  }
+  assert.match(config, /destination: "\/matches"/);
+  assert.match(config, /permanent: true/);
+});
+
 test("commercial surfaces route users into the simplified club journey", () => {
   const cases = read("src/app/cases/page.tsx");
   const pilot = read("src/app/pilot/page.tsx");
