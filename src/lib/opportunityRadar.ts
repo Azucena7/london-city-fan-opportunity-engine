@@ -19,24 +19,6 @@ export type OpportunityRadarItem = {
   rank: number;
 };
 
-const lensRules: Array<{ label: string; pattern: RegExp }> = [
-  { label: "Player momentum", pattern: /player|alexia|lioness|international|selection|search|social/i },
-  { label: "Family / grassroots", pattern: /family|grassroots|academy|girls|youth|school/i },
-  { label: "City / culture", pattern: /event|city|culture|music|festival|tourism|local/i },
-  { label: "Fixture overlap", pattern: /competing|competition|overlap|clash|men.?s|women.?s football/i },
-  { label: "Attendance demand", pattern: /ticket|attendance|demand|buyer|repeat|conversion|inventory/i },
-  { label: "Access / matchday", pattern: /weather|transport|travel|venue|kickoff|mobility/i },
-  { label: "Partner fit", pattern: /partner|sponsor|commercial|brand/i }
-];
-
-function signalLenses(titles: string[]) {
-  const labels = lensRules
-    .filter((rule) => titles.some((title) => rule.pattern.test(title)))
-    .map((rule) => rule.label);
-
-  return Array.from(new Set(labels)).slice(0, 3);
-}
-
 function priorityRank(
   score: number | null,
   confidence: "High" | "Medium" | "Low",
@@ -85,7 +67,9 @@ export function buildOpportunityRadar(fixtureIds: string[]): OpportunityRadarIte
         daysToFixture: item.daysToFixture,
         signalCount: item.liveSignals.length,
         materialSignalCount,
-        lens: signalLenses(item.liveSignals.map((signal) => signal.title)),
+        lens: Array.from(new Set(item.liveSignals.map((signal) => signal.lens)))
+          .filter((lens) => lens !== "General context")
+          .slice(0, 3),
         radarState: radarState(rank, item.daysToFixture),
         rank
       };
