@@ -10,6 +10,7 @@ type Signal = {
   materiality: "high" | "medium" | "low";
   sourceName: string;
   sourceUrl: string;
+  lens?: string;
 };
 
 function confidence(active: Signal[]) {
@@ -87,7 +88,7 @@ export function MatchSignalControls({
                 />
                 <span className={styles.switch} aria-hidden="true" />
                 <div>
-                  <span>{signal.materiality} · {signal.state}</span>
+                  <span>{signal.lens ? `${signal.lens} · ` : ""}{signal.materiality} · {signal.state}</span>
                   <h3>{signal.title}</h3>
                 </div>
               </label>
