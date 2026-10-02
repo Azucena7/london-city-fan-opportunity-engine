@@ -333,6 +333,38 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(env, /AI_GATEWAY_MODEL=/);
 });
 
+test("club setup persists reusable fixture, channel, objective, brand and approval context", () => {
+  const setup = read("src/components/ClubSetup.tsx");
+  const route = read("src/app/api/club-setup/route.ts");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const page = read("src/app/app/setup/page.tsx");
+  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+
+  assert.match(setup, /Configure once\. Let every fixture start with context/);
+  assert.match(setup, /Fixture source/);
+  assert.match(setup, /connectedChannels/);
+  assert.match(setup, /priorityObjectives/);
+  assert.match(setup, /Brand rules/);
+  assert.match(setup, /Require campaign approval before reservation/);
+  assert.match(setup, /Admin role required/);
+  assert.match(setup, /Setup completeness/);
+
+  assert.match(route, /club_setup/);
+  assert.match(route, /on_conflict=club_id/);
+  assert.match(route, /Authentication required/);
+
+  assert.match(nav, /href: "\/app\/setup"/);
+  assert.match(nav, /label: "Setup"/);
+  assert.match(page, /ClubSetup/);
+
+  assert.match(migration, /create table if not exists public\.club_setup/);
+  assert.match(migration, /'campaigns', 'administer'/);
+  assert.match(migration, /connected_channels/);
+  assert.match(migration, /priority_objectives/);
+  assert.match(migration, /brand_rules/);
+  assert.match(migration, /approval_rules/);
+});
+
 test("Learning turns measured evidence into a bounded next-fixture adjustment", () => {
   const page = read("src/app/results/page.tsx");
   const component = read("src/components/NextFixtureLearning.tsx");
