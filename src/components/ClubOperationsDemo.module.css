@@ -32,6 +32,9 @@
 .sidebar nav button { text-align: left; background: transparent; border-color: transparent; }
 .sidebar nav button.active { background: #fffdf7; border-color: #aab99c; }
 .sidebar p { font-size: 13px; }
+.sidebar details { border-top: 1px solid #d1dbca; }
+.sidebar details button { display: block; width: 100%; text-align: left; margin-bottom: 8px; }
+.sidebar details button:last-child { margin-bottom: 16px; }
 .content { min-width: 0; }
 .pageHead h1 { font-size: clamp(30px,4vw,44px); line-height: 1.2; margin: 8px 0 14px; }
 .pageHead p { margin: 0; }
