@@ -45,12 +45,27 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <h1>London City <small>v</small> {fixture.opponent}</h1>
           <p>{fixture.date} · {fixture.kickoff ?? "TBC"} · {fixture.venue}</p>
         </div>
-        <aside className={styles.stateCard}>
+        <aside className={`${styles.stateCard} ${live.decisionState === "HOLD" ? styles.holdState : styles.readyState}`}>
           <span>Plan state</span>
           <strong>{live.decisionState}</strong>
           <p>{live.confidence.label} confidence · {live.liveSignals.length} sourced signals</p>
         </aside>
       </header>
+
+      <section className={styles.priorityBar} aria-label="Decision at a glance">
+        <div>
+          <span>Decision</span>
+          <strong>{live.decisionState}</strong>
+        </div>
+        <div>
+          <span>Do next</span>
+          <strong>{live.nextAction.label}</strong>
+        </div>
+        <div>
+          <span>Blocking gate</span>
+          <strong>{approvals.length ? live.primaryBlocker : "No blocking gate"}</strong>
+        </div>
+      </section>
 
       <section className={styles.recommendation}>
         <div>
@@ -98,30 +113,34 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       </section>
 
       <section className={styles.signalsSection}>
-        <div className={styles.sectionHead}>
-          <div>
-            <span className={styles.eyebrow}>Why this plan</span>
-            <h2>{live.liveSignals.length} signals are shaping the recommendation.</h2>
-          </div>
-          <span>Evidence is visible without becoming another workspace.</span>
-        </div>
+        <details className={styles.reasoningDetails}>
+          <summary>
+            <div>
+              <span className={styles.eyebrow}>Why this plan</span>
+              <strong>{live.liveSignals.length} signals · {live.confidence.label} confidence</strong>
+            </div>
+            <span>Review signals and evidence →</span>
+          </summary>
 
-        <MatchSignalControls
-          signals={live.liveSignals}
-          baseRecommendation={live.recommendedAction}
-        />
+          <div className={styles.reasoningBody}>
+            <MatchSignalControls
+              signals={live.liveSignals}
+              baseRecommendation={live.recommendedAction}
+            />
 
-        <details className={styles.evidenceDetails}>
-          <summary>Inspect evidence, assumptions and missing inputs</summary>
-          <ProductDataStateLegend />
-          <div className={styles.evidenceGrid}>
-            <article><span>Known</span><ul>{live.known.slice(0, 5).map((item) => <li key={item}>{item}</li>)}</ul></article>
-            <article><span>Assumed</span><ul>{live.assumptions.slice(0, 5).map((item) => <li key={item}>{item}</li>)}</ul></article>
-            <article><span>Missing</span><ul>{live.missing.slice(0, 5).map((item) => <li key={item}>{item}</li>)}</ul></article>
-          </div>
-          <div className={styles.changeDecision}>
-            <span>What would change the recommendation?</span>
-            <ul>{live.whatWouldChangeDecision.map((item) => <li key={item}>{item}</li>)}</ul>
+            <details className={styles.evidenceDetails}>
+              <summary>Inspect evidence, assumptions and missing inputs</summary>
+              <ProductDataStateLegend />
+              <div className={styles.evidenceGrid}>
+                <article><span>Known</span><ul>{live.known.slice(0, 5).map((item) => <li key={item}>{item}</li>)}</ul></article>
+                <article><span>Assumed</span><ul>{live.assumptions.slice(0, 5).map((item) => <li key={item}>{item}</li>)}</ul></article>
+                <article><span>Missing</span><ul>{live.missing.slice(0, 5).map((item) => <li key={item}>{item}</li>)}</ul></article>
+              </div>
+              <div className={styles.changeDecision}>
+                <span>What would change the recommendation?</span>
+                <ul>{live.whatWouldChangeDecision.map((item) => <li key={item}>{item}</li>)}</ul>
+              </div>
+            </details>
           </div>
         </details>
       </section>
