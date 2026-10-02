@@ -1,0 +1,11 @@
+.shell { max-width: 680px; margin: 0 auto; padding: 48px 24px 80px; line-height: 1.65; color: #162d27; }
+.shell h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; margin: 12px 0 24px; }
+.shell h2 { font-size: 1.25rem; line-height: 1.4; margin: 0 0 12px; }
+.shell a { color: #15563f; text-decoration: underline; text-underline-offset: 4px; }
+.eyebrow { margin-top: 40px; font-weight: 700; }
+.card { margin: 24px 0; padding: 24px; border: 1px solid #b8c9c1; border-radius: 16px; background: #fff; }
+.card p { margin: 12px 0; }
+.card label { display: block; font-weight: 600; margin: 20px 0 8px; }
+.card input { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid #69877a; border-radius: 8px; background: #fff; color: #162d27; font-size: 1rem; }
+.shell button { padding: 12px 20px; margin-top: 24px; border: 0; border-radius: 8px; background: #15563f; color: #fff; font: inherit; cursor: pointer; }
+.shell :focus-visible { outline: 3px solid #ddad25; outline-offset: 4px; }

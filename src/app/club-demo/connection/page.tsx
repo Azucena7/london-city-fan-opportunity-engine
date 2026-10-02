@@ -31,10 +31,11 @@ export default async function ConnectionPage() {
       <h2 id="workspace-readiness">Acceso privado · Pendiente de activar</h2>
       <p>La demo sigue utilizando datos de prueba y roles simulados.</p>
       <ul>
-        <li>Inicio de sesión por invitación: pendiente.</li>
+        <li>Inicio de sesión por invitación: preparado, pendiente de activación y prueba real.</li>
         <li>Permisos y aislamiento entre clubes: sin verificar.</li>
         <li>Guardado de planes y registro de auditoría: sin verificar.</li>
       </ul>
+      <Link href="/club/sign-in">Ver el acceso privado del club →</Link>
     </section>
   </main>;
 }
