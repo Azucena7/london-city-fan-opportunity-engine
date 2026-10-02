@@ -24,6 +24,7 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
     timeZone: "Europe/London"
   });
   const reference = reviewedAt.slice(0, 10);
+  const latestResult = calendar.filter((item) => item.status === "final").sort((a, b) => b.date.localeCompare(a.date))[0];
   const currentActions = actions.filter((item) => item.fixtureId === opportunity?.fixtureId).slice(0, 3);
   const historical = validation.cases[0];
 
@@ -44,7 +45,7 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
           <aside className={styles.review}>
             <span>{es ? "Última revisión de evidencia" : "Latest evidence review"}</span>
             <strong>{date(reference)}</strong>
-            <small>{es ? "Caso independiente · horarios de Londres" : "Independent case · London local times"}</small>
+            <small>{latestResult ? `${es ? "Último resultado" : "Latest result"} · ${latestResult.opponent} ${latestResult.result ? `${latestResult.result.for}–${latestResult.result.against}` : ""}` : (es ? "Caso independiente · horarios de Londres" : "Independent case · London local times")}</small>
           </aside>
         </header>
 
