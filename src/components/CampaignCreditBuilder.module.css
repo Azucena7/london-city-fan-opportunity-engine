@@ -55,3 +55,11 @@
 .draftField p,.draftField ul{margin:6px 0 0;color:#3e4c44;line-height:1.5;font-size:13px}
 .draftField ul{padding-left:18px}
 @media(max-width:900px){.productionHead{flex-direction:column}.draftGrid{grid-template-columns:1fr}.itemCost{flex-wrap:wrap;justify-content:flex-start}}
+
+.workspaceState{display:grid;gap:4px;min-width:190px;padding:10px 12px;background:#f2f4f0;border:1px solid #d8dfda}
+.workspaceState span{font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#78837c}
+.workspaceState strong{font-size:12px}.workspaceState small{color:#6f7b73;font-size:11px}
+.productionActions{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-top:18px;padding:12px 0;border-top:1px solid #e1e5e2;border-bottom:1px solid #e1e5e2}
+.productionActions span{font-size:12px;color:#637068}.productionActions span strong{color:#132019}
+.productionActions button{min-height:36px;padding:8px 11px;border:1px solid #cdd5cf;background:#fff;color:#132019;font-size:11px;font-weight:850;cursor:pointer}
+@media(max-width:700px){.productionActions{align-items:flex-start;flex-direction:column}.workspaceState{width:100%}}
