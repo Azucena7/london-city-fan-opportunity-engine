@@ -34,3 +34,24 @@
 .channelStrip b{font-size:11px}
 .channelActive{background:#eef5cf;color:#4f6500;border:1px solid #cbd985}
 .channelInactive{background:#f4f4f2;color:#8a938d;border:1px dashed #cfd5d1;text-decoration:line-through}
+
+.generateButton{min-width:142px;min-height:36px;padding:7px 10px;border:1px solid #cbd985;background:#f3f7df;color:#4f6500;font-size:11px;font-weight:900;cursor:pointer}
+.generateButton:disabled{cursor:default;opacity:.6}
+.production{margin-top:14px;padding:24px;background:#fff;border:1px solid #d9dfda}
+.productionHead{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+.productionHead>div>span{font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:#728078}
+.productionHead h3{margin:7px 0 8px;font-size:24px;letter-spacing:-.035em}
+.productionHead p{max-width:760px;margin:0;color:#66736b;line-height:1.5}
+.productionHead>strong{white-space:nowrap;padding:8px 10px;border-radius:999px;background:#eef1ec;font-size:11px}
+.productionEmpty{margin-top:18px;padding:18px;background:#f7f8f6;border:1px dashed #ced6d0}
+.productionEmpty strong,.productionEmpty p{display:block}.productionEmpty p{margin:6px 0 0;color:#728078;font-size:13px}
+.generationError{margin:18px 0 0;padding:12px 14px;background:#fff1ec;border-left:3px solid #cf7754;color:#8c432d;font-size:13px}
+.draftGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.draftCard{padding:20px;background:#f8f9f7;border:1px solid #dce2dd}
+.draftTop{display:flex;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid #e1e5e2}
+.draftTop span{font-weight:900}.draftTop strong{font-size:11px;color:#526d00}
+.draftField{padding:14px 0;border-bottom:1px solid #e5e8e6}.draftField:last-child{border-bottom:0}
+.draftField>span{display:block;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#7a857e}
+.draftField p,.draftField ul{margin:6px 0 0;color:#3e4c44;line-height:1.5;font-size:13px}
+.draftField ul{padding-left:18px}
+@media(max-width:900px){.productionHead{flex-direction:column}.draftGrid{grid-template-columns:1fr}.itemCost{flex-wrap:wrap;justify-content:flex-start}}
