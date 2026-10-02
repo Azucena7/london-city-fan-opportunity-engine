@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup";
+  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access";
 };
 
 const primaryItems = [
@@ -10,6 +10,7 @@ const primaryItems = [
   { key: "demo", label: "Guided demo", href: "/app/demo" },
   { key: "credits", label: "Credits", href: "/app/credits" },
   { key: "setup", label: "Setup", href: "/app/setup" },
+  { key: "access", label: "Access", href: "/app/access" },
   { key: "results", label: "Learning", href: "/app/learning" }
 ] as const;
 
