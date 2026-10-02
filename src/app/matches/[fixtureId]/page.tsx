@@ -5,6 +5,7 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
 import { MatchSignalControls } from "@/components/MatchSignalControls";
+import { ActivationDraft } from "@/components/ActivationDraft";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -67,10 +68,16 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         <div className={styles.sectionHead}>
           <div>
             <span className={styles.eyebrow}>Do now</span>
-            <h2>Three actions before matchday.</h2>
+            <h2>Review the draft, then execute the next actions.</h2>
           </div>
           <span>{approvals.length} unresolved gates</span>
         </div>
+
+        <ActivationDraft
+          campaign={campaign}
+          fallbackOwner={live.nextAction.owner}
+          fallbackMeasurement={live.nextAction.measurement}
+        />
 
         <div className={styles.actionGrid}>
           {(actions.length ? actions : [{
@@ -86,12 +93,6 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
               <b>{item.state.replaceAll("-", " ")}</b>
             </article>
           ))}
-        </div>
-
-        <div className={styles.ownerStrip}>
-          <div><span>Owner</span><strong>{live.nextAction.owner}</strong></div>
-          <div><span>Measurement</span><strong>{live.nextAction.measurement}</strong></div>
-          <div><span>Next gate</span><strong>{live.primaryBlocker}</strong></div>
         </div>
       </section>
 
