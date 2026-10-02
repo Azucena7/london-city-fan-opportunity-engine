@@ -105,9 +105,10 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
                 ? "No hay campaña activada ni presupuesto aprobado desde este prototipo. El caso muestra una recomendación y los gaps de evidencia necesarios para convertirla en una decisión de club."
                 : "No campaign is activated and no budget is approved from this prototype. The case shows a recommendation and the evidence gaps required to turn it into a club decision."}
             </p>
-            <a href="https://www.londoncitylionesses.com/everton-h-2627" target="_blank" rel="noreferrer">
-              {es ? "Ver la oferta oficial ↗" : "See the official offer ↗"}
-            </a>
+            <div className={styles.actions}>
+              <div><Link href="/live/london-city/everton">{es ? "Leer el caso actual →" : "Read the current case →"}</Link></div>
+              <div><a href="https://www.londoncitylionesses.com/everton-h-2627" target="_blank" rel="noreferrer">{es ? "Ver la oferta oficial ↗" : "See the official offer ↗"}</a></div>
+            </div>
           </article>
         </section>
 
