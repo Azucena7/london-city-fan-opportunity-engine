@@ -383,6 +383,18 @@ test("Opportunity Radar applies club context as advisory fit without changing ev
   assert.match(context, /return null/);
 });
 
+test("first club admin is bootstrapped only by a confirmed private email invite", () => {
+  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+
+  assert.match(migration, /private\.club_admin_invites/);
+  assert.match(migration, /email_confirmed_at is null/);
+  assert.match(migration, /lower\(email\)=lower\(new\.email\)/);
+  assert.match(migration, /role='admin'/);
+  assert.match(migration, /security definer/);
+  assert.match(migration, /revoke all on function private\.apply_confirmed_admin_invite/);
+  assert.match(migration, /after insert or update of email_confirmed_at, email on auth\.users/);
+});
+
 test("pilot access separates identity from club membership and supports admin approval", () => {
   const access = read("src/components/AccessCenter.tsx");
   const signup = read("src/app/api/auth/signup/route.ts");
