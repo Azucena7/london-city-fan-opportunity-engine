@@ -22,6 +22,7 @@ export const sourceLabels: Record<SourceId, Copy> = {
 };
 export type Task = { id: string; title: Copy; department: Copy; offset: number; owner: string; done: boolean };
 export type Action = {
+  contextEvidence?: { id: string; title: Copy; recommendation: Copy; validation: Copy; reviewDate: string; synthetic: true }[];
   id: Goal | "mobility"; title: Copy; reason: Copy; audience: Copy; kpi: Copy;
   sources: SourceId[]; tasks: Task[]; owner: string; measurement: boolean; audienceReviewed: boolean; rights: boolean;
   approvedVersion: string | null; simulatedVersion: string | null; strategyVersion?: string;
@@ -72,7 +73,7 @@ export function rankFans(fans: Fan[], segment: "all" | Fan["segment"], metric: "
   return fans.filter((fan) => segment === "all" || fan.segment === segment).map((fan) => ({ fan, value: metric === "purchases" ? fan.purchases : fan.reconciled && fan.eligibleMatches > 0 ? fan.visits / fan.eligibleMatches : null })).sort((a, b) => (b.value ?? -1) - (a.value ?? -1) || a.fan.id.localeCompare(b.fan.id));
 }
 export function actionVersion(action: Action, date: string, sources: Record<SourceId, SourceState>): string {
-  return JSON.stringify({ id: action.id, date, owner: action.owner, measurement: action.measurement, audienceReviewed: action.audienceReviewed, rights: action.rights, strategyVersion: action.strategyVersion, sources: action.sources.map((id) => [id, sources[id]]) });
+  return JSON.stringify({ id: action.id, date, owner: action.owner, measurement: action.measurement, audienceReviewed: action.audienceReviewed, rights: action.rights, contextEvidence: action.contextEvidence, strategyVersion: action.strategyVersion, sources: action.sources.map((id) => [id, sources[id]]) });
 }
 export function approvalBlockers(action: Action, date: string, sources: Record<SourceId, SourceState>, role: Role): string[] {
   const reasons: string[] = [];
