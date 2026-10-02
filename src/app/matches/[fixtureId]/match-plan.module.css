@@ -38,3 +38,24 @@
   .briefGrid article{min-height:0}
   .briefGrid article>strong{margin-top:14px}
 }
+
+.clubExecutionContext{padding:34px 0;border-top:1px solid #d9dfda}
+.clubExecutionIntro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(320px,1.2fr);gap:34px;align-items:start}
+.clubExecutionIntro h2{margin:0;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.04em;line-height:1.05}
+.clubExecutionIntro p{margin:0;color:#606c64;line-height:1.55}
+.clubExecutionGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.clubExecutionGrid article{min-height:150px;padding:18px;background:#fff;border:1px solid #d9dfda}
+.clubExecutionGrid span,.clubExecutionGrid strong,.clubExecutionGrid small{display:block}
+.clubExecutionGrid span{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#748078}
+.clubExecutionGrid strong{margin-top:18px;font-size:15px;line-height:1.4}
+.clubExecutionGrid small{margin-top:8px;color:#748078;line-height:1.4}
+.handoffList{margin-top:10px;padding:16px 18px;background:#fff9f3;border:1px solid #dfcbbd}
+.handoffList>span{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#826d58}
+.handoffList ul{margin:8px 0 0;padding-left:18px;color:#6b5a4b;line-height:1.45}
+.clubExecutionEmpty{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:28px 0;padding:18px;background:#fff;border:1px dashed #ccd4ce}
+.clubExecutionEmpty>span{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#748078}
+.clubExecutionEmpty>strong{font-size:13px}
+.clubExecutionEmpty>p{flex:1 1 400px;margin:0;color:#6b776f;font-size:12px}
+.clubExecutionEmpty>a{font-size:12px;font-weight:900;color:#142019;text-decoration:none;border-bottom:1px solid #142019}
+@media(max-width:950px){.clubExecutionIntro{grid-template-columns:1fr}.clubExecutionGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.clubExecutionGrid{grid-template-columns:1fr}}
