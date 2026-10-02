@@ -20,6 +20,9 @@ import { ClubActionOverview } from "./ClubActionOverview";
 import { ClubTaskCalendar } from "./ClubTaskCalendar";
 import { ClubCreativeBrief } from "./ClubCreativeBrief";
 import { ClubDepartmentHome } from "./ClubDepartmentHome";
+import { ClubMatchContext } from "./ClubMatchContext";
+import { incorporateSignal, matchSignals, signalBlocker } from "@/lib/clubMatchContext";
+import type { MatchSignal } from "@/lib/clubMatchContext";
 import type { Department } from "@/lib/clubDepartments";
 import { findCreative, storeCreative, clearActionCreatives, headlineLines } from "@/lib/clubCreativePackages";
 import type { CreativePackages } from "@/lib/clubCreativePackages";
@@ -35,6 +38,7 @@ export function ClubOperationsDemo({ fixture }: { fixture: Fixture }) {
   const tr = (spanish: string, english: string) => es ? spanish : english;
   const [view, setViewState] = useState<View>("home");
   const [department, setDepartment] = useState<Department>("all");
+  const [dismissedSignals, setDismissedSignals] = useState<string[]>([]);
   const [actionStep, setActionStep] = useState<"prepare" | "creative" | "control">("prepare");
   const [taskOwner, setTaskOwner] = useState("all");
   const [taskStatus, setTaskStatus] = useState("pending");
@@ -128,11 +132,20 @@ export function ClubOperationsDemo({ fixture }: { fixture: Fixture }) {
     if (!editable || !validDate(date)) return;
     if (plan && !window.confirm(tr("Esto sustituirá el plan, sus tareas y revisiones en esta demo. ¿Quieres continuar?", "This replaces the plan, tasks and reviews in this demo. Continue?"))) return;
     setPlanScenario(scenario);
+    setDismissedSignals([]);
     setTaskAction("all"); setTaskPhase("all");
     invalidateControls();
     const next = generatePlan(date, goal, mobility, comprehensive);
     setPlan({ ...next, actions:next.actions.map((item) => ({ ...item, strategyVersion:JSON.stringify({ kits:brandCampaignVersion(brand,campaign),talent:talentId }) })) }); setSelected(goal); setCreativePackages({});
     log(tr("Plan generado con reglas y datos de prueba. Todas las acciones requieren revisión.", "Plan generated using rules and test data. Every action requires review."));
+  }
+  function addSignal(signal: MatchSignal) {
+    if (!editable || signalBlocker(signal, plan, configurationChanged, sources) || !plan) return;
+    const next = incorporateSignal(plan, signal);
+    invalidateControls();
+    setPlan(next);
+    setCreativePackages(previous => clearActionCreatives(previous, signal.actionId));
+    log(tr("Sugerencia incorporada como borrador. Conservamos el trabajo anterior; revisa la evidencia y asigna las nuevas tareas.", "Suggestion incorporated as a draft. Existing work is retained; review evidence and assign the new tasks."));
   }
   function patchAction(patch: Partial<Pick<Action, "owner" | "measurement" | "audienceReviewed" | "rights">>) {
     if (!editable || !action) return;
@@ -173,7 +186,7 @@ export function ClubOperationsDemo({ fixture }: { fixture: Fixture }) {
     if (plan && !window.confirm(tr("Se borrará el trabajo de esta sesión de prueba. ¿Reiniciar la demo?", "This clears the current rehearsal session. Reset demo?"))) return;
     setTalentActionId(null); setControl({ ...defaultControl }); setPaused(false); setReviews({}); setEpoch(0); setControlEvents([]);
     setBrand({ ...demoBrand }); setCampaign({ ...demoCampaigns[0] }); setEnabledModules([...allModules]); setAppearances([...demoAppearances]); setTalentId(null);
-    setDepartment("all"); setPlanScenario("london"); setTaskOwner("all"); setTaskStatus("pending"); setTaskAction("all"); setTaskPhase("all");
+    setDismissedSignals([]); setDepartment("all"); setPlanScenario("london"); setTaskOwner("all"); setTaskStatus("pending"); setTaskAction("all"); setTaskPhase("all");
     setScenario("london"); setDate(fixture.date); setGoal("repeat"); setMobility(false); setComprehensive(false); setRole("operator"); setSources({ ...defaultSources }); setPlan(null); setCreativePackages({}); setSelected("repeat"); setChannel("instagram"); setSegment("all"); setRankMetric("attendance"); setActivity([]); go("home"); setNotice(tr("Demo reiniciada.", "Demo reset."));
   }
   const empty = <section className={styles.panel}><h2>{tr("Primero genera un plan", "Generate a plan first")}</h2><p>{tr("Elige un objetivo y una fecha. Después podrás asignar, aprobar y ensayar cada acción.", "Choose an objective and date. Then assign, approve and rehearse each action.")}</p><button type="button" className={styles.primary} onClick={() => go("plan")}>{tr("Ir al plan", "Open plan")}</button></section>;
@@ -199,7 +212,8 @@ export function ClubOperationsDemo({ fixture }: { fixture: Fixture }) {
             <label>{tr("Escenario", "Scenario")}<select value={scenario} disabled={!editable} onChange={(event) => { setScenario(event.target.value); setDate(event.target.value === "london" ? fixture.date : "2026-10-25"); clearPlan(); }}><option value="london">London City · {tr("piloto de demostración", "demonstration pilot")}</option><option value="spain">{tr("Club español · escenario ficticio de Segunda", "Spanish club · fictional second-tier scenario")}</option></select></label>
             <label>{tr("Fecha de ensayo", "Rehearsal date")}<input type="date" value={date} min="2026-01-01" max="2030-12-31" disabled={!editable} onChange={(event) => { setDate(event.target.value); clearPlan(); }} /></label>
             <label>{tr("Objetivo principal", "Primary objective")}<select value={goal} disabled={!editable} onChange={(event) => { setGoal(event.target.value as Goal); clearPlan(); }}>{(Object.keys(goalLabels) as Goal[]).map((id) => <option key={id} value={id}>{goalLabels[id][lang]}</option>)}</select></label>
-          </div><label className={styles.check}><input type="checkbox" checked={comprehensive} disabled={!editable} onChange={(event) => { setComprehensive(event.target.checked); clearPlan(); }} />{tr("Plan integral: captación, recurrencia, asistencia, partners y fidelización", "Complete plan: acquisition, repeat visits, attendance, partners and loyalty")}</label><label className={styles.check}><input type="checkbox" checked={mobility} disabled={!editable} onChange={(event) => { setMobility(event.target.checked); clearPlan(); }} />{tr("Añadir una incidencia ficticia de transporte", "Add a fictional transport disruption")}</label><p>{tr("El generador aplica reglas visibles. Meteorología está incluida como fuente de ejemplo, pero todavía no modifica el plan. Las fechas del calendario son días completos, sin hora de envío.", "The generator applies visible rules. Weather is included as an example source but does not yet change the plan. Calendar dates are all-day tasks, not sending times.")}</p><button type="button" className={styles.primary} disabled={!editable || !validDate(date)} onClick={build}>{plan ? tr("Regenerar plan y reiniciar revisiones", "Regenerate plan and reset reviews") : tr("Generar plan del partido", "Generate matchday plan")}</button></section>
+          </div><label className={styles.check}><input type="checkbox" checked={comprehensive} disabled={!editable} onChange={(event) => { setComprehensive(event.target.checked); clearPlan(); }} />{tr("Plan integral: captación, recurrencia, asistencia, partners y fidelización", "Complete plan: acquisition, repeat visits, attendance, partners and loyalty")}</label><label className={styles.check}><input type="checkbox" checked={mobility} disabled={!editable} onChange={(event) => { setMobility(event.target.checked); clearPlan(); }} />{tr("Añadir una incidencia ficticia de transporte", "Add a fictional transport disruption")}</label><p>{tr("El motor prepara borradores con reglas visibles. Incorpora las señales de contexto para adaptar el plan; la lluvia de ejemplo añade una propuesta de asistencia. Las fechas son días completos, sin hora de envío.", "The engine prepares drafts with visible rules. Incorporate context signals to adapt the plan; example rain adds an attendance proposal. Dates are all-day tasks, not sending times.")}</p><button type="button" className={styles.primary} disabled={!editable || !validDate(date)} onClick={build}>{plan ? tr("Regenerar plan y reiniciar revisiones", "Regenerate plan and reset reviews") : tr("Generar plan del partido", "Generate matchday plan")}</button></section>
+          <ClubMatchContext lang={lang} date={date} plan={plan} changed={configurationChanged} editable={editable} sources={sources} dismissed={dismissedSignals} onAdd={addSignal} onPrepare={() => { if (!editable || !plan || configurationChanged) return; const usable = matchSignals().filter(signal => !dismissedSignals.includes(signal.id) && !signalBlocker(signal,plan,false,sources)); if (!usable.length) return; invalidateControls(); setPlan(usable.reduce(incorporateSignal,plan)); setCreativePackages(previous => usable.reduce((packages,signal) => clearActionCreatives(packages,signal.actionId),previous)); log(tr("Borradores preparados desde las señales de ensayo. No se ha lanzado ninguna acción.", "Drafts prepared from rehearsal signals. No action has been launched.")); }} onDismiss={id => { if (!editable) return; setDismissedSignals(previous => previous.includes(id) ? previous.filter(value => value !== id) : [...previous,id]); }} />
           {plan && <><div className={styles.metrics}><article><span>{tr("Acciones propuestas", "Proposed actions")}</span><strong>{plan.actions.length}</strong></article><article><span>{tr("Tareas generadas", "Generated tasks")}</span><strong>{plan.actions.flatMap((item) => item.tasks).length}</strong></article><article><span>{tr("Aprobadas en ensayo", "Approved in rehearsal")}</span><strong>{plan.actions.filter((item) => item.approvedVersion === actionVersion(item, plan.date, sources)).length}</strong></article></div><div className={styles.cards}>{plan.actions.map((item) => <article key={item.id} className={styles.panel}><span className={styles.badge}>{tr("Propuesta de prueba", "Test proposal")}</span><h2>{item.title[lang]}</h2><p>{item.reason[lang]}</p><p><strong>{tr("Medición: ", "Measurement: ")}</strong>{item.kpi[lang]}</p><button type="button" onClick={() => openAction(item.id)}>{tr("Preparar esta acción", "Prepare this action")} →</button></article>)}</div></>}
           <section className={styles.panel}><h2>{tr("Recorrido de la demo", "Demo journey")}</h2><ol><li>{tr("Genera el plan y abre una acción.", "Generate the plan and open an action.")}</li><li>{tr("Asigna responsable y confirma medición; cambia al rol de aprobación.", "Assign an owner and confirm measurement; switch to the approver role.")}</li><li>{tr("Aprueba la acción y genera su paquete creativo.", "Approve the action and generate its creative package.")}</li><li>{tr("Revisa la pieza, apruébala y simula el lanzamiento.", "Review the creative, approve it and simulate launch.")}</li><li>{tr("Explora calendario, audiencias, partners y resultados de prueba.", "Explore calendar, audiences, partners and test results.")}</li></ol></section>
         </>}
