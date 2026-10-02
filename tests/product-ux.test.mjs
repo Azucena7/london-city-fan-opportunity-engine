@@ -235,6 +235,18 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 
 
 
+test("single match workspace absorbs plan evidence signals and impact", () => {
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  assert.match(page, /Recommended plan/);
+  assert.match(page, /Three actions before matchday/);
+  assert.match(page, /signals are shaping the recommendation/);
+  assert.match(page, /Inspect evidence, assumptions and missing inputs/);
+  assert.match(page, /Open editable impact scenario/);
+  assert.match(page, /Open measurement & learning/);
+  assert.doesNotMatch(page, /href="\/decision-room"/);
+  assert.doesNotMatch(page, /href="\/impact"/);
+});
+
 test("club product starts from fixtures instead of requiring a plan first", () => {
   const matches = read("src/app/matches/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
@@ -242,6 +254,7 @@ test("club product starts from fixtures instead of requiring a plan first", () =
   assert.match(matches, /The engine starts from the fixture calendar automatically/);
   assert.match(matches, /Fixture → signals → AI interpretation → opportunity → draft plan/);
   assert.match(matches, /Monitoring automatically/);
+  assert.match(matches, /\/matches\/\$\{fixture\.id\}/);
   assert.match(nav, /href: "\/matches"/);
   assert.match(nav, /label: "Learning"/);
 });
