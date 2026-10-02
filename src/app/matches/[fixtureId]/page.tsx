@@ -35,7 +35,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       <ProductJourneyNav active="matches" />
 
       <div className={styles.backRow}>
-        <Link href="/matches">← All matches</Link>
+        <Link href="/app/matches">← All matches</Link>
         <span>{live.timingLabel}</span>
       </div>
 
@@ -180,7 +180,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <span className={styles.eyebrow}>After matchday</span>
           <h2>The same fixture becomes the learning record.</h2>
         </div>
-        <Link href={`/results?fixture=${fixture.id}`}>Open measurement & learning →</Link>
+        <Link href={`/app/learning?fixture=${fixture.id}`}>Open measurement & learning →</Link>
       </section>
     </main>
   );
