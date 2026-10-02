@@ -234,13 +234,27 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 });
 
 
+
+test("club product starts from fixtures instead of requiring a plan first", () => {
+  const matches = read("src/app/matches/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(matches, /Upcoming home matches/);
+  assert.match(matches, /The engine starts from the fixture calendar automatically/);
+  assert.match(matches, /Fixture → signals → AI interpretation → opportunity → draft plan/);
+  assert.match(matches, /Monitoring automatically/);
+  assert.match(nav, /href: "\/matches"/);
+  assert.match(nav, /label: "Learning"/);
+});
+
 test("product and analyst branding are intentionally separated", () => {
   const productNav = read("src/components/ProductJourneyNav.tsx");
   const analystNav = read("src/components/NavTabs.tsx");
   assert.match(productNav, /Fan Growth Engine/);
-  assert.match(productNav, /Morning brief/);
-  assert.match(productNav, /Opportunity/);
-  assert.match(productNav, /Caso London City/);
+  assert.match(productNav, /Matches/);
+  assert.match(productNav, /Learning/);
+  assert.match(productNav, /For clubs/);
+  assert.doesNotMatch(productNav, /Morning brief/);
+  assert.doesNotMatch(productNav, /Decision Room/);
   assert.match(analystNav, /LONDON CITY \/ CASE/);
   assert.match(analystNav, /Evidence environment/);
   assert.match(analystNav, /Back to product/);
