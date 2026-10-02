@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { NavTabs } from "./NavTabs";
+import { MarketingNav } from "./MarketingNav";
 import { useLanguage } from "./LanguageProvider";
 import type { CalendarFixture, DecisionValidationData, LocalizedText } from "@/lib/models";
 import type { ProductOpportunity } from "@/lib/productOpportunity";
@@ -23,7 +23,7 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
   const currentActions = actions.filter((a) => a.fixtureId === opportunity?.fixtureId);
   const historical = validation.cases[0];
   return <main>
-    <NavTabs />
+    <MarketingNav />
     <header className="caseOverviewHero">
       <span className="eyebrow">{es ? "CASO LONDON CITY · PROTOTIPO INDEPENDIENTE" : "LONDON CITY CASE · INDEPENDENT PROTOTYPE"}</span>
       <h1>{es ? "Qué sabemos y qué toca hacer ahora." : "What we know. What happens next."}</h1>
@@ -40,7 +40,7 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
       <h2>{es ? `${opportunity?.fixture.opponent}: una razón para volver a Bromley.` : `${opportunity?.fixture.opponent}: a reason to return to Bromley.`}</h2>
       <p>{es ? "El club ya anuncia Oktoberfest y una zona familiar sin alcohol. La propuesta del motor es probar mensajes diferenciados para familias y aficionados que repiten, usando la oferta oficial." : "The club is promoting Oktoberfest and an alcohol-free family area. The engine proposes testing separate messages for families and returning supporters using the official offer."}</p>
       <p><strong>{es ? "Pendiente:" : "Pending:"}</strong> {es ? "responsable del club, audiencia con consentimiento y medición de compras. No hay campaña activada ni presupuesto aprobado." : "club owner, consented audience and purchase measurement. No campaign is activated and no budget is approved."}</p>
-      <div className="caseOverviewLinks"><Link href="/london-city/everton">{es ? "Ver decisión y medición →" : "View decision and measurement →"}</Link><Link href={opportunity ? `/matches/${opportunity.fixtureId}` : "/matches"}>{es ? "Ver plan del partido →" : "View match plan →"}</Link><a href="https://www.londoncitylionesses.com/everton-h-2627" target="_blank" rel="noreferrer">{es ? "Oferta oficial ↗" : "Official offer ↗"}</a></div>
+      <div className="caseOverviewLinks"><Link href="/london-city/everton">{es ? "Ver decisión y medición →" : "View decision and measurement →"}</Link><Link href={opportunity ? `/app/matches/${opportunity.fixtureId}` : "/app/matches"}>{es ? "Ver plan del partido →" : "View match plan →"}</Link><a href="https://www.londoncitylionesses.com/everton-h-2627" target="_blank" rel="noreferrer">{es ? "Oferta oficial ↗" : "Official offer ↗"}</a></div>
     </section>
     <section className="caseOverviewPanel">
       <h2>{es ? "Tres pasos para avanzar" : "Three steps to move forward"}</h2>
@@ -51,12 +51,12 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
       <h2>{es ? "La hipótesis coincidió con un anuncio posterior del club." : "The hypothesis aligned with a later club announcement."}</h2>
       <p>{historical.observedAction[lang]}</p><p>{historical.caveat[lang]}</p>
       <p>{es ? "El partido ya pasó. La ejecución del watchalong, su asistencia y su efecto en ventas siguen pendientes de evidencia." : "The fixture has passed. Watchalong delivery, attendance and sales effects still need evidence."}</p>
-      <div className="caseOverviewLinks"><Link href="/london-city/brighton">{es ? "Ver comparación y aprendizaje →" : "View comparison and learning →"}</Link><Link href={`/results?fixture=${historical.fixtureId}`}>{es ? "Consultar resultados de Brighton →" : "Review Brighton results →"}</Link><a href={historical.observedSource.url} target="_blank" rel="noreferrer">{es ? "Anuncio oficial ↗" : "Official announcement ↗"}</a></div>
+      <div className="caseOverviewLinks"><Link href="/london-city/brighton">{es ? "Ver comparación y aprendizaje →" : "View comparison and learning →"}</Link><Link href={`/app/learning?fixture=${historical.fixtureId}`}>{es ? "Consultar resultados de Brighton →" : "Review Brighton results →"}</Link><a href={historical.observedSource.url} target="_blank" rel="noreferrer">{es ? "Anuncio oficial ↗" : "Official announcement ↗"}</a></div>
     </section>
     <section className="caseOverviewPanel">
       <h2>{es ? "Lo que falta para demostrar valor" : "What is missing to prove value"}</h2>
       <ul><li>{es ? "Asistencia y ventas de partidos posteriores al estreno." : "Attendance and ticket sales after the opener."}</li><li>{es ? "Compradores con consentimiento y repetición entre partidos." : "Consented buyers and repeat attendance across fixtures."}</li><li>{es ? "Campaña vinculada a compra, acceso y costes reales." : "Campaign links to purchase, scans and actual costs."}</li><li>{es ? "Comparación válida para evaluar impacto adicional." : "A credible comparison to assess incremental impact."}</li></ul>
-      <div className="caseOverviewLinks"><Link href="/measurement">{es ? "Ver estado de medición →" : "View measurement status →"}</Link><Link href="/sources">{es ? "Consultar fuentes →" : "Inspect sources →"}</Link><Link href="/today">{es ? "Abrir seguimiento operativo →" : "Open operational tracking →"}</Link></div>
+      <div className="caseOverviewLinks"><Link href="/measurement">{es ? "Ver estado de medición →" : "View measurement status →"}</Link><Link href="/sources">{es ? "Consultar fuentes →" : "Inspect sources →"}</Link><Link href="/">{es ? "Volver al producto →" : "Back to product →"}</Link></div>
     </section>
   </main>;
 }
