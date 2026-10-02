@@ -25,8 +25,8 @@ function priorHomeFixtures(currentFixtureId: string) {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
-export function getCurrentImpactDefaults(): ProductImpactDefaults {
-  const opportunity = getCurrentProductOpportunity();
+export function getCurrentImpactDefaults(fixtureId?: string): ProductImpactDefaults {
+  const opportunity = getCurrentProductOpportunity(fixtureId);
 
   if (!opportunity || crmTicketingLive.datasetState !== "club-aggregate") {
     return {

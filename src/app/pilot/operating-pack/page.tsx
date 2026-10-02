@@ -189,7 +189,7 @@ export default function OperatingPackPage() {
         </div>
         <div className={styles.actions}>
           <Link className={styles.primary} href="/pilot/rehearsal">Open pilot rehearsal</Link>
-          <Link className={styles.secondary} href="/brief">Open Morning Brief</Link>
+          <Link className={styles.secondary} href="/matches">Open club workspace</Link>
         </div>
       </section>
     </main>

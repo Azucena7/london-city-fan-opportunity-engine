@@ -8,7 +8,7 @@ import { getCurrentProductResults } from "@/lib/productResults";
 import { calendar, currentState } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Results & Learning",
+  title: "Learning",
   description: "Close the loop after matchday: measure the action, capture the learning and update the next fixture decision."
 };
 
@@ -38,7 +38,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
     <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="results" />
 
-      <nav className="resultsFixturePicker" aria-label="Choose a fixture to review">
+      <nav className={styles.fixturePicker} aria-label="Choose a fixture to review">
         <strong>Review a fixture</strong>
         {calendar.filter((item) => item.homeAway === "home" && (item.status !== "scheduled" || item.id === currentState.next_home_fixture_id)).map((item) => (
           <Link key={item.id} href={`/results?fixture=${item.id}`} aria-current={item.id === selectedId ? "page" : undefined}>
@@ -49,12 +49,12 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
 
       <header className={styles.hero}>
         <div>
-          <span className={styles.eyebrow}>Results & Learning · {selected?.opponent} · {selected?.date}</span>
+          <span className={styles.eyebrow}>Learning · {selected?.opponent} · {selected?.date}</span>
           <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What do we know after matchday?"}</h1>
           <p>
             {live?.fixturePhase === "pre-match"
               ? "The fixture is still ahead. This screen keeps the measurement plan explicit now, then switches to observed outcomes when authorised post-match evidence arrives."
-              : "Results are only useful when they change the next decision. This view separates observed outcomes, attribution and causal claims so the club does not confuse correlation with incrementality."}
+              : "Learning is only useful when it changes the next decision. This view separates observed outcomes, attribution and causal claims so the club does not confuse correlation with incrementality."}
           </p>
         </div>
         <aside className={styles.stateCard}>
@@ -70,7 +70,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
 
       <ProductDataStateLegend />
 
-      {selected ? <section className="resultsFixtureFacts" aria-label="Observed fixture facts">
+      {selected ? <section className={styles.fixtureFacts} aria-label="Observed fixture facts">
         <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
         <article><span>Recorded attendance</span><strong>{selected.attendance?.toLocaleString("en-GB") ?? "Not measured yet"}</strong></article>
         <article><span>Commercial impact</span><strong>{measured ? "Descriptive club evidence connected" : "Not measured yet"}</strong></article>
@@ -99,33 +99,38 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </article>
       </section>
 
-      <section className={styles.interpretation}>
-        <div>
-          <span className={styles.eyebrow}>Interpretation guardrail</span>
-          <h2>Attribution is not the same as incremental impact.</h2>
+      <details className={styles.interpretation}>
+        <summary>
+          <div>
+            <span className={styles.eyebrow}>Interpretation guardrail</span>
+            <strong>How to read this evidence</strong>
+          </div>
+          <span>Attribution ≠ incremental impact →</span>
+        </summary>
+        <div className={styles.interpretationBody}>
           <p>
             A campaign id can tell us which tickets were associated with an activation. It does not prove that those
             purchases would not have happened anyway.
           </p>
+          <div className={styles.interpretationGrid}>
+            <article>
+              <span>Observed</span>
+              <strong>Purchases, scans, revenue and repeat behaviour</strong>
+              <p>Descriptive club evidence.</p>
+            </article>
+            <article>
+              <span>Attributed</span>
+              <strong>Tickets linked to campaign identifiers</strong>
+              <p>Useful for channel analysis, but still descriptive.</p>
+            </article>
+            <article>
+              <span>Incremental</span>
+              <strong>Not established</strong>
+              <p>{results?.interpretation.requirement ?? "Requires a credible counterfactual."}</p>
+            </article>
+          </div>
         </div>
-        <div className={styles.interpretationGrid}>
-          <article>
-            <span>Observed</span>
-            <strong>Purchases, scans, revenue and repeat behaviour</strong>
-            <p>Descriptive club evidence.</p>
-          </article>
-          <article>
-            <span>Attributed</span>
-            <strong>Tickets linked to campaign identifiers</strong>
-            <p>Useful for channel analysis, but still descriptive.</p>
-          </article>
-          <article>
-            <span>Incremental</span>
-            <strong>Not established</strong>
-            <p>{results?.interpretation.requirement ?? "Requires a credible counterfactual."}</p>
-          </article>
-        </div>
-      </section>
+      </details>
 
       <section className={styles.learningLoop}>
         <div className={styles.sectionHead}>
@@ -178,11 +183,11 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
       <section className={styles.next}>
         <div>
           <span className={styles.eyebrow}>Close the loop</span>
-          <h2>Results should send the user back to the next opportunity, not to a report archive.</h2>
+          <h2>Learning should send the user back to the next match, not to a report archive.</h2>
         </div>
         <div className={styles.actions}>
-          <Link className={styles.primary} href="/brief">Back to Morning Brief</Link>
-          <Link className={styles.secondary} href="/today">Inspect measurement layer</Link>
+          <Link className={styles.primary} href="/matches">Back to matches</Link>
+          {selectedId ? <Link className={styles.secondary} href={`/matches/${selectedId}`}>Open match record</Link> : null}
         </div>
       </section>
     </main>

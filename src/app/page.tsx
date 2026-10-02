@@ -25,7 +25,7 @@ export default function Home() {
           </p>
 
           <div className="productHeroActions">
-            <Link className="productButton" href="/brief">Open live Morning Brief</Link>
+            <Link className="productButton" href="/matches">Open club workspace</Link>
             <Link className="productButtonGhost" href="/for-clubs">See the 90-day pilot</Link>
           </div>
 
@@ -69,34 +69,34 @@ export default function Home() {
             <strong>{live?.nextAction.label ?? "Review the live evidence and define the next action."}</strong>
           </div>
 
-          <Link className="fixtureLink" href="/opportunity">Open opportunity workspace →</Link>
+          <Link className="fixtureLink" href="/matches">Open upcoming matches →</Link>
         </aside>
       </section>
 
       <section className="productSection" id="how-it-works">
         <div className="productSectionHeader">
           <span className="productSectionKicker">The operating loop</span>
-          <h2>Brief. Decide. Act. Learn.</h2>
+          <h2>Fixture in. Recommended plan out.</h2>
           <p>
-            The product keeps the executive view simple, then reveals evidence, assumptions and source detail only when the user needs them.
+            The engine starts from the fixture calendar, monitors the relevant signals and turns them into one recommended plan. Evidence stays underneath until the user asks why.
           </p>
         </div>
 
         <div className="productSteps">
           <article className="productStep">
-            <span className="productStepNum">01 · BRIEF</span>
-            <h3>What needs attention?</h3>
-            <p>One fixture, one priority opportunity and the material changes around it.</p>
+            <span className="productStepNum">01 · OBSERVE</span>
+            <h3>The fixture starts the work.</h3>
+            <p>Calendar, fan, territory and attention signals are monitored automatically.</p>
           </article>
           <article className="productStep">
-            <span className="productStepNum">02 · DECIDE</span>
-            <h3>Is there enough evidence?</h3>
-            <p>Separate confirmed evidence from assumptions, missing inputs and blockers.</p>
+            <span className="productStepNum">02 · RECOMMEND</span>
+            <h3>One plan, not another dashboard.</h3>
+            <p>The engine proposes the audience, action, timing and measurement for the fixture.</p>
           </article>
           <article className="productStep">
             <span className="productStepNum">03 · LEARN</span>
-            <h3>What changes next?</h3>
-            <p>Use measured outcomes to improve the next fixture decision rather than archive another report.</p>
+            <h3>The next fixture gets smarter.</h3>
+            <p>Measured outcomes update the evidence and improve the next recommended plan.</p>
           </article>
         </div>
       </section>
@@ -104,17 +104,15 @@ export default function Home() {
       <section className="productProductView">
         <div>
           <span className="productSectionKicker">Inside the product</span>
-          <h2>One context. Progressive depth.</h2>
+          <h2>Two places for the club to work.</h2>
           <p>
-            Commercial leaders can stay at decision level. Marketing and CRM can move into action. Analysts can inspect the evidence without changing products.
+            Matches holds the live plan. Learning closes the loop after matchday. Signals, evidence and scenarios remain available inside the decision instead of becoming separate destinations.
           </p>
         </div>
 
-        <div className="productViewFlow" aria-label="Progressive product depth">
-          <Link href="/brief"><span>01</span><strong>Morning Brief</strong><small>What needs attention today?</small></Link>
-          <Link href="/opportunity"><span>02</span><strong>Opportunity</strong><small>Action, evidence and impact in one workspace.</small></Link>
-          <Link href="/decision-room"><span>03</span><strong>Decision</strong><small>Blockers, assumptions and what changes the call.</small></Link>
-          <Link href="/london-city"><span>04</span><strong>London City case</strong><small>Signals, sources and operational detail.</small></Link>
+        <div className="productViewFlow" aria-label="Simplified club product">
+          <Link href="/matches"><span>01</span><strong>Matches</strong><small>Upcoming fixtures, recommended focus and what to do next.</small></Link>
+          <Link href="/results"><span>02</span><strong>Learning</strong><small>What happened, what changed and what the engine should carry forward.</small></Link>
         </div>
       </section>
 

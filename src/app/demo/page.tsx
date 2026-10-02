@@ -165,7 +165,7 @@ export default function GuidedDemoPage() {
                     <li><strong>Blocker:</strong> {live?.primaryBlocker ?? "Not available"}</li>
                     <li><strong>Would change the decision:</strong> {live?.whatWouldChangeDecision[0] ?? "Not available"}</li>
                   </ul>
-                  <Link className={styles.decisionLink} href="/opportunity">Open Opportunity workspace →</Link>
+                  <Link className={styles.decisionLink} href={live ? `/matches/${live.fixtureId}` : "/matches"}>Open match plan →</Link>
                 </div>
               ) : null}
 

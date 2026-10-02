@@ -198,10 +198,10 @@ test("social sharing matches the current Fan Growth Engine product story", () =>
   assert.match(layout, /Fan Growth Engine/);
   assert.match(layout, /Turn fan data into the next best action for every fixture/);
   assert.match(card, /DECISION INTELLIGENCE FOR FOOTBALL CLUBS/);
-  assert.match(card, /Morning Brief/);
-  assert.match(card, /Opportunity/);
-  assert.match(card, /Decision/);
-  assert.match(card, /Results/);
+  assert.match(card, /Matches/);
+  assert.match(card, /Match plan/);
+  assert.match(card, /Review/);
+  assert.match(card, /Learning/);
   assert.match(og, /Live · Modelled · Missing/);
   assert.doesNotMatch(card, /\+280/);
 });
@@ -234,13 +234,131 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 });
 
 
+
+test("match plan closes with a simple review and handoff gate", () => {
+  const decision = read("src/components/MatchPlanDecision.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  assert.match(decision, /Review required/);
+  assert.match(decision, /Approve draft for handoff/);
+  assert.match(decision, /does not send campaigns, commit spend or execute club actions automatically/);
+  assert.match(page, /MatchPlanDecision/);
+  assert.match(page, /id="approval-gates"/);
+});
+
+test("match plan exposes a review-ready activation draft", () => {
+  const draft = read("src/components/ActivationDraft.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  for (const label of ["Audience", "Channel", "Message", "Timing", "Owner", "Measurement", "Next approval"]) {
+    assert.match(draft, new RegExp(label));
+  }
+  assert.match(draft, /Review all drafted activations/);
+  assert.match(page, /ActivationDraft/);
+  assert.match(page, /Review the draft, then execute the next actions/);
+});
+
+test("match signals can be excluded without mutating engine data", () => {
+  const controls = read("src/components/MatchSignalControls.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  assert.match(controls, /Signals used/);
+  assert.match(controls, /Confidence with this selection/);
+  assert.match(controls, /Recommendation/);
+  assert.match(controls, /The recommendation is unchanged/);
+  assert.match(controls, /Needs review/);
+  assert.match(controls, /does not delete the source or change the underlying engine data/);
+  assert.match(page, /MatchSignalControls/);
+});
+
+test("single match workspace absorbs plan evidence signals and impact", () => {
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  assert.match(page, /Recommended plan/);
+  assert.match(page, /Review the draft, then execute the next actions/);
+  assert.match(page, /signals · \{live\.confidence\.label\} confidence/);
+  assert.match(page, /Inspect evidence, assumptions and missing inputs/);
+  assert.match(page, /Open editable impact scenario/);
+  assert.match(page, /Open measurement & learning/);
+  assert.doesNotMatch(page, /href="\/decision-room"/);
+  assert.doesNotMatch(page, /href="\/impact"/);
+});
+
+test("Learning keeps deep interpretation secondary to observed outcomes", () => {
+  const page = read("src/app/results/page.tsx");
+  const css = read("src/app/results/results.module.css");
+  assert.match(page, /How to read this evidence/);
+  assert.match(page, /Attribution ≠ incremental impact/);
+  assert.match(page, /fixturePicker/);
+  assert.match(page, /fixtureFacts/);
+  assert.match(css, /interpretation>summary/);
+});
+
+test("matches behaves like a decision inbox with one priority fixture", () => {
+  const page = read("src/app/matches/page.tsx");
+  const css = read("src/app/matches/matches.module.css");
+  assert.match(page, /Current priority/);
+  assert.match(page, /Future home matches/);
+  assert.match(page, /No action required until evidence becomes material/);
+  assert.match(page, /Open match plan/);
+  assert.match(css, /priorityMatch/);
+  assert.match(css, /futureFixture/);
+});
+
+test("match plan prioritises the decision before deep evidence", () => {
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
+  assert.match(page, /Decision at a glance/);
+  assert.match(page, /Do next/);
+  assert.match(page, /Blocking gate/);
+  assert.match(page, /reasoningDetails/);
+  assert.match(css, /holdState/);
+  assert.match(css, /readyState/);
+  assert.match(css, /priorityBar/);
+});
+
+test("legacy club routes redirect into the fixture-first workspace", () => {
+  const config = read("next.config.mjs");
+  for (const route of ["/brief", "/opportunity", "/decision-room", "/impact"]) {
+    assert.match(config, new RegExp(route.replace("/", "\\/")));
+  }
+  assert.match(config, /destination: "\/matches"/);
+  assert.match(config, /permanent: true/);
+});
+
+test("commercial surfaces route users into the simplified club journey", () => {
+  const cases = read("src/app/cases/page.tsx");
+  const pilot = read("src/app/pilot/page.tsx");
+  const demo = read("src/app/demo/page.tsx");
+  const operatingPack = read("src/app/pilot/operating-pack/page.tsx");
+  const caseOverview = read("src/components/LondonCityCase.tsx");
+  for (const source of [cases, pilot, demo, operatingPack, caseOverview]) {
+    assert.doesNotMatch(source, /href="\/brief"/);
+    assert.doesNotMatch(source, /href="\/opportunity"/);
+    assert.doesNotMatch(source, /href="\/decision-room"/);
+  }
+  assert.match(pilot, /\/matches/);
+  assert.match(demo, /\/matches\/\$\{live\.fixtureId\}/);
+  assert.match(caseOverview, /\/matches\/\$\{opportunity\.fixtureId\}/);
+});
+
+test("club product starts from fixtures instead of requiring a plan first", () => {
+  const matches = read("src/app/matches/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(matches, /Upcoming home matches/);
+  assert.match(matches, /The engine starts from the fixture calendar automatically/);
+  assert.match(matches, /Fixture → signals → AI interpretation → opportunity → draft plan/);
+  assert.match(matches, /Monitoring automatically/);
+  assert.match(matches, /\/matches\/\$\{currentFixture\.id\}/);
+  assert.match(nav, /href: "\/matches"/);
+  assert.match(nav, /label: "Learning"/);
+});
+
 test("product and analyst branding are intentionally separated", () => {
   const productNav = read("src/components/ProductJourneyNav.tsx");
   const analystNav = read("src/components/NavTabs.tsx");
   assert.match(productNav, /Fan Growth Engine/);
-  assert.match(productNav, /Morning brief/);
-  assert.match(productNav, /Opportunity/);
-  assert.match(productNav, /Caso London City/);
+  assert.match(productNav, /Matches/);
+  assert.match(productNav, /Learning/);
+  assert.match(productNav, /For clubs/);
+  assert.doesNotMatch(productNav, /Morning brief/);
+  assert.doesNotMatch(productNav, /Decision Room/);
   assert.match(analystNav, /LONDON CITY \/ CASE/);
   assert.match(analystNav, /Evidence environment/);
   assert.match(analystNav, /Back to product/);
@@ -418,7 +536,7 @@ test("Impact model seeds from measured club history only when aggregate evidence
 test("Results never equates campaign attribution with incrementality", () => {
   const results = read("src/app/results/page.tsx");
   const adapter = read("src/lib/productResults.ts");
-  assert.match(results, /Attribution is not the same as incremental impact/);
+  assert.match(results, /Attribution ≠ incremental impact/);
   assert.match(results, /What do we know after matchday/);
   assert.match(results, /Not established/);
   assert.match(adapter, /incrementality: "not-established"/);
