@@ -316,7 +316,7 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(builder, /Saved on this device/);
   assert.match(builder, /localStorage/);
   assert.match(builder, /campaign-workspace/);
-  assert.match(builder, /Mark ready for review/);
+  assert.match(builder, /Review campaign/);
   assert.match(builder, /\/api\/campaign-draft/);
 
   assert.match(route, /AI_GATEWAY_API_KEY/);
