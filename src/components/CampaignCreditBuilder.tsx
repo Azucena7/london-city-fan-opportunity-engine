@@ -83,6 +83,10 @@ export function CampaignCreditBuilder({
   const [accountEmail, setAccountEmail] = useState("");
   const [accountPassword, setAccountPassword] = useState("");
   const [accountError, setAccountError] = useState<string | null>(null);
+  const [reservedCampaignCredits, setReservedCampaignCredits] = useState(0);
+  const [reservationBusy, setReservationBusy] = useState(false);
+  const [reservationError, setReservationError] = useState<string | null>(null);
+  const [launchHandoffReady, setLaunchHandoffReady] = useState(false);
 
   const storageKey = `fan-growth-engine:campaign-workspace:${fixtureId}`;
 
@@ -96,13 +100,21 @@ export function CampaignCreditBuilder({
           extraCredits?: number;
           drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
           workspaceStatus?: "draft" | "review-ready";
+      reservedCampaignCredits?: number;
+      launchHandoffReady?: boolean;
+          reservedCampaignCredits?: number;
+          launchHandoffReady?: boolean;
         };
 
         if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
         if (workspace.variants) setVariants(workspace.variants);
         if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
         if (workspace.drafts) setDrafts(workspace.drafts);
+    if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
+    if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
         if (workspace.workspaceStatus === "review-ready") setWorkspaceStatus("review-ready");
+        if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
+        if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
       }
     } catch {
       // A corrupt browser workspace should never block the campaign builder.
@@ -122,9 +134,11 @@ export function CampaignCreditBuilder({
       extraCredits,
       drafts,
       workspaceStatus,
+      reservedCampaignCredits,
+      launchHandoffReady,
       savedAt: new Date().toISOString()
     }));
-  }, [drafts, extraCredits, fixtureId, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
+  }, [drafts, extraCredits, fixtureId, launchHandoffReady, reservedCampaignCredits, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
 
   function applyWorkspaceState(state: Record<string, unknown>, status?: string) {
     const workspace = state as {
@@ -212,7 +226,9 @@ export function CampaignCreditBuilder({
               variants,
               extraCredits,
               drafts,
-              workspaceStatus
+              workspaceStatus,
+              reservedCampaignCredits,
+              launchHandoffReady
             }
           })
         });
@@ -222,7 +238,7 @@ export function CampaignCreditBuilder({
     }, 700);
 
     return () => window.clearTimeout(timer);
-  }, [activeClubId, drafts, extraCredits, fixtureId, remoteReady, selected, variants, workspaceLoaded, workspaceStatus]);
+  }, [activeClubId, drafts, extraCredits, fixtureId, launchHandoffReady, remoteReady, reservedCampaignCredits, selected, variants, workspaceLoaded, workspaceStatus]);
 
   async function signInToClubWorkspace() {
     setAccountError(null);
@@ -287,10 +303,14 @@ export function CampaignCreditBuilder({
   const generatedItems = Object.keys(drafts) as GeneratableItem[];
   const committedCredits = generatedItems.reduce((sum, id) => sum + (catalogue.find((item) => item.id === id)?.baseCredits ?? 0), 0);
   const explorer = tier === "explorer";
-  const canLaunch = !explorer && remaining >= 0 && unresolvedGates === 0;
+  const reservationRequired = Math.max(0, total - committedCredits);
+  const hasReservation = reservedCampaignCredits > 0 || (total > 0 && reservationRequired === 0);
+  const canReview = !explorer && remaining >= 0;
+  const canReserve = canReview && unresolvedGates === 0 && workspaceStatus === "review-ready" && !hasReservation;
+  const canPrepareLaunch = !explorer && hasReservation && unresolvedGates === 0;
 
   function toggle(id: string) {
-    if (explorer) return;
+    if (explorer || hasReservation) return;
     setSelected((current) => {
       const next = new Set(current);
       if (next.has(id)) next.delete(id);
@@ -300,8 +320,79 @@ export function CampaignCreditBuilder({
   }
 
   function changeVariants(id: string, value: number) {
+    if (hasReservation) return;
     const safe = Math.max(1, Math.min(4, Number.isFinite(value) ? value : 1));
     setVariants((current) => ({ ...current, [id]: safe }));
+  }
+
+  async function reserveCampaign() {
+    if (!canReserve || reservationBusy) return;
+    setReservationBusy(true);
+    setReservationError(null);
+
+    try {
+      if (activeClubId && reservationRequired > 0) {
+        const response = await fetch("/api/credit-ledger", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            clubId: activeClubId,
+            fixtureId,
+            itemId: "campaign-reservation",
+            eventKey: `${fixtureId}:campaign:reserve`,
+            eventType: "commit",
+            credits: reservationRequired,
+            note: "Credits reserved after campaign review. Existing generated-draft commitments are excluded."
+          })
+        });
+        if (!response.ok) throw new Error("Campaign credits could not be reserved.");
+      }
+
+      setReservedCampaignCredits(reservationRequired);
+      setLaunchHandoffReady(false);
+    } catch (error) {
+      setReservationError(error instanceof Error ? error.message : "Campaign reservation failed.");
+    } finally {
+      setReservationBusy(false);
+    }
+  }
+
+  async function reopenCampaign() {
+    if (!hasReservation || reservationBusy) return;
+    setReservationBusy(true);
+    setReservationError(null);
+
+    try {
+      if (activeClubId && reservedCampaignCredits > 0) {
+        const response = await fetch("/api/credit-ledger", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            clubId: activeClubId,
+            fixtureId,
+            itemId: "campaign-reservation",
+            eventKey: `${fixtureId}:campaign:release:${reservedCampaignCredits}`,
+            eventType: "release",
+            credits: reservedCampaignCredits,
+            note: "Campaign reservation released when the club reopened the campaign."
+          })
+        });
+        if (!response.ok) throw new Error("Reserved credits could not be released.");
+      }
+
+      setReservedCampaignCredits(0);
+      setWorkspaceStatus("draft");
+      setLaunchHandoffReady(false);
+    } catch (error) {
+      setReservationError(error instanceof Error ? error.message : "Campaign could not be reopened.");
+    } finally {
+      setReservationBusy(false);
+    }
+  }
+
+  function prepareLaunchHandoff() {
+    if (!canPrepareLaunch) return;
+    setLaunchHandoffReady(true);
   }
 
   async function generateDraft(type: GeneratableItem) {
@@ -534,19 +625,65 @@ export function CampaignCreditBuilder({
               </div>
 
               <div className={styles.launchState}>
-                <span>Launch readiness</span>
-                <strong>{canLaunch ? "Ready to launch" : "Not ready"}</strong>
+                <span>Campaign stage</span>
+                <strong>
+                  {launchHandoffReady
+                    ? "Launch handoff ready"
+                    : hasReservation
+                      ? "Credits reserved"
+                      : workspaceStatus === "review-ready"
+                        ? "Ready to reserve"
+                        : "Estimate in progress"}
+                </strong>
                 <small>
                   {remaining < 0
                     ? "Credit budget exceeded."
                     : unresolvedGates > 0
                       ? `${unresolvedGates} approval gate${unresolvedGates === 1 ? "" : "s"} still unresolved.`
-                      : "Credit budget and approval gates are clear."}
+                      : !hasReservation && workspaceStatus !== "review-ready"
+                        ? "Review the final scope before reserving credits."
+                        : hasReservation
+                          ? "Scope is locked until the campaign is reopened."
+                          : "Budget and approval gates are clear."}
                 </small>
               </div>
 
-              <button className={styles.launch} type="button" disabled={!canLaunch}>Launch campaign</button>
-              <small className={styles.guardrail}>Prototype state: launch does not yet publish content, send CRM or spend media. Connected channels will replace this guardrail over time.</small>
+              <div className={styles.reviewFlow}>
+                <div className={workspaceStatus === "draft" ? styles.reviewStepActive : ""}>
+                  <span>1</span><strong>Estimate</strong><small>{total} cr planned</small>
+                </div>
+                <div className={workspaceStatus === "review-ready" && !hasReservation ? styles.reviewStepActive : ""}>
+                  <span>2</span><strong>Review</strong><small>{missingRecommended.length} recommended removed</small>
+                </div>
+                <div className={hasReservation && !launchHandoffReady ? styles.reviewStepActive : ""}>
+                  <span>3</span><strong>Reserve</strong><small>{hasReservation ? `${reservedCampaignCredits} cr newly reserved` : `${reservationRequired} cr to reserve`}</small>
+                </div>
+                <div className={launchHandoffReady ? styles.reviewStepActive : ""}>
+                  <span>4</span><strong>Launch</strong><small>handoff only today</small>
+                </div>
+              </div>
+
+              {reservationError ? <p className={styles.warning}>{reservationError}</p> : null}
+
+              {!hasReservation ? (
+                <button
+                  className={styles.launch}
+                  type="button"
+                  disabled={!canReserve || reservationBusy}
+                  onClick={() => void reserveCampaign()}
+                >
+                  {reservationBusy ? "Reserving…" : `Reserve ${reservationRequired} credits`}
+                </button>
+              ) : launchHandoffReady ? (
+                <button className={styles.launch} type="button" disabled>Launch campaign · connector required</button>
+              ) : (
+                <button className={styles.launch} type="button" disabled={!canPrepareLaunch} onClick={prepareLaunchHandoff}>
+                  Prepare launch handoff
+                </button>
+              )}
+
+              {hasReservation ? <button className={styles.reopen} type="button" disabled={reservationBusy} onClick={() => void reopenCampaign()}>Reopen campaign and release reservation</button> : null}
+              <small className={styles.guardrail}>Launch is not simulated: unsupported channels remain explicit handoffs. No CRM send, social publish or media spend happens from this button today.</small>
             </aside>
           </div>
 
@@ -621,8 +758,8 @@ export function CampaignCreditBuilder({
 
             <div className={styles.productionActions}>
               <span><strong>{committedCredits}</strong> credits committed to generated content</span>
-              <button type="button" onClick={() => setWorkspaceStatus((current) => current === "draft" ? "review-ready" : "draft")}>
-                {workspaceStatus === "review-ready" ? "Return to draft" : "Mark ready for review"}
+              <button type="button" disabled={hasReservation} onClick={() => setWorkspaceStatus((current) => current === "draft" ? "review-ready" : "draft")}>
+                {hasReservation ? "Scope locked by reservation" : workspaceStatus === "review-ready" ? "Return to draft" : "Review campaign"}
               </button>
             </div>
 
