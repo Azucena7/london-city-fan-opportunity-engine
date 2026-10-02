@@ -195,7 +195,7 @@ export default function Home() {
         </div>
         <div className="salesDemoActions">
           <Link className="salesPrimary" href="/for-clubs#demo">Request a club demo</Link>
-          <Link className="salesSecondary" href="/app/matches">Open the product</Link>
+          <Link className="salesSecondary" href="/app/demo">Try the guided demo</Link>
         </div>
       </section>
 
