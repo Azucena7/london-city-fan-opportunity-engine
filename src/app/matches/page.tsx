@@ -60,7 +60,7 @@ export default function MatchesPage() {
               <div className={styles.fixtureMain}>
                 <div className={styles.fixtureTopline}>
                   <span>{isCurrent ? "NEXT HOME MATCH" : "MONITORING"}</span>
-                  <span>{signalCount} sourced signals</span>
+                  <span>{isCurrent ? `${live?.decisionState ?? "HOLD"} · ${live?.confidence.label ?? "—"} confidence` : `${signalCount} sourced signals`}</span>
                 </div>
                 <h2>London City <small>v</small> {fixture.opponent}</h2>
                 <p>{fixture.competition} · {fixture.venue}</p>
@@ -69,7 +69,7 @@ export default function MatchesPage() {
                   <div className={styles.decision}>
                     <span>Recommended focus</span>
                     <strong>{live?.opportunity ?? "Review current evidence."}</strong>
-                    <p>{live?.nextAction.label ?? "No action is currently required."}</p>
+                    <p><strong>Do next:</strong> {live?.nextAction.label ?? "No action is currently required."}</p>
                   </div>
                 ) : (
                   <div className={styles.monitoring}>
