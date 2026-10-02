@@ -6,6 +6,7 @@ import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
 import { MatchSignalControls } from "@/components/MatchSignalControls";
 import { ActivationDraft } from "@/components/ActivationDraft";
+import { MatchPlanDecision } from "@/components/MatchPlanDecision";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -64,7 +65,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </div>
       </section>
 
-      <section className={styles.actionsSection}>
+      <section className={styles.actionsSection} id="approval-gates">
         <div className={styles.sectionHead}>
           <div>
             <span className={styles.eyebrow}>Do now</span>
@@ -147,6 +148,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           />
         </details>
       </section>
+
+      <MatchPlanDecision
+        decisionState={live.decisionState}
+        blockerCount={approvals.length}
+        nextApproval={campaign?.nextApproval.en ?? live.primaryBlocker}
+        signalCount={live.liveSignals.length}
+      />
 
       <section className={styles.footerActions}>
         <div>
