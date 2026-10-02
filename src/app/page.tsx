@@ -68,7 +68,7 @@ export default function Home() {
 
       <section className="salesHero">
         <div className="salesHeroCopy">
-          <span className="productEyebrow">Fan growth operating system for football clubs</span>
+          <span className="productEyebrow">Decision intelligence layer for football clubs</span>
           <h1>Every home fixture should come with a plan to grow the crowd.</h1>
           <p>
             Fan Growth Engine monitors the fixture, the city, football demand and club signals — then gives your team
@@ -79,9 +79,9 @@ export default function Home() {
             <Link className="salesSecondary" href="/live/london-city">See London City live</Link>
           </div>
           <div className="salesHeroTrust">
-            <span>No new dashboard to manage.</span>
+            <span>Works above CRM, ticketing and social.</span>
             <span>Starts from your fixture calendar.</span>
-            <span>Built around measurable actions.</span>
+            <span>Turns signals into one measurable action.</span>
           </div>
         </div>
 
@@ -106,12 +106,12 @@ export default function Home() {
       <section className="salesProblem">
         <div>
           <span className="salesKicker">Why clubs need it</span>
-          <h2>Fan growth work is fragmented across too many teams, tools and signals.</h2>
+          <h2>The missing layer is not another system of record. It is the decision between the signals and the campaign.</h2>
         </div>
         <div className="salesProblemGrid">
-          <article><strong>Fixtures</strong><p>Match importance changes week by week, but planning often starts manually.</p></article>
-          <article><strong>Signals</strong><p>Ticketing, CRM, local events, football demand and club activity sit in separate places.</p></article>
-          <article><strong>Decisions</strong><p>Teams still have to translate all that information into one action everyone understands.</p></article>
+          <article><strong>Keep the stack</strong><p>CRM, ticketing, social and analytics remain the systems that store data and execute work.</p></article>
+          <article><strong>Add intelligence</strong><p>The engine combines fixture, demand, territory and club signals to decide what deserves action now.</p></article>
+          <article><strong>Close the loop</strong><p>One recommended plan moves through review, production, handoff and learning without pretending attribution is causation.</p></article>
         </div>
       </section>
 
@@ -147,10 +147,9 @@ export default function Home() {
       <section className="salesProof">
         <div>
           <span className="salesKicker">See it before you buy it</span>
-          <h2>London City Live shows the engine thinking in public.</h2>
+          <h2>London City Live is the women&apos;s-football proving ground for the engine.</h2>
           <p>
-            Follow what the engine saw before a fixture, what it recommended and what public evidence appeared later.
-            Alignment is recorded alongside divergence — not rewritten after the fact.
+            The product is built for football clubs broadly, while the live case keeps the proof grounded in the specific growth realities of women&apos;s football: audience development, repeat attendance and constrained team capacity. Follow what the engine saw before a fixture, what it recommended and what public evidence appeared later.
           </p>
           <Link className="salesSecondary" href="/live/london-city">Explore the live case</Link>
         </div>
