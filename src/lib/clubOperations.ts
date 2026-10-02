@@ -22,12 +22,13 @@ export const sourceLabels: Record<SourceId, Copy> = {
 };
 export type Task = { id: string; title: Copy; department: Copy; offset: number; owner: string; done: boolean };
 export type Action = {
+  fixtureContext?: { fixtureId:string; kickoff:string; timeZone:string };
   contextEvidence?: { id: string; title: Copy; recommendation: Copy; validation: Copy; reviewDate: string; synthetic: true }[];
   id: Goal | "mobility"; title: Copy; reason: Copy; audience: Copy; kpi: Copy;
   sources: SourceId[]; tasks: Task[]; owner: string; measurement: boolean; audienceReviewed: boolean; rights: boolean;
   approvedVersion: string | null; simulatedVersion: string | null; strategyVersion?: string;
 };
-export type Plan = { date: string; goal: Goal; mobility: boolean; comprehensive: boolean; actions: Action[] };
+export type Plan = { date: string; goal: Goal; mobility: boolean; comprehensive: boolean; actions: Action[]; kickoff?:string; fixtureId?:string; timeZone?:string; sourceStates?:Record<SourceId,SourceState>; excludedSignalIds?:string[]; signalSnapshot?: { id:string; state:"used"|"excluded"|"irrelevant"|"unavailable" }[] };
 const task = (id: string, title: Copy, department: Copy, offset: number): Task => ({ id, title, department, offset, owner: "", done: false });
 const marketing = copy("Marketing", "Marketing");
 const communications = copy("Comunicación", "Communications");
@@ -73,7 +74,7 @@ export function rankFans(fans: Fan[], segment: "all" | Fan["segment"], metric: "
   return fans.filter((fan) => segment === "all" || fan.segment === segment).map((fan) => ({ fan, value: metric === "purchases" ? fan.purchases : fan.reconciled && fan.eligibleMatches > 0 ? fan.visits / fan.eligibleMatches : null })).sort((a, b) => (b.value ?? -1) - (a.value ?? -1) || a.fan.id.localeCompare(b.fan.id));
 }
 export function actionVersion(action: Action, date: string, sources: Record<SourceId, SourceState>): string {
-  return JSON.stringify({ id: action.id, date, owner: action.owner, measurement: action.measurement, audienceReviewed: action.audienceReviewed, rights: action.rights, contextEvidence: action.contextEvidence, strategyVersion: action.strategyVersion, sources: action.sources.map((id) => [id, sources[id]]) });
+  return JSON.stringify({ id: action.id, date, fixtureContext:action.fixtureContext, owner: action.owner, measurement: action.measurement, audienceReviewed: action.audienceReviewed, rights: action.rights, contextEvidence: action.contextEvidence, strategyVersion: action.strategyVersion, sources: action.sources.map((id) => [id, sources[id]]) });
 }
 export function approvalBlockers(action: Action, date: string, sources: Record<SourceId, SourceState>, role: Role): string[] {
   const reasons: string[] = [];
