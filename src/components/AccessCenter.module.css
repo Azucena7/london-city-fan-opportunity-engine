@@ -10,3 +10,5 @@
 .accountBar{background:var(--product-inverse)}
 .rows>div,.reviewList>div{background:rgba(255,255,255,.28);border-radius:0}
 .guardrail{background:#ecefdc;border-left-color:var(--product-accent)}
+
+@media(max-width:800px){.authGrid article,.authGrid article:nth-child(even),.grid article,.grid article:nth-child(even){border-right:0;padding-left:22px;padding-right:22px}.wrap{padding-top:40px}.state{border-left:0;border-top:1px solid var(--product-line);padding:16px 0 0}}
