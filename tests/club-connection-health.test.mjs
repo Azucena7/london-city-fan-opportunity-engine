@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import ts from "typescript";
 const source = await readFile(new URL("../src/lib/clubConnectionHealth.ts", import.meta.url), "utf8");
 const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { checkClubConnection: check } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+const { checkClubConnection: check, getSupabaseConfiguration: configuration } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
 const jwt = role => `eyJhbGciOiJIUzI1NiJ9.${Buffer.from(JSON.stringify({ role })).toString("base64url")}.signature`;
 const env = { SUPABASE_URL: "https://abcdefghijklmnopqrst.supabase.co", SUPABASE_ANON_KEY: jwt("anon") };
 test("missing config does not make a request", async () => {
@@ -44,4 +44,19 @@ test("credential, provider and transport failures expose no raw errors", async (
     assert.equal((await check(env, async () => new Response("private error", { status }))).authService, expected);
   }
   assert.equal((await check(env, async () => { throw Error("key and URL must stay private"); })).authService, "unavailable");
+});
+test("CLUB integration namespace takes precedence as a complete pair", async () => {
+  const club = { CLUB_SUPABASE_URL: env.SUPABASE_URL, CLUB_SUPABASE_PUBLISHABLE_KEY: `sb_publishable_${"c".repeat(24)}` };
+  const settings = { ...env, SUPABASE_URL: "https://wrong.invalid", ...club };
+  const selected = configuration(settings);
+  assert.equal(selected.status, "configured");
+  assert.equal(selected.origin.origin, club.CLUB_SUPABASE_URL);
+  assert.equal(selected.key, club.CLUB_SUPABASE_PUBLISHABLE_KEY);
+  assert.equal((await check(settings, async () => new Response(null, { status: 200 }))).authService, "available");
+});
+test("incomplete or privileged CLUB configuration cannot fall back or mix projects", async () => {
+  for (const patch of [{ CLUB_SUPABASE_URL: env.SUPABASE_URL }, { CLUB_SUPABASE_ANON_KEY: env.SUPABASE_ANON_KEY }, { CLUB_SUPABASE_URL: "" }]) {
+    assert.equal(configuration({ ...env, ...patch }).status, "missing_configuration");
+  }
+  assert.equal(configuration({ ...env, CLUB_SUPABASE_URL: env.SUPABASE_URL, CLUB_SUPABASE_PUBLISHABLE_KEY: "sb_secret_secret", CLUB_SUPABASE_ANON_KEY: env.SUPABASE_ANON_KEY }).status, "invalid_configuration");
 });

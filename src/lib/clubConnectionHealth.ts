@@ -1,4 +1,7 @@
-type Environment = { SUPABASE_URL?: string; SUPABASE_PUBLISHABLE_KEY?: string; SUPABASE_ANON_KEY?: string };
+type Environment = {
+  SUPABASE_URL?: string; SUPABASE_PUBLISHABLE_KEY?: string; SUPABASE_ANON_KEY?: string;
+  CLUB_SUPABASE_URL?: string; CLUB_SUPABASE_PUBLISHABLE_KEY?: string; CLUB_SUPABASE_ANON_KEY?: string;
+};
 type HealthState = "missing_configuration" | "invalid_configuration" | "available" | "credentials_rejected" | "unavailable";
 
 export type ClubConnectionHealth = {
@@ -24,8 +27,13 @@ function lowPrivilegeKey(key: string): boolean {
 }
 
 export function getSupabaseConfiguration(env: Environment): { status: "configured"; origin: URL; key: string } | { status: "missing_configuration" | "invalid_configuration" } {
-  const url = env.SUPABASE_URL?.trim();
-  const key = (env.SUPABASE_PUBLISHABLE_KEY ?? env.SUPABASE_ANON_KEY)?.trim();
+  // The installed Vercel integration uses CLUB. Choose one complete namespace;
+  // never mix a URL and key from different projects or fall back on a bad CLUB key.
+  const clubNamespace = [env.CLUB_SUPABASE_URL, env.CLUB_SUPABASE_PUBLISHABLE_KEY, env.CLUB_SUPABASE_ANON_KEY].some(value => value !== undefined);
+  const url = (clubNamespace ? env.CLUB_SUPABASE_URL : env.SUPABASE_URL)?.trim();
+  const key = (clubNamespace
+    ? env.CLUB_SUPABASE_PUBLISHABLE_KEY ?? env.CLUB_SUPABASE_ANON_KEY
+    : env.SUPABASE_PUBLISHABLE_KEY ?? env.SUPABASE_ANON_KEY)?.trim();
   if (!url || !key) return { status: "missing_configuration" };
   if (key.length > 4096 || !lowPrivilegeKey(key)) return { status: "invalid_configuration" };
   let origin: URL;
@@ -62,6 +70,9 @@ export async function getClubConnectionHealth(): Promise<ClubConnectionHealth> {
       SUPABASE_URL: process.env.SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY: process.env.SUPABASE_PUBLISHABLE_KEY,
       SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+      CLUB_SUPABASE_URL: process.env.CLUB_SUPABASE_URL,
+      CLUB_SUPABASE_PUBLISHABLE_KEY: process.env.CLUB_SUPABASE_PUBLISHABLE_KEY,
+      CLUB_SUPABASE_ANON_KEY: process.env.CLUB_SUPABASE_ANON_KEY,
     });
     const value = await pending;
     cached = { value, expires: Date.now() + 60_000 };
