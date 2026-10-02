@@ -254,7 +254,7 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /\+200 credits/);
   assert.match(builder, /additional credits|additional credit|add a credit pack/i);
   assert.match(builder, /Launch campaign/);
-  assert.match(builder, /does not publish content, send CRM or spend media yet/);
+  assert.match(builder, /launch does not yet publish content, send CRM or spend media/);
   assert.match(builder, /specific content\/channel proposal is locked/);
   assert.match(page, /CampaignCreditBuilder/);
   assert.match(nav, /60/);
