@@ -38,7 +38,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
     <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="results" />
 
-      <nav className="resultsFixturePicker" aria-label="Choose a fixture to review">
+      <nav className={styles.fixturePicker} aria-label="Choose a fixture to review">
         <strong>Review a fixture</strong>
         {calendar.filter((item) => item.homeAway === "home" && (item.status !== "scheduled" || item.id === currentState.next_home_fixture_id)).map((item) => (
           <Link key={item.id} href={`/results?fixture=${item.id}`} aria-current={item.id === selectedId ? "page" : undefined}>
@@ -70,7 +70,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
 
       <ProductDataStateLegend />
 
-      {selected ? <section className="resultsFixtureFacts" aria-label="Observed fixture facts">
+      {selected ? <section className={styles.fixtureFacts} aria-label="Observed fixture facts">
         <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
         <article><span>Recorded attendance</span><strong>{selected.attendance?.toLocaleString("en-GB") ?? "Not measured yet"}</strong></article>
         <article><span>Commercial impact</span><strong>{measured ? "Descriptive club evidence connected" : "Not measured yet"}</strong></article>
@@ -99,33 +99,38 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </article>
       </section>
 
-      <section className={styles.interpretation}>
-        <div>
-          <span className={styles.eyebrow}>Interpretation guardrail</span>
-          <h2>Attribution is not the same as incremental impact.</h2>
+      <details className={styles.interpretation}>
+        <summary>
+          <div>
+            <span className={styles.eyebrow}>Interpretation guardrail</span>
+            <strong>How to read this evidence</strong>
+          </div>
+          <span>Attribution ≠ incremental impact →</span>
+        </summary>
+        <div className={styles.interpretationBody}>
           <p>
             A campaign id can tell us which tickets were associated with an activation. It does not prove that those
             purchases would not have happened anyway.
           </p>
+          <div className={styles.interpretationGrid}>
+            <article>
+              <span>Observed</span>
+              <strong>Purchases, scans, revenue and repeat behaviour</strong>
+              <p>Descriptive club evidence.</p>
+            </article>
+            <article>
+              <span>Attributed</span>
+              <strong>Tickets linked to campaign identifiers</strong>
+              <p>Useful for channel analysis, but still descriptive.</p>
+            </article>
+            <article>
+              <span>Incremental</span>
+              <strong>Not established</strong>
+              <p>{results?.interpretation.requirement ?? "Requires a credible counterfactual."}</p>
+            </article>
+          </div>
         </div>
-        <div className={styles.interpretationGrid}>
-          <article>
-            <span>Observed</span>
-            <strong>Purchases, scans, revenue and repeat behaviour</strong>
-            <p>Descriptive club evidence.</p>
-          </article>
-          <article>
-            <span>Attributed</span>
-            <strong>Tickets linked to campaign identifiers</strong>
-            <p>Useful for channel analysis, but still descriptive.</p>
-          </article>
-          <article>
-            <span>Incremental</span>
-            <strong>Not established</strong>
-            <p>{results?.interpretation.requirement ?? "Requires a credible counterfactual."}</p>
-          </article>
-        </div>
-      </section>
+      </details>
 
       <section className={styles.learningLoop}>
         <div className={styles.sectionHead}>
