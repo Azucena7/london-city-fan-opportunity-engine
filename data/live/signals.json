@@ -591,5 +591,117 @@
     },
     "sourceName": "London City Lionesses · Everton matchday",
     "sourceUrl": "https://www.londoncitylionesses.com/everton-h-2627"
+  },
+  {
+    "id": "access-tottenham-online-closed-2026-10-02",
+    "fixtureId": "2026-10-04-tot-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-02T10:00:00+01:00",
+    "title": {
+      "en": "Tottenham away online sales closed; stadium purchase remains available",
+      "es": "La venta visitante online de Tottenham ha cerrado; queda compra en el estadio"
+    },
+    "summary": {
+      "en": "London City's updated away notice states that online tickets are closed and supporters can buy at the stadium on 4 October. Both clubs confirm 14:00 BST; Tottenham confirms Sky Sports Football in the UK. This is a purchase-channel change, not a sell-out or sales count.",
+      "es": "La nota visitante actualizada de London City indica que la venta online ha cerrado y que se podrá comprar en el estadio el 4 de octubre. Ambos clubes confirman las 14:00 BST; Tottenham confirma Sky Sports Football en Reino Unido. Es un cambio de canal de compra, no sold out ni cifra de ventas."
+    },
+    "marketingAction": {
+      "en": "Replace online purchase calls to action with stadium-purchase guidance, show 14:00 and BetWright Stadium, and give non-travellers the UK broadcast option. Do not promise an unverified box-office opening time or ticket quantity.",
+      "es": "Sustituir llamadas a comprar online por la guía de compra en el estadio, mostrar las 14:00 y BetWright Stadium y ofrecer la retransmisión en Reino Unido a quienes no viajen. No prometer hora de taquilla ni cupo sin verificar."
+    },
+    "sourceName": "London City Lionesses / Tottenham Hotspur",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+        "checkedAt": "2026-10-02"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1145195/spurs-vs-london-city-lionesses-womens-super-league-how-to-watch-team-news-kit-colours-key-information",
+        "checkedAt": "2026-10-02"
+      }
+    ]
+  },
+  {
+    "id": "tickets-players-cup-bundle-2026-10-02",
+    "fixtureId": "2026-10-28-cry-h",
+    "relatedFixtureIds": [
+      "2026-11-18-bha-h",
+      "2026-12-16-bri-h"
+    ],
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-02T10:00:00+01:00",
+    "title": {
+      "en": "Three home cup matches offered for the price of two",
+      "es": "Tres partidos de copa en casa por el precio de dos"
+    },
+    "summary": {
+      "en": "The club launched a bundle for Crystal Palace (28 October), Brighton (18 November) and Bristol City (16 December), all at 19:00. Season ticket holders and registered-interest supporters can buy now; bundle general sale starts 5 October. Individual ticket priority opens 8 October and general sale 12 October. Each buyer receives one ticket per person per fixture. Offer availability is confirmed; sales and attendance are not measured.",
+      "es": "El club lanzó un pack para Crystal Palace (28 de octubre), Brighton (18 de noviembre) y Bristol City (16 de diciembre), todos a las 19:00. Ya pueden comprar abonados e interesados registrados; la venta general del pack abre el 5 de octubre. La prioridad individual abre el 8 y la venta general el 12 de octubre. Se entrega una entrada por persona y partido. La oferta está confirmada; ventas y asistencia no están medidas."
+    },
+    "marketingAction": {
+      "en": "Prepare separate bundle and single-match CRM journeys for the official sale windows. Measure bundle purchases, per-fixture scans and repeat attendance separately; avoid counting one bundle as one attendee or as three actual visits.",
+      "es": "Preparar recorridos separados de CRM para pack y partido individual según las ventanas oficiales. Medir compras del pack, scans por fixture y repetición por separado; no contar un pack como una persona asistente ni como tres visitas reales."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/introducing-2026-27-subway-player-s-cup-3-game-bundle",
+    "sources": [
+      {
+        "name": "London City Lionesses announcement",
+        "url": "https://www.londoncitylionesses.com/post/introducing-2026-27-subway-player-s-cup-3-game-bundle",
+        "checkedAt": "2026-10-02"
+      },
+      {
+        "name": "London City Lionesses bundle page",
+        "url": "https://www.londoncitylionesses.com/playerscupbundle",
+        "checkedAt": "2026-10-02"
+      }
+    ]
+  },
+  {
+    "id": "attendance-brighton-4177-reported-2026-10-02",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "demand",
+    "state": "reported",
+    "confidence": "medium",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-02T10:00:00+01:00",
+    "title": {
+      "en": "Brighton attendance is reported as 4,177",
+      "es": "La asistencia de Brighton se reporta en 4.177"
+    },
+    "summary": {
+      "en": "Football Web Pages and FotMob publish 4,177 attendance for the 26 September 2–0 Brighton fixture. This is a reported attendance figure, not verified club scans or ticket sales. No direct club/league confirmation or counting methodology was found; Football Web Pages also has an outdated venue field. It is 1,225 (22.7%) below the measured 5,402 opener, but this aggregate comparison cannot establish buyer retention.",
+      "es": "Football Web Pages y FotMob publican 4.177 asistentes al 2–0 ante Brighton del 26 de septiembre. Es asistencia reportada, no scans del club verificados ni ventas. No se encontró confirmación directa del club/liga ni metodología de recuento; Football Web Pages además conserva una sede desactualizada. Son 1.225 (22,7%) menos que los 5.402 medidos del opener, pero esta comparación agregada no acredita retención de compradores."
+    },
+    "marketingAction": {
+      "en": "Use the provisional count to review Brighton-to-Everton acquisition and retention plans; request authorised attendance, scans and cohort reconciliation before publishing a retention or no-show rate. Preserve the opener's measured observation.",
+      "es": "Usar la cifra provisional para revisar captación y repetición de Brighton hacia Everton; solicitar conciliación autorizada de asistencia, scans y cohortes antes de publicar tasas de retención o no-show. Conservar la observación medida del opener."
+    },
+    "sourceName": "Football Web Pages / FotMob",
+    "sourceUrl": "https://www.footballwebpages.co.uk/match/2026-2027/womens-super-league/london-city-lionesses/brighton-and-hove-albion-women/589072",
+    "sources": [
+      {
+        "name": "Football Web Pages",
+        "url": "https://www.footballwebpages.co.uk/match/2026-2027/womens-super-league/london-city-lionesses/brighton-and-hove-albion-women/589072",
+        "checkedAt": "2026-10-02"
+      },
+      {
+        "name": "FotMob",
+        "url": "https://www.fotmob.com/matches/brighton-vs-london-city-lionesses/awc12a3z",
+        "checkedAt": "2026-10-02"
+      }
+    ]
   }
 ]
