@@ -26,6 +26,8 @@ export default function MatchesPage() {
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a, b) => a.date.localeCompare(b.date))
     .slice(0, 6);
+  const currentFixture = upcoming.find((fixture) => fixture.id === currentFixtureId) ?? upcoming[0] ?? null;
+  const futureFixtures = upcoming.filter((fixture) => fixture.id !== currentFixture?.id);
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -46,46 +48,71 @@ export default function MatchesPage() {
         </div>
       </header>
 
-      <section className={styles.fixtureList} aria-label="Upcoming home fixtures">
-        {upcoming.map((fixture, index) => {
-          const isCurrent = fixture.id === currentFixtureId;
-          const signalCount = liveSignals.filter((signal) => signal.fixtureId === fixture.id).length;
-          return (
-            <article className={[styles.fixture, isCurrent ? styles.current : ""].join(" ")} key={fixture.id}>
-              <div className={styles.dateBlock}>
-                <span>{formatDate(fixture.date)}</span>
-                <strong>{fixture.kickoff ?? "TBC"}</strong>
+      {currentFixture ? (
+        <section className={styles.priorityMatch} aria-label="Current priority match">
+          <div className={styles.priorityTop}>
+            <div>
+              <span className={styles.eyebrow}>Current priority</span>
+              <div className={styles.fixtureTopline}>
+                <span>{live?.timingLabel ?? "Next home match"}</span>
+                <span>{live?.decisionState ?? "HOLD"} · {live?.confidence.label ?? "—"} confidence</span>
               </div>
+            </div>
+            <div className={styles.priorityDate}>
+              <span>{formatDate(currentFixture.date)}</span>
+              <strong>{currentFixture.kickoff ?? "TBC"}</strong>
+            </div>
+          </div>
 
-              <div className={styles.fixtureMain}>
-                <div className={styles.fixtureTopline}>
-                  <span>{isCurrent ? "NEXT HOME MATCH" : "MONITORING"}</span>
-                  <span>{isCurrent ? `${live?.decisionState ?? "HOLD"} · ${live?.confidence.label ?? "—"} confidence` : `${signalCount} sourced signals`}</span>
+          <div className={styles.priorityMain}>
+            <div>
+              <h2>London City <small>v</small> {currentFixture.opponent}</h2>
+              <p>{currentFixture.competition} · {currentFixture.venue}</p>
+            </div>
+            <div className={styles.priorityDecision}>
+              <span>Recommended focus</span>
+              <strong>{live?.opportunity ?? "Review current evidence."}</strong>
+              <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
+            </div>
+          </div>
+
+          <div className={styles.priorityFooter}>
+            <div>
+              <span>Why now</span>
+              <strong>{live?.whyNow ?? "Current fixture evidence is still being assessed."}</strong>
+            </div>
+            <Link href={`/matches/${currentFixture.id}`}>Open match plan →</Link>
+          </div>
+        </section>
+      ) : null}
+
+      <section className={styles.monitoringSection} aria-label="Future fixtures under monitoring">
+        <div className={styles.monitoringHead}>
+          <div>
+            <span className={styles.eyebrow}>Monitoring</span>
+            <h2>Future home matches</h2>
+          </div>
+          <span>No action required until evidence becomes material.</span>
+        </div>
+
+        <div className={styles.futureList}>
+          {futureFixtures.map((fixture) => {
+            const signalCount = liveSignals.filter((signal) => signal.fixtureId === fixture.id).length;
+            return (
+              <article className={styles.futureFixture} key={fixture.id}>
+                <div>
+                  <span>{formatDate(fixture.date)} · {fixture.kickoff ?? "TBC"}</span>
+                  <h3>{fixture.opponent}</h3>
+                  <p>{fixture.competition} · {fixture.venue}</p>
                 </div>
-                <h2>London City <small>v</small> {fixture.opponent}</h2>
-                <p>{fixture.competition} · {fixture.venue}</p>
-
-                {isCurrent ? (
-                  <div className={styles.decision}>
-                    <span>Recommended focus</span>
-                    <strong>{live?.opportunity ?? "Review current evidence."}</strong>
-                    <p><strong>Do next:</strong> {live?.nextAction.label ?? "No action is currently required."}</p>
-                  </div>
-                ) : (
-                  <div className={styles.monitoring}>
-                    <strong>No action required yet.</strong>
-                    <span>The engine is watching fixture, demand and attention signals automatically.</span>
-                  </div>
-                )}
-              </div>
-
-              <div className={styles.fixtureAction}>
-                <span>{index === 0 ? live?.timingLabel ?? "Current" : "Future fixture"}</span>
-                {isCurrent ? <Link href={`/matches/${fixture.id}`}>Open match plan →</Link> : <span>Monitoring automatically</span>}
-              </div>
-            </article>
-          );
-        })}
+                <div className={styles.futureState}>
+                  <span>{signalCount} sourced signals</span>
+                  <strong>Monitoring automatically</strong>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </section>
 
       <section className={styles.principle}>
