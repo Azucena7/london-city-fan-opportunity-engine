@@ -63,3 +63,13 @@
 .productionActions span{font-size:12px;color:#637068}.productionActions span strong{color:#132019}
 .productionActions button{min-height:36px;padding:8px 11px;border:1px solid #cdd5cf;background:#fff;color:#132019;font-size:11px;font-weight:850;cursor:pointer}
 @media(max-width:700px){.productionActions{align-items:flex-start;flex-direction:column}.workspaceState{width:100%}}
+
+.accountPanel{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-top:18px;padding:16px;background:#f4f6f3;border:1px solid #d9dfda}
+.accountPanel>div:first-child>span{display:block;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#78837c}
+.accountPanel>div:first-child>strong{display:block;margin-top:5px;font-size:14px}
+.accountPanel>div:first-child>small{display:block;margin-top:4px;max-width:620px;color:#68756d;line-height:1.4}
+.accountControls,.signInForm{display:flex;gap:8px;align-items:center}
+.accountControls select,.signInForm input{min-height:38px;padding:8px 10px;border:1px solid #cdd5cf;background:#fff;color:#132019;font:inherit;font-size:12px}
+.accountControls button,.signInForm button{min-height:38px;padding:8px 11px;border:1px solid #142019;background:#142019;color:#fff;font-size:11px;font-weight:850;cursor:pointer}
+.signInForm input{width:160px}
+@media(max-width:820px){.accountPanel{align-items:flex-start;flex-direction:column}.accountControls,.signInForm{width:100%;flex-wrap:wrap}.signInForm input{flex:1;min-width:150px}}
