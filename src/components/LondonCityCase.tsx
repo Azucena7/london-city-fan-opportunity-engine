@@ -132,7 +132,7 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
 
           <div className={styles.principle}>
             <span>{es ? "REGLA DE EVIDENCIA" : "EVIDENCE RULE"}</span>
-            <strong>{historical.principle?.[lang] ?? validation.principle[lang]}</strong>
+            <strong>{validation.principle[lang]}</strong>
             <p>{historical.caveat[lang]}</p>
           </div>
         </section>
