@@ -48,8 +48,8 @@ test("new commercial views are discoverable from the product and case overview",
   for (const page of [marketingNav, product, pilot]) assert.match(page, /href[=:]\s*"\/for-clubs"/);
   assert.doesNotMatch(appNav, /href[=:]\s*"\/for-clubs"/);
   assert.match(appNav, /href="\/"/);
-  assert.match(overview, /href="\/london-city\/everton"/);
-  assert.match(overview, /href="\/london-city\/brighton"/);
+  assert.match(overview, /href="\/live\/london-city\/everton"/);
+  assert.match(overview, /href="\/live\/london-city\/brighton"/);
 });
 
 test("commercial primary link retains readable text against its dark button", async () => {
