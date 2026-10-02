@@ -301,7 +301,7 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   assert.match(home, /MarketingNav/);
   assert.match(home, /See London City live/);
   assert.match(home, /href="\/live\/london-city"/);
-  assert.match(marketingNav, /Open club app/);
+  assert.match(marketingNav, /Open app/);
   assert.match(marketingNav, /\/app\/matches/);
   assert.match(appNav, /Product site/);
   assert.match(appNav, /\/app\/learning/);
