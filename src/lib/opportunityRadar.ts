@@ -120,7 +120,7 @@ export function buildOpportunityRadar(
         item.opportunityLabel,
         item.recommendedAction,
         item.whyNow,
-        ...item.liveSignals.flatMap((signal) => [signal.lens, signal.summary])
+        ...item.liveSignals.flatMap((signal) => [signal.lens, signal.title])
       ].join(" ");
 
       return {
