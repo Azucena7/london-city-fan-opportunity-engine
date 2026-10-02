@@ -58,6 +58,12 @@
 .facts { display: grid; gap: 18px; }
 .facts dt { font-size: 13px; font-weight: 700; color: #53684a; }
 .facts dd { margin: 6px 0 0; }
+.proposalList { padding-left: 24px; }
+.proposalList > li { padding: 18px 0 24px 8px; border-top: 1px solid #d3dccb; }
+.proposalList h3 { margin: 0 0 12px; font-size: 21px; line-height: 1.4; }
+.proposalList summary h3 { display: inline; }
+.proposalList article { min-width: 0; overflow-wrap: anywhere; }
+.proposalList details { margin-top: 18px; }
 .warning { background: #f8f0de; border: 1px solid #d6c49b; border-radius: 12px; padding: 18px; }
 .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
 .picker { max-width: 600px; margin: 20px 0; }
