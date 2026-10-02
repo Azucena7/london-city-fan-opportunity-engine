@@ -30,9 +30,12 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
         ))}
       </div>
 
-      <Link className={styles.engine} href="/">
-        Product site
-      </Link>
+      <div className={styles.account}>
+        <span className={styles.credits}><strong>60</strong> credits</span>
+        <Link className={styles.engine} href="/">
+          Product site
+        </Link>
+      </div>
     </nav>
   );
 }
