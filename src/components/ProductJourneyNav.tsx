@@ -2,12 +2,13 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs";
+  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits";
 };
 
 const primaryItems = [
   { key: "matches", label: "Matches", href: "/app/matches" },
   { key: "demo", label: "Guided demo", href: "/app/demo" },
+  { key: "credits", label: "Credits", href: "/app/credits" },
   { key: "results", label: "Learning", href: "/app/learning" }
 ] as const;
 

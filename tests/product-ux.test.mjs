@@ -252,6 +252,87 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
   assert.match(nav, /\/app\/demo/);
 });
 
+test("club campaign workspace supports authenticated multi-user persistence with RLS", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const server = read("src/lib/supabaseServer.ts");
+  const session = read("src/app/api/auth/session/route.ts");
+  const login = read("src/app/api/auth/login/route.ts");
+  const workspace = read("src/app/api/campaign-workspace/[fixtureId]/route.ts");
+  const ledger = read("src/app/api/credit-ledger/route.ts");
+  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+
+  assert.match(builder, /Connect club workspace/);
+  assert.match(builder, /Pilot account sign-in/);
+  assert.match(builder, /Saved to \$\{clubs/);
+  assert.match(builder, /\/api\/campaign-workspace/);
+  assert.match(builder, /\/api\/credit-ledger/);
+  assert.match(builder, /eventKey/);
+  assert.match(builder, /Remote persistence is protected by club membership and row-level security/);
+
+  assert.match(server, /httpOnly: true/);
+  assert.match(server, /sameSite: "lax"/);
+  assert.match(server, /SUPABASE_PUBLISHABLE_KEY/);
+  assert.match(session, /club_memberships/);
+  assert.match(login, /grant_type=password/);
+  assert.match(workspace, /on_conflict=club_id,fixture_id/);
+  assert.match(ledger, /on_conflict=event_key/);
+
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /club_has_permission/);
+  assert.match(migration, /'campaigns', 'edit'/);
+  assert.match(migration, /'campaigns', 'approve'/);
+  assert.match(migration, /campaign_workspaces/);
+  assert.match(migration, /credit_ledger/);
+  assert.match(migration, /event_key text unique/);
+  assert.match(migration, /auth\.uid\(\)/);
+});
+
+test("club app exposes an auditable Credit Center from the persistent ledger", () => {
+  const center = read("src/components/CreditCenter.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const page = read("src/app/app/credits/page.tsx");
+
+  assert.match(center, /Credit Center/);
+  assert.match(center, /Committed/);
+  assert.match(center, /Outstanding/);
+  assert.match(center, /Consumed/);
+  assert.match(center, /Released/);
+  assert.match(center, /\/api\/credit-ledger/);
+  assert.match(center, /\/api\/auth\/session/);
+  assert.match(center, /No credit events yet/);
+  assert.match(nav, /href: "\/app\/credits"/);
+  assert.match(nav, /label: "Credits"/);
+  assert.match(page, /CreditCenter/);
+});
+
+test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const route = read("src/app/api/campaign-draft/route.ts");
+  const env = read(".env.example");
+
+  assert.match(builder, /Generate draft/);
+  assert.match(builder, /Generative production/);
+  assert.match(builder, /credits committed/);
+  assert.match(builder, /Saved on this device/);
+  assert.match(builder, /localStorage/);
+  assert.match(builder, /campaign-workspace/);
+  assert.match(builder, /Mark ready for review/);
+  assert.match(builder, /\/api\/campaign-draft/);
+
+  assert.match(route, /AI_GATEWAY_API_KEY/);
+  assert.match(route, /VERCEL_OIDC_TOKEN/);
+  assert.match(route, /https:\/\/ai-gateway\.vercel\.sh\/v1\/chat\/completions/);
+  assert.match(route, /openai\/gpt-5\.6-sol/);
+  assert.match(route, /crm-email/);
+  assert.match(route, /vertical-video/);
+  assert.match(route, /Never invent ticket prices/);
+  assert.match(route, /creditsCommitted/);
+  assert.match(route, /persistence: "device-workspace"/);
+
+  assert.match(env, /AI_GATEWAY_API_KEY=/);
+  assert.match(env, /AI_GATEWAY_MODEL=/);
+});
+
 test("match plan includes campaign proposal credit budgeting and gated launch", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");
@@ -285,6 +366,7 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /launch does not yet publish content, send CRM or spend media/);
   assert.match(builder, /specific campaign recipe is locked/);
   assert.match(page, /CampaignCreditBuilder/);
+  assert.match(page, /fixtureId=\{fixture\.id\}/);
   assert.match(nav, /60/);
   assert.match(nav, /credits/);
 });

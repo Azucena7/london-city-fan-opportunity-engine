@@ -1,10 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./CampaignCreditBuilder.module.css";
 
 type Tier = "explorer" | "club" | "club-pro";
 type CreditCategory = "creation" | "adaptation" | "automation" | "deployment";
+type GeneratableItem = "crm-email" | "vertical-video";
+type GeneratedDraft = Record<string, string | string[]>;
+type ClubWorkspaceClub = { id: string; name: string; role: string };
 
 type CampaignItem = {
   id: string;
@@ -54,17 +57,203 @@ export function CampaignCreditBuilder({
   objective,
   audience,
   proposition,
-  unresolvedGates
+  unresolvedGates,
+  fixtureId
 }: {
   objective: string;
   audience: string;
   proposition: string;
   unresolvedGates: number;
+  fixtureId: string;
 }) {
   const [tier, setTier] = useState<Tier>("club");
   const [selected, setSelected] = useState(() => new Set(catalogue.filter((item) => item.recommended).map((item) => item.id)));
   const [variants, setVariants] = useState<Record<string, number>>(() => Object.fromEntries(catalogue.map((item) => [item.id, 1])));
   const [extraCredits, setExtraCredits] = useState(0);
+  const [drafts, setDrafts] = useState<Partial<Record<GeneratableItem, GeneratedDraft>>>({});
+  const [generating, setGenerating] = useState<GeneratableItem | null>(null);
+  const [generationError, setGenerationError] = useState<string | null>(null);
+  const [workspaceStatus, setWorkspaceStatus] = useState<"draft" | "review-ready">("draft");
+  const [workspaceLoaded, setWorkspaceLoaded] = useState(false);
+  const [remoteConfigured, setRemoteConfigured] = useState<boolean | null>(null);
+  const [clubs, setClubs] = useState<ClubWorkspaceClub[]>([]);
+  const [activeClubId, setActiveClubId] = useState<string | null>(null);
+  const [remoteReady, setRemoteReady] = useState(false);
+  const [remoteSaving, setRemoteSaving] = useState(false);
+  const [accountEmail, setAccountEmail] = useState("");
+  const [accountPassword, setAccountPassword] = useState("");
+  const [accountError, setAccountError] = useState<string | null>(null);
+
+  const storageKey = `fan-growth-engine:campaign-workspace:${fixtureId}`;
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(storageKey);
+      if (stored) {
+        const workspace = JSON.parse(stored) as {
+          selected?: string[];
+          variants?: Record<string, number>;
+          extraCredits?: number;
+          drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
+          workspaceStatus?: "draft" | "review-ready";
+        };
+
+        if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
+        if (workspace.variants) setVariants(workspace.variants);
+        if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
+        if (workspace.drafts) setDrafts(workspace.drafts);
+        if (workspace.workspaceStatus === "review-ready") setWorkspaceStatus("review-ready");
+      }
+    } catch {
+      // A corrupt browser workspace should never block the campaign builder.
+    } finally {
+      setWorkspaceLoaded(true);
+    }
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (!workspaceLoaded) return;
+
+    window.localStorage.setItem(storageKey, JSON.stringify({
+      version: 1,
+      fixtureId,
+      selected: Array.from(selected),
+      variants,
+      extraCredits,
+      drafts,
+      workspaceStatus,
+      savedAt: new Date().toISOString()
+    }));
+  }, [drafts, extraCredits, fixtureId, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
+
+  function applyWorkspaceState(state: Record<string, unknown>, status?: string) {
+    const workspace = state as {
+      selected?: string[];
+      variants?: Record<string, number>;
+      extraCredits?: number;
+      drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
+      workspaceStatus?: "draft" | "review-ready";
+    };
+
+    if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
+    if (workspace.variants) setVariants(workspace.variants);
+    if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
+    if (workspace.drafts) setDrafts(workspace.drafts);
+    if (status === "review-ready" || workspace.workspaceStatus === "review-ready") {
+      setWorkspaceStatus("review-ready");
+    } else {
+      setWorkspaceStatus("draft");
+    }
+  }
+
+  async function loadClubWorkspace(clubId: string) {
+    setRemoteReady(false);
+    const response = await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
+    const result = await response.json() as {
+      workspace?: { state?: Record<string, unknown>; status?: string } | null;
+      error?: string;
+    };
+
+    if (response.ok && result.workspace?.state) {
+      applyWorkspaceState(result.workspace.state, result.workspace.status);
+    }
+
+    setRemoteReady(response.ok);
+  }
+
+  async function loadAccountSession() {
+    try {
+      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const result = await response.json() as {
+        authenticated?: boolean;
+        configured?: boolean;
+        clubs?: ClubWorkspaceClub[];
+      };
+
+      setRemoteConfigured(Boolean(result.configured));
+      const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
+      setClubs(nextClubs);
+
+      if (result.authenticated && nextClubs.length) {
+        const preferred = nextClubs.some((club) => club.id === activeClubId) ? activeClubId : nextClubs[0].id;
+        setActiveClubId(preferred);
+        if (preferred) await loadClubWorkspace(preferred);
+      } else {
+        setActiveClubId(null);
+        setRemoteReady(false);
+      }
+    } catch {
+      setRemoteConfigured(false);
+      setActiveClubId(null);
+      setRemoteReady(false);
+    }
+  }
+
+  useEffect(() => {
+    void loadAccountSession();
+  }, [fixtureId]); // eslint-disable-line react-hooks/exhaustive-deps -- re-check account when the active fixture changes
+
+  useEffect(() => {
+    if (!workspaceLoaded || !remoteReady || !activeClubId) return;
+
+    const timer = window.setTimeout(async () => {
+      setRemoteSaving(true);
+      try {
+        await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            clubId: activeClubId,
+            status: workspaceStatus,
+            state: {
+              version: 1,
+              fixtureId,
+              selected: Array.from(selected),
+              variants,
+              extraCredits,
+              drafts,
+              workspaceStatus
+            }
+          })
+        });
+      } finally {
+        setRemoteSaving(false);
+      }
+    }, 700);
+
+    return () => window.clearTimeout(timer);
+  }, [activeClubId, drafts, extraCredits, fixtureId, remoteReady, selected, variants, workspaceLoaded, workspaceStatus]);
+
+  async function signInToClubWorkspace() {
+    setAccountError(null);
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: accountEmail, password: accountPassword })
+    });
+    const result = await response.json() as { error?: string };
+
+    if (!response.ok) {
+      setAccountError(result.error || "Sign-in failed.");
+      return;
+    }
+
+    setAccountPassword("");
+    await loadAccountSession();
+  }
+
+  async function signOutOfClubWorkspace() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    setClubs([]);
+    setActiveClubId(null);
+    setRemoteReady(false);
+    setAccountError(null);
+  }
+
+  async function switchClub(clubId: string) {
+    setActiveClubId(clubId);
+    await loadClubWorkspace(clubId);
+  }
 
   const includedCredits = tierCredits[tier];
   const available = includedCredits + extraCredits;
@@ -95,6 +284,8 @@ export function CampaignCreditBuilder({
   const recommendedChannels = Array.from(new Set(allRecommended.flatMap((item) => item.channels)));
   const channelCoverage = recommendedChannels.length ? Math.round((activeChannels.filter((channel) => recommendedChannels.includes(channel)).length / recommendedChannels.length) * 100) : 0;
   const launchQuality = missingRecommended.length === 0 ? "Full recommended scope" : missingRecommended.length <= 2 ? "Reduced scope" : "Thin campaign";
+  const generatedItems = Object.keys(drafts) as GeneratableItem[];
+  const committedCredits = generatedItems.reduce((sum, id) => sum + (catalogue.find((item) => item.id === id)?.baseCredits ?? 0), 0);
   const explorer = tier === "explorer";
   const canLaunch = !explorer && remaining >= 0 && unresolvedGates === 0;
 
@@ -111,6 +302,51 @@ export function CampaignCreditBuilder({
   function changeVariants(id: string, value: number) {
     const safe = Math.max(1, Math.min(4, Number.isFinite(value) ? value : 1));
     setVariants((current) => ({ ...current, [id]: safe }));
+  }
+
+  async function generateDraft(type: GeneratableItem) {
+    if (drafts[type] || generating) return;
+    setGenerating(type);
+    setGenerationError(null);
+
+    try {
+      const response = await fetch("/api/campaign-draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, objective, audience, proposition })
+      });
+      const result = await response.json() as { draft?: GeneratedDraft; error?: string };
+
+      if (!response.ok || !result.draft) {
+        throw new Error(result.error || "Draft generation failed.");
+      }
+
+      setDrafts((current) => ({ ...current, [type]: result.draft }));
+
+      if (activeClubId) {
+        const ledgerResponse = await fetch("/api/credit-ledger", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            clubId: activeClubId,
+            fixtureId,
+            itemId: type,
+            eventKey: `${fixtureId}:${type}:commit`,
+            eventType: "commit",
+            credits: catalogue.find((item) => item.id === type)?.baseCredits ?? 0,
+            note: "Credits committed when the first approval-ready draft was generated."
+          })
+        });
+
+        if (!ledgerResponse.ok) {
+          setGenerationError("Draft generated, but the club credit ledger could not be updated.");
+        }
+      }
+    } catch (error) {
+      setGenerationError(error instanceof Error ? error.message : "Draft generation failed.");
+    } finally {
+      setGenerating(null);
+    }
   }
 
   return (
@@ -244,6 +480,20 @@ export function CampaignCreditBuilder({
                         </label>
                       ) : null}
                       <b>{active ? rowTotal : 0} cr</b>
+                      {active && (item.id === "crm-email" || item.id === "vertical-video") ? (
+                        <button
+                          className={styles.generateButton}
+                          type="button"
+                          disabled={Boolean(drafts[item.id as GeneratableItem]) || generating !== null}
+                          onClick={() => generateDraft(item.id as GeneratableItem)}
+                        >
+                          {drafts[item.id as GeneratableItem]
+                            ? "Draft generated"
+                            : generating === item.id
+                              ? "Generating…"
+                              : `Generate draft · ${item.baseCredits} cr`}
+                        </button>
+                      ) : null}
                     </div>
                   </div>
                 );
@@ -256,8 +506,9 @@ export function CampaignCreditBuilder({
               <dl>
                 <div><dt>Plan allowance</dt><dd>{includedCredits} cr</dd></div>
                 <div><dt>Extra credits</dt><dd>{extraCredits} cr</dd></div>
-                <div><dt>Campaign</dt><dd>-{total} cr</dd></div>
-                <div className={remaining < 0 ? styles.over : ""}><dt>Remaining</dt><dd>{remaining} cr</dd></div>
+                <div><dt>Planned campaign</dt><dd>-{total} cr</dd></div>
+                <div><dt>Committed to generated drafts</dt><dd>{committedCredits} cr</dd></div>
+                <div className={remaining < 0 ? styles.over : ""}><dt>Remaining after plan</dt><dd>{remaining} cr</dd></div>
               </dl>
 
               <div className={styles.breakdown}>
@@ -298,6 +549,117 @@ export function CampaignCreditBuilder({
               <small className={styles.guardrail}>Prototype state: launch does not yet publish content, send CRM or spend media. Connected channels will replace this guardrail over time.</small>
             </aside>
           </div>
+
+          <section className={styles.production} aria-label="Generated campaign drafts">
+            <div className={styles.productionHead}>
+              <div>
+                <span>Generative production</span>
+                <h3>Approval-ready drafts from the campaign strategy.</h3>
+                <p>Generation commits the creation credits shown on the selected item. Signed-in club users sync this workspace across devices; otherwise the current device remains the fallback.</p>
+              </div>
+              <div className={styles.workspaceState}>
+                <span>Workspace</span>
+                <strong>
+                  {activeClubId
+                    ? remoteSaving
+                      ? "Saving to club…"
+                      : `Saved to ${clubs.find((club) => club.id === activeClubId)?.name ?? "club"}`
+                    : workspaceLoaded
+                      ? "Saved on this device"
+                      : "Loading workspace…"}
+                </strong>
+                <small>
+                  {activeClubId
+                    ? `${clubs.find((club) => club.id === activeClubId)?.role ?? "member"} · ${workspaceStatus === "review-ready" ? "ready for review" : "draft in progress"}`
+                    : workspaceStatus === "review-ready" ? "Marked ready for review" : "Draft in progress"}
+                </small>
+              </div>
+            </div>
+
+            <div className={styles.accountPanel}>
+              {activeClubId ? (
+                <>
+                  <div>
+                    <span>Club workspace</span>
+                    <strong>{clubs.find((club) => club.id === activeClubId)?.name ?? "Connected club"}</strong>
+                    <small>Remote persistence is protected by club membership and row-level security.</small>
+                  </div>
+                  <div className={styles.accountControls}>
+                    {clubs.length > 1 ? (
+                      <select value={activeClubId} onChange={(event) => void switchClub(event.target.value)}>
+                        {clubs.map((club) => <option key={club.id} value={club.id}>{club.name}</option>)}
+                      </select>
+                    ) : null}
+                    <button type="button" onClick={() => void signOutOfClubWorkspace()}>Sign out</button>
+                  </div>
+                </>
+              ) : remoteConfigured ? (
+                <>
+                  <div>
+                    <span>Connect club workspace</span>
+                    <strong>Pilot account sign-in</strong>
+                    <small>Invited club users can restore campaigns, drafts and credit history on any device.</small>
+                  </div>
+                  <div className={styles.signInForm}>
+                    <input type="email" autoComplete="email" placeholder="Work email" value={accountEmail} onChange={(event) => setAccountEmail(event.target.value)} />
+                    <input type="password" autoComplete="current-password" placeholder="Password" value={accountPassword} onChange={(event) => setAccountPassword(event.target.value)} />
+                    <button type="button" onClick={() => void signInToClubWorkspace()}>Sign in</button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <span>Device workspace</span>
+                    <strong>Club sync not configured</strong>
+                    <small>Campaign state stays on this device until Supabase credentials and the club schema are enabled.</small>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {accountError ? <p className={styles.generationError}>{accountError}</p> : null}
+
+            <div className={styles.productionActions}>
+              <span><strong>{committedCredits}</strong> credits committed to generated content</span>
+              <button type="button" onClick={() => setWorkspaceStatus((current) => current === "draft" ? "review-ready" : "draft")}>
+                {workspaceStatus === "review-ready" ? "Return to draft" : "Mark ready for review"}
+              </button>
+            </div>
+
+            {generationError ? <p className={styles.generationError}>{generationError}</p> : null}
+
+            {generatedItems.length ? (
+              <div className={styles.draftGrid}>
+                {generatedItems.map((id) => {
+                  const item = catalogue.find((entry) => entry.id === id);
+                  const draft = drafts[id];
+                  return (
+                    <article key={id} className={styles.draftCard}>
+                      <div className={styles.draftTop}>
+                        <span>{item?.label}</span>
+                        <strong>{item?.baseCredits} cr committed</strong>
+                      </div>
+                      {draft ? Object.entries(draft).map(([key, value]) => (
+                        <div className={styles.draftField} key={key}>
+                          <span>{key.replaceAll("-", " ")}</span>
+                          {Array.isArray(value) ? (
+                            <ul>{value.map((line) => <li key={line}>{line}</li>)}</ul>
+                          ) : (
+                            <p>{value}</p>
+                          )}
+                        </div>
+                      )) : null}
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className={styles.productionEmpty}>
+                <strong>No credits committed yet.</strong>
+                <p>Generate the CRM email or vertical video draft from the campaign builder above.</p>
+              </div>
+            )}
+          </section>
         </>
       )}
     </section>
