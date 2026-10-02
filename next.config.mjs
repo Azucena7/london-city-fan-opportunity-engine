@@ -6,7 +6,8 @@ const redirects = [
   { source: "/matches", destination: "/app/matches" },
   { source: "/matches/:fixtureId", destination: "/app/matches/:fixtureId" },
   { source: "/results", destination: "/app/learning" },
-  { source: "/london-city", destination: "/live/london-city" }
+  { source: "/london-city", destination: "/live/london-city" },
+  { source: "/london-city/:case", destination: "/live/london-city/:case" }
 ];
 
 const nextConfig = {
