@@ -243,6 +243,17 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /Explorer · preview only/);
   assert.match(builder, /Club · 60 included credits/);
   assert.match(builder, /Club Pro · 160 included credits/);
+  assert.match(builder, /Proposed campaign/);
+  assert.match(builder, /Campaign workflow coverage/);
+  assert.match(builder, /Channel coverage/);
+  assert.match(builder, /Campaign quality/);
+  assert.match(builder, /Campaign channels/);
+  assert.match(builder, /channelActive/);
+  assert.match(builder, /channelInactive/);
+  assert.match(builder, /If removed:/);
+  assert.match(builder, /Full recommended scope/);
+  assert.match(builder, /Reduced scope/);
+  assert.match(builder, /Thin campaign/);
   assert.match(builder, /Estimated campaign budget/);
   assert.match(builder, /Creation/);
   assert.match(builder, /Adaptation/);
@@ -296,7 +307,7 @@ test("match signals can be excluded without mutating engine data", () => {
 
 test("single match workspace absorbs plan evidence signals and impact", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
-  assert.match(page, /Recommended plan/);
+  assert.match(page, /Recommended campaign/);
   assert.match(page, /Review the draft, then execute the next actions/);
   assert.match(page, /signals · \{live\.confidence\.label\} confidence/);
   assert.match(page, /Inspect evidence, assumptions and missing inputs/);
@@ -356,16 +367,18 @@ test("matches behaves like a decision inbox with one priority fixture", () => {
   assert.match(css, /futureFixture/);
 });
 
-test("match plan prioritises the decision before deep evidence", () => {
+test("match plan prioritises one executive campaign decision before deep evidence", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
   const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
-  assert.match(page, /Decision at a glance/);
-  assert.match(page, /Do next/);
-  assert.match(page, /Blocking gate/);
+  assert.match(page, /Recommended campaign/);
+  assert.match(page, /Opportunity/);
+  assert.match(page, /Audience/);
+  assert.match(page, /Confidence/);
+  assert.match(page, /Next action/);
+  assert.match(page, /Build this campaign/);
   assert.match(page, /reasoningDetails/);
-  assert.match(css, /holdState/);
-  assert.match(css, /readyState/);
-  assert.match(css, /priorityBar/);
+  assert.match(css, /decisionCockpit/);
+  assert.match(css, /decisionFacts/);
 });
 
 test("legacy club routes redirect into the fixture-first workspace", () => {
