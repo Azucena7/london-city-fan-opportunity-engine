@@ -280,6 +280,18 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
   assert.doesNotMatch(page, /href="\/impact"/);
 });
 
+test("match plan prioritises the decision before deep evidence", () => {
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
+  assert.match(page, /Decision at a glance/);
+  assert.match(page, /Do next/);
+  assert.match(page, /Blocking gate/);
+  assert.match(page, /reasoningDetails/);
+  assert.match(css, /holdState/);
+  assert.match(css, /readyState/);
+  assert.match(css, /priorityBar/);
+});
+
 test("legacy club routes redirect into the fixture-first workspace", () => {
   const config = read("next.config.mjs");
   for (const route of ["/brief", "/opportunity", "/decision-room", "/impact"]) {
