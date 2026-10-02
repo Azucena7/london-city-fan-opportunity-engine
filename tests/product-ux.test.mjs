@@ -344,8 +344,9 @@ test("Opportunity Radar applies club context as advisory fit without changing ev
   assert.match(radar, /activationChannels/);
   assert.match(radar, /No direct club-priority match detected yet/);
   assert.match(radar, /const rank = priorityRank/);
-  assert.ok(radar.indexOf("const rank = priorityRank") < radar.indexOf("deriveClubFit"));
-  assert.doesNotMatch(radar.slice(radar.indexOf("function priorityRank"), radar.indexOf("function deriveClubFit")), /ClubOperatingContext|priorityObjectives|connectedChannels/);
+  const rankFn = radar.slice(radar.indexOf("function priorityRank"), radar.indexOf("const objectiveMatchers"));
+  assert.doesNotMatch(rankFn, /ClubOperatingContext|priorityObjectives|connectedChannels|clubContext/);
+  assert.match(radar, /const rank = priorityRank\(\s*item\.score,\s*item\.confidence\.label,\s*item\.daysToFixture,\s*materialSignalCount,\s*item\.decisionState === "READY FOR REVIEW"\s*\)/s);
 
   assert.match(matches, /getCurrentClubOperatingContext/);
   assert.match(matches, /Context explains fit\. Evidence still sets the priority/);
