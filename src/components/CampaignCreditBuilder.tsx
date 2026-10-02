@@ -8,6 +8,14 @@ type CreditCategory = "creation" | "adaptation" | "automation" | "deployment";
 type GeneratableItem = "crm-email" | "vertical-video";
 type GeneratedDraft = Record<string, string | string[]>;
 type ClubWorkspaceClub = { id: string; name: string; role: string };
+type ClubSetupContext = {
+  connectedChannels: string[];
+  priorityObjectives: string[];
+  tone?: string;
+  mustAvoid?: string;
+  approvalOwner?: string;
+  approvalRequired?: boolean;
+};
 type CampaignActivityEvent = {
   id: string;
   event_type: "review" | "draft-generated" | "reserve" | "release" | "launch-handoff";
@@ -96,6 +104,7 @@ export function CampaignCreditBuilder({
   const [reservationError, setReservationError] = useState<string | null>(null);
   const [launchHandoffReady, setLaunchHandoffReady] = useState(false);
   const [activity, setActivity] = useState<CampaignActivityEvent[]>([]);
+  const [clubSetup, setClubSetup] = useState<ClubSetupContext | null>(null);
 
   const storageKey = `fan-growth-engine:campaign-workspace:${fixtureId}`;
 
@@ -187,6 +196,31 @@ export function CampaignCreditBuilder({
     if (response.ok) await loadCampaignActivity(activeClubId);
   }
 
+  async function loadClubSetup(clubId: string) {
+    const response = await fetch(`/api/club-setup?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
+    const result = await response.json() as {
+      setup?: {
+        connected_channels?: string[];
+        priority_objectives?: string[];
+        brand_rules?: { tone?: string; mustAvoid?: string };
+        approval_rules?: { owner?: string; required?: boolean };
+      } | null;
+    };
+
+    if (response.ok && result.setup) {
+      setClubSetup({
+        connectedChannels: result.setup.connected_channels ?? [],
+        priorityObjectives: result.setup.priority_objectives ?? [],
+        tone: result.setup.brand_rules?.tone,
+        mustAvoid: result.setup.brand_rules?.mustAvoid,
+        approvalOwner: result.setup.approval_rules?.owner,
+        approvalRequired: result.setup.approval_rules?.required
+      });
+    } else {
+      setClubSetup(null);
+    }
+  }
+
   async function loadClubWorkspace(clubId: string) {
     setRemoteReady(false);
     const response = await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
@@ -199,7 +233,9 @@ export function CampaignCreditBuilder({
       applyWorkspaceState(result.workspace.state, result.workspace.status);
     }
 
-    if (response.ok) await loadCampaignActivity(clubId);
+    if (response.ok) {
+      await Promise.all([loadCampaignActivity(clubId), loadClubSetup(clubId)]);
+    }
     setRemoteReady(response.ok);
   }
 
@@ -291,12 +327,26 @@ export function CampaignCreditBuilder({
     setClubs([]);
     setActiveClubId(null);
     setRemoteReady(false);
+    setClubSetup(null);
     setAccountError(null);
   }
 
   async function switchClub(clubId: string) {
     setActiveClubId(clubId);
     await loadClubWorkspace(clubId);
+  }
+
+  function channelIsConnected(channel: string) {
+    const connected = clubSetup?.connectedChannels ?? [];
+    if (!connected.length) return true;
+    if (connected.includes(channel)) return true;
+    if (channel === "CRM" && connected.includes("Email")) return true;
+    if (channel === "Social" && connected.some((item) => ["Instagram", "Facebook", "TikTok"].includes(item))) return true;
+    return false;
+  }
+
+  function itemUsesConnectedStack(item: CampaignItem) {
+    return item.channels.some(channelIsConnected);
   }
 
   const includedCredits = tierCredits[tier];
@@ -453,7 +503,7 @@ export function CampaignCreditBuilder({
       const response = await fetch("/api/campaign-draft", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type, objective, audience, proposition })
+        body: JSON.stringify({ type, objective, audience, proposition, clubId: activeClubId })
       });
       const result = await response.json() as { draft?: GeneratedDraft; error?: string };
 
@@ -573,6 +623,23 @@ export function CampaignCreditBuilder({
             </div>
           </div>
 
+          {activeClubId ? (
+            <div className={styles.clubContext}>
+              <div>
+                <span>Club context applied</span>
+                <strong>Built above the club&apos;s existing stack — not instead of it.</strong>
+                <p>
+                  Campaign recipes use saved channels, objectives, brand rules and approval defaults. Items outside the connected stack stay visible as explicit handoffs rather than pretending the platform can execute them.
+                </p>
+              </div>
+              <div className={styles.clubContextFacts}>
+                <span><strong>{clubSetup?.connectedChannels.length ?? 0}</strong> connected channels</span>
+                <span><strong>{clubSetup?.priorityObjectives.length ?? 0}</strong> priority objectives</span>
+                <span><strong>{clubSetup?.approvalRequired === false ? "Flexible" : "Required"}</strong> approval</span>
+              </div>
+            </div>
+          ) : null}
+
           <div className={styles.creditExplainer}>
             {(["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).map((category) => (
               <article key={category}>
@@ -602,6 +669,7 @@ export function CampaignCreditBuilder({
                 const active = selected.has(item.id);
                 const count = Math.max(1, variants[item.id] ?? 1);
                 const rowTotal = item.baseCredits + (item.supportsVariants ? Math.max(0, count - 1) * Math.ceil(item.baseCredits * 0.45) : 0);
+                const connectedStack = itemUsesConnectedStack(item);
                 return (
                   <div key={item.id} className={active ? styles.itemActive : styles.item}>
                     <label className={styles.itemToggle}>
@@ -610,9 +678,11 @@ export function CampaignCreditBuilder({
                         <div className={styles.itemTitle}>
                           <strong>{item.label}</strong>
                           {item.recommended ? <span>Recommended</span> : null}
+                          {activeClubId ? <span className={connectedStack ? styles.stackConnected : styles.stackHandoff}>{connectedStack ? "Connected stack" : "Handoff"}</span> : null}
                         </div>
                         <p>{item.detail}</p>
                         <small>{categoryLabels[item.category]} · {item.channels.join(" · ")} · base {item.baseCredits} cr</small>
+                        {activeClubId && !connectedStack ? <p className={styles.stackNote}>Not in the club&apos;s connected channels. This remains a preparation/manual handoff unless a connector is added.</p> : null}
                       {item.recommended && !active ? <p className={styles.impactWarning}>If removed: {item.impact}</p> : null}
                       </div>
                     </label>
