@@ -94,14 +94,14 @@
     "fixtureId": "2026-09-26-bha-h",
     "area": "CRM & Data",
     "status": "next",
-    "due": "2026-09-28",
+    "due": "2026-10-05",
     "title": {
       "en": "Collect Brighton demand and experience evidence",
       "es": "Recoger la evidencia de demanda y experiencia de Brighton"
     },
     "reason": {
-      "en": "The 2–0 result and scorers are confirmed, but attendance, scans, ticket sales, no-show, territory/repeat mix, Broomfields retail/bar use and watchalong dwell remain unpublished. Reconcile ticketing, access-control, CRM and venue data before completing the post-match scorecard or making demand claims.",
-      "es": "El 2–0 y las goleadoras están confirmados, pero siguen sin publicarse asistencia, scans, ventas, no-show, mezcla territorial/repetición, uso de retail/bar en Broomfields y permanencia en el watchalong. Conciliar ticketing, control de acceso, CRM y datos del venue antes de completar el scorecard postpartido o afirmar resultados de demanda."
+      "en": "Brighton attendance is now reported as 4,177 by Football Web Pages and FotMob, but club/league confirmation, methodology, ticket sales, scans, repeat mix and Broomfields/watchalong metrics remain pending. Reconcile authorised sources before treating the count as measured or publishing retention/no-show claims.",
+      "es": "La asistencia de Brighton ya se reporta en 4.177 en Football Web Pages y FotMob, pero siguen pendientes confirmación del club/liga, metodología, ventas, scans, repetición y métricas de Broomfields/watchalong. Conciliar fuentes autorizadas antes de tratar la cifra como medida o publicar retención/no-show."
     }
   },
   {
@@ -237,6 +237,40 @@
     "reason": {
       "en": "Keep families and themed-matchday audiences distinct; approve tracking before activation.",
       "es": "Diferenciar familias y público de la jornada temática; aprobar seguimiento antes de activar."
+    }
+  },
+  {
+    "id": "tottenham-final-purchase-route-2026-10-02",
+    "fixtureId": "2026-10-04-tot-a",
+    "area": "Marketing Operations & CRM",
+    "status": "next",
+    "due": "2026-10-02",
+    "title": {
+      "en": "Replace Tottenham online calls to action with stadium purchase",
+      "es": "Sustituir la compra online de Tottenham por compra en el estadio"
+    },
+    "reason": {
+      "en": "The official away notice now closes online tickets and confirms purchase at the stadium. Update supporter messages today with 14:00 BST, BetWright Stadium and the UK Sky Sports Football option; verify box-office opening before publishing it.",
+      "es": "La nota visitante oficial cierra la venta online y confirma compra en el estadio. Actualizar hoy los mensajes con las 14:00 BST, BetWright Stadium y Sky Sports Football en Reino Unido; verificar apertura de taquilla antes de publicarla."
+    }
+  },
+  {
+    "id": "cup-bundle-crm-2026-10-02",
+    "fixtureId": "2026-10-28-cry-h",
+    "relatedFixtureIds": [
+      "2026-11-18-bha-h",
+      "2026-12-16-bri-h"
+    ],
+    "area": "Ticketing & CRM",
+    "status": "next",
+    "due": "2026-10-05",
+    "title": {
+      "en": "Prepare the cup bundle general-sale journey",
+      "es": "Preparar el recorrido de venta general del pack de copa"
+    },
+    "reason": {
+      "en": "Bundle priority is open and general sale starts 5 October; single-match priority/general sale follows 8/12 October. Separate audiences and purchase routes, explain one ticket per fixture, and measure bundle orders and each match's scans separately.",
+      "es": "La prioridad del pack está abierta y la venta general empieza el 5 de octubre; las ventanas individuales siguen el 8/12 de octubre. Separar audiencias y compra, explicar una entrada por fixture y medir por separado pedidos del pack y scans de cada partido."
     }
   }
 ]
