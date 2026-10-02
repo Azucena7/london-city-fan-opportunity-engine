@@ -29,7 +29,9 @@ function demoWindows(): PostMatchScorecardWindow[] {
 }
 
 function buildPublicScorecard(fixture: CalendarFixture, review: PostMatchReview, asOf: Date): PostMatchScorecard {
-  const ticketValue = `${review.ticketsSoldQualifier ?? ""}${review.ticketsSold.toLocaleString("en-GB")}`;
+  const hasTickets = typeof review.ticketsSold === "number" && Number.isFinite(review.ticketsSold) && review.ticketsSold >= 0;
+  const hasAttendance = typeof review.attendance === "number" && Number.isFinite(review.attendance) && review.attendance >= 0;
+  const ticketValue = hasTickets ? `${review.ticketsSoldQualifier ?? ""}${review.ticketsSold.toLocaleString("en-GB")}` : "Pending";
   return {
     fixtureId: fixture.id,
     fixtureDate: fixture.date,
@@ -40,9 +42,9 @@ function buildPublicScorecard(fixture: CalendarFixture, review: PostMatchReview,
     nextAction: review.nextAction,
     metrics: [
       { id: "result", label: { en: "Result", es: "Resultado" }, value: review.result, state: "public-measured" },
-      { id: "attendance", label: { en: "Attendance", es: "Asistencia" }, value: review.attendance.toLocaleString("en-GB"), state: review.attendanceState === "measured" ? "public-measured" : "public-reported" },
-      { id: "tickets", label: { en: "Tickets sold", es: "Entradas vendidas" }, value: ticketValue, state: "public-reported" },
-      { id: "occupancy", label: { en: "Occupancy", es: "Ocupación" }, value: review.occupancy, state: "public-reported" },
+      { id: "attendance", label: { en: "Attendance", es: "Asistencia" }, value: hasAttendance ? review.attendance.toLocaleString("en-GB") : "Pending", state: !hasAttendance ? "requires-access" : review.attendanceState === "measured" ? "public-measured" : "public-reported" },
+      { id: "tickets", label: { en: "Tickets sold", es: "Entradas vendidas" }, value: ticketValue, state: hasTickets ? "public-reported" : "requires-access" },
+      { id: "occupancy", label: { en: "Occupancy", es: "Ocupación" }, value: review.occupancy || "Pending", state: review.occupancy ? "public-reported" : "requires-access" },
       { id: "scans", label: { en: "Scans", es: "Accesos" }, value: "Pending", state: "requires-access" },
       { id: "no-show", label: { en: "No-show", es: "No-show" }, value: "Pending", state: "requires-access" },
       { id: "repeat", label: { en: "30/60/90 repeat", es: "Repetición 30/60/90" }, value: "Waiting", state: "waiting" }
