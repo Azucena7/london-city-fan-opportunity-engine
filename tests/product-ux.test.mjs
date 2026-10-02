@@ -241,8 +241,8 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   const nav = read("src/components/ProductJourneyNav.tsx");
   assert.match(builder, /Campaign proposal/);
   assert.match(builder, /Explorer · preview only/);
-  assert.match(builder, /Club · 60 credits/);
-  assert.match(builder, /Club Pro · 160 credits/);
+  assert.match(builder, /Club · 60 included credits/);
+  assert.match(builder, /Club Pro · 160 included credits/);
   assert.match(builder, /Estimated campaign budget/);
   assert.match(builder, /Creation/);
   assert.match(builder, /Adaptation/);
