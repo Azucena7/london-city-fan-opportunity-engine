@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./results.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
+import { LearningCampaignTrace } from "@/components/LearningCampaignTrace";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { calendar, currentState } from "@/lib/data";
@@ -69,6 +70,8 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
       </header>
 
       <ProductDataStateLegend />
+
+      {selectedId ? <LearningCampaignTrace fixtureId={selectedId} /> : null}
 
       {selected ? <section className={styles.fixtureFacts} aria-label="Observed fixture facts">
         <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
