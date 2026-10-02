@@ -374,3 +374,7 @@ drop trigger if exists apply_confirmed_admin_invite on auth.users;
 create trigger apply_confirmed_admin_invite
 after insert or update of email_confirmed_at, email on auth.users
 for each row execute function private.apply_confirmed_admin_invite();
+
+
+create index if not exists club_admin_invites_claimed_by_idx
+on private.club_admin_invites(claimed_by);
