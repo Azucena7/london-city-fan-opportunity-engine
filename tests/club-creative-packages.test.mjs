@@ -4,8 +4,16 @@ import { readFile } from "node:fs/promises";
 import ts from "typescript";
 const source = await readFile(new URL("../src/lib/clubCreativePackages.ts", import.meta.url), "utf8");
 const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { findCreative, storeCreative, clearActionCreatives } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+const { findCreative, storeCreative, clearActionCreatives, headlineLines } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
 const creative = (actionId, channel, text = "Test copy") => ({ actionId, channel, text, headline: "Test", storyboard: [], actionVersion: "v1", approvedVersion: null });
+test("SVG headlines wrap at word boundaries and limit long content explicitly", () => {
+  assert.deepEqual(headlineLines("Tu próxima visita empieza aquí"), ["Tu próxima visita empieza aquí", ""]);
+  assert.deepEqual(headlineLines("Un titular de campaña más largo para probar la lectura"), ["Un titular de campaña más", "largo para probar la lectura"]);
+  const lines = headlineLines("A".repeat(100));
+  assert.ok(lines[0].endsWith("…"));
+  assert.equal(lines[0].length, 30);
+  assert.deepEqual(headlineLines(""), ["", ""]);
+});
 test("packages preserve independent action and channel drafts without state mutation", () => {
   const original = {};
   let packages = storeCreative(original, "repeat", "instagram", creative("repeat", "instagram", "Edited Instagram"));
