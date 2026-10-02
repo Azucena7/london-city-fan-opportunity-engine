@@ -333,6 +333,27 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(env, /AI_GATEWAY_MODEL=/);
 });
 
+test("Learning turns measured evidence into a bounded next-fixture adjustment", () => {
+  const page = read("src/app/results/page.tsx");
+  const component = read("src/components/NextFixtureLearning.tsx");
+  const model = read("src/lib/learningRecommendation.ts");
+
+  assert.match(page, /deriveNextFixtureLearning/);
+  assert.match(page, /NextFixtureLearning/);
+  assert.match(page, /nextFixtureId=\{nextFixture\?\.id\}/);
+
+  assert.match(component, /Next fixture adjustment/);
+  assert.match(component, /Repeat/);
+  assert.match(component, /Change/);
+  assert.match(component, /Measure next/);
+  assert.match(component, /No confidence uplift is applied automatically/);
+
+  assert.match(model, /Requires a randomized holdout|credible comparison group|counterfactual/i);
+  assert.match(model, /does not treat attributed tickets as causal lift/);
+  assert.match(model, /Do not increase campaign scope or spend based on unmeasured outcomes/);
+  assert.match(model, /Learning confidence/);
+});
+
 test("Learning compares recorded campaign workflow with measured outcomes without implying causation", () => {
   const learning = read("src/app/results/page.tsx");
   const trace = read("src/components/LearningCampaignTrace.tsx");
