@@ -235,6 +235,16 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 
 
 
+test("match plan closes with a simple review and handoff gate", () => {
+  const decision = read("src/components/MatchPlanDecision.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  assert.match(decision, /Review required/);
+  assert.match(decision, /Approve draft for handoff/);
+  assert.match(decision, /does not send campaigns, commit spend or execute club actions automatically/);
+  assert.match(page, /MatchPlanDecision/);
+  assert.match(page, /id="approval-gates"/);
+});
+
 test("match plan exposes a review-ready activation draft", () => {
   const draft = read("src/components/ActivationDraft.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");
