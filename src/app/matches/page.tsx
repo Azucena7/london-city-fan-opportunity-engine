@@ -4,6 +4,7 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { calendar, currentState } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
+import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import styles from "./matches.module.css";
 
 export const metadata: Metadata = {
@@ -19,14 +20,15 @@ function formatDate(value: string) {
   }).format(new Date(value + "T12:00:00"));
 }
 
-export default function MatchesPage() {
+export default async function MatchesPage() {
   const today = currentState.updated_at.slice(0, 10);
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a, b) => a.date.localeCompare(b.date))
     .slice(0, 8);
 
-  const radar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id));
+  const clubContext = await getCurrentClubOperatingContext();
+  const radar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id), clubContext);
   const priority = radar[0] ?? null;
   const currentFixture = priority
     ? upcoming.find((fixture) => fixture.id === priority.fixtureId) ?? null
@@ -62,6 +64,31 @@ export default function MatchesPage() {
         <div><span>Monitoring</span><strong>{radar.filter((item) => item.radarState === "Monitor").length}</strong></div>
       </section>
 
+      {clubContext ? (
+        <section className={styles.clubFitPanel} aria-label="Club context for Opportunity Radar">
+          <div>
+            <span className={styles.eyebrow}>Club context · {clubContext.clubName}</span>
+            <h2>Context explains fit. Evidence still sets the priority.</h2>
+            <p>
+              AVELA compares each opportunity with the club&apos;s saved objectives and connected channels.
+              This context never changes the radar rank, confidence or evidence state.
+            </p>
+          </div>
+          <div className={styles.clubFitFacts}>
+            <span><strong>{clubContext.priorityObjectives.length}</strong> priority objectives</span>
+            <span><strong>{clubContext.connectedChannels.length}</strong> connected channels</span>
+            <span><strong>{clubContext.fixtureSource}</strong> fixture source</span>
+          </div>
+        </section>
+      ) : (
+        <section className={styles.clubFitEmpty} aria-label="Club context unavailable">
+          <span>Evidence-only mode</span>
+          <strong>Opportunity Radar is running without saved club context.</strong>
+          <p>Connect a club workspace and complete Setup to add objective/channel fit without changing evidence ranking.</p>
+          <Link href="/app/setup">Open Setup →</Link>
+        </section>
+      )}
+
       {currentFixture ? (
         <section className={styles.priorityMatch} aria-label="Current priority match">
           <div className={styles.priorityTop}>
@@ -87,6 +114,12 @@ export default function MatchesPage() {
               <span>Growth opportunity</span>
               <strong>{live?.opportunity ?? "Review current evidence."}</strong>
               <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
+              {priority?.clubFit ? (
+                <div className={styles.priorityClubFit}>
+                  <span>Club fit · advisory only</span>
+                  <strong>{priority.clubFit.summary}</strong>
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -128,6 +161,18 @@ export default function MatchesPage() {
                 ) : (
                   <small>No women’s-football-specific public signal classified yet.</small>
                 )}
+                {item.clubFit ? (
+                  <div className={styles.clubFitInline}>
+                    <span>Club fit does not affect rank</span>
+                    <p>{item.clubFit.summary}</p>
+                    {item.clubFit.matchedObjectives.length || item.clubFit.activationChannels.length ? (
+                      <div>
+                        {item.clubFit.matchedObjectives.map((objective) => <b key={objective}>Goal · {objective}</b>)}
+                        {item.clubFit.activationChannels.map((channel) => <b key={channel}>Route · {channel}</b>)}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
               <div className={styles.radarEvidence}>
                 <span className={styles[`state${item.radarState.replace(" ", "")}`]}>{item.radarState}</span>

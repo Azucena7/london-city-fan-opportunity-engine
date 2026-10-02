@@ -42,3 +42,25 @@
   .radarSummary{grid-template-columns:1fr}
   .radarSummary>div+div,.radarSummary>div:nth-child(3),.radarSummary>div:nth-child(4){border-left:0;border-top:1px solid #e0e5e1}
 }
+
+.clubFitPanel{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;margin:14px 0 28px;padding:22px 24px;border:1px solid #cfd8d1;background:#edf3eb}
+.clubFitPanel h2{margin:0;font-size:24px;letter-spacing:-.035em}
+.clubFitPanel p{max-width:760px;margin:8px 0 0;color:#5f6c64;font-size:13px;line-height:1.5}
+.clubFitFacts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.clubFitFacts span{display:grid;gap:2px;min-width:120px;padding:10px 12px;border:1px solid #d4ddd5;background:#fff;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#748078}
+.clubFitFacts strong{font-size:13px;color:#142019;text-transform:none;letter-spacing:0}
+.clubFitEmpty{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:14px 0 28px;padding:16px 18px;border:1px dashed #c9d2cb;background:#fafbfa}
+.clubFitEmpty>span{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#78847c}
+.clubFitEmpty>strong{font-size:13px}
+.clubFitEmpty>p{flex:1 1 380px;margin:0;color:#707b74;font-size:12px}
+.clubFitEmpty>a{font-size:12px;font-weight:900;color:#142019;text-decoration:none;border-bottom:1px solid #142019}
+.priorityClubFit{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.14)}
+.priorityClubFit span,.priorityClubFit strong{display:block}
+.priorityClubFit span{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#9eaaa2}
+.priorityClubFit strong{margin-top:5px;font-size:12px;line-height:1.45;color:#e6ebe7}
+.clubFitInline{margin-top:11px;padding-top:10px;border-top:1px solid #e1e6e2}
+.clubFitInline>span{display:block;font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:#7d887f}
+.clubFitInline>p{margin:5px 0 0;color:#5f6c64;font-size:11px;line-height:1.45}
+.clubFitInline>div{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.clubFitInline b{padding:4px 6px;background:#f1f4ef;border:1px solid #dce3dd;color:#536158;font-size:9px;font-weight:800}
+@media(max-width:850px){.clubFitPanel{grid-template-columns:1fr}.clubFitFacts{justify-content:flex-start}}

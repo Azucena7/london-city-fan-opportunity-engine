@@ -195,8 +195,8 @@ test("social sharing matches the current Fan Growth Engine product story", () =>
   const layout = read("src/app/layout.tsx");
   const card = read("src/app/linkedin-card/route.tsx");
   const og = read("src/app/opengraph-image.tsx");
-  assert.match(layout, /Fan Growth Engine/);
-  assert.match(layout, /Turn fan data into the next best action for every fixture/);
+  assert.match(layout, /AVELA · Growth Intelligence for Women’s Football/);
+  assert.match(layout, /Turn every fixture into a growth opportunity/);
   assert.match(card, /DECISION INTELLIGENCE FOR FOOTBALL CLUBS/);
   assert.match(card, /Matches/);
   assert.match(card, /Match plan/);
@@ -331,6 +331,112 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
 
   assert.match(env, /AI_GATEWAY_API_KEY=/);
   assert.match(env, /AI_GATEWAY_MODEL=/);
+});
+
+test("Opportunity Brief explains execution fit without letting club setup rewrite evidence", () => {
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const context = read("src/lib/clubOperatingContext.ts");
+
+  assert.match(page, /getCurrentClubOperatingContext/);
+  assert.match(page, /buildOpportunityRadar\(\[fixtureId\], clubContext\)/);
+  assert.match(page, /How this play fits the club&apos;s real operating setup/);
+  assert.match(page, /Evidence still determines the opportunity/);
+  assert.match(page, /Does not change rank or confidence/);
+  assert.match(page, /Connected execution/);
+  assert.match(page, /Manual \/ connector handoff/);
+  assert.match(page, /Approval default/);
+  assert.match(page, /Brand guardrail/);
+  assert.match(page, /Evidence-only brief/);
+  assert.match(page, /\/app\/setup/);
+
+  assert.match(context, /brandTone/);
+  assert.match(context, /brandMustAvoid/);
+  assert.match(context, /brand_rules/);
+});
+
+test("Opportunity Radar applies club context as advisory fit without changing evidence rank", () => {
+  const radar = read("src/lib/opportunityRadar.ts");
+  const matches = read("src/app/matches/page.tsx");
+  const context = read("src/lib/clubOperatingContext.ts");
+
+  assert.match(radar, /clubContext: ClubOperatingContext \| null = null/);
+  assert.match(radar, /affectsRank: false/);
+  assert.match(radar, /matchedObjectives/);
+  assert.match(radar, /activationChannels/);
+  assert.match(radar, /No direct club-priority match detected yet/);
+  assert.match(radar, /const rank = priorityRank/);
+  const rankFn = radar.slice(radar.indexOf("function priorityRank"), radar.indexOf("const objectiveMatchers"));
+  assert.doesNotMatch(rankFn, /ClubOperatingContext|priorityObjectives|connectedChannels|clubContext/);
+  assert.match(radar, /const rank = priorityRank\(\s*item\.score,\s*item\.confidence\.label,\s*item\.daysToFixture,\s*materialSignalCount,\s*item\.decisionState === "READY FOR REVIEW"\s*\)/s);
+
+  assert.match(matches, /getCurrentClubOperatingContext/);
+  assert.match(matches, /Context explains fit\. Evidence still sets the priority/);
+  assert.match(matches, /This context never changes the radar rank, confidence or evidence state/);
+  assert.match(matches, /Club fit · advisory only/);
+  assert.match(matches, /Club fit does not affect rank/);
+  assert.match(matches, /Evidence-only mode/);
+  assert.match(matches, /\/app\/setup/);
+
+  assert.match(context, /club_memberships/);
+  assert.match(context, /club_setup/);
+  assert.match(context, /currentSupabaseUser/);
+  assert.match(context, /return null/);
+});
+
+test("club setup context differentiates the engine from replacement CRM and generic campaign tools", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const draftRoute = read("src/app/api/campaign-draft/route.ts");
+  const home = read("src/app/page.tsx");
+
+  assert.match(builder, /Built above the club&apos;s existing stack — not instead of it/);
+  assert.match(builder, /Connected stack/);
+  assert.match(builder, /Handoff/);
+  assert.match(builder, /clubId: activeClubId/);
+  assert.match(builder, /\/api\/club-setup/);
+
+  assert.match(draftRoute, /club_setup/);
+  assert.match(draftRoute, /connected_channels/);
+  assert.match(draftRoute, /priority_objectives/);
+  assert.match(draftRoute, /brand_rules/);
+  assert.match(draftRoute, /Follow this club tone/);
+  assert.match(draftRoute, /Respect this club must-avoid rule/);
+
+  assert.match(home, /Growth intelligence for women’s football/);
+  assert.match(home, /Works with your existing stack/);
+  assert.match(home, /Women’s-football signal layer/);
+  assert.match(home, /growth-intelligence layer/);
+});
+
+test("club setup persists reusable fixture, channel, objective, brand and approval context", () => {
+  const setup = read("src/components/ClubSetup.tsx");
+  const route = read("src/app/api/club-setup/route.ts");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const page = read("src/app/app/setup/page.tsx");
+  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+
+  assert.match(setup, /Configure once\. Let every fixture start with context/);
+  assert.match(setup, /Fixture source/);
+  assert.match(setup, /connectedChannels/);
+  assert.match(setup, /priorityObjectives/);
+  assert.match(setup, /Brand rules/);
+  assert.match(setup, /Require campaign approval before reservation/);
+  assert.match(setup, /Admin role required/);
+  assert.match(setup, /Setup completeness/);
+
+  assert.match(route, /club_setup/);
+  assert.match(route, /on_conflict=club_id/);
+  assert.match(route, /Authentication required/);
+
+  assert.match(nav, /href: "\/app\/setup"/);
+  assert.match(nav, /label: "Setup"/);
+  assert.match(page, /ClubSetup/);
+
+  assert.match(migration, /create table if not exists public\.club_setup/);
+  assert.match(migration, /'campaigns', 'administer'/);
+  assert.match(migration, /connected_channels/);
+  assert.match(migration, /priority_objectives/);
+  assert.match(migration, /brand_rules/);
+  assert.match(migration, /approval_rules/);
 });
 
 test("Learning turns measured evidence into a bounded next-fixture adjustment", () => {
@@ -490,7 +596,7 @@ test("match signals can be excluded without mutating engine data", () => {
 
 test("single match workspace absorbs plan evidence signals and impact", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
-  assert.match(page, /Recommended campaign/);
+  assert.match(page, /Recommended play/);
   assert.match(page, /Review the draft, then execute the next actions/);
   assert.match(page, /signals · \{live\.confidence\.label\} confidence/);
   assert.match(page, /Inspect evidence, assumptions and missing inputs/);
@@ -519,7 +625,7 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   const config = read("next.config.mjs");
   const liveCase = read("src/components/LondonCityCase.tsx");
   assert.match(home, /MarketingNav/);
-  assert.match(home, /See London City live/);
+  assert.match(home, /See the live case/);
   assert.match(home, /href="\/live\/london-city"/);
   assert.match(marketingNav, /Open app/);
   assert.match(marketingNav, /\/app\/matches/);
@@ -542,10 +648,10 @@ test("Learning keeps deep interpretation secondary to observed outcomes", () => 
 test("matches behaves like a decision inbox with one priority fixture", () => {
   const page = read("src/app/matches/page.tsx");
   const css = read("src/app/matches/matches.module.css");
-  assert.match(page, /Current priority/);
-  assert.match(page, /Future home matches/);
-  assert.match(page, /No action required until evidence becomes material/);
-  assert.match(page, /Open match plan/);
+  assert.match(page, /Current engine priority/);
+  assert.match(page, /Next opportunities/);
+  assert.match(page, /Ranked by what deserves attention now/);
+  assert.match(page, /Open opportunity brief/);
   assert.match(css, /priorityMatch/);
   assert.match(css, /futureFixture/);
 });
@@ -553,7 +659,7 @@ test("matches behaves like a decision inbox with one priority fixture", () => {
 test("match plan prioritises one executive campaign decision before deep evidence", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
   const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
-  assert.match(page, /Recommended campaign/);
+  assert.match(page, /Recommended play/);
   assert.match(page, /Opportunity/);
   assert.match(page, /Audience/);
   assert.match(page, /Confidence/);
@@ -592,10 +698,10 @@ test("commercial surfaces route users into the simplified club journey", () => {
 test("club product starts from fixtures instead of requiring a plan first", () => {
   const matches = read("src/app/matches/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
-  assert.match(matches, /Upcoming home matches/);
-  assert.match(matches, /The engine starts from the fixture calendar automatically/);
-  assert.match(matches, /Fixture → signals → AI interpretation → opportunity → draft plan/);
-  assert.match(matches, /Monitoring automatically/);
+  assert.match(matches, /AVELA · Opportunity Radar/);
+  assert.match(matches, /The club does not create a plan first/);
+  assert.match(matches, /Fixture → signals → opportunity → recommended play → human review → activation → learning/);
+  assert.match(matches, /Monitoring/);
   assert.match(matches, /\/app\/matches\/\$\{currentFixture\.id\}/);
   assert.match(nav, /href: "\/app\/matches"/);
   assert.match(nav, /label: "Learning"/);
@@ -604,7 +710,7 @@ test("club product starts from fixtures instead of requiring a plan first", () =
 test("product and analyst branding are intentionally separated", () => {
   const productNav = read("src/components/ProductJourneyNav.tsx");
   const analystNav = read("src/components/NavTabs.tsx");
-  assert.match(productNav, /Fan Growth Engine/);
+  assert.match(productNav, /AVELA/);
   assert.match(productNav, /Matches/);
   assert.match(productNav, /Learning/);
   assert.match(productNav, /Product site/);

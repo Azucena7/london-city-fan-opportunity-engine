@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
 
 type DraftType = "crm-email" | "vertical-video";
 
@@ -7,6 +8,7 @@ type DraftRequest = {
   objective?: string;
   audience?: string;
   proposition?: string;
+  clubId?: string;
 };
 
 const draftCredits: Record<DraftType, number> = {
@@ -38,6 +40,7 @@ export async function POST(request: Request) {
   const objective = safeText(body?.objective);
   const audience = safeText(body?.audience);
   const proposition = safeText(body?.proposition);
+  const clubId = safeText(body?.clubId, 80);
 
   if (!objective || !audience || !proposition) {
     return NextResponse.json({ error: "Campaign objective, audience and proposition are required." }, { status: 400 });
@@ -53,6 +56,38 @@ export async function POST(request: Request) {
       },
       { status: 503 }
     );
+  }
+
+  let clubContext: {
+    connectedChannels: string[];
+    priorityObjectives: string[];
+    tone?: string;
+    mustAvoid?: string;
+  } | null = null;
+
+  if (clubId && supabaseConfigured()) {
+    const user = await currentSupabaseUser();
+    if (user) {
+      const setupResponse = await supabaseRequest(
+        `/rest/v1/club_setup?club_id=eq.${encodeURIComponent(clubId)}&select=connected_channels,priority_objectives,brand_rules&limit=1`
+      );
+      if (setupResponse.ok) {
+        const rows = await setupResponse.json() as Array<{
+          connected_channels?: string[];
+          priority_objectives?: string[];
+          brand_rules?: { tone?: string; mustAvoid?: string };
+        }>;
+        const setup = rows[0];
+        if (setup) {
+          clubContext = {
+            connectedChannels: setup.connected_channels ?? [],
+            priorityObjectives: setup.priority_objectives ?? [],
+            tone: setup.brand_rules?.tone,
+            mustAvoid: setup.brand_rules?.mustAvoid
+          };
+        }
+      }
+    }
   }
 
   const model = process.env.AI_GATEWAY_MODEL || "openai/gpt-5.6-sol";
@@ -88,10 +123,19 @@ export async function POST(request: Request) {
           content: JSON.stringify({
             task: type,
             campaign: { objective, audience, proposition },
+            clubContext,
             output: requestedShape,
             constraints: [
               "Use British English.",
-              "Keep the tone credible, energetic and club-appropriate.",
+              clubContext?.tone
+                ? `Follow this club tone: ${clubContext.tone}`
+                : "Keep the tone credible, energetic and club-appropriate.",
+              clubContext?.mustAvoid
+                ? `Respect this club must-avoid rule: ${clubContext.mustAvoid}`
+                : "Avoid unsupported urgency, invented scarcity and unverified claims.",
+              clubContext?.priorityObjectives.length
+                ? `Keep the club priorities in view without inventing outcomes: ${clubContext.priorityObjectives.join(", ")}`
+                : "Keep the copy focused on the supplied campaign objective.",
               "Do not claim scarcity, discounts, player appearances or benefits unless stated in the proposition.",
               "Write for human review before publication."
             ]

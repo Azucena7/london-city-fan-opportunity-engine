@@ -2,22 +2,23 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits";
+  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup";
 };
 
 const primaryItems = [
   { key: "matches", label: "Matches", href: "/app/matches" },
   { key: "demo", label: "Guided demo", href: "/app/demo" },
   { key: "credits", label: "Credits", href: "/app/credits" },
+  { key: "setup", label: "Setup", href: "/app/setup" },
   { key: "results", label: "Learning", href: "/app/learning" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
   return (
-    <nav className={styles.nav} aria-label="Fan Growth Engine navigation">
+    <nav className={styles.nav} aria-label="AVELA club app navigation">
       <Link className={styles.brand} href="/app/matches">
         <span className={styles.brandMark} aria-hidden="true" />
-        Fan Growth Engine
+        AVELA
       </Link>
 
       <div className={styles.links}>
