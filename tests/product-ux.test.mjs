@@ -195,8 +195,8 @@ test("social sharing matches the current Fan Growth Engine product story", () =>
   const layout = read("src/app/layout.tsx");
   const card = read("src/app/linkedin-card/route.tsx");
   const og = read("src/app/opengraph-image.tsx");
-  assert.match(layout, /Fan Growth Engine/);
-  assert.match(layout, /Turn fan data into the next best action for every fixture/);
+  assert.match(layout, /AVELA · Growth Intelligence for Women’s Football/);
+  assert.match(layout, /Turn every fixture into a growth opportunity/);
   assert.match(card, /DECISION INTELLIGENCE FOR FOOTBALL CLUBS/);
   assert.match(card, /Matches/);
   assert.match(card, /Match plan/);
@@ -351,10 +351,10 @@ test("club setup context differentiates the engine from replacement CRM and gene
   assert.match(draftRoute, /Follow this club tone/);
   assert.match(draftRoute, /Respect this club must-avoid rule/);
 
-  assert.match(home, /Decision intelligence layer for football clubs/);
-  assert.match(home, /Works above CRM, ticketing and social/);
-  assert.match(home, /missing layer is not another system of record/);
-  assert.match(home, /women&apos;s-football proving ground/);
+  assert.match(home, /Growth intelligence for women’s football/);
+  assert.match(home, /Works with your existing stack/);
+  assert.match(home, /Women’s-football signal layer/);
+  assert.match(home, /growth-intelligence layer/);
 });
 
 test("club setup persists reusable fixture, channel, objective, brand and approval context", () => {
