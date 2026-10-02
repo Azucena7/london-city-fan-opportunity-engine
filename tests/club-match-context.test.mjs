@@ -8,7 +8,7 @@ const url = s => `data:text/javascript;base64,${Buffer.from(compile(s)).toString
 const operations = url((await read("src/lib/clubOperations.ts")).replace(/import sample from .*?;/,`const sample=${await read("data/seed/club-operations-demo.json")};`));
 const {generatePlan,actionVersion} = await import(operations);
 const context = (await read("src/lib/clubMatchContext.ts")).replace('from "./clubOperations";',`from "${operations}";`);
-const {matchSignals,relevantSignal,incorporateSignal,signalBlocker} = await import(url(context));
+const {matchSignals,relevantSignal,incorporateSignal,signalBlocker,generateContextPlan,validKickoff} = await import(url(context));
 const sources = {ticketing:"ready",crm:"ready",access:"ready",transport:"ready",weather:"ready"};
 test("events require audience overlap or a concrete access or collaboration effect",()=>{
   const signals=matchSignals();
@@ -56,4 +56,31 @@ test("batch suggestions group actions, exclude irrelevant events and do not gran
   assert.equal(next.actions.flatMap(a=>a.contextEvidence??[]).length,5);
   assert.ok(next.actions.every(a=>!a.approvedVersion&&!a.simulatedVersion));
   assert.ok(next.actions.every(a=>!a.contextEvidence?.some(e=>e.id==="unrelated")));
+});
+test("calendar context creates a draft without a previous plan and excludes toggled signals",()=>{
+  const draft=generateContextPlan("2026-10-18","14:00","everton","repeat",["football","weather"],sources);
+  assert.equal(draft.kickoff,"14:00");
+  assert.equal(draft.fixtureId,"everton");
+  assert.equal(draft.signalSnapshot.find(s=>s.id==="weather").state,"excluded");
+  assert.ok(!draft.actions.some(a=>a.id==="attendance" || a.id==="acquisition"));
+  assert.ok(draft.actions.every(a=>a.fixtureContext.kickoff==="14:00" && !a.approvedVersion));
+  assert.ok(!draft.actions.flatMap(a=>a.contextEvidence??[]).some(e=>e.id==="weather"));
+});
+test("kickoff changes temporal relevance and stale feeds are audited rather than silently used",()=>{
+  const early=generateContextPlan("2026-10-18","12:00","early","repeat",[],sources);
+  const afternoon=generateContextPlan("2026-10-18","14:00","afternoon","repeat",[],sources);
+  assert.equal(early.signalSnapshot.find(s=>s.id==="football").state,"irrelevant");
+  assert.equal(afternoon.signalSnapshot.find(s=>s.id==="football").state,"used");
+  const stale=generateContextPlan("2026-10-18","14:00","same","repeat",[],{...sources,weather:"stale"});
+  assert.equal(stale.signalSnapshot.find(s=>s.id==="weather").state,"unavailable");
+  assert.ok(!stale.actions.some(a=>a.id==="attendance"));
+  assert.equal(validKickoff("24:00"),false);
+  assert.equal(validKickoff("14:60"),false);
+  assert.throws(()=>generateContextPlan("2026-10-18","","x","repeat",[],sources));
+  assert.notEqual(actionVersion(early.actions[0],early.date,sources),actionVersion(afternoon.actions[0],afternoon.date,sources));
+});
+test("home fixture selection excludes away, completed and past kickoffs in the club time zone",async()=>{
+  const {upcomingHomeFixtures}=await import(url(await read("src/lib/clubFixtureCalendar.ts")));
+  const fixtures=[{id:"past",date:"2026-10-02",kickoff:"14:00",homeAway:"home"},{id:"next",date:"2026-10-02",kickoff:"17:00",homeAway:"home"},{id:"away",date:"2026-10-03",kickoff:"12:00",homeAway:"away"},{id:"final",date:"2026-10-04",kickoff:"12:00",homeAway:"home",status:"final"},{id:"unknown",date:"2026-10-05",kickoff:"",homeAway:"home"}];
+  assert.deepEqual(upcomingHomeFixtures(fixtures,new Date("2026-10-02T14:30:00Z"),"Europe/London").map(f=>f.id),["next","unknown"]);
 });
