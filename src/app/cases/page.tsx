@@ -57,7 +57,7 @@ export default function CasesPage() {
               <div><span>Territory</span><strong>{item.territory}</strong></div>
               <div className={styles.detailAction}>
                 {item.evidenceState === "historical-case" ? (
-                  <Link href={`/results?fixture=${item.fixtureId}`}>Review this fixture →</Link>
+                  <Link href={`/app/learning?fixture=${item.fixtureId}`}>Review this fixture →</Link>
                 ) : item.evidenceState === "live-decision-case" ? (
                   <Link href={`/app/matches/${item.fixtureId}`}>Open match plan →</Link>
                 ) : (
