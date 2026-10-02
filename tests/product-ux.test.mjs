@@ -271,13 +271,16 @@ test("club campaign workspace supports authenticated multi-user persistence with
 
   assert.match(server, /httpOnly: true/);
   assert.match(server, /sameSite: "lax"/);
-  assert.match(session, /club_members/);
+  assert.match(server, /SUPABASE_PUBLISHABLE_KEY/);
+  assert.match(session, /club_memberships/);
   assert.match(login, /grant_type=password/);
   assert.match(workspace, /on_conflict=club_id,fixture_id/);
   assert.match(ledger, /on_conflict=event_key/);
 
   assert.match(migration, /enable row level security/);
-  assert.match(migration, /viewer','editor','approver','admin/);
+  assert.match(migration, /club_has_permission/);
+  assert.match(migration, /'campaigns', 'edit'/);
+  assert.match(migration, /'campaigns', 'approve'/);
   assert.match(migration, /campaign_workspaces/);
   assert.match(migration, /credit_ledger/);
   assert.match(migration, /event_key text unique/);
