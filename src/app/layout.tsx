@@ -36,28 +36,28 @@ import { cookies } from "next/headers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://london-city-fan-opportunity-engine.vercel.app"),
   title: {
-    default: "Fan Growth Engine",
-    template: "%s | Fan Growth Engine"
+    default: "AVELA · Growth Intelligence for Women’s Football",
+    template: "%s | AVELA"
   },
   description:
-    "Turn fan data into the next best action for every fixture. A live product prototype for football club fan growth and commercial decision intelligence.",
+    "Turn every fixture into a growth opportunity. Matchday intelligence for women’s football clubs.",
   openGraph: {
-    title: "Fan Growth Engine",
-    description: "Discover the opportunity. Act before matchday. Learn what worked.",
+    title: "AVELA · Growth Intelligence for Women’s Football",
+    description: "Every fixture is a growth opportunity.",
     url: "/",
-    siteName: "Fan Growth Engine",
+    siteName: "AVELA",
     type: "website",
     images: [{
       url: "/linkedin-card",
       width: 1200,
       height: 630,
-      alt: "Fan Growth Engine — decision intelligence for football clubs"
+      alt: "AVELA — growth intelligence for women’s football"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fan Growth Engine",
-    description: "Turn fan data into the next best action for every fixture.",
+    title: "AVELA · Growth Intelligence for Women’s Football",
+    description: "Every fixture is a growth opportunity.",
     images: ["/linkedin-card"]
   }
 };
