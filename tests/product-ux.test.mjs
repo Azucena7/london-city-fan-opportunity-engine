@@ -609,7 +609,7 @@ test("matches behaves like a decision inbox with one priority fixture", () => {
 test("match plan prioritises one executive campaign decision before deep evidence", () => {
   const page = read("src/app/matches/[fixtureId]/page.tsx");
   const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
-  assert.match(page, /Recommended campaign/);
+  assert.match(page, /Recommended play/);
   assert.match(page, /Opportunity/);
   assert.match(page, /Audience/);
   assert.match(page, /Confidence/);
