@@ -333,6 +333,24 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(env, /AI_GATEWAY_MODEL=/);
 });
 
+test("Learning compares recorded campaign workflow with measured outcomes without implying causation", () => {
+  const learning = read("src/app/results/page.tsx");
+  const trace = read("src/components/LearningCampaignTrace.tsx");
+
+  assert.match(learning, /LearningCampaignTrace/);
+  assert.match(learning, /fixtureId=\{selectedId\}/);
+
+  assert.match(trace, /Execution trace/);
+  assert.match(trace, /What actually happened inside the campaign workspace/);
+  assert.match(trace, /operational evidence, not outcome evidence/);
+  assert.match(trace, /No shared execution events for this fixture/);
+  assert.match(trace, /Learning should not assume a campaign was executed/);
+  assert.match(trace, /Use ticketing, CRM, scan and revenue evidence to assess outcomes/);
+  assert.match(trace, /credible counterfactual/);
+  assert.match(trace, /\/api\/campaign-history/);
+  assert.match(trace, /\/api\/auth\/session/);
+});
+
 test("campaign history records shared fixture milestones without conflating them with the credit ledger", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const route = read("src/app/api/campaign-history/[fixtureId]/route.ts");
