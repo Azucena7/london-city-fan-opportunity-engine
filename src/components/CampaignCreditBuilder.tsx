@@ -5,6 +5,8 @@ import styles from "./CampaignCreditBuilder.module.css";
 
 type Tier = "explorer" | "club" | "club-pro";
 type CreditCategory = "creation" | "adaptation" | "automation" | "deployment";
+type GeneratableItem = "crm-email" | "vertical-video";
+type GeneratedDraft = Record<string, string | string[]>;
 
 type CampaignItem = {
   id: string;
@@ -65,6 +67,9 @@ export function CampaignCreditBuilder({
   const [selected, setSelected] = useState(() => new Set(catalogue.filter((item) => item.recommended).map((item) => item.id)));
   const [variants, setVariants] = useState<Record<string, number>>(() => Object.fromEntries(catalogue.map((item) => [item.id, 1])));
   const [extraCredits, setExtraCredits] = useState(0);
+  const [drafts, setDrafts] = useState<Partial<Record<GeneratableItem, GeneratedDraft>>>({});
+  const [generating, setGenerating] = useState<GeneratableItem | null>(null);
+  const [generationError, setGenerationError] = useState<string | null>(null);
 
   const includedCredits = tierCredits[tier];
   const available = includedCredits + extraCredits;
@@ -95,6 +100,8 @@ export function CampaignCreditBuilder({
   const recommendedChannels = Array.from(new Set(allRecommended.flatMap((item) => item.channels)));
   const channelCoverage = recommendedChannels.length ? Math.round((activeChannels.filter((channel) => recommendedChannels.includes(channel)).length / recommendedChannels.length) * 100) : 0;
   const launchQuality = missingRecommended.length === 0 ? "Full recommended scope" : missingRecommended.length <= 2 ? "Reduced scope" : "Thin campaign";
+  const generatedItems = Object.keys(drafts) as GeneratableItem[];
+  const committedCredits = generatedItems.reduce((sum, id) => sum + (catalogue.find((item) => item.id === id)?.baseCredits ?? 0), 0);
   const explorer = tier === "explorer";
   const canLaunch = !explorer && remaining >= 0 && unresolvedGates === 0;
 
@@ -111,6 +118,31 @@ export function CampaignCreditBuilder({
   function changeVariants(id: string, value: number) {
     const safe = Math.max(1, Math.min(4, Number.isFinite(value) ? value : 1));
     setVariants((current) => ({ ...current, [id]: safe }));
+  }
+
+  async function generateDraft(type: GeneratableItem) {
+    if (drafts[type] || generating) return;
+    setGenerating(type);
+    setGenerationError(null);
+
+    try {
+      const response = await fetch("/api/campaign-draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, objective, audience, proposition })
+      });
+      const result = await response.json() as { draft?: GeneratedDraft; error?: string };
+
+      if (!response.ok || !result.draft) {
+        throw new Error(result.error || "Draft generation failed.");
+      }
+
+      setDrafts((current) => ({ ...current, [type]: result.draft }));
+    } catch (error) {
+      setGenerationError(error instanceof Error ? error.message : "Draft generation failed.");
+    } finally {
+      setGenerating(null);
+    }
   }
 
   return (
@@ -244,6 +276,20 @@ export function CampaignCreditBuilder({
                         </label>
                       ) : null}
                       <b>{active ? rowTotal : 0} cr</b>
+                      {active && (item.id === "crm-email" || item.id === "vertical-video") ? (
+                        <button
+                          className={styles.generateButton}
+                          type="button"
+                          disabled={Boolean(drafts[item.id as GeneratableItem]) || generating !== null}
+                          onClick={() => generateDraft(item.id as GeneratableItem)}
+                        >
+                          {drafts[item.id as GeneratableItem]
+                            ? "Draft generated"
+                            : generating === item.id
+                              ? "Generating…"
+                              : `Generate draft · ${item.baseCredits} cr`}
+                        </button>
+                      ) : null}
                     </div>
                   </div>
                 );
@@ -256,8 +302,9 @@ export function CampaignCreditBuilder({
               <dl>
                 <div><dt>Plan allowance</dt><dd>{includedCredits} cr</dd></div>
                 <div><dt>Extra credits</dt><dd>{extraCredits} cr</dd></div>
-                <div><dt>Campaign</dt><dd>-{total} cr</dd></div>
-                <div className={remaining < 0 ? styles.over : ""}><dt>Remaining</dt><dd>{remaining} cr</dd></div>
+                <div><dt>Planned campaign</dt><dd>-{total} cr</dd></div>
+                <div><dt>Committed to generated drafts</dt><dd>{committedCredits} cr</dd></div>
+                <div className={remaining < 0 ? styles.over : ""}><dt>Remaining after plan</dt><dd>{remaining} cr</dd></div>
               </dl>
 
               <div className={styles.breakdown}>
@@ -298,6 +345,51 @@ export function CampaignCreditBuilder({
               <small className={styles.guardrail}>Prototype state: launch does not yet publish content, send CRM or spend media. Connected channels will replace this guardrail over time.</small>
             </aside>
           </div>
+
+          <section className={styles.production} aria-label="Generated campaign drafts">
+            <div className={styles.productionHead}>
+              <div>
+                <span>Generative production</span>
+                <h3>Approval-ready drafts from the campaign strategy.</h3>
+                <p>Generation commits the creation credits shown on the selected item. Drafts are session-only until campaign persistence is added.</p>
+              </div>
+              <strong>{committedCredits} credits committed</strong>
+            </div>
+
+            {generationError ? <p className={styles.generationError}>{generationError}</p> : null}
+
+            {generatedItems.length ? (
+              <div className={styles.draftGrid}>
+                {generatedItems.map((id) => {
+                  const item = catalogue.find((entry) => entry.id === id);
+                  const draft = drafts[id];
+                  return (
+                    <article key={id} className={styles.draftCard}>
+                      <div className={styles.draftTop}>
+                        <span>{item?.label}</span>
+                        <strong>{item?.baseCredits} cr committed</strong>
+                      </div>
+                      {draft ? Object.entries(draft).map(([key, value]) => (
+                        <div className={styles.draftField} key={key}>
+                          <span>{key.replaceAll("-", " ")}</span>
+                          {Array.isArray(value) ? (
+                            <ul>{value.map((line) => <li key={line}>{line}</li>)}</ul>
+                          ) : (
+                            <p>{value}</p>
+                          )}
+                        </div>
+                      )) : null}
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className={styles.productionEmpty}>
+                <strong>No credits committed yet.</strong>
+                <p>Generate the CRM email or vertical video draft from the campaign builder above.</p>
+              </div>
+            )}
+          </section>
         </>
       )}
     </section>
