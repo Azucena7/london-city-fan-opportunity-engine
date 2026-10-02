@@ -299,7 +299,7 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   const config = read("next.config.mjs");
   const liveCase = read("src/components/LondonCityCase.tsx");
   assert.match(home, /MarketingNav/);
-  assert.match(home, /Explore London City live/);
+  assert.match(home, /See London City live/);
   assert.match(home, /href="\/live\/london-city"/);
   assert.match(marketingNav, /Open club app/);
   assert.match(marketingNav, /\/app\/matches/);
@@ -636,12 +636,16 @@ test("pilot weekly example reads the current product opportunity", () => {
 });
 
 
-test("homepage uses the operational next action and causal-safe learning language", () => {
+test("homepage sells the product with demo conversion and transparent packages", () => {
   const page = read("src/app/page.tsx");
+  assert.match(page, /Request a demo/);
+  assert.match(page, /Pricing/);
+  assert.match(page, /£4,500/);
+  assert.match(page, /£1,500/);
+  assert.match(page, /£3,000/);
+  assert.match(page, /Indicative starting prices/);
   assert.match(page, /live\?\.nextAction\.label/);
-  assert.doesNotMatch(page, /live\?\.recommendedAction/);
-  assert.match(page, /What happened after matchday/);
-  assert.doesNotMatch(page, /What changed after matchday/);
+  assert.match(page, /London City Live/);
 });
 
 test("National Rail RDM is registered as approved access awaiting a data product", () => {
