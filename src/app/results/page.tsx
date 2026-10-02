@@ -4,6 +4,8 @@ import styles from "./results.module.css";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { LearningCampaignTrace } from "@/components/LearningCampaignTrace";
+import { NextFixtureLearning } from "@/components/NextFixtureLearning";
+import { deriveNextFixtureLearning } from "@/lib/learningRecommendation";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { calendar, currentState } from "@/lib/data";
@@ -34,6 +36,10 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
   const results = getCurrentProductResults(selectedId);
   const selected = calendar.find((item) => item.id === selectedId);
   const measured = results?.state === "measured";
+  const nextFixture = calendar
+    .filter((item) => item.homeAway === "home" && item.status === "scheduled" && item.id !== selectedId)
+    .sort((a, b) => a.date.localeCompare(b.date))[0] ?? null;
+  const nextLearning = deriveNextFixtureLearning(live, results);
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -182,6 +188,12 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <div><span>Causal claim</span><strong>{results?.interpretation.causalClaim ? "Supported" : "Not established"}</strong></div>
         </div>
       </section>
+
+      <NextFixtureLearning
+        learning={nextLearning}
+        nextFixtureId={nextFixture?.id}
+        nextFixtureLabel={nextFixture ? `${nextFixture.opponent} · ${nextFixture.date}` : undefined}
+      />
 
       <section className={styles.next}>
         <div>
