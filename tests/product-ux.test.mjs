@@ -280,6 +280,16 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
   assert.doesNotMatch(page, /href="\/impact"/);
 });
 
+test("Learning keeps deep interpretation secondary to observed outcomes", () => {
+  const page = read("src/app/results/page.tsx");
+  const css = read("src/app/results/results.module.css");
+  assert.match(page, /How to read this evidence/);
+  assert.match(page, /Attribution ≠ incremental impact/);
+  assert.match(page, /fixturePicker/);
+  assert.match(page, /fixtureFacts/);
+  assert.match(css, /interpretation>summary/);
+});
+
 test("matches behaves like a decision inbox with one priority fixture", () => {
   const page = read("src/app/matches/page.tsx");
   const css = read("src/app/matches/matches.module.css");
