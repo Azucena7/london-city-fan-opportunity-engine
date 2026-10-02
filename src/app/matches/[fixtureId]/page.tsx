@@ -7,6 +7,7 @@ import { ImpactScenario } from "@/components/ImpactScenario";
 import { MatchSignalControls } from "@/components/MatchSignalControls";
 import { ActivationDraft } from "@/components/ActivationDraft";
 import { MatchPlanDecision } from "@/components/MatchPlanDecision";
+import { CampaignCreditBuilder } from "@/components/CampaignCreditBuilder";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -79,6 +80,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <p>{live.nextAction.label}</p>
         </div>
       </section>
+
+      <CampaignCreditBuilder
+        objective={campaign?.objective.en ?? live.opportunity}
+        audience={campaign?.audiences[0]?.label.en ?? live.audience.label}
+        proposition={campaign?.proposition.en ?? live.recommendedAction}
+        unresolvedGates={approvals.length}
+      />
 
       <section className={styles.actionsSection} id="approval-gates">
         <div className={styles.sectionHead}>

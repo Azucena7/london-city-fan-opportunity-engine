@@ -235,6 +235,32 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 
 
 
+test("match plan includes campaign proposal credit budgeting and gated launch", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(builder, /Campaign proposal/);
+  assert.match(builder, /Explorer · preview only/);
+  assert.match(builder, /Club · 60 included credits/);
+  assert.match(builder, /Club Pro · 160 included credits/);
+  assert.match(builder, /Estimated campaign budget/);
+  assert.match(builder, /Creation/);
+  assert.match(builder, /Adaptation/);
+  assert.match(builder, /Automation/);
+  assert.match(builder, /Deployment/);
+  assert.match(builder, /Extra variants cost less/);
+  assert.match(builder, /\+25 credits/);
+  assert.match(builder, /\+75 credits/);
+  assert.match(builder, /\+200 credits/);
+  assert.match(builder, /additional credits|additional credit|add a credit pack/i);
+  assert.match(builder, /Launch campaign/);
+  assert.match(builder, /launch does not yet publish content, send CRM or spend media/);
+  assert.match(builder, /specific campaign recipe is locked/);
+  assert.match(page, /CampaignCreditBuilder/);
+  assert.match(nav, /60/);
+  assert.match(nav, /credits/);
+});
+
 test("match plan closes with a simple review and handoff gate", () => {
   const decision = read("src/components/MatchPlanDecision.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");
