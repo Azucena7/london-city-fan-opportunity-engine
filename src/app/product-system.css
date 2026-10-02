@@ -1,10 +1,10 @@
 :root{
-  --product-bg:#F3F2EC;
-  --product-surface:#FBFAF6;
-  --product-surface-2:#EEEDE6;
+  --product-bg:#F4F1E8;
+  --product-surface:#FBF9F3;
+  --product-surface-2:#EDE9DE;
   --product-ink:#10211B;
-  --product-muted:#64706B;
-  --product-line:#D7D8D1;
+  --product-muted:#66736C;
+  --product-line:#D8D4C9;
   --product-accent:#C7EA3A;
   --product-accent-ink:#263400;
   --product-inverse:#10211B;
@@ -14,10 +14,16 @@
   --product-danger:#A83C3C;
   --product-info:#2D66A8;
   --product-missing:#7B8580;
-  --product-radius-sm:12px;
-  --product-radius-md:18px;
-  --product-radius-lg:28px;
-  --product-shadow:0 18px 60px rgba(16,33,27,.08);
+  --product-radius-sm:8px;
+  --product-radius-md:12px;
+  --product-radius-lg:18px;
+  --product-shadow:0 22px 70px rgba(16,33,27,.08);
+  --product-space-xs:8px;
+  --product-space-sm:14px;
+  --product-space-md:22px;
+  --product-space-lg:36px;
+  --product-space-xl:64px;
+  --product-orange:#FF7954;
   --product-display:clamp(44px,6.2vw,76px);
   --product-title:clamp(30px,4vw,48px);
   --product-body:16px;
@@ -136,3 +142,28 @@ textarea:focus-visible{
 
 /* Mobile accessibility preview refresh */
 
+
+.productAppShell{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.34),transparent 280px),
+    var(--product-bg);
+}
+.productAppShell h1,.productAppShell h2,.productAppShell h3{
+  text-wrap:balance;
+}
+.productAppShell button,
+.productAppShell input,
+.productAppShell select,
+.productAppShell textarea{
+  border-radius:0;
+}
+.productAppShell section{
+  scroll-margin-top:24px;
+}
+@media (prefers-reduced-motion:no-preference){
+  .productAppShell [class*="priority"],
+  .productAppShell [class*="radarFixture"],
+  .productAppShell [class*="campaignCanvas"]{
+    transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+  }
+}
