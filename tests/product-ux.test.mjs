@@ -235,6 +235,24 @@ test("Today surfaces a compact engine-versus-reality check for the current fixtu
 
 
 
+test("match plan includes campaign proposal credit budgeting and gated launch", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(builder, /Campaign proposal/);
+  assert.match(builder, /Explorer · preview only/);
+  assert.match(builder, /Club · 60 credits/);
+  assert.match(builder, /Club Pro · 160 credits/);
+  assert.match(builder, /Estimated campaign budget/);
+  assert.match(builder, /additional credits/);
+  assert.match(builder, /Launch campaign/);
+  assert.match(builder, /does not publish content, send CRM or spend media yet/);
+  assert.match(builder, /specific content\/channel proposal is locked/);
+  assert.match(page, /CampaignCreditBuilder/);
+  assert.match(nav, /60/);
+  assert.match(nav, /credits/);
+});
+
 test("match plan closes with a simple review and handoff gate", () => {
   const decision = read("src/components/MatchPlanDecision.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");
