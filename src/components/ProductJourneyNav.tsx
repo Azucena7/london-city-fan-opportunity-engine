@@ -15,10 +15,10 @@ const primaryItems = [
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
   return (
-    <nav className={styles.nav} aria-label="Fan Growth Engine navigation">
+    <nav className={styles.nav} aria-label="AVELA club app navigation">
       <Link className={styles.brand} href="/app/matches">
         <span className={styles.brandMark} aria-hidden="true" />
-        Fan Growth Engine
+        AVELA
       </Link>
 
       <div className={styles.links}>
