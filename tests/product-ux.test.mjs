@@ -317,6 +317,7 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(builder, /\/api\/campaign-draft/);
 
   assert.match(route, /AI_GATEWAY_API_KEY/);
+  assert.match(route, /VERCEL_OIDC_TOKEN/);
   assert.match(route, /https:\/\/ai-gateway\.vercel\.sh\/v1\/chat\/completions/);
   assert.match(route, /openai\/gpt-5\.6-sol/);
   assert.match(route, /crm-email/);
