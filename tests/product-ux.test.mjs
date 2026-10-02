@@ -260,7 +260,10 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(builder, /Generate draft/);
   assert.match(builder, /Generative production/);
   assert.match(builder, /credits committed/);
-  assert.match(builder, /session-only/);
+  assert.match(builder, /Saved on this device/);
+  assert.match(builder, /localStorage/);
+  assert.match(builder, /campaign-workspace/);
+  assert.match(builder, /Mark ready for review/);
   assert.match(builder, /\/api\/campaign-draft/);
 
   assert.match(route, /AI_GATEWAY_API_KEY/);
@@ -270,7 +273,7 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(route, /vertical-video/);
   assert.match(route, /Never invent ticket prices/);
   assert.match(route, /creditsCommitted/);
-  assert.match(route, /persistence: "session-only"/);
+  assert.match(route, /persistence: "device-workspace"/);
 
   assert.match(env, /AI_GATEWAY_API_KEY=/);
   assert.match(env, /AI_GATEWAY_MODEL=/);
@@ -309,6 +312,7 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /launch does not yet publish content, send CRM or spend media/);
   assert.match(builder, /specific campaign recipe is locked/);
   assert.match(page, /CampaignCreditBuilder/);
+  assert.match(page, /fixtureId=\{fixture\.id\}/);
   assert.match(nav, /60/);
   assert.match(nav, /credits/);
 });
