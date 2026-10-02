@@ -1,108 +1,134 @@
 # Product Brief
 
-## Product name
-Fan Growth Engine
+## Working product name
+AVELA
+
+## Category
+Growth Intelligence for Women’s Football.
 
 ## Live demonstration environment
-London City Lionesses
-
-## Public positioning
-Decision intelligence for football clubs.
+London City Lionesses.
 
 ## Core promise
-**Turn fan data into the next best action for every fixture.**
+**Turn every fixture into a growth opportunity.**
 
-Before each home match, the product should help a club understand:
+AVELA continuously reads the signals around a match — fixture, audience, city, culture, ticketing, sponsors, player momentum and club context — then helps the club decide where to act next.
 
-1. Where is the highest-value fan growth opportunity?
-2. Who should we target?
-3. What should we do?
-4. What could it generate?
-5. Is there enough evidence to act?
-6. What happened afterwards?
-7. What changes for the next fixture?
+The technology remains football-wide by design. The initial go-to-market and product specialization are women’s football.
+
+## Strategic position
+
+AVELA is not a replacement for CRM, ticketing, BI, engagement or activation tools.
+
+It is the intelligence layer above them:
+
+**Fixture → Context → Signals → Opportunity → Recommended Play → Activation → Measurement → Learning**
+
+The central question is not “who are our fans?” but:
+
+**“What should we do about this fixture, now?”**
 
 ## Primary commercial entry product
-### 90-Day Fan Growth Pilot
+
+### 90-Day Growth Intelligence Pilot
 Six fixture-by-fixture decision cycles combining the platform with a light intelligence service.
 
 The pilot is designed to prove value before asking a club to adopt a broader system.
 
-## Core product flow
-**Fixture → Recommended plan → Review → Handoff → Learning**
+## Product engines
 
-### Opportunity
-The most relevant attendance, repeat-visit or revenue opportunity around the next fixture.
+### 1. Match Intelligence
+Starts automatically from the fixture calendar and continuously reads the changing context around each match.
 
-### Action
-Audience, channel, owner, timing and measurement plan.
+### 2. Audience Growth
+Identifies the most actionable audience opportunity around the fixture, including families, grassroots, cultural crossover, international demand, first-time visitors and repeat attendance.
 
-### Impact
-A transparent scenario based on addressable audience, observed or assumed conversion, ticket economics and activation cost.
+### 3. Attendance
+Highlights demand gaps, big-stadium potential, inventory pressure and when activation is or is not justified.
 
-### Decision
-Evidence, assumptions, blockers, confidence and what would change the decision.
+### 4. Sponsor Opportunity
+Connects match context, audience, player momentum and partner categories to timely activation ideas. Sponsor prospecting remains outside the core product.
 
-### Result
-Observed campaign and ticketing outcome after matchday. Attribution remains descriptive unless the agreed measurement design supports incrementality.
+### 5. Activation
+Turns an accepted opportunity into audience, message, channels, assets, owners, timing, credit estimate, budget range and measurement.
 
-### Learning
-A club-specific signal that improves the next recommendation.
+### 6. Learning
+Compares what the engine predicted, what the club executed and what happened after matchday so the next fixture starts smarter.
+
+## Women’s-football signal layer
+
+Priority signals include:
+
+- national-team and international-window momentum;
+- player search / social momentum;
+- big-stadium transfer potential;
+- family attendance opportunity;
+- girls’ grassroots and academy density;
+- relevant cultural crossover;
+- international player / opponent demand;
+- sponsor-fit moments;
+- men’s-football fixture overlap;
+- women’s-football competition overlap;
+- venue, transport, weather and calendar constraints.
+
+Each recommendation should expose the signals used and allow a club user to exclude a signal and recalculate where practical.
 
 ## Intended users
 
 ### Commercial / revenue leader
-Needs to know what decision deserves attention and the value at stake.
+Needs to know which opportunity deserves attention and the value at stake.
 
-### Marketing / CRM lead
+### Growth / marketing lead
 Needs the audience, action, channel, timing and measurement plan.
 
 ### Ticketing lead
-Needs to know how the decision affects inventory, pricing, utilisation and repeat attendance.
+Needs to know how the decision affects inventory, demand, utilisation and repeat attendance.
+
+### Partnerships lead
+Needs credible, context-led sponsor activation opportunities rather than generic inventory ideas.
 
 ### Analyst
 Needs the sources, assumptions, calculations, uncertainty and measurement design.
 
-### Executive / CEO
+### Executive
 Needs a concise view of opportunity, risk, decision readiness and result.
 
 ## Product principles
 
 - Simple on the surface; evidence underneath.
+- The fixture starts the work automatically.
 - Opportunity potential and confidence are different things.
 - Claimed, sourced, confirmed, measured and validated should not be conflated.
-- A recommendation should state what would change it.
+- A recommendation should explain why it exists and what would change it.
+- “No meaningful opportunity” is a valid output.
 - Decision work and execution work should be visibly different.
 - Scenario models should expose assumptions and should not be presented as forecasts.
-- Campaign attribution and incremental impact are different claims.
 - Club CRM/ticketing data should be processed locally and persisted as aggregate evidence only.
 - Post-match learning must feed the next decision.
 - Human decision owners remain accountable for commercial choices.
 
-## Live product routes
+## Primary club journey
 
-### Primary club journey
-- `/matches` — fixture-first club workspace
-- `/matches/[fixtureId]` — generated match plan, activation draft, evidence, signal review, impact and handoff
-- `/results` — Learning after matchday
-
-### Commercial / supporting routes
-- `/` — product / sales front
-- `/demo` — guided product story
-- `/pilot` — 90-day pilot proposition
-- `/pilot/operating-pack` — onboarding, data trust and measurement design
-- `/cases` — product use cases
-
-Legacy decision and analyst routes remain available underneath, but are not primary club navigation.
+- `/app/matches` — upcoming fixtures ranked by opportunity / risk;
+- fixture workspace — signals, opportunity brief, recommended play and explainability;
+- activation builder — channel, asset, credit and budget calculator;
+- results — predicted vs planned vs executed vs observed;
+- learning memory — club-specific evidence for future recommendations.
 
 ## Non-goals
 
 - tactical football analysis;
 - player performance modelling;
+- replacing CRM, ticketing, BI or engagement platforms;
 - automated fan outreach without human approval;
 - black-box ROI claims;
 - causal claims without appropriate measurement;
-- replacing a club's CRM, ticketing or BI stack in the initial pilot.
+- sponsor prospecting / sales CRM in the initial product.
 
-## Long-term product direction
-A club-specific decision layer that becomes more valuable as it learns which audiences, fixtures, territories, offers and activation patterns actually drive attendance, repeat visits and commercial return.
+## Long-term moat
+
+Build a proprietary context-to-outcome memory:
+
+**match context → recommended decision → club action → observed outcome**
+
+Over time this becomes a club-specific Opportunity Memory and, across deployments where data rights allow, a football opportunity knowledge layer.
