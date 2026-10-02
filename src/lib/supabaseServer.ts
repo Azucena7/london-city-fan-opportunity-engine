@@ -4,12 +4,12 @@ const ACCESS_COOKIE = "fge-sb-access";
 const REFRESH_COOKIE = "fge-sb-refresh";
 
 export function supabaseConfigured() {
-  return Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY);
+  return Boolean(process.env.SUPABASE_URL && (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_ANON_KEY));
 }
 
 export function supabasePublicConfig() {
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_ANON_KEY;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_ANON_KEY;
   if (!url || !key) throw new Error("Supabase is not configured.");
   return { url: url.replace(/\/$/, ""), key };
 }
