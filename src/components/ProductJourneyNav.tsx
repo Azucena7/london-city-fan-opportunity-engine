@@ -6,12 +6,12 @@ type ProductJourneyNavProps = {
 };
 
 const primaryItems = [
-  { key: "matches", label: "Matches", href: "/app/matches" },
-  { key: "demo", label: "Guided demo", href: "/app/demo" },
+  { key: "matches", label: "Radar", href: "/app/matches" },
+  { key: "results", label: "Learning", href: "/app/learning" },
   { key: "credits", label: "Credits", href: "/app/credits" },
   { key: "setup", label: "Setup", href: "/app/setup" },
-  { key: "access", label: "Access", href: "/app/access" },
-  { key: "results", label: "Learning", href: "/app/learning" }
+  { key: "access", label: "Team", href: "/app/access" },
+  { key: "demo", label: "Demo", href: "/app/demo" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
@@ -35,9 +35,9 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
       </div>
 
       <div className={styles.account}>
-        <span className={styles.credits}><strong>60</strong> credits</span>
+        <span className={styles.workspace}>Club workspace</span>
         <Link className={styles.engine} href="/">
-          Product site
+          AVELA.com ↗
         </Link>
       </div>
     </nav>
