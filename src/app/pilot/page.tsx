@@ -114,8 +114,8 @@ export default function PilotPage() {
         </div>
         <div className={styles.ctaActions}>
           <Link className={styles.button} href="/for-clubs">Prepare a club pilot discussion</Link>
-          <Link className={styles.button} href="/matches">Explore the live club workspace</Link>
-          <Link className={styles.secondary} href={live ? `/matches/${live.fixtureId}` : "/matches"}>Open the current match plan</Link>
+          <Link className={styles.button} href="/app/matches">Explore the live club workspace</Link>
+          <Link className={styles.secondary} href={live ? `/app/matches/${live.fixtureId}` : "/matches"}>Open the current match plan</Link>
           <Link className={styles.secondary} href="/pilot/operating-pack">Open the Pilot Operating Pack</Link>
           <Link className={styles.secondary} href="/pilot/rehearsal">See the synthetic data rehearsal</Link>
         </div>
