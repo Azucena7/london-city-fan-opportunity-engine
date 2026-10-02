@@ -10,10 +10,13 @@ export function MarketingNav() {
       </Link>
       <div className={styles.links}>
         <Link href="/#how-it-works">Product</Link>
-        <Link href="/live/london-city">London City live</Link>
-        <Link href="/for-clubs">For clubs</Link>
+        <Link href="/live/london-city">London City Live</Link>
+        <Link href="/#pricing">Pricing</Link>
       </div>
-      <Link className={styles.app} href="/app/matches">Open club app</Link>
+      <div className={styles.actions}>
+        <Link className={styles.login} href="/app/matches">Open app</Link>
+        <Link className={styles.demo} href="/for-clubs#demo">Request demo</Link>
+      </div>
     </nav>
   );
 }
