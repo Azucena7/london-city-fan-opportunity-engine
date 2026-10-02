@@ -20,8 +20,6 @@ function formatDate(value: string) {
 }
 
 export default function MatchesPage() {
-  const live = getCurrentProductOpportunity();
-  const currentFixtureId = currentState.next_home_fixture_id;
   const today = currentState.updated_at.slice(0, 10);
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
@@ -29,8 +27,14 @@ export default function MatchesPage() {
     .slice(0, 8);
 
   const radar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id));
-  const currentFixture = upcoming.find((fixture) => fixture.id === currentFixtureId) ?? upcoming[0] ?? null;
-  const radarWithoutCurrent = radar.filter((item) => item.fixtureId !== currentFixture?.id);
+  const priority = radar[0] ?? null;
+  const currentFixture = priority
+    ? upcoming.find((fixture) => fixture.id === priority.fixtureId) ?? null
+    : null;
+  const live = priority ? getCurrentProductOpportunity(priority.fixtureId) : null;
+  const radarWithoutCurrent = priority
+    ? radar.filter((item) => item.fixtureId !== priority.fixtureId)
+    : radar;
 
   return (
     <main className={`${styles.shell} productAppShell`}>
