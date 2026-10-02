@@ -144,3 +144,5 @@
   .link,.more summary{padding:8px 10px}
 }
 
+
+.account{display:flex;align-items:center;gap:8px}.credits{display:inline-flex;align-items:baseline;gap:4px;padding:8px 10px;border-radius:999px;background:var(--product-surface-2,#EEEDE6);color:var(--product-muted,#64706B);font-size:11px;font-weight:750;white-space:nowrap}.credits strong{color:var(--product-ink,#10211B);font-size:13px}@media(max-width:700px){.credits{display:none}}
