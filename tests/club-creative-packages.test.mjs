@@ -44,12 +44,12 @@ test("regeneration and approval edits affect only one package; action edits clea
   assert.equal(findCreative(cleared, "repeat", "whatsapp"), null);
   assert.ok(findCreative(cleared, "attendance", "instagram"));
 });
-test("UI navigation retains drafts while rebuilds and strategy changes clear invalid packages", async () => {
+test("UI navigation retains drafts and action edits rebase copy for review", async () => {
   const ui = await readFile(new URL("../src/components/ClubOperationsDemo.tsx", import.meta.url), "utf8");
   const open = ui.slice(ui.indexOf("function openAction"), ui.indexOf("function build"));
   assert.doesNotMatch(open, /setCreative/);
   assert.match(ui, /creative.actionVersion === version/);
-  assert.match(ui, /clearActionCreatives\(previous, selected\)/);
+  assert.match(ui, /rebaseActionCreatives\(previous,updated,plan.date,sources\)/);
   assert.match(ui, /Regenerar sustituirá el texto editado/);
   assert.match(ui, /setCreativePackages\(\{\}\)/);
   assert.match(ui, /disabled=\{!editable\} onChange=\{\(event\) => \{ invalidateControls\(\); setCreative/);

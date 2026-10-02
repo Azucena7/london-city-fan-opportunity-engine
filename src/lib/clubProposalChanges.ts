@@ -13,7 +13,7 @@ export function proposalChanges(current:Plan|null, proposed:Plan) {
   for (const action of proposed.actions) {
     const old = oldActions.get(action.id);
     if (!old) added.push(action);
-    else if (fixtureChanged || inputs(old)!==inputs(action)) updated.push(action);
+    else if (fixtureChanged || inputs(old)!==inputs(action) || action.sources.some(id=>current?.sourceStates?.[id]!==proposed.sourceStates?.[id])) updated.push(action);
     else unchanged.push(action);
   }
   const oldSignals = new Map(current?.signalSnapshot?.map(signal=>[signal.id,signal.state]) ?? []);
