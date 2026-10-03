@@ -4,7 +4,7 @@ import { calendar, currentState, decisionValidation, roadmapItems } from "@/lib/
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
-  title: "London City Live · Fan Growth Engine",
+  title: "London City Live · AVELA",
   description: "A live public case showing what the engine sees before each match and what happens next."
 };
 
