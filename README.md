@@ -23,7 +23,7 @@ The club-facing product is designed around one simple operating loop:
 - **/app/matches** — Radar for upcoming home fixtures and automatic opportunity monitoring.
 - **/app/matches/[fixtureId]** — Opportunity Brief: recommendation, activation draft, signals, evidence, impact and handoff review.
 - **/app/campaigns** — fixture-led and seasonal campaign planning.
-- **/app/player-assets** — player asset availability, rights, usage and pack optimisation.
+- **/app/players** — player asset availability, rights, usage and pack optimisation.
 - **/app/season** — season-level opportunity and activation intelligence.
 - **/app/learning** — measured post-match evidence and what changes next.
 - **/app/sources** — intelligence source state and connector readiness.

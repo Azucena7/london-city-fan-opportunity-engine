@@ -106,6 +106,13 @@ export function PlayerAssetPlanner() {
   );
   const baseline = packs[0] ?? null;
   const selectionComplete = activeIds.length === count;
+  const livePackState = !selectionComplete
+    ? "Incomplete"
+    : activeEvaluation.blockers.length
+      ? "Blocked"
+      : manualContext === contextKey
+        ? "Custom pack"
+        : "Recommended";
   const momentumRanking = players
     .map((player) => ({ player, momentum: playerMomentumScore(player.id, demoPlayerMomentum) }))
     .sort((a,b) => (b.momentum.score ?? -1) - (a.momentum.score ?? -1));
@@ -151,7 +158,7 @@ export function PlayerAssetPlanner() {
         </div>
       </header>
 
-      <section className={styles.campaignContext} aria-label="Commercial campaign context">
+      <section id="campaign-context" className={styles.campaignContext} aria-label="Commercial campaign context">
         <div>
           <span>Campaign context</span>
           <select
@@ -180,7 +187,29 @@ export function PlayerAssetPlanner() {
         </article>
       </section>
 
-      <section className={styles.alerts}>
+      <nav className={styles.decisionRail} aria-label="Player asset planning sections">
+        <div className={styles.railState} aria-live="polite">
+          <span>Live pack</span>
+          <strong>{livePackState}</strong>
+          <small>{activeIds.length}/{count} selected · {selectedCampaign.name}</small>
+        </div>
+        <div className={styles.railMetrics}>
+          <div><span>Score</span><strong>{selectionComplete ? activeEvaluation.packScore.toFixed(0) : "—"}</strong></div>
+          <div><span>Cost</span><strong>£{activeEvaluation.totalFee}</strong></div>
+          <div><span>Opp. cost</span><strong>{activeEvaluation.opportunityCost.toFixed(0)}</strong></div>
+          <div><span>Blockers</span><strong>{selectionComplete ? activeEvaluation.blockers.length : "—"}</strong></div>
+        </div>
+        <div className={styles.railLinks}>
+          <a href="#campaign-context">Campaign</a>
+          <a href="#availability">Availability</a>
+          <a href="#player-status">Players</a>
+          <a href="#momentum">Momentum</a>
+          <a href="#packs">Packs</a>
+          <a href="#scenario">Scenario</a>
+        </div>
+      </nav>
+
+      <section id="availability" className={styles.alerts}>
         <div className={styles.sectionHead}>
           <div><span>International duty alerts</span><h2>Know absences before the pack is locked.</h2></div>
           <p>Windows create watch alerts. Internal pre-alerts and public squad confirmations remove affected players from eligible packs for overlapping dates.</p>
@@ -202,7 +231,7 @@ export function PlayerAssetPlanner() {
         <article><span>Human control</span><strong>Club confirms sporting status</strong><small>No medical inference or automatic player-status claim</small></article>
       </section>
 
-      <section className={styles.playerGrid} aria-label="Player asset status">
+      <section id="player-status" className={styles.playerGrid} aria-label="Player asset status">
         {players.map((player) => {
           const capacity = playerCapacity(player, demoAppearances);
           const duty = demoInternationalDuty.find((item) => item.playerId === player.id && item.state !== "released");
@@ -248,7 +277,7 @@ export function PlayerAssetPlanner() {
         })}
       </section>
 
-      <section className={styles.momentum}>
+      <section id="momentum" className={styles.momentum}>
         <div className={styles.sectionHead}>
           <div><span>Momentum Monitor</span><h2>Use current pull while it is useful — without confusing it with long-term value.</h2></div>
           <p>Sporting, attention/social, international and commercial momentum remain separate. Missing dimensions are excluded from the average, never treated as zero.</p>
@@ -292,7 +321,7 @@ export function PlayerAssetPlanner() {
         <p className={styles.demoNote}>Demo momentum values are synthetic and labelled as such in the data model. In a club deployment these slots should be fed by authorised/public sources such as sporting events, social/content performance, search/attention and international context.</p>
       </section>
 
-      <section className={styles.packs}>
+      <section id="packs" className={styles.packs}>
         <div className={styles.sectionHead}>
           <div><span>Pack Optimizer</span><h2>Best combinations for {count} player{count === 1 ? "" : "s"}.</h2></div>
           <p>AVELA optimises the group, not just the top individual names.</p>
@@ -326,7 +355,7 @@ export function PlayerAssetPlanner() {
         </div>
       </section>
 
-      <section className={styles.simulator} aria-label="Player pack scenario simulator">
+      <section id="scenario" className={styles.simulator} aria-label="Player pack scenario simulator">
         <div className={styles.simulatorHead}>
           <div>
             <span>Live scenario</span>
