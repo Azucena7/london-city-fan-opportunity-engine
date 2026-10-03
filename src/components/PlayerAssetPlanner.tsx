@@ -5,10 +5,13 @@ import {
   demoAppearances,
   demoCommercialCampaigns,
   demoInternationalDuty,
+  demoPlayerMomentum,
   demoPlayers,
   demoPosts,
+  evaluatePlayerPack,
   internationalAvailabilityAlerts,
   playerCapacity,
+  playerMomentumScore,
   recommendPlayerPacks,
   type ActivationRequest,
   type SportingAvailability
@@ -50,6 +53,8 @@ export function PlayerAssetPlanner() {
   const [commercialOverride, setCommercialOverride] = useState<Record<string, boolean>>(
     Object.fromEntries(demoPlayers.map((player) => [player.id, Boolean(player.commercialAvailabilityOverride)]))
   );
+  const [manualSelectedIds, setManualSelectedIds] = useState<string[]>([]);
+  const [manualContext, setManualContext] = useState("");
 
   const players = useMemo(
     () => demoPlayers.map((player) => ({
@@ -74,11 +79,57 @@ export function PlayerAssetPlanner() {
     request,
     demoAppearances,
     Math.min(count, players.length),
-    { fit: 35, balance: 20, engagement: 10, cost: 15, opportunityCost: 15, sportingAvailability: 5 },
+    { fit: 30, balance: 15, engagement: 10, cost: 12, opportunityCost: 13, sportingAvailability: 5, momentum: 15 },
     demoPosts,
     true,
-    demoInternationalDuty
+    demoInternationalDuty,
+    demoPlayerMomentum
   ).slice(0, 3);
+
+  const contextKey = [
+    campaignId,
+    count,
+    ...players.map((player) => `${player.id}:${player.sportingAvailability}:${player.commercialAvailabilityOverride ? 1 : 0}`)
+  ].join("|");
+  const recommendedIds = packs[0]?.players.map((item) => item.player.id) ?? [];
+  const activeIds = manualContext === contextKey ? manualSelectedIds : recommendedIds;
+  const activePlayers = players.filter((player) => activeIds.includes(player.id));
+  const activeEvaluation = evaluatePlayerPack(
+    activePlayers,
+    request,
+    demoAppearances,
+    { fit: 30, balance: 15, engagement: 10, cost: 12, opportunityCost: 13, sportingAvailability: 5, momentum: 15 },
+    demoPosts,
+    true,
+    demoInternationalDuty,
+    demoPlayerMomentum
+  );
+  const baseline = packs[0] ?? null;
+  const selectionComplete = activeIds.length === count;
+  const momentumRanking = players
+    .map((player) => ({ player, momentum: playerMomentumScore(player.id, demoPlayerMomentum) }))
+    .sort((a,b) => (b.momentum.score ?? -1) - (a.momentum.score ?? -1));
+
+  function choosePack(ids: string[]) {
+    setManualSelectedIds(ids);
+    setManualContext(contextKey);
+  }
+
+  function togglePlayer(playerId: string) {
+    const current = manualContext === contextKey ? manualSelectedIds : recommendedIds;
+    if (current.includes(playerId)) {
+      choosePack(current.filter((id) => id !== playerId));
+      return;
+    }
+    if (current.length >= count) return;
+    choosePack([...current, playerId]);
+  }
+
+  function delta(value: number | null | undefined, reference: number | null | undefined, suffix = "") {
+    if (value === null || value === undefined || reference === null || reference === undefined) return "—";
+    const diff = value - reference;
+    return `${diff > 0 ? "+" : ""}${diff.toFixed(0)}${suffix}`;
+  }
 
   const internationalAlerts = internationalAvailabilityAlerts(players, demoInternationalDuty, selectedCampaign.start, selectedCampaign.end);
 
@@ -197,6 +248,50 @@ export function PlayerAssetPlanner() {
         })}
       </section>
 
+      <section className={styles.momentum}>
+        <div className={styles.sectionHead}>
+          <div><span>Momentum Monitor</span><h2>Use current pull while it is useful — without confusing it with long-term value.</h2></div>
+          <p>Sporting, attention/social, international and commercial momentum remain separate. Missing dimensions are excluded from the average, never treated as zero.</p>
+        </div>
+        <div className={styles.momentumGrid}>
+          {momentumRanking.map(({ player, momentum }) => {
+            const signal = momentum.signal;
+            const isSelected = activeIds.includes(player.id);
+            return (
+              <article key={player.id} className={isSelected ? styles.momentumSelected : ""}>
+                <div className={styles.momentumTop}>
+                  <div><span>{isSelected ? "In current pack" : "Candidate"}</span><strong>{player.name}</strong></div>
+                  <b>{momentum.score !== null ? momentum.score.toFixed(0) : "—"}</b>
+                </div>
+                {signal ? (
+                  <div className={styles.momentumDimensions}>
+                    {[
+                      ["Sporting", signal.sporting],
+                      ["Attention", signal.attention],
+                      ["International", signal.international],
+                      ["Commercial", signal.commercial]
+                    ].map(([label, dimension]) => {
+                      const item = dimension as typeof signal.sporting;
+                      return (
+                        <div key={String(label)} title={item.source}>
+                          <span><b>{label}</b><small>{item.direction === "up" ? "↑" : item.direction === "down" ? "↓" : item.direction === "stable" ? "→" : "?"} {item.value ?? "missing"}</small></span>
+                          <i><em style={{ width: `${item.value ?? 0}%` }} /></i>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : <p>No current momentum evidence.</p>}
+                <small className={styles.momentumSource}>{signal ? `Snapshot ${signal.observedAt} · ${momentum.availableDimensions}/4 dimensions available` : "No evidence snapshot"}</small>
+                <button type="button" onClick={() => togglePlayer(player.id)} disabled={!isSelected && activeIds.length >= count}>
+                  {isSelected ? "Remove from pack" : activeIds.length >= count ? "Pack full" : "Add to pack"}
+                </button>
+              </article>
+            );
+          })}
+        </div>
+        <p className={styles.demoNote}>Demo momentum values are synthetic and labelled as such in the data model. In a club deployment these slots should be fed by authorised/public sources such as sporting events, social/content performance, search/attention and international context.</p>
+      </section>
+
       <section className={styles.packs}>
         <div className={styles.sectionHead}>
           <div><span>Pack Optimizer</span><h2>Best combinations for {count} player{count === 1 ? "" : "s"}.</h2></div>
@@ -219,14 +314,56 @@ export function PlayerAssetPlanner() {
                 ))}
               </div>
               <div className={styles.packMetrics}>
-                <div><span>Avg fit</span><strong>{pack.avgScore.toFixed(0)}</strong></div>
-                <div><span>Opportunity cost</span><strong>{pack.opportunityCost.toFixed(0)}</strong></div>
-                <div><span>Sporting availability bonus</span><strong>{pack.sportingAvailabilityBonus.toFixed(0)}</strong></div>
+                <div><span>Fit</span><strong>{pack.avgScore.toFixed(0)}</strong></div>
+                <div><span>Momentum</span><strong>{pack.momentumScore?.toFixed(0) ?? "—"}</strong></div>
+                <div><span>Opp. cost</span><strong>{pack.opportunityCost.toFixed(0)}</strong></div>
               </div>
+              <button className={styles.usePack} type="button" onClick={() => choosePack(pack.players.map((item) => item.player.id))}>{index === 0 ? "Reset to recommendation" : "Use this pack"}</button>
               <p>{pack.blockers.length ? `Blocked: ${pack.blockers.join(", ")}` : "Eligible under current contract, date, channel, budget and international-duty assumptions."}</p>
             </article>
           ))}
           {!packs.length ? <div className={styles.noPack}><strong>No eligible pack for this requirement.</strong><p>Reduce player count, change date/channel/budget, or resolve availability and international-duty blockers.</p></div> : null}
+        </div>
+      </section>
+
+      <section className={styles.simulator} aria-label="Player pack scenario simulator">
+        <div className={styles.simulatorHead}>
+          <div>
+            <span>Live scenario</span>
+            <h2>{selectionComplete ? "Your current pack" : `Select ${count - activeIds.length} more player${count - activeIds.length === 1 ? "" : "s"}`}</h2>
+            <p>Every add/remove recalculates the recommendation economics and flags blockers immediately.</p>
+          </div>
+          <button type="button" onClick={() => { setManualSelectedIds([]); setManualContext(""); }}>Reset recommendation</button>
+        </div>
+
+        <div className={styles.currentPack}>
+          <div className={styles.currentPlayers}>
+            {activePlayers.map((player) => (
+              <button type="button" key={player.id} onClick={() => togglePlayer(player.id)}>
+                <span>{player.name}</span><b>×</b>
+              </button>
+            ))}
+            {Array.from({ length: Math.max(0, count - activePlayers.length) }).map((_, index) => <div key={index} className={styles.emptySlot}>+ player</div>)}
+          </div>
+
+          <div className={styles.liveMetrics}>
+            <article><span>Pack score</span><strong>{activeEvaluation.packScore.toFixed(0)}</strong><small>{delta(activeEvaluation.packScore, baseline?.packScore)} vs recommended</small></article>
+            <article><span>Cost</span><strong>£{activeEvaluation.totalFee}</strong><small>{delta(activeEvaluation.totalFee, baseline?.totalFee, " GBP")} vs recommended</small></article>
+            <article><span>Momentum</span><strong>{activeEvaluation.momentumScore?.toFixed(0) ?? "—"}</strong><small>{delta(activeEvaluation.momentumScore, baseline?.momentumScore)} vs recommended</small></article>
+            <article><span>Opportunity cost</span><strong>{activeEvaluation.opportunityCost.toFixed(0)}</strong><small>{delta(activeEvaluation.opportunityCost, baseline?.opportunityCost)} vs recommended · lower is better</small></article>
+          </div>
+        </div>
+
+        <div className={styles.changeStory}>
+          <div><span>What changed?</span><strong>{manualContext === contextKey ? "AVELA recalculated this combination." : "This is the current AVELA recommendation."}</strong></div>
+          <div className={styles.changeChips}>
+            <b>{delta(activeEvaluation.totalFee, baseline?.totalFee, " GBP")} cost</b>
+            <b>{delta(activeEvaluation.momentumScore, baseline?.momentumScore)} momentum</b>
+            <b>{delta(activeEvaluation.avgScore, baseline?.avgScore)} fit</b>
+            <b>{delta(activeEvaluation.opportunityCost, baseline?.opportunityCost)} opportunity cost</b>
+            <b>{activeEvaluation.blockers.length ? `${activeEvaluation.blockers.length} blocker${activeEvaluation.blockers.length === 1 ? "" : "s"}` : "No blockers"}</b>
+          </div>
+          <p>{!selectionComplete ? "Pack is incomplete. Add players from Momentum Monitor." : activeEvaluation.blockers.length ? `Resolve: ${activeEvaluation.blockers.join(", ")}.` : activeEvaluation.momentumScore !== null && baseline?.momentumScore !== null && activeEvaluation.momentumScore > baseline.momentumScore && activeEvaluation.opportunityCost > (baseline?.opportunityCost ?? 0) ? "This version captures more current momentum but consumes more scarce player capacity." : "The current trade-off remains within the campaign constraints."}</p>
         </div>
       </section>
     </section>
