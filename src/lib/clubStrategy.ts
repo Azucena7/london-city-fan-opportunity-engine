@@ -53,7 +53,10 @@ export type InternationalDutyState = "window" | "manual-private" | "public-confi
 export type InternationalDuty = { id: string; playerId: string; start: string; end: string; state: InternationalDutyState; team: string; source: string; public: boolean; note?: string };
 export type ActivationRequest = { date: string; category: string; channel: string; territory: string; owner: string; budget: number };
 export type CommercialCampaignBrief = { id: string; name: string; type: "fixture" | "season-ticket" | "seasonal" | "community" | "retail" | "sponsor" | "hospitality" | "other"; start: string; end: string; activationDate: string; objective: string; category: string; channel: string; territory: string; owner: string; budget: number; playerNeed: number };
+export type MomentumDimension = { value: number | null; direction: "up" | "down" | "stable" | "unknown"; state: "measured" | "reported" | "public" | "synthetic-demo" | "missing"; source: string };
+export type PlayerMomentum = { playerId: string; observedAt: string; sporting: MomentumDimension; attention: MomentumDimension; international: MomentumDimension; commercial: MomentumDimension };
 export const demoCommercialCampaigns = (sample.commercialCampaigns ?? []) as CommercialCampaignBrief[];
+export const demoPlayerMomentum = (sample.playerMomentum ?? []) as PlayerMomentum[];
 export const demoPlayers = sample.players as Player[];
 export const demoAppearances = sample.appearances as Appearance[];
 export const demoInternationalDuty = (sample.internationalDuty ?? []) as InternationalDuty[];
@@ -132,13 +135,15 @@ export function recommendPlayers(players: Player[], request: ActivationRequest, 
   }).sort((a, b) => Number(a.blockers.length > 0) - Number(b.blockers.length > 0) || b.score - a.score || a.player.id.localeCompare(b.player.id));
 }
 
-export type PlayerPackWeights = Weights & { cost: number; opportunityCost: number; sportingAvailability: number };
+export type PlayerPackWeights = Weights & { cost: number; opportunityCost: number; sportingAvailability: number; momentum: number };
 export type PlayerPackRecommendation = {
   players: Array<ReturnType<typeof recommendPlayers>[number]>;
   totalFee: number;
   avgScore: number;
   opportunityCost: number;
   sportingAvailabilityBonus: number;
+  momentumScore: number | null;
+  costEfficiency: number;
   packScore: number;
   blockers: string[];
 };
@@ -168,6 +173,56 @@ function playerOpportunityCost(player: Player, capacity: ReturnType<typeof playe
   return Math.max(0, reserve - afterUse) * 50 + (capacity.remaining <= 1 ? 35 : 0);
 }
 
+
+export function playerMomentumScore(playerId: string, signals: PlayerMomentum[] = demoPlayerMomentum) {
+  const signal = signals.find((item) => item.playerId === playerId) ?? null;
+  if (!signal) return { score: null as number | null, signal: null as PlayerMomentum | null, availableDimensions: 0 };
+  const values = [signal.sporting.value, signal.attention.value, signal.international.value, signal.commercial.value]
+    .filter((value): value is number => typeof value === "number" && Number.isFinite(value));
+  return {
+    score: values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null,
+    signal,
+    availableDimensions: values.length
+  };
+}
+
+export function evaluatePlayerPack(
+  selectedPlayers: Player[],
+  request: ActivationRequest,
+  appearances: Appearance[],
+  weights: PlayerPackWeights,
+  posts: Post[],
+  intelligence: boolean,
+  duties: InternationalDuty[] = demoInternationalDuty,
+  momentumSignals: PlayerMomentum[] = demoPlayerMomentum
+): PlayerPackRecommendation {
+  const ranked = recommendPlayers(selectedPlayers, request, appearances, weights, posts, intelligence, duties);
+  const totalFee = ranked.reduce((sum, item) => sum + item.player.fee, 0);
+  const avgScore = ranked.length ? ranked.reduce((sum, item) => sum + item.score, 0) / ranked.length : 0;
+  const opportunityCost = ranked.length ? ranked.reduce((sum, item) => sum + playerOpportunityCost(item.player, item.capacity), 0) / ranked.length : 0;
+  const sportingAvailabilityBonus = ranked.length ? ranked.reduce((sum, item) => sum + sportingCommercialBonus(item.player), 0) / ranked.length : 0;
+  const momentumValues = ranked
+    .map((item) => playerMomentumScore(item.player.id, momentumSignals).score)
+    .filter((value): value is number => value !== null);
+  const momentumScore = momentumValues.length ? momentumValues.reduce((sum, value) => sum + value, 0) / momentumValues.length : null;
+  const costEfficiency = request.budget > 0 ? Math.max(0, 100 - (totalFee / request.budget) * 100) : 0;
+  const totalWeight = weights.fit + weights.balance + (intelligence ? weights.engagement : 0) + weights.cost + weights.opportunityCost + weights.sportingAvailability + (momentumScore !== null ? weights.momentum : 0);
+  const packScore = totalWeight > 0
+    ? (
+        avgScore * (weights.fit + weights.balance + (intelligence ? weights.engagement : 0)) +
+        costEfficiency * weights.cost +
+        Math.max(0, 100 - opportunityCost) * weights.opportunityCost +
+        sportingAvailabilityBonus * weights.sportingAvailability +
+        (momentumScore ?? 0) * (momentumScore !== null ? weights.momentum : 0)
+      ) / totalWeight
+    : 0;
+  const blockers = Array.from(new Set([
+    ...ranked.flatMap((item) => item.blockers),
+    ...(totalFee > request.budget ? ["budget"] : [])
+  ]));
+  return { players: ranked, totalFee, avgScore, opportunityCost, sportingAvailabilityBonus, momentumScore, costEfficiency, packScore, blockers };
+}
+
 export function recommendPlayerPacks(
   players: Player[],
   request: ActivationRequest,
@@ -176,29 +231,15 @@ export function recommendPlayerPacks(
   weights: PlayerPackWeights,
   posts: Post[],
   intelligence: boolean,
-  duties: InternationalDuty[] = demoInternationalDuty
+  duties: InternationalDuty[] = demoInternationalDuty,
+  momentumSignals: PlayerMomentum[] = demoPlayerMomentum
 ): PlayerPackRecommendation[] {
   if (!Number.isSafeInteger(count) || count < 1 || count > players.length) throw new Error("count");
   const ranked = recommendPlayers(players, request, appearances, weights, posts, intelligence, duties);
-  const eligible = ranked.filter((item) => item.blockers.length === 0);
-  const packs = combinations(eligible, count).map((pack) => {
-    const totalFee = pack.reduce((sum, item) => sum + item.player.fee, 0);
-    const avgScore = pack.reduce((sum, item) => sum + item.score, 0) / pack.length;
-    const opportunityCost = pack.reduce((sum, item) => sum + playerOpportunityCost(item.player, item.capacity), 0) / pack.length;
-    const sportingAvailabilityBonus = pack.reduce((sum, item) => sum + sportingCommercialBonus(item.player), 0) / pack.length;
-    const costEfficiency = request.budget > 0 ? Math.max(0, 100 - (totalFee / request.budget) * 100) : 0;
-    const totalWeight = weights.fit + weights.balance + (intelligence ? weights.engagement : 0) + weights.cost + weights.opportunityCost + weights.sportingAvailability;
-    const packScore = totalWeight > 0
-      ? (
-          avgScore * (weights.fit + weights.balance + (intelligence ? weights.engagement : 0)) +
-          costEfficiency * weights.cost +
-          Math.max(0, 100 - opportunityCost) * weights.opportunityCost +
-          sportingAvailabilityBonus * weights.sportingAvailability
-        ) / totalWeight
-      : 0;
-    const blockers = totalFee > request.budget ? ["budget"] : [];
-    return { players: pack, totalFee, avgScore, opportunityCost, sportingAvailabilityBonus, packScore, blockers };
-  });
+  const eligible = ranked.filter((item) => item.blockers.length === 0).map((item) => item.player);
+  const packs = combinations(eligible, count).map((pack) =>
+    evaluatePlayerPack(pack, request, appearances, weights, posts, intelligence, duties, momentumSignals)
+  );
   return packs.sort((a,b) => Number(a.blockers.length > 0) - Number(b.blockers.length > 0) || b.packScore - a.packScore || a.totalFee - b.totalFee);
 }
 
