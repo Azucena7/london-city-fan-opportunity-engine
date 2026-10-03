@@ -242,9 +242,9 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <summary>
             <div>
               <span className={styles.eyebrow}>Why this plan</span>
-              <strong>{live.liveSignals.length} signals · {live.confidence.label} confidence</strong>
+              <strong>{live.liveSignals.length} signals · {live.confidence.label} confidence · test the recommendation</strong>
             </div>
-            <span>Review signals and evidence →</span>
+            <span>Inspect, exclude & recalculate →</span>
           </summary>
 
           <div className={styles.reasoningBody}>
