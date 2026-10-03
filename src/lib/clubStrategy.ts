@@ -46,7 +46,8 @@ export function contentInsights(posts: Post[], filter: ContentFilter, group: "pl
   }).sort((a, b) => (metric === "volume" ? b.interactions - a.interactions : (b.rate ?? -1) - (a.rate ?? -1)) || a.id.localeCompare(b.id));
 }
 
-export type Player = { id: string; name: string; signed: boolean; validated: boolean; document: string; start: string; end: string; channels: string[]; territories: string[]; blockedCategories: string[]; quota: number | null; confirmedDates: string[]; fit: number; fee: number };
+export type SportingAvailability = "available" | "injured" | "rehab" | "sporting-unavailable";
+export type Player = { id: string; name: string; signed: boolean; validated: boolean; document: string; start: string; end: string; channels: string[]; territories: string[]; blockedCategories: string[]; quota: number | null; confirmedDates: string[]; fit: number; fee: number; sportingAvailability?: SportingAvailability; commercialAvailabilityOverride?: boolean; priorityReserve?: number };
 export type Appearance = { id: string; playerId: string; date: string; status: "reserved" | "completed" | "cancelled"; category: string; channel: string; territory: string; owner: string; evidence: string | null };
 export type ActivationRequest = { date: string; category: string; channel: string; territory: string; owner: string; budget: number };
 export const demoPlayers = sample.players as Player[];
@@ -64,6 +65,7 @@ export function activationBlockers(player: Player, request: ActivationRequest, a
   if (!player.territories.includes(request.territory)) reasons.push("territory");
   if (player.blockedCategories.includes(request.category)) reasons.push("conflict");
   if (!player.confirmedDates.includes(request.date)) reasons.push("availability");
+  if (player.sportingAvailability === "sporting-unavailable" && !player.commercialAvailabilityOverride) reasons.push("sportingAvailability");
   if (!Number.isFinite(request.budget) || request.budget < player.fee) reasons.push("budget");
   if (!request.owner) reasons.push("owner");
   const capacity = playerCapacity(player, appearances);
@@ -86,6 +88,76 @@ export function recommendPlayers(players: Player[], request: ActivationRequest, 
     return { player, capacity, rate, balance, score, blockers: activationBlockers(player, request, appearances) };
   }).sort((a, b) => Number(a.blockers.length > 0) - Number(b.blockers.length > 0) || b.score - a.score || a.player.id.localeCompare(b.player.id));
 }
+
+export type PlayerPackWeights = Weights & { cost: number; opportunityCost: number; sportingAvailability: number };
+export type PlayerPackRecommendation = {
+  players: Array<ReturnType<typeof recommendPlayers>[number]>;
+  totalFee: number;
+  avgScore: number;
+  opportunityCost: number;
+  sportingAvailabilityBonus: number;
+  packScore: number;
+  blockers: string[];
+};
+
+function combinations<T>(items: T[], size: number): T[][] {
+  if (size <= 0) return [[]];
+  if (size > items.length) return [];
+  if (size === 1) return items.map((item) => [item]);
+  const result: T[][] = [];
+  for (let i = 0; i <= items.length - size; i += 1) {
+    for (const tail of combinations(items.slice(i + 1), size - 1)) result.push([items[i], ...tail]);
+  }
+  return result;
+}
+
+function sportingCommercialBonus(player: Player) {
+  if (!player.commercialAvailabilityOverride) return 0;
+  if (player.sportingAvailability === "injured") return 100;
+  if (player.sportingAvailability === "rehab") return 70;
+  return 0;
+}
+
+function playerOpportunityCost(player: Player, capacity: ReturnType<typeof playerCapacity>) {
+  if (player.quota === null || capacity.remaining === null) return 100;
+  const reserve = player.priorityReserve ?? 1;
+  const afterUse = Math.max(0, capacity.remaining - 1);
+  return Math.max(0, reserve - afterUse) * 50 + (capacity.remaining <= 1 ? 35 : 0);
+}
+
+export function recommendPlayerPacks(
+  players: Player[],
+  request: ActivationRequest,
+  appearances: Appearance[],
+  count: number,
+  weights: PlayerPackWeights,
+  posts: Post[],
+  intelligence: boolean
+): PlayerPackRecommendation[] {
+  if (!Number.isSafeInteger(count) || count < 1 || count > players.length) throw new Error("count");
+  const ranked = recommendPlayers(players, request, appearances, weights, posts, intelligence);
+  const eligible = ranked.filter((item) => item.blockers.length === 0);
+  const packs = combinations(eligible, count).map((pack) => {
+    const totalFee = pack.reduce((sum, item) => sum + item.player.fee, 0);
+    const avgScore = pack.reduce((sum, item) => sum + item.score, 0) / pack.length;
+    const opportunityCost = pack.reduce((sum, item) => sum + playerOpportunityCost(item.player, item.capacity), 0) / pack.length;
+    const sportingAvailabilityBonus = pack.reduce((sum, item) => sum + sportingCommercialBonus(item.player), 0) / pack.length;
+    const costEfficiency = request.budget > 0 ? Math.max(0, 100 - (totalFee / request.budget) * 100) : 0;
+    const totalWeight = weights.fit + weights.balance + (intelligence ? weights.engagement : 0) + weights.cost + weights.opportunityCost + weights.sportingAvailability;
+    const packScore = totalWeight > 0
+      ? (
+          avgScore * (weights.fit + weights.balance + (intelligence ? weights.engagement : 0)) +
+          costEfficiency * weights.cost +
+          Math.max(0, 100 - opportunityCost) * weights.opportunityCost +
+          sportingAvailabilityBonus * weights.sportingAvailability
+        ) / totalWeight
+      : 0;
+    const blockers = totalFee > request.budget ? ["budget"] : [];
+    return { players: pack, totalFee, avgScore, opportunityCost, sportingAvailabilityBonus, packScore, blockers };
+  });
+  return packs.sort((a,b) => Number(a.blockers.length > 0) - Number(b.blockers.length > 0) || b.packScore - a.packScore || a.totalFee - b.totalFee);
+}
+
 export function reserveAppearance(player: Player, request: ActivationRequest, appearances: Appearance[], role: string): Appearance[] {
   if (role !== "approver" || activationBlockers(player, request, appearances).length) throw new Error("blocked");
   return [...appearances, { id: `AP-RESERVED-${player.id}-${request.date}-${appearances.length + 1}`, playerId: player.id, ...request, status: "reserved", evidence: null }];
