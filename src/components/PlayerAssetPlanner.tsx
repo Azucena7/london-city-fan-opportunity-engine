@@ -270,7 +270,7 @@ export function PlayerAssetPlanner() {
                       ["Attention", signal.attention],
                       ["International", signal.international],
                       ["Commercial", signal.commercial]
-                    ].map(([label, dimension]) => {
+                    ] as const).map(([label, dimension]) => {
                       const item = dimension as typeof signal.sporting;
                       return (
                         <div key={String(label)} title={item.source}>
