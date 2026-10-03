@@ -1374,3 +1374,29 @@ test("Campaigns uses a semantic navigation state instead of the legacy brief key
   assert.match(nav, /key: "campaigns"/);
   assert.match(campaigns, /active="campaigns"/);
 });
+
+
+test("Radar includes an interactive visual Opportunity Explorer", () => {
+  const radar = read("src/app/matches/page.tsx");
+  const explorer = read("src/components/OpportunityExplorer.tsx");
+  assert.match(radar, /OpportunityExplorer/);
+  assert.match(explorer, /Opportunity map/);
+  assert.match(explorer, /Campaign readiness/);
+  assert.match(explorer, /Signal pulse/);
+  assert.match(explorer, /Higher = stronger opportunity/);
+  assert.match(explorer, /driver bars are separate signals, not an additive score formula/i);
+});
+
+test("Season Intelligence aggregates campaigns and evidence without treating missing as zero", () => {
+  const page = read("src/app/app/season/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(page, /Season Intelligence/);
+  assert.match(page, /Are we getting better across the season/);
+  assert.match(page, /Home attendance trend/);
+  assert.match(page, /Activation mix/);
+  assert.match(page, /Season opportunity timeline/);
+  assert.match(page, /Missing fixtures are not shown as zero/);
+  assert.match(page, /drafted activation volume, not channel performance or incremental impact/);
+  assert.match(nav, /label: "Season"/);
+  assert.match(nav, //app/season/);
+});
