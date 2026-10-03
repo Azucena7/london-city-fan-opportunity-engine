@@ -335,7 +335,7 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
 });
 
 test("Opportunity Brief explains execution fit without letting club setup rewrite evidence", () => {
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const context = read("src/lib/clubOperatingContext.ts");
 
   assert.match(page, /getCurrentClubOperatingContext/);
@@ -357,7 +357,7 @@ test("Opportunity Brief explains execution fit without letting club setup rewrit
 
 test("Opportunity Radar applies club context as advisory fit without changing evidence rank", () => {
   const radar = read("src/lib/opportunityRadar.ts");
-  const matches = read("src/app/matches/page.tsx");
+  const matches = read("src/app/app/matches/page.tsx");
   const context = read("src/lib/clubOperatingContext.ts");
 
   assert.match(radar, /clubContext: ClubOperatingContext \| null = null/);
@@ -498,7 +498,7 @@ test("club setup persists reusable fixture, channel, objective, brand and approv
 });
 
 test("Learning turns measured evidence into a bounded next-fixture adjustment", () => {
-  const page = read("src/app/results/page.tsx");
+  const page = read("src/app/app/learning/page.tsx");
   const component = read("src/components/NextFixtureLearning.tsx");
   const model = read("src/lib/learningRecommendation.ts");
 
@@ -519,7 +519,7 @@ test("Learning turns measured evidence into a bounded next-fixture adjustment", 
 });
 
 test("Learning compares recorded campaign workflow with measured outcomes without implying causation", () => {
-  const learning = read("src/app/results/page.tsx");
+  const learning = read("src/app/app/learning/page.tsx");
   const trace = read("src/components/LearningCampaignTrace.tsx");
 
   assert.match(learning, /LearningCampaignTrace/);
@@ -600,7 +600,7 @@ test("campaign reservation cycles are uniquely identifiable and repeat safely", 
 
 test("match plan includes campaign proposal credit budgeting and gated launch", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
   assert.match(builder, /Campaign proposal/);
   assert.match(builder, /Explorer · preview only/);
@@ -640,7 +640,7 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
 
 test("match plan closes with a simple review and handoff gate", () => {
   const decision = read("src/components/MatchPlanDecision.tsx");
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   assert.match(decision, /Review required/);
   assert.match(decision, /Approve draft for handoff/);
   assert.match(decision, /does not send campaigns, commit spend or execute club actions automatically/);
@@ -650,7 +650,7 @@ test("match plan closes with a simple review and handoff gate", () => {
 
 test("match plan exposes a review-ready activation draft", () => {
   const draft = read("src/components/ActivationDraft.tsx");
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   for (const label of ["Audience", "Channel", "Message", "Timing", "Owner", "Measurement", "Next approval"]) {
     assert.match(draft, new RegExp(label));
   }
@@ -661,7 +661,7 @@ test("match plan exposes a review-ready activation draft", () => {
 
 test("match signals can be excluded without mutating engine data", () => {
   const controls = read("src/components/MatchSignalControls.tsx");
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   assert.match(controls, /Signals used/);
   assert.match(controls, /Confidence with this selection/);
   assert.match(controls, /Recommendation/);
@@ -672,7 +672,7 @@ test("match signals can be excluded without mutating engine data", () => {
 });
 
 test("single match workspace absorbs plan evidence signals and impact", () => {
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   assert.match(page, /Recommended play/);
   assert.match(page, /Review the draft, then execute the next actions/);
   assert.match(page, /signals · \{live\.confidence\.label\} confidence/);
@@ -713,8 +713,8 @@ test("marketing app and live case have distinct canonical surfaces", () => {
 });
 
 test("Learning keeps deep interpretation secondary to observed outcomes", () => {
-  const page = read("src/app/results/page.tsx");
-  const css = read("src/app/results/results.module.css");
+  const page = read("src/app/app/learning/page.tsx");
+  const css = read("src/app/app/learning/results.module.css");
   assert.match(page, /How to read this evidence/);
   assert.match(page, /Attribution ≠ incremental impact/);
   assert.match(page, /fixturePicker/);
@@ -723,8 +723,8 @@ test("Learning keeps deep interpretation secondary to observed outcomes", () => 
 });
 
 test("matches behaves like a decision inbox with one priority fixture", () => {
-  const page = read("src/app/matches/page.tsx");
-  const css = read("src/app/matches/matches.module.css");
+  const page = read("src/app/app/matches/page.tsx");
+  const css = read("src/app/app/matches/matches.module.css");
   assert.match(page, /Current engine priority/);
   assert.match(page, /Next opportunities/);
   assert.match(page, /Ranked by what deserves attention now/);
@@ -734,8 +734,8 @@ test("matches behaves like a decision inbox with one priority fixture", () => {
 });
 
 test("match plan prioritises one executive campaign decision before deep evidence", () => {
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
-  const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
   assert.match(page, /Recommended play/);
   assert.match(page, /Opportunity/);
   assert.match(page, /Audience/);
@@ -773,7 +773,7 @@ test("commercial surfaces route users into the simplified club journey", () => {
 });
 
 test("club product starts from fixtures instead of requiring a plan first", () => {
-  const matches = read("src/app/matches/page.tsx");
+  const matches = read("src/app/app/matches/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
   assert.match(matches, /AVELA · Opportunity Radar/);
   assert.match(matches, /The club does not create a plan first/);
@@ -825,7 +825,7 @@ test("commercial product routes opt into the full-width product shell", () => {
     "src/app/brief/page.tsx",
     "src/app/opportunity/page.tsx",
     "src/app/decision-room/page.tsx",
-    "src/app/results/page.tsx",
+    "src/app/app/learning/page.tsx",
     "src/app/impact/page.tsx",
     "src/app/pilot/page.tsx",
     "src/app/pilot/operating-pack/page.tsx",
@@ -852,7 +852,7 @@ test("core product surfaces expose a shared Live Modelled Missing trust language
     "src/app/opportunity/page.tsx",
     "src/app/decision-room/page.tsx",
     "src/app/impact/page.tsx",
-    "src/app/results/page.tsx"
+    "src/app/app/learning/page.tsx"
   ]) {
     assert.match(read(route), /ProductDataStateLegend/, route + " should show the shared data-state legend");
   }
@@ -871,7 +871,7 @@ test("mobile product flow keeps a contextual next action", () => {
 
 
 test("Results switches from missing to measured only through the live CRM slot", () => {
-  const page = read("src/app/results/page.tsx");
+  const page = read("src/app/app/learning/page.tsx");
   const adapter = read("src/lib/productResults.ts");
   const live = JSON.parse(read("data/live/crm-ticketing.json"));
 
@@ -935,7 +935,7 @@ test("strategy and operational next action stay separate", () => {
 
 test("fixture lifecycle keeps pre-match and post-match UX distinct", () => {
   const opportunity = read("src/lib/productOpportunity.ts");
-  const results = read("src/app/results/page.tsx");
+  const results = read("src/app/app/learning/page.tsx");
   assert.match(opportunity, /fixturePhase: "pre-match" \| "matchday" \| "post-match"/);
   assert.match(opportunity, /timingLabel/);
   assert.match(opportunity, /T-\$\{daysToFixture\}/);
@@ -968,7 +968,7 @@ test("Impact model seeds from measured club history only when aggregate evidence
 
 
 test("Results never equates campaign attribution with incrementality", () => {
-  const results = read("src/app/results/page.tsx");
+  const results = read("src/app/app/learning/page.tsx");
   const adapter = read("src/lib/productResults.ts");
   assert.match(results, /Attribution ≠ incremental impact/);
   assert.match(results, /What do we know after matchday/);
@@ -1077,7 +1077,7 @@ test("club UX exposes clear setup, access and campaign next-step flows", () => {
   const setup = read("src/components/ClubSetup.tsx");
   const access = read("src/components/AccessCenter.tsx");
   const builder = read("src/components/CampaignCreditBuilder.tsx");
-  const learningCss = read("src/app/results/results.module.css");
+  const learningCss = read("src/app/app/learning/results.module.css");
 
   assert.match(setup, /Club setup progress/);
   assert.match(setup, /Save and use for next fixture/);
@@ -1095,8 +1095,8 @@ test("club surfaces use explicit loading states and mobile-first controls", () =
   const setupCss = read("src/components/ClubSetup.module.css");
   const access = read("src/components/AccessCenter.tsx");
   const accessCss = read("src/components/AccessCenter.module.css");
-  const radarCss = read("src/app/matches/matches.module.css");
-  const learningCss = read("src/app/results/results.module.css");
+  const radarCss = read("src/app/app/matches/matches.module.css");
+  const learningCss = read("src/app/app/learning/results.module.css");
 
   assert.match(setup, /Loading club context/);
   assert.match(setup, /configured === null/);
@@ -1139,8 +1139,8 @@ test("National Rail RDM is registered as approved access awaiting a data product
 
 test("Opportunity Radar is the primary fixture decision surface", () => {
   const radar = read("src/lib/opportunityRadar.ts");
-  const matches = read("src/app/matches/page.tsx");
-  const css = read("src/app/matches/matches.module.css");
+  const matches = read("src/app/app/matches/page.tsx");
+  const css = read("src/app/app/matches/matches.module.css");
 
   assert.match(radar, /opportunityScore: number \| null/);
   assert.match(radar, /urgency: "Immediate" \| "Soon" \| "Watch"/);
@@ -1158,7 +1158,7 @@ test("Opportunity Radar is the primary fixture decision surface", () => {
 
 test("Opportunity Brief supports transparent signal what-if recalculation", () => {
   const controls = read("src/components/MatchSignalControls.tsx");
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const product = read("src/lib/productOpportunity.ts");
 
   assert.match(controls, /Core evidence/);
@@ -1176,8 +1176,8 @@ test("Opportunity Brief supports transparent signal what-if recalculation", () =
 
 
 test("Opportunity Brief reads like an executive decision brief", () => {
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
-  const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
 
   assert.match(page, /Executive opportunity summary/);
   assert.match(page, /Opportunity score/);
@@ -1307,8 +1307,8 @@ test("Intelligence Sources exposes Blinkfire as public demo evidence without fak
 
 test("final visual pass removes legacy olive neutrals from primary product surfaces", () => {
   const system = read("src/app/product-system.css");
-  const radar = read("src/app/matches/matches.module.css");
-  const brief = read("src/app/matches/[fixtureId]/match-plan.module.css");
+  const radar = read("src/app/app/matches/matches.module.css");
+  const brief = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
   const commercial = read("src/app/commercial-home.module.css");
   assert.doesNotMatch(system, /16,33,27/);
   assert.doesNotMatch(commercial, /199,234,58/);
@@ -1357,8 +1357,8 @@ test("campaign index visualizes approval progress and next decision", () => {
 
 
 test("Opportunity Brief keeps long-form work navigable with a sticky context rail", () => {
-  const page = read("src/app/matches/[fixtureId]/page.tsx");
-  const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
   assert.match(page, /Opportunity workspace sections/);
   assert.match(page, /href="#decision"/);
   assert.match(page, /href="#campaign"/);
@@ -1377,7 +1377,7 @@ test("Campaigns uses a semantic navigation state instead of the legacy brief key
 
 
 test("Radar includes an interactive visual Opportunity Explorer", () => {
-  const radar = read("src/app/matches/page.tsx");
+  const radar = read("src/app/app/matches/page.tsx");
   const explorer = read("src/components/OpportunityExplorer.tsx");
   assert.match(radar, /OpportunityExplorer/);
   assert.match(explorer, /Opportunity map/);
