@@ -90,6 +90,43 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
         </p>
       </section>
 
+      <section className="caseStudySection caseStudyPredictionProof" aria-label={es ? "AVELA predijo frente a realidad observable" : "AVELA prediction versus observable reality"}>
+        <div className="caseStudySectionHead">
+          <div className="eyebrow">{es ? "ANTES DE QUE EL CLUB LO ANUNCIARA" : "BEFORE THE CLUB ANNOUNCED IT"}</div>
+          <h2>{es ? "AVELA detectó la misma oportunidad de jornada extendida tres días antes de la activación pública." : "AVELA surfaced the same extended-matchday opportunity three days before the public activation."}</h2>
+          <p>{es
+            ? "No demuestra que London City utilizara AVELA. Sí demuestra que una hipótesis registrada por el engine apareció después como una acción pública comparable."
+            : "This does not show London City used AVELA. It shows a time-stamped engine hypothesis was followed by a comparable public club action."}</p>
+        </div>
+
+        <div className="predictionProofFlow">
+          <article className="prediction">
+            <span>{es ? "15 SEP · AVELA VIO" : "15 SEP · AVELA SAW"}</span>
+            <strong>{validationCase.hypothesis[lang]}</strong>
+            <small>{validationCase.hypothesisSource.name}</small>
+          </article>
+          <div className="predictionProofGap" aria-hidden="true"><b>3</b><span>{es ? "días" : "days"}</span><i>→</i></div>
+          <article className="reality">
+            <span>{es ? "18 SEP · LONDON CITY ANUNCIÓ" : "18 SEP · LONDON CITY ANNOUNCED"}</span>
+            <strong>{validationCase.observedAction[lang]}</strong>
+            <a href={validationCase.observedSource.url} target="_blank" rel="noreferrer">{es ? "Fuente pública" : "Public source"} ↗</a>
+          </article>
+        </div>
+
+        <div className="predictionProofReadout">
+          <article><strong>{aligned}/{validationCase.dimensions.length}</strong><span>{es ? "dimensiones totalmente alineadas" : "dimensions fully aligned"}</span></article>
+          <article><strong>{partial}</strong><span>{es ? "dimensión parcialmente alineada" : "partially aligned dimension"}</span></article>
+          <article><strong>0</strong><span>{es ? "afirmaciones de causalidad" : "causal claims"}</span></article>
+          <article><strong>{validationCase.liveValidation?.state.replaceAll("-", " ") ?? "documented"}</strong><span>{es ? "estado de validación" : "validation state"}</span></article>
+        </div>
+
+        <div className="predictionProofBoundary">
+          <div><span>{es ? "LO QUE SÍ PRUEBA" : "WHAT IT DOES SHOW"}</span><p>{es ? "AVELA pudo detectar una oportunidad comercialmente relevante antes de que apareciera públicamente una ejecución comparable." : "AVELA could surface a commercially relevant opportunity before a comparable execution became public."}</p></div>
+          <div><span>{es ? "LO QUE NO PRUEBA" : "WHAT IT DOES NOT SHOW"}</span><p>{validationCase.caveat[lang]}</p></div>
+        </div>
+        <Link className="caseStudyTextLink" href="/measurement#decision-validation-title">{es ? "Abrir la evidencia completa" : "Open the full evidence trail"} →</Link>
+      </section>
+
       <section className="caseStudySection caseStudyProblem">
         <div className="caseStudySectionHead">
           <div className="eyebrow">{es ? "EL PROBLEMA COMERCIAL" : "THE COMMERCIAL PROBLEM"}</div>
@@ -274,7 +311,7 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
       </section>
 
       <footer className="caseStudyFooter">
-        <div>London City Fan Opportunity Engine</div>
+        <div>AVELA · London City Live Proof</div>
         <div className="muted">{es ? "Prototipo independiente · No afiliado a London City Lionesses." : "Independent prototype · Not affiliated with London City Lionesses."}</div>
       </footer>
     </main>
