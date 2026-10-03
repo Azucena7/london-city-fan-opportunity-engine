@@ -1173,3 +1173,22 @@ test("Opportunity Brief supports transparent signal what-if recalculation", () =
   assert.match(page, /Inspect, exclude & recalculate/);
   assert.match(product, /observedAt: signal\.observedAt/);
 });
+
+
+test("Opportunity Brief reads like an executive decision brief", () => {
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
+
+  assert.match(page, /Executive opportunity summary/);
+  assert.match(page, /Opportunity score/);
+  assert.match(page, /Decision state/);
+  assert.match(page, /Signal movement/);
+  assert.match(page, /Commercial objective/);
+  assert.match(page, /Evidence used/);
+  assert.match(page, /Decision support, not autopilot/);
+  assert.match(page, /Do not launch yet/);
+  assert.match(page, /Ready for human review/);
+  assert.match(page, /confidence\.rationale/);
+  assert.match(css, /executiveStrip/);
+  assert.match(css, /briefDecision/);
+});
