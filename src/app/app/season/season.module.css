@@ -2,5 +2,5 @@
 .playerTwinBars{display:grid;gap:6px;margin-top:10px}
 .playerTwinBars>span{display:grid;grid-template-columns:56px 1fr;gap:7px;align-items:center}
 .playerTwinBars b{font-size:8px;color:var(--product-muted)}
-.playerTwinBars i{display:block;height:5px;background:#ECEEF2}
+.playerTwinBars i{display:block;height:5px;margin:0;background:#ECEEF2}
 .playerTwinBars em{display:block;height:100%;background:var(--product-accent)}
