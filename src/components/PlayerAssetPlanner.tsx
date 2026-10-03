@@ -265,7 +265,7 @@ export function PlayerAssetPlanner() {
                 </div>
                 {signal ? (
                   <div className={styles.momentumDimensions}>
-                    {[
+                    {([
                       ["Sporting", signal.sporting],
                       ["Attention", signal.attention],
                       ["International", signal.international],
