@@ -197,11 +197,12 @@ test("social sharing matches the current AVELA product story", () => {
   const og = read("src/app/opengraph-image.tsx");
   assert.match(layout, /AVELA · Growth Intelligence for Women’s Football/);
   assert.match(layout, /Turn every fixture into a growth opportunity/);
-  assert.match(card, /DECISION INTELLIGENCE FOR FOOTBALL CLUBS/);
-  assert.match(card, /Matches/);
-  assert.match(card, /Match plan/);
-  assert.match(card, /Review/);
+  assert.match(card, /GROWTH INTELLIGENCE FOR WOMEN’S FOOTBALL/);
+  assert.match(card, /Radar/);
+  assert.match(card, /Opportunity brief/);
+  assert.match(card, /Campaign/);
   assert.match(card, /Learning/);
+  assert.match(og, /Know where to act before the moment passes/);
   assert.match(og, /Live · Modelled · Missing/);
   assert.doesNotMatch(card, /\+280/);
 });
