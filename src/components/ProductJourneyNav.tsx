@@ -2,13 +2,14 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "home" | "campaigns" | "product" | "matches" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access" | "sources" | "executive" | "season";
+  active?: "home" | "campaigns" | "product" | "matches" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access" | "sources" | "executive" | "season" | "players";
 };
 
 const workItems = [
   { key: "home", label: "Home", hint: "What needs attention", href: "/app", glyph: "H" },
   { key: "matches", label: "Radar", hint: "Prioritise fixtures", href: "/app/matches", glyph: "R" },
   { key: "campaigns", label: "Campaigns", hint: "Review drafted plays", href: "/app/campaigns", glyph: "C" },
+  { key: "players", label: "Player assets", hint: "Plan talent usage", href: "/app/players", glyph: "P" },
   { key: "results", label: "Learning", hint: "Close the loop", href: "/app/learning", glyph: "L" },
   { key: "season", label: "Season", hint: "See the whole pattern", href: "/app/season", glyph: "S" }
 ] as const;

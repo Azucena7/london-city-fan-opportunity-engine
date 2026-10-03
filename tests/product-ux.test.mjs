@@ -1400,3 +1400,42 @@ test("Season Intelligence aggregates campaigns and evidence without treating mis
   assert.match(nav, /label: "Season"/);
   assert.match(nav, //app/season/);
 });
+
+
+test("Player Asset Planning optimises multi-player packs with contract, capacity, cost and opportunity cost", () => {
+  const strategy = read("src/lib/clubStrategy.ts");
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(strategy, /recommendPlayerPacks/);
+  assert.match(strategy, /opportunityCost/);
+  assert.match(strategy, /sportingAvailability/);
+  assert.match(strategy, /commercialAvailabilityOverride/);
+  assert.match(planner, /Players needed/);
+  assert.match(planner, /Pack Optimizer/);
+  assert.match(planner, /Best combinations/);
+  assert.match(nav, /Player assets/);
+});
+
+test("International duty supports watch windows, private pre-alerts and public confirmations", () => {
+  const strategy = read("src/lib/clubStrategy.ts");
+  const data = JSON.parse(read("data/seed/club-strategy-demo.json"));
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  assert.match(strategy, /InternationalDutyState/);
+  assert.match(strategy, /manual-private/);
+  assert.match(strategy, /public-confirmed/);
+  assert.match(strategy, /internationalAvailabilityAlerts/);
+  assert.match(strategy, /internationalDuty/);
+  assert.ok(data.internationalDuty.some((item) => item.state === "window"));
+  assert.ok(data.internationalDuty.some((item) => item.state === "manual-private" && item.public === false));
+  assert.ok(data.internationalDuty.some((item) => item.state === "public-confirmed"));
+  assert.match(planner, /International duty alerts/);
+  assert.match(planner, /Internal pre-alert/);
+  assert.match(planner, /Public confirmation/);
+});
+
+test("Season Intelligence includes player asset utilisation without calling usage performance", () => {
+  const page = read("src/app/app/season/page.tsx");
+  assert.match(page, /Player asset utilisation/);
+  assert.match(page, /Usage is not performance/);
+  assert.match(page, /Open Player Asset Planning/);
+});

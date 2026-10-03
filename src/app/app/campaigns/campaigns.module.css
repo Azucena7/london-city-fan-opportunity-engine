@@ -6,4 +6,4 @@
 .header p{font-size:15px;margin-top:14px}
 .card h2{font-size:24px}
 @media(max-width:900px){.shell{padding:0 18px 48px}}
-.progressBar{grid-column:1/-1;height:4px;background:#E7E9EE;overflow:hidden}.progressBar>span{display:block;height:100%;background:var(--product-accent)}.card:hover{background:#FAFAFC}
+.progressBar{grid-column:1/-1;height:4px;background:#E7E9EE;overflow:hidden}.progressBar>span{display:block;height:100%;background:var(--product-accent)}.card:hover{background:#FAFAFC}.assetShortcut{max-width:1120px;margin:22px auto 0;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 14px;background:#F2F0FF;border-left:3px solid var(--product-accent)}.assetShortcut span{font-size:10px;font-weight:800;color:#5145D8}.assetShortcut a{font-size:10px;font-weight:900;color:#10131A;text-decoration:none}

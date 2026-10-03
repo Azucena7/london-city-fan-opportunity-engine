@@ -15,6 +15,7 @@ export default function CampaignsPage() {
   return (
     <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="campaigns" />
+      <div className={styles.assetShortcut}><span>Need player talent for an activation?</span><Link href="/app/players">Optimise player pack →</Link></div>
       <header className={styles.header}>
         <div>
           <span className={styles.eyebrow}>AVELA · Campaigns</span>

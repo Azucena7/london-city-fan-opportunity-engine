@@ -4,6 +4,7 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
+import { demoAppearances, demoPlayers, playerCapacity } from "@/lib/clubStrategy";
 import styles from "./season.module.css";
 
 export const metadata: Metadata = {
@@ -48,6 +49,8 @@ export default function SeasonIntelligencePage() {
   const totalAttendance = measuredAttendance.reduce((sum,row) => sum + (row.attendance ?? 0),0);
   const avgAttendance = measuredAttendance.length ? Math.round(totalAttendance / measuredAttendance.length) : null;
   const measuredOutcomes = fixtureRows.filter((row) => row.measuredOutcome).length;
+  const playerUsage = demoPlayers.map((player) => ({ player, capacity: playerCapacity(player, demoAppearances) }));
+  const totalPlayerUses = playerUsage.reduce((sum, item) => sum + item.capacity.used, 0);
   const scoredFixtures = fixtureRows.filter((row) => row.score !== null);
 
   const channelCounts = Array.from(new Map(
@@ -151,6 +154,23 @@ export default function SeasonIntelligencePage() {
             );
           })}
         </div>
+      </section>
+
+      <section className={styles.playerAssets}>
+        <div className={styles.sectionHead}>
+          <div><span>Player asset utilisation</span><h2>Are we using commercial player rights intelligently?</h2></div>
+          <Link href="/app/players">Open Player Asset Planning →</Link>
+        </div>
+        <div className={styles.playerUsageGrid}>
+          {playerUsage.map(({ player, capacity }) => (
+            <article key={player.id}>
+              <div><span>{player.name}</span><strong>{capacity.used}{player.quota !== null ? `/${player.quota}` : ""}</strong></div>
+              <i><em style={{ width: player.quota ? `${Math.min(100, (capacity.used / player.quota) * 100)}%` : "0%" }} /></i>
+              <small>{capacity.remaining === null ? "Quota unknown" : `${capacity.remaining} appearances remaining`} · £{player.fee} per appearance</small>
+            </article>
+          ))}
+        </div>
+        <p className={styles.note}>{totalPlayerUses} completed/reserved commercial appearances recorded in the synthetic planning pool. Usage is not performance.</p>
       </section>
 
       <section className={styles.patterns}>
