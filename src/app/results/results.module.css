@@ -186,3 +186,15 @@
 @media(max-width:600px){
   .hero,.fixturePicker,.fixtureFacts,.kpis,.interpretation,.learningLoop,.resultState,.next{width:min(100% - 28px,1240px)}
 }
+
+
+@media(max-width:620px){
+  .hero{padding-top:38px;gap:24px}
+  .hero h1{font-size:clamp(42px,13vw,60px)}
+  .fixturePicker{display:grid;grid-template-columns:1fr;gap:0}
+  .fixturePicker>strong{margin-bottom:8px}
+  .fixturePicker a{margin-right:0;padding:11px 0}
+  .stateCard{padding-left:16px}
+  .interpretation>summary{align-items:flex-start;flex-direction:column}
+  .next .primary,.next .secondary{width:100%;text-align:center}
+}
