@@ -43,15 +43,12 @@ test("calendar and overview explain rehearsal limits and retain read-only contro
   assert.match(calendar, /disabled=\{!editable \|\| !task.owner\}/);
   assert.match(await read("src/components/ClubOperationsDemo.tsx"), /if \(!editable\) return; setPlan/);
 });
-test("both demo entry routes lead to one canonical guided workspace", async () => {
-  assert.match(await read("src/app/club-demo/page.tsx"), /ClubOperationsDemo/);
-  assert.match(await read("src/app/club-demo/operations/page.tsx"), /redirect\("\/club-demo"\)/);
-  const ui = await read("src/components/ClubOperationsDemo.tsx");
-  assert.match(ui, /useState<View>\("home"\)/);
-  assert.match(ui, /"home","plan","flow","calendar","audiences","partners","results"/);
-  assert.match(ui, /actionStep === "prepare"/);
-  assert.match(ui, /actionStep === "creative"/);
-  assert.match(ui, /actionStep === "control"/);
+test("legacy club demo routes redirect to the canonical guided demo", async () => {
+  const config = await read("next.config.mjs");
+  const page = await read("src/app/app/demo/page.tsx");
+  assert.match(config, /source: "\/club-demo", destination: "\/app\/demo"/);
+  assert.match(config, /source: "\/club-demo\/:path\*", destination: "\/app\/demo"/);
+  assert.match(page, /DemoTour/);
 });
 test("configuration edits retain the plan and block approval pending resolution", async () => {
   const ui = await read("src/components/ClubOperationsDemo.tsx");

@@ -222,16 +222,14 @@ test("Brighton club activation intelligence includes the observed England v Spai
 });
 
 
-test("Today surfaces a compact engine-versus-reality check for the current fixture", () => {
-  const page = read("src/app/today/page.tsx");
-  const today = read("src/components/LocalizedToday.tsx");
-  assert.match(page, /decisionValidation/);
-  assert.match(today, /REALITY CHECK/);
-  assert.match(today, /comparable public club action/);
-  assert.match(today, /not influence on the club/);
-  assert.match(today, /causation claimed/);
-  assert.match(today, /\/measurement#decision-validation-title/);
-  assert.ok(today.indexOf("REALITY CHECK") < today.indexOf("Three actions before the next home fixture"));
+test("retired analyst routes redirect into canonical AVELA surfaces", () => {
+  const config = read("next.config.mjs");
+  for (const route of ["/today", "/this-week", "/calendar", "/fixtures", "/opportunities", "/signals"]) {
+    assert.match(config, new RegExp(`source: "${route.replace("/", "\\/")}"`));
+  }
+  assert.match(config, /source: "\/measurement", destination: "\/app\/learning"/);
+  assert.match(config, /source: "\/sources", destination: "\/app\/sources"/);
+  assert.match(config, /source: "\/club-demo\/:path\*", destination: "\/app\/demo"/);
 });
 
 
@@ -759,7 +757,8 @@ test("legacy club routes redirect into the fixture-first workspace", () => {
 test("commercial surfaces route users into the simplified club journey", () => {
   const cases = read("src/app/cases/page.tsx");
   const pilot = read("src/app/pilot/page.tsx");
-  const demo = read("src/app/demo/page.tsx");
+  const demo = read("src/app/app/demo/page.tsx");
+  const demoTour = read("src/components/DemoTour.tsx");
   const operatingPack = read("src/app/pilot/operating-pack/page.tsx");
   const caseOverview = read("src/components/LondonCityCase.tsx");
   for (const source of [cases, pilot, demo, operatingPack, caseOverview]) {
@@ -768,7 +767,8 @@ test("commercial surfaces route users into the simplified club journey", () => {
     assert.doesNotMatch(source, /href="\/decision-room"/);
   }
   assert.match(pilot, /\/app\/matches/);
-  assert.match(demo, /\/app\/matches\/\$\{live\.fixtureId\}/);
+  assert.match(demo, /DemoTour/);
+  assert.match(demoTour, /\/app\/matches\/\$\{props\.fixtureId\}/);
   assert.match(caseOverview, /\/app\/matches\/\$\{opportunity\.fixtureId\}/);
 });
 
