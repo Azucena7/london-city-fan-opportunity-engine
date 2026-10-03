@@ -1,10 +1,10 @@
 .shell{
-  --cream:#f4f1e8;
-  --cream2:#ebe8dc;
-  --ink:#10211b;
-  --muted:#66736c;
-  --lime:#c7ea3a;
-  --orange:#ff7954;
+  --cream:#f6f7f9;
+  --cream2:#eef1f6;
+  --ink:#10131a;
+  --muted:#69707d;
+  --lime:#6657ff;
+  --orange:#ff654f;
   min-height:100vh;
   color:var(--ink);
   background:var(--cream);
@@ -25,7 +25,7 @@
   display:inline-flex;
   align-items:center;
   gap:9px;
-  color:#526d00;
+  color:#6657ff;
   font-size:10px;
   font-weight:900;
   letter-spacing:.13em;
@@ -48,7 +48,7 @@
 .heroLead{
   max-width:680px;
   margin:0;
-  color:#4f5d55;
+  color:#5f6672;
   font-size:clamp(18px,1.8vw,22px);
   line-height:1.5;
 }
@@ -69,7 +69,7 @@
   font-size:13px;
   font-weight:900;
 }
-.primary,.primaryDark{background:var(--ink);color:white}
+.primary{background:var(--ink);color:white}.primaryDark{background:white;color:var(--ink)}
 .primaryLight{background:var(--lime);color:var(--ink)}
 .textLink,.finalLink{
   color:var(--ink);
@@ -85,7 +85,7 @@
   margin-top:30px;
   padding-top:18px;
   border-top:1px solid rgba(16,33,27,.16);
-  color:#66736c;
+  color:#69707d;
   font-size:11px;
   font-weight:750;
 }
@@ -129,7 +129,7 @@
 }
 .manifestoText p{
   margin:0 0 18px;
-  color:#55635b;
+  color:#5f6672;
   font-size:17px;
   line-height:1.6;
 }
@@ -149,7 +149,7 @@
   border-bottom:1px solid rgba(16,33,27,.18);
 }
 .flow article>span{
-  color:#526d00;
+  color:#6657ff;
   font-size:11px;
   font-weight:900;
 }
@@ -161,7 +161,7 @@
 .flow p{
   max-width:620px;
   margin:9px 0 0;
-  color:#627068;
+  color:#69707d;
   font-size:15px;
   line-height:1.55;
 }
@@ -169,12 +169,12 @@
   width:100%;
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(460px,.9fr);
-  background:#10211b;
-  color:#edf1eb;
+  background:#10131a;
+  color:#f5f6fa;
 }
 .liveCopy,.livePanel{padding:96px max(24px,calc((100vw - 1240px)/2))}
 .liveCopy{padding-right:60px}
-.liveCopy .kicker{color:#c7ea3a}
+.liveCopy .kicker{color:#6657ff}
 .liveCopy h2{
   margin:14px 0 18px;
   max-width:700px;
@@ -184,25 +184,25 @@
 }
 .liveCopy p{
   max-width:660px;
-  color:#aeb8b3;
+  color:#b9c0cc;
   font-size:16px;
   line-height:1.55;
 }
 .liveCopy .primaryLight{margin-top:0}
 .proofPair{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:24px;background:rgba(255,255,255,.14)}
-.proofPair article{padding:18px;background:#10211b}
+.proofPair article{padding:18px;background:#10131a}
 .proofPair span,.proofPair strong{display:block}
-.proofPair span{color:#c7ea3a;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
-.proofPair article+article span{color:#f5ca67}
-.proofPair strong{margin-top:8px;color:#dfe5e0;font-size:13px;line-height:1.45}
+.proofPair span{color:#6657ff;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.proofPair article+article span{color:#ff654f}
+.proofPair strong{margin-top:8px;color:#eef0f5;font-size:13px;line-height:1.45}
 .proofActions{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin-top:20px}
-.proofTextLink{color:#dce3de;font-size:13px;font-weight:850;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}
+.proofTextLink{color:#eef0f5;font-size:13px;font-weight:850;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}
 .livePanel{
   padding-left:46px;
   border-left:1px solid rgba(255,255,255,.14);
   background:
     radial-gradient(circle at 80% 20%,rgba(199,234,58,.15),transparent 240px),
-    #142820;
+    #171b24;
 }
 .liveTop,.liveFacts{
   display:flex;
@@ -214,7 +214,7 @@
   border-bottom:1px solid rgba(255,255,255,.13);
 }
 .liveTop span,.liveDecision span,.liveFacts span{
-  color:#95a29b;
+  color:#9ca5b4;
   font-size:9px;
   font-weight:900;
   letter-spacing:.1em;
@@ -248,7 +248,7 @@
   padding:24px 0;
   border-bottom:1px solid rgba(16,33,27,.18);
 }
-.differenceRows span{color:#526d00;font-size:10px;font-weight:900}
+.differenceRows span{color:#6657ff;font-size:10px;font-weight:900}
 .differenceRows strong{font-size:17px;line-height:1.35}
 .differenceRows p{margin:0;color:#68756d;font-size:14px;line-height:1.5}
 .roles{
@@ -272,7 +272,7 @@
   letter-spacing:.09em;
 }
 .pricingIntro{max-width:850px;margin-bottom:48px}
-.pricingIntro p{max-width:680px;color:#69756e}
+.pricingIntro p{max-width:680px;color:#69707d}
 .priceGrid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -293,11 +293,11 @@
 .priceTop span,.priceTop strong,.priceTop small{display:block}
 .priceTop span{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.09em}
 .priceTop strong{margin-top:28px;font-size:48px;letter-spacing:-.055em}
-.priceTop small{margin-top:4px;color:#69756e}
-.priceGrid article>p{min-height:76px;color:#627068;line-height:1.5}
+.priceTop small{margin-top:4px;color:#69707d}
+.priceGrid article>p{min-height:76px;color:#69707d;line-height:1.5}
 .priceGrid ul{flex:1;list-style:none;margin:10px 0 24px;padding:18px 0 0;border-top:1px solid rgba(16,33,27,.14)}
 .priceGrid li{padding:7px 0;font-size:13px}
-.priceGrid li::before{content:"↗";margin-right:8px;color:#526d00;font-weight:900}
+.priceGrid li::before{content:"↗";margin-right:8px;color:#6657ff;font-weight:900}
 .priceGrid a{color:var(--ink);font-size:13px;font-weight:900;text-decoration:none}
 .finalCta{
   width:100%;
@@ -307,9 +307,10 @@
   gap:70px;
   align-items:end;
   background:var(--lime);
+  color:white;
 }
-.finalCta .kicker{color:#334600}
-.finalCta p{max-width:680px;color:#405046;font-size:16px}
+.finalCta .kicker{color:#ffffff}
+.finalCta p{max-width:680px;color:#eceaff;font-size:16px}
 .finalCta>div:last-child{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .pilotPromise{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px;max-width:760px}
 .pilotPromise span{padding:10px 12px;border:1px solid rgba(16,33,27,.24);font-size:11px;font-weight:850}
@@ -320,7 +321,7 @@
   grid-template-columns:1fr 1fr 1fr;
   gap:24px;
   padding:28px 0 54px;
-  color:#69756e;
+  color:#69707d;
   font-size:11px;
 }
 .footer strong{color:var(--ink);letter-spacing:.08em}
@@ -331,8 +332,8 @@
   .primary:hover,.primaryDark:hover,.primaryLight:hover{transform:translateY(-2px)}
 }
 @keyframes tickerTint{
-  from{background:#c7ea3a}
-  to{background:#d9f477}
+  from{background:#6657ff}
+  to{background:#786BFF}
 }
 @media(max-width:980px){
   .hero{grid-template-columns:1fr;min-height:0}
