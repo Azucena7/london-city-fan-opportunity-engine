@@ -77,7 +77,21 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </aside>
       </header>
 
-      <section className={styles.decisionCockpit} aria-label="Decision at a glance">
+      <nav className={styles.contextNav} aria-label="Opportunity workspace sections">
+        <div>
+          <span>{fixture.opponent}</span>
+          <strong>{live.decisionState} · {live.confidence.label} confidence</strong>
+        </div>
+        <div className={styles.contextLinks}>
+          <a href="#decision">Decision</a>
+          <a href="#campaign">Campaign</a>
+          <a href="#signals">Signals</a>
+          <a href="#impact">Impact</a>
+          <a href="#learning">Learning</a>
+        </div>
+      </nav>
+
+      <section id="decision" className={styles.decisionCockpit} aria-label="Decision at a glance">
         <div className={styles.decisionLead}>
           <span className={styles.eyebrow}>Recommended play</span>
           <h2>{campaign?.title.en ?? live.opportunity}</h2>
@@ -265,7 +279,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </div>
       </section>
 
-      <section className={styles.signalsSection}>
+      <section id="signals" className={styles.signalsSection}>
         <details className={styles.reasoningDetails}>
           <summary>
             <div>
@@ -298,7 +312,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </details>
       </section>
 
-      <section className={styles.impactSection}>
+      <section id="impact" className={styles.impactSection}>
         <div className={styles.sectionHead}>
           <div>
             <span className={styles.eyebrow}>Commercial impact</span>
@@ -328,7 +342,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         signalCount={live.liveSignals.length}
       />
 
-      <section className={styles.footerActions}>
+      <section id="learning" className={styles.footerActions}>
         <div>
           <span className={styles.eyebrow}>After matchday</span>
           <h2>The same fixture becomes the learning record.</h2>
