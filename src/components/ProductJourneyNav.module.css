@@ -13,7 +13,7 @@
   display:inline-flex;
   align-items:center;
   gap:10px;
-  color:var(--product-ink,#10211B);
+  color:var(--product-ink,#10131A);
   text-decoration:none;
   font-size:13px;
   font-weight:850;
@@ -24,7 +24,7 @@
   width:10px;
   height:10px;
   border-radius:0;
-  background:var(--product-accent,#C7EA3A);
+  background:var(--product-accent,#6657FF);
   box-shadow:inset 0 0 0 1px rgba(16,33,27,.08);
   transform:rotate(45deg);
 }
@@ -37,7 +37,7 @@
 }
 .link,.more summary{
   position:relative;
-  color:var(--product-muted,#64706B);
+  color:var(--product-muted,#69707D);
   text-decoration:none;
   font-size:11px;
   font-weight:820;
@@ -47,11 +47,11 @@
   white-space:nowrap;
 }
 .link:hover,.more summary:hover{
-  color:var(--product-ink,#10211B);
+  color:var(--product-ink,#10131A);
   background:rgba(16,33,27,.05);
 }
 .active,.activeSummary{
-  color:var(--product-ink,#10211B)!important;
+  color:var(--product-ink,#10131A)!important;
   background:transparent!important;
 }
 .active::after{
@@ -61,7 +61,7 @@
   right:11px;
   bottom:3px;
   height:2px;
-  background:var(--product-accent,#C7EA3A);
+  background:var(--product-accent,#6657FF);
 }
 .more{position:relative}
 .more summary{list-style:none;cursor:pointer}
@@ -74,30 +74,30 @@
   right:0;
   width:270px;
   padding:8px;
-  border:1px solid var(--product-line,#D7D8D1);
+  border:1px solid var(--product-line,#D9DDE5);
   border-radius:16px;
-  background:var(--product-surface,#FBFAF6);
+  background:var(--product-surface,#FFFFFF);
   box-shadow:var(--product-shadow,0 18px 60px rgba(16,33,27,.08));
 }
 .menu a{
   display:block;
   padding:12px;
   border-radius:11px;
-  color:var(--product-ink,#10211B);
+  color:var(--product-ink,#10131A);
   text-decoration:none;
 }
-.menu a:hover,.menuActive{background:var(--product-surface-2,#EEEDE6)}
+.menu a:hover,.menuActive{background:var(--product-surface-2,#F1F3F7)}
 .menu strong,.menu span{display:block}
 .menu strong{font-size:13px}
-.menu span{margin-top:3px;color:var(--product-muted,#64706B);font-size:12px;line-height:1.35}
+.menu span{margin-top:3px;color:var(--product-muted,#69707D);font-size:12px;line-height:1.35}
 .engine{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  color:var(--product-ink,#10211B);
+  color:var(--product-ink,#10131A);
   background:transparent;
   border:0;
-  border-left:1px solid var(--product-line,#D7D8D1);
+  border-left:1px solid var(--product-line,#D9DDE5);
   text-decoration:none;
   border-radius:0;
   padding:10px 0 10px 14px;
@@ -106,10 +106,10 @@
   white-space:nowrap;
 }
 .engine:hover{
-  border-color:var(--product-ink,#10211B);
-  background:var(--product-surface,#FBFAF6);
+  border-color:var(--product-ink,#10131A);
+  background:var(--product-surface,#FFFFFF);
 }
-.activeEngine{background:var(--product-inverse,#10211B);color:white}
+.activeEngine{background:var(--product-inverse,#10131A);color:white}
 @media(max-width:900px){
   .nav{
     grid-template-columns:1fr auto;
@@ -127,7 +127,7 @@
     scrollbar-width:none;
     margin:0 -6px;
     padding:7px 6px 4px;
-    border-top:1px solid var(--product-line,#D7D8D1);
+    border-top:1px solid var(--product-line,#D9DDE5);
   }
   .links::-webkit-scrollbar{display:none}
   .link,.more summary{
@@ -158,7 +158,7 @@
 }
 
 
-.account{display:flex;align-items:center;gap:12px}.workspace{display:inline-flex;align-items:center;gap:7px;color:var(--product-muted,#64706B);font-size:10px;font-weight:850;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}.workspace::before{content:"";width:7px;height:7px;background:var(--product-accent,#C7EA3A)}@media(max-width:700px){.workspace{display:none}}
+.account{display:flex;align-items:center;gap:12px}.workspace{display:inline-flex;align-items:center;gap:7px;color:var(--product-muted,#69707D);font-size:10px;font-weight:850;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}.workspace::before{content:"";width:7px;height:7px;background:var(--product-accent,#6657FF);border-radius:50%}@media(max-width:700px){.workspace{display:none}}
 @media(max-width:600px){
   .nav{width:min(100% - 28px,1240px)}
 }
