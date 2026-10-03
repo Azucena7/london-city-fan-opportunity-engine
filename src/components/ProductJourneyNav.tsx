@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access";
+  active?: "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access" | "sources";
 };
 
 const workItems = [
@@ -12,6 +12,7 @@ const workItems = [
 ] as const;
 
 const workspaceItems = [
+  { key: "sources", label: "Sources", href: "/app/sources" },
   { key: "setup", label: "Setup", href: "/app/setup" },
   { key: "access", label: "Team", href: "/app/access" },
   { key: "credits", label: "Credits", href: "/app/credits" }
