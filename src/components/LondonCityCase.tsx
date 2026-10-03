@@ -34,8 +34,8 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
       <div className={styles.content}>
         <header className={styles.hero}>
           <div>
-            <span className={styles.eyebrow}>{es ? "LONDON CITY LIVE · CASO PÚBLICO" : "LONDON CITY LIVE · PUBLIC CASE"}</span>
-            <h1>{es ? "Lo que vio el motor antes del partido. Lo que ocurrió después." : "What the engine saw before the match. What happened next."}</h1>
+            <span className={styles.eyebrow}>{es ? "DEMO PÚBLICA · LONDON CITY" : "PUBLIC DEMO · LONDON CITY"}</span>
+            <h1>{es ? "Un ejemplo público de cómo AVELA separa señal, decisión y evidencia." : "A public example of how AVELA separates signal, decision and evidence."}</h1>
             <p>
               {es
                 ? "Seguimos un contexto real de club con fuentes públicas: qué detecta el motor, qué recomienda y qué evidencia aparece después. La coincidencia no implica que el club haya visto o utilizado este producto."
@@ -68,7 +68,7 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
               <span>{es ? "02 · QUÉ RECOMENDÓ" : "02 · WHAT IT RECOMMENDED"}</span>
               <h3>{opportunity?.recommendedAction ?? (es ? "Sin recomendación activa." : "No active recommendation.")}</h3>
               <p>{opportunity?.nextAction.label ?? ""}</p>
-              {opportunity ? <Link href={`/app/matches/${opportunity.fixtureId}`}>{es ? "Ver el plan operativo →" : "See the operational plan →"}</Link> : null}
+              {opportunity ? <Link href={`/app/matches/${opportunity.fixtureId}`}>{es ? "Abrir esta demo en el workspace →" : "Open this demo in the workspace →"}</Link> : null}
             </article>
             <article>
               <span>{es ? "03 · QUÉ SABEMOS DE VERDAD" : "03 · WHAT WE ACTUALLY KNOW"}</span>
