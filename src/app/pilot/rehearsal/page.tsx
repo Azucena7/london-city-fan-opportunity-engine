@@ -7,7 +7,7 @@ import styles from "./rehearsal.module.css";
 
 export const metadata: Metadata = {
   title: "Pilot Rehearsal",
-  description: "Synthetic end-to-end rehearsal of the Fan Growth Engine club-data path."
+  description: "Synthetic end-to-end rehearsal of the AVELA club-data path."
 };
 
 const sourceFixtureId = "2026-09-06-mun-h";
