@@ -703,5 +703,41 @@
         "checkedAt": "2026-10-02"
       }
     ]
+  },
+  {
+    "id": "attention-bromley-women-reading-overlap-2026-10-03",
+    "fixtureId": "2026-10-04-tot-a",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-03T10:17:00+01:00",
+    "title": {
+      "en": "Bromley Women host Reading at the same time as Tottenham–London City",
+      "es": "Bromley Women recibe al Reading a la misma hora que Tottenham–London City"
+    },
+    "summary": {
+      "en": "Bromley FC Women host Reading in the Women's FA Cup at the CopperJax Community Stadium on Sunday 4 October at 14:00, the same kickoff time as Tottenham v London City at BetWright Stadium. Bromley Men's season-ticket holders are offered free entry. Tottenham–London City is also live on Sky Sports Football in the UK. The overlap is confirmed; any effect on travel, viewing or attendance is unmeasured.",
+      "es": "Bromley FC Women recibe al Reading en la Women’s FA Cup en el CopperJax Community Stadium el domingo 4 de octubre a las 14:00, la misma hora que Tottenham–London City en BetWright Stadium. Los abonados del equipo masculino de Bromley tienen entrada gratuita. Tottenham–London City también se emite en Sky Sports Football en Reino Unido. El solapamiento está confirmado; cualquier efecto sobre viaje, audiencia o asistencia no está medido."
+    },
+    "marketingAction": {
+      "en": "Segment Sunday communications into Tottenham travellers, UK broadcast viewers and Bromley local-football audiences. Keep each route and venue explicit, suppress generic same-time local matchday prompts where they could confuse supporters, and measure clicks or attendance independently before claiming displaced demand.",
+      "es": "Segmentar la comunicación del domingo entre viajeros a Tottenham, audiencia de la retransmisión en Reino Unido y público del fútbol local de Bromley. Mostrar claramente cada recorrido y sede, evitar mensajes locales genéricos a la misma hora que puedan confundir y medir por separado clics o asistencia antes de afirmar demanda desplazada."
+    },
+    "sourceName": "Bromley FC Women / Tottenham Hotspur",
+    "sourceUrl": "https://www.bromleyfc.co.uk/news/2026/september/28/bromley-fc-women-remain-unbeaten-after-barking-battle---now-all-eyes-turn-to-raise-the-record/",
+    "sources": [
+      {
+        "name": "Bromley FC Women",
+        "url": "https://www.bromleyfc.co.uk/news/2026/september/28/bromley-fc-women-remain-unbeaten-after-barking-battle---now-all-eyes-turn-to-raise-the-record/",
+        "checkedAt": "2026-10-03"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1145195/spurs-vs-london-city-lionesses-womens-super-league-how-to-watch-team-news-kit-colours-key-information",
+        "checkedAt": "2026-10-03"
+      }
+    ]
   }
 ]
