@@ -50,11 +50,9 @@ test("approval version changes when goal, cadence or applied data changes", () =
   assert.equal(original, clubDemoVersion({ ...complete }, { ...clubDemoExample }));
 });
 
-test("public prototype has no real data transfer, persistence or email channel", async () => {
-  const component = await readFile(new URL("../src/components/ClubWorkspaceDemo.tsx", import.meta.url), "utf8");
-  assert.match(component, /PUBLIC PROTOTYPE · TEST DATA ONLY/);
-  assert.match(component, /No campaign has been activated/);
-  assert.doesNotMatch(component, /fetch\(|localStorage|sessionStorage|mailto:|type="file"|type="password"/);
+test("legacy workspace entry redirects to the canonical guided demo", async () => {
   const config = await readFile(new URL("../next.config.mjs", import.meta.url), "utf8");
+  const page = await readFile(new URL("../src/app/app/demo/page.tsx", import.meta.url), "utf8");
   assert.match(config, /source: "\/club-demo", destination: "\/app\/demo"/);
+  assert.match(page, /DemoTour/);
 });
