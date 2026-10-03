@@ -272,5 +272,20 @@
       "en": "Bundle priority is open and general sale starts 5 October; single-match priority/general sale follows 8/12 October. Separate audiences and purchase routes, explain one ticket per fixture, and measure bundle orders and each match's scans separately.",
       "es": "La prioridad del pack está abierta y la venta general empieza el 5 de octubre; las ventanas individuales siguen el 8/12 de octubre. Separar audiencias y compra, explicar una entrada por fixture y medir por separado pedidos del pack y scans de cada partido."
     }
+  },
+  {
+    "id": "bromley-overlap-segmentation-2026-10-03",
+    "fixtureId": "2026-10-04-tot-a",
+    "area": "Growth Marketing & Community Partnerships",
+    "status": "next",
+    "due": "2026-10-03",
+    "title": {
+      "en": "Separate the three Sunday audience journeys",
+      "es": "Separar los tres recorridos de audiencia del domingo"
+    },
+    "reason": {
+      "en": "Bromley Women v Reading at CopperJax and Tottenham v London City at BetWright both start at 14:00, while the London City match is live on Sky Sports Football. Tag travel, broadcast and local-football messages separately; make venue and purchase route unmistakable, then compare measured engagement without inferring attendance transfer.",
+      "es": "Bromley Women–Reading en CopperJax y Tottenham–London City en BetWright empiezan ambos a las 14:00, mientras el partido de London City se emite en Sky Sports Football. Etiquetar por separado los mensajes de viaje, retransmisión y fútbol local; dejar inequívocos sede y recorrido de compra y comparar engagement medido sin inferir transferencia de asistencia."
+    }
   }
 ]
