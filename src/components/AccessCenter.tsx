@@ -164,6 +164,16 @@ export function AccessCenter() {
     if (response.ok) await refresh();
   }
 
+  if (configured === null) {
+    return (
+      <section className={styles.loadingState} aria-live="polite">
+        <span>Access & team</span>
+        <strong>Checking account and club access…</strong>
+        <p>Identity and membership are loaded separately so club data never flashes open before authorisation is known.</p>
+      </section>
+    );
+  }
+
   if (configured === false) {
     return (
       <section className={styles.empty}>
