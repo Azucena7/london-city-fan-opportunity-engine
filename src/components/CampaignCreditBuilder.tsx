@@ -410,6 +410,24 @@ export function CampaignCreditBuilder({
             ? `Reserve ${reservationRequired} credits to lock this scope.`
             : "Finish the campaign scope and mark it ready for review.";
 
+  const builderStage = launchHandoffReady
+    ? 5
+    : hasReservation
+      ? 4
+      : workspaceStatus === "review-ready"
+        ? 3
+        : selectedCount > 0
+          ? 2
+          : 1;
+
+  const journeySteps = [
+    { id: 1, label: "Opportunity", detail: "Why act now", state: "complete" },
+    { id: 2, label: "Recipe", detail: "Channels + assets", state: builderStage > 2 ? "complete" : builderStage === 2 ? "active" : "upcoming" },
+    { id: 3, label: "Review", detail: unresolvedGates ? `${unresolvedGates} gate${unresolvedGates === 1 ? "" : "s"} open` : "Human approval", state: builderStage > 3 ? "complete" : builderStage === 3 ? "active" : "upcoming" },
+    { id: 4, label: "Reserve", detail: hasReservation ? `${reservedCampaignCredits} cr locked` : "Lock scope", state: builderStage > 4 ? "complete" : builderStage === 4 ? "active" : "upcoming" },
+    { id: 5, label: "Handoff", detail: launchHandoffReady ? "Ready" : "No auto-publish", state: builderStage === 5 ? "active" : "upcoming" }
+  ] as const;
+
   function toggle(id: string) {
     if (explorer || hasReservation) return;
     setSelected((current) => {
@@ -596,6 +614,32 @@ export function CampaignCreditBuilder({
         <article><span>Proposition</span><strong>{proposition}</strong></article>
       </div>
 
+      <div className={styles.guidedBuilder} aria-label="Campaign build progress">
+        <div className={styles.guidedIntro}>
+          <span>Campaign path</span>
+          <strong>Follow the recommendation. Change only what the club needs to change.</strong>
+          <small>The current stage is highlighted; later stages stay visible so the user always knows what comes next.</small>
+        </div>
+        <div className={styles.guidedSteps}>
+          {journeySteps.map((step) => (
+            <div
+              key={step.id}
+              className={[
+                styles.guidedStep,
+                step.state === "active" ? styles.guidedStepActive : "",
+                step.state === "complete" ? styles.guidedStepComplete : ""
+              ].join(" ")}
+            >
+              <span>{step.state === "complete" ? "✓" : String(step.id).padStart(2, "0")}</span>
+              <div>
+                <strong>{step.label}</strong>
+                <small>{step.detail}</small>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {explorer ? (
         <div className={styles.locked}>
           <span>Explorer preview</span>
@@ -636,6 +680,28 @@ export function CampaignCreditBuilder({
                   </span>
                 );
               })}
+            </div>
+
+            <div className={styles.recipeMap} aria-label="Recommended campaign flow">
+              <div className={styles.recipeNode}>
+                <span>Audience</span>
+                <strong>{audience}</strong>
+              </div>
+              <i aria-hidden="true">→</i>
+              <div className={styles.recipeBranches}>
+                {activeChannels.slice(0, 4).map((channel) => (
+                  <div key={channel}>
+                    <span>{channel}</span>
+                    <strong>{pricedItems.filter((item) => item.channels.includes(channel) || (channel === "Social" && item.channels.includes("Social"))).length || 1} touchpoint{pricedItems.filter((item) => item.channels.includes(channel)).length === 1 ? "" : "s"}</strong>
+                  </div>
+                ))}
+                {!activeChannels.length ? <div><span>Channels</span><strong>Choose the route</strong></div> : null}
+              </div>
+              <i aria-hidden="true">→</i>
+              <div className={styles.recipeNode}>
+                <span>Goal</span>
+                <strong>{objective}</strong>
+              </div>
             </div>
 
             <div className={styles.campaignFlow} aria-label="Campaign workflow coverage">

@@ -1316,3 +1316,19 @@ test("final visual pass removes legacy olive neutrals from primary product surfa
   assert.doesNotMatch(radar, /#d9dfda|#68756d|#637068/i);
   assert.doesNotMatch(brief, /#d9dfda|#68756d|#5f6c64/i);
 });
+
+
+test("campaign builder makes the recommended campaign path visually explicit", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const css = read("src/components/CampaignCreditBuilder.module.css");
+  assert.match(builder, /Campaign path/);
+  assert.match(builder, /Opportunity/);
+  assert.match(builder, /Recipe/);
+  assert.match(builder, /Review/);
+  assert.match(builder, /Reserve/);
+  assert.match(builder, /Handoff/);
+  assert.match(builder, /Recommended campaign flow/);
+  assert.match(builder, /journeySteps/);
+  assert.match(css, /guidedSteps/);
+  assert.match(css, /recipeMap/);
+});
