@@ -1071,6 +1071,24 @@ test("club UX exposes clear setup, access and campaign next-step flows", () => {
   assert.match(learningCss, /AVELA learning visual refresh/);
 });
 
+test("club surfaces use explicit loading states and mobile-first controls", () => {
+  const setup = read("src/components/ClubSetup.tsx");
+  const setupCss = read("src/components/ClubSetup.module.css");
+  const access = read("src/components/AccessCenter.tsx");
+  const accessCss = read("src/components/AccessCenter.module.css");
+  const radarCss = read("src/app/matches/matches.module.css");
+  const learningCss = read("src/app/results/results.module.css");
+
+  assert.match(setup, /Loading club context/);
+  assert.match(setup, /configured === null/);
+  assert.match(access, /Checking account and club access/);
+  assert.match(access, /configured === null/);
+  assert.match(setupCss, /min-height:44px/);
+  assert.match(accessCss, /width:100%/);
+  assert.match(radarCss, /@media\(max-width:620px\)/);
+  assert.match(learningCss, /fixturePicker\{display:grid/);
+});
+
 test("homepage sells the product with demo conversion and transparent packages", () => {
   const page = read("src/app/page.tsx");
   assert.match(page, /Request a demo/);
