@@ -6,3 +6,4 @@
 .header p{font-size:15px;margin-top:14px}
 .card h2{font-size:24px}
 @media(max-width:900px){.shell{padding:0 18px 48px}}
+.progressBar{grid-column:1/-1;height:4px;background:#E7E9EE;overflow:hidden}.progressBar>span{display:block;height:100%;background:var(--product-accent)}.card:hover{background:#FAFAFC}
