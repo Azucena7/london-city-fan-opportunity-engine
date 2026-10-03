@@ -79,7 +79,10 @@
       "quota": 4,
       "confirmedDates": [
         "2026-10-18",
-        "2026-10-25"
+        "2026-10-25",
+        "2026-11-28",
+        "2026-12-02",
+        "2026-12-08"
       ],
       "fit": 90,
       "fee": 400,
@@ -107,7 +110,10 @@
       "quota": 5,
       "confirmedDates": [
         "2026-10-18",
-        "2026-10-25"
+        "2026-10-25",
+        "2026-11-28",
+        "2026-12-02",
+        "2026-12-08"
       ],
       "fit": 85,
       "fee": 200,
@@ -134,7 +140,10 @@
       "quota": 6,
       "confirmedDates": [
         "2026-10-18",
-        "2026-10-25"
+        "2026-10-25",
+        "2026-11-28",
+        "2026-12-02",
+        "2026-12-08"
       ],
       "fit": 75,
       "fee": 150,
@@ -161,7 +170,10 @@
       "blockedCategories": [],
       "quota": null,
       "confirmedDates": [
-        "2026-10-18"
+        "2026-10-18",
+        "2026-11-28",
+        "2026-12-02",
+        "2026-12-08"
       ],
       "fit": 95,
       "fee": 100,
@@ -188,7 +200,10 @@
       "quota": 5,
       "confirmedDates": [
         "2026-10-18",
-        "2026-10-25"
+        "2026-10-25",
+        "2026-11-28",
+        "2026-12-02",
+        "2026-12-08"
       ],
       "fit": 82,
       "fee": 250,
@@ -216,7 +231,10 @@
       "quota": 7,
       "confirmedDates": [
         "2026-10-18",
-        "2026-10-25"
+        "2026-10-25",
+        "2026-11-28",
+        "2026-12-02",
+        "2026-12-08"
       ],
       "fit": 72,
       "fee": 120,
@@ -245,7 +263,10 @@
       ],
       "quota": 4,
       "confirmedDates": [
-        "2026-10-18"
+        "2026-10-18",
+        "2026-11-28",
+        "2026-12-02",
+        "2026-12-08"
       ],
       "fit": 88,
       "fee": 320,
@@ -445,6 +466,53 @@
       "source": "Synthetic public squad announcement",
       "public": true,
       "note": "Unavailable for the 18 October demo activation."
+    }
+  ],
+  "commercialCampaigns": [
+    {
+      "id": "season-tickets-2027",
+      "name": "Season tickets 2027",
+      "type": "season-ticket",
+      "start": "2026-11-24",
+      "end": "2027-01-20",
+      "activationDate": "2026-12-02",
+      "objective": "Renew and acquire season-ticket holders.",
+      "category": "retail",
+      "channel": "club-social",
+      "territory": "UK",
+      "owner": "marketing",
+      "budget": 2200,
+      "playerNeed": 4
+    },
+    {
+      "id": "christmas-2026",
+      "name": "Christmas campaign",
+      "type": "seasonal",
+      "start": "2026-12-01",
+      "end": "2026-12-24",
+      "activationDate": "2026-12-08",
+      "objective": "Support Christmas retail, gifting and fan engagement.",
+      "category": "retail",
+      "channel": "club-social",
+      "territory": "UK",
+      "owner": "marketing",
+      "budget": 1800,
+      "playerNeed": 3
+    },
+    {
+      "id": "community-winter",
+      "name": "Winter community day",
+      "type": "community",
+      "start": "2026-11-20",
+      "end": "2026-12-15",
+      "activationDate": "2026-11-28",
+      "objective": "Build family and community participation before the winter fixture run.",
+      "category": "community",
+      "channel": "event",
+      "territory": "UK",
+      "owner": "community",
+      "budget": 1400,
+      "playerNeed": 2
     }
   ]
 }
