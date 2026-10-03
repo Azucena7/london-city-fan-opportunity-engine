@@ -1354,3 +1354,23 @@ test("campaign index visualizes approval progress and next decision", () => {
   assert.match(campaigns, /progressBar/);
   assert.match(campaigns, /Next decision/);
 });
+
+
+test("Opportunity Brief keeps long-form work navigable with a sticky context rail", () => {
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/matches/[fixtureId]/match-plan.module.css");
+  assert.match(page, /Opportunity workspace sections/);
+  assert.match(page, /href="#decision"/);
+  assert.match(page, /href="#campaign"/);
+  assert.match(page, /href="#signals"/);
+  assert.match(page, /href="#impact"/);
+  assert.match(page, /href="#learning"/);
+  assert.match(css, /position:sticky/);
+});
+
+test("Campaigns uses a semantic navigation state instead of the legacy brief key", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const campaigns = read("src/app/app/campaigns/page.tsx");
+  assert.match(nav, /key: "campaigns"/);
+  assert.match(campaigns, /active="campaigns"/);
+});
