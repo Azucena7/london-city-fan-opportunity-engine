@@ -14,7 +14,7 @@ export default function CasesPage() {
 
   return (
     <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="cases" />
+      <ProductJourneyNav />
 
       <header className={styles.hero}>
         <span className={styles.eyebrow}>Fixture use cases</span>

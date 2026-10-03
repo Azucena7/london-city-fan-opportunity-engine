@@ -577,7 +577,7 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   assert.match(home, /See AVELA thinking in public/);
   assert.match(home, /href="\/live\/london-city"/);
   assert.match(marketingNav, /Open app/);
-  assert.match(marketingNav, /\/app\/matches/);
+  assert.match(marketingNav, /href="\/app">Open app/);
   assert.match(appNav, /AVELA website/);
   assert.match(appNav, /\/app\/learning/);
   assert.match(config, /source: "\/london-city", destination: "\/live\/london-city"/);
@@ -1339,4 +1339,48 @@ test("Season Intelligence compares player momentum with asset usage instead of c
   assert.match(season, /momentum inputs/);
   assert.match(season, /Momentum and usage are different signals/);
   assert.match(season, /high momentum does not automatically mean/);
+});
+
+
+test("mobile app navigation keeps settings and utility destinations reachable", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const css = read("src/components/ProductJourneyNav.module.css");
+  assert.match(nav, /className=\{styles\.mobileMenu\}/);
+  assert.match(nav, />More<\/summary>/);
+  for (const label of ["Executive view", "Sources", "Setup", "Team", "Credits", "Product demo"]) {
+    assert.match(nav, new RegExp(label));
+  }
+  assert.match(nav, /aria-current=\{active === item\.key \? "page"/);
+  assert.match(css, /overflow-x:auto/);
+  assert.match(css, /\.mobileMenu\{display:block/);
+});
+
+test("club app has explicit loading error and not-found states and remains non-indexable", () => {
+  const layout = read("src/app/app/layout.tsx");
+  const loading = read("src/app/app/loading.tsx");
+  const error = read("src/app/app/error.tsx");
+  const notFound = read("src/app/app/not-found.tsx");
+  assert.match(layout, /index: false/);
+  assert.match(layout, /follow: false/);
+  assert.match(loading, /Preparing the next decision/);
+  assert.match(error, /underlying data has not been changed/);
+  assert.match(notFound, /This workspace does not exist/);
+});
+
+test("public crawl policy exposes canonical surfaces and excludes the club app", () => {
+  const robots = read("src/app/robots.ts");
+  const sitemap = read("src/app/sitemap.ts");
+  assert.match(robots, /disallow: \["\/app\/"/);
+  assert.match(robots, /sitemap\.xml/);
+  assert.match(sitemap, /\/for-clubs/);
+  assert.match(sitemap, /\/case-study/);
+  assert.match(sitemap, /\/live\/london-city/);
+  assert.doesNotMatch(sitemap, /\$\{base\}\/app/);
+});
+
+test("commercial navigation enters the decision-first Home and labels London City as a demo", () => {
+  const nav = read("src/components/MarketingNav.tsx");
+  assert.match(nav, /London City demo/);
+  assert.match(nav, /href="\/app">Open app/);
+  assert.doesNotMatch(nav, /href="\/app\/matches">Open app/);
 });
