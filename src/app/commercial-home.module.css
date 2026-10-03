@@ -1,13 +1,13 @@
 .shell{
-  --cream:#f6f7f9;
-  --cream2:#eef1f6;
+  --page-bg:#f6f7f9;
+  --surface-muted:#eef1f6;
   --ink:#10131a;
   --muted:#69707d;
-  --lime:#6657ff;
-  --orange:#ff654f;
+  --accent:#6657ff;
+  --signal:#ff654f;
   min-height:100vh;
   color:var(--ink);
-  background:var(--cream);
+  background:var(--page-bg);
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 .hero{
@@ -34,7 +34,7 @@
 .eyebrow::before,.kicker::before{
   content:"";
   width:8px;height:8px;
-  background:var(--lime);
+  background:var(--accent);
   transform:rotate(45deg);
 }
 .hero h1{
@@ -70,13 +70,13 @@
   font-weight:900;
 }
 .primary{background:var(--ink);color:white}.primaryDark{background:white;color:var(--ink)}
-.primaryLight{background:var(--lime);color:var(--ink)}
+.primaryLight{background:var(--accent);color:#fff}
 .textLink,.finalLink{
   color:var(--ink);
   font-size:13px;
   font-weight:850;
   text-decoration:none;
-  border-bottom:1px solid rgba(16,33,27,.45);
+  border-bottom:1px solid rgba(16,19,26,.45);
 }
 .heroMeta{
   display:flex;
@@ -84,7 +84,7 @@
   gap:8px 18px;
   margin-top:30px;
   padding-top:18px;
-  border-top:1px solid rgba(16,33,27,.16);
+  border-top:1px solid rgba(16,19,26,.16);
   color:#69707d;
   font-size:11px;
   font-weight:750;
@@ -93,7 +93,7 @@
   overflow:hidden;
   width:100%;
   padding:14px 24px;
-  background:var(--lime);
+  background:var(--accent);
   color:var(--ink);
   display:flex;
   justify-content:space-around;
@@ -107,7 +107,7 @@
   width:min(1240px,calc(100% - 48px));
   margin:0 auto;
   padding:110px 0;
-  border-top:1px solid rgba(16,33,27,.15);
+  border-top:1px solid rgba(16,19,26,.15);
 }
 .manifesto{
   display:grid;
@@ -124,7 +124,7 @@
 }
 .manifestoText{
   align-self:end;
-  border-left:1px solid rgba(16,33,27,.18);
+  border-left:1px solid rgba(16,19,26,.18);
   padding-left:28px;
 }
 .manifestoText p{
@@ -140,13 +140,13 @@
   align-items:start;
 }
 .productIntro{position:sticky;top:32px}
-.flow{border-top:1px solid rgba(16,33,27,.18)}
+.flow{border-top:1px solid rgba(16,19,26,.18)}
 .flow article{
   display:grid;
   grid-template-columns:52px 1fr;
   gap:20px;
   padding:28px 0 34px;
-  border-bottom:1px solid rgba(16,33,27,.18);
+  border-bottom:1px solid rgba(16,19,26,.18);
 }
 .flow article>span{
   color:#6657ff;
@@ -201,7 +201,7 @@
   padding-left:46px;
   border-left:1px solid rgba(255,255,255,.14);
   background:
-    radial-gradient(circle at 80% 20%,rgba(199,234,58,.15),transparent 240px),
+    radial-gradient(circle at 80% 20%,rgba(102,87,255,.10),transparent 240px),
     #171b24;
 }
 .liveTop,.liveFacts{
@@ -240,17 +240,17 @@
   grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
   gap:78px;
 }
-.differenceRows{border-top:1px solid rgba(16,33,27,.18)}
+.differenceRows{border-top:1px solid rgba(16,19,26,.18)}
 .differenceRows>div{
   display:grid;
   grid-template-columns:36px minmax(180px,.9fr) minmax(0,1.1fr);
   gap:18px;
   padding:24px 0;
-  border-bottom:1px solid rgba(16,33,27,.18);
+  border-bottom:1px solid rgba(16,19,26,.18);
 }
 .differenceRows span{color:#6657ff;font-size:10px;font-weight:900}
 .differenceRows strong{font-size:17px;line-height:1.35}
-.differenceRows p{margin:0;color:#68756d;font-size:14px;line-height:1.5}
+.differenceRows p{margin:0;color:#69707D;font-size:14px;line-height:1.5}
 .roles{
   display:grid;
   grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
@@ -265,7 +265,7 @@
 }
 .roleRail span{
   padding:10px 12px;
-  border:1px solid rgba(16,33,27,.18);
+  border:1px solid rgba(16,19,26,.18);
   background:rgba(255,255,255,.28);
   font-size:10px;
   font-weight:900;
@@ -276,8 +276,8 @@
 .priceGrid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  border-top:1px solid rgba(16,33,27,.2);
-  border-bottom:1px solid rgba(16,33,27,.2);
+  border-top:1px solid rgba(16,19,26,.2);
+  border-bottom:1px solid rgba(16,19,26,.2);
 }
 .priceGrid article{
   min-height:470px;
@@ -287,15 +287,15 @@
 }
 .priceGrid article+article{
   padding-left:28px;
-  border-left:1px solid rgba(16,33,27,.2);
+  border-left:1px solid rgba(16,19,26,.2);
 }
-.priceGrid .featured{background:rgba(199,234,58,.11)}
+.priceGrid .featured{background:rgba(102,87,255,.08)}
 .priceTop span,.priceTop strong,.priceTop small{display:block}
 .priceTop span{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.09em}
 .priceTop strong{margin-top:28px;font-size:48px;letter-spacing:-.055em}
 .priceTop small{margin-top:4px;color:#69707d}
 .priceGrid article>p{min-height:76px;color:#69707d;line-height:1.5}
-.priceGrid ul{flex:1;list-style:none;margin:10px 0 24px;padding:18px 0 0;border-top:1px solid rgba(16,33,27,.14)}
+.priceGrid ul{flex:1;list-style:none;margin:10px 0 24px;padding:18px 0 0;border-top:1px solid rgba(16,19,26,.14)}
 .priceGrid li{padding:7px 0;font-size:13px}
 .priceGrid li::before{content:"↗";margin-right:8px;color:#6657ff;font-weight:900}
 .priceGrid a{color:var(--ink);font-size:13px;font-weight:900;text-decoration:none}
@@ -306,14 +306,14 @@
   grid-template-columns:minmax(0,1fr) auto;
   gap:70px;
   align-items:end;
-  background:var(--lime);
+  background:var(--accent);
   color:white;
 }
 .finalCta .kicker{color:#ffffff}
 .finalCta p{max-width:680px;color:#eceaff;font-size:16px}
 .finalCta>div:last-child{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .pilotPromise{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px;max-width:760px}
-.pilotPromise span{padding:10px 12px;border:1px solid rgba(16,33,27,.24);font-size:11px;font-weight:850}
+.pilotPromise span{padding:10px 12px;border:1px solid rgba(16,19,26,.24);font-size:11px;font-weight:850}
 .footer{
   width:min(1240px,calc(100% - 48px));
   margin:0 auto;
@@ -342,7 +342,7 @@
   .liveProof{grid-template-columns:1fr}
   .livePanel{border-left:0;border-top:1px solid rgba(255,255,255,.14)}
   .priceGrid{grid-template-columns:1fr}
-  .priceGrid article,.priceGrid article+article{min-height:0;padding:26px 0;border-left:0;border-top:1px solid rgba(16,33,27,.2)}
+  .priceGrid article,.priceGrid article+article{min-height:0;padding:26px 0;border-left:0;border-top:1px solid rgba(16,19,26,.2)}
   .priceGrid article:first-child{border-top:0}
   .finalCta{grid-template-columns:1fr}
 }
@@ -413,3 +413,8 @@
 .motionTrack article{min-height:150px}
 @media(max-width:980px){.hero{grid-template-columns:1fr}.liveProof{grid-template-columns:1fr}}
 @media(max-width:650px){.hero,.manifesto,.motionStory,.productTheatre,.difference,.roles,.pricing,.footer{width:min(100% - 30px,1080px)}.hero h1{font-size:48px}}
+
+/* Remove legacy oversized/full-bleed behavior */
+.liveCopy,.livePanel{padding-left:max(24px,calc((100vw - 1080px)/2));padding-right:54px}
+.livePanel{padding-left:42px;padding-right:max(24px,calc((100vw - 1080px)/2))}
+@media(max-width:980px){.liveCopy,.livePanel{padding-left:24px;padding-right:24px}}
