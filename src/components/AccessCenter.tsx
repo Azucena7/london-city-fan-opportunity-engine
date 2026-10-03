@@ -220,7 +220,7 @@ export function AccessCenter() {
             <label>Work email<input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
             <label>Password<input type="password" autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
             <button type="button" disabled={busy} onClick={() => void signUp()}>Create account</button>
-            <p>Email confirmation is required before the account can sign in.</p>
+            <p>Email confirmation is required before the account can sign in. If the confirmation link opens a fallback page, return here afterwards and try Sign in — confirmation may already have completed.</p>
           </article>
           <article>
             <span>Existing user</span>
