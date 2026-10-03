@@ -3,32 +3,316 @@
   "synthetic": true,
   "asOf": "2026-10-01",
   "provenance": "Invented demonstration data. Not London City records, signed contracts or Blinkfire output.",
-  "brand": { "schemaVersion": 1, "synthetic": true, "id": "brand-demo", "name": "Identidad Demo", "primary": "#21432f", "background": "#e9f0df", "font": "sans-serif", "tone": "Cercano, claro e inclusivo / Warm, clear and inclusive", "version": 1 },
+  "brand": {
+    "schemaVersion": 1,
+    "synthetic": true,
+    "id": "brand-demo",
+    "name": "Identidad Demo",
+    "primary": "#21432f",
+    "background": "#e9f0df",
+    "font": "sans-serif",
+    "tone": "Cercano, claro e inclusivo / Warm, clear and inclusive",
+    "version": 1
+  },
   "campaigns": [
-    { "id": "return", "name": {"es":"Volvemos al estadio","en":"Back to the stadium"}, "headline": {"es":"Tu próxima visita empieza aquí","en":"Your next visit starts here"}, "brief": {"es":"Invitación a volver; sin descuentos ni promesas no autorizadas.","en":"An invitation to return; no unauthorised discounts or promises."}, "primary": "#21432f", "background": "#e9f0df", "start": "2026-10-01", "end": "2026-11-30", "goal": "repeat" },
-    { "id": "local", "name": {"es":"El club y su comunidad","en":"Club and community"}, "headline": {"es":"Un partido para compartir","en":"A matchday to share"}, "brief": {"es":"Descubrir el club y facilitar la primera visita.","en":"Discover the club and make a first visit easier."}, "primary": "#482955", "background": "#f2e8f6", "start": "2026-10-01", "end": "2026-12-31", "goal": "acquisition" }
+    {
+      "id": "return",
+      "name": {
+        "es": "Volvemos al estadio",
+        "en": "Back to the stadium"
+      },
+      "headline": {
+        "es": "Tu próxima visita empieza aquí",
+        "en": "Your next visit starts here"
+      },
+      "brief": {
+        "es": "Invitación a volver; sin descuentos ni promesas no autorizadas.",
+        "en": "An invitation to return; no unauthorised discounts or promises."
+      },
+      "primary": "#21432f",
+      "background": "#e9f0df",
+      "start": "2026-10-01",
+      "end": "2026-11-30",
+      "goal": "repeat"
+    },
+    {
+      "id": "local",
+      "name": {
+        "es": "El club y su comunidad",
+        "en": "Club and community"
+      },
+      "headline": {
+        "es": "Un partido para compartir",
+        "en": "A matchday to share"
+      },
+      "brief": {
+        "es": "Descubrir el club y facilitar la primera visita.",
+        "en": "Discover the club and make a first visit easier."
+      },
+      "primary": "#482955",
+      "background": "#f2e8f6",
+      "start": "2026-10-01",
+      "end": "2026-12-31",
+      "goal": "acquisition"
+    }
   ],
   "players": [
-    {"id":"PLAYER-DEMO-A","name":"Talento Demo A","signed":true,"validated":true,"document":"AGREEMENT-DEMO-A · sin documento real","start":"2026-07-01","end":"2027-06-30","channels":["club-social","event"],"territories":["UK","ES"],"blockedCategories":["mobility"],"quota":4,"confirmedDates":["2026-10-18","2026-10-25"],"fit":90,"fee":400},
-    {"id":"PLAYER-DEMO-B","name":"Talento Demo B","signed":true,"validated":true,"document":"AGREEMENT-DEMO-B · sin documento real","start":"2026-07-01","end":"2027-06-30","channels":["club-social","event"],"territories":["UK","ES"],"blockedCategories":[],"quota":5,"confirmedDates":["2026-10-18","2026-10-25"],"fit":85,"fee":200},
-    {"id":"PLAYER-DEMO-C","name":"Talento Demo C","signed":true,"validated":true,"document":"AGREEMENT-DEMO-C · sin documento real","start":"2026-07-01","end":"2026-10-10","channels":["club-social"],"territories":["UK"],"blockedCategories":[],"quota":3,"confirmedDates":["2026-10-18"],"fit":75,"fee":150},
-    {"id":"PLAYER-DEMO-D","name":"Talento Demo D","signed":false,"validated":false,"document":"AGREEMENT-DEMO-D · pendiente","start":"2026-07-01","end":"2027-06-30","channels":["club-social","player-social"],"territories":["UK","ES"],"blockedCategories":[],"quota":null,"confirmedDates":["2026-10-18"],"fit":95,"fee":100}
+    {
+      "id": "PLAYER-DEMO-A",
+      "name": "Talento Demo A",
+      "signed": true,
+      "validated": true,
+      "document": "AGREEMENT-DEMO-A · sin documento real",
+      "start": "2026-07-01",
+      "end": "2027-06-30",
+      "channels": [
+        "club-social",
+        "event"
+      ],
+      "territories": [
+        "UK",
+        "ES"
+      ],
+      "blockedCategories": [
+        "mobility"
+      ],
+      "quota": 4,
+      "confirmedDates": [
+        "2026-10-18",
+        "2026-10-25"
+      ],
+      "fit": 90,
+      "fee": 400,
+      "sportingAvailability": "available",
+      "commercialAvailabilityOverride": false,
+      "priorityReserve": 1
+    },
+    {
+      "id": "PLAYER-DEMO-B",
+      "name": "Talento Demo B",
+      "signed": true,
+      "validated": true,
+      "document": "AGREEMENT-DEMO-B · sin documento real",
+      "start": "2026-07-01",
+      "end": "2027-06-30",
+      "channels": [
+        "club-social",
+        "event"
+      ],
+      "territories": [
+        "UK",
+        "ES"
+      ],
+      "blockedCategories": [],
+      "quota": 5,
+      "confirmedDates": [
+        "2026-10-18",
+        "2026-10-25"
+      ],
+      "fit": 85,
+      "fee": 200,
+      "sportingAvailability": "injured",
+      "commercialAvailabilityOverride": true,
+      "priorityReserve": 1
+    },
+    {
+      "id": "PLAYER-DEMO-C",
+      "name": "Talento Demo C",
+      "signed": true,
+      "validated": true,
+      "document": "AGREEMENT-DEMO-C · sin documento real",
+      "start": "2026-07-01",
+      "end": "2026-10-10",
+      "channels": [
+        "club-social"
+      ],
+      "territories": [
+        "UK"
+      ],
+      "blockedCategories": [],
+      "quota": 3,
+      "confirmedDates": [
+        "2026-10-18"
+      ],
+      "fit": 75,
+      "fee": 150,
+      "sportingAvailability": "rehab",
+      "commercialAvailabilityOverride": true,
+      "priorityReserve": 0
+    },
+    {
+      "id": "PLAYER-DEMO-D",
+      "name": "Talento Demo D",
+      "signed": false,
+      "validated": false,
+      "document": "AGREEMENT-DEMO-D · pendiente",
+      "start": "2026-07-01",
+      "end": "2027-06-30",
+      "channels": [
+        "club-social",
+        "player-social"
+      ],
+      "territories": [
+        "UK",
+        "ES"
+      ],
+      "blockedCategories": [],
+      "quota": null,
+      "confirmedDates": [
+        "2026-10-18"
+      ],
+      "fit": 95,
+      "fee": 100,
+      "sportingAvailability": "sporting-unavailable",
+      "commercialAvailabilityOverride": false,
+      "priorityReserve": 1
+    }
   ],
   "appearances": [
-    {"id":"AP-DEMO-1","playerId":"PLAYER-DEMO-A","date":"2026-08-10","status":"completed","category":"retail","channel":"event","territory":"UK","owner":"partnerships","evidence":"EVIDENCE-DEMO-1"},
-    {"id":"AP-DEMO-2","playerId":"PLAYER-DEMO-A","date":"2026-09-01","status":"completed","category":"retail","channel":"club-social","territory":"UK","owner":"communications","evidence":"EVIDENCE-DEMO-2"},
-    {"id":"AP-DEMO-3","playerId":"PLAYER-DEMO-A","date":"2026-11-05","status":"reserved","category":"retail","channel":"event","territory":"UK","owner":"partnerships","evidence":null},
-    {"id":"AP-DEMO-4","playerId":"PLAYER-DEMO-B","date":"2026-09-10","status":"completed","category":"retail","channel":"club-social","territory":"UK","owner":"communications","evidence":"EVIDENCE-DEMO-4"}
+    {
+      "id": "AP-DEMO-1",
+      "playerId": "PLAYER-DEMO-A",
+      "date": "2026-08-10",
+      "status": "completed",
+      "category": "retail",
+      "channel": "event",
+      "territory": "UK",
+      "owner": "partnerships",
+      "evidence": "EVIDENCE-DEMO-1"
+    },
+    {
+      "id": "AP-DEMO-2",
+      "playerId": "PLAYER-DEMO-A",
+      "date": "2026-09-01",
+      "status": "completed",
+      "category": "retail",
+      "channel": "club-social",
+      "territory": "UK",
+      "owner": "communications",
+      "evidence": "EVIDENCE-DEMO-2"
+    },
+    {
+      "id": "AP-DEMO-3",
+      "playerId": "PLAYER-DEMO-A",
+      "date": "2026-11-05",
+      "status": "reserved",
+      "category": "retail",
+      "channel": "event",
+      "territory": "UK",
+      "owner": "partnerships",
+      "evidence": null
+    },
+    {
+      "id": "AP-DEMO-4",
+      "playerId": "PLAYER-DEMO-B",
+      "date": "2026-09-10",
+      "status": "completed",
+      "category": "retail",
+      "channel": "club-social",
+      "territory": "UK",
+      "owner": "communications",
+      "evidence": "EVIDENCE-DEMO-4"
+    }
   ],
   "posts": [
-    {"id":"POST-DEMO-1","playerId":"PLAYER-DEMO-A","account":"club","platform":"instagram","format":"video","theme":"behind-scenes","period":"previous","interactions":1000,"impressions":25000},
-    {"id":"POST-DEMO-2","playerId":"PLAYER-DEMO-A","account":"club","platform":"instagram","format":"video","theme":"behind-scenes","period":"current","interactions":2000,"impressions":40000},
-    {"id":"POST-DEMO-3","playerId":"PLAYER-DEMO-A","account":"player","platform":"instagram","format":"video","theme":"behind-scenes","period":"current","interactions":3000,"impressions":60000},
-    {"id":"POST-DEMO-4","playerId":"PLAYER-DEMO-B","account":"club","platform":"instagram","format":"video","theme":"community","period":"previous","interactions":600,"impressions":12000},
-    {"id":"POST-DEMO-5","playerId":"PLAYER-DEMO-B","account":"club","platform":"instagram","format":"video","theme":"community","period":"current","interactions":1200,"impressions":15000},
-    {"id":"POST-DEMO-6","playerId":"PLAYER-DEMO-C","account":"club","platform":"instagram","format":"image","theme":"matchday","period":"current","interactions":400,"impressions":null},
-    {"id":"POST-DEMO-7","playerId":"PLAYER-DEMO-D","account":"club","platform":"instagram","format":"video","theme":"community","period":"current","interactions":900,"impressions":10000},
-    {"id":"POST-DEMO-8","playerId":"PLAYER-DEMO-A","account":"club","platform":"tiktok","format":"video","theme":"behind-scenes","period":"current","interactions":5000,"impressions":100000},
-    {"id":"POST-DEMO-9","playerId":"PLAYER-DEMO-B","account":"club","platform":"instagram","format":"image","theme":"community","period":"current","interactions":200,"impressions":5000}
+    {
+      "id": "POST-DEMO-1",
+      "playerId": "PLAYER-DEMO-A",
+      "account": "club",
+      "platform": "instagram",
+      "format": "video",
+      "theme": "behind-scenes",
+      "period": "previous",
+      "interactions": 1000,
+      "impressions": 25000
+    },
+    {
+      "id": "POST-DEMO-2",
+      "playerId": "PLAYER-DEMO-A",
+      "account": "club",
+      "platform": "instagram",
+      "format": "video",
+      "theme": "behind-scenes",
+      "period": "current",
+      "interactions": 2000,
+      "impressions": 40000
+    },
+    {
+      "id": "POST-DEMO-3",
+      "playerId": "PLAYER-DEMO-A",
+      "account": "player",
+      "platform": "instagram",
+      "format": "video",
+      "theme": "behind-scenes",
+      "period": "current",
+      "interactions": 3000,
+      "impressions": 60000
+    },
+    {
+      "id": "POST-DEMO-4",
+      "playerId": "PLAYER-DEMO-B",
+      "account": "club",
+      "platform": "instagram",
+      "format": "video",
+      "theme": "community",
+      "period": "previous",
+      "interactions": 600,
+      "impressions": 12000
+    },
+    {
+      "id": "POST-DEMO-5",
+      "playerId": "PLAYER-DEMO-B",
+      "account": "club",
+      "platform": "instagram",
+      "format": "video",
+      "theme": "community",
+      "period": "current",
+      "interactions": 1200,
+      "impressions": 15000
+    },
+    {
+      "id": "POST-DEMO-6",
+      "playerId": "PLAYER-DEMO-C",
+      "account": "club",
+      "platform": "instagram",
+      "format": "image",
+      "theme": "matchday",
+      "period": "current",
+      "interactions": 400,
+      "impressions": null
+    },
+    {
+      "id": "POST-DEMO-7",
+      "playerId": "PLAYER-DEMO-D",
+      "account": "club",
+      "platform": "instagram",
+      "format": "video",
+      "theme": "community",
+      "period": "current",
+      "interactions": 900,
+      "impressions": 10000
+    },
+    {
+      "id": "POST-DEMO-8",
+      "playerId": "PLAYER-DEMO-A",
+      "account": "club",
+      "platform": "tiktok",
+      "format": "video",
+      "theme": "behind-scenes",
+      "period": "current",
+      "interactions": 5000,
+      "impressions": 100000
+    },
+    {
+      "id": "POST-DEMO-9",
+      "playerId": "PLAYER-DEMO-B",
+      "account": "club",
+      "platform": "instagram",
+      "format": "image",
+      "theme": "community",
+      "period": "current",
+      "interactions": 200,
+      "impressions": 5000
+    }
   ]
 }
