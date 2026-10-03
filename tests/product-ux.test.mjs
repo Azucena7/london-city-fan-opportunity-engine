@@ -191,7 +191,7 @@ test("global evidence claims stay consistent with current source availability", 
 });
 
 
-test("social sharing matches the current Fan Growth Engine product story", () => {
+test("social sharing matches the current AVELA product story", () => {
   const layout = read("src/app/layout.tsx");
   const card = read("src/app/linkedin-card/route.tsx");
   const og = read("src/app/opengraph-image.tsx");
