@@ -64,3 +64,39 @@
 .clubFitInline>div{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
 .clubFitInline b{padding:4px 6px;background:#f1f4ef;border:1px solid #dce3dd;color:#536158;font-size:9px;font-weight:800}
 @media(max-width:850px){.clubFitPanel{grid-template-columns:1fr}.clubFitFacts{justify-content:flex-start}}
+
+
+/* AVELA visual refresh */
+.shell{background:var(--product-bg);padding:0 34px 72px}
+.header{padding:72px 0 42px}
+.header h1{font-size:clamp(48px,6.6vw,84px);letter-spacing:-.065em}
+.header p{max-width:700px;color:var(--product-muted)}
+.engineState{background:transparent;border:0;border-left:1px solid var(--product-line);padding:8px 0 8px 22px}
+.radarSummary{background:transparent;border:0;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
+.radarSummary>div{padding:18px 18px 18px 0}
+.radarSummary>div+div{padding-left:18px;border-left:1px solid var(--product-line)}
+.clubFitPanel{background:#ecefdc;border:0;border-left:3px solid var(--product-accent);padding:20px 22px}
+.priorityMatch{position:relative;margin:34px 0 22px;border:0;background:var(--product-inverse);color:#f3f5f1;box-shadow:0 28px 70px rgba(16,33,27,.13)}
+.priorityMatch::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--product-accent)}
+.priorityTop{border-bottom-color:rgba(255,255,255,.12)}
+.priorityTop .eyebrow,.fixtureTopline,.priorityDate span{color:#aeb8b3}
+.priorityMain h2{color:#f4f5f2}
+.priorityMain h2 small{color:#8f9b94}
+.priorityMain>div>p{color:#aeb8b3}
+.priorityDecision{padding:0 0 0 26px;background:transparent;border-left:1px solid rgba(255,255,255,.14)}
+.priorityDecision span{color:var(--product-accent)}
+.priorityFooter{background:rgba(255,255,255,.035);border-top-color:rgba(255,255,255,.12)}
+.priorityFooter span{color:#9fa9a3}
+.priorityFooter strong{color:#eef1ee}
+.priorityFooter a{background:var(--product-accent);color:var(--product-ink)}
+.monitoringSection{padding-top:48px}
+.radarList{gap:0;border-top:1px solid var(--product-line)}
+.radarFixture{position:relative;gap:24px;padding:22px 0;background:transparent;border:0;border-bottom:1px solid var(--product-line)}
+.radarFixture::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:2px;background:transparent}
+.radarFixture:hover::before{background:var(--product-accent)}
+.radarFixture:hover{transform:translateX(3px)}
+.signalLenses b{border-radius:0;background:#e9eadf}
+.radarEvidence>span{border-radius:0}
+.womenLens{margin-top:42px;padding:42px 0}
+.principle{margin-top:12px}
+@media(max-width:850px){.priorityDecision{padding:22px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.14)}}

@@ -92,6 +92,8 @@ export function AccessCenter() {
 
   const activeMemberships = useMemo(() => new Set(memberships.map((membership) => membership.club_id)), [memberships]);
   const availableClubs = clubs.filter((club) => !activeMemberships.has(club.id));
+  const hasMembership = memberships.length > 0;
+  const hasPendingRequest = requests.some((request) => request.status === "pending");
 
   async function signUp() {
     setBusy(true);
@@ -188,6 +190,18 @@ export function AccessCenter() {
         </div>
       </header>
 
+      <div className={styles.accessFlow} aria-label="Secure access flow">
+        <div className={authenticated ? styles.flowDone : styles.flowCurrent}>
+          <span>01</span><strong>Identity</strong><small>{authenticated ? "Confirmed account" : "Create or sign in"}</small>
+        </div>
+        <div className={hasMembership ? styles.flowDone : authenticated ? styles.flowCurrent : ""}>
+          <span>02</span><strong>Club membership</strong><small>{hasMembership ? "Active membership" : hasPendingRequest ? "Awaiting club review" : "Requires club approval"}</small>
+        </div>
+        <div className={hasMembership ? styles.flowCurrent : ""}>
+          <span>03</span><strong>Workspace</strong><small>{hasMembership ? "Club data available" : "Remains locked"}</small>
+        </div>
+      </div>
+
       {!authenticated ? (
         <div className={styles.authGrid}>
           <article>
@@ -209,6 +223,14 @@ export function AccessCenter() {
         </div>
       ) : (
         <>
+          {hasMembership ? (
+            <div className={styles.accessSuccess}>
+              <span>Workspace unlocked</span>
+              <strong>You have an active club membership.</strong>
+              <p>Authentication established identity; the membership now controls which club workspace and actions you can access.</p>
+            </div>
+          ) : null}
+
           <div className={styles.accountBar}>
             <div><span>Signed in as</span><strong>{email}</strong></div>
             <button type="button" onClick={() => void signOut()}>Sign out</button>

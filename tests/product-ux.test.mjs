@@ -248,7 +248,7 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
   assert.match(demo, /Open campaign builder/);
   assert.match(page, /getCurrentProductOpportunity/);
   assert.match(page, /campaignPlans/);
-  assert.match(nav, /Guided demo/);
+  assert.match(nav, /label: "Demo"/);
   assert.match(nav, /\/app\/demo/);
 });
 
@@ -431,7 +431,7 @@ test("pilot access separates identity from club membership and supports admin ap
   assert.match(approve, /Authentication required/);
 
   assert.match(nav, /href: "\/app\/access"/);
-  assert.match(nav, /label: "Access"/);
+  assert.match(nav, /label: "Team"/);
 
   assert.match(migration, /create table if not exists public\.club_access_requests/);
   assert.match(migration, /security invoker/);
@@ -459,9 +459,9 @@ test("club setup context differentiates the engine from replacement CRM and gene
   assert.match(draftRoute, /Respect this club must-avoid rule/);
 
   assert.match(home, /Growth intelligence for women’s football/);
-  assert.match(home, /Works with your existing stack/);
-  assert.match(home, /Women’s-football signal layer/);
-  assert.match(home, /growth-intelligence layer/);
+  assert.match(home, /A decision layer above the club stack/);
+  assert.match(home, /Women’s-football signal layer|women’s-football signal layer/i);
+  assert.match(home, /growth-intelligence layer|decision layer/i);
 });
 
 test("club setup persists reusable fixture, channel, objective, brand and approval context", () => {
@@ -614,8 +614,9 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /specific campaign recipe is locked/);
   assert.match(page, /CampaignCreditBuilder/);
   assert.match(page, /fixtureId=\{fixture\.id\}/);
-  assert.match(nav, /60/);
-  assert.match(nav, /credits/);
+  assert.match(nav, /href: "\/app\/credits"/);
+  assert.match(nav, /label: "Credits"/);
+  assert.doesNotMatch(nav, /<strong>60<\/strong> credits/);
 });
 
 test("match plan closes with a simple review and handoff gate", () => {
@@ -682,11 +683,11 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   const config = read("next.config.mjs");
   const liveCase = read("src/components/LondonCityCase.tsx");
   assert.match(home, /MarketingNav/);
-  assert.match(home, /See the live case/);
+  assert.match(home, /See AVELA thinking in public/);
   assert.match(home, /href="\/live\/london-city"/);
   assert.match(marketingNav, /Open app/);
   assert.match(marketingNav, /\/app\/matches/);
-  assert.match(appNav, /Product site/);
+  assert.match(appNav, /AVELA\.com/);
   assert.match(appNav, /\/app\/learning/);
   assert.match(config, /source: "\/london-city", destination: "\/live\/london-city"/);
   assert.match(liveCase, /MarketingNav/);
@@ -768,9 +769,9 @@ test("product and analyst branding are intentionally separated", () => {
   const productNav = read("src/components/ProductJourneyNav.tsx");
   const analystNav = read("src/components/NavTabs.tsx");
   assert.match(productNav, /AVELA/);
-  assert.match(productNav, /Matches/);
+  assert.match(productNav, /Radar/);
   assert.match(productNav, /Learning/);
-  assert.match(productNav, /Product site/);
+  assert.match(productNav, /AVELA\.com/);
   assert.doesNotMatch(productNav, /Morning brief/);
   assert.doesNotMatch(productNav, /Decision Room/);
   assert.match(analystNav, /LONDON CITY \/ CASE/);
@@ -1021,10 +1022,59 @@ test("pilot weekly example reads the current product opportunity", () => {
 });
 
 
+test("AVELA commercial home uses an editorial product-theatre identity with purposeful motion", () => {
+  const page = read("src/app/page.tsx");
+  const homeCss = read("src/app/commercial-home.module.css");
+  const motion = read("src/components/CommercialSignalStage.tsx");
+  const motionCss = read("src/components/CommercialSignalStage.module.css");
+  const productSystem = read("src/app/product-system.css");
+  const appNav = read("src/components/ProductJourneyNav.tsx");
+
+  assert.match(page, /Know where to act before the moment passes/);
+  assert.match(page, /Not another CRM/);
+  assert.match(page, /The missing layer/);
+  assert.match(page, /CommercialSignalStage/);
+  assert.match(page, /See what AVELA saw before the result was known/);
+
+  assert.match(motion, /Fixture → decision → action/);
+  assert.match(motion, /Opportunity/);
+  assert.match(motion, /Recommended play/);
+  assert.match(motionCss, /@keyframes drift/);
+  assert.match(motionCss, /prefers-reduced-motion:no-preference/);
+
+  assert.match(homeCss, /--cream:#f4f1e8/);
+  assert.match(homeCss, /--lime:#c7ea3a/);
+  assert.match(homeCss, /productTheatre/);
+  assert.match(homeCss, /liveProof/);
+
+  assert.match(productSystem, /--product-space-xl/);
+  assert.match(productSystem, /--product-orange/);
+  assert.match(appNav, /label: "Radar"/);
+  assert.match(appNav, /label: "Team"/);
+  assert.doesNotMatch(appNav, /<strong>60<\/strong> credits/);
+});
+
+test("club UX exposes clear setup, access and campaign next-step flows", () => {
+  const setup = read("src/components/ClubSetup.tsx");
+  const access = read("src/components/AccessCenter.tsx");
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const learningCss = read("src/app/results/results.module.css");
+
+  assert.match(setup, /Club setup progress/);
+  assert.match(setup, /Save and use for next fixture/);
+  assert.match(access, /Secure access flow/);
+  assert.match(access, /Workspace unlocked/);
+  assert.match(access, /Authentication established identity/);
+  assert.match(builder, /Do next/);
+  assert.match(builder, /Finish the campaign scope and mark it ready for review/);
+  assert.match(builder, /Nothing is published or spent from this workspace/);
+  assert.match(learningCss, /AVELA learning visual refresh/);
+});
+
 test("homepage sells the product with demo conversion and transparent packages", () => {
   const page = read("src/app/page.tsx");
   assert.match(page, /Request a demo/);
-  assert.match(page, /Pricing/);
+  assert.match(page, /Start small/);
   assert.match(page, /£4,500/);
   assert.match(page, /£1,500/);
   assert.match(page, /£3,000/);
