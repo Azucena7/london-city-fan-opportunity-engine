@@ -1192,3 +1192,19 @@ test("Opportunity Brief reads like an executive decision brief", () => {
   assert.match(css, /executiveStrip/);
   assert.match(css, /briefDecision/);
 });
+
+
+test("commercial case study leads with time-stamped prediction versus observable reality", () => {
+  const story = read("src/components/LocalizedStoryPage.tsx");
+  const css = read("src/app/globals.css");
+  assert.match(story, /BEFORE THE CLUB ANNOUNCED IT/);
+  assert.match(story, /AVELA SAW/);
+  assert.match(story, /LONDON CITY ANNOUNCED/);
+  assert.match(story, /3<\/b>/);
+  assert.match(story, /WHAT IT DOES SHOW/);
+  assert.match(story, /WHAT IT DOES NOT SHOW/);
+  assert.match(story, /Open the full evidence trail/);
+  assert.match(story, /AVELA · London City Live Proof/);
+  assert.match(css, /predictionProofFlow/);
+  assert.match(css, /predictionProofBoundary/);
+});
