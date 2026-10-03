@@ -30,7 +30,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
 
   const campaign = campaignPlans.campaigns.find((item) => item.fixtureId === fixtureId) ?? null;
   const clubContext = await getCurrentClubOperatingContext();
-  const clubFit = buildOpportunityRadar([fixtureId], clubContext)[0]?.clubFit ?? null;
+  const radarItem = buildOpportunityRadar([fixtureId], clubContext)[0] ?? null;
+  const clubFit = radarItem?.clubFit ?? null;
   const defaults = getCurrentImpactDefaults(fixtureId);
   const actions = campaign?.schedule.filter((item) => item.state !== "complete").slice(0, 3) ?? [];
   const approvals = campaign?.approvals.filter((item) => item.state !== "ready") ?? [];
@@ -106,6 +107,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </div>
       </section>
 
+      <section className={styles.executiveStrip} aria-label="Executive opportunity summary">
+        <article><span>Opportunity score</span><strong>{radarItem?.opportunityScore ?? "—"}</strong><small>{radarItem?.opportunityLabel ?? "Under review"}</small></article>
+        <article><span>Decision state</span><strong>{radarItem?.radarState ?? "Review"}</strong><small>{radarItem?.urgency ?? "Watch"} urgency</small></article>
+        <article><span>Evidence</span><strong>{radarItem?.materialSignalCount ?? 0} material</strong><small>{radarItem?.signalCount ?? 0} total signals</small></article>
+        <article><span>Signal movement</span><strong>{radarItem?.signalChangeLabel ?? "No recent movement"}</strong><small>Last 7 days</small></article>
+      </section>
+
       <section className={styles.opportunityBrief} aria-label="Opportunity brief">
         <div className={styles.briefIntro}>
           <span className={styles.eyebrow}>Opportunity brief</span>
@@ -118,8 +126,14 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
 
         <div className={styles.briefGrid}>
           <article>
+            <span>Commercial objective</span>
+            <strong>{campaign?.objective.en ?? live.opportunity}</strong>
+            <small>{live.measurementEvidence.label} · {live.measurementEvidence.detail}</small>
+          </article>
+          <article>
             <span>Why now</span>
             <strong>{live.whyNow}</strong>
+            <small>{live.confidence.rationale}</small>
           </article>
           <article>
             <span>Audience to unlock</span>
@@ -129,12 +143,26 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <article>
             <span>Recommended play</span>
             <strong>{live.recommendedAction}</strong>
+            <small>Next owner · {live.nextAction.owner} · {live.nextAction.deadline}</small>
+          </article>
+          <article>
+            <span>Evidence used</span>
+            <strong>{live.liveSignals.length ? live.liveSignals.slice(0, 3).map((signal) => signal.title).join(" · ") : "No fixture-specific sourced signal yet"}</strong>
+            <small>{live.liveSignals.length ? "Open the signal review below to inspect sources or run a what-if." : "Recommendation should remain under review until evidence improves."}</small>
           </article>
           <article className={styles.briefRisk}>
             <span>Primary risk / blocker</span>
             <strong>{live.primaryBlocker}</strong>
             <small>{approvals.length ? `${approvals.length} unresolved approval gate${approvals.length === 1 ? "" : "s"}` : "No blocking approval gate currently recorded"}</small>
           </article>
+        </div>
+
+        <div className={styles.briefDecision}>
+          <div>
+            <span>Decision support, not autopilot</span>
+            <strong>{live.decisionState === "HOLD" ? "Do not launch yet." : "Ready for human review."}</strong>
+          </div>
+          <p>{live.decisionState === "HOLD" ? live.primaryBlocker : "The evidence supports review, but club approval still controls activation."}</p>
         </div>
 
         <details className={styles.changeCourse}>
