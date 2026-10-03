@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import { calendar, currentState } from "@/lib/data";
+import { OpportunityExplorer } from "@/components/OpportunityExplorer";
+import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
@@ -37,6 +38,31 @@ export default async function MatchesPage() {
   const radarWithoutCurrent = priority
     ? radar.filter((item) => item.fixtureId !== priority.fixtureId)
     : radar;
+
+  const explorerItems = radar.map((item) => {
+    const campaign = campaignPlans.campaigns.find((entry) => entry.fixtureId === item.fixtureId) ?? null;
+    const approvalsReady = campaign?.approvals.filter((approval) => approval.state === "ready").length ?? 0;
+    const channels = Array.from(new Set((campaign?.activations ?? []).map((activation) => activation.channel)));
+    return {
+      fixtureId: item.fixtureId,
+      opponent: item.opponent,
+      date: item.date,
+      daysToFixture: item.daysToFixture,
+      opportunityScore: item.opportunityScore,
+      opportunity: item.opportunity,
+      confidence: item.confidence,
+      urgency: item.urgency,
+      radarState: item.radarState,
+      materialSignalCount: item.materialSignalCount,
+      recentMaterialSignalCount: item.recentMaterialSignalCount,
+      signalCount: item.signalCount,
+      decisionState: item.decisionState,
+      approvalsReady,
+      approvalsTotal: campaign?.approvals.length ?? 0,
+      activations: campaign?.activations.length ?? 0,
+      channels
+    };
+  });
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -138,6 +164,8 @@ export default async function MatchesPage() {
           </div>
         </section>
       ) : null}
+
+      <OpportunityExplorer items={explorerItems} />
 
       <section className={styles.monitoringSection} aria-label="Upcoming fixture opportunity radar">
         <div className={styles.monitoringHead}>
