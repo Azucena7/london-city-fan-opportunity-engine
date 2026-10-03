@@ -514,5 +514,203 @@
       "budget": 1400,
       "playerNeed": 2
     }
+  ],
+  "playerMomentum": [
+    {
+      "playerId": "PLAYER-DEMO-A",
+      "observedAt": "2026-10-02",
+      "sporting": {
+        "value": 92,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic recent sporting momentum"
+      },
+      "attention": {
+        "value": 88,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic social/content attention"
+      },
+      "international": {
+        "value": 76,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic international context"
+      },
+      "commercial": {
+        "value": 84,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic commercial response"
+      }
+    },
+    {
+      "playerId": "PLAYER-DEMO-B",
+      "observedAt": "2026-10-02",
+      "sporting": {
+        "value": null,
+        "direction": "unknown",
+        "state": "missing",
+        "source": "No sporting score while unavailable"
+      },
+      "attention": {
+        "value": 81,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic social/content attention"
+      },
+      "international": {
+        "value": 90,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic international context"
+      },
+      "commercial": {
+        "value": 79,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic commercial response"
+      }
+    },
+    {
+      "playerId": "PLAYER-DEMO-C",
+      "observedAt": "2026-10-02",
+      "sporting": {
+        "value": null,
+        "direction": "unknown",
+        "state": "missing",
+        "source": "No sporting score during rehab"
+      },
+      "attention": {
+        "value": 70,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic social/content attention"
+      },
+      "international": {
+        "value": 64,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic international context"
+      },
+      "commercial": {
+        "value": 73,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic commercial response"
+      }
+    },
+    {
+      "playerId": "PLAYER-DEMO-D",
+      "observedAt": "2026-10-02",
+      "sporting": {
+        "value": 87,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic recent sporting momentum"
+      },
+      "attention": {
+        "value": 91,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic social/content attention"
+      },
+      "international": {
+        "value": 82,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic international context"
+      },
+      "commercial": {
+        "value": 75,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic commercial response"
+      }
+    },
+    {
+      "playerId": "PLAYER-DEMO-E",
+      "observedAt": "2026-10-02",
+      "sporting": {
+        "value": 78,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic recent sporting momentum"
+      },
+      "attention": {
+        "value": 72,
+        "direction": "down",
+        "state": "synthetic-demo",
+        "source": "Synthetic social/content attention"
+      },
+      "international": {
+        "value": 86,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic international context"
+      },
+      "commercial": {
+        "value": 71,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic commercial response"
+      }
+    },
+    {
+      "playerId": "PLAYER-DEMO-F",
+      "observedAt": "2026-10-02",
+      "sporting": {
+        "value": 69,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic recent sporting momentum"
+      },
+      "attention": {
+        "value": 77,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic social/content attention"
+      },
+      "international": {
+        "value": 58,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic international context"
+      },
+      "commercial": {
+        "value": 80,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic commercial response"
+      }
+    },
+    {
+      "playerId": "PLAYER-DEMO-G",
+      "observedAt": "2026-10-02",
+      "sporting": {
+        "value": 83,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic recent sporting momentum"
+      },
+      "attention": {
+        "value": 85,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic social/content attention"
+      },
+      "international": {
+        "value": 80,
+        "direction": "stable",
+        "state": "synthetic-demo",
+        "source": "Synthetic international context"
+      },
+      "commercial": {
+        "value": 89,
+        "direction": "up",
+        "state": "synthetic-demo",
+        "source": "Synthetic commercial response"
+      }
+    }
   ]
 }
