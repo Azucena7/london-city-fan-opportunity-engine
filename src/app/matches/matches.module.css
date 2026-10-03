@@ -100,3 +100,18 @@
 .womenLens{margin-top:42px;padding:42px 0}
 .principle{margin-top:12px}
 @media(max-width:850px){.priorityDecision{padding:22px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.14)}}
+
+
+@media(max-width:620px){
+  .shell{padding:0 14px 44px}
+  .header{padding-top:42px}
+  .header h1{font-size:clamp(44px,14vw,64px)}
+  .fixtureTopline{flex-direction:column;gap:4px}
+  .priorityTop{padding-top:20px}
+  .priorityMain{gap:20px}
+  .priorityFooter a{width:100%;text-align:center}
+  .radarFixture{grid-template-columns:28px 1fr;gap:14px}
+  .radarMatch h3{font-size:19px}
+  .radarOpportunity strong{font-size:14px}
+  .clubFitFacts span{min-width:0;flex:1 1 130px}
+}
