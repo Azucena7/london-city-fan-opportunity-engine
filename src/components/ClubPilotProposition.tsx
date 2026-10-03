@@ -43,7 +43,7 @@ export function ClubPilotProposition() {
       <p>{es ? "Conectar calendario, contexto y señales de afición para elegir qué probar, quién lo aprueba y cómo aprender del resultado." : "Connect the calendar, context and supporter signals to choose what to test, who approves it and how to learn from the outcome."}</p>
       <p className="commercialScope">{es ? "90 días · 6 partidos propuestos · un objetivo prioritario" : "90 days · 6 proposed fixtures · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
-      <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar la conversación →" : "Prepare the discussion →"}</a><Link href="/live/london-city">{es ? "Ver el caso London City →" : "View the London City example →"}</Link></div>
+      <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar la conversación →" : "Prepare the discussion →"}</a></div>
       <p><Link href="/club-demo">{es ? "Probar el espacio de cliente con datos de prueba →" : "Try the client workspace with test data →"}</Link></p>
     </header>
 
@@ -76,7 +76,7 @@ export function ClubPilotProposition() {
     </section>
 
     <section className="commercialPanel">
-      <h2>{es ? "Dos ejemplos, dos estados distintos" : "Two examples, two different states"}</h2>
+      <p className="eyebrow">{es ? "DEMO INDEPENDIENTE" : "INDEPENDENT DEMO"}</p><h2>{es ? "London City: ejemplo de cómo funciona el método" : "London City: an example of how the method works"}</h2>
       <div className="commercialTwoColumns"><article><h3>Everton</h3><p>{es ? "Una propuesta de repetición pendiente de audiencia, aprobación y tracking. No está activada." : "A repeat-visit proposal awaiting audience, approval and tracking. Not activated."}</p><Link href="/live/london-city/everton">{es ? "Ver decisión propuesta →" : "View the proposed decision →"}</Link></article><article><h3>Brighton</h3><p>{es ? "Una coincidencia entre hipótesis y anuncio público. Ejecución e impacto comercial aún no verificados." : "Alignment between a hypothesis and a public announcement. Delivery and commercial impact remain unverified."}</p><Link href="/live/london-city/brighton">{es ? "Ver comparación histórica →" : "View the historical comparison →"}</Link></article></div>
       <p>{es ? "London City es un caso de demostración independiente. No implica que el club sea cliente, haya visto el prototipo o lo haya utilizado." : "London City is an independent demonstration case. It does not imply the club is a customer or has seen or used the prototype."}</p>
     </section>
