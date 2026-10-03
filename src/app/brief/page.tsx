@@ -17,7 +17,7 @@ export default function BriefPage() {
 
   return (
     <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="brief" />
+      <ProductJourneyNav active="campaigns" />
 
       <header className={styles.hero}>
         <div>

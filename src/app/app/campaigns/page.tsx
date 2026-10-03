@@ -14,7 +14,7 @@ export default function CampaignsPage() {
 
   return (
     <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="brief" />
+      <ProductJourneyNav active="campaigns" />
       <header className={styles.header}>
         <div>
           <span className={styles.eyebrow}>AVELA · Campaigns</span>
