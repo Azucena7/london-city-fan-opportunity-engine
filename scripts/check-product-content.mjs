@@ -34,7 +34,7 @@ if (!sources.includes("Public demo evidence") || !sources.includes("Requires acc
   throw new Error("Sources must keep permission and evidence-state boundaries explicit");
 }
 
-if (!londonCity.includes("PUBLIC DEMO") || !londonCity.includes("not evidence that the club saw or used AVELA")) {
+if (!londonCity.includes("PUBLIC DEMO") || !londonCity.includes("Alignment never implies the club saw or used this product.")) {
   throw new Error("London City public demo must preserve independent-proof framing");
 }
 
