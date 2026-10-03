@@ -29,7 +29,7 @@ export async function GET() {
                 borderRadius: "3px"
               }}
             />
-            FAN GROWTH ENGINE
+            AVELA
           </div>
 
           <div style={{ display: "flex", marginTop: "62px", color: "#526D00", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em" }}>
