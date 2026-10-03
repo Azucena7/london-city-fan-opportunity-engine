@@ -1,5 +1,5 @@
 .nav{
-  width:min(1240px,calc(100% - 48px));
+  width:min(1080px,calc(100% - 48px));
   margin:0 auto;
   padding:16px 0;
   display:grid;
@@ -35,4 +35,4 @@
   .actions{grid-column:2;grid-row:1}
   .login{display:none}
 }
-@media(max-width:560px){.nav{width:min(100% - 28px,1240px)}.demo{padding:9px 11px}}
+@media(max-width:560px){.nav{width:min(100% - 28px,1080px)}.demo{padding:9px 11px}}
