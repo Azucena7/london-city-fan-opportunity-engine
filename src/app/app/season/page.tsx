@@ -4,7 +4,7 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
-import { demoAppearances, demoPlayers, playerCapacity } from "@/lib/clubStrategy";
+import { demoAppearances, demoPlayerMomentum, demoPlayers, playerCapacity, playerMomentumScore } from "@/lib/clubStrategy";
 import styles from "./season.module.css";
 
 export const metadata: Metadata = {
@@ -49,7 +49,8 @@ export default function SeasonIntelligencePage() {
   const totalAttendance = measuredAttendance.reduce((sum,row) => sum + (row.attendance ?? 0),0);
   const avgAttendance = measuredAttendance.length ? Math.round(totalAttendance / measuredAttendance.length) : null;
   const measuredOutcomes = fixtureRows.filter((row) => row.measuredOutcome).length;
-  const playerUsage = demoPlayers.map((player) => ({ player, capacity: playerCapacity(player, demoAppearances) }));
+  const playerUsage = demoPlayers.map((player) => ({ player, capacity: playerCapacity(player, demoAppearances), momentum: playerMomentumScore(player.id, demoPlayerMomentum) }))
+    .sort((a,b) => (b.momentum.score ?? -1) - (a.momentum.score ?? -1));
   const totalPlayerUses = playerUsage.reduce((sum, item) => sum + item.capacity.used, 0);
   const scoredFixtures = fixtureRows.filter((row) => row.score !== null);
 
@@ -164,13 +165,16 @@ export default function SeasonIntelligencePage() {
         <div className={styles.playerUsageGrid}>
           {playerUsage.map(({ player, capacity }) => (
             <article key={player.id}>
-              <div><span>{player.name}</span><strong>{capacity.used}{player.quota !== null ? `/${player.quota}` : ""}</strong></div>
-              <i><em style={{ width: player.quota ? `${Math.min(100, (capacity.used / player.quota) * 100)}%` : "0%" }} /></i>
-              <small>{capacity.remaining === null ? "Quota unknown" : `${capacity.remaining} appearances remaining`} · £{player.fee} per appearance</small>
+              <div><span>{player.name}</span><strong>{momentum.score !== null ? `${momentum.score.toFixed(0)} momentum` : "No momentum score"}</strong></div>
+              <div className={styles.playerTwinBars}>
+                <span><b>Usage</b><i><em style={{ width: player.quota ? `${Math.min(100, (capacity.used / player.quota) * 100)}%` : "0%" }} /></i></span>
+                <span><b>Momentum</b><i><em style={{ width: `${momentum.score ?? 0}%` }} /></i></span>
+              </div>
+              <small>{capacity.remaining === null ? "Quota unknown" : `${capacity.remaining} appearances remaining`} · £{player.fee} per appearance · {momentum.availableDimensions}/4 momentum inputs</small>
             </article>
           ))}
         </div>
-        <p className={styles.note}>{totalPlayerUses} completed/reserved commercial appearances recorded in the synthetic planning pool. Usage is not performance.</p>
+        <p className={styles.note}>{totalPlayerUses} completed/reserved commercial appearances recorded in the synthetic planning pool. Momentum and usage are different signals: high momentum does not automatically mean “use now”.</p>
       </section>
 
       <section className={styles.patterns}>
