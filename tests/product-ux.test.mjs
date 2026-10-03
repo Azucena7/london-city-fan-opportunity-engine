@@ -1054,6 +1054,23 @@ test("AVELA commercial home uses an editorial product-theatre identity with purp
   assert.doesNotMatch(appNav, /<strong>60<\/strong> credits/);
 });
 
+test("club UX exposes clear setup, access and campaign next-step flows", () => {
+  const setup = read("src/components/ClubSetup.tsx");
+  const access = read("src/components/AccessCenter.tsx");
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const learningCss = read("src/app/results/results.module.css");
+
+  assert.match(setup, /Club setup progress/);
+  assert.match(setup, /Save and use for next fixture/);
+  assert.match(access, /Secure access flow/);
+  assert.match(access, /Workspace unlocked/);
+  assert.match(access, /Authentication established identity/);
+  assert.match(builder, /Do next/);
+  assert.match(builder, /Finish the campaign scope and mark it ready for review/);
+  assert.match(builder, /Nothing is published or spent from this workspace/);
+  assert.match(learningCss, /AVELA learning visual refresh/);
+});
+
 test("homepage sells the product with demo conversion and transparent packages", () => {
   const page = read("src/app/page.tsx");
   assert.match(page, /Request a demo/);
