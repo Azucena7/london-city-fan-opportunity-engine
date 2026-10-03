@@ -28,3 +28,18 @@
 .readyAction>span{max-width:360px;color:#c4cec7!important;font-size:11px!important;text-transform:none!important;letter-spacing:0!important}
 .readyAction button{margin-top:0!important}
 @media(max-width:800px){.setupJourney{grid-template-columns:1fr 1fr}.setupJourney>div{border-bottom:1px solid var(--product-line)}.setupJourney>div+div{border-left:0;padding-left:0}.setupJourney>div:nth-child(even){padding-left:14px;border-left:1px solid var(--product-line)}.readyAction{align-items:flex-start;flex-direction:column}}
+
+
+.loadingState{width:min(1240px,100%);margin:0 auto;padding:80px 0;min-height:360px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--product-line)}
+.loadingState>span{font-size:10px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#748078}
+.loadingState>strong{display:block;margin-top:10px;font-size:clamp(28px,4vw,46px);letter-spacing:-.04em}
+.loadingState>p{max-width:620px;margin:10px 0 0;color:#657168;line-height:1.5}
+@media(max-width:800px){
+  .wrap,.empty,.loadingState{width:min(100% - 28px,1240px)}
+  .head h1,.empty h1{font-size:clamp(38px,11vw,56px)}
+  .setupJourney{overflow-x:auto;grid-template-columns:repeat(5,minmax(150px,1fr));scrollbar-width:none}
+  .setupJourney::-webkit-scrollbar{display:none}
+  .grid article,.grid article:nth-child(even){padding:22px 0}
+  .clubBar select,.grid select,.grid input,.grid textarea{width:100%}
+  .chips button{min-height:44px}
+}
