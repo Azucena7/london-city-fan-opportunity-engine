@@ -4,7 +4,7 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import styles from "./credits.module.css";
 
 export const metadata: Metadata = {
-  title: "Credits · Fan Growth Engine",
+  title: "Credits · AVELA",
   description: "Club credit commitments, consumption and release history."
 };
 
