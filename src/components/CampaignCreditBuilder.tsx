@@ -386,6 +386,17 @@ export function CampaignCreditBuilder({
   const canReview = !explorer && remaining >= 0;
   const canReserve = canReview && unresolvedGates === 0 && workspaceStatus === "review-ready" && !hasReservation;
   const canPrepareLaunch = !explorer && hasReservation && unresolvedGates === 0;
+  const nextMove = launchHandoffReady
+    ? "Hand off to the connected or manual execution route."
+    : hasReservation
+      ? "Prepare the external launch handoff."
+      : remaining < 0
+        ? `Reduce scope or add ${Math.abs(remaining)} credits.`
+        : unresolvedGates > 0
+          ? `Resolve ${unresolvedGates} approval gate${unresolvedGates === 1 ? "" : "s"}.`
+          : workspaceStatus === "review-ready"
+            ? `Reserve ${reservationRequired} credits to lock this scope.`
+            : "Finish the campaign scope and mark it ready for review.";
 
   function toggle(id: string) {
     if (explorer || hasReservation) return;
@@ -653,6 +664,12 @@ export function CampaignCreditBuilder({
                 </small>
               </article>
             ))}
+          </div>
+
+          <div className={styles.nextMove}>
+            <span>Do next</span>
+            <strong>{nextMove}</strong>
+            <small>AVELA advances one explicit stage at a time. Nothing is published or spent from this workspace.</small>
           </div>
 
           <div className={styles.calculator}>
