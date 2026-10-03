@@ -1,6 +1,6 @@
 # Club Operations: producto y contratación modular
 
-Propuesta de producto, 1 octubre 2026. No es una tarifa aprobada, una licencia activa ni un contrato. La web actual es una demo pública con datos sintéticos; no es todavía un espacio privado de producción.
+Propuesta de producto, 1 octubre 2026. No es una tarifa aprobada, una licencia activa ni un contrato. La aplicación actual combina una demo pública guiada con superficies operativas de AVELA. El acceso privado de producción sigue condicionado a autenticación, permisos, persistencia y validación con un club.
 
 ## Qué vendemos
 
@@ -69,7 +69,7 @@ Pendiente confirmar contrato del club, autorización para nuestra aplicación y 
 
 ## Estado de la entrega y recorrido de demo
 
-En `/club-demo/operations`: Marca y recursos → importar JSON sintético descargado; Kits de campaña → cambiar campaña sin alterar marca; Contenidos y tendencias → filtrar cuenta/canal/formato/tasa; Talento y derechos → comprobar acuerdo, ajustar solicitud/pesos, usar rol Aprobación, reservar y observar cupo/colisión; Plan → generar acción, aprobar, Estudio → generar pieza con contexto de campaña y talento reservado; cambiar kit → aprobación invalidada; Licencia y módulos → Base, añadir módulos y descargar alcance.
+El recorrido canónico vive en `/app`: Home → Radar → Opportunity Brief → Campaigns → Player Assets → Learning. `/app/demo` ofrece el recorrido guiado con datos de demostración. La planificación de talento y derechos se concentra en Player Assets, con disponibilidad deportiva/comercial, derechos, cupos, coste de oportunidad, momentum y optimización de packs.
 
 Fuentes: `data/seed/club-strategy-demo.json` contiene cuatro talentos, cuatro apariciones y nueve posts inventados. Ventanas de comparación de 14 días, muestras pequeñas sin tendencia inferencial. No son datos de London City ni de Blinkfire. La tasa es suma de interacciones / suma de impresiones; sin denominador completo, tasa desconocida. La variación es en puntos porcentuales, no crecimiento de ventas.
 

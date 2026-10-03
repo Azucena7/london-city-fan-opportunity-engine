@@ -19,19 +19,28 @@ The club-facing product is designed around one simple operating loop:
 ## Product routes
 
 ### Club-facing flow
-- **/** — commercial product home.
-- **/matches** — upcoming home fixtures and automatic monitoring.
-- **/matches/[fixtureId]** — single match plan: recommendation, activation draft, signals, evidence, impact and handoff review.
-- **/results** — Learning: measured post-match evidence and what changes next.
+- **/app** — operational Home: what needs attention, why, blockers and next action.
+- **/app/matches** — Radar for upcoming home fixtures and automatic opportunity monitoring.
+- **/app/matches/[fixtureId]** — Opportunity Brief: recommendation, activation draft, signals, evidence, impact and handoff review.
+- **/app/campaigns** — fixture-led and seasonal campaign planning.
+- **/app/player-assets** — player asset availability, rights, usage and pack optimisation.
+- **/app/season** — season-level opportunity and activation intelligence.
+- **/app/learning** — measured post-match evidence and what changes next.
+- **/app/sources** — intelligence source state and connector readiness.
+- **/app/executive** — presentation-ready executive view.
+- **/app/demo** — guided product demo.
 
 ### Commercial / implementation
+- **/** — commercial product home.
+- **/for-clubs** — club proposition and pilot discussion.
 - **/pilot** — 90-day / 6-fixture Fan Growth Pilot proposition.
 - **/pilot/operating-pack** — onboarding, data trust, roles and measurement design.
 - **/pilot/rehearsal** — synthetic end-to-end rehearsal of the privacy-safe club-data path.
 - **/cases** — product use cases.
-- **/demo** — guided product story.
+- **/case-study** — public proof and method case study.
+- **/live/london-city** — independent London City demonstration.
 
-Legacy decision surfaces remain available for compatibility and analyst inspection, but are not part of the primary club journey. The deeper London City routes remain available for fixture, territory, signal, source, experience and operational detail.
+Historical URLs are preserved only as permanent redirects into the canonical AVELA routes. They are not maintained as parallel product surfaces.
 
 ## Commercial entry product
 
@@ -73,18 +82,6 @@ Core sources:
 - selected public demand and market signals.
 
 Public and editorial data live under `data/seed` and `data/live`. Authorised CRM/ticketing exports remain outside the repository and are processed locally. The repository stores only aggregate fixture summaries and repeat-cohort counts; supporter-, order- and ticket-level hashes are discarded before the live product state is written. Never commit credentials or raw club exports.
-
-## London City intelligence engine
-
-The underlying live prototype currently includes:
-
-- **Today** — current decision, next home fixture, material changes and marketing response.
-- **Calendar** — official schedule, results, fixture dossiers, attendance baselines and demand measurement.
-- **Territories** — spatial opportunity, ranked evidence and access.
-- **Signals** — deliberately narrow attention and demand signals.
-- **Campaign plans** — sourced signals translated into approval-ready campaign drafts.
-- **Measurement** — reach → engagement → intent → purchase/scan → repeat.
-- **Sources** — source quality and operational status.
 
 ## Daily data refresh
 
