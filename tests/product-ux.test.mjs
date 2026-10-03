@@ -820,17 +820,17 @@ test("Today Calendar and Measurement share the same Brighton live validation lif
 });
 
 
-test("commercial product routes opt into the full-width product shell", () => {
+test("canonical club app routes opt into the shared product shell", () => {
   const routes = [
-    "src/app/brief/page.tsx",
-    "src/app/opportunity/page.tsx",
-    "src/app/decision-room/page.tsx",
+    "src/app/app/page.tsx",
+    "src/app/app/matches/page.tsx",
+    "src/app/app/matches/[fixtureId]/page.tsx",
+    "src/app/app/campaigns/page.tsx",
+    "src/app/app/players/page.tsx",
     "src/app/app/learning/page.tsx",
-    "src/app/impact/page.tsx",
-    "src/app/pilot/page.tsx",
-    "src/app/pilot/operating-pack/page.tsx",
-    "src/app/demo/page.tsx",
-    "src/app/cases/page.tsx"
+    "src/app/app/season/page.tsx",
+    "src/app/app/executive/page.tsx",
+    "src/app/app/sources/page.tsx"
   ];
   for (const route of routes) {
     assert.match(read(route), /productAppShell/, route + " should use the product app shell");
@@ -849,24 +849,11 @@ test("core product surfaces expose a shared Live Modelled Missing trust language
   assert.match(legend, />Missing</);
 
   for (const route of [
-    "src/app/opportunity/page.tsx",
-    "src/app/decision-room/page.tsx",
-    "src/app/impact/page.tsx",
+    "src/app/app/matches/[fixtureId]/page.tsx",
     "src/app/app/learning/page.tsx"
   ]) {
     assert.match(read(route), /ProductDataStateLegend/, route + " should show the shared data-state legend");
   }
-});
-
-test("mobile product flow keeps a contextual next action", () => {
-  const brief = read("src/app/brief/page.tsx");
-  const opportunity = read("src/app/opportunity/page.tsx");
-  const briefCss = read("src/app/brief/brief.module.css");
-  const opportunityCss = read("src/app/opportunity/opportunity.module.css");
-  assert.match(brief, /Open Opportunity/);
-  assert.match(opportunity, /Review Decision/);
-  assert.match(briefCss, /position:fixed/);
-  assert.match(opportunityCss, /position:fixed/);
 });
 
 
@@ -920,16 +907,14 @@ test("repository CRM evidence is aggregate-only and importer never stores suppor
 
 test("strategy and operational next action stay separate", () => {
   const opportunity = read("src/lib/productOpportunity.ts");
-  const brief = read("src/app/brief/page.tsx");
-  const decision = read("src/app/decision-room/page.tsx");
+  const brief = read("src/app/app/matches/[fixtureId]/page.tsx");
 
   assert.match(opportunity, /recommendedAction/);
   assert.match(opportunity, /nextRequiredAction/);
   assert.match(opportunity, /campaign\?\.nextApproval\.en/);
   assert.match(opportunity, /OVERDUE/);
   assert.match(brief, /nextAction\.label/);
-  assert.match(brief, /Strategic recommendation/);
-  assert.match(decision, /nextAction\.label/);
+  assert.match(brief, /Recommended play/);
 });
 
 
