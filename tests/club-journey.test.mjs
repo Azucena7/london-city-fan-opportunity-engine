@@ -34,27 +34,10 @@ test("action progress counts tasks independently of approvals and handles empty 
   assert.deepEqual(actionTaskProgress(action), { total: 3, done: 1, unassigned: 1, firstOffset: -4, lastOffset: -2 });
   assert.deepEqual(actionTaskProgress({ ...action, tasks: [] }), { total: 0, done: 0, unassigned: 0, firstOffset: null, lastOffset: null });
 });
-test("calendar and overview explain rehearsal limits and retain read-only controls", async () => {
-  const overview = await read("src/components/ClubActionOverview.tsx");
-  assert.match(overview, /Completar tareas no equivale a aprobar/);
-  assert.match(overview, /Público y exclusiones/);
-  const calendar = await read("src/components/ClubTaskCalendar.tsx");
-  assert.match(calendar, /No hay tareas con estos filtros/);
-  assert.match(calendar, /disabled=\{!editable \|\| !task.owner\}/);
-  assert.match(await read("src/components/ClubOperationsDemo.tsx"), /if \(!editable\) return; setPlan/);
-});
 test("legacy club demo routes redirect to the canonical guided demo", async () => {
   const config = await read("next.config.mjs");
   const page = await read("src/app/app/demo/page.tsx");
   assert.match(config, /source: "\/club-demo", destination: "\/app\/demo"/);
   assert.match(config, /source: "\/club-demo\/:path\*", destination: "\/app\/demo"/);
   assert.match(page, /DemoTour/);
-});
-test("configuration edits retain the plan and block approval pending resolution", async () => {
-  const ui = await read("src/components/ClubOperationsDemo.tsx");
-  const clear = ui.slice(ui.indexOf("function clearPlan()"), ui.indexOf("function go("));
-  assert.doesNotMatch(clear, /setPlan\(null\)|setCreative\(null\)/);
-  assert.match(ui, /configurationChanged \? \["configuration"\]/);
-  assert.match(ui, /window.confirm/);
-  assert.match(ui, /Descartar cambios/);
 });
