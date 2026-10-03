@@ -5,8 +5,8 @@
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 .hero,.section,.cycle,.cta{width:min(1120px,calc(100% - 40px));margin:0 auto}
-.hero{padding:54px 0 40px;display:grid;grid-template-columns:1.15fr .85fr;gap:46px;align-items:end}
-.eyebrow{color:#526D00;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.hero{padding:54px 0 40px;display:grid;grid-template-columns:1.15fr .85fr;gap:46px;align-items:flex-end}
+.eyebrow{color:var(--product-accent);font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
 .hero h1{margin:10px 0 14px;font-size:clamp(38px,5vw,60px);line-height:1;letter-spacing:-.05em}
 .hero p{margin:0;color:var(--product-muted);font-size:17px;line-height:1.5;max-width:760px}
 .status{padding:20px 0 4px 22px;border-left:3px solid var(--product-warning)}
@@ -21,7 +21,7 @@
 
 .steps,.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .steps article,.roles article,.coverage article{padding:20px;border-radius:var(--product-radius-md);border:1px solid var(--product-line);background:var(--product-surface)}
-.steps span{color:#526D00;font-size:12px;font-weight:900}
+.steps span{color:var(--product-accent);font-size:12px;font-weight:900}
 .steps h3,.roles h3{margin:9px 0 6px;font-size:20px}
 .steps p,.roles p,.coverage p{margin:0;color:var(--product-muted);line-height:1.5;font-size:14px}
 
@@ -36,14 +36,14 @@
 .timeline{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
 .timeline div{padding:20px 20px 22px 0}
 .timeline div+div{padding-left:20px;border-left:1px solid var(--product-line)}
-.timeline span{display:block;color:#526D00;font-size:12px;font-weight:900;letter-spacing:.07em;margin-bottom:7px}
+.timeline span{display:block;color:var(--product-accent);font-size:12px;font-weight:900;letter-spacing:.07em;margin-bottom:7px}
 .timeline strong{display:block;font-size:19px}
 .timeline p{margin:7px 0 0;color:var(--product-muted);font-size:14px;line-height:1.45}
 
 .success{display:grid;gap:0;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
 .success article{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;padding:15px 0;border-top:1px solid var(--product-line)}
 .success article:first-child{border-top:0}
-.success span{color:#526D00;font-size:12px;font-weight:900}
+.success span{color:var(--product-accent);font-size:12px;font-weight:900}
 .success strong{font-size:16px;line-height:1.4}
 
 .cta{
@@ -51,25 +51,25 @@
   padding:34px;
   border-radius:var(--product-radius-lg);
   background:var(--product-inverse);
-  color:#F7F8F5;
+  color:#F7F8FA;
   display:grid;
   grid-template-columns:1fr auto;
   gap:28px;
-  align-items:end;
+  align-items:flex-end;
 }
 .cta .eyebrow{color:var(--product-accent)}
 .cta h2{margin:9px 0 0;max-width:780px;font-size:34px;line-height:1.04;letter-spacing:-.04em}
 .actions{display:flex;flex-direction:column;gap:9px}
 .primary,.secondary{display:inline-flex;justify-content:center;padding:11px 16px;border-radius:999px;text-decoration:none;font-size:13px;font-weight:850}
 .primary{background:var(--product-accent);color:var(--product-accent-ink)}
-.secondary{border:1px solid rgba(255,255,255,.16);color:#F7F8F5}
+.secondary{border:1px solid rgba(255,255,255,.16);color:#F7F8FA}
 
 @media(max-width:900px){
   .hero{grid-template-columns:1fr}
   .timeline{grid-template-columns:1fr 1fr}
   .timeline div:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--product-line)}
   .timeline div:nth-child(4){border-top:1px solid var(--product-line)}
-  .cta{grid-template-columns:1fr;align-items:start}
+  .cta{grid-template-columns:1fr;align-items:flex-start}
   .actions{flex-direction:row}
 }
 @media(max-width:600px){
@@ -95,7 +95,7 @@
 .trustGrid span{
   display:block;
   margin-bottom:8px;
-  color:#526D00;
+  color:var(--product-accent);
   font-size:12px;
   font-weight:900;
   letter-spacing:.08em;
@@ -153,7 +153,7 @@
 }
 .measurementGrid span{
   display:block;
-  color:#526D00;
+  color:var(--product-accent);
   font-size:12px;
   font-weight:900;
   letter-spacing:.08em;
