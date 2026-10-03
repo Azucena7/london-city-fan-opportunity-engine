@@ -27,8 +27,8 @@
   --product-space-lg:36px;
   --product-space-xl:64px;
   --product-orange:#FF654F;
-  --product-display:clamp(44px,6.2vw,76px);
-  --product-title:clamp(30px,4vw,48px);
+  --product-display:clamp(38px,4.8vw,58px);
+  --product-title:clamp(26px,3vw,38px);
   --product-body:16px;
 }
 
@@ -170,3 +170,17 @@ textarea:focus-visible{
     transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
   }
 }
+
+/* Application shell: tool first, website second */
+.productAppShell{padding-left:232px;background:#F6F7F9}
+.productAppShell>header,
+.productAppShell>section,
+.productAppShell>div:not([class*="ProductJourneyNav"]){
+  max-width:1120px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.productAppShell h1{font-size:var(--product-display)!important;line-height:1.02!important;letter-spacing:-.045em!important}
+.productAppShell h2{font-size:var(--product-title)}
+.productAppShell p{max-width:72ch}
+@media(max-width:900px){.productAppShell{padding-left:0}}
