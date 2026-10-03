@@ -6,14 +6,14 @@
   grid-template-columns:auto 1fr auto;
   gap:28px;
   align-items:center;
-  border-bottom:1px solid rgba(16,33,27,.12);
+  border-bottom:1px solid rgba(16,19,26,.12);
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-.brand{display:inline-flex;align-items:center;gap:10px;color:#10211b;text-decoration:none;font-size:13px;font-weight:900;letter-spacing:.06em}
-.mark{width:10px;height:10px;background:#c7ea3a;transform:rotate(45deg)}
+.brand{display:inline-flex;align-items:center;gap:10px;color:#10131a;text-decoration:none;font-size:13px;font-weight:900;letter-spacing:.06em}
+.mark{width:10px;height:10px;background:#6657ff;transform:rotate(45deg)}
 .links{display:flex;justify-content:center;gap:18px}
-.links a,.login{color:#66736c;text-decoration:none;font-size:11px;font-weight:820;letter-spacing:.02em}
-.links a:hover,.login:hover{color:#10211b}
+.links a,.login{color:#69707d;text-decoration:none;font-size:11px;font-weight:820;letter-spacing:.02em}
+.links a:hover,.login:hover{color:#10131a}
 .actions{display:flex;align-items:center;gap:14px}
 .login{white-space:nowrap}
 .demo{
@@ -21,7 +21,7 @@
   justify-content:center;
   min-height:40px;
   padding:10px 14px;
-  background:#10211b;
+  background:#10131a;
   color:#fff;
   text-decoration:none;
   font-size:11px;

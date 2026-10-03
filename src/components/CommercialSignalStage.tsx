@@ -16,6 +16,7 @@ export function CommercialSignalStage() {
         <span className={styles.pulseA} />
         <span className={styles.pulseB} />
         <span className={styles.pulseC} />
+        <i className={styles.tracer} />
       </div>
 
       <div className={styles.topline}>
@@ -41,6 +42,9 @@ export function CommercialSignalStage() {
       <div className={styles.footer}>
         <span>AVELA</span>
         <strong>One growth decision at a time.</strong>
+      </div>
+      <div className={styles.decisionPulse} aria-hidden="true">
+        <span>signal</span><i>→</i><span>decision</span><i>→</i><strong>play</strong>
       </div>
     </div>
   );

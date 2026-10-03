@@ -1225,3 +1225,40 @@ test("commercial home turns London City proof into a concrete 90-day pilot path"
   assert.match(css, /proofPair/);
   assert.match(css, /pilotPromise/);
 });
+
+
+test("AVELA visual system removes olive identity and simplifies club app navigation", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const navCss = read("src/components/ProductJourneyNav.module.css");
+  const system = read("src/app/product-system.css");
+  const commercial = read("src/app/commercial-home.module.css");
+  assert.match(nav, /Radar/);
+  assert.match(nav, /Campaigns/);
+  assert.match(nav, /Learning/);
+  assert.match(nav, /const clubItems/);
+  assert.match(nav, />Club<\/summary>/);
+  assert.doesNotMatch(nav, /label: "London City Live"/);
+  assert.doesNotMatch(nav, /primaryItems[\s\S]*label: "Credits"/);
+  assert.match(system, /--product-accent:#6657FF/);
+  assert.match(system, /--product-signal:#FF654F/);
+  assert.match(system, /--product-bg:#F6F7F9/);
+  assert.doesNotMatch(system, /#C7EA3A/);
+  assert.doesNotMatch(system, /#526D00/i);
+  assert.match(navCss, /#6657FF/);
+  assert.match(commercial, /#6657ff/i);
+});
+
+
+test("commercial home uses lightweight product motion instead of decorative video", () => {
+  const page = read("src/app/page.tsx");
+  const css = read("src/app/commercial-home.module.css");
+  const stage = read("src/components/CommercialSignalStage.tsx");
+  assert.match(page, /Product in motion/);
+  assert.match(page, /Watch the decision form/);
+  assert.match(page, /proofTimeline/);
+  assert.match(css, /motionTrack/);
+  assert.match(css, /@keyframes motionStep/);
+  assert.match(css, /@keyframes proofFlow/);
+  assert.match(stage, /decisionPulse/);
+  assert.match(stage, /tracer/);
+});
