@@ -162,3 +162,27 @@
   .interpretationGrid article:first-child{border-top:0}
 }
 
+
+/* AVELA learning visual refresh */
+.hero,.fixturePicker,.fixtureFacts,.kpis,.interpretation,.learningLoop,.resultState,.next{
+  width:min(1240px,calc(100% - 48px));
+}
+.hero{padding:58px 0 34px;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr)}
+.hero h1{font-size:clamp(44px,5.8vw,74px);letter-spacing:-.06em}
+.stateCard{border-left-color:var(--product-orange)}
+.stateCard span{color:#9a4e36}
+.fixturePicker{padding-top:26px;border-bottom:1px solid var(--product-line)}
+.fixturePicker a{border-radius:0;background:transparent;border:0;border-bottom:2px solid transparent;padding:10px 2px;margin-right:12px}
+.fixturePicker a[aria-current="page"]{background:transparent;color:var(--product-ink);border-color:var(--product-accent)}
+.fixtureFacts{margin-top:18px}
+.kpis{margin-top:0}
+.interpretation{background:transparent;border-radius:0}
+.learningLoop{padding:58px 0}
+.timeline article{min-height:180px}
+.resultState{padding:58px 0}
+.stateList{border-radius:0;background:transparent}
+.next{padding:54px 0 64px}
+.primary,.secondary{border-radius:0}
+@media(max-width:600px){
+  .hero,.fixturePicker,.fixtureFacts,.kpis,.interpretation,.learningLoop,.resultState,.next{width:min(100% - 28px,1240px)}
+}
