@@ -1398,7 +1398,7 @@ test("Season Intelligence aggregates campaigns and evidence without treating mis
   assert.match(page, /Missing fixtures are not shown as zero/);
   assert.match(page, /drafted activation volume, not channel performance or incremental impact/);
   assert.match(nav, /label: "Season"/);
-  assert.match(nav, //app/season/);
+  assert.match(nav, /\/app\/season/);
 });
 
 
