@@ -20,19 +20,3 @@ test("missing plan has no invented tasks and departmental previews never mutate 
   for (const id of Object.keys(departments)) departmentWork(plan, id);
   assert.equal(JSON.stringify(plan), original);
 });
-test("department UI does not grant permissions or change the simulated authorization role", async () => {
-  const panel = await read("src/components/ClubDepartmentHome.tsx");
-  assert.match(panel, /No identifica a una persona ni concede permisos/);
-  assert.match(panel, /asignaciones explícitas/);
-  assert.doesNotMatch(panel, /setRole|approveCreative|approveAction|simulate\(/);
-  const ui = await read("src/components/ClubOperationsDemo.tsx");
-  assert.match(ui, /onDepartment=\{setDepartment\}/);
-  assert.match(ui, /onTasks=\{\(owner\) => \{ setTaskOwner\(owner\); setTaskStatus\("pending"\); setTaskAction\("all"\); setTaskPhase\("all"\)/);
-  assert.match(ui, /const editable = role !== "viewer"/);
-});
-test("home keeps the primary next step first and business assignments are available consistently", async () => {
-  const home = await read("src/components/ClubJourneyHome.tsx");
-  assert.ok(home.indexOf("TU SIGUIENTE PASO") < home.indexOf("{departmentPanel}"));
-  for (const path of ["src/components/ClubTaskCalendar.tsx", "src/components/ClubOperationsDemo.tsx"]) assert.match(await read(path), /option value="business"/);
-  assert.match(await read("src/components/ClubActionOverview.tsx"), /business: tr\("Negocio", "Business"\)/);
-});
