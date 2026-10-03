@@ -1402,3 +1402,12 @@ test("Player Assets keeps the live pack decision visible and navigable", () => {
   assert.match(readme, /\/app\/players/);
   assert.doesNotMatch(readme, /\/app\/player-assets/);
 });
+
+
+test("Vercel only auto-deploys production and explicit preview branches", () => {
+  const config = JSON.parse(read("vercel.json"));
+  assert.equal(config.git.deploymentEnabled["**"], false);
+  assert.equal(config.git.deploymentEnabled.main, true);
+  assert.equal(config.git.deploymentEnabled["preview-*"], true);
+  assert.equal(config.git.deploymentEnabled["*"], undefined);
+});
