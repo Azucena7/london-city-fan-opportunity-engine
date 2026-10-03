@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Fan Growth Engine — turn fan data into the next best action for every fixture";
+export const alt = "AVELA — growth intelligence for women’s football";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -30,7 +30,7 @@ export default function Image() {
                 borderRadius: "3px"
               }}
             />
-            FAN GROWTH ENGINE
+            AVELA
           </div>
 
           <div style={{ color: "#526D00", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em", marginTop: "70px" }}>
