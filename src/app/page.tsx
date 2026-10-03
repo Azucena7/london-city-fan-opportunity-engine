@@ -100,6 +100,21 @@ export default function Home() {
         </div>
       </section>
 
+      <section className={styles.motionStory} aria-label="AVELA live decision loop">
+        <div className={styles.motionHeader}>
+          <span className={styles.kicker}>Product in motion</span>
+          <h2>Watch the decision form.</h2>
+          <p>Signals do not become another dashboard. They move through one controlled loop until a club has a decision worth reviewing.</p>
+        </div>
+        <div className={styles.motionTrack}>
+          <article><span>01 · Fixture</span><strong>Everton · Home</strong><i /></article>
+          <article><span>02 · Signals</span><strong>Return demand + family fit</strong><i /></article>
+          <article className={styles.motionHot}><span>03 · Opportunity</span><strong>Return-attendance moment</strong><i /></article>
+          <article><span>04 · Play</span><strong>Build the return path</strong><i /></article>
+          <article><span>05 · Learning</span><strong>Measure what moved</strong></article>
+        </div>
+      </section>
+
       <section className={styles.productTheatre} id="how-it-works">
         <div className={styles.productIntro}>
           <span className={styles.kicker}>How AVELA works</span>
@@ -126,6 +141,7 @@ export default function Home() {
             The Brighton hypothesis was time-stamped on 15 September. A comparable London City activation became public
             on 18 September. That is evidence of relevance — not evidence that the club saw or used AVELA.
           </p>
+          <div className={styles.proofTimeline} aria-hidden="true"><span>15 SEP</span><i /><b>3 DAYS</b><i /><span>18 SEP</span></div>
           <div className={styles.proofPair}>
             <article><span>15 Sep · AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
             <article><span>18 Sep · London City announced</span><strong>{proof.observedAction.en}</strong></article>
