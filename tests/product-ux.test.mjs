@@ -1384,3 +1384,21 @@ test("commercial navigation enters the decision-first Home and labels London Cit
   assert.match(nav, /href="\/app">Open app/);
   assert.doesNotMatch(nav, /href="\/app\/matches">Open app/);
 });
+
+
+test("Player Assets keeps the live pack decision visible and navigable", () => {
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  const css = read("src/components/PlayerAssetPlanner.module.css");
+  const readme = read("README.md");
+
+  for (const id of ["campaign-context", "availability", "player-status", "momentum", "packs", "scenario"]) {
+    assert.match(planner, new RegExp(`id="${id}"`));
+  }
+  assert.match(planner, /Player asset planning sections/);
+  assert.match(planner, /Live pack/);
+  assert.match(planner, /livePackState/);
+  assert.match(css, /\.decisionRail/);
+  assert.match(css, /position:sticky/);
+  assert.match(readme, /\/app\/players/);
+  assert.doesNotMatch(readme, /\/app\/player-assets/);
+});
