@@ -122,17 +122,19 @@
       "validated": true,
       "document": "AGREEMENT-DEMO-C · sin documento real",
       "start": "2026-07-01",
-      "end": "2026-10-10",
+      "end": "2027-06-30",
       "channels": [
-        "club-social"
+        "club-social",
+        "event"
       ],
       "territories": [
         "UK"
       ],
       "blockedCategories": [],
-      "quota": 3,
+      "quota": 6,
       "confirmedDates": [
-        "2026-10-18"
+        "2026-10-18",
+        "2026-10-25"
       ],
       "fit": 75,
       "fee": 150,
@@ -164,6 +166,90 @@
       "fit": 95,
       "fee": 100,
       "sportingAvailability": "sporting-unavailable",
+      "commercialAvailabilityOverride": false,
+      "priorityReserve": 1
+    },
+    {
+      "id": "PLAYER-DEMO-E",
+      "name": "Talento Demo E",
+      "signed": true,
+      "validated": true,
+      "document": "AGREEMENT-DEMO-E · sin documento real",
+      "start": "2026-07-01",
+      "end": "2027-06-30",
+      "channels": [
+        "club-social",
+        "event"
+      ],
+      "territories": [
+        "UK"
+      ],
+      "blockedCategories": [],
+      "quota": 5,
+      "confirmedDates": [
+        "2026-10-18",
+        "2026-10-25"
+      ],
+      "fit": 82,
+      "fee": 250,
+      "sportingAvailability": "available",
+      "commercialAvailabilityOverride": false,
+      "priorityReserve": 2
+    },
+    {
+      "id": "PLAYER-DEMO-F",
+      "name": "Talento Demo F",
+      "signed": true,
+      "validated": true,
+      "document": "AGREEMENT-DEMO-F · sin documento real",
+      "start": "2026-07-01",
+      "end": "2027-06-30",
+      "channels": [
+        "club-social",
+        "event"
+      ],
+      "territories": [
+        "UK",
+        "ES"
+      ],
+      "blockedCategories": [],
+      "quota": 7,
+      "confirmedDates": [
+        "2026-10-18",
+        "2026-10-25"
+      ],
+      "fit": 72,
+      "fee": 120,
+      "sportingAvailability": "available",
+      "commercialAvailabilityOverride": false,
+      "priorityReserve": 0
+    },
+    {
+      "id": "PLAYER-DEMO-G",
+      "name": "Talento Demo G",
+      "signed": true,
+      "validated": true,
+      "document": "AGREEMENT-DEMO-G · sin documento real",
+      "start": "2026-07-01",
+      "end": "2027-06-30",
+      "channels": [
+        "club-social",
+        "event"
+      ],
+      "territories": [
+        "UK",
+        "ES"
+      ],
+      "blockedCategories": [
+        "retail"
+      ],
+      "quota": 4,
+      "confirmedDates": [
+        "2026-10-18"
+      ],
+      "fit": 88,
+      "fee": 320,
+      "sportingAvailability": "available",
       "commercialAvailabilityOverride": false,
       "priorityReserve": 1
     }
@@ -330,8 +416,8 @@
     {
       "id": "INT-DEMO-B",
       "playerId": "PLAYER-DEMO-B",
-      "start": "2026-10-17",
-      "end": "2026-10-26",
+      "start": "2026-10-22",
+      "end": "2026-10-31",
       "state": "manual-private",
       "team": "National team B",
       "source": "Internal club planning flag",
@@ -348,6 +434,17 @@
       "source": "Synthetic public squad announcement",
       "public": true,
       "note": "Public confirmation for demo only."
+    },
+    {
+      "id": "INT-DEMO-E",
+      "playerId": "PLAYER-DEMO-E",
+      "start": "2026-10-16",
+      "end": "2026-10-21",
+      "state": "public-confirmed",
+      "team": "National team E",
+      "source": "Synthetic public squad announcement",
+      "public": true,
+      "note": "Unavailable for the 18 October demo activation."
     }
   ]
 }
