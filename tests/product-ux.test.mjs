@@ -577,7 +577,7 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   assert.match(home, /See AVELA thinking in public/);
   assert.match(home, /href="\/live\/london-city"/);
   assert.match(marketingNav, /Open app/);
-  assert.match(marketingNav, /\/app\/matches/);
+  assert.match(marketingNav, /href="\/app">Open app/);
   assert.match(appNav, /AVELA website/);
   assert.match(appNav, /\/app\/learning/);
   assert.match(config, /source: "\/london-city", destination: "\/live\/london-city"/);
@@ -1381,6 +1381,6 @@ test("public crawl policy exposes canonical surfaces and excludes the club app",
 test("commercial navigation enters the decision-first Home and labels London City as a demo", () => {
   const nav = read("src/components/MarketingNav.tsx");
   assert.match(nav, /London City demo/);
-  assert.match(nav, /label: "Open app", href: "\/app"/);
-  assert.doesNotMatch(nav, /label: "Open app", href: "\/app\/matches"/);
+  assert.match(nav, /href="\/app">Open app/);
+  assert.doesNotMatch(nav, /href="\/app\/matches">Open app/);
 });
