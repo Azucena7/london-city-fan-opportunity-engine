@@ -1287,3 +1287,19 @@ test("commercial and London City surfaces use bounded reading widths and demo fr
   assert.match(liveCss, /width:min\(980px/);
   assert.match(clubs, /INDEPENDENT DEMO/);
 });
+
+
+test("Intelligence Sources exposes Blinkfire as public demo evidence without faking private access", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const sources = read("src/components/IntelligenceSources.tsx");
+  const page = read("src/app/app/sources/page.tsx");
+  assert.match(nav, /label: "Sources"/);
+  assert.match(nav, /\/app\/sources/);
+  assert.match(page, /IntelligenceSources/);
+  assert.match(sources, /Blinkfire/);
+  assert.match(sources, /Public demo evidence/);
+  assert.match(sources, /active Blinkfire licence/);
+  assert.match(sources, /Private club-level data is not accessed in this demo/);
+  assert.match(sources, /Blinkfire measurement/);
+  assert.match(sources, /AVELA learning/);
+});
