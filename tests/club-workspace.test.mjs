@@ -55,6 +55,6 @@ test("public prototype has no real data transfer, persistence or email channel",
   assert.match(component, /PUBLIC PROTOTYPE · TEST DATA ONLY/);
   assert.match(component, /No campaign has been activated/);
   assert.doesNotMatch(component, /fetch\(|localStorage|sessionStorage|mailto:|type="file"|type="password"/);
-  const page = await readFile(new URL("../src/app/club-demo/page.tsx", import.meta.url), "utf8");
-  assert.match(page, /index: false, follow: false/);
+  const config = await readFile(new URL("../next.config.mjs", import.meta.url), "utf8");
+  assert.match(config, /source: "\/club-demo", destination: "\/app\/demo"/);
 });
