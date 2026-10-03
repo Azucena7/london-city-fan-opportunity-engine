@@ -758,6 +758,7 @@ test("commercial surfaces route users into the simplified club journey", () => {
   const cases = read("src/app/cases/page.tsx");
   const pilot = read("src/app/pilot/page.tsx");
   const demo = read("src/app/app/demo/page.tsx");
+  const demoTour = read("src/components/DemoTour.tsx");
   const operatingPack = read("src/app/pilot/operating-pack/page.tsx");
   const caseOverview = read("src/components/LondonCityCase.tsx");
   for (const source of [cases, pilot, demo, operatingPack, caseOverview]) {
@@ -766,7 +767,8 @@ test("commercial surfaces route users into the simplified club journey", () => {
     assert.doesNotMatch(source, /href="\/decision-room"/);
   }
   assert.match(pilot, /\/app\/matches/);
-  assert.match(demo, /\/app\/matches\/\$\{live\.fixtureId\}/);
+  assert.match(demo, /DemoTour/);
+  assert.match(demoTour, /\/app\/matches\/\$\{props\.fixtureId\}/);
   assert.match(caseOverview, /\/app\/matches\/\$\{opportunity\.fixtureId\}/);
 });
 
