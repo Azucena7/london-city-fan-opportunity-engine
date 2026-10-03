@@ -40,6 +40,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
             key={item.key}
             href={item.href}
             className={[styles.workLink, active === item.key ? styles.active : ""].join(" ")}
+            aria-current={active === item.key ? "page" : undefined}
           >
             <span className={styles.glyph} aria-hidden="true">{item.glyph}</span>
             <span>
@@ -53,16 +54,41 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
       <nav className={styles.secondary} aria-label="Club settings">
         <span className={styles.sectionLabel}>Club</span>
         {workspaceItems.map((item) => (
-          <Link key={item.key} href={item.href} className={active === item.key ? styles.secondaryActive : ""}>
+          <Link
+            key={item.key}
+            href={item.href}
+            className={active === item.key ? styles.secondaryActive : ""}
+            aria-current={active === item.key ? "page" : undefined}
+          >
             {item.label}
           </Link>
         ))}
       </nav>
 
       <div className={styles.bottom}>
-        <Link href="/app/demo" className={active === "demo" ? styles.secondaryActive : ""}>Product demo</Link>
+        <Link href="/app/demo" className={active === "demo" ? styles.secondaryActive : ""} aria-current={active === "demo" ? "page" : undefined}>Product demo</Link>
         <Link href="/">AVELA website ↗</Link>
       </div>
+
+      <details className={styles.mobileMenu}>
+        <summary>More</summary>
+        <div className={styles.mobileMenuPanel}>
+          <span>Club</span>
+          {workspaceItems.map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              aria-current={active === item.key ? "page" : undefined}
+              className={active === item.key ? styles.mobileActive : ""}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <span>More</span>
+          <Link href="/app/demo" aria-current={active === "demo" ? "page" : undefined} className={active === "demo" ? styles.mobileActive : ""}>Product demo</Link>
+          <Link href="/">AVELA website ↗</Link>
+        </div>
+      </details>
     </aside>
   );
 }
