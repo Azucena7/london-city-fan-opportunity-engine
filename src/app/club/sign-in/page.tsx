@@ -10,7 +10,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
   const enabled = clubAccessEnabled();
   const status = (await searchParams).status;
   return <main id="main-content" className={styles.shell}>
-    <Link href="/">Fan Growth Engine</Link>
+    <Link href="/">AVELA</Link>
     <p className={styles.eyebrow}>Espacio privado del club</p>
     <h1>Accede a tu club</h1>
     <p>Para miembros invitados por el administrador. El club y tus permisos se comprueban en el servidor.</p>

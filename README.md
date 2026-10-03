@@ -1,6 +1,6 @@
-# Fan Growth Engine
+# AVELA
 
-A decision-intelligence product for football clubs that turns fan, ticketing, fixture, territory and market signals into the next best action for each fixture — then measures what happened and improves the next decision.
+Growth intelligence for women’s football clubs that turns fan, ticketing, fixture, territory and market signals into the next best action for each fixture — then measures what happened and improves the next decision.
 
 London City Lionesses is currently used as the live demonstration environment.
 

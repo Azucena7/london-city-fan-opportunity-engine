@@ -6,7 +6,7 @@ import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
   title: "London City Guided Demo",
-  description: "A guided walkthrough of how Fan Growth Engine turns a live fixture opportunity into an action and measurement plan."
+  description: "A guided walkthrough of how AVELA turns a live fixture opportunity into an action and measurement plan."
 };
 
 const steps = [

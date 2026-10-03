@@ -6,7 +6,7 @@ import styles from "./cases.module.css";
 
 export const metadata: Metadata = {
   title: "Opportunity Cases",
-  description: "Three different fixture decisions showing how Fan Growth Engine adapts to different commercial contexts."
+  description: "Three different fixture decisions showing how AVELA adapts to different commercial contexts."
 };
 
 export default function CasesPage() {

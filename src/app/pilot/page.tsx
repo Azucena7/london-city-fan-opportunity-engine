@@ -5,8 +5,8 @@ import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
-  title: "90-Day Fan Growth Pilot",
-  description: "A six-fixture pilot to prove how Fan Growth Engine can improve attendance, repeat visits and commercial decision-making."
+  title: "90-Day AVELA Pilot",
+  description: "A six-fixture pilot to prove how AVELA can improve attendance, repeat visits and commercial decision-making."
 };
 
 const deliverables = [

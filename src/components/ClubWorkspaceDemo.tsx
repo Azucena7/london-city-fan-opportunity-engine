@@ -76,7 +76,7 @@ export function ClubWorkspaceDemo({ fixture }: { fixture: Fixture }) {
   }
 
   return <main className={`${styles.shell} productAppShell`}>
-    <header className={styles.topbar}><Link href="/">Fan Growth Engine</Link><div><LanguageSwitcher /><button type="button" onClick={reset}>{tr("Reiniciar ensayo", "Reset rehearsal")}</button></div></header>
+    <header className={styles.topbar}><Link href="/">AVELA</Link><div><LanguageSwitcher /><button type="button" onClick={reset}>{tr("Reiniciar ensayo", "Reset rehearsal")}</button></div></header>
     <aside className={styles.demoNotice}><strong>{tr("PROTOTIPO PÚBLICO · SOLO DATOS DE PRUEBA", "PUBLIC PROTOTYPE · TEST DATA ONLY")}</strong><p>{tr("Este recorrido representa el futuro espacio interno de un club. Todavía no tiene autenticación ni conexiones reales. No introduzcas datos privados. Los cambios viven en esta página y se pierden al recargar.", "This walkthrough represents a future internal club workspace. It has no authentication or live connections yet. Do not enter private data. Changes live on this page and reset on reload.")}</p></aside>
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
