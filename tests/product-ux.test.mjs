@@ -1332,3 +1332,25 @@ test("campaign builder makes the recommended campaign path visually explicit", (
   assert.match(css, /guidedSteps/);
   assert.match(css, /recipeMap/);
 });
+
+
+test("app Home surfaces the next decision before navigation", () => {
+  const home = read("src/app/app/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(home, /What needs attention today/);
+  assert.match(home, /Primary action/);
+  assert.match(home, /Decision queue/);
+  assert.match(home, /Everything else can wait/);
+  assert.match(home, /Fixture/);
+  assert.match(home, /Signals/);
+  assert.match(home, /Opportunity/);
+  assert.match(home, /Campaign/);
+  assert.match(home, /Learning/);
+  assert.match(nav, /label: "Home"/);
+});
+
+test("campaign index visualizes approval progress and next decision", () => {
+  const campaigns = read("src/app/app/campaigns/page.tsx");
+  assert.match(campaigns, /progressBar/);
+  assert.match(campaigns, /Next decision/);
+});
