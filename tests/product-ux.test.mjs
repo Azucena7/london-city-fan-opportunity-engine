@@ -1456,3 +1456,38 @@ test("Player Asset Planning works for fixture and non-fixture commercial campaig
   assert.ok(data.commercialCampaigns.some((item) => item.type === "seasonal"));
   assert.ok(data.commercialCampaigns.some((item) => item.type === "community"));
 });
+
+
+test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  const css = read("src/components/PlayerAssetPlanner.module.css");
+  assert.match(planner, /Momentum Monitor/);
+  assert.match(planner, /Live scenario/);
+  assert.match(planner, /What changed/);
+  assert.match(planner, /Add to pack/);
+  assert.match(planner, /Remove from pack/);
+  assert.match(planner, /Reset recommendation/);
+  assert.match(planner, /vs recommended/);
+  assert.match(css, /currentPack/);
+  assert.match(css, /changeStory/);
+});
+
+test("Player momentum remains multi-dimensional, traceable and missing-aware", () => {
+  const strategy = read("src/lib/clubStrategy.ts");
+  const data = JSON.parse(read("data/seed/club-strategy-demo.json"));
+  assert.match(strategy, /PlayerMomentum/);
+  assert.match(strategy, /playerMomentumScore/);
+  assert.match(strategy, /availableDimensions/);
+  assert.match(strategy, /momentumScore/);
+  assert.ok(data.playerMomentum.length >= 5);
+  assert.ok(data.playerMomentum.some((item) => item.sporting.value === null && item.sporting.state === "missing"));
+  assert.ok(data.playerMomentum.every((item) => item.sporting.source && item.attention.source && item.international.source && item.commercial.source));
+});
+
+test("Season Intelligence compares player momentum with asset usage instead of conflating them", () => {
+  const season = read("src/app/app/season/page.tsx");
+  assert.match(season, /momentum: playerMomentumScore/);
+  assert.match(season, /momentum inputs/);
+  assert.match(season, /Momentum and usage are different signals/);
+  assert.match(season, /high momentum does not automatically mean/);
+});
