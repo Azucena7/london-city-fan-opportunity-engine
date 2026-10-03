@@ -579,6 +579,24 @@ test("campaign flow reviews scope before reserving credits and never simulates l
   assert.match(builder, /No CRM send, social publish or media spend happens/);
 });
 
+test("campaign reservation cycles are uniquely identifiable and repeat safely", () => {
+  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const trace = read("src/components/LearningCampaignTrace.tsx");
+
+  assert.match(builder, /reservationId/);
+  assert.match(builder, /crypto\.randomUUID\(\)/);
+  assert.match(builder, /campaign:reserve:\$\{cycleId\}/);
+  assert.match(builder, /campaign:release:\$\{reservationId\}/);
+  assert.match(builder, /reserve-history:\$\{cycleId\}/);
+  assert.match(builder, /release-history:\$\{reservationId\}/);
+  assert.match(builder, /const hasReservation = Boolean\(reservationId\)/);
+  assert.match(builder, /setReservationId\(null\)/);
+
+  assert.match(trace, /latestReservationEvent/);
+  assert.match(trace, /latestReservationEvent\?\.event_type === "reserve"/);
+  assert.match(trace, /latestReservationEvent\?\.event_type === "release"/);
+});
+
 test("match plan includes campaign proposal credit budgeting and gated launch", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const page = read("src/app/matches/[fixtureId]/page.tsx");

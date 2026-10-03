@@ -100,6 +100,7 @@ export function CampaignCreditBuilder({
   const [accountPassword, setAccountPassword] = useState("");
   const [accountError, setAccountError] = useState<string | null>(null);
   const [reservedCampaignCredits, setReservedCampaignCredits] = useState(0);
+  const [reservationId, setReservationId] = useState<string | null>(null);
   const [reservationBusy, setReservationBusy] = useState(false);
   const [reservationError, setReservationError] = useState<string | null>(null);
   const [launchHandoffReady, setLaunchHandoffReady] = useState(false);
@@ -119,6 +120,7 @@ export function CampaignCreditBuilder({
           drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
           workspaceStatus?: "draft" | "review-ready";
           reservedCampaignCredits?: number;
+          reservationId?: string | null;
           launchHandoffReady?: boolean;
         };
 
@@ -128,6 +130,7 @@ export function CampaignCreditBuilder({
         if (workspace.drafts) setDrafts(workspace.drafts);
         if (workspace.workspaceStatus === "review-ready") setWorkspaceStatus("review-ready");
         if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
+        if (typeof workspace.reservationId === "string" && workspace.reservationId) setReservationId(workspace.reservationId);
         if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
       }
     } catch {
@@ -149,10 +152,11 @@ export function CampaignCreditBuilder({
       drafts,
       workspaceStatus,
       reservedCampaignCredits,
+      reservationId,
       launchHandoffReady,
       savedAt: new Date().toISOString()
     }));
-  }, [drafts, extraCredits, fixtureId, launchHandoffReady, reservedCampaignCredits, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
+  }, [drafts, extraCredits, fixtureId, launchHandoffReady, reservationId, reservedCampaignCredits, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
 
   function applyWorkspaceState(state: Record<string, unknown>, status?: string) {
     const workspace = state as {
@@ -161,12 +165,19 @@ export function CampaignCreditBuilder({
       extraCredits?: number;
       drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
       workspaceStatus?: "draft" | "review-ready";
+      reservedCampaignCredits?: number;
+      reservationId?: string | null;
+      launchHandoffReady?: boolean;
     };
 
     if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
     if (workspace.variants) setVariants(workspace.variants);
     if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
     if (workspace.drafts) setDrafts(workspace.drafts);
+    if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
+    if (typeof workspace.reservationId === "string" && workspace.reservationId) setReservationId(workspace.reservationId);
+    else setReservationId(null);
+    if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
     if (status === "review-ready" || workspace.workspaceStatus === "review-ready") {
       setWorkspaceStatus("review-ready");
     } else {
@@ -292,6 +303,7 @@ export function CampaignCreditBuilder({
               drafts,
               workspaceStatus,
               reservedCampaignCredits,
+              reservationId,
               launchHandoffReady
             }
           })
@@ -302,7 +314,7 @@ export function CampaignCreditBuilder({
     }, 700);
 
     return () => window.clearTimeout(timer);
-  }, [activeClubId, drafts, extraCredits, fixtureId, launchHandoffReady, remoteReady, reservedCampaignCredits, selected, variants, workspaceLoaded, workspaceStatus]);
+  }, [activeClubId, drafts, extraCredits, fixtureId, launchHandoffReady, remoteReady, reservationId, reservedCampaignCredits, selected, variants, workspaceLoaded, workspaceStatus]);
 
   async function signInToClubWorkspace() {
     setAccountError(null);
@@ -382,7 +394,7 @@ export function CampaignCreditBuilder({
   const committedCredits = generatedItems.reduce((sum, id) => sum + (catalogue.find((item) => item.id === id)?.baseCredits ?? 0), 0);
   const explorer = tier === "explorer";
   const reservationRequired = Math.max(0, total - committedCredits);
-  const hasReservation = reservedCampaignCredits > 0 || (total > 0 && reservationRequired === 0);
+  const hasReservation = Boolean(reservationId);
   const canReview = !explorer && remaining >= 0;
   const canReserve = canReview && unresolvedGates === 0 && workspaceStatus === "review-ready" && !hasReservation;
   const canPrepareLaunch = !explorer && hasReservation && unresolvedGates === 0;
@@ -420,6 +432,7 @@ export function CampaignCreditBuilder({
     setReservationError(null);
 
     try {
+      const cycleId = crypto.randomUUID();
       if (activeClubId && reservationRequired > 0) {
         const response = await fetch("/api/credit-ledger", {
           method: "POST",
@@ -428,7 +441,7 @@ export function CampaignCreditBuilder({
             clubId: activeClubId,
             fixtureId,
             itemId: "campaign-reservation",
-            eventKey: `${fixtureId}:campaign:reserve`,
+            eventKey: `${fixtureId}:campaign:reserve:${cycleId}`,
             eventType: "commit",
             credits: reservationRequired,
             note: "Credits reserved after campaign review. Existing generated-draft commitments are excluded."
@@ -438,13 +451,14 @@ export function CampaignCreditBuilder({
       }
 
       setReservedCampaignCredits(reservationRequired);
+      setReservationId(cycleId);
       setLaunchHandoffReady(false);
       await recordActivity(
         "reserve",
-        `${fixtureId}:campaign:reserve-history`,
+        `${fixtureId}:campaign:reserve-history:${cycleId}`,
         "Campaign credits reserved",
         `${reservationRequired} additional credits reserved after review.`,
-        { credits: reservationRequired, totalPlanned: total, existingCommitted: committedCredits }
+        { credits: reservationRequired, totalPlanned: total, existingCommitted: committedCredits, reservationId: cycleId }
       );
     } catch (error) {
       setReservationError(error instanceof Error ? error.message : "Campaign reservation failed.");
@@ -454,7 +468,7 @@ export function CampaignCreditBuilder({
   }
 
   async function reopenCampaign() {
-    if (!hasReservation || reservationBusy) return;
+    if (!hasReservation || !reservationId || reservationBusy) return;
     setReservationBusy(true);
     setReservationError(null);
 
@@ -467,7 +481,7 @@ export function CampaignCreditBuilder({
             clubId: activeClubId,
             fixtureId,
             itemId: "campaign-reservation",
-            eventKey: `${fixtureId}:campaign:release:${reservedCampaignCredits}`,
+            eventKey: `${fixtureId}:campaign:release:${reservationId}`,
             eventType: "release",
             credits: reservedCampaignCredits,
             note: "Campaign reservation released when the club reopened the campaign."
@@ -478,12 +492,13 @@ export function CampaignCreditBuilder({
 
       await recordActivity(
         "release",
-        `${fixtureId}:campaign:release-history:${reservedCampaignCredits}`,
+        `${fixtureId}:campaign:release-history:${reservationId}`,
         "Campaign reopened",
         `${reservedCampaignCredits} reserved credits released and scope reopened for editing.`,
-        { credits: reservedCampaignCredits }
+        { credits: reservedCampaignCredits, reservationId }
       );
       setReservedCampaignCredits(0);
+      setReservationId(null);
       setWorkspaceStatus("draft");
       setLaunchHandoffReady(false);
     } catch (error) {

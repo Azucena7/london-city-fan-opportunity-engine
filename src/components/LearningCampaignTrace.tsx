@@ -47,11 +47,12 @@ export function LearningCampaignTrace({ fixtureId }: { fixtureId: string }) {
 
   const trace = useMemo(() => {
     const types = new Set(events.map((event) => event.event_type));
+    const latestReservationEvent = events.find((event) => event.event_type === "reserve" || event.event_type === "release");
     return {
       reviewed: types.has("review"),
       produced: types.has("draft-generated"),
-      reserved: types.has("reserve") && !types.has("release"),
-      reopened: types.has("release"),
+      reserved: latestReservationEvent?.event_type === "reserve",
+      reopened: latestReservationEvent?.event_type === "release",
       handoff: types.has("launch-handoff")
     };
   }, [events]);
