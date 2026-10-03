@@ -32,10 +32,13 @@ export default function CampaignsPage() {
               <div className={styles.meta}><span>{campaign.status}</span><span>{campaign.fixtureId}</span></div>
               <h2>{campaign.title.en}</h2>
               <p>{campaign.objective.en}</p>
+              <div className={styles.progressBar} aria-label={`${approvalCount} of ${approvalTotal} approvals ready`}>
+                <span style={{ width: `${approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0}%` }} />
+              </div>
               <div className={styles.facts}>
                 <div><span>Activations</span><strong>{campaign.activations?.length ?? 0}</strong></div>
                 <div><span>Approvals ready</span><strong>{approvalCount}/{approvalTotal}</strong></div>
-                <div><span>Next approval</span><strong>{campaign.nextApproval?.en ?? "Review required"}</strong></div>
+                <div><span>Next decision</span><strong>{campaign.nextApproval?.en ?? "Review required"}</strong></div>
               </div>
               <Link href={`/app/matches/${campaign.fixtureId}`}>Open fixture campaign →</Link>
             </article>
