@@ -33,15 +33,15 @@ export async function GET() {
           </div>
 
           <div style={{ display: "flex", marginTop: "62px", color: "#526D00", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em" }}>
-            DECISION INTELLIGENCE FOR FOOTBALL CLUBS
+            GROWTH INTELLIGENCE FOR WOMEN’S FOOTBALL
           </div>
 
           <div style={{ display: "flex", marginTop: "18px", fontSize: "58px", lineHeight: 0.98, fontWeight: 800, letterSpacing: "-0.045em" }}>
-            Turn fan data into the next best action for every fixture.
+            Know where to act before the moment passes.
           </div>
 
           <div style={{ display: "flex", marginTop: "24px", color: "#64706B", fontSize: "20px", lineHeight: 1.35 }}>
-            Fixture in. Recommended plan out. Learn from matchday.
+            Fixture in. Opportunity out. Learn from what happened.
           </div>
 
           <div style={{ display: "flex", marginTop: "auto", color: "#7A827E", fontSize: "14px" }}>
@@ -65,9 +65,9 @@ export async function GET() {
           </div>
 
           {[
-            ["01", "Matches", "Fixtures trigger monitoring automatically"],
-            ["02", "Match plan", "Action draft, evidence and impact"],
-            ["03", "Review", "Signals, blockers and handoff"],
+            ["01", "Radar", "Fixtures trigger monitoring automatically"],
+            ["02", "Opportunity brief", "Evidence, fit and recommended play"],
+            ["03", "Campaign", "Scope, approvals and handoff"],
             ["04", "Learning", "What changes for the next match?"]
           ].map(([num, label, detail]) => (
             <div key={num} style={{ display: "flex", padding: "16px 0", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
@@ -94,7 +94,7 @@ export async function GET() {
               90-DAY PILOT · 6 FIXTURES
             </div>
             <div style={{ display: "flex", marginTop: "6px", fontSize: "17px", fontWeight: 800 }}>
-              Fixture → Plan → Review → Learning
+              Fixture → Opportunity → Campaign → Learning
             </div>
           </div>
         </div>
