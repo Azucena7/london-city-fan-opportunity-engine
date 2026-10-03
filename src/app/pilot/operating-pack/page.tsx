@@ -37,7 +37,7 @@ export default function OperatingPackPage() {
 
   return (
     <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="pilot" />
+      <ProductJourneyNav />
 
       <header className={styles.hero}>
         <div>
