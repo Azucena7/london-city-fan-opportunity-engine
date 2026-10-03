@@ -70,6 +70,12 @@ const blinkfireEvidence = [
   }
 ] as const;
 
+const nwslPublicBenchmark = [
+  { club: "San Diego Wave FC", engagement: "5.2M", videoViews: "69.5M" },
+  { club: "Kansas City Current", engagement: "5.0M", videoViews: "45.1M" },
+  { club: "Washington Spirit", engagement: "3.4M", videoViews: "32.7M" }
+] as const;
+
 export function IntelligenceSources() {
   return (
     <section className={styles.wrap}>
@@ -128,6 +134,23 @@ export function IntelligenceSources() {
               <p>{item.detail}</p>
             </article>
           ))}
+        </div>
+        <div className={styles.publicBenchmark}>
+          <div>
+            <span>Public women&apos;s-football benchmark · 2025 NWSL regular season</span>
+            <strong>Example evidence AVELA can use today without private account access.</strong>
+            <small>Owned-and-operated social data published by Blinkfire for 14 Mar–2 Nov 2025. Context only; not a London City comparison or a current-season forecast.</small>
+          </div>
+          <div className={styles.benchmarkRows}>
+            {nwslPublicBenchmark.map((row) => (
+              <div key={row.club}>
+                <strong>{row.club}</strong>
+                <span>{row.engagement}<small>engagements</small></span>
+                <span>{row.videoViews}<small>video views</small></span>
+              </div>
+            ))}
+          </div>
+          <a href="https://www.blinkfire.com/d/view_upload/2025-nwsl-report" target="_blank" rel="noreferrer">Open Blinkfire public NWSL report ↗</a>
         </div>
         <div className={styles.flow}>
           <span>AVELA opportunity</span><i>→</i>
