@@ -249,7 +249,7 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
   assert.match(demo, /Open campaign builder/);
   assert.match(page, /getCurrentProductOpportunity/);
   assert.match(page, /campaignPlans/);
-  assert.match(nav, /label: "Demo"/);
+  assert.match(nav, />Product demo</);
   assert.match(nav, /\/app\/demo/);
 });
 
@@ -1302,4 +1302,17 @@ test("Intelligence Sources exposes Blinkfire as public demo evidence without fak
   assert.match(sources, /Private club-level data is not accessed in this demo/);
   assert.match(sources, /Blinkfire measurement/);
   assert.match(sources, /AVELA learning/);
+});
+
+
+test("final visual pass removes legacy olive neutrals from primary product surfaces", () => {
+  const system = read("src/app/product-system.css");
+  const radar = read("src/app/matches/matches.module.css");
+  const brief = read("src/app/matches/[fixtureId]/match-plan.module.css");
+  const commercial = read("src/app/commercial-home.module.css");
+  assert.doesNotMatch(system, /16,33,27/);
+  assert.doesNotMatch(commercial, /199,234,58/);
+  assert.doesNotMatch(commercial, /--lime|--cream/);
+  assert.doesNotMatch(radar, /#d9dfda|#68756d|#637068/i);
+  assert.doesNotMatch(brief, /#d9dfda|#68756d|#5f6c64/i);
 });
