@@ -1439,3 +1439,20 @@ test("Season Intelligence includes player asset utilisation without calling usag
   assert.match(page, /Usage is not performance/);
   assert.match(page, /Open Player Asset Planning/);
 });
+
+
+test("Player Asset Planning works for fixture and non-fixture commercial campaigns", () => {
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  const campaigns = read("src/app/app/campaigns/page.tsx");
+  const data = JSON.parse(read("data/seed/club-strategy-demo.json"));
+  assert.match(planner, /Campaign context/);
+  assert.match(planner, /Season tickets 2027/);
+  assert.match(planner, /Christmas campaign/);
+  assert.match(planner, /selectedCampaign\.activationDate/);
+  assert.match(planner, /selectedCampaign\.playerNeed/);
+  assert.match(campaigns, /Campaigns that do not need a fixture to exist/);
+  assert.match(campaigns, /season tickets, Christmas, retail, community or sponsor activity/i);
+  assert.ok(data.commercialCampaigns.some((item) => item.type === "season-ticket"));
+  assert.ok(data.commercialCampaigns.some((item) => item.type === "seasonal"));
+  assert.ok(data.commercialCampaigns.some((item) => item.type === "community"));
+});
