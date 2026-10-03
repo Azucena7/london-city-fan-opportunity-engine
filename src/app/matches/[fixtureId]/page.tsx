@@ -83,6 +83,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <strong>{live.decisionState} · {live.confidence.label} confidence</strong>
         </div>
         <div className={styles.contextLinks}>
+          <Link className={styles.executiveLink} href={`/app/executive?fixture=${fixture.id}`}>Executive view</Link>
           <a href="#decision">Decision</a>
           <a href="#campaign">Campaign</a>
           <a href="#signals">Signals</a>
