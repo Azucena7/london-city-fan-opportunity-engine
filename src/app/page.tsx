@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
 import { CommercialSignalStage } from "@/components/CommercialSignalStage";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
+import { decisionValidation } from "@/lib/data";
 import styles from "./commercial-home.module.css";
 
 export const metadata: Metadata = {
@@ -47,6 +48,7 @@ const flow = [
 
 export default function Home() {
   const live = getCurrentProductOpportunity();
+  const proof = decisionValidation.cases[0];
 
   return (
     <main className={styles.shell}>
@@ -119,12 +121,19 @@ export default function Home() {
       <section className={styles.liveProof}>
         <div className={styles.liveCopy}>
           <span className={styles.kicker}>Proof in public</span>
-          <h2>See what AVELA saw before the result was known.</h2>
+          <h2>See what AVELA saw before London City announced it.</h2>
           <p>
-            London City Live preserves the original signal read, recommendation and subsequent public evidence.
-            Alignment and divergence stay visible instead of being rewritten after the fact.
+            The Brighton hypothesis was time-stamped on 15 September. A comparable London City activation became public
+            on 18 September. That is evidence of relevance — not evidence that the club saw or used AVELA.
           </p>
-          <Link className={styles.primaryLight} href="/live/london-city">Explore London City Live</Link>
+          <div className={styles.proofPair}>
+            <article><span>15 Sep · AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
+            <article><span>18 Sep · London City announced</span><strong>{proof.observedAction.en}</strong></article>
+          </div>
+          <div className={styles.proofActions}>
+            <Link className={styles.primaryLight} href="/case-study">See the evidence</Link>
+            <Link className={styles.proofTextLink} href="/live/london-city">Open London City Live ↗</Link>
+          </div>
         </div>
         <div className={styles.livePanel}>
           <div className={styles.liveTop}>
@@ -194,13 +203,23 @@ export default function Home() {
 
       <section className={styles.finalCta}>
         <div>
-          <span className={styles.kicker}>Bring one fixture</span>
-          <h2>We’ll show you where the growth opportunity is.</h2>
-          <p>A useful demo starts with a real upcoming home match, not a generic software tour.</p>
+          <span className={styles.kicker}>Bring your next six home fixtures</span>
+          <h2>Run AVELA as a 90-day decision pilot.</h2>
+          <p>
+            Start with the real calendar. AVELA ranks the fixtures, explains the signals, proposes the play and preserves
+            what was predicted so the club can review what actually happened.
+          </p>
+          <div className={styles.pilotPromise}>
+            <span>01 · Radar across six home fixtures</span>
+            <span>02 · Opportunity briefs and signal what-if</span>
+            <span>03 · Campaign drafts with human approval</span>
+            <span>04 · Prediction vs reality learning review</span>
+          </div>
         </div>
         <div>
-          <Link className={styles.primaryDark} href="/for-clubs#demo">Request a club demo</Link>
-          <Link className={styles.finalLink} href="/app/demo">Try the guided demo ↗</Link>
+          <Link className={styles.primaryDark} href="/for-clubs#demo">Request the 90-day pilot</Link>
+          <Link className={styles.finalLink} href="/app/demo">Try the 3-minute product demo ↗</Link>
+          <Link className={styles.finalLink} href="/case-study">Review London City proof ↗</Link>
         </div>
       </section>
 
