@@ -163,7 +163,7 @@ export default function SeasonIntelligencePage() {
           <Link href="/app/players">Open Player Asset Planning →</Link>
         </div>
         <div className={styles.playerUsageGrid}>
-          {playerUsage.map(({ player, capacity }) => (
+          {playerUsage.map(({ player, capacity, momentum }) => (
             <article key={player.id}>
               <div><span>{player.name}</span><strong>{momentum.score !== null ? `${momentum.score.toFixed(0)} momentum` : "No momentum score"}</strong></div>
               <div className={styles.playerTwinBars}>

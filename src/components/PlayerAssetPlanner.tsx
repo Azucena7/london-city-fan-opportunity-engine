@@ -265,12 +265,12 @@ export function PlayerAssetPlanner() {
                 </div>
                 {signal ? (
                   <div className={styles.momentumDimensions}>
-                    {[
+                    {([
                       ["Sporting", signal.sporting],
                       ["Attention", signal.attention],
                       ["International", signal.international],
                       ["Commercial", signal.commercial]
-                    ].map(([label, dimension]) => {
+                    ] as const).map(([label, dimension]) => {
                       const item = dimension as typeof signal.sporting;
                       return (
                         <div key={String(label)} title={item.source}>

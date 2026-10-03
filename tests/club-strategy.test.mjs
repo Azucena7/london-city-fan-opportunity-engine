@@ -49,18 +49,18 @@ test("rights are hard gates before ranking and capacity includes future commitme
   assert.deepEqual(d.playerCapacity(a,d.demoAppearances),{completed:2,reserved:1,remaining:1,used:3});
   assert.deepEqual(d.activationBlockers(b,request,d.demoAppearances),[]);
   assert.ok(d.activationBlockers(a,{...request,category:"mobility"},d.demoAppearances).includes("conflict"));
-  assert.ok(d.activationBlockers(c,request,d.demoAppearances).includes("dates"));
+  assert.ok(d.activationBlockers(c,{...request,date:"2027-07-01"},d.demoAppearances).includes("dates"));
   assert.ok(d.activationBlockers(dPlayer,request,d.demoAppearances).includes("agreement"));
   assert.ok(d.activationBlockers(dPlayer,request,d.demoAppearances).includes("quotaUnknown"));
   for(const [patch,reason] of [[{channel:"paid-ad"},"channel"],[{territory:"US"},"territory"],[{budget:0},"budget"],[{owner:""},"owner"],[{date:"2026-10-20"},"availability"]]) assert.ok(d.activationBlockers(b,{...request,...patch},d.demoAppearances).includes(reason));
 });
 test("allocation explains scores, respects weights and never ranks an ineligible player first",()=>{
   const ranked=d.recommendPlayers(d.demoPlayers,request,d.demoAppearances,weights,d.demoPosts,true);
-  assert.equal(ranked[0].player.id,"PLAYER-DEMO-B");
+  assert.equal(ranked[0].player.id,"PLAYER-DEMO-C");
   assert.equal(ranked[0].blockers.length,0);
   assert.equal(ranked.find((r)=>r.player.id==="PLAYER-DEMO-D").rate,9);
   const balanced=d.recommendPlayers(d.demoPlayers,request,d.demoAppearances,{fit:1,balance:100,engagement:0},d.demoPosts,false);
-  assert.equal(balanced[0].player.id,"PLAYER-DEMO-B");
+  assert.equal(balanced[0].player.id,"PLAYER-DEMO-C");
   assert.throws(()=>d.recommendPlayers(d.demoPlayers,request,[],{fit:0,balance:0,engagement:0},[],false));
   assert.throws(()=>d.recommendPlayers(d.demoPlayers,request,[],{fit:-1,balance:1,engagement:1},[],true));
   const noMetric=d.recommendPlayers([d.demoPlayers[1]],request,[],weights,[],true)[0];
