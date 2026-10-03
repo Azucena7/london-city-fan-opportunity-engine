@@ -757,7 +757,7 @@ test("legacy club routes redirect into the fixture-first workspace", () => {
 test("commercial surfaces route users into the simplified club journey", () => {
   const cases = read("src/app/cases/page.tsx");
   const pilot = read("src/app/pilot/page.tsx");
-  const demo = read("src/app/demo/page.tsx");
+  const demo = read("src/app/app/demo/page.tsx");
   const operatingPack = read("src/app/pilot/operating-pack/page.tsx");
   const caseOverview = read("src/components/LondonCityCase.tsx");
   for (const source of [cases, pilot, demo, operatingPack, caseOverview]) {
