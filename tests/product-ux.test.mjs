@@ -222,16 +222,14 @@ test("Brighton club activation intelligence includes the observed England v Spai
 });
 
 
-test("Today surfaces a compact engine-versus-reality check for the current fixture", () => {
-  const page = read("src/app/today/page.tsx");
-  const today = read("src/components/LocalizedToday.tsx");
-  assert.match(page, /decisionValidation/);
-  assert.match(today, /REALITY CHECK/);
-  assert.match(today, /comparable public club action/);
-  assert.match(today, /not influence on the club/);
-  assert.match(today, /causation claimed/);
-  assert.match(today, /\/measurement#decision-validation-title/);
-  assert.ok(today.indexOf("REALITY CHECK") < today.indexOf("Three actions before the next home fixture"));
+test("retired analyst routes redirect into canonical AVELA surfaces", () => {
+  const config = read("next.config.mjs");
+  for (const route of ["/today", "/this-week", "/calendar", "/fixtures", "/opportunities", "/signals"]) {
+    assert.match(config, new RegExp(`source: "${route.replace("/", "\\/")}"`));
+  }
+  assert.match(config, /source: "\/measurement", destination: "\/app\/learning"/);
+  assert.match(config, /source: "\/sources", destination: "\/app\/sources"/);
+  assert.match(config, /source: "\/club-demo\/:path\*", destination: "\/app\/demo"/);
 });
 
 
