@@ -75,3 +75,28 @@
 .clubExecutionGrid article:first-child{border-left:0}
 .handoffList{border-radius:0;background:#f3eadf}
 .clubExecutionEmpty{background:transparent}
+
+.executiveStrip{display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 34px;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
+.executiveStrip article{padding:18px 18px 18px 0}
+.executiveStrip article+article{padding-left:18px;border-left:1px solid var(--product-line)}
+.executiveStrip span,.executiveStrip strong,.executiveStrip small{display:block}
+.executiveStrip span{font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#748078}
+.executiveStrip strong{margin-top:7px;font-size:18px;line-height:1.25}
+.executiveStrip small{margin-top:4px;color:#748078;font-size:11px}
+.briefGrid{grid-template-columns:repeat(3,1fr)}
+.briefDecision{display:grid;grid-template-columns:minmax(220px,.7fr) 1.3fr;gap:28px;align-items:center;margin-top:10px;padding:18px 20px;background:#ecefdc;border-left:3px solid var(--product-accent)}
+.briefDecision span,.briefDecision strong{display:block}
+.briefDecision span{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#657067}
+.briefDecision strong{margin-top:5px;font-size:18px}
+.briefDecision p{margin:0;color:#59655d;line-height:1.5}
+@media(max-width:900px){
+  .executiveStrip{grid-template-columns:1fr 1fr}
+  .executiveStrip article:nth-child(3){border-left:0;border-top:1px solid var(--product-line)}
+  .executiveStrip article:nth-child(4){border-top:1px solid var(--product-line)}
+  .briefGrid{grid-template-columns:1fr}
+  .briefDecision{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .executiveStrip{grid-template-columns:1fr}
+  .executiveStrip article+article,.executiveStrip article:nth-child(3),.executiveStrip article:nth-child(4){padding-left:0;border-left:0;border-top:1px solid var(--product-line)}
+}
