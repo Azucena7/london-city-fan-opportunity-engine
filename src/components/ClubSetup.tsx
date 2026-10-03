@@ -94,6 +94,16 @@ export function ClubSetup() {
     setStatus(response.ok ? "Club setup saved." : "Club setup could not be saved.");
   }
 
+  if (configured === null) {
+    return (
+      <section className={styles.loadingState} aria-live="polite">
+        <span>Club setup</span>
+        <strong>Loading club context…</strong>
+        <p>Checking account access and saved operating defaults.</p>
+      </section>
+    );
+  }
+
   if (configured === false) {
     return <section className={styles.empty}><span>Club setup</span><h1>Club onboarding is ready for Supabase configuration.</h1></section>;
   }
