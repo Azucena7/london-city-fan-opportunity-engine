@@ -667,7 +667,7 @@ test("match signals can be excluded without mutating engine data", () => {
   assert.match(controls, /Recommendation/);
   assert.match(controls, /The recommended play is unchanged in this scenario/);
   assert.match(controls, /Needs review/);
-  assert.match(controls, /does not delete the source or change the underlying engine data/);
+  assert.match(controls, /does not delete the source, edit the evidence register, change the saved Radar rank or authorise a campaign/);
   assert.match(page, /MatchSignalControls/);
 });
 
