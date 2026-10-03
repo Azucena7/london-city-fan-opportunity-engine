@@ -49,15 +49,55 @@ export function contentInsights(posts: Post[], filter: ContentFilter, group: "pl
 export type SportingAvailability = "available" | "injured" | "rehab" | "sporting-unavailable";
 export type Player = { id: string; name: string; signed: boolean; validated: boolean; document: string; start: string; end: string; channels: string[]; territories: string[]; blockedCategories: string[]; quota: number | null; confirmedDates: string[]; fit: number; fee: number; sportingAvailability?: SportingAvailability; commercialAvailabilityOverride?: boolean; priorityReserve?: number };
 export type Appearance = { id: string; playerId: string; date: string; status: "reserved" | "completed" | "cancelled"; category: string; channel: string; territory: string; owner: string; evidence: string | null };
+export type InternationalDutyState = "window" | "manual-private" | "public-confirmed" | "released";
+export type InternationalDuty = { id: string; playerId: string; start: string; end: string; state: InternationalDutyState; team: string; source: string; public: boolean; note?: string };
 export type ActivationRequest = { date: string; category: string; channel: string; territory: string; owner: string; budget: number };
 export const demoPlayers = sample.players as Player[];
 export const demoAppearances = sample.appearances as Appearance[];
+export const demoInternationalDuty = (sample.internationalDuty ?? []) as InternationalDuty[];
 export function playerCapacity(player: Player, appearances: Appearance[]) {
   const items = appearances.filter((a) => a.playerId === player.id && a.status !== "cancelled" && a.date >= player.start && a.date <= player.end);
   const completed = items.filter((a) => a.status === "completed").length;
   return { completed, reserved: items.length - completed, remaining: player.quota === null ? null : Math.max(0, player.quota - items.length), used: items.length };
 }
-export function activationBlockers(player: Player, request: ActivationRequest, appearances: Appearance[]): string[] {
+export function internationalDutyForDate(playerId: string, date: string, duties: InternationalDuty[] = demoInternationalDuty) {
+  return duties.filter((duty) =>
+    duty.playerId === playerId &&
+    duty.state !== "released" &&
+    date >= duty.start &&
+    date <= duty.end
+  );
+}
+
+export function internationalAvailabilityAlerts(
+  players: Player[],
+  duties: InternationalDuty[],
+  from: string,
+  to: string
+) {
+  return duties
+    .filter((duty) => duty.state !== "released" && duty.end >= from && duty.start <= to)
+    .map((duty) => {
+      const player = players.find((item) => item.id === duty.playerId);
+      return {
+        playerId: duty.playerId,
+        playerName: player?.name ?? duty.playerId,
+        team: duty.team,
+        start: duty.start,
+        end: duty.end,
+        state: duty.state,
+        visibility: duty.public ? "public" as const : "internal" as const,
+        message: duty.state === "window"
+          ? `International window may affect ${player?.name ?? duty.playerId}; call-up not yet confirmed.`
+          : duty.state === "manual-private"
+            ? `${player?.name ?? duty.playerId} is marked internally as expected unavailable for international duty.`
+            : `${player?.name ?? duty.playerId} is publicly confirmed for international duty.`
+      };
+    })
+    .sort((a,b) => a.start.localeCompare(b.start) || a.playerName.localeCompare(b.playerName));
+}
+
+export function activationBlockers(player: Player, request: ActivationRequest, appearances: Appearance[], duties: InternationalDuty[] = demoInternationalDuty): string[] {
   const reasons: string[] = [];
   if (!player.signed || !player.validated) reasons.push("agreement");
   if (!dateValid(request.date) || request.date < player.start || request.date > player.end) reasons.push("dates");
@@ -66,6 +106,7 @@ export function activationBlockers(player: Player, request: ActivationRequest, a
   if (player.blockedCategories.includes(request.category)) reasons.push("conflict");
   if (!player.confirmedDates.includes(request.date)) reasons.push("availability");
   if (player.sportingAvailability === "sporting-unavailable" && !player.commercialAvailabilityOverride) reasons.push("sportingAvailability");
+  if (internationalDutyForDate(player.id, request.date, duties).some((duty) => duty.state === "manual-private" || duty.state === "public-confirmed")) reasons.push("internationalDuty");
   if (!Number.isFinite(request.budget) || request.budget < player.fee) reasons.push("budget");
   if (!request.owner) reasons.push("owner");
   const capacity = playerCapacity(player, appearances);
@@ -75,7 +116,7 @@ export function activationBlockers(player: Player, request: ActivationRequest, a
   return reasons;
 }
 export type Weights = { fit: number; balance: number; engagement: number };
-export function recommendPlayers(players: Player[], request: ActivationRequest, appearances: Appearance[], weights: Weights, posts: Post[], intelligence: boolean) {
+export function recommendPlayers(players: Player[], request: ActivationRequest, appearances: Appearance[], weights: Weights, posts: Post[], intelligence: boolean, duties: InternationalDuty[] = demoInternationalDuty) {
   if (Object.values(weights).some((v) => !Number.isFinite(v) || v < 0) || weights.fit + weights.balance + (intelligence ? weights.engagement : 0) <= 0) throw new Error("weights");
   const insights = contentInsights(posts, { account: "club", platform: "instagram", format: "video" }, "playerId", "rate");
   return players.map((player) => {
@@ -85,7 +126,7 @@ export function recommendPlayers(players: Player[], request: ActivationRequest, 
     const useEngagement = intelligence && rate !== null;
     const total = weights.fit + weights.balance + (useEngagement ? weights.engagement : 0);
     const score = total > 0 ? (weights.fit * player.fit + weights.balance * balance + (useEngagement ? weights.engagement * Math.min(100, rate * 10) : 0)) / total : 0;
-    return { player, capacity, rate, balance, score, blockers: activationBlockers(player, request, appearances) };
+    return { player, capacity, rate, balance, score, blockers: activationBlockers(player, request, appearances, duties) };
   }).sort((a, b) => Number(a.blockers.length > 0) - Number(b.blockers.length > 0) || b.score - a.score || a.player.id.localeCompare(b.player.id));
 }
 
@@ -132,10 +173,11 @@ export function recommendPlayerPacks(
   count: number,
   weights: PlayerPackWeights,
   posts: Post[],
-  intelligence: boolean
+  intelligence: boolean,
+  duties: InternationalDuty[] = demoInternationalDuty
 ): PlayerPackRecommendation[] {
   if (!Number.isSafeInteger(count) || count < 1 || count > players.length) throw new Error("count");
-  const ranked = recommendPlayers(players, request, appearances, weights, posts, intelligence);
+  const ranked = recommendPlayers(players, request, appearances, weights, posts, intelligence, duties);
   const eligible = ranked.filter((item) => item.blockers.length === 0);
   const packs = combinations(eligible, count).map((pack) => {
     const totalFee = pack.reduce((sum, item) => sum + item.player.fee, 0);
@@ -158,8 +200,8 @@ export function recommendPlayerPacks(
   return packs.sort((a,b) => Number(a.blockers.length > 0) - Number(b.blockers.length > 0) || b.packScore - a.packScore || a.totalFee - b.totalFee);
 }
 
-export function reserveAppearance(player: Player, request: ActivationRequest, appearances: Appearance[], role: string): Appearance[] {
-  if (role !== "approver" || activationBlockers(player, request, appearances).length) throw new Error("blocked");
+export function reserveAppearance(player: Player, request: ActivationRequest, appearances: Appearance[], role: string, duties: InternationalDuty[] = demoInternationalDuty): Appearance[] {
+  if (role !== "approver" || activationBlockers(player, request, appearances, duties).length) throw new Error("blocked");
   return [...appearances, { id: `AP-RESERVED-${player.id}-${request.date}-${appearances.length + 1}`, playerId: player.id, ...request, status: "reserved", evidence: null }];
 }
 export function completeAppearance(id: string, appearances: Appearance[], role: string): Appearance[] {
