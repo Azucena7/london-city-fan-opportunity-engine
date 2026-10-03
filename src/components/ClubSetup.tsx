@@ -113,6 +113,14 @@ export function ClubSetup() {
         <div className={styles.score}><span>Setup completeness</span><strong>{completeness}%</strong><small>{status}</small></div>
       </header>
 
+      <div className={styles.setupJourney} aria-label="Club setup progress">
+        <div className={fixtureSource !== "manual" ? styles.journeyDone : ""}><span>01</span><strong>Fixtures</strong><small>{fixtureSource !== "manual" ? "Connected" : "Needs source"}</small></div>
+        <div className={channels.length ? styles.journeyDone : ""}><span>02</span><strong>Channels</strong><small>{channels.length ? `${channels.length} active` : "Choose routes"}</small></div>
+        <div className={objectives.length ? styles.journeyDone : ""}><span>03</span><strong>Objectives</strong><small>{objectives.length ? `${objectives.length} priorities` : "Choose goals"}</small></div>
+        <div className={tone.trim() ? styles.journeyDone : ""}><span>04</span><strong>Brand</strong><small>{tone.trim() ? "Guardrails set" : "Needs rules"}</small></div>
+        <div className={approvalOwner.trim() ? styles.journeyDone : ""}><span>05</span><strong>Approval</strong><small>{approvalOwner.trim() ? approvalOwner : "Needs owner"}</small></div>
+      </div>
+
       <div className={styles.clubBar}>
         <label>Club<select value={activeClubId} onChange={(event) => { setActiveClubId(event.target.value); void loadSetup(event.target.value); }}>{clubs.map((club) => <option key={club.id} value={club.id}>{club.name}</option>)}</select></label>
         <div><span>Role</span><strong>{role}</strong><small>{canEdit ? "Can edit setup" : "Read-only setup access"}</small></div>
@@ -159,7 +167,10 @@ export function ClubSetup() {
           <span>Engine readiness</span>
           <h2>{completeness >= 80 ? "Ready to reduce manual setup." : "More context needed."}</h2>
           <p>The next home fixture can use these settings as club defaults. Fixture-specific signals and evidence still determine the actual recommendation.</p>
-          <button type="button" disabled={!canEdit} onClick={() => void saveSetup()}>{canEdit ? "Save club setup" : "Admin role required"}</button>
+          <div className={styles.readyAction}>
+            <span>{completeness >= 80 ? "Next fixture can use this context." : "Complete the missing context above."}</span>
+            <button type="button" disabled={!canEdit} onClick={() => void saveSetup()}>{canEdit ? "Save and use for next fixture" : "Admin role required"}</button>
+          </div>
         </article>
       </div>
     </section>
