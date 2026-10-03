@@ -7,3 +7,18 @@
 .card h2{font-size:24px}
 @media(max-width:900px){.shell{padding:0 18px 48px}}
 .progressBar{grid-column:1/-1;height:4px;background:#E7E9EE;overflow:hidden}.progressBar>span{display:block;height:100%;background:var(--product-accent)}.card:hover{background:#FAFAFC}.assetShortcut{max-width:1120px;margin:22px auto 0;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 14px;background:#F2F0FF;border-left:3px solid var(--product-accent)}.assetShortcut span{font-size:10px;font-weight:800;color:#5145D8}.assetShortcut a{font-size:10px;font-weight:900;color:#10131A;text-decoration:none}
+.seasonal{max-width:1120px;margin:34px auto 0;padding-top:28px;border-top:1px solid var(--product-line)}
+.seasonalHead{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:14px}
+.seasonalHead span{display:block;color:var(--product-muted);font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.seasonalHead h2{margin:6px 0 0;font-size:24px!important}
+.seasonalHead>a{color:var(--product-ink);font-size:10px;font-weight:900;text-decoration:none}
+.seasonalGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seasonalGrid article{padding:18px;background:#fff;border:1px solid var(--product-line)}
+.seasonalGrid article>div{display:flex;justify-content:space-between;gap:12px}
+.seasonalGrid article>div span{font-size:8px;font-weight:900;text-transform:uppercase;color:var(--product-accent)}
+.seasonalGrid article>div strong{font-size:10px}
+.seasonalGrid h3{margin:10px 0 6px;font-size:17px}
+.seasonalGrid p{margin:0;color:var(--product-muted);font-size:11px;line-height:1.45}
+.seasonalGrid small{display:block;margin-top:10px;color:var(--product-muted);font-size:9px}
+.seasonalGrid>a,.seasonalGrid article>a{display:inline-block;margin-top:12px;color:var(--product-ink);font-size:9px;font-weight:900;text-decoration:none}
+@media(max-width:900px){.seasonalGrid{grid-template-columns:1fr}.seasonalHead{align-items:flex-start;flex-direction:column}}
