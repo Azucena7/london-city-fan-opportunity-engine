@@ -63,7 +63,10 @@ export default async function ClubAppHome() {
               <div><b>{priority.materialSignalCount}</b><small>material signals</small></div>
               <div><b>{unresolved.length}</b><small>open gates</small></div>
             </div>
-            <Link href={`/app/matches/${priority.fixtureId}`}>Open decision workspace →</Link>
+            <div className={styles.focusActions}>
+              <Link href={`/app/matches/${priority.fixtureId}`}>Open decision workspace →</Link>
+              <Link href={`/app/executive?fixture=${priority.fixtureId}`}>Executive view →</Link>
+            </div>
           </div>
         </section>
       ) : (
