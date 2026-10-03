@@ -20,7 +20,7 @@
   --product-radius-sm:8px;
   --product-radius-md:12px;
   --product-radius-lg:18px;
-  --product-shadow:0 22px 70px rgba(16,33,27,.08);
+  --product-shadow:0 22px 70px rgba(16,19,26,.08);
   --product-space-xs:8px;
   --product-space-sm:14px;
   --product-space-md:22px;
@@ -93,7 +93,7 @@
   height:6px;
   overflow:hidden;
   border-radius:999px;
-  background:#DDE0DA;
+  background:#E2E4E9;
 }
 .productConfidenceTrack>span{
   display:block;
@@ -184,3 +184,9 @@ textarea:focus-visible{
 .productAppShell h2{font-size:var(--product-title)}
 .productAppShell p{max-width:72ch}
 @media(max-width:900px){.productAppShell{padding-left:0}}
+
+/* Final density and surface consistency */
+.productAppShell{background:#F7F8FA}
+.productAppShell :is(h1,h2,h3){color:var(--product-ink)}
+.productAppShell :is(p,small){color:var(--product-muted)}
+.productAppShell :is(article,section,div){box-sizing:border-box}
