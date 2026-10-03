@@ -74,6 +74,7 @@ export type ProductOpportunity = {
     materiality: LiveSignal["materiality"];
     sourceName: string;
     sourceUrl: string;
+    observedAt: string;
     lens: WomensFootballSignalLens;
   }>;
   updatedAt: string | null;
@@ -376,6 +377,7 @@ export function getCurrentProductOpportunity(requestedFixtureId?: string): Produ
       materiality: signal.materiality,
       sourceName: signal.sourceName,
       sourceUrl: signal.sourceUrl,
+      observedAt: signal.observedAt,
       lens: classifyWomensFootballSignal(signal)
     })),
     updatedAt: (currentState.updated_at as string | undefined) ?? null,

@@ -1135,3 +1135,22 @@ test("National Rail RDM is registered as approved access awaiting a data product
   assert.match(env, /RDM_AUTH_MODE=/);
 });
 
+
+
+test("Opportunity Radar is the primary fixture decision surface", () => {
+  const radar = read("src/lib/opportunityRadar.ts");
+  const matches = read("src/app/matches/page.tsx");
+  const css = read("src/app/matches/matches.module.css");
+
+  assert.match(radar, /opportunityScore: number \| null/);
+  assert.match(radar, /urgency: "Immediate" \| "Soon" \| "Watch"/);
+  assert.match(radar, /recentMaterialSignalCount/);
+  assert.match(radar, /No material opportunity/);
+  assert.match(radar, /new material signal/);
+  assert.match(matches, /Opportunity score/);
+  assert.match(matches, /Signal movement/);
+  assert.match(matches, /signalChangeLabel/);
+  assert.match(matches, /Open opportunity brief/);
+  assert.match(css, /radarScoreline/);
+  assert.match(css, /stateNomaterialopportunity/);
+});

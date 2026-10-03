@@ -62,6 +62,7 @@ export default async function MatchesPage() {
         <div><span>Act now</span><strong>{radar.filter((item) => item.radarState === "Act now").length}</strong></div>
         <div><span>Needs review</span><strong>{radar.filter((item) => item.radarState === "Review").length}</strong></div>
         <div><span>Monitoring</span><strong>{radar.filter((item) => item.radarState === "Monitor").length}</strong></div>
+        <div><span>No material opportunity</span><strong>{radar.filter((item) => item.radarState === "No material opportunity").length}</strong></div>
       </section>
 
       {clubContext ? (
@@ -113,6 +114,11 @@ export default async function MatchesPage() {
             <div className={styles.priorityDecision}>
               <span>Growth opportunity</span>
               <strong>{live?.opportunity ?? "Review current evidence."}</strong>
+              <div className={styles.priorityMetrics}>
+                <div><span>Opportunity score</span><b>{priority?.opportunityScore ?? "—"}</b></div>
+                <div><span>Urgency</span><b>{priority?.urgency ?? "—"}</b></div>
+                <div><span>Signal movement</span><b>{priority?.signalChangeLabel ?? "—"}</b></div>
+              </div>
               <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
               {priority?.clubFit ? (
                 <div className={styles.priorityClubFit}>
@@ -175,9 +181,14 @@ export default async function MatchesPage() {
                 ) : null}
               </div>
               <div className={styles.radarEvidence}>
-                <span className={styles[`state${item.radarState.replace(" ", "")}`]}>{item.radarState}</span>
+                <span className={styles[`state${item.radarState.replaceAll(" ", "")}`]}>{item.radarState}</span>
+                <div className={styles.radarScoreline}>
+                  <b>{item.opportunityScore ?? "—"}<small>score</small></b>
+                  <b>{item.urgency}<small>urgency</small></b>
+                </div>
                 <strong>{item.confidence} confidence</strong>
                 <small>{item.materialSignalCount} material · {item.signalCount} total signals</small>
+                <small className={styles.signalMovement}>{item.signalChangeLabel}</small>
                 <Link href={`/app/matches/${item.fixtureId}`}>Review →</Link>
               </div>
             </article>

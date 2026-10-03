@@ -16,8 +16,12 @@ export type OpportunityRadarItem = {
   signalCount: number;
   materialSignalCount: number;
   lens: string[];
-  radarState: "Act now" | "Review" | "Monitor";
+  radarState: "Act now" | "Review" | "Monitor" | "No material opportunity";
   rank: number;
+  opportunityScore: number | null;
+  urgency: "Immediate" | "Soon" | "Watch";
+  recentMaterialSignalCount: number;
+  signalChangeLabel: string;
   clubFit: {
     matchedObjectives: string[];
     activationChannels: string[];
@@ -92,7 +96,35 @@ function deriveClubFit(
   };
 }
 
-function radarState(rank: number, daysToFixture: number): OpportunityRadarItem["radarState"] {
+function urgencyLabel(daysToFixture: number): OpportunityRadarItem["urgency"] {
+  if (daysToFixture <= 7) return "Immediate";
+  if (daysToFixture <= 28) return "Soon";
+  return "Watch";
+}
+
+function recentMaterialSignals(
+  signals: Array<{ observedAt?: string; materiality: "high" | "medium" | "low" }>,
+  referenceIso: string | null
+) {
+  if (!referenceIso) return 0;
+  const reference = new Date(referenceIso).getTime();
+  const windowStart = reference - 7 * 86400000;
+  return signals.filter((signal) => {
+    if (signal.materiality === "low" || !signal.observedAt) return false;
+    const observed = new Date(signal.observedAt).getTime();
+    return observed >= windowStart && observed <= reference;
+  }).length;
+}
+
+function radarState(
+  rank: number,
+  daysToFixture: number,
+  opportunityScore: number | null,
+  materialSignalCount: number
+): OpportunityRadarItem["radarState"] {
+  if (opportunityScore !== null && opportunityScore < 55 && materialSignalCount === 0 && daysToFixture > 21) {
+    return "No material opportunity";
+  }
   if (rank >= 92 || daysToFixture <= 7) return "Act now";
   if (rank >= 70 || daysToFixture <= 28) return "Review";
   return "Monitor";
@@ -113,6 +145,14 @@ export function buildOpportunityRadar(
         item.daysToFixture,
         materialSignalCount,
         item.decisionState === "READY FOR REVIEW"
+      );
+
+      const recentMaterialSignalCount = recentMaterialSignals(
+        item.liveSignals.map((signal) => ({
+          observedAt: signal.observedAt,
+          materiality: signal.materiality
+        })),
+        item.updatedAt
       );
 
       const clubFitText = [
@@ -140,8 +180,14 @@ export function buildOpportunityRadar(
         lens: Array.from(new Set(item.liveSignals.map((signal) => signal.lens)))
           .filter((lens) => lens !== "General context")
           .slice(0, 3),
-        radarState: radarState(rank, item.daysToFixture),
+        radarState: radarState(rank, item.daysToFixture, item.score, materialSignalCount),
         rank,
+        opportunityScore: item.score,
+        urgency: urgencyLabel(item.daysToFixture),
+        recentMaterialSignalCount,
+        signalChangeLabel: recentMaterialSignalCount > 0
+          ? `${recentMaterialSignalCount} new material signal${recentMaterialSignalCount === 1 ? "" : "s"} in 7d`
+          : "No new material signal in 7d",
         clubFit: deriveClubFit(clubFitText, clubContext)
       };
     })
