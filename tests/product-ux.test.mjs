@@ -248,7 +248,7 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
   assert.match(demo, /Open campaign builder/);
   assert.match(page, /getCurrentProductOpportunity/);
   assert.match(page, /campaignPlans/);
-  assert.match(nav, /Guided demo/);
+  assert.match(nav, /label: "Demo"/);
   assert.match(nav, /\/app\/demo/);
 });
 
@@ -431,7 +431,7 @@ test("pilot access separates identity from club membership and supports admin ap
   assert.match(approve, /Authentication required/);
 
   assert.match(nav, /href: "\/app\/access"/);
-  assert.match(nav, /label: "Access"/);
+  assert.match(nav, /label: "Team"/);
 
   assert.match(migration, /create table if not exists public\.club_access_requests/);
   assert.match(migration, /security invoker/);
@@ -614,8 +614,9 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /specific campaign recipe is locked/);
   assert.match(page, /CampaignCreditBuilder/);
   assert.match(page, /fixtureId=\{fixture\.id\}/);
-  assert.match(nav, /60/);
-  assert.match(nav, /credits/);
+  assert.match(nav, /href: "\/app\/credits"/);
+  assert.match(nav, /label: "Credits"/);
+  assert.doesNotMatch(nav, /<strong>60<\/strong> credits/);
 });
 
 test("match plan closes with a simple review and handoff gate", () => {
