@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "home" | "campaigns" | "product" | "matches" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access" | "sources" | "executive" | "season" | "players";
+  active?: "home" | "campaigns" | "matches" | "demo" | "results" | "credits" | "setup" | "access" | "sources" | "executive" | "season" | "players";
 };
 
 const workItems = [
