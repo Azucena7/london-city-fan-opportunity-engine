@@ -1154,3 +1154,22 @@ test("Opportunity Radar is the primary fixture decision surface", () => {
   assert.match(css, /radarScoreline/);
   assert.match(css, /stateNomaterialopportunity/);
 });
+
+
+test("Opportunity Brief supports transparent signal what-if recalculation", () => {
+  const controls = read("src/components/MatchSignalControls.tsx");
+  const page = read("src/app/matches/[fixtureId]/page.tsx");
+  const product = read("src/lib/productOpportunity.ts");
+
+  assert.match(controls, /Core evidence/);
+  assert.match(controls, /Observed/);
+  assert.match(controls, /Excluded temporarily/);
+  assert.match(controls, /How recalculation works/);
+  assert.match(controls, /No source data has been changed/);
+  assert.match(controls, /does not delete the source/);
+  assert.match(controls, /change the saved Radar rank/);
+  assert.match(controls, /isCoreEvidence/);
+  assert.match(controls, /disabled=\{core\}/);
+  assert.match(page, /Inspect, exclude & recalculate/);
+  assert.match(product, /observedAt: signal\.observedAt/);
+});
