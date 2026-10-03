@@ -314,5 +314,40 @@
       "interactions": 200,
       "impressions": 5000
     }
+  ],
+  "internationalDuty": [
+    {
+      "id": "INT-DEMO-A",
+      "playerId": "PLAYER-DEMO-A",
+      "start": "2026-10-19",
+      "end": "2026-10-28",
+      "state": "window",
+      "team": "National team A",
+      "source": "Synthetic international calendar window",
+      "public": true,
+      "note": "Window only; selection not confirmed."
+    },
+    {
+      "id": "INT-DEMO-B",
+      "playerId": "PLAYER-DEMO-B",
+      "start": "2026-10-17",
+      "end": "2026-10-26",
+      "state": "manual-private",
+      "team": "National team B",
+      "source": "Internal club planning flag",
+      "public": false,
+      "note": "Expected absence entered manually before public squad announcement."
+    },
+    {
+      "id": "INT-DEMO-C",
+      "playerId": "PLAYER-DEMO-C",
+      "start": "2026-11-09",
+      "end": "2026-11-19",
+      "state": "public-confirmed",
+      "team": "National team C",
+      "source": "Synthetic public squad announcement",
+      "public": true,
+      "note": "Public confirmation for demo only."
+    }
   ]
 }
