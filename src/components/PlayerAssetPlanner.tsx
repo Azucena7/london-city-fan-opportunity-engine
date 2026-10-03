@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import {
   demoAppearances,
+  demoCommercialCampaigns,
   demoInternationalDuty,
   demoPlayers,
   demoPosts,
@@ -21,8 +22,28 @@ const sportingLabel: Record<SportingAvailability, string> = {
   "sporting-unavailable": "Sporting unavailable"
 };
 
+const fixtureBrief = {
+  id: "fixture-everton",
+  name: "Everton matchday campaign",
+  type: "fixture" as const,
+  start: "2026-10-03",
+  end: "2026-10-18",
+  activationDate: "2026-10-18",
+  objective: "Convert the current Everton opportunity into a reviewable matchday activation.",
+  category: "retail",
+  channel: "club-social",
+  territory: "UK",
+  owner: "marketing",
+  budget: 1600,
+  playerNeed: 3
+};
+
 export function PlayerAssetPlanner() {
-  const [count, setCount] = useState(3);
+  const campaignOptions = [fixtureBrief, ...demoCommercialCampaigns];
+  const [campaignId, setCampaignId] = useState(campaignOptions[0]?.id ?? fixtureBrief.id);
+  const selectedCampaign = campaignOptions.find((item) => item.id === campaignId) ?? fixtureBrief;
+  const [countOverride, setCountOverride] = useState<number | null>(null);
+  const count = countOverride ?? selectedCampaign.playerNeed;
   const [sporting, setSporting] = useState<Record<string, SportingAvailability>>(
     Object.fromEntries(demoPlayers.map((player) => [player.id, player.sportingAvailability ?? "available"]))
   );
@@ -40,12 +61,12 @@ export function PlayerAssetPlanner() {
   );
 
   const request: ActivationRequest = {
-    date: "2026-10-18",
-    category: "retail",
-    channel: "club-social",
-    territory: "UK",
-    owner: "marketing",
-    budget: 1600
+    date: selectedCampaign.activationDate,
+    category: selectedCampaign.category,
+    channel: selectedCampaign.channel,
+    territory: selectedCampaign.territory,
+    owner: selectedCampaign.owner,
+    budget: selectedCampaign.budget
   };
 
   const packs = recommendPlayerPacks(
@@ -59,7 +80,7 @@ export function PlayerAssetPlanner() {
     demoInternationalDuty
   ).slice(0, 3);
 
-  const internationalAlerts = internationalAvailabilityAlerts(players, demoInternationalDuty, "2026-10-01", "2026-11-30");
+  const internationalAlerts = internationalAvailabilityAlerts(players, demoInternationalDuty, selectedCampaign.start, selectedCampaign.end);
 
   return (
     <section className={styles.wrap}>
@@ -72,11 +93,41 @@ export function PlayerAssetPlanner() {
         <div className={styles.need}>
           <span>Players needed</span>
           <div>
-            {[1,2,3,4].map((value) => <button type="button" key={value} className={count === value ? styles.active : ""} onClick={() => setCount(value)}>{value}</button>)}
-            <button type="button" className={count >= 5 ? styles.active : ""} onClick={() => setCount(Math.min(5, players.length))}>5+</button>
+            {[1,2,3,4].map((value) => <button type="button" key={value} className={count === value ? styles.active : ""} onClick={() => setCountOverride(value)}>{value}</button>)}
+            <button type="button" className={count >= 5 ? styles.active : ""} onClick={() => setCountOverride(Math.min(5, players.length))}>5+</button>
           </div>
+          <small>Brief default · {selectedCampaign.playerNeed} player{selectedCampaign.playerNeed === 1 ? "" : "s"}</small>
         </div>
       </header>
+
+      <section className={styles.campaignContext} aria-label="Commercial campaign context">
+        <div>
+          <span>Campaign context</span>
+          <select
+            value={campaignId}
+            onChange={(event) => {
+              setCampaignId(event.target.value);
+              setCountOverride(null);
+            }}
+          >
+            {campaignOptions.map((campaign) => (
+              <option key={campaign.id} value={campaign.id}>{campaign.name}</option>
+            ))}
+          </select>
+        </div>
+        <article>
+          <span>Type</span>
+          <strong>{selectedCampaign.type.replaceAll("-", " ")}</strong>
+        </article>
+        <article>
+          <span>Activation date</span>
+          <strong>{selectedCampaign.activationDate}</strong>
+        </article>
+        <article>
+          <span>Objective</span>
+          <strong>{selectedCampaign.objective}</strong>
+        </article>
+      </section>
 
       <section className={styles.alerts}>
         <div className={styles.sectionHead}>
@@ -95,7 +146,7 @@ export function PlayerAssetPlanner() {
       </section>
 
       <section className={styles.summary}>
-        <article><span>Activation</span><strong>Everton campaign · 18 Oct</strong><small>club-social · UK · £1,600 budget</small></article>
+        <article><span>Activation</span><strong>{selectedCampaign.name} · {selectedCampaign.activationDate}</strong><small>{selectedCampaign.channel} · {selectedCampaign.territory} · £{selectedCampaign.budget.toLocaleString("en-GB")} budget</small></article>
         <article><span>Optimisation goal</span><strong>Fit + balance + cost + opportunity cost</strong><small>Engagement used where measured</small></article>
         <article><span>Human control</span><strong>Club confirms sporting status</strong><small>No medical inference or automatic player-status claim</small></article>
       </section>
