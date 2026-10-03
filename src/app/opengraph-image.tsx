@@ -34,11 +34,11 @@ export default function Image() {
           </div>
 
           <div style={{ color: "#526D00", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em", marginTop: "70px" }}>
-            DECISION INTELLIGENCE FOR FOOTBALL CLUBS
+            GROWTH INTELLIGENCE FOR WOMEN’S FOOTBALL
           </div>
 
           <div style={{ fontSize: "60px", lineHeight: 0.98, fontWeight: 800, letterSpacing: "-0.045em", marginTop: "18px" }}>
-            Turn fan data into the next best action for every fixture.
+            Know where to act before the moment passes.
           </div>
 
           <div style={{ fontSize: "20px", lineHeight: 1.35, color: "#64706B", marginTop: "24px" }}>
@@ -62,9 +62,9 @@ export default function Image() {
             </div>
 
             {[
-              ["01", "Matches"],
-              ["02", "Match plan"],
-              ["03", "Review"],
+              ["01", "Radar"],
+              ["02", "Opportunity brief"],
+              ["03", "Campaign"],
               ["04", "Learning"]
             ].map(([num, label]) => (
               <div key={num} style={{ display: "flex", alignItems: "center", padding: "15px 0", borderBottom: "1px solid rgba(255,255,255,0.09)" }}>
