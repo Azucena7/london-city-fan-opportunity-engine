@@ -44,7 +44,7 @@ export function ClubPilotProposition() {
       <p className="commercialScope">{es ? "90 días · 6 partidos propuestos · un objetivo prioritario" : "90 days · 6 proposed fixtures · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
       <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar la conversación →" : "Prepare the discussion →"}</a></div>
-      <p><Link href="/club-demo">{es ? "Probar el espacio de cliente con datos de prueba →" : "Try the client workspace with test data →"}</Link></p>
+      <p><Link href="/app/demo">{es ? "Probar el espacio de cliente con datos de prueba →" : "Try the client workspace with test data →"}</Link></p>
     </header>
 
     <section className="commercialPanel">
