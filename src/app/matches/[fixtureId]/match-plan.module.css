@@ -100,3 +100,11 @@
   .executiveStrip{grid-template-columns:1fr}
   .executiveStrip article+article,.executiveStrip article:nth-child(3),.executiveStrip article:nth-child(4){padding-left:0;border-left:0;border-top:1px solid var(--product-line)}
 }
+
+.shell{padding:0 28px 64px}
+.backRow,.hero,.priorityBar,.decisionCockpit,.executiveStrip,.opportunityBrief,.recommendation,.actionsSection,.signalsSection,.impactSection,.clubExecutionContext,.footerActions{max-width:1120px;margin-left:auto;margin-right:auto}
+.hero{padding:30px 0 28px}
+.hero h1{max-width:720px!important}
+.decisionLead h2{font-size:clamp(28px,3.4vw,42px)}
+.sectionHead h2{font-size:26px}
+@media(max-width:900px){.shell{padding:0 18px 48px}}

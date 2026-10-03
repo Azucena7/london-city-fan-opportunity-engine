@@ -122,3 +122,14 @@
   .priorityMetrics{grid-template-columns:1fr}
   .radarScoreline{gap:18px}
 }
+
+/* Tool-density reset */
+.shell{padding:0 28px 64px}
+.header{max-width:1120px;margin:0 auto;padding:42px 0 28px;gap:32px}
+.header h1{max-width:680px!important}
+.header p{max-width:680px;font-size:15px;line-height:1.6;margin-top:14px}
+.radarSummary,.clubFitPanel,.clubFitEmpty,.priorityMatch,.monitoringSection,.womenLens,.principle{max-width:1120px;margin-left:auto;margin-right:auto}
+.priorityMain h2{font-size:clamp(30px,3.6vw,44px)}
+.monitoringHead h2{font-size:24px}
+.radarFixture{grid-template-columns:38px minmax(160px,.72fr) minmax(260px,1.35fr) minmax(150px,.62fr)}
+@media(max-width:900px){.shell{padding:0 18px 48px}}

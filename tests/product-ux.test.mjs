@@ -1262,3 +1262,28 @@ test("commercial home uses lightweight product motion instead of decorative vide
   assert.match(stage, /decisionPulse/);
   assert.match(stage, /tracer/);
 });
+
+
+test("AVELA uses an application shell with a left sidebar and bounded work area", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const navCss = read("src/components/ProductJourneyNav.module.css");
+  const system = read("src/app/product-system.css");
+  assert.match(nav, /aside className=\{styles\.sidebar\}/);
+  assert.match(nav, /Club workflow/);
+  assert.match(navCss, /position:fixed/);
+  assert.match(navCss, /width:232px/);
+  assert.match(system, /padding-left:232px/);
+  assert.match(system, /max-width:1120px/);
+});
+
+test("commercial and London City surfaces use bounded reading widths and demo framing", () => {
+  const commercial = read("src/app/commercial-home.module.css");
+  const live = read("src/components/LondonCityCase.tsx");
+  const liveCss = read("src/components/LondonCityLive.module.css");
+  const clubs = read("src/components/ClubPilotProposition.tsx");
+  assert.match(commercial, /width:min\(1080px/);
+  assert.match(commercial, /signalTicker\{background:#fff/);
+  assert.match(live, /PUBLIC DEMO · LONDON CITY/);
+  assert.match(liveCss, /width:min\(980px/);
+  assert.match(clubs, /INDEPENDENT DEMO/);
+});
