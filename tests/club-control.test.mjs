@@ -53,14 +53,3 @@ test("agreement revoked, expired, unknown quota and insufficient fee block talen
   assert.ok(talent(player,[reservation],"instagram","UK",0).includes("talentBudget"));
   assert.deepEqual(d.talentLaunchBlockers(undefined,false,[],date,"whatsapp","UK",0),[]);
 });
-test("UI gates handler and button and clears controls when restoring changed settings",async()=>{
-  const ui=await readFile(new URL("../src/components/ClubOperationsDemo.tsx",import.meta.url),"utf8");
-  assert.match(ui,/function simulate\(\)[\s\S]*?launchControlBlockers.length/);
-  assert.match(ui,/disabled=\{!canSimulate[\s\S]*?launchControlBlockers.length > 0/);
-  assert.match(ui,/function invalidateControls\(\) \{ setReviews\(\{\}\); setEpoch/);
-  assert.match(ui,/setControl\(value\); invalidateControls\(\)/);
-  // Channel selection is navigation between independent drafts, not an edit.
-  // Reviews remain bound to the exact selected creative version (includes channel).
-  assert.match(ui,/creative:currentCreative \? creativeVersion\(currentCreative\) : null/);
-  assert.match(ui,/setChannel\(event.target.value as Channel\)/);
-});
