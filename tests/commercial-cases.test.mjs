@@ -5,7 +5,7 @@ import { readFile } from "node:fs/promises";
 const source = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("commercial fixture route resolves known cases and rejects unknown cases", async () => {
-  const page = await source("src/app/london-city/[case]/page.tsx");
+  const page = await source("src/app/live/london-city/[case]/page.tsx");
   assert.match(page, /2026-10-18-eve-h/);
   assert.match(page, /2026-09-26-bha-h/);
   assert.match(page, /key !== "everton" && key !== "brighton"\) notFound\(\)/);
