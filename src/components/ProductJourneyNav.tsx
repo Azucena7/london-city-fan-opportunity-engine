@@ -7,11 +7,15 @@ type ProductJourneyNavProps = {
 
 const primaryItems = [
   { key: "matches", label: "Radar", href: "/app/matches" },
-  { key: "results", label: "Learning", href: "/app/learning" },
-  { key: "credits", label: "Credits", href: "/app/credits" },
-  { key: "setup", label: "Setup", href: "/app/setup" },
-  { key: "access", label: "Team", href: "/app/access" },
-  { key: "demo", label: "Demo", href: "/app/demo" }
+  { key: "brief", label: "Campaigns", href: "/app/campaigns" },
+  { key: "results", label: "Learning", href: "/app/learning" }
+] as const;
+
+const clubItems = [
+  { key: "setup", label: "Setup", description: "Objectives, channels and fixture source", href: "/app/setup" },
+  { key: "access", label: "Team", description: "Workspace access and roles", href: "/app/access" },
+  { key: "credits", label: "Credits", description: "Usage and plan allowance", href: "/app/credits" },
+  { key: "demo", label: "Demo", description: "Guided product walkthrough", href: "/app/demo" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
@@ -36,6 +40,17 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
 
       <div className={styles.account}>
         <span className={styles.workspace}>Club workspace</span>
+        <details className={styles.more}>
+          <summary className={clubItems.some((item) => item.key === active) ? styles.activeSummary : ""}>Club</summary>
+          <div className={styles.menu}>
+            {clubItems.map((item) => (
+              <Link key={item.key} href={item.href} className={active === item.key ? styles.menuActive : ""}>
+                <strong>{item.label}</strong>
+                <span>{item.description}</span>
+              </Link>
+            ))}
+          </div>
+        </details>
         <Link className={styles.engine} href="/">
           AVELA.com ↗
         </Link>
