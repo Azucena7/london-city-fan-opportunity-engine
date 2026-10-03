@@ -665,7 +665,7 @@ test("match signals can be excluded without mutating engine data", () => {
   assert.match(controls, /Signals used/);
   assert.match(controls, /Confidence with this selection/);
   assert.match(controls, /Recommendation/);
-  assert.match(controls, /The recommendation is unchanged/);
+  assert.match(controls, /The recommended play is unchanged in this scenario/);
   assert.match(controls, /Needs review/);
   assert.match(controls, /does not delete the source or change the underlying engine data/);
   assert.match(page, /MatchSignalControls/);
@@ -686,7 +686,7 @@ test("single match workspace absorbs plan evidence signals and impact", () => {
 test("London City Live reads like an editorial case journal", () => {
   const overview = read("src/components/LondonCityCase.tsx");
   const detail = read("src/components/CommercialCaseStory.tsx");
-  assert.match(overview, /What the engine saw before the match/);
+  assert.match(overview, /PUBLIC DEMO · LONDON CITY/);
   assert.match(overview, /WHAT THE ENGINE SAW/);
   assert.match(overview, /WHAT IT RECOMMENDED/);
   assert.match(overview, /CASE JOURNAL/);
@@ -706,7 +706,7 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   assert.match(home, /href="\/live\/london-city"/);
   assert.match(marketingNav, /Open app/);
   assert.match(marketingNav, /\/app\/matches/);
-  assert.match(appNav, /AVELA\.com/);
+  assert.match(appNav, /AVELA website/);
   assert.match(appNav, /\/app\/learning/);
   assert.match(config, /source: "\/london-city", destination: "\/live\/london-city"/);
   assert.match(liveCase, /MarketingNav/);
@@ -790,7 +790,7 @@ test("product and analyst branding are intentionally separated", () => {
   assert.match(productNav, /AVELA/);
   assert.match(productNav, /Radar/);
   assert.match(productNav, /Learning/);
-  assert.match(productNav, /AVELA\.com/);
+  assert.match(productNav, /AVELA website/);
   assert.doesNotMatch(productNav, /Morning brief/);
   assert.doesNotMatch(productNav, /Decision Room/);
   assert.match(analystNav, /LONDON CITY \/ CASE/);
@@ -1053,7 +1053,7 @@ test("AVELA commercial home uses an editorial product-theatre identity with purp
   assert.match(page, /Not another CRM/);
   assert.match(page, /The missing layer/);
   assert.match(page, /CommercialSignalStage/);
-  assert.match(page, /See what AVELA saw before the result was known/);
+  assert.match(page, /See AVELA thinking in public/);
 
   assert.match(motion, /Fixture → decision → action/);
   assert.match(motion, /Opportunity/);
@@ -1061,8 +1061,8 @@ test("AVELA commercial home uses an editorial product-theatre identity with purp
   assert.match(motionCss, /@keyframes drift/);
   assert.match(motionCss, /prefers-reduced-motion:no-preference/);
 
-  assert.match(homeCss, /--cream:#f4f1e8/);
-  assert.match(homeCss, /--lime:#c7ea3a/);
+  assert.match(homeCss, /--page-bg:#f6f7f9/);
+  assert.match(homeCss, /--accent:#6657ff/i);
   assert.match(homeCss, /productTheatre/);
   assert.match(homeCss, /liveProof/);
 
@@ -1235,8 +1235,8 @@ test("AVELA visual system removes olive identity and simplifies club app navigat
   assert.match(nav, /Radar/);
   assert.match(nav, /Campaigns/);
   assert.match(nav, /Learning/);
-  assert.match(nav, /const clubItems/);
-  assert.match(nav, />Club<\/summary>/);
+  assert.match(nav, /const workspaceItems/);
+  assert.match(nav, />Club<\/span>/);
   assert.doesNotMatch(nav, /label: "London City Live"/);
   assert.doesNotMatch(nav, /primaryItems[\s\S]*label: "Credits"/);
   assert.match(system, /--product-accent:#6657FF/);
@@ -1436,7 +1436,7 @@ test("International duty supports watch windows, private pre-alerts and public c
 test("Season Intelligence includes player asset utilisation without calling usage performance", () => {
   const page = read("src/app/app/season/page.tsx");
   assert.match(page, /Player asset utilisation/);
-  assert.match(page, /Usage is not performance/);
+  assert.match(page, /Momentum and usage are different signals/);
   assert.match(page, /Open Player Asset Planning/);
 });
 
@@ -1446,8 +1446,8 @@ test("Player Asset Planning works for fixture and non-fixture commercial campaig
   const campaigns = read("src/app/app/campaigns/page.tsx");
   const data = JSON.parse(read("data/seed/club-strategy-demo.json"));
   assert.match(planner, /Campaign context/);
-  assert.match(planner, /Season tickets 2027/);
-  assert.match(planner, /Christmas campaign/);
+  assert.match(planner, /demoCommercialCampaigns/);
+  assert.match(planner, /campaignOptions/);
   assert.match(planner, /selectedCampaign\.activationDate/);
   assert.match(planner, /selectedCampaign\.playerNeed/);
   assert.match(campaigns, /Campaigns that do not need a fixture to exist/);
