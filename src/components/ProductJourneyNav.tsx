@@ -2,13 +2,13 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "home" | "product" | "matches" | "brief" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access" | "sources";
+  active?: "home" | "campaigns" | "product" | "matches" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access" | "sources";
 };
 
 const workItems = [
   { key: "home", label: "Home", hint: "What needs attention", href: "/app", glyph: "H" },
   { key: "matches", label: "Radar", hint: "Prioritise fixtures", href: "/app/matches", glyph: "R" },
-  { key: "brief", label: "Campaigns", hint: "Review drafted plays", href: "/app/campaigns", glyph: "C" },
+  { key: "campaigns", label: "Campaigns", hint: "Review drafted plays", href: "/app/campaigns", glyph: "C" },
   { key: "results", label: "Learning", hint: "Close the loop", href: "/app/learning", glyph: "L" }
 ] as const;
 
