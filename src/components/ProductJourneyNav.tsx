@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "home" | "campaigns" | "product" | "matches" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access" | "sources";
+  active?: "home" | "campaigns" | "product" | "matches" | "opportunity" | "cases" | "demo" | "decision" | "results" | "pilot" | "impact" | "engine" | "clubs" | "credits" | "setup" | "access" | "sources" | "executive";
 };
 
 const workItems = [
@@ -13,6 +13,7 @@ const workItems = [
 ] as const;
 
 const workspaceItems = [
+  { key: "executive", label: "Executive view", href: "/app/executive" },
   { key: "sources", label: "Sources", href: "/app/sources" },
   { key: "setup", label: "Setup", href: "/app/setup" },
   { key: "access", label: "Team", href: "/app/access" },
@@ -23,7 +24,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
   return (
     <aside className={styles.sidebar} aria-label="AVELA club app navigation">
       <div className={styles.top}>
-        <Link className={styles.brand} href="/app/matches">
+        <Link className={styles.brand} href="/app">
           <span className={styles.brandMark} aria-hidden="true" />
           <span>AVELA</span>
         </Link>
