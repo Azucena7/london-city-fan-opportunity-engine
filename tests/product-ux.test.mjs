@@ -1208,3 +1208,20 @@ test("commercial case study leads with time-stamped prediction versus observable
   assert.match(css, /predictionProofFlow/);
   assert.match(css, /predictionProofBoundary/);
 });
+
+
+test("commercial home turns London City proof into a concrete 90-day pilot path", () => {
+  const page = read("src/app/page.tsx");
+  const css = read("src/app/commercial-home.module.css");
+  assert.match(page, /See what AVELA saw before London City announced it/);
+  assert.match(page, /15 Sep · AVELA saw/);
+  assert.match(page, /18 Sep · London City announced/);
+  assert.match(page, /evidence of relevance/);
+  assert.match(page, /Run AVELA as a 90-day decision pilot/);
+  assert.match(page, /Radar across six home fixtures/);
+  assert.match(page, /Opportunity briefs and signal what-if/);
+  assert.match(page, /Prediction vs reality learning review/);
+  assert.match(page, /Request the 90-day pilot/);
+  assert.match(css, /proofPair/);
+  assert.match(css, /pilotPromise/);
+});
