@@ -423,7 +423,7 @@ export function CampaignDeliveryPlanner({
     try {
       const cycleId = crypto.randomUUID();
       if (activeClubId && reservationRequired > 0) {
-        const response = await fetch("/api/credit-ledger", {
+        const response = await fetch("/api/delivery-effort", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -432,7 +432,7 @@ export function CampaignDeliveryPlanner({
             itemId: "campaign-reservation",
             eventKey: `${fixtureId}:campaign:reserve:${cycleId}`,
             eventType: "commit",
-            credits: reservationRequired,
+            units: reservationRequired,
             note: "Scope locked after campaign review. Existing generated-draft effort is excluded."
           })
         });
@@ -463,7 +463,7 @@ export function CampaignDeliveryPlanner({
 
     try {
       if (activeClubId && reservedCampaignCredits > 0) {
-        const response = await fetch("/api/credit-ledger", {
+        const response = await fetch("/api/delivery-effort", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -472,7 +472,7 @@ export function CampaignDeliveryPlanner({
             itemId: "campaign-reservation",
             eventKey: `${fixtureId}:campaign:release:${reservationId}`,
             eventType: "release",
-            credits: reservedCampaignCredits,
+            units: reservedCampaignCredits,
             note: "Campaign reservation released when the club reopened the campaign."
           })
         });
@@ -536,7 +536,7 @@ export function CampaignDeliveryPlanner({
       );
 
       if (activeClubId) {
-        const ledgerResponse = await fetch("/api/credit-ledger", {
+        const ledgerResponse = await fetch("/api/delivery-effort", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -545,7 +545,7 @@ export function CampaignDeliveryPlanner({
             itemId: type,
             eventKey: `${fixtureId}:${type}:commit`,
             eventType: "commit",
-            credits: catalogue.find((item) => item.id === type)?.baseCredits ?? 0,
+            units: catalogue.find((item) => item.id === type)?.baseCredits ?? 0,
             note: "Effort recorded when the first approval-ready draft was generated."
           })
         });
