@@ -1590,7 +1590,9 @@ test("Ask AVELA is grounded in the current decision and treats new user informat
 
   assert.match(page, /AskAvelaPanel/);
   assert.match(panel, /Why are you recommending this\?/);
-  assert.match(panel, /I don't know what to do for this match/);
+  assert.match(panel, /Can we realistically do this\?/);
+  assert.match(panel, /Who needs to respond next\?/);
+  assert.match(panel, /What happens if we wait\?/);
   assert.match(panel, /Internal context detected/);
   assert.match(panel, /Add to AVELA memory/);
   assert.match(panel, /context-added/);
@@ -1738,4 +1740,35 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /Decision Center/);
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
+});
+
+
+test("Ask AVELA separates Ask Tell Change and grounds operational answers in club state", () => {
+  const panel = read("src/components/AskAvelaPanel.tsx");
+  const route = read("src/app/api/ask-avela/route.ts");
+  const css = read("src/components/AskAvelaPanel.module.css");
+
+  assert.match(panel, /\? ASK/);
+  assert.match(panel, /\+ TELL AVELA/);
+  assert.match(panel, /✎ CHANGE/);
+  assert.match(panel, /mode: activeMode/);
+  assert.match(panel, /Nothing is added to club memory until you confirm it/);
+  assert.match(panel, /This does not change the official decision/);
+  assert.match(panel, /Show me a simpler version/);
+
+  assert.match(route, /operationalCapacity/);
+  assert.match(route, /pendingOperationalRequests/);
+  assert.match(route, /workload_items/);
+  assert.match(route, /capacity_windows/);
+  assert.match(route, /operational_requests/);
+  assert.match(route, /availableMinutes <= 0/);
+  assert.match(route, /state: "unknown"/);
+  assert.match(route, /For delay questions/);
+  assert.match(route, /qualitative risk only/);
+  assert.match(route, /Respect the requested mode/);
+  assert.match(route, /intent === "tell"/);
+  assert.match(route, /candidateContext: intent === "tell"/);
+
+  assert.match(css, /modeBar/);
+  assert.match(css, /activeMode/);
 });
