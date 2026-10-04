@@ -1739,3 +1739,23 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
 });
+
+
+test("Sponsor Intelligence uses real partner prospecting data without pretending it is contract truth", () => {
+  const page = read("src/app/app/sponsors/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const css = read("src/app/app/sponsors/sponsors.module.css");
+
+  assert.match(nav, /href: "\/app\/sponsors"/);
+  assert.match(nav, /Prioritise partnerships/);
+  assert.match(page, /partnerCommercialPack/);
+  assert.match(page, /pilotReadiness/);
+  assert.match(page, /Prospecting ≠ contract truth/);
+  assert.match(page, /Compare partner opportunities before outreach/);
+  assert.match(page, /verified contract/);
+  assert.match(page, /Do not treat missing measurement as zero/);
+  assert.match(page, /What must be true first\?/);
+  assert.match(css, /truthBoundary/);
+  assert.match(css, /evidenceList/);
+  assert.match(css, /gateList/);
+});
