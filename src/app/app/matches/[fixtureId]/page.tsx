@@ -11,6 +11,7 @@ import { CampaignDeliveryPlanner } from "@/components/CampaignDeliveryPlanner";
 import { DecisionHistoryPanel } from "@/components/DecisionHistoryPanel";
 import { AskAvelaPanel } from "@/components/AskAvelaPanel";
 import { OperationalHandoffs } from "@/components/OperationalHandoffs";
+import { AvailabilityPlanner } from "@/components/AvailabilityPlanner";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
