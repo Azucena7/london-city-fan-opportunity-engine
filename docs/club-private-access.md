@@ -24,7 +24,7 @@ The current product includes:
 
 The server validates the current access token against `/auth/v1/user` and all private domain data remains subject to RLS. Application inputs and user metadata cannot self-grant club membership or elevate permissions.
 
-Session state uses HttpOnly, SameSite=Lax cookies for the Supabase access and refresh tokens. Cookies are marked Secure in production. Private requests are uncached and revalidate the authenticated user before accessing club-scoped data.
+Session state persists only the short-lived Supabase access token in an HttpOnly, SameSite=Lax cookie. The cookie is marked Secure in production and expires with the access token. Refresh tokens are not stored because the current server does not implement token refresh; an expired session requires sign-in again. Private requests are uncached and revalidate the authenticated user before accessing club-scoped data.
 
 ## Operational checks before a real club pilot
 
