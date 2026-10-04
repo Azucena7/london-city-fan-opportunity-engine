@@ -20,7 +20,7 @@ export function ClubPilotProposition() {
     `${es ? "Disponibilidad de datos" : "Data readiness"}: ${dataOptions[readiness as keyof typeof dataOptions]}`,
     es ? "Alcance propuesto: 90 días y 6 partidos, sujeto al calendario y a un acuerdo con el club." : "Proposed scope: 90 days and 6 fixtures, subject to the club calendar and agreement.",
     es ? "A acordar: responsable, partidos, KPI, comparación, permisos, precio y umbrales para continuar o parar." : "To agree: owner, fixtures, KPI, comparison, permissions, price and continue/stop thresholds.",
-    es ? "No compartir nombres, emails ni registros individuales. El club conserva audiencias y consentimiento; el prototipo recibe resultados agregados autorizados." : "Do not share names, emails or individual records. The club retains audiences and consent; the prototype receives authorised aggregate outcomes.",
+    es ? "No compartir nombres, emails ni registros individuales. El club conserva audiencias y consentimiento; el entorno piloto recibe resultados agregados autorizados." : "Do not share names, emails or individual records. The club retains audiences and consent; the pilot environment receives authorised aggregate outcomes.",
     es ? "Sin resultados comerciales garantizados. Datos públicos por sí solos no validan conversión o repetición." : "No guaranteed commercial outcomes. Public data alone cannot establish conversion or repeat visits.",
     "https://avela-growth-intelligence.vercel.app/for-clubs"
   ].join("\n\n");
