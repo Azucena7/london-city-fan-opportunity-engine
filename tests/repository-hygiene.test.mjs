@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 const retiredRootArtifacts = [
   "HOTFIX.md",
@@ -63,4 +63,10 @@ test("legacy root seed tree and V1 frontend specification stay retired", () => {
   ]) {
     assert.equal(existsSync(path), false, `${path} has a canonical replacement and should not return`);
   }
+});
+
+test("dependency install scripts stay explicitly reviewed and narrowly allowlisted", () => {
+  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+  assert.deepEqual(pkg.allowScripts, { "unrs-resolver": true });
+  assert.equal(pkg.allowScripts["*"], undefined);
 });
