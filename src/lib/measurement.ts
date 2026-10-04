@@ -21,7 +21,7 @@ function campaignContext() {
   const safe = (value: string | null, fallback: string) => value && /^[a-zA-Z0-9._~-]{1,80}$/.test(value) ? value : fallback;
   return {
     utm_source: safe(params.get("utm_source"), "direct"),
-    utm_medium: safe(params.get("utm_medium"), "prototype"),
+    utm_medium: safe(params.get("utm_medium"), "demo"),
     utm_campaign: safe(params.get("utm_campaign"), "unassigned"),
     utm_content: safe(params.get("utm_content"), "unassigned")
   };
