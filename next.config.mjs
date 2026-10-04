@@ -36,6 +36,16 @@ const nextConfig = {
   typedRoutes: false,
   async redirects() {
     return redirects.map((item) => ({ ...item, permanent: true }));
+  },
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          { key: "Cache-Control", value: "private, no-store, max-age=0" }
+        ]
+      }
+    ];
   }
 };
 
