@@ -1,16 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import { calendar, campaignPlans, currentState } from "@/lib/data";
+import { calendar, currentState } from "@/lib/data";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
-import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
+import { buildDecisionAlerts, decisionSummary, type DecisionPriority } from "@/lib/decisionIntelligence";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
-  title: "Home · AVELA",
-  description: "The club's operational starting point: what needs attention, why, what is blocked and what to do next."
+  title: "Decision Center · AVELA",
+  description: "See what changed, what needs attention, why it matters and what AVELA recommends next."
 };
+
+const priorityLabel: Record<DecisionPriority, string> = {
+  "act-now": "Act now",
+  review: "Review",
+  blocked: "Blocked",
+  "on-track": "On track",
+  monitor: "Monitor"
+};
+
+const prioritySymbol: Record<DecisionPriority, string> = {
+  "act-now": "●",
+  review: "●",
+  blocked: "■",
+  "on-track": "●",
+  monitor: "○"
+};
+
+function shortDate(value: string) {
+  if (!value) return "—";
+  const parsed = new Date(value.includes("T") ? value : value + "T12:00:00Z");
+  if (Number.isNaN(parsed.getTime())) return value;
+  return parsed.toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+}
 
 export default async function ClubAppHome() {
   const today = currentState.updated_at.slice(0, 10);
@@ -18,13 +41,17 @@ export default async function ClubAppHome() {
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a,b) => a.date.localeCompare(b.date))
     .slice(0, 8);
+
   const clubContext = await getCurrentClubOperatingContext();
   const radar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id), clubContext);
-  const priority = radar[0] ?? null;
-  const live = priority ? getCurrentProductOpportunity(priority.fixtureId) : null;
-  const campaign = priority ? campaignPlans.campaigns.find((item) => item.fixtureId === priority.fixtureId) ?? null : null;
-  const unresolved = campaign?.approvals.filter((item) => item.state !== "ready") ?? [];
-  const reviewCount = radar.filter((item) => item.radarState === "Review" || item.radarState === "Act now").length;
+  const alerts = buildDecisionAlerts(radar);
+  const summary = decisionSummary(alerts);
+  const attention = alerts.filter((item) => ["act-now", "review", "blocked"].includes(item.priority));
+  const primary = attention[0] ?? alerts[0] ?? null;
+  const recentChanges = alerts
+    .flatMap((alert) => alert.events.map((event) => ({ ...event, alert })))
+    .sort((a,b) => b.at.localeCompare(a.at))
+    .slice(0, 6);
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -32,9 +59,9 @@ export default async function ClubAppHome() {
 
       <header className={styles.header}>
         <div>
-          <span>AVELA · Home</span>
-          <h1>What needs attention today?</h1>
-          <p>Start with the next decision, not a dashboard. AVELA surfaces the fixture that deserves attention and the shortest path to action.</p>
+          <span>AVELA · Decision Center</span>
+          <h1>{summary.attention ? `${summary.attention} thing${summary.attention === 1 ? "" : "s"} need your attention.` : "Everything important is currently under control."}</h1>
+          <p>Start here. AVELA brings together current evidence, urgency, blockers and deadlines so you can see what changed and what to do next without opening every workspace.</p>
         </div>
         <div className={styles.refresh}>
           <span>Engine refresh</span>
@@ -42,76 +69,126 @@ export default async function ClubAppHome() {
         </div>
       </header>
 
-      {priority && live ? (
-        <section className={styles.focus} aria-label="Primary action">
-          <div className={styles.focusLead}>
-            <span>01 · Primary action</span>
-            <h2>{live.nextAction.label}</h2>
-            <p>{live.opportunity}</p>
-            <div className={styles.focusMeta}>
-              <strong>{priority.opponent}</strong>
-              <span>{priority.date} · {priority.kickoff ?? "TBC"}</span>
-              <span>{priority.confidence} confidence</span>
-              <span>{priority.urgency} urgency</span>
-            </div>
-          </div>
-          <div className={styles.focusReason}>
-            <span>Why this is first</span>
-            <strong>{live.whyNow}</strong>
-            <div className={styles.focusMetrics}>
-              <div><b>{priority.opportunityScore ?? "—"}</b><small>opportunity</small></div>
-              <div><b>{priority.materialSignalCount}</b><small>material signals</small></div>
-              <div><b>{unresolved.length}</b><small>open gates</small></div>
-            </div>
-            <div className={styles.focusActions}>
-              <Link href={`/app/matches/${priority.fixtureId}`}>Open decision workspace →</Link>
-              <Link href={`/app/executive?fixture=${priority.fixtureId}`}>Executive view →</Link>
-            </div>
-          </div>
-        </section>
-      ) : (
-        <section className={styles.empty}><strong>No fixture currently requires action.</strong><p>Radar will surface the next material opportunity when evidence changes.</p></section>
-      )}
-
-      <section className={styles.queue} aria-label="Decision queue">
-        <div className={styles.sectionHead}>
-          <div><span>Decision queue</span><h2>Everything else can wait.</h2></div>
-          <Link href="/app/matches">Open full Radar →</Link>
-        </div>
-        <div className={styles.queueGrid}>
-          {radar.slice(1,4).map((item) => (
-            <Link href={`/app/matches/${item.fixtureId}`} key={item.fixtureId} className={styles.queueCard}>
-              <div><span>{item.radarState}</span><b>{item.opponent}</b></div>
-              <strong>{item.opportunity}</strong>
-              <small>{item.date} · {item.urgency} urgency · {item.materialSignalCount} material signals</small>
-            </Link>
-          ))}
-        </div>
+      <section className={styles.signalStrip} aria-label="Decision health summary">
+        <article className={styles.stateAct}><span>● Act now</span><strong>{summary.actNow}</strong><small>Immediate decisions</small></article>
+        <article className={styles.stateReview}><span>● Review</span><strong>{summary.review}</strong><small>Needs a decision soon</small></article>
+        <article className={styles.stateBlocked}><span>■ Blocked</span><strong>{summary.blocked}</strong><small>Dependency unresolved</small></article>
+        <article className={styles.stateGood}><span>● On track</span><strong>{summary.onTrack}</strong><small>No intervention required</small></article>
+        <article className={styles.stateMonitor}><span>○ Monitor</span><strong>{summary.monitor}</strong><small>Keep watching</small></article>
       </section>
 
-      <section className={styles.status} aria-label="Workspace status">
+      {primary ? (
+        <section className={styles.primaryDecision} aria-label="Highest priority decision">
+          <div className={styles.primaryTop}>
+            <div>
+              <span className={styles.priorityPill} data-state={primary.priority}>{prioritySymbol[primary.priority]} {priorityLabel[primary.priority]}</span>
+              <small>Highest current priority · {primary.category}</small>
+            </div>
+            <Link href={primary.href}>Open decision →</Link>
+          </div>
+          <div className={styles.primaryGrid}>
+            <div>
+              <h2>{primary.title}</h2>
+              <p className={styles.recommendation}>{primary.recommendation}</p>
+            </div>
+            <div className={styles.decisionFacts}>
+              <div><span>Why</span><strong>{primary.why}</strong></div>
+              <div><span>Changed</span><strong>{primary.changed}</strong></div>
+              <div className={styles.factRow}>
+                <p><span>Deadline</span><strong>{primary.deadline}</strong></p>
+                <p><span>Impact</span><strong>{primary.impact}</strong></p>
+                <p><span>Confidence</span><strong>{primary.confidence}</strong></p>
+              </div>
+            </div>
+          </div>
+          <details className={styles.whyPanel}>
+            <summary>Why AVELA is recommending this</summary>
+            <div>
+              <p>{primary.why}</p>
+              <p><strong>What changed:</strong> {primary.changed}.</p>
+              <p><strong>Current deadline:</strong> {primary.deadline}.</p>
+            </div>
+          </details>
+        </section>
+      ) : null}
+
+      <section className={styles.workspaceGrid}>
+        <div className={styles.queue}>
+          <div className={styles.sectionHead}>
+            <div><span>Decision queue</span><h2>What should I look at next?</h2></div>
+            <Link href="/app/matches">Open full Radar →</Link>
+          </div>
+          <div className={styles.alertList}>
+            {alerts.slice(0, 6).map((item) => (
+              <article className={styles.alertCard} key={item.id}>
+                <div className={styles.alertState}>
+                  <span className={styles.priorityPill} data-state={item.priority}>{prioritySymbol[item.priority]} {priorityLabel[item.priority]}</span>
+                  <small>{item.category}</small>
+                </div>
+                <div className={styles.alertBody}>
+                  <h3>{item.title}</h3>
+                  <strong>{item.recommendation}</strong>
+                  <p>{item.changed}</p>
+                </div>
+                <div className={styles.alertMeta}>
+                  <span><b>{item.impact}</b> impact</span>
+                  <span><b>{item.confidence}</b> confidence</span>
+                  <span><b>{item.deadline}</b> deadline</span>
+                  <Link href={item.href}>Open →</Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <aside className={styles.changes}>
+          <div className={styles.sectionHead}>
+            <div><span>What changed</span><h2>Latest intelligence</h2></div>
+          </div>
+          <div className={styles.changeFeed}>
+            {recentChanges.map((item) => (
+              <Link href={item.alert.href} key={item.id}>
+                <span>{item.kind}</span>
+                <strong>{item.label}</strong>
+                <p>{item.detail}</p>
+                <small>{shortDate(item.at)} · {item.alert.title}</small>
+              </Link>
+            ))}
+            {!recentChanges.length ? <p>No recent decision events are available.</p> : null}
+          </div>
+        </aside>
+      </section>
+
+      <section className={styles.overview} aria-label="Workspace overview">
         <article>
-          <span>Needs attention</span>
-          <strong>{reviewCount}</strong>
-          <p>Fixtures at Act now or Review.</p>
+          <span>Opportunity Radar</span>
+          <strong>{radar.length}</strong>
+          <p>Upcoming home fixtures currently monitored by the engine.</p>
+          <Link href="/app/matches">View opportunities →</Link>
         </article>
         <article>
-          <span>Campaign state</span>
-          <strong>{campaign?.status ?? "No active draft"}</strong>
-          <p>{unresolved.length ? `${unresolved.length} approval gate${unresolved.length === 1 ? "" : "s"} unresolved.` : "No blocking approval gate in the current priority."}</p>
-          <Link href="/app/campaigns">Open campaigns →</Link>
+          <span>Campaign execution</span>
+          <strong>{alerts.filter((item) => item.events.some((event) => event.kind === "blocker")).length}</strong>
+          <p>Current decisions with an unresolved approval dependency.</p>
+          <Link href="/app/campaigns">View campaigns →</Link>
         </article>
         <article>
-          <span>Data readiness</span>
-          <strong>{clubContext ? "Club context active" : "Evidence-only mode"}</strong>
-          <p>{clubContext ? `${clubContext.connectedChannels.length} channels · ${clubContext.priorityObjectives.length} objectives configured.` : "Add club context without changing evidence ranking."}</p>
+          <span>Club context</span>
+          <strong>{clubContext ? "Active" : "Evidence only"}</strong>
+          <p>{clubContext ? `${clubContext.connectedChannels.length} channels and ${clubContext.priorityObjectives.length} objectives available to explain execution fit.` : "Connect club context to improve execution guidance without rewriting evidence."}</p>
           <Link href={clubContext ? "/app/sources" : "/app/setup"}>{clubContext ? "Review sources →" : "Complete setup →"}</Link>
+        </article>
+        <article>
+          <span>Learning</span>
+          <strong>History</strong>
+          <p>Measured outcomes stay separate from recommendations so future decisions can learn from what actually happened.</p>
+          <Link href="/app/learning">Open learning →</Link>
         </article>
       </section>
 
       <section className={styles.loop}>
-        <span>How AVELA works</span>
-        <div><b>Fixture</b><i>→</i><b>Signals</b><i>→</i><strong>Opportunity</strong><i>→</i><b>Campaign</b><i>→</i><b>Learning</b></div>
+        <span>AVELA decision loop</span>
+        <div><b>Sense</b><i>→</i><b>Prioritise</b><i>→</i><strong>Recommend</strong><i>→</i><b>Decide</b><i>→</i><b>Execute</b><i>→</i><b>Learn</b></div>
       </section>
     </main>
   );
