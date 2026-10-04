@@ -1,5 +1,7 @@
 # Data Model
 
+Reference domain model. Runtime truth is defined by the active application code and persistence schema.
+
 ## Territory
 
 ```ts
