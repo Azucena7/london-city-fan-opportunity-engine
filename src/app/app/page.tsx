@@ -88,11 +88,11 @@ export default async function ClubAppHome() {
     ...campaignPlans.campaigns.flatMap((campaign) =>
       campaign.schedule
         .filter((item) => item.date >= today && item.date <= horizonEndIso.slice(0, 10) && item.state !== "complete")
-        .map((item) => ({
-          id: "campaign-" + campaign.fixtureId + "-" + item.id,
+        .map((item, index) => ({
+          id: "campaign-" + campaign.fixtureId + "-" + index + "-" + item.date,
           date: item.date,
           type: "Campaign",
-          title: item.label.en,
+          title: item.action.en,
           detail: campaign.title.en
         }))
     )
