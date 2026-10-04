@@ -23,20 +23,29 @@ const MEN_FOOTBALL_FEEDS = [
   { competition: "UEFA Conference League", feedUrl: "https://fixturedownload.com/feed/json/conference-league-2026", sourceUrl: "https://fixturedownload.com/view/json/conference-league-2026" }
 ];
 const WSL_ATTENDANCE_URL = "https://www.footballwebpages.co.uk/womens-super-league/attendances";
+const WSL_ATTENDANCE_FALLBACK_URL = "https://www.worldfootball.net/competition/co5071/england-women-womens-super-league/attendance/";
+const WSL_ATTENDANCE_ALIASES = {
+  "Arsenal": ["Arsenal WFC"],
+  "Chelsea": ["Chelsea FC Women"],
+  "London City Lionesses": ["London City Lionesses"],
+  "Manchester United": ["Manchester United WFC"],
+  "Brighton & Hove Albion": ["Brighton & Hove Albion WFC"],
+  "Charlton Athletic": ["Charlton Athletic WFC"],
+  "Tottenham Hotspur": ["Tottenham Hotspur WFC"],
+  "West Ham United": ["West Ham United WFC"],
+  "Birmingham City": ["Birmingham City WFC"],
+  "Crystal Palace": ["Crystal Palace Women"],
+  "Aston Villa": ["Aston Villa WFC"],
+  "Everton": ["Everton FC"],
+  "Liverpool": ["Liverpool FC Women"],
+  "Manchester City": ["Manchester City WFC"]
+};
 const DRY_RUN = process.env.REFRESH_DRY_RUN === "1";
 
 function londonIsoDate(value = new Date()) {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit"
   }).format(value);
-}
-
-function compactNumber(value) {
-  if (!value) return null;
-  const match = String(value).toLowerCase().replaceAll(",", "").match(/([\d.]+)\s*([kmb])?/);
-  if (!match) return null;
-  const multiplier = { k: 1_000, m: 1_000_000, b: 1_000_000_000 }[match[2]] ?? 1;
-  return Math.round(Number(match[1]) * multiplier);
 }
 
 function compactDisplay(value) {
@@ -194,18 +203,19 @@ function updateSourceHealth(sourceHealth, attemptedAt, results) {
       if (!result) return source;
       return {
         ...source,
-        access: "api-key",
-        state: result.ok ? "operational" : "degraded",
-        method: "official-api",
+        access: result.secret ? "api-key" : source.access,
+        state: result.ok ? "operational" : (result.state ?? "degraded"),
+        method: result.secret ? "official-api" : source.method,
+        lastAttemptAt: attemptedAt,
         lastSuccessfulAt: result.ok ? attemptedAt : source.lastSuccessfulAt,
-        ownerAction: result.ok ? null : {
+        ownerAction: result.ok ? null : (result.ownerAction ?? (result.secret ? {
           en: `Configure ${result.secret} as a GitHub Actions secret.`,
           es: `Configurar ${result.secret} como secreto de GitHub Actions.`
-        },
-        note: result.ok ? result.note : {
+        } : source.ownerAction)),
+        note: result.ok ? (result.note ?? source.note) : (result.note ?? {
           en: `The last valid observation is retained. ${result.message}`,
           es: `Se conserva la última observación válida. ${result.message}`
-        }
+        })
       };
     })
   };
@@ -223,22 +233,53 @@ function stripHtml(value) {
     .trim();
 }
 
+function attendanceNumber(value) {
+  const text = String(value ?? "").trim();
+  if (!/^\d{1,3}(?:[.,]\d{3})+$/.test(text) && !/^\d{3,6}$/.test(text)) return null;
+  const number = Number(text.replace(/[.,]/g, ""));
+  return Number.isFinite(number) && number > 100 ? number : null;
+}
+
 export function parseWslAttendanceAverages(html, clubNames) {
   if (/Attention Required!|cf-error-details|captcha/i.test(html)) {
     throw new Error("WSL attendance source blocked the automated request");
   }
+  const aliases = new Map();
+  for (const club of clubNames) {
+    aliases.set(club, club);
+    for (const alias of WSL_ATTENDANCE_ALIASES[club] ?? []) aliases.set(alias, club);
+  }
+
   const rows = [...html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)].map((match) => match[1]);
   const observations = new Map();
   for (const row of rows) {
     const cells = [...row.matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((match) => stripHtml(match[1]));
-    const club = clubNames.find((name) => cells.some((cell) => cell === name));
-    if (!club) continue;
-    const clubIndex = cells.findIndex((cell) => cell === club);
-    const attendance = cells.slice(clubIndex + 1).map(compactNumber).find((value) => value !== null && value > 100);
+    const observedName = cells.find((cell) => aliases.has(cell));
+    if (!observedName) continue;
+    const club = aliases.get(observedName);
+    const clubIndex = cells.findIndex((cell) => cell === observedName);
+    const attendance = cells.slice(clubIndex + 1).map(attendanceNumber).filter((value) => value !== null).at(-1);
     if (attendance !== undefined) observations.set(club, attendance);
   }
   if (observations.size < 2) throw new Error("WSL attendance table did not contain enough comparable rows");
   return observations;
+}
+
+async function fetchWslAttendance(clubNames) {
+  const sources = [
+    { name: "Football Web Pages", url: WSL_ATTENDANCE_URL },
+    { name: "worldfootball.net", url: WSL_ATTENDANCE_FALLBACK_URL }
+  ];
+  const failures = [];
+  for (const source of sources) {
+    try {
+      const html = await fetchText(source.url, `WSL attendance (${source.name})`);
+      return { observations: parseWslAttendanceAverages(html, clubNames), source };
+    } catch (error) {
+      failures.push(`${source.name}: ${error instanceof Error ? error.message : "refresh failed"}`);
+    }
+  }
+  throw new Error(failures.join(" | "));
 }
 
 function metric(key, label, value, unit, sourceName, sourceUrl) {
@@ -429,14 +470,35 @@ export async function refreshPublicSignals(now = new Date()) {
   try {
     const latest = benchmark.snapshots.at(-1);
     const clubs = latest.clubs.map((club) => club.club);
-    const observations = parseWslAttendanceAverages(await fetchText(WSL_ATTENDANCE_URL, "WSL attendance"), clubs);
-    nextBenchmark = appendBenchmarkSnapshot(benchmark, observations, today);
+    const attendanceResult = await fetchWslAttendance(clubs);
+    nextBenchmark = {
+      ...appendBenchmarkSnapshot(benchmark, attendanceResult.observations, today),
+      checkedAt: attemptedAt,
+      sourceName: attendanceResult.source.name,
+      sourceUrl: attendanceResult.source.url
+    };
     appendedBenchmarkSnapshot = nextBenchmark.snapshots.length > benchmark.snapshots.length;
-    sources.push({ id: "wsl-attendance", label: "WSL attendance benchmark", state: "measured", confidence: "medium", checkedAt: attemptedAt, sourceUrl: WSL_ATTENDANCE_URL });
+    sources.push({ id: "wsl-attendance", label: "WSL attendance benchmark", state: "measured", confidence: "medium", checkedAt: attemptedAt, sourceUrl: attendanceResult.source.url });
+    healthResults["wsl-attendance"] = {
+      ok: true,
+      note: {
+        en: `Published WSL home-attendance averages refreshed via ${attendanceResult.source.name}; early-season rankings remain directional.`,
+        es: `Medias publicadas de asistencia local WSL actualizadas vía ${attendanceResult.source.name}; el ranking inicial sigue siendo orientativo.`
+      }
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message : "WSL attendance refresh failed";
     failures.push(`WSL attendance: ${message}`);
     sources.push({ id: "wsl-attendance", label: "WSL attendance benchmark", state: "waiting", confidence: "unavailable", checkedAt: attemptedAt, sourceUrl: WSL_ATTENDANCE_URL, message });
+    healthResults["wsl-attendance"] = {
+      ok: false,
+      state: "blocked",
+      message,
+      ownerAction: {
+        en: "Approve a licensed sports-data provider only if both public attendance sources become unavailable.",
+        es: "Aprobar un proveedor de datos deportivos con licencia solo si ambas fuentes públicas de asistencia dejan de estar disponibles."
+      }
+    };
   }
 
   const successfulSources = sources.filter((source) => source.state === "measured").length;

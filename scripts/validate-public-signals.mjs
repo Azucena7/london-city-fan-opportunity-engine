@@ -93,4 +93,14 @@ if (attendance.get("Arsenal") !== 23_900 || attendance.get("London City Lionesse
   throw new Error("WSL attendance parser failed");
 }
 
+const fallbackAttendance = parseWslAttendanceAverages(`
+  <table><tbody>
+    <tr><td>1</td><td>Arsenal WFC</td><td>2</td><td>53.753</td><td>26.877</td></tr>
+    <tr><td>3</td><td>London City Lionesses</td><td>1</td><td>5.402</td><td>5.402</td></tr>
+  </tbody></table>
+`, ["Arsenal", "London City Lionesses"]);
+if (fallbackAttendance.get("Arsenal") !== 26_877 || fallbackAttendance.get("London City Lionesses") !== 5_402) {
+  throw new Error("WSL attendance fallback parser failed");
+}
+
 console.log(JSON.stringify({ youtube, ticketmasterEvents: ticketmaster.length, leagueFixtures: leagueFixtures.length, mensFootballFixtures: mensFootballFixtures.length, relevantEvents: ranked.length, attendanceRows: attendance.size }, null, 2));
