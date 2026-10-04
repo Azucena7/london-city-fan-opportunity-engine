@@ -116,8 +116,8 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
   assert.match(demo, /Fixture detected/);
   assert.match(demo, /Engine recommends/);
   assert.match(demo, /Campaign built/);
-  assert.match(demo, /Review & launch/);
-  assert.match(demo, /same live product data/);
+  assert.match(demo, /Review & handoff/);
+  assert.match(demo, /same product logic and current public evidence/);
   assert.match(demo, /Open campaign builder/);
   assert.match(page, /getCurrentProductOpportunity/);
   assert.match(page, /campaignPlans/);
