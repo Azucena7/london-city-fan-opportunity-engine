@@ -9,6 +9,7 @@ import { ActivationDraft } from "@/components/ActivationDraft";
 import { MatchPlanDecision } from "@/components/MatchPlanDecision";
 import { CampaignDeliveryPlanner } from "@/components/CampaignDeliveryPlanner";
 import { DecisionHistoryPanel } from "@/components/DecisionHistoryPanel";
+import { AskAvelaPanel } from "@/components/AskAvelaPanel";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -350,6 +351,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         subjectId={fixture.id}
         recommendation={campaign?.title.en ?? live.recommendedAction}
       />
+
+      <AskAvelaPanel fixtureId={fixture.id} decisionId={`fixture:${fixture.id}`} />
 
       <section id="learning" className={styles.footerActions}>
         <div>

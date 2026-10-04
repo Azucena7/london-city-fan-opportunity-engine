@@ -1580,3 +1580,26 @@ test("opportunity brief records the final decision and actual execution separate
   assert.match(css, /stages/);
   assert.match(css, /timeline/);
 });
+
+
+test("Ask AVELA is grounded in the current decision and treats new user information as confirmable context", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const panel = read("src/components/AskAvelaPanel.tsx");
+  const route = read("src/app/api/ask-avela/route.ts");
+
+  assert.match(page, /AskAvelaPanel/);
+  assert.match(panel, /Why are you recommending this\?/);
+  assert.match(panel, /I don't know what to do for this match/);
+  assert.match(panel, /Internal context detected/);
+  assert.match(panel, /Add to AVELA memory/);
+  assert.match(panel, /context-added/);
+  assert.match(panel, /\/api\/decision-history/);
+
+  assert.match(route, /getCurrentProductOpportunity/);
+  assert.match(route, /buildOpportunityRadar/);
+  assert.match(route, /decision_events/);
+  assert.match(route, /Never invent club facts/);
+  assert.match(route, /candidateContext/);
+  assert.match(route, /do not claim it has been saved or applied/);
+  assert.match(route, /AI_GATEWAY_API_KEY/);
+});
