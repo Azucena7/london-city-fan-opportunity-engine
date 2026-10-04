@@ -31,7 +31,6 @@ export function OperationalCapacityPanel({
   windowEnd: string;
 }) {
   const [clubs, setClubs] = useState<Club[]>([]);
-  const [activeClubId, setActiveClubId] = useState("");
   const [workload, setWorkload] = useState<WorkloadItem[]>([]);
   const [capacity, setCapacity] = useState<CapacityWindow[]>([]);
 
