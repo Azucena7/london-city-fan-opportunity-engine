@@ -1751,6 +1751,7 @@ test("Decision Center surfaces cross-workspace club state without turning unknow
   assert.match(page, /Operational capacity/);
   assert.match(page, /Availability/);
   assert.match(page, /Sponsor opportunities/);
+  assert.match(page, /Requests/);
   assert.match(page, /Verified contracts/);
   assert.match(page, /Next 30 days/);
   assert.match(page, /Prospecting only · not contract fulfilment/);
@@ -1760,6 +1761,9 @@ test("Decision Center surfaces cross-workspace club state without turning unknow
   assert.match(helper, /utilisation: null/);
   assert.match(helper, /hard-unavailable/);
   assert.match(helper, /international-duty/);
+  assert.match(helper, /operational_requests/);
+  assert.match(helper, /heads-up,formal-request/);
+  assert.match(helper, /nextRecipient/);
   assert.doesNotMatch(helper, /utilisation: 0/);
 
   assert.match(css, /clubStateGrid/);
