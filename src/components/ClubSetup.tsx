@@ -167,9 +167,9 @@ export function ClubSetup() {
 
         <article>
           <span>05 · Approval</span>
-          <h2>Who needs to approve before credits are reserved?</h2>
+          <h2>Who needs to approve before campaign scope is locked?</h2>
           <label>Default owner<input disabled={!canEdit} value={approvalOwner} onChange={(event) => setApprovalOwner(event.target.value)} /></label>
-          <label className={styles.check}><input disabled={!canEdit} type="checkbox" checked={requiresApproval} onChange={(event) => setRequiresApproval(event.target.checked)} /> Require campaign approval before reservation</label>
+          <label className={styles.check}><input disabled={!canEdit} type="checkbox" checked={requiresApproval} onChange={(event) => setRequiresApproval(event.target.checked)} /> Require campaign approval before scope lock</label>
           <p>Existing campaign permissions and RLS still control who can view, edit and approve.</p>
         </article>
 
