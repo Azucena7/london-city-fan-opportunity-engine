@@ -197,6 +197,12 @@ test("retired standalone journey-routing prototype stays removed", () => {
   assert.match(env, /RDM_DATA_PRODUCT_ID/);
 });
 
+test("retired Club Operations licensing prototype stays removed", () => {
+  assert.equal(existsSync("docs/club-licensing-strategy.md"), false);
+  const strategy = readFileSync("src/lib/clubStrategy.ts", "utf8");
+  assert.doesNotMatch(strategy, /ModuleId|licenceProposal|normalizeModules|toggleModule|Club Operations/);
+});
+
 test("canonical public surfaces use the AVELA production host", () => {
   const canonical = "https://avela-growth-intelligence.vercel.app";
   const legacy = "https://london-city-fan-opportunity-engine.vercel.app";
