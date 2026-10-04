@@ -270,3 +270,10 @@ test("language persistence uses the AVELA namespace and only reads the retired k
   assert.doesNotMatch(provider, /dictionary\[lang\]|\bt:\s*dictionary/);
   assert.equal(i18n.trim(), 'export type Lang = "en" | "es";');
 });
+
+
+test("server language bootstrap prefers the AVELA cookie with legacy fallback", () => {
+  const layout = readFileSync("src/app/layout.tsx", "utf8");
+  assert.match(layout, /get\("avela-language"\)/);
+  assert.match(layout, /\?\? cookieStore\.get\("lcl-language"\)/);
+});
