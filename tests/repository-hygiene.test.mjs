@@ -659,3 +659,18 @@ test("core public sources update source-health on every refresh attempt", () => 
   assert.match(refreshData, /source_failures: fixtureRefresh\.ok \? \[\] : \[`Club fixtures:/);
   assert.match(refreshData, /writeFile\(SOURCE_HEALTH_PATH/);
 });
+
+
+test("feature intelligence styles stay outside the base globals layer", () => {
+  const globals = readFileSync("src/app/globals.css", "utf8");
+  const intelligence = readFileSync("src/app/intelligence-surfaces.css", "utf8");
+  const layout = readFileSync("src/app/layout.tsx", "utf8");
+
+  assert.ok(globals.length < 35000, "globals.css should remain focused on shared foundation styles");
+  assert.doesNotMatch(globals, /\.demandHistory\s*\{/);
+  assert.doesNotMatch(globals, /\.sourceHealthCenter\s*\{/);
+  assert.match(intelligence, /\.demandHistory\s*\{/);
+  assert.match(intelligence, /\.sourceHealthCenter\s*\{/);
+  assert.match(intelligence, /\.caseStudyPredictionProof\s*\{/);
+  assert.match(layout, /intelligence-surfaces\.css/);
+});
