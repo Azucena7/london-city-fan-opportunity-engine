@@ -328,7 +328,8 @@ test("architecture document reflects the as-built AVELA runtime", () => {
   assert.match(architecture, /Supabase Auth \+ RLS/);
   assert.match(architecture, /Vercel AI Gateway/);
   assert.match(architecture, /There is no hidden TransportAPI fallback/);
-  assert.match(architecture, /legacy physical credit_ledger/);
+  assert.match(architecture, /delivery_effort_events/);
+  assert.match(architecture, /former `credit_ledger` table is retained only during the staged database cutover/);
   assert.doesNotMatch(architecture, /Phase 1 - Public prototype|Phase 2 - Live decision engine|Phase 3 - Agentic workflows/);
 });
 
@@ -510,4 +511,16 @@ test("refresh language matches the scheduled as-built automation", () => {
   assert.match(radar, /re-prioritised whenever the validated evidence state refreshes/);
   assert.doesNotMatch(radar, /continuously re-prioritised/);
   assert.match(socialCard, /Scheduled fixture refresh starts monitoring/);
+});
+
+
+test("canonical delivery-effort storage is versioned and application-facing", () => {
+  const migration = readFileSync("supabase/migrations/20261004193752_create_delivery_effort_events.sql", "utf8");
+  const route = readFileSync("src/app/api/delivery-effort/route.ts", "utf8");
+  assert.match(migration, /create table if not exists public\.delivery_effort_events/);
+  assert.match(migration, /units integer not null/);
+  assert.match(migration, /campaign viewers can read delivery effort events/);
+  assert.match(migration, /campaign editors can add delivery effort events/);
+  assert.match(route, /delivery_effort_events/);
+  assert.doesNotMatch(route, /credit_ledger|credits/);
 });

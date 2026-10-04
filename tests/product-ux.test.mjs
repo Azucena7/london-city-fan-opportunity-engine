@@ -131,8 +131,9 @@ test("club campaign workspace supports authenticated multi-user persistence with
   const session = read("src/app/api/auth/session/route.ts");
   const login = read("src/app/api/auth/login/route.ts");
   const workspace = read("src/app/api/campaign-workspace/[fixtureId]/route.ts");
-  const ledger = read("src/app/api/delivery-effort/route.ts");
+  const effort = read("src/app/api/delivery-effort/route.ts");
   const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+  const effortMigration = read("supabase/migrations/20261004193752_create_delivery_effort_events.sql");
 
   assert.match(builder, /Connect club workspace/);
   assert.match(builder, /Pilot account sign-in/);
@@ -148,16 +149,18 @@ test("club campaign workspace supports authenticated multi-user persistence with
   assert.match(session, /club_memberships/);
   assert.match(login, /grant_type=password/);
   assert.match(workspace, /on_conflict=club_id,fixture_id/);
-  assert.match(ledger, /on_conflict=event_key/);
+  assert.match(effort, /on_conflict=event_key/);
 
   assert.match(migration, /enable row level security/);
   assert.match(migration, /club_has_permission/);
   assert.match(migration, /'campaigns', 'edit'/);
   assert.match(migration, /'campaigns', 'approve'/);
   assert.match(migration, /campaign_workspaces/);
-  assert.match(migration, /credit_ledger/);
-  assert.match(migration, /event_key text unique/);
-  assert.match(migration, /auth\.uid\(\)/);
+  assert.match(effortMigration, /delivery_effort_events/);
+  assert.match(effortMigration, /units integer not null/);
+  assert.match(effortMigration, /event_key text unique/);
+  assert.match(effortMigration, /enable row level security/);
+  assert.match(effortMigration, /auth\.uid\(\)/);
 });
 
 test("retired Credit Center no longer appears as a product surface", () => {
@@ -190,13 +193,12 @@ test("delivery planner uses effort naming while preserving legacy persisted stat
 });
 
 
-test("delivery effort API exposes units while isolating legacy storage naming", () => {
+test("delivery effort API uses canonical unit storage", () => {
   const route = read("src/app/api/delivery-effort/route.ts");
   assert.match(route, /units\?: number/);
-  assert.doesNotMatch(route, /body\?\.credits|body\.credits/);
-  assert.match(route, /units: credits \?\? 0/);
-  assert.match(route, /credits: units/);
-  assert.match(route, /units: credits \?\? units/);
+  assert.match(route, /delivery_effort_events/);
+  assert.match(route, /select=id,fixture_id,item_id,event_type,units,note,created_at/);
+  assert.doesNotMatch(route, /credit_ledger|credits/);
 });
 
 test("active campaign surfaces no longer expose credit purchase language", () => {

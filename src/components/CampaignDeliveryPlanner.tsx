@@ -540,7 +540,7 @@ export function CampaignDeliveryPlanner({
       );
 
       if (activeClubId) {
-        const ledgerResponse = await fetch("/api/delivery-effort", {
+        const effortResponse = await fetch("/api/delivery-effort", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -554,8 +554,8 @@ export function CampaignDeliveryPlanner({
           })
         });
 
-        if (!ledgerResponse.ok) {
-          setGenerationError("Draft generated, but the club effort ledger could not be updated.");
+        if (!effortResponse.ok) {
+          setGenerationError("Draft generated, but the club delivery-effort history could not be updated.");
         }
       }
     } catch (error) {

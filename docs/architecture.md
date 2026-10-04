@@ -51,11 +51,11 @@ ingestion / validation scripts
                 delivery-effort API
                          |
                          v
-                legacy physical credit_ledger
-                (storage name only)
+              delivery_effort_events
+                   (units)
 ```
 
-The application contract is **delivery effort / units**. The physical `credit_ledger.credits` naming is retained only as a database compatibility boundary and is not exposed as product currency.
+The application and persistence contract is **delivery effort / units** through `delivery_effort_events.units`. The former `credit_ledger` table is retained only during the staged database cutover and is no longer used by the application.
 
 ## Canonical application surfaces
 
