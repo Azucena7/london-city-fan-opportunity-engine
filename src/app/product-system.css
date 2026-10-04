@@ -178,7 +178,7 @@ textarea:focus-visible{
 }
 
 /* Application shell: tool first, website second */
-.productAppShell{padding-left:232px;background:#F6F7F9}
+.productAppShell{margin-left:232px;width:calc(100% - 232px);background:#F6F7F9}
 .productAppShell>header,
 .productAppShell>section,
 .productAppShell>div:not([class*="ProductJourneyNav"]){
@@ -189,7 +189,7 @@ textarea:focus-visible{
 .productAppShell h1{font-size:var(--product-display)!important;line-height:1.02!important;letter-spacing:-.045em!important}
 .productAppShell h2{font-size:var(--product-title)}
 .productAppShell p{max-width:72ch}
-@media(max-width:900px){.productAppShell{padding-left:0}}
+@media(max-width:900px){.productAppShell{margin-left:0;width:100%}}
 
 /* Final density and surface consistency */
 .productAppShell{background:#F7F8FA}
