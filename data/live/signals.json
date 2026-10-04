@@ -739,5 +739,44 @@
         "checkedAt": "2026-10-03"
       }
     ]
+  },
+  {
+    "id": "experience-brighton-vip-sold-out-2026-10-04",
+    "fixtureId": "2026-09-26-bha-h",
+    "relatedFixtureIds": [
+      "2026-10-18-eve-h"
+    ],
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-04T09:54:03+01:00",
+    "title": {
+      "en": "Brighton VIP Terrace sold out; Everton VIP remains available",
+      "es": "La VIP Terrace de Brighton agotó entradas; la VIP de Everton sigue disponible"
+    },
+    "summary": {
+      "en": "London City's official VIP page now confirms that all £75 VIP Terrace tickets for the Brighton fixture sold out and directs supporters to the next VIP opportunity against Everton on 18 October. This is a confirmed sell-out of the VIP product only, not evidence that the full fixture sold out, nor an attendance or scans figure.",
+      "es": "La página VIP oficial de London City confirma ahora que se agotaron todas las entradas de £75 de la VIP Terrace para Brighton y dirige a la siguiente oportunidad VIP, ante Everton el 18 de octubre. Es un sold out confirmado únicamente del producto VIP, no evidencia de que se agotara el aforo completo ni una cifra de asistencia o scans."
+    },
+    "marketingAction": {
+      "en": "Use the confirmed premium-product demand to target consented Brighton VIP buyers, hospitality prospects, groups and partners with Everton VIP availability; capture a waitlist and measure bookings, conversion and yield separately from standard tickets and attendance.",
+      "es": "Usar la demanda confirmada del producto premium para impactar, con consentimiento, a compradores VIP de Brighton, prospects de hospitality, grupos y partners con la disponibilidad VIP de Everton; captar lista de espera y medir reservas, conversión y yield por separado de entradas estándar y asistencia."
+    },
+    "sourceName": "London City Lionesses VIP Terrace",
+    "sourceUrl": "https://www.londoncitylionesses.com/vip-terrace",
+    "sources": [
+      {
+        "name": "London City Lionesses VIP Terrace",
+        "url": "https://www.londoncitylionesses.com/vip-terrace",
+        "checkedAt": "2026-10-04"
+      },
+      {
+        "name": "London City Lionesses Everton matchday",
+        "url": "https://www.londoncitylionesses.com/everton-h-2627",
+        "checkedAt": "2026-10-04"
+      }
+    ]
   }
 ]
