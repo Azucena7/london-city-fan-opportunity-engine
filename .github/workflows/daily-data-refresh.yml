@@ -3,8 +3,9 @@ name: Daily data refresh
 on:
   workflow_dispatch:
   schedule:
-    # GitHub cron uses UTC. Both slots are scheduled so the script can keep 06:30 Europe/London across DST.
-    - cron: "30 5,6 * * *"
+    # GitHub cron uses UTC. Separate expressions let us identify the intended BST/GMT slot even if GitHub starts the job late.
+    - cron: "30 5 * * *"
+    - cron: "30 6 * * *"
 
 permissions:
   contents: write
@@ -17,19 +18,45 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
+      - name: Select the Europe/London schedule slot
+        id: schedule_gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "run_refresh=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          london_offset="$(TZ=Europe/London date +%z)"
+          if { [ "$SCHEDULE" = "30 5 * * *" ] && [ "$london_offset" = "+0100" ]; } || \
+             { [ "$SCHEDULE" = "30 6 * * *" ] && [ "$london_offset" = "+0000" ]; }; then
+            echo "run_refresh=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run_refresh=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping duplicate DST slot: schedule=$SCHEDULE london_offset=$london_offset"
+          fi
+
       - uses: actions/checkout@v7
+        if: steps.schedule_gate.outputs.run_refresh == 'true'
       - uses: actions/setup-node@v7
+        if: steps.schedule_gate.outputs.run_refresh == 'true'
         with:
           node-version: 24
           cache: npm
       - run: npm ci
+        if: steps.schedule_gate.outputs.run_refresh == 'true'
       - run: npm run refresh:data
+        if: steps.schedule_gate.outputs.run_refresh == 'true'
       - name: Refresh public audience and attendance signals
+        if: steps.schedule_gate.outputs.run_refresh == 'true'
         run: npm run refresh:public-signals
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
       - name: Commit material updates
+        if: steps.schedule_gate.outputs.run_refresh == 'true'
         run: |
           if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/wsl-attendance-benchmark.json data/live/event-landscape.json data/live/source-health.json; then
             echo "No data change to publish"
