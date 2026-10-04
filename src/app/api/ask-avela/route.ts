@@ -180,7 +180,7 @@ export async function POST(request: Request) {
             "Keep evidence, internal user information, inference and assumptions distinct.",
             "The UI can explicitly request one mode: ask, tell or change. Respect the requested mode when supplied.",
             "ASK answers a question without changing state.",
-            "TELL AVELA extracts candidate internal context but does not claim it has been saved or applied.",
+            "TELL AVELA extracts candidate internal context; do not claim it has been saved or applied.",
             "CHANGE explores a scenario or decision modification but does not claim the official decision has changed.",
             "For capacity questions, use operationalCapacity and say when it is unknown.",
             "For blocker or ownership questions, use pendingOperationalRequests, approvals and nextAction.",
