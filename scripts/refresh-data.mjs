@@ -146,10 +146,6 @@ async function fetchWeather(nextHome) {
 
 async function main() {
   const london = londonParts();
-  if (process.env.GITHUB_EVENT_NAME === "schedule" && london.hour !== "06") {
-    console.log("Not the 06:30 Europe/London run; exiting without changes.");
-    return;
-  }
   const [existing, current, signals] = await Promise.all([
     readFile(CALENDAR_PATH, "utf8").then(JSON.parse),
     readFile(CURRENT_PATH, "utf8").then(JSON.parse),
