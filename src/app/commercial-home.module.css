@@ -1,10 +1,7 @@
 .shell{
   --page-bg:#f6f7f9;
-  --surface-muted:#eef1f6;
   --ink:#10131a;
-  --muted:#69707d;
   --accent:#6657ff;
-  --signal:#ff654f;
   min-height:100vh;
   color:var(--ink);
   background:var(--page-bg);
