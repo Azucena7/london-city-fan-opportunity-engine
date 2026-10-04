@@ -195,3 +195,30 @@ test("retired standalone journey-routing prototype stays removed", () => {
   assert.doesNotMatch(env, /TFL_API_KEY|TRANSPORTAPI_APP_ID|TRANSPORTAPI_APP_KEY/);
   assert.match(env, /RDM_DATA_PRODUCT_ID/);
 });
+
+test("canonical public surfaces use the AVELA production host", () => {
+  const canonical = "https://avela-growth-intelligence.vercel.app";
+  const legacy = "https://london-city-fan-opportunity-engine.vercel.app";
+  const paths = [
+    "src/app/robots.ts",
+    "src/app/sitemap.ts",
+    "src/app/layout.tsx",
+    "scripts/refresh-data.mjs",
+    "scripts/refresh-public-signals.mjs",
+    "src/components/ClubPilotProposition.tsx",
+    "data/contracts/campaign-plan.schema.json",
+    "data/contracts/pilot-readiness.schema.json",
+    "data/contracts/crm-ticketing.schema.json",
+    "data/contracts/search-demand.schema.json",
+    "data/contracts/experience-demand.schema.json",
+    "data/contracts/partner-commercial-pack.schema.json",
+    "data/contracts/experiment-measurement.schema.json",
+    "data/contracts/mobility-partnership.schema.json",
+    "data/live/audience-reach.json"
+  ];
+  for (const path of paths) {
+    const source = readFileSync(path, "utf8");
+    assert.ok(source.includes(canonical), `${path} should reference the AVELA canonical host`);
+    assert.ok(!source.includes(legacy), `${path} should not reference the historical host`);
+  }
+});

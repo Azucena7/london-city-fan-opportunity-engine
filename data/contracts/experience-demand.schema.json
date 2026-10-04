@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/experience-demand",
+  "$id": "https://avela-growth-intelligence.vercel.app/api/contracts/experience-demand",
   "title": "ExperienceDemandValidation",
   "type": "object",
   "required": ["version", "checkedAt", "status", "headline", "principle", "concepts", "fixtures", "origins", "partySizes", "funnel", "searchDemandGateIds", "launchGates", "analytics", "guardrails"],

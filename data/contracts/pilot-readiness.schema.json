@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/pilot-readiness",
+  "$id": "https://avela-growth-intelligence.vercel.app/api/contracts/pilot-readiness",
   "title": "PilotReadiness",
   "type": "object",
   "required": ["version", "checkedAt", "status", "recommendationState", "recommendedPackId", "recommendedFixtureId", "headline", "principle", "scoringModel", "candidates", "owners", "checklist", "timeline", "budgetInputs", "outreachDraft", "decision", "guardrails"],

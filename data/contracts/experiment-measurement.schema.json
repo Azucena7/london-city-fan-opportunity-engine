@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/experiment-measurement",
+  "$id": "https://avela-growth-intelligence.vercel.app/api/contracts/experiment-measurement",
   "title": "ExperimentMeasurementLayer",
   "type": "object",
   "required": ["version", "checkedAt", "status", "headline", "principle", "minimumAggregateCohort", "experiments", "events", "cohorts", "provider", "commonFields", "prohibitedFields", "qualityRules", "guardrails"],

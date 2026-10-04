@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/mobility-partnership",
+  "$id": "https://avela-growth-intelligence.vercel.app/api/contracts/mobility-partnership",
   "title": "MobilityPartnershipLayer",
   "type": "object",
   "required": ["version", "checkedAt", "status", "demandState", "headline", "principle", "pilots", "corridors", "partnerModels", "scoring", "simulator", "experienceEvent", "guardrails"],

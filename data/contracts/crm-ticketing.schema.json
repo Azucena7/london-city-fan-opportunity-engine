@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://london-city-fan-opportunity-engine.vercel.app/contracts/crm-ticketing/1.0",
+  "$id": "https://avela-growth-intelligence.vercel.app/contracts/crm-ticketing/1.0",
   "title": "CRM and ticketing import record",
   "description": "Consent-safe, one-ticket-per-row contract. Direct identifiers and payment details are outside scope.",
   "type": "array",
