@@ -331,3 +331,10 @@ test("architecture document reflects the as-built AVELA runtime", () => {
   assert.match(architecture, /legacy physical credit_ledger/);
   assert.doesNotMatch(architecture, /Phase 1 - Public prototype|Phase 2 - Live decision engine|Phase 3 - Agentic workflows/);
 });
+
+
+test("commercial home does not retain dead ticker animation overrides", () => {
+  const css = readFileSync("src/app/commercial-home.module.css", "utf8");
+  assert.doesNotMatch(css, /tickerTint/);
+  assert.doesNotMatch(css, /animation:\s*none!important/);
+});
