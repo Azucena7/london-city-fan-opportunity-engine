@@ -104,10 +104,18 @@ test("canonical surfaces do not link internally through retired redirect routes"
     "src/components/LocalizedTechnicalCaseStudy.tsx",
     "src/app/pilot/rehearsal/page.tsx"
   ];
-  const retiredHrefs = /href="\/(?:today|measurement|method|brief|results|london-city)"/;
+  const retiredRoute = /["']\/(?:today|this-week|calendar|territories|experience|access|measurement|partners|sources|method|brief|results|london-city)["']/;
   for (const path of paths) {
-    assert.doesNotMatch(readFileSync(path, "utf8"), retiredHrefs, `${path} should link directly to a canonical surface`);
+    assert.doesNotMatch(readFileSync(path, "utf8"), retiredRoute, `${path} should link directly to a canonical surface`);
   }
+  const analystNav = readFileSync("src/components/NavTabs.tsx", "utf8");
+  assert.match(analystNav, /"\/live\/london-city"/);
+  assert.match(analystNav, /"\/app\/matches"/);
+  assert.match(analystNav, /"\/app\/campaigns"/);
+  assert.match(analystNav, /"\/app\/learning"/);
+  assert.match(analystNav, /"\/app\/players"/);
+  assert.match(analystNav, /"\/app\/season"/);
+  assert.match(analystNav, /"\/app\/sources"/);
 });
 
 test("authentication does not retain an unused Supabase refresh token", () => {
