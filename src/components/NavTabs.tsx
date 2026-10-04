@@ -6,8 +6,8 @@ import { useLanguage } from "./LanguageProvider";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 function isActive(pathname: string, href: string) {
-  if (href === "/today") return pathname === "/" || pathname.startsWith("/today") || pathname.startsWith("/this-week");
-  return pathname.startsWith(href);
+  if (href === "/app") return pathname === "/app";
+  return pathname === href || pathname.startsWith(`${href}/`);
 }
 
 export function NavTabs() {
@@ -16,18 +16,17 @@ export function NavTabs() {
   const es = lang === "es";
 
   const primary = [
-    ["/london-city", es ? "Resumen del caso" : "Case overview"],
-    ["/today", es ? "Hoy" : "Today"],
-    ["/calendar", es ? "Calendario" : "Calendar"],
-    ["/territories", es ? "Territorios" : "Territories"],
-    ["/experience", es ? "Experiencia del aficionado" : "Fan Experience"]
+    ["/live/london-city", es ? "Resumen del caso" : "Case overview"],
+    ["/app", es ? "Inicio" : "Home"],
+    ["/app/matches", es ? "Radar" : "Radar"],
+    ["/app/campaigns", es ? "Campañas" : "Campaigns"],
+    ["/app/learning", es ? "Aprendizaje" : "Learning"]
   ] as const;
 
   const operations = [
-    ["/access", es ? "Acceso al partido" : "Matchday Access"],
-    ["/measurement", es ? "Medición" : "Measurement"],
-    ["/partners", es ? "Alianzas" : "Partnerships"],
-    ["/sources", es ? "Datos y fuentes" : "Data & Sources"]
+    ["/app/players", es ? "Activos de jugadoras" : "Player assets"],
+    ["/app/season", es ? "Temporada" : "Season"],
+    ["/app/sources", es ? "Datos y fuentes" : "Data & Sources"]
   ] as const;
 
   return (
