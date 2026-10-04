@@ -248,6 +248,17 @@ export default async function ClubAppHome() {
             <small>Prospecting only · not contract fulfilment</small>
           </article>
 
+          <article data-state={opsState.requests.state}>
+            <span>Requests</span>
+            <strong>{
+              opsState.requests.state === "unknown" ? "Unknown" :
+              opsState.requests.overdue > 0 ? opsState.requests.overdue + " overdue" :
+              opsState.requests.pending > 0 ? opsState.requests.pending + " waiting" : "Clear"
+            }</strong>
+            <p>{opsState.requests.nextRecipient ? "Next response: " + opsState.requests.nextRecipient : "No pending Team Manager, Activation or Protocol response is recorded."}</p>
+            <small>{opsState.requests.pending} open heads-up / formal request{opsState.requests.pending === 1 ? "" : "s"}</small>
+          </article>
+
           <article data-state="unknown">
             <span>Verified contracts</span>
             <strong>{contractState}</strong>
