@@ -167,3 +167,7 @@ test("generated social cards use the default Node.js runtime", () => {
     assert.doesNotMatch(source, /runtime\s*=\s*["']edge["']/);
   }
 });
+
+test("retired standalone travel-delta prototype stays removed", () => {
+  assert.equal(existsSync("src/lib/travelDelta.ts"), false);
+});
