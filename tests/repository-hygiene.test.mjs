@@ -258,3 +258,15 @@ test("historical Vercel host permanently redirects to AVELA", () => {
   assert.match(config, /destination: "https:\/\/avela-growth-intelligence\.vercel\.app\/:path\*"/);
   assert.match(config, /permanent: true/);
 });
+
+
+test("language persistence uses the AVELA namespace and only reads the retired key for migration", () => {
+  const provider = readFileSync("src/components/LanguageProvider.tsx", "utf8");
+  const i18n = readFileSync("src/lib/i18n.ts", "utf8");
+  assert.match(provider, /avela-language/);
+  assert.match(provider, /getItem\("lcl-language"\)/);
+  assert.match(provider, /removeItem\("lcl-language"\)/);
+  assert.doesNotMatch(provider, /setItem\("lcl-language"/);
+  assert.doesNotMatch(provider, /dictionary\[lang\]|\bt:\s*dictionary/);
+  assert.equal(i18n.trim(), 'export type Lang = "en" | "es";');
+});
