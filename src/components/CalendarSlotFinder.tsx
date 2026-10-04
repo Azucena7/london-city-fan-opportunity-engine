@@ -48,15 +48,25 @@ function mapWindow(row: ApiWindow): AvailabilityWindow {
 
 export function CalendarSlotFinder({
   fixtureDate,
-  fixtureLabel
+  fixtureLabel,
+  initialRequiredRoles,
+  purpose,
+  durationMinutes = 60,
+  includeSquadDefault = true
 }: {
   fixtureDate: string;
   fixtureLabel: string;
+  initialRequiredRoles?: string[];
+  purpose?: string | null;
+  durationMinutes?: number;
+  includeSquadDefault?: boolean;
 }) {
   const [clubs, setClubs] = useState<Club[]>([]);
   const [windows, setWindows] = useState<AvailabilityWindow[]>([]);
-  const [selectedRoles, setSelectedRoles] = useState<string[]>(["Head of Marketing", "Secretary / Protocol"]);
-  const [includeSquad, setIncludeSquad] = useState(true);
+  const [selectedRoles, setSelectedRoles] = useState<string[]>(
+    initialRequiredRoles?.length ? Array.from(new Set(initialRequiredRoles)) : ["Head of Marketing", "Secretary / Protocol"]
+  );
+  const [includeSquad, setIncludeSquad] = useState(includeSquadDefault);
 
   const fixture = new Date(`${fixtureDate}T12:00:00Z`);
   const rangeEnd = fixture.toISOString();
@@ -86,11 +96,11 @@ export function CalendarSlotFinder({
   const candidates = useMemo(() => rankSchedulingSlots({
     from: rangeStart,
     to: rangeEnd,
-    durationMinutes: 60,
+    durationMinutes,
     requirements,
     windows,
     maxResults: 5
-  }), [rangeStart, rangeEnd, requirements, windows]);
+  }), [durationMinutes, rangeStart, rangeEnd, requirements, windows]);
 
   if (!clubs.length) return null;
 
@@ -101,11 +111,12 @@ export function CalendarSlotFinder({
           <span>Calendar intelligence</span>
           <h2>When is the best moment to make this happen?</h2>
           <p>AVELA ranks common windows before {fixtureLabel}. Unknown calendars stay unknown — they are never treated as free.</p>
+          {purpose ? <p className={styles.inferredPurpose}>Inferred from this action: {purpose} Edit attendees before using the recommendation.</p> : null}
         </div>
         <div className={styles.range}>
           <span>Search window</span>
           <strong>14 days before fixture</strong>
-          <small>60-minute working slots</small>
+          <small>{durationMinutes}-minute working slots</small>
         </div>
       </div>
 
