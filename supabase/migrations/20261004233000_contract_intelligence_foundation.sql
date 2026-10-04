@@ -25,13 +25,14 @@ create table if not exists public.contract_documents (
   updated_by uuid not null references auth.users(id),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  check (effective_end is null or effective_start is null or effective_end >= effective_start)
+  check (effective_end is null or effective_start is null or effective_end >= effective_start),
+  unique(id, club_id)
 );
 
 create table if not exists public.contract_clauses (
   id uuid primary key default gen_random_uuid(),
   club_id uuid not null references public.clubs(id) on delete cascade,
-  document_id uuid not null references public.contract_documents(id) on delete cascade,
+  document_id uuid not null,
   clause_type text not null check (
     clause_type in (
       'rights','obligation','exclusivity','appearance','fee','approval','deadline',
@@ -63,13 +64,16 @@ create table if not exists public.contract_clauses (
   check (
     (review_state <> 'verified')
     or (reviewed_by is not null and reviewed_at is not null)
-  )
+  ),
+  unique(id, club_id),
+  foreign key(document_id, club_id)
+    references public.contract_documents(id, club_id) on delete cascade
 );
 
 create table if not exists public.contract_season_instances (
   id uuid primary key default gen_random_uuid(),
   club_id uuid not null references public.clubs(id) on delete cascade,
-  document_id uuid not null references public.contract_documents(id) on delete cascade,
+  document_id uuid not null,
   season_key text not null,
   state text not null default 'draft' check (state in ('draft','active','closed','blocked')),
   carry_forward boolean not null default true,
@@ -80,20 +84,27 @@ create table if not exists public.contract_season_instances (
   updated_by uuid not null references auth.users(id),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  unique(document_id, season_key)
+  unique(document_id, season_key),
+  foreign key(document_id, club_id)
+    references public.contract_documents(id, club_id) on delete cascade
 );
 
 create table if not exists public.contract_entity_links (
   id uuid primary key default gen_random_uuid(),
   club_id uuid not null references public.clubs(id) on delete cascade,
-  document_id uuid not null references public.contract_documents(id) on delete cascade,
-  clause_id uuid references public.contract_clauses(id) on delete cascade,
+  document_id uuid not null,
+  clause_id uuid,
+
   entity_type text not null check (entity_type in ('sponsor','player','campaign','fixture','season','decision')),
   entity_id text not null,
   relationship_type text not null check (relationship_type in ('applies-to','blocks','requires','supersedes','informs')),
   created_by uuid not null references auth.users(id),
   created_at timestamptz not null default now(),
-  unique(document_id, clause_id, entity_type, entity_id, relationship_type)
+  unique(document_id, clause_id, entity_type, entity_id, relationship_type),
+  foreign key(document_id, club_id)
+    references public.contract_documents(id, club_id) on delete cascade,
+  foreign key(clause_id, club_id)
+    references public.contract_clauses(id, club_id) on delete cascade
 );
 
 alter table public.contract_documents enable row level security;
@@ -185,19 +196,24 @@ set search_path=''
 as $$
 begin
   if TG_TABLE_NAME = 'contract_documents' then
-    if new.lifecycle_state = 'active'
-       and (TG_OP = 'INSERT' or old.lifecycle_state is distinct from 'active')
-       and not public.club_has_permission(new.club_id,'governance','approve') then
-      raise exception 'governance approve permission is required to activate a contract';
+    if (
+      new.lifecycle_state = 'active'
+      or (TG_OP = 'UPDATE' and old.lifecycle_state = 'active')
+    ) and not public.club_has_permission(new.club_id,'governance','approve') then
+      raise exception 'governance approve permission is required to activate or alter an active contract';
     end if;
   elsif TG_TABLE_NAME = 'contract_clauses' then
-    if new.review_state = 'verified'
-       and (TG_OP = 'INSERT' or old.review_state is distinct from 'verified') then
+    if (
+      new.review_state = 'verified'
+      or (TG_OP = 'UPDATE' and old.review_state = 'verified')
+    ) then
       if not public.club_has_permission(new.club_id,'governance','approve') then
-        raise exception 'governance approve permission is required to verify a contract clause';
+        raise exception 'governance approve permission is required to verify or alter a verified contract clause';
       end if;
-      new.reviewed_by := auth.uid();
-      new.reviewed_at := coalesce(new.reviewed_at, now());
+      if new.review_state = 'verified' then
+        new.reviewed_by := auth.uid();
+        new.reviewed_at := coalesce(new.reviewed_at, now());
+      end if;
     end if;
   end if;
   return new;
