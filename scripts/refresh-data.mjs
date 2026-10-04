@@ -145,7 +145,6 @@ async function fetchWeather(nextHome) {
 }
 
 async function main() {
-  const london = londonParts();
   const [existing, current, signals] = await Promise.all([
     readFile(CALENDAR_PATH, "utf8").then(JSON.parse),
     readFile(CURRENT_PATH, "utf8").then(JSON.parse),
