@@ -1,5 +1,7 @@
-const redirects = [
-  { source: "/brief", destination: "/app/matches" },
+// Compatibility-only routes retained for historical links and indexed URLs.
+// Canonical AVELA surfaces must link directly to /app, /case-study and /live routes.
+const historicalWorkspaceRedirects = [
+{ source: "/brief", destination: "/app/matches" },
   { source: "/opportunity", destination: "/app/matches" },
   { source: "/decision-room", destination: "/app/matches" },
   { source: "/impact", destination: "/app/matches" },
@@ -17,6 +19,9 @@ const redirects = [
   { source: "/access", destination: "/app/access" },
   { source: "/demo", destination: "/app/demo" },
   { source: "/app/credits", destination: "/app/campaigns" },
+];
+
+const historicalClubRedirects = [
   { source: "/club", destination: "/app" },
   { source: "/club/sign-in", destination: "/app/access" },
   { source: "/club-demo", destination: "/app/demo" },
@@ -27,10 +32,19 @@ const redirects = [
   { source: "/territory-travel", destination: "/app" },
   { source: "/travel", destination: "/app" },
   { source: "/partners", destination: "/app" },
+];
+
+const historicalProofRedirects = [
   { source: "/story", destination: "/case-study" },
   { source: "/method", destination: "/case-study" },
   { source: "/london-city", destination: "/live/london-city" },
   { source: "/london-city/:case", destination: "/live/london-city/:case" }
+];
+
+const historicalRouteRedirects = [
+  ...historicalWorkspaceRedirects,
+  ...historicalClubRedirects,
+  ...historicalProofRedirects
 ];
 
 const nextConfig = {
@@ -43,7 +57,7 @@ const nextConfig = {
         destination: "https://avela-growth-intelligence.vercel.app/:path*",
         permanent: true
       },
-      ...redirects.map((item) => ({ ...item, permanent: true }))
+      ...historicalRouteRedirects.map((item) => ({ ...item, permanent: true }))
     ];
   },
   async headers() {

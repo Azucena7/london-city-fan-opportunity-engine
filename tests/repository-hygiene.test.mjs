@@ -453,3 +453,13 @@ test("active CSS avoids construction-phase labels", () => {
     assert.doesNotMatch(css, /\/\*\s*(?:Block \d+|PR #\d+)/);
   }
 });
+
+
+test("historical redirects are explicitly isolated from canonical routing", () => {
+  const config = readFileSync("next.config.mjs", "utf8");
+  assert.match(config, /const historicalWorkspaceRedirects/);
+  assert.match(config, /const historicalClubRedirects/);
+  assert.match(config, /const historicalProofRedirects/);
+  assert.match(config, /historicalRouteRedirects\.map/);
+  assert.doesNotMatch(config, /const redirects =/);
+});
