@@ -8,7 +8,7 @@ The guided public product demo is `/app/demo` and contains only synthetic/demo-s
 The installed Vercel Supabase integration uses the required custom prefix `CLUB`.
 The server prefers `CLUB_SUPABASE_URL` plus `CLUB_SUPABASE_PUBLISHABLE_KEY` and accepts the integration-provided `NEXT_PUBLIC_CLUB_*` equivalents. `CLUB_SUPABASE_ANON_KEY` remains supported only as an older key name inside the same CLUB namespace.
 
-Namespace selection is atomic: if any CLUB Supabase variable exists, the server uses only CLUB / NEXT_PUBLIC_CLUB variables and never mixes in unprefixed `SUPABASE_*` values. Unprefixed variables are retained only as a compatibility fallback for environments where no CLUB namespace exists at all. The app does not use provider secret keys or Postgres credentials for login.
+The server reads only the `CLUB_*` / `NEXT_PUBLIC_CLUB_*` namespace. Retired unprefixed `SUPABASE_*` variables are ignored even if they still exist in an environment. The app does not use provider secret keys or Postgres credentials for login.
 
 ## Current access and persistence flow
 
