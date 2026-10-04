@@ -373,7 +373,6 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         subjectType="fixture"
         subjectId={fixture.id}
         recommendation={campaign?.title.en ?? live.recommendedAction}
-        suggestions={handoffSuggestions}
       />
 
       <AvailabilityPlanner
@@ -406,6 +405,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         fixtureLabel={`London City v ${fixture.opponent}`}
         eventAt={fixture.date ? `${fixture.date}T${fixture.kickoff ?? "12:00"}:00` : null}
         recommendation={campaign?.title.en ?? live.recommendedAction}
+        suggestions={handoffSuggestions}
       />
 
       <AskAvelaPanel fixtureId={fixture.id} decisionId={`fixture:${fixture.id}`} />
