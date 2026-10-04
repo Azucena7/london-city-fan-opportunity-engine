@@ -1235,11 +1235,11 @@ test("app Home surfaces the next decision before navigation", () => {
   assert.match(home, /Highest current priority/);
   assert.match(home, /Decision queue/);
   assert.match(home, /What should I look at next\?/);
-  assert.match(home, /Fixture/);
-  assert.match(home, /Signals/);
-  assert.match(home, /Opportunity/);
-  assert.match(home, /Campaign/);
+  assert.match(home, /Opportunity Radar/);
+  assert.match(home, /Campaign execution/);
+  assert.match(home, /Club context/);
   assert.match(home, /Learning/);
+  assert.match(home, /AVELA decision loop/);
   assert.match(nav, /label: "Home"/);
 });
 
