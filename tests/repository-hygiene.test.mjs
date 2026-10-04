@@ -40,3 +40,14 @@ test("canonical data and source locations remain present", () => {
     assert.equal(existsSync(path), true, `${path} is a canonical project input`);
   }
 });
+
+test("retired first persistence prototype stays removed", () => {
+  for (const path of [
+    "docs/club-control-demo.md",
+    "docs/club-private-drafts.md",
+    "supabase/migrations/20261002_club_match_drafts.sql"
+  ]) {
+    assert.equal(existsSync(path), false, `${path} belongs to the retired first persistence prototype`);
+  }
+  assert.equal(existsSync("supabase/migrations/20261002_campaign_workspace.sql"), true);
+});
