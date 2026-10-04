@@ -116,8 +116,8 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
   assert.match(demo, /Fixture detected/);
   assert.match(demo, /Engine recommends/);
   assert.match(demo, /Campaign built/);
-  assert.match(demo, /Review & launch/);
-  assert.match(demo, /same live product data/);
+  assert.match(demo, /Review & handoff/);
+  assert.match(demo, /same product logic and current public evidence/);
   assert.match(demo, /Open campaign builder/);
   assert.match(page, /getCurrentProductOpportunity/);
   assert.match(page, /campaignPlans/);
@@ -1452,4 +1452,15 @@ test("commercial funnel proves relevance before explaining the full product and 
   assert.match(clubs, /Prepare a pilot conversation/);
   assert.match(clubs, /Copy pilot brief/);
   assert.doesNotMatch(clubs, /Request a club demo/);
+});
+
+test("guided demo sells the decision workflow without implying unsupported execution", () => {
+  const demo = read("src/components/DemoTour.tsx");
+  assert.match(demo, /one home fixture becomes one growth decision/);
+  assert.match(demo, /Review & handoff/);
+  assert.match(demo, /Handoff principle/);
+  assert.match(demo, /never presents an unsupported action as executed/);
+  assert.match(demo, /Use this workflow on your next six home fixtures/);
+  assert.doesNotMatch(demo, /credit cost/);
+  assert.doesNotMatch(demo, /Review & launch/);
 });

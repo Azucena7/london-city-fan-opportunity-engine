@@ -22,7 +22,7 @@ const steps = [
   { id: "detect", label: "Fixture detected" },
   { id: "decide", label: "Engine recommends" },
   { id: "build", label: "Campaign built" },
-  { id: "launch", label: "Review & launch" }
+  { id: "handoff", label: "Review & handoff" }
 ] as const;
 
 export function DemoTour(props: Props) {
@@ -34,10 +34,10 @@ export function DemoTour(props: Props) {
       <header className={styles.hero}>
         <div>
           <span>3-minute guided demo</span>
-          <h1>See the club workflow from fixture to campaign.</h1>
-          <p>This walkthrough uses the same live product data as the club workspace. Nothing here is a separate mock dashboard.</p>
+          <h1>See how one home fixture becomes one growth decision.</h1>
+          <p>This walkthrough uses the same product logic and current public evidence as the club workspace. Nothing here is a separate mock dashboard.</p>
         </div>
-        <Link href={props.fixtureId ? `/app/matches/${props.fixtureId}` : "/app/matches"}>Open full product →</Link>
+        <Link href={props.fixtureId ? `/app/matches/${props.fixtureId}` : "/app/matches"}>Skip to full workspace →</Link>
       </header>
 
       <div className={styles.progress} aria-label="Demo progress">
@@ -96,9 +96,9 @@ export function DemoTour(props: Props) {
               <article><span>Audience</span><strong>{props.campaignAudience}</strong></article>
               <article><span>Content</span><strong>Email + vertical video + carousel</strong></article>
               <article><span>Channels</span><strong>CRM + Instagram + Facebook + paid social</strong></article>
-              <article><span>Automation</span><strong>Follow-up flow + scheduling</strong></article>
+              <article><span>Handoff</span><strong>Follow-up flow + scheduling</strong></article>
             </div>
-            <p className={styles.note}>The full builder lets the club remove items, add variants and see credit cost plus campaign coverage change in real time.</p>
+            <p className={styles.note}>The full builder lets the club remove items, add variants and see recommended scope plus delivery readiness change in real time.</p>
           </div>
         ) : null}
 
@@ -107,13 +107,13 @@ export function DemoTour(props: Props) {
             <article className={styles.mainCard}>
               <span>Next action</span>
               <h2>{props.nextAction}</h2>
-              <p>Before launch, the club sees approvals, credit budget, missing channels and what has been removed from the recommended scope.</p>
+              <p>Before handoff, the club sees approvals, missing channels and what has been removed from the recommended scope.</p>
               <Link href={props.fixtureId ? `/app/matches/${props.fixtureId}#campaign` : "/app/matches"}>Open campaign builder →</Link>
             </article>
             <article className={styles.sideCard}>
-              <span>Launch principle</span>
-              <strong>Review first. Execute second.</strong>
-              <p>Connected channels can eventually publish or send directly. Until then, unsupported actions remain explicit handoffs rather than simulated execution.</p>
+              <span>Handoff principle</span>
+              <strong>Review first. Handoff second.</strong>
+              <p>AVELA never presents an unsupported action as executed. The club approves the play, then each action remains a clear handoff until a real connection exists.</p>
             </article>
           </div>
         ) : null}
@@ -123,7 +123,10 @@ export function DemoTour(props: Props) {
           {step < steps.length - 1 ? (
             <button type="button" className={styles.primary} onClick={() => setStep((value) => Math.min(steps.length - 1, value + 1))}>Continue →</button>
           ) : (
-            <Link className={styles.primary} href={props.fixtureId ? `/app/matches/${props.fixtureId}` : "/app/matches"}>Explore the product →</Link>
+            <>
+              <Link className={styles.primary} href={props.fixtureId ? `/app/matches/${props.fixtureId}` : "/app/matches"}>Explore the full workspace →</Link>
+              <Link href="/for-clubs#demo">Use this workflow on your next six home fixtures →</Link>
+            </>
           )}
         </div>
       </div>
