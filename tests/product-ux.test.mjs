@@ -1536,3 +1536,27 @@ test("Decision Center derives a simple action queue from the canonical opportuni
   assert.match(css, /changeFeed/);
   assert.match(css, /priorityPill/);
 });
+
+
+test("decision history persists an auditable club memory with RLS", () => {
+  const route = read("src/app/api/decision-history/route.ts");
+  const migration = read("supabase/migrations/20261004214706_decision_event_history.sql");
+  const creatorIndex = read("supabase/migrations/20261004214718_index_decision_event_creator.sql");
+
+  assert.match(route, /decision_events/);
+  assert.match(route, /eventType/);
+  assert.match(route, /sourceType/);
+  assert.match(route, /on_conflict=event_key/);
+  assert.match(route, /Authentication required/);
+
+  assert.match(migration, /create table if not exists public\.decision_events/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /club_has_permission\(club_id, 'overview', 'view'\)/);
+  assert.match(migration, /club_has_permission\(club_id, 'overview', 'edit'\)/);
+  assert.match(migration, /'committed'/);
+  assert.match(migration, /'executed'/);
+  assert.match(migration, /'measured'/);
+  assert.match(migration, /'learned'/);
+  assert.match(migration, /'context-added'/);
+  assert.match(creatorIndex, /decision_events_created_by_idx/);
+});
