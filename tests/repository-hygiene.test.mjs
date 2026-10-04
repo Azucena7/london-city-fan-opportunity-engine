@@ -338,7 +338,7 @@ test("commercial home keeps one canonical CSS layer", () => {
   assert.doesNotMatch(css, /tickerTint/);
   assert.doesNotMatch(css, /animation:\s*none!important/);
   assert.doesNotMatch(css, /Reading-width and hierarchy reset|Remove legacy oversized\/full-bleed behavior/);
-  assert.equal((css.match(/\.signalTicker\{/g) ?? []).length, 1);
+  assert.equal((css.match(/^\\.signalTicker\\{/gm) ?? []).length, 1);
 });
 
 
