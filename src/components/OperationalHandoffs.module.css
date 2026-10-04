@@ -3,3 +3,5 @@
 .recommendedPreset{border-color:rgba(47,143,131,.45)!important;box-shadow:inset 0 3px 0 var(--product-accent);background:linear-gradient(180deg,rgba(47,143,131,.06),#fff 34%)!important}
 .recommendedPreset .presetTop span{color:var(--product-accent)}
 .suggestionReason{margin-top:9px!important;padding-top:9px;border-top:1px solid var(--product-line);color:var(--product-ink)!important;font-size:9px!important;line-height:1.45!important}
+
+.suggestionRoles{margin-top:7px!important;color:var(--product-accent)!important;font-size:8px!important;font-weight:850;line-height:1.45!important}
