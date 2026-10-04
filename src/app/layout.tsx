@@ -18,7 +18,7 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://london-city-fan-opportunity-engine.vercel.app"),
+  metadataBase: new URL("https://avela-growth-intelligence.vercel.app"),
   title: {
     default: "AVELA · Growth Intelligence for Women’s Football",
     template: "%s | AVELA"
