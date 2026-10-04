@@ -139,10 +139,18 @@
     "id": "2026-10-04-tot-a",
     "date": "2026-10-04",
     "kickoff": "14:00",
+    "kickoffVerification": {
+      "value": "14:00",
+      "checkedAt": "2026-10-02T10:00:00+01:00",
+      "sourceUrls": [
+        "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+        "https://www.tottenhamhotspur.com/news/1145195/spurs-vs-london-city-lionesses-womens-super-league-how-to-watch-team-news-kit-colours-key-information"
+      ]
+    },
     "opponent": "Tottenham Hotspur",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
-    "venue": "BetWright Stadium",
+    "venue": "Brisbane Road",
     "status": "scheduled",
     "sourceDiscrepancies": [
       {
@@ -164,15 +172,7 @@
           }
         ]
       }
-    ],
-    "kickoffVerification": {
-      "value": "14:00",
-      "checkedAt": "2026-10-02T10:00:00+01:00",
-      "sourceUrls": [
-        "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
-        "https://www.tottenhamhotspur.com/news/1145195/spurs-vs-london-city-lionesses-womens-super-league-how-to-watch-team-news-kit-colours-key-information"
-      ]
-    }
+    ]
   },
   {
     "id": "2026-10-18-eve-h",
