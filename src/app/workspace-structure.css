@@ -22,7 +22,7 @@
   text-decoration: none;
 }
 
-.prototypeMark {
+.evidenceMark {
   margin-top: 0;
   white-space: nowrap;
 }
@@ -496,7 +496,7 @@
   .navTabsRow { align-items: flex-start; flex-direction: column; }
   .primaryTabs { width: 100%; gap: 16px; overflow-x: auto; }
   .navSecondary { width: 100%; justify-content: space-between; }
-  .prototypeMark { display: none; }
+  .evidenceMark { display: none; }
   .decisionFirstHero { grid-template-columns: 1fr; }
   .actionBrief { grid-column: auto; grid-template-columns: 1fr; }
   .readinessStrip { grid-template-columns: 1fr; }

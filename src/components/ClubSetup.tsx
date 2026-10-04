@@ -140,7 +140,7 @@ export function ClubSetup() {
         <article>
           <span>01 · Fixtures</span>
           <h2>How does the engine know what is next?</h2>
-          <label>Fixture source<select disabled={!canEdit} value={fixtureSource} onChange={(event) => setFixtureSource(event.target.value as FixtureSource)}><option value="manual">Manual / prototype</option><option value="calendar-feed">Calendar feed</option><option value="ticketing">Ticketing / fixture system</option></select></label>
+          <label>Fixture source<select disabled={!canEdit} value={fixtureSource} onChange={(event) => setFixtureSource(event.target.value as FixtureSource)}><option value="manual">Manual / demo</option><option value="calendar-feed">Calendar feed</option><option value="ticketing">Ticketing / fixture system</option></select></label>
           <p>Goal: fixture date and kickoff should start monitoring automatically.</p>
         </article>
 

@@ -199,7 +199,7 @@ html, body {
   background: var(--case-accent);
 }
 
-.prototypeMark {
+.evidenceMark {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -212,7 +212,7 @@ html, body {
   letter-spacing: .04em;
 }
 
-.prototypeMark::before {
+.evidenceMark::before {
   content: "";
   width: 7px;
   height: 7px;

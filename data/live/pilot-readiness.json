@@ -19,7 +19,7 @@
       { "id": "impact", "label": { "en": "Potential impact", "es": "Impacto potencial" }, "weight": 30 },
       { "id": "feasibility", "label": { "en": "Delivery feasibility", "es": "Viabilidad de ejecución" }, "weight": 25 },
       { "id": "evidence", "label": { "en": "Evidence readiness", "es": "Madurez de evidencia" }, "weight": 20 },
-      { "id": "speed", "label": { "en": "Speed to prototype", "es": "Velocidad al prototipo" }, "weight": 15 },
+      { "id": "speed", "label": { "en": "Speed to pilot", "es": "Velocidad al piloto" }, "weight": 15 },
       { "id": "control", "label": { "en": "Operational control", "es": "Control operativo" }, "weight": 10 }
     ]
   },

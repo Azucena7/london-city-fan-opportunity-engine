@@ -102,8 +102,8 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
             <h2>{opportunity?.decisionState ?? "HOLD"}</h2>
             <p>
               {es
-                ? "No hay campaña activada ni presupuesto aprobado desde este prototipo. El caso muestra una recomendación y los gaps de evidencia necesarios para convertirla en una decisión de club."
-                : "No campaign is activated and no budget is approved from this prototype. The case shows a recommendation and the evidence gaps required to turn it into a club decision."}
+                ? "No hay campaña activada ni presupuesto aprobado desde esta demo independiente. El caso muestra una recomendación y los gaps de evidencia necesarios para convertirla en una decisión de club."
+                : "No campaign is activated and no budget is approved from this independent demo. The case shows a recommendation and the evidence gaps required to turn it into a club decision."}
             </p>
             <div className={styles.actions}>
               <div><Link href="/live/london-city/everton">{es ? "Leer el caso actual →" : "Read the current case →"}</Link></div>
