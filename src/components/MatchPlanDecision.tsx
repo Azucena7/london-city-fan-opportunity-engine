@@ -48,7 +48,7 @@ export function MatchPlanDecision({
       )}
 
       <p>
-        Review state only. This prototype does not send campaigns, commit spend or execute club actions automatically.
+        Review state only. This demo environment does not send campaigns, commit spend or execute club actions automatically.
       </p>
     </aside>
   );
