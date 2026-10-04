@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import { calendar, currentState } from "@/lib/data";
+import { calendar, campaignPlans, currentState, partnerCommercialPack, pilotReadiness } from "@/lib/data";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildDecisionAlerts, decisionSummary, type DecisionPriority } from "@/lib/decisionIntelligence";
+import { getDecisionCenterOpsState } from "@/lib/decisionCenterOverview";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
@@ -52,6 +53,52 @@ export default async function ClubAppHome() {
     .flatMap((alert) => alert.events.map((event) => ({ ...event, alert })))
     .sort((a,b) => b.at.localeCompare(a.at))
     .slice(0, 6);
+
+  const horizonEnd = new Date(today + "T00:00:00Z");
+  horizonEnd.setUTCDate(horizonEnd.getUTCDate() + 30);
+  const horizonEndIso = horizonEnd.toISOString();
+
+  const opsState = await getDecisionCenterOpsState({
+    clubId: clubContext?.clubId,
+    from: currentState.updated_at,
+    to: horizonEndIso
+  });
+
+  const activeCampaigns = campaignPlans.campaigns.filter((campaign) =>
+    campaign.schedule.some((item) => item.state !== "complete")
+  );
+  const campaignsAtRisk = activeCampaigns.filter((campaign) =>
+    campaign.approvals.some((approval) => approval.state !== "ready")
+  ).length;
+
+  const partnerCandidates = partnerCommercialPack.packs.length;
+  const partnerRecommended = pilotReadiness.candidates.find((candidate) => candidate.decision === "recommended-for-review") ?? null;
+  const contractState = "Not connected";
+
+  const timeline = [
+    ...upcoming
+      .filter((fixture) => fixture.date <= horizonEndIso.slice(0, 10))
+      .map((fixture) => ({
+        id: "fixture-" + fixture.id,
+        date: fixture.date,
+        type: "Fixture",
+        title: "London City v " + fixture.opponent,
+        detail: fixture.kickoff ? fixture.kickoff + " · " + fixture.venue : fixture.venue
+      })),
+    ...campaignPlans.campaigns.flatMap((campaign) =>
+      campaign.schedule
+        .filter((item) => item.date >= today && item.date <= horizonEndIso.slice(0, 10) && item.state !== "complete")
+        .map((item) => ({
+          id: "campaign-" + campaign.fixtureId + "-" + item.id,
+          date: item.date,
+          type: "Campaign",
+          title: item.label.en,
+          detail: campaign.title.en
+        }))
+    )
+  ]
+    .sort((a,b) => a.date.localeCompare(b.date))
+    .slice(0, 10);
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -159,6 +206,75 @@ export default async function ClubAppHome() {
         </aside>
       </section>
 
+      <section className={styles.clubState} aria-label="Club state overview">
+        <div className={styles.sectionHead}>
+          <div><span>Club state</span><h2>Can the club absorb what is coming?</h2></div>
+          <p>Only connected or explicitly known state is summarised here. Missing operational data stays unknown.</p>
+        </div>
+        <div className={styles.clubStateGrid}>
+          <article data-state={opsState.capacity.state}>
+            <span>Operational capacity</span>
+            <strong>{
+              opsState.capacity.state === "unknown" ? "Unknown" :
+              opsState.capacity.state === "overloaded" ? "Overloaded" :
+              opsState.capacity.state === "tight" ? "Tight" : "Available"
+            }</strong>
+            <p>{opsState.capacity.utilisation !== null ? opsState.capacity.utilisation + "% of recorded capacity committed" : "Connect workload and capacity data before treating the plan as feasible."}</p>
+            <small>{opsState.capacity.blockers} blocked workload item{opsState.capacity.blockers === 1 ? "" : "s"}</small>
+          </article>
+
+          <article data-state={opsState.availability.state}>
+            <span>Availability</span>
+            <strong>{
+              opsState.availability.state === "unknown" ? "Unknown" :
+              opsState.availability.state === "blocked" ? "Blocked windows" :
+              opsState.availability.state === "tight" ? "Constraints present" : "No recorded conflict"
+            }</strong>
+            <p>{opsState.availability.hardUnavailable} hard unavailable · {opsState.availability.protectedOrBusy} protected / busy · {opsState.availability.internationalDuty} international</p>
+            <small>Next 30 days</small>
+          </article>
+
+          <article data-state={campaignsAtRisk > 0 ? "tight" : "clear"}>
+            <span>Campaigns</span>
+            <strong>{activeCampaigns.length} active</strong>
+            <p>{campaignsAtRisk} with unresolved approval dependencies.</p>
+            <Link href="/app/campaigns">Review execution →</Link>
+          </article>
+
+          <article data-state={partnerRecommended ? "review" : "unknown"}>
+            <span>Sponsor opportunities</span>
+            <strong>{partnerCandidates}</strong>
+            <p>{partnerRecommended ? "One partner opportunity is recommended for review." : "No partner opportunity currently clears the review threshold."}</p>
+            <small>Prospecting only · not contract fulfilment</small>
+          </article>
+
+          <article data-state="unknown">
+            <span>Verified contracts</span>
+            <strong>{contractState}</strong>
+            <p>No sponsor or player legal agreement is currently verified in AVELA.</p>
+            <small>Do not infer rights from planning data</small>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.timelineSection} aria-label="Next 30 days">
+        <div className={styles.sectionHead}>
+          <div><span>Next 30 days</span><h2>Fixtures and work windows that can collide.</h2></div>
+          <p>AVELA should surface timing pressure before it becomes a last-minute coordination problem.</p>
+        </div>
+        <div className={styles.timeline}>
+          {timeline.map((item) => (
+            <article key={item.id}>
+              <time>{shortDate(item.date)}</time>
+              <span>{item.type}</span>
+              <strong>{item.title}</strong>
+              <p>{item.detail}</p>
+            </article>
+          ))}
+          {!timeline.length ? <p>No dated fixture or campaign item is recorded in the next 30 days.</p> : null}
+        </div>
+      </section>
+
       <section className={styles.overview} aria-label="Workspace overview">
         <article>
           <span>Opportunity Radar</span>
@@ -173,10 +289,10 @@ export default async function ClubAppHome() {
           <Link href="/app/campaigns">View campaigns →</Link>
         </article>
         <article>
-          <span>Club context</span>
-          <strong>{clubContext ? "Active" : "Evidence only"}</strong>
-          <p>{clubContext ? `${clubContext.connectedChannels.length} channels and ${clubContext.priorityObjectives.length} objectives available to explain execution fit.` : "Connect club context to improve execution guidance without rewriting evidence."}</p>
-          <Link href={clubContext ? "/app/sources" : "/app/setup"}>{clubContext ? "Review sources →" : "Complete setup →"}</Link>
+          <span>Sponsor intelligence</span>
+          <strong>{partnerRecommended ? "Review" : "Prospecting"}</strong>
+          <p>{partnerCandidates} partner opportunities are modelled separately from verified contract obligations.</p>
+          <Link href="/app/sources">Review source boundary →</Link>
         </article>
         <article>
           <span>Learning</span>
