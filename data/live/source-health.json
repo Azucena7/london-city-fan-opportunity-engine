@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-04T20:22:30.923Z",
+  "checkedAt": "2026-10-04T20:28:30.205Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -13,13 +13,13 @@
       "state": "operational",
       "method": "scheduled-public-observation",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-04T20:22:30.341Z",
+      "lastSuccessfulAt": "2026-10-04T20:28:29.170Z",
       "ownerAction": null,
       "note": {
         "en": "Fixtures and public activations are observed with source-level evidence and discrepancy preservation.",
         "es": "Los partidos y activaciones públicas se observan con evidencia por fuente y conservación de discrepancias."
       },
-      "lastAttemptAt": "2026-10-04T20:22:30.341Z"
+      "lastAttemptAt": "2026-10-04T20:28:29.170Z"
     },
     {
       "id": "open-meteo",
@@ -32,13 +32,13 @@
       "state": "operational",
       "method": "api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-04T20:22:30.341Z",
+      "lastSuccessfulAt": "2026-10-04T20:28:29.170Z",
       "ownerAction": null,
       "note": {
         "en": "Forecast data is live; it remains a forecast rather than an observed matchday outcome.",
         "es": "La predicción está activa; sigue siendo una previsión y no un resultado observado de matchday."
       },
-      "lastAttemptAt": "2026-10-04T20:22:30.341Z"
+      "lastAttemptAt": "2026-10-04T20:28:29.170Z"
     },
     {
       "id": "youtube-public",
@@ -51,12 +51,13 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "weekly-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-04T20:22:30.923Z",
+      "lastSuccessfulAt": "2026-10-04T20:28:30.205Z",
       "ownerAction": null,
       "note": {
         "en": "Channel statistics are refreshed through the official YouTube Data API.",
         "es": "Las estadísticas del canal se actualizan mediante la API oficial de YouTube Data."
-      }
+      },
+      "lastAttemptAt": "2026-10-04T20:28:30.205Z"
     },
     {
       "id": "ticketmaster-events",
@@ -69,12 +70,13 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-04T20:22:30.923Z",
+      "lastSuccessfulAt": "2026-10-04T20:28:30.205Z",
       "ownerAction": null,
       "note": {
         "en": "31 strategically relevant sports events remain from 615 candidates; routine culture and entertainment are excluded.",
         "es": "31 citas deportivas estratégicamente relevantes permanecen de 615 candidatas; se excluyen cultura y entretenimiento rutinarios."
-      }
+      },
+      "lastAttemptAt": "2026-10-04T20:28:30.205Z"
     },
     {
       "id": "wsl-attendance",
@@ -89,13 +91,14 @@
       "cadence": "weekly",
       "lastSuccessfulAt": null,
       "ownerAction": {
-        "en": "Approve a replacement source or licensed sports-data provider.",
-        "es": "Aprobar una fuente alternativa o un proveedor de datos deportivos con licencia."
+        "en": "Approve a licensed sports-data provider only if both public attendance sources become unavailable.",
+        "es": "Aprobar un proveedor de datos deportivos con licencia solo si ambas fuentes públicas de asistencia dejan de estar disponibles."
       },
       "note": {
-        "en": "The current source returns 403. Missing data remains unavailable and is never converted to zero.",
-        "es": "La fuente actual devuelve 403. El dato ausente permanece no disponible y nunca se convierte en cero."
-      }
+        "en": "The last valid observation is retained. Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403",
+        "es": "Se conserva la última observación válida. Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403"
+      },
+      "lastAttemptAt": "2026-10-04T20:28:30.205Z"
     },
     {
       "id": "google-trends",
