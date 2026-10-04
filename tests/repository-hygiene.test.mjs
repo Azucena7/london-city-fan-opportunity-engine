@@ -124,3 +124,17 @@ test("API responses are never cached by shared or browser caches", () => {
   assert.match(config, /Cache-Control/);
   assert.match(config, /private, no-store, max-age=0/);
 });
+
+test("private persistence APIs do not expose raw provider error payloads", () => {
+  const paths = [
+    "src/app/api/access/route.ts",
+    "src/app/api/access/approve/route.ts",
+    "src/app/api/club-setup/route.ts",
+    "src/app/api/credit-ledger/route.ts",
+    "src/app/api/campaign-history/[fixtureId]/route.ts",
+    "src/app/api/campaign-workspace/[fixtureId]/route.ts"
+  ];
+  for (const path of paths) {
+    assert.doesNotMatch(readFileSync(path, "utf8"), /detail:\s*payload/);
+  }
+});
