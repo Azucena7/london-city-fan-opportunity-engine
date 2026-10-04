@@ -999,9 +999,10 @@ test("club surfaces use explicit loading states and mobile-first controls", () =
 
 test("homepage sells the decision layer with a low-friction pilot path", () => {
   const page = read("src/app/page.tsx");
+  const ecosystem = read("src/components/CommercialEcosystem.tsx");
   assert.match(page, /Read the signals/);
   assert.match(page, /Decision intelligence for football clubs/);
-  assert.match(page, /Keep your specialist tools/);
+  assert.match(ecosystem, /Keep your specialist tools/);
   assert.match(page, /See how AVELA could fit your club/);
   assert.match(page, /No rip-and-replace programme is required/);
   assert.match(page, /live\?\.nextAction\.label/);
@@ -1481,15 +1482,17 @@ test("current AVELA brand surfaces do not regress to the retired lime system", (
   }
   assert.match(read("src/app/app/learning/results.module.css"), /var\(--product-accent\)/);
   assert.match(read("src/app/pilot/pilot.module.css"), /var\(--product-accent-soft\)/);
-  assert.match(read("src/app/opengraph-image.tsx"), /#6657FF/);
-  assert.match(read("src/app/linkedin-card/route.tsx"), /#6657FF/);
+  assert.match(read("src/app/opengraph-image.tsx"), /#2F8F83/);
+  assert.match(read("src/app/linkedin-card/route.tsx"), /#2F8F83/);
+  assert.doesNotMatch(read("src/app/opengraph-image.tsx"), /#6657FF/);
+  assert.doesNotMatch(read("src/app/linkedin-card/route.tsx"), /#6657FF/);
 });
 
 test("commercial funnel proves relevance before explaining the full product and keeps CTAs truthful", () => {
   const home = read("src/app/page.tsx");
   const nav = read("src/components/MarketingNav.tsx");
   const clubs = read("src/components/ClubPilotProposition.tsx");
-  assert.ok(home.indexOf("Proof in public") < home.indexOf("The missing layer"));
+  assert.ok(home.indexOf("The problem is not missing data") < home.indexOf("Proof in public"));
   assert.match(home, /Explore the 90-day pilot/);
   assert.match(home, /See a live fixture decision/);
   assert.doesNotMatch(home, /Request a demo|Request pilot demo|Request club demo|Request the 90-day pilot/);
