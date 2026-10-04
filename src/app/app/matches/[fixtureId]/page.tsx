@@ -8,6 +8,7 @@ import { MatchSignalControls } from "@/components/MatchSignalControls";
 import { ActivationDraft } from "@/components/ActivationDraft";
 import { MatchPlanDecision } from "@/components/MatchPlanDecision";
 import { CampaignDeliveryPlanner } from "@/components/CampaignDeliveryPlanner";
+import { DecisionHistoryPanel } from "@/components/DecisionHistoryPanel";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -341,6 +342,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         blockerCount={approvals.length}
         nextApproval={campaign?.nextApproval.en ?? live.primaryBlocker}
         signalCount={live.liveSignals.length}
+      />
+
+      <DecisionHistoryPanel
+        decisionId={`fixture:${fixture.id}`}
+        subjectType="fixture"
+        subjectId={fixture.id}
+        recommendation={campaign?.title.en ?? live.recommendedAction}
       />
 
       <section id="learning" className={styles.footerActions}>
