@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
       `https://nominatim.openstreetmap.org/search?${params.toString()}`,
       {
         headers: {
-          "User-Agent": "LondonCityFanOpportunityLab/1.0 research-prototype"
+          "User-Agent": "AVELA/1.0 (+https://london-city-fan-opportunity-engine.vercel.app)"
         },
         next: { revalidate: 86400 }
       }
