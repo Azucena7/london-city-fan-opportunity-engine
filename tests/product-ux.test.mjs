@@ -1255,9 +1255,9 @@ test("Opportunity Brief keeps long-form work navigable with a sticky context rai
   const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
   assert.match(page, /Opportunity workspace sections/);
   assert.match(page, /href="#decision"/);
-  assert.match(page, /href="#campaign"/);
+  assert.match(page, /href="#readiness"/);
+  assert.match(page, /href="#execute"/);
   assert.match(page, /href="#evidence"/);
-  assert.match(page, /href="#impact"/);
   assert.match(page, /href="#learning"/);
   assert.match(css, /position:sticky/);
 });
