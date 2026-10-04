@@ -107,7 +107,7 @@ export function CampaignCreditBuilder({
   const [activity, setActivity] = useState<CampaignActivityEvent[]>([]);
   const [clubSetup, setClubSetup] = useState<ClubSetupContext | null>(null);
 
-  const storageKey = `fan-growth-engine:campaign-workspace:${fixtureId}`;
+  const storageKey = `avela:campaign-workspace:${fixtureId}`;
 
   useEffect(() => {
     try {
