@@ -1672,3 +1672,25 @@ test("internal availability can block or protect fixture-day activation", () => 
   assert.match(migration, /international-duty/);
   assert.match(migration, /personal-calendar/);
 });
+
+
+test("calendar intelligence ranks common windows without treating missing calendars as free", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const component = read("src/components/CalendarSlotFinder.tsx");
+  const model = read("src/lib/schedulingIntelligence.ts");
+
+  assert.match(page, /CalendarSlotFinder/);
+  assert.match(component, /President/);
+  assert.match(component, /General Director/);
+  assert.match(component, /Head of Marketing/);
+  assert.match(component, /Secretary \/ Protocol/);
+  assert.match(component, /Unknown calendars stay unknown/);
+  assert.match(component, /Consider squad availability/);
+  assert.match(model, /rankSchedulingSlots/);
+  assert.match(model, /hard-unavailable/);
+  assert.match(model, /protected/);
+  assert.match(model, /busy/);
+  assert.match(model, /preferred/);
+  assert.match(model, /Needs calendar data/);
+  assert.match(model, /unknown/);
+});
