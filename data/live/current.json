@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-10-04T20:28:30.205Z",
+  "updated_at": "2026-10-04T20:32:00.365Z",
   "status": "active",
   "next_home_fixture_id": "2026-10-18-eve-h",
   "last_completed_home_fixture_id": "2026-09-26-bha-h",
   "weather": {
     "status": "forecast",
     "valid_for": "2026-10-18",
-    "generated_at": "2026-10-04T20:28:30.063Z",
+    "generated_at": "2026-10-04T20:32:00.256Z",
     "precipitation_probability_max": 18,
     "precipitation_sum": 0,
     "temperature_max": 18.4,
@@ -21,14 +21,14 @@
   "attention_availability": 35,
   "material_changes": 0,
   "source_failures": [
-    "WSL attendance: Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403"
+    "WSL attendance: FBref: WSL attendance (FBref) returned 403 | Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403"
   ],
   "public_signal_changes": 0,
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-10-04T20:28:30.205Z",
-    "lastSuccessfulAt": "2026-10-04T20:28:30.205Z",
+    "lastAttemptAt": "2026-10-04T20:32:00.365Z",
+    "lastSuccessfulAt": "2026-10-04T20:32:00.365Z",
     "state": "partial",
     "sources": [
       {
@@ -36,7 +36,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-04T20:28:30.205Z",
+        "checkedAt": "2026-10-04T20:32:00.365Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -44,7 +44,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-04T20:28:30.205Z",
+        "checkedAt": "2026-10-04T20:32:00.365Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       },
       {
@@ -52,9 +52,9 @@
         "label": "WSL attendance benchmark",
         "state": "waiting",
         "confidence": "unavailable",
-        "checkedAt": "2026-10-04T20:28:30.205Z",
+        "checkedAt": "2026-10-04T20:32:00.365Z",
         "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
-        "message": "Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403"
+        "message": "FBref: WSL attendance (FBref) returned 403 | Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403"
       }
     ]
   },

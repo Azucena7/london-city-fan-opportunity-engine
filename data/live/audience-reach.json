@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-04T20:28:30.205Z",
+  "checkedAt": "2026-10-04T20:32:00.365Z",
   "scope": "Public reach, search interest and fixture conversion",
   "headline": {
     "en": "Reach matters only when it can be connected to matchday demand",
@@ -1991,8 +1991,8 @@
   "refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-10-04T20:28:30.205Z",
-    "lastSuccessfulAt": "2026-10-04T20:28:30.205Z",
+    "lastAttemptAt": "2026-10-04T20:32:00.365Z",
+    "lastSuccessfulAt": "2026-10-04T20:32:00.365Z",
     "state": "partial",
     "sources": [
       {
@@ -2000,7 +2000,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-04T20:28:30.205Z",
+        "checkedAt": "2026-10-04T20:32:00.365Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -2008,7 +2008,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-04T20:28:30.205Z",
+        "checkedAt": "2026-10-04T20:32:00.365Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       },
       {
@@ -2016,9 +2016,9 @@
         "label": "WSL attendance benchmark",
         "state": "waiting",
         "confidence": "unavailable",
-        "checkedAt": "2026-10-04T20:28:30.205Z",
+        "checkedAt": "2026-10-04T20:32:00.365Z",
         "sourceUrl": "https://www.footballwebpages.co.uk/womens-super-league/attendances",
-        "message": "Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403"
+        "message": "FBref: WSL attendance (FBref) returned 403 | Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403"
       }
     ]
   }
