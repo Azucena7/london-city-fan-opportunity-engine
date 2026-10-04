@@ -7,14 +7,12 @@ import {
   useMemo,
   useState
 } from "react";
-import { dictionary, Lang } from "@/lib/i18n";
+import type { Lang } from "@/lib/i18n";
 
-type Dictionary = (typeof dictionary)[Lang];
 
 type LanguageContextValue = {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  t: Dictionary;
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
@@ -29,11 +27,15 @@ export function LanguageProvider({
   const [lang, setLangState] = useState<Lang>(initialLang);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("lcl-language");
+    const saved = window.localStorage.getItem("avela-language") ?? window.localStorage.getItem("lcl-language");
 
     if (saved === "en" || saved === "es") {
       setLangState(saved);
+      window.localStorage.setItem("avela-language", saved);
+      window.localStorage.removeItem("lcl-language");
       document.documentElement.lang = saved;
+      document.cookie = `avela-language=${saved}; path=/; max-age=31536000; samesite=lax`;
+      document.cookie = "lcl-language=; path=/; max-age=0; samesite=lax";
       return;
     }
 
@@ -42,22 +44,22 @@ export function LanguageProvider({
     if (browser?.startsWith("es")) {
       setLangState("es");
       document.documentElement.lang = "es";
-      document.cookie = "lcl-language=es; path=/; max-age=31536000; samesite=lax";
+      window.localStorage.setItem("avela-language", "es");
+      document.cookie = "avela-language=es; path=/; max-age=31536000; samesite=lax";
     }
   }, []);
 
   function setLang(next: Lang) {
     setLangState(next);
-    window.localStorage.setItem("lcl-language", next);
-    document.cookie = `lcl-language=${next}; path=/; max-age=31536000; samesite=lax`;
+    window.localStorage.setItem("avela-language", next);
+    document.cookie = `avela-language=${next}; path=/; max-age=31536000; samesite=lax`;
     document.documentElement.lang = next;
   }
 
   const value = useMemo<LanguageContextValue>(
     () => ({
       lang,
-      setLang,
-      t: dictionary[lang]
+      setLang
     }),
     [lang]
   );
