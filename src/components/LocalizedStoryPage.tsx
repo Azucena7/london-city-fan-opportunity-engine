@@ -85,8 +85,8 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
         </div>
         <p className="caseStudyDisclosure">
           {es
-            ? "Prototipo independiente · London City Lionesses se utiliza como caso de estudio vivo · Los resultados internos permanecen pendientes hasta disponer de acceso autorizado."
-            : "Independent prototype · London City Lionesses is used as a live case study · Internal outcomes remain pending until authorised access exists."}
+            ? "Demo independiente · London City Lionesses se utiliza como caso de estudio vivo · Los resultados internos permanecen pendientes hasta disponer de acceso autorizado."
+            : "Independent demo · London City Lionesses is used as a live case study · Internal outcomes remain pending until authorised access exists."}
         </p>
       </section>
 
@@ -208,7 +208,7 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
       <section className="caseStudySection caseStudyProof">
         <div className="caseStudySectionHead">
           <div className="eyebrow">{es ? "PRUEBA CONSTRUIDA" : "PROOF BUILT"}</div>
-          <h2>{es ? "El prototipo ya conecta mercado, demanda y ejecución." : "The prototype now connects market, demand and execution."}</h2>
+          <h2>{es ? "La demo ya conecta mercado, demanda y ejecución." : "The demo now connects market, demand and execution."}</h2>
           <p>{es ? "No es una maqueta conceptual. Cada cifra tiene un estado, una fuente y un uso definido." : "This is not a conceptual mock-up. Every number has a state, a source and a defined use."}</p>
         </div>
         <div className="caseStudyMetricGrid">
@@ -294,7 +294,7 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
 
       <section className="caseStudySection caseStudyNextLayer">
         <div>
-          <div className="eyebrow">{es ? "DE PROTOTIPO A PILOTO" : "FROM PROTOTYPE TO PILOT"}</div>
+          <div className="eyebrow">{es ? "DE DEMO A PILOTO" : "FROM DEMO TO PILOT"}</div>
           <h2>{es ? "El siguiente salto no es más UI. Es cerrar el bucle con datos de club." : "The next leap is not more UI. It is closing the loop with club data."}</h2>
           <p>{es ? "Un piloto real conectaría datos privados mínimos, instrumentaría una o dos decisiones por partido y revisaría resultados contra un baseline antes de ampliar alcance." : "A real pilot would connect the minimum private data, instrument one or two fixture decisions and review outcomes against a baseline before expanding scope."}</p>
         </div>
@@ -312,7 +312,7 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
 
       <footer className="caseStudyFooter">
         <div>AVELA · London City Live Proof</div>
-        <div className="muted">{es ? "Prototipo independiente · No afiliado a London City Lionesses." : "Independent prototype · Not affiliated with London City Lionesses."}</div>
+        <div className="muted">{es ? "Demo independiente · No afiliada a London City Lionesses." : "Independent demo · Not affiliated with London City Lionesses."}</div>
       </footer>
     </main>
   );
