@@ -1256,7 +1256,7 @@ test("Opportunity Brief keeps long-form work navigable with a sticky context rai
   assert.match(page, /Opportunity workspace sections/);
   assert.match(page, /href="#decision"/);
   assert.match(page, /href="#campaign"/);
-  assert.match(page, /href="#signals"/);
+  assert.match(page, /href="#evidence"/);
   assert.match(page, /href="#impact"/);
   assert.match(page, /href="#learning"/);
   assert.match(css, /position:sticky/);
@@ -1749,7 +1749,7 @@ test("Opportunity Brief follows decision readiness execution evidence memory hie
   const readiness = page.indexOf('id="readiness"');
   const execute = page.indexOf('id="execute"');
   const evidence = page.indexOf('id="evidence"');
-  const history = page.indexOf("DecisionHistoryPanel");
+  const history = page.indexOf("<DecisionHistoryPanel");
 
   assert.ok(decision >= 0);
   assert.ok(readiness > decision);
