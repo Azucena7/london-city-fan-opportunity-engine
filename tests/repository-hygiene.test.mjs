@@ -80,3 +80,19 @@ test("runtime persistence identifiers use the AVELA namespace", () => {
   assert.match(builder, /avela:campaign-workspace/);
   assert.doesNotMatch(builder, /fan-growth-engine:/);
 });
+
+test("public product surfaces stay free of retired product names", () => {
+  const paths = [
+    "src/app/case-study/page.tsx",
+    "src/app/case-study/technical/page.tsx",
+    "src/components/LocalizedTechnicalCaseStudy.tsx",
+    "src/app/pilot/page.tsx",
+    "src/app/pilot/operating-pack/page.tsx",
+    "src/app/for-clubs/page.tsx",
+    "README.md"
+  ];
+  for (const path of paths) {
+    const source = readFileSync(path, "utf8");
+    assert.doesNotMatch(source, /London City Fan Opportunity|Fan Growth Pilot|Fan Growth Playbook/);
+  }
+});
