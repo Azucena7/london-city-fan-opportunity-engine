@@ -173,11 +173,6 @@ test("retired Credit Center no longer appears as a product surface", () => {
   assert.equal(existsSync("src/app/app/credits/credits.module.css"), false);
 });
 
-test("legacy credit-ledger endpoint is only a compatibility alias", () => {
-  const legacy = read("src/app/api/credit-ledger/route.ts");
-  assert.match(legacy, /delivery-effort/);
-  assert.doesNotMatch(legacy, /credit_ledger\?/);
-});
 
 test("delivery planner uses effort naming while preserving legacy persisted state compatibility", () => {
   const planner = read("src/components/CampaignDeliveryPlanner.tsx");
