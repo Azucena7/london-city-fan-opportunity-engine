@@ -1162,7 +1162,10 @@ test("AVELA uses an application shell with a left sidebar and bounded work area"
   assert.match(nav, /Club workflow/);
   assert.match(navCss, /position:fixed/);
   assert.match(navCss, /width:232px/);
-  assert.match(system, /padding-left:232px/);
+  assert.match(system, /margin-left:232px/);
+  assert.match(system, /width:calc\(100% - 232px\)/);
+  assert.match(system, /@media\(max-width:900px\)\{\.productAppShell\{margin-left:0;width:100%\}\}/);
+  assert.doesNotMatch(system, /\.productAppShell\{padding-left:232px/);
   assert.match(system, /max-width:1120px/);
 });
 
