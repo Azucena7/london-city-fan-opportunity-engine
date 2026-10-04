@@ -79,6 +79,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       .flatMap((approval) => [approval.label.en, approval.state])
       .join(" ") ?? ""
   });
+  const representationSuggestion = handoffSuggestions.find((item) => item.requestType === "representation") ?? null;
+  const playerHandoffSuggested = handoffSuggestions.some((item) => item.requestType === "player");
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -383,6 +385,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       <CalendarSlotFinder
         fixtureDate={fixture.date}
         fixtureLabel={`London City v ${fixture.opponent}`}
+        initialRequiredRoles={representationSuggestion?.requiredRoles}
+        purpose={representationSuggestion?.reason}
+        durationMinutes={representationSuggestion?.durationMinutes ?? 60}
+        includeSquadDefault={playerHandoffSuggested}
       />
 
       <OperationalCapacityPanel
