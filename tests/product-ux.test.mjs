@@ -1739,3 +1739,20 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
 });
+
+
+test("Contract Intelligence stays honest when no verified legal contract is connected", () => {
+  const page = read("src/app/app/contracts/page.tsx");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const css = read("src/app/app/contracts/contracts.module.css");
+
+  assert.match(nav, /href: "\/app\/contracts"/);
+  assert.match(page, /0 verified legal contracts connected/);
+  assert.match(page, /Technical API schemas in the repo are product contracts, not sponsor or player legal agreements/);
+  assert.match(page, /Extracted → Reviewed → Active/);
+  assert.match(page, /Only verified fields may drive alerts, fulfilment and recommendations/);
+  assert.match(page, /Contract Impact Graph/);
+  assert.match(page, /Connect the source before building fulfilment around assumptions/);
+  assert.match(css, /truth|state/);
+  assert.match(css, /impactFlow/);
+});
