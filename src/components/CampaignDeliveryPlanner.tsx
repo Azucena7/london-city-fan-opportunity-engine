@@ -136,7 +136,6 @@ export function CampaignDeliveryPlanner({
       drafts,
       workspaceStatus,
       lockedCampaignEffort,
-      reservedCampaignCredits: lockedCampaignEffort,
       reservationId,
       launchHandoffReady,
       savedAt: new Date().toISOString()
@@ -159,6 +158,7 @@ export function CampaignDeliveryPlanner({
     if (workspace.variants) setVariants(workspace.variants);
     if (workspace.drafts) setDrafts(workspace.drafts);
     if (typeof workspace.lockedCampaignEffort === "number") setLockedCampaignEffort(workspace.lockedCampaignEffort);
+    else if (typeof workspace.reservedCampaignCredits === "number") setLockedCampaignEffort(workspace.reservedCampaignCredits);
     if (typeof workspace.reservationId === "string" && workspace.reservationId) setReservationId(workspace.reservationId);
     else setReservationId(null);
     if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
@@ -286,7 +286,6 @@ export function CampaignDeliveryPlanner({
               drafts,
               workspaceStatus,
               lockedCampaignEffort,
-              reservedCampaignCredits: lockedCampaignEffort,
               reservationId,
               launchHandoffReady
             }
