@@ -5,6 +5,7 @@ const FIXTURES_URL = "https://www.londoncitylionesses.com/fixtures";
 const CALENDAR_PATH = new URL("../data/seed/calendar.json", import.meta.url);
 const CURRENT_PATH = new URL("../data/live/current.json", import.meta.url);
 const SIGNALS_PATH = new URL("../data/live/signals.json", import.meta.url);
+const SOURCE_HEALTH_PATH = new URL("../data/live/source-health.json", import.meta.url);
 const DRY_RUN = process.env.REFRESH_DRY_RUN === "1";
 
 function londonParts(value = new Date()) {
@@ -120,9 +121,9 @@ function materialChangeCount(before, after) {
 }
 
 async function fetchWeather(nextHome) {
-  if (!nextHome) return { status: "waiting", reason: "No upcoming home fixture" };
+  if (!nextHome) return { weather: { status: "waiting", reason: "No upcoming home fixture" }, attempted: false, ok: true };
   const days = Math.ceil((new Date(`${nextHome.date}T12:00:00Z`) - new Date()) / 86400000);
-  if (days > 16) return { status: "waiting", reason: "Operational forecast window not yet reliable" };
+  if (days > 16) return { weather: { status: "waiting", reason: "Operational forecast window not yet reliable" }, attempted: false, ok: true };
   const url = new URL("https://api.open-meteo.com/v1/forecast");
   url.search = new URLSearchParams({
     latitude: "51.3908", longitude: "0.0183", timezone: "Europe/London", forecast_days: "16",
@@ -132,8 +133,9 @@ async function fetchWeather(nextHome) {
   if (!response.ok) throw new Error(`Weather provider returned ${response.status}`);
   const data = await response.json();
   const index = data.daily?.time?.indexOf(nextHome.date) ?? -1;
-  if (index < 0) return { status: "waiting", reason: "Fixture date not present in forecast" };
+  if (index < 0) return { weather: { status: "waiting", reason: "Fixture date not present in forecast" }, attempted: true, ok: true };
   return {
+    weather: {
     status: "forecast", valid_for: nextHome.date, generated_at: new Date().toISOString(),
     precipitation_probability_max: data.daily.precipitation_probability_max?.[index] ?? null,
     precipitation_sum: data.daily.precipitation_sum?.[index] ?? null,
@@ -141,28 +143,71 @@ async function fetchWeather(nextHome) {
     temperature_min: data.daily.temperature_2m_min?.[index] ?? null,
     wind_speed_max: data.daily.wind_speed_10m_max?.[index] ?? null,
     source: "Open-Meteo"
+    },
+    attempted: true,
+    ok: true
+  };
+}
+
+function updateCoreSourceHealth(sourceHealth, attemptedAt, results) {
+  return {
+    ...sourceHealth,
+    checkedAt: attemptedAt,
+    sources: sourceHealth.sources.map((source) => {
+      const result = results[source.id];
+      if (!result) return source;
+      return {
+        ...source,
+        state: result.ok ? "operational" : "degraded",
+        lastAttemptAt: attemptedAt,
+        lastSuccessfulAt: result.ok ? attemptedAt : source.lastSuccessfulAt
+      };
+    })
   };
 }
 
 async function main() {
-  const [existing, current, signals] = await Promise.all([
+  const attemptedAt = new Date().toISOString();
+  const [existing, current, signals, sourceHealth] = await Promise.all([
     readFile(CALENDAR_PATH, "utf8").then(JSON.parse),
     readFile(CURRENT_PATH, "utf8").then(JSON.parse),
-    readFile(SIGNALS_PATH, "utf8").then(JSON.parse)
+    readFile(SIGNALS_PATH, "utf8").then(JSON.parse),
+    readFile(SOURCE_HEALTH_PATH, "utf8").then(JSON.parse)
   ]);
-  const response = await fetch(FIXTURES_URL, { headers: { "user-agent": "AVELA/1.0 (+https://avela-growth-intelligence.vercel.app)" } });
-  if (!response.ok) throw new Error(`Official fixtures page returned ${response.status}`);
+
+  let response;
+  try {
+    response = await fetch(FIXTURES_URL, { headers: { "user-agent": "AVELA/1.0 (+https://avela-growth-intelligence.vercel.app)" } });
+    if (!response.ok) throw new Error(`Official fixtures page returned ${response.status}`);
+  } catch (error) {
+    if (!DRY_RUN) {
+      const failedHealth = updateCoreSourceHealth(sourceHealth, attemptedAt, { "club-public-web": { ok: false } });
+      await writeFile(SOURCE_HEALTH_PATH, `${JSON.stringify(failedHealth, null, 2)}\n`);
+    }
+    throw error;
+  }
+
   const calendar = normaliseFixtures(parseWarmup(await response.text()), existing);
   const today = londonIsoDate();
   const scheduled = calendar.filter((item) => item.status === "scheduled" && item.date >= today);
   const nextHome = scheduled.find((item) => item.homeAway === "home") ?? null;
   const completedHome = [...calendar].reverse().find((item) => item.homeAway === "home" && item.status !== "scheduled") ?? null;
-  let weather;
-  try { weather = await fetchWeather(nextHome); }
-  catch (error) { weather = { status: "waiting", reason: error instanceof Error ? error.message : "Weather refresh failed" }; }
+  let weatherResult;
+  try { weatherResult = await fetchWeather(nextHome); }
+  catch (error) {
+    weatherResult = {
+      weather: { status: "waiting", reason: error instanceof Error ? error.message : "Weather refresh failed" },
+      attempted: true,
+      ok: false
+    };
+  }
+  const weather = weatherResult.weather;
+  const healthResults = { "club-public-web": { ok: true } };
+  if (weatherResult.attempted) healthResults["open-meteo"] = { ok: weatherResult.ok };
+  const nextSourceHealth = updateCoreSourceHealth(sourceHealth, attemptedAt, healthResults);
   const nextCurrent = {
     ...current,
-    updated_at: new Date().toISOString(),
+    updated_at: attemptedAt,
     status: "active",
     next_home_fixture_id: nextHome?.id ?? null,
     last_completed_home_fixture_id: completedHome?.id ?? null,
@@ -195,13 +240,14 @@ async function main() {
     };
   });
   if (DRY_RUN) {
-    console.log(JSON.stringify({ fixtures: calendar.length, nextHome, weather, materialChanges: nextCurrent.material_changes }, null, 2));
+    console.log(JSON.stringify({ fixtures: calendar.length, nextHome, weather, materialChanges: nextCurrent.material_changes, sourceHealth: nextSourceHealth.sources.filter((source) => source.id === "club-public-web" || source.id === "open-meteo") }, null, 2));
     return;
   }
   await Promise.all([
     writeFile(CALENDAR_PATH, `${JSON.stringify(calendar, null, 2)}\n`),
     writeFile(CURRENT_PATH, `${JSON.stringify(nextCurrent, null, 2)}\n`),
-    writeFile(SIGNALS_PATH, `${JSON.stringify(nextSignals, null, 2)}\n`)
+    writeFile(SIGNALS_PATH, `${JSON.stringify(nextSignals, null, 2)}\n`),
+    writeFile(SOURCE_HEALTH_PATH, `${JSON.stringify(nextSourceHealth, null, 2)}\n`)
   ]);
   console.log(`Updated ${calendar.length} fixtures; ${nextCurrent.material_changes} material calendar changes.`);
 }
