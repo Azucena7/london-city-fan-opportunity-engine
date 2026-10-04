@@ -588,7 +588,9 @@ test("Supabase migration files mirror the applied remote history", () => {
     "20261002230223_remove_generic_admin_bootstrap.sql",
     "20261002230401_index_admin_invite_claim.sql",
     "20261004193752_create_delivery_effort_events.sql",
-    "20261004194305_drop_legacy_credit_ledger.sql"
+    "20261004194305_drop_legacy_credit_ledger.sql",
+    "20261004200451_allow_access_request_resubmission.sql",
+    "20261004200615_restrict_access_approval_rpc.sql"
   ];
 
   for (const file of applied) {
@@ -603,4 +605,20 @@ test("Supabase migration files mirror the applied remote history", () => {
   const generator = readFileSync("scripts/generate-club-permissions-migration.mjs", "utf8");
   assert.match(generator, /supabase\/bootstrap\/club_membership\.sql/);
   assert.doesNotMatch(generator, /supabase\/migrations\/20261002_club_membership\.sql/);
+});
+
+
+test("access request history permits safe resubmission after closure", () => {
+  const migration = readFileSync("supabase/migrations/20261004200451_allow_access_request_resubmission.sql", "utf8");
+  assert.match(migration, /drop constraint if exists club_access_requests_club_id_user_id_key/);
+  assert.match(migration, /create unique index if not exists club_access_requests_active_club_user_idx/);
+  assert.match(migration, /where status in \('pending','approved'\)/);
+});
+
+
+test("access approval RPC is not executable by anonymous users", () => {
+  const migration = readFileSync("supabase/migrations/20261004200615_restrict_access_approval_rpc.sql", "utf8");
+  assert.match(migration, /revoke execute on function public\.approve_club_access_request\(uuid, text\) from anon/);
+  assert.match(migration, /revoke execute on function public\.approve_club_access_request\(uuid, text\) from public/);
+  assert.match(migration, /grant execute on function public\.approve_club_access_request\(uuid, text\) to authenticated/);
 });
