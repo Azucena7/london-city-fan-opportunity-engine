@@ -1,7 +1,6 @@
 import sample from "../../data/seed/club-strategy-demo.json";
 
 type Copy = { es: string; en: string };
-const c = (es: string, en: string): Copy => ({ es, en });
 export type BrandKit = { schemaVersion: 1; synthetic: true; id: string; name: string; primary: string; background: string; font: "sans-serif" | "serif"; tone: string; version: number };
 export type Campaign = { id: string; name: Copy; headline: Copy; brief: Copy; primary: string; background: string; start: string; end: string; goal: string };
 export const strategySample = sample;
