@@ -11,13 +11,11 @@ export async function GET(request: Request) {
   if (!clubId) return NextResponse.json({ error: "clubId is required." }, { status: 400 });
 
   const response = await supabaseRequest(
-    `/rest/v1/credit_ledger?club_id=eq.${encodeURIComponent(clubId)}&select=id,fixture_id,item_id,event_type,credits,note,created_at&order=created_at.desc&limit=50`
+    `/rest/v1/delivery_effort_events?club_id=eq.${encodeURIComponent(clubId)}&select=id,fixture_id,item_id,event_type,units,note,created_at&order=created_at.desc&limit=50`
   );
   if (!response.ok) return NextResponse.json({ error: "Delivery effort history could not be loaded." }, { status: response.status });
   const payload = await response.json().catch(() => []);
-  const events = Array.isArray(payload)
-    ? payload.map(({ credits, ...event }: { credits?: number; [key: string]: unknown }) => ({ ...event, units: credits ?? 0 }))
-    : [];
+  const events = Array.isArray(payload) ? payload : [];
   return NextResponse.json({ persistence: "club", events });
 }
 
@@ -43,7 +41,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Valid clubId, eventType and effort units are required." }, { status: 400 });
   }
 
-  const response = await supabaseRequest("/rest/v1/credit_ledger?on_conflict=event_key", {
+  const response = await supabaseRequest("/rest/v1/delivery_effort_events?on_conflict=event_key", {
     method: "POST",
     headers: { Prefer: "resolution=ignore-duplicates,return=representation" },
     body: JSON.stringify({
@@ -52,7 +50,7 @@ export async function POST(request: Request) {
       item_id: typeof body?.itemId === "string" ? body.itemId.slice(0, 160) : null,
       event_key: typeof body?.eventKey === "string" ? body.eventKey.slice(0, 240) : null,
       event_type: eventType,
-      credits: units,
+      units,
       note: typeof body?.note === "string" ? body.note.slice(0, 500) : null,
       created_by: user.id
     })
@@ -60,9 +58,6 @@ export async function POST(request: Request) {
 
   const payload = await response.json().catch(() => null);
   if (!response.ok) return NextResponse.json({ error: "Delivery effort event could not be recorded." }, { status: response.status });
-  const storedEvent = Array.isArray(payload) ? payload[0] : payload;
-  const event = storedEvent && typeof storedEvent === "object"
-    ? (({ credits, ...rest }: { credits?: number; [key: string]: unknown }) => ({ ...rest, units: credits ?? units }))(storedEvent as { credits?: number; [key: string]: unknown })
-    : storedEvent;
+  const event = Array.isArray(payload) ? payload[0] : payload;
   return NextResponse.json({ persistence: "club", recorded: true, event });
 }
