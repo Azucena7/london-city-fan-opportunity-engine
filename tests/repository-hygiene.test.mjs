@@ -320,3 +320,14 @@ test("runtime env example contains only active or explicitly planned contracts",
   assert.match(env, /CLUB_SUPABASE_PUBLISHABLE_KEY/);
   assert.match(env, /RDM_DATA_PRODUCT_ID/);
 });
+
+
+test("architecture document reflects the as-built AVELA runtime", () => {
+  const architecture = readFileSync("02_ARCHITECTURE.md", "utf8");
+  assert.match(architecture, /Current system/);
+  assert.match(architecture, /Supabase Auth \+ RLS/);
+  assert.match(architecture, /Vercel AI Gateway/);
+  assert.match(architecture, /There is no hidden TransportAPI fallback/);
+  assert.match(architecture, /legacy physical credit_ledger/);
+  assert.doesNotMatch(architecture, /Phase 1 - Public prototype|Phase 2 - Live decision engine|Phase 3 - Agentic workflows/);
+});
