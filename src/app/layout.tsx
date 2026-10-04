@@ -18,14 +18,14 @@ import { cookies } from "next/headers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://avela-growth-intelligence.vercel.app"),
   title: {
-    default: "AVELA · Growth Intelligence for Women’s Football",
+    default: "AVELA · Decision Intelligence for Football Clubs",
     template: "%s | AVELA"
   },
   description:
-    "Turn every fixture into a growth opportunity. Matchday intelligence for women’s football clubs.",
+    "Connect signals, club context and operational constraints to know what needs attention, what to do next and whether the club can deliver it.",
   openGraph: {
-    title: "AVELA · Growth Intelligence for Women’s Football",
-    description: "Every fixture is a growth opportunity.",
+    title: "AVELA · Decision Intelligence for Football Clubs",
+    description: "Read the signals. Move the club.",
     url: "/",
     siteName: "AVELA",
     type: "website",
@@ -33,12 +33,12 @@ export const metadata: Metadata = {
       url: "/linkedin-card",
       width: 1200,
       height: 630,
-      alt: "AVELA — growth intelligence for women’s football"
+      alt: "AVELA — decision intelligence for football clubs"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "AVELA · Growth Intelligence for Women’s Football",
+    title: "AVELA · Decision Intelligence for Football Clubs",
     description: "Every fixture is a growth opportunity.",
     images: ["/linkedin-card"]
   }
