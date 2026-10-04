@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import "./story.css";
-import "./live.css";
 import "./brand.css";
 import "./i18n.css";
 import "./i18n-fixes.css";
