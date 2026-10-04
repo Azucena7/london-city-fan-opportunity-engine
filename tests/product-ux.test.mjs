@@ -1560,3 +1560,23 @@ test("decision history persists an auditable club memory with RLS", () => {
   assert.match(migration, /'context-added'/);
   assert.match(creatorIndex, /decision_events_created_by_idx/);
 });
+
+
+test("opportunity brief records the final decision and actual execution separately", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const component = read("src/components/DecisionHistoryPanel.tsx");
+  const css = read("src/components/DecisionHistoryPanel.module.css");
+
+  assert.match(page, /DecisionHistoryPanel/);
+  assert.match(page, /decisionId=\{\`fixture:\$\{fixture\.id\}\`\}/);
+  assert.match(component, /Confirm decision to production/);
+  assert.match(component, /Confirm what went live/);
+  assert.match(component, /Recommended → decided → executed → learned/);
+  assert.match(component, /\/api\/decision-history/);
+  assert.match(component, /eventType/);
+  assert.match(component, /committed/);
+  assert.match(component, /executed/);
+  assert.match(component, /View full decision history/);
+  assert.match(css, /stages/);
+  assert.match(css, /timeline/);
+});
