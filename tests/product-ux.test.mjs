@@ -1170,7 +1170,7 @@ test("commercial and London City surfaces use bounded reading widths and demo fr
   const liveCss = read("src/components/LondonCityLive.module.css");
   const clubs = read("src/components/ClubPilotProposition.tsx");
   assert.match(commercial, /width:min\(1080px/);
-  assert.match(commercial, /signalTicker\\{[\\s\\S]*?background:#fff/);
+  assert.match(commercial, /signalTicker\{[\s\S]*?background:#fff/);
   assert.match(live, /PUBLIC DEMO · LONDON CITY/);
   assert.match(liveCss, /width:min\(980px/);
   assert.match(clubs, /INDEPENDENT DEMO/);
