@@ -329,7 +329,8 @@ test("architecture document reflects the as-built AVELA runtime", () => {
   assert.match(architecture, /Vercel AI Gateway/);
   assert.match(architecture, /There is no hidden TransportAPI fallback/);
   assert.match(architecture, /delivery_effort_events/);
-  assert.match(architecture, /former `credit_ledger` table is retained only during the staged database cutover/);
+  assert.match(architecture, /No parallel credit-currency persistence remains in the active database/);
+  assert.doesNotMatch(architecture, /credit_ledger/);
   assert.doesNotMatch(architecture, /Phase 1 - Public prototype|Phase 2 - Live decision engine|Phase 3 - Agentic workflows/);
 });
 
@@ -523,4 +524,17 @@ test("canonical delivery-effort storage is versioned and application-facing", ()
   assert.match(migration, /campaign editors can add delivery effort events/);
   assert.match(route, /delivery_effort_events/);
   assert.doesNotMatch(route, /credit_ledger|credits/);
+});
+
+
+test("legacy credit ledger removal is versioned after the canonical cutover", () => {
+  const migration = readFileSync("supabase/migrations/20261004194305_drop_legacy_credit_ledger.sql", "utf8");
+  const route = readFileSync("src/app/api/delivery-effort/route.ts", "utf8");
+  const architecture = readFileSync("docs/architecture.md", "utf8");
+
+  assert.match(migration, /insert into public\.delivery_effort_events/);
+  assert.match(migration, /drop table public\.credit_ledger/);
+  assert.match(route, /delivery_effort_events/);
+  assert.doesNotMatch(route, /credit_ledger|credits/);
+  assert.doesNotMatch(architecture, /credit_ledger/);
 });
