@@ -118,7 +118,7 @@
     "state": "requires-instrumentation"
   },
   "guardrails": [
-    { "id": "no-booking", "text": { "en": "No service, seat or vehicle is booked by this prototype.", "es": "Este prototipo no reserva servicios, plazas ni vehículos." } },
+    { "id": "no-booking", "text": { "en": "No service, seat or vehicle is booked by this demo environment.", "es": "Esta demo no reserva servicios, plazas ni vehículos." } },
     { "id": "no-quote", "text": { "en": "Scenario costs never represent a partner quote.", "es": "Los costes de escenario nunca representan una cotización de partner." } },
     { "id": "aggregate-only", "text": { "en": "Only cohorts of 20 or more can become a partner signal.", "es": "Solo las cohortes de 20 o más pueden convertirse en señal para partners." } },
     { "id": "no-individual-movement", "text": { "en": "Never share addresses, postcodes or individual movements.", "es": "Nunca compartir direcciones, códigos postales ni movimientos individuales." } },
