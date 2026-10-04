@@ -193,7 +193,7 @@ test("delivery planner uses effort naming while preserving legacy persisted stat
 test("delivery effort API exposes units while isolating legacy storage naming", () => {
   const route = read("src/app/api/delivery-effort/route.ts");
   assert.match(route, /units\?: number/);
-  assert.doesNotMatch(route, /credits\?: number/);
+  assert.doesNotMatch(route, /body\?\.credits|body\.credits/);
   assert.match(route, /units: credits \?\? 0/);
   assert.match(route, /credits: units/);
   assert.match(route, /units: credits \?\? units/);
