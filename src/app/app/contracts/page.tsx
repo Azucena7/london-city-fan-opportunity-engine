@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ContractReviewQueue } from "@/components/ContractReviewQueue";
+import { ContractImpactGraph } from "@/components/ContractImpactGraph";
 import styles from "./contracts.module.css";
 
 export const metadata: Metadata = {
@@ -61,6 +62,8 @@ export default function ContractsPage() {
       </section>
 
       <ContractReviewQueue />
+
+      <ContractImpactGraph />
 
       <section className={styles.grids}>
         <article>
