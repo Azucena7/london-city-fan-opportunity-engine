@@ -117,3 +117,10 @@ test("authentication does not retain an unused Supabase refresh token", () => {
   assert.doesNotMatch(login, /refresh_token/);
   assert.match(login, /setSessionCookie\(payload\.access_token, payload\.expires_in\)/);
 });
+
+test("API responses are never cached by shared or browser caches", () => {
+  const config = readFileSync("next.config.mjs", "utf8");
+  assert.match(config, /source: "\/api\/:path\*"/);
+  assert.match(config, /Cache-Control/);
+  assert.match(config, /private, no-store, max-age=0/);
+});
