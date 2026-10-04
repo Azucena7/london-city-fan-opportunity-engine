@@ -18,7 +18,7 @@ export function ClubPilotProposition() {
     es ? "CONVERSACIÓN SOBRE UN PILOTO · PROPUESTA, NO APROBACIÓN" : "PILOT DISCUSSION · PROPOSAL, NOT APPROVAL",
     `${es ? "Objetivo prioritario" : "Priority objective"}: ${goals[goal as keyof typeof goals]}`,
     `${es ? "Disponibilidad de datos" : "Data readiness"}: ${dataOptions[readiness as keyof typeof dataOptions]}`,
-    es ? "Alcance propuesto: 90 días y 6 partidos, sujeto al calendario y a un acuerdo con el club." : "Proposed scope: 90 days and 6 fixtures, subject to the club calendar and agreement.",
+    es ? "Alcance propuesto: 4–6 partidos y uno o dos flujos de decisión, sujeto al calendario y a un acuerdo con el club." : "Proposed scope: 4–6 fixtures and one or two decision workflows, subject to the club calendar and agreement.",
     es ? "A acordar: responsable, partidos, KPI, comparación, permisos, precio y umbrales para continuar o parar." : "To agree: owner, fixtures, KPI, comparison, permissions, price and continue/stop thresholds.",
     es ? "No compartir nombres, emails ni registros individuales. El club conserva audiencias y consentimiento; el entorno piloto recibe resultados agregados autorizados." : "Do not share names, emails or individual records. The club retains audiences and consent; the pilot environment receives authorised aggregate outcomes.",
     es ? "Sin resultados comerciales garantizados. Datos públicos por sí solos no validan conversión o repetición." : "No guaranteed commercial outcomes. Public data alone cannot establish conversion or repeat visits.",
@@ -39,9 +39,9 @@ export function ClubPilotProposition() {
     <div className="commercialLanguage"><LanguageSwitcher /></div>
     <header className="commercialHero">
       <p className="eyebrow">{es ? "PARA CLUBES · PILOTO PROPUESTO" : "FOR CLUBS · PROPOSED PILOT"}</p>
-      <h1>{es ? "Una decisión útil antes de cada partido. Evidencia después." : "A useful decision before each fixture. Evidence afterwards."}</h1>
-      <p>{es ? "Conectar calendario, contexto y señales de afición para elegir qué probar, quién lo aprueba y cómo aprender del resultado." : "Connect the calendar, context and supporter signals to choose what to test, who approves it and how to learn from the outcome."}</p>
-      <p className="commercialScope">{es ? "90 días · 6 partidos propuestos · un objetivo prioritario" : "90 days · 6 proposed fixtures · one priority objective"}</p>
+      <h1>{es ? "Añade la capa de decisión sin sustituir el stack del club." : "Add the decision layer without replacing the club stack."}</h1>
+      <p>{es ? "Empieza con pocos partidos y flujos de decisión. Conecta solo el contexto que mejora la decisión y compara después lo que AVELA recomendó con lo que el club hizo y aprendió." : "Start with a small number of fixtures and workflows. Connect only the context that improves the decision, then compare what AVELA recommended with what the club actually did and learned."}</p>
+      <p className="commercialScope">{es ? "4–6 partidos · 1–2 flujos de decisión · un objetivo prioritario" : "4–6 fixtures · 1–2 decision workflows · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
       <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar el brief del piloto →" : "Prepare the pilot brief →"}</a></div>
       <p><Link href="/app/demo">{es ? "Probar la demo guiada de 3 minutos →" : "Try the 3-minute guided demo →"}</Link></p>
@@ -53,7 +53,7 @@ export function ClubPilotProposition() {
         <article><h3>{es ? "Antes: una decisión, no otra lista de señales" : "Before: a decision, not another signal list"}</h3><p>{es ? "Brief con oportunidad, audiencia propuesta, mensaje, responsable, bloqueos y plan de medición. No activa campañas sin aprobación." : "A brief with an opportunity, proposed audience, message, owner, blockers and measurement plan. No campaign activation without approval."}</p></article>
         <article><h3>{es ? "Después: aprender sin exagerar resultados" : "After: learn without overstating outcomes"}</h3><p>{es ? "Revisión de lo ejecutado y del KPI acordado. Separar atribución de incremento; registrar también pruebas sin resultado o sin datos." : "Review delivery and the agreed KPI. Separate attribution from incremental change; record tests with no result or missing data too."}</p></article>
       </div>
-      <p>{es ? "Incluye una revisión de preparación, hasta seis fichas de decisión y un cierre del piloto con recomendaciones para continuar, ajustar o detener." : "Includes a readiness review, up to six decision briefs and a pilot review recommending whether to continue, adjust or stop."}</p>
+      <p>{es ? "Incluye una revisión de preparación, un conjunto acotado de fichas de decisión y un cierre del piloto con recomendaciones para continuar, ajustar o detener." : "Includes a readiness review, a focused set of decision briefs and a pilot review recommending whether to continue, adjust or stop."}</p>
     </section>
 
     <section className="commercialPanel">
