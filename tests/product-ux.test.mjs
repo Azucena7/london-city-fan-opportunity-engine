@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
@@ -160,22 +160,17 @@ test("club campaign workspace supports authenticated multi-user persistence with
   assert.match(migration, /auth\.uid\(\)/);
 });
 
-test("club app exposes an auditable Credit Center from the persistent ledger", () => {
-  const center = read("src/components/CreditCenter.tsx");
+test("retired Credit Center no longer appears as a product surface", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
-  const page = read("src/app/app/credits/page.tsx");
+  const config = read("next.config.mjs");
 
-  assert.match(center, /Credit Center/);
-  assert.match(center, /Committed/);
-  assert.match(center, /Outstanding/);
-  assert.match(center, /Consumed/);
-  assert.match(center, /Released/);
-  assert.match(center, /\/api\/credit-ledger/);
-  assert.match(center, /\/api\/auth\/session/);
-  assert.match(center, /No credit events yet/);
-  assert.match(nav, /href: "\/app\/credits"/);
-  assert.match(nav, /label: "Credits"/);
-  assert.match(page, /CreditCenter/);
+  assert.doesNotMatch(nav, /href: "\/app\/credits"/);
+  assert.doesNotMatch(nav, /label: "Credits"/);
+  assert.match(config, /source: "\/app\/credits", destination: "\/app\/campaigns"/);
+  assert.equal(existsSync("src/components/CreditCenter.tsx"), false);
+  assert.equal(existsSync("src/components/CreditCenter.module.css"), false);
+  assert.equal(existsSync("src/app/app/credits/page.tsx"), false);
+  assert.equal(existsSync("src/app/app/credits/credits.module.css"), false);
 });
 
 test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
@@ -508,8 +503,8 @@ test("match plan keeps delivery effort visible without an in-product credit payw
   assert.doesNotMatch(builder, /£175|£450|£1,000/);
   assert.match(page, /CampaignCreditBuilder/);
   assert.match(page, /fixtureId=\{fixture\.id\}/);
-  assert.match(nav, /href: "\/app\/credits"/);
-  assert.match(nav, /label: "Credits"/);
+  assert.doesNotMatch(nav, /href: "\/app\/credits"/);
+  assert.doesNotMatch(nav, /label: "Credits"/);
   assert.doesNotMatch(nav, /<strong>60<\/strong> credits/);
 });
 
@@ -1350,7 +1345,7 @@ test("mobile app navigation keeps settings and utility destinations reachable", 
   const css = read("src/components/ProductJourneyNav.module.css");
   assert.match(nav, /className=\{styles\.mobileMenu\}/);
   assert.match(nav, />More<\/summary>/);
-  for (const label of ["Executive view", "Sources", "Setup", "Team", "Credits", "Product demo"]) {
+  for (const label of ["Executive view", "Sources", "Setup", "Team", "Product demo"]) {
     assert.match(nav, new RegExp(label));
   }
   assert.match(nav, /aria-current=\{active === item\.key \? "page"/);

@@ -16,6 +16,7 @@ const redirects = [
   { source: "/sources", destination: "/app/sources" },
   { source: "/access", destination: "/app/access" },
   { source: "/demo", destination: "/app/demo" },
+  { source: "/app/credits", destination: "/app/campaigns" },
   { source: "/club", destination: "/app" },
   { source: "/club/sign-in", destination: "/app/access" },
   { source: "/club-demo", destination: "/app/demo" },

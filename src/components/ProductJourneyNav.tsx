@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "home" | "campaigns" | "matches" | "demo" | "results" | "credits" | "setup" | "access" | "sources" | "executive" | "season" | "players";
+  active?: "home" | "campaigns" | "matches" | "demo" | "results" | "setup" | "access" | "sources" | "executive" | "season" | "players";
 };
 
 const workItems = [
@@ -18,8 +18,7 @@ const workspaceItems = [
   { key: "executive", label: "Executive view", href: "/app/executive" },
   { key: "sources", label: "Sources", href: "/app/sources" },
   { key: "setup", label: "Setup", href: "/app/setup" },
-  { key: "access", label: "Team", href: "/app/access" },
-  { key: "credits", label: "Credits", href: "/app/credits" }
+  { key: "access", label: "Team", href: "/app/access" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
