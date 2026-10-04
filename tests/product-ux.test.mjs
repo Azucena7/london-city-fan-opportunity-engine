@@ -1694,3 +1694,31 @@ test("calendar intelligence ranks common windows without treating missing calend
   assert.match(model, /Needs calendar data/);
   assert.match(model, /unknown/);
 });
+
+
+test("operational intelligence calculates complexity and capacity rather than asking users to label difficulty", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const component = read("src/components/OperationalCapacityPanel.tsx");
+  const model = read("src/lib/operationalCapacity.ts");
+  const route = read("src/app/api/operational-capacity/route.ts");
+  const migration = read("supabase/migrations/20261004221000_operational_capacity_model.sql");
+
+  assert.match(page, /OperationalCapacityPanel/);
+  assert.match(page, /estimatedMinutes/);
+  assert.match(page, /dependencyCount/);
+  assert.match(page, /approvalCount/);
+  assert.match(page, /unknownInputs/);
+  assert.match(component, /Can we realistically deliver this\?/);
+  assert.match(component, /How to make it viable/);
+  assert.match(component, /Asana, Monday, Jira, Teams/);
+  assert.match(model, /calculateOperationalComplexity/);
+  assert.match(model, /assessOperationalCapacity/);
+  assert.match(model, /Simplify scope/);
+  assert.match(model, /Reallocate work/);
+  assert.match(route, /workload_items/);
+  assert.match(route, /capacity_windows/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /external_system/);
+  assert.match(migration, /estimated_minutes/);
+  assert.match(migration, /complexity_score/);
+});
