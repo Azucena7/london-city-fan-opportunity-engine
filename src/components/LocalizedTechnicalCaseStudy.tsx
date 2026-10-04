@@ -147,7 +147,7 @@ export function LocalizedTechnicalCaseStudy() {
             : "A walkthrough of the sources, contracts, confidence states, automation and safeguards that connect a fixture to a decision and a measurable campaign."}
         </p>
         <div className="caseStudyActions">
-          <Link className="caseStudyButton primary" href="/today">{es ? "Abrir el producto vivo" : "Open the live product"}</Link>
+          <Link className="caseStudyButton primary" href="/app">{es ? "Abrir el producto vivo" : "Open the live product"}</Link>
           <Link className="caseStudyButton secondary" href="/case-study">{es ? "Volver al caso comercial" : "Back to commercial case"}</Link>
         </div>
       </section>
@@ -325,7 +325,7 @@ export function LocalizedTechnicalCaseStudy() {
         </div>
         <div className="technicalTags"><span>Next.js</span><span>TypeScript</span><span>Versioned JSON</span><span>JSON Schema</span><span>GitHub Actions</span><span>Vercel</span><span>Public APIs</span><span>Responsive UI</span></div>
         <div className="caseStudyNextActions">
-          <Link className="caseStudyButton primary" href="/today">{es ? "Explorar el producto" : "Explore the product"}</Link>
+          <Link className="caseStudyButton primary" href="/app">{es ? "Explorar el producto" : "Explore the product"}</Link>
           <Link className="caseStudyButton secondary" href="/case-study">{es ? "Leer el caso comercial" : "Read the commercial case"}</Link>
         </div>
       </section>
