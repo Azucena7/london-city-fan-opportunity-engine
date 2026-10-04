@@ -284,3 +284,12 @@ test("retired i18n fixes stylesheet stays removed", () => {
   assert.equal(existsSync("src/app/i18n-fixes.css"), false);
   assert.doesNotMatch(layout, /i18n-fixes\.css/);
 });
+
+
+test("shared language switcher uses AVELA design tokens", () => {
+  const css = readFileSync("src/app/i18n.css", "utf8");
+  assert.match(css, /var\(--product-accent, #6657FF\)/);
+  assert.match(css, /var\(--product-accent-ink, #FFFFFF\)/);
+  assert.match(css, /var\(--product-line, #D9DDE5\)/);
+  assert.doesNotMatch(css, /lcl-hyperturq|lcl-navy/);
+});
