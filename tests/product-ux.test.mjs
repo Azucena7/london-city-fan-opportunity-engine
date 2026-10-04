@@ -1510,3 +1510,29 @@ test("guided demo sells the decision workflow without implying unsupported execu
   assert.doesNotMatch(demo, /credit cost/);
   assert.doesNotMatch(demo, /Review & launch/);
 });
+
+
+test("Decision Center derives a simple action queue from the canonical opportunity engine", () => {
+  const home = read("src/app/app/page.tsx");
+  const model = read("src/lib/decisionIntelligence.ts");
+  const css = read("src/app/app/home.module.css");
+
+  assert.match(home, /Decision Center/);
+  assert.match(home, /What changed/);
+  assert.match(home, /Decision queue/);
+  assert.match(home, /Why AVELA is recommending this/);
+  assert.match(home, /buildDecisionAlerts/);
+  assert.match(home, /decisionSummary/);
+
+  assert.match(model, /DecisionPriority/);
+  assert.match(model, /"act-now" \| "review" \| "on-track" \| "monitor" \| "blocked"/);
+  assert.match(model, /getCurrentProductOpportunity/);
+  assert.match(model, /campaignPlans/);
+  assert.match(model, /new material signal/);
+  assert.match(model, /Approval gate unresolved/);
+
+  assert.match(css, /signalStrip/);
+  assert.match(css, /primaryDecision/);
+  assert.match(css, /changeFeed/);
+  assert.match(css, /priorityPill/);
+});
