@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./CampaignDeliveryPlanner.module.css";
 
-type CreditCategory = "creation" | "adaptation" | "automation" | "deployment";
+type EffortCategory = "creation" | "adaptation" | "automation" | "deployment";
 type GeneratableItem = "crm-email" | "vertical-video";
 type GeneratedDraft = Record<string, string | string[]>;
 type ClubWorkspaceClub = { id: string; name: string; role: string };
@@ -27,9 +27,9 @@ type CampaignActivityEvent = {
 type CampaignItem = {
   id: string;
   label: string;
-  category: CreditCategory;
+  category: EffortCategory;
   detail: string;
-  baseCredits: number;
+  baseEffort: number;
   recommended: boolean;
   supportsVariants?: boolean;
   channels: string[];
@@ -37,19 +37,19 @@ type CampaignItem = {
 };
 
 const catalogue: CampaignItem[] = [
-  { id: "crm-email", label: "CRM email", category: "creation", detail: "Subject line, body copy, CTA and one approval-ready version.", baseCredits: 5, recommended: true, supportsVariants: true, channels: ["CRM"], impact: "Removes the direct reactivation route to known supporters." },
-  { id: "vertical-video", label: "Vertical video", category: "creation", detail: "Concept, script, shot list and short-form edit direction.", baseCredits: 10, recommended: true, supportsVariants: true, channels: ["Instagram", "TikTok"], impact: "Reduces short-form reach and makes the social campaign less distinctive." },
-  { id: "social-carousel", label: "Social carousel", category: "creation", detail: "Six-frame carousel with copy and visual direction.", baseCredits: 6, recommended: true, supportsVariants: true, channels: ["Instagram", "Facebook"], impact: "Removes a low-friction explainer format for the campaign proposition." },
-  { id: "story-set", label: "Story set", category: "adaptation", detail: "Adapt the core campaign into a three-story sequence.", baseCredits: 4, recommended: false, supportsVariants: true, channels: ["Instagram"], impact: "Reduces repeat social exposure close to matchday." },
-  { id: "landing-copy", label: "Landing page copy", category: "creation", detail: "Campaign page structure, copy and conversion CTA.", baseCredits: 7, recommended: false, channels: ["Web"], impact: "Removes a dedicated conversion destination for the campaign." },
-  { id: "channel-adaptation", label: "Channel adaptation pack", category: "adaptation", detail: "Resize/rewrite the core idea for one additional social channel.", baseCredits: 3, recommended: true, supportsVariants: true, channels: ["Social"], impact: "Narrows the number of channels carrying the core idea." },
-  { id: "crm-flow", label: "CRM follow-up flow", category: "automation", detail: "Initial message, reminder logic, suppression and exclusion rules.", baseCredits: 9, recommended: true, channels: ["CRM"], impact: "Removes automated follow-up and leaves the campaign as a one-shot send." },
-  { id: "organic-scheduling", label: "Organic scheduling", category: "deployment", detail: "Prepare and schedule approved organic assets for one channel.", baseCredits: 3, recommended: true, channels: ["Instagram", "Facebook"], impact: "Assets remain prepared but are not scheduled for organic publishing." },
-  { id: "paid-social", label: "Paid social launch pack", category: "deployment", detail: "Audience, placements, creative variants and launch configuration.", baseCredits: 8, recommended: true, supportsVariants: true, channels: ["Instagram", "Facebook"], impact: "Removes paid distribution and limits the campaign to owned reach." },
-  { id: "sms-push", label: "SMS / push deployment", category: "deployment", detail: "Short-form message, timing and approved send configuration.", baseCredits: 4, recommended: false, channels: ["SMS", "Push"], impact: "Removes the highest-urgency reminder channel close to kickoff." }
+  { id: "crm-email", label: "CRM email", category: "creation", detail: "Subject line, body copy, CTA and one approval-ready version.", baseEffort: 5, recommended: true, supportsVariants: true, channels: ["CRM"], impact: "Removes the direct reactivation route to known supporters." },
+  { id: "vertical-video", label: "Vertical video", category: "creation", detail: "Concept, script, shot list and short-form edit direction.", baseEffort: 10, recommended: true, supportsVariants: true, channels: ["Instagram", "TikTok"], impact: "Reduces short-form reach and makes the social campaign less distinctive." },
+  { id: "social-carousel", label: "Social carousel", category: "creation", detail: "Six-frame carousel with copy and visual direction.", baseEffort: 6, recommended: true, supportsVariants: true, channels: ["Instagram", "Facebook"], impact: "Removes a low-friction explainer format for the campaign proposition." },
+  { id: "story-set", label: "Story set", category: "adaptation", detail: "Adapt the core campaign into a three-story sequence.", baseEffort: 4, recommended: false, supportsVariants: true, channels: ["Instagram"], impact: "Reduces repeat social exposure close to matchday." },
+  { id: "landing-copy", label: "Landing page copy", category: "creation", detail: "Campaign page structure, copy and conversion CTA.", baseEffort: 7, recommended: false, channels: ["Web"], impact: "Removes a dedicated conversion destination for the campaign." },
+  { id: "channel-adaptation", label: "Channel adaptation pack", category: "adaptation", detail: "Resize/rewrite the core idea for one additional social channel.", baseEffort: 3, recommended: true, supportsVariants: true, channels: ["Social"], impact: "Narrows the number of channels carrying the core idea." },
+  { id: "crm-flow", label: "CRM follow-up flow", category: "automation", detail: "Initial message, reminder logic, suppression and exclusion rules.", baseEffort: 9, recommended: true, channels: ["CRM"], impact: "Removes automated follow-up and leaves the campaign as a one-shot send." },
+  { id: "organic-scheduling", label: "Organic scheduling", category: "deployment", detail: "Prepare and schedule approved organic assets for one channel.", baseEffort: 3, recommended: true, channels: ["Instagram", "Facebook"], impact: "Assets remain prepared but are not scheduled for organic publishing." },
+  { id: "paid-social", label: "Paid social launch pack", category: "deployment", detail: "Audience, placements, creative variants and launch configuration.", baseEffort: 8, recommended: true, supportsVariants: true, channels: ["Instagram", "Facebook"], impact: "Removes paid distribution and limits the campaign to owned reach." },
+  { id: "sms-push", label: "SMS / push deployment", category: "deployment", detail: "Short-form message, timing and approved send configuration.", baseEffort: 4, recommended: false, channels: ["SMS", "Push"], impact: "Removes the highest-urgency reminder channel close to kickoff." }
 ];
 
-const categoryLabels: Record<CreditCategory, string> = {
+const categoryLabels: Record<EffortCategory, string> = {
   creation: "Creation",
   adaptation: "Adaptation",
   automation: "Automation",
@@ -84,7 +84,7 @@ export function CampaignDeliveryPlanner({
   const [accountEmail, setAccountEmail] = useState("");
   const [accountPassword, setAccountPassword] = useState("");
   const [accountError, setAccountError] = useState<string | null>(null);
-  const [reservedCampaignCredits, setReservedCampaignCredits] = useState(0);
+  const [lockedCampaignEffort, setLockedCampaignEffort] = useState(0);
   const [reservationId, setReservationId] = useState<string | null>(null);
   const [reservationBusy, setReservationBusy] = useState(false);
   const [reservationError, setReservationError] = useState<string | null>(null);
@@ -103,6 +103,7 @@ export function CampaignDeliveryPlanner({
           variants?: Record<string, number>;
           drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
           workspaceStatus?: "draft" | "review-ready";
+          lockedCampaignEffort?: number;
           reservedCampaignCredits?: number;
           reservationId?: string | null;
           launchHandoffReady?: boolean;
@@ -112,7 +113,9 @@ export function CampaignDeliveryPlanner({
         if (workspace.variants) setVariants(workspace.variants);
         if (workspace.drafts) setDrafts(workspace.drafts);
         if (workspace.workspaceStatus === "review-ready") setWorkspaceStatus("review-ready");
-        if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
+        if (typeof workspace.lockedCampaignEffort === "number") setLockedCampaignEffort(workspace.lockedCampaignEffort);
+    else if (typeof workspace.reservedCampaignCredits === "number") setLockedCampaignEffort(workspace.reservedCampaignCredits);
+        else if (typeof workspace.reservedCampaignCredits === "number") setLockedCampaignEffort(workspace.reservedCampaignCredits);
         if (typeof workspace.reservationId === "string" && workspace.reservationId) setReservationId(workspace.reservationId);
         if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
       }
@@ -133,12 +136,13 @@ export function CampaignDeliveryPlanner({
       variants,
       drafts,
       workspaceStatus,
-      reservedCampaignCredits,
+      lockedCampaignEffort,
+      reservedCampaignCredits: lockedCampaignEffort,
       reservationId,
       launchHandoffReady,
       savedAt: new Date().toISOString()
     }));
-  }, [drafts, fixtureId, launchHandoffReady, reservationId, reservedCampaignCredits, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
+  }, [drafts, fixtureId, launchHandoffReady, reservationId, lockedCampaignEffort, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
 
   function applyWorkspaceState(state: Record<string, unknown>, status?: string) {
     const workspace = state as {
@@ -146,6 +150,7 @@ export function CampaignDeliveryPlanner({
       variants?: Record<string, number>;
       drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
       workspaceStatus?: "draft" | "review-ready";
+      lockedCampaignEffort?: number;
       reservedCampaignCredits?: number;
       reservationId?: string | null;
       launchHandoffReady?: boolean;
@@ -154,7 +159,7 @@ export function CampaignDeliveryPlanner({
     if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
     if (workspace.variants) setVariants(workspace.variants);
     if (workspace.drafts) setDrafts(workspace.drafts);
-    if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
+    if (typeof workspace.lockedCampaignEffort === "number") setLockedCampaignEffort(workspace.lockedCampaignEffort);
     if (typeof workspace.reservationId === "string" && workspace.reservationId) setReservationId(workspace.reservationId);
     else setReservationId(null);
     if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
@@ -281,7 +286,8 @@ export function CampaignDeliveryPlanner({
               variants,
               drafts,
               workspaceStatus,
-              reservedCampaignCredits,
+              lockedCampaignEffort,
+              reservedCampaignCredits: lockedCampaignEffort,
               reservationId,
               launchHandoffReady
             }
@@ -293,7 +299,7 @@ export function CampaignDeliveryPlanner({
     }, 700);
 
     return () => window.clearTimeout(timer);
-  }, [activeClubId, drafts, fixtureId, launchHandoffReady, remoteReady, reservationId, reservedCampaignCredits, selected, variants, workspaceLoaded, workspaceStatus]);
+  }, [activeClubId, drafts, fixtureId, launchHandoffReady, remoteReady, reservationId, lockedCampaignEffort, selected, variants, workspaceLoaded, workspaceStatus]);
 
   async function signInToClubWorkspace() {
     setAccountError(null);
@@ -343,21 +349,21 @@ export function CampaignDeliveryPlanner({
   const pricedItems = useMemo(
     () => catalogue.filter((item) => selected.has(item.id)).map((item) => {
       const count = item.supportsVariants ? Math.max(1, Math.min(4, variants[item.id] ?? 1)) : 1;
-      const variantCredits = item.supportsVariants ? Math.max(0, count - 1) * Math.ceil(item.baseCredits * 0.45) : 0;
-      return { ...item, count, totalCredits: item.baseCredits + variantCredits };
+      const variantEffort = item.supportsVariants ? Math.max(0, count - 1) * Math.ceil(item.baseEffort * 0.45) : 0;
+      return { ...item, count, totalEffort: item.baseEffort + variantEffort };
     }),
     [selected, variants]
   );
 
   const categoryTotals = useMemo(() => {
-    const totals: Record<CreditCategory, number> = { creation: 0, adaptation: 0, automation: 0, deployment: 0 };
-    pricedItems.forEach((item) => { totals[item.category] += item.totalCredits; });
+    const totals: Record<EffortCategory, number> = { creation: 0, adaptation: 0, automation: 0, deployment: 0 };
+    pricedItems.forEach((item) => { totals[item.category] += item.totalEffort; });
     return totals;
   }, [pricedItems]);
 
-  const total = pricedItems.reduce((sum, item) => sum + item.totalCredits, 0);
+  const total = pricedItems.reduce((sum, item) => sum + item.totalEffort, 0);
   const selectedCount = pricedItems.length;
-  const activeCategories = (["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).filter((category) => categoryTotals[category] > 0);
+  const activeCategories = (["creation", "adaptation", "automation", "deployment"] as EffortCategory[]).filter((category) => categoryTotals[category] > 0);
   const campaignCoverage = Math.round((activeCategories.length / 4) * 100);
   const allRecommended = catalogue.filter((item) => item.recommended);
   const missingRecommended = allRecommended.filter((item) => !selected.has(item.id));
@@ -366,8 +372,8 @@ export function CampaignDeliveryPlanner({
   const channelCoverage = recommendedChannels.length ? Math.round((activeChannels.filter((channel) => recommendedChannels.includes(channel)).length / recommendedChannels.length) * 100) : 0;
   const launchQuality = missingRecommended.length === 0 ? "Full recommended scope" : missingRecommended.length <= 2 ? "Reduced scope" : "Thin campaign";
   const generatedItems = Object.keys(drafts) as GeneratableItem[];
-  const committedCredits = generatedItems.reduce((sum, id) => sum + (catalogue.find((item) => item.id === id)?.baseCredits ?? 0), 0);
-  const reservationRequired = Math.max(0, total - committedCredits);
+  const generatedEffort = generatedItems.reduce((sum, id) => sum + (catalogue.find((item) => item.id === id)?.baseEffort ?? 0), 0);
+  const effortToLock = Math.max(0, total - generatedEffort);
   const hasReservation = Boolean(reservationId);
   const canReserve = unresolvedGates === 0 && workspaceStatus === "review-ready" && !hasReservation;
   const canPrepareLaunch = hasReservation && unresolvedGates === 0;
@@ -422,7 +428,7 @@ export function CampaignDeliveryPlanner({
 
     try {
       const cycleId = crypto.randomUUID();
-      if (activeClubId && reservationRequired > 0) {
+      if (activeClubId && effortToLock > 0) {
         const response = await fetch("/api/delivery-effort", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -432,22 +438,22 @@ export function CampaignDeliveryPlanner({
             itemId: "campaign-reservation",
             eventKey: `${fixtureId}:campaign:reserve:${cycleId}`,
             eventType: "commit",
-            units: reservationRequired,
+            units: effortToLock,
             note: "Scope locked after campaign review. Existing generated-draft effort is excluded."
           })
         });
         if (!response.ok) throw new Error("Campaign scope could not be locked.");
       }
 
-      setReservedCampaignCredits(reservationRequired);
+      setLockedCampaignEffort(effortToLock);
       setReservationId(cycleId);
       setLaunchHandoffReady(false);
       await recordActivity(
         "reserve",
         `${fixtureId}:campaign:reserve-history:${cycleId}`,
         "Campaign scope locked",
-        `${reservationRequired} effort units locked after review.`,
-        { credits: reservationRequired, totalPlanned: total, existingCommitted: committedCredits, reservationId: cycleId }
+        `${effortToLock} effort units locked after review.`,
+        { credits: effortToLock, totalPlanned: total, existingCommitted: generatedEffort, reservationId: cycleId }
       );
     } catch (error) {
       setReservationError(error instanceof Error ? error.message : "Campaign reservation failed.");
@@ -462,7 +468,7 @@ export function CampaignDeliveryPlanner({
     setReservationError(null);
 
     try {
-      if (activeClubId && reservedCampaignCredits > 0) {
+      if (activeClubId && lockedCampaignEffort > 0) {
         const response = await fetch("/api/delivery-effort", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -472,7 +478,7 @@ export function CampaignDeliveryPlanner({
             itemId: "campaign-reservation",
             eventKey: `${fixtureId}:campaign:release:${reservationId}`,
             eventType: "release",
-            units: reservedCampaignCredits,
+            units: lockedCampaignEffort,
             note: "Campaign reservation released when the club reopened the campaign."
           })
         });
@@ -483,10 +489,10 @@ export function CampaignDeliveryPlanner({
         "release",
         `${fixtureId}:campaign:release-history:${reservationId}`,
         "Campaign reopened",
-        `${reservedCampaignCredits} locked effort units released and scope reopened for editing.`,
-        { credits: reservedCampaignCredits, reservationId }
+        `${lockedCampaignEffort} locked effort units released and scope reopened for editing.`,
+        { credits: lockedCampaignEffort, reservationId }
       );
-      setReservedCampaignCredits(0);
+      setLockedCampaignEffort(0);
       setReservationId(null);
       setWorkspaceStatus("draft");
       setLaunchHandoffReady(false);
@@ -505,7 +511,7 @@ export function CampaignDeliveryPlanner({
       `${fixtureId}:campaign:launch-handoff`,
       "Launch handoff prepared",
       "Campaign is ready for an external connector or manual execution handoff. No publishing or spend occurred.",
-      { channels: activeChannels, plannedCredits: total }
+      { channels: activeChannels, plannedEffort: total }
     );
   }
 
@@ -545,7 +551,7 @@ export function CampaignDeliveryPlanner({
             itemId: type,
             eventKey: `${fixtureId}:${type}:commit`,
             eventType: "commit",
-            units: catalogue.find((item) => item.id === type)?.baseCredits ?? 0,
+            units: catalogue.find((item) => item.id === type)?.baseEffort ?? 0,
             note: "Effort recorded when the first approval-ready draft was generated."
           })
         });
@@ -656,7 +662,7 @@ export function CampaignDeliveryPlanner({
             </div>
 
             <div className={styles.campaignFlow} aria-label="Campaign workflow coverage">
-              {(["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).map((category, index) => (
+              {(["creation", "adaptation", "automation", "deployment"] as EffortCategory[]).map((category, index) => (
                 <div key={category} className={categoryTotals[category] > 0 ? styles.flowActive : styles.flowInactive}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <strong>{categoryLabels[category]}</strong>
@@ -684,7 +690,7 @@ export function CampaignDeliveryPlanner({
           ) : null}
 
           <div className={styles.creditExplainer}>
-            {(["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).map((category) => (
+            {(["creation", "adaptation", "automation", "deployment"] as EffortCategory[]).map((category) => (
               <article key={category}>
                 <span>{categoryLabels[category]}</span>
                 <strong>{categoryTotals[category]} units</strong>
@@ -717,7 +723,7 @@ export function CampaignDeliveryPlanner({
               {catalogue.map((item) => {
                 const active = selected.has(item.id);
                 const count = Math.max(1, variants[item.id] ?? 1);
-                const rowTotal = item.baseCredits + (item.supportsVariants ? Math.max(0, count - 1) * Math.ceil(item.baseCredits * 0.45) : 0);
+                const rowTotal = item.baseEffort + (item.supportsVariants ? Math.max(0, count - 1) * Math.ceil(item.baseEffort * 0.45) : 0);
                 const connectedStack = itemUsesConnectedStack(item);
                 return (
                   <div key={item.id} className={active ? styles.itemActive : styles.item}>
@@ -730,7 +736,7 @@ export function CampaignDeliveryPlanner({
                           {activeClubId ? <span className={connectedStack ? styles.stackConnected : styles.stackHandoff}>{connectedStack ? "Connected stack" : "Handoff"}</span> : null}
                         </div>
                         <p>{item.detail}</p>
-                        <small>{categoryLabels[item.category]} · {item.channels.join(" · ")} · effort {item.baseCredits} units</small>
+                        <small>{categoryLabels[item.category]} · {item.channels.join(" · ")} · effort {item.baseEffort} units</small>
                         {activeClubId && !connectedStack ? <p className={styles.stackNote}>Not in the club&apos;s connected channels. This remains a preparation/manual handoff unless a connector is added.</p> : null}
                       {item.recommended && !active ? <p className={styles.impactWarning}>If removed: {item.impact}</p> : null}
                       </div>
@@ -771,12 +777,12 @@ export function CampaignDeliveryPlanner({
               <strong>{total} units</strong>
               <dl>
                 <div><dt>Planned work</dt><dd>{total} units</dd></div>
-                <div><dt>Already generated</dt><dd>{committedCredits} units</dd></div>
-                <div><dt>Remaining to lock</dt><dd>{reservationRequired} units</dd></div>
+                <div><dt>Already generated</dt><dd>{generatedEffort} units</dd></div>
+                <div><dt>Remaining to lock</dt><dd>{effortToLock} units</dd></div>
               </dl>
 
               <div className={styles.breakdown}>
-                {(["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).map((category) => (
+                {(["creation", "adaptation", "automation", "deployment"] as EffortCategory[]).map((category) => (
                   <div key={category}><span>{categoryLabels[category]}</span><strong>{categoryTotals[category]} units</strong></div>
                 ))}
               </div>
@@ -813,7 +819,7 @@ export function CampaignDeliveryPlanner({
                   <span>2</span><strong>Review</strong><small>{missingRecommended.length} recommended removed</small>
                 </div>
                 <div className={hasReservation && !launchHandoffReady ? styles.reviewStepActive : ""}>
-                  <span>3</span><strong>Lock</strong><small>{hasReservation ? "Scope locked" : `${reservationRequired} units to lock`}</small>
+                  <span>3</span><strong>Lock</strong><small>{hasReservation ? "Scope locked" : `${effortToLock} units to lock`}</small>
                 </div>
                 <div className={launchHandoffReady ? styles.reviewStepActive : ""}>
                   <span>4</span><strong>Launch</strong><small>handoff only today</small>
@@ -914,7 +920,7 @@ export function CampaignDeliveryPlanner({
             {accountError ? <p className={styles.generationError}>{accountError}</p> : null}
 
             <div className={styles.productionActions}>
-              <span><strong>{committedCredits}</strong> effort units already generated</span>
+              <span><strong>{generatedEffort}</strong> effort units already generated</span>
               <button type="button" disabled={hasReservation} onClick={() => {
                 setWorkspaceStatus((current) => {
                   const next = current === "draft" ? "review-ready" : "draft";
@@ -945,7 +951,7 @@ export function CampaignDeliveryPlanner({
                     <article key={id} className={styles.draftCard}>
                       <div className={styles.draftTop}>
                         <span>{item?.label}</span>
-                        <strong>{item?.baseCredits} effort units</strong>
+                        <strong>{item?.baseEffort} effort units</strong>
                       </div>
                       {draft ? Object.entries(draft).map(([key, value]) => (
                         <div className={styles.draftField} key={key}>
