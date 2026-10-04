@@ -3,19 +3,34 @@ import { cookies } from "next/headers";
 const ACCESS_COOKIE = "fge-sb-access";
 const REFRESH_COOKIE = "fge-sb-refresh";
 
+function clubSupabaseNamespaceConfigured() {
+  return Boolean(
+    process.env.CLUB_SUPABASE_URL
+      || process.env.NEXT_PUBLIC_CLUB_SUPABASE_URL
+      || process.env.CLUB_SUPABASE_PUBLISHABLE_KEY
+      || process.env.NEXT_PUBLIC_CLUB_SUPABASE_PUBLISHABLE_KEY
+      || process.env.CLUB_SUPABASE_ANON_KEY
+      || process.env.NEXT_PUBLIC_CLUB_SUPABASE_ANON_KEY
+  );
+}
+
 function resolveSupabaseUrl() {
-  return process.env.SUPABASE_URL
-    || process.env.CLUB_SUPABASE_URL
-    || process.env.NEXT_PUBLIC_CLUB_SUPABASE_URL;
+  if (clubSupabaseNamespaceConfigured()) {
+    return process.env.CLUB_SUPABASE_URL
+      || process.env.NEXT_PUBLIC_CLUB_SUPABASE_URL;
+  }
+  return process.env.SUPABASE_URL;
 }
 
 function resolveSupabaseKey() {
+  if (clubSupabaseNamespaceConfigured()) {
+    return process.env.CLUB_SUPABASE_PUBLISHABLE_KEY
+      || process.env.NEXT_PUBLIC_CLUB_SUPABASE_PUBLISHABLE_KEY
+      || process.env.CLUB_SUPABASE_ANON_KEY
+      || process.env.NEXT_PUBLIC_CLUB_SUPABASE_ANON_KEY;
+  }
   return process.env.SUPABASE_PUBLISHABLE_KEY
-    || process.env.CLUB_SUPABASE_PUBLISHABLE_KEY
-    || process.env.NEXT_PUBLIC_CLUB_SUPABASE_PUBLISHABLE_KEY
-    || process.env.SUPABASE_ANON_KEY
-    || process.env.CLUB_SUPABASE_ANON_KEY
-    || process.env.NEXT_PUBLIC_CLUB_SUPABASE_ANON_KEY;
+    || process.env.SUPABASE_ANON_KEY;
 }
 
 export function supabaseConfigured() {

@@ -268,13 +268,21 @@ test("first club admin is bootstrapped only by a confirmed private email invite"
   assert.match(migration, /after insert or update of email_confirmed_at, email on auth\.users/);
 });
 
-test("Supabase server config accepts Vercel integration variable names", () => {
+test("Supabase server config isolates the CLUB namespace from retired unprefixed variables", () => {
   const helper = read("src/lib/supabaseServer.ts");
+  const env = read(".env.example");
+  assert.match(helper, /clubSupabaseNamespaceConfigured/);
+  assert.match(helper, /if \(clubSupabaseNamespaceConfigured\(\)\)/);
   assert.match(helper, /CLUB_SUPABASE_URL/);
   assert.match(helper, /NEXT_PUBLIC_CLUB_SUPABASE_URL/);
   assert.match(helper, /CLUB_SUPABASE_PUBLISHABLE_KEY/);
   assert.match(helper, /NEXT_PUBLIC_CLUB_SUPABASE_PUBLISHABLE_KEY/);
-  assert.match(helper, /SUPABASE_PUBLISHABLE_KEY/);
+  assert.match(helper, /return process\.env\.SUPABASE_URL/);
+  assert.match(env, /^CLUB_SUPABASE_URL=/m);
+  assert.match(env, /^CLUB_SUPABASE_PUBLISHABLE_KEY=/m);
+  assert.doesNotMatch(env, /^SUPABASE_URL=/m);
+  assert.doesNotMatch(env, /^SUPABASE_ANON_KEY=/m);
+  assert.doesNotMatch(env, /^DATABASE_URL=/m);
 });
 
 test("pilot access separates identity from club membership and supports admin approval", () => {
