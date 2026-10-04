@@ -13,7 +13,7 @@ The site now separates code from live content. GitHub Actions refreshes the offi
 - WSL attendance averages when the source returns a comparable table; blocked or incomplete responses are recorded without overwriting the last valid observation.
 - Public-source health, last attempt and last successful refresh.
 
-## What remains editorial or requires a connected research automation
+## What remains editorial or requires authorised access
 
 - Ticket-sales milestones and scans from club systems.
 - Media-attention changes outside the connected event and league-fixture sources.
@@ -22,7 +22,7 @@ The site now separates code from live content. GitHub Actions refreshes the offi
 - Eleven TV video-level reach until a canonical public video is configured.
 - Google Trends matched-query exports; its relative index must be captured from a consistent comparison rather than scraped as absolute volume.
 
-Those signals use `data/live/signals.json`, `postmatch.json`, `roadmap.json` and `wsl-attendance-benchmark.json`. Every entry must include an evidence state, observed time, source and explicit marketing implication. A connected daily research automation can update these files after this pull request is merged. Internal ticketing and CRM fields require an authorised data source; never put credentials in GitHub.
+Editorial and access-dependent signals use the relevant `data/live` evidence files. Every entry must include an evidence state, observed time, source and explicit marketing implication. The active daily workflow already refreshes its declared public sources; anything outside that declared source set remains editorial or requires an authorised integration. Internal ticketing and CRM fields require an authorised data source; never put credentials in GitHub.
 
 ## Operating cadence
 
