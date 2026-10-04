@@ -694,3 +694,11 @@ test("feature intelligence styles stay outside the base globals layer", () => {
   assert.match(intelligence, /\.caseStudyPredictionProof\s*\{/);
   assert.match(layout, /intelligence-surfaces\.css/);
 });
+
+
+test("daily automation leaves reviewed WSL attendance outside its commit set", () => {
+  const workflow = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
+  assert.doesNotMatch(workflow, /data\/live\/wsl-attendance-benchmark\.json/);
+  assert.match(workflow, /data\/live\/source-health\.json/);
+  assert.match(workflow, /data\/live\/audience-reach\.json/);
+});
