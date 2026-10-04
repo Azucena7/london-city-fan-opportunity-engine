@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
@@ -504,7 +504,7 @@ test("match plan keeps delivery effort visible without an in-product credit payw
   assert.match(page, /CampaignCreditBuilder/);
   assert.match(page, /fixtureId=\{fixture\.id\}/);
   assert.match(nav, /href: "\/app\/credits"/);
-  assert.match(nav, /label: "Credits"/);
+  assert.doesNotMatch(nav, /label: "Credits"/);
   assert.doesNotMatch(nav, /<strong>60<\/strong> credits/);
 });
 
@@ -1345,7 +1345,7 @@ test("mobile app navigation keeps settings and utility destinations reachable", 
   const css = read("src/components/ProductJourneyNav.module.css");
   assert.match(nav, /className=\{styles\.mobileMenu\}/);
   assert.match(nav, />More<\/summary>/);
-  for (const label of ["Executive view", "Sources", "Setup", "Team", "Credits", "Product demo"]) {
+  for (const label of ["Executive view", "Sources", "Setup", "Team", "Product demo"]) {
     assert.match(nav, new RegExp(label));
   }
   assert.match(nav, /aria-current=\{active === item\.key \? "page"/);
