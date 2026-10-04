@@ -131,14 +131,14 @@ test("club campaign workspace supports authenticated multi-user persistence with
   const session = read("src/app/api/auth/session/route.ts");
   const login = read("src/app/api/auth/login/route.ts");
   const workspace = read("src/app/api/campaign-workspace/[fixtureId]/route.ts");
-  const ledger = read("src/app/api/credit-ledger/route.ts");
+  const ledger = read("src/app/api/delivery-effort/route.ts");
   const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
 
   assert.match(builder, /Connect club workspace/);
   assert.match(builder, /Pilot account sign-in/);
   assert.match(builder, /Saved to \$\{clubs/);
   assert.match(builder, /\/api\/campaign-workspace/);
-  assert.match(builder, /\/api\/credit-ledger/);
+  assert.match(builder, /\/api\/delivery-effort/);
   assert.match(builder, /eventKey/);
   assert.match(builder, /Remote persistence is protected by club membership and row-level security/);
 
@@ -171,6 +171,12 @@ test("retired Credit Center no longer appears as a product surface", () => {
   assert.equal(existsSync("src/components/CreditCenter.module.css"), false);
   assert.equal(existsSync("src/app/app/credits/page.tsx"), false);
   assert.equal(existsSync("src/app/app/credits/credits.module.css"), false);
+});
+
+test("legacy credit-ledger endpoint is only a compatibility alias", () => {
+  const legacy = read("src/app/api/credit-ledger/route.ts");
+  assert.match(legacy, /delivery-effort/);
+  assert.doesNotMatch(legacy, /credit_ledger\?/);
 });
 
 test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
