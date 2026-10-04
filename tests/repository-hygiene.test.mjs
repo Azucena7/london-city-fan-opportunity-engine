@@ -49,7 +49,7 @@ test("retired first persistence prototype stays removed", () => {
   ]) {
     assert.equal(existsSync(path), false, `${path} belongs to the retired first persistence prototype`);
   }
-  assert.equal(existsSync("supabase/migrations/20261002_campaign_workspace.sql"), true);
+  assert.equal(existsSync("supabase/bootstrap/campaign_workspace.sql"), true);
 });
 
 test("legacy root seed tree and V1 frontend specification stay retired", () => {
@@ -569,4 +569,38 @@ test("active AVELA surfaces use demo and pilot terminology rather than prototype
   const measurement = readFileSync("src/lib/measurement.ts", "utf8");
   assert.match(measurement, /utm_medium"\), "demo"/);
   assert.doesNotMatch(measurement, /utm_medium"\), "prototype"/);
+});
+
+
+test("Supabase migration files mirror the applied remote history", () => {
+  const applied = [
+    "20261002212637_club_campaign_workspace_rls.sql",
+    "20261002212742_align_campaign_workspace_with_existing_permissions.sql",
+    "20261002214822_campaign_activity_history.sql",
+    "20261002220044_club_setup_onboarding.sql",
+    "20261002220058_fix_club_setup_admin_permission.sql",
+    "20261002225446_pilot_club_access_requests.sql",
+    "20261002225514_approve_club_access_request_rpc.sql",
+    "20261002225601_authenticated_club_discovery.sql",
+    "20261002225801_pilot_access_policy_cleanup.sql",
+    "20261002230127_secure_first_admin_bootstrap.sql",
+    "20261002230157_confirmed_email_admin_invite.sql",
+    "20261002230223_remove_generic_admin_bootstrap.sql",
+    "20261002230401_index_admin_invite_claim.sql",
+    "20261004193752_create_delivery_effort_events.sql",
+    "20261004194305_drop_legacy_credit_ledger.sql"
+  ];
+
+  for (const file of applied) {
+    assert.equal(existsSync(`supabase/migrations/${file}`), true, `${file} should mirror an applied Supabase migration`);
+  }
+
+  assert.equal(existsSync("supabase/migrations/20261002_club_membership.sql"), false);
+  assert.equal(existsSync("supabase/migrations/20261002_campaign_workspace.sql"), false);
+  assert.equal(existsSync("supabase/bootstrap/club_membership.sql"), true);
+  assert.equal(existsSync("supabase/bootstrap/campaign_workspace.sql"), true);
+
+  const generator = readFileSync("scripts/generate-club-permissions-migration.mjs", "utf8");
+  assert.match(generator, /supabase\/bootstrap\/club_membership\.sql/);
+  assert.doesNotMatch(generator, /supabase\/migrations\/20261002_club_membership\.sql/);
 });
