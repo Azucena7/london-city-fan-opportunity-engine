@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./CampaignCreditBuilder.module.css";
 
-type Tier = "explorer" | "club" | "club-pro";
 type CreditCategory = "creation" | "adaptation" | "automation" | "deployment";
 type GeneratableItem = "crm-email" | "vertical-video";
 type GeneratedDraft = Record<string, string | string[]>;
@@ -36,18 +35,6 @@ type CampaignItem = {
   channels: string[];
   impact: string;
 };
-
-const tierCredits: Record<Tier, number> = {
-  explorer: 0,
-  club: 60,
-  "club-pro": 160
-};
-
-const creditPacks = [
-  { id: "small", label: "+25 credits", price: "£175" },
-  { id: "medium", label: "+75 credits", price: "£450" },
-  { id: "large", label: "+200 credits", price: "£1,000" }
-] as const;
 
 const catalogue: CampaignItem[] = [
   { id: "crm-email", label: "CRM email", category: "creation", detail: "Subject line, body copy, CTA and one approval-ready version.", baseCredits: 5, recommended: true, supportsVariants: true, channels: ["CRM"], impact: "Removes the direct reactivation route to known supporters." },
@@ -82,10 +69,8 @@ export function CampaignCreditBuilder({
   unresolvedGates: number;
   fixtureId: string;
 }) {
-  const [tier, setTier] = useState<Tier>("club");
   const [selected, setSelected] = useState(() => new Set(catalogue.filter((item) => item.recommended).map((item) => item.id)));
   const [variants, setVariants] = useState<Record<string, number>>(() => Object.fromEntries(catalogue.map((item) => [item.id, 1])));
-  const [extraCredits, setExtraCredits] = useState(0);
   const [drafts, setDrafts] = useState<Partial<Record<GeneratableItem, GeneratedDraft>>>({});
   const [generating, setGenerating] = useState<GeneratableItem | null>(null);
   const [generationError, setGenerationError] = useState<string | null>(null);
@@ -116,7 +101,6 @@ export function CampaignCreditBuilder({
         const workspace = JSON.parse(stored) as {
           selected?: string[];
           variants?: Record<string, number>;
-          extraCredits?: number;
           drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
           workspaceStatus?: "draft" | "review-ready";
           reservedCampaignCredits?: number;
@@ -126,7 +110,6 @@ export function CampaignCreditBuilder({
 
         if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
         if (workspace.variants) setVariants(workspace.variants);
-        if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
         if (workspace.drafts) setDrafts(workspace.drafts);
         if (workspace.workspaceStatus === "review-ready") setWorkspaceStatus("review-ready");
         if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
@@ -148,7 +131,6 @@ export function CampaignCreditBuilder({
       fixtureId,
       selected: Array.from(selected),
       variants,
-      extraCredits,
       drafts,
       workspaceStatus,
       reservedCampaignCredits,
@@ -156,13 +138,12 @@ export function CampaignCreditBuilder({
       launchHandoffReady,
       savedAt: new Date().toISOString()
     }));
-  }, [drafts, extraCredits, fixtureId, launchHandoffReady, reservationId, reservedCampaignCredits, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
+  }, [drafts, fixtureId, launchHandoffReady, reservationId, reservedCampaignCredits, selected, storageKey, variants, workspaceLoaded, workspaceStatus]);
 
   function applyWorkspaceState(state: Record<string, unknown>, status?: string) {
     const workspace = state as {
       selected?: string[];
       variants?: Record<string, number>;
-      extraCredits?: number;
       drafts?: Partial<Record<GeneratableItem, GeneratedDraft>>;
       workspaceStatus?: "draft" | "review-ready";
       reservedCampaignCredits?: number;
@@ -172,7 +153,6 @@ export function CampaignCreditBuilder({
 
     if (Array.isArray(workspace.selected)) setSelected(new Set(workspace.selected));
     if (workspace.variants) setVariants(workspace.variants);
-    if (typeof workspace.extraCredits === "number") setExtraCredits(workspace.extraCredits);
     if (workspace.drafts) setDrafts(workspace.drafts);
     if (typeof workspace.reservedCampaignCredits === "number") setReservedCampaignCredits(workspace.reservedCampaignCredits);
     if (typeof workspace.reservationId === "string" && workspace.reservationId) setReservationId(workspace.reservationId);
@@ -299,7 +279,6 @@ export function CampaignCreditBuilder({
               fixtureId,
               selected: Array.from(selected),
               variants,
-              extraCredits,
               drafts,
               workspaceStatus,
               reservedCampaignCredits,
@@ -314,7 +293,7 @@ export function CampaignCreditBuilder({
     }, 700);
 
     return () => window.clearTimeout(timer);
-  }, [activeClubId, drafts, extraCredits, fixtureId, launchHandoffReady, remoteReady, reservationId, reservedCampaignCredits, selected, variants, workspaceLoaded, workspaceStatus]);
+  }, [activeClubId, drafts, fixtureId, launchHandoffReady, remoteReady, reservationId, reservedCampaignCredits, selected, variants, workspaceLoaded, workspaceStatus]);
 
   async function signInToClubWorkspace() {
     setAccountError(null);
@@ -361,9 +340,6 @@ export function CampaignCreditBuilder({
     return item.channels.some(channelIsConnected);
   }
 
-  const includedCredits = tierCredits[tier];
-  const available = includedCredits + extraCredits;
-
   const pricedItems = useMemo(
     () => catalogue.filter((item) => selected.has(item.id)).map((item) => {
       const count = item.supportsVariants ? Math.max(1, Math.min(4, variants[item.id] ?? 1)) : 1;
@@ -380,7 +356,6 @@ export function CampaignCreditBuilder({
   }, [pricedItems]);
 
   const total = pricedItems.reduce((sum, item) => sum + item.totalCredits, 0);
-  const remaining = available - total;
   const selectedCount = pricedItems.length;
   const activeCategories = (["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).filter((category) => categoryTotals[category] > 0);
   const campaignCoverage = Math.round((activeCategories.length / 4) * 100);
@@ -392,23 +367,19 @@ export function CampaignCreditBuilder({
   const launchQuality = missingRecommended.length === 0 ? "Full recommended scope" : missingRecommended.length <= 2 ? "Reduced scope" : "Thin campaign";
   const generatedItems = Object.keys(drafts) as GeneratableItem[];
   const committedCredits = generatedItems.reduce((sum, id) => sum + (catalogue.find((item) => item.id === id)?.baseCredits ?? 0), 0);
-  const explorer = tier === "explorer";
   const reservationRequired = Math.max(0, total - committedCredits);
   const hasReservation = Boolean(reservationId);
-  const canReview = !explorer && remaining >= 0;
-  const canReserve = canReview && unresolvedGates === 0 && workspaceStatus === "review-ready" && !hasReservation;
-  const canPrepareLaunch = !explorer && hasReservation && unresolvedGates === 0;
+  const canReserve = unresolvedGates === 0 && workspaceStatus === "review-ready" && !hasReservation;
+  const canPrepareLaunch = hasReservation && unresolvedGates === 0;
   const nextMove = launchHandoffReady
     ? "Hand off to the connected or manual execution route."
     : hasReservation
       ? "Prepare the external launch handoff."
-      : remaining < 0
-        ? `Reduce scope or add ${Math.abs(remaining)} credits.`
-        : unresolvedGates > 0
-          ? `Resolve ${unresolvedGates} approval gate${unresolvedGates === 1 ? "" : "s"}.`
-          : workspaceStatus === "review-ready"
-            ? `Reserve ${reservationRequired} credits to lock this scope.`
-            : "Finish the campaign scope and mark it ready for review.";
+      : unresolvedGates > 0
+        ? `Resolve ${unresolvedGates} approval gate${unresolvedGates === 1 ? "" : "s"}.`
+        : workspaceStatus === "review-ready"
+          ? "Lock the reviewed scope for handoff."
+          : "Finish the campaign scope and mark it ready for review.";
 
   const builderStage = launchHandoffReady
     ? 5
@@ -424,12 +395,12 @@ export function CampaignCreditBuilder({
     { id: 1, label: "Opportunity", detail: "Why act now", state: "complete" },
     { id: 2, label: "Recipe", detail: "Channels + assets", state: builderStage > 2 ? "complete" : builderStage === 2 ? "active" : "upcoming" },
     { id: 3, label: "Review", detail: unresolvedGates ? `${unresolvedGates} gate${unresolvedGates === 1 ? "" : "s"} open` : "Human approval", state: builderStage > 3 ? "complete" : builderStage === 3 ? "active" : "upcoming" },
-    { id: 4, label: "Reserve", detail: hasReservation ? `${reservedCampaignCredits} cr locked` : "Lock scope", state: builderStage > 4 ? "complete" : builderStage === 4 ? "active" : "upcoming" },
+    { id: 4, label: "Lock", detail: hasReservation ? "Scope locked" : "Lock scope", state: builderStage > 4 ? "complete" : builderStage === 4 ? "active" : "upcoming" },
     { id: 5, label: "Handoff", detail: launchHandoffReady ? "Ready" : "No auto-publish", state: builderStage === 5 ? "active" : "upcoming" }
   ] as const;
 
   function toggle(id: string) {
-    if (explorer || hasReservation) return;
+    if (hasReservation) return;
     setSelected((current) => {
       const next = new Set(current);
       if (next.has(id)) next.delete(id);
@@ -462,10 +433,10 @@ export function CampaignCreditBuilder({
             eventKey: `${fixtureId}:campaign:reserve:${cycleId}`,
             eventType: "commit",
             credits: reservationRequired,
-            note: "Credits reserved after campaign review. Existing generated-draft commitments are excluded."
+            note: "Scope locked after campaign review. Existing generated-draft effort is excluded."
           })
         });
-        if (!response.ok) throw new Error("Campaign credits could not be reserved.");
+        if (!response.ok) throw new Error("Campaign scope could not be locked.");
       }
 
       setReservedCampaignCredits(reservationRequired);
@@ -474,8 +445,8 @@ export function CampaignCreditBuilder({
       await recordActivity(
         "reserve",
         `${fixtureId}:campaign:reserve-history:${cycleId}`,
-        "Campaign credits reserved",
-        `${reservationRequired} additional credits reserved after review.`,
+        "Campaign scope locked",
+        `${reservationRequired} effort units locked after review.`,
         { credits: reservationRequired, totalPlanned: total, existingCommitted: committedCredits, reservationId: cycleId }
       );
     } catch (error) {
@@ -505,14 +476,14 @@ export function CampaignCreditBuilder({
             note: "Campaign reservation released when the club reopened the campaign."
           })
         });
-        if (!response.ok) throw new Error("Reserved credits could not be released.");
+        if (!response.ok) throw new Error("Locked scope could not be reopened.");
       }
 
       await recordActivity(
         "release",
         `${fixtureId}:campaign:release-history:${reservationId}`,
         "Campaign reopened",
-        `${reservedCampaignCredits} reserved credits released and scope reopened for editing.`,
+        `${reservedCampaignCredits} locked effort units released and scope reopened for editing.`,
         { credits: reservedCampaignCredits, reservationId }
       );
       setReservedCampaignCredits(0);
@@ -575,12 +546,12 @@ export function CampaignCreditBuilder({
             eventKey: `${fixtureId}:${type}:commit`,
             eventType: "commit",
             credits: catalogue.find((item) => item.id === type)?.baseCredits ?? 0,
-            note: "Credits committed when the first approval-ready draft was generated."
+            note: "Effort recorded when the first approval-ready draft was generated."
           })
         });
 
         if (!ledgerResponse.ok) {
-          setGenerationError("Draft generated, but the club credit ledger could not be updated.");
+          setGenerationError("Draft generated, but the club effort ledger could not be updated.");
         }
       }
     } catch (error) {
@@ -591,21 +562,13 @@ export function CampaignCreditBuilder({
   }
 
   return (
-    <section className={styles.shell} aria-label="Campaign proposal and credit calculator">
+    <section className={styles.shell} aria-label="Campaign proposal and delivery planner">
       <div className={styles.head}>
         <div>
           <span>Campaign proposal</span>
-          <h2>Turn the match plan into a launchable campaign.</h2>
-          <p>The engine proposes the campaign recipe first. The club then decides what to produce, adapt, automate and deploy before any credits are committed.</p>
+          <h2>Turn the match plan into an approval-ready campaign.</h2>
+          <p>The engine proposes the campaign recipe first. The club then decides what to produce, adapt and hand off before any external execution occurs.</p>
         </div>
-        <label>
-          Product tier
-          <select value={tier} onChange={(event) => { setTier(event.target.value as Tier); setExtraCredits(0); }}>
-            <option value="explorer">Explorer · preview only</option>
-            <option value="club">Club · 60 included credits</option>
-            <option value="club-pro">Club Pro · 160 included credits</option>
-          </select>
-        </label>
       </div>
 
       <div className={styles.brief}>
@@ -640,20 +603,8 @@ export function CampaignCreditBuilder({
         </div>
       </div>
 
-      {explorer ? (
-        <div className={styles.locked}>
-          <span>Explorer preview</span>
-          <h3>The workflow is visible, but the specific campaign recipe is locked.</h3>
-          <p>Explorer can understand how the engine moves from match plan to campaign, but cannot inspect the recommended content/channel mix, calculate credits or launch.</p>
-          <div className={styles.lockedRows}>
-            <div><strong>Recommended content mix</strong><span>Upgrade to reveal</span></div>
-            <div><strong>Recommended channels</strong><span>Upgrade to reveal</span></div>
-            <div><strong>Automation plan</strong><span>Upgrade to reveal</span></div>
-            <div><strong>Estimated credit budget</strong><span>Upgrade to reveal</span></div>
-          </div>
-        </div>
-      ) : (
-        <>
+      <>
+
           <div className={styles.campaignCanvas}>
             <div>
               <span>Proposed campaign</span>
@@ -664,7 +615,7 @@ export function CampaignCreditBuilder({
               <article><span>Audience</span><strong>{audience}</strong></article>
               <article><span>Selected items</span><strong>{selectedCount}</strong></article>
               <article><span>Workflow coverage</span><strong>{campaignCoverage}%</strong></article>
-              <article><span>Estimated cost</span><strong>{total} cr</strong></article>
+              <article><span>Delivery effort</span><strong>{total} units</strong></article>
             </div>
             <div className={styles.campaignHealth}>
               <article><span>Channel coverage</span><strong>{channelCoverage}%</strong><small>{activeChannels.length ? activeChannels.join(" · ") : "No channels selected"}</small></article>
@@ -709,7 +660,7 @@ export function CampaignCreditBuilder({
                 <div key={category} className={categoryTotals[category] > 0 ? styles.flowActive : styles.flowInactive}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <strong>{categoryLabels[category]}</strong>
-                  <small>{categoryTotals[category] > 0 ? categoryTotals[category] + " credits" : "Not included"}</small>
+                  <small>{categoryTotals[category] > 0 ? categoryTotals[category] + " units" : "Not included"}</small>
                 </div>
               ))}
             </div>
@@ -736,7 +687,7 @@ export function CampaignCreditBuilder({
             {(["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).map((category) => (
               <article key={category}>
                 <span>{categoryLabels[category]}</span>
-                <strong>{categoryTotals[category]} cr</strong>
+                <strong>{categoryTotals[category]} units</strong>
                 <small>
                   {category === "creation" ? "Net-new campaign assets."
                     : category === "adaptation" ? "Variants and channel-specific versions."
@@ -779,7 +730,7 @@ export function CampaignCreditBuilder({
                           {activeClubId ? <span className={connectedStack ? styles.stackConnected : styles.stackHandoff}>{connectedStack ? "Connected stack" : "Handoff"}</span> : null}
                         </div>
                         <p>{item.detail}</p>
-                        <small>{categoryLabels[item.category]} · {item.channels.join(" · ")} · base {item.baseCredits} cr</small>
+                        <small>{categoryLabels[item.category]} · {item.channels.join(" · ")} · effort {item.baseCredits} units</small>
                         {activeClubId && !connectedStack ? <p className={styles.stackNote}>Not in the club&apos;s connected channels. This remains a preparation/manual handoff unless a connector is added.</p> : null}
                       {item.recommended && !active ? <p className={styles.impactWarning}>If removed: {item.impact}</p> : null}
                       </div>
@@ -794,7 +745,7 @@ export function CampaignCreditBuilder({
                           </select>
                         </label>
                       ) : null}
-                      <b>{active ? rowTotal : 0} cr</b>
+                      <b>{active ? rowTotal : 0} units</b>
                       {active && (item.id === "crm-email" || item.id === "vertical-video") ? (
                         <button
                           className={styles.generateButton}
@@ -806,7 +757,7 @@ export function CampaignCreditBuilder({
                             ? "Draft generated"
                             : generating === item.id
                               ? "Generating…"
-                              : `Generate draft · ${item.baseCredits} cr`}
+                              : `Generate draft`}
                         </button>
                       ) : null}
                     </div>
@@ -816,37 +767,21 @@ export function CampaignCreditBuilder({
             </div>
 
             <aside className={styles.budget}>
-              <span>Estimated campaign budget</span>
-              <strong>{total} credits</strong>
+              <span>Delivery effort</span>
+              <strong>{total} units</strong>
               <dl>
-                <div><dt>Plan allowance</dt><dd>{includedCredits} cr</dd></div>
-                <div><dt>Extra credits</dt><dd>{extraCredits} cr</dd></div>
-                <div><dt>Planned campaign</dt><dd>-{total} cr</dd></div>
-                <div><dt>Committed to generated drafts</dt><dd>{committedCredits} cr</dd></div>
-                <div className={remaining < 0 ? styles.over : ""}><dt>Remaining after plan</dt><dd>{remaining} cr</dd></div>
+                <div><dt>Planned work</dt><dd>{total} units</dd></div>
+                <div><dt>Already generated</dt><dd>{committedCredits} units</dd></div>
+                <div><dt>Remaining to lock</dt><dd>{reservationRequired} units</dd></div>
               </dl>
 
               <div className={styles.breakdown}>
                 {(["creation", "adaptation", "automation", "deployment"] as CreditCategory[]).map((category) => (
-                  <div key={category}><span>{categoryLabels[category]}</span><strong>{categoryTotals[category]} cr</strong></div>
+                  <div key={category}><span>{categoryLabels[category]}</span><strong>{categoryTotals[category]} units</strong></div>
                 ))}
               </div>
 
-              {remaining < 0 ? (
-                <p className={styles.warning}>This campaign needs {Math.abs(remaining)} additional credits. Reduce scope or add a credit pack.</p>
-              ) : (
-                <p>{remaining} credits remain after this campaign.</p>
-              )}
-
-              <div className={styles.creditPacks}>
-                <span>Add credits</span>
-                {creditPacks.map((pack) => (
-                  <button key={pack.id} type="button" onClick={() => setExtraCredits(Number(pack.label.match(/\d+/)?.[0] ?? 0))}>
-                    <strong>{pack.label}</strong><small>{pack.price}</small>
-                  </button>
-                ))}
-                {extraCredits > 0 ? <button type="button" onClick={() => setExtraCredits(0)}>Remove extra pack</button> : null}
-              </div>
+              <p>Effort units are an internal planning signal, not a purchasable currency. Commercial pricing stays outside the campaign workflow.</p>
 
               <div className={styles.launchState}>
                 <span>Campaign stage</span>
@@ -854,33 +789,31 @@ export function CampaignCreditBuilder({
                   {launchHandoffReady
                     ? "Launch handoff ready"
                     : hasReservation
-                      ? "Credits reserved"
+                      ? "Scope locked"
                       : workspaceStatus === "review-ready"
-                        ? "Ready to reserve"
+                        ? "Ready to lock"
                         : "Estimate in progress"}
                 </strong>
                 <small>
-                  {remaining < 0
-                    ? "Credit budget exceeded."
-                    : unresolvedGates > 0
-                      ? `${unresolvedGates} approval gate${unresolvedGates === 1 ? "" : "s"} still unresolved.`
-                      : !hasReservation && workspaceStatus !== "review-ready"
-                        ? "Review the final scope before reserving credits."
-                        : hasReservation
-                          ? "Scope is locked until the campaign is reopened."
-                          : "Budget and approval gates are clear."}
+                  {unresolvedGates > 0
+                    ? `${unresolvedGates} approval gate${unresolvedGates === 1 ? "" : "s"} still unresolved.`
+                    : !hasReservation && workspaceStatus !== "review-ready"
+                      ? "Review the final scope before locking it."
+                      : hasReservation
+                        ? "Scope is locked until the campaign is reopened."
+                        : "Scope and approval gates are clear."}
                 </small>
               </div>
 
               <div className={styles.reviewFlow}>
                 <div className={workspaceStatus === "draft" ? styles.reviewStepActive : ""}>
-                  <span>1</span><strong>Estimate</strong><small>{total} cr planned</small>
+                  <span>1</span><strong>Scope</strong><small>{total} units planned</small>
                 </div>
                 <div className={workspaceStatus === "review-ready" && !hasReservation ? styles.reviewStepActive : ""}>
                   <span>2</span><strong>Review</strong><small>{missingRecommended.length} recommended removed</small>
                 </div>
                 <div className={hasReservation && !launchHandoffReady ? styles.reviewStepActive : ""}>
-                  <span>3</span><strong>Reserve</strong><small>{hasReservation ? `${reservedCampaignCredits} cr newly reserved` : `${reservationRequired} cr to reserve`}</small>
+                  <span>3</span><strong>Lock</strong><small>{hasReservation ? "Scope locked" : `${reservationRequired} units to lock`}</small>
                 </div>
                 <div className={launchHandoffReady ? styles.reviewStepActive : ""}>
                   <span>4</span><strong>Launch</strong><small>handoff only today</small>
@@ -896,7 +829,7 @@ export function CampaignCreditBuilder({
                   disabled={!canReserve || reservationBusy}
                   onClick={() => void reserveCampaign()}
                 >
-                  {reservationBusy ? "Reserving…" : `Reserve ${reservationRequired} credits`}
+                  {reservationBusy ? "Locking…" : "Lock reviewed scope"}
                 </button>
               ) : launchHandoffReady ? (
                 <button className={styles.launch} type="button" disabled>Launch campaign · connector required</button>
@@ -906,7 +839,7 @@ export function CampaignCreditBuilder({
                 </button>
               )}
 
-              {hasReservation ? <button className={styles.reopen} type="button" disabled={reservationBusy} onClick={() => void reopenCampaign()}>Reopen campaign and release reservation</button> : null}
+              {hasReservation ? <button className={styles.reopen} type="button" disabled={reservationBusy} onClick={() => void reopenCampaign()}>Reopen campaign scope</button> : null}
               <small className={styles.guardrail}>Launch is not simulated: unsupported channels remain explicit handoffs. No CRM send, social publish or media spend happens from this button today.</small>
             </aside>
           </div>
@@ -916,7 +849,7 @@ export function CampaignCreditBuilder({
               <div>
                 <span>Generative production</span>
                 <h3>Approval-ready drafts from the campaign strategy.</h3>
-                <p>Generation commits the creation credits shown on the selected item. Signed-in club users sync this workspace across devices; otherwise the current device remains the fallback.</p>
+                <p>Generation records the effort already spent on produced drafts. Signed-in club users sync this workspace across devices; otherwise the current device remains the fallback.</p>
               </div>
               <div className={styles.workspaceState}>
                 <span>Workspace</span>
@@ -959,7 +892,7 @@ export function CampaignCreditBuilder({
                   <div>
                     <span>Connect club workspace</span>
                     <strong>Pilot account sign-in</strong>
-                    <small>Invited club users can restore campaigns, drafts and credit history on any device.</small>
+                    <small>Invited club users can restore campaigns, drafts and activity history on any device.</small>
                   </div>
                   <div className={styles.signInForm}>
                     <input type="email" autoComplete="email" placeholder="Work email" value={accountEmail} onChange={(event) => setAccountEmail(event.target.value)} />
@@ -981,7 +914,7 @@ export function CampaignCreditBuilder({
             {accountError ? <p className={styles.generationError}>{accountError}</p> : null}
 
             <div className={styles.productionActions}>
-              <span><strong>{committedCredits}</strong> credits committed to generated content</span>
+              <span><strong>{committedCredits}</strong> effort units already generated</span>
               <button type="button" disabled={hasReservation} onClick={() => {
                 setWorkspaceStatus((current) => {
                   const next = current === "draft" ? "review-ready" : "draft";
@@ -990,7 +923,7 @@ export function CampaignCreditBuilder({
                       "review",
                       `${fixtureId}:campaign:review:${total}:${selectedCount}`,
                       "Campaign moved to review",
-                      `${selectedCount} items · ${total} planned credits · ${missingRecommended.length} recommended items removed.`,
+                      `${selectedCount} items · ${total} planned effort units · ${missingRecommended.length} recommended items removed.`,
                       { selectedCount, total, missingRecommended: missingRecommended.length, channels: activeChannels }
                     );
                   }
@@ -1012,7 +945,7 @@ export function CampaignCreditBuilder({
                     <article key={id} className={styles.draftCard}>
                       <div className={styles.draftTop}>
                         <span>{item?.label}</span>
-                        <strong>{item?.baseCredits} cr committed</strong>
+                        <strong>{item?.baseCredits} effort units</strong>
                       </div>
                       {draft ? Object.entries(draft).map(([key, value]) => (
                         <div className={styles.draftField} key={key}>
@@ -1030,7 +963,7 @@ export function CampaignCreditBuilder({
               </div>
             ) : (
               <div className={styles.productionEmpty}>
-                <strong>No credits committed yet.</strong>
+                <strong>No generated drafts yet.</strong>
                 <p>Generate the CRM email or vertical video draft from the campaign builder above.</p>
               </div>
             )}
@@ -1063,12 +996,11 @@ export function CampaignCreditBuilder({
             ) : (
               <div className={styles.historyEmpty}>
                 <strong>No shared campaign history yet.</strong>
-                <p>Reviewing scope, generating drafts, reserving credits and preparing launch handoff will create the timeline for authenticated club users.</p>
+                <p>Reviewing scope, generating drafts, locking scope and preparing launch handoff will create the timeline for authenticated club users.</p>
               </div>
             )}
           </section>
-        </>
-      )}
+      </>
     </section>
   );
 }

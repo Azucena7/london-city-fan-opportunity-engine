@@ -185,7 +185,7 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
 
   assert.match(builder, /Generate draft/);
   assert.match(builder, /Generative production/);
-  assert.match(builder, /credits committed/);
+  assert.match(builder, /effort units already generated/);
   assert.match(builder, /Saved on this device/);
   assert.match(builder, /localStorage/);
   assert.match(builder, /campaign-workspace/);
@@ -426,7 +426,7 @@ test("campaign history records shared fixture milestones without conflating them
   assert.match(builder, /\/api\/campaign-history/);
   assert.match(builder, /draft-generated/);
   assert.match(builder, /Campaign moved to review/);
-  assert.match(builder, /Campaign credits reserved/);
+  assert.match(builder, /Campaign scope locked/);
   assert.match(builder, /Campaign reopened/);
   assert.match(builder, /Launch handoff prepared/);
 
@@ -441,19 +441,19 @@ test("campaign history records shared fixture milestones without conflating them
   assert.match(migration, /club_has_permission\(club_id, 'campaigns', 'view'\)/);
 });
 
-test("campaign flow reviews scope before reserving credits and never simulates launch", () => {
+test("campaign flow reviews and locks scope before a truthful launch handoff", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
 
-  assert.match(builder, /Estimate/);
+  assert.match(builder, /Scope/);
   assert.match(builder, /Review/);
-  assert.match(builder, /Reserve/);
+  assert.match(builder, /Lock/);
   assert.match(builder, /Launch/);
-  assert.match(builder, /Reserve \$\{reservationRequired\} credits/);
+  assert.match(builder, /Lock reviewed scope/);
   assert.match(builder, /campaign:reserve/);
   assert.match(builder, /campaign:release/);
-  assert.match(builder, /Existing generated-draft commitments are excluded/);
+  assert.match(builder, /Existing generated-draft effort is excluded/);
   assert.match(builder, /Scope locked by reservation/);
-  assert.match(builder, /Reopen campaign and release reservation/);
+  assert.match(builder, /Reopen campaign scope/);
   assert.match(builder, /Prepare launch handoff/);
   assert.match(builder, /Launch campaign · connector required/);
   assert.match(builder, /Launch is not simulated/);
@@ -478,14 +478,12 @@ test("campaign reservation cycles are uniquely identifiable and repeat safely", 
   assert.match(trace, /latestReservationEvent\?\.event_type === "release"/);
 });
 
-test("match plan includes campaign proposal credit budgeting and gated launch", () => {
+test("match plan keeps delivery effort visible without an in-product credit paywall", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
   assert.match(builder, /Campaign proposal/);
-  assert.match(builder, /Explorer · preview only/);
-  assert.match(builder, /Club · 60 included credits/);
-  assert.match(builder, /Club Pro · 160 included credits/);
+  assert.match(builder, /approval-ready campaign/);
   assert.match(builder, /Proposed campaign/);
   assert.match(builder, /Campaign workflow coverage/);
   assert.match(builder, /Channel coverage/);
@@ -497,20 +495,17 @@ test("match plan includes campaign proposal credit budgeting and gated launch", 
   assert.match(builder, /Full recommended scope/);
   assert.match(builder, /Reduced scope/);
   assert.match(builder, /Thin campaign/);
-  assert.match(builder, /Estimated campaign budget/);
-  assert.match(builder, /Creation/);
-  assert.match(builder, /Adaptation/);
-  assert.match(builder, /Automation/);
-  assert.match(builder, /Deployment/);
-  assert.match(builder, /Extra variants cost less/);
-  assert.match(builder, /\+25 credits/);
-  assert.match(builder, /\+75 credits/);
-  assert.match(builder, /\+200 credits/);
-  assert.match(builder, /additional credits|additional credit|add a credit pack/i);
+  assert.match(builder, /Delivery effort/);
+  assert.match(builder, /internal planning signal, not a purchasable currency/);
+  assert.match(builder, /Lock reviewed scope/);
   assert.match(builder, /Prepare launch handoff/);
   assert.match(builder, /Launch campaign · connector required/);
   assert.match(builder, /Launch is not simulated/);
-  assert.match(builder, /specific campaign recipe is locked/);
+  assert.doesNotMatch(builder, /Explorer · preview only/);
+  assert.doesNotMatch(builder, /included credits/);
+  assert.doesNotMatch(builder, /Upgrade to reveal/);
+  assert.doesNotMatch(builder, /Add credits/);
+  assert.doesNotMatch(builder, /£175|£450|£1,000/);
   assert.match(page, /CampaignCreditBuilder/);
   assert.match(page, /fixtureId=\{fixture\.id\}/);
   assert.match(nav, /href: "\/app\/credits"/);
