@@ -147,7 +147,6 @@ test("technical package and outbound agents identify as AVELA", () => {
   assert.equal(lock.packages[""].name, "avela-growth-intelligence");
 
   for (const path of [
-    "src/app/api/geocode/route.ts",
     "scripts/refresh-data.mjs",
     "scripts/refresh-public-signals.mjs"
   ]) {
@@ -180,4 +179,19 @@ test("retired territory-travel API prototype stays removed", () => {
   ]) {
     assert.equal(existsSync(path), false, `${path} belonged to the orphan territory-travel prototype`);
   }
+});
+
+test("retired standalone journey-routing prototype stays removed", () => {
+  const retired = [
+    "src/app/api/geocode/route.ts",
+    "src/app/api/journey/route.ts",
+    "src/app/api/national-journey/route.ts",
+    "automations/journey-intelligence.md",
+    "automations/national-journey-layer.md"
+  ];
+  for (const path of retired) assert.equal(existsSync(path), false, `${path} belonged to the retired journey-routing prototype`);
+
+  const env = readFileSync(".env.example", "utf8");
+  assert.doesNotMatch(env, /TFL_API_KEY|TRANSPORTAPI_APP_ID|TRANSPORTAPI_APP_KEY/);
+  assert.match(env, /RDM_DATA_PRODUCT_ID/);
 });
