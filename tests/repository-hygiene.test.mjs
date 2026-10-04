@@ -293,3 +293,11 @@ test("shared language switcher uses AVELA design tokens", () => {
   assert.match(css, /var\(--product-line, #D9DDE5\)/);
   assert.doesNotMatch(css, /lcl-hyperturq|lcl-navy/);
 });
+
+
+test("AVELA product eyebrow labels override the case-study accent", () => {
+  const css = readFileSync("src/app/product-system.css", "utf8");
+  assert.match(css, /\.productShell \.eyebrow/);
+  assert.match(css, /\.productAppShell \.eyebrow/);
+  assert.match(css, /color:var\(--product-accent\)/);
+});
