@@ -1769,3 +1769,30 @@ test("Decision Center surfaces cross-workspace club state without turning unknow
   assert.match(css, /clubStateGrid/);
   assert.match(css, /timeline/);
 });
+
+
+test("Campaign portfolio ranks decision pressure separately from verified contract obligation", () => {
+  const page = read("src/app/app/campaigns/page.tsx");
+  const lib = read("src/lib/portfolioPriority.ts");
+  const css = read("src/app/app/campaigns/campaigns.module.css");
+
+  assert.match(page, /Portfolio decision/);
+  assert.match(page, /What should the club protect, simplify or sequence\?/);
+  assert.match(page, /Contract obligation is currently excluded from portfolio scoring/);
+  assert.match(page, /getDecisionCenterOpsState/);
+  assert.match(page, /rankCampaignPortfolio/);
+  assert.match(page, /advisePortfolioCapacity/);
+
+  assert.match(lib, /opportunity \* 0\.5/);
+  assert.match(lib, /urgency \* 0\.35/);
+  assert.match(lib, /blockerPressure \* 0\.15/);
+  assert.match(lib, /Verified contractual obligation is not scored until contract data is connected and reviewed/);
+  assert.match(lib, /simplify/);
+  assert.match(lib, /defer/);
+  assert.match(lib, /protect/);
+
+  assert.match(css, /portfolioGrid/);
+  assert.match(css, /data-action="protect"/);
+  assert.match(css, /data-action="simplify"/);
+  assert.match(css, /data-action="defer"/);
+});
