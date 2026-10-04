@@ -63,7 +63,7 @@ export async function GET() {
           </div>
 
           {[
-            ["01", "Radar", "Fixtures trigger monitoring automatically"],
+            ["01", "Radar", "Scheduled fixture refresh starts monitoring"],
             ["02", "Opportunity brief", "Evidence, fit and recommended play"],
             ["03", "Campaign", "Scope, approvals and handoff"],
             ["04", "Learning", "What changes for the next match?"]
