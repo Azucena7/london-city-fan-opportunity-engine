@@ -1769,3 +1769,32 @@ test("contract intelligence persistence keeps legal truth verified immutable and
   assert.match(sql, /reviewed_at := coalesce\(new\.reviewed_at, now\(\)\)/);
   assert.match(sql, /do not treat extraction as legal truth/i);
 });
+
+
+test("Contract review queue keeps provenance visible and verification explicit", () => {
+  const page = read("src/app/app/contracts/page.tsx");
+  const component = read("src/components/ContractReviewQueue.tsx");
+  const route = read("src/app/api/contracts/review/route.ts");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+
+  assert.match(nav, /href: "\/app\/contracts"/);
+  assert.match(page, /ContractReviewQueue/);
+  assert.match(page, /Extraction is candidate evidence/);
+  assert.match(page, /Only clauses explicitly verified by authorised governance users/);
+  assert.match(page, /Active and verified truth is versioned rather than silently overwritten/);
+
+  assert.match(component, /Provenance/);
+  assert.match(component, /Source fragment/);
+  assert.match(component, /confidence unknown/);
+  assert.match(component, /Verify clause/);
+  assert.match(component, /Needs review/);
+  assert.match(component, /Reject/);
+  assert.match(component, /AVELA will not create fulfilment truth from prospecting, technical schemas or assumptions/);
+
+  assert.match(route, /contract_documents/);
+  assert.match(route, /contract_clauses/);
+  assert.match(route, /schema-not-ready/);
+  assert.match(route, /REVIEW_STATES/);
+  assert.match(route, /Governance approval may be required/);
+  assert.doesNotMatch(route, /review_state: "verified"/);
+});
