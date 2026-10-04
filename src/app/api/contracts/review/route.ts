@@ -56,8 +56,6 @@ export async function PATCH(request: Request) {
   const clubId = safe(body?.clubId, 80);
   const clauseId = safe(body?.clauseId, 80);
   const reviewState = safe(body?.reviewState, 40);
-  const note = safe(body?.note, 1200);
-
   if (!clubId || !clauseId || !REVIEW_STATES.has(reviewState)) {
     return NextResponse.json({ error: "Valid clubId, clauseId and reviewState are required." }, { status: 400 });
   }
@@ -70,8 +68,7 @@ export async function PATCH(request: Request) {
       body: JSON.stringify({
         review_state: reviewState,
         updated_by: user.id,
-        updated_at: new Date().toISOString(),
-        metadata: note ? { reviewNote: note } : undefined
+        updated_at: new Date().toISOString()
       })
     }
   );
