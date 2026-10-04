@@ -55,7 +55,7 @@ ingestion / validation scripts
                    (units)
 ```
 
-The application and persistence contract is **delivery effort / units** through `delivery_effort_events.units`. The former `credit_ledger` table is retained only during the staged database cutover and is no longer used by the application.
+The application and persistence contract is **delivery effort / units** through `delivery_effort_events.units`. No parallel credit-currency persistence remains in the active database.
 
 ## Canonical application surfaces
 
