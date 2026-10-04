@@ -1739,3 +1739,33 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
 });
+
+
+test("contract intelligence persistence keeps legal truth verified immutable and club scoped", () => {
+  const sql = read("supabase/migrations/20261004233000_contract_intelligence_foundation.sql");
+
+  assert.match(sql, /contract_documents/);
+  assert.match(sql, /contract_clauses/);
+  assert.match(sql, /contract_season_instances/);
+  assert.match(sql, /contract_entity_links/);
+
+  assert.match(sql, /lifecycle_state in \('detected','extracted','reviewed','active','superseded','terminated'\)/);
+  assert.match(sql, /review_state in \('extracted','needs-review','verified','rejected'\)/);
+
+  assert.match(sql, /governance','view/);
+  assert.match(sql, /governance','edit/);
+  assert.match(sql, /governance','approve/);
+
+  assert.match(sql, /active contract content is immutable; create a new document version instead/);
+  assert.match(sql, /verified clause content is immutable; create a superseding clause instead/);
+  assert.match(sql, /supersedes_document_id/);
+  assert.match(sql, /supersedes_clause_id/);
+
+  assert.match(sql, /foreign key\(document_id, club_id\)/);
+  assert.match(sql, /foreign key\(clause_id, document_id, club_id\)/);
+  assert.match(sql, /unique\(id, document_id, club_id\)/);
+
+  assert.match(sql, /reviewed_by := auth\.uid\(\)/);
+  assert.match(sql, /reviewed_at := coalesce\(new\.reviewed_at, now\(\)\)/);
+  assert.match(sql, /do not treat extraction as legal truth/i);
+});
