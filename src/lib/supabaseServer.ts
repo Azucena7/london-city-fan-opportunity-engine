@@ -1,8 +1,6 @@
 import { cookies } from "next/headers";
 
 const ACCESS_COOKIE = "avela-sb-access";
-const REFRESH_COOKIE = "avela-sb-refresh";
-
 function clubSupabaseNamespaceConfigured() {
   return Boolean(
     process.env.CLUB_SUPABASE_URL
@@ -48,7 +46,7 @@ export async function getAccessToken() {
   return (await cookies()).get(ACCESS_COOKIE)?.value ?? null;
 }
 
-export async function setSessionCookies(accessToken: string, refreshToken: string, expiresIn = 3600) {
+export async function setSessionCookie(accessToken: string, expiresIn = 3600) {
   const store = await cookies();
   const secure = process.env.NODE_ENV === "production";
   store.set(ACCESS_COOKIE, accessToken, {
@@ -58,19 +56,11 @@ export async function setSessionCookies(accessToken: string, refreshToken: strin
     path: "/",
     maxAge: expiresIn
   });
-  store.set(REFRESH_COOKIE, refreshToken, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure,
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30
-  });
 }
 
 export async function clearSessionCookies() {
   const store = await cookies();
   store.delete(ACCESS_COOKIE);
-  store.delete(REFRESH_COOKIE);
 }
 
 export async function supabaseRequest(path: string, init: RequestInit = {}) {
