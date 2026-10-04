@@ -36,7 +36,15 @@ const redirects = [
 const nextConfig = {
   typedRoutes: false,
   async redirects() {
-    return redirects.map((item) => ({ ...item, permanent: true }));
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "london-city-fan-opportunity-engine.vercel.app" }],
+        destination: "https://avela-growth-intelligence.vercel.app/:path*",
+        permanent: true
+      },
+      ...redirects.map((item) => ({ ...item, permanent: true }))
+    ];
   },
   async headers() {
     return [
