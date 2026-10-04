@@ -340,7 +340,7 @@ test("club setup context differentiates the engine from replacement CRM and gene
   assert.match(draftRoute, /Respect this club must-avoid rule/);
 
   assert.match(home, /Growth intelligence for women’s football/);
-  assert.match(home, /A decision layer above the club stack/);
+  assert.match(home, /Works above your existing stack/);
   assert.match(home, /Women’s-football signal layer|women’s-football signal layer/i);
   assert.match(home, /growth-intelligence layer|decision layer/i);
 });
@@ -585,7 +585,7 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   assert.match(home, /See a live fixture decision/);
   assert.match(home, /href="\/live\/london-city"/);
   assert.match(marketingNav, /Try product/);
-  assert.match(marketingNav, /href="\/app">Open app/);
+  assert.match(marketingNav, /href="\/app\/demo">Try product/);
   assert.match(appNav, /AVELA website/);
   assert.match(appNav, /\/app\/learning/);
   assert.match(config, /source: "\/london-city", destination: "\/live\/london-city"/);
