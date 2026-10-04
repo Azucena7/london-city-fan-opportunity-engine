@@ -1603,3 +1603,30 @@ test("Ask AVELA is grounded in the current decision and treats new user informat
   assert.match(route, /do not claim it has been saved or applied/);
   assert.match(route, /AI_GATEWAY_API_KEY/);
 });
+
+
+test("opportunity brief can create role-specific heads-ups and operational requests", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const component = read("src/components/OperationalHandoffs.tsx");
+  const route = read("src/app/api/operational-requests/route.ts");
+  const migration = read("supabase/migrations/20261004215220_operational_request_handoffs.sql");
+
+  assert.match(page, /OperationalHandoffs/);
+  assert.match(component, /Player heads-up/);
+  assert.match(component, /Team Manager/);
+  assert.match(component, /Sponsor activation/);
+  assert.match(component, /Activation Manager/);
+  assert.match(component, /Club representation/);
+  assert.match(component, /Secretary \/ Protocol/);
+  assert.match(component, /Heads-up/);
+  assert.match(component, /Formal request/);
+  assert.match(component, /\/api\/operational-requests/);
+
+  assert.match(route, /operational_requests/);
+  assert.match(route, /requestType/);
+  assert.match(route, /recipientRole/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /'heads-up'/);
+  assert.match(migration, /'formal-request'/);
+  assert.match(migration, /'confirmed'/);
+});
