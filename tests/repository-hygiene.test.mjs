@@ -694,3 +694,34 @@ test("feature intelligence styles stay outside the base globals layer", () => {
   assert.match(intelligence, /\.caseStudyPredictionProof\s*\{/);
   assert.match(layout, /intelligence-surfaces\.css/);
 });
+
+
+test("contract intelligence persistence keeps legal truth behind governance approval", () => {
+  const migration = readFileSync("supabase/migrations/20261004233000_contract_intelligence_foundation.sql", "utf8");
+
+  assert.match(migration, /create table if not exists public\.contract_documents/);
+  assert.match(migration, /create table if not exists public\.contract_clauses/);
+  assert.match(migration, /create table if not exists public\.contract_season_instances/);
+  assert.match(migration, /create table if not exists public\.contract_entity_links/);
+
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /revoke all on public\.contract_documents[\s\S]*from anon/);
+  assert.match(migration, /club_has_permission\(club_id,'governance','view'\)/);
+  assert.match(migration, /club_has_permission\(club_id,'governance','edit'\)/);
+  assert.match(migration, /club_has_permission\(new\.club_id,'governance','approve'\)/);
+  assert.doesNotMatch(migration, /club_has_permission\([^\n]*'overview'/);
+
+  assert.match(migration, /activate or alter an active contract/);
+  assert.match(migration, /verify or alter a verified contract clause/);
+  assert.match(migration, /reviewed_by := auth\.uid\(\)/);
+  assert.match(migration, /reviewed_at := coalesce\(new\.reviewed_at, now\(\)\)/);
+
+  assert.match(migration, /foreign key\(document_id, club_id\)/);
+  assert.match(migration, /foreign key\(clause_id, club_id\)/);
+  assert.match(migration, /foreign key\(supersedes_document_id, club_id\)/);
+  assert.match(migration, /foreign key\(supersedes_clause_id, club_id\)/);
+
+  assert.match(migration, /lifecycle_state in \('detected','extracted','reviewed','active','superseded','terminated'\)/);
+  assert.match(migration, /review_state in \('extracted','needs-review','verified','rejected'\)/);
+  assert.match(migration, /unique\(document_id, season_key\)/);
+});
