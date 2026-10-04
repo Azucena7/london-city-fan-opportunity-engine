@@ -2,7 +2,7 @@
 
 ## Existing monitoring concept
 
-A recurring Fan Opportunity Watch should monitor:
+A recurring AVELA Opportunity Watch should monitor:
 - London City attendance
 - competitor attendance
 - next-match weather
