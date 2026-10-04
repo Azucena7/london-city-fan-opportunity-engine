@@ -54,7 +54,6 @@ export function CalendarSlotFinder({
   fixtureLabel: string;
 }) {
   const [clubs, setClubs] = useState<Club[]>([]);
-  const [activeClubId, setActiveClubId] = useState("");
   const [windows, setWindows] = useState<AvailabilityWindow[]>([]);
   const [selectedRoles, setSelectedRoles] = useState<string[]>(["Head of Marketing", "Secretary / Protocol"]);
   const [includeSquad, setIncludeSquad] = useState(true);
