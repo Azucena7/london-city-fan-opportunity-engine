@@ -644,3 +644,18 @@ test("daily refresh tolerates delayed GitHub schedule starts", () => {
   assert.doesNotMatch(refreshSignals, /Not the 06:30 Europe\/London run/);
   assert.doesNotMatch(refreshSignals, /function londonHour/);
 });
+
+
+test("core public sources update source-health on every refresh attempt", () => {
+  const refreshData = readFileSync("scripts/refresh-data.mjs", "utf8");
+
+  assert.match(refreshData, /SOURCE_HEALTH_PATH/);
+  assert.match(refreshData, /function updateCoreSourceHealth/);
+  assert.match(refreshData, /"club-public-web": \{ ok: fixtureRefresh\.ok \}/);
+  assert.match(refreshData, /healthResults\["open-meteo"\]/);
+  assert.match(refreshData, /lastAttemptAt: attemptedAt/);
+  assert.match(refreshData, /lastSuccessfulAt: result\.ok \? attemptedAt : source\.lastSuccessfulAt/);
+  assert.match(refreshData, /calendar = existing/);
+  assert.match(refreshData, /source_failures: fixtureRefresh\.ok \? \[\] : \[`Club fixtures:/);
+  assert.match(refreshData, /writeFile\(SOURCE_HEALTH_PATH/);
+});
