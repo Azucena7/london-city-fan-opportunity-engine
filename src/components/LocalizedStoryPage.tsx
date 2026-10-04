@@ -80,7 +80,7 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
             : "The prototype connects territory, calendar, attention, access, experience and measurement to generate operating hypotheses and then check what actually happened."}
         </p>
         <div className="caseStudyActions">
-          <Link className="caseStudyButton primary" href="/today">{es ? "Explorar el producto" : "Explore the product"}</Link>
+          <Link className="caseStudyButton primary" href="/app">{es ? "Explorar el producto" : "Explore the product"}</Link>
           <Link className="caseStudyButton secondary" href="/case-study/technical">{es ? "Ver cómo se ha construido" : "See how it is built"} →</Link>
         </div>
         <p className="caseStudyDisclosure">
@@ -250,7 +250,7 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
         <div className="caseStudyPlaybooks">
           {["Back to Bromley", "The next chapter", "Alexia → London City", "Matchday confidence"].map((item, index) => <span key={item}><b>{String(index + 1).padStart(2, "0")}</b>{item}</span>)}
         </div>
-        <Link className="caseStudyTextLink" href="/today">{es ? "Ver el Campaign Lab en contexto" : "See the Campaign Lab in context"} →</Link>
+        <Link className="caseStudyTextLink" href="/app">{es ? "Ver el Campaign Lab en contexto" : "See the Campaign Lab in context"} →</Link>
       </section>
 
       <section className="caseStudySection caseStudyAudienceLayer">
@@ -305,8 +305,8 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
           <article><span>04</span><strong>{es ? "Decidir" : "Decide"}</strong><p>{es ? "Escalar, adaptar o parar según evidencia observada." : "Scale, adapt or stop based on observed evidence."}</p></article>
         </div>
         <div className="caseStudyNextActions">
-          <Link className="caseStudyButton primary" href="/measurement">{es ? "Ver control de evidencia" : "Open evidence control"}</Link>
-          <Link className="caseStudyButton secondary" href="/method">{es ? "Revisar metodología" : "Review methodology"}</Link>
+          <Link className="caseStudyButton primary" href="/app/learning">{es ? "Ver control de evidencia" : "Open evidence control"}</Link>
+          <Link className="caseStudyButton secondary" href="/case-study/technical">{es ? "Revisar metodología" : "Review methodology"}</Link>
         </div>
       </section>
 

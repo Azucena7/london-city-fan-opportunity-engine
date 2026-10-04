@@ -155,7 +155,7 @@ export default function PilotRehearsalPage() {
         </div>
         <div className={styles.actions}>
           <Link className={styles.primary} href="/pilot/operating-pack">Open Pilot Operating Pack</Link>
-          <Link className={styles.secondary} href="/results">See Results & Learning</Link>
+          <Link className={styles.secondary} href="/app/learning">See Results & Learning</Link>
         </div>
       </section>
     </main>

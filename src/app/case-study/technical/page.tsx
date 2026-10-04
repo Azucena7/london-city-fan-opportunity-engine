@@ -3,7 +3,7 @@ import { LocalizedTechnicalCaseStudy } from "@/components/LocalizedTechnicalCase
 
 export const metadata: Metadata = {
   title: "Technical Case Study",
-  description: "How the London City Fan Opportunity Lab connects public sources, versioned data contracts, decision models, campaign briefs and CRM-ready measurement."
+  description: "How AVELA’s London City evidence environment connects public sources, versioned data contracts, decision models, campaign briefs and CRM-ready measurement."
 };
 
 export default function TechnicalCaseStudyPage() {

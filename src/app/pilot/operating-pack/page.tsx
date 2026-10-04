@@ -6,7 +6,7 @@ import styles from "./operating-pack.module.css";
 
 export const metadata: Metadata = {
   title: "Pilot Operating Pack",
-  description: "The practical onboarding, data, roles and weekly cadence for a 90-day Fan Growth Pilot."
+  description: "The practical onboarding, data, roles and weekly cadence for a 90-day Growth Intelligence Pilot."
 };
 
 const roles = [

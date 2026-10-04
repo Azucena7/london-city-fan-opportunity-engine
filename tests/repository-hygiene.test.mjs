@@ -70,3 +70,42 @@ test("dependency install scripts stay explicitly reviewed and narrowly allowlist
   assert.deepEqual(pkg.allowScripts, { "unrs-resolver": true });
   assert.equal(pkg.allowScripts["*"], undefined);
 });
+
+test("runtime persistence identifiers use the AVELA namespace", () => {
+  const server = readFileSync("src/lib/supabaseServer.ts", "utf8");
+  const builder = readFileSync("src/components/CampaignCreditBuilder.tsx", "utf8");
+  assert.match(server, /avela-sb-access/);
+  assert.match(server, /avela-sb-refresh/);
+  assert.doesNotMatch(server, /fge-sb-/);
+  assert.match(builder, /avela:campaign-workspace/);
+  assert.doesNotMatch(builder, /fan-growth-engine:/);
+});
+
+test("public product surfaces stay free of retired product names", () => {
+  const paths = [
+    "src/app/case-study/page.tsx",
+    "src/app/case-study/technical/page.tsx",
+    "src/components/LocalizedTechnicalCaseStudy.tsx",
+    "src/app/pilot/page.tsx",
+    "src/app/pilot/operating-pack/page.tsx",
+    "src/app/for-clubs/page.tsx",
+    "README.md"
+  ];
+  for (const path of paths) {
+    const source = readFileSync(path, "utf8");
+    assert.doesNotMatch(source, /London City Fan Opportunity|Fan Growth Pilot|Fan Growth Playbook/);
+  }
+});
+
+test("canonical surfaces do not link internally through retired redirect routes", () => {
+  const paths = [
+    "src/components/NavTabs.tsx",
+    "src/components/LocalizedStoryPage.tsx",
+    "src/components/LocalizedTechnicalCaseStudy.tsx",
+    "src/app/pilot/rehearsal/page.tsx"
+  ];
+  const retiredHrefs = /href="\/(?:today|measurement|method|brief|results|london-city)"/;
+  for (const path of paths) {
+    assert.doesNotMatch(readFileSync(path, "utf8"), retiredHrefs, `${path} should link directly to a canonical surface`);
+  }
+});

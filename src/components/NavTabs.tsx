@@ -33,14 +33,14 @@ export function NavTabs() {
   return (
     <header className="labHeader">
       <div className="labTopline">
-        <Link className="brand brandLink" href="/london-city">
+        <Link className="brand brandLink" href="/live/london-city">
           LONDON CITY / CASE
         </Link>
         <div className="analystBridge">
           <span className="prototypeMark">
             {es ? "Entorno de evidencia" : "Evidence environment"}
           </span>
-          <Link className="backToProduct" href="/brief">
+          <Link className="backToProduct" href="/app/matches">
             {es ? "← Volver al producto" : "← Back to product"}
           </Link>
         </div>
@@ -66,9 +66,9 @@ export function NavTabs() {
         <nav className="navSecondary" aria-label={es ? "Evaluación del producto" : "Product evaluation"}>
           <span className="navGroupLabel">{es ? "Evaluación" : "Evaluation"}</span>
           <Link
-            href="/method"
-            className={pathname.startsWith("/method") ? "secondaryLink active" : "secondaryLink"}
-            aria-current={pathname.startsWith("/method") ? "page" : undefined}
+            href="/case-study/technical"
+            className={pathname.startsWith("/case-study/technical") ? "secondaryLink active" : "secondaryLink"}
+            aria-current={pathname.startsWith("/case-study/technical") ? "page" : undefined}
           >
             {es ? "Cómo funciona" : "How it works"}
           </Link>
