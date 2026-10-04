@@ -306,6 +306,12 @@ export default async function ClubAppHome() {
           <Link href="/app/sources">Review source boundary →</Link>
         </article>
         <article>
+          <span>Club context</span>
+          <strong>{clubContext ? "Active" : "Evidence only"}</strong>
+          <p>{clubContext ? `${clubContext.connectedChannels.length} channels and ${clubContext.priorityObjectives.length} objectives available to explain execution fit.` : "Connect club context to improve execution guidance without rewriting evidence."}</p>
+          <Link href={clubContext ? "/app/sources" : "/app/setup"}>{clubContext ? "Review sources →" : "Complete setup →"}</Link>
+        </article>
+        <article>
           <span>Learning</span>
           <strong>History</strong>
           <p>Measured outcomes stay separate from recommendations so future decisions can learn from what actually happened.</p>
