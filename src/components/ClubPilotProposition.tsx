@@ -22,7 +22,7 @@ export function ClubPilotProposition() {
     es ? "A acordar: responsable, partidos, KPI, comparación, permisos, precio y umbrales para continuar o parar." : "To agree: owner, fixtures, KPI, comparison, permissions, price and continue/stop thresholds.",
     es ? "No compartir nombres, emails ni registros individuales. El club conserva audiencias y consentimiento; el prototipo recibe resultados agregados autorizados." : "Do not share names, emails or individual records. The club retains audiences and consent; the prototype receives authorised aggregate outcomes.",
     es ? "Sin resultados comerciales garantizados. Datos públicos por sí solos no validan conversión o repetición." : "No guaranteed commercial outcomes. Public data alone cannot establish conversion or repeat visits.",
-    "https://london-city-fan-opportunity-engine.vercel.app/for-clubs"
+    "https://avela-growth-intelligence.vercel.app/for-clubs"
   ].join("\n\n");
 
   async function copyBrief() {
