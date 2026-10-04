@@ -1,5 +1,7 @@
 # Scoring Logic
 
+Reference scoring rationale. Runtime behaviour is governed by the active scoring implementation and tests.
+
 ## 1. Territory Opportunity
 
 The structural score should ultimately be based on:

@@ -1,5 +1,7 @@
 # Automations and Agents
 
+Reference operating model. Current integration readiness is defined by the architecture and source-health contracts.
+
 ## Existing monitoring concept
 
 A recurring AVELA Opportunity Watch should monitor:

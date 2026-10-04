@@ -1,6 +1,6 @@
 # Source Register
 
-Core source families used in V1 research.
+Core source families used by AVELA research and the public proof environment.
 
 ## Demography / geography
 - ONS Census 2021 TS003 Household Composition
