@@ -2,7 +2,7 @@
 
 .clubState,.timelineSection{max-width:1120px;margin-left:auto;margin-right:auto;padding:38px 0;border-top:1px solid var(--product-line)}
 .clubState>.sectionHead>p,.timelineSection>.sectionHead>p{max-width:360px;margin:0!important;color:var(--product-muted);font-size:10px!important;line-height:1.5}
-.clubStateGrid{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
+.clubStateGrid{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
 .clubStateGrid article{min-height:150px;padding:16px 16px 18px 0}
 .clubStateGrid article+article{padding-left:16px;border-left:1px solid var(--product-line)}
 .clubStateGrid span,.clubStateGrid strong,.clubStateGrid small{display:block}
@@ -11,8 +11,8 @@
 .clubStateGrid p{margin:9px 0 0!important;color:var(--product-muted);font-size:9px!important;line-height:1.45}
 .clubStateGrid small{margin-top:8px;color:var(--product-muted);font-size:8px;line-height:1.4}
 .clubStateGrid a{display:inline-block;margin-top:8px;color:var(--product-ink);font-size:8px;font-weight:900;text-decoration:none}
-.clubStateGrid article[data-state="overloaded"] strong,.clubStateGrid article[data-state="blocked"] strong{color:var(--product-danger)}
-.clubStateGrid article[data-state="tight"] strong,.clubStateGrid article[data-state="review"] strong{color:var(--product-warning)}
+.clubStateGrid article[data-state="overloaded"] strong,.clubStateGrid article[data-state="blocked"] strong,.clubStateGrid article[data-state="overdue"] strong{color:var(--product-danger)}
+.clubStateGrid article[data-state="tight"] strong,.clubStateGrid article[data-state="review"] strong,.clubStateGrid article[data-state="waiting"] strong{color:var(--product-warning)}
 .clubStateGrid article[data-state="available"] strong,.clubStateGrid article[data-state="clear"] strong{color:var(--product-success)}
 .clubStateGrid article[data-state="unknown"] strong{color:var(--product-missing)}
 .timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--product-line);border:1px solid var(--product-line)}
