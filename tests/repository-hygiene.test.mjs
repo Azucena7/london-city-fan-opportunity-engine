@@ -51,3 +51,16 @@ test("retired first persistence prototype stays removed", () => {
   }
   assert.equal(existsSync("supabase/migrations/20261002_campaign_workspace.sql"), true);
 });
+
+test("legacy root seed tree and V1 frontend specification stay retired", () => {
+  for (const path of [
+    "seed/competitors.json",
+    "seed/fixtures.json",
+    "seed/grassroots.json",
+    "seed/territories.json",
+    "seed/ticketing.json",
+    "05_FRONTEND_SPEC.md"
+  ]) {
+    assert.equal(existsSync(path), false, `${path} has a canonical replacement and should not return`);
+  }
+});
