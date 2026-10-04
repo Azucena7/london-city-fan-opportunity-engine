@@ -70,6 +70,6 @@ export async function POST(request: Request) {
   });
 
   const payload = await response.json().catch(() => null);
-  if (!response.ok) return NextResponse.json({ error: "Access request could not be saved.", detail: payload }, { status: response.status });
+  if (!response.ok) return NextResponse.json({ error: "Access request could not be saved." }, { status: response.status });
   return NextResponse.json({ requested: true, request: Array.isArray(payload) ? payload[0] : payload });
 }
