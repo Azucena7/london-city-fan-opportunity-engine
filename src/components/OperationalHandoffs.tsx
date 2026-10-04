@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { OperationalHandoffSuggestion } from "@/lib/operationalRouting";
 import styles from "./OperationalHandoffs.module.css";
 
 type Club = { id: string; name: string; role: string };
@@ -15,25 +16,20 @@ type RequestRow = {
   updated_at: string;
 };
 
-type Preset = {
-  requestType: RequestRow["request_type"];
-  stage: RequestRow["stage"];
-  recipientRole: string;
-  title: string;
-  hint: string;
-  subject: string;
-};
+type Preset = OperationalHandoffSuggestion & { recommended: boolean };
 
 export function OperationalHandoffs({
   decisionId,
   fixtureLabel,
   eventAt,
-  recommendation
+  recommendation,
+  suggestions = []
 }: {
   decisionId: string;
   fixtureLabel: string;
   eventAt?: string | null;
   recommendation: string;
+  suggestions?: OperationalHandoffSuggestion[];
 }) {
   const [clubs, setClubs] = useState<Club[]>([]);
   const [activeClubId, setActiveClubId] = useState("");
@@ -41,14 +37,17 @@ export function OperationalHandoffs({
   const [busy, setBusy] = useState<string | null>(null);
   const [status, setStatus] = useState("");
 
-  const presets: Preset[] = [
+  const manualPresets: OperationalHandoffSuggestion[] = [
     {
       requestType: "player",
       stage: "heads-up",
       recipientRole: "Team Manager",
       title: "Player heads-up",
       hint: "Warn Team Manager before a formal player request is needed.",
-      subject: `Possible player requirement · ${fixtureLabel}`
+      subject: `Possible player requirement · ${fixtureLabel}`,
+      urgency: "plan",
+      reason: "Available as a manual handoff when player involvement is known internally.",
+      ruleId: "manual-player"
     },
     {
       requestType: "sponsor-activation",
@@ -56,7 +55,10 @@ export function OperationalHandoffs({
       recipientRole: "Activation Manager",
       title: "Sponsor activation",
       hint: "Hand the recommended activation to the sponsor execution owner.",
-      subject: `Activation requirement · ${fixtureLabel}`
+      subject: `Activation requirement · ${fixtureLabel}`,
+      urgency: "plan",
+      reason: "Available as a manual handoff when sponsor involvement is known internally.",
+      ruleId: "manual-sponsor"
     },
     {
       requestType: "representation",
@@ -64,8 +66,19 @@ export function OperationalHandoffs({
       recipientRole: "Secretary / Protocol",
       title: "Club representation",
       hint: "Pre-alert agenda/protocol that club representation may be required.",
-      subject: `Possible club representation · ${fixtureLabel}`
+      subject: `Possible club representation · ${fixtureLabel}`,
+      urgency: "plan",
+      reason: "Available as a manual handoff when club representation is required.",
+      ruleId: "manual-representation"
     }
+  ];
+
+  const suggestionKeys = new Set(suggestions.map((item) => item.requestType + ":" + item.recipientRole));
+  const presets: Preset[] = [
+    ...suggestions.map((item) => ({ ...item, recommended: true })),
+    ...manualPresets
+      .filter((item) => !suggestionKeys.has(item.requestType + ":" + item.recipientRole))
+      .map((item) => ({ ...item, recommended: false }))
   ];
 
   async function load(clubId: string) {
@@ -124,7 +137,11 @@ export function OperationalHandoffs({
         requirements: {
           fixture: fixtureLabel,
           recommendation,
-          purpose: preset.hint
+          purpose: preset.hint,
+          avelaSuggestion: preset.recommended,
+          ruleId: preset.ruleId,
+          reason: preset.reason,
+          urgency: preset.urgency
         }
       })
     });
@@ -158,15 +175,16 @@ export function OperationalHandoffs({
 
       <div className={styles.presetGrid}>
         {presets.map((preset) => (
-          <article key={preset.requestType + preset.recipientRole}>
+          <article key={preset.requestType + preset.recipientRole} className={preset.recommended ? styles.recommendedPreset : ""}>
             <div className={styles.presetTop}>
-              <span>{preset.stage === "heads-up" ? "Heads-up" : "Formal request"}</span>
+              <span>{preset.recommended ? `AVELA suggests · ${preset.urgency}` : preset.stage === "heads-up" ? "Heads-up" : "Formal request"}</span>
               <small>{preset.recipientRole}</small>
             </div>
             <h3>{preset.title}</h3>
             <p>{preset.hint}</p>
+            {preset.recommended ? <p className={styles.suggestionReason}>{preset.reason}</p> : null}
             <button type="button" disabled={Boolean(busy)} onClick={() => void create(preset)}>
-              {busy === preset.requestType + preset.recipientRole ? "Creating…" : preset.stage === "heads-up" ? "Create pre-alert" : "Create request"}
+              {busy === preset.requestType + preset.recipientRole ? "Creating…" : preset.recommended ? preset.stage === "heads-up" ? "Create suggested pre-alert" : "Create suggested request" : preset.stage === "heads-up" ? "Create pre-alert" : "Create request"}
             </button>
           </article>
         ))}
