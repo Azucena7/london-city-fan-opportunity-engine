@@ -43,6 +43,12 @@
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
+
+.productShell .eyebrow,
+.productAppShell .eyebrow{
+  color:var(--product-accent);
+}
+
 .productDataState{
   display:inline-flex;
   align-items:center;
