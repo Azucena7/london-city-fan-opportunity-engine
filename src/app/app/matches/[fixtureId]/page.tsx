@@ -19,6 +19,7 @@ import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
+import { buildOperationalHandoffSuggestions } from "@/lib/operationalRouting";
 import styles from "./match-plan.module.css";
 
 export const metadata: Metadata = {
@@ -60,6 +61,24 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
     if (/web|ticket|owned/i.test(channel)) return !clubContext.connectedChannels.includes("Web");
     return true;
   }) ?? [];
+
+  const handoffSuggestions = buildOperationalHandoffSuggestions({
+    fixtureLabel: `London City v ${fixture.opponent}`,
+    recommendation: campaign?.title.en ?? live.recommendedAction,
+    daysToFixture: live.daysToFixture,
+    activationText: campaign?.activations
+      .flatMap((activation) => [
+        activation.title.en,
+        activation.role.en,
+        activation.asset.en,
+        activation.channel,
+        activation.state
+      ])
+      .join(" ") ?? "",
+    approvalText: campaign?.approvals
+      .flatMap((approval) => [approval.label.en, approval.state])
+      .join(" ") ?? ""
+  });
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -354,6 +373,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         subjectType="fixture"
         subjectId={fixture.id}
         recommendation={campaign?.title.en ?? live.recommendedAction}
+        suggestions={handoffSuggestions}
       />
 
       <AvailabilityPlanner
