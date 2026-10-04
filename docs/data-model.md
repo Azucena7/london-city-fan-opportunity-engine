@@ -103,26 +103,36 @@ interface AttendanceObservation {
 }
 ```
 
-## CrmTicketingRecord v1.0
+## CRM / ticketing external import contract v1.0
 
-Grain: one ticket per row. The stable attribution path is:
+The row-level CRM/ticketing schema is an **external import contract**, not repository persistence.
+
+Import grain: one ticket per row. The stable attribution path is:
 
 `fixture_id → campaign_id → content_id → ticket_id_hash → scan_status → supporter_id_hash`
 
-Required groups:
-- fixture and source keys
-- pseudonymous supporter, order and ticket keys
-- purchase timestamp, product and realised unit price
-- scan state and conditional scan timestamp
-- consent state and extract timestamp
+Required input groups:
+- fixture and source keys;
+- pseudonymous supporter, order and ticket keys;
+- purchase timestamp, product and realised unit price;
+- scan state and conditional scan timestamp;
+- consent state and extract timestamp.
 
-Excluded from the contract:
-- names, email addresses and phone numbers
-- full postcodes and dates of birth
-- payment details
+Excluded from the import contract:
+- names, email addresses and phone numbers;
+- full postcodes and dates of birth;
+- payment details.
 
-The public prototype may use `synthetic-demo` records to validate calculations. Synthetic
-records must never be combined with measured club results.
+Authorised row-level exports must stay outside the repository. `scripts/import-crm-ticketing.mjs`
+processes the external file locally and writes only aggregate evidence to
+`data/live/crm-ticketing.json`. Pseudonymous supporter, order and ticket hashes are input-only
+for that aggregation path and are not persisted in the repository-backed live dataset.
+
+The repository aggregate contains fixture summaries and repeat cohorts, with a dataset state that
+makes missing club access explicit. It never treats absent private data as zero.
+
+The synthetic rehearsal may use repository-owned `synthetic-demo` rows to validate calculations.
+Synthetic records must never be combined with measured club results or presented as production evidence.
 
 ## PostMatchScorecard
 
