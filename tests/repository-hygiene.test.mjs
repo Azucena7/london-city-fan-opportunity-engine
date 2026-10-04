@@ -156,3 +156,14 @@ test("technical package and outbound agents identify as AVELA", () => {
     assert.doesNotMatch(source, /LondonCityFanOpportunityLab|research-prototype/);
   }
 });
+
+test("generated social cards use the default Node.js runtime", () => {
+  for (const path of [
+    "src/app/linkedin-card/route.tsx",
+    "src/app/opengraph-image.tsx"
+  ]) {
+    const source = readFileSync(path, "utf8");
+    assert.match(source, /ImageResponse/);
+    assert.doesNotMatch(source, /runtime\s*=\s*["']edge["']/);
+  }
+});
