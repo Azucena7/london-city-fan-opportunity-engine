@@ -70,3 +70,13 @@ test("dependency install scripts stay explicitly reviewed and narrowly allowlist
   assert.deepEqual(pkg.allowScripts, { "unrs-resolver": true });
   assert.equal(pkg.allowScripts["*"], undefined);
 });
+
+test("runtime persistence identifiers use the AVELA namespace", () => {
+  const server = readFileSync("src/lib/supabaseServer.ts", "utf8");
+  const builder = readFileSync("src/components/CampaignCreditBuilder.tsx", "utf8");
+  assert.match(server, /avela-sb-access/);
+  assert.match(server, /avela-sb-refresh/);
+  assert.doesNotMatch(server, /fge-sb-/);
+  assert.match(builder, /avela:campaign-workspace/);
+  assert.doesNotMatch(builder, /fan-growth-engine:/);
+});
