@@ -139,7 +139,6 @@ test("private persistence APIs do not expose raw provider error payloads", () =>
     "src/app/api/access/approve/route.ts",
     "src/app/api/club-setup/route.ts",
     "src/app/api/delivery-effort/route.ts",
-    "src/app/api/credit-ledger/route.ts",
     "src/app/api/campaign-history/[fixtureId]/route.ts",
     "src/app/api/campaign-workspace/[fixtureId]/route.ts"
   ];
@@ -245,4 +244,9 @@ test("canonical public surfaces use the AVELA production host", () => {
     assert.ok(source.includes(canonical), `${path} should reference the AVELA canonical host`);
     assert.ok(!source.includes(legacy), `${path} should not reference the historical host`);
   }
+});
+
+
+test("retired credit-ledger API alias stays removed", () => {
+  assert.equal(existsSync("src/app/api/credit-ledger/route.ts"), false);
 });
