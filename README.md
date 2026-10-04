@@ -6,7 +6,7 @@ London City Lionesses is currently used as the live demonstration environment.
 
 ## Product proposition
 
-**Turn fan data into the next best action for every fixture.**
+**Turn every fixture into a growth opportunity.**
 
 The club-facing product is designed around one simple operating loop:
 
