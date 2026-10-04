@@ -96,3 +96,16 @@ test("public product surfaces stay free of retired product names", () => {
     assert.doesNotMatch(source, /London City Fan Opportunity|Fan Growth Pilot|Fan Growth Playbook/);
   }
 });
+
+test("canonical surfaces do not link internally through retired redirect routes", () => {
+  const paths = [
+    "src/components/NavTabs.tsx",
+    "src/components/LocalizedStoryPage.tsx",
+    "src/components/LocalizedTechnicalCaseStudy.tsx",
+    "src/app/pilot/rehearsal/page.tsx"
+  ];
+  const retiredHrefs = /href="\/(?:today|measurement|method|brief|results|london-city)"/;
+  for (const path of paths) {
+    assert.doesNotMatch(readFileSync(path, "utf8"), retiredHrefs, `${path} should link directly to a canonical surface`);
+  }
+});
