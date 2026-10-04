@@ -95,8 +95,8 @@
         }
       ],
       "caveat": {
-        "en": "Alignment does not imply causation. There is no evidence that London City saw or used this prototype before announcing its activation.",
-        "es": "La alineación no implica causalidad. No hay evidencia de que London City viera o utilizara este prototipo antes de anunciar su activación."
+        "en": "Alignment does not imply causation. There is no evidence that London City saw or used this independent demo before announcing its activation.",
+        "es": "La alineación no implica causalidad. No hay evidencia de que London City viera o utilizara esta demo independiente antes de anunciar su activación."
       },
       "learning": {
         "en": "Track whether the engine repeatedly surfaces relevant opportunities before comparable club actions become public, and record divergence as carefully as alignment.",
@@ -195,8 +195,8 @@
               "es": "Capturar asistencia, señales públicas de resultado, qué se alineó o divergió y los gaps que aún requieren acceso del club."
             },
             "observed": {
-              "en": "Post-match review is open. Attendance, watchalong delivery and conversion remain unmeasured in this prototype.",
-              "es": "La revisión pospartido está abierta. Asistencia, ejecución del watchalong y conversión siguen sin medir en este prototipo."
+              "en": "Post-match review is open. Attendance, watchalong delivery and conversion remain unmeasured in this public demo.",
+              "es": "La revisión pospartido está abierta. Asistencia, ejecución del watchalong y conversión siguen sin medir en esta demo pública."
             },
             "evidenceRef": null
           }
