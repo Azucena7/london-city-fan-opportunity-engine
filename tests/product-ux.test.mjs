@@ -1404,6 +1404,7 @@ test("public crawl policy exposes canonical surfaces and excludes the club app",
   const sitemap = read("src/app/sitemap.ts");
   assert.match(robots, /disallow: \["\/app\/"/);
   assert.match(robots, /sitemap\.xml/);
+  assert.doesNotMatch(robots, /"\/brief"|"\/opportunity"|"\/decision-room"|"\/impact"|"\/today"|"\/calendar"|"\/measurement"|"\/club-demo"/);
   assert.match(sitemap, /\/for-clubs/);
   assert.match(sitemap, /\/case-study/);
   assert.match(sitemap, /\/live\/london-city/);
