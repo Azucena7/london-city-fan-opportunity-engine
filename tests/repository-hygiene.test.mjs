@@ -440,3 +440,16 @@ test("permission migration generator is enforced", () => {
   assert.match(pkg.scripts.build, /check:permissions/);
   assert.match(quality, /npm run check:permissions/);
 });
+
+
+test("active CSS avoids construction-phase labels", () => {
+  for (const path of [
+    "src/app/case-study.css",
+    "src/app/navigation-v2.css",
+    "src/app/workspace-structure.css",
+    "src/app/product-ux.css"
+  ]) {
+    const css = readFileSync(path, "utf8");
+    assert.doesNotMatch(css, /\/\*\s*(?:Block \d+|PR #\d+)/);
+  }
+});
