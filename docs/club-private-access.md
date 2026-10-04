@@ -6,7 +6,7 @@ The guided public product demo is `/app/demo` and contains only synthetic/demo-s
 ## Supabase namespace
 
 The installed Vercel Supabase integration uses the required custom prefix `CLUB`.
-The server prefers `CLUB_SUPABASE_URL` plus `CLUB_SUPABASE_PUBLISHABLE_KEY` and accepts the integration-provided `NEXT_PUBLIC_CLUB_*` equivalents. `CLUB_SUPABASE_ANON_KEY` remains supported only as an older key name inside the same CLUB namespace.
+The server uses `CLUB_SUPABASE_URL` plus `CLUB_SUPABASE_PUBLISHABLE_KEY` and accepts the integration-provided `NEXT_PUBLIC_CLUB_*` equivalents. Older `*_ANON_KEY` aliases are no longer part of the application contract.
 
 The server reads only the `CLUB_*` / `NEXT_PUBLIC_CLUB_*` namespace. Retired unprefixed `SUPABASE_*` variables are ignored even if they still exist in an environment. The app does not use provider secret keys or Postgres credentials for login.
 
