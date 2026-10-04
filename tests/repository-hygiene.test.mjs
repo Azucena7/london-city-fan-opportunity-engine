@@ -323,7 +323,7 @@ test("runtime env example contains only active or explicitly planned contracts",
 
 
 test("architecture document reflects the as-built AVELA runtime", () => {
-  const architecture = readFileSync("02_ARCHITECTURE.md", "utf8");
+  const architecture = readFileSync("docs/architecture.md", "utf8");
   assert.match(architecture, /Current system/);
   assert.match(architecture, /Supabase Auth \+ RLS/);
   assert.match(architecture, /Vercel AI Gateway/);
@@ -370,4 +370,31 @@ test("shared visual system avoids the retired lcl CSS namespace", () => {
   }
   assert.equal(existsSync("src/app/brand.css"), false);
   assert.match(readFileSync("src/app/layout.tsx", "utf8"), /case-brand\.css/);
+});
+
+
+test("phase-numbered root documentation stays retired", () => {
+  const retired = [
+    "01_PRODUCT_BRIEF.md",
+    "02_ARCHITECTURE.md",
+    "03_DATA_MODEL.md",
+    "04_SCORING_LOGIC.md",
+    "06_AUTOMATIONS_AND_AGENTS.md",
+    "07_SOURCE_REGISTER.md",
+    "08_ROADMAP.md"
+  ];
+  for (const path of retired) assert.equal(existsSync(path), false, `${path} belongs in docs/`);
+
+  for (const path of [
+    "docs/product-brief.md",
+    "docs/architecture.md",
+    "docs/data-model.md",
+    "docs/scoring-logic.md",
+    "docs/automations-and-agents.md",
+    "docs/source-register.md",
+    "docs/roadmap.md",
+    "docs/daily-update-runbook.md",
+    "docs/womens-football-product-thesis.md",
+    "docs/README.md"
+  ]) assert.equal(existsSync(path), true, `${path} is canonical documentation`);
 });

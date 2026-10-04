@@ -97,7 +97,7 @@ GitHub Actions runs `npm run refresh:data` and `npm run refresh:public-signals` 
 
 The first refreshes the official fixture calendar, results and matchday weather. The second ranks a deliberately narrow set of attention competitors: simultaneous WSL, London men's football, England, nationally prominent men's fixtures and exceptional major sport. Routine culture and entertainment are excluded.
 
-Both preserve the last valid observation when a source is unavailable. See `docs/DAILY_UPDATE_RUNBOOK.md` for sources, scoring, secrets, cadence and post-match responsibilities.
+Both preserve the last valid observation when a source is unavailable. See `docs/daily-update-runbook.md` for sources, scoring, secrets, cadence and post-match responsibilities.
 
 ## Pilot data rehearsal
 
@@ -131,3 +131,8 @@ npm run lint
 npm test
 npm run build
 ```
+
+
+## Documentation
+
+Maintained product and technical references live in [docs/README.md](docs/README.md). The repository root is kept for runtime and project entry files rather than phase-numbered design artifacts.
