@@ -19,14 +19,16 @@ create table if not exists public.contract_documents (
   storage_ref text,
   document_hash text,
   version_label text,
-  supersedes_document_id uuid references public.contract_documents(id),
+  supersedes_document_id uuid,
   metadata jsonb not null default '{}'::jsonb,
   created_by uuid not null references auth.users(id),
   updated_by uuid not null references auth.users(id),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   check (effective_end is null or effective_start is null or effective_end >= effective_start),
-  unique(id, club_id)
+  unique(id, club_id),
+  foreign key(supersedes_document_id, club_id)
+    references public.contract_documents(id, club_id)
 );
 
 create table if not exists public.contract_clauses (
@@ -54,7 +56,7 @@ create table if not exists public.contract_clauses (
   valid_to date,
   reviewed_by uuid references auth.users(id),
   reviewed_at timestamptz,
-  supersedes_clause_id uuid references public.contract_clauses(id),
+  supersedes_clause_id uuid,
   metadata jsonb not null default '{}'::jsonb,
   created_by uuid not null references auth.users(id),
   updated_by uuid not null references auth.users(id),
@@ -67,7 +69,9 @@ create table if not exists public.contract_clauses (
   ),
   unique(id, club_id),
   foreign key(document_id, club_id)
-    references public.contract_documents(id, club_id) on delete cascade
+    references public.contract_documents(id, club_id) on delete cascade,
+  foreign key(supersedes_clause_id, club_id)
+    references public.contract_clauses(id, club_id)
 );
 
 create table if not exists public.contract_season_instances (
