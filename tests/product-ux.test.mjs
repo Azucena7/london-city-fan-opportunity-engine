@@ -1230,7 +1230,8 @@ test("campaign builder makes the recommended campaign path visually explicit", (
 test("app Home surfaces the next decision before navigation", () => {
   const home = read("src/app/app/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
-  assert.match(home, /What needs attention today/);
+  assert.match(home, /Decision Center/);
+  assert.match(home, /need your attention/);
   assert.match(home, /Primary action/);
   assert.match(home, /Decision queue/);
   assert.match(home, /Everything else can wait/);
@@ -1666,7 +1667,7 @@ test("internal availability can block or protect fixture-day activation", () => 
   assert.match(model, /preferred/);
   assert.match(model, /assessAvailability/);
   assert.match(route, /availability_windows/);
-  assert.match(route, /calendar', 'edit'/);
+  assert.match(migration, /calendar', 'edit'/);
   assert.match(migration, /enable row level security/);
   assert.match(migration, /christmas-break/);
   assert.match(migration, /international-duty/);
