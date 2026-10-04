@@ -73,7 +73,7 @@ test("dependency install scripts stay explicitly reviewed and narrowly allowlist
 
 test("runtime persistence identifiers use the AVELA namespace", () => {
   const server = readFileSync("src/lib/supabaseServer.ts", "utf8");
-  const builder = readFileSync("src/components/CampaignCreditBuilder.tsx", "utf8");
+  const builder = readFileSync("src/components/CampaignDeliveryPlanner.tsx", "utf8");
   assert.match(server, /avela-sb-access/);
   assert.doesNotMatch(server, /avela-sb-refresh/);
   assert.doesNotMatch(server, /fge-sb-/);
