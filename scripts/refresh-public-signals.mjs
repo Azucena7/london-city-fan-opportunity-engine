@@ -48,14 +48,6 @@ function londonIsoDate(value = new Date()) {
   }).format(value);
 }
 
-function compactNumber(value) {
-  if (!value) return null;
-  const match = String(value).toLowerCase().replaceAll(",", "").match(/([\d.]+)\s*([kmb])?/);
-  if (!match) return null;
-  const multiplier = { k: 1_000, m: 1_000_000, b: 1_000_000_000 }[match[2]] ?? 1;
-  return Math.round(Number(match[1]) * multiplier);
-}
-
 function compactDisplay(value) {
   if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(value < 10_000_000 ? 1 : 0)}M`;
   if (value >= 1_000) return `${(value / 1_000).toFixed(value < 100_000 ? 1 : 0)}K`;
