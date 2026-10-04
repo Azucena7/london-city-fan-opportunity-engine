@@ -444,11 +444,11 @@ test("campaign history records shared fixture milestones without conflating them
 test("campaign flow reviews and locks scope before a truthful launch handoff", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
 
-  assert.match(builder, /Estimate/);
+  assert.match(builder, /Scope/);
   assert.match(builder, /Review/);
-  assert.match(builder, /Reserve/);
+  assert.match(builder, /Lock/);
   assert.match(builder, /Launch/);
-  assert.match(builder, /Reserve \$\{reservationRequired\} credits/);
+  assert.match(builder, /Lock reviewed scope/);
   assert.match(builder, /campaign:reserve/);
   assert.match(builder, /campaign:release/);
   assert.match(builder, /Existing generated-draft effort is excluded/);
