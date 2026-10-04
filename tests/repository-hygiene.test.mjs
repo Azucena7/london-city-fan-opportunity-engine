@@ -250,3 +250,11 @@ test("canonical public surfaces use the AVELA production host", () => {
 test("retired credit-ledger API alias stays removed", () => {
   assert.equal(existsSync("src/app/api/credit-ledger/route.ts"), false);
 });
+
+
+test("historical Vercel host permanently redirects to AVELA", () => {
+  const config = readFileSync("next.config.mjs", "utf8");
+  assert.match(config, /type: "host", value: "london-city-fan-opportunity-engine\.vercel\.app"/);
+  assert.match(config, /destination: "https:\/\/avela-growth-intelligence\.vercel\.app\/:path\*"/);
+  assert.match(config, /permanent: true/);
+});
