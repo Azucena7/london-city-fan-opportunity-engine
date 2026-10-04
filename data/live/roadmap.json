@@ -212,16 +212,16 @@
   {
     "id": "everton-review-2",
     "fixtureId": "2026-10-18-eve-h",
-    "area": "CRM / Data",
-    "status": "planned",
-    "due": "2026-10-07",
+    "area": "Hospitality & CRM",
+    "status": "next",
+    "due": "2026-10-05",
     "title": {
-      "en": "Validate the Brighton-to-Everton return audience",
-      "es": "Validar la audiencia de repetición Brighton–Everton"
+      "en": "Convert Brighton VIP demand into Everton VIP bookings",
+      "es": "Convertir la demanda VIP de Brighton en reservas VIP para Everton"
     },
     "reason": {
-      "en": "Request authorised aggregate audience and consent evidence before selecting recipients.",
-      "es": "Solicitar audiencia agregada autorizada y evidencia de consentimiento antes de seleccionar destinatarios."
+      "en": "The club confirms the £75 Brighton VIP Terrace sold out and that Everton is the next VIP opportunity. Build consented buyer, waitlist, group, corporate and partner segments; send the official Everton route and measure VIP bookings, conversion and yield without presenting the signal as a full-fixture sell-out or attendance.",
+      "es": "El club confirma que la VIP Terrace de Brighton de £75 agotó entradas y que Everton es la siguiente oportunidad VIP. Crear segmentos consentidos de compradores, lista de espera, grupos, empresas y partners; enviar la ruta oficial de Everton y medir reservas VIP, conversión y yield sin presentar la señal como sold out del aforo completo ni como asistencia."
     }
   },
   {
