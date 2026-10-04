@@ -10,6 +10,7 @@ import { MatchPlanDecision } from "@/components/MatchPlanDecision";
 import { CampaignDeliveryPlanner } from "@/components/CampaignDeliveryPlanner";
 import { DecisionHistoryPanel } from "@/components/DecisionHistoryPanel";
 import { AskAvelaPanel } from "@/components/AskAvelaPanel";
+import { OperationalHandoffs } from "@/components/OperationalHandoffs";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -349,6 +350,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         decisionId={`fixture:${fixture.id}`}
         subjectType="fixture"
         subjectId={fixture.id}
+        recommendation={campaign?.title.en ?? live.recommendedAction}
+      />
+
+      <OperationalHandoffs
+        decisionId={`fixture:${fixture.id}`}
+        fixtureLabel={`London City v ${fixture.opponent}`}
+        eventAt={fixture.date ? `${fixture.date}T${fixture.kickoff ?? "12:00"}:00` : null}
         recommendation={campaign?.title.en ?? live.recommendedAction}
       />
 
