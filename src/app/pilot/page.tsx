@@ -13,7 +13,7 @@ const deliverables = [
   ["Before each fixture", "One priority growth opportunity, recommended action and decision brief."],
   ["During the week", "Audience, channel, owner, timing and measurement plan."],
   ["After matchday", "Result, learning and what changes for the next fixture."],
-  ["At the end", "A club-specific Fan Growth Playbook built from six live cycles."]
+  ["At the end", "A club-specific Growth Intelligence Playbook built from six live cycles."]
 ];
 
 export default function PilotPage() {
@@ -25,7 +25,7 @@ export default function PilotPage() {
 
       <header className={styles.hero}>
         <div>
-          <span className={styles.eyebrow}>90-day fan growth pilot · 6 fixtures</span>
+          <span className={styles.eyebrow}>90-day growth intelligence pilot · 6 fixtures</span>
           <h1>Prove the value with one live matchday cycle at a time.</h1>
           <p>
             A practical entry product for clubs: we use the data already available, identify the highest-value fan growth opportunity before each home fixture,
@@ -94,7 +94,7 @@ export default function PilotPage() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <span className={styles.eyebrow}>End-of-pilot asset</span>
-          <h2>The club leaves with a Fan Growth Playbook, not just six reports.</h2>
+          <h2>The club leaves with a Growth Intelligence Playbook, not just six reports.</h2>
         </div>
         <div className={styles.playbook}>
           <article><span>WHO COMES</span><strong>Which audiences actually attend</strong></article>
