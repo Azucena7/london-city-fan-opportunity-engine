@@ -1739,3 +1739,30 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
 });
+
+
+test("similar decisions only reuse executed measured or learned institutional memory", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const route = read("src/app/api/decision-memory/similar/route.ts");
+  const similarity = read("src/lib/decisionSimilarity.ts");
+  const panel = read("src/components/SimilarDecisionsPanel.tsx");
+
+  assert.match(page, /SimilarDecisionsPanel/);
+  assert.ok(page.indexOf("<SimilarDecisionsPanel") < page.indexOf("<MatchPlanDecision"));
+
+  assert.match(route, /executed","measured","learned/);
+  assert.match(route, /historicalFixtureId === fixtureId/);
+  assert.match(route, /No comparable executed, measured or learned decision is recorded yet/);
+  assert.match(route, /compareDecisionProfiles/);
+
+  assert.match(similarity, /Shared campaign theme/);
+  assert.match(similarity, /Similar audience definition/);
+  assert.match(similarity, /Similar channel mix/);
+  assert.match(similarity, /Similar approval load/);
+  assert.match(similarity, /Similar lead-time profile/);
+  assert.doesNotMatch(similarity, /embedding/i);
+
+  assert.match(panel, /Similarity is based on visible decision dimensions/);
+  assert.match(panel, /No comparable executed decision yet/);
+  assert.match(panel, /A similar decision is evidence, not a rule/);
+});
