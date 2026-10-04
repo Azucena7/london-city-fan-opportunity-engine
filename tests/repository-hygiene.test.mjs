@@ -64,3 +64,17 @@ test("legacy root seed tree and V1 frontend specification stay retired", () => {
     assert.equal(existsSync(path), false, `${path} has a canonical replacement and should not return`);
   }
 });
+
+test("block-era automation notes stay retired", () => {
+  for (const path of [
+    "automations/LIVE_STATE.md",
+    "automations/TRAVEL_FRICTION_DELTA.md",
+    "automations/fixture-selection.md",
+    "automations/journey-intelligence.md",
+    "automations/live-signal-contract.md",
+    "automations/national-journey-layer.md",
+    "automations/weather-live.md"
+  ]) {
+    assert.equal(existsSync(path), false, `${path} documents the retired block-era architecture`);
+  }
+});
