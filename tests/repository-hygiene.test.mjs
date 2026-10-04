@@ -476,3 +476,19 @@ test("automation documentation distinguishes live workflows from future agents",
   assert.match(doc, /future capability, not part of the current production claim/);
   assert.doesNotMatch(doc, /Existing monitoring concept/);
 });
+
+
+test("canonical product docs use current effort and CRM persistence contracts", () => {
+  const product = readFileSync("docs/product-brief.md", "utf8");
+  const model = readFileSync("docs/data-model.md", "utf8");
+
+  assert.match(product, /estimated delivery effort/);
+  assert.doesNotMatch(product, /credit estimate/);
+
+  assert.match(model, /external import contract/);
+  assert.match(model, /Authorised row-level exports must stay outside the repository/);
+  assert.match(model, /writes only aggregate evidence/);
+  assert.match(model, /Pseudonymous supporter, order and ticket hashes are input-only/);
+  assert.match(model, /fixture summaries and repeat cohorts/);
+  assert.doesNotMatch(model, /## CrmTicketingRecord v1\.0/);
+});
