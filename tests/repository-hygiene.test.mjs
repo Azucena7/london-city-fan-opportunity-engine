@@ -463,3 +463,16 @@ test("historical redirects are explicitly isolated from canonical routing", () =
   assert.match(config, /historicalRouteRedirects\.map/);
   assert.doesNotMatch(config, /const redirects =/);
 });
+
+
+test("automation documentation distinguishes live workflows from future agents", () => {
+  const doc = readFileSync("docs/automations-and-agents.md", "utf8");
+  assert.match(doc, /deterministic scheduled workflows and validation scripts/);
+  assert.match(doc, /daily-data-refresh\.yml/);
+  assert.match(doc, /Node\.js 24/);
+  assert.match(doc, /refresh:data/);
+  assert.match(doc, /refresh:public-signals/);
+  assert.match(doc, /Future agentic layer/);
+  assert.match(doc, /future capability, not part of the current production claim/);
+  assert.doesNotMatch(doc, /Existing monitoring concept/);
+});
