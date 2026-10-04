@@ -277,3 +277,10 @@ test("server language bootstrap prefers the AVELA cookie with legacy fallback", 
   assert.match(layout, /get\("avela-language"\)/);
   assert.match(layout, /\?\? cookieStore\.get\("lcl-language"\)/);
 });
+
+
+test("retired i18n fixes stylesheet stays removed", () => {
+  const layout = readFileSync("src/app/layout.tsx", "utf8");
+  assert.equal(existsSync("src/app/i18n-fixes.css"), false);
+  assert.doesNotMatch(layout, /i18n-fixes\.css/);
+});
