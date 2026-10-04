@@ -171,3 +171,13 @@ test("generated social cards use the default Node.js runtime", () => {
 test("retired standalone travel-delta prototype stays removed", () => {
   assert.equal(existsSync("src/lib/travelDelta.ts"), false);
 });
+
+test("retired territory-travel API prototype stays removed", () => {
+  for (const path of [
+    "src/app/api/territory-travel/route.ts",
+    "src/lib/territoryTravel.ts",
+    "data/territory_travel_origins.json"
+  ]) {
+    assert.equal(existsSync(path), false, `${path} belonged to the orphan territory-travel prototype`);
+  }
+});
