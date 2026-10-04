@@ -1493,7 +1493,7 @@ test("commercial funnel proves relevance before explaining the full product and 
   const nav = read("src/components/MarketingNav.tsx");
   const clubs = read("src/components/ClubPilotProposition.tsx");
   assert.ok(home.indexOf("The problem is not missing data") < home.indexOf("Proof in public"));
-  assert.match(home, /Explore the 90-day pilot/);
+  assert.match(home, /See how AVELA could fit your club/);
   assert.match(home, /See a live fixture decision/);
   assert.doesNotMatch(home, /Request a demo|Request pilot demo|Request club demo|Request the 90-day pilot/);
   assert.match(nav, /href="\/app\/demo">Try product/);
