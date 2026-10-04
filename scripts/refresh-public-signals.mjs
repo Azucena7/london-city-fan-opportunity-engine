@@ -55,7 +55,7 @@ async function fetchResponse(url, source) {
   const response = await fetch(url, {
     signal: AbortSignal.timeout(45_000),
     headers: {
-      "user-agent": "Mozilla/5.0 (compatible; AVELA/1.0; +https://london-city-fan-opportunity-engine.vercel.app)",
+      "user-agent": "Mozilla/5.0 (compatible; AVELA/1.0; +https://avela-growth-intelligence.vercel.app)",
       "accept-language": "en-GB,en;q=0.9"
     }
   });
