@@ -1647,3 +1647,28 @@ test("operational handoff recipients can return execution state to AVELA", () =>
   assert.match(route, /updated_at: new Date\(\)\.toISOString\(\)/);
   assert.match(css, /requestActions/);
 });
+
+
+test("internal availability can block or protect fixture-day activation", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const component = read("src/components/AvailabilityPlanner.tsx");
+  const model = read("src/lib/availabilityIntelligence.ts");
+  const route = read("src/app/api/availability/route.ts");
+  const migration = read("supabase/migrations/20261004220010_internal_availability_windows.sql");
+
+  assert.match(page, /AvailabilityPlanner/);
+  assert.match(component, /Squad off day/);
+  assert.match(component, /Recovery \/ protected/);
+  assert.match(component, /Christmas break/);
+  assert.match(component, /public signals cannot see/);
+  assert.match(model, /hard-unavailable/);
+  assert.match(model, /protected/);
+  assert.match(model, /preferred/);
+  assert.match(model, /assessAvailability/);
+  assert.match(route, /availability_windows/);
+  assert.match(route, /calendar', 'edit'/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /christmas-break/);
+  assert.match(migration, /international-duty/);
+  assert.match(migration, /personal-calendar/);
+});
