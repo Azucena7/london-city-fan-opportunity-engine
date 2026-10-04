@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { SeasonCloseReview } from "@/components/SeasonCloseReview";
 import { calendar, campaignPlans } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
