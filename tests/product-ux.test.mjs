@@ -1722,3 +1722,19 @@ test("operational intelligence calculates complexity and capacity rather than as
   assert.match(migration, /estimated_minutes/);
   assert.match(migration, /complexity_score/);
 });
+
+
+test("daily automation leaves reviewed WSL attendance outside its commit set", () => {
+  const workflow = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
+  assert.doesNotMatch(workflow, /data\/live\/wsl-attendance-benchmark\.json/);
+  assert.match(workflow, /data\/live\/source-health\.json/);
+  assert.match(workflow, /data\/live\/audience-reach\.json/);
+});
+
+
+test("content guard follows the Decision Center home", () => {
+  const guard = read("scripts/check-product-content.mjs");
+  assert.match(guard, /Decision Center/);
+  assert.match(guard, /need your attention/);
+  assert.doesNotMatch(guard, /What needs attention today\?/);
+});
