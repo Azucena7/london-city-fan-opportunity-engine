@@ -193,6 +193,20 @@ test("delivery planner uses effort naming while preserving legacy persisted stat
 });
 
 
+test("active campaign surfaces no longer expose credit purchase language", () => {
+  const setup = read("src/components/ClubSetup.tsx");
+  const trace = read("src/components/LearningCampaignTrace.tsx");
+  const route = read("src/app/api/campaign-draft/route.ts");
+  assert.match(setup, /campaign scope is locked/);
+  assert.match(setup, /approval before scope lock/);
+  assert.doesNotMatch(setup, /credits are reserved|approval before reservation/);
+  assert.match(trace, /Scope lock/);
+  assert.doesNotMatch(trace, /Credits reserved/);
+  assert.match(route, /draftEffort/);
+  assert.match(route, /effortUnits/);
+  assert.doesNotMatch(route, /creditsCommitted|draftCredits/);
+});
+
 test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
   const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const route = read("src/app/api/campaign-draft/route.ts");
@@ -214,7 +228,7 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(route, /crm-email/);
   assert.match(route, /vertical-video/);
   assert.match(route, /Never invent ticket prices/);
-  assert.match(route, /creditsCommitted/);
+  assert.match(route, /effortUnits/);
   assert.match(route, /persistence: "device-workspace"/);
 
   assert.match(env, /AI_GATEWAY_API_KEY=/);
@@ -372,7 +386,7 @@ test("club setup persists reusable fixture, channel, objective, brand and approv
   assert.match(setup, /connectedChannels/);
   assert.match(setup, /priorityObjectives/);
   assert.match(setup, /Brand rules/);
-  assert.match(setup, /Require campaign approval before reservation/);
+  assert.match(setup, /Require campaign approval before scope lock/);
   assert.match(setup, /Admin role required/);
   assert.match(setup, /Setup completeness/);
 
