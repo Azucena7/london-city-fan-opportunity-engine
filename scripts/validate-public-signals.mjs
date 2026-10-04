@@ -1,4 +1,4 @@
-import { parseTicketmasterEvents, parseWslAttendanceAverages, parseYoutubeChannelResponse } from "./refresh-public-signals.mjs";
+import { parseTicketmasterEvents, parseWslAttendanceAverages, parseWslFixtureAttendanceAverages, parseYoutubeChannelResponse } from "./refresh-public-signals.mjs";
 import { parseMensFootballFixtures, parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
 
 const youtube = parseYoutubeChannelResponse({
@@ -101,6 +101,30 @@ const fallbackAttendance = parseWslAttendanceAverages(`
 `, ["Arsenal", "London City Lionesses"]);
 if (fallbackAttendance.get("Arsenal") !== 26_877 || fallbackAttendance.get("London City Lionesses") !== 5_402) {
   throw new Error("WSL attendance fallback parser failed");
+}
+
+const fbrefAttendance = parseWslFixtureAttendanceAverages(`
+  <table><tbody>
+    <tr>
+      <td data-stat="home_team"><a>Arsenal</a></td>
+      <td data-stat="attendance">23,900</td>
+    </tr>
+    <tr>
+      <td data-stat="home_team"><a>Arsenal</a></td>
+      <td data-stat="attendance">29,853</td>
+    </tr>
+    <tr>
+      <td data-stat="home_team"><a>Lionesses</a></td>
+      <td data-stat="attendance">5,402</td>
+    </tr>
+    <tr>
+      <td data-stat="home_team"><a>Lionesses</a></td>
+      <td data-stat="attendance">4,178</td>
+    </tr>
+  </tbody></table>
+`, ["Arsenal", "London City Lionesses"]);
+if (fbrefAttendance.get("Arsenal") !== 26_877 || fbrefAttendance.get("London City Lionesses") !== 4_790) {
+  throw new Error("FBref WSL fixture attendance parser failed");
 }
 
 console.log(JSON.stringify({ youtube, ticketmasterEvents: ticketmaster.length, leagueFixtures: leagueFixtures.length, mensFootballFixtures: mensFootballFixtures.length, relevantEvents: ranked.length, attendanceRows: attendance.size }, null, 2));

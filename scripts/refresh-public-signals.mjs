@@ -22,17 +22,18 @@ const MEN_FOOTBALL_FEEDS = [
   { competition: "UEFA Europa League", feedUrl: "https://fixturedownload.com/feed/json/europa-league-2026", sourceUrl: "https://fixturedownload.com/view/json/europa-league-2026" },
   { competition: "UEFA Conference League", feedUrl: "https://fixturedownload.com/feed/json/conference-league-2026", sourceUrl: "https://fixturedownload.com/view/json/conference-league-2026" }
 ];
+const WSL_ATTENDANCE_FBREF_URL = "https://fbref.com/en/comps/189/schedule/Womens-Super-League-Scores-and-Fixtures";
 const WSL_ATTENDANCE_URL = "https://www.footballwebpages.co.uk/womens-super-league/attendances";
 const WSL_ATTENDANCE_FALLBACK_URL = "https://www.worldfootball.net/competition/co5071/england-women-womens-super-league/attendance/";
 const WSL_ATTENDANCE_ALIASES = {
   "Arsenal": ["Arsenal WFC"],
   "Chelsea": ["Chelsea FC Women"],
-  "London City Lionesses": ["London City Lionesses"],
-  "Manchester United": ["Manchester United WFC"],
-  "Brighton & Hove Albion": ["Brighton & Hove Albion WFC"],
+  "London City Lionesses": ["London City Lionesses", "Lionesses"],
+  "Manchester United": ["Manchester United WFC", "Manchester Utd"],
+  "Brighton & Hove Albion": ["Brighton & Hove Albion WFC", "Brighton"],
   "Charlton Athletic": ["Charlton Athletic WFC"],
-  "Tottenham Hotspur": ["Tottenham Hotspur WFC"],
-  "West Ham United": ["West Ham United WFC"],
+  "Tottenham Hotspur": ["Tottenham Hotspur WFC", "Tottenham"],
+  "West Ham United": ["West Ham United WFC", "West Ham"],
   "Birmingham City": ["Birmingham City WFC"],
   "Crystal Palace": ["Crystal Palace Women"],
   "Aston Villa": ["Aston Villa WFC"],
@@ -265,16 +266,47 @@ export function parseWslAttendanceAverages(html, clubNames) {
   return observations;
 }
 
+export function parseWslFixtureAttendanceAverages(html, clubNames) {
+  const aliases = new Map();
+  for (const club of clubNames) {
+    aliases.set(club, club);
+    for (const alias of WSL_ATTENDANCE_ALIASES[club] ?? []) aliases.set(alias, club);
+  }
+
+  const totals = new Map();
+  const rows = [...html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)].map((match) => match[1]);
+  for (const row of rows) {
+    const homeMatch = row.match(/<t[dh]\b[^>]*data-stat=["']home_team["'][^>]*>([\s\S]*?)<\/t[dh]>/i);
+    const attendanceMatch = row.match(/<t[dh]\b[^>]*data-stat=["']attendance["'][^>]*>([\s\S]*?)<\/t[dh]>/i);
+    if (!homeMatch || !attendanceMatch) continue;
+
+    const observedName = stripHtml(homeMatch[1]);
+    const club = aliases.get(observedName);
+    const attendance = attendanceNumber(stripHtml(attendanceMatch[1]));
+    if (!club || attendance === null) continue;
+
+    const previous = totals.get(club) ?? { sum: 0, count: 0 };
+    totals.set(club, { sum: previous.sum + attendance, count: previous.count + 1 });
+  }
+
+  const observations = new Map(
+    [...totals.entries()].map(([club, value]) => [club, Math.round(value.sum / value.count)])
+  );
+  if (observations.size < 2) throw new Error("WSL fixture attendance table did not contain enough comparable rows");
+  return observations;
+}
+
 async function fetchWslAttendance(clubNames) {
   const sources = [
-    { name: "Football Web Pages", url: WSL_ATTENDANCE_URL },
-    { name: "worldfootball.net", url: WSL_ATTENDANCE_FALLBACK_URL }
+    { name: "FBref", url: WSL_ATTENDANCE_FBREF_URL, parser: parseWslFixtureAttendanceAverages },
+    { name: "Football Web Pages", url: WSL_ATTENDANCE_URL, parser: parseWslAttendanceAverages },
+    { name: "worldfootball.net", url: WSL_ATTENDANCE_FALLBACK_URL, parser: parseWslAttendanceAverages }
   ];
   const failures = [];
   for (const source of sources) {
     try {
       const html = await fetchText(source.url, `WSL attendance (${source.name})`);
-      return { observations: parseWslAttendanceAverages(html, clubNames), source };
+      return { observations: source.parser(html, clubNames), source };
     } catch (error) {
       failures.push(`${source.name}: ${error instanceof Error ? error.message : "refresh failed"}`);
     }
@@ -495,8 +527,8 @@ export async function refreshPublicSignals(now = new Date()) {
       state: "blocked",
       message,
       ownerAction: {
-        en: "Approve a licensed sports-data provider only if both public attendance sources become unavailable.",
-        es: "Aprobar un proveedor de datos deportivos con licencia solo si ambas fuentes públicas de asistencia dejan de estar disponibles."
+        en: "Approve a licensed sports-data provider only if all public attendance sources become unavailable.",
+        es: "Aprobar un proveedor de datos deportivos con licencia solo si todas las fuentes públicas de asistencia dejan de estar disponibles."
       }
     };
   }
