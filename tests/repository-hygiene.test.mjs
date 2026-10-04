@@ -130,6 +130,7 @@ test("private persistence APIs do not expose raw provider error payloads", () =>
     "src/app/api/access/route.ts",
     "src/app/api/access/approve/route.ts",
     "src/app/api/club-setup/route.ts",
+    "src/app/api/delivery-effort/route.ts",
     "src/app/api/credit-ledger/route.ts",
     "src/app/api/campaign-history/[fixtureId]/route.ts",
     "src/app/api/campaign-workspace/[fixtureId]/route.ts"
