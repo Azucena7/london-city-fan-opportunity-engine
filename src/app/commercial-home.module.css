@@ -404,7 +404,7 @@
 .manifestoText p,.motionHeader p,.flow p,.differenceRows p,.pricingIntro p,.finalCta p{max-width:64ch}
 .motionHeader{grid-template-columns:minmax(0,.8fr) minmax(320px,1fr);gap:48px}
 .motionHeader h2{font-size:clamp(36px,4.3vw,56px);line-height:1}
-.signalTicker{background:#fff;color:#5B50D6;border-top:1px solid #E1E3E8;border-bottom:1px solid #E1E3E8;animation:none!important}
+.signalTicker{background:#fff;color:#5B50D6;border-top:1px solid #E1E3E8;border-bottom:1px solid #E1E3E8;animation:none}
 .finalCta{background:#10131A;color:white;padding:78px max(24px,calc((100vw - 1080px)/2))}
 .finalCta .kicker{color:#BDB7FF}
 .priceGrid .featured{background:#F4F3FF}
