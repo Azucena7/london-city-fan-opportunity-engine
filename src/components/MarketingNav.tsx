@@ -14,8 +14,8 @@ export function MarketingNav() {
         <Link href="/#pricing">Pricing</Link>
       </div>
       <div className={styles.actions}>
-        <Link className={styles.login} href="/app">Open app</Link>
-        <Link className={styles.demo} href="/for-clubs#demo">Request demo</Link>
+        <Link className={styles.login} href="/app/demo">Try product</Link>
+        <Link className={styles.demo} href="/for-clubs#demo">90-day pilot</Link>
       </div>
     </nav>
   );
