@@ -55,6 +55,6 @@ export async function POST(request: Request) {
   });
 
   const payload = await response.json().catch(() => null);
-  if (!response.ok) return NextResponse.json({ error: "Credit event could not be recorded.", detail: payload }, { status: response.status });
+  if (!response.ok) return NextResponse.json({ error: "Credit event could not be recorded." }, { status: response.status });
   return NextResponse.json({ persistence: "club", recorded: true, event: Array.isArray(payload) ? payload[0] : payload });
 }
