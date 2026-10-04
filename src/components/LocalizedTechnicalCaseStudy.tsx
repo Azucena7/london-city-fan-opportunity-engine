@@ -332,7 +332,7 @@ export function LocalizedTechnicalCaseStudy() {
 
       <footer className="caseStudyFooter">
         <div>AVELA · London City technical case study</div>
-        <div className="muted">{es ? "Prototipo independiente · Datos y límites visibles por diseño." : "Independent prototype · Data and limits visible by design."}</div>
+        <div className="muted">{es ? "Demo independiente · Datos y límites visibles por diseño." : "Independent demo · Data and limits visible by design."}</div>
       </footer>
     </main>
   );
