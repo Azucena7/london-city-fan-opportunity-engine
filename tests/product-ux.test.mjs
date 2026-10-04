@@ -1411,3 +1411,22 @@ test("Vercel only auto-deploys production and explicit preview branches", () => 
   assert.equal(config.git.deploymentEnabled["preview-*"], true);
   assert.equal(config.git.deploymentEnabled["*"], undefined);
 });
+
+
+test("current AVELA brand surfaces do not regress to the retired lime system", () => {
+  const paths = [
+    "src/app/app/learning/results.module.css",
+    "src/app/pilot/pilot.module.css",
+    "src/app/pilot/operating-pack/operating-pack.module.css",
+    "src/app/opengraph-image.tsx",
+    "src/app/linkedin-card/route.tsx"
+  ];
+  for (const path of paths) {
+    const source = read(path);
+    assert.doesNotMatch(source, /#526D00|#C7EA3A|#EAF4B9|#BCD22D|#AFC52D/i, `${path} should use the current AVELA identity`);
+  }
+  assert.match(read("src/app/app/learning/results.module.css"), /var\(--product-accent\)/);
+  assert.match(read("src/app/pilot/pilot.module.css"), /var\(--product-accent-soft\)/);
+  assert.match(read("src/app/opengraph-image.tsx"), /#6657FF/);
+  assert.match(read("src/app/linkedin-card/route.tsx"), /#6657FF/);
+});

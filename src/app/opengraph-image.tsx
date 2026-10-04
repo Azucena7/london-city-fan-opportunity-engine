@@ -13,8 +13,8 @@ export default function Image() {
           height: "630px",
           display: "flex",
           padding: "54px",
-          color: "#10211B",
-          background: "linear-gradient(135deg, #F7F6F1 0%, #F0F1E8 100%)",
+          color: "#10131A",
+          background: "linear-gradient(135deg, #F7F8FA 0%, #EFF2F6 100%)",
           fontFamily: "Arial, Helvetica, sans-serif"
         }}
       >
@@ -24,7 +24,7 @@ export default function Image() {
               style={{
                 width: "12px",
                 height: "12px",
-                background: "#C7EA3A",
+                background: "#6657FF",
                 marginRight: "12px",
                 transform: "rotate(45deg)",
                 borderRadius: "3px"
@@ -33,7 +33,7 @@ export default function Image() {
             AVELA
           </div>
 
-          <div style={{ color: "#526D00", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em", marginTop: "70px" }}>
+          <div style={{ color: "#5B50D6", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em", marginTop: "70px" }}>
             GROWTH INTELLIGENCE FOR WOMEN’S FOOTBALL
           </div>
 
@@ -41,7 +41,7 @@ export default function Image() {
             Know where to act before the moment passes.
           </div>
 
-          <div style={{ fontSize: "20px", lineHeight: 1.35, color: "#64706B", marginTop: "24px" }}>
+          <div style={{ fontSize: "20px", lineHeight: 1.35, color: "#69707D", marginTop: "24px" }}>
             See what matters now, what to do next, and how much evidence the club really has.
           </div>
         </div>
@@ -53,11 +53,11 @@ export default function Image() {
               flexDirection: "column",
               padding: "26px",
               borderRadius: "24px",
-              background: "#10211B",
-              color: "#F7F8F5"
+              background: "#10131A",
+              color: "#F7F8FA"
             }}
           >
-            <div style={{ display: "flex", color: "#AEB8B3", fontSize: "10px", fontWeight: 800, letterSpacing: "0.08em" }}>
+            <div style={{ display: "flex", color: "#B9C0CC", fontSize: "10px", fontWeight: 800, letterSpacing: "0.08em" }}>
               PRODUCT JOURNEY
             </div>
 
@@ -68,12 +68,12 @@ export default function Image() {
               ["04", "Learning"]
             ].map(([num, label]) => (
               <div key={num} style={{ display: "flex", alignItems: "center", padding: "15px 0", borderBottom: "1px solid rgba(255,255,255,0.09)" }}>
-                <div style={{ display: "flex", width: "38px", color: "#C7EA3A", fontSize: "11px", fontWeight: 800 }}>{num}</div>
-                <div style={{ display: "flex", color: "#F7F8F5", fontSize: "18px", fontWeight: 800 }}>{label}</div>
+                <div style={{ display: "flex", width: "38px", color: "#BDB7FF", fontSize: "11px", fontWeight: 800 }}>{num}</div>
+                <div style={{ display: "flex", color: "#F7F8FA", fontSize: "18px", fontWeight: 800 }}>{label}</div>
               </div>
             ))}
 
-            <div style={{ display: "flex", marginTop: "18px", color: "#AEB8B3", fontSize: "11px", lineHeight: 1.4 }}>
+            <div style={{ display: "flex", marginTop: "18px", color: "#B9C0CC", fontSize: "11px", lineHeight: 1.4 }}>
               Live · Modelled · Missing — always visible.
             </div>
           </div>
