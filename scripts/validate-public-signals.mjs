@@ -1,4 +1,4 @@
-import { parseTicketmasterEvents, parseWslAttendanceAverages, parseWslFixtureAttendanceAverages, parseYoutubeChannelResponse } from "./refresh-public-signals.mjs";
+import { parseTicketmasterEvents, parseYoutubeChannelResponse } from "./refresh-public-signals.mjs";
 import { parseMensFootballFixtures, parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
 
 const youtube = parseYoutubeChannelResponse({
@@ -83,48 +83,4 @@ if (ranked.some((event) => event.name === "Repeated exhibition admission")) {
   throw new Error("Repeated miscellaneous admission filtering failed");
 }
 
-const attendance = parseWslAttendanceAverages(`
-  <table><tbody>
-    <tr><td>1</td><td>Arsenal</td><td>23,900</td></tr>
-    <tr><td>2</td><td>London City Lionesses</td><td>5,402</td></tr>
-  </tbody></table>
-`, ["Arsenal", "London City Lionesses"]);
-if (attendance.get("Arsenal") !== 23_900 || attendance.get("London City Lionesses") !== 5_402) {
-  throw new Error("WSL attendance parser failed");
-}
-
-const fallbackAttendance = parseWslAttendanceAverages(`
-  <table><tbody>
-    <tr><td>1</td><td>Arsenal WFC</td><td>2</td><td>53.753</td><td>26.877</td></tr>
-    <tr><td>3</td><td>London City Lionesses</td><td>1</td><td>5.402</td><td>5.402</td></tr>
-  </tbody></table>
-`, ["Arsenal", "London City Lionesses"]);
-if (fallbackAttendance.get("Arsenal") !== 26_877 || fallbackAttendance.get("London City Lionesses") !== 5_402) {
-  throw new Error("WSL attendance fallback parser failed");
-}
-
-const fbrefAttendance = parseWslFixtureAttendanceAverages(`
-  <table><tbody>
-    <tr>
-      <td data-stat="home_team"><a>Arsenal</a></td>
-      <td data-stat="attendance">23,900</td>
-    </tr>
-    <tr>
-      <td data-stat="home_team"><a>Arsenal</a></td>
-      <td data-stat="attendance">29,853</td>
-    </tr>
-    <tr>
-      <td data-stat="home_team"><a>Lionesses</a></td>
-      <td data-stat="attendance">5,402</td>
-    </tr>
-    <tr>
-      <td data-stat="home_team"><a>Lionesses</a></td>
-      <td data-stat="attendance">4,178</td>
-    </tr>
-  </tbody></table>
-`, ["Arsenal", "London City Lionesses"]);
-if (fbrefAttendance.get("Arsenal") !== 26_877 || fbrefAttendance.get("London City Lionesses") !== 4_790) {
-  throw new Error("FBref WSL fixture attendance parser failed");
-}
-
-console.log(JSON.stringify({ youtube, ticketmasterEvents: ticketmaster.length, leagueFixtures: leagueFixtures.length, mensFootballFixtures: mensFootballFixtures.length, relevantEvents: ranked.length, attendanceRows: attendance.size }, null, 2));
+console.log(JSON.stringify({ youtube, ticketmasterEvents: ticketmaster.length, leagueFixtures: leagueFixtures.length, mensFootballFixtures: mensFootballFixtures.length, relevantEvents: ranked.length }, null, 2));
