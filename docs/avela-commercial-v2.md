@@ -88,3 +88,20 @@ Suggested challenge choices:
 4. Redesign Decision Center.
 5. Redesign Opportunity Brief.
 6. Extend to Radar, Campaigns, Players, Sponsors, Learning and Season.
+
+
+## Lead form implementation status
+
+A real lead-capture form has been prepared as a draft in Tally:
+
+- Form ID: `9qz9YX`
+- Title: `AVELA Club Pilot Interest`
+- Required: Club, Role, Work email
+- Optional: Biggest challenge, additional context
+- Hidden tracking: utm_source, utm_medium, utm_campaign, utm_content
+- Thank-you page included
+- Current state: draft, not linked from the website yet
+
+Do not surface or link the form until it is published and its public URL is verified.
+
+Advanced Tally visual customisation and some metadata/retention controls depend on paid Tally tiers. The website must therefore remain visually self-sufficient and must not depend on paid Tally styling for brand consistency.
