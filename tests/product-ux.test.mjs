@@ -1014,7 +1014,8 @@ test("National Rail RDM is registered as approved access awaiting a data product
   assert.equal(rdm.label.en, "National Rail / Rail Data Marketplace");
   assert.equal(rdm.access, "account-approved-product-pending");
   assert.equal(rdm.state, "not-configured");
-  assert.match(rdm.note.en, /TransportAPI remains the temporary national-routing fallback/);
+  assert.match(rdm.note.en, /national rail routing remains unavailable until an RDM product is validated and connected/);
+  assert.doesNotMatch(rdm.note.en, /TransportAPI|fallback/i);
 
   const env = read(".env.example");
   assert.match(env, /RDM_DATA_PRODUCT_ID=/);
