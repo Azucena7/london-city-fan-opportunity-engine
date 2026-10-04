@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 
-const ACCESS_COOKIE = "fge-sb-access";
-const REFRESH_COOKIE = "fge-sb-refresh";
+const ACCESS_COOKIE = "avela-sb-access";
+const REFRESH_COOKIE = "avela-sb-refresh";
 
 function clubSupabaseNamespaceConfigured() {
   return Boolean(
