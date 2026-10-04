@@ -141,7 +141,9 @@ export function OperationalHandoffs({
           avelaSuggestion: preset.recommended,
           ruleId: preset.ruleId,
           reason: preset.reason,
-          urgency: preset.urgency
+          urgency: preset.urgency,
+          requiredRoles: preset.requiredRoles ?? [],
+          durationMinutes: preset.durationMinutes ?? null
         }
       })
     });
@@ -183,6 +185,9 @@ export function OperationalHandoffs({
             <h3>{preset.title}</h3>
             <p>{preset.hint}</p>
             {preset.recommended ? <p className={styles.suggestionReason}>{preset.reason}</p> : null}
+            {preset.recommended && preset.requiredRoles?.length ? (
+              <p className={styles.suggestionRoles}>Needs: {preset.requiredRoles.join(" · ")} · {preset.durationMinutes ?? 60} min</p>
+            ) : null}
             <button type="button" disabled={Boolean(busy)} onClick={() => void create(preset)}>
               {busy === preset.requestType + preset.recipientRole ? "Creating…" : preset.recommended ? preset.stage === "heads-up" ? "Create suggested pre-alert" : "Create suggested request" : preset.stage === "heads-up" ? "Create pre-alert" : "Create request"}
             </button>
