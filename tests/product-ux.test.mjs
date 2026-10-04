@@ -503,7 +503,7 @@ test("match plan keeps delivery effort visible without an in-product credit payw
   assert.doesNotMatch(builder, /£175|£450|£1,000/);
   assert.match(page, /CampaignCreditBuilder/);
   assert.match(page, /fixtureId=\{fixture\.id\}/);
-  assert.match(nav, /href: "\/app\/credits"/);
+  assert.doesNotMatch(nav, /href: "\/app\/credits"/);
   assert.doesNotMatch(nav, /label: "Credits"/);
   assert.doesNotMatch(nav, /<strong>60<\/strong> credits/);
 });
