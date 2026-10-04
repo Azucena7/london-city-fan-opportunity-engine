@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { setSessionCookies, supabaseConfigured, supabasePublicConfig } from "@/lib/supabaseServer";
+import { setSessionCookie, supabaseConfigured, supabasePublicConfig } from "@/lib/supabaseServer";
 
 export async function POST(request: Request) {
   if (!supabaseConfigured()) {
@@ -24,20 +24,19 @@ export async function POST(request: Request) {
 
   const payload = await response.json().catch(() => null) as {
     access_token?: string;
-    refresh_token?: string;
     expires_in?: number;
     user?: { id: string; email?: string };
     error_description?: string;
     msg?: string;
   } | null;
 
-  if (!response.ok || !payload?.access_token || !payload.refresh_token) {
+  if (!response.ok || !payload?.access_token) {
     return NextResponse.json(
       { error: payload?.error_description || payload?.msg || "Sign-in failed." },
       { status: 401 }
     );
   }
 
-  await setSessionCookies(payload.access_token, payload.refresh_token, payload.expires_in);
+  await setSessionCookie(payload.access_token, payload.expires_in);
   return NextResponse.json({ authenticated: true, user: payload.user ?? { email } });
 }
