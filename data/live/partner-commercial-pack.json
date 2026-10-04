@@ -94,8 +94,8 @@
         }
       ],
       "commercialAsk": {
-        "en": "A technical feasibility session and one fixture-scoped prototype review.",
-        "es": "Una sesión de viabilidad técnica y revisión de un prototipo para un partido."
+        "en": "A technical feasibility session and one fixture-scoped pilot review.",
+        "es": "Una sesión de viabilidad técnica y revisión piloto para un partido."
       },
       "evidence": [
         {
@@ -729,8 +729,8 @@
     {
       "id": "no-outreach",
       "text": {
-        "en": "This prototype does not contact, email or submit information to any candidate.",
-        "es": "Este prototipo no contacta, envía emails ni remite información a ningún candidato."
+        "en": "This demo environment does not contact, email or submit information to any candidate.",
+        "es": "Esta demo no contacta, envía emails ni remite información a ningún candidato."
       }
     },
     {
