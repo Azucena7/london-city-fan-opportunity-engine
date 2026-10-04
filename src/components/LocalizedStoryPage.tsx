@@ -76,8 +76,8 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
         <h1>{es ? "De señales dispersas a decisiones que pueden contrastarse con la realidad." : "From scattered signals to decisions that can be tested against reality."}</h1>
         <p className="caseStudyHeroLede">
           {es
-            ? "El prototipo conecta territorio, calendario, atención, acceso, experiencia y medición para generar hipótesis operativas y comprobar después qué ocurrió realmente."
-            : "The prototype connects territory, calendar, attention, access, experience and measurement to generate operating hypotheses and then check what actually happened."}
+            ? "El entorno de evidencia conecta territorio, calendario, atención, acceso, experiencia y medición para generar hipótesis operativas y comprobar después qué ocurrió realmente."
+            : "The evidence environment connects territory, calendar, attention, access, experience and measurement to generate operating hypotheses and then check what actually happened."}
         </p>
         <div className="caseStudyActions">
           <Link className="caseStudyButton primary" href="/app">{es ? "Explorar el producto" : "Explore the product"}</Link>
