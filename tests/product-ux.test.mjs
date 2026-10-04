@@ -386,7 +386,7 @@ test("club setup persists reusable fixture, channel, objective, brand and approv
   assert.match(setup, /connectedChannels/);
   assert.match(setup, /priorityObjectives/);
   assert.match(setup, /Brand rules/);
-  assert.match(setup, /Require campaign approval before reservation/);
+  assert.match(setup, /Require campaign approval before scope lock/);
   assert.match(setup, /Admin role required/);
   assert.match(setup, /Setup completeness/);
 
