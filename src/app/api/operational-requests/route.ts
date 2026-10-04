@@ -67,3 +67,38 @@ export async function POST(request: Request) {
   if (!response.ok) return NextResponse.json({ error: "Operational request could not be created." }, { status: response.status });
   return NextResponse.json({ persistence: "club", request: Array.isArray(payload) ? payload[0] : payload });
 }
+
+
+export async function PATCH(request: Request) {
+  if (!supabaseConfigured()) return NextResponse.json({ error: "Club persistence is not configured." }, { status: 503 });
+  const user = await currentSupabaseUser();
+  if (!user) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
+
+  const body = await request.json().catch(() => null) as Record<string, unknown> | null;
+  const id = safe(body?.id, 80);
+  const clubId = safe(body?.clubId, 80);
+  const stage = safe(body?.stage, 40);
+  const detail = safe(body?.detail, 1400);
+
+  if (!id || !clubId || !STAGES.has(stage)) {
+    return NextResponse.json({ error: "Valid id, clubId and stage are required." }, { status: 400 });
+  }
+
+  const response = await supabaseRequest(
+    `/rest/v1/operational_requests?id=eq.${encodeURIComponent(id)}&club_id=eq.${encodeURIComponent(clubId)}`,
+    {
+      method: "PATCH",
+      headers: { Prefer: "return=representation" },
+      body: JSON.stringify({
+        stage,
+        detail: detail || undefined,
+        updated_by: user.id,
+        updated_at: new Date().toISOString()
+      })
+    }
+  );
+
+  const payload = await response.json().catch(() => null);
+  if (!response.ok) return NextResponse.json({ error: "Operational request could not be updated." }, { status: response.status });
+  return NextResponse.json({ persistence: "club", request: Array.isArray(payload) ? payload[0] : payload });
+}
