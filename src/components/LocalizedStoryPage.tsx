@@ -9,34 +9,34 @@ type Localized = { en: string; es: string };
 
 const productViews: Array<{ number: string; title: Localized; text: Localized; href: string; cta: Localized }> = [
   {
-    number: "01", title: { en: "Today", es: "Hoy" }, href: "/today",
+    number: "01", title: { en: "Home", es: "Inicio" }, href: "/app",
     text: { en: "What matters before the next fixture—and which action deserves attention now.", es: "Qué importa antes del próximo partido y qué acción merece atención ahora." },
-    cta: { en: "Open decision cockpit", es: "Abrir cockpit de decisión" }
+    cta: { en: "Open Home", es: "Abrir Inicio" }
   },
   {
-    number: "02", title: { en: "Calendar", es: "Calendario" }, href: "/calendar",
+    number: "02", title: { en: "Opportunity Radar", es: "Radar de oportunidades" }, href: "/app/matches",
     text: { en: "A fixture-led operating plan instead of a passive list of dates.", es: "Un plan operativo por partido en lugar de una lista pasiva de fechas." },
-    cta: { en: "Open fixture plan", es: "Abrir plan de partido" }
+    cta: { en: "Open Opportunity Radar", es: "Abrir Radar de oportunidades" }
   },
   {
-    number: "03", title: { en: "Territories", es: "Territorios" }, href: "/territories",
+    number: "03", title: { en: "Territory signals", es: "Señales territoriales" }, href: "/app/matches",
     text: { en: "Where local acquisition opportunity appears strongest before access friction is tested.", es: "Dónde parece más fuerte la oportunidad de captación local antes de probar la fricción de acceso." },
-    cta: { en: "Open opportunity map", es: "Abrir mapa de oportunidad" }
+    cta: { en: "Open Radar", es: "Abrir Radar" }
   },
   {
-    number: "04", title: { en: "Matchday Access", es: "Acceso al partido" }, href: "/access",
+    number: "04", title: { en: "Matchday access signals", es: "Señales de acceso al partido" }, href: "/app/matches",
     text: { en: "Whether supporters from priority areas can realistically reach the ground on matchday.", es: "Si los aficionados de zonas prioritarias pueden llegar realmente al estadio el día de partido." },
-    cta: { en: "Validate access", es: "Validar acceso" }
+    cta: { en: "Review fixture signals", es: "Revisar señales del partido" }
   },
   {
-    number: "05", title: { en: "Fan Experience", es: "Experiencia del aficionado" }, href: "/experience",
+    number: "05", title: { en: "Campaign opportunities", es: "Oportunidades de campaña" }, href: "/app/campaigns",
     text: { en: "Which experience concepts are worth testing before they are treated as products.", es: "Qué conceptos de experiencia merece la pena probar antes de tratarlos como productos." },
-    cta: { en: "Open experience lab", es: "Abrir laboratorio de experiencia" }
+    cta: { en: "Open Campaigns", es: "Abrir Campañas" }
   },
   {
-    number: "06", title: { en: "Measurement", es: "Medición" }, href: "/measurement",
+    number: "06", title: { en: "Learning", es: "Aprendizaje" }, href: "/app/learning",
     text: { en: "Whether there is enough evidence to act—and how prior hypotheses compare with observable reality.", es: "Si existe suficiente evidencia para actuar y cómo se comparan las hipótesis previas con la realidad observable." },
-    cta: { en: "Open evidence control", es: "Abrir control de evidencia" }
+    cta: { en: "Open Learning", es: "Abrir Aprendizaje" }
   }
 ];
 
