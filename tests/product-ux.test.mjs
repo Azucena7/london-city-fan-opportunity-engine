@@ -126,7 +126,7 @@ test("club app includes a guided demo that uses the real fixture workflow", () =
 });
 
 test("club campaign workspace supports authenticated multi-user persistence with RLS", () => {
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const server = read("src/lib/supabaseServer.ts");
   const session = read("src/app/api/auth/session/route.ts");
   const login = read("src/app/api/auth/login/route.ts");
@@ -174,7 +174,7 @@ test("retired Credit Center no longer appears as a product surface", () => {
 });
 
 test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const route = read("src/app/api/campaign-draft/route.ts");
   const env = read(".env.example");
 
@@ -317,7 +317,7 @@ test("pilot access separates identity from club membership and supports admin ap
 });
 
 test("club setup context differentiates the engine from replacement CRM and generic campaign tools", () => {
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const draftRoute = read("src/app/api/campaign-draft/route.ts");
   const home = read("src/app/page.tsx");
 
@@ -412,7 +412,7 @@ test("Learning compares recorded campaign workflow with measured outcomes withou
 });
 
 test("campaign history records shared fixture milestones without conflating them with the credit ledger", () => {
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const route = read("src/app/api/campaign-history/[fixtureId]/route.ts");
   const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
 
@@ -437,7 +437,7 @@ test("campaign history records shared fixture milestones without conflating them
 });
 
 test("campaign flow reviews and locks scope before a truthful launch handoff", () => {
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
 
   assert.match(builder, /Scope/);
   assert.match(builder, /Review/);
@@ -456,7 +456,7 @@ test("campaign flow reviews and locks scope before a truthful launch handoff", (
 });
 
 test("campaign reservation cycles are uniquely identifiable and repeat safely", () => {
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const trace = read("src/components/LearningCampaignTrace.tsx");
 
   assert.match(builder, /reservationId/);
@@ -474,7 +474,7 @@ test("campaign reservation cycles are uniquely identifiable and repeat safely", 
 });
 
 test("match plan keeps delivery effort visible without an in-product credit paywall", () => {
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
   assert.match(builder, /Campaign proposal/);
@@ -501,7 +501,7 @@ test("match plan keeps delivery effort visible without an in-product credit payw
   assert.doesNotMatch(builder, /Upgrade to reveal/);
   assert.doesNotMatch(builder, /Add credits/);
   assert.doesNotMatch(builder, /£175|£450|£1,000/);
-  assert.match(page, /CampaignCreditBuilder/);
+  assert.match(page, /CampaignDeliveryPlanner/);
   assert.match(page, /fixtureId=\{fixture\.id\}/);
   assert.doesNotMatch(nav, /href: "\/app\/credits"/);
   assert.doesNotMatch(nav, /label: "Credits"/);
@@ -923,7 +923,7 @@ test("AVELA commercial home uses an editorial product-theatre identity with purp
 test("club UX exposes clear setup, access and campaign next-step flows", () => {
   const setup = read("src/components/ClubSetup.tsx");
   const access = read("src/components/AccessCenter.tsx");
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const learningCss = read("src/app/app/learning/results.module.css");
 
   assert.match(setup, /Club setup progress/);
@@ -1166,8 +1166,8 @@ test("final visual pass removes legacy olive neutrals from primary product surfa
 
 
 test("campaign builder makes the recommended campaign path visually explicit", () => {
-  const builder = read("src/components/CampaignCreditBuilder.tsx");
-  const css = read("src/components/CampaignCreditBuilder.module.css");
+  const builder = read("src/components/CampaignDeliveryPlanner.tsx");
+  const css = read("src/components/CampaignDeliveryPlanner.module.css");
   assert.match(builder, /Campaign path/);
   assert.match(builder, /Opportunity/);
   assert.match(builder, /Recipe/);
