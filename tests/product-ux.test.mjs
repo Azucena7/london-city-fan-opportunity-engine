@@ -1798,3 +1798,31 @@ test("Contract review queue keeps provenance visible and verification explicit",
   assert.match(route, /Governance approval may be required/);
   assert.doesNotMatch(route, /review_state: "verified"/);
 });
+
+
+test("Sponsor Intelligence keeps prospecting separate from verified contract health", () => {
+  const page = read("src/app/app/sponsors/page.tsx");
+  const component = read("src/components/SponsorContractHealth.tsx");
+  const route = read("src/app/api/sponsors/contract-health/route.ts");
+  const nav = read("src/components/ProductJourneyNav.tsx");
+
+  assert.match(nav, /href: "\/app\/sponsors"/);
+  assert.match(nav, /href: "\/app\/contracts"/);
+
+  assert.match(page, /Prospecting ≠ contract truth/);
+  assert.match(page, /SponsorContractHealth/);
+  assert.match(page, /Prospecting · recommended for review/);
+  assert.match(page, /never turns an opportunity into a legal or delivery obligation silently/);
+
+  assert.match(component, /Verified contract health/);
+  assert.match(component, /active sponsor contracts and verified clauses only/i);
+  assert.match(component, /No execution linkage yet — do not show 0%/);
+  assert.match(component, /Contract delivery ≠ performance/);
+  assert.match(component, /Blinkfire can contribute performance evidence/);
+
+  assert.match(route, /contract_type=eq\.sponsor/);
+  assert.match(route, /lifecycle_state=eq\.active/);
+  assert.match(route, /review_state=eq\.verified/);
+  assert.match(route, /fulfilmentState: decisionLinks\.length \? "evidence-linked" : "not-measured"/);
+  assert.match(route, /schema-not-ready/);
+});
