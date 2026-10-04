@@ -492,3 +492,22 @@ test("canonical product docs use current effort and CRM persistence contracts", 
   assert.match(model, /fixture summaries and repeat cohorts/);
   assert.doesNotMatch(model, /## CrmTicketingRecord v1\.0/);
 });
+
+
+test("refresh language matches the scheduled as-built automation", () => {
+  const product = readFileSync("docs/product-brief.md", "utf8");
+  const runbook = readFileSync("docs/daily-update-runbook.md", "utf8");
+  const readme = readFileSync("README.md", "utf8");
+  const radar = readFileSync("src/app/app/matches/page.tsx", "utf8");
+  const socialCard = readFileSync("src/app/linkedin-card/route.tsx", "utf8");
+
+  assert.match(product, /scheduled cadence/);
+  assert.match(product, /scheduled fixture refresh/);
+  assert.doesNotMatch(product, /continuously reads/);
+  assert.match(runbook, /active daily workflow already refreshes its declared public sources/);
+  assert.doesNotMatch(runbook, /after this pull request is merged/);
+  assert.match(readme, /scheduled fixture refresh starts the work automatically/);
+  assert.match(radar, /re-prioritised whenever the validated evidence state refreshes/);
+  assert.doesNotMatch(radar, /continuously re-prioritised/);
+  assert.match(socialCard, /Scheduled fixture refresh starts monitoring/);
+});
