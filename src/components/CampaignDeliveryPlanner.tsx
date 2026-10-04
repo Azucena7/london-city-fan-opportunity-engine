@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import styles from "./CampaignCreditBuilder.module.css";
+import styles from "./CampaignDeliveryPlanner.module.css";
 
 type CreditCategory = "creation" | "adaptation" | "automation" | "deployment";
 type GeneratableItem = "crm-email" | "vertical-video";
@@ -56,7 +56,7 @@ const categoryLabels: Record<CreditCategory, string> = {
   deployment: "Deployment"
 };
 
-export function CampaignCreditBuilder({
+export function CampaignDeliveryPlanner({
   objective,
   audience,
   proposition,
