@@ -1234,7 +1234,7 @@ test("app Home surfaces the next decision before navigation", () => {
   assert.match(home, /need your attention/);
   assert.match(home, /Highest current priority/);
   assert.match(home, /Decision queue/);
-  assert.match(home, /Everything else can wait/);
+  assert.match(home, /What should I look at next\?/);
   assert.match(home, /Fixture/);
   assert.match(home, /Signals/);
   assert.match(home, /Opportunity/);
