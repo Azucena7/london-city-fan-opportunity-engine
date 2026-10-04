@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-04T20:38:03.296Z",
+  "checkedAt": "2026-10-04T22:17:59.312Z",
   "scope": "Public reach, search interest and fixture conversion",
   "headline": {
     "en": "Reach matters only when it can be connected to matchday demand",
@@ -1991,8 +1991,8 @@
   "refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-10-04T20:38:03.296Z",
-    "lastSuccessfulAt": "2026-10-04T20:38:03.296Z",
+    "lastAttemptAt": "2026-10-04T22:17:59.312Z",
+    "lastSuccessfulAt": "2026-10-04T22:17:59.312Z",
     "state": "fresh",
     "sources": [
       {
@@ -2000,7 +2000,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-04T20:38:03.296Z",
+        "checkedAt": "2026-10-04T22:17:59.312Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -2008,7 +2008,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-04T20:38:03.296Z",
+        "checkedAt": "2026-10-04T22:17:59.312Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       }
     ]
