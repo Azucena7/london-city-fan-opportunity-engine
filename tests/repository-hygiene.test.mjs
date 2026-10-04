@@ -75,7 +75,7 @@ test("runtime persistence identifiers use the AVELA namespace", () => {
   const server = readFileSync("src/lib/supabaseServer.ts", "utf8");
   const builder = readFileSync("src/components/CampaignCreditBuilder.tsx", "utf8");
   assert.match(server, /avela-sb-access/);
-  assert.match(server, /avela-sb-refresh/);
+  assert.doesNotMatch(server, /avela-sb-refresh/);
   assert.doesNotMatch(server, /fge-sb-/);
   assert.match(builder, /avela:campaign-workspace/);
   assert.doesNotMatch(builder, /fan-growth-engine:/);
@@ -108,4 +108,12 @@ test("canonical surfaces do not link internally through retired redirect routes"
   for (const path of paths) {
     assert.doesNotMatch(readFileSync(path, "utf8"), retiredHrefs, `${path} should link directly to a canonical surface`);
   }
+});
+
+test("authentication does not retain an unused Supabase refresh token", () => {
+  const server = readFileSync("src/lib/supabaseServer.ts", "utf8");
+  const login = readFileSync("src/app/api/auth/login/route.ts", "utf8");
+  assert.doesNotMatch(server, /REFRESH_COOKIE|refreshToken/);
+  assert.doesNotMatch(login, /refresh_token/);
+  assert.match(login, /setSessionCookie\(payload\.access_token, payload\.expires_in\)/);
 });
