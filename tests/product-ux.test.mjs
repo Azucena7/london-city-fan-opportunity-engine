@@ -1386,11 +1386,11 @@ test("public crawl policy exposes canonical surfaces and excludes the club app",
   assert.doesNotMatch(sitemap, /\$\{base\}\/app/);
 });
 
-test("commercial navigation enters the decision-first Home and labels London City as a demo", () => {
+test("commercial navigation enters the guided product demo and labels London City as a demo", () => {
   const nav = read("src/components/MarketingNav.tsx");
   assert.match(nav, /London City demo/);
-  assert.match(nav, /href="\/app">Open app/);
-  assert.doesNotMatch(nav, /href="\/app\/matches">Open app/);
+  assert.match(nav, /href="\/app\/demo">Try product/);
+  assert.doesNotMatch(nav, /href="\/app\/matches">Try product/);
 });
 
 
