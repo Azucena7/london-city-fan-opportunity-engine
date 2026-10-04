@@ -527,8 +527,8 @@ export async function refreshPublicSignals(now = new Date()) {
       state: "blocked",
       message,
       ownerAction: {
-        en: "Approve a licensed sports-data provider only if both public attendance sources become unavailable.",
-        es: "Aprobar un proveedor de datos deportivos con licencia solo si ambas fuentes públicas de asistencia dejan de estar disponibles."
+        en: "Approve a licensed sports-data provider only if all public attendance sources become unavailable.",
+        es: "Aprobar un proveedor de datos deportivos con licencia solo si todas las fuentes públicas de asistencia dejan de estar disponibles."
       }
     };
   }
