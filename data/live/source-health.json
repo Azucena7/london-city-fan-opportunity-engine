@@ -133,8 +133,8 @@
         "es": "Seleccionar y suscribirse en RDM al producto de datos que exponga los datos necesarios de trayectos, horarios o incidencias y registrar después su especificación de entrega y autenticación."
       },
       "note": {
-        "en": "RDM consumer account access is approved. No product-specific endpoint or credentials are connected yet; TransportAPI remains the temporary national-routing fallback until an RDM product is validated.",
-        "es": "El acceso de consumidor a RDM está aprobado. Aún no hay endpoint ni credenciales de un producto concreto; TransportAPI se mantiene como fallback temporal de rutas nacionales hasta validar un producto RDM."
+        "en": "RDM consumer account access is approved. No product-specific endpoint or credentials are connected yet, so national rail routing remains unavailable until an RDM product is validated and connected.",
+        "es": "El acceso de consumidor a RDM está aprobado. Aún no hay endpoint ni credenciales de un producto concreto, por lo que las rutas ferroviarias nacionales siguen sin estar disponibles hasta validar y conectar un producto RDM."
       }
     },
     {
