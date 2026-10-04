@@ -1249,6 +1249,15 @@ test("Opportunity Brief keeps long-form work navigable with a sticky context rai
   assert.match(css, /position:sticky/);
 });
 
+test("Learning uses a semantic navigation state instead of the legacy results key", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const learning = read("src/app/app/learning/page.tsx");
+  assert.match(nav, /key: "learning"/);
+  assert.match(learning, /active="learning"/);
+  assert.doesNotMatch(nav, /key: "results"/);
+  assert.doesNotMatch(learning, /active="results"/);
+});
+
 test("Campaigns uses a semantic navigation state instead of the legacy brief key", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
   const campaigns = read("src/app/app/campaigns/page.tsx");

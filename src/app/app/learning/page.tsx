@@ -43,7 +43,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
 
   return (
     <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="results" />
+      <ProductJourneyNav active="learning" />
 
       <nav className={styles.fixturePicker} aria-label="Choose a fixture to review">
         <strong>Review a fixture</strong>
