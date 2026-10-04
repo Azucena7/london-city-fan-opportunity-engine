@@ -694,3 +694,31 @@ test("feature intelligence styles stay outside the base globals layer", () => {
   assert.match(intelligence, /\.caseStudyPredictionProof\s*\{/);
   assert.match(layout, /intelligence-surfaces\.css/);
 });
+
+
+test("season lifecycle preserves immutable history and governed rollover", () => {
+  const migration = readFileSync("supabase/migrations/20261004234500_season_lifecycle_foundation.sql", "utf8");
+
+  assert.match(migration, /create table if not exists public\.club_seasons/);
+  assert.match(migration, /create table if not exists public\.season_snapshots/);
+  assert.match(migration, /create table if not exists public\.season_rollover_items/);
+
+  assert.match(migration, /state in \('draft','active','closed'\)/);
+  assert.match(migration, /club_seasons_one_active_idx/);
+  assert.match(migration, /where state='active'/);
+  assert.match(migration, /unique\(id, club_id\)/);
+
+  assert.match(migration, /governance approve permission is required to open or close a season/);
+  assert.match(migration, /closed season state is immutable/);
+  assert.match(migration, /season snapshots are immutable/);
+  assert.match(migration, /s\.state='closed'/);
+
+  assert.match(migration, /rollover source season must be closed/);
+  assert.match(migration, /rollover target season must be draft or active/);
+  assert.match(migration, /reviewed rollover decisions are immutable/);
+  assert.match(migration, /governance approve permission is required to accept or reject rollover/);
+
+  assert.match(migration, /'contract','obligation','restriction','campaign','decision','availability','other'/);
+  assert.match(migration, /'auto','needs-review','blocked','accepted','rejected'/);
+  assert.doesNotMatch(migration, /delete from public\.decision_events/i);
+});
