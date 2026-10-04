@@ -3,7 +3,6 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./brand.css";
 import "./i18n.css";
-import "./i18n-fixes.css";
 import "./block14.css";
 import "./block16.css";
 import "./ux-consolidation.css";
