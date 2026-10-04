@@ -132,7 +132,7 @@ test("club campaign workspace supports authenticated multi-user persistence with
   const login = read("src/app/api/auth/login/route.ts");
   const workspace = read("src/app/api/campaign-workspace/[fixtureId]/route.ts");
   const effort = read("src/app/api/delivery-effort/route.ts");
-  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+  const migration = read("supabase/bootstrap/campaign_workspace.sql");
   const effortMigration = read("supabase/migrations/20261004193752_create_delivery_effort_events.sql");
 
   assert.match(builder, /Connect club workspace/);
@@ -294,7 +294,7 @@ test("Opportunity Radar applies club context as advisory fit without changing ev
 });
 
 test("first club admin is bootstrapped only by a confirmed private email invite", () => {
-  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+  const migration = read("supabase/bootstrap/campaign_workspace.sql");
 
   assert.match(migration, /private\.club_admin_invites/);
   assert.match(migration, /email_confirmed_at is null/);
@@ -328,7 +328,7 @@ test("pilot access separates identity from club membership and supports admin ap
   const accessApi = read("src/app/api/access/route.ts");
   const approve = read("src/app/api/access/approve/route.ts");
   const nav = read("src/components/ProductJourneyNav.tsx");
-  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+  const migration = read("supabase/bootstrap/campaign_workspace.sql");
 
   assert.match(access, /Secure pilot access without opening the club workspace/);
   assert.match(access, /Authentication proves identity\. Membership grants club access/);
@@ -387,7 +387,7 @@ test("club setup persists reusable fixture, channel, objective, brand and approv
   const route = read("src/app/api/club-setup/route.ts");
   const nav = read("src/components/ProductJourneyNav.tsx");
   const page = read("src/app/app/setup/page.tsx");
-  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+  const migration = read("supabase/bootstrap/campaign_workspace.sql");
 
   assert.match(setup, /Configure once\. Let every fixture start with context/);
   assert.match(setup, /Fixture source/);
@@ -456,7 +456,7 @@ test("Learning compares recorded campaign workflow with measured outcomes withou
 test("campaign history records shared fixture milestones without conflating them with the credit ledger", () => {
   const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const route = read("src/app/api/campaign-history/[fixtureId]/route.ts");
-  const migration = read("supabase/migrations/20261002_campaign_workspace.sql");
+  const migration = read("supabase/bootstrap/campaign_workspace.sql");
 
   assert.match(builder, /Campaign history/);
   assert.match(builder, /One timeline from review to launch handoff/);

@@ -14,6 +14,6 @@ for (const [role, profile] of Object.entries(profiles)) for (const [area, allowe
 }
 let sql = await readFile(new URL("supabase/templates/club_access.sql", root), "utf8");
 for (const [marker, value] of Object.entries({ ROLES: Object.keys(profiles).map(q).join(", "), AREAS: areas.map(q).join(", "), ACTIONS: actions.map(q).join(", "), DEFAULTS: tuples.join(",\n"), AREA_VALUES: areas.map(x => `(${q(x)})`).join(", "), ACTION_VALUES: actions.map(x => `(${q(x)})`).join(", ") })) sql = sql.replaceAll(`/*${marker}*/`, value);
-const path = new URL("supabase/migrations/20261002_club_membership.sql", root);
-if (process.argv.includes("--check")) { if (await readFile(path, "utf8") !== sql) throw Error("Permission migration needs regeneration"); }
+const path = new URL("supabase/bootstrap/club_membership.sql", root);
+if (process.argv.includes("--check")) { if (await readFile(path, "utf8") !== sql) throw Error("Permission bootstrap needs regeneration"); }
 else await writeFile(path, sql);
