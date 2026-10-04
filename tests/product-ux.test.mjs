@@ -1630,3 +1630,20 @@ test("opportunity brief can create role-specific heads-ups and operational reque
   assert.match(migration, /'formal-request'/);
   assert.match(migration, /'confirmed'/);
 });
+
+
+test("operational handoff recipients can return execution state to AVELA", () => {
+  const component = read("src/components/OperationalHandoffs.tsx");
+  const route = read("src/app/api/operational-requests/route.ts");
+  const css = read("src/components/OperationalHandoffs.module.css");
+
+  assert.match(component, /Confirm/);
+  assert.match(component, /Alternative/);
+  assert.match(component, /Unavailable/);
+  assert.match(component, /method: "PATCH"/);
+  assert.match(component, /updateRequest/);
+  assert.match(route, /export async function PATCH/);
+  assert.match(route, /updated_by: user\.id/);
+  assert.match(route, /updated_at: new Date\(\)\.toISOString\(\)/);
+  assert.match(css, /requestActions/);
+});
