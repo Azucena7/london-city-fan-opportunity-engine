@@ -160,22 +160,17 @@ test("club campaign workspace supports authenticated multi-user persistence with
   assert.match(migration, /auth\.uid\(\)/);
 });
 
-test("club app exposes an auditable Credit Center from the persistent ledger", () => {
-  const center = read("src/components/CreditCenter.tsx");
+test("retired Credit Center no longer appears as a product surface", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
-  const page = read("src/app/app/credits/page.tsx");
+  const config = read("next.config.mjs");
 
-  assert.match(center, /Credit Center/);
-  assert.match(center, /Committed/);
-  assert.match(center, /Outstanding/);
-  assert.match(center, /Consumed/);
-  assert.match(center, /Released/);
-  assert.match(center, /\/api\/credit-ledger/);
-  assert.match(center, /\/api\/auth\/session/);
-  assert.match(center, /No credit events yet/);
-  assert.match(nav, /href: "\/app\/credits"/);
-  assert.match(nav, /label: "Credits"/);
-  assert.match(page, /CreditCenter/);
+  assert.doesNotMatch(nav, /href: "\/app\/credits"/);
+  assert.doesNotMatch(nav, /label: "Credits"/);
+  assert.match(config, /source: "\/app\/credits", destination: "\/app\/campaigns"/);
+  assert.equal(existsSync("src/components/CreditCenter.tsx"), false);
+  assert.equal(existsSync("src/components/CreditCenter.module.css"), false);
+  assert.equal(existsSync("src/app/app/credits/page.tsx"), false);
+  assert.equal(existsSync("src/app/app/credits/credits.module.css"), false);
 });
 
 test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
