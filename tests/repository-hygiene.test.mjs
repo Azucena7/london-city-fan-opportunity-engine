@@ -538,3 +538,35 @@ test("legacy credit ledger removal is versioned after the canonical cutover", ()
   assert.doesNotMatch(route, /credit_ledger|credits/);
   assert.doesNotMatch(architecture, /credit_ledger/);
 });
+
+
+test("active AVELA surfaces use demo and pilot terminology rather than prototype framing", () => {
+  const activeSurfaces = [
+    "src/components/MatchPlanDecision.tsx",
+    "src/components/ClubPilotProposition.tsx",
+    "src/components/LocalizedStoryPage.tsx",
+    "src/components/ClubSetup.tsx",
+    "src/components/LondonCityCase.tsx",
+    "src/components/CommercialCaseStory.tsx",
+    "src/components/LocalizedTechnicalCaseStudy.tsx"
+  ];
+
+  for (const surface of activeSurfaces) {
+    const source = readFileSync(surface, "utf8");
+    assert.doesNotMatch(source, /\bprototype\b|\bprototipo\b/i, `${surface} should use demo, evidence-environment or pilot language`);
+  }
+
+  const nav = readFileSync("src/components/NavTabs.tsx", "utf8");
+  const brand = readFileSync("src/app/case-brand.css", "utf8");
+  const workspace = readFileSync("src/app/workspace-structure.css", "utf8");
+  assert.match(nav, /evidenceMark/);
+  assert.doesNotMatch(nav, /prototypeMark/);
+  assert.match(brand, /\.evidenceMark/);
+  assert.match(workspace, /\.evidenceMark/);
+  assert.doesNotMatch(brand, /prototypeMark/);
+  assert.doesNotMatch(workspace, /prototypeMark/);
+
+  const measurement = readFileSync("src/lib/measurement.ts", "utf8");
+  assert.match(measurement, /utm_medium"\), "demo"/);
+  assert.doesNotMatch(measurement, /utm_medium"\), "prototype"/);
+});
