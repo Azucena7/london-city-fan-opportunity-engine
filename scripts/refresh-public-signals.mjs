@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url";
 import { parseMensFootballFixtures, parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
 
 const AUDIENCE_PATH = new URL("../data/live/audience-reach.json", import.meta.url);
-const BENCHMARK_PATH = new URL("../data/live/wsl-attendance-benchmark.json", import.meta.url);
 const CALENDAR_PATH = new URL("../data/seed/calendar.json", import.meta.url);
 const CURRENT_PATH = new URL("../data/live/current.json", import.meta.url);
 const EVENT_LANDSCAPE_PATH = new URL("../data/live/event-landscape.json", import.meta.url);
@@ -22,25 +21,6 @@ const MEN_FOOTBALL_FEEDS = [
   { competition: "UEFA Europa League", feedUrl: "https://fixturedownload.com/feed/json/europa-league-2026", sourceUrl: "https://fixturedownload.com/view/json/europa-league-2026" },
   { competition: "UEFA Conference League", feedUrl: "https://fixturedownload.com/feed/json/conference-league-2026", sourceUrl: "https://fixturedownload.com/view/json/conference-league-2026" }
 ];
-const WSL_ATTENDANCE_FBREF_URL = "https://fbref.com/en/comps/189/schedule/Womens-Super-League-Scores-and-Fixtures";
-const WSL_ATTENDANCE_URL = "https://www.footballwebpages.co.uk/womens-super-league/attendances";
-const WSL_ATTENDANCE_FALLBACK_URL = "https://www.worldfootball.net/competition/co5071/england-women-womens-super-league/attendance/";
-const WSL_ATTENDANCE_ALIASES = {
-  "Arsenal": ["Arsenal WFC"],
-  "Chelsea": ["Chelsea FC Women"],
-  "London City Lionesses": ["London City Lionesses", "Lionesses"],
-  "Manchester United": ["Manchester United WFC", "Manchester Utd"],
-  "Brighton & Hove Albion": ["Brighton & Hove Albion WFC", "Brighton"],
-  "Charlton Athletic": ["Charlton Athletic WFC"],
-  "Tottenham Hotspur": ["Tottenham Hotspur WFC", "Tottenham"],
-  "West Ham United": ["West Ham United WFC", "West Ham"],
-  "Birmingham City": ["Birmingham City WFC"],
-  "Crystal Palace": ["Crystal Palace Women"],
-  "Aston Villa": ["Aston Villa WFC"],
-  "Everton": ["Everton FC"],
-  "Liverpool": ["Liverpool FC Women"],
-  "Manchester City": ["Manchester City WFC"]
-};
 const DRY_RUN = process.env.REFRESH_DRY_RUN === "1";
 
 function londonIsoDate(value = new Date()) {
@@ -222,98 +202,6 @@ function updateSourceHealth(sourceHealth, attemptedAt, results) {
   };
 }
 
-function stripHtml(value) {
-  return value
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&#39;/g, "'")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function attendanceNumber(value) {
-  const text = String(value ?? "").trim();
-  if (!/^\d{1,3}(?:[.,]\d{3})+$/.test(text) && !/^\d{3,6}$/.test(text)) return null;
-  const number = Number(text.replace(/[.,]/g, ""));
-  return Number.isFinite(number) && number > 100 ? number : null;
-}
-
-export function parseWslAttendanceAverages(html, clubNames) {
-  if (/Attention Required!|cf-error-details|captcha/i.test(html)) {
-    throw new Error("WSL attendance source blocked the automated request");
-  }
-  const aliases = new Map();
-  for (const club of clubNames) {
-    aliases.set(club, club);
-    for (const alias of WSL_ATTENDANCE_ALIASES[club] ?? []) aliases.set(alias, club);
-  }
-
-  const rows = [...html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)].map((match) => match[1]);
-  const observations = new Map();
-  for (const row of rows) {
-    const cells = [...row.matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((match) => stripHtml(match[1]));
-    const observedName = cells.find((cell) => aliases.has(cell));
-    if (!observedName) continue;
-    const club = aliases.get(observedName);
-    const clubIndex = cells.findIndex((cell) => cell === observedName);
-    const attendance = cells.slice(clubIndex + 1).map(attendanceNumber).filter((value) => value !== null).at(-1);
-    if (attendance !== undefined) observations.set(club, attendance);
-  }
-  if (observations.size < 2) throw new Error("WSL attendance table did not contain enough comparable rows");
-  return observations;
-}
-
-export function parseWslFixtureAttendanceAverages(html, clubNames) {
-  const aliases = new Map();
-  for (const club of clubNames) {
-    aliases.set(club, club);
-    for (const alias of WSL_ATTENDANCE_ALIASES[club] ?? []) aliases.set(alias, club);
-  }
-
-  const totals = new Map();
-  const rows = [...html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)].map((match) => match[1]);
-  for (const row of rows) {
-    const homeMatch = row.match(/<t[dh]\b[^>]*data-stat=["']home_team["'][^>]*>([\s\S]*?)<\/t[dh]>/i);
-    const attendanceMatch = row.match(/<t[dh]\b[^>]*data-stat=["']attendance["'][^>]*>([\s\S]*?)<\/t[dh]>/i);
-    if (!homeMatch || !attendanceMatch) continue;
-
-    const observedName = stripHtml(homeMatch[1]);
-    const club = aliases.get(observedName);
-    const attendance = attendanceNumber(stripHtml(attendanceMatch[1]));
-    if (!club || attendance === null) continue;
-
-    const previous = totals.get(club) ?? { sum: 0, count: 0 };
-    totals.set(club, { sum: previous.sum + attendance, count: previous.count + 1 });
-  }
-
-  const observations = new Map(
-    [...totals.entries()].map(([club, value]) => [club, Math.round(value.sum / value.count)])
-  );
-  if (observations.size < 2) throw new Error("WSL fixture attendance table did not contain enough comparable rows");
-  return observations;
-}
-
-async function fetchWslAttendance(clubNames) {
-  const sources = [
-    { name: "FBref", url: WSL_ATTENDANCE_FBREF_URL, parser: parseWslFixtureAttendanceAverages },
-    { name: "Football Web Pages", url: WSL_ATTENDANCE_URL, parser: parseWslAttendanceAverages },
-    { name: "worldfootball.net", url: WSL_ATTENDANCE_FALLBACK_URL, parser: parseWslAttendanceAverages }
-  ];
-  const failures = [];
-  for (const source of sources) {
-    try {
-      const html = await fetchText(source.url, `WSL attendance (${source.name})`);
-      return { observations: source.parser(html, clubNames), source };
-    } catch (error) {
-      failures.push(`${source.name}: ${error instanceof Error ? error.message : "refresh failed"}`);
-    }
-  }
-  throw new Error(failures.join(" | "));
-}
-
 function metric(key, label, value, unit, sourceName, sourceUrl) {
   return {
     key,
@@ -362,34 +250,9 @@ function updateYoutubeChannel(audience, publicData) {
   });
 }
 
-function appendBenchmarkSnapshot(benchmark, observations, today) {
-  const latest = benchmark.snapshots.at(-1);
-  const changed = latest.clubs.some((club) => observations.has(club.club) && observations.get(club.club) !== club.attendance);
-  if (!changed) return benchmark;
-  const clubs = latest.clubs.map((club) => {
-    const attendance = observations.get(club.club);
-    if (attendance === undefined) return club;
-    const sampleIncrease = club.attendance !== attendance ? 1 : 0;
-    return { ...club, attendance, state: "measured", homeMatchesObserved: Math.max(1, club.homeMatchesObserved + sampleIncrease) };
-  });
-  const measured = clubs.filter((club) => club.attendance !== null).length;
-  return {
-    ...benchmark,
-    checkedAt: new Date().toISOString(),
-    snapshots: [...benchmark.snapshots, {
-      id: `auto-${today}`,
-      label: { en: `Public refresh · ${today}`, es: `Actualización pública · ${today}` },
-      throughDate: today,
-      completeness: { en: `${measured} of ${clubs.length} clubs have a published home observation`, es: `${measured} de ${clubs.length} clubes tienen una observación local publicada` },
-      clubs
-    }]
-  };
-}
-
 export async function refreshPublicSignals(now = new Date()) {
-  const [audience, benchmark, calendar, current, eventLandscape, sourceHealth] = await Promise.all([
+  const [audience, calendar, current, eventLandscape, sourceHealth] = await Promise.all([
     readFile(AUDIENCE_PATH, "utf8").then(JSON.parse),
-    readFile(BENCHMARK_PATH, "utf8").then(JSON.parse),
     readFile(CALENDAR_PATH, "utf8").then(JSON.parse),
     readFile(CURRENT_PATH, "utf8").then(JSON.parse),
     readFile(EVENT_LANDSCAPE_PATH, "utf8").then(JSON.parse),
@@ -400,10 +263,8 @@ export async function refreshPublicSignals(now = new Date()) {
   const sources = [];
   const failures = [];
   let nextAudience = audience;
-  let nextBenchmark = benchmark;
   let nextEventLandscape = eventLandscape;
   let appendedAudienceSnapshot = false;
-  let appendedBenchmarkSnapshot = false;
   const healthResults = {};
 
   try {
@@ -499,39 +360,6 @@ export async function refreshPublicSignals(now = new Date()) {
     }
   }
 
-  try {
-    const latest = benchmark.snapshots.at(-1);
-    const clubs = latest.clubs.map((club) => club.club);
-    const attendanceResult = await fetchWslAttendance(clubs);
-    nextBenchmark = {
-      ...appendBenchmarkSnapshot(benchmark, attendanceResult.observations, today),
-      checkedAt: attemptedAt,
-      sourceName: attendanceResult.source.name,
-      sourceUrl: attendanceResult.source.url
-    };
-    appendedBenchmarkSnapshot = nextBenchmark.snapshots.length > benchmark.snapshots.length;
-    sources.push({ id: "wsl-attendance", label: "WSL attendance benchmark", state: "measured", confidence: "medium", checkedAt: attemptedAt, sourceUrl: attendanceResult.source.url });
-    healthResults["wsl-attendance"] = {
-      ok: true,
-      note: {
-        en: `Published WSL home-attendance averages refreshed via ${attendanceResult.source.name}; early-season rankings remain directional.`,
-        es: `Medias publicadas de asistencia local WSL actualizadas vía ${attendanceResult.source.name}; el ranking inicial sigue siendo orientativo.`
-      }
-    };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "WSL attendance refresh failed";
-    failures.push(`WSL attendance: ${message}`);
-    sources.push({ id: "wsl-attendance", label: "WSL attendance benchmark", state: "waiting", confidence: "unavailable", checkedAt: attemptedAt, sourceUrl: WSL_ATTENDANCE_URL, message });
-    healthResults["wsl-attendance"] = {
-      ok: false,
-      state: "blocked",
-      message,
-      ownerAction: {
-        en: "Approve a licensed sports-data provider only if all public attendance sources become unavailable.",
-        es: "Aprobar un proveedor de datos deportivos con licencia solo si todas las fuentes públicas de asistencia dejan de estar disponibles."
-      }
-    };
-  }
 
   const successfulSources = sources.filter((source) => source.state === "measured").length;
   nextAudience = {
@@ -545,7 +373,7 @@ export async function refreshPublicSignals(now = new Date()) {
       sources
     }
   };
-  const materialChanges = Number(appendedAudienceSnapshot) + Number(appendedBenchmarkSnapshot);
+  const materialChanges = Number(appendedAudienceSnapshot);
   const nextCurrent = {
     ...current,
     updated_at: attemptedAt,
@@ -558,13 +386,12 @@ export async function refreshPublicSignals(now = new Date()) {
   if (!DRY_RUN) {
     await Promise.all([
       writeFile(AUDIENCE_PATH, `${JSON.stringify(nextAudience, null, 2)}\n`),
-      writeFile(BENCHMARK_PATH, `${JSON.stringify(nextBenchmark, null, 2)}\n`),
       writeFile(CURRENT_PATH, `${JSON.stringify(nextCurrent, null, 2)}\n`),
       writeFile(EVENT_LANDSCAPE_PATH, `${JSON.stringify(nextEventLandscape, null, 2)}\n`),
       writeFile(SOURCE_HEALTH_PATH, `${JSON.stringify(nextSourceHealth, null, 2)}\n`)
     ]);
   }
-  return { today, materialChanges, appendedAudienceSnapshot, appendedBenchmarkSnapshot, eventCount: nextEventLandscape.events.length, failures, sources };
+  return { today, materialChanges, appendedAudienceSnapshot, eventCount: nextEventLandscape.events.length, failures, sources };
 }
 
 if (fileURLToPath(import.meta.url) === process.argv[1]) {

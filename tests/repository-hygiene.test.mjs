@@ -659,3 +659,23 @@ test("core public sources update source-health on every refresh attempt", () => 
   assert.match(refreshData, /source_failures: fixtureRefresh\.ok \? \[\] : \[`Club fixtures:/);
   assert.match(refreshData, /writeFile\(SOURCE_HEALTH_PATH/);
 });
+
+
+test("WSL attendance stays a reviewed manual snapshot rather than a failing daily scraper", () => {
+  const refresh = readFileSync("scripts/refresh-public-signals.mjs", "utf8");
+  const runbook = readFileSync("docs/daily-update-runbook.md", "utf8");
+  const benchmark = JSON.parse(readFileSync("data/live/wsl-attendance-benchmark.json", "utf8"));
+  const sourceHealth = JSON.parse(readFileSync("data/live/source-health.json", "utf8"));
+  const wsl = sourceHealth.sources.find((source) => source.id === "wsl-attendance");
+
+  assert.doesNotMatch(refresh, /footballwebpages\.co\.uk\/womens-super-league\/attendances/);
+  assert.doesNotMatch(refresh, /worldfootball\.net\/competition\/co5071/);
+  assert.doesNotMatch(refresh, /fbref\.com\/en\/comps\/189\/schedule/);
+  assert.doesNotMatch(refresh, /fetchWslAttendance|parseWslAttendanceAverages|parseWslFixtureAttendanceAverages/);
+  assert.match(runbook, /reviewed public browser snapshot/);
+  assert.equal(benchmark.snapshots.at(-1).id, "reviewed-2026-10-04");
+  assert.match(benchmark.sourceName, /reviewed browser snapshot/);
+  assert.equal(wsl.state, "degraded");
+  assert.equal(wsl.method, "reviewed-manual-public-snapshot");
+  assert.ok(wsl.lastSuccessfulAt);
+});

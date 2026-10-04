@@ -62,6 +62,8 @@ Core source families used by AVELA research and the public proof environment.
   https://www.theglades.co.uk/advertising-opportunities
 
 ## Women's football benchmarks
+- WSL attendance benchmark: reviewed public browser snapshot, refreshed weekly and after London City home matches because the available public attendance pages block GitHub-hosted automation.
+- Current browser evidence may use Football Web Pages, FBref and worldfootball.net; preserve the source URL and review timestamp in `data/live/wsl-attendance-benchmark.json`.
 - WSL / FA / club official ticketing and fixture pages
 - London City 2025/26 match ledger
   https://en.wikipedia.org/wiki/2025%E2%80%9326_London_City_Lionesses_season

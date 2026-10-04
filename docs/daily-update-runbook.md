@@ -10,7 +10,7 @@ The site now separates code from live content. GitHub Actions refreshes the offi
 - Matchday weather when the fixture enters the 16-day provider window.
 - A commit only when tracked data changes; Vercel can deploy that commit through the existing Git integration.
 - London City YouTube subscriber and channel-view snapshots, weekly or when a measured value changes.
-- WSL attendance averages when the source returns a comparable table; blocked or incomplete responses are recorded without overwriting the last valid observation.
+- WSL attendance is maintained as a reviewed public browser snapshot; GitHub-hosted automation does not retry the known 403-blocked pages on every daily run.
 - Public-source health, last attempt and last successful refresh.
 
 ## What remains editorial or requires authorised access
@@ -26,7 +26,7 @@ Editorial and access-dependent signals use the relevant `data/live` evidence fil
 
 ## Operating cadence
 
-1. Daily: refresh fixtures and material public signals; check the WSL attendance source and audience/search sources, appending snapshots only when the sample or signal changes materially.
+1. Daily: refresh fixtures and material automated public signals; WSL attendance is reviewed separately on the weekly/postmatch cadence and committed only when the published average changes materially.
 2. Inside T-48 hours: recheck fixture and weather every six hours when a suitable scheduler is connected.
 3. T+1: result, public attendance and incidents.
 4. T+3: scans, no-show, sales and yield.
@@ -53,7 +53,7 @@ npm run validate:public-signals
 npm run typecheck
 ```
 
-The public-signal refresh uses the official YouTube Data API, Ticketmaster Discovery API, official Barclays WSL fixture list and daily structured football feeds for the Premier League, London EFL clubs, England men and UEFA club competitions involving London teams. Configure `YOUTUBE_API_KEY` and `TICKETMASTER_API_KEY` as GitHub Actions repository secrets; Vercel environment variables do not propagate to GitHub-hosted workflows. YouTube channel statistics are read by handle.
+The public-signal refresh uses the official YouTube Data API, Ticketmaster Discovery API, official Barclays WSL fixture list and daily structured football feeds for the Premier League, London EFL clubs, England men and UEFA club competitions involving London teams. WSL attendance is deliberately outside this automated set because the available public pages return 403 to GitHub-hosted requests. Configure `YOUTUBE_API_KEY` and `TICKETMASTER_API_KEY` as GitHub Actions repository secrets; Vercel environment variables do not propagate to GitHub-hosted workflows. YouTube channel statistics are read by handle.
 
 The attention model applies a relevance gate before scoring. It admits simultaneous WSL fixtures, England men's internationals, matches involving London men's clubs, nationally prominent men's fixtures and exceptional sports occasions at major venues. A candidate must occur on the same day as the London City fixture. Routine concerts, musicals, theatre, attractions and generic family entertainment are excluded: co-occurrence alone is not treated as competition.
 
