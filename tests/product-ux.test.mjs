@@ -1739,3 +1739,37 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
 });
+
+
+test("operational routing suggests explainable heads-ups without auto-sending", () => {
+  const routing = read("src/lib/operationalRouting.ts");
+  const component = read("src/components/OperationalHandoffs.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/components/OperationalHandoffs.module.css");
+
+  assert.match(routing, /player-usage/);
+  assert.match(routing, /partner-dependency/);
+  assert.match(routing, /club-representation/);
+  assert.match(routing, /operational-dependency/);
+  assert.match(routing, /Team Manager/);
+  assert.match(routing, /Activation Manager/);
+  assert.match(routing, /Secretary \/ Protocol/);
+  assert.match(routing, /Operations/);
+  assert.match(routing, /urgency/);
+  assert.match(routing, /reason/);
+
+  assert.match(page, /buildOperationalHandoffSuggestions/);
+  assert.match(page, /suggestions={handoffSuggestions}/);
+
+  assert.match(component, /AVELA suggests/);
+  assert.match(component, /Create suggested pre-alert/);
+  assert.match(component, /Create suggested request/);
+  assert.match(component, /onClick=\{\(\) => void create\(preset\)\}/);
+  assert.doesNotMatch(component, /useEffect\([\s\S]*create\(preset\)/);
+  assert.match(component, /avelaSuggestion/);
+  assert.match(component, /ruleId/);
+  assert.match(component, /reason/);
+
+  assert.match(css, /recommendedPreset/);
+  assert.match(css, /suggestionReason/);
+});
