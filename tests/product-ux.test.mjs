@@ -1232,7 +1232,7 @@ test("app Home surfaces the next decision before navigation", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
   assert.match(home, /Decision Center/);
   assert.match(home, /need your attention/);
-  assert.match(home, /Primary action/);
+  assert.match(home, /Highest current priority/);
   assert.match(home, /Decision queue/);
   assert.match(home, /Everything else can wait/);
   assert.match(home, /Fixture/);
