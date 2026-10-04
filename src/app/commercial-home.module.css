@@ -93,8 +93,10 @@
   overflow:hidden;
   width:100%;
   padding:14px 24px;
-  background:var(--accent);
-  color:var(--ink);
+  background:#fff;
+  color:#5B50D6;
+  border-top:1px solid #E1E3E8;
+  border-bottom:1px solid #E1E3E8;
   display:flex;
   justify-content:space-around;
   gap:24px;
