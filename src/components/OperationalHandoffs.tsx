@@ -87,6 +87,24 @@ export function OperationalHandoffs({
     })();
   }, [decisionId]); // eslint-disable-line react-hooks/exhaustive-deps -- request queue follows the current decision
 
+  async function updateRequest(id: string, stage: RequestRow["stage"]) {
+    if (!activeClubId || busy) return;
+    setBusy(id + stage);
+    setStatus("");
+    const response = await fetch("/api/operational-requests", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, clubId: activeClubId, stage })
+    });
+    if (response.ok) {
+      setStatus(stage === "confirmed" ? "Handoff confirmed." : stage === "alternative" ? "Alternative requested." : "Availability issue recorded.");
+      await load(activeClubId);
+    } else {
+      setStatus("This handoff response could not be saved.");
+    }
+    setBusy(null);
+  }
+
   async function create(preset: Preset) {
     if (!activeClubId || busy) return;
     setBusy(preset.requestType + preset.recipientRole);
@@ -164,7 +182,16 @@ export function OperationalHandoffs({
                 <strong>{request.subject}</strong>
                 {request.detail ? <p>{request.detail}</p> : null}
               </div>
-              <small>{new Date(request.updated_at).toLocaleString("en-GB")}</small>
+              <div className={styles.requestActions}>
+                <small>{new Date(request.updated_at).toLocaleString("en-GB")}</small>
+                {request.stage === "heads-up" || request.stage === "formal-request" ? (
+                  <div>
+                    <button type="button" disabled={Boolean(busy)} onClick={() => void updateRequest(request.id, "confirmed")}>Confirm</button>
+                    <button type="button" disabled={Boolean(busy)} onClick={() => void updateRequest(request.id, "alternative")}>Alternative</button>
+                    <button type="button" disabled={Boolean(busy)} onClick={() => void updateRequest(request.id, "unavailable")}>Unavailable</button>
+                  </div>
+                ) : null}
+              </div>
             </article>
           ))}
         </div>
