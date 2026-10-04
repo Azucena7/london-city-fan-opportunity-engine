@@ -42,6 +42,14 @@ The club-facing product is designed around one simple operating loop:
 
 Historical URLs are preserved only as permanent redirects into the canonical AVELA routes. They are not maintained as parallel product surfaces.
 
+### Canonical runtime boundary
+
+- Club authentication and persistence use only the `CLUB_SUPABASE_*` / `NEXT_PUBLIC_CLUB_SUPABASE_*` namespace.
+- Retired unprefixed `SUPABASE_*` / `DATABASE_URL` variables are ignored by the application and should remain empty if legacy Vercel keys still exist.
+- The retired TfL / TransportAPI journey-routing prototype is not part of the active runtime. Travel and mobility remain product signals/contracts rather than a parallel routing application.
+- The current Vercel hostname still contains the repository's historical slug. Treat it as infrastructure until a dedicated AVELA domain is migrated; it is not the product name.
+
+
 ## Commercial entry product
 
 ### 90-Day Growth Intelligence Pilot
