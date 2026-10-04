@@ -9,6 +9,7 @@ import { ActivationDraft } from "@/components/ActivationDraft";
 import { MatchPlanDecision } from "@/components/MatchPlanDecision";
 import { CampaignDeliveryPlanner } from "@/components/CampaignDeliveryPlanner";
 import { DecisionHistoryPanel } from "@/components/DecisionHistoryPanel";
+import { SimilarDecisionsPanel } from "@/components/SimilarDecisionsPanel";
 import { AskAvelaPanel } from "@/components/AskAvelaPanel";
 import { OperationalHandoffs } from "@/components/OperationalHandoffs";
 import { AvailabilityPlanner } from "@/components/AvailabilityPlanner";
@@ -341,6 +342,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           />
         </details>
       </section>
+
+      <SimilarDecisionsPanel fixtureId={fixture.id} />
 
       <MatchPlanDecision
         decisionState={live.decisionState}
