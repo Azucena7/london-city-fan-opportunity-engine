@@ -11,7 +11,7 @@ type DraftRequest = {
   clubId?: string;
 };
 
-const draftCredits: Record<DraftType, number> = {
+const draftEffort: Record<DraftType, number> = {
   "crm-email": 5,
   "vertical-video": 10
 };
@@ -167,7 +167,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       draft,
       type,
-      creditsCommitted: draftCredits[type],
+      effortUnits: draftEffort[type],
       model,
       persistence: "device-workspace"
     });
