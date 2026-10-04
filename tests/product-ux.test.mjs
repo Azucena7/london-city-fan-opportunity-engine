@@ -1776,3 +1776,34 @@ test("operational routing suggests explainable heads-ups without auto-sending", 
   assert.match(css, /recommendedPreset/);
   assert.match(css, /suggestionReason/);
 });
+
+
+test("representation handoffs prefill calendar intelligence without auto-booking", () => {
+  const routing = read("src/lib/operationalRouting.ts");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const finder = read("src/components/CalendarSlotFinder.tsx");
+  const handoffs = read("src/components/OperationalHandoffs.tsx");
+
+  assert.match(routing, /inferRepresentationRoles/);
+  assert.match(routing, /President/);
+  assert.match(routing, /General Director/);
+  assert.match(routing, /Head of Marketing/);
+  assert.match(routing, /Commercial Director/);
+  assert.match(routing, /Secretary \/ Protocol/);
+  assert.match(routing, /requiredRoles/);
+  assert.match(routing, /durationMinutes/);
+
+  assert.match(page, /representationSuggestion/);
+  assert.match(page, /initialRequiredRoles=\{representationSuggestion\?\.requiredRoles\}/);
+  assert.match(page, /durationMinutes=\{representationSuggestion\?\.durationMinutes \?\? 60\}/);
+
+  assert.match(finder, /initialRequiredRoles/);
+  assert.match(finder, /Edit attendees before using the recommendation/);
+  assert.match(finder, /type="checkbox"/);
+  assert.match(finder, /rankSchedulingSlots/);
+  assert.doesNotMatch(finder, /fetch\([^\n]*POST/);
+
+  assert.match(handoffs, /requiredRoles: preset\.requiredRoles/);
+  assert.match(handoffs, /durationMinutes: preset\.durationMinutes/);
+  assert.match(handoffs, /Create suggested pre-alert/);
+});
