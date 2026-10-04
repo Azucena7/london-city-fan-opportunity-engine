@@ -333,8 +333,10 @@ test("architecture document reflects the as-built AVELA runtime", () => {
 });
 
 
-test("commercial home does not retain dead ticker animation overrides", () => {
+test("commercial home keeps one canonical CSS layer", () => {
   const css = readFileSync("src/app/commercial-home.module.css", "utf8");
   assert.doesNotMatch(css, /tickerTint/);
   assert.doesNotMatch(css, /animation:\s*none!important/);
+  assert.doesNotMatch(css, /Reading-width and hierarchy reset|Remove legacy oversized\/full-bleed behavior/);
+  assert.equal((css.match(/\.signalTicker\{/g) ?? []).length, 1);
 });
