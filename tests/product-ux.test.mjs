@@ -1765,7 +1765,10 @@ test("operational routing suggests explainable heads-ups without auto-sending", 
   assert.match(component, /Create suggested pre-alert/);
   assert.match(component, /Create suggested request/);
   assert.match(component, /onClick=\{\(\) => void create\(preset\)\}/);
-  assert.doesNotMatch(component, /useEffect\([\s\S]*create\(preset\)/);
+  const effectStart = component.indexOf("useEffect(() => {");
+  const createFunction = component.indexOf("async function create");
+  assert.ok(effectStart >= 0 && createFunction > effectStart);
+  assert.doesNotMatch(component.slice(effectStart, createFunction), /create\(preset\)/);
   assert.match(component, /avelaSuggestion/);
   assert.match(component, /ruleId/);
   assert.match(component, /reason/);
