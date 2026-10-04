@@ -311,3 +311,12 @@ test("Supabase runtime accepts only publishable-key naming", () => {
   assert.doesNotMatch(server, /CLUB_SUPABASE_ANON_KEY|NEXT_PUBLIC_CLUB_SUPABASE_ANON_KEY/);
   assert.doesNotMatch(env, /CLUB_SUPABASE_ANON_KEY|NEXT_PUBLIC_CLUB_SUPABASE_ANON_KEY/);
 });
+
+
+test("runtime env example contains only active or explicitly planned contracts", () => {
+  const env = readFileSync(".env.example", "utf8");
+  assert.doesNotMatch(env, /WEATHER_API_KEY|NEXT_PUBLIC_MAP_STYLE_URL/);
+  assert.match(env, /AI_GATEWAY_API_KEY/);
+  assert.match(env, /CLUB_SUPABASE_PUBLISHABLE_KEY/);
+  assert.match(env, /RDM_DATA_PRODUCT_ID/);
+});
