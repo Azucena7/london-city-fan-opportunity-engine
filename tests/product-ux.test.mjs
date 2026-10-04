@@ -426,7 +426,7 @@ test("campaign history records shared fixture milestones without conflating them
   assert.match(builder, /\/api\/campaign-history/);
   assert.match(builder, /draft-generated/);
   assert.match(builder, /Campaign moved to review/);
-  assert.match(builder, /Campaign credits reserved/);
+  assert.match(builder, /Campaign scope locked/);
   assert.match(builder, /Campaign reopened/);
   assert.match(builder, /Launch handoff prepared/);
 
@@ -441,7 +441,7 @@ test("campaign history records shared fixture milestones without conflating them
   assert.match(migration, /club_has_permission\(club_id, 'campaigns', 'view'\)/);
 });
 
-test("campaign flow reviews scope before reserving credits and never simulates launch", () => {
+test("campaign flow reviews and locks scope before a truthful launch handoff", () => {
   const builder = read("src/components/CampaignCreditBuilder.tsx");
 
   assert.match(builder, /Estimate/);
@@ -451,9 +451,9 @@ test("campaign flow reviews scope before reserving credits and never simulates l
   assert.match(builder, /Reserve \$\{reservationRequired\} credits/);
   assert.match(builder, /campaign:reserve/);
   assert.match(builder, /campaign:release/);
-  assert.match(builder, /Existing generated-draft commitments are excluded/);
+  assert.match(builder, /Existing generated-draft effort is excluded/);
   assert.match(builder, /Scope locked by reservation/);
-  assert.match(builder, /Reopen campaign and release reservation/);
+  assert.match(builder, /Reopen campaign scope/);
   assert.match(builder, /Prepare launch handoff/);
   assert.match(builder, /Launch campaign · connector required/);
   assert.match(builder, /Launch is not simulated/);
