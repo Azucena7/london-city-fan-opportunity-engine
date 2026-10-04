@@ -340,3 +340,19 @@ test("commercial home keeps one canonical CSS layer", () => {
   assert.doesNotMatch(css, /Reading-width and hierarchy reset|Remove legacy oversized\/full-bleed behavior/);
   assert.equal((css.match(/\.signalTicker\{/g) ?? []).length, 1);
 });
+
+
+test("construction-era stylesheet names stay retired", () => {
+  const layout = readFileSync("src/app/layout.tsx", "utf8");
+  for (const path of ["src/app/block14.css", "src/app/block16.css", "src/app/ux-consolidation.css"]) {
+    assert.equal(existsSync(path), false, `${path} is a construction-era artifact`);
+    assert.ok(!layout.includes(path.split("/").at(-1)), `${path} should not be imported`);
+  }
+  for (const path of ["src/app/workspace-structure.css", "src/app/case-study.css", "src/app/product-ux.css"]) {
+    assert.equal(existsSync(path), true, `${path} is a canonical stylesheet`);
+  }
+
+  const workflow = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
+  assert.match(workflow, /avela-data-bot/);
+  assert.doesNotMatch(workflow, /lcl-data-bot/);
+});
