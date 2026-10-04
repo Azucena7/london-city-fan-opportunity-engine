@@ -36,7 +36,7 @@ export function NavTabs() {
           LONDON CITY / CASE
         </Link>
         <div className="analystBridge">
-          <span className="prototypeMark">
+          <span className="evidenceMark">
             {es ? "Entorno de evidencia" : "Evidence environment"}
           </span>
           <Link className="backToProduct" href="/app/matches">
