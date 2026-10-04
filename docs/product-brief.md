@@ -50,7 +50,7 @@ Highlights demand gaps, big-stadium potential, inventory pressure and when activ
 Connects match context, audience, player momentum and partner categories to timely activation ideas. Sponsor prospecting remains outside the core product.
 
 ### 5. Activation
-Turns an accepted opportunity into audience, message, channels, assets, owners, timing, credit estimate, budget range and measurement.
+Turns an accepted opportunity into audience, message, channels, assets, owners, timing, estimated delivery effort, budget range and measurement.
 
 ### 6. Learning
 Compares what the engine predicted, what the club executed and what happened after matchday so the next fixture starts smarter.
