@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-04T20:18:23.504Z",
+  "checkedAt": "2026-10-04T20:22:30.923Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -13,12 +13,13 @@
       "state": "operational",
       "method": "scheduled-public-observation",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-20T05:41:56.167Z",
+      "lastSuccessfulAt": "2026-10-04T20:22:30.341Z",
       "ownerAction": null,
       "note": {
         "en": "Fixtures and public activations are observed with source-level evidence and discrepancy preservation.",
         "es": "Los partidos y activaciones públicas se observan con evidencia por fuente y conservación de discrepancias."
-      }
+      },
+      "lastAttemptAt": "2026-10-04T20:22:30.341Z"
     },
     {
       "id": "open-meteo",
@@ -31,12 +32,13 @@
       "state": "operational",
       "method": "api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-09-20T05:41:56.022Z",
+      "lastSuccessfulAt": "2026-10-04T20:22:30.341Z",
       "ownerAction": null,
       "note": {
         "en": "Forecast data is live; it remains a forecast rather than an observed matchday outcome.",
         "es": "La predicción está activa; sigue siendo una previsión y no un resultado observado de matchday."
-      }
+      },
+      "lastAttemptAt": "2026-10-04T20:22:30.341Z"
     },
     {
       "id": "youtube-public",
@@ -49,7 +51,7 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "weekly-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-04T20:18:23.504Z",
+      "lastSuccessfulAt": "2026-10-04T20:22:30.923Z",
       "ownerAction": null,
       "note": {
         "en": "Channel statistics are refreshed through the official YouTube Data API.",
@@ -67,7 +69,7 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-04T20:18:23.504Z",
+      "lastSuccessfulAt": "2026-10-04T20:22:30.923Z",
       "ownerAction": null,
       "note": {
         "en": "31 strategically relevant sports events remain from 615 candidates; routine culture and entertainment are excluded.",
