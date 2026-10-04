@@ -22,6 +22,6 @@ export async function POST(request: Request) {
   });
 
   const payload = await response.json().catch(() => null);
-  if (!response.ok) return NextResponse.json({ error: "Access request could not be approved.", detail: payload }, { status: response.status });
+  if (!response.ok) return NextResponse.json({ error: "Access request could not be approved." }, { status: response.status });
   return NextResponse.json({ approved: true, request: payload });
 }
