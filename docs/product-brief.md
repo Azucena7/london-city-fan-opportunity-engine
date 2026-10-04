@@ -12,7 +12,7 @@ London City Lionesses.
 ## Core promise
 **Turn every fixture into a growth opportunity.**
 
-AVELA continuously reads the signals around a match — fixture, audience, city, culture, ticketing, sponsors, player momentum and club context — then helps the club decide where to act next.
+AVELA refreshes the validated signals around a match on a scheduled cadence — fixture, audience, city, culture, ticketing, sponsors, player momentum and club context — then helps the club decide where to act next.
 
 The technology remains football-wide by design. The initial go-to-market and product specialization are women’s football.
 
@@ -38,7 +38,7 @@ The pilot is designed to prove value before asking a club to adopt a broader sys
 ## Product engines
 
 ### 1. Match Intelligence
-Starts automatically from the fixture calendar and continuously reads the changing context around each match.
+Starts from the scheduled fixture refresh and re-evaluates the changing context around each match as validated evidence is refreshed.
 
 ### 2. Audience Growth
 Identifies the most actionable audience opportunity around the fixture, including families, grassroots, cultural crossover, international demand, first-time visitors and repeat attendance.

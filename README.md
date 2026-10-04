@@ -10,7 +10,7 @@ London City Lionesses is currently used as the live demonstration environment.
 
 The club-facing product is designed around one simple operating loop:
 
-1. **Match detected** — the fixture calendar starts the work automatically.
+1. **Match detected** — the scheduled fixture refresh starts the work automatically.
 2. **Plan generated** — signals are interpreted into one recommended activation draft.
 3. **Review** — the club can inspect evidence, adjust match-level signals and resolve blockers.
 4. **Handoff** — an approved draft passes to the club's execution workflow.
@@ -20,7 +20,7 @@ The club-facing product is designed around one simple operating loop:
 
 ### Club-facing flow
 - **/app** — operational Home: what needs attention, why, blockers and next action.
-- **/app/matches** — Radar for upcoming home fixtures and automatic opportunity monitoring.
+- **/app/matches** — Radar for upcoming home fixtures and refresh-based opportunity monitoring.
 - **/app/matches/[fixtureId]** — Opportunity Brief: recommendation, activation draft, signals, evidence, impact and handoff review.
 - **/app/campaigns** — fixture-led and seasonal campaign planning.
 - **/app/players** — player asset availability, rights, usage and pack optimisation.
