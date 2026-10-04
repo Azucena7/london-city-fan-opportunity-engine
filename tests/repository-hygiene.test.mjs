@@ -413,3 +413,8 @@ test("retired live weather scoring prototype stays removed", () => {
 
   assert.doesNotMatch(readFileSync("src/lib/models.ts", "utf8"), /LiveMatchState/);
 });
+
+
+test("orphan source-health helper stays retired", () => {
+  assert.equal(existsSync("src/lib/sourceHealth.ts"), false);
+});
