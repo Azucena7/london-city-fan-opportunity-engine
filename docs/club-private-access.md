@@ -32,7 +32,7 @@ Session state persists only the short-lived Supabase access token in an HttpOnly
 2. Apply only migrations that have not already been applied to the target Supabase project. Never rewrite an applied migration.
 3. Keep public signup policy aligned with the pilot model and validate the intended invite / account-creation path.
 4. Test at least two clubs and two roles for cross-club isolation, revocation, expiry and permission denial.
-5. Validate sign-in, access requests, approval, campaign persistence and credit-ledger writes in Preview before relying on the workflow in Production.
+5. Validate sign-in, access requests, approval, campaign persistence and delivery-effort writes in Preview before relying on the workflow in Production.
 
 The public guided demo at `/app/demo` cannot grant private club access.
 
