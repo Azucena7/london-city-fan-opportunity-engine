@@ -331,3 +331,15 @@ test("architecture document reflects the as-built AVELA runtime", () => {
   assert.match(architecture, /legacy physical credit_ledger/);
   assert.doesNotMatch(architecture, /Phase 1 - Public prototype|Phase 2 - Live decision engine|Phase 3 - Agentic workflows/);
 });
+
+
+test("automation documentation distinguishes live workflows from future agents", () => {
+  const doc = readFileSync("06_AUTOMATIONS_AND_AGENTS.md", "utf8");
+  assert.match(doc, /deterministic scheduled workflows and validation scripts/);
+  assert.match(doc, /daily-data-refresh\.yml/);
+  assert.match(doc, /refresh:data/);
+  assert.match(doc, /refresh:public-signals/);
+  assert.match(doc, /Future agentic layer/);
+  assert.match(doc, /future capability, not part of the current production claim/);
+  assert.doesNotMatch(doc, /Existing monitoring concept/);
+});
