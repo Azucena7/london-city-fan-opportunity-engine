@@ -83,6 +83,14 @@ export default function SeasonIntelligencePage() {
         <article><span>Measured outcomes</span><strong>{measuredOutcomes}</strong><small>fixtures with connected outcome evidence</small></article>
       </section>
 
+      <SeasonCloseReview
+        scheduledFixtures={fixtureRows.filter((row) => row.status === "scheduled").length}
+        campaignDrafts={campaigns.filter((campaign) => campaign.status !== "closed").length}
+        unresolvedApprovals={allApprovals.filter((item) => item.state !== "ready").length}
+        measuredOutcomes={measuredOutcomes}
+        attendanceEvidence={measuredAttendance.length}
+      />
+
       <section className={styles.visualGrid}>
         <article className={styles.chartCard}>
           <div className={styles.chartHead}><div><span>Attendance evidence</span><h2>Home attendance trend</h2></div><strong>{avgAttendance ? avgAttendance.toLocaleString("en-GB") : "—"}<small>avg observed</small></strong></div>
