@@ -31,12 +31,6 @@ function londonIsoDate(value = new Date()) {
   }).format(value);
 }
 
-function londonHour(value = new Date()) {
-  return new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/London", hour: "2-digit", hourCycle: "h23"
-  }).format(value);
-}
-
 function compactNumber(value) {
   if (!value) return null;
   const match = String(value).toLowerCase().replaceAll(",", "").match(/([\d.]+)\s*([kmb])?/);
@@ -480,11 +474,7 @@ export async function refreshPublicSignals(now = new Date()) {
 }
 
 if (fileURLToPath(import.meta.url) === process.argv[1]) {
-  const scheduledOutsideLondonWindow = process.env.GITHUB_EVENT_NAME === "schedule" && londonHour() !== "06";
-  const run = scheduledOutsideLondonWindow
-    ? Promise.resolve({ skipped: true, reason: "Not the 06:30 Europe/London run" })
-    : refreshPublicSignals();
-  run.then((result) => console.log(JSON.stringify(result, null, 2))).catch((error) => {
+  refreshPublicSignals().then((result) => console.log(JSON.stringify(result, null, 2))).catch((error) => {
     console.error(error);
     process.exitCode = 1;
   });

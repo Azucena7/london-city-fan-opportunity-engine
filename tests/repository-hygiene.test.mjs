@@ -622,3 +622,25 @@ test("access approval RPC is not executable by anonymous users", () => {
   assert.match(migration, /revoke execute on function public\.approve_club_access_request\(uuid, text\) from public/);
   assert.match(migration, /grant execute on function public\.approve_club_access_request\(uuid, text\) to authenticated/);
 });
+
+
+test("daily refresh tolerates delayed GitHub schedule starts", () => {
+  const workflow = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
+  const refreshData = readFileSync("scripts/refresh-data.mjs", "utf8");
+  const refreshSignals = readFileSync("scripts/refresh-public-signals.mjs", "utf8");
+
+  assert.match(workflow, /cron: "30 5 \* \* \*"/);
+  assert.match(workflow, /cron: "30 6 \* \* \*"/);
+  assert.match(workflow, /EVENT_NAME: \$\{\{ github\.event_name \}\}/);
+  assert.match(workflow, /SCHEDULE: \$\{\{ github\.event\.schedule \}\}/);
+  assert.match(workflow, /push:\n    branches: \[main\]/);
+  assert.match(workflow, /scripts\/refresh-data\.mjs/);
+  assert.match(workflow, /scripts\/refresh-public-signals\.mjs/);
+  assert.match(workflow, /if \[ "\$EVENT_NAME" != "schedule" \]/);
+  assert.match(workflow, /TZ=Europe\/London date \+%z/);
+  assert.match(workflow, /steps\.schedule_gate\.outputs\.run_refresh == 'true'/);
+
+  assert.doesNotMatch(refreshData, /Not the 06:30 Europe\/London run/);
+  assert.doesNotMatch(refreshSignals, /Not the 06:30 Europe\/London run/);
+  assert.doesNotMatch(refreshSignals, /function londonHour/);
+});
