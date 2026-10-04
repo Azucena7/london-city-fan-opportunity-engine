@@ -711,13 +711,15 @@ test("contract intelligence persistence keeps legal truth behind governance appr
   assert.match(migration, /club_has_permission\(new\.club_id,'governance','approve'\)/);
   assert.doesNotMatch(migration, /club_has_permission\([^\n]*'overview'/);
 
-  assert.match(migration, /activate or alter an active contract/);
-  assert.match(migration, /verify or alter a verified contract clause/);
+  assert.match(migration, /governance approve permission is required to activate a contract/);
+  assert.match(migration, /active contract content is immutable; create a new document version instead/);
+  assert.match(migration, /verified clause content is immutable; create a superseding clause instead/);
   assert.match(migration, /reviewed_by := auth\.uid\(\)/);
   assert.match(migration, /reviewed_at := coalesce\(new\.reviewed_at, now\(\)\)/);
 
   assert.match(migration, /foreign key\(document_id, club_id\)/);
-  assert.match(migration, /foreign key\(clause_id, club_id\)/);
+  assert.match(migration, /foreign key\(clause_id, document_id, club_id\)/);
+  assert.match(migration, /unique\(id, document_id, club_id\)/);
   assert.match(migration, /foreign key\(supersedes_document_id, club_id\)/);
   assert.match(migration, /foreign key\(supersedes_clause_id, club_id\)/);
 
