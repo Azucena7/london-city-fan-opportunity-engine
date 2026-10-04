@@ -211,6 +211,15 @@ test("retired Club Operations licensing prototype stays removed", () => {
   assert.doesNotMatch(strategy, /ModuleId|licenceProposal|normalizeModules|toggleModule|Club Operations/);
 });
 
+
+test("retired story and live global stylesheets stay removed", () => {
+  const layout = readFileSync("src/app/layout.tsx", "utf8");
+  for (const path of ["src/app/story.css", "src/app/live.css"]) {
+    assert.equal(existsSync(path), false, `${path} should not return as a global legacy layer`);
+  }
+  assert.doesNotMatch(layout, /story\.css|live\.css/);
+});
+
 test("canonical public surfaces use the AVELA production host", () => {
   const canonical = "https://avela-growth-intelligence.vercel.app";
   const legacy = "https://london-city-fan-opportunity-engine.vercel.app";
