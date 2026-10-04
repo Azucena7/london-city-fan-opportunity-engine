@@ -188,7 +188,8 @@ The product must not imply that an unsupported action has occurred. Until a real
 - **Source of truth:** GitHub.
 - **Production:** Vercel project `avela-growth-intelligence`.
 - **Canonical host:** `https://avela-growth-intelligence.vercel.app`.
-- **Production branch:** `main`.
+- **Production branch:** `main`, deployed through the Vercel Git integration on every relevant push.
+- **Build skipping:** no custom ignore-build command; affected-project skipping is disabled for this single-app repository.
 - **Preview deploys:** explicit `preview-*` branches only.
 - **Scheduled data refresh:** GitHub Actions.
 - **Private persistence:** Supabase.
