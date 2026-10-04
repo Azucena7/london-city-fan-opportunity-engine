@@ -73,8 +73,8 @@ export default async function MatchesPage() {
           <span className={styles.eyebrow}>AVELA · Opportunity Radar</span>
           <h1>Where should the club act next?</h1>
           <p>
-            Upcoming home fixtures are continuously re-prioritised using opportunity potential, evidence confidence
-            and time to act. The ranking is a decision aid, not an attendance forecast.
+            Upcoming home fixtures are re-prioritised whenever the validated evidence state refreshes, using opportunity potential,
+            evidence confidence and time to act. The ranking is a decision aid, not an attendance forecast.
           </p>
         </div>
         <div className={styles.engineState}>
