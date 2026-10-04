@@ -14,7 +14,11 @@ export async function GET(request: Request) {
     `/rest/v1/credit_ledger?club_id=eq.${encodeURIComponent(clubId)}&select=id,fixture_id,item_id,event_type,credits,note,created_at&order=created_at.desc&limit=50`
   );
   if (!response.ok) return NextResponse.json({ error: "Delivery effort history could not be loaded." }, { status: response.status });
-  return NextResponse.json({ persistence: "club", events: await response.json() });
+  const payload = await response.json().catch(() => []);
+  const events = Array.isArray(payload)
+    ? payload.map(({ credits, ...event }: { credits?: number; [key: string]: unknown }) => ({ ...event, units: credits ?? 0 }))
+    : [];
+  return NextResponse.json({ persistence: "club", events });
 }
 
 export async function POST(request: Request) {
@@ -29,17 +33,12 @@ export async function POST(request: Request) {
     eventKey?: string;
     eventType?: "commit" | "release" | "consume" | "adjust";
     units?: number;
-    credits?: number;
     note?: string;
   } | null;
 
   const clubId = typeof body?.clubId === "string" ? body.clubId.trim() : "";
   const eventType = body?.eventType;
-  const units = Number.isInteger(body?.units)
-    ? Number(body?.units)
-    : Number.isInteger(body?.credits)
-      ? Number(body?.credits)
-      : 0;
+  const units = Number.isInteger(body?.units) ? Number(body?.units) : 0;
   if (!clubId || !eventType || units <= 0) {
     return NextResponse.json({ error: "Valid clubId, eventType and effort units are required." }, { status: 400 });
   }
@@ -61,5 +60,9 @@ export async function POST(request: Request) {
 
   const payload = await response.json().catch(() => null);
   if (!response.ok) return NextResponse.json({ error: "Delivery effort event could not be recorded." }, { status: response.status });
-  return NextResponse.json({ persistence: "club", recorded: true, event: Array.isArray(payload) ? payload[0] : payload });
+  const storedEvent = Array.isArray(payload) ? payload[0] : payload;
+  const event = storedEvent && typeof storedEvent === "object"
+    ? (({ credits, ...rest }: { credits?: number; [key: string]: unknown }) => ({ ...rest, units: credits ?? units }))(storedEvent as { credits?: number; [key: string]: unknown })
+    : storedEvent;
+  return NextResponse.json({ persistence: "club", recorded: true, event });
 }
