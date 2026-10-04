@@ -31,7 +31,6 @@ export function OperationalCapacityPanel({
   windowEnd: string;
 }) {
   const [clubs, setClubs] = useState<Club[]>([]);
-  const [activeClubId, setActiveClubId] = useState("");
   const [workload, setWorkload] = useState<WorkloadItem[]>([]);
   const [capacity, setCapacity] = useState<CapacityWindow[]>([]);
 
@@ -67,7 +66,6 @@ export function OperationalCapacityPanel({
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
       setClubs(nextClubs);
       if (result.authenticated && nextClubs.length) {
-        setActiveClubId(nextClubs[0].id);
         await load(nextClubs[0].id);
       }
     })();

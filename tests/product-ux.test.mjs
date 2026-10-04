@@ -1230,15 +1230,16 @@ test("campaign builder makes the recommended campaign path visually explicit", (
 test("app Home surfaces the next decision before navigation", () => {
   const home = read("src/app/app/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
-  assert.match(home, /What needs attention today/);
-  assert.match(home, /Primary action/);
+  assert.match(home, /Decision Center/);
+  assert.match(home, /need your attention/);
+  assert.match(home, /Highest current priority/);
   assert.match(home, /Decision queue/);
-  assert.match(home, /Everything else can wait/);
-  assert.match(home, /Fixture/);
-  assert.match(home, /Signals/);
-  assert.match(home, /Opportunity/);
-  assert.match(home, /Campaign/);
+  assert.match(home, /What should I look at next\?/);
+  assert.match(home, /Opportunity Radar/);
+  assert.match(home, /Campaign execution/);
+  assert.match(home, /Club context/);
   assert.match(home, /Learning/);
+  assert.match(home, /AVELA decision loop/);
   assert.match(nav, /label: "Home"/);
 });
 
@@ -1666,7 +1667,7 @@ test("internal availability can block or protect fixture-day activation", () => 
   assert.match(model, /preferred/);
   assert.match(model, /assessAvailability/);
   assert.match(route, /availability_windows/);
-  assert.match(route, /calendar', 'edit'/);
+  assert.match(migration, /calendar', 'edit'/);
   assert.match(migration, /enable row level security/);
   assert.match(migration, /christmas-break/);
   assert.match(migration, /international-duty/);
@@ -1721,4 +1722,20 @@ test("operational intelligence calculates complexity and capacity rather than as
   assert.match(migration, /external_system/);
   assert.match(migration, /estimated_minutes/);
   assert.match(migration, /complexity_score/);
+});
+
+
+test("daily automation leaves reviewed WSL attendance outside its commit set", () => {
+  const workflow = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
+  assert.doesNotMatch(workflow, /data\/live\/wsl-attendance-benchmark\.json/);
+  assert.match(workflow, /data\/live\/source-health\.json/);
+  assert.match(workflow, /data\/live\/audience-reach\.json/);
+});
+
+
+test("content guard follows the Decision Center home", () => {
+  const guard = read("scripts/check-product-content.mjs");
+  assert.match(guard, /Decision Center/);
+  assert.match(guard, /need your attention/);
+  assert.doesNotMatch(guard, /What needs attention today\?/);
 });

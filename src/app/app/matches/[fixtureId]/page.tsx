@@ -356,6 +356,31 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         recommendation={campaign?.title.en ?? live.recommendedAction}
       />
 
+      <AvailabilityPlanner
+        fixtureDate={fixture.date}
+        fixtureLabel={`London City v ${fixture.opponent}`}
+      />
+
+      <CalendarSlotFinder
+        fixtureDate={fixture.date}
+        fixtureLabel={`London City v ${fixture.opponent}`}
+      />
+
+      <OperationalCapacityPanel
+        windowStart={currentState.updated_at}
+        windowEnd={`${fixture.date}T23:59:59Z`}
+        plan={{
+          estimatedMinutes: Math.max(120, (campaign?.schedule.length ?? 1) * 75 + (campaign?.activations.length ?? 0) * 90),
+          taskCount: campaign?.schedule.length ?? Math.max(1, actions.length),
+          dependencyCount: approvals.length + handoffActivations.length,
+          teamCount: Math.max(1, new Set([live.nextAction.owner, ...activationChannels]).size),
+          approvalCount: approvals.length,
+          daysAvailable: Math.max(0, live.daysToFixture),
+          externalParties: handoffActivations.length,
+          unknownInputs: Math.min(5, live.missing.length)
+        }}
+      />
+
       <OperationalHandoffs
         decisionId={`fixture:${fixture.id}`}
         fixtureLabel={`London City v ${fixture.opponent}`}

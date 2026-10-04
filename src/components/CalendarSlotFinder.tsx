@@ -54,7 +54,6 @@ export function CalendarSlotFinder({
   fixtureLabel: string;
 }) {
   const [clubs, setClubs] = useState<Club[]>([]);
-  const [activeClubId, setActiveClubId] = useState("");
   const [windows, setWindows] = useState<AvailabilityWindow[]>([]);
   const [selectedRoles, setSelectedRoles] = useState<string[]>(["Head of Marketing", "Secretary / Protocol"]);
   const [includeSquad, setIncludeSquad] = useState(true);
@@ -72,7 +71,6 @@ export function CalendarSlotFinder({
       if (!sessionResult.authenticated || !nextClubs.length) return;
 
       const clubId = nextClubs[0].id;
-      setActiveClubId(clubId);
       const response = await fetch(`/api/availability?clubId=${encodeURIComponent(clubId)}&from=${encodeURIComponent(rangeStart)}&to=${encodeURIComponent(rangeEnd)}`, { cache: "no-store" });
       const result = await response.json() as { windows?: ApiWindow[] };
       setWindows(response.ok && Array.isArray(result.windows) ? result.windows.map(mapWindow) : []);

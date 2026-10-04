@@ -18,7 +18,7 @@ if (!layout.includes('className="skipLink"') || !layout.includes("lang={initialL
   throw new Error("Root layout must keep the skip link and server-selected document language");
 }
 
-if (!home.includes("What needs attention today?")) {
+if (!home.includes("Decision Center") || !home.includes("need your attention")) {
   throw new Error("Operational Home must remain decision-first");
 }
 
