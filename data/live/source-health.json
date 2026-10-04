@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-04T20:32:00.365Z",
+  "checkedAt": "2026-10-04T20:35:21.030Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -85,20 +85,20 @@
         "es": "Benchmark de asistencia WSL"
       },
       "category": "attendance",
-      "access": "public-fragile",
-      "state": "blocked",
-      "method": "public-page-observation",
-      "cadence": "weekly",
-      "lastSuccessfulAt": null,
+      "access": "public-browser",
+      "state": "degraded",
+      "method": "reviewed-manual-public-snapshot",
+      "cadence": "weekly-and-postmatch",
+      "lastSuccessfulAt": "2026-10-04T20:35:21.030Z",
       "ownerAction": {
-        "en": "Approve a licensed sports-data provider only if all public attendance sources become unavailable.",
-        "es": "Aprobar un proveedor de datos deportivos con licencia solo si todas las fuentes públicas de asistencia dejan de estar disponibles."
+        "en": "Refresh the reviewed public snapshot weekly and after London City home matches; use a licensed provider only if browser evidence becomes insufficient.",
+        "es": "Actualizar el snapshot público revisado semanalmente y tras los partidos de London City en casa; usar un proveedor con licencia solo si la evidencia en navegador deja de ser suficiente."
       },
       "note": {
-        "en": "The last valid observation is retained. FBref: WSL attendance (FBref) returned 403 | Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403",
-        "es": "Se conserva la última observación válida. FBref: WSL attendance (FBref) returned 403 | Football Web Pages: WSL attendance (Football Web Pages) returned 403 | worldfootball.net: WSL attendance (worldfootball.net) returned 403"
+        "en": "FBref, Football Web Pages and worldfootball.net are readable in browser/search contexts but return 403 to GitHub-hosted automation. The latest reviewed public snapshot is retained instead of reporting a daily pipeline failure.",
+        "es": "FBref, Football Web Pages y worldfootball.net son legibles en navegador/buscadores, pero devuelven 403 a la automatización alojada en GitHub. Se conserva el último snapshot público revisado en lugar de reportar un fallo diario del pipeline."
       },
-      "lastAttemptAt": "2026-10-04T20:32:00.365Z"
+      "lastAttemptAt": "2026-10-04T20:35:21.030Z"
     },
     {
       "id": "google-trends",
