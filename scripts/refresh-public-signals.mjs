@@ -480,11 +480,7 @@ export async function refreshPublicSignals(now = new Date()) {
 }
 
 if (fileURLToPath(import.meta.url) === process.argv[1]) {
-  const scheduledOutsideLondonWindow = process.env.GITHUB_EVENT_NAME === "schedule" && londonHour() !== "06";
-  const run = scheduledOutsideLondonWindow
-    ? Promise.resolve({ skipped: true, reason: "Not the 06:30 Europe/London run" })
-    : refreshPublicSignals();
-  run.then((result) => console.log(JSON.stringify(result, null, 2))).catch((error) => {
+  refreshPublicSignals().then((result) => console.log(JSON.stringify(result, null, 2))).catch((error) => {
     console.error(error);
     process.exitCode = 1;
   });
