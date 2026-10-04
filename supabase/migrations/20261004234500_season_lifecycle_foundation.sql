@@ -18,6 +18,7 @@ create table if not exists public.club_seasons (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   unique(club_id, season_key),
+  unique(id, club_id),
   check (ends_on is null or starts_on is null or ends_on >= starts_on),
   check (
     (state <> 'active')
@@ -124,6 +125,13 @@ on public.season_snapshots for insert to authenticated
 with check (
   created_by=(select auth.uid())
   and public.club_has_permission(club_id,'governance','approve')
+  and exists (
+    select 1
+    from public.club_seasons s
+    where s.id=season_id
+      and s.club_id=club_id
+      and s.state='closed'
+  )
 );
 
 create policy "club members can read rollover items"
@@ -214,8 +222,31 @@ returns trigger
 language plpgsql
 security invoker
 set search_path=''
-as $$
+as $
+declare
+  from_state text;
+  to_state text;
 begin
+  select s.state into from_state
+  from public.club_seasons s
+  where s.id=new.from_season_id and s.club_id=new.club_id;
+
+  select s.state into to_state
+  from public.club_seasons s
+  where s.id=new.to_season_id and s.club_id=new.club_id;
+
+  if from_state is distinct from 'closed' then
+    raise exception 'rollover source season must be closed';
+  end if;
+
+  if to_state not in ('draft','active') then
+    raise exception 'rollover target season must be draft or active';
+  end if;
+
+  if TG_OP='UPDATE' and old.rollover_state in ('accepted','rejected') then
+    raise exception 'reviewed rollover decisions are immutable';
+  end if;
+
   if new.rollover_state in ('accepted','rejected')
      and (
        TG_OP='INSERT'
@@ -229,7 +260,7 @@ begin
   end if;
   return new;
 end;
-$$;
+$;
 
 revoke all on function public.enforce_rollover_review_permissions() from public, anon;
 grant execute on function public.enforce_rollover_review_permissions() to authenticated;
