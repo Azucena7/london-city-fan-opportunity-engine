@@ -301,3 +301,13 @@ test("AVELA product eyebrow labels override the case-study accent", () => {
   assert.match(css, /\.productAppShell \.eyebrow/);
   assert.match(css, /color:var\(--product-accent\)/);
 });
+
+
+test("Supabase runtime accepts only publishable-key naming", () => {
+  const server = readFileSync("src/lib/supabaseServer.ts", "utf8");
+  const env = readFileSync(".env.example", "utf8");
+  assert.match(server, /CLUB_SUPABASE_PUBLISHABLE_KEY/);
+  assert.match(server, /NEXT_PUBLIC_CLUB_SUPABASE_PUBLISHABLE_KEY/);
+  assert.doesNotMatch(server, /CLUB_SUPABASE_ANON_KEY|NEXT_PUBLIC_CLUB_SUPABASE_ANON_KEY/);
+  assert.doesNotMatch(env, /CLUB_SUPABASE_ANON_KEY|NEXT_PUBLIC_CLUB_SUPABASE_ANON_KEY/);
+});
