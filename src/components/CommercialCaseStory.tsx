@@ -21,7 +21,7 @@ export function CommercialCaseStory({ kind, fixture, campaign, validation }: {
     [es ? "Oportunidad" : "Opportunity", es ? "Alargar la jornada con Inglaterra–España." : "Extend the football day with England v Spain.", es ? "Anunció un watchalong después de Brighton." : "Announced a watchalong after Brighton.", es ? "Coincidencia de propuesta" : "Proposition alignment"],
     [es ? "Ejecución" : "Execution", es ? "Contemplaba una extensión con un establecimiento local." : "Considered an extension with a local viewing partner.", es ? "Anunció la actividad en el propio recinto." : "Announced the activity at the ground.", es ? "Diferencia operativa" : "Operational difference"],
     [es ? "Entrega real" : "Actual delivery", es ? "Necesita comprobar que la actividad se realizó." : "Requires evidence that the activity ran.", es ? "El anuncio no demuestra ejecución." : "An announcement does not establish delivery.", es ? "Sin verificar" : "Unverified"],
-    [es ? "Resultado comercial" : "Commercial outcome", es ? "Medir asistencia, ventas y repetición." : "Measure attendance, sales and repeat visits.", es ? "No hay resultados comerciales conectados al prototipo." : "No commercial outcomes are connected to the prototype.", es ? "Sin medir" : "Not measured"]
+    [es ? "Resultado comercial" : "Commercial outcome", es ? "Medir asistencia, ventas y repetición." : "Measure attendance, sales and repeat visits.", es ? "No hay resultados comerciales conectados a la demo pública." : "No commercial outcomes are connected to the public demo.", es ? "Sin medir" : "Not measured"]
   ];
   return <main>
     <MarketingNav />
