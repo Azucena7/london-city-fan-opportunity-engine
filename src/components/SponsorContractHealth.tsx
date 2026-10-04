@@ -65,6 +65,14 @@ export function SponsorContractHealth(){
         <p>This section uses active sponsor contracts and verified clauses only. It is deliberately separate from prospecting readiness.</p>
       </div>
       <aside>
+        {clubs.length > 1 ? (
+          <label>
+            Club
+            <select value={clubId} onChange={(event) => { setClubId(event.target.value); void load(event.target.value); }}>
+              {clubs.map((club) => <option key={club.id} value={club.id}>{club.name}</option>)}
+            </select>
+          </label>
+        ) : null}
         <span>Fulfilment evidence</span>
         <strong>{measurementState.replaceAll("-"," ")}</strong>
         <small>{measurementState==="not-measured"?"No execution linkage yet — do not show 0%.":"Some verified obligations are linked to operational decisions."}</small>
