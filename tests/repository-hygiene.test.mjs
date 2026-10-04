@@ -398,3 +398,18 @@ test("phase-numbered root documentation stays retired", () => {
     "docs/README.md"
   ]) assert.equal(existsSync(path), true, `${path} is canonical documentation`);
 });
+
+
+test("retired live weather scoring prototype stays removed", () => {
+  for (const path of [
+    "src/lib/scoring.ts",
+    "src/lib/weather.ts",
+    "automations/LIVE_STATE.md",
+    "automations/TRAVEL_FRICTION_DELTA.md",
+    "automations/fixture-selection.md",
+    "automations/live-signal-contract.md",
+    "automations/weather-live.md"
+  ]) assert.equal(existsSync(path), false, `${path} belonged to the retired live-weather prototype`);
+
+  assert.doesNotMatch(readFileSync("src/lib/models.ts", "utf8"), /LiveMatchState/);
+});

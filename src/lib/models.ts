@@ -880,15 +880,3 @@ export type Territory = {
   [key: string]: unknown;
 };
 
-export type LiveMatchState = {
-  fixture: Fixture;
-  weatherSuitability: number | null;
-  attendanceMomentum: number | null;
-  planningScore: number;
-  liveScore: number | null;
-  activeScore: number;
-  decision: Decision;
-  readiness: number;
-  totalSignals: 6;
-  updatedAt: string | null;
-};
