@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://london-city-fan-opportunity-engine.vercel.app/api/contracts/partner-commercial-pack",
+  "$id": "https://avela-growth-intelligence.vercel.app/api/contracts/partner-commercial-pack",
   "title": "PartnerCommercialPack",
   "type": "object",
   "required": ["version", "checkedAt", "status", "measurementState", "headline", "principle", "fixtures", "packs", "pilotPhases", "approvalGates", "guardrails"],
