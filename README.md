@@ -33,7 +33,7 @@ The club-facing product is designed around one simple operating loop:
 ### Commercial / implementation
 - **/** — commercial product home.
 - **/for-clubs** — club proposition and pilot discussion.
-- **/pilot** — 90-day / 6-fixture Fan Growth Pilot proposition.
+- **/pilot** — 90-day / 6-fixture Growth Intelligence Pilot proposition.
 - **/pilot/operating-pack** — onboarding, data trust, roles and measurement design.
 - **/pilot/rehearsal** — synthetic end-to-end rehearsal of the privacy-safe club-data path.
 - **/cases** — product use cases.
@@ -44,7 +44,7 @@ Historical URLs are preserved only as permanent redirects into the canonical AVE
 
 ## Commercial entry product
 
-### 90-Day Fan Growth Pilot
+### 90-Day Growth Intelligence Pilot
 
 Six home-fixture decision cycles.
 
@@ -56,7 +56,7 @@ For every fixture:
 - decision blockers and confidence;
 - post-match result and learning.
 
-At the end of the pilot, the club receives a **Fan Growth Playbook** covering who attends, who returns, what converts, where growth exists, which assumptions failed and what to prioritise next.
+At the end of the pilot, the club receives a **Growth Intelligence Playbook** covering who attends, who returns, what converts, where growth exists, which assumptions failed and what to prioritise next.
 
 ## Product principles
 
