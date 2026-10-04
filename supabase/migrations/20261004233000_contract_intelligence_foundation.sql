@@ -68,6 +68,7 @@ create table if not exists public.contract_clauses (
     or (reviewed_by is not null and reviewed_at is not null)
   ),
   unique(id, club_id),
+  unique(id, document_id, club_id),
   foreign key(document_id, club_id)
     references public.contract_documents(id, club_id) on delete cascade,
   foreign key(supersedes_clause_id, club_id)
@@ -107,8 +108,8 @@ create table if not exists public.contract_entity_links (
   unique(document_id, clause_id, entity_type, entity_id, relationship_type),
   foreign key(document_id, club_id)
     references public.contract_documents(id, club_id) on delete cascade,
-  foreign key(clause_id, club_id)
-    references public.contract_clauses(id, club_id) on delete cascade
+  foreign key(clause_id, document_id, club_id)
+    references public.contract_clauses(id, document_id, club_id) on delete cascade
 );
 
 alter table public.contract_documents enable row level security;
@@ -192,37 +193,65 @@ with check (
 );
 
 -- Prevent a normal editor from silently promoting extracted content into legal truth.
+-- Once active/verified, substantive content is immutable: corrections create a new version
+-- linked through supersedes_document_id / supersedes_clause_id.
 create or replace function public.enforce_contract_verification_permissions()
 returns trigger
 language plpgsql
 security invoker
 set search_path=''
-as $$
+as $
 begin
   if TG_TABLE_NAME = 'contract_documents' then
-    if (
-      new.lifecycle_state = 'active'
-      or (TG_OP = 'UPDATE' and old.lifecycle_state = 'active')
-    ) and not public.club_has_permission(new.club_id,'governance','approve') then
-      raise exception 'governance approve permission is required to activate or alter an active contract';
+    if new.lifecycle_state = 'active'
+       and (TG_OP = 'INSERT' or old.lifecycle_state is distinct from 'active')
+       and not public.club_has_permission(new.club_id,'governance','approve') then
+      raise exception 'governance approve permission is required to activate a contract';
     end if;
-  elsif TG_TABLE_NAME = 'contract_clauses' then
-    if (
-      new.review_state = 'verified'
-      or (TG_OP = 'UPDATE' and old.review_state = 'verified')
-    ) then
+
+    if TG_OP = 'UPDATE' and old.lifecycle_state = 'active' then
       if not public.club_has_permission(new.club_id,'governance','approve') then
-        raise exception 'governance approve permission is required to verify or alter a verified contract clause';
+        raise exception 'governance approve permission is required to supersede or terminate an active contract';
       end if;
-      if new.review_state = 'verified' then
-        new.reviewed_by := auth.uid();
-        new.reviewed_at := coalesce(new.reviewed_at, now());
+
+      if new.lifecycle_state not in ('active','superseded','terminated') then
+        raise exception 'an active contract can only remain active, be superseded or be terminated';
       end if;
+
+      if new.contract_type is distinct from old.contract_type
+         or new.subject_type is distinct from old.subject_type
+         or new.subject_id is distinct from old.subject_id
+         or new.subject_label is distinct from old.subject_label
+         or new.title is distinct from old.title
+         or new.effective_start is distinct from old.effective_start
+         or new.effective_end is distinct from old.effective_end
+         or new.source_system is distinct from old.source_system
+         or new.source_ref is distinct from old.source_ref
+         or new.storage_ref is distinct from old.storage_ref
+         or new.document_hash is distinct from old.document_hash
+         or new.version_label is distinct from old.version_label
+         or new.supersedes_document_id is distinct from old.supersedes_document_id then
+        raise exception 'active contract content is immutable; create a new document version instead';
+      end if;
+    end if;
+
+  elsif TG_TABLE_NAME = 'contract_clauses' then
+    if TG_OP = 'UPDATE' and old.review_state = 'verified' then
+      raise exception 'verified clause content is immutable; create a superseding clause instead';
+    end if;
+
+    if new.review_state = 'verified'
+       and (TG_OP = 'INSERT' or old.review_state is distinct from 'verified') then
+      if not public.club_has_permission(new.club_id,'governance','approve') then
+        raise exception 'governance approve permission is required to verify a contract clause';
+      end if;
+      new.reviewed_by := auth.uid();
+      new.reviewed_at := coalesce(new.reviewed_at, now());
     end if;
   end if;
   return new;
 end;
-$$;
+$;
 
 revoke all on function public.enforce_contract_verification_permissions() from public, anon;
 grant execute on function public.enforce_contract_verification_permissions() to authenticated;
