@@ -179,6 +179,20 @@ test("legacy credit-ledger endpoint is only a compatibility alias", () => {
   assert.doesNotMatch(legacy, /credit_ledger\?/);
 });
 
+test("delivery planner uses effort naming while preserving legacy persisted state compatibility", () => {
+  const planner = read("src/components/CampaignDeliveryPlanner.tsx");
+  assert.match(planner, /EffortCategory/);
+  assert.match(planner, /baseEffort/);
+  assert.match(planner, /generatedEffort/);
+  assert.match(planner, /lockedCampaignEffort/);
+  assert.match(planner, /effortToLock/);
+  assert.doesNotMatch(planner, /type CreditCategory/);
+  assert.doesNotMatch(planner, /baseCredits/);
+  assert.doesNotMatch(planner, /totalCredits/);
+  assert.match(planner, /reservedCampaignCredits/);
+});
+
+
 test("campaign builder can generate real CRM and vertical-video drafts through a server route", () => {
   const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const route = read("src/app/api/campaign-draft/route.ts");

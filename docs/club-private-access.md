@@ -19,7 +19,7 @@ The current product includes:
 - club access requests and admin approval through `club_access_requests`;
 - membership and permission checks through `club_memberships` and `club_has_permission`;
 - persistent campaign workspaces in `campaign_workspaces`;
-- a persistent credit ledger in `credit_ledger`;
+- persistent delivery-effort audit events stored in the legacy physical table `credit_ledger` for rollback compatibility; the active application contract is `/api/delivery-effort`;
 - club setup context protected by the same membership boundary.
 
 The server validates the current access token against `/auth/v1/user` and all private domain data remains subject to RLS. Application inputs and user metadata cannot self-grant club membership or elevate permissions.
