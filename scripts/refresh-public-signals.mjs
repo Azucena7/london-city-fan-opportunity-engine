@@ -31,12 +31,6 @@ function londonIsoDate(value = new Date()) {
   }).format(value);
 }
 
-function londonHour(value = new Date()) {
-  return new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/London", hour: "2-digit", hourCycle: "h23"
-  }).format(value);
-}
-
 function compactNumber(value) {
   if (!value) return null;
   const match = String(value).toLowerCase().replaceAll(",", "").match(/([\d.]+)\s*([kmb])?/);
