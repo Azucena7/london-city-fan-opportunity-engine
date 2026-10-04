@@ -1826,3 +1826,28 @@ test("Sponsor Intelligence keeps prospecting separate from verified contract hea
   assert.match(route, /fulfilmentState: decisionLinks\.length \? "evidence-linked" : "not-measured"/);
   assert.match(route, /schema-not-ready/);
 });
+
+
+test("Player Assets separates verified contract truth from planning scenarios", () => {
+  const page = read("src/app/app/players/page.tsx");
+  const component = read("src/components/PlayerContractHealth.tsx");
+  const route = read("src/app/api/players/contract-health/route.ts");
+  const css = read("src/app/app/players/players.module.css");
+
+  assert.match(page, /PlayerContractHealth/);
+  assert.match(page, /Scenario optimiser · not legal contract truth/);
+  assert.match(page, /agreement\/quota data remains demo planning context/);
+
+  assert.match(component, /Verified player contract health/);
+  assert.match(component, /Sporting availability, momentum and contract truth remain separate signals/);
+  assert.match(component, /No linked execution evidence yet — do not show 0 uses/);
+  assert.match(component, /Contract rights \+ availability \+ cost \+ usage \+ opportunity cost are different dimensions/);
+
+  assert.match(route, /contract_type=eq\.player/);
+  assert.match(route, /lifecycle_state=eq\.active/);
+  assert.match(route, /review_state=eq\.verified/);
+  assert.match(route, /usageMeasurementState: decisionLinks\.length \? "evidence-linked" : "not-measured"/);
+  assert.match(route, /schema-not-ready/);
+
+  assert.match(css, /planningBoundary/);
+});
