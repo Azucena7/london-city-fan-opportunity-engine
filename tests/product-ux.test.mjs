@@ -1851,3 +1851,34 @@ test("Player Assets separates verified contract truth from planning scenarios", 
 
   assert.match(css, /planningBoundary/);
 });
+
+
+test("Contract Impact Graph requires explicit verified links and keeps legal text out of the general queue", () => {
+  const page = read("src/app/app/contracts/page.tsx");
+  const component = read("src/components/ContractImpactGraph.tsx");
+  const route = read("src/app/api/contracts/impacts/route.ts");
+  const migration = read("supabase/migrations/20261005000500_contract_impact_reviews.sql");
+
+  assert.match(page, /ContractImpactGraph/);
+  assert.ok(page.indexOf("<ContractReviewQueue") < page.indexOf("<ContractImpactGraph"));
+
+  assert.match(component, /sanitised operational view/i);
+  assert.match(component, /not the underlying legal clause text/i);
+  assert.match(component, /No link means AVELA does not guess the impact/);
+  assert.match(component, /Raw clause text remains restricted to Contract Intelligence/);
+  assert.doesNotMatch(component, /source_fragment/);
+  assert.doesNotMatch(component, /extracted_value/);
+
+  assert.match(route, /contract_impact_reviews/);
+  assert.match(route, /select=id,entity_type,entity_id,relationship_type,review_state,reason,created_at,updated_at/);
+  assert.doesNotMatch(route, /source_fragment/);
+  assert.doesNotMatch(route, /extracted_value/);
+
+  assert.match(migration, /new\.review_state='verified'/);
+  assert.match(migration, /new\.material=true/);
+  assert.match(migration, /link\.clause_id=new\.id/);
+  assert.match(migration, /relationship_type in \('applies-to','blocks','requires','supersedes'\)/);
+  assert.match(migration, /new\.relationship_type='informs'/);
+  assert.match(migration, /resolved contract impact reviews are immutable/);
+  assert.match(migration, /governance approve permission is required to resolve a contract impact review/);
+});
