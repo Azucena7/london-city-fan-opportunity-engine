@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "AVELA — growth intelligence for women’s football";
+export const alt = "AVELA — decision intelligence for football clubs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -13,8 +13,8 @@ export default function Image() {
           height: "630px",
           display: "flex",
           padding: "54px",
-          color: "#10131A",
-          background: "linear-gradient(135deg, #F7F8FA 0%, #EFF2F6 100%)",
+          color: "#102742",
+          background: "linear-gradient(135deg, #F8F6F1 0%, #F1E9DE 100%)",
           fontFamily: "Arial, Helvetica, sans-serif"
         }}
       >
@@ -24,7 +24,7 @@ export default function Image() {
               style={{
                 width: "12px",
                 height: "12px",
-                background: "#6657FF",
+                background: "#2F8F83",
                 marginRight: "12px",
                 transform: "rotate(45deg)",
                 borderRadius: "3px"
@@ -33,15 +33,15 @@ export default function Image() {
             AVELA
           </div>
 
-          <div style={{ color: "#5B50D6", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em", marginTop: "70px" }}>
-            GROWTH INTELLIGENCE FOR WOMEN’S FOOTBALL
+          <div style={{ color: "#2F8F83", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em", marginTop: "70px" }}>
+            DECISION INTELLIGENCE FOR FOOTBALL CLUBS
           </div>
 
           <div style={{ fontSize: "60px", lineHeight: 0.98, fontWeight: 800, letterSpacing: "-0.045em", marginTop: "18px" }}>
-            Know where to act before the moment passes.
+            READ THE SIGNALS. MOVE THE CLUB.
           </div>
 
-          <div style={{ fontSize: "20px", lineHeight: 1.35, color: "#69707D", marginTop: "24px" }}>
+          <div style={{ fontSize: "20px", lineHeight: 1.35, color: "#637282", marginTop: "24px" }}>
             See what matters now, what to do next, and how much evidence the club really has.
           </div>
         </div>
@@ -53,11 +53,11 @@ export default function Image() {
               flexDirection: "column",
               padding: "26px",
               borderRadius: "24px",
-              background: "#10131A",
-              color: "#F7F8FA"
+              background: "#102742",
+              color: "#F8F6F1"
             }}
           >
-            <div style={{ display: "flex", color: "#B9C0CC", fontSize: "10px", fontWeight: 800, letterSpacing: "0.08em" }}>
+            <div style={{ display: "flex", color: "#C6D2DD", fontSize: "10px", fontWeight: 800, letterSpacing: "0.08em" }}>
               PRODUCT JOURNEY
             </div>
 
@@ -68,12 +68,12 @@ export default function Image() {
               ["04", "Learning"]
             ].map(([num, label]) => (
               <div key={num} style={{ display: "flex", alignItems: "center", padding: "15px 0", borderBottom: "1px solid rgba(255,255,255,0.09)" }}>
-                <div style={{ display: "flex", width: "38px", color: "#BDB7FF", fontSize: "11px", fontWeight: 800 }}>{num}</div>
-                <div style={{ display: "flex", color: "#F7F8FA", fontSize: "18px", fontWeight: 800 }}>{label}</div>
+                <div style={{ display: "flex", width: "38px", color: "#74C9BB", fontSize: "11px", fontWeight: 800 }}>{num}</div>
+                <div style={{ display: "flex", color: "#F8F6F1", fontSize: "18px", fontWeight: 800 }}>{label}</div>
               </div>
             ))}
 
-            <div style={{ display: "flex", marginTop: "18px", color: "#B9C0CC", fontSize: "11px", lineHeight: 1.4 }}>
+            <div style={{ display: "flex", marginTop: "18px", color: "#C6D2DD", fontSize: "11px", lineHeight: 1.4 }}>
               Live · Modelled · Missing — always visible.
             </div>
           </div>
