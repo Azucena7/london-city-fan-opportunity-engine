@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const base = "https://london-city-fan-opportunity-engine.vercel.app";
+const base = "https://avela-growth-intelligence.vercel.app";
 const updated = new Date("2026-10-03T00:00:00Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
