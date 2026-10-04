@@ -155,7 +155,7 @@ async function main() {
     readFile(CURRENT_PATH, "utf8").then(JSON.parse),
     readFile(SIGNALS_PATH, "utf8").then(JSON.parse)
   ]);
-  const response = await fetch(FIXTURES_URL, { headers: { "user-agent": "LondonCityFanOpportunityLab/1.0" } });
+  const response = await fetch(FIXTURES_URL, { headers: { "user-agent": "AVELA/1.0 (+https://london-city-fan-opportunity-engine.vercel.app)" } });
   if (!response.ok) throw new Error(`Official fixtures page returned ${response.status}`);
   const calendar = normaliseFixtures(parseWarmup(await response.text()), existing);
   const today = londonIsoDate();

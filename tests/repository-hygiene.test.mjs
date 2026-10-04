@@ -138,3 +138,21 @@ test("private persistence APIs do not expose raw provider error payloads", () =>
     assert.doesNotMatch(readFileSync(path, "utf8"), /detail:\s*payload/);
   }
 });
+
+test("technical package and outbound agents identify as AVELA", () => {
+  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+  const lock = JSON.parse(readFileSync("package-lock.json", "utf8"));
+  assert.equal(pkg.name, "avela-growth-intelligence");
+  assert.equal(lock.name, "avela-growth-intelligence");
+  assert.equal(lock.packages[""].name, "avela-growth-intelligence");
+
+  for (const path of [
+    "src/app/api/geocode/route.ts",
+    "scripts/refresh-data.mjs",
+    "scripts/refresh-public-signals.mjs"
+  ]) {
+    const source = readFileSync(path, "utf8");
+    assert.match(source, /AVELA\/1\.0/);
+    assert.doesNotMatch(source, /LondonCityFanOpportunityLab|research-prototype/);
+  }
+});
