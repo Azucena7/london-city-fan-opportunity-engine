@@ -43,8 +43,8 @@ export function ClubPilotProposition() {
       <p>{es ? "Conectar calendario, contexto y señales de afición para elegir qué probar, quién lo aprueba y cómo aprender del resultado." : "Connect the calendar, context and supporter signals to choose what to test, who approves it and how to learn from the outcome."}</p>
       <p className="commercialScope">{es ? "90 días · 6 partidos propuestos · un objetivo prioritario" : "90 days · 6 proposed fixtures · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
-      <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar la conversación →" : "Prepare the discussion →"}</a></div>
-      <p><Link href="/app/demo">{es ? "Probar el espacio de cliente con datos de prueba →" : "Try the client workspace with test data →"}</Link></p>
+      <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar el brief del piloto →" : "Prepare the pilot brief →"}</a></div>
+      <p><Link href="/app/demo">{es ? "Probar la demo guiada de 3 minutos →" : "Try the 3-minute guided demo →"}</Link></p>
     </header>
 
     <section className="commercialPanel">
@@ -82,7 +82,7 @@ export function ClubPilotProposition() {
     </section>
 
     <section className="commercialPanel" id="demo" aria-labelledby="discussion-title">
-      <h2 id="discussion-title">{es ? "Solicitar una demo para el club" : "Request a club demo"}</h2>
+      <h2 id="discussion-title">{es ? "Preparar una conversación sobre el piloto" : "Prepare a pilot conversation"}</h2>
       <p>{es ? "Selecciona el punto de partida y copia un resumen para compartir por tu propio canal. Estas selecciones no se envían ni solicitan datos personales." : "Select a starting point and copy a summary to share through your own channel. These selections are not submitted and request no personal data."}</p>
       <div className="commercialTwoColumns commercialFields">
         <label htmlFor="pilot-goal">{es ? "Objetivo prioritario" : "Priority objective"}<select id="pilot-goal" value={goal} onChange={(event) => { setGoal(event.target.value); setCopyState("idle"); }}>{Object.entries(goals).map(([key, value]) => <option key={key} value={key}>{value}</option>)}</select></label>
@@ -90,7 +90,7 @@ export function ClubPilotProposition() {
       </div>
       <label className="commercialBriefLabel" htmlFor="pilot-brief">{es ? "Resumen listo para copiar" : "Summary ready to copy"}</label>
       <textarea id="pilot-brief" className="commercialBrief" readOnly value={brief} rows={13} />
-      <button className="productButton" type="button" onClick={copyBrief}>{es ? "Copiar resumen" : "Copy summary"}</button>
+      <button className="productButton" type="button" onClick={copyBrief}>{es ? "Copiar brief del piloto" : "Copy pilot brief"}</button>
       <p role="status" aria-live="polite">{copyState === "copied" ? (es ? "Resumen copiado. No se ha enviado ninguna solicitud." : "Summary copied. No request has been sent.") : copyState === "manual" ? (es ? "No se pudo acceder al portapapeles. Selecciona el resumen y cópialo manualmente." : "Clipboard access was unavailable. Select the summary and copy it manually.") : (es ? "Este resumen no reserva ni activa un piloto. Puedes copiarlo y compartirlo por el canal que prefieras." : "This summary does not book or activate a pilot. You can copy it and share it through your preferred channel.")}</p>
       <Link href="/pilot">{es ? "Consultar el detalle operativo del piloto →" : "Read the pilot operating detail →"}</Link>
     </section>
