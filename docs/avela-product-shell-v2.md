@@ -100,3 +100,37 @@ After shell approval:
 9. Contracts / Sources / Setup
 
 Do not restyle every screen in one merge.
+
+
+## Prepared PR integration order
+
+When production deploy capacity is available again, validate and merge in this order:
+
+1. **#262 · Commercial identity and positioning**
+   - public website only;
+   - verify desktop/tablet/mobile;
+   - verify final CTA and published lead-form URL before exposing it.
+
+2. **#263 · Product shell identity**
+   - shared product tokens + navigation shell + Decision Center + Ask AVELA styling;
+   - rebase on main after #262 if necessary.
+
+3. **#264 · Decision-first Opportunity Brief**
+   - rebase on the new product shell so the hierarchy inherits the approved tokens;
+   - visually verify Decision → Readiness → Execute → Evidence → Human decision → Memory.
+
+4. **#265 · Sponsor Intelligence**
+   - rebase after #263 because both touch ProductJourneyNav;
+   - keep Sponsors as a primary workspace.
+
+5. **#266 · Contract Intelligence**
+   - rebase after #265 because both touch ProductJourneyNav;
+   - keep Contracts secondary until verified legal sources exist.
+
+Do not merge #265 and #266 independently without rebasing after the first navigation change; otherwise the navigation type/item edits may conflict.
+
+After each merge:
+- require green Quality Gate;
+- deploy one coherent layer at a time;
+- visually verify before advancing;
+- do not batch all five into one production release.
