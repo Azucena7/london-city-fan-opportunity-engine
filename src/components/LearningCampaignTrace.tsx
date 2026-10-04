@@ -101,7 +101,7 @@ export function LearningCampaignTrace({ fixtureId }: { fixtureId: string }) {
       <div className={styles.states}>
         <article><span>Reviewed</span><strong>{trace.reviewed ? "Recorded" : "No record"}</strong></article>
         <article><span>Drafts produced</span><strong>{trace.produced ? "Recorded" : "No record"}</strong></article>
-        <article><span>Credits reserved</span><strong>{trace.reserved ? "Active" : trace.reopened ? "Released" : "No record"}</strong></article>
+        <article><span>Scope lock</span><strong>{trace.reserved ? "Active" : trace.reopened ? "Released" : "No record"}</strong></article>
         <article><span>Launch handoff</span><strong>{trace.handoff ? "Prepared" : "No record"}</strong></article>
       </div>
 
