@@ -8,7 +8,19 @@ export type OperationalHandoffSuggestion = {
   urgency: "now" | "soon" | "plan";
   reason: string;
   ruleId: string;
+  requiredRoles?: string[];
+  durationMinutes?: number;
 };
+
+function inferRepresentationRoles(text: string) {
+  const roles = new Set<string>(["Secretary / Protocol"]);
+  if (/president|chair|chairman|chairwoman/i.test(text)) roles.add("President");
+  if (/general director|chief executive|\bceo\b|executive director/i.test(text)) roles.add("General Director");
+  if (/marketing|campaign|brand|media/i.test(text)) roles.add("Head of Marketing");
+  if (/commercial|sponsor|partner|hospitality/i.test(text)) roles.add("Commercial Director");
+  if (roles.size === 1) roles.add("Head of Marketing");
+  return Array.from(roles);
+}
 
 function urgency(daysToFixture: number) {
   if (daysToFixture <= 7) return "now" as const;
@@ -71,7 +83,9 @@ export function buildOperationalHandoffSuggestions({
       subject: `Possible club representation · ${fixtureLabel}`,
       urgency: timing,
       reason: "The action contains an event, hospitality or representation dependency.",
-      ruleId: "club-representation"
+      ruleId: "club-representation",
+      requiredRoles: inferRepresentationRoles(text),
+      durationMinutes: /ceremony|hospitality|event|launch/i.test(text) ? 90 : 60
     });
   }
 
