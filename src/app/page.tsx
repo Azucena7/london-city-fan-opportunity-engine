@@ -19,7 +19,7 @@ const packages = [
     cadence: "one-off · 90 days",
     description: "Prove the workflow across six home fixtures before committing to a full-season rollout.",
     features: ["6 home fixtures", "Opportunity Radar", "Recommended play", "Campaign draft", "Learning review"],
-    cta: "Request pilot demo"
+    cta: "Explore pilot"
   },
   {
     name: "Club",
@@ -27,7 +27,7 @@ const packages = [
     cadence: "per month · annual",
     description: "The growth-intelligence layer for one club across the season.",
     features: ["Full home calendar", "Continuous monitoring", "Club context", "Campaign workflow", "Learning loop"],
-    cta: "Request club demo"
+    cta: "Explore Club"
   },
   {
     name: "Club Pro",
@@ -63,13 +63,13 @@ export default function Home() {
             identifying what matters now and showing the club one play worth reviewing.
           </p>
           <div className={styles.heroActions}>
-            <Link className={styles.primary} href="/for-clubs#demo">Request a demo</Link>
-            <Link className={styles.textLink} href="/live/london-city">See AVELA thinking in public ↗</Link>
+            <Link className={styles.primary} href="/for-clubs#demo">Explore the 90-day pilot</Link>
+            <Link className={styles.textLink} href="/live/london-city">See a live fixture decision ↗</Link>
           </div>
           <div className={styles.heroMeta}>
-            <span>Not another CRM.</span>
-            <span>Not another dashboard.</span>
-            <span>A decision layer above the club stack.</span>
+            <span>Works above your existing stack.</span>
+            <span>Human approval before activation.</span>
+            <span>Learns fixture to fixture.</span>
           </div>
         </div>
         <CommercialSignalStage />
@@ -82,6 +82,41 @@ export default function Home() {
         <span>CULTURAL CROSSOVER</span>
         <span>FIXTURE OVERLAP</span>
         <span>PARTNER FIT</span>
+      </section>
+
+      <section className={styles.liveProof}>
+        <div className={styles.liveCopy}>
+          <span className={styles.kicker}>Proof in public</span>
+          <h2>See what AVELA saw before London City announced it.</h2>
+          <p>
+            The Brighton hypothesis was time-stamped on 15 September. A comparable London City activation became public
+            on 18 September. That is evidence of relevance — not evidence that the club saw or used AVELA.
+          </p>
+          <div className={styles.proofTimeline} aria-hidden="true"><span>15 SEP</span><i /><b>3 DAYS</b><i /><span>18 SEP</span></div>
+          <div className={styles.proofPair}>
+            <article><span>15 Sep · AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
+            <article><span>18 Sep · London City announced</span><strong>{proof.observedAction.en}</strong></article>
+          </div>
+          <div className={styles.proofActions}>
+            <Link className={styles.primaryLight} href="/case-study">See the evidence</Link>
+            <Link className={styles.proofTextLink} href="/live/london-city">Open London City Live ↗</Link>
+          </div>
+        </div>
+        <div className={styles.livePanel}>
+          <div className={styles.liveTop}>
+            <span>Current live case</span>
+            <strong>{live?.fixture.opponent ?? "Next home fixture"}</strong>
+          </div>
+          <div className={styles.liveDecision}>
+            <span>Opportunity</span>
+            <strong>{live?.opportunity ?? "Review current evidence."}</strong>
+          </div>
+          <div className={styles.liveFacts}>
+            <div><span>State</span><strong>{live?.decisionState ?? "HOLD"}</strong></div>
+            <div><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
+            <div><span>Do next</span><strong>{live?.nextAction.label ?? "Review evidence"}</strong></div>
+          </div>
+        </div>
       </section>
 
       <section className={styles.manifesto}>
@@ -130,41 +165,6 @@ export default function Home() {
               </div>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className={styles.liveProof}>
-        <div className={styles.liveCopy}>
-          <span className={styles.kicker}>Proof in public</span>
-          <h2>See what AVELA saw before London City announced it.</h2>
-          <p>
-            The Brighton hypothesis was time-stamped on 15 September. A comparable London City activation became public
-            on 18 September. That is evidence of relevance — not evidence that the club saw or used AVELA.
-          </p>
-          <div className={styles.proofTimeline} aria-hidden="true"><span>15 SEP</span><i /><b>3 DAYS</b><i /><span>18 SEP</span></div>
-          <div className={styles.proofPair}>
-            <article><span>15 Sep · AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
-            <article><span>18 Sep · London City announced</span><strong>{proof.observedAction.en}</strong></article>
-          </div>
-          <div className={styles.proofActions}>
-            <Link className={styles.primaryLight} href="/case-study">See the evidence</Link>
-            <Link className={styles.proofTextLink} href="/live/london-city">Open London City Live ↗</Link>
-          </div>
-        </div>
-        <div className={styles.livePanel}>
-          <div className={styles.liveTop}>
-            <span>Current live case</span>
-            <strong>{live?.fixture.opponent ?? "Next home fixture"}</strong>
-          </div>
-          <div className={styles.liveDecision}>
-            <span>Opportunity</span>
-            <strong>{live?.opportunity ?? "Review current evidence."}</strong>
-          </div>
-          <div className={styles.liveFacts}>
-            <div><span>State</span><strong>{live?.decisionState ?? "HOLD"}</strong></div>
-            <div><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
-            <div><span>Do next</span><strong>{live?.nextAction.label ?? "Review evidence"}</strong></div>
-          </div>
         </div>
       </section>
 
@@ -233,7 +233,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <Link className={styles.primaryDark} href="/for-clubs#demo">Request the 90-day pilot</Link>
+          <Link className={styles.primaryDark} href="/for-clubs#demo">Explore the 90-day pilot</Link>
           <Link className={styles.finalLink} href="/app/demo">Try the 3-minute product demo ↗</Link>
           <Link className={styles.finalLink} href="/case-study">Review London City proof ↗</Link>
         </div>
