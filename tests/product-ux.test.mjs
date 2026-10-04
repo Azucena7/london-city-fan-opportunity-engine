@@ -1453,3 +1453,14 @@ test("commercial funnel proves relevance before explaining the full product and 
   assert.match(clubs, /Copy pilot brief/);
   assert.doesNotMatch(clubs, /Request a club demo/);
 });
+
+test("guided demo sells the decision workflow without implying unsupported execution", () => {
+  const demo = read("src/components/DemoTour.tsx");
+  assert.match(demo, /one home fixture becomes one growth decision/);
+  assert.match(demo, /Review & handoff/);
+  assert.match(demo, /Handoff principle/);
+  assert.match(demo, /never presents an unsupported action as executed/);
+  assert.match(demo, /Use this workflow on your next six home fixtures/);
+  assert.doesNotMatch(demo, /credit cost/);
+  assert.doesNotMatch(demo, /Review & launch/);
+});
