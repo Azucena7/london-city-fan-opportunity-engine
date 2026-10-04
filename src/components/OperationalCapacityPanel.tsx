@@ -66,7 +66,6 @@ export function OperationalCapacityPanel({
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
       setClubs(nextClubs);
       if (result.authenticated && nextClubs.length) {
-        setActiveClubId(nextClubs[0].id);
         await load(nextClubs[0].id);
       }
     })();
