@@ -582,9 +582,9 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   const config = read("next.config.mjs");
   const liveCase = read("src/components/LondonCityCase.tsx");
   assert.match(home, /MarketingNav/);
-  assert.match(home, /See AVELA thinking in public/);
+  assert.match(home, /See a live fixture decision/);
   assert.match(home, /href="\/live\/london-city"/);
-  assert.match(marketingNav, /Open app/);
+  assert.match(marketingNav, /Try product/);
   assert.match(marketingNav, /href="\/app">Open app/);
   assert.match(appNav, /AVELA website/);
   assert.match(appNav, /\/app\/learning/);
@@ -907,10 +907,10 @@ test("AVELA commercial home uses an editorial product-theatre identity with purp
   const appNav = read("src/components/ProductJourneyNav.tsx");
 
   assert.match(page, /Know where to act before the moment passes/);
-  assert.match(page, /Not another CRM/);
+  assert.match(page, /Works above your existing stack/);
   assert.match(page, /The missing layer/);
   assert.match(page, /CommercialSignalStage/);
-  assert.match(page, /See AVELA thinking in public/);
+  assert.match(page, /See a live fixture decision/);
 
   assert.match(motion, /Fixture → decision → action/);
   assert.match(motion, /Opportunity/);
@@ -967,7 +967,7 @@ test("club surfaces use explicit loading states and mobile-first controls", () =
 
 test("homepage sells the product with demo conversion and transparent packages", () => {
   const page = read("src/app/page.tsx");
-  assert.match(page, /Request a demo/);
+  assert.match(page, /Explore the 90-day pilot/);
   assert.match(page, /Start small/);
   assert.match(page, /£4,500/);
   assert.match(page, /£1,500/);
@@ -1078,7 +1078,7 @@ test("commercial home turns London City proof into a concrete 90-day pilot path"
   assert.match(page, /Radar across six home fixtures/);
   assert.match(page, /Opportunity briefs and signal what-if/);
   assert.match(page, /Prediction vs reality learning review/);
-  assert.match(page, /Request the 90-day pilot/);
+  assert.match(page, /Explore the 90-day pilot/);
   assert.match(css, /proofPair/);
   assert.match(css, /pilotPromise/);
 });
@@ -1437,4 +1437,19 @@ test("current AVELA brand surfaces do not regress to the retired lime system", (
   assert.match(read("src/app/pilot/pilot.module.css"), /var\(--product-accent-soft\)/);
   assert.match(read("src/app/opengraph-image.tsx"), /#6657FF/);
   assert.match(read("src/app/linkedin-card/route.tsx"), /#6657FF/);
+});
+
+test("commercial funnel proves relevance before explaining the full product and keeps CTAs truthful", () => {
+  const home = read("src/app/page.tsx");
+  const nav = read("src/components/MarketingNav.tsx");
+  const clubs = read("src/components/ClubPilotProposition.tsx");
+  assert.ok(home.indexOf("Proof in public") < home.indexOf("The missing layer"));
+  assert.match(home, /Explore the 90-day pilot/);
+  assert.match(home, /See a live fixture decision/);
+  assert.doesNotMatch(home, /Request a demo|Request pilot demo|Request club demo|Request the 90-day pilot/);
+  assert.match(nav, /href="\/app\/demo">Try product/);
+  assert.match(nav, /90-day pilot/);
+  assert.match(clubs, /Prepare a pilot conversation/);
+  assert.match(clubs, /Copy pilot brief/);
+  assert.doesNotMatch(clubs, /Request a club demo/);
 });
