@@ -30,6 +30,9 @@ jobs:
       - name: Lint, typecheck and content checks
         run: npm run lint
 
+      - name: Permission migration contract
+        run: npm run check:permissions
+
       - name: Unit and regression tests
         run: npm test
 

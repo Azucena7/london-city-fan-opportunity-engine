@@ -431,3 +431,12 @@ test("Node runtime stays aligned across Vercel and CI", () => {
   assert.match(quality, /node-version: 24/);
   assert.match(refresh, /node-version: 24/);
 });
+
+
+test("permission migration generator is enforced", () => {
+  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+  const quality = readFileSync(".github/workflows/quality-gate.yml", "utf8");
+  assert.equal(pkg.scripts["check:permissions"], "node scripts/generate-club-permissions-migration.mjs --check");
+  assert.match(pkg.scripts.build, /check:permissions/);
+  assert.match(quality, /npm run check:permissions/);
+});
