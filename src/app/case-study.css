@@ -44,9 +44,9 @@
 }
 
 .caseStudyButton.primary {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
-  border-color: var(--lcl-hyperturq);
+  background: var(--case-accent);
+  color: var(--case-navy);
+  border-color: var(--case-accent);
 }
 
 .caseStudyButton.secondary {
@@ -204,9 +204,9 @@
 }
 
 .caseStudyStat.primaryStat {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
-  border-color: var(--lcl-hyperturq);
+  background: var(--case-accent);
+  color: var(--case-navy);
+  border-color: var(--case-accent);
 }
 
 .caseStudyStat strong,
@@ -235,7 +235,7 @@
 
 .caseStudyStat.primaryStat small,
 .caseStudyStat.primaryStat span {
-  color: var(--lcl-navy);
+  color: var(--case-navy);
 }
 
 .caseStudyDecisionStamp {
@@ -290,8 +290,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
 }
 
 .caseStudyFlowStart strong {
@@ -370,8 +370,8 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 28px;
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
 }
 
 .caseStudyBrowserDecision span,
@@ -471,8 +471,8 @@
   flex: 0 0 auto;
   padding: 11px 15px;
   border-radius: 999px;
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
   font-size: 12px;
   font-weight: 900;
   text-decoration: none;
@@ -566,8 +566,8 @@
 }
 
 .caseStudyModeNav .active {
-  color: var(--lcl-navy);
-  background: var(--lcl-hyperturq);
+  color: var(--case-navy);
+  background: var(--case-accent);
 }
 
 .caseStudyHeroCommercial h1,
@@ -674,9 +674,9 @@
   min-height: 230px;
 }
 .caseStudyMetricGrid article.featured {
-  color: var(--lcl-navy);
-  border-color: var(--lcl-hyperturq);
-  background: var(--lcl-hyperturq);
+  color: var(--case-navy);
+  border-color: var(--case-accent);
+  background: var(--case-accent);
 }
 .caseStudyMetricGrid strong,
 .caseStudyMetricGrid span {
@@ -744,8 +744,8 @@
 }
 .caseStudyCampaignLead {
   padding: 34px;
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
 }
 .caseStudyCampaignLead > span {
   font-size: 12px;
@@ -919,9 +919,9 @@
   background: rgba(16,33,27,.018);
 }
 .technicalStack article:first-child {
-  color: var(--lcl-navy);
-  border-color: var(--lcl-hyperturq);
-  background: var(--lcl-hyperturq);
+  color: var(--case-navy);
+  border-color: var(--case-accent);
+  background: var(--case-accent);
 }
 .technicalStack span { font-size: 12px; font-weight: 900; }
 .technicalStack strong { font-size: 16px; }
@@ -1179,7 +1179,7 @@
   border-radius:18px;
   background:rgba(16,33,27,.018);
 }
-.caseStudyEvidenceStates article.built { border-top:3px solid var(--lcl-hyperturq); }
+.caseStudyEvidenceStates article.built { border-top:3px solid var(--case-accent); }
 .caseStudyEvidenceStates article.observed { border-top:3px solid #f5ca67; }
 .caseStudyEvidenceStates article.pending { border-top:3px solid #63716a; }
 .caseStudyEvidenceStates span,

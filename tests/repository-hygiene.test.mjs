@@ -356,3 +356,18 @@ test("construction-era stylesheet names stay retired", () => {
   assert.match(workflow, /avela-data-bot/);
   assert.doesNotMatch(workflow, /lcl-data-bot/);
 });
+
+
+test("shared visual system avoids the retired lcl CSS namespace", () => {
+  const activeStyles = [
+    "src/app/case-brand.css",
+    "src/app/workspace-structure.css",
+    "src/app/case-study.css",
+    "src/app/product-ux.css"
+  ];
+  for (const path of activeStyles) {
+    assert.doesNotMatch(readFileSync(path, "utf8"), /--lcl-/);
+  }
+  assert.equal(existsSync("src/app/brand.css"), false);
+  assert.match(readFileSync("src/app/layout.tsx", "utf8"), /case-brand\.css/);
+});

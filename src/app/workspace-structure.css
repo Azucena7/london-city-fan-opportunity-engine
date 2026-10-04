@@ -64,7 +64,7 @@
   right: 0;
   bottom: -1px;
   height: 2px;
-  background: var(--lcl-hyperturq);
+  background: var(--case-accent);
 }
 
 .navSecondary {
@@ -133,17 +133,17 @@
 }
 
 .decisionLockup {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
 }
 
 .decisionLockup .eyebrow {
-  color: var(--lcl-navy);
+  color: var(--case-navy);
   opacity: .68;
 }
 
 .decisionLockup .thisWeekTitle {
-  color: var(--lcl-navy);
+  color: var(--case-navy);
   font-size: clamp(40px, 5.6vw, 76px);
   margin: 18px 0 26px;
   max-width: 300px;
@@ -320,8 +320,8 @@
 }
 
 .viewTabs button.active {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
 }
 
 .frameworkStrip,

@@ -1,25 +1,25 @@
 /*
-  London City-inspired prototype palette.
-  This is NOT an official club brand stylesheet.
+  London City case palette for the public proof environment.
+  This is not an official club brand stylesheet.
   The official 2026/27 home kit uses Hyperturq with navy details.
 */
 
 :root {
-  --lcl-hyperturq: #32e6d4;
-  --lcl-hyperturq-soft: #9af5ea;
-  --lcl-navy: #071b33;
-  --lcl-navy-2: #0b2947;
-  --lcl-white: #f8fbfc;
-  --lcl-cloud: #dce7eb;
-  --lcl-ink: #061522;
+  --case-accent: #32e6d4;
+  --case-accent-soft: #9af5ea;
+  --case-navy: #071b33;
+  --case-navy-2: #0b2947;
+  --case-white: #f8fbfc;
+  --case-cloud: #dce7eb;
+  --case-ink: #061522;
 
-  --bg: var(--lcl-navy);
+  --bg: var(--case-navy);
   --surface: #0a223b;
   --surface-2: #0e2c4a;
-  --ink: var(--lcl-white);
+  --ink: var(--case-white);
   --muted: #a9bdc8;
   --line: rgba(16,33,27,.14);
-  --accent: var(--lcl-hyperturq);
+  --accent: var(--case-accent);
   --hot: #f28e72;
 }
 
@@ -38,7 +38,7 @@ html, body {
 }
 
 .status span {
-  background: var(--lcl-hyperturq);
+  background: var(--case-accent);
 }
 
 .tabs a {
@@ -46,9 +46,9 @@ html, body {
 }
 
 .tabs a:hover {
-  color: var(--lcl-navy);
-  background: var(--lcl-hyperturq);
-  border-color: var(--lcl-hyperturq);
+  color: var(--case-navy);
+  background: var(--case-accent);
+  border-color: var(--case-accent);
 }
 
 .hero,
@@ -64,7 +64,7 @@ html, body {
   bottom: -1px;
   width: 36%;
   height: 3px;
-  background: var(--lcl-hyperturq);
+  background: var(--case-accent);
 }
 
 .panel,
@@ -78,50 +78,50 @@ html, body {
 }
 
 .weeklyHeroLeft {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
 }
 
 .weeklyHeroLeft .eyebrow {
-  color: var(--lcl-navy);
+  color: var(--case-navy);
   opacity: .72;
 }
 
 .calendarBar {
   background: linear-gradient(
     90deg,
-    var(--lcl-hyperturq),
-    var(--lcl-hyperturq-soft)
+    var(--case-accent),
+    var(--case-accent-soft)
   );
 }
 
 .thesis {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
 }
 
 .thesis .eyebrow,
 .thesis .muted {
-  color: var(--lcl-navy);
+  color: var(--case-navy);
   opacity: .72;
 }
 
 .shareCard {
   background:
     linear-gradient(140deg, rgba(16,33,27,.16), transparent 40%),
-    var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+    var(--case-accent);
+  color: var(--case-navy);
 }
 
 .shareEyebrow {
-  color: var(--lcl-navy);
+  color: var(--case-navy);
   opacity: .72;
 }
 
 .mapScore,
 .hayesDot {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
+  background: var(--case-accent);
+  color: var(--case-navy);
 }
 
 .mapNode.priority {
@@ -158,15 +158,15 @@ html, body {
 }
 
 .signalBadge.live {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
-  border-color: var(--lcl-hyperturq);
+  background: var(--case-accent);
+  color: var(--case-navy);
+  border-color: var(--case-accent);
 }
 
 .signalStatus.active {
-  background: var(--lcl-hyperturq);
-  color: var(--lcl-navy);
-  border-color: var(--lcl-hyperturq);
+  background: var(--case-accent);
+  color: var(--case-navy);
+  border-color: var(--case-accent);
 }
 
 .strategyLine {
@@ -196,7 +196,7 @@ html, body {
 }
 
 .brandStripe span:nth-child(2) {
-  background: var(--lcl-hyperturq);
+  background: var(--case-accent);
 }
 
 .prototypeMark {
@@ -217,6 +217,6 @@ html, body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--lcl-hyperturq);
+  background: var(--case-accent);
 }
 
