@@ -1739,3 +1739,25 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
 });
+
+
+test("Season close review separates archive carry-forward and review without enabling destructive close", () => {
+  const page = read("src/app/app/season/page.tsx");
+  const component = read("src/components/SeasonCloseReview.tsx");
+  const css = read("src/components/SeasonCloseReview.module.css");
+
+  assert.match(page, /SeasonCloseReview/);
+  assert.match(component, /Archive/);
+  assert.match(component, /Carry forward/);
+  assert.match(component, /Needs review/);
+  assert.match(component, /Missing attendance remains missing — never converted to zero/);
+  assert.match(component, /Verified multi-year contracts/);
+  assert.match(component, /Institutional learning/);
+  assert.match(component, /Off-days, Christmas breaks and personal calendars/);
+  assert.match(component, /Active season → immutable snapshot → reviewed rollover → new active season/);
+  assert.match(component, /close action is intentionally not enabled/);
+  assert.doesNotMatch(component, /fetch\(/);
+  assert.doesNotMatch(component, /<button/);
+  assert.match(css, /columns/);
+  assert.match(css, /data-state="not-ready"/);
+});
