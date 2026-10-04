@@ -175,19 +175,18 @@ async function main() {
     readFile(SOURCE_HEALTH_PATH, "utf8").then(JSON.parse)
   ]);
 
-  let response;
+  let calendar = existing;
+  let fixtureRefresh = { ok: true, message: null };
   try {
-    response = await fetch(FIXTURES_URL, { headers: { "user-agent": "AVELA/1.0 (+https://avela-growth-intelligence.vercel.app)" } });
+    const response = await fetch(FIXTURES_URL, { headers: { "user-agent": "AVELA/1.0 (+https://avela-growth-intelligence.vercel.app)" } });
     if (!response.ok) throw new Error(`Official fixtures page returned ${response.status}`);
+    calendar = normaliseFixtures(parseWarmup(await response.text()), existing);
   } catch (error) {
-    if (!DRY_RUN) {
-      const failedHealth = updateCoreSourceHealth(sourceHealth, attemptedAt, { "club-public-web": { ok: false } });
-      await writeFile(SOURCE_HEALTH_PATH, `${JSON.stringify(failedHealth, null, 2)}\n`);
-    }
-    throw error;
+    fixtureRefresh = {
+      ok: false,
+      message: error instanceof Error ? error.message : "Official fixtures refresh failed"
+    };
   }
-
-  const calendar = normaliseFixtures(parseWarmup(await response.text()), existing);
   const today = londonIsoDate();
   const scheduled = calendar.filter((item) => item.status === "scheduled" && item.date >= today);
   const nextHome = scheduled.find((item) => item.homeAway === "home") ?? null;
@@ -202,7 +201,7 @@ async function main() {
     };
   }
   const weather = weatherResult.weather;
-  const healthResults = { "club-public-web": { ok: true } };
+  const healthResults = { "club-public-web": { ok: fixtureRefresh.ok } };
   if (weatherResult.attempted) healthResults["open-meteo"] = { ok: weatherResult.ok };
   const nextSourceHealth = updateCoreSourceHealth(sourceHealth, attemptedAt, healthResults);
   const nextCurrent = {
@@ -213,7 +212,7 @@ async function main() {
     last_completed_home_fixture_id: completedHome?.id ?? null,
     weather,
     material_changes: materialChangeCount(existing, calendar),
-    source_failures: []
+    source_failures: fixtureRefresh.ok ? [] : [`Club fixtures: ${fixtureRefresh.message}`]
   };
   const nextSignals = signals.map((signal) => {
     if (signal.category !== "weather" || signal.fixtureId !== nextHome?.id) return signal;
@@ -240,7 +239,7 @@ async function main() {
     };
   });
   if (DRY_RUN) {
-    console.log(JSON.stringify({ fixtures: calendar.length, nextHome, weather, materialChanges: nextCurrent.material_changes, sourceHealth: nextSourceHealth.sources.filter((source) => source.id === "club-public-web" || source.id === "open-meteo") }, null, 2));
+    console.log(JSON.stringify({ fixtures: calendar.length, fixtureRefresh, nextHome, weather, materialChanges: nextCurrent.material_changes, sourceHealth: nextSourceHealth.sources.filter((source) => source.id === "club-public-web" || source.id === "open-meteo") }, null, 2));
     return;
   }
   await Promise.all([
