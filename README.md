@@ -47,7 +47,7 @@ Historical URLs are preserved only as permanent redirects into the canonical AVE
 - Club authentication and persistence use only the `CLUB_SUPABASE_*` / `NEXT_PUBLIC_CLUB_SUPABASE_*` namespace.
 - Retired unprefixed `SUPABASE_*` / `DATABASE_URL` variables are ignored by the application and should remain empty if legacy Vercel keys still exist.
 - The retired TfL / TransportAPI journey-routing prototype is not part of the active runtime. Travel and mobility remain product signals/contracts rather than a parallel routing application.
-- Canonical public URL: `https://avela-growth-intelligence.vercel.app`. The Vercel project is also named `avela-growth-intelligence`; the historical London City hostname remains available only for backward compatibility until a dedicated AVELA-owned custom domain is introduced.
+- Canonical public URL: `https://avela-growth-intelligence.vercel.app`. The Vercel project is also named `avela-growth-intelligence`; the historical London City hostname is retained only as a permanent 308 redirect to the canonical AVELA host.
 
 
 ## Commercial entry product
