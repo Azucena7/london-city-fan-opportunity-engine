@@ -114,7 +114,6 @@ export function CampaignDeliveryPlanner({
         if (workspace.drafts) setDrafts(workspace.drafts);
         if (workspace.workspaceStatus === "review-ready") setWorkspaceStatus("review-ready");
         if (typeof workspace.lockedCampaignEffort === "number") setLockedCampaignEffort(workspace.lockedCampaignEffort);
-    else if (typeof workspace.reservedCampaignCredits === "number") setLockedCampaignEffort(workspace.reservedCampaignCredits);
         else if (typeof workspace.reservedCampaignCredits === "number") setLockedCampaignEffort(workspace.reservedCampaignCredits);
         if (typeof workspace.reservationId === "string" && workspace.reservationId) setReservationId(workspace.reservationId);
         if (typeof workspace.launchHandoffReady === "boolean") setLaunchHandoffReady(workspace.launchHandoffReady);
@@ -453,7 +452,7 @@ export function CampaignDeliveryPlanner({
         `${fixtureId}:campaign:reserve-history:${cycleId}`,
         "Campaign scope locked",
         `${effortToLock} effort units locked after review.`,
-        { credits: effortToLock, totalPlanned: total, existingCommitted: generatedEffort, reservationId: cycleId }
+        { effortUnits: effortToLock, totalPlanned: total, existingGeneratedEffort: generatedEffort, reservationId: cycleId }
       );
     } catch (error) {
       setReservationError(error instanceof Error ? error.message : "Campaign reservation failed.");
@@ -490,7 +489,7 @@ export function CampaignDeliveryPlanner({
         `${fixtureId}:campaign:release-history:${reservationId}`,
         "Campaign reopened",
         `${lockedCampaignEffort} locked effort units released and scope reopened for editing.`,
-        { credits: lockedCampaignEffort, reservationId }
+        { effortUnits: lockedCampaignEffort, reservationId }
       );
       setLockedCampaignEffort(0);
       setReservationId(null);
@@ -689,7 +688,7 @@ export function CampaignDeliveryPlanner({
             </div>
           ) : null}
 
-          <div className={styles.creditExplainer}>
+          <div className={styles.effortExplainer}>
             {(["creation", "adaptation", "automation", "deployment"] as EffortCategory[]).map((category) => (
               <article key={category}>
                 <span>{categoryLabels[category]}</span>
