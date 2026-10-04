@@ -633,6 +633,10 @@ test("daily refresh tolerates delayed GitHub schedule starts", () => {
   assert.match(workflow, /cron: "30 6 \* \* \*"/);
   assert.match(workflow, /EVENT_NAME: \$\{\{ github\.event_name \}\}/);
   assert.match(workflow, /SCHEDULE: \$\{\{ github\.event\.schedule \}\}/);
+  assert.match(workflow, /push:\n    branches: \[main\]/);
+  assert.match(workflow, /scripts\/refresh-data\.mjs/);
+  assert.match(workflow, /scripts\/refresh-public-signals\.mjs/);
+  assert.match(workflow, /if \[ "\$EVENT_NAME" != "schedule" \]/);
   assert.match(workflow, /TZ=Europe\/London date \+%z/);
   assert.match(workflow, /steps\.schedule_gate\.outputs\.run_refresh == 'true'/);
 
