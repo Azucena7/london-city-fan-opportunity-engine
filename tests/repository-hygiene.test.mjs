@@ -418,3 +418,16 @@ test("retired live weather scoring prototype stays removed", () => {
 test("orphan source-health helper stays retired", () => {
   assert.equal(existsSync("src/lib/sourceHealth.ts"), false);
 });
+
+
+test("Node runtime stays aligned across Vercel and CI", () => {
+  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+  const lock = JSON.parse(readFileSync("package-lock.json", "utf8"));
+  const quality = readFileSync(".github/workflows/quality-gate.yml", "utf8");
+  const refresh = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
+
+  assert.equal(pkg.engines?.node, "24.x");
+  assert.equal(lock.packages[""].engines?.node, "24.x");
+  assert.match(quality, /node-version: 24/);
+  assert.match(refresh, /node-version: 24/);
+});
