@@ -111,7 +111,7 @@ Needs a concise view of opportunity, risk, decision readiness and result.
 
 - `/app/matches` — upcoming fixtures ranked by opportunity / risk;
 - fixture workspace — signals, opportunity brief, recommended play and explainability;
-- activation builder — channel, asset, credit and budget calculator;
+- campaign delivery planner — channel, asset, effort and budget planning;
 - results — predicted vs planned vs executed vs observed;
 - learning memory — club-specific evidence for future recommendations.
 

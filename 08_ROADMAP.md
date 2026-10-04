@@ -74,7 +74,7 @@ Extend the existing CampaignPlan contract with:
 - content / asset list;
 - human owners;
 - timing;
-- estimated platform credits;
+- estimated delivery effort;
 - editable production scope;
 - directional media / activation budget;
 - UTM and campaign keys;
