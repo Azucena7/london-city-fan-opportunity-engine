@@ -279,7 +279,7 @@ export function CampaignCreditBuilder({
               fixtureId,
               selected: Array.from(selected),
               variants,
-                      drafts,
+              drafts,
               workspaceStatus,
               reservedCampaignCredits,
               reservationId,
@@ -395,7 +395,7 @@ export function CampaignCreditBuilder({
     { id: 1, label: "Opportunity", detail: "Why act now", state: "complete" },
     { id: 2, label: "Recipe", detail: "Channels + assets", state: builderStage > 2 ? "complete" : builderStage === 2 ? "active" : "upcoming" },
     { id: 3, label: "Review", detail: unresolvedGates ? `${unresolvedGates} gate${unresolvedGates === 1 ? "" : "s"} open` : "Human approval", state: builderStage > 3 ? "complete" : builderStage === 3 ? "active" : "upcoming" },
-    { id: 4, label: "Reserve", detail: hasReservation ? "Scope locked" : "Lock scope", state: builderStage > 4 ? "complete" : builderStage === 4 ? "active" : "upcoming" },
+    { id: 4, label: "Lock", detail: hasReservation ? "Scope locked" : "Lock scope", state: builderStage > 4 ? "complete" : builderStage === 4 ? "active" : "upcoming" },
     { id: 5, label: "Handoff", detail: launchHandoffReady ? "Ready" : "No auto-publish", state: builderStage === 5 ? "active" : "upcoming" }
   ] as const;
 
@@ -436,7 +436,7 @@ export function CampaignCreditBuilder({
             note: "Scope locked after campaign review. Existing generated-draft effort is excluded."
           })
         });
-        if (!response.ok) throw new Error("Campaign credits could not be reserved.");
+        if (!response.ok) throw new Error("Campaign scope could not be locked.");
       }
 
       setReservedCampaignCredits(reservationRequired);
@@ -892,7 +892,7 @@ export function CampaignCreditBuilder({
                   <div>
                     <span>Connect club workspace</span>
                     <strong>Pilot account sign-in</strong>
-                    <small>Invited club users can restore campaigns, drafts and credit history on any device.</small>
+                    <small>Invited club users can restore campaigns, drafts and activity history on any device.</small>
                   </div>
                   <div className={styles.signInForm}>
                     <input type="email" autoComplete="email" placeholder="Work email" value={accountEmail} onChange={(event) => setAccountEmail(event.target.value)} />
