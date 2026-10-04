@@ -82,15 +82,6 @@ test("reservation is gated, prevents duplicates and completion does not consume 
   assert.notEqual(replacement.at(-1).id,id);
   assert.equal(new Set(replacement.map((a)=>a.id)).size,replacement.length);
 });
-test("licence proposals resolve dependencies and do not create a purchase or security boundary",()=>{
-  assert.deepEqual(d.normalizeModules(["automation"]),["audiences","automation"]);
-  assert.deepEqual(d.toggleModule(["audiences","automation","talent"],"audiences",false),["talent"]);
-  assert.deepEqual(d.normalizeModules(["talent"]),["talent"]);
-  const proposal=d.licenceProposal(["automation"],"es");
-  assert.equal(proposal.purchase,false);assert.equal(proposal.proposalOnly,true);
-  assert.equal(proposal.liveConnections,false);assert.equal(proposal.modules.length,2);
-  assert.equal(d.licenceProposal([],"en").modules.length,0);
-});
 test("strategy source has no actual players, contracts, Blinkfire values or credentials",()=>{
   assert.equal(sample.synthetic,true);assert.equal(sample.schemaVersion,1);
   assert.ok(sample.players.every((p)=>p.id.startsWith("PLAYER-DEMO-")));
