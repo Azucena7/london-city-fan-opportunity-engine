@@ -185,6 +185,8 @@ test("delivery planner uses effort naming while preserving legacy persisted stat
   assert.doesNotMatch(planner, /baseCredits/);
   assert.doesNotMatch(planner, /totalCredits/);
   assert.match(planner, /reservedCampaignCredits/);
+  assert.match(planner, /else if \(typeof workspace\.reservedCampaignCredits === "number"\)/);
+  assert.doesNotMatch(planner, /reservedCampaignCredits: lockedCampaignEffort/);
 });
 
 
