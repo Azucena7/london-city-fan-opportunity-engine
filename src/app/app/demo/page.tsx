@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DemoTour } from "@/components/DemoTour";
 import { campaignPlans } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -15,8 +15,13 @@ export default function ClubDemoPage() {
   const campaign = live ? campaignPlans.campaigns.find((item) => item.fixtureId === live.fixtureId) ?? null : null;
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="demo" />
+    <AppWorkspaceShell
+      active="demo"
+      eyebrow="Guided workflow"
+      title="Product demo"
+      subtitle="Follow one fixture from signal detection to review, campaign scope and handoff."
+    >
+      <div className={styles.shell}>
       <DemoTour
         fixtureId={live?.fixtureId ?? ""}
         fixtureLabel={live ? `London City v ${live.fixture.opponent}` : "Next home fixture"}
@@ -30,6 +35,7 @@ export default function ClubDemoPage() {
         campaignObjective={campaign?.objective.en ?? live?.opportunity ?? "Review current opportunity"}
         campaignAudience={campaign?.audiences[0]?.label.en ?? live?.audience.label ?? "Requires club data"}
       />
-    </main>
+      </div>
+    </AppWorkspaceShell>
   );
 }
