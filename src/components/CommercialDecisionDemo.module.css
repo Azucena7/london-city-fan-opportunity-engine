@@ -190,3 +190,42 @@
 @media(max-width:650px){
   .wrap{padding:72px 18px}
 }
+
+
+/* Refined AVELA palette */
+.wrap{
+  background:
+    radial-gradient(circle at 18% 16%,rgba(50,156,145,.10),transparent 22%),
+    linear-gradient(135deg,#091a2c 0%,#0d2238 58%,#173852 100%);
+}
+.intro>span{color:#8ad9cc}
+.intro p{color:#bdcbd5}
+.stage{
+  overflow:hidden;
+  border-radius:18px;
+  border-color:rgba(255,255,255,.11);
+  background:rgba(23,56,82,.72);
+  box-shadow:0 24px 70px rgba(0,0,0,.16);
+}
+.rail::before{
+  background:linear-gradient(90deg,transparent,#f08a6a,transparent);
+}
+.rail i{
+  background:#8ad9cc;
+  box-shadow:0 0 18px rgba(138,217,204,.62);
+}
+.scenarioHead span{color:#f08a6a}
+.signalStack>div{
+  border-radius:10px;
+  background:rgba(255,255,255,.04);
+}
+.flowArrow{color:#8ad9cc}
+.decision{
+  border-radius:12px;
+  background:#fffdfa;
+  color:#10263d;
+}
+.decision span{color:#329c91}
+.decision small{color:#667686}
+.footer i{color:#f08a6a}
+.footer strong{color:#8ad9cc}
