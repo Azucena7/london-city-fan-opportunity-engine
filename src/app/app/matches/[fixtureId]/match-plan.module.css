@@ -233,3 +233,27 @@
 .contextNav{position:relative!important;top:auto!important;margin:0 auto 10px!important;padding:8px 10px!important;border:1px solid var(--product-line)!important;border-radius:10px;background:#fff!important;backdrop-filter:none!important}
 .decisionCockpit,.opportunityBrief,.clubExecutionContext,.actionsSection,.signalsSection,.impactSection{border-radius:10px}
 @media(max-width:900px){.hero{grid-template-columns:1fr!important}.stateCard{max-width:none}.contextNav{align-items:flex-start;flex-direction:column}.contextLinks{width:100%}}
+
+
+/* Opportunity Brief workspace continuity */
+.workspaceAction{min-height:38px;padding:8px 12px;font-size:12px}
+.backRow{font-size:12px!important}
+.hero p{font-size:12px!important;line-height:1.5!important}
+.stateCard span{font-size:10px}
+.stateCard strong{font-size:22px}
+.stateCard p{font-size:12px}
+.contextNav>div:first-child span{font-size:11px}
+.contextNav>div:first-child strong{font-size:10px}
+.contextLinks a{font-size:11px;min-height:34px;display:inline-flex;align-items:center}
+.decisionLens span,.executiveStrip span,.briefDecision span,.clubExecutionGrid span,.handoffList>span,.clubExecutionEmpty>span{font-size:10px}
+.decisionLens strong{font-size:14px}
+.executiveStrip strong{font-size:19px}
+.executiveStrip small{font-size:12px}
+.briefDecision strong{font-size:19px}
+.briefDecision p,.phaseIntro p{font-size:13px;line-height:1.55}
+.phaseNumber{font-size:10px}
+.clubExecutionGrid strong{font-size:16px}
+.clubExecutionGrid small{font-size:12px}
+.handoffList ul{font-size:12px;line-height:1.5}
+.clubExecutionEmpty>strong{font-size:14px}
+.clubExecutionEmpty>p,.clubExecutionEmpty>a{font-size:12px}
