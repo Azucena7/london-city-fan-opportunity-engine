@@ -81,6 +81,29 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </aside>
       </header>
 
+      <section className={styles.learningStory} aria-label="Learning journey">
+        <article data-stage="before">
+          <span>01 · Before</span>
+          <strong>{live?.opportunity ?? "Opportunity under review"}</strong>
+          <p>{live?.recommendedAction ?? "No recommendation available."}</p>
+        </article>
+        <article data-stage="action">
+          <span>02 · Action</span>
+          <strong>{live?.nextAction.label ?? "Club action not recorded"}</strong>
+          <p>{live?.nextAction.owner ? "Owner: " + live.nextAction.owner : "Human-owned execution remains outside AVELA until confirmed."}</p>
+        </article>
+        <article data-stage={measured ? "outcome" : "pending"}>
+          <span>03 · Outcome</span>
+          <strong>{measured ? (results?.campaignAttributedTickets?.toLocaleString("en-GB") ?? "Observed") + " attributed tickets" : "Outcome evidence pending"}</strong>
+          <p>{measured ? "Observed club evidence is connected; attribution still does not establish incrementality." : "AVELA keeps this stage explicitly unmeasured until authorised post-match evidence arrives."}</p>
+        </article>
+        <article data-stage="next">
+          <span>04 · Next decision</span>
+          <strong>{nextLearning.change}</strong>
+          <p>{nextFixture ? "Apply to " + nextFixture.opponent + " · " + nextFixture.date : "No next home fixture is currently available."}</p>
+        </article>
+      </section>
+
       {selected ? <section className={styles.fixtureFacts} aria-label="Observed fixture facts">
         <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
         <article><span>Recorded attendance</span><strong>{selected.attendance?.toLocaleString("en-GB") ?? "Not measured yet"}</strong></article>
