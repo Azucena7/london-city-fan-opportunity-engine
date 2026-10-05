@@ -1767,3 +1767,33 @@ test("work-system orchestration derives vendor-neutral work without becoming a t
   assert.match(page, /taskCount: workPackage\?\.items\.length/);
   assert.match(page, /dependencyCount: workDependencyCount/);
 });
+
+
+test("external work sync stores only the operational projection AVELA needs", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const component = read("src/components/ExternalExecutionSync.tsx");
+  const route = read("src/app/api/work-system/status/route.ts");
+  const migration = read("supabase/migrations/20261005002000_work_system_sync_projection.sql");
+
+  assert.match(page, /ExternalExecutionSync/);
+  assert.match(component, /Only operational state required for decision intelligence is synced back/);
+  assert.match(component, /External system owns task execution/);
+  assert.match(component, /does not duplicate comments, attachments or full task history/);
+  assert.match(component, /safeExternalUrl/);
+  assert.match(component, /\^https:\\/\\//);
+
+  assert.match(route, /external_work_packages/);
+  assert.match(route, /external_work_item_links/);
+  assert.match(route, /work_system_connections/);
+  assert.match(route, /assignee_label/);
+  assert.match(route, /blocker_label/);
+  assert.doesNotMatch(route, /comment|attachment|description|body_text/i);
+
+  assert.match(migration, /Provider credentials and task bodies remain outside AVELA/);
+  assert.match(migration, /connection_ref/);
+  assert.doesNotMatch(migration, /access_token|refresh_token|api_key|client_secret/i);
+  assert.match(migration, /completed_count cannot exceed item_count/);
+  assert.match(migration, /blocked_count cannot exceed item_count/);
+  assert.match(migration, /club_has_permission\(club_id,'connections','view'\)/);
+  assert.match(migration, /club_has_permission\(club_id,'campaigns','view'\)/);
+});
