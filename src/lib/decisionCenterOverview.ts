@@ -78,7 +78,7 @@ export async function getDecisionCenterOpsState({
   const impactsPath =
     `/rest/v1/contract_impact_reviews?club_id=eq.${encodeURIComponent(clubId)}&review_state=in.(pending,acknowledged)&select=id,entity_type,entity_id,relationship_type,review_state,reason,created_at&order=created_at.desc&limit=250`;
   const executionPath =
-    `/rest/v1/external_work_packages?club_id=eq.${encodeURIComponent(clubId)}&sync_state=not.in.(archived)&select=id,decision_id,title,sync_state,item_count,completed_count,blocked_count,last_sync_at,sync_error&order=updated_at.desc&limit=250`;
+    `/rest/v1/external_work_packages?club_id=eq.${encodeURIComponent(clubId)}&sync_state=not.in.(archived)&select=id,decision_id,title,sync_state,item_count,completed_count,blocked_count,last_sync_at&order=updated_at.desc&limit=250`;
 
   const [workloadResponse, capacityResponse, availabilityResponse, requestsResponse, contractsResponse, clausesResponse, impactsResponse, executionResponse] =
     await Promise.all([
@@ -173,7 +173,7 @@ export async function getDecisionCenterOpsState({
         id: "contract-impact-" + item.id,
         category: "contract",
         priority: item.review_state === "pending" ? "review" : "monitor",
-        title: "Contract change · " + item.entity_type + " " + item.entity_id,
+        title: "Contract change · " + item.entity_type + " review required",
         recommendation: "Review the affected " + item.entity_type + " before the next commitment.",
         why: item.reason,
         changed: "Verified material contract truth changed the review state of this " + item.entity_type + ".",
@@ -202,7 +202,6 @@ export async function getDecisionCenterOpsState({
       completed_count?: number | null;
       blocked_count?: number | null;
       last_sync_at?: string | null;
-      sync_error?: string | null;
     }>;
     const blockedItems = packages.reduce((sum, item) => sum + Math.max(0, item.blocked_count ?? 0), 0);
     const totalItems = packages.reduce((sum, item) => sum + Math.max(0, item.item_count ?? 0), 0);
@@ -230,7 +229,7 @@ export async function getDecisionCenterOpsState({
         title: item.title + " · execution",
         recommendation: blocked > 0 ? "Resolve " + blocked + " blocked external work item" + (blocked === 1 ? "" : "s") + "." : "Review the external sync issue before relying on execution progress.",
         why: blocked > 0 ? "External execution state contains blocked work." : "The connected work package is only partially synced or has an error.",
-        changed: item.sync_error ? "Sync issue: " + item.sync_error : "External execution state requires review.",
+        changed: "External execution state requires review.",
         deadline: "Operational window",
         impact: blocked > 0 ? "High" : "Medium",
         confidence: "High",
