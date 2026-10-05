@@ -61,7 +61,7 @@ export function CommercialDecisionDemo() {
         <span>Try the matchday decision</span>
         <h2 id="decision-demo-title">Change the signal. Watch the marketing play change.</h2>
         <p>
-          illustrative product simulation: when the context changes, the recommendation should change with it. Choose what changes around the fixture and AVELA updates the recommended audience,
+          This is an illustrative product simulation. When the context changes, the recommendation should change with it. Choose what changes around the fixture and AVELA updates the recommended audience,
           channel, message and spend posture instead of treating every home match the same.
         </p>
       </div>
