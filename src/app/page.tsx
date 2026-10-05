@@ -158,19 +158,19 @@ export default function Home() {
       <section className={styles.example} aria-labelledby="example-title">
         <div className={styles.exampleIntro}>
           <span className={styles.kicker}>What a decision looks like</span>
-          <h2 id="example-title">From several weak signals to one operationally viable action.</h2>
+          <h2 id="example-title">From scattered match signals to one sharper marketing play.</h2>
         </div>
         <div className={styles.exampleGrid}>
           <div className={styles.exampleSignals}>
-            <article><span>09:12 · Performance</span><strong>Player momentum rises materially.</strong></article>
-            <article><span>Contract</span><strong>Partner player appearances remain to be delivered.</strong></article>
-            <article><span>Calendar</span><strong>International availability risk is approaching.</strong></article>
-            <article><span>Operations</span><strong>Creative capacity is already close to saturation.</strong></article>
+            <article><span>Ticketing</span><strong>Sales pace is soft versus the comparable fixture.</strong></article>
+            <article><span>CRM</span><strong>Family buyers from the last two home matches are reachable.</strong></article>
+            <article><span>City context</span><strong>A competing local event is compressing the afternoon window.</strong></article>
+            <article><span>Content</span><strong>Player-led social creative is outperforming generic match graphics.</strong></article>
           </div>
           <div className={styles.exampleDecision}>
             <span>AVELA · Review</span>
-            <h3>Act before the availability window closes.</h3>
-            <p>Use the strongest viable player window, reduce the creative package and send an early heads-up to the operational owners.</p>
+            <h3>Shift the match plan before media spend hardens.</h3>
+            <p>Prioritise warm family audiences, use the strongest player-led creative, move owned channels first and hold broad paid spend until intent strengthens.</p>
             <div className={styles.exampleFacts}>
               <div><span>Impact</span><strong>High</strong></div>
               <div><span>Urgency</span><strong>High</strong></div>
