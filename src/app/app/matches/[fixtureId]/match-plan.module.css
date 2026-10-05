@@ -257,3 +257,54 @@
 .handoffList ul{font-size:12px;line-height:1.5}
 .clubExecutionEmpty>strong{font-size:14px}
 .clubExecutionEmpty>p,.clubExecutionEmpty>a{font-size:12px}
+
+
+.phasePanel{
+  max-width:1120px;
+  margin:0 auto 12px;
+  border:1px solid var(--product-line);
+  border-radius:12px;
+  background:#fff;
+  overflow:hidden;
+}
+.phasePanel>summary{
+  cursor:pointer;
+  list-style:none;
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:14px 16px;
+}
+.phasePanel>summary::-webkit-details-marker{display:none}
+.phasePanel>summary>span{
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border:1px solid var(--product-line);
+  color:var(--product-accent);
+  font-size:10px;
+  font-weight:900;
+}
+.phasePanel>summary>div{display:grid;gap:2px}
+.phasePanel>summary strong{font-size:13px}
+.phasePanel>summary small{color:var(--product-muted);font-size:11px;line-height:1.4}
+.phasePanel>summary>b{color:var(--product-accent);font-size:11px;white-space:nowrap}
+.phasePanel[open]>summary{border-bottom:1px solid var(--product-line);background:#F8FBFA}
+.phasePanel .phaseIntro{
+  padding-left:18px;
+  padding-right:18px;
+  border-top:0;
+}
+.phasePanel>.clubExecutionContext,
+.phasePanel>.actionsSection,
+.phasePanel>.signalsSection,
+.phasePanel>.impactSection{
+  padding-left:18px;
+  padding-right:18px;
+}
+@media(max-width:620px){
+  .phasePanel>summary{grid-template-columns:30px 1fr}
+  .phasePanel>summary>b{grid-column:2}
+}
