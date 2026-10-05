@@ -438,3 +438,44 @@ create index if not exists player_pack_selections_updated_by_idx
 on public.player_pack_selections(updated_by);
 
 notify pgrst, 'reload schema';
+
+
+-- Enforce player-pack lifecycle independently of the client.
+create or replace function public.enforce_player_pack_status_transition()
+returns trigger
+language plpgsql
+security invoker
+set search_path = ''
+as $$
+begin
+  if tg_op = 'INSERT' and new.status <> 'selected' then
+    raise exception 'Player pack must be selected before approval or commitment';
+  end if;
+
+  if tg_op = 'UPDATE' then
+    if old.status = 'selected' and new.status not in ('selected','approved') then
+      raise exception 'Selected pack can only remain selected or become approved';
+    end if;
+    if old.status = 'approved' and new.status not in ('approved','committed') then
+      raise exception 'Approved pack can only remain approved or become committed';
+    end if;
+    if old.status = 'committed' and new.status <> 'committed' then
+      raise exception 'Committed player pack status is immutable';
+    end if;
+  end if;
+
+  if new.status in ('approved','committed')
+     and coalesce((new.snapshot->>'blockerCount')::integer, 0) > 0 then
+    raise exception 'Player pack blockers must be resolved before approval or commitment';
+  end if;
+
+  return new;
+end;
+$$;
+
+drop trigger if exists enforce_player_pack_status_transition on public.player_pack_selections;
+create trigger enforce_player_pack_status_transition
+before insert or update on public.player_pack_selections
+for each row execute function public.enforce_player_pack_status_transition();
+
+revoke all on function public.enforce_player_pack_status_transition() from public, anon, authenticated;
