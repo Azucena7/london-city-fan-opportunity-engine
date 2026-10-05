@@ -1843,7 +1843,7 @@ test("Decision Center promotes sanitized contract and execution issues into the 
   assert.match(page, /priorityWeight/);
   assert.match(page, /blocked: 5/);
   assert.match(page, /decisionSummary\(alerts\)/);
-  assert.match(page, /What needs attention/);
+  assert.match(page, /What should I look at next\\?/);
 
   assert.match(helper, /crossAlerts: DecisionAlert\[\]/);
   assert.match(helper, /contract_impact_reviews/);
