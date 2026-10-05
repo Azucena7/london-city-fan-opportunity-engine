@@ -137,7 +137,7 @@ test("club campaign workspace supports authenticated multi-user persistence with
   assert.match(builder, /Connect club workspace/);
   assert.match(builder, /Pilot account sign-in/);
   assert.match(builder, /Synced to \$\{clubs/);
-  assert.match(builder, /\/api\/campaign-workspace/);
+  assert.match(builder, /\/api\/campaign-record\//);
   assert.match(builder, /\/api\/delivery-effort/);
   assert.match(builder, /eventKey/);
   assert.match(builder, /Remote persistence is protected by club membership and row-level security/);
