@@ -15,6 +15,17 @@ import { WorkspaceBadge } from "@/components/WorkspaceUI";
 import styles from "@/app/app/campaigns/campaigns.module.css";
 
 type Club = { id: string; name: string; permissions?: string[] };
+type CampaignRecord = {
+  campaign_key: string;
+  campaign_kind: "commercial" | "fixture";
+  status: string;
+  state?: {
+    campaign?: { name?: string; activationDate?: string; objective?: string };
+    talent?: { status?: "selected" | "approved" | "committed"; selectedPlayerIds?: string[]; playerCount?: number };
+  };
+  updated_at?: string;
+};
+
 type Selection = {
   campaign_id: string;
   status: "selected" | "approved" | "committed";
@@ -32,6 +43,7 @@ function governanceRank(status: Selection["status"]) {
 
 export function CommercialCampaignBoard() {
   const [selections, setSelections] = useState<Selection[]>([]);
+  const [records, setRecords] = useState<CampaignRecord[]>([]);
   const [state, setState] = useState<"loading" | "local" | "shared">("loading");
   const [activeClub, setActiveClub] = useState<Club | null>(null);
   const [applyState, setApplyState] = useState<Record<string, string>>({});
@@ -49,14 +61,15 @@ export function CommercialCampaignBoard() {
           return;
         }
         setActiveClub(firstClub);
-        const response = await fetch(`/api/player-pack-selection?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
-        const result = await response.json() as { selections?: Selection[] };
-        if (response.ok && Array.isArray(result.selections)) {
-          setSelections(result.selections);
-          setState("shared");
-        } else {
-          setState("local");
-        }
+        const [selectionResponse, recordResponse] = await Promise.all([
+          fetch(`/api/player-pack-selection?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" }),
+          fetch(`/api/campaign-record?clubId=${encodeURIComponent(clubId)}&kind=commercial`, { cache: "no-store" })
+        ]);
+        const selectionResult = await selectionResponse.json() as { selections?: Selection[] };
+        const recordResult = await recordResponse.json() as { records?: CampaignRecord[] };
+        if (selectionResponse.ok && Array.isArray(selectionResult.selections)) setSelections(selectionResult.selections);
+        if (recordResponse.ok && Array.isArray(recordResult.records)) setRecords(recordResult.records);
+        setState(selectionResponse.ok || recordResponse.ok ? "shared" : "local");
       } catch {
         setState("local");
       }
@@ -114,13 +127,20 @@ export function CommercialCampaignBoard() {
     () => new Map(selections.map((selection) => [selection.campaign_id, selection])),
     [selections]
   );
+  const recordByCampaign = useMemo(
+    () => new Map(records.map((record) => [record.campaign_key, record])),
+    [records]
+  );
 
   return (
     <>
       {demoCommercialCampaigns.map((campaign) => {
         const selection = byCampaign.get(campaign.id);
-        const talentState = selection?.status ?? "recommended";
-        const names = selection?.selected_player_ids
+        const record = recordByCampaign.get(campaign.id);
+        const recordTalent = record?.state?.talent;
+        const talentState = selection?.status ?? recordTalent?.status ?? "recommended";
+        const selectedIds = selection?.selected_player_ids ?? recordTalent?.selectedPlayerIds ?? [];
+        const names = selectedIds
           ?.map((id) => demoPlayers.find((player) => player.id === id)?.name ?? id)
           .join(" · ");
         const conflictRows = selection ? selections.flatMap((other) => {
@@ -206,6 +226,7 @@ export function CommercialCampaignBoard() {
                   : talentState === "recommended"
                     ? "AVELA recommendation not yet selected"
                     : "Shared club selection")}
+                {record ? " · shared campaign record" : ""}
               </small>
             </div>
             {conflictRows.length ? (
