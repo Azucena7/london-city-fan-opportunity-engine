@@ -1324,7 +1324,7 @@ test("Player Asset Planning works for fixture and non-fixture commercial campaig
   assert.match(planner, /selectedCampaign\.activationDate/);
   assert.match(planner, /selectedCampaign\.playerNeed/);
   assert.match(planner, /avela:player-pack/);
-  assert.match(planner, /saved on this device/);
+  assert.match(planner, /window\.localStorage\.setItem\(selectionStorageKey/);
   assert.match(planner, /does not approve talent use/);
   assert.match(campaigns, /Campaigns that do not need a fixture to exist/);
   assert.match(campaigns, /season tickets, Christmas, retail, community or sponsor activity/i);
@@ -1341,7 +1341,7 @@ test("Player pack selection syncs complete planning choices through club-scoped 
   assert.match(planner, /player-pack-selection/);
   assert.match(planner, /Synced to club workspace · selected/);
   assert.match(planner, /Complete the pack to sync shared selection/);
-  assert.match(planner, /shared club selection/);
+  assert.match(planner, /setSelectionSource\("shared"\)/);
   assert.match(route, /player_pack_selections/);
   assert.match(route, /status: "selected"/);
   assert.match(route, /selectedPlayerIds/);
