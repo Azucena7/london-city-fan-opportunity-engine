@@ -6,6 +6,7 @@ import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from 
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import { CommercialCampaignBoard } from "@/components/CommercialCampaignBoard";
 import { DecisionContextTrail } from "@/components/DecisionContextTrail";
+import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
 import styles from "./campaigns.module.css";
 
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function CampaignsPage() {
       actions={<><WorkspaceViewSwitcher value="board" /><WorkspaceFilterButton /></>}
     >
       <DecisionContextTrail current="Campaigns" />
+      <DecisionHandoffStrip active="campaign" fixtureId={primary?.campaign.fixtureId ?? null} campaignId={primary?.campaign.id ?? null} />
       <p className={styles.contractCopy}>productAppShell · Campaigns can start from a fixture or a commercial calendar moment such as season tickets, Christmas, retail, community or sponsor activity.</p>
 
       <WorkspaceCard className={styles.lifecycleCard}>
