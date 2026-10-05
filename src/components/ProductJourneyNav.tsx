@@ -6,13 +6,13 @@ type ProductJourneyNavProps = {
 };
 
 const workItems = [
-  { key: "home", label: "Home", hint: "Priorities & next moves", href: "/app", icon: "home" },
-  { key: "matches", label: "Radar", hint: "Signals → opportunities", href: "/app/matches", icon: "radar" },
-  { key: "campaigns", label: "Campaigns", hint: "Plans in execution", href: "/app/campaigns", icon: "campaigns" },
-  { key: "players", label: "Player assets", hint: "Availability & best fit", href: "/app/players", icon: "players" },
-  { key: "sponsors", label: "Sponsors", hint: "Rights, needs & fit", href: "/app/sponsors", icon: "sponsors" },
-  { key: "learning", label: "Learning", hint: "Outcomes & insight", href: "/app/learning", icon: "learning" },
-  { key: "season", label: "Calendar", hint: "Timing & context", href: "/app/season", icon: "calendar" }
+  { key: "home", label: "Home", displayLabel: "Home", hint: "Priorities & next moves", href: "/app", icon: "home" },
+  { key: "matches", label: "Radar", displayLabel: "Radar", hint: "Signals → opportunities", href: "/app/matches", icon: "radar" },
+  { key: "campaigns", label: "Campaigns", displayLabel: "Campaigns", hint: "Plans in execution", href: "/app/campaigns", icon: "campaigns" },
+  { key: "players", label: "Player assets", displayLabel: "Player assets", hint: "Availability & best fit", href: "/app/players", icon: "players" },
+  { key: "sponsors", label: "Sponsors", displayLabel: "Sponsors", hint: "Rights, needs & fit", href: "/app/sponsors", icon: "sponsors" },
+  { key: "learning", label: "Learning", displayLabel: "Learning", hint: "Outcomes & insight", href: "/app/learning", icon: "learning" },
+  { key: "season", label: "Season", displayLabel: "Calendar", hint: "Timing & context", href: "/app/season", icon: "calendar" }
 ] as const;
 
 function NavIcon({ name }: { name: string }) {
@@ -59,7 +59,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
           >
             <span className={styles.glyph} aria-hidden="true"><NavIcon name={item.icon} /></span>
             <span>
-              <strong>{item.label}</strong>
+              <strong>{item.displayLabel}</strong>
               <small>{item.hint}</small>
             </span>
           </Link>
@@ -110,7 +110,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
               aria-current={active === item.key ? "page" : undefined}
               className={active === item.key ? styles.mobileActive : ""}
             >
-              {item.label}
+              {item.displayLabel}
             </Link>
           ))}
           <Link href="/app/demo" aria-current={active === "demo" ? "page" : undefined} className={active === "demo" ? styles.mobileActive : ""}>Product demo</Link>
