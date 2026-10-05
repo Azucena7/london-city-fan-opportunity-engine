@@ -442,10 +442,10 @@ test("Learning compares recorded campaign workflow with measured outcomes withou
   assert.match(learning, /fixtureId=\{selectedId\}/);
 
   assert.match(trace, /Execution trace/);
-  assert.match(trace, /What actually happened inside the campaign workspace/);
-  assert.match(trace, /operational evidence, not outcome evidence/);
-  assert.match(trace, /No shared execution events for this fixture/);
-  assert.match(trace, /Learning should not assume a campaign was executed/);
+  assert.match(trace, /what actually executed and what happened next/i);
+  assert.match(trace, /workflow completion/);
+  assert.match(trace, /No execution evidence/);
+  assert.match(trace, /Missing stages stay missing rather than being inferred/);
   assert.match(trace, /Use ticketing, CRM, scan and revenue evidence to assess outcomes/);
   assert.match(trace, /credible counterfactual/);
   assert.match(trace, /\/api\/campaign-history/);
@@ -493,7 +493,7 @@ test("campaign flow reviews and locks scope before a truthful launch handoff", (
   assert.match(builder, /Prepare launch handoff/);
   assert.match(builder, /External launch required/);
   assert.match(builder, /AVELA prepares the handoff only/);
-  assert.match(builder, /No CRM send, social publish or media spend happens/);
+  assert.match(builder, /no CRM send, social publish or media spend happens/);
 });
 
 test("campaign reservation cycles are uniquely identifiable and repeat safely", () => {
@@ -535,7 +535,7 @@ test("match plan keeps delivery effort visible without an in-product credit payw
   assert.match(builder, /internal planning signal, not a purchasable currency/);
   assert.match(builder, /Lock reviewed scope/);
   assert.match(builder, /Prepare launch handoff/);
-  assert.match(builder, /Launch campaign · connector required/);
+  assert.match(builder, /External launch required/);
   assert.match(builder, /Launch is not simulated/);
   assert.doesNotMatch(builder, /Explorer · preview only/);
   assert.doesNotMatch(builder, /included credits/);
@@ -553,8 +553,8 @@ test("match plan closes with a simple review and handoff gate", () => {
   const decision = read("src/components/MatchPlanDecision.tsx");
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   assert.match(decision, /Review required/);
-  assert.match(decision, /Approve draft for handoff/);
-  assert.match(decision, /does not send campaigns, commit spend or execute club actions automatically/);
+  assert.match(decision, /Mark as reviewed locally/);
+  assert.match(decision, /does not send campaigns, commit spend or execute club actions/);
   assert.match(page, /MatchPlanDecision/);
   assert.match(page, /id="approval-gates"/);
 });
@@ -736,7 +736,7 @@ test("canonical club app routes opt into the shared product shell", () => {
     "src/app/app/sources/page.tsx"
   ];
   for (const route of routes) {
-    assert.match(read(route), /productAppShell/, route + " should use the product app shell");
+    assert.match(read(route), /AppWorkspaceShell|productAppShell/, route + " should use the product app shell");
   }
   const system = read("src/app/product-system.css");
   assert.match(system, /\.productAppShell\{/);
@@ -1641,7 +1641,7 @@ test("club app has explicit loading error and not-found states and remains non-i
   assert.match(layout, /follow: false/);
   assert.match(loading, /Preparing the next decision/);
   assert.match(error, /underlying data has not been changed/);
-  assert.match(notFound, /This workspace does not exist/);
+  assert.match(notFound, /Workspace not found/);
 });
 
 test("public crawl policy exposes canonical surfaces and excludes the club app", () => {
@@ -1792,8 +1792,8 @@ test("opportunity brief records the final decision and actual execution separate
 
   assert.match(page, /DecisionHistoryPanel/);
   assert.match(page, /decisionId=\{\`fixture:\$\{fixture\.id\}\`\}/);
-  assert.match(component, /Confirm decision to production/);
-  assert.match(component, /Confirm what went live/);
+  assert.match(component, /Record final decision/);
+  assert.match(component, /Record what went live/);
   assert.match(component, /Recommended → decided → executed → learned/);
   assert.match(component, /\/api\/decision-history/);
   assert.match(component, /eventType/);
