@@ -19,3 +19,21 @@
 .surface :global([class*="contract"]){padding:16px 0!important}
 .surface :global([class*="contract"] h2){font-size:15px!important}
 @media(max-width:900px){.surface :global([class*="sourceList"]){grid-template-columns:1fr!important}}
+
+
+/* Source health workspace legibility pass */
+.surface{border-radius:12px}
+.surface :global([class*="wrap"]){padding:16px!important}
+.surface :global([class*="head"]){padding:0 0 14px!important}
+.surface :global([class*="head"] h1){font-size:26px!important}
+.surface :global([class*="sourceList"]){gap:10px!important}
+.surface :global([class*="source"]){padding:16px!important;border-radius:10px!important}
+.surface :global([class*="sourceTop"] h2){font-size:17px!important}
+.surface :global([class*="source"]>p){font-size:12px!important;line-height:1.5!important}
+.surface :global([class*="columns"]){gap:12px!important;padding-top:12px!important}
+.surface :global([class*="columns"] li){font-size:11px!important;line-height:1.45!important}
+.surface :global([class*="blinkfire"]){margin-top:14px!important;padding:18px!important}
+.surface :global([class*="blinkfireIntro"] h2){font-size:18px!important}
+.surface :global([class*="blinkfireIntro"] p){font-size:12px!important;line-height:1.5!important}
+.surface :global([class*="contract"]){padding:18px 0!important}
+.surface :global([class*="contract"] h2){font-size:16px!important}
