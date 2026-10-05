@@ -198,3 +198,18 @@
   .interpretation>summary{align-items:flex-start;flex-direction:column}
   .next .primary,.next .secondary{width:100%;text-align:center}
 }
+
+
+/* Decision workspace surface */
+.shell{padding:0 28px 64px!important}
+.fixturePicker{margin-top:18px!important;border:1px solid var(--product-line)!important;border-radius:12px!important;background:#fff!important;box-shadow:0 8px 24px rgba(16,39,66,.035)}
+.fixturePicker a{border-radius:8px!important}
+.hero{padding:28px 0 22px!important;border-bottom:0!important}
+.stateCard{border:1px solid var(--product-line)!important;border-radius:12px!important;background:#fff!important;box-shadow:0 8px 26px rgba(16,39,66,.035)}
+.fixtureFacts,.kpis{gap:10px!important;background:transparent!important;border:0!important}
+.fixtureFacts article,.kpis article{border:1px solid var(--product-line)!important;border-radius:12px!important;background:#fff!important;box-shadow:0 8px 24px rgba(16,39,66,.035)}
+.interpretation,.learningLoop,.resultState,.next{border:1px solid var(--product-line)!important;border-radius:14px!important;background:#fff!important}
+.timeline article,.stateList article{border-radius:10px!important}
+.primary{border-radius:10px!important;background:var(--product-navy)!important;color:#fff!important}
+.secondary{border-radius:10px!important}
+@media(max-width:900px){.shell{padding:0 18px 48px!important}}
