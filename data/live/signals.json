@@ -778,5 +778,75 @@
         "checkedAt": "2026-10-04"
       }
     ]
+  },
+  {
+    "id": "result-tottenham-1-6-2026-10-05",
+    "fixtureId": "2026-10-04-tot-a",
+    "relatedFixtureIds": [
+      "2026-10-18-eve-h"
+    ],
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-05T09:51:25+01:00",
+    "title": {
+      "en": "London City beat Tottenham 6–1 before the Everton campaign",
+      "es": "London City venció 1–6 al Tottenham antes de la campaña de Everton"
+    },
+    "summary": {
+      "en": "The official WSL and Tottenham reports confirm a 6–1 away win on 4 October, ending Tottenham's unbeaten league start. This is a confirmed sporting result and content signal, not evidence of ticket demand, sales or attendance.",
+      "es": "Los informes oficiales de la WSL y Tottenham confirman la victoria visitante por 1–6 del 4 de octubre, que terminó con el inicio liguero invicto del Tottenham. Es un resultado deportivo confirmado y una señal de contenido, no evidencia de demanda, ventas ni asistencia."
+    },
+    "marketingAction": {
+      "en": "Refresh Everton acquisition, CRM and social creative around the statement win, using separate tagged journeys for prior home buyers, known away buyers and broadcast audiences; judge impact through measured ticket conversion.",
+      "es": "Actualizar captación, CRM y creatividad social de Everton alrededor de la victoria, con recorridos etiquetados por separado para compradores anteriores en casa, compradores visitantes conocidos y audiencias de retransmisión; evaluar el impacto mediante conversión de entradas medida."
+    },
+    "sourceName": "WSL Football / Tottenham Hotspur",
+    "sourceUrl": "https://www.wslfootball.com/video/putellas-diani-scored-twice-in-6-goal-rampage-spurs-v-london-city-highlights-barclays-wsl-26-27",
+    "sources": [
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/video/putellas-diani-scored-twice-in-6-goal-rampage-spurs-v-london-city-highlights-barclays-wsl-26-27",
+        "checkedAt": "2026-10-05"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1169984/spurs-women-lionesses-inflict-heavy-defeat-at-brisbane-road",
+        "checkedAt": "2026-10-05"
+      }
+    ]
+  },
+  {
+    "id": "attendance-tottenham-2377-reported-2026-10-05",
+    "fixtureId": "2026-10-04-tot-a",
+    "category": "demand",
+    "state": "reported",
+    "confidence": "high",
+    "direction": "neutral",
+    "materiality": "high",
+    "observedAt": "2026-10-05T09:51:25+01:00",
+    "title": {
+      "en": "Tottenham reports attendance of 2,377",
+      "es": "Tottenham reporta una asistencia de 2.377"
+    },
+    "summary": {
+      "en": "Tottenham's official match report publishes attendance of 2,377 at Brisbane Road. This is a host-club-reported attendance figure; ticket sales, scans, away allocation usage and counting methodology have not been published and must not be inferred.",
+      "es": "El informe oficial de Tottenham publica una asistencia de 2.377 en Brisbane Road. Es una cifra de asistencia reportada por el club anfitrión; no se han publicado ventas, scans, uso del cupo visitante ni metodología de recuento y no deben inferirse."
+    },
+    "marketingAction": {
+      "en": "Use the figure as a provisional away-attendance benchmark, then reconcile London City ticketing, scans and CRM before attributing attendance to the stadium-purchase route, broadcast or campaign activity.",
+      "es": "Usar la cifra como benchmark provisional de asistencia visitante y conciliar después ticketing, scans y CRM de London City antes de atribuir asistencia a la compra en el estadio, la retransmisión o la actividad de campaña."
+    },
+    "sourceName": "Tottenham Hotspur",
+    "sourceUrl": "https://www.tottenhamhotspur.com/news/1169984/spurs-women-lionesses-inflict-heavy-defeat-at-brisbane-road",
+    "sources": [
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1169984/spurs-women-lionesses-inflict-heavy-defeat-at-brisbane-road",
+        "checkedAt": "2026-10-05"
+      }
+    ]
   }
 ]
