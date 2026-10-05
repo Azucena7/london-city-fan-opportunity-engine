@@ -1352,6 +1352,24 @@ test("Player pack selection syncs complete planning choices through club-scoped 
   assert.match(migration, /status in \('selected','approved','committed'\)/);
 });
 
+test("Player pack governance requires effective approval permission and valid lifecycle transitions", () => {
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  const session = read("src/app/api/auth/session/route.ts");
+  const route = read("src/app/api/player-pack-selection/[campaignId]/route.ts");
+  const migration = read("supabase/bootstrap/campaign_workspace.sql");
+  assert.match(session, /club_permission_matrix/);
+  assert.match(session, /permissions/);
+  assert.match(planner, /campaigns:approve/);
+  assert.match(planner, /Approve selected pack/);
+  assert.match(planner, /Commit approved pack/);
+  assert.match(planner, /activeEvaluation\.blockers\.length === 0/);
+  assert.match(route, /Only a selected pack can be approved/);
+  assert.match(route, /Only an approved pack can be committed/);
+  assert.match(route, /Approved or committed packs cannot be overwritten as selected/);
+  assert.match(migration, /enforce_player_pack_status_transition/);
+  assert.match(migration, /Committed player pack status is immutable/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
