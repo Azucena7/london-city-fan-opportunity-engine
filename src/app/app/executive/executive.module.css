@@ -81,3 +81,39 @@
   .contextBar{display:none}
   .scoreStrip,.storyGrid,.boardFooter{break-inside:avoid}
 }
+
+
+/* Executive workspace legibility pass */
+.contextBar{padding:11px 13px;border-radius:11px}
+.contextBar a,.contextBar>span{font-size:11px}
+
+.hero{margin-bottom:12px}
+.heroCopy{padding:20px}
+.heroCopy>span,.heroState>span,.boardFooter span,.scoreStrip span,.evidenceColumns span{font-size:10px}
+.heroCopy h1{font-size:28px!important}
+.heroCopy p{font-size:12px!important;line-height:1.5}
+.heroState{padding:20px}
+.heroState strong{font-size:25px}
+.heroState small{font-size:11px!important;line-height:1.4}
+
+.scoreStrip{gap:10px;margin-bottom:12px}
+.scoreStrip>section{min-height:98px;padding:13px 14px}
+.scoreStrip strong{font-size:22px}
+.scoreStrip small{font-size:11px!important;line-height:1.4}
+
+.storyGrid{gap:10px;margin-bottom:12px}
+.storyGrid>section{min-height:178px;padding:15px}
+.storyGrid>section>strong{font-size:14px;line-height:1.45}
+.storyGrid>section>p{font-size:11px!important;line-height:1.5}
+.storyGrid ul{font-size:11px;line-height:1.5}
+.decisionCard>a{font-size:11px}
+.chips{gap:6px}
+.chips b{padding:5px 8px;font-size:10px}
+
+.evidenceColumns{gap:10px}
+.evidenceColumns article{padding:11px}
+.evidenceColumns ul{font-size:10px;line-height:1.5}
+
+.boardFooter{margin-top:12px;padding:14px 15px}
+.boardFooter strong{font-size:13px;line-height:1.45}
+.boardFooter a{font-size:11px}

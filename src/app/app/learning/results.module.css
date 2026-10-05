@@ -83,3 +83,54 @@
   .actions{width:100%}
   .primary,.secondary{flex:1;justify-content:center}
 }
+
+
+/* Learning workspace legibility pass */
+.fixturePicker{gap:8px;padding:10px 12px;border-radius:11px}
+.fixturePicker>strong{font-size:10px}
+.fixturePicker a{padding:7px 10px;font-size:11px}
+
+.hero{gap:12px;margin-bottom:12px}
+.hero>div,.stateCard{padding:16px;border-radius:11px}
+.eyebrow{font-size:10px}
+.hero h1{font-size:23px!important}
+.hero>div>p{font-size:12px!important;line-height:1.5}
+.stateCard span{font-size:10px}
+.stateCard strong{font-size:13px;line-height:1.4}
+.stateCard p{font-size:11px!important;line-height:1.45}
+
+.fixtureFacts,.kpis{gap:10px;margin-bottom:12px}
+.fixtureFacts article,.kpis article{padding:13px 14px;border-radius:10px}
+.fixtureFacts span,.kpis span,.timeline span,.stateList span{font-size:10px}
+.fixtureFacts strong{font-size:15px}
+.kpis strong{font-size:22px}
+.kpis p{font-size:10px!important;line-height:1.4}
+
+.evidenceDrawer,.interpretation,.learningLoop,.resultState,.next{margin-top:12px;border-radius:11px}
+.evidenceDrawer>summary,.interpretation>summary{padding:13px 15px}
+.evidenceDrawer>summary strong,.interpretation>summary strong{font-size:12px}
+.evidenceDrawer>summary>span,.interpretation>summary>span{font-size:10px}
+.evidenceDrawerBody,.interpretationBody{padding:14px}
+.interpretationBody>p{font-size:11px!important;line-height:1.5}
+.interpretationGrid{gap:9px}
+.interpretationGrid article{padding:11px}
+.interpretationGrid span{font-size:9px}
+.interpretationGrid strong{font-size:11px;line-height:1.4}
+.interpretationGrid p{font-size:10px!important;line-height:1.4}
+
+.learningLoop,.resultState,.next{padding:15px}
+.sectionHead h2,.resultState h2,.next h2{font-size:16px!important}
+.timeline{gap:9px}
+.timeline article{padding:11px}
+.timeline strong{font-size:11px;line-height:1.4}
+.timeline p{font-size:10px!important;line-height:1.45}
+
+.resultState{gap:14px}
+.resultState>div:first-child>p{font-size:11px!important;line-height:1.5}
+.stateList{gap:8px}
+.stateList>div{padding:10px}
+.stateList strong{font-size:11px;line-height:1.4}
+
+.next{gap:14px}
+.actions{gap:8px}
+.primary,.secondary{min-height:38px;padding:8px 12px;font-size:11px}
