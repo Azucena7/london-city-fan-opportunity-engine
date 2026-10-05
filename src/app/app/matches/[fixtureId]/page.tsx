@@ -16,12 +16,15 @@ import { CalendarSlotFinder } from "@/components/CalendarSlotFinder";
 import { OperationalCapacityPanel } from "@/components/OperationalCapacityPanel";
 import { ExternalWorkPackagePreview } from "@/components/ExternalWorkPackagePreview";
 import { ExternalExecutionSync } from "@/components/ExternalExecutionSync";
+import { WorkRoutingPlan } from "@/components/WorkRoutingPlan";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { deriveCampaignWorkPackage } from "@/lib/workSystemOrchestration";
+import { routeWorkPackage } from "@/lib/workSystemRouting";
+import { getWorkRoutingRules } from "@/lib/workSystemRoutingServer";
 import styles from "./match-plan.module.css";
 
 export const metadata: Metadata = {
@@ -66,6 +69,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
 
   const workPackage = campaign
     ? deriveCampaignWorkPackage({ campaign, decisionId: `fixture:${fixture.id}` })
+    : null;
+  const workRoutingRules = await getWorkRoutingRules(clubContext?.clubId);
+  const workRoutingPlan = workPackage
+    ? routeWorkPackage({ workPackage, rules: workRoutingRules })
     : null;
   const workDependencyCount = workPackage
     ? workPackage.items.reduce((sum, item) => sum + item.dependencyKeys.length, 0)
@@ -377,6 +384,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       />
 
       {workPackage ? <ExternalWorkPackagePreview workPackage={workPackage} /> : null}
+
+      {workRoutingPlan ? <WorkRoutingPlan plan={workRoutingPlan} /> : null}
 
       <ExternalExecutionSync decisionId={`fixture:${fixture.id}`} />
 
