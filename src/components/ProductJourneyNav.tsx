@@ -5,15 +5,32 @@ type ProductJourneyNavProps = {
   active?: "home" | "campaigns" | "matches" | "demo" | "learning" | "setup" | "access" | "sources" | "executive" | "season" | "players" | "sponsors" | "contracts" | "help";
 };
 
-const workItems = [
-  { key: "home", label: "Home", displayLabel: "Home", hint: "Priorities & next moves", href: "/app", icon: "home" },
-  { key: "matches", label: "Radar", displayLabel: "Radar", hint: "Signals → opportunities", href: "/app/matches", icon: "radar" },
-  { key: "campaigns", label: "Campaigns", displayLabel: "Campaigns", hint: "Plans in execution", href: "/app/campaigns", icon: "campaigns" },
-  { key: "players", label: "Player assets", displayLabel: "Player assets", hint: "Availability & best fit", href: "/app/players", icon: "players" },
-  { key: "sponsors", label: "Sponsors", displayLabel: "Sponsors", hint: "Rights, needs & fit", href: "/app/sponsors", icon: "sponsors" },
-  { key: "learning", label: "Learning", displayLabel: "Learning", hint: "Outcomes & insight", href: "/app/learning", icon: "learning" },
-  { key: "season", label: "Season", displayLabel: "Calendar", hint: "Timing & context", href: "/app/season", icon: "calendar" }
+const navGroups = [
+  {
+    label: "Decide",
+    items: [
+      { key: "home", label: "Home", displayLabel: "Home", hint: "Priorities & next moves", href: "/app", icon: "home" },
+      { key: "matches", label: "Radar", displayLabel: "Radar", hint: "Signals → opportunities", href: "/app/matches", icon: "radar" }
+    ]
+  },
+  {
+    label: "Plan & execute",
+    items: [
+      { key: "campaigns", label: "Campaigns", displayLabel: "Campaigns", hint: "Plans in execution", href: "/app/campaigns", icon: "campaigns" },
+      { key: "players", label: "Player assets", displayLabel: "Players", hint: "Best-fit talent packs", href: "/app/players", icon: "players" },
+      { key: "sponsors", label: "Sponsors", displayLabel: "Sponsors", hint: "Commercial opportunities", href: "/app/sponsors", icon: "sponsors" },
+      { key: "season", label: "Season", displayLabel: "Calendar", hint: "Timing & context", href: "/app/season", icon: "calendar" }
+    ]
+  },
+  {
+    label: "Learn",
+    items: [
+      { key: "learning", label: "Learning", displayLabel: "Learning", hint: "Outcomes → next decision", href: "/app/learning", icon: "learning" }
+    ]
+  }
 ] as const;
+
+const workItems = navGroups.flatMap((group) => group.items);
 
 function NavIcon({ name }: { name: string }) {
   const common = { viewBox: "0 0 24 24", width: 16, height: 16, fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
@@ -29,7 +46,10 @@ function NavIcon({ name }: { name: string }) {
 const workspaceItems = [
   { key: "executive", label: "Executive view", href: "/app/executive" },
   { key: "contracts", label: "Contracts", href: "/app/contracts" },
-  { key: "sources", label: "Sources", href: "/app/sources" },
+  { key: "sources", label: "Sources", href: "/app/sources" }
+] as const;
+
+const utilityItems = [
   { key: "setup", label: "Setup", href: "/app/setup" },
   { key: "access", label: "Team", href: "/app/access" }
 ] as const;
@@ -49,20 +69,24 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
       </div>
 
       <nav className={styles.primary} aria-label="Club workflow">
-        <span className={styles.sectionLabel}>Decision workspace</span>
-        {workItems.map((item) => (
-          <Link
-            key={item.key}
-            href={item.href}
-            className={[styles.workLink, active === item.key ? styles.active : ""].join(" ")}
-            aria-current={active === item.key ? "page" : undefined}
-          >
-            <span className={styles.glyph} aria-hidden="true"><NavIcon name={item.icon} /></span>
-            <span>
-              <strong>{item.displayLabel}</strong>
-              <small>{item.hint}</small>
-            </span>
-          </Link>
+        {navGroups.map((group) => (
+          <div className={styles.navGroup} key={group.label}>
+            <span className={styles.sectionLabel}>{group.label}</span>
+            {group.items.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                className={[styles.workLink, active === item.key ? styles.active : ""].join(" ")}
+                aria-current={active === item.key ? "page" : undefined}
+              >
+                <span className={styles.glyph} aria-hidden="true"><NavIcon name={item.icon} /></span>
+                <span>
+                  <strong>{item.displayLabel}</strong>
+                  <small>{item.hint}</small>
+                </span>
+              </Link>
+            ))}
+          </div>
         ))}
       </nav>
 
@@ -84,6 +108,10 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
         <div className={styles.positioning}>
           <span>Signals</span><i>→</i><span>Context</span><i>→</i><strong>Action</strong>
         </div>
+        <span className={styles.bottomLabel}>Workspace</span>
+        {utilityItems.map((item) => (
+          <Link key={item.key} href={item.href} className={active === item.key ? styles.secondaryActive : ""} aria-current={active === item.key ? "page" : undefined}>{item.label}</Link>
+        ))}
         <Link href="/app/help" className={active === "help" ? styles.secondaryActive : ""} aria-current={active === "help" ? "page" : undefined}>Help & methodology</Link>
         <Link href="/app/demo" className={active === "demo" ? styles.secondaryActive : ""} aria-current={active === "demo" ? "page" : undefined}>Product demo</Link>
         <Link href="/">AVELA website ↗</Link>
@@ -93,7 +121,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
         <summary>More</summary>
         <div className={styles.mobileMenuPanel}>
           <span>Club</span>
-          {workspaceItems.map((item) => (
+          {[...workspaceItems, ...utilityItems].map((item) => (
             <Link
               key={item.key}
               href={item.href}
