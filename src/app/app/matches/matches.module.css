@@ -126,3 +126,14 @@
   .radarScoreline{grid-template-columns:repeat(3,minmax(0,1fr))}
   .radarState{display:grid}
 }
+
+
+.opportunityMapCard{padding:16px!important;margin-bottom:12px}
+.mapHint{color:#83909B;font-size:10px}
+.opportunityMap{position:relative;height:360px;margin-top:14px;border:1px solid #E0E5E8;border-radius:12px;background:linear-gradient(180deg,#FFF8F4 0 34%,#FBFCFC 34% 67%,#F2FAF8 67% 100%);overflow:hidden}
+.mapGrid{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(16,39,66,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(16,39,66,.06) 1px,transparent 1px);background-size:25% 100%,100% 33.333%}
+.axisY{position:absolute;top:14px;left:14px;z-index:2;color:#7C8994;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.axisX{position:absolute;right:14px;bottom:12px;z-index:2;color:#7C8994;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.mapPoint{position:absolute;z-index:3;display:grid;place-items:center;align-content:center;border:3px solid #fff;border-radius:50%;box-shadow:0 5px 14px rgba(16,39,66,.15);text-decoration:none;transform:translate(-50%,-50%);transition:transform .16s ease,box-shadow .16s ease}.mapPoint:hover{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 8px 20px rgba(16,39,66,.22)}.mapPoint strong{font-size:9px;line-height:1}.mapPoint small{margin-top:2px;font-size:10px;font-weight:900}.mapPoint[data-state="actnow"]{background:#EF8B6C;color:#fff}.mapPoint[data-state="review"]{background:#EAB95F;color:#5B4211}.mapPoint[data-state="monitor"]{background:#74C9BB;color:#173B36}.mapPoint[data-state="nomaterialopportunity"]{background:#DCE2E6;color:#53616D}
+.mapLegend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.mapLegend span{display:inline-flex;align-items:center;gap:6px;color:#667681;font-size:10px}.mapLegend span::before{content:"";width:9px;height:9px;border-radius:50%;background:#DCE2E6}.mapLegend span[data-tone="act"]::before{background:#EF8B6C}.mapLegend span[data-tone="review"]::before{background:#EAB95F}.mapLegend span[data-tone="monitor"]::before{background:#74C9BB}
+@media(max-width:620px){.opportunityMap{height:300px}.mapPoint{width:38px!important;height:38px!important}.mapPoint strong{font-size:8px}.mapPoint small{font-size:9px}}
