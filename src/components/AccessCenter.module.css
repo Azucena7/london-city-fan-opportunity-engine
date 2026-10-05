@@ -1,89 +1,56 @@
-.wrap{width:min(1180px,100%);margin:0 auto;padding:44px 0 70px}.head{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:32px;align-items:end}.head>div>span,.empty>span,.grid article>span,.authGrid article>span{font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:#748078}.head h1,.empty h1{max-width:860px;margin:9px 0 12px;font-size:clamp(38px,5vw,62px);line-height:1;letter-spacing:-.05em}.head p,.empty p{max-width:780px;margin:0;color:#657168;line-height:1.55}.state{padding:15px;background:#fff;border:1px solid #d9dfda}.state span,.state strong,.state small{display:block}.state span{font-size:9px;text-transform:uppercase;color:#758078}.state strong{margin-top:5px}.state small{margin-top:5px;color:#6e7a72;line-height:1.35}.authGrid,.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}.authGrid article,.grid article{padding:22px;background:#fff;border:1px solid #d9dfda}.authGrid h2,.grid h2{margin:7px 0 16px;font-size:22px;letter-spacing:-.035em}.authGrid label,.grid label{display:grid;gap:7px;margin-top:10px;font-size:10px;font-weight:850;letter-spacing:.07em;text-transform:uppercase;color:#6f7b73}.authGrid input,.grid select,.grid textarea{min-height:40px;padding:8px 10px;border:1px solid #ccd4ce;background:#fff;color:#132019;font:inherit}.grid textarea{min-height:80px;resize:vertical}.authGrid button,.grid button,.accountBar button{margin-top:14px;min-height:40px;padding:8px 12px;border:1px solid #142019;background:#142019;color:#fff;font-weight:850;cursor:pointer}.authGrid button:disabled,.grid button:disabled{opacity:.55}.authGrid p,.grid article>p{color:#6b776f;font-size:12px;line-height:1.45}.accountBar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-top:26px;padding:16px 18px;background:#111a15;color:#fff}.accountBar span,.accountBar strong{display:block}.accountBar span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#aeb8b1}.accountBar strong{margin-top:4px}.accountBar button{margin-top:0;background:#fff;color:#142019;border-color:#fff}.rows{display:grid;gap:7px}.rows>div{display:flex;justify-content:space-between;gap:14px;padding:10px 12px;background:#f5f7f4;border:1px solid #e0e5e1}.rows strong,.rows small{display:block}.rows small{text-transform:capitalize;color:#748078}.admin{grid-column:1/-1}.reviewList{display:grid;gap:8px}.reviewList>div{display:grid;grid-template-columns:minmax(0,1fr) 180px auto;gap:8px;align-items:center;padding:12px;background:#f7f8f6;border:1px solid #e0e5e1}.reviewList strong,.reviewList small{display:block}.reviewList small{margin-top:4px;color:#758078}.reviewList button{margin-top:0}.guardrail{margin-top:12px;padding:16px 18px;background:#eef3eb;border-left:3px solid #8fa360}.guardrail strong{display:block;font-size:12px}.guardrail p{margin:5px 0 0;color:#61705f;font-size:12px;line-height:1.45}.empty{width:min(1180px,100%);margin:0 auto;padding:80px 0}@media(max-width:800px){.head{grid-template-columns:1fr}.authGrid,.grid{grid-template-columns:1fr}.admin{grid-column:auto}.reviewList>div{grid-template-columns:1fr}.accountBar{align-items:flex-start;flex-direction:column}}
+.wrap{width:100%;margin:0 auto;padding:4px 0 24px}
+.head{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px;align-items:center}
+.head>div>span,.empty>span,.grid article>span,.authGrid article>span,.state span,.accountBar span,.accessFlow span,.accessSuccess span,.loadingState>span{font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:#748078}
+.head h1,.empty h1{max-width:860px;margin:9px 0 12px;font-size:clamp(24px,3vw,34px);line-height:1.08;letter-spacing:-.035em}
+.head p,.empty p{max-width:780px;margin:0;color:#657168;font-size:12px;line-height:1.5}
+.state{padding:0 0 0 16px;background:transparent;border:0;border-left:1px solid var(--product-line)}
+.state span,.state strong,.state small{display:block}
+.state strong{margin-top:5px;font-size:13px}
+.state small{margin-top:5px;color:#6e7a72;font-size:11px;line-height:1.4}
 
-/* AVELA team/access refresh */
-.wrap{width:min(1240px,100%);padding-top:58px}
-.head h1,.empty h1{font-size:clamp(44px,5.8vw,72px);letter-spacing:-.06em}
-.state{background:transparent;border:0;border-left:1px solid var(--product-line);padding-left:20px}
-.authGrid,.grid{gap:0;border-top:1px solid var(--product-line)}
-.authGrid article,.grid article{background:transparent;border:0;border-right:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
+.authGrid,.grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:18px;border-top:1px solid var(--product-line)}
+.authGrid article,.grid article{padding:18px;background:transparent;border:0;border-right:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
 .authGrid article:nth-child(even),.grid article:nth-child(even){border-right:0;padding-left:28px}
-.accountBar{background:var(--product-inverse)}
-.rows>div,.reviewList>div{background:rgba(255,255,255,.28);border-radius:0}
-.guardrail{background:#ecefdc;border-left-color:var(--product-accent)}
+.authGrid h2,.grid h2{margin:7px 0 16px;font-size:18px;letter-spacing:-.035em}
+.authGrid label,.grid label{display:grid;gap:7px;margin-top:10px;font-size:11px;font-weight:850;letter-spacing:.07em;text-transform:uppercase;color:#6f7b73}
+.authGrid input,.grid select,.grid textarea{min-height:42px;padding:8px 10px;border:1px solid #ccd4ce;background:#fff;color:#132019;font:inherit}
+.grid textarea{min-height:80px;resize:vertical}
+.authGrid button,.grid button,.accountBar button{margin-top:14px;min-height:42px;padding:8px 12px;border:1px solid var(--product-navy);background:var(--product-navy);color:#fff;font-size:12px;font-weight:850;cursor:pointer}
+.authGrid button:disabled,.grid button:disabled{opacity:.55}
+.authGrid p,.grid article>p{color:#6b776f;font-size:12px;line-height:1.5}
 
-@media(max-width:800px){.authGrid article,.authGrid article:nth-child(even),.grid article,.grid article:nth-child(even){border-right:0;padding-left:22px;padding-right:22px}.wrap{padding-top:40px}.state{border-left:0;border-top:1px solid var(--product-line);padding:16px 0 0}}
+.accountBar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-top:18px;padding:14px 16px;background:var(--product-navy);color:#fff}
+.accountBar span,.accountBar strong{display:block}.accountBar strong{margin-top:4px}.accountBar button{margin-top:0;background:#fff;color:#142019;border-color:#fff}
+.rows{display:grid;gap:7px}.rows>div{display:flex;justify-content:space-between;gap:14px;padding:11px 12px;background:rgba(255,255,255,.28);border:1px solid #e0e5e1}
+.rows strong,.rows small{display:block}.rows strong{font-size:12px}.rows small{font-size:11px;text-transform:capitalize;color:#748078}
+.admin{grid-column:1/-1}
+.reviewList{display:grid;gap:8px}.reviewList>div{display:grid;grid-template-columns:minmax(0,1fr) 180px auto;gap:8px;align-items:center;padding:12px;background:rgba(255,255,255,.28);border:1px solid #e0e5e1}
+.reviewList strong,.reviewList small{display:block;font-size:12px}.reviewList small{margin-top:4px;color:#758078;font-size:11px}.reviewList button{margin-top:0}
+.guardrail{margin-top:12px;padding:16px 18px;background:#EAF4F1;border-left:3px solid var(--product-accent)}
+.guardrail strong{display:block;font-size:12px}.guardrail p{margin:5px 0 0;color:#61705f;font-size:12px;line-height:1.45}
 
-
-.accessFlow{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
-.accessFlow>div{position:relative;display:grid;gap:4px;padding:15px 16px 15px 0}
-.accessFlow>div+div{padding-left:16px;border-left:1px solid var(--product-line)}
-.accessFlow span{color:#7b867f;font-size:9px;font-weight:900}
-.accessFlow strong{font-size:13px}
-.accessFlow small{color:#7b867f;font-size:10px}
+.accessFlow{display:grid;grid-template-columns:repeat(3,1fr);margin-top:20px;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
+.accessFlow>div{position:relative;display:grid;gap:4px;padding:14px}
+.accessFlow>div+div{border-left:1px solid var(--product-line)}
+.accessFlow strong{font-size:13px}.accessFlow small{color:#7b867f;font-size:11px}
 .flowDone::after,.flowCurrent::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px}
-.flowDone::after{background:var(--product-accent)}
-.flowCurrent::after{background:var(--product-orange)}
+.flowDone::after{background:var(--product-accent)}.flowCurrent::after{background:var(--product-orange)}
 .flowDone span{color:#526d00}.flowCurrent span{color:#9a4e36}
-.accessSuccess{margin-top:20px;padding:18px 20px;background:#eaf0d5;border-left:3px solid var(--product-accent)}
-.accessSuccess span,.accessSuccess strong{display:block}
-.accessSuccess span{font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#526d00}
-.accessSuccess strong{margin-top:6px;font-size:18px}
-.accessSuccess p{max-width:760px;margin:6px 0 0;color:#5f6c64;font-size:12px;line-height:1.5}
-@media(max-width:800px){.accessFlow{grid-template-columns:1fr}.accessFlow>div+div{padding-left:0;border-left:0;border-top:1px solid var(--product-line)}}
 
+.accessSuccess{margin-top:20px;padding:16px 18px;background:#EAF4F1;border-left:3px solid var(--product-accent)}
+.accessSuccess span,.accessSuccess strong{display:block}.accessSuccess span{color:#526d00}
+.accessSuccess strong{margin-top:6px;font-size:17px}.accessSuccess p{max-width:760px;margin:6px 0 0;color:#5f6c64;font-size:12px;line-height:1.5}
 
-.loadingState{width:min(1240px,100%);margin:0 auto;padding:80px 0;min-height:360px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--product-line)}
-.loadingState>span{font-size:10px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#748078}
+.empty{width:100%;margin:0 auto;padding:80px 0}
+.loadingState{width:100%;margin:0 auto;padding:80px 0;min-height:360px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--product-line)}
 .loadingState>strong{display:block;margin-top:10px;font-size:clamp(28px,4vw,46px);letter-spacing:-.04em}
 .loadingState>p{max-width:700px;margin:10px 0 0;color:#657168;line-height:1.5}
+
 @media(max-width:800px){
-  .wrap,.empty,.loadingState{width:min(100% - 28px,1240px)}
-  .head h1,.empty h1{font-size:clamp(38px,11vw,56px)}
-  .authGrid article,.authGrid article:nth-child(even),.grid article,.grid article:nth-child(even){padding:22px 0}
-  .authGrid input,.grid select,.grid textarea{width:100%}
-  .authGrid button,.grid button,.accountBar button{width:100%}
-  .accessFlow>div{padding-left:0;padding-right:0}
+  .head{grid-template-columns:1fr}.state{border-left:0;border-top:1px solid var(--product-line);padding:16px 0 0}
+  .authGrid,.grid{grid-template-columns:1fr}.admin{grid-column:auto}
+  .authGrid article,.authGrid article:nth-child(even),.grid article,.grid article:nth-child(even){border-right:0;padding:22px 0}
+  .reviewList>div{grid-template-columns:1fr}.accountBar{align-items:flex-start;flex-direction:column}
+  .accessFlow{grid-template-columns:1fr}.accessFlow>div+div{border-left:0;border-top:1px solid var(--product-line)}
+  .authGrid input,.grid select,.grid textarea{width:100%}.authGrid button,.grid button,.accountBar button{width:100%}
 }
-
-
-/* P0 AVELA visual cleanup */
-.head h1,.empty h1{font-size:clamp(36px,4.5vw,54px);letter-spacing:-.045em}
-.accountBar{background:var(--product-navy)}
-.authGrid button,.grid button,.accountBar button{border-color:var(--product-navy);background:var(--product-navy)}
-.guardrail,.accessSuccess{background:#EAF4F1;border-left-color:var(--product-accent)}
-.head>div>span,.empty>span,.grid article>span,.authGrid article>span,.state span,.accountBar span,.accessFlow span,.accessSuccess span,.loadingState>span{font-size:10px}
-.accessFlow small{font-size:11px}
-@media(max-width:800px){.head h1,.empty h1{font-size:clamp(34px,10vw,48px)}}
-
-
-/* Shared Team/Access workspace density */
-.wrap{width:100%;padding:4px 0 24px}
-.head{grid-template-columns:minmax(0,1fr) 260px;gap:20px;align-items:center}
-.head h1,.empty h1{font-size:clamp(24px,3vw,34px);line-height:1.08;letter-spacing:-.035em}
-.head p,.empty p{font-size:12px;line-height:1.5}
-.state{padding-left:16px}
-.state span,.accountBar span,.accessFlow span,.accessSuccess span,.loadingState>span{font-size:10px}
-.state strong{font-size:13px}
-.state small{font-size:11px;line-height:1.4}
-.authGrid,.grid{margin-top:18px}
-.authGrid article,.grid article{padding:18px}
-.authGrid h2,.grid h2{font-size:18px}
-.authGrid label,.grid label{font-size:11px}
-.authGrid input,.grid select,.grid textarea{min-height:42px}
-.authGrid p,.grid article>p{font-size:12px;line-height:1.5}
-.authGrid button,.grid button,.accountBar button{min-height:42px;font-size:12px}
-.accountBar{margin-top:18px;padding:14px 16px}
-.rows>div{padding:11px 12px}
-.rows strong{font-size:12px}
-.rows small{font-size:11px}
-.reviewList>div{padding:12px}
-.reviewList strong{font-size:12px}
-.reviewList small{font-size:11px}
-.guardrail strong,.guardrail p{font-size:12px}
-.accessFlow{margin-top:20px}
-.accessFlow>div{padding:14px}
-.accessFlow strong{font-size:13px}
-.accessFlow small{font-size:11px}
-.accessSuccess{padding:16px 18px}
-.accessSuccess strong{font-size:17px}
-.accessSuccess p{font-size:12px;line-height:1.5}

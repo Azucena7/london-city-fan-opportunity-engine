@@ -100,8 +100,8 @@
 .profileStatus>span{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#E7F1EF;color:var(--product-teal);font-size:10px;font-weight:900}
 .profileStatus small{font-size:11px;font-weight:800;color:#51616F}
 .viewIndicator,.filterStatus{min-height:34px;display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid #DDE3E7;border-radius:8px;background:#F7F9FA;color:#788692}
-.viewIndicator span{font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.055em}
-.viewIndicator strong{font-size:11px;color:#20364C}
+.viewIndicator span{font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.055em}
+.viewIndicator strong{font-size:12px;color:#20364C}
 .filterStatus{color:#96A1AA;cursor:default}
 .filterStatus{font-size:11px;font-weight:850}
 @media(max-width:900px){
@@ -113,10 +113,3 @@
   .searchPlaceholder span{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .iconStatus{display:none}
 }
-
-
-/* Workspace shell legibility baseline */
-.viewIndicator span{font-size:10px}
-.viewIndicator strong{font-size:12px}
-.searchPlaceholder span{font-size:11px}
-.filterStatus{font-size:11px}
