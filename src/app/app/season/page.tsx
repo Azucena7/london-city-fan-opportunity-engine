@@ -107,6 +107,18 @@ export default async function SeasonIntelligencePage() {
     return { day, date, fixtures, campaignItems, relationships };
   });
   const monthLabel = monthStart.toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
+  const upcomingRows = fixtureRows.filter((row) => row.date >= fromDate).sort((a,b) => a.date.localeCompare(b.date));
+  const nextRow = upcomingRows[0] ?? null;
+  const nextPressure = nextRow
+    ? calendarRelationships.filter((item) => item.fixtureId === nextRow.id || item.date === nextRow.date).slice(0, 3)
+    : [];
+  const nextDecisionState = !nextRow
+    ? "MONITOR"
+    : nextRow.approvalsTotal > 0 && nextRow.approvalsReady < nextRow.approvalsTotal
+      ? "REVIEW"
+      : nextRow.campaign
+        ? "READY"
+        : "ACT";
 
   return (
     <AppWorkspaceShell
@@ -117,6 +129,27 @@ export default async function SeasonIntelligencePage() {
       actions={<><WorkspaceViewSwitcher value="calendar" /><WorkspaceFilterButton /></>}
     >
       <p className={styles.contractCopy}>productAppShell · Season Intelligence · Are we getting better across the season? · Missing fixtures are not shown as zero. · This measures drafted activation volume, not channel performance or incremental impact.</p>
+
+      {nextRow ? (
+        <section className={styles.nextMoveRail} aria-label="Next calendar decision">
+          <div className={styles.nextMoveDate}>
+            <span>Next decision window</span>
+            <strong>{shortDate(nextRow.date)}</strong>
+            <small>London City v {nextRow.opponent}</small>
+          </div>
+          <div className={styles.nextMoveState}>
+            <DecisionStateBadge state={nextDecisionState} />
+            <strong>{nextRow.campaign ? nextRow.campaign.title.en : "No campaign draft yet"}</strong>
+            <small>{nextPressure.length ? nextPressure.length + " calendar pressure signals around this fixture" : "No material calendar pressure currently linked"}</small>
+          </div>
+          <div className={styles.nextMoveFlow} aria-label="Recommended workflow">
+            <Link href={"/app/matches/" + nextRow.id}><span>01</span><strong>Decide</strong><small>Opportunity brief</small></Link>
+            <Link href="/app/campaigns"><span>02</span><strong>Campaign</strong><small>{nextRow.campaign ? "Review scope" : "Create from decision"}</small></Link>
+            <Link href={nextRow.campaign ? "/app/players?campaign=" + nextRow.campaign.id : "/app/players"}><span>03</span><strong>Players</strong><small>Check talent fit</small></Link>
+            <Link href={"/app/learning?fixture=" + nextRow.id}><span>04</span><strong>Learning</strong><small>{nextRow.measuredOutcome ? "Review evidence" : "Measurement plan"}</small></Link>
+          </div>
+        </section>
+      ) : null}
 
       <section className={styles.calendarToolbar}>
         <div>
@@ -193,9 +226,9 @@ export default async function SeasonIntelligencePage() {
                     <div><i><em style={{ width: approvalPct + "%" }} /></i><small>{row.approvalsTotal ? row.approvalsReady + "/" + row.approvalsTotal + " approvals" : "No gates"}</small></div>
                   </div>
                   <div className={styles.outcome}>
-                    <span>Outcome</span>
-                    <DecisionStateBadge state={row.measuredOutcome ? "MEASURED" : "MONITOR"} label={row.measuredOutcome ? "Measured" : row.attendance !== null ? "Attendance only" : "Pending"} />
-                    <Link href={row.measuredOutcome || row.attendance !== null ? "/app/learning?fixture=" + row.id : "/app/matches/" + row.id}>Open →</Link>
+                    <span>Next handoff</span>
+                    <DecisionStateBadge state={row.measuredOutcome ? "MEASURED" : row.campaign && row.approvalsTotal > 0 && row.approvalsReady < row.approvalsTotal ? "REVIEW" : row.campaign ? "READY" : "ACT"} label={row.measuredOutcome ? "Learning" : row.campaign && row.approvalsTotal > 0 && row.approvalsReady < row.approvalsTotal ? "Approval" : row.campaign ? "Campaign" : "Decide"} />
+                    <Link href={row.measuredOutcome ? "/app/learning?fixture=" + row.id : row.campaign ? "/app/campaigns" : "/app/matches/" + row.id}>Open →</Link>
                   </div>
                 </article>
               );
