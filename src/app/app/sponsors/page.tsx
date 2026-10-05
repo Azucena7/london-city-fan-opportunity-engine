@@ -66,7 +66,7 @@ export default function SponsorsPage() {
       </section>
 
       {recommended ? (
-        <WorkspaceCard id="opportunity" className={styles.primary} tone="action">
+        <div id="opportunity"><WorkspaceCard className={styles.primary} tone="action">
           <WorkspaceSectionHeader
             eyebrow="Recommended for review"
             title={recommended.pack.candidate}
@@ -86,7 +86,7 @@ export default function SponsorsPage() {
               <div><span>Unresolved</span><strong>{recommended.evidence.missing}</strong></div>
             </div>
           </div>
-        </WorkspaceCard>
+        </WorkspaceCard></div>
       ) : null}
 
       <details className={styles.explorePanel}>
@@ -178,10 +178,10 @@ export default function SponsorsPage() {
         </details>
 
         <aside className={styles.sideRail}>
-          <WorkspaceCard id="evidence" className={styles.truthBoundary}>
+          <div id="evidence"><WorkspaceCard className={styles.truthBoundary}>
             <WorkspaceSectionHeader eyebrow="Truth boundary" title="Prospecting ≠ contract truth" />
             <p>Partner ideas can be ranked before outreach. Rights and obligations only become contract truth after governed verification.</p>
-          </WorkspaceCard>
+          </WorkspaceCard></div>
 
           <div id="rights"><WorkspaceDrawer label="Contract truth" title="Verified rights & obligations">
             <SponsorContractHealth />
@@ -199,10 +199,10 @@ export default function SponsorsPage() {
             </div>
           </WorkspaceDrawer></div>
 
-          <WorkspaceCard id="commit" className={styles.commitBoundary}>
+          <div id="commit"><WorkspaceCard className={styles.commitBoundary}>
             <WorkspaceSectionHeader eyebrow="Commit boundary" title="Human review before commitment" />
             <p>AVELA can rank and prepare the opportunity. A commercial owner must still verify rights, resolve approval gates and make any external commitment.</p>
-          </WorkspaceCard>
+          </WorkspaceCard></div>
         </aside>
       </section>
     </AppWorkspaceShell>
