@@ -1780,7 +1780,7 @@ test("external work sync stores only the operational projection AVELA needs", ()
   assert.match(component, /External system owns task execution/);
   assert.match(component, /does not duplicate comments, attachments or full task history/);
   assert.match(component, /safeExternalUrl/);
-  assert.match(component, /\^https:\\/\\//);
+  assert.ok(component.includes("^https:\\/\\/"));
 
   assert.match(route, /external_work_packages/);
   assert.match(route, /external_work_item_links/);
