@@ -36,18 +36,14 @@ export function AppWorkspaceShell({
             </div>
           </div>
 
-          <div className={styles.searchPlaceholder} aria-label="Search unavailable in this pilot">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
-            <span>Search is not enabled in this pilot</span>
+          <div className={styles.topbarContext}>
+            <span>Decision intelligence workspace</span>
           </div>
 
           <div className={styles.utility}>
             <Link href="/app/season" className={styles.iconButton} aria-label="Open calendar">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
             </Link>
-            <span className={styles.iconStatus} aria-label="Notifications are not enabled in this pilot" title="Notifications are not enabled in this pilot">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
-            </span>
             <div className={styles.profileStatus} aria-label="Current demo profile">
               <span>MT</span>
               <small>Marta</small>
@@ -85,8 +81,8 @@ export function WorkspaceViewSwitcher({
   } as const;
 
   return (
-    <div className={styles.viewIndicator} aria-label={`Current view: ${labels[value]}`}>
-      <span>View</span>
+    <div className={styles.viewIndicator} aria-label={`Current layout: ${labels[value]}`}>
+      <span>Layout</span>
       <strong>{labels[value]}</strong>
     </div>
   );
@@ -94,8 +90,7 @@ export function WorkspaceViewSwitcher({
 
 export function WorkspaceFilterButton({ label = "Filters" }: { label?: string }) {
   return (
-    <span className={styles.filterStatus} aria-label={`${label} are not enabled in this pilot`} title={`${label} are not enabled in this pilot`}>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
+    <span className={styles.filterStatus} aria-label={`${label} context`}>
       {label}
     </span>
   );
