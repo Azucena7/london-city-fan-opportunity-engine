@@ -164,7 +164,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   }
 
   function togglePlayer(playerId: string) {
-    const current = manualContext === contextKey ? manualSelectedIds : recommendedIds;
+    const current = hasCurrentManualSelection ? manualSelectedIds : recommendedIds;
     if (current.includes(playerId)) {
       choosePack(current.filter((id) => id !== playerId));
       return;
