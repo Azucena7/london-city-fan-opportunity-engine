@@ -1574,6 +1574,16 @@ test("Club setup separates planning readiness from outcome measurement readiness
   assert.match(readiness, /Ready with limits/);
 });
 
+test("Commercial FAQ states current integration and execution boundaries", () => {
+  const faq = read("src/components/CommercialFAQ.tsx");
+  assert.match(faq, /public Blinkfire evidence as context/);
+  assert.match(faq, /private club-specific Blinkfire measurement requires authorised club access/);
+  assert.match(faq, /What is actually connected today/);
+  assert.match(faq, /Club-private CRM, ticketing and Blinkfire data are not treated as connected/);
+  assert.match(faq, /remains 'proposed' in AVELA until a real authorised adapter creates tasks/);
+  assert.match(faq, /Publishing, sends and media spend remain in the club's execution tools/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
