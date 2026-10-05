@@ -71,7 +71,7 @@ export function ExternalExecutionSync({decisionId}:{decisionId:string}){
     const next=Array.isArray(result.clubs)?result.clubs:[];
     setClubs(next);
     if(result.authenticated&&next.length){setClubId(next[0].id);await load(next[0].id);}
-  })();},[decisionId]);
+  })();},[decisionId]); // eslint-disable-line react-hooks/exhaustive-deps -- reload is intentionally keyed by decision
 
   const total=useMemo(()=>packages.reduce((sum,item)=>sum+item.item_count,0),[packages]);
   const done=useMemo(()=>packages.reduce((sum,item)=>sum+item.completed_count,0),[packages]);
