@@ -147,3 +147,19 @@
   .workLink{min-height:34px;padding:7px 8px}
   .workLink strong{font-size:10px}
 }
+/* Responsive workspace navigation polish */
+@media(max-width:900px){
+  .sidebar{min-height:54px}
+  .brand{min-width:72px}
+  .primary{padding-inline:2px}
+  .workLink{min-height:38px;padding:8px 10px}
+  .mobileMenu summary{min-width:54px;text-align:center}
+}
+@media(max-width:620px){
+  .sidebar{grid-template-columns:auto minmax(0,1fr) auto;padding:7px 8px;gap:6px}
+  .brandCopy strong{font-size:10px}
+  .brandMark{width:16px;height:18px}
+  .workLink{padding:7px 8px}
+  .workLink strong{font-size:10px}
+  .mobileMenuPanel{width:min(230px,calc(100vw - 24px))}
+}
