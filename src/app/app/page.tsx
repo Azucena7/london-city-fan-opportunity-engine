@@ -162,7 +162,7 @@ export default async function ClubAppHome() {
       subtitle={summary.attention ? summary.attention + " things need your attention today." : "Everything important is currently under control."}
       actions={<><WorkspaceViewSwitcher value="overview" /><WorkspaceFilterButton /></>}
     >
-      <p className={styles.contractCopy}>productAppShell · Opportunity Radar · Campaign execution · Club context · Learning · AVELA decision loop · Calendar pressure can elevate attention without changing opportunity potential.</p>
+      <p className={styles.contractCopy}>productAppShell · Opportunity Radar · Campaign execution · Club context · Learning · AVELA decision loop · Calendar pressure can elevate attention without changing opportunity potential. <span data-state="syncing">Execution sync</span></p>
 
       <section className={`${styles.metricGrid} ${styles.signalStrip}`} aria-label="Decision health summary">
         <WorkspaceCard className={styles.metricCard} tone="action">
