@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PlayerAssetPlanner } from "@/components/PlayerAssetPlanner";
 import { PlayerContractHealth } from "@/components/PlayerContractHealth";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
 };
 
 // productAppShell is provided by AppWorkspaceShell.
-export default function PlayerAssetsPage() {
+export default async function PlayerAssetsPage({ searchParams }: { searchParams: Promise<{ campaign?: string }> }) {
+  const params = await searchParams;
+  const initialCampaignId = params.campaign;
   return (
     <AppWorkspaceShell
       active="players"
@@ -26,8 +29,17 @@ export default function PlayerAssetsPage() {
         <p>AVELA recommends a pack from planning evidence. Verified contract truth remains separate and opens only when you need to validate the recommendation.</p>
       </section>
 
+      <section className={styles.workflowContext} aria-label="Player planning workflow context">
+        <div>
+          <span>Workflow context</span>
+          <strong>{initialCampaignId ? "Opened from a campaign" : "Standalone player planning"}</strong>
+          <small>{initialCampaignId ? "The selected campaign is preserved in the player planner." : "Choose a campaign below or return to Campaigns to start from a specific brief."}</small>
+        </div>
+        <Link href="/app/campaigns">← Back to Campaigns</Link>
+      </section>
+
       <div className={styles.plannerSurface}>
-        <PlayerAssetPlanner />
+        <PlayerAssetPlanner initialCampaignId={initialCampaignId} />
       </div>
 
       <div className={styles.contractDrawer}>
