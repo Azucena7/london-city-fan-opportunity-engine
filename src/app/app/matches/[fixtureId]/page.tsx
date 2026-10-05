@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
 import { MatchSignalControls } from "@/components/MatchSignalControls";
@@ -79,18 +79,24 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
     : approvals.length + handoffActivations.length;
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="matches" />
+    <AppWorkspaceShell
+      active="matches"
+      eyebrow="Fixture workspace"
+      title={`London City v ${fixture.opponent}`}
+      subtitle={`${fixture.date} · ${fixture.kickoff ?? "TBC"} · ${fixture.competition}`}
+      actions={<Link className={styles.workspaceAction} href={`/app/executive?fixture=${fixture.id}`}>Executive view</Link>}
+    >
+      <div className={styles.shell}>
 
       <div className={styles.backRow}>
         <Link href="/app/matches">← All matches</Link>
         <span>{live.timingLabel}</span>
       </div>
 
-      <header className={styles.hero}>
+      <section className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>Next home match · {fixture.competition}</span>
-          <h1>London City <small>v</small> {fixture.opponent}</h1>
+          <h2>Opportunity and decision state</h2>
           <p>{fixture.date} · {fixture.kickoff ?? "TBC"} · {fixture.venue}</p>
         </div>
         <aside className={`${styles.stateCard} ${live.decisionState === "HOLD" ? styles.holdState : styles.readyState}`}>
@@ -98,7 +104,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <strong>{live.decisionState}</strong>
           <p>{live.confidence.label} confidence · {live.liveSignals.length} sourced signals</p>
         </aside>
-      </header>
+      </section>
 
       <nav className={styles.contextNav} aria-label="Opportunity workspace sections">
         <div>
@@ -491,6 +497,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </div>
         <Link href={`/app/learning?fixture=${fixture.id}`}>Open measurement & learning →</Link>
       </section>
-    </main>
+      </div>
+    </AppWorkspaceShell>
   );
 }
