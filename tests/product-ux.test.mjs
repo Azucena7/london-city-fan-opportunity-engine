@@ -2291,3 +2291,30 @@ test("campaign workflow preserves lifecycle and decision context", () => {
   assert.match(trail, /Campaign context preserved/);
   assert.doesNotMatch(campaigns, /\bLive\b/);
 });
+
+
+test("universal state primitives keep decision and evidence semantics consistent", () => {
+  const ui = read("src/components/WorkspaceUI.tsx");
+  const home = read("src/app/app/page.tsx");
+  const radar = read("src/app/app/matches/page.tsx");
+  const campaigns = read("src/app/app/campaigns/page.tsx");
+  const season = read("src/app/app/season/page.tsx");
+  const executive = read("src/app/app/executive/page.tsx");
+  const sponsors = read("src/app/app/sponsors/page.tsx");
+  const learning = read("src/app/app/learning/page.tsx");
+  const help = read("src/app/app/help/page.tsx");
+
+  assert.match(ui, /UniversalDecisionState = "ACT" \| "REVIEW" \| "BLOCKED" \| "MONITOR" \| "READY" \| "MEASURED"/);
+  assert.match(ui, /UniversalEvidenceState = "OBSERVED" \| "VERIFIED" \| "MODELLED" \| "MISSING"/);
+  assert.match(home, /DecisionStateBadge/);
+  assert.match(radar, /DecisionStateBadge/);
+  assert.match(campaigns, /DecisionStateBadge/);
+  assert.match(season, /DecisionStateBadge/);
+  assert.match(executive, /DecisionStateBadge/);
+  assert.match(sponsors, /DecisionStateBadge/);
+  assert.match(sponsors, /EvidenceStateBadge/);
+  assert.match(learning, /DecisionStateBadge/);
+  assert.match(learning, /EvidenceStateBadge/);
+  assert.match(help, /DecisionStateBadge/);
+  assert.match(help, /EvidenceStateBadge/);
+});
