@@ -1,16 +1,19 @@
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import styles from "./route-state.module.css";
 
 export default function AppLoading() {
   return (
-    <main className={`${styles.shell} productAppShell`} aria-busy="true" aria-label="Loading AVELA workspace">
-      <ProductJourneyNav />
-      <div className={styles.content}>
-        <span className={styles.eyebrow}>AVELA · Loading workspace</span>
-        <h1 className={styles.title}>Preparing the next decision.</h1>
-        <p className={styles.copy}>AVELA is loading the latest fixture, campaign and evidence context.</p>
+    <AppWorkspaceShell
+      active="home"
+      eyebrow="System state"
+      title="Loading workspace"
+      subtitle="Preparing the latest fixture, campaign and evidence context."
+    >
+      <section className={styles.content} aria-busy="true" aria-label="Loading AVELA workspace">
+        <span className={styles.eyebrow}>Preparing the next decision</span>
+        <p className={styles.copy}>AVELA is loading the latest context without changing any underlying club data.</p>
         <div className={styles.skeleton} aria-hidden="true"><span /><span /><span /></div>
-      </div>
-    </main>
+      </section>
+    </AppWorkspaceShell>
   );
 }
