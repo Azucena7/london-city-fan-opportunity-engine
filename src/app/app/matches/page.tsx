@@ -9,7 +9,7 @@ import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
-import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
+import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./matches.module.css";
 
 export const metadata: Metadata = {
@@ -23,6 +23,14 @@ function formatDate(value: string) {
     day: "numeric",
     month: "short"
   }).format(new Date(value + "T12:00:00"));
+}
+
+function stateForAttention(value: string | null | undefined) {
+  if (value === "Act now") return "ACT" as const;
+  if (value === "Review") return "REVIEW" as const;
+  if (value === "Monitor") return "MONITOR" as const;
+  if (value === "No material opportunity") return "MONITOR" as const;
+  return "MONITOR" as const;
 }
 
 export default async function MatchesPage() {
@@ -111,7 +119,7 @@ export default async function MatchesPage() {
           <WorkspaceSectionHeader
             eyebrow="Current engine priority"
             title={"London City v " + currentFixture.opponent}
-            action={<WorkspaceBadge tone={priority?.attentionState === "Act now" ? "coral" : priority?.attentionState === "Review" ? "warning" : "teal"}>{priority?.attentionState ?? "Monitor"}</WorkspaceBadge>}
+            action={<DecisionStateBadge state={stateForAttention(priority?.attentionState)} label={priority?.attentionState ?? "Monitor"} />}
           />
           <div className={styles.priorityGrid}>
             <div className={styles.priorityDecision}>
@@ -206,7 +214,7 @@ export default async function MatchesPage() {
                   <div><span>Calendar</span><strong>{item.calendarPressure.state}</strong></div>
                 </div>
                 <div className={styles.radarState}>
-                  <WorkspaceBadge tone={item.attentionState === "Act now" ? "coral" : item.attentionState === "Review" ? "warning" : item.attentionState === "No material opportunity" ? "neutral" : "teal"}>{item.attentionState}</WorkspaceBadge>
+                  <DecisionStateBadge state={stateForAttention(item.attentionState)} label={item.attentionState} />
                   <small>Opportunity state · {item.radarState}</small>
                   <small>{item.attentionReason}</small>
                 </div>
