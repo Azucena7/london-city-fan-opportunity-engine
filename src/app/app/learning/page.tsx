@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./results.module.css";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { LearningCampaignTrace } from "@/components/LearningCampaignTrace";
 import { NextFixtureLearning } from "@/components/NextFixtureLearning";
@@ -9,6 +8,7 @@ import { deriveNextFixtureLearning } from "@/lib/learningRecommendation";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { calendar, currentState } from "@/lib/data";
+import { AppWorkspaceShell, WorkspaceFilterButton } from "@/components/AppWorkspaceShell";
 
 export const metadata: Metadata = {
   title: "Learning",
@@ -28,6 +28,7 @@ function currency(value: number | null) {
   }).format(value);
 }
 
+// productAppShell is provided by AppWorkspaceShell.
 export default async function ResultsLearningPage({ searchParams }: { searchParams: Promise<{ fixture?: string }> }) {
   const params = await searchParams;
   const selectedId = calendar.some((item) => item.id === params.fixture && item.homeAway === "home")
@@ -42,8 +43,13 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
   const nextLearning = deriveNextFixtureLearning(live, results);
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="learning" />
+    <AppWorkspaceShell
+      active="learning"
+      eyebrow="Outcomes & learning"
+      title="Learning"
+      subtitle={selected ? selected.opponent + " · " + selected.date : "Close the loop from observed outcome to next decision."}
+      actions={<WorkspaceFilterButton label="Fixture filters" />}
+    >
 
       <nav className={styles.fixturePicker} aria-label="Choose a fixture to review">
         <strong>Review a fixture</strong>
@@ -212,6 +218,6 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           {selectedId ? <Link className={styles.secondary} href={`/app/matches/${selectedId}`}>Open match record</Link> : null}
         </div>
       </section>
-    </main>
+    </AppWorkspaceShell>
   );
 }

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { ExecutiveShareActions } from "@/components/ExecutiveShareActions";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
+import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./executive.module.css";
 
 export const metadata: Metadata = {
@@ -36,94 +37,87 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   if (!fixture || !live) return null;
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="executive" />
+    <AppWorkspaceShell
+      active="executive"
+      eyebrow={"Executive · " + fixture.opponent}
+      title="Executive"
+      subtitle="Presentation-ready decision brief · current opportunity, campaign, evidence and learning state."
+      actions={<ExecutiveShareActions />}
+    >
+      <p className={styles.contractCopy}>productAppShell · Executive decision brief · Board takeaway.</p>
 
-      <header className={styles.toolbar}>
-        <div>
-          <Link href={`/app/matches/${selectedId}`}>← Back to workspace</Link>
-          <span>Executive view · {fixture.opponent}</span>
-        </div>
-        <ExecutiveShareActions />
-      </header>
+      <div className={styles.contextBar}>
+        <Link href={"/app/matches/" + selectedId}>← Back to workspace</Link>
+        <span>{fixture.opponent} · {fixture.date} · {fixture.kickoff ?? "TBC"}</span>
+        <WorkspaceBadge tone={live.decisionState === "HOLD" ? "warning" : "teal"}>{live.decisionState}</WorkspaceBadge>
+      </div>
 
-      <section className={styles.hero}>
-        <div>
+      <WorkspaceCard className={styles.hero} tone="action">
+        <div className={styles.heroCopy}>
           <span>Executive decision brief</span>
           <h1>{campaign?.title.en ?? live.opportunity}</h1>
           <p>{live.whyNow}</p>
         </div>
-        <aside>
+        <div className={styles.heroState}>
           <span>Recommendation state</span>
           <strong>{live.decisionState}</strong>
           <small>{live.confidence.label} confidence · {radarItem?.urgency ?? "Watch"} urgency</small>
-        </aside>
-      </section>
+        </div>
+      </WorkspaceCard>
 
       <section className={styles.scoreStrip} aria-label="Executive summary metrics">
-        <article><span>Opportunity</span><strong>{radarItem?.opportunityScore ?? "—"}</strong><small>{radarItem?.opportunityLabel ?? "Under review"}</small></article>
-        <article><span>Evidence</span><strong>{radarItem?.materialSignalCount ?? 0}</strong><small>material signals</small></article>
-        <article><span>Open gates</span><strong>{approvals.length}</strong><small>{approvals.length ? "human decision required" : "no blocking gate"}</small></article>
-        <article><span>Measurement</span><strong>{measured ? "Observed" : "Pending"}</strong><small>{measured ? "club evidence connected" : "outcome not yet established"}</small></article>
+        <WorkspaceCard><span>Opportunity</span><strong>{radarItem?.opportunityScore ?? "—"}</strong><small>{radarItem?.opportunityLabel ?? "Under review"}</small></WorkspaceCard>
+        <WorkspaceCard><span>Evidence</span><strong>{radarItem?.materialSignalCount ?? 0}</strong><small>material signals</small></WorkspaceCard>
+        <WorkspaceCard tone={approvals.length ? "action" : "accent"}><span>Open gates</span><strong>{approvals.length}</strong><small>{approvals.length ? "human decision required" : "no blocking gate"}</small></WorkspaceCard>
+        <WorkspaceCard tone={measured ? "accent" : "default"}><span>Measurement</span><strong>{measured ? "Observed" : "Pending"}</strong><small>{measured ? "club evidence connected" : "outcome not yet established"}</small></WorkspaceCard>
       </section>
 
-      <section className={styles.story}>
-        <article className={styles.decision}>
-          <span>01 · Decision</span>
-          <h2>What should we do?</h2>
+      <section className={styles.storyGrid}>
+        <WorkspaceCard className={styles.decisionCard} tone="action">
+          <WorkspaceSectionHeader eyebrow="01 · Decision" title="What should we do?" />
           <strong>{live.recommendedAction}</strong>
           <p>{live.nextAction.label} · Owner: {live.nextAction.owner} · {live.nextAction.deadline}</p>
-        </article>
+          <Link href={"/app/matches/" + selectedId}>Open decision workspace →</Link>
+        </WorkspaceCard>
 
-        <article>
-          <span>02 · Why now</span>
-          <h2>What changed?</h2>
+        <WorkspaceCard>
+          <WorkspaceSectionHeader eyebrow="02 · Why now" title="What changed?" />
           <strong>{live.opportunity}</strong>
-          <ul>
-            {live.liveSignals.slice(0,4).map((signal) => <li key={signal.id}>{signal.title}</li>)}
-          </ul>
-        </article>
+          <ul>{live.liveSignals.slice(0,4).map((signal) => <li key={signal.id}>{signal.title}</li>)}</ul>
+        </WorkspaceCard>
 
-        <article>
-          <span>03 · Campaign</span>
-          <h2>What would activation look like?</h2>
+        <WorkspaceCard>
+          <WorkspaceSectionHeader eyebrow="03 · Campaign" title="What would activation look like?" />
           <strong>{campaign?.proposition.en ?? live.recommendedAction}</strong>
-          <div className={styles.chips}>
-            {(campaign?.activations ?? []).slice(0,5).map((activation) => <b key={activation.id}>{activation.channel}</b>)}
-          </div>
+          <div className={styles.chips}>{(campaign?.activations ?? []).slice(0,5).map((activation) => <b key={activation.id}>{activation.channel}</b>)}</div>
           <p>{campaign?.nextApproval.en ?? live.primaryBlocker}</p>
-        </article>
+        </WorkspaceCard>
 
-        <article>
-          <span>04 · Commercial read</span>
-          <h2>What do we know about impact?</h2>
-          <strong>{live.audience.value !== null ? `${live.audience.value.toLocaleString("en-GB")} measured fans` : "Audience sizing requires club data"}</strong>
+        <WorkspaceCard>
+          <WorkspaceSectionHeader eyebrow="04 · Commercial read" title="What do we know about impact?" />
+          <strong>{live.audience.value !== null ? live.audience.value.toLocaleString("en-GB") + " measured fans" : "Audience sizing requires club data"}</strong>
           <p>{measured ? "Observed club evidence is available. Attribution still does not equal incrementality." : "Impact remains a scenario until authorised outcome data is connected."}</p>
-        </article>
+        </WorkspaceCard>
       </section>
 
-      <section className={styles.evidence}>
-        <div>
-          <span>Evidence confidence</span>
-          <h2>What supports the recommendation — and what could change it.</h2>
-        </div>
+      <WorkspaceDrawer label="Evidence confidence" title="What supports the recommendation — and what could change it">
         <div className={styles.evidenceColumns}>
           <article><span>Known</span><ul>{live.known.slice(0,4).map((item) => <li key={item}>{item}</li>)}</ul></article>
           <article><span>Missing / assumed</span><ul>{[...live.assumptions.slice(0,2), ...live.missing.slice(0,2)].map((item) => <li key={item}>{item}</li>)}</ul></article>
           <article><span>Change course if</span><ul>{live.whatWouldChangeDecision.slice(0,4).map((item) => <li key={item}>{item}</li>)}</ul></article>
         </div>
-      </section>
+      </WorkspaceDrawer>
 
-      <section className={styles.boardFooter}>
+      <WorkspaceCard className={styles.boardFooter}>
         <div>
           <span>Board takeaway</span>
           <strong>{live.decisionState === "HOLD" ? "The opportunity is visible, but the evidence or approvals do not support launch yet." : "The opportunity is ready for human review; execution remains controlled by the club."}</strong>
         </div>
         <div>
-          <Link href={`/app/matches/${selectedId}#campaign`}>Open campaign detail →</Link>
-          <Link href={`/app/learning?fixture=${selectedId}`}>Open learning →</Link>
+          <Link href={"/app/matches/" + selectedId + "#campaign"}>Open campaign detail →</Link>
+          <Link href={"/app/learning?fixture=" + selectedId}>Open learning →</Link>
         </div>
-      </section>
-    </main>
+      </WorkspaceCard>
+    </AppWorkspaceShell>
   );
 }
