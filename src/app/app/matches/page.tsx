@@ -94,7 +94,7 @@ export default async function MatchesPage() {
           <span className={styles.eyebrow}>AVELA · Opportunity Radar</span>
           <h1>Where should the club act next?</h1>
           <p>
-            Upcoming home fixtures are re-prioritised whenever validated evidence refreshes. Opportunity potential stays separate
+            Upcoming home fixtures are re-prioritised whenever the validated evidence state refreshes. Opportunity potential stays separate
             from calendar pressure; the final attention order can rise because of timing, internal constraints or fixture collisions.
             The ranking is a decision aid, not an attendance forecast.
           </p>
@@ -166,6 +166,7 @@ export default async function MatchesPage() {
                 <div><span>Opportunity score</span><b>{priority?.opportunityScore ?? "—"}</b></div>
                 <div><span>Attention</span><b>{priority?.attentionState ?? "—"}</b></div>
                 <div><span>Calendar pressure</span><b>{priority?.calendarPressure.state ?? "—"}</b></div>
+                <div><span>Signal movement</span><b>{priority?.signalChangeLabel ?? "—"}</b></div>
               </div>
               <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
               <p><b>Attention driver:</b> {priority?.attentionReason ?? "No calendar pressure adjustment."}</p>
