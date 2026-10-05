@@ -44,6 +44,7 @@ export function AccessCenter() {
   const [busy, setBusy] = useState(false);
 
   async function refresh() {
+    try {
     const sessionResponse = await fetch("/api/auth/session", { cache: "no-store" });
     const session = await sessionResponse.json() as {
       configured?: boolean;
@@ -84,6 +85,15 @@ export function AccessCenter() {
     setPendingReviews(Array.isArray(result.pendingReviews) ? result.pendingReviews : []);
     setClubId((current) => current || nextClubs[0]?.id || "");
     setMessage("Account state loaded.");
+    } catch {
+      setConfigured(true);
+      setAuthenticated(false);
+      setClubs([]);
+      setMemberships([]);
+      setRequests([]);
+      setPendingReviews([]);
+      setMessage("Account service is unreachable. Club access state could not be loaded.");
+    }
   }
 
   useEffect(() => {
@@ -137,9 +147,21 @@ export function AccessCenter() {
   }
 
   async function signOut() {
-    await fetch("/api/auth/logout", { method: "POST" });
-    setPassword("");
-    await refresh();
+    setBusy(true);
+    setMessage("Signing out…");
+    try {
+      const response = await fetch("/api/auth/logout", { method: "POST" });
+      if (!response.ok) {
+        setMessage("Sign-out failed. Your current session may still be active.");
+        return;
+      }
+      setPassword("");
+      await refresh();
+    } catch {
+      setMessage("Sign-out service is unreachable. Your current session may still be active.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function requestAccess() {
