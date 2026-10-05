@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   demoAppearances,
   demoCommercialCampaigns,
@@ -59,6 +59,31 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   );
   const [manualSelectedIds, setManualSelectedIds] = useState<string[]>([]);
   const [manualContext, setManualContext] = useState("");
+  const [selectionSource, setSelectionSource] = useState<"recommended" | "local">("recommended");
+  const selectionStorageKey = `avela:player-pack:${campaignId}`;
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(selectionStorageKey);
+      if (!stored) {
+        setManualSelectedIds([]);
+        setManualContext("");
+        setSelectionSource("recommended");
+        return;
+      }
+      const parsed = JSON.parse(stored) as { ids?: string[]; count?: number };
+      if (Array.isArray(parsed.ids) && parsed.ids.every((id) => demoPlayers.some((player) => player.id === id))) {
+        setManualSelectedIds(parsed.ids);
+        setManualContext("stored");
+        setSelectionSource("local");
+        if (typeof parsed.count === "number") setCountOverride(parsed.count);
+      }
+    } catch {
+      setManualSelectedIds([]);
+      setManualContext("");
+      setSelectionSource("recommended");
+    }
+  }, [selectionStorageKey]);
 
   const players = useMemo(
     () => demoPlayers.map((player) => ({
@@ -96,7 +121,8 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     ...players.map((player) => `${player.id}:${player.sportingAvailability}:${player.commercialAvailabilityOverride ? 1 : 0}`)
   ].join("|");
   const recommendedIds = packs[0]?.players.map((item) => item.player.id) ?? [];
-  const activeIds = manualContext === contextKey ? manualSelectedIds : recommendedIds;
+  const hasCurrentManualSelection = manualContext === contextKey || manualContext === "stored";
+  const activeIds = hasCurrentManualSelection ? manualSelectedIds : recommendedIds;
   const activePlayers = players.filter((player) => activeIds.includes(player.id));
   const activeEvaluation = evaluatePlayerPack(
     activePlayers,
@@ -114,8 +140,8 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     ? "Incomplete"
     : activeEvaluation.blockers.length
       ? "Blocked"
-      : manualContext === contextKey
-        ? "Custom pack"
+      : hasCurrentManualSelection
+        ? selectionSource === "local" ? "Selected locally" : "Custom pack"
         : "Recommended";
   const momentumRanking = players
     .map((player) => ({ player, momentum: playerMomentumScore(player.id, demoPlayerMomentum) }))
@@ -124,6 +150,17 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   function choosePack(ids: string[]) {
     setManualSelectedIds(ids);
     setManualContext(contextKey);
+    setSelectionSource("local");
+    try {
+      window.localStorage.setItem(selectionStorageKey, JSON.stringify({
+        campaignId,
+        ids,
+        count,
+        savedAt: new Date().toISOString()
+      }));
+    } catch {
+      // Local persistence is a convenience only; planning must still work without storage.
+    }
   }
 
   function togglePlayer(playerId: string) {
@@ -170,6 +207,9 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
             onChange={(event) => {
               setCampaignId(event.target.value);
               setCountOverride(null);
+              setManualSelectedIds([]);
+              setManualContext("");
+              setSelectionSource("recommended");
             }}
           >
             {campaignOptions.map((campaign) => (
@@ -190,7 +230,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         <div className={styles.railState} aria-live="polite">
           <span>Live pack</span>
           <strong>{livePackState}</strong>
-          <small>{activeIds.length}/{count} selected · {selectedCampaign.name}</small>
+          <small>{activeIds.length}/{count} selected · {selectedCampaign.name}{selectionSource === "local" ? " · saved on this device" : ""}</small>
         </div>
         <div className={styles.railMetrics}>
           <div><span>Score</span><strong>{selectionComplete ? activeEvaluation.packScore.toFixed(0) : "—"}</strong></div>
@@ -298,7 +338,13 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
             <h2>{selectionComplete ? "Your current pack" : `Select ${count - activeIds.length} more player${count - activeIds.length === 1 ? "" : "s"}`}</h2>
             <p>Change the recommendation only when the trade-off is worth it. Every add/remove recalculates cost, fit, momentum, scarcity and blockers.</p>
           </div>
-          <button type="button" onClick={() => { setManualSelectedIds([]); setManualContext(""); }}>Reset recommendation</button>
+          <button type="button" onClick={() => {
+            setManualSelectedIds([]);
+            setManualContext("");
+            setSelectionSource("recommended");
+            setCountOverride(null);
+            try { window.localStorage.removeItem(selectionStorageKey); } catch {}
+          }}>Reset recommendation</button>
         </div>
 
         <div className={styles.currentPack}>
@@ -336,7 +382,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         <div>
           <span>Scenario boundary</span>
           <strong>This player pack is a planning scenario until the campaign records it.</strong>
-          <p>Changing the pack here recalculates fit, cost, scarcity and blockers, but it does not approve talent use or write a final player commitment into the campaign.</p>
+          <p>Changing the pack here recalculates fit, cost, scarcity and blockers. The selected pack is remembered on this device for this campaign, but it does not approve talent use or write a final player commitment into the shared club workspace.</p>
         </div>
         <Link href="/app/campaigns">Return to Campaigns →</Link>
       </section>
