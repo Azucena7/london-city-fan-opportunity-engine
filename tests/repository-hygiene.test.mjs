@@ -350,7 +350,7 @@ test("construction-era stylesheet names stay retired", () => {
     assert.equal(existsSync(path), false, `${path} is a construction-era artifact`);
     assert.ok(!layout.includes(path.split("/").at(-1)), `${path} should not be imported`);
   }
-  for (const path of ["src/app/workspace-structure.css", "src/app/case-study.css", "src/app/product-ux.css"]) {
+  for (const path of ["src/app/workspace-structure.css", "src/app/case-study.css", "src/app/case-study-technical.css", "src/app/case-study-commercial.css", "src/app/product-ux.css"]) {
     assert.equal(existsSync(path), true, `${path} is a canonical stylesheet`);
   }
 
@@ -360,11 +360,24 @@ test("construction-era stylesheet names stay retired", () => {
 });
 
 
+test("case study styles stay split in cascade order", () => {
+  const layout = readFileSync("src/app/layout.tsx", "utf8");
+  const base = layout.indexOf('import "./case-study.css";');
+  const technical = layout.indexOf('import "./case-study-technical.css";');
+  const commercial = layout.indexOf('import "./case-study-commercial.css";');
+  assert.ok(base >= 0 && technical > base && commercial > technical);
+  assert.match(readFileSync("src/app/case-study-technical.css", "utf8"), /Technical case study/);
+  assert.match(readFileSync("src/app/case-study-commercial.css", "utf8"), /Evidence-led evaluation case study/);
+});
+
+
 test("shared visual system avoids the retired lcl CSS namespace", () => {
   const activeStyles = [
     "src/app/case-brand.css",
     "src/app/workspace-structure.css",
     "src/app/case-study.css",
+    "src/app/case-study-technical.css",
+    "src/app/case-study-commercial.css",
     "src/app/product-ux.css"
   ];
   for (const path of activeStyles) {
