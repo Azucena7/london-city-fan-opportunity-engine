@@ -1856,3 +1856,94 @@ test("Decision Center promotes sanitized contract and execution issues into the 
   assert.doesNotMatch(helper, /sync_error/);
   assert.doesNotMatch(helper, /title: "Contract change · " \+ item\.entity_type \+ " " \+ item\.entity_id/);
 });
+
+
+test("work-system orchestration derives vendor-neutral work without becoming a task manager", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const lib = read("src/lib/workSystemOrchestration.ts");
+  const component = read("src/components/ExternalWorkPackagePreview.tsx");
+
+  assert.match(lib, /WorkSystemId = "asana" \| "monday" \| "jira" \| "notion" \| "other"/);
+  assert.match(lib, /interface WorkSystemAdapter/);
+  assert.match(lib, /createWorkPackage/);
+  assert.match(lib, /syncWorkPackage/);
+  assert.match(lib, /deriveCampaignWorkPackage/);
+  assert.match(lib, /dependencyKeys/);
+  assert.match(lib, /estimatedMinutes/);
+  assert.doesNotMatch(lib, /fetch\(/);
+  assert.doesNotMatch(lib, /api\.asana|monday\.com|atlassian|notion\.com/i);
+
+  assert.match(component, /AVELA derives the work package/);
+  assert.match(component, /Not connected/);
+  assert.match(component, /Preview only · no external task has been created/);
+  assert.match(component, /AVELA orchestrates; it does not replace project management/);
+
+  assert.match(page, /deriveCampaignWorkPackage/);
+  assert.match(page, /ExternalWorkPackagePreview/);
+  assert.match(page, /estimatedMinutes: workPackage\?\.estimatedMinutes/);
+  assert.match(page, /taskCount: workPackage\?\.items\.length/);
+  assert.match(page, /dependencyCount: workDependencyCount/);
+});
+
+
+test("external work sync stores only the operational projection AVELA needs", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const component = read("src/components/ExternalExecutionSync.tsx");
+  const route = read("src/app/api/work-system/status/route.ts");
+  const migration = read("supabase/migrations/20261005002000_work_system_sync_projection.sql");
+
+  assert.match(page, /ExternalExecutionSync/);
+  assert.match(component, /Only operational state required for decision intelligence is synced back/);
+  assert.match(component, /External system owns task execution/);
+  assert.match(component, /does not duplicate comments, attachments or full task history/);
+  assert.match(component, /safeExternalUrl/);
+  assert.ok(component.includes("^https:\\/\\/"));
+
+  assert.match(route, /external_work_packages/);
+  assert.match(route, /external_work_item_links/);
+  assert.match(route, /work_system_connections/);
+  assert.match(route, /assignee_label/);
+  assert.match(route, /blocker_label/);
+  assert.doesNotMatch(route, /comment|attachment|description|body_text/i);
+
+  assert.match(migration, /Provider credentials and task bodies remain outside AVELA/);
+  assert.match(migration, /connection_ref/);
+  assert.doesNotMatch(migration, /access_token|refresh_token|api_key|client_secret/i);
+  assert.match(migration, /completed_count cannot exceed item_count/);
+  assert.match(migration, /blocked_count cannot exceed item_count/);
+  assert.match(migration, /club_has_permission\(club_id,'connections','view'\)/);
+  assert.match(migration, /club_has_permission\(club_id,'campaigns','view'\)/);
+});
+
+
+test("work-system routing stays explainable and confirmation-gated", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const routing = read("src/lib/workSystemRouting.ts");
+  const server = read("src/lib/workSystemRoutingServer.ts");
+  const component = read("src/components/WorkRoutingPlan.tsx");
+  const migration = read("supabase/migrations/20261005003500_work_system_routing_policy.sql");
+
+  assert.match(page, /getWorkRoutingRules/);
+  assert.match(page, /routeWorkPackage/);
+  assert.match(page, /WorkRoutingPlan/);
+
+  assert.match(routing, /highest-priority matching rule/);
+  assert.match(routing, /No enabled work-system routing rule matches this package/);
+  assert.match(routing, /unroutedItemKeys/);
+  assert.match(routing, /requireConfirmation/);
+
+  assert.match(server, /work_routing_rules/);
+  assert.match(server, /work_system_connections/);
+  assert.match(server, /state=eq\.connected/);
+
+  assert.match(component, /No route configured/);
+  assert.match(component, /Confirmation/);
+  assert.match(component, /AVELA does not dispatch this package automatically/);
+
+  assert.match(migration, /require_confirmation boolean not null default true check \(require_confirmation = true\)/);
+  assert.match(migration, /external work routing currently requires human confirmation/);
+  assert.match(migration, /routing destination_system must match the selected connection/);
+  assert.match(migration, /enabled routing rule requires a connected destination/);
+  assert.doesNotMatch(migration, /access_token|refresh_token|api_key|client_secret/i);
+});
+
