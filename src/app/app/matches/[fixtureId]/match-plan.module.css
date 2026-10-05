@@ -16,7 +16,7 @@
 
 
 /* AVELA opportunity brief */
-.opportunityBrief{padding:38px 0;border-top:1px solid #D9DDE5}
+.opportunityBrief{padding:34px 0 46px;border-top:1px solid var(--product-line)}
 .briefIntro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(320px,1.2fr);gap:38px;align-items:flex-start;margin-bottom:20px}
 .briefIntro h2{margin:0;font-size:clamp(30px,4vw,44px);line-height:1.04;letter-spacing:-.045em}
 .briefIntro p{margin:0;color:var(--product-muted);font-size:15px;line-height:1.6}
@@ -39,7 +39,7 @@
   .briefGrid article>strong{margin-top:14px}
 }
 
-.clubExecutionContext{padding:34px 0;border-top:1px solid #D9DDE5}
+.clubExecutionContext{padding:34px 0 46px;border-top:1px solid var(--product-line)}
 .clubExecutionIntro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(320px,1.2fr);gap:34px;align-items:flex-start}
 .clubExecutionIntro h2{margin:0;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.04em;line-height:1.05}
 .clubExecutionIntro p{margin:0;color:var(--product-muted);line-height:1.55}
@@ -123,3 +123,99 @@
 .contextLinks a:hover{background:#fff;color:var(--product-ink)}
 #decision,#campaign,#signals,#impact,#learning{scroll-margin-top:62px}
 @media(max-width:760px){.contextNav{top:53px;align-items:flex-start;flex-direction:column;padding:9px 0}.contextNav>div:first-child strong{white-space:normal}.contextLinks{width:100%}}
+
+/* Decision-first Opportunity Brief hierarchy */
+.decisionLens{
+  display:grid;
+  grid-template-columns:.9fr 1.25fr 1.05fr;
+  max-width:1120px;
+  margin:0 auto 34px;
+  border-top:1px solid var(--product-line);
+  border-bottom:1px solid var(--product-line);
+}
+.decisionLens>div{
+  padding:16px 18px 18px 0;
+}
+.decisionLens>div+div{
+  padding-left:18px;
+  border-left:1px solid var(--product-line);
+}
+.decisionLens span,
+.decisionLens strong{
+  display:block;
+}
+.decisionLens span{
+  color:var(--product-muted);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.decisionLens strong{
+  margin-top:6px;
+  font-size:13px;
+  line-height:1.45;
+}
+.phaseIntro{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(280px,.7fr);
+  gap:40px;
+  align-items:end;
+  max-width:1120px;
+  margin:0 auto;
+  padding:54px 0 22px;
+  border-top:1px solid var(--product-line);
+}
+.phaseIntro>div{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+}
+.phaseNumber{
+  display:grid;
+  place-items:center;
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  margin-top:1px;
+  border:1px solid var(--product-line);
+  color:var(--product-accent);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.06em;
+}
+.phaseIntro h2{
+  margin:0;
+  max-width:760px;
+  font-size:clamp(27px,3.2vw,40px);
+  line-height:1.03;
+  letter-spacing:-.042em;
+}
+.phaseIntro p{
+  margin:0;
+  color:var(--product-muted);
+  font-size:12px;
+  line-height:1.55;
+}
+#readiness + section,
+#readiness + section + section,
+#readiness + section + section + section{
+  scroll-margin-top:62px;
+}
+@media(max-width:900px){
+  .decisionLens{
+    grid-template-columns:1fr;
+  }
+  .decisionLens>div,
+  .decisionLens>div+div{
+    padding:14px 0;
+    border-left:0;
+    border-top:1px solid var(--product-line);
+  }
+  .decisionLens>div:first-child{border-top:0}
+  .phaseIntro{
+    grid-template-columns:1fr;
+    gap:12px;
+    padding-top:42px;
+  }
+}
