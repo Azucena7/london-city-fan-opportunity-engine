@@ -494,31 +494,26 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         </div>
       </section>
 
-      <nav className={styles.decisionRail} aria-label="Player asset planning sections">
-        <div className={styles.railState} aria-live="polite">
-          <span>Live pack</span>
-          <strong>{livePackState}</strong>
-          <small>
-            {activeIds.length}/{count} selected · {selectedCampaign.name}
-            {selectionSource === "shared" ? " · shared club selection" : selectionSource === "local" ? " · saved on this device" : ""}
-          </small>
-        </div>
-        <div className={styles.railMetrics}>
-          <div><span>Score</span><strong>{selectionComplete ? activeEvaluation.packScore.toFixed(0) : "—"}</strong></div>
-          <div><span>Cost</span><strong>£{activeEvaluation.totalFee}</strong></div>
-          <div><span>Opp. cost</span><strong>{activeEvaluation.opportunityCost.toFixed(0)}</strong></div>
-          <div><span>Blockers</span><strong>{selectionComplete ? activeEvaluation.blockers.length : "—"}</strong></div>
-        </div>
-        <div className={styles.railLinks}>
-          <a href="#packs">Recommendation</a>
-          <a href="#scenario">Scenario</a>
-          <a href="#availability">Evidence</a>
-        </div>
+      <nav className={styles.guidedSteps} aria-label="Player pack workflow">
+        <a href="#campaign-context" aria-current="step"><span>01</span><strong>Need</strong><small>Campaign + player count</small></a>
+        <a href="#constraints"><span>02</span><strong>Constraints</strong><small>Availability + blockers</small></a>
+        <a href="#packs"><span>03</span><strong>Recommended pack</strong><small>Best current combination</small></a>
+        <a href="#compare"><span>04</span><strong>Compare</strong><small>Only if you need alternatives</small></a>
+        <a href="#commit"><span>05</span><strong>Commit</strong><small>Approve or hand back</small></a>
       </nav>
+
+      <section id="constraints" className={styles.constraintsGate} aria-label="Current player constraints">
+        <div>
+          <span>Step 02 · Constraints</span>
+          <strong>{activeEvaluation.blockers.length ? activeEvaluation.blockers.length + " blocker" + (activeEvaluation.blockers.length === 1 ? "" : "s") + " in the current pack" : "No hard blocker in the current pack"}</strong>
+          <small>{internationalAlerts.length} international-duty alert{internationalAlerts.length === 1 ? "" : "s"} · sporting and commercial availability stay inspectable</small>
+        </div>
+        <a href="#availability">Inspect constraints →</a>
+      </section>
 
       <section id="packs" className={styles.recommendation} aria-label="Pack Optimizer recommendation">
         <div className={styles.sectionHead}>
-          <div><span>Pack Optimizer</span><h2>Best combinations for {count} player{count === 1 ? "" : "s"}.</h2></div>
+          <div><span>Step 03 · Recommended pack</span><h2>Best combinations for {count} player{count === 1 ? "" : "s"}.</h2></div>
           <p>AVELA optimises the group, not just the top individual names.</p>
         </div>
 
@@ -569,11 +564,11 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         )}
 
         {packs.length > 1 ? (
-          <div className={styles.alternatives}>
-            <div className={styles.alternativeHead}>
-              <span>Alternatives</span>
-              <strong>Compare the trade-off before changing the recommendation.</strong>
-            </div>
+          <details id="compare" className={styles.alternatives}>
+            <summary className={styles.alternativeHead}>
+              <div><span>Step 04 · Compare</span><strong>Challenge the recommendation only if you need another trade-off.</strong></div>
+              <b>Show {packs.length - 1} alternative{packs.length - 1 === 1 ? "" : "s"} →</b>
+            </summary>
             <div className={styles.alternativeGrid}>
               {packs.slice(1).map((pack, index) => (
                 <article key={pack.players.map((item) => item.player.id).join("-")}>
@@ -598,11 +593,16 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
                 </article>
               ))}
             </div>
-          </div>
+          </details>
         ) : null}
       </section>
 
-      <section id="scenario" className={styles.simulator} aria-label="Player pack scenario simulator">
+      <details id="scenario" className={styles.simulator} aria-label="Player pack scenario simulator">
+        <summary className={styles.simulatorSummary}>
+          <div><span>Optional scenario</span><strong>Manually change the recommended pack</strong></div>
+          <small>Open only when you want to add/remove players and recalculate the trade-off.</small>
+        </summary>
+        <div className={styles.simulatorBody}>
         <div className={styles.simulatorHead}>
           <div>
             <span>Live scenario</span>
@@ -648,9 +648,10 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
           </div>
           <p>{!selectionComplete ? "Pack is incomplete. Add players from Momentum Monitor." : activeEvaluation.blockers.length ? `Resolve: ${activeEvaluation.blockers.join(", ")}.` : activeEvaluation.momentumScore !== null && baseline?.momentumScore !== null && activeEvaluation.momentumScore > baseline.momentumScore && activeEvaluation.opportunityCost > (baseline?.opportunityCost ?? 0) ? "This version captures more current momentum but consumes more scarce player capacity." : "The current trade-off remains within the campaign constraints."}</p>
         </div>
-      </section>
+        </div>
+      </details>
 
-      <section className={styles.workflowExit} aria-label="Continue campaign workflow">
+      <section id="commit" className={styles.workflowExit} aria-label="Continue campaign workflow">
         <div>
           <span>Selection state</span>
           <strong>{sharedStatus === "committed" ? "Player pack committed in the club workspace." : sharedStatus === "approved" ? "Player pack approved and awaiting commitment." : selectionSource === "shared" ? "Selected pack is shared with authorised club users." : "This player pack is still a planning selection."}</strong>
