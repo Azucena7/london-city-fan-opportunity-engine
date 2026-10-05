@@ -308,3 +308,5 @@
   .phasePanel>summary{grid-template-columns:30px 1fr}
   .phasePanel>summary>b{grid-column:2}
 }
+
+.executiveLink{border:1px solid var(--product-line);background:#fff;color:var(--product-ink)!important}
