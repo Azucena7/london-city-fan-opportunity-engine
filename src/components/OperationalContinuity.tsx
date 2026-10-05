@@ -236,6 +236,6 @@ export function OperationalContinuity(){
       <strong>History is preserved.</strong>
       <p>AVELA reassigns future operational ownership without rewriting who made past decisions, who approved work or what was actually executed. Access removal is the final step, not the first.</p>
     </div>
-    {message?<p className={styles.message}>{message}</p>:null}
+    {message?<p className={styles.message} role="status" aria-live="polite">{message}</p>:null}
   </section>;
 }
