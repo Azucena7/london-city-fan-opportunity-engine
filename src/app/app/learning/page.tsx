@@ -9,6 +9,7 @@ import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { calendar, currentState } from "@/lib/data";
 import { AppWorkspaceShell, WorkspaceFilterButton } from "@/components/AppWorkspaceShell";
+import { DecisionStateBadge, EvidenceStateBadge } from "@/components/WorkspaceUI";
 
 export const metadata: Metadata = {
   title: "Learning",
@@ -72,6 +73,10 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </div>
         <aside className={styles.stateCard}>
           <span>{live?.timingLabel ?? "Measurement"} · Current measurement state</span>
+          <div className={styles.stateBadges}>
+            <DecisionStateBadge state={measured ? "MEASURED" : "MONITOR"} />
+            <EvidenceStateBadge state={measured ? "OBSERVED" : "MISSING"} />
+          </div>
           <strong>{measured ? "Club ticketing data connected" : live?.fixturePhase === "pre-match" ? "Pre-match · outcome not available yet" : "Awaiting club conversion data"}</strong>
           <p>
             {measured
