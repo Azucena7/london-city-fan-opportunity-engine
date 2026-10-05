@@ -126,3 +126,52 @@
   .radarScoreline{grid-template-columns:repeat(3,minmax(0,1fr))}
   .radarState{display:grid}
 }
+
+
+/* Opportunity Radar legibility pass */
+.contractInline{font-size:12px!important;line-height:1.45!important}
+.radarSummary{gap:10px}
+.radarSummary>section{min-height:100px;padding:14px}
+.radarSummary span{font-size:10px}
+.radarSummary strong{font-size:26px}
+.radarSummary small{font-size:11px!important;line-height:1.4}
+
+.priorityMatch{padding:16px}
+.priorityGrid{gap:12px}
+.priorityDecision{grid-template-columns:128px minmax(0,1fr) auto;gap:18px;padding:18px;border-radius:10px}
+.priorityDate span,.priorityDecision>div:nth-child(2)>span{font-size:10px}
+.priorityDate strong{font-size:30px}
+.priorityDate small{font-size:11px!important;line-height:1.4}
+.priorityDecision h2{font-size:22px!important}
+.priorityDecision p{font-size:12px!important;line-height:1.5}
+.priorityDecision>a{min-height:40px;padding:9px 12px;font-size:11px}
+
+.priorityMetrics>div,.priorityWhy>div{padding:13px}
+.priorityMetrics span,.priorityWhy span{font-size:10px}
+.priorityMetrics strong{font-size:14px}
+.priorityWhy strong{font-size:12px;line-height:1.4}
+
+.inboxCard{padding:16px}
+.refresh{font-size:10px}
+.radarList{margin-top:10px}
+.radarFixture{grid-template-columns:38px minmax(130px,.65fr) minmax(230px,1.2fr) minmax(200px,.75fr) minmax(150px,.6fr);gap:12px;padding:12px 4px}
+.futureFixture{min-height:82px}
+.radarRank{font-size:10px}
+.radarMatch span,.radarOpportunity span{font-size:10px}
+.radarMatch strong{font-size:13px}
+.radarMatch small,.radarOpportunity small{font-size:10px!important;line-height:1.35}
+.radarOpportunity strong{font-size:12px;line-height:1.4}
+.radarScoreline>div{padding:8px}
+.radarScoreline span{font-size:9px}
+.radarScoreline strong{font-size:11px}
+.radarState small{font-size:10px!important;line-height:1.35}
+
+.clubFitCard{padding:16px}
+.clubFitCard p{font-size:11px!important;line-height:1.5}
+.clubFitCard>a{font-size:11px}
+.clubFitFacts>div{padding:10px}
+.clubFitFacts span{font-size:10px}
+.clubFitFacts strong{font-size:12px;line-height:1.35}
+.evidenceContract>summary{padding:13px 15px;font-size:11px}
+.evidenceContract>div{padding:0 15px 15px}
+.evidenceContract p{font-size:11px!important;line-height:1.5}
