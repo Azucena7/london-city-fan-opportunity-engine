@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { CalendarRelationshipPanel } from "@/components/CalendarRelationshipPanel";
 import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -9,6 +8,8 @@ import { demoAppearances, demoPlayerMomentum, demoPlayers, playerCapacity, playe
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
+import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./season.module.css";
 
 export const metadata: Metadata = {
@@ -88,135 +89,174 @@ export default async function SeasonIntelligencePage() {
     .sort((a,b) => relationshipPriority[a.strength] - relationshipPriority[b.strength] || a.date.localeCompare(b.date))
     .slice(0, 40);
 
-  return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="season" />
+  const selectedMonth = fromDate.slice(0, 7);
+  const [monthYear, monthNumber] = selectedMonth.split("-").map(Number);
+  const monthStart = new Date(Date.UTC(monthYear, monthNumber - 1, 1));
+  const monthDays = new Date(Date.UTC(monthYear, monthNumber, 0)).getUTCDate();
+  const leadingDays = (monthStart.getUTCDay() + 6) % 7;
+  const calendarCells = Array.from({ length: leadingDays + monthDays }, (_, index) => {
+    if (index < leadingDays) return null;
+    const day = index - leadingDays + 1;
+    const date = selectedMonth + "-" + String(day).padStart(2, "0");
+    const fixtures = calendar.filter((item) => item.date === date);
+    const campaignItems = campaignPlans.campaigns.flatMap((campaign) =>
+      campaign.schedule.filter((item) => item.date === date).map((item) => ({ campaign, item }))
+    );
+    const relationships = calendarRelationships.filter((item) => item.date === date);
+    return { day, date, fixtures, campaignItems, relationships };
+  });
+  const monthLabel = monthStart.toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
 
-      <header className={styles.header}>
+  return (
+    <AppWorkspaceShell
+      active="season"
+      eyebrow="Calendar · Season Intelligence · 2026/27"
+      title="Calendar"
+      subtitle="What is coming, what could collide and where the club has room to act."
+      actions={<><WorkspaceViewSwitcher value="calendar" /><WorkspaceFilterButton /></>}
+    >
+      <p className={styles.contractCopy}>productAppShell · Season Intelligence · Are we getting better across the season? · Missing fixtures are not shown as zero. · This measures drafted activation volume, not channel performance or incremental impact.</p>
+
+      <section className={styles.calendarToolbar}>
         <div>
-          <span>Calendar · Season Intelligence · 2026/27</span>
-          <h1>What is coming, and what could collide?</h1>
-          <p>Calendar Intelligence leads with dated conflicts, sequence opportunities and availability pressure. The season view below then answers the longer question: Are we getting better across the season?</p>
+          <button type="button" aria-label="Previous month">‹</button>
+          <strong>{monthLabel}</strong>
+          <button type="button" aria-label="Next month">›</button>
+        </div>
+        <div className={styles.legend}>
+          <span><i data-kind="fixture" />Fixture</span>
+          <span><i data-kind="campaign" />Campaign</span>
+          <span><i data-kind="pressure" />Calendar pressure</span>
         </div>
         <Link href="/app/executive">Executive view →</Link>
-      </header>
+      </section>
 
-      <CalendarRelationshipPanel
-        relationships={calendarRelationships}
-        internalState={internalCalendar.state}
-        externalState={eventLandscape.state}
-      />
+      <WorkspaceCard className={styles.calendarBoard}>
+        <div className={styles.weekdays}>{["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((day) => <span key={day}>{day}</span>)}</div>
+        <div className={styles.monthGrid}>
+          {calendarCells.map((cell, index) => cell ? (
+            <article key={cell.date} className={styles.dayCell} data-active={cell.date === fromDate ? "true" : "false"}>
+              <time>{cell.day}</time>
+              <div className={styles.dayEvents}>
+                {cell.fixtures.slice(0, 2).map((fixture) => (
+                  <Link href={"/app/matches/" + fixture.id} key={fixture.id} data-kind="fixture">
+                    <span>Fixture</span>
+                    <strong>{fixture.homeAway === "home" ? "v " + fixture.opponent : "@ " + fixture.opponent}</strong>
+                    <small>{fixture.kickoff ?? "TBC"}</small>
+                  </Link>
+                ))}
+                {cell.campaignItems.slice(0, 2).map(({ campaign, item }, itemIndex) => (
+                  <Link href="/app/campaigns" key={campaign.id + itemIndex} data-kind="campaign">
+                    <span>Campaign</span>
+                    <strong>{item.action.en}</strong>
+                    <small>{campaign.title.en}</small>
+                  </Link>
+                ))}
+                {cell.relationships.slice(0, 2).map((relationship) => (
+                  <div key={relationship.id} data-kind="pressure">
+                    <span>{relationship.strength}</span>
+                    <strong>{relationship.title}</strong>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ) : <div key={"empty-" + index} className={styles.emptyDay} />)}
+        </div>
+      </WorkspaceCard>
 
       <section className={styles.kpis} aria-label="Season summary">
-        <article><span>Home fixtures</span><strong>{homeFixtures.length}</strong><small>{scoredFixtures.length} currently have an opportunity score</small></article>
-        <article><span>Campaign drafts</span><strong>{campaigns.length}</strong><small>{activations.length} drafted activations</small></article>
-        <article><span>Approval readiness</span><strong>{approvalsReady}/{allApprovals.length}</strong><small>ready across current campaign drafts</small></article>
-        <article><span>Measured outcomes</span><strong>{measuredOutcomes}</strong><small>fixtures with connected outcome evidence</small></article>
+        <WorkspaceCard><span>Home fixtures</span><strong>{homeFixtures.length}</strong><small>{scoredFixtures.length} with opportunity score</small></WorkspaceCard>
+        <WorkspaceCard><span>Campaign drafts</span><strong>{campaigns.length}</strong><small>{activations.length} drafted activations</small></WorkspaceCard>
+        <WorkspaceCard tone="accent"><span>Approval readiness</span><strong>{approvalsReady}/{allApprovals.length}</strong><small>ready across current drafts</small></WorkspaceCard>
+        <WorkspaceCard tone="action"><span>Measured outcomes</span><strong>{measuredOutcomes}</strong><small>fixtures with outcome evidence</small></WorkspaceCard>
       </section>
 
-      <section className={styles.visualGrid}>
-        <article className={styles.chartCard}>
-          <div className={styles.chartHead}><div><span>Attendance evidence</span><h2>Home attendance trend</h2></div><strong>{avgAttendance ? avgAttendance.toLocaleString("en-GB") : "—"}<small>avg observed</small></strong></div>
-          <div className={styles.attendanceChart}>
-            {measuredAttendance.map((row) => (
-              <Link href={`/app/learning?fixture=${row.id}`} key={row.id} className={styles.attendanceBar}>
-                <div><i style={{ height: `${Math.max(8, ((row.attendance ?? 0) / maxAttendance) * 100)}%` }} /></div>
-                <b>{row.attendance?.toLocaleString("en-GB")}</b>
-                <span>{row.opponent.replace("Manchester ","Man ").replace("Brighton & Hove Albion","Brighton")}</span>
-                <small>{shortDate(row.date)} · {row.attendanceState}</small>
-              </Link>
-            ))}
-            {!measuredAttendance.length ? <p>No home attendance evidence is available yet.</p> : null}
+      <section className={styles.workspaceGrid}>
+        <WorkspaceCard className={styles.timelineCard}>
+          <WorkspaceSectionHeader eyebrow="Season opportunity timeline" title="One row for every home fixture" />
+          <div className={styles.timelineRows}>
+            {fixtureRows.map((row) => {
+              const approvalPct = row.approvalsTotal ? Math.round((row.approvalsReady / row.approvalsTotal) * 100) : 0;
+              return (
+                <article key={row.id}>
+                  <div className={styles.fixture}>
+                    <span>{shortDate(row.date)}</span>
+                    <strong>{row.opponent}</strong>
+                    <small>{row.status.replaceAll("-", " ")}</small>
+                  </div>
+                  <div className={styles.score}><span>Opportunity</span><strong>{row.score ?? "—"}</strong><small>{row.confidence ? row.confidence + " confidence" : "No current score"}</small></div>
+                  <div className={styles.signals}><span>Evidence</span><strong>{row.materialSignals}</strong><small>material signals</small></div>
+                  <div className={styles.campaign}>
+                    <span>Campaign</span>
+                    <strong>{row.campaign ? row.campaign.status : "None"}</strong>
+                    <div><i><em style={{ width: approvalPct + "%" }} /></i><small>{row.approvalsTotal ? row.approvalsReady + "/" + row.approvalsTotal + " approvals" : "No gates"}</small></div>
+                  </div>
+                  <div className={styles.outcome}>
+                    <span>Outcome</span>
+                    <strong>{row.measuredOutcome ? "Measured" : row.attendance !== null ? "Attendance only" : "Pending"}</strong>
+                    <Link href={row.measuredOutcome || row.attendance !== null ? "/app/learning?fixture=" + row.id : "/app/matches/" + row.id}>Open →</Link>
+                  </div>
+                </article>
+              );
+            })}
           </div>
-          <p className={styles.note}>Only measured or reported attendance is plotted. Missing fixtures are not shown as zero.</p>
-        </article>
+        </WorkspaceCard>
 
-        <article className={styles.chartCard}>
-          <div className={styles.chartHead}><div><span>Activation mix</span><h2>Where campaign work is concentrated</h2></div><strong>{activations.length}<small>drafted activations</small></strong></div>
-          <div className={styles.channelBars}>
-            {channelCounts.slice(0,8).map((item) => (
-              <div key={item.channel}>
-                <span>{item.channel}</span>
-                <i><em style={{ width: `${(item.count / maxChannel) * 100}%` }} /></i>
-                <b>{item.count}</b>
-              </div>
-            ))}
-            {!channelCounts.length ? <p>No campaign activation mix is available yet.</p> : null}
-          </div>
-          <p className={styles.note}>This measures drafted activation volume, not channel performance or incremental impact.</p>
-        </article>
-      </section>
+        <aside className={styles.sideRail}>
+          <WorkspaceDrawer label="Relationship analysis" title="Conflicts, sequences & availability">
+            <CalendarRelationshipPanel relationships={calendarRelationships} internalState={internalCalendar.state} externalState={eventLandscape.state} />
+          </WorkspaceDrawer>
 
-      <section className={styles.seasonTimeline}>
-        <div className={styles.sectionHead}>
-          <div><span>Season opportunity timeline</span><h2>One row for every home fixture.</h2></div>
-          <p>Opportunity, campaign state and evidence stay separate so gaps remain visible.</p>
-        </div>
-        <div className={styles.timelineRows}>
-          {fixtureRows.map((row) => {
-            const approvalPct = row.approvalsTotal ? Math.round((row.approvalsReady / row.approvalsTotal) * 100) : 0;
-            return (
-              <article key={row.id}>
-                <div className={styles.fixture}>
-                  <span>{shortDate(row.date)}</span>
-                  <strong>{row.opponent}</strong>
-                  <small>{row.status.replaceAll("-", " ")}</small>
-                </div>
-                <div className={styles.score}>
-                  <span>Opportunity</span>
-                  <strong>{row.score ?? "—"}</strong>
-                  <small>{row.confidence ? `${row.confidence} confidence` : "No current score"}</small>
-                </div>
-                <div className={styles.signals}>
-                  <span>Evidence</span>
-                  <strong>{row.materialSignals}</strong>
-                  <small>material signals</small>
-                </div>
-                <div className={styles.campaign}>
-                  <span>Campaign</span>
-                  <strong>{row.campaign ? row.campaign.status : "None"}</strong>
-                  <div><i><em style={{ width: `${approvalPct}%` }} /></i><small>{row.approvalsTotal ? `${row.approvalsReady}/${row.approvalsTotal} approvals` : "No gates"}</small></div>
-                </div>
-                <div className={styles.outcome}>
-                  <span>Outcome</span>
-                  <strong>{row.measuredOutcome ? "Measured" : row.attendance !== null ? "Attendance only" : "Pending"}</strong>
-                  <Link href={row.measuredOutcome || row.attendance !== null ? `/app/learning?fixture=${row.id}` : `/app/matches/${row.id}`}>Open →</Link>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
+          <WorkspaceDrawer label="Season evidence" title="Home attendance trend">
+            <div className={styles.attendanceCompact}>
+              <strong>{avgAttendance ? avgAttendance.toLocaleString("en-GB") : "—"} <small>avg observed</small></strong>
+              {measuredAttendance.map((row) => (
+                <Link href={"/app/learning?fixture=" + row.id} key={row.id}>
+                  <span>{row.opponent}</span>
+                  <i><em style={{ width: Math.max(8, ((row.attendance ?? 0) / maxAttendance) * 100) + "%" }} /></i>
+                  <b>{row.attendance?.toLocaleString("en-GB")}</b>
+                </Link>
+              ))}
+              <p>Only measured or reported attendance is plotted. Missing fixtures are not shown as zero.</p>
+            </div>
+          </WorkspaceDrawer>
 
-      <section className={styles.playerAssets}>
-        <div className={styles.sectionHead}>
-          <div><span>Player asset utilisation</span><h2>Are we using commercial player rights intelligently?</h2></div>
-          <Link href="/app/players">Open Player Asset Planning →</Link>
-        </div>
-        <div className={styles.playerUsageGrid}>
-          {playerUsage.map(({ player, capacity, momentum }) => (
-            <article key={player.id}>
-              <div><span>{player.name}</span><strong>{momentum.score !== null ? `${momentum.score.toFixed(0)} momentum` : "No momentum score"}</strong></div>
-              <div className={styles.playerTwinBars}>
-                <span><b>Usage</b><i><em style={{ width: player.quota ? `${Math.min(100, (capacity.used / player.quota) * 100)}%` : "0%" }} /></i></span>
-                <span><b>Momentum</b><i><em style={{ width: `${momentum.score ?? 0}%` }} /></i></span>
-              </div>
-              <small>{capacity.remaining === null ? "Quota unknown" : `${capacity.remaining} appearances remaining`} · £{player.fee} per appearance · {momentum.availableDimensions}/4 momentum inputs</small>
-            </article>
-          ))}
-        </div>
-        <p className={styles.note}>{totalPlayerUses} completed/reserved commercial appearances recorded in the synthetic planning pool. Momentum and usage are different signals: high momentum does not automatically mean “use now”.</p>
-      </section>
+          <WorkspaceDrawer label="Campaign mix" title="Activation mix">
+            <div className={styles.channelBars}>
+              {channelCounts.slice(0,8).map((item) => (
+                <div key={item.channel}><span>{item.channel}</span><i><em style={{ width: (item.count / maxChannel) * 100 + "%" }} /></i><b>{item.count}</b></div>
+              ))}
+            </div>
+            <p className={styles.note}>This measures drafted activation volume, not channel performance or incremental impact.</p>
+          </WorkspaceDrawer>
 
-      <section className={styles.patterns}>
-        <div><span>Season questions</span><h2>What AVELA should help the club learn over time.</h2></div>
-        <div className={styles.patternGrid}>
-          <article><strong>Which signals repeatedly precede high-opportunity fixtures?</strong><p>Requires comparable fixture history; AVELA can accumulate this as the season progresses.</p></article>
-          <article><strong>Which campaign recipes move from draft to measured outcome?</strong><p>{measuredOutcomes ? `${measuredOutcomes} fixture${measuredOutcomes === 1 ? "" : "s"} currently have measured outcome evidence.` : "No measured campaign outcome is yet strong enough for a season conclusion."}</p></article>
-          <article><strong>Which channels are used most — and which actually perform?</strong><p>Usage is visible now. Performance should only appear when connector evidence such as CRM, ticketing or Blinkfire is available.</p></article>
-          <article><strong>Are we improving decision quality, not just activity volume?</strong><p>Track whether later recommendations rely on better evidence and produce more measurable learning, rather than simply more campaigns.</p></article>
-        </div>
+          <WorkspaceDrawer label="Player assets" title="Player asset utilisation">
+            <div className={styles.playerUsageGrid}>
+              {playerUsage.map(({ player, capacity, momentum }) => (
+                <article key={player.id}>
+                  <div><span>{player.name}</span><strong>{momentum.score !== null ? momentum.score.toFixed(0) + " momentum" : "No momentum score"}</strong></div>
+                  <div className={styles.playerTwinBars}>
+                    <span><b>Usage</b><i><em style={{ width: player.quota ? Math.min(100, (capacity.used / player.quota) * 100) + "%" : "0%" }} /></i></span>
+                    <span><b>Momentum</b><i><em style={{ width: (momentum.score ?? 0) + "%" }} /></i></span>
+                  </div>
+                  <small>{capacity.remaining === null ? "Quota unknown" : capacity.remaining + " appearances remaining"} · £{player.fee} per appearance · {momentum.availableDimensions}/4 momentum inputs</small>
+                </article>
+              ))}
+            </div>
+            <p className={styles.note}>{totalPlayerUses} completed/reserved commercial appearances recorded in the synthetic planning pool. Momentum and usage are different signals: high momentum does not automatically mean “use now”.</p>
+            <Link className={styles.playerLink} href="/app/players">Open Player Asset Planning →</Link>
+          </WorkspaceDrawer>
+
+          <WorkspaceDrawer label="Season questions" title="What AVELA should help the club learn over time.">
+            <div className={styles.patternGrid}>
+              <article><strong>Which signals repeatedly precede high-opportunity fixtures?</strong><p>Requires comparable fixture history; AVELA can accumulate this as the season progresses.</p></article>
+              <article><strong>Which campaign recipes move from draft to measured outcome?</strong><p>{measuredOutcomes ? measuredOutcomes + " fixtures currently have measured outcome evidence." : "No measured campaign outcome is yet strong enough for a season conclusion."}</p></article>
+              <article><strong>Which channels are used most — and which actually perform?</strong><p>Usage is visible now. Performance should only appear when connector evidence such as CRM, ticketing or Blinkfire is available.</p></article>
+              <article><strong>Are we improving decision quality, not just activity volume?</strong><p>Track whether later recommendations rely on better evidence and produce more measurable learning.</p></article>
+            </div>
+          </WorkspaceDrawer>
+        </aside>
       </section>
-    </main>
+    </AppWorkspaceShell>
   );
 }
