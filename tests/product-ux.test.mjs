@@ -1388,6 +1388,21 @@ test("Campaigns surface talent lifecycle and committed packs consume planning ca
   assert.match(planner, /now reserved in player capacity planning/);
 });
 
+test("Season Intelligence exposes shared talent pressure before campaign approval", () => {
+  const season = read("src/app/app/season/page.tsx");
+  const panel = read("src/components/TalentPressurePanel.tsx");
+  assert.match(season, /TalentPressurePanel/);
+  assert.match(season, /Player conflicts & weekly load/);
+  assert.match(panel, /Talent pressure/);
+  assert.match(panel, /weekKey/);
+  assert.match(panel, /Same-day conflict/);
+  assert.match(panel, /days apart/);
+  assert.match(panel, /selected/);
+  assert.match(panel, /approved/);
+  assert.match(panel, /committed/);
+  assert.match(panel, /Review pack/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
