@@ -263,7 +263,7 @@ export default async function ClubAppHome() {
           <article data-state={radar.filter((item) => item.calendarPressure.state === "Act now").length > 0 ? "overdue" : radar.filter((item) => item.calendarPressure.state === "Review").length > 0 ? "review" : "clear"}>
             <span>Calendar pressure</span>
             <strong>{radar.filter((item) => item.calendarPressure.state === "Act now").length > 0 ? radar.filter((item) => item.calendarPressure.state === "Act now").length + " act now" : radar.filter((item) => item.calendarPressure.state === "Review").length > 0 ? radar.filter((item) => item.calendarPressure.state === "Review").length + " review" : "Clear"}</strong>
-            <p>Calendar relationships can elevate attention without changing opportunity potential.</p>
+            <p>Calendar pressure can elevate attention without changing opportunity potential.</p>
             <Link href="/app/season">Open Calendar Intelligence →</Link>
           </article>
 
