@@ -116,7 +116,7 @@
 .readinessGrid small{margin-top:3px!important;color:#84929D!important;font-size:9px!important}
 .readinessGrid article[data-state="tight"] strong,.readinessGrid article[data-state="blocked"] strong,.readinessGrid article[data-state="at-risk"] strong{color:#B56628}
 .readinessGrid article[data-state="unknown"] strong,.readinessGrid article[data-state="unavailable"] strong{color:#7C8791}
-.readinessGrid article[data-state="connected"] strong,.readinessGrid article[data-state="available"] strong,.readinessGrid article[data-state="clear"] strong{color:#2F8F83}
+.readinessGrid article[data-state="connected"] strong,.readinessGrid article[data-state="available"] strong,.readinessGrid article[data-state="clear"] strong,.readinessGrid article[data-state="syncing"] strong{color:#2F8F83}
 
 @media(max-width:1180px){
   .metricGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
