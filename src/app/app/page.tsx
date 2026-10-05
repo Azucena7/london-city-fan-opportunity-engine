@@ -196,7 +196,7 @@ export default async function ClubAppHome() {
           <WorkspaceSectionHeader
             eyebrow="Recommendation"
             title="Highest current priority"
-            action={primary ? <WorkspaceBadge tone={primary.priority === "act-now" ? "coral" : primary.priority === "blocked" ? "danger" : "warning"}>{priorityLabel[primary.priority]}</WorkspaceBadge> : null}
+            action={primary ? <span className={styles.priorityPill}><WorkspaceBadge tone={primary.priority === "act-now" ? "coral" : primary.priority === "blocked" ? "danger" : "warning"}>{priorityLabel[primary.priority]}</WorkspaceBadge></span> : null}
           />
           {primary ? (
             <>
