@@ -113,3 +113,9 @@
   .searchPlaceholder span{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .iconStatus{display:none}
 }
+
+.topbarContext{min-width:0;display:flex;align-items:center;color:#92A0AA}
+.topbarContext span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;font-weight:850;letter-spacing:.055em;text-transform:uppercase}
+.filterStatus{border-style:dashed!important;background:#FAFBFC!important;color:#8996A0!important}
+.filterStatus::before{content:"Context";font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:#A1ACB5}
+@media(max-width:900px){.topbarContext{grid-column:1}.topbarContext span{font-size:9px}}
