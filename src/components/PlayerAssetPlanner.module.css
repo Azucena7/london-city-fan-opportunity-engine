@@ -88,3 +88,14 @@
 @media(max-width:560px){
   .decisionRail>.railMetrics{grid-template-columns:repeat(2,1fr)}
 }
+
+
+/* P0 AVELA visual cleanup */
+.packGrid>article.best,.momentumGrid>article.momentumSelected{border-color:rgba(47,143,131,.42);box-shadow:inset 0 3px 0 var(--product-accent)}
+.momentumSelected button,.best .usePack,.changeStory{background:var(--product-navy);border-color:var(--product-navy)}
+.head>div>span,.need>span,.sectionHead span,.summary span,.playerTop span,.capacity span,.state>span,.packHead span,.packMetrics span,
+.campaignContext span,.momentumTop span,.simulatorHead span,.liveMetrics span,.changeStory span,.railState span,.railMetrics span{font-size:10px}
+.alertGrid article>div span,.packPlayers small,.momentumDimensions b,.momentumDimensions small,.momentumSource,.liveMetrics small,.railState small,.railLinks a{font-size:10px}
+.summary small,.state small,.need small,.demoNote{font-size:10px!important}
+.playerGrid label,.momentumGrid button,.usePack,.simulatorHead>button{font-size:11px}
+.packGrid p,.changeStory p{font-size:11px!important}

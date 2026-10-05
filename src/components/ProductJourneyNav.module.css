@@ -106,3 +106,17 @@
   .mobileMenuPanel a{padding:9px 8px;border-radius:7px;color:#637282;text-decoration:none;font-size:11px;font-weight:750}
   .mobileMenuPanel a:hover,.mobileActive{background:#EEF3F5!important;color:#102742!important}
 }
+
+/* P0 legibility and mobile hierarchy */
+.brandCopy small,.workspace,.sectionLabel,.positioning{font-size:10px}
+.workLink strong{font-size:12px}
+.workLink small{font-size:10px;line-height:1.35}
+.secondary a,.bottom a{font-size:11px}
+.glyph svg{display:block}
+@media(max-width:900px){
+  .primary .workLink:nth-of-type(n+5){display:none}
+  .workLink strong{font-size:11px}
+  .mobileMenu summary{font-size:11px;min-height:38px}
+  .mobileMenuPanel>span{font-size:10px}
+  .mobileMenuPanel a{font-size:12px;min-height:38px;display:flex;align-items:center}
+}

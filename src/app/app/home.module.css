@@ -60,3 +60,17 @@
 @media(max-width:1000px){.clubStateGrid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr 1fr 1fr}.overview{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.shell{padding:0 18px 48px}.header,.primaryGrid,.workspaceGrid{grid-template-columns:1fr}.refresh{max-width:360px}.signalStrip{grid-template-columns:1fr 1fr}.primaryGrid>div+div{border-left:0;border-top:1px solid var(--product-line)}}
 @media(max-width:620px){.signalStrip,.clubStateGrid,.timeline,.overview{grid-template-columns:1fr}.alertCard{grid-template-columns:1fr}.factRow{grid-template-columns:1fr}.primaryTop{align-items:flex-start;flex-direction:column}.queue,.changes{padding:14px}}
+
+
+/* P0 product polish: readable briefing, less dashboard density */
+.header>div:first-child>span,.sectionHead span,.overview span,.loop>span{font-size:10px}
+.refresh span,.signalStrip span,.primaryTop small,.decisionFacts>div>span,.factRow span{font-size:10px}
+.signalStrip small,.alertState small,.alertMeta span,.changeFeed small,.clubStateGrid span,.clubStateGrid small,.timeline time,.timeline span{font-size:10px}
+.primaryTop>a,.whyPanel summary,.sectionHead a,.alertMeta a,.clubStateGrid a{font-size:11px}
+.alertBody p,.changeFeed p,.clubStateGrid p,.timeline p{font-size:11px!important}
+.changeFeed>a>span{font-size:10px}
+.changeFeed strong{font-size:12px}
+.clubStateGrid strong{font-size:18px}
+.timeline strong{font-size:12px}
+.workspaceGrid{align-items:start}
+@media(max-width:900px){.signalStrip{grid-template-columns:repeat(2,minmax(0,1fr))}}

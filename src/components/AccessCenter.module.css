@@ -44,3 +44,13 @@
   .authGrid button,.grid button,.accountBar button{width:100%}
   .accessFlow>div{padding-left:0;padding-right:0}
 }
+
+
+/* P0 AVELA visual cleanup */
+.head h1,.empty h1{font-size:clamp(36px,4.5vw,54px);letter-spacing:-.045em}
+.accountBar{background:var(--product-navy)}
+.authGrid button,.grid button,.accountBar button{border-color:var(--product-navy);background:var(--product-navy)}
+.guardrail,.accessSuccess{background:#EAF4F1;border-left-color:var(--product-accent)}
+.head>div>span,.empty>span,.grid article>span,.authGrid article>span,.state span,.accountBar span,.accessFlow span,.accessSuccess span,.loadingState>span{font-size:10px}
+.accessFlow small{font-size:11px}
+@media(max-width:800px){.head h1,.empty h1{font-size:clamp(34px,10vw,48px)}}
