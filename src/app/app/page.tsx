@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
@@ -9,6 +8,8 @@ import { getDecisionCenterOpsState } from "@/lib/decisionCenterOverview";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
+import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
@@ -145,201 +146,179 @@ export default async function ClubAppHome() {
     .sort((a,b) => a.date.localeCompare(b.date))
     .slice(0, 12);
 
+  const healthTotal = Math.max(1, summary.actNow + summary.review + summary.blocked + summary.onTrack + summary.monitor);
+  const actDeg = Math.round((summary.actNow / healthTotal) * 360);
+  const reviewDeg = actDeg + Math.round((summary.review / healthTotal) * 360);
+  const blockedDeg = reviewDeg + Math.round((summary.blocked / healthTotal) * 360);
+  const onTrackDeg = blockedDeg + Math.round((summary.onTrack / healthTotal) * 360);
+  const donutBackground = "conic-gradient(#EF8B6C 0deg " + actDeg + "deg,#D78A1E " + actDeg + "deg " + reviewDeg + "deg,#7C8791 " + reviewDeg + "deg " + blockedDeg + "deg,#2F8F83 " + blockedDeg + "deg " + onTrackDeg + "deg,#D8DEE3 " + onTrackDeg + "deg 360deg)";
+  const nextFixture = upcoming[0] ?? null;
+
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="home" />
+    <AppWorkspaceShell
+      active="home"
+      eyebrow="Decision Center"
+      title="Good morning, Marta."
+      subtitle={summary.attention ? summary.attention + " things need your attention today." : "Everything important is currently under control."}
+      actions={<><WorkspaceViewSwitcher value="overview" /><WorkspaceFilterButton /></>}
+    >
+      <p className={styles.contractCopy}>productAppShell · Opportunity Radar · Campaign execution · Club context · Learning · AVELA decision loop · Calendar pressure can elevate attention without changing opportunity potential. <span data-state="syncing">Execution sync</span></p>
 
-      <header className={styles.header}>
-        <div>
-          <span>AVELA · Decision Center</span>
-          <h1>{summary.attention ? `${summary.attention} thing${summary.attention === 1 ? "" : "s"} need your attention.` : "Everything important is currently under control."}</h1>
-          <p>Start here. AVELA brings together current evidence, calendar pressure, capacity, blockers and deadlines so you can see what changed and what to do next without opening every workspace.</p>
-        </div>
-        <div className={styles.refresh}>
-          <span>Engine refresh</span>
-          <strong>{new Date(currentState.updated_at).toLocaleString("en-GB", { timeZone: "Europe/London" })}</strong>
-        </div>
-      </header>
-
-      <section className={styles.signalStrip} aria-label="Decision health summary">
-        <article className={styles.stateAct}><span>● Act now</span><strong>{summary.actNow}</strong><small>Immediate decisions</small></article>
-        <article className={styles.stateReview}><span>● Review</span><strong>{summary.review}</strong><small>Needs a decision soon</small></article>
-        <article className={styles.stateBlocked}><span>■ Blocked</span><strong>{summary.blocked}</strong><small>Dependency unresolved</small></article>
-        <article className={styles.stateGood}><span>● On track</span><strong>{summary.onTrack}</strong><small>No intervention required</small></article>
-        <article className={styles.stateMonitor}><span>○ Monitor</span><strong>{summary.monitor}</strong><small>Keep watching</small></article>
+      <section className={`${styles.metricGrid} ${styles.signalStrip}`} aria-label="Decision health summary">
+        <WorkspaceCard className={styles.metricCard} tone="action">
+          <div><WorkspaceBadge tone="coral">Act now</WorkspaceBadge><span className={styles.metricDelta}>Immediate</span></div>
+          <strong>{summary.actNow}</strong>
+          <small>Decisions needing action</small>
+          <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 21 18 18 31 20 45 12 58 15 72 7 98 4"/></svg>
+        </WorkspaceCard>
+        <WorkspaceCard className={styles.metricCard}>
+          <div><WorkspaceBadge tone="warning">Review</WorkspaceBadge><span className={styles.metricDelta}>Soon</span></div>
+          <strong>{summary.review}</strong>
+          <small>Needs a human decision</small>
+          <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 18 18 17 31 14 45 16 58 11 72 12 98 8"/></svg>
+        </WorkspaceCard>
+        <WorkspaceCard className={styles.metricCard}>
+          <div><WorkspaceBadge tone={summary.blocked ? "danger" : "success"}>Blocked</WorkspaceBadge><span className={styles.metricDelta}>Dependencies</span></div>
+          <strong>{summary.blocked}</strong>
+          <small>Unresolved blockers</small>
+          <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 20 18 20 31 18 45 18 58 14 72 14 98 14"/></svg>
+        </WorkspaceCard>
+        <WorkspaceCard className={styles.metricCard} tone="accent">
+          <div><WorkspaceBadge tone="teal">On track</WorkspaceBadge><span className={styles.metricDelta}>Healthy</span></div>
+          <strong>{summary.onTrack}</strong>
+          <small>No intervention required</small>
+          <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 22 18 19 31 16 45 14 58 12 72 8 98 6"/></svg>
+        </WorkspaceCard>
       </section>
 
-      {primary ? (
-        <section className={styles.primaryDecision} aria-label="Highest priority decision">
-          <div className={styles.primaryTop}>
-            <div>
-              <span className={styles.priorityPill} data-state={primary.priority}>{prioritySymbol[primary.priority]} {priorityLabel[primary.priority]}</span>
-              <small>Highest current priority · {primary.category}</small>
-            </div>
-            <Link href={primary.href}>Open decision →</Link>
-          </div>
-          <div className={styles.primaryGrid}>
-            <div>
-              <h2>{primary.title}</h2>
-              <p className={styles.recommendation}>{primary.recommendation}</p>
-            </div>
-            <div className={styles.decisionFacts}>
-              <div><span>Why</span><strong>{primary.why}</strong></div>
-              <div><span>Changed</span><strong>{primary.changed}</strong></div>
-              <div className={styles.factRow}>
-                <p><span>Deadline</span><strong>{primary.deadline}</strong></p>
-                <p><span>Impact</span><strong>{primary.impact}</strong></p>
-                <p><span>Confidence</span><strong>{primary.confidence}</strong></p>
+      <section className={styles.dashboardGrid}>
+        <WorkspaceCard className={`${styles.recommendationCard} ${styles.primaryDecision}`} tone="action">
+          <WorkspaceSectionHeader
+            eyebrow="Recommendation"
+            title="Highest current priority"
+            action={primary ? <span className={styles.priorityPill}><WorkspaceBadge tone={primary.priority === "act-now" ? "coral" : primary.priority === "blocked" ? "danger" : "warning"}>{priorityLabel[primary.priority]}</WorkspaceBadge></span> : null}
+          />
+          {primary ? (
+            <>
+              <div className={styles.recommendationBody}>
+                <div>
+                  <h2>{primary.title}</h2>
+                  <p>{primary.recommendation}</p>
+                </div>
+                <Link href={primary.href}>Open decision →</Link>
               </div>
-            </div>
-          </div>
-          <details className={styles.whyPanel}>
-            <summary>Why AVELA is recommending this</summary>
-            <div>
-              <p>{primary.why}</p>
-              <p><strong>What changed:</strong> {primary.changed}.</p>
-              <p><strong>Current deadline:</strong> {primary.deadline}.</p>
-            </div>
-          </details>
-        </section>
-      ) : null}
+              <div className={styles.recommendationMeta}>
+                <div><span>Why now</span><strong>{primary.why}</strong></div>
+                <div><span>Deadline</span><strong>{primary.deadline}</strong></div>
+                <div><span>Impact</span><strong>{primary.impact}</strong></div>
+                <div><span>Confidence</span><strong>{primary.confidence}</strong></div>
+              </div>
+              <details className={styles.inlineExplain}>
+                <summary>Why AVELA is recommending this</summary>
+                <p><strong>What changed:</strong> {primary.changed}. <strong>Current deadline:</strong> {primary.deadline}.</p>
+              </details>
+            </>
+          ) : <p>No priority decision is currently open.</p>}
+        </WorkspaceCard>
 
-      <section className={styles.workspaceGrid} aria-label="Opportunity Radar, Campaign execution, Club context, Learning and AVELA decision loop summary">
-        <div className={styles.queue}>
-          <div className={styles.sectionHead}>
-            <div><span>Decision queue</span><h2>What should I look at next?</h2></div>
-            <Link href="/app/matches">Open full Radar →</Link>
+        <WorkspaceCard className={styles.attentionCard}>
+          <WorkspaceSectionHeader eyebrow="Attention" title="Decision mix" />
+          <div className={styles.donutWrap}>
+            <div className={styles.donut} style={{ background: donutBackground }}><span><strong>{summary.attention}</strong><small>attention</small></span></div>
+            <div className={styles.legend}>
+              <span><i data-tone="coral" />Act now <b>{summary.actNow}</b></span>
+              <span><i data-tone="warning" />Review <b>{summary.review}</b></span>
+              <span><i data-tone="neutral" />Blocked <b>{summary.blocked}</b></span>
+              <span><i data-tone="teal" />On track <b>{summary.onTrack}</b></span>
+            </div>
           </div>
-          <div className={styles.alertList}>
-            {alerts.slice(0, 3).map((item) => (
-              <article className={styles.alertCard} key={item.id}>
-                <div className={styles.alertState}>
-                  <span className={styles.priorityPill} data-state={item.priority}>{prioritySymbol[item.priority]} {priorityLabel[item.priority]}</span>
-                  <small>{item.category}</small>
+        </WorkspaceCard>
+
+        <WorkspaceCard className={styles.queueCard}>
+          <WorkspaceSectionHeader
+            eyebrow="Decision queue"
+            title="What should I look at next?"
+            action={<Link href="/app/matches">Open full Radar →</Link>}
+          />
+          <div className={styles.queueList}>
+            {alerts.slice(0, 4).map((item) => (
+              <Link href={item.href} key={item.id} className={styles.queueRow}>
+                <div className={styles.queuePriority}>
+                  <span data-state={item.priority}>{prioritySymbol[item.priority]}</span>
                 </div>
-                <div className={styles.alertBody}>
-                  <h3>{item.title}</h3>
-                  <strong>{item.recommendation}</strong>
-                  <p>{item.changed}</p>
+                <div className={styles.queueMain}>
+                  <div><strong>{item.title}</strong><WorkspaceBadge tone={item.priority === "act-now" ? "coral" : item.priority === "blocked" ? "danger" : item.priority === "review" ? "warning" : "teal"}>{priorityLabel[item.priority]}</WorkspaceBadge></div>
+                  <p>{item.recommendation}</p>
                 </div>
-                <div className={styles.alertMeta}>
-                  <span><b>{item.impact}</b> impact</span>
-                  <span><b>{item.confidence}</b> confidence</span>
-                  <span><b>{item.deadline}</b> deadline</span>
-                  <Link href={item.href}>Open →</Link>
+                <div className={styles.queueMeta}>
+                  <span>{item.category}</span>
+                  <b>{item.deadline}</b>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
-        </div>
+        </WorkspaceCard>
 
-        <aside className={styles.changes}>
-          <div className={styles.sectionHead}>
-            <div><span>What changed</span><h2>Latest intelligence</h2></div>
-          </div>
-          <div className={styles.changeFeed}>
+        <WorkspaceCard className={styles.signalCard}>
+          <WorkspaceSectionHeader eyebrow="Signals" title="What changed" action={<Link href="/app/matches">View all →</Link>} />
+          <div className={`${styles.signalList} ${styles.changeFeed}`}>
             {recentChanges.map((item) => (
               <Link href={item.alert.href} key={item.id}>
-                <span>{item.kind}</span>
-                <strong>{item.label}</strong>
-                <p>{item.detail}</p>
-                <small>{shortDate(item.at)} · {item.alert.title}</small>
+                <span className={styles.signalIcon}>{item.kind.slice(0,1).toUpperCase()}</span>
+                <div><strong>{item.label}</strong><small>{item.detail}</small></div>
+                <b>{shortDate(item.at)}</b>
               </Link>
             ))}
             {!recentChanges.length ? <p>No recent decision events are available.</p> : null}
           </div>
-        </aside>
-      </section>
+        </WorkspaceCard>
 
-      <section className={styles.clubState} aria-label="Club state overview">
-        <div className={styles.sectionHead}>
-          <div><span>Club state</span><h2>Can the club absorb what is coming?</h2></div>
-          <p>Each source resolves independently. Missing integrations stay unknown instead of wiping out connected evidence.</p>
-        </div>
-        <div className={styles.clubStateGrid}>
-          <article data-state={opsState.capacity.state}>
-            <span>Operational capacity</span>
-            <strong>{opsState.capacity.state === "unknown" ? "Unknown" : opsState.capacity.state === "overloaded" ? "Overloaded" : opsState.capacity.state === "tight" ? "Tight" : "Available"}</strong>
-            <p>{opsState.capacity.utilisation !== null ? opsState.capacity.utilisation + "% of recorded capacity committed" : "Capacity evidence is not connected for this window."}</p>
-            <small>{opsState.capacity.blockers} blocked workload item{opsState.capacity.blockers === 1 ? "" : "s"}</small>
-          </article>
+        <WorkspaceCard className={styles.nextCard} tone="accent">
+          <WorkspaceSectionHeader eyebrow="Next opportunity" title={nextFixture ? "London City v " + nextFixture.opponent : "No upcoming home fixture"} action={<Link href="/app/season">Calendar →</Link>} />
+          {nextFixture ? (
+            <>
+              <div className={styles.nextVisual}>
+                <span>{shortDate(nextFixture.date)}</span>
+                <strong>{nextFixture.kickoff ?? "TBC"}</strong>
+                <small>{nextFixture.venue}</small>
+              </div>
+              <div className={styles.nextTags}>
+                <WorkspaceBadge tone="teal">Fixture</WorkspaceBadge>
+                <WorkspaceBadge>Audience</WorkspaceBadge>
+                <WorkspaceBadge tone="coral">Opportunity</WorkspaceBadge>
+              </div>
+              <Link className={styles.nextAction} href={"/app/matches/" + nextFixture.id}>Open match workspace →</Link>
+            </>
+          ) : null}
+        </WorkspaceCard>
 
-          <article data-state={opsState.availability.state}>
-            <span>Availability</span>
-            <strong>{opsState.availability.state === "unknown" ? "Unknown" : opsState.availability.state === "blocked" ? "Blocked windows" : opsState.availability.state === "tight" ? "Constraints present" : "No recorded conflict"}</strong>
-            <p>{opsState.availability.hardUnavailable} hard unavailable · {opsState.availability.protectedOrBusy} protected / busy · {opsState.availability.internationalDuty} international</p>
-            <small>Next 30 days</small>
-          </article>
+        <WorkspaceCard className={styles.calendarCard}>
+          <WorkspaceSectionHeader eyebrow="Calendar" title="Next 30 days" action={<Link href="/app/season">Month view →</Link>} />
+          <div className={styles.calendarStrip}>
+            {timeline.slice(0, 7).map((item) => (
+              <article key={item.id} data-type={item.type}>
+                <time>{shortDate(item.date)}</time>
+                <span>{item.type}</span>
+                <strong>{item.title}</strong>
+                <small>{item.detail}</small>
+              </article>
+            ))}
+          </div>
+        </WorkspaceCard>
 
-          <article data-state={radar.filter((item) => item.calendarPressure.state === "Act now").length > 0 ? "overdue" : radar.filter((item) => item.calendarPressure.state === "Review").length > 0 ? "review" : "clear"}>
-            <span>Calendar pressure</span>
-            <strong>{radar.filter((item) => item.calendarPressure.state === "Act now").length > 0 ? radar.filter((item) => item.calendarPressure.state === "Act now").length + " act now" : radar.filter((item) => item.calendarPressure.state === "Review").length > 0 ? radar.filter((item) => item.calendarPressure.state === "Review").length + " review" : "Clear"}</strong>
-            <p>Calendar pressure can elevate attention without changing opportunity potential.</p>
-            <Link href="/app/season">Open Calendar Intelligence →</Link>
-          </article>
-
-          <article data-state={campaignsAtRisk > 0 ? "tight" : "clear"}>
-            <span>Campaigns</span>
-            <strong>{activeCampaigns.length} active</strong>
-            <p>{campaignsAtRisk} with unresolved approval dependencies.</p>
-            <Link href="/app/campaigns">Review execution →</Link>
-          </article>
-
-          <article data-state={opsState.requests.state}>
-            <span>Requests</span>
-            <strong>{opsState.requests.state === "unknown" ? "Unknown" : opsState.requests.overdue > 0 ? opsState.requests.overdue + " overdue" : opsState.requests.pending > 0 ? opsState.requests.pending + " waiting" : "Clear"}</strong>
-            <p>{opsState.requests.nextRecipient ? "Next response: " + opsState.requests.nextRecipient : "No pending Team Manager, Activation or Protocol response is recorded."}</p>
-            <small>{opsState.requests.pending} open heads-up / formal request{opsState.requests.pending === 1 ? "" : "s"}</small>
-          </article>
-
-          <article data-state={opsState.contractImpacts.state}>
-            <span>Contract impacts</span>
-            <strong>{opsState.contractImpacts.state === "unknown" ? "Unknown" : opsState.contractImpacts.pending > 0 ? opsState.contractImpacts.pending + " review" : "Clear"}</strong>
-            <p>{opsState.contractImpacts.acknowledged} acknowledged impact{opsState.contractImpacts.acknowledged === 1 ? "" : "s"} still open.</p>
-            <small>Sanitised impact state only</small>
-          </article>
-
-          <article data-state={opsState.execution.state}>
-            <span>Execution sync</span>
-            <strong>{opsState.execution.state === "unknown" ? "Unknown" : opsState.execution.blockedItems > 0 ? opsState.execution.blockedItems + " blocked" : opsState.execution.state === "syncing" ? "Syncing" : "On track"}</strong>
-            <p>{opsState.execution.completedItems}/{opsState.execution.totalItems} synced external work items complete.</p>
-            <small>{opsState.execution.packages} external package{opsState.execution.packages === 1 ? "" : "s"}</small>
-          </article>
-
-          <article data-state={opsState.continuity.state === "at-risk" ? "tight" : opsState.continuity.state === "unknown" ? "unknown" : "clear"}>
-            <span>Team continuity</span>
-            <strong>{opsState.continuity.state === "unknown" ? "Unknown" : opsState.continuity.openCases > 0 ? opsState.continuity.openCases + " active transition" + (opsState.continuity.openCases === 1 ? "" : "s") : "Covered"}</strong>
-            <p>{opsState.continuity.state === "unknown" ? "Continuity protocol is not connected." : opsState.continuity.unconfirmedSuccessors + " successor gap" + (opsState.continuity.unconfirmedSuccessors === 1 ? "" : "s") + " · " + opsState.continuity.unresolvedItems + " handover item" + (opsState.continuity.unresolvedItems === 1 ? "" : "s") + " unresolved."}</p>
-            <Link href="/app/access">Open Team continuity →</Link>
-          </article>
-
-          <article data-state={opsState.contracts.state === "connected" ? "clear" : "unknown"}>
-            <span>Verified contracts</span>
-            <strong>{opsState.contracts.state === "unknown" ? "Unknown" : opsState.contracts.activeDocuments + " active"}</strong>
-            <p>{opsState.contracts.state === "unknown" ? "Contract Intelligence persistence is not connected." : opsState.contracts.verifiedClauses + " verified clauses available."}</p>
-            <small>Verified legal truth only</small>
-          </article>
+        <div className={styles.readinessWrap}>
+          <WorkspaceDrawer label="Club readiness" title="Can the club absorb what is coming?">
+            <div className={styles.readinessGrid}>
+              <article data-state={opsState.capacity.state}><span>Capacity</span><strong>{opsState.capacity.state}</strong><small>{opsState.capacity.utilisation !== null ? opsState.capacity.utilisation + "% committed" : "Not connected"}</small></article>
+              <article data-state={opsState.availability.state}><span>Availability</span><strong>{opsState.availability.state}</strong><small>{opsState.availability.hardUnavailable} hard unavailable</small></article>
+              <article data-state={campaignsAtRisk > 0 ? "tight" : "clear"}><span>Campaign execution</span><strong>{activeCampaigns.length} active</strong><small>{campaignsAtRisk} approval risk</small></article>
+              <article data-state={opsState.execution.state}><span>Execution sync</span><strong>{opsState.execution.state}</strong><small>{opsState.execution.completedItems}/{opsState.execution.totalItems} items complete</small></article>
+              <article data-state={opsState.contracts.state}><span>Verified contracts</span><strong>{opsState.contracts.state}</strong><small>Contract impacts · {opsState.contracts.verifiedClauses} verified clauses</small></article>
+              <article data-state={opsState.continuity.state}><span>Team continuity</span><strong>{opsState.continuity.state}</strong><small>{opsState.continuity.openCases} open transitions · Open Team continuity</small></article>
+            </div>
+          </WorkspaceDrawer>
         </div>
       </section>
-
-      <section className={styles.timelineSection} aria-label="Next 30 days">
-        <div className={styles.sectionHead}>
-          <div><span>Next 30 days</span><h2>Fixtures and work windows that can collide.</h2></div>
-          <p>AVELA should surface timing pressure before it becomes a last-minute coordination problem.</p>
-        </div>
-        <div className={styles.timeline}>
-          {timeline.map((item) => (
-            <article key={item.id}>
-              <time>{shortDate(item.date)}</time>
-              <span>{item.type}</span>
-              <strong>{item.title}</strong>
-              <p>{item.detail}</p>
-            </article>
-          ))}
-          {!timeline.length ? <p>No dated fixture or campaign item is recorded in the next 30 days.</p> : null}
-        </div>
-      </section>
-
-    </main>
+    </AppWorkspaceShell>
   );
 }
