@@ -1427,6 +1427,17 @@ test("AVELA recommends a resolution for near-term player conflicts", () => {
   assert.match(css, /conflictResolution/);
 });
 
+test("Talent conflict alternatives can only be applied safely as selected", () => {
+  const board = read("src/components/CommercialCampaignBoard.tsx");
+  assert.match(board, /Apply alternative as selected/);
+  assert.match(board, /status: "selected"/);
+  assert.match(board, /campaigns:edit/);
+  assert.match(board, /approval required again/);
+  assert.match(board, /Reopen it in Player Assets before changing talent/);
+  assert.match(board, /selection\.status !== "selected"/);
+  assert.match(board, /alternativePool\.length >= campaign\.playerNeed/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");

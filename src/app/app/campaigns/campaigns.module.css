@@ -101,3 +101,7 @@
 .conflictResolution span{font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#9F5B45}
 .conflictResolution strong{font-size:9px;color:#5C4036}
 .conflictResolution p{margin:0!important;font-size:8px!important;line-height:1.4;color:#7C655D!important}
+
+.conflictResolution button{margin-top:5px;border:1px solid #E5B7A7;border-radius:7px;background:#fff;padding:7px 8px;font-size:8px;font-weight:900;color:#8E4E39;cursor:pointer}
+.conflictResolution button:disabled{opacity:.55;cursor:not-allowed}
+.reopenRequired,.applyStatus{display:block;margin-top:5px!important;font-size:7px!important;line-height:1.35;color:#7C655D!important}
