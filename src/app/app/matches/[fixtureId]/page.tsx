@@ -79,8 +79,14 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
     : approvals.length + handoffActivations.length;
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="matches" />
+    <AppWorkspaceShell
+      active="matches"
+      eyebrow="Fixture workspace"
+      title={`London City v ${fixture.opponent}`}
+      subtitle={`${fixture.date} · ${fixture.kickoff ?? "TBC"} · ${fixture.competition}`}
+      actions={<Link className={styles.workspaceAction} href={`/app/executive?fixture=${fixture.id}`}>Executive view</Link>}
+    >
+      <div className={styles.shell}>
 
       <div className={styles.backRow}>
         <Link href="/app/matches">← All matches</Link>
@@ -98,7 +104,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <strong>{live.decisionState}</strong>
           <p>{live.confidence.label} confidence · {live.liveSignals.length} sourced signals</p>
         </aside>
-      </header>
+      </section>
 
       <nav className={styles.contextNav} aria-label="Opportunity workspace sections">
         <div>
@@ -491,6 +497,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </div>
         <Link href={`/app/learning?fixture=${fixture.id}`}>Open measurement & learning →</Link>
       </section>
-    </div>\n    </AppWorkspaceShell>
+      </div>
+    </AppWorkspaceShell>
   );
 }
