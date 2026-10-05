@@ -2339,3 +2339,17 @@ test("calendar exposes a next-decision rail and shared handoffs", () => {
   assert.match(handoff, /Players/);
   assert.match(handoff, /Learning/);
 });
+
+
+test("player assets uses a guided progressive-disclosure funnel", () => {
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+
+  assert.match(planner, /Player pack workflow/);
+  assert.match(planner, /Step 02 · Constraints/);
+  assert.match(planner, /Step 03 · Recommended pack/);
+  assert.match(planner, /Step 04 · Compare/);
+  assert.match(planner, /id="commit"/);
+  assert.match(planner, /<details id="compare"/);
+  assert.match(planner, /<details id="scenario"/);
+  assert.match(planner, /Decision evidence/);
+});
