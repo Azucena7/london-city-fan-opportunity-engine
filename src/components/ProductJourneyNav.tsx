@@ -30,7 +30,7 @@ const navGroups = [
   }
 ] as const;
 
-const workItems = navGroups.flatMap((group) => group.items);
+const workItems = [...navGroups[0].items, ...navGroups[1].items, ...navGroups[2].items] as const;
 
 function NavIcon({ name }: { name: string }) {
   const common = { viewBox: "0 0 24 24", width: 16, height: 16, fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
