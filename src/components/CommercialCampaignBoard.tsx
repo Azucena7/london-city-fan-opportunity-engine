@@ -14,7 +14,7 @@ import {
 import { WorkspaceBadge } from "@/components/WorkspaceUI";
 import styles from "@/app/app/campaigns/campaigns.module.css";
 
-type Club = { id: string; name: string };
+type Club = { id: string; name: string; permissions?: string[] };
 type Selection = {
   campaign_id: string;
   status: "selected" | "approved" | "committed";
@@ -33,17 +33,22 @@ function governanceRank(status: Selection["status"]) {
 export function CommercialCampaignBoard() {
   const [selections, setSelections] = useState<Selection[]>([]);
   const [state, setState] = useState<"loading" | "local" | "shared">("loading");
+  const [activeClub, setActiveClub] = useState<Club | null>(null);
+  const [applyState, setApplyState] = useState<Record<string, string>>({});
 
   useEffect(() => {
     void (async () => {
       try {
         const sessionResponse = await fetch("/api/auth/session", { cache: "no-store" });
         const session = await sessionResponse.json() as { authenticated?: boolean; clubs?: Club[] };
-        const clubId = session.clubs?.[0]?.id;
+        const firstClub = session.clubs?.[0] ?? null;
+        const clubId = firstClub?.id;
         if (!session.authenticated || !clubId) {
+          setActiveClub(null);
           setState("local");
           return;
         }
+        setActiveClub(firstClub);
         const response = await fetch(`/api/player-pack-selection?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
         const result = await response.json() as { selections?: Selection[] };
         if (response.ok && Array.isArray(result.selections)) {
@@ -57,6 +62,53 @@ export function CommercialCampaignBoard() {
       }
     })();
   }, []);
+
+  async function applyResolution(campaignId: string, playerIds: string[], campaignName: string, activationDate: string, channel: string, territory: string) {
+    if (!activeClub || !activeClub.permissions?.includes("campaigns:edit")) {
+      setApplyState((current) => ({ ...current, [campaignId]: "Your club role cannot edit campaign talent selections." }));
+      return;
+    }
+    setApplyState((current) => ({ ...current, [campaignId]: "Applying alternative as selected…" }));
+    try {
+      const response = await fetch(`/api/player-pack-selection/${encodeURIComponent(campaignId)}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClub.id,
+          status: "selected",
+          selectedPlayerIds: playerIds,
+          playerCount: playerIds.length,
+          snapshot: {
+            campaignName,
+            activationDate,
+            channel,
+            territory,
+            blockerCount: 0,
+            resolutionSource: "talent-conflict"
+          }
+        })
+      });
+      const result = await response.json().catch(() => null) as { error?: string; selection?: Selection } | null;
+      if (!response.ok) {
+        setApplyState((current) => ({ ...current, [campaignId]: result?.error || "Alternative pack was not applied." }));
+        return;
+      }
+      const nextSelection = result?.selection ?? {
+        campaign_id: campaignId,
+        status: "selected" as const,
+        selected_player_ids: playerIds,
+        player_count: playerIds.length,
+        snapshot: { campaignName, activationDate }
+      };
+      setSelections((current) => [
+        ...current.filter((item) => item.campaign_id !== campaignId),
+        nextSelection
+      ]);
+      setApplyState((current) => ({ ...current, [campaignId]: "Alternative applied as selected · approval required again." }));
+    } catch {
+      setApplyState((current) => ({ ...current, [campaignId]: "Club workspace unavailable. No selection was changed." }));
+    }
+  }
 
   const byCampaign = useMemo(
     () => new Map(selections.map((selection) => [selection.campaign_id, selection])),
@@ -106,9 +158,10 @@ export function CommercialCampaignBoard() {
           )
         ) : false;
         const shouldChangeCurrent = conflictRows.length > 0 && !protectCurrent;
-        const eligibleAlternatives = shouldChangeCurrent
+        const alternativePool = demoPlayers.filter((player) => !conflictPlayerIds.has(player.id));
+        const eligibleAlternatives = shouldChangeCurrent && alternativePool.length >= campaign.playerNeed
           ? recommendPlayerPacks(
-              demoPlayers.filter((player) => !conflictPlayerIds.has(player.id)),
+              alternativePool,
               {
                 date: campaign.activationDate,
                 category: campaign.category,
@@ -118,7 +171,7 @@ export function CommercialCampaignBoard() {
                 budget: campaign.budget
               },
               demoAppearances,
-              Math.min(campaign.playerNeed, demoPlayers.length - conflictPlayerIds.size),
+              campaign.playerNeed,
               { fit: 30, balance: 15, engagement: 10, cost: 12, opportunityCost: 13, sportingAvailability: 5, momentum: 15 },
               demoPosts,
               true,
@@ -174,6 +227,25 @@ export function CommercialCampaignBoard() {
                         ? `Best alternative: ${resolutionPack.players.map((item) => item.player.name).join(" · ")} · score ${resolutionPack.packScore.toFixed(0)} · £${resolutionPack.totalFee}${costDelta === null ? "" : ` · ${costDelta >= 0 ? "+" : ""}£${costDelta} vs current`} · opportunity cost ${resolutionPack.opportunityCost.toFixed(0)}.`
                         : "No eligible alternative pack satisfies the current date, contract, availability, budget and duty constraints."}
                   </p>
+                  {!protectCurrent && resolutionPack && selection?.status === "selected" ? (
+                    <button
+                      type="button"
+                      disabled={applyState[campaign.id] === "Applying alternative as selected…"}
+                      onClick={() => void applyResolution(
+                        campaign.id,
+                        resolutionPack.players.map((item) => item.player.id),
+                        campaign.name,
+                        campaign.activationDate,
+                        campaign.channel,
+                        campaign.territory
+                      )}
+                    >
+                      {applyState[campaign.id] === "Applying alternative as selected…" ? "Applying…" : "Apply alternative as selected"}
+                    </button>
+                  ) : !protectCurrent && resolutionPack && selection && selection.status !== "selected" ? (
+                    <small className={styles.reopenRequired}>Pack is {selection.status}. Reopen it in Player Assets before changing talent.</small>
+                  ) : null}
+                  {applyState[campaign.id] ? <small className={styles.applyStatus} role="status">{applyState[campaign.id]}</small> : null}
                 </div>
               </div>
             ) : null}
