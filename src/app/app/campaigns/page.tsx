@@ -3,7 +3,7 @@ import Link from "next/link";
 import { campaignPlans } from "@/lib/data";
 import { demoCommercialCampaigns } from "@/lib/clubStrategy";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
-import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
+import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import { CommercialCampaignBoard } from "@/components/CommercialCampaignBoard";
 import { DecisionContextTrail } from "@/components/DecisionContextTrail";
 import styles from "./campaigns.module.css";
@@ -66,7 +66,7 @@ export default function CampaignsPage() {
           <WorkspaceSectionHeader
             eyebrow={primary.needsDecision ? "Decision required" : "Next campaign"}
             title={primary.campaign.title.en}
-            action={<WorkspaceBadge tone={primary.needsDecision ? "coral" : "teal"}>{primary.campaign.status}</WorkspaceBadge>}
+            action={<DecisionStateBadge state={primary.needsDecision ? "REVIEW" : "READY"} label={primary.campaign.status} />}
           />
           <div className={styles.primaryGrid}>
             <div className={styles.primaryBrief}>
@@ -99,7 +99,7 @@ export default function CampaignsPage() {
               <div>
                 {campaignRows.filter((item) => item.needsDecision).map(({ campaign, approvalCount, approvalTotal }) => (
                   <article key={campaign.id} className={styles.campaignCard} data-needs-decision="true">
-                    <div className={styles.meta}><WorkspaceBadge tone="coral">{campaign.status}</WorkspaceBadge><small>{campaign.fixtureId}</small></div>
+                    <div className={styles.meta}><DecisionStateBadge state="REVIEW" label={campaign.status} /><small>{campaign.fixtureId}</small></div>
                     <h3>{campaign.title.en}</h3>
                     <p>{campaign.objective.en}</p>
                     <div className={styles.progressBar} aria-label={approvalCount + " of " + approvalTotal + " approvals ready"}><span style={{ width: (approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0) + "%" }} /></div>
@@ -120,7 +120,7 @@ export default function CampaignsPage() {
               <div>
                 {campaignRows.filter((item) => !item.needsDecision).map(({ campaign, approvalCount, approvalTotal }) => (
                   <article key={campaign.id} className={styles.campaignCard}>
-                    <div className={styles.meta}><WorkspaceBadge tone="teal">{campaign.status}</WorkspaceBadge><small>{campaign.fixtureId}</small></div>
+                    <div className={styles.meta}><DecisionStateBadge state="READY" label={campaign.status} /><small>{campaign.fixtureId}</small></div>
                     <h3>{campaign.title.en}</h3>
                     <p>{campaign.objective.en}</p>
                     <div className={styles.progressBar}><span style={{ width: (approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0) + "%" }} /></div>
