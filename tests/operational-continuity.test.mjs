@@ -50,3 +50,17 @@ test("continuity API creates a standard handover checklist and never deactivates
   assert.doesNotMatch(route,/club_memberships[^\n]*active\s*=\s*false/i);
   assert.doesNotMatch(route,/delete\s+from\s+public\.club_memberships/i);
 });
+
+
+test("Decision Center promotes unresolved continuity into operational attention",()=>{
+  const helper=read("src/lib/decisionCenterOverview.ts");
+  const home=read("src/app/app/page.tsx");
+  assert.match(helper,/operational_continuity_cases/);
+  assert.match(helper,/operational_continuity_items/);
+  assert.match(helper,/Staff continuity ·/);
+  assert.match(helper,/Confirm successor or interim coverage before access changes/);
+  assert.match(helper,/continuity: \{/);
+  assert.match(home,/Team continuity/);
+  assert.match(home,/Open Team continuity/);
+  assert.match(home,/opsState\.continuity/);
+});
