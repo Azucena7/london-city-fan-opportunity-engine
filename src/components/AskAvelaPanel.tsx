@@ -205,7 +205,7 @@ export function AskAvelaPanel({
               onChange={(event) => setMessage(event.target.value)}
               placeholder={
                 mode === "ask"
-                  ? "e.g. Can we execute this with current capacity?"
+                  ? "e.g. I don't know what to do for this match…"
                   : mode === "tell"
                     ? "e.g. Smith is likely to be unavailable on Wednesday."
                     : "e.g. Give me a lower-complexity version with one player."
