@@ -38,6 +38,12 @@ export type DecisionCenterOpsState = {
     completedItems: number;
     totalItems: number;
   };
+  continuity: {
+    state: "clear" | "handover" | "at-risk" | "unknown";
+    openCases: number;
+    unconfirmedSuccessors: number;
+    unresolvedItems: number;
+  };
   crossAlerts: DecisionAlert[];
 };
 
@@ -48,6 +54,7 @@ const unknownState = (): DecisionCenterOpsState => ({
   contracts: { state: "unknown", activeDocuments: 0, verifiedClauses: 0 },
   contractImpacts: { state: "unknown", pending: 0, acknowledged: 0 },
   execution: { state: "unknown", packages: 0, blockedItems: 0, completedItems: 0, totalItems: 0 },
+  continuity: { state: "unknown", openCases: 0, unconfirmedSuccessors: 0, unresolvedItems: 0 },
   crossAlerts: []
 });
 
@@ -79,8 +86,12 @@ export async function getDecisionCenterOpsState({
     `/rest/v1/contract_impact_reviews?club_id=eq.${encodeURIComponent(clubId)}&review_state=in.(pending,acknowledged)&select=id,entity_type,entity_id,relationship_type,review_state,reason,created_at&order=created_at.desc&limit=250`;
   const executionPath =
     `/rest/v1/external_work_packages?club_id=eq.${encodeURIComponent(clubId)}&sync_state=not.in.(archived)&select=id,decision_id,title,sync_state,item_count,completed_count,blocked_count,last_sync_at&order=updated_at.desc&limit=250`;
+  const continuityCasesPath =
+    `/rest/v1/operational_continuity_cases?club_id=eq.${encodeURIComponent(clubId)}&state=not.eq.closed&select=id,departing_role,continuity_owner_role,successor_status,state,effective_at,created_at&order=created_at.desc&limit=100`;
+  const continuityItemsPath =
+    `/rest/v1/operational_continuity_items?club_id=eq.${encodeURIComponent(clubId)}&state=in.(pending,transferred)&select=id,case_id,state&limit=800`;
 
-  const [workloadResponse, capacityResponse, availabilityResponse, requestsResponse, contractsResponse, clausesResponse, impactsResponse, executionResponse] =
+  const [workloadResponse, capacityResponse, availabilityResponse, requestsResponse, contractsResponse, clausesResponse, impactsResponse, executionResponse, continuityCasesResponse, continuityItemsResponse] =
     await Promise.all([
       supabaseRequest(workloadPath),
       supabaseRequest(capacityPath),
@@ -89,7 +100,9 @@ export async function getDecisionCenterOpsState({
       supabaseRequest(contractsPath),
       supabaseRequest(clausesPath),
       supabaseRequest(impactsPath),
-      supabaseRequest(executionPath)
+      supabaseRequest(executionPath),
+      supabaseRequest(continuityCasesPath),
+      supabaseRequest(continuityItemsPath)
     ]);
 
   if (workloadResponse.ok && capacityResponse.ok) {
@@ -186,6 +199,61 @@ export async function getDecisionCenterOpsState({
           at: item.created_at,
           label: "Verified contract impact",
           detail: item.relationship_type.replaceAll("-", " ") + " · sanitised impact review",
+          kind: "blocker"
+        }]
+      };
+    }));
+  }
+
+  if (continuityCasesResponse.ok && continuityItemsResponse.ok) {
+    const continuityCases = await continuityCasesResponse.json() as Array<{
+      id: string;
+      departing_role: string;
+      continuity_owner_role: string;
+      successor_status: "unknown" | "nominated" | "confirmed";
+      state: "planned" | "handover" | "ready-to-transition";
+      effective_at?: string | null;
+      created_at: string;
+    }>;
+    const continuityItems = await continuityItemsResponse.json() as Array<{
+      id: string;
+      case_id: string;
+      state: "pending" | "transferred";
+    }>;
+
+    const unconfirmedSuccessors = continuityCases.filter((item) => item.successor_status !== "confirmed").length;
+    const unresolvedItems = continuityItems.length;
+    result.continuity = {
+      state: continuityCases.length === 0 ? "clear" : unconfirmedSuccessors > 0 || unresolvedItems > 0 ? "at-risk" : "handover",
+      openCases: continuityCases.length,
+      unconfirmedSuccessors,
+      unresolvedItems
+    };
+
+    result.crossAlerts.push(...continuityCases.slice(0, 8).map((item): DecisionAlert => {
+      const unresolvedForCase = continuityItems.filter((entry) => entry.case_id === item.id).length;
+      const coverageMissing = item.successor_status !== "confirmed";
+      return {
+        id: "continuity-" + item.id,
+        category: "operations",
+        priority: coverageMissing || unresolvedForCase > 0 ? "review" : "monitor",
+        title: "Staff continuity · " + item.departing_role,
+        recommendation: coverageMissing
+          ? "Confirm successor or interim coverage before access changes."
+          : unresolvedForCase > 0
+            ? "Verify " + unresolvedForCase + " remaining handover item" + (unresolvedForCase === 1 ? "" : "s") + "."
+            : "Complete the governed transition.",
+        why: "Operational ownership should move without losing decision history, delivery context or institutional memory.",
+        changed: "A staff continuity case is active for " + item.departing_role + ".",
+        deadline: item.effective_at ? new Date(item.effective_at).toLocaleDateString("en-GB") : "Before role transition",
+        impact: coverageMissing ? "High" : "Medium",
+        confidence: "High",
+        href: "/app/access",
+        events: [{
+          id: "continuity-event-" + item.id,
+          at: item.created_at,
+          label: "Operational continuity case opened",
+          detail: item.state.replaceAll("-", " ") + " · owner " + item.continuity_owner_role,
           kind: "blocker"
         }]
       };
