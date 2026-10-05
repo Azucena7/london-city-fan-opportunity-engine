@@ -1668,13 +1668,14 @@ test("Player Assets keeps the live pack decision visible and navigable", () => {
   const css = read("src/components/PlayerAssetPlanner.module.css");
   const readme = read("README.md");
 
-  for (const id of ["campaign-context", "availability", "player-status", "momentum", "packs", "scenario"]) {
+  for (const id of ["campaign-context", "constraints", "availability", "player-status", "momentum", "packs", "compare", "scenario", "commit"]) {
     assert.match(planner, new RegExp(`id="${id}"`));
   }
-  assert.match(planner, /Player asset planning sections/);
-  assert.match(planner, /Live pack/);
-  assert.match(planner, /livePackState/);
-  assert.match(css, /\.decisionRail/);
+  assert.match(planner, /Player pack workflow/);
+  assert.match(planner, /Recommended pack/);
+  assert.match(planner, /<details id="compare"/);
+  assert.match(planner, /<details id="scenario"/);
+  assert.match(css, /\.guidedSteps/);
   assert.match(css, /position:sticky/);
   assert.match(readme, /\/app\/players/);
   assert.doesNotMatch(readme, /\/app\/player-assets/);
