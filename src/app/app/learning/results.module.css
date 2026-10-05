@@ -100,3 +100,5 @@
 .learningStory [data-stage="next"]{border-top:3px solid #EF8B6C;background:#FFF9F6}
 @media(max-width:900px){.learningStory{grid-template-columns:1fr 1fr}.learningStory article:nth-child(2)::after{display:none}}
 @media(max-width:620px){.learningStory{grid-template-columns:1fr}.learningStory article+article{border-left:0;border-top:1px solid #E0E5E8}.learningStory article::after{display:none}.learningStory article{min-height:auto}}
+
+.stateBadges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
