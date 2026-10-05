@@ -1739,3 +1739,31 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
 });
+
+
+test("work-system orchestration derives vendor-neutral work without becoming a task manager", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const lib = read("src/lib/workSystemOrchestration.ts");
+  const component = read("src/components/ExternalWorkPackagePreview.tsx");
+
+  assert.match(lib, /WorkSystemId = "asana" \| "monday" \| "jira" \| "notion" \| "other"/);
+  assert.match(lib, /interface WorkSystemAdapter/);
+  assert.match(lib, /createWorkPackage/);
+  assert.match(lib, /syncWorkPackage/);
+  assert.match(lib, /deriveCampaignWorkPackage/);
+  assert.match(lib, /dependencyKeys/);
+  assert.match(lib, /estimatedMinutes/);
+  assert.doesNotMatch(lib, /fetch\(/);
+  assert.doesNotMatch(lib, /api\.asana|monday\.com|atlassian|notion\.com/i);
+
+  assert.match(component, /AVELA derives the work package/);
+  assert.match(component, /Not connected/);
+  assert.match(component, /Preview only · no external task has been created/);
+  assert.match(component, /AVELA orchestrates; it does not replace project management/);
+
+  assert.match(page, /deriveCampaignWorkPackage/);
+  assert.match(page, /ExternalWorkPackagePreview/);
+  assert.match(page, /estimatedMinutes: workPackage\?\.estimatedMinutes/);
+  assert.match(page, /taskCount: workPackage\?\.items\.length/);
+  assert.match(page, /dependencyCount: workDependencyCount/);
+});
