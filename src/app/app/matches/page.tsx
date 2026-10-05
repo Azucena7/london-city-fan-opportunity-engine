@@ -96,6 +96,7 @@ export default async function MatchesPage() {
           <p>
             Upcoming home fixtures are re-prioritised whenever validated evidence refreshes. Opportunity potential stays separate
             from calendar pressure; the final attention order can rise because of timing, internal constraints or fixture collisions.
+            The ranking is a decision aid, not an attendance forecast.
           </p>
         </div>
         <div className={styles.engineState}>
