@@ -14,7 +14,6 @@ create table if not exists public.club_outcome_aggregates (
   source_label text not null check (char_length(source_label) between 1 and 160),
   source_ref text,
   observed_at timestamptz not null,
-  note text,
   updated_by uuid not null references auth.users(id),
   updated_at timestamptz not null default now(),
   unique (club_id, fixture_id)
