@@ -19,3 +19,17 @@
 .continuity :global([class*="protocol"]){margin-top:10px!important}
 .continuity :global([class*="create"]){margin-top:10px!important;border-radius:8px!important}
 .continuity :global([class*="caseCard"]){border-radius:8px!important;overflow:hidden}
+
+
+/* Team workspace legibility pass */
+.accessSurface{border-radius:12px}
+.accessSurface :global([class*="wrap"]),
+.accessSurface :global([class*="empty"]),
+.accessSurface :global([class*="loadingState"]){padding:16px!important}
+.accessSurface :global([class*="head"] h1),
+.accessSurface :global([class*="empty"] h1){font-size:26px!important}
+.accessSurface :global([class*="authGrid"]),
+.accessSurface :global([class*="grid"]){gap:10px!important}
+.accessSurface :global(article){border-radius:10px!important}
+.continuity{margin-top:12px}
+.continuity :global([class*="head"] h2){font-size:16px!important}

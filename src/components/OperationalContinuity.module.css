@@ -7,3 +7,27 @@
 .protocol p,.caseCard header p,.score small,.items strong,.empty p,.guardrail p,.message{font-size:11px!important}
 .caseCard header span{font-size:10px}
 .create>button,.caseCard footer button:last-child{background:var(--product-navy);border-color:var(--product-navy)}
+
+
+/* Operational continuity legibility pass */
+.head>div>span,.unavailable>span,.create>div>span,.guardrail strong,.head aside span,.head aside small,
+.protocol span,.coverage>span,.items span,.caseCard footer span{font-size:10px}
+.head h2{font-size:22px!important}
+.head p,.unavailable p{font-size:12px!important;line-height:1.5}
+.head aside strong{font-size:22px}
+.protocol strong{font-size:12px}
+.protocol p{font-size:11px!important;line-height:1.45}
+.create{gap:12px;padding:16px}
+.create>div>strong{font-size:12px}
+.create label{font-size:10px}
+.create input,.create select{min-height:40px;font-size:11px}
+.create button,.coverage button,.itemActions button,.caseCard footer button{min-height:36px;font-size:11px}
+.caseCard header span{font-size:10px}
+.caseCard h3{font-size:18px}
+.caseCard header p{font-size:11px!important}
+.score small{font-size:10px}
+.coverage>span{font-size:10px}
+.items strong{font-size:11px}
+.caseCard footer strong{font-size:11px}
+.empty strong{font-size:12px}
+.empty p,.guardrail p,.message{font-size:11px!important;line-height:1.45}
