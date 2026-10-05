@@ -21,9 +21,11 @@ export function ClubSetup() {
   const [approvalOwner, setApprovalOwner] = useState("Marketing");
   const [requiresApproval, setRequiresApproval] = useState(true);
   const [status, setStatus] = useState("Loading setup…");
+  const [saving, setSaving] = useState(false);
 
   async function loadSetup(clubId: string) {
     setStatus("Loading club setup…");
+    try {
     const response = await fetch(`/api/club-setup?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
     const result = await response.json() as {
       setup?: {
@@ -47,10 +49,14 @@ export function ClubSetup() {
     } else {
       setStatus("No saved setup yet. Configure the club once below.");
     }
+    } catch {
+      setStatus("Club setup service is unreachable. Existing club defaults were not changed.");
+    }
   }
 
   useEffect(() => {
     void (async () => {
+      try {
       const response = await fetch("/api/auth/session", { cache: "no-store" });
       const result = await response.json() as { configured?: boolean; authenticated?: boolean; clubs?: Club[] };
       setConfigured(Boolean(result.configured));
@@ -61,6 +67,11 @@ export function ClubSetup() {
         await loadSetup(next[0].id);
       } else {
         setStatus("Sign in from a campaign workspace to configure a club.");
+      }
+      } catch {
+        setConfigured(true);
+        setClubs([]);
+        setStatus("Account state could not be loaded. Club setup remains unchanged.");
       }
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps -- initial account bootstrap only
@@ -77,7 +88,8 @@ export function ClubSetup() {
   }
 
   async function saveSetup() {
-    if (!activeClubId || !canEdit) return;
+    if (!activeClubId || !canEdit || saving) return;
+    setSaving(true);
     setStatus("Saving…");
     try {
       const response = await fetch("/api/club-setup", {
@@ -95,6 +107,8 @@ export function ClubSetup() {
       setStatus(response.ok ? "Club setup saved to the club workspace." : "Club setup could not be saved. Existing club defaults were not changed.");
     } catch {
       setStatus("The club workspace is unreachable. Existing club defaults were not changed.");
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -183,7 +197,7 @@ export function ClubSetup() {
           <p>The next home fixture can use these settings as club defaults. Fixture-specific signals and evidence still determine the actual recommendation.</p>
           <div className={styles.readyAction}>
             <span>{completeness >= 80 ? "Next fixture can use this context." : "Complete the missing context above."}</span>
-            <button type="button" disabled={!canEdit} onClick={() => void saveSetup()}>{canEdit ? "Save and use for next fixture" : "Admin role required"}</button>
+            <button type="button" disabled={!canEdit || saving} onClick={() => void saveSetup()}>{!canEdit ? "Admin role required" : saving ? "Saving…" : "Save and use for next fixture"}</button>
           </div>
         </article>
       </div>
