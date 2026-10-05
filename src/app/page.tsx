@@ -111,6 +111,12 @@ export default function Home() {
 
       <CommercialDecisionDemo />
 
+      <div className={styles.storyBridge} aria-hidden="true">
+        <span>Illustrative decision</span>
+        <i>→</i>
+        <strong>Observed evidence</strong>
+      </div>
+
       <section className={styles.liveProof}>
         <div className={styles.liveCopy}>
           <span className={styles.kicker}>Proof in public</span>
