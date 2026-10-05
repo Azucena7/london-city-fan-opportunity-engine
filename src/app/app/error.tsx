@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import styles from "./route-state.module.css";
 
 export default function AppError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
-    <main className={styles.shell}>
+    <main className={`${styles.shell} productAppShell`}>
+      <ProductJourneyNav />
       <div className={styles.content} role="alert">
         <span className={styles.eyebrow}>AVELA · Workspace error</span>
         <h1 className={styles.title}>This workspace could not load.</h1>
