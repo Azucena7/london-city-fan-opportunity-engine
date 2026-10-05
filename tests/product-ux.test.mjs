@@ -1454,6 +1454,25 @@ test("Club-system network failures preserve truthful state and recover visibly",
   assert.match(contracts, /Contract truth was not changed/);
 });
 
+test("Workspace accessibility baseline covers focus, touch targets, drawers and live status", () => {
+  const productCss = read("src/app/product-system.css");
+  const navCss = read("src/components/ProductJourneyNav.module.css");
+  const workspace = read("src/components/WorkspaceUI.tsx");
+  const workspaceCss = read("src/components/WorkspaceUI.module.css");
+  const access = read("src/components/AccessCenter.tsx");
+  const setup = read("src/components/ClubSetup.tsx");
+  assert.match(productCss, /:focus-visible/);
+  assert.match(productCss, /summary,select,input/);
+  assert.match(productCss, /min-height:44px/);
+  assert.match(navCss, /pointer:coarse/);
+  assert.match(navCss, /mobileMenu summary\{min-height:44px/);
+  assert.match(workspace, /whenClosed/);
+  assert.match(workspace, /whenOpen/);
+  assert.match(workspaceCss, /drawer\[open\]>summary \.whenOpen/);
+  assert.match(access, /aria-live="polite"/);
+  assert.match(setup, /aria-live="polite"/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
