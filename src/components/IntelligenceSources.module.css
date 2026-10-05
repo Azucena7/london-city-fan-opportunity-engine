@@ -3,3 +3,11 @@
 .source,.legend{border-radius:8px}
 .blinkfire{border-radius:10px}
 .sourceTop>strong{border-radius:999px}
+
+
+/* P0 AVELA visual cleanup */
+.blinkfireIntro>span,.publicBenchmark>div:first-child>span{color:#86D8CC}
+.flow i{color:var(--product-accent)}
+.flow strong{color:var(--product-orange)}
+.sourceTop span,.sourceTop>strong,.columns>div>span,.evidenceGrid span,.publicBenchmark small,.benchmarkRows small{font-size:10px}
+.columns li,.source>a,.evidenceGrid p,.publicBenchmark>a{font-size:11px}
