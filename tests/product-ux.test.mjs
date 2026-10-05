@@ -1438,6 +1438,22 @@ test("Talent conflict alternatives can only be applied safely as selected", () =
   assert.match(board, /alternativePool\.length >= campaign\.playerNeed/);
 });
 
+test("Club-system network failures preserve truthful state and recover visibly", () => {
+  const continuity = read("src/components/OperationalContinuity.tsx");
+  const access = read("src/components/AccessCenter.tsx");
+  const setup = read("src/components/ClubSetup.tsx");
+  const availability = read("src/components/AvailabilityPlanner.tsx");
+  const contracts = read("src/components/ContractReviewQueue.tsx");
+  assert.match(continuity, /No continuity data was changed/);
+  assert.match(continuity, /Continuity state was not changed/);
+  assert.match(access, /Sign-out failed\. Your current session may still be active/);
+  assert.match(access, /Account service is unreachable/);
+  assert.match(setup, /saving/);
+  assert.match(setup, /Existing club defaults were not changed/);
+  assert.match(availability, /No availability state was changed/);
+  assert.match(contracts, /Contract truth was not changed/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");

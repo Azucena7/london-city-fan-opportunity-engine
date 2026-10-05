@@ -46,6 +46,7 @@ export function ContractReviewQueue() {
   const [message, setMessage] = useState("");
 
   async function load(id: string) {
+    try {
     const response = await fetch("/api/contracts/review?clubId=" + encodeURIComponent(id), { cache: "no-store" });
     const result = await response.json() as {
       enabled?: boolean;
@@ -56,11 +57,18 @@ export function ContractReviewQueue() {
     setEnabled(Boolean(result.enabled));
     setDocuments(response.ok && Array.isArray(result.documents) ? result.documents : []);
     setClauses(response.ok && Array.isArray(result.clauses) ? result.clauses : []);
-    setMessage(result.message ?? "");
+    setMessage(response.ok ? (result.message ?? "") : result.message ?? "Contract review state could not be loaded.");
+    } catch {
+      setEnabled(false);
+      setDocuments([]);
+      setClauses([]);
+      setMessage("Contract service is unreachable. Contract truth was not changed.");
+    }
   }
 
   useEffect(() => {
     void (async () => {
+      try {
       const response = await fetch("/api/auth/session", { cache: "no-store" });
       const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
       const next = Array.isArray(result.clubs) ? result.clubs : [];
@@ -68,6 +76,13 @@ export function ContractReviewQueue() {
       if (result.authenticated && next.length) {
         setClubId(next[0].id);
         await load(next[0].id);
+      } else {
+        setMessage("Sign in to review club contract intelligence.");
+      }
+      } catch {
+        setClubs([]);
+        setEnabled(false);
+        setMessage("Account state could not be loaded. Contract truth was not changed.");
       }
     })();
   }, []);
