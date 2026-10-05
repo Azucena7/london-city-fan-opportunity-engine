@@ -95,5 +95,51 @@
         }
       }
     }
+  },
+  {
+    "fixtureId": "2026-10-04-tot-a",
+    "status": "learning",
+    "updatedAt": "2026-10-05T09:51:25+01:00",
+    "result": "1–6",
+    "attendance": 2377,
+    "attendanceState": "reported",
+    "confidence": "high",
+    "sourceName": "Tottenham Hotspur",
+    "sourceUrl": "https://www.tottenhamhotspur.com/news/1169984/spurs-women-lionesses-inflict-heavy-defeat-at-brisbane-road",
+    "sources": [
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1169984/spurs-women-lionesses-inflict-heavy-defeat-at-brisbane-road",
+        "checkedAt": "2026-10-05"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/video/putellas-diani-scored-twice-in-6-goal-rampage-spurs-v-london-city-highlights-barclays-wsl-26-27",
+        "checkedAt": "2026-10-05"
+      }
+    ],
+    "headline": {
+      "en": "Statement away win creates an Everton conversion opportunity",
+      "es": "La victoria contundente fuera crea una oportunidad de conversión hacia Everton"
+    },
+    "learning": {
+      "en": "The 6–1 result is confirmed and Tottenham reports attendance of 2,377. The attendance is not verified scans or sales, and the aggregate total cannot identify London City away attendance, stadium purchases, broadcast displacement or campaign contribution.",
+      "es": "El resultado 1–6 está confirmado y Tottenham reporta una asistencia de 2.377. La asistencia no son scans ni ventas verificados, y el total agregado no identifica asistencia visitante de London City, compras en el estadio, desplazamiento por la retransmisión ni contribución de campaña."
+    },
+    "nextAction": {
+      "en": "Content & CRM should deploy tagged Everton creative from the win by 6 October. CRM & Data should separately reconcile away-ticket records, stadium purchases where available, scans and consented cohorts before making demand or retention claims.",
+      "es": "Content & CRM debe desplegar antes del 6 de octubre creatividad etiquetada para Everton basada en la victoria. CRM & Data debe conciliar por separado registros de entradas visitantes, compras en el estadio si están disponibles, scans y cohortes consentidas antes de afirmar demanda o retención."
+    },
+    "dataGaps": [
+      "London City away allocation",
+      "tickets sold",
+      "stadium purchases",
+      "scans",
+      "no-show",
+      "counting methodology",
+      "away buyer identities",
+      "broadcast audience overlap",
+      "campaign attribution"
+    ]
   }
 ]
