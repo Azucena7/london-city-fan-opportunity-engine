@@ -6,3 +6,13 @@
 .actions article{background:transparent;color:#f3f5f1;border-left:1px solid rgba(255,255,255,.14)}
 .actions article:first-child{border-left:0}
 .actions span{color:var(--product-accent)}
+
+
+/* AVELA decision card */
+.wrap{background:var(--product-navy);color:#F8F6F1;border-radius:14px;box-shadow:0 16px 42px rgba(16,39,66,.10)}
+.head>div>span,.confidence span{color:#9CCFC7}
+.head p,.footer p{color:#C7D2DC}
+.confidence{border-radius:10px;background:rgba(255,255,255,.06)}
+.actions article{background:#fff;color:var(--product-ink)}
+.actions span{color:var(--product-accent)}
+.footer a{color:#F3A087}

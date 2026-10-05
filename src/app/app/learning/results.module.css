@@ -213,3 +213,34 @@
 .primary{border-radius:10px!important;background:var(--product-navy)!important;color:#fff!important}
 .secondary{border-radius:10px!important}
 @media(max-width:900px){.shell{padding:0 18px 48px!important}}
+
+
+/* Decision-first learning hierarchy */
+.evidenceDrawer{
+  width:min(1240px,calc(100% - 48px));
+  margin:18px auto 0;
+  border:1px solid var(--product-line);
+  border-radius:14px;
+  background:#fff;
+  overflow:hidden;
+}
+.evidenceDrawer>summary{
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  align-items:center;
+  padding:18px 20px;
+}
+.evidenceDrawer>summary::-webkit-details-marker{display:none}
+.evidenceDrawer>summary strong{display:block;margin-top:5px;font-size:16px;line-height:1.35}
+.evidenceDrawer>summary>span{color:var(--product-accent);font-size:11px;font-weight:900}
+.evidenceDrawer[open]>summary{border-bottom:1px solid var(--product-line);background:#F8FBFA}
+.evidenceDrawerBody{padding:6px 20px 22px}
+.learningLoop,.resultState{margin-top:18px!important}
+.hero h1{font-size:clamp(38px,4.8vw,60px)!important}
+@media(max-width:600px){
+  .evidenceDrawer{width:min(100% - 28px,1240px)}
+  .evidenceDrawer>summary{align-items:flex-start;flex-direction:column}
+}

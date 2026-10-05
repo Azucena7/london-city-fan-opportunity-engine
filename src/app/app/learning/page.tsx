@@ -57,11 +57,11 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
       <header className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>Learning · {selected?.opponent} · {selected?.date}</span>
-          <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What do we know after matchday?"}</h1>
+          <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What should change for the next match?"}</h1>
           <p>
             {live?.fixturePhase === "pre-match"
               ? "The fixture is still ahead. This screen keeps the measurement plan explicit now, then switches to observed outcomes when authorised post-match evidence arrives."
-              : "Learning is only useful when it changes the next decision. This view separates observed outcomes, attribution and causal claims so the club does not confuse correlation with incrementality."}
+              : "What do we know after matchday? Start there, then turn it into one bounded change for the next fixture. Attribution and causal claims stay separate so the club does not confuse correlation with incrementality."}
           </p>
         </div>
         <aside className={styles.stateCard}>
@@ -74,10 +74,6 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           </p>
         </aside>
       </header>
-
-      <ProductDataStateLegend />
-
-      {selectedId ? <LearningCampaignTrace fixtureId={selectedId} /> : null}
 
       {selected ? <section className={styles.fixtureFacts} aria-label="Observed fixture facts">
         <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
@@ -107,6 +103,23 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <p>{measured ? `Scan rate ${percent(results?.scanRate ?? null)} · no-show ${percent(results?.noShowRate ?? null)}` : "Requires realised ticket value and scan status."}</p>
         </article>
       </section>
+
+      <NextFixtureLearning
+        learning={nextLearning}
+        nextFixtureId={nextFixture?.id}
+        nextFixtureLabel={nextFixture ? `${nextFixture.opponent} · ${nextFixture.date}` : undefined}
+      />
+
+      <details className={styles.evidenceDrawer}>
+        <summary>
+          <div><span className={styles.eyebrow}>Decision evidence</span><strong>Why AVELA is changing — or not changing — the next fixture decision</strong></div>
+          <span>Open measurement trace →</span>
+        </summary>
+        <div className={styles.evidenceDrawerBody}>
+          <ProductDataStateLegend />
+          {selectedId ? <LearningCampaignTrace fixtureId={selectedId} /> : null}
+        </div>
+      </details>
 
       <details className={styles.interpretation}>
         <summary>
@@ -188,12 +201,6 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <div><span>Causal claim</span><strong>{results?.interpretation.causalClaim ? "Supported" : "Not established"}</strong></div>
         </div>
       </section>
-
-      <NextFixtureLearning
-        learning={nextLearning}
-        nextFixtureId={nextFixture?.id}
-        nextFixtureLabel={nextFixture ? `${nextFixture.opponent} · ${nextFixture.date}` : undefined}
-      />
 
       <section className={styles.next}>
         <div>

@@ -12,6 +12,13 @@ export const metadata: Metadata = {
 
 export default function CampaignsPage() {
   const campaigns = campaignPlans.campaigns ?? [];
+  const campaignRows = campaigns.map((campaign) => {
+    const approvalCount = campaign.approvals?.filter((item) => item.state === "ready").length ?? 0;
+    const approvalTotal = campaign.approvals?.length ?? 0;
+    return { campaign, approvalCount, approvalTotal, needsDecision: approvalTotal > 0 && approvalCount < approvalTotal };
+  });
+  const needsDecision = campaignRows.filter((item) => item.needsDecision);
+  const primary = needsDecision[0] ?? campaignRows[0] ?? null;
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -20,17 +27,40 @@ export default function CampaignsPage() {
       <header className={styles.header}>
         <div>
           <span className={styles.eyebrow}>AVELA · Campaigns</span>
-          <h1>Turn accepted opportunities into reviewable work.</h1>
-          <p>Campaigns can start from a fixture or a commercial calendar moment such as season tickets, Christmas, retail, community or sponsor activity. AVELA can propose channels, assets, talent and timing, but approval and launch remain with the club.</p>
+          <h1>What needs a decision before it can move?</h1>
+          <p>Campaigns can start from a fixture or a commercial calendar moment such as season tickets, Christmas, retail, community or sponsor activity. AVELA keeps the next approval, blocker and execution path visible; approval and launch remain with the club.</p>
         </div>
-        <div className={styles.summary}><span>Drafts</span><strong>{campaigns.length + demoCommercialCampaigns.length}</strong></div>
+        <div className={styles.summary}><span>Needs decision</span><strong>{needsDecision.length}</strong><small>{campaigns.length + demoCommercialCampaigns.length} total campaign drafts</small></div>
       </header>
-      <section className={styles.list} aria-label="Campaign drafts">
-        {campaigns.map((campaign) => {
-          const approvalCount = campaign.approvals?.filter((item) => item.state === "ready").length ?? 0;
-          const approvalTotal = campaign.approvals?.length ?? 0;
+
+      {primary ? (
+        <section className={styles.primaryDecision} aria-label="Highest priority campaign decision">
+          <div className={styles.primaryCopy}>
+            <span>{primary.needsDecision ? "Decision required" : "Next campaign"}</span>
+            <h2>{primary.campaign.title.en}</h2>
+            <p>{primary.campaign.objective.en}</p>
+            <strong>Next decision · {primary.campaign.nextApproval?.en ?? "Review required"}</strong>
+          </div>
+          <div className={styles.primaryFacts}>
+            <div><span>Status</span><strong>{primary.campaign.status}</strong></div>
+            <div><span>Approvals ready</span><strong>{primary.approvalCount}/{primary.approvalTotal}</strong></div>
+            <div><span>Activations</span><strong>{primary.campaign.activations?.length ?? 0}</strong></div>
+            <Link href={`/app/matches/${primary.campaign.fixtureId}`}>Open decision workspace →</Link>
+          </div>
+        </section>
+      ) : null}
+
+      <div className={styles.workflowLinks} aria-label="Campaign workflow shortcuts">
+        <a href="#fixture-campaigns">Fixture campaigns</a>
+        <a href="#commercial-calendar">Commercial calendar</a>
+        <Link href="/app/season">Check Calendar pressure →</Link>
+        <Link href="/app/learning">Review outcomes →</Link>
+      </div>
+
+      <section id="fixture-campaigns" className={styles.list} aria-label="Campaign drafts">
+        {campaignRows.map(({ campaign, approvalCount, approvalTotal, needsDecision: rowNeedsDecision }) => {
           return (
-            <article key={campaign.id} className={styles.card}>
+            <article key={campaign.id} className={styles.card} data-needs-decision={rowNeedsDecision ? "true" : "false"}>
               <div className={styles.meta}><span>{campaign.status}</span><span>{campaign.fixtureId}</span></div>
               <h2>{campaign.title.en}</h2>
               <p>{campaign.objective.en}</p>
@@ -47,7 +77,7 @@ export default function CampaignsPage() {
           );
         })}
       </section>
-      <section className={styles.seasonal} aria-label="Seasonal commercial campaigns">
+      <section id="commercial-calendar" className={styles.seasonal} aria-label="Seasonal commercial campaigns">
         <div className={styles.seasonalHead}>
           <div><span>Commercial calendar</span><h2>Campaigns that do not need a fixture to exist.</h2></div>
           <Link href="/app/players">Plan player assets →</Link>
