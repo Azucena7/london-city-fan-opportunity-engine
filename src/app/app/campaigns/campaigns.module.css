@@ -1,63 +1,63 @@
 .contractCopy{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-.campaignSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
-.campaignSummary>section{min-height:92px;padding:12px 13px}
+.campaignSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.campaignSummary>section{min-height:100px;padding:14px}
 .campaignSummary span,.campaignSummary strong,.campaignSummary small{display:block}
-.campaignSummary span{color:#81909C;font-size:9px;font-weight:850;letter-spacing:.055em;text-transform:uppercase}
-.campaignSummary strong{margin-top:9px;font-size:25px;line-height:1;letter-spacing:-.04em}
-.campaignSummary small{margin-top:4px!important;color:#8C99A3!important;font-size:9px!important}
+.campaignSummary span{color:#81909C;font-size:10px;font-weight:850;letter-spacing:.055em;text-transform:uppercase}
+.campaignSummary strong{margin-top:9px;font-size:26px;line-height:1;letter-spacing:-.04em}
+.campaignSummary small{margin-top:4px!important;color:#8C99A3!important;font-size:11px!important;line-height:1.4}
 
-.primaryDecision{padding:14px;margin-bottom:12px}
-.primaryGrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.65fr) auto;gap:10px;align-items:stretch;margin-top:10px}
-.primaryBrief{padding:14px;border-radius:8px;background:var(--product-navy);color:#fff}
-.primaryBrief>p{margin:0!important;color:#C6D1DA!important;font-size:11px!important;line-height:1.45}
+.primaryDecision{padding:16px;margin-bottom:12px}
+.primaryGrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.65fr) auto;gap:12px;align-items:stretch;margin-top:10px}
+.primaryBrief{padding:16px;border-radius:8px;background:var(--product-navy);color:#fff}
+.primaryBrief>p{margin:0!important;color:#C6D1DA!important;font-size:12px!important;line-height:1.5}
 .primaryBrief>div{margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.12)}
 .primaryBrief span,.primaryBrief strong{display:block}
-.primaryBrief span{color:#91C8BF;font-size:8px;font-weight:850;text-transform:uppercase;letter-spacing:.055em}
-.primaryBrief strong{margin-top:4px;font-size:12px;line-height:1.35}
+.primaryBrief span{color:#91C8BF;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.055em}
+.primaryBrief strong{margin-top:4px;font-size:13px;line-height:1.4}
 .primaryFacts{display:grid;grid-template-columns:1fr 1fr;gap:1px;border:1px solid #E4E8EB;border-radius:8px;overflow:hidden;background:#E4E8EB}
-.primaryFacts>div{padding:11px;background:#fff}
+.primaryFacts>div{padding:13px;background:#fff}
 .primaryFacts>div:last-child{grid-column:1/-1}
 .primaryFacts span,.primaryFacts strong{display:block}
-.primaryFacts span{color:#8896A1;font-size:8px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
-.primaryFacts strong{margin-top:4px;font-size:12px}
-.primaryGrid>a{align-self:stretch;display:flex;align-items:center;justify-content:center;min-width:150px;padding:10px 12px;border-radius:8px;background:#EF8B6C;color:#fff;text-decoration:none;text-align:center;font-size:10px;font-weight:900}
+.primaryFacts span{color:#8896A1;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
+.primaryFacts strong{margin-top:4px;font-size:14px}
+.primaryGrid>a{align-self:stretch;display:flex;align-items:center;justify-content:center;min-width:168px;min-height:42px;padding:10px 12px;border-radius:8px;background:#EF8B6C;color:#fff;text-decoration:none;text-align:center;font-size:12px;font-weight:900}
 
 .workspaceGrid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,.35fr);gap:12px;align-items:start}
-.boardCard{padding:14px}
-.boardCard [class*="sectionHeader"] a{color:#2F8F83;text-decoration:none;font-size:10px;font-weight:850}
-.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px;align-items:start}
-.board>section{min-width:0;border:1px solid #E3E8EB;border-radius:9px;background:#F8FAFB;overflow:hidden}
-.board>section>header{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 11px;border-bottom:1px solid #E3E8EB;background:#F3F6F7}
-.board>section>header span{color:#687985;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.055em}
-.board>section>header b{display:grid;place-items:center;min-width:21px;height:21px;border-radius:999px;background:#fff;color:#53636F;font-size:9px}
-.board>section>div{display:grid;gap:7px;padding:7px}
+.boardCard{padding:16px}
+.boardCard [class*="sectionHeader"] a{color:#2F8F83;text-decoration:none;font-size:11px;font-weight:850}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px;align-items:start}
+.board>section{min-width:0;border:1px solid #E3E8EB;border-radius:10px;background:#F8FAFB;overflow:hidden}
+.board>section>header{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 12px;border-bottom:1px solid #E3E8EB;background:#F3F6F7}
+.board>section>header span{color:#687985;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.055em}
+.board>section>header b{display:grid;place-items:center;min-width:24px;height:24px;border-radius:999px;background:#fff;color:#53636F;font-size:10px}
+.board>section>div{display:grid;gap:9px;padding:9px}
 
-.campaignCard{position:relative;padding:11px;border:1px solid #E2E7EA;border-radius:8px;background:#fff;box-shadow:0 1px 2px rgba(16,39,66,.025)}
+.campaignCard{position:relative;padding:13px;border:1px solid #E2E7EA;border-radius:9px;background:#fff;box-shadow:0 1px 2px rgba(16,39,66,.025)}
 .campaignCard[data-needs-decision="true"]{box-shadow:inset 2px 0 0 #EF8B6C,0 1px 2px rgba(16,39,66,.025)}
 .meta{display:flex;justify-content:space-between;gap:8px;align-items:center}
-.meta small{color:#93A0AA!important;font-size:8px!important}
-.campaignCard h3{margin:9px 0 0!important;font-size:12px!important;line-height:1.25!important;letter-spacing:-.015em!important}
-.campaignCard p{margin:5px 0 0!important;color:#7A8994!important;font-size:9px!important;line-height:1.4}
+.meta small{color:#93A0AA!important;font-size:10px!important}
+.campaignCard h3{margin:9px 0 0!important;font-size:14px!important;line-height:1.3!important;letter-spacing:-.015em!important}
+.campaignCard p{margin:5px 0 0!important;color:#7A8994!important;font-size:11px!important;line-height:1.5}
 .progressBar{height:4px;margin-top:10px;border-radius:999px;background:#EDF0F2;overflow:hidden}
 .progressBar>span{display:block;height:100%;background:#2F8F83}
 .cardFacts{display:flex;justify-content:space-between;gap:8px;margin-top:8px}
-.cardFacts span{color:#87949E;font-size:8px}
-.cardFacts b{color:#405564;font-size:8px}
-.nextDecision{margin-top:9px;padding:8px;border-radius:6px;background:#FFF7F3}
+.cardFacts span{color:#87949E;font-size:10px}
+.cardFacts b{color:#405564;font-size:10px}
+.nextDecision{margin-top:9px;padding:9px;border-radius:6px;background:#FFF7F3}
 .nextDecision span,.nextDecision strong{display:block}
-.nextDecision span{color:#B9725A;font-size:8px;font-weight:850;text-transform:uppercase}
-.nextDecision strong{margin-top:3px;font-size:9px;line-height:1.3}
-.campaignCard>a{display:inline-flex;margin-top:9px;color:#2F8F83;text-decoration:none;font-size:9px;font-weight:900}
-.empty{padding:14px;margin:0!important;color:#8C98A2!important;font-size:9px!important;text-align:center}
+.nextDecision span{color:#B9725A;font-size:10px;font-weight:850;text-transform:uppercase}
+.nextDecision strong{margin-top:3px;font-size:11px;line-height:1.35}
+.campaignCard>a{display:inline-flex;margin-top:9px;color:#2F8F83;text-decoration:none;font-size:11px;font-weight:900}
+.empty{padding:14px;margin:0!important;color:#8C98A2!important;font-size:11px!important;text-align:center}
 
 .sideRail{display:grid;gap:10px}
-.quickCard{padding:14px}
-.quickCard>a{display:grid;gap:2px;padding:10px 0;border-top:1px solid #EDF0F2;color:#20364C;text-decoration:none}
+.quickCard{padding:16px}
+.quickCard>a{display:grid;gap:2px;padding:11px 0;border-top:1px solid #EDF0F2;color:#20364C;text-decoration:none}
 .quickCard>a:first-of-type{margin-top:8px}
-.quickCard>a span{color:#8996A0;font-size:8px;font-weight:850;text-transform:uppercase;letter-spacing:.045em}
-.quickCard>a strong{font-size:10px}
-.sideRail p{margin:0!important;color:#73818D!important;font-size:10px!important;line-height:1.45}
+.quickCard>a span{color:#8996A0;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.045em}
+.quickCard>a strong{font-size:12px}
+.sideRail p{margin:0!important;color:#73818D!important;font-size:11px!important;line-height:1.5}
 
 /* Regression contract */
 .card{display:block}
@@ -87,77 +87,21 @@
 }
 
 .talentState{display:grid;gap:2px;padding:8px 0;border-top:1px solid var(--product-line)}
-.talentState span{font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.06em;color:var(--product-muted)}
-.talentState strong{font-size:11px;text-transform:capitalize;color:var(--product-ink)}
+.talentState span{font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.06em;color:var(--product-muted)}
+.talentState strong{font-size:12px;text-transform:capitalize;color:var(--product-ink)}
 .talentState strong[data-status="approved"]{color:#8a5b00}
 .talentState strong[data-status="committed"]{color:var(--product-accent)}
-.talentState small{font-size:10px;line-height:1.35;color:var(--product-muted)}
+.talentState small{font-size:11px;line-height:1.4;color:var(--product-muted)}
 
 .talentConflictAlert{display:grid;gap:2px;padding:7px 8px;border:1px solid #F0D4CA;border-radius:7px;background:#FFF7F3}
-.talentConflictAlert strong{font-size:9px;color:#9F5B45}
-.talentConflictAlert small{font-size:8px!important;line-height:1.35;color:#8B6C61!important}
+.talentConflictAlert strong{font-size:11px;color:#9F5B45}
+.talentConflictAlert small{font-size:10px!important;line-height:1.4;color:#8B6C61!important}
 
 .conflictResolution{display:grid;gap:3px;margin-top:6px;padding-top:6px;border-top:1px solid #F0D4CA}
-.conflictResolution span{font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#9F5B45}
-.conflictResolution strong{font-size:9px;color:#5C4036}
-.conflictResolution p{margin:0!important;font-size:8px!important;line-height:1.4;color:#7C655D!important}
+.conflictResolution span{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#9F5B45}
+.conflictResolution strong{font-size:11px;color:#5C4036}
+.conflictResolution p{margin:0!important;font-size:10px!important;line-height:1.45;color:#7C655D!important}
 
-.conflictResolution button{margin-top:5px;border:1px solid #E5B7A7;border-radius:7px;background:#fff;padding:7px 8px;font-size:8px;font-weight:900;color:#8E4E39;cursor:pointer}
+.conflictResolution button{margin-top:5px;min-height:36px;border:1px solid #E5B7A7;border-radius:7px;background:#fff;padding:7px 8px;font-size:10px;font-weight:900;color:#8E4E39;cursor:pointer}
 .conflictResolution button:disabled{opacity:.55;cursor:not-allowed}
-.reopenRequired,.applyStatus{display:block;margin-top:5px!important;font-size:7px!important;line-height:1.35;color:#7C655D!important}
-
-
-/* Campaign workspace legibility pass */
-.campaignSummary{gap:10px}
-.campaignSummary>section{min-height:100px;padding:14px}
-.campaignSummary span{font-size:10px}
-.campaignSummary strong{font-size:26px}
-.campaignSummary small{font-size:11px!important;line-height:1.4}
-
-.primaryDecision{padding:16px}
-.primaryGrid{gap:12px}
-.primaryBrief{padding:16px}
-.primaryBrief>p{font-size:12px!important;line-height:1.5}
-.primaryBrief span{font-size:10px}
-.primaryBrief strong{font-size:13px;line-height:1.4}
-.primaryFacts>div{padding:13px}
-.primaryFacts span{font-size:10px}
-.primaryFacts strong{font-size:14px}
-.primaryGrid>a{min-width:168px;font-size:12px;min-height:42px}
-
-.boardCard{padding:16px}
-.boardCard [class*="sectionHeader"] a{font-size:11px}
-.board{gap:10px}
-.board>section{border-radius:10px}
-.board>section>header{padding:11px 12px}
-.board>section>header span{font-size:10px}
-.board>section>header b{min-width:24px;height:24px;font-size:10px}
-.board>section>div{gap:9px;padding:9px}
-
-.campaignCard{padding:13px;border-radius:9px}
-.meta small{font-size:10px!important}
-.campaignCard h3{font-size:14px!important;line-height:1.3!important}
-.campaignCard p{font-size:11px!important;line-height:1.5}
-.cardFacts span,.cardFacts b{font-size:10px}
-.nextDecision{padding:9px}
-.nextDecision span{font-size:10px}
-.nextDecision strong{font-size:11px;line-height:1.35}
-.campaignCard>a{font-size:11px}
-.empty{font-size:11px!important}
-
-.quickCard{padding:16px}
-.quickCard>a{padding:11px 0}
-.quickCard>a span{font-size:10px}
-.quickCard>a strong{font-size:12px}
-.sideRail p{font-size:11px!important;line-height:1.5}
-
-.talentState span{font-size:10px}
-.talentState strong{font-size:12px}
-.talentState small{font-size:11px;line-height:1.4}
-.talentConflictAlert strong{font-size:11px}
-.talentConflictAlert small{font-size:10px!important;line-height:1.4}
-.conflictResolution span{font-size:9px}
-.conflictResolution strong{font-size:11px}
-.conflictResolution p{font-size:10px!important;line-height:1.45}
-.conflictResolution button{min-height:36px;font-size:10px}
-.reopenRequired,.applyStatus{font-size:9px!important;line-height:1.4}
+.reopenRequired,.applyStatus{display:block;margin-top:5px!important;font-size:9px!important;line-height:1.4;color:#7C655D!important}
