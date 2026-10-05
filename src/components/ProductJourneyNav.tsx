@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "home" | "campaigns" | "matches" | "demo" | "learning" | "setup" | "access" | "sources" | "executive" | "season" | "players";
+  active?: "home" | "campaigns" | "matches" | "demo" | "learning" | "setup" | "access" | "sources" | "executive" | "season" | "players" | "sponsors" | "contracts";
 };
 
 const workItems = [
@@ -10,12 +10,14 @@ const workItems = [
   { key: "matches", label: "Radar", hint: "Prioritise fixtures", href: "/app/matches", glyph: "R" },
   { key: "campaigns", label: "Campaigns", hint: "Review drafted plays", href: "/app/campaigns", glyph: "C" },
   { key: "players", label: "Player assets", hint: "Plan talent usage", href: "/app/players", glyph: "P" },
+  { key: "sponsors", label: "Sponsors", hint: "Track rights & opportunities", href: "/app/sponsors", glyph: "S" },
   { key: "learning", label: "Learning", hint: "Close the loop", href: "/app/learning", glyph: "L" },
-  { key: "season", label: "Season", hint: "See the whole pattern", href: "/app/season", glyph: "S" }
+  { key: "season", label: "Season", hint: "See the whole pattern", href: "/app/season", glyph: "O" }
 ] as const;
 
 const workspaceItems = [
   { key: "executive", label: "Executive view", href: "/app/executive" },
+  { key: "contracts", label: "Contracts", href: "/app/contracts" },
   { key: "sources", label: "Sources", href: "/app/sources" },
   { key: "setup", label: "Setup", href: "/app/setup" },
   { key: "access", label: "Team", href: "/app/access" }
