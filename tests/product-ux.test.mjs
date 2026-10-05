@@ -1488,6 +1488,21 @@ test("Fixture campaign builder uses the unified campaign record contract", () =>
   assert.match(migration, /from public\.campaign_workspaces/);
 });
 
+test("Commercial campaigns use the unified shared campaign record", () => {
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  const board = read("src/components/CommercialCampaignBoard.tsx");
+  const collection = read("src/app/api/campaign-record/route.ts");
+  assert.match(planner, /syncCommercialCampaignRecord/);
+  assert.match(planner, /campaignKind: "commercial"/);
+  assert.match(planner, /source: "commercial-calendar"/);
+  assert.match(planner, /talent:/);
+  assert.match(board, /campaign-record\?clubId=/);
+  assert.match(board, /recordByCampaign/);
+  assert.match(board, /shared campaign record/);
+  assert.match(collection, /campaign_records/);
+  assert.match(collection, /campaign_kind/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
