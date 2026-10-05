@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { ClubSetup } from "@/components/ClubSetup";
+import { ClubPilotReadiness } from "@/components/ClubPilotReadiness";
 
 export const metadata: Metadata = {
   title: "Club setup · AVELA",
@@ -15,6 +16,7 @@ export default function ClubSetupPage() {
       title="Club setup"
       subtitle="Set the operating defaults once so every fixture, campaign and recommendation starts with the right context."
     >
+      <ClubPilotReadiness />
       <ClubSetup />
     </AppWorkspaceShell>
   );

@@ -1560,6 +1560,20 @@ test("External work handoff requires human confirmation and remains proposed unt
   assert.match(sync, /avela:execution-handoff-proposed/);
 });
 
+test("Club setup separates planning readiness from outcome measurement readiness", () => {
+  const readiness = read("src/components/ClubPilotReadiness.tsx");
+  const page = read("src/app/app/setup/page.tsx");
+  assert.match(page, /ClubPilotReadiness/);
+  assert.match(readiness, /Pilot readiness/);
+  assert.match(readiness, /Planning readiness and outcome measurement are assessed separately/);
+  assert.match(readiness, /Identity & club membership/);
+  assert.match(readiness, /Shared campaign persistence/);
+  assert.match(readiness, /Outcome measurement/);
+  assert.match(readiness, /crm-ticketing/);
+  assert.match(readiness, /Missing measurement never becomes fake evidence/);
+  assert.match(readiness, /Ready with limits/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
