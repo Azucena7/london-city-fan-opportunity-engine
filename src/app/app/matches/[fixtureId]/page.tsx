@@ -15,6 +15,7 @@ import { AvailabilityPlanner } from "@/components/AvailabilityPlanner";
 import { CalendarSlotFinder } from "@/components/CalendarSlotFinder";
 import { OperationalCapacityPanel } from "@/components/OperationalCapacityPanel";
 import { ExternalWorkPackagePreview } from "@/components/ExternalWorkPackagePreview";
+import { ExternalExecutionSync } from "@/components/ExternalExecutionSync";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -376,6 +377,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       />
 
       {workPackage ? <ExternalWorkPackagePreview workPackage={workPackage} /> : null}
+
+      <ExternalExecutionSync decisionId={`fixture:${fixture.id}`} />
 
       <OperationalCapacityPanel
         windowStart={currentState.updated_at}
