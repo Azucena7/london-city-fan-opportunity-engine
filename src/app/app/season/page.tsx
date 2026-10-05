@@ -110,7 +110,7 @@ export default async function SeasonIntelligencePage() {
   const upcomingRows = fixtureRows.filter((row) => row.date >= fromDate).sort((a,b) => a.date.localeCompare(b.date));
   const nextRow = upcomingRows[0] ?? null;
   const nextPressure = nextRow
-    ? calendarRelationships.filter((item) => item.fixtureId === nextRow.id || item.date === nextRow.date).slice(0, 3)
+    ? calendarRelationships.filter((item) => item.fixtureIds.includes(nextRow.id) || item.date === nextRow.date).slice(0, 3)
     : [];
   const nextDecisionState = !nextRow
     ? "MONITOR"
