@@ -56,13 +56,20 @@ export function AvailabilityPlanner({
   const assessment = useMemo(() => assessAvailability(fixtureStart, fixtureEnd, windows), [fixtureStart, fixtureEnd, windows]);
 
   async function load(clubId: string) {
-    const response = await fetch(`/api/availability?clubId=${encodeURIComponent(clubId)}&from=${encodeURIComponent(fixtureStart)}&to=${encodeURIComponent(fixtureEnd)}`, { cache: "no-store" });
-    const result = await response.json() as { windows?: ApiWindow[] };
-    setWindows(response.ok && Array.isArray(result.windows) ? result.windows.map(mapWindow) : []);
+    try {
+      const response = await fetch(`/api/availability?clubId=${encodeURIComponent(clubId)}&from=${encodeURIComponent(fixtureStart)}&to=${encodeURIComponent(fixtureEnd)}`, { cache: "no-store" });
+      const result = await response.json() as { windows?: ApiWindow[]; error?: string };
+      setWindows(response.ok && Array.isArray(result.windows) ? result.windows.map(mapWindow) : []);
+      if (!response.ok) setStatus(result.error || "Internal availability could not be loaded.");
+    } catch {
+      setWindows([]);
+      setStatus("Internal availability service is unreachable. No availability state was changed.");
+    }
   }
 
   useEffect(() => {
     void (async () => {
+      try {
       const response = await fetch("/api/auth/session", { cache: "no-store" });
       const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
@@ -70,6 +77,12 @@ export function AvailabilityPlanner({
       if (result.authenticated && nextClubs.length) {
         setActiveClubId(nextClubs[0].id);
         await load(nextClubs[0].id);
+      } else {
+        setStatus("Sign in to use internal availability intelligence.");
+      }
+      } catch {
+        setClubs([]);
+        setStatus("Account state could not be loaded. No availability state was changed.");
       }
     })();
   }, [fixtureDate]); // eslint-disable-line react-hooks/exhaustive-deps
