@@ -18,9 +18,9 @@ const workItems = [
 const workspaceItems = [
   { key: "executive", label: "Executive view", href: "/app/executive" },
   { key: "contracts", label: "Contracts", href: "/app/contracts" },
-  { key: "sources", label: "Signals & sources", href: "/app/sources" },
-  { key: "setup", label: "Configuration", href: "/app/setup" },
-  { key: "access", label: "Team & access", href: "/app/access" }
+  { key: "sources", label: "Sources", href: "/app/sources" },
+  { key: "setup", label: "Setup", href: "/app/setup" },
+  { key: "access", label: "Team", href: "/app/access" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
