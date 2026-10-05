@@ -1777,3 +1777,26 @@ test("Calendar Intelligence derives relationships without treating disconnected 
   assert.match(panel, /Relationship ≠ automatic decision/);
   assert.match(panel, /does not silently move dates, contact people or alter the official campaign/);
 });
+
+
+test("calendar pressure can elevate attention without changing opportunity score", () => {
+  const page = read("src/app/app/matches/page.tsx");
+  const pressure = read("src/lib/calendarDecisionPressure.ts");
+
+  assert.match(page, /opportunityRadar = buildOpportunityRadar/);
+  assert.match(page, /applyCalendarDecisionPressure/);
+  assert.match(page, /Attention driver:/);
+  assert.match(page, /Opportunity state ·/);
+  assert.match(page, /Calendar pressure/);
+
+  assert.match(pressure, /attentionState/);
+  assert.match(pressure, /calendarPressure/);
+  assert.match(pressure, /Calendar pressure elevates/);
+  assert.match(pressure, /internalBlocks/);
+  assert.match(pressure, /highConflicts/);
+  assert.match(pressure, /sequenceOpportunities/);
+  assert.match(pressure, /radarWeight/);
+  assert.match(pressure, /pressureWeight/);
+  assert.doesNotMatch(pressure, /opportunityScore\s*[+*\-/]/);
+  assert.doesNotMatch(pressure, /rank\s*=\s*.*calendar/i);
+});
