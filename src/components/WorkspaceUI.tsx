@@ -43,6 +43,47 @@ export function WorkspaceBadge({
   return <span className={styles.badge} data-tone={tone}>{children}</span>;
 }
 
+
+export type UniversalDecisionState = "ACT" | "REVIEW" | "BLOCKED" | "MONITOR" | "READY" | "MEASURED";
+
+const stateTone: Record<UniversalDecisionState, "coral" | "warning" | "danger" | "teal" | "success"> = {
+  ACT: "coral",
+  REVIEW: "warning",
+  BLOCKED: "danger",
+  MONITOR: "teal",
+  READY: "success",
+  MEASURED: "success"
+};
+
+export function DecisionStateBadge({
+  state,
+  label
+}: {
+  state: UniversalDecisionState;
+  label?: string;
+}) {
+  return <WorkspaceBadge tone={stateTone[state]}>{label ?? state}</WorkspaceBadge>;
+}
+
+export type UniversalEvidenceState = "OBSERVED" | "VERIFIED" | "MODELLED" | "MISSING";
+
+const evidenceTone: Record<UniversalEvidenceState, "teal" | "success" | "warning" | "neutral"> = {
+  OBSERVED: "teal",
+  VERIFIED: "success",
+  MODELLED: "warning",
+  MISSING: "neutral"
+};
+
+export function EvidenceStateBadge({
+  state,
+  label
+}: {
+  state: UniversalEvidenceState;
+  label?: string;
+}) {
+  return <WorkspaceBadge tone={evidenceTone[state]}>{label ?? state}</WorkspaceBadge>;
+}
+
 export function WorkspaceDrawer({
   label,
   title,

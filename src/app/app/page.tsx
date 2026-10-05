@@ -9,7 +9,7 @@ import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
-import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
+import { DecisionStateBadge, WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader, type UniversalDecisionState } from "@/components/WorkspaceUI";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
@@ -32,6 +32,14 @@ const prioritySymbol: Record<DecisionPriority, string> = {
   "on-track": "●",
   monitor: "○"
 };
+
+function stateForPriority(priority: DecisionPriority): UniversalDecisionState {
+  if (priority === "act-now") return "ACT";
+  if (priority === "review") return "REVIEW";
+  if (priority === "blocked") return "BLOCKED";
+  if (priority === "monitor") return "MONITOR";
+  return "READY";
+}
 
 function shortDate(value: string) {
   if (!value) return "—";
@@ -177,7 +185,7 @@ export default async function ClubAppHome() {
               <div className={styles.attentionCopy}>
                 <div>
                   <strong>{item.title}</strong>
-                  <WorkspaceBadge tone={item.priority === "act-now" ? "coral" : item.priority === "blocked" ? "danger" : "warning"}>{priorityLabel[item.priority]}</WorkspaceBadge>
+                  <DecisionStateBadge state={stateForPriority(item.priority)} label={priorityLabel[item.priority]} />
                 </div>
                 <p>{item.recommendation}</p>
                 <small>{item.changed}</small>
@@ -195,25 +203,25 @@ export default async function ClubAppHome() {
 
       <section className={`${styles.metricGrid} ${styles.signalStrip}`} aria-label="Decision health summary">
         <WorkspaceCard className={styles.metricCard} tone="action">
-          <div><WorkspaceBadge tone="coral">Act now</WorkspaceBadge><span className={styles.metricDelta}>Immediate</span></div>
+          <div><DecisionStateBadge state="ACT" label="Act now" /><span className={styles.metricDelta}>Immediate</span></div>
           <strong>{summary.actNow}</strong>
           <small>Decisions needing action</small>
           <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 21 18 18 31 20 45 12 58 15 72 7 98 4"/></svg>
         </WorkspaceCard>
         <WorkspaceCard className={styles.metricCard}>
-          <div><WorkspaceBadge tone="warning">Review</WorkspaceBadge><span className={styles.metricDelta}>Soon</span></div>
+          <div><DecisionStateBadge state="REVIEW" label="Review" /><span className={styles.metricDelta}>Soon</span></div>
           <strong>{summary.review}</strong>
           <small>Needs a human decision</small>
           <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 18 18 17 31 14 45 16 58 11 72 12 98 8"/></svg>
         </WorkspaceCard>
         <WorkspaceCard className={styles.metricCard}>
-          <div><WorkspaceBadge tone={summary.blocked ? "danger" : "success"}>Blocked</WorkspaceBadge><span className={styles.metricDelta}>Dependencies</span></div>
+          <div><DecisionStateBadge state={summary.blocked ? "BLOCKED" : "READY"} label="Blocked" /><span className={styles.metricDelta}>Dependencies</span></div>
           <strong>{summary.blocked}</strong>
           <small>Unresolved blockers</small>
           <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 20 18 20 31 18 45 18 58 14 72 14 98 14"/></svg>
         </WorkspaceCard>
         <WorkspaceCard className={styles.metricCard} tone="accent">
-          <div><WorkspaceBadge tone="teal">On track</WorkspaceBadge><span className={styles.metricDelta}>Healthy</span></div>
+          <div><DecisionStateBadge state="READY" label="On track" /><span className={styles.metricDelta}>Healthy</span></div>
           <strong>{summary.onTrack}</strong>
           <small>No intervention required</small>
           <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 22 18 19 31 16 45 14 58 12 72 8 98 6"/></svg>
@@ -225,7 +233,7 @@ export default async function ClubAppHome() {
           <WorkspaceSectionHeader
             eyebrow="Recommendation"
             title="Highest current priority"
-            action={primary ? <span className={styles.priorityPill}><WorkspaceBadge tone={primary.priority === "act-now" ? "coral" : primary.priority === "blocked" ? "danger" : "warning"}>{priorityLabel[primary.priority]}</WorkspaceBadge></span> : null}
+            action={primary ? <span className={styles.priorityPill}><DecisionStateBadge state={stateForPriority(primary.priority)} label={priorityLabel[primary.priority]} /></span> : null}
           />
           {primary ? (
             <>
@@ -276,7 +284,7 @@ export default async function ClubAppHome() {
                   <span data-state={item.priority}>{prioritySymbol[item.priority]}</span>
                 </div>
                 <div className={styles.queueMain}>
-                  <div><strong>{item.title}</strong><WorkspaceBadge tone={item.priority === "act-now" ? "coral" : item.priority === "blocked" ? "danger" : item.priority === "review" ? "warning" : "teal"}>{priorityLabel[item.priority]}</WorkspaceBadge></div>
+                  <div><strong>{item.title}</strong><DecisionStateBadge state={stateForPriority(item.priority)} label={priorityLabel[item.priority]} /></div>
                   <p>{item.recommendation}</p>
                 </div>
                 <div className={styles.queueMeta}>

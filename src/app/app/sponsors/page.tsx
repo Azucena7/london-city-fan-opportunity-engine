@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SponsorContractHealth } from "@/components/SponsorContractHealth";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
-import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
+import { DecisionStateBadge, EvidenceStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import { partnerCommercialPack, pilotReadiness } from "@/lib/data";
 import styles from "./sponsors.module.css";
 
@@ -62,7 +62,7 @@ export default function SponsorsPage() {
           <WorkspaceSectionHeader
             eyebrow="Recommended for review"
             title={recommended.pack.candidate}
-            action={<WorkspaceBadge tone="coral">{recommended.readiness?.decision.replaceAll("-", " ") ?? "review"}</WorkspaceBadge>}
+            action={<DecisionStateBadge state="REVIEW" label={recommended.readiness?.decision.replaceAll("-", " ") ?? "review"} />}
           />
           <div className={styles.primaryGrid}>
             <div className={styles.primaryCopy}>
@@ -82,10 +82,10 @@ export default function SponsorsPage() {
       ) : null}
 
       <WorkspaceCard className={styles.matrixCard}>
-        <WorkspaceSectionHeader eyebrow="Opportunity matrix" title="Strategic fit × evidence readiness" action={<span className={styles.matrixHint}>Bubble size = relevant fixtures</span>} />
-        <div className={styles.sponsorMatrix} role="group" aria-label="Sponsor matrix. Higher position means stronger evidence readiness; further right means stronger strategic fit.">
+        <WorkspaceSectionHeader eyebrow="Opportunity matrix" title="Commercial readiness × evidence readiness" action={<span className={styles.matrixHint}>Bubble size = relevant fixtures</span>} />
+        <div className={styles.sponsorMatrix} role="group" aria-label="Sponsor matrix. Higher position means stronger evidence readiness; further right means stronger commercial readiness.">
           <span className={styles.matrixY}>Evidence readiness</span>
-          <span className={styles.matrixX}>Strategic fit →</span>
+          <span className={styles.matrixX}>Commercial readiness →</span>
           <div className={styles.matrixGrid} />
           {candidates.map((item) => (
             <div
@@ -136,7 +136,7 @@ export default function SponsorsPage() {
                   <span><strong>{readiness?.weightedScore ?? "—"}</strong><small>weighted</small></span>
                   <span><strong>{evidence.verified}/{evidence.verified + evidence.modelled + evidence.missing}</strong><small>verified</small></span>
                   <span><strong>{pack.recommendedFixtureIds.length}</strong><small>recommended</small></span>
-                  <WorkspaceBadge tone={readiness?.decision === "recommended-for-review" ? "coral" : "neutral"}>{readiness?.decision.replaceAll("-", " ") ?? "review"}</WorkspaceBadge>
+                  <DecisionStateBadge state={readiness?.decision === "recommended-for-review" ? "REVIEW" : "MONITOR"} label={readiness?.decision.replaceAll("-", " ") ?? "review"} />
                 </summary>
                 <div className={styles.rowDetail}>
                   <div><span>Why this could fit</span><p>{pack.whyFit.en}</p></div>
@@ -145,7 +145,7 @@ export default function SponsorsPage() {
                     <span>Evidence & unknowns</span>
                     {pack.evidence.map((item) => (
                       <article key={item.id}>
-                        <WorkspaceBadge tone={item.state === "public-verified" ? "success" : item.state === "modelled-scenario" ? "warning" : "neutral"}>{item.state.replaceAll("-", " ")}</WorkspaceBadge>
+                        <EvidenceStateBadge state={item.state === "public-verified" ? "VERIFIED" : item.state === "modelled-scenario" ? "MODELLED" : "MISSING"} label={item.state.replaceAll("-", " ")} />
                         <strong>{item.label.en}</strong>
                         <p>{item.detail.en}</p>
                       </article>
@@ -171,7 +171,7 @@ export default function SponsorsPage() {
             <div className={styles.gateList}>
               {partnerCommercialPack.approvalGates.map((gate) => (
                 <article key={gate.id} data-state={gate.state}>
-                  <WorkspaceBadge tone={gate.state === "ready" ? "success" : "warning"}>{gate.state}</WorkspaceBadge>
+                  <DecisionStateBadge state={gate.state === "ready" ? "READY" : "REVIEW"} label={gate.state} />
                   <strong>{gate.label.en}</strong>
                   <small>{gate.owner.en}</small>
                 </article>
