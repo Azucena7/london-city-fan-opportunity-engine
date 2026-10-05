@@ -14,7 +14,7 @@ export function MatchPlanDecision({
   nextApproval: string;
   signalCount: number;
 }) {
-  const [reviewed, setApproved] = useState(false);
+  const [reviewed, setReviewed] = useState(false);
   const blocked = decisionState === "HOLD" || blockerCount > 0;
 
   return (
@@ -39,9 +39,9 @@ export function MatchPlanDecision({
         <a className={styles.primary} href="#approval-gates">Review blockers</a>
       ) : (
         <button
-          className={reviewed ? styles.reviewed : styles.primary}
+          className={reviewed ? styles.approved : styles.primary}
           type="button"
-          onClick={() => setApproved((value) => !value)}
+          onClick={() => setReviewed((value) => !value)}
         >
           {reviewed ? "Reviewed locally ✓" : "Mark as reviewed locally"}
         </button>
