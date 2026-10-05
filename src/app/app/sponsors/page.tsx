@@ -82,10 +82,10 @@ export default function SponsorsPage() {
       ) : null}
 
       <WorkspaceCard className={styles.matrixCard}>
-        <WorkspaceSectionHeader eyebrow="Opportunity matrix" title="Strategic fit × evidence readiness" action={<span className={styles.matrixHint}>Bubble size = relevant fixtures</span>} />
-        <div className={styles.sponsorMatrix} role="group" aria-label="Sponsor matrix. Higher position means stronger evidence readiness; further right means stronger strategic fit.">
+        <WorkspaceSectionHeader eyebrow="Opportunity matrix" title="Commercial readiness × evidence readiness" action={<span className={styles.matrixHint}>Bubble size = relevant fixtures</span>} />
+        <div className={styles.sponsorMatrix} role="group" aria-label="Sponsor matrix. Higher position means stronger evidence readiness; further right means stronger commercial readiness.">
           <span className={styles.matrixY}>Evidence readiness</span>
-          <span className={styles.matrixX}>Strategic fit →</span>
+          <span className={styles.matrixX}>Commercial readiness →</span>
           <div className={styles.matrixGrid} />
           {candidates.map((item) => (
             <div
