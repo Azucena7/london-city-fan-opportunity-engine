@@ -19,7 +19,7 @@ import {
 } from "@/lib/clubStrategy";
 import styles from "./PlayerAssetPlanner.module.css";
 
-type Club = { id: string; name: string; role: string };
+type Club = { id: string; name: string; role: string; permissions?: string[] };
 
 const sportingLabel: Record<SportingAvailability, string> = {
   available: "Sporting available",
@@ -66,6 +66,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   const [activeClubId, setActiveClubId] = useState("");
   const [remoteStatus, setRemoteStatus] = useState("");
   const [remoteBusy, setRemoteBusy] = useState(false);
+  const [sharedStatus, setSharedStatus] = useState<"selected" | "approved" | "committed" | null>(null);
   const selectionStorageKey = `avela:player-pack:${campaignId}`;
 
   useEffect(() => {
@@ -109,8 +110,11 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         setManualContext("shared");
         setSelectionSource("shared");
         setCountOverride(typeof result.selection?.player_count === "number" ? result.selection.player_count : ids.length);
-        setRemoteStatus(`Shared selection · ${result.selection?.status ?? "selected"}`);
+        const nextStatus = result.selection?.status === "approved" || result.selection?.status === "committed" ? result.selection.status : "selected";
+        setSharedStatus(nextStatus);
+        setRemoteStatus(`Shared selection · ${nextStatus}`);
       } else {
+        setSharedStatus(null);
         setRemoteStatus("No shared player selection yet.");
       }
     } catch {
@@ -168,6 +172,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
       if (response.ok) {
         setSelectionSource("shared");
         setManualContext("shared");
+        setSharedStatus("selected");
         setRemoteStatus("Synced to club workspace · selected");
       } else {
         const result = await response.json().catch(() => null) as { error?: string } | null;
@@ -273,6 +278,61 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     if (value === null || value === undefined || reference === null || reference === undefined) return "—";
     const diff = value - reference;
     return `${diff > 0 ? "+" : ""}${diff.toFixed(0)}${suffix}`;
+  }
+
+  const activeClub = clubs.find((club) => club.id === activeClubId) ?? null;
+  const canApprove = Boolean(activeClub?.permissions?.includes("campaigns:approve"));
+
+  async function advanceSharedStatus(nextStatus: "approved" | "committed") {
+    if (!activeClubId || remoteBusy) return;
+    if (!selectionComplete || activeEvaluation.blockers.length) {
+      setRemoteStatus("Resolve pack blockers and complete the selection before approval.");
+      return;
+    }
+    if (!canApprove) {
+      setRemoteStatus("Your club role does not have campaign approval permission.");
+      return;
+    }
+    setRemoteBusy(true);
+    setRemoteStatus(nextStatus === "approved" ? "Approving selected pack…" : "Committing approved pack…");
+    try {
+      const response = await fetch(`/api/player-pack-selection/${encodeURIComponent(campaignId)}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClubId,
+          status: nextStatus,
+          selectedPlayerIds: activeIds,
+          playerCount: activeIds.length,
+          snapshot: {
+            campaignName: selectedCampaign.name,
+            requestedPlayerCount: count,
+            activationDate: selectedCampaign.activationDate,
+            channel: selectedCampaign.channel,
+            territory: selectedCampaign.territory,
+            blockerCount: activeEvaluation.blockers.length,
+            packScore: activeEvaluation.packScore,
+            totalFee: activeEvaluation.totalFee,
+            opportunityCost: activeEvaluation.opportunityCost
+          }
+        })
+      });
+      const result = await response.json().catch(() => null) as { error?: string } | null;
+      if (response.ok) {
+        setSharedStatus(nextStatus);
+        setSelectionSource("shared");
+        setManualContext("shared");
+        setRemoteStatus(nextStatus === "approved"
+          ? "Approved in club workspace · not yet committed"
+          : "Committed in club workspace · talent use still requires downstream operational execution");
+      } else {
+        setRemoteStatus(result?.error || "Player pack status could not be advanced.");
+      }
+    } catch {
+      setRemoteStatus("Club workspace is unreachable. Player pack status was not changed.");
+    } finally {
+      setRemoteBusy(false);
+    }
   }
 
   const internationalAlerts = internationalAvailabilityAlerts(players, demoInternationalDuty, selectedCampaign.start, selectedCampaign.end);
@@ -481,7 +541,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
       <section className={styles.workflowExit} aria-label="Continue campaign workflow">
         <div>
           <span>Selection state</span>
-          <strong>{selectionSource === "shared" ? "Selected pack is shared with authorised club users." : "This player pack is still a planning selection."}</strong>
+          <strong>{sharedStatus === "committed" ? "Player pack committed in the club workspace." : sharedStatus === "approved" ? "Player pack approved and awaiting commitment." : selectionSource === "shared" ? "Selected pack is shared with authorised club users." : "This player pack is still a planning selection."}</strong>
           <p>{remoteStatus || "Changing the pack recalculates fit, cost, scarcity and blockers. Selection does not approve talent use or create a final player commitment."}</p>
           {clubs.length > 1 ? (
             <label>
@@ -495,7 +555,19 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
             </label>
           ) : null}
         </div>
-        <Link href="/app/campaigns">Return to Campaigns →</Link>
+        <div className={styles.governanceActions}>
+          {sharedStatus === "selected" && canApprove && selectionComplete && activeEvaluation.blockers.length === 0 ? (
+            <button type="button" disabled={remoteBusy} onClick={() => void advanceSharedStatus("approved")}>
+              {remoteBusy ? "Updating…" : "Approve selected pack"}
+            </button>
+          ) : null}
+          {sharedStatus === "approved" && canApprove ? (
+            <button type="button" disabled={remoteBusy} onClick={() => void advanceSharedStatus("committed")}>
+              {remoteBusy ? "Updating…" : "Commit approved pack"}
+            </button>
+          ) : null}
+          <Link href="/app/campaigns">Return to Campaigns →</Link>
+        </div>
       </section>
 
       <details className={styles.evidencePanel}>
