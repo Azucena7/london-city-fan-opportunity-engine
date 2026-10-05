@@ -14,11 +14,13 @@ import { OperationalHandoffs } from "@/components/OperationalHandoffs";
 import { AvailabilityPlanner } from "@/components/AvailabilityPlanner";
 import { CalendarSlotFinder } from "@/components/CalendarSlotFinder";
 import { OperationalCapacityPanel } from "@/components/OperationalCapacityPanel";
+import { ExternalWorkPackagePreview } from "@/components/ExternalWorkPackagePreview";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
+import { deriveCampaignWorkPackage } from "@/lib/workSystemOrchestration";
 import styles from "./match-plan.module.css";
 
 export const metadata: Metadata = {
@@ -60,6 +62,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
     if (/web|ticket|owned/i.test(channel)) return !clubContext.connectedChannels.includes("Web");
     return true;
   }) ?? [];
+
+  const workPackage = campaign
+    ? deriveCampaignWorkPackage({ campaign, decisionId: `fixture:${fixture.id}` })
+    : null;
+  const workDependencyCount = workPackage
+    ? workPackage.items.reduce((sum, item) => sum + item.dependencyKeys.length, 0)
+    : approvals.length + handoffActivations.length;
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -366,13 +375,15 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         fixtureLabel={`London City v ${fixture.opponent}`}
       />
 
+      {workPackage ? <ExternalWorkPackagePreview workPackage={workPackage} /> : null}
+
       <OperationalCapacityPanel
         windowStart={currentState.updated_at}
         windowEnd={`${fixture.date}T23:59:59Z`}
         plan={{
-          estimatedMinutes: Math.max(120, (campaign?.schedule.length ?? 1) * 75 + (campaign?.activations.length ?? 0) * 90),
-          taskCount: campaign?.schedule.length ?? Math.max(1, actions.length),
-          dependencyCount: approvals.length + handoffActivations.length,
+          estimatedMinutes: workPackage?.estimatedMinutes ?? Math.max(120, (campaign?.schedule.length ?? 1) * 75 + (campaign?.activations.length ?? 0) * 90),
+          taskCount: workPackage?.items.length ?? campaign?.schedule.length ?? Math.max(1, actions.length),
+          dependencyCount: workDependencyCount,
           teamCount: Math.max(1, new Set([live.nextAction.owner, ...activationChannels]).size),
           approvalCount: approvals.length,
           daysAvailable: Math.max(0, live.daysToFixture),
