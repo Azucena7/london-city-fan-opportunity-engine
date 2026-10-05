@@ -41,6 +41,9 @@ export function AppWorkspaceShell({
           </div>
 
           <div className={styles.utility}>
+            <Link href="/app/help" className={styles.iconButton} aria-label="Open AVELA help">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.4 2.4 0 1 1 3.7 2c-.9.6-1.5 1.1-1.5 2.2"/><path d="M12 17h.01"/></svg>
+            </Link>
             <Link href="/app/season" className={styles.iconButton} aria-label="Open calendar">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
             </Link>
