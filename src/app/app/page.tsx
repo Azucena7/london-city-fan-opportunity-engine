@@ -192,7 +192,7 @@ export default async function ClubAppHome() {
       </section>
 
       <section className={styles.dashboardGrid}>
-        <WorkspaceCard className={styles.recommendationCard} tone="action">
+        <WorkspaceCard className={`${styles.recommendationCard} ${styles.primaryDecision}`} tone="action">
           <WorkspaceSectionHeader
             eyebrow="Recommendation"
             title="Highest current priority"
@@ -313,7 +313,7 @@ export default async function ClubAppHome() {
               <article data-state={opsState.availability.state}><span>Availability</span><strong>{opsState.availability.state}</strong><small>{opsState.availability.hardUnavailable} hard unavailable</small></article>
               <article data-state={campaignsAtRisk > 0 ? "tight" : "clear"}><span>Campaign execution</span><strong>{activeCampaigns.length} active</strong><small>{campaignsAtRisk} approval risk</small></article>
               <article data-state={opsState.execution.state}><span>Execution sync</span><strong>{opsState.execution.state}</strong><small>{opsState.execution.completedItems}/{opsState.execution.totalItems} items complete</small></article>
-              <article data-state={opsState.contracts.state}><span>Contract impacts</span><strong>{opsState.contracts.state}</strong><small>{opsState.contracts.verifiedClauses} verified clauses</small></article>
+              <article data-state={opsState.contracts.state}><span>Verified contracts</span><strong>{opsState.contracts.state}</strong><small>Contract impacts · {opsState.contracts.verifiedClauses} verified clauses</small></article>
               <article data-state={opsState.continuity.state}><span>Team continuity</span><strong>{opsState.continuity.state}</strong><small>{opsState.continuity.openCases} open transitions · Open Team continuity</small></article>
             </div>
           </WorkspaceDrawer>
