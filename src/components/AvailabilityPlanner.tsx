@@ -84,30 +84,35 @@ export function AvailabilityPlanner({
         ? { availabilityType: "hard-unavailable", reasonType: "christmas-break", title: "Christmas break", detail: "Internal Christmas break / protected squad downtime." }
         : { availabilityType: "protected", reasonType: "recovery", title: "Recovery window", detail: "Avoid commercial activation unless operationally necessary." };
 
-    const response = await fetch("/api/availability", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        clubId: activeClubId,
-        subjectType: "squad",
-        subjectLabel: "First-team squad",
-        availabilityType: preset.availabilityType,
-        reasonType: preset.reasonType,
-        title: preset.title,
-        detail: preset.detail,
-        startsAt: fixtureStart,
-        endsAt: fixtureEnd,
-        confidence: "confirmed"
-      })
-    });
+    try {
+      const response = await fetch("/api/availability", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClubId,
+          subjectType: "squad",
+          subjectLabel: "First-team squad",
+          availabilityType: preset.availabilityType,
+          reasonType: preset.reasonType,
+          title: preset.title,
+          detail: preset.detail,
+          startsAt: fixtureStart,
+          endsAt: fixtureEnd,
+          confidence: "confirmed"
+        })
+      });
 
-    if (response.ok) {
-      setStatus("Internal availability added.");
-      await load(activeClubId);
-    } else {
-      setStatus("Availability could not be saved.");
+      if (response.ok) {
+        setStatus("Internal availability recorded in club workspace.");
+        await load(activeClubId);
+      } else {
+        setStatus("Availability could not be saved. No availability window was added.");
+      }
+    } catch {
+      setStatus("The club workspace is unreachable. No availability window was added.");
+    } finally {
+      setSaving(false);
     }
-    setSaving(false);
   }
 
   if (!clubs.length) return null;
