@@ -138,7 +138,7 @@ export function ClubSetup() {
           <h1>Configure once. Let every fixture start with context.</h1>
           <p>This is operating context for the engine, not a campaign brief. It should reduce repeated setup work across the season.</p>
         </div>
-        <div className={styles.score}><span>Setup completeness</span><strong>{completeness}%</strong><small>{status}</small></div>
+        <div className={styles.score}><span>Setup completeness</span><strong>{completeness}%</strong><small role="status" aria-live="polite">{status}</small></div>
       </header>
 
       <div className={styles.setupJourney} aria-label="Club setup progress">
