@@ -12,6 +12,7 @@ type Selection = {
   status: "selected" | "approved" | "committed";
   selected_player_ids: string[];
   player_count: number;
+  snapshot?: { activationDate?: string; campaignName?: string };
   updated_at?: string;
 };
 
@@ -56,6 +57,23 @@ export function CommercialCampaignBoard() {
         const names = selection?.selected_player_ids
           ?.map((id) => demoPlayers.find((player) => player.id === id)?.name ?? id)
           .join(" · ");
+        const conflictRows = selection ? selections.flatMap((other) => {
+          if (other.campaign_id === campaign.id) return [];
+          const sharedIds = selection.selected_player_ids.filter((id) => other.selected_player_ids.includes(id));
+          if (!sharedIds.length) return [];
+          const otherCampaign = demoCommercialCampaigns.find((item) => item.id === other.campaign_id);
+          const aDate = selection.snapshot?.activationDate ?? campaign.activationDate;
+          const bDate = other.snapshot?.activationDate ?? otherCampaign?.activationDate;
+          if (!bDate) return [];
+          const days = Math.round(Math.abs(Date.parse(aDate) - Date.parse(bDate)) / 86400000);
+          if (days > 7) return [];
+          return sharedIds.map((playerId) => ({
+            playerId,
+            days,
+            status: other.status,
+            campaignName: other.snapshot?.campaignName ?? otherCampaign?.name ?? other.campaign_id
+          }));
+        }) : [];
 
         return (
           <article key={campaign.id} className={styles.campaignCard}>
@@ -80,6 +98,17 @@ export function CommercialCampaignBoard() {
                     : "Shared club selection")}
               </small>
             </div>
+            {conflictRows.length ? (
+              <div className={styles.talentConflictAlert}>
+                <strong>{conflictRows.length} talent conflict{conflictRows.length === 1 ? "" : "s"}</strong>
+                <small>
+                  {conflictRows.slice(0, 2).map((conflict) => {
+                    const player = demoPlayers.find((item) => item.id === conflict.playerId);
+                    return `${player?.name ?? conflict.playerId} · ${conflict.days === 0 ? "same day" : conflict.days + "d"} vs ${conflict.campaignName} (${conflict.status})`;
+                  }).join(" · ")}
+                </small>
+              </div>
+            ) : null}
             <Link href={"/app/players?campaign=" + encodeURIComponent(campaign.id)}>
               {talentState === "recommended" ? "Optimise pack →" : "Open talent pack →"}
             </Link>

@@ -1403,6 +1403,17 @@ test("Season Intelligence exposes shared talent pressure before campaign approva
   assert.match(panel, /Review pack/);
 });
 
+test("Campaigns warns about near-term talent conflicts before approval", () => {
+  const board = read("src/components/CommercialCampaignBoard.tsx");
+  const css = read("src/app/app/campaigns/campaigns.module.css");
+  assert.match(board, /conflictRows/);
+  assert.match(board, /sharedIds/);
+  assert.match(board, /days > 7/);
+  assert.match(board, /talent conflict/);
+  assert.match(board, /same day/);
+  assert.match(css, /talentConflictAlert/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");

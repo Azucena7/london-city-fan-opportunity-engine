@@ -92,3 +92,7 @@
 .talentState strong[data-status="approved"]{color:#8a5b00}
 .talentState strong[data-status="committed"]{color:var(--product-accent)}
 .talentState small{font-size:10px;line-height:1.35;color:var(--product-muted)}
+
+.talentConflictAlert{display:grid;gap:2px;padding:7px 8px;border:1px solid #F0D4CA;border-radius:7px;background:#FFF7F3}
+.talentConflictAlert strong{font-size:9px;color:#9F5B45}
+.talentConflictAlert small{font-size:8px!important;line-height:1.35;color:#8B6C61!important}
