@@ -1,12 +1,12 @@
 import Link from "next/link";
+import sourceHealth from "../../data/live/source-health.json";
 import styles from "./IntelligenceSources.module.css";
 
 const sources = [
   {
     name: "Blinkfire",
     category: "Media · sponsorship · audience",
-    state: "public-demo",
-    stateLabel: "Public demo evidence",
+    healthIds: ["blinkfire"],
     summary: "Use published Blinkfire reports and case studies to demonstrate how media, audience and sponsorship outcomes could feed AVELA learning.",
     available: [
       "Published social and campaign performance examples",
@@ -23,8 +23,7 @@ const sources = [
   {
     name: "Club ticketing / CRM",
     category: "Conversion · attendance · retention",
-    state: "requires-access",
-    stateLabel: "Requires club access",
+    healthIds: ["crm-ticketing"],
     summary: "Adds purchases, scans, repeat attendance, realised price and consent-safe cohort evidence.",
     available: ["Synthetic demo schema and aggregate measurement model"],
     connected: ["Real club data requires an authorised club integration"],
@@ -33,8 +32,7 @@ const sources = [
   {
     name: "Fixtures + public context",
     category: "Calendar · city · competition",
-    state: "connected",
-    stateLabel: "Connected",
+    healthIds: ["club-public-web", "open-meteo", "ticketmaster-events"],
     summary: "Provides the time anchor that starts monitoring and contextual signals around each home fixture.",
     available: ["Fixture calendar", "Public event context", "Competition overlap"],
     connected: ["Live public-signal layer"],
@@ -43,14 +41,46 @@ const sources = [
   {
     name: "Web analytics",
     category: "Traffic · response",
-    state: "connected",
-    stateLabel: "Connected",
+    healthIds: ["avela-web-analytics"],
     summary: "Provides aggregate website response and campaign landing behaviour where instrumentation is available.",
     available: ["Vercel Web Analytics on AVELA properties"],
     connected: ["Club-owned analytics remains a separate permissioned source"],
     href: "/"
   }
 ] as const;
+
+type HealthSource = (typeof sourceHealth.sources)[number];
+const healthById = new Map(sourceHealth.sources.map((source) => [source.id, source]));
+
+function aggregateHealth(ids: readonly string[]) {
+  const items = ids.map((id) => healthById.get(id)).filter((item): item is HealthSource => Boolean(item));
+  const priority: Record<HealthSource["state"], number> = {
+    blocked: 5,
+    "not-configured": 4,
+    "requires-access": 3,
+    degraded: 2,
+    operational: 1
+  };
+  const primary = [...items].sort((a, b) => priority[b.state] - priority[a.state])[0] ?? null;
+  const className = primary?.state === "operational" ? "connected" : primary?.state === "degraded" ? "demo" : "locked";
+  const label = primary?.state === "operational"
+    ? "Operational"
+    : primary?.state === "degraded"
+      ? "Degraded"
+      : primary?.state === "blocked"
+        ? "Blocked"
+        : primary?.state === "not-configured"
+          ? "Not configured"
+          : primary?.state === "requires-access"
+            ? "Requires access"
+            : "Unknown";
+  const latest = items
+    .map((item) => item.lastSuccessfulAt)
+    .filter((value): value is string => Boolean(value))
+    .sort()
+    .at(-1) ?? null;
+  return { items, primary, className, label, latest };
+}
 
 const blinkfireEvidence = [
   {
@@ -93,16 +123,23 @@ export function IntelligenceSources() {
       </header>
 
       <div className={styles.sourceList}>
-        {sources.map((source) => (
+        {sources.map((source) => {
+          const health = aggregateHealth(source.healthIds);
+          return (
           <article key={source.name} className={styles.source}>
             <div className={styles.sourceTop}>
               <div>
                 <span>{source.category}</span>
                 <h2>{source.name}</h2>
               </div>
-              <strong className={styles[source.state]}>{source.stateLabel}</strong>
+              <strong className={styles[health.className]}>{health.label}</strong>
             </div>
             <p>{source.summary}</p>
+            <div className={styles.healthMeta}>
+              <span>Source health · {health.items.map((item) => item.id).join(" · ")}</span>
+              <strong>{health.latest ? "Last successful " + new Date(health.latest).toLocaleString("en-GB", { timeZone: "UTC" }) + " UTC" : "No private successful refresh recorded"}</strong>
+              <small>{health.primary?.ownerAction?.en ?? health.primary?.note?.en ?? "No owner action required."}</small>
+            </div>
             <div className={styles.columns}>
               <div>
                 <span>What AVELA can use</span>
@@ -117,7 +154,8 @@ export function IntelligenceSources() {
               ? <a href={source.href} target="_blank" rel="noreferrer">Open public source ↗</a>
               : <Link href={source.href}>Open related AVELA surface →</Link>}
           </article>
-        ))}
+          );
+        })}
       </div>
 
       <section className={styles.blinkfire}>

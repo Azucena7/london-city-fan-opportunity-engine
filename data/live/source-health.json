@@ -180,6 +180,47 @@
         "en": "Only the synthetic rehearsal is available. No club customer or transaction data is connected.",
         "es": "Solo está disponible el ensayo sintético. No hay datos de clientes ni transacciones del club conectados."
       }
+    },
+    {
+      "id": "blinkfire",
+      "label": {
+        "en": "Blinkfire",
+        "es": "Blinkfire"
+      },
+      "category": "media-sponsorship-audience",
+      "access": "club-licence-required",
+      "state": "requires-access",
+      "method": "public-evidence-until-authorised-connector",
+      "cadence": "post-campaign-and-weekly",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Connect an authorised club Blinkfire API, MCP or warehouse delivery when the club wants private measurement in AVELA.",
+        "es": "Conectar una API, MCP o entrega a warehouse de Blinkfire autorizada por el club cuando quiera incorporar medición privada en AVELA."
+      },
+      "note": {
+        "en": "Public Blinkfire reports and case studies are usable as contextual evidence. AVELA does not have access to a club Blinkfire account in the current pilot.",
+        "es": "Los informes y casos públicos de Blinkfire pueden usarse como evidencia contextual. AVELA no tiene acceso a una cuenta Blinkfire del club en el piloto actual."
+      },
+      "lastAttemptAt": null
+    },
+    {
+      "id": "avela-web-analytics",
+      "label": {
+        "en": "AVELA Web Analytics",
+        "es": "Analítica web de AVELA"
+      },
+      "category": "product-traffic",
+      "access": "first-party",
+      "state": "operational",
+      "method": "vercel-web-analytics",
+      "cadence": "continuous-aggregate",
+      "lastSuccessfulAt": "2026-10-05T12:32:34.236Z",
+      "ownerAction": null,
+      "note": {
+        "en": "Aggregate traffic for AVELA-owned properties is available. This is product telemetry, not club campaign conversion evidence.",
+        "es": "Está disponible el tráfico agregado de propiedades de AVELA. Es telemetría del producto, no evidencia de conversión de campañas del club."
+      },
+      "lastAttemptAt": "2026-10-05T12:32:34.236Z"
     }
   ],
   "decisions": [
@@ -286,6 +327,28 @@
       "nextAction": {
         "en": "Club-authorised CRM and ticketing access is required; synthetic rehearsal data must remain clearly separated.",
         "es": "Se requiere acceso autorizado del club a CRM y ticketing; los datos sintéticos de ensayo deben permanecer claramente separados."
+      }
+    },
+    {
+      "id": "media-sponsor-learning",
+      "label": {
+        "en": "Media & sponsorship learning",
+        "es": "Aprendizaje de medios y patrocinio"
+      },
+      "question": {
+        "en": "Can AVELA learn from club-specific media and sponsorship outcomes?",
+        "es": "¿Puede AVELA aprender de resultados específicos del club en medios y patrocinio?"
+      },
+      "route": "/app/sources",
+      "requiredSourceIds": [
+        "blinkfire"
+      ],
+      "supportingSourceIds": [
+        "avela-web-analytics"
+      ],
+      "nextAction": {
+        "en": "Use public Blinkfire evidence only as context until the club authorises a private connector; do not treat AVELA product traffic as campaign outcome evidence.",
+        "es": "Usar la evidencia pública de Blinkfire solo como contexto hasta que el club autorice un conector privado; no tratar el tráfico del producto AVELA como evidencia de resultados de campaña."
       }
     }
   ]
