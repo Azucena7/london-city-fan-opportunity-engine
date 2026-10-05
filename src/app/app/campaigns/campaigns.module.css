@@ -22,3 +22,18 @@
 .seasonalGrid small{display:block;margin-top:10px;color:var(--product-muted);font-size:9px}
 .seasonalGrid>a,.seasonalGrid article>a{display:inline-block;margin-top:12px;color:var(--product-ink);font-size:9px;font-weight:900;text-decoration:none}
 @media(max-width:900px){.seasonalGrid{grid-template-columns:1fr}.seasonalHead{align-items:flex-start;flex-direction:column}}
+
+
+/* Decision workspace surface */
+.shell{padding:0 28px 64px}
+.assetShortcut{margin-top:18px!important;border:1px solid var(--product-line)!important;border-radius:10px!important;background:#fff!important}
+.header{padding:30px 0 22px!important;border-bottom:0!important}
+.summary{border:1px solid var(--product-line)!important;border-radius:12px!important;background:#fff!important;box-shadow:0 8px 26px rgba(16,39,66,.035)}
+.list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important}
+.card{margin:0!important;padding:20px!important;border:1px solid var(--product-line)!important;border-radius:14px!important;background:#fff!important;box-shadow:0 10px 28px rgba(16,39,66,.04)}
+.card>a,.seasonalGrid a{color:var(--product-accent)!important}
+.facts{gap:8px!important}.facts>div{border-radius:9px;background:#F8FAFA!important}
+.seasonal{margin-top:24px!important;padding-top:24px!important}
+.seasonalGrid{gap:12px!important}.seasonalGrid>article{border:1px solid var(--product-line)!important;border-radius:14px!important;background:#fff!important;box-shadow:0 8px 24px rgba(16,39,66,.035)}
+.principle{margin-top:24px!important;border-radius:11px;background:var(--product-navy)!important;color:#fff!important}
+@media(max-width:900px){.shell{padding:0 18px 48px}.list{grid-template-columns:1fr}}
