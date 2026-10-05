@@ -274,3 +274,11 @@
   .head{grid-template-columns:1fr;align-items:start}
   .need{padding:12px 0 0;border-left:0;border-top:1px solid var(--product-line)}
 }
+
+.workflowExit{display:flex;justify-content:space-between;gap:18px;align-items:center;margin:18px 0;padding:14px 16px;border:1px solid var(--product-line);border-radius:10px;background:#F8FAFB}
+.workflowExit div{display:grid;gap:4px;max-width:760px}
+.workflowExit span{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--product-accent)}
+.workflowExit strong{font-size:13px;line-height:1.35}
+.workflowExit p{margin:0!important;font-size:10px!important;line-height:1.45;color:var(--product-muted)!important}
+.workflowExit a{white-space:nowrap;font-size:11px;font-weight:900;text-decoration:none;color:var(--product-ink)}
+@media(max-width:760px){.workflowExit{align-items:flex-start;flex-direction:column}}
