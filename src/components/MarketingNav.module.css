@@ -43,3 +43,26 @@
 .brand{font-size:15px}
 .links a,.login{font-size:11px}
 .demo{min-height:42px;padding:11px 15px;font-size:11px;border-radius:999px}
+
+
+/* Premium commercial nav */
+.nav{
+  border-bottom-color:rgba(13,34,56,.10);
+}
+.brand{
+  color:#0d2238;
+}
+.mark{
+  background:linear-gradient(135deg,#329c91 0 48%,#f08a6a 48% 72%,#e7d9c6 72%);
+}
+.links a,.login{
+  color:#6a7886;
+}
+.links a:hover,.login:hover{
+  color:#0d2238;
+}
+.demo{
+  border-radius:12px;
+  background:#0d2238;
+  box-shadow:0 8px 22px rgba(13,34,56,.10);
+}
