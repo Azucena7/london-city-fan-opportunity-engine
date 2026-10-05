@@ -1256,9 +1256,9 @@ test("Opportunity Brief keeps long-form work navigable with a sticky context rai
   const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
   assert.match(page, /Opportunity workspace sections/);
   assert.match(page, /href="#decision"/);
-  assert.match(page, /href="#campaign"/);
-  assert.match(page, /href="#signals"/);
-  assert.match(page, /href="#impact"/);
+  assert.match(page, /href="#readiness"/);
+  assert.match(page, /href="#execute"/);
+  assert.match(page, /href="#evidence"/);
   assert.match(page, /href="#learning"/);
   assert.match(css, /position:sticky/);
 });
@@ -1781,4 +1781,36 @@ test("product shell uses the prepared AVELA navy teal coral identity without cha
   assert.match(nav, /brandMark::after/);
   assert.match(home, /background:var\(--product-navy\)/);
   assert.match(ask, /background:var\(--product-navy\)/);
+});
+
+
+test("Opportunity Brief follows decision readiness execution evidence memory hierarchy", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
+
+  const decision = page.indexOf('id="decision"');
+  const readiness = page.indexOf('id="readiness"');
+  const execute = page.indexOf('id="execute"');
+  const evidence = page.indexOf('id="evidence"');
+  const history = page.indexOf("<DecisionHistoryPanel");
+
+  assert.ok(decision >= 0);
+  assert.ok(readiness > decision);
+  assert.ok(execute > readiness);
+  assert.ok(evidence > execute);
+  assert.ok(history > evidence);
+
+  assert.match(page, /Can we actually do it\?/);
+  assert.match(page, /Make the decision executable/);
+  assert.match(page, /Why AVELA thinks this/);
+  assert.match(page, /Human decision/);
+  assert.match(page, /Decision memory/);
+  assert.match(page, /AvailabilityPlanner/);
+  assert.match(page, /CalendarSlotFinder/);
+  assert.match(page, /OperationalCapacityPanel/);
+  assert.match(page, /OperationalHandoffs/);
+
+  assert.match(css, /decisionLens/);
+  assert.match(css, /phaseIntro/);
+  assert.match(css, /phaseNumber/);
 });
