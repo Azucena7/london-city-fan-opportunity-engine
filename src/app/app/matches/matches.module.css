@@ -139,3 +139,19 @@
 .radarFixture{border-radius:0}
 .radarFixture:hover{background:#FAFAFC}
 .engineState,.clubFitFacts span{border-color:var(--product-line)}
+
+
+/* Decision workspace surface */
+.shell{padding:0 28px 64px}
+.header{padding:34px 0 22px;border-bottom:0}
+.engineState{padding:14px 16px;border:1px solid var(--product-line);border-radius:12px;background:#fff;box-shadow:0 8px 26px rgba(16,39,66,.035)}
+.radarSummary{gap:10px;background:transparent!important;border:0!important}
+.radarSummary>div{padding:14px 15px!important;border:1px solid var(--product-line)!important;border-radius:12px;background:#fff;box-shadow:0 8px 26px rgba(16,39,66,.035)}
+.priorityMatch{border:1px solid var(--product-line);border-radius:16px;overflow:hidden;box-shadow:0 18px 46px rgba(16,39,66,.06)}
+.priorityDecision{border-radius:12px;background:var(--product-navy)}
+.priorityFooter{background:#FBFAF7}
+.radarList{gap:10px}
+.radarFixture{border:1px solid var(--product-line)!important;border-radius:12px!important;background:#fff;box-shadow:0 8px 24px rgba(16,39,66,.035)}
+.futureFixture{border:1px solid var(--product-line);border-radius:11px;background:#fff}
+.clubFitPanel,.signalLenses{border-radius:12px!important}
+@media(max-width:900px){.shell{padding:0 18px 48px}}
