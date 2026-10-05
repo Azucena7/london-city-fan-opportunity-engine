@@ -43,9 +43,14 @@ export default function CampaignsPage() {
       <DecisionHandoffStrip active="campaign" fixtureId={primary?.campaign.fixtureId ?? null} campaignId={primary?.campaign.id ?? null} />
       <p className={styles.contractCopy}>productAppShell · Campaigns can start from a fixture or a commercial calendar moment such as season tickets, Christmas, retail, community or sponsor activity.</p>
 
-      <WorkspaceCard className={styles.lifecycleCard}>
-        <WorkspaceSectionHeader eyebrow="Campaign lifecycle" title="Draft → Review → Ready → Handoff → Learning" />
-        <div className={styles.lifecycle}>
+      <details className={styles.portfolioPanel}>
+        <summary>
+          <div><span>Portfolio overview</span><strong>Lifecycle & campaign counts</strong><small>Open when you need the portfolio view, not to resolve the next decision.</small></div>
+          <b>Open overview →</b>
+        </summary>
+        <WorkspaceCard className={styles.lifecycleCard}>
+          <WorkspaceSectionHeader eyebrow="Campaign lifecycle" title="Draft → Review → Ready → Handoff → Learning" />
+          <div className={styles.lifecycle}>
           {lifecycleStages.map((stage, index) => (
             <div key={stage} data-stage={stage.toLowerCase()}>
               <span>{String(index + 1).padStart(2, "0")}</span>
@@ -53,15 +58,16 @@ export default function CampaignsPage() {
               <small>{campaignRows.filter((item) => lifecycleStage(item) === stage).length} campaigns</small>
             </div>
           ))}
-        </div>
-      </WorkspaceCard>
+          </div>
+        </WorkspaceCard>
 
-      <section className={styles.campaignSummary} aria-label="Campaign status summary">
+        <section className={styles.campaignSummary} aria-label="Campaign status summary">
         <WorkspaceCard tone="action"><span>Needs decision</span><strong>{needsDecision.length}</strong><small>Approval or scope gate</small></WorkspaceCard>
         <WorkspaceCard><span>Fixture campaigns</span><strong>{campaigns.length}</strong><small>Driven by match opportunity</small></WorkspaceCard>
         <WorkspaceCard tone="accent"><span>Commercial calendar</span><strong>{demoCommercialCampaigns.length}</strong><small>Seasonal / non-fixture</small></WorkspaceCard>
         <WorkspaceCard><span>Player asset route</span><strong>{demoCommercialCampaigns.filter((item) => item.playerNeed > 0).length}</strong><small>Campaigns needing talent</small></WorkspaceCard>
-      </section>
+        </section>
+      </details>
 
       {primary ? (
         <WorkspaceCard className={styles.primaryDecision} tone="action">
@@ -89,7 +95,12 @@ export default function CampaignsPage() {
       ) : null}
 
       <section className={styles.workspaceGrid}>
-        <WorkspaceCard className={styles.boardCard}>
+        <details className={styles.portfolioPanel}>
+          <summary>
+            <div><span>Explore mode</span><strong>All campaign work</strong><small>Open the board only when you need to browse or compare across campaigns.</small></div>
+            <b>Open board →</b>
+          </summary>
+          <WorkspaceCard className={styles.boardCard}>
           <WorkspaceSectionHeader
             eyebrow="Execution board"
             title="Fixture campaigns"
@@ -143,7 +154,8 @@ export default function CampaignsPage() {
               </div>
             </section>
           </div>
-        </WorkspaceCard>
+          </WorkspaceCard>
+        </details>
 
         <aside className={styles.sideRail}>
           <WorkspaceCard className={styles.quickCard}>
