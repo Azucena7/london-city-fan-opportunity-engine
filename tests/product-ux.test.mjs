@@ -2328,7 +2328,7 @@ test("calendar exposes a next-decision rail and shared handoffs", () => {
   const handoff = read("src/components/DecisionHandoffStrip.tsx");
 
   assert.match(season, /Next decision window/);
-  assert.match(season, /Decision flow/);
+  assert.match(season, /Recommended workflow/);
   assert.match(season, /fixtureIds\.includes\(nextRow\.id\)/);
   assert.match(season, /Next handoff/);
   assert.match(campaigns, /DecisionHandoffStrip active="campaign"/);
