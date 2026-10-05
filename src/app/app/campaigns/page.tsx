@@ -120,7 +120,7 @@ export default function CampaignsPage() {
                       <span>Players <b>{campaign.playerNeed}</b></span>
                       <span>Window <b>{campaign.start} → {campaign.end}</b></span>
                     </div>
-                    <Link href="/app/players">Optimise pack →</Link>
+                    <Link href={"/app/players?campaign=" + encodeURIComponent(campaign.id)}>Optimise pack →</Link>
                   </article>
                 ))}
               </div>

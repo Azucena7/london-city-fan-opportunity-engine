@@ -30,3 +30,14 @@
 @media(max-width:760px){
   .planningBoundary{grid-template-columns:1fr;gap:4px}
 }
+
+.workflowContext{
+  display:flex;justify-content:space-between;gap:16px;align-items:center;
+  margin-bottom:10px;padding:10px 12px;border:1px solid #E1E6E9;border-radius:9px;background:#F8FAFB;
+}
+.workflowContext div{display:grid;gap:2px}
+.workflowContext span{font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--product-accent)}
+.workflowContext strong{font-size:11px;color:var(--product-ink)}
+.workflowContext small{font-size:10px;line-height:1.4;color:#74818C}
+.workflowContext a{font-size:11px;font-weight:850;text-decoration:none;color:var(--product-ink);white-space:nowrap}
+@media(max-width:760px){.workflowContext{align-items:flex-start;flex-direction:column}}
