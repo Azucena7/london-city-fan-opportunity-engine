@@ -91,9 +91,9 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         <div className={styles.contextLinks}>
           <Link className={styles.executiveLink} href={`/app/executive?fixture=${fixture.id}`}>Executive view</Link>
           <a href="#decision">Decision</a>
-          <a href="#campaign">Campaign</a>
-          <a href="#signals">Signals</a>
-          <a href="#impact">Impact</a>
+          <a href="#readiness">Can we do it?</a>
+          <a href="#execute">Execute</a>
+          <a href="#evidence">Why?</a>
           <a href="#learning">Learning</a>
         </div>
       </nav>
@@ -133,6 +133,21 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         <article><span>Decision state</span><strong>{radarItem?.radarState ?? "Review"}</strong><small>{radarItem?.urgency ?? "Watch"} urgency</small></article>
         <article><span>Evidence</span><strong>{radarItem?.materialSignalCount ?? 0} material</strong><small>{radarItem?.signalCount ?? 0} total signals</small></article>
         <article><span>Signal movement</span><strong>{radarItem?.signalChangeLabel ?? "No recent movement"}</strong><small>Last 7 days</small></article>
+      </section>
+
+      <section className={styles.decisionLens} aria-label="Decision lens">
+        <div>
+          <span>What AVELA thinks</span>
+          <strong>{live.decisionState === "HOLD" ? "Do not launch yet." : "This opportunity is ready for human review."}</strong>
+        </div>
+        <div>
+          <span>Why now</span>
+          <strong>{live.whyNow}</strong>
+        </div>
+        <div>
+          <span>What happens next</span>
+          <strong>{live.nextAction.label}</strong>
+        </div>
       </section>
 
       <section className={styles.opportunityBrief} aria-label="Opportunity brief">
@@ -194,6 +209,42 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </details>
       </section>
 
+      <section id="readiness" className={styles.phaseIntro} aria-label="Decision readiness">
+        <div>
+          <span className={styles.phaseNumber}>02</span>
+          <div>
+            <span className={styles.eyebrow}>Can we actually do it?</span>
+            <h2>Check availability, timing and capacity before the club commits.</h2>
+          </div>
+        </div>
+        <p>AVELA should not recommend an attractive idea that cannot survive the club&apos;s real calendar, player constraints or workload.</p>
+      </section>
+
+      <AvailabilityPlanner
+        fixtureDate={fixture.date}
+        fixtureLabel={`London City v ${fixture.opponent}`}
+      />
+
+      <CalendarSlotFinder
+        fixtureDate={fixture.date}
+        fixtureLabel={`London City v ${fixture.opponent}`}
+      />
+
+      <OperationalCapacityPanel
+        windowStart={currentState.updated_at}
+        windowEnd={`${fixture.date}T23:59:59Z`}
+        plan={{
+          estimatedMinutes: Math.max(120, (campaign?.schedule.length ?? 1) * 75 + (campaign?.activations.length ?? 0) * 90),
+          taskCount: campaign?.schedule.length ?? Math.max(1, actions.length),
+          dependencyCount: approvals.length + handoffActivations.length,
+          teamCount: Math.max(1, new Set([live.nextAction.owner, ...activationChannels]).size),
+          approvalCount: approvals.length,
+          daysAvailable: Math.max(0, live.daysToFixture),
+          externalParties: handoffActivations.length,
+          unknownInputs: Math.min(5, live.missing.length)
+        }}
+      />
+
       {clubContext ? (
         <section className={styles.clubExecutionContext} aria-label="Club execution context">
           <div className={styles.clubExecutionIntro}>
@@ -244,6 +295,17 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </section>
       )}
 
+      <section id="execute" className={styles.phaseIntro} aria-label="Execution plan">
+        <div>
+          <span className={styles.phaseNumber}>03</span>
+          <div>
+            <span className={styles.eyebrow}>Make the decision executable</span>
+            <h2>Turn the recommendation into a plan, owners and handoffs.</h2>
+          </div>
+        </div>
+        <p>AVELA prepares the work and routes requests, while the club keeps final control over what is committed and launched.</p>
+      </section>
+
       <div id="campaign">
       <CampaignDeliveryPlanner
         objective={campaign?.objective.en ?? live.opportunity}
@@ -253,6 +315,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         fixtureId={fixture.id}
       />
       </div>
+
+      <OperationalHandoffs
+        decisionId={`fixture:${fixture.id}`}
+        fixtureLabel={`London City v ${fixture.opponent}`}
+        eventAt={fixture.date ? `${fixture.date}T${fixture.kickoff ?? "12:00"}:00` : null}
+        recommendation={campaign?.title.en ?? live.recommendedAction}
+      />
 
       <section className={styles.actionsSection} id="approval-gates">
         <div className={styles.sectionHead}>
@@ -284,6 +353,17 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
             </article>
           ))}
         </div>
+      </section>
+
+      <section id="evidence" className={styles.phaseIntro} aria-label="Evidence and reasoning">
+        <div>
+          <span className={styles.phaseNumber}>04</span>
+          <div>
+            <span className={styles.eyebrow}>Why AVELA thinks this</span>
+            <h2>Inspect the evidence, assumptions and missing context behind the recommendation.</h2>
+          </div>
+        </div>
+        <p>The user can challenge the recommendation without losing the original evidence trail.</p>
       </section>
 
       <section id="signals" className={styles.signalsSection}>
@@ -342,6 +422,17 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </details>
       </section>
 
+      <section className={styles.phaseIntro} aria-label="Human decision">
+        <div>
+          <span className={styles.phaseNumber}>05</span>
+          <div>
+            <span className={styles.eyebrow}>Human decision</span>
+            <h2>Approve, modify or hold — then record what actually happened.</h2>
+          </div>
+        </div>
+        <p>Recommendation, club decision and execution stay separate so AVELA can learn from the difference.</p>
+      </section>
+
       <MatchPlanDecision
         decisionState={live.decisionState}
         blockerCount={approvals.length}
@@ -349,42 +440,21 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         signalCount={live.liveSignals.length}
       />
 
+      <section className={styles.phaseIntro} aria-label="Decision memory">
+        <div>
+          <span className={styles.phaseNumber}>06</span>
+          <div>
+            <span className={styles.eyebrow}>Decision memory</span>
+            <h2>Preserve the recommendation, the club&apos;s choice and the outcome.</h2>
+          </div>
+        </div>
+        <p>This is the institutional memory that makes the next comparable decision better.</p>
+      </section>
+
       <DecisionHistoryPanel
         decisionId={`fixture:${fixture.id}`}
         subjectType="fixture"
         subjectId={fixture.id}
-        recommendation={campaign?.title.en ?? live.recommendedAction}
-      />
-
-      <AvailabilityPlanner
-        fixtureDate={fixture.date}
-        fixtureLabel={`London City v ${fixture.opponent}`}
-      />
-
-      <CalendarSlotFinder
-        fixtureDate={fixture.date}
-        fixtureLabel={`London City v ${fixture.opponent}`}
-      />
-
-      <OperationalCapacityPanel
-        windowStart={currentState.updated_at}
-        windowEnd={`${fixture.date}T23:59:59Z`}
-        plan={{
-          estimatedMinutes: Math.max(120, (campaign?.schedule.length ?? 1) * 75 + (campaign?.activations.length ?? 0) * 90),
-          taskCount: campaign?.schedule.length ?? Math.max(1, actions.length),
-          dependencyCount: approvals.length + handoffActivations.length,
-          teamCount: Math.max(1, new Set([live.nextAction.owner, ...activationChannels]).size),
-          approvalCount: approvals.length,
-          daysAvailable: Math.max(0, live.daysToFixture),
-          externalParties: handoffActivations.length,
-          unknownInputs: Math.min(5, live.missing.length)
-        }}
-      />
-
-      <OperationalHandoffs
-        decisionId={`fixture:${fixture.id}`}
-        fixtureLabel={`London City v ${fixture.opponent}`}
-        eventAt={fixture.date ? `${fixture.date}T${fixture.kickoff ?? "12:00"}:00` : null}
         recommendation={campaign?.title.en ?? live.recommendedAction}
       />
 
