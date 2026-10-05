@@ -79,19 +79,23 @@ export function ClubSetup() {
   async function saveSetup() {
     if (!activeClubId || !canEdit) return;
     setStatus("Saving…");
-    const response = await fetch("/api/club-setup", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        clubId: activeClubId,
-        fixtureSource,
-        connectedChannels: channels,
-        priorityObjectives: objectives,
-        brandRules: { tone, mustAvoid },
-        approvalRules: { owner: approvalOwner, required: requiresApproval }
-      })
-    });
-    setStatus(response.ok ? "Club setup saved." : "Club setup could not be saved.");
+    try {
+      const response = await fetch("/api/club-setup", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClubId,
+          fixtureSource,
+          connectedChannels: channels,
+          priorityObjectives: objectives,
+          brandRules: { tone, mustAvoid },
+          approvalRules: { owner: approvalOwner, required: requiresApproval }
+        })
+      });
+      setStatus(response.ok ? "Club setup saved to the club workspace." : "Club setup could not be saved. Existing club defaults were not changed.");
+    } catch {
+      setStatus("The club workspace is unreachable. Existing club defaults were not changed.");
+    }
   }
 
   if (configured === null) {
