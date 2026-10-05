@@ -19,6 +19,8 @@ import {
 } from "@/lib/clubStrategy";
 import styles from "./PlayerAssetPlanner.module.css";
 
+type Club = { id: string; name: string; role: string };
+
 const sportingLabel: Record<SportingAvailability, string> = {
   available: "Sporting available",
   injured: "Injured · club-marked",
@@ -59,7 +61,11 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   );
   const [manualSelectedIds, setManualSelectedIds] = useState<string[]>([]);
   const [manualContext, setManualContext] = useState("");
-  const [selectionSource, setSelectionSource] = useState<"recommended" | "local">("recommended");
+  const [selectionSource, setSelectionSource] = useState<"recommended" | "local" | "shared">("recommended");
+  const [clubs, setClubs] = useState<Club[]>([]);
+  const [activeClubId, setActiveClubId] = useState("");
+  const [remoteStatus, setRemoteStatus] = useState("");
+  const [remoteBusy, setRemoteBusy] = useState(false);
   const selectionStorageKey = `avela:player-pack:${campaignId}`;
 
   useEffect(() => {
@@ -84,6 +90,95 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
       setSelectionSource("recommended");
     }
   }, [selectionStorageKey]);
+
+  async function loadSharedSelection(clubId: string, targetCampaignId = campaignId) {
+    setRemoteStatus("Loading shared selection…");
+    try {
+      const response = await fetch(`/api/player-pack-selection/${encodeURIComponent(targetCampaignId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
+      const result = await response.json() as {
+        selection?: { selected_player_ids?: string[]; player_count?: number; status?: string } | null;
+        error?: string;
+      };
+      if (!response.ok) {
+        setRemoteStatus(result.error || "Shared selection could not be loaded.");
+        return;
+      }
+      const ids = result.selection?.selected_player_ids;
+      if (Array.isArray(ids) && ids.length && ids.every((id) => demoPlayers.some((player) => player.id === id))) {
+        setManualSelectedIds(ids);
+        setManualContext("shared");
+        setSelectionSource("shared");
+        setCountOverride(typeof result.selection?.player_count === "number" ? result.selection.player_count : ids.length);
+        setRemoteStatus(`Shared selection · ${result.selection?.status ?? "selected"}`);
+      } else {
+        setRemoteStatus("No shared player selection yet.");
+      }
+    } catch {
+      setRemoteStatus("Shared selection is temporarily unavailable.");
+    }
+  }
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const response = await fetch("/api/auth/session", { cache: "no-store" });
+        const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
+        const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
+        setClubs(nextClubs);
+        if (result.authenticated && nextClubs.length) {
+          const clubId = nextClubs[0].id;
+          setActiveClubId(clubId);
+          await loadSharedSelection(clubId, campaignId);
+        } else {
+          setActiveClubId("");
+          setRemoteStatus("Local planning only");
+        }
+      } catch {
+        setActiveClubId("");
+        setRemoteStatus("Local planning only");
+      }
+    })();
+  }, [campaignId]); // eslint-disable-line react-hooks/exhaustive-deps -- shared selection follows the campaign
+
+  async function syncSharedSelection(ids: string[]) {
+    if (!activeClubId || ids.length !== count) {
+      if (activeClubId && ids.length !== count) setRemoteStatus("Complete the pack to sync shared selection.");
+      return;
+    }
+    setRemoteBusy(true);
+    setRemoteStatus("Syncing selected pack…");
+    try {
+      const response = await fetch(`/api/player-pack-selection/${encodeURIComponent(campaignId)}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClubId,
+          status: "selected",
+          selectedPlayerIds: ids,
+          playerCount: ids.length,
+          snapshot: {
+            campaignName: selectedCampaign.name,
+            requestedPlayerCount: count,
+            activationDate: selectedCampaign.activationDate,
+            channel: selectedCampaign.channel,
+            territory: selectedCampaign.territory
+          }
+        })
+      });
+      if (response.ok) {
+        setSelectionSource("shared");
+        setManualContext("shared");
+        setRemoteStatus("Synced to club workspace · selected");
+      } else {
+        const result = await response.json().catch(() => null) as { error?: string } | null;
+        setRemoteStatus(result?.error || "Shared selection could not be synced. Local selection is unchanged.");
+      }
+    } catch {
+      setRemoteStatus("Club sync unavailable. Local selection is unchanged.");
+    } finally {
+      setRemoteBusy(false);
+    }
+  }
 
   const players = useMemo(
     () => demoPlayers.map((player) => ({
@@ -121,7 +216,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     ...players.map((player) => `${player.id}:${player.sportingAvailability}:${player.commercialAvailabilityOverride ? 1 : 0}`)
   ].join("|");
   const recommendedIds = packs[0]?.players.map((item) => item.player.id) ?? [];
-  const hasCurrentManualSelection = manualContext === contextKey || manualContext === "stored";
+  const hasCurrentManualSelection = manualContext === contextKey || manualContext === "stored" || manualContext === "shared";
   const activeIds = hasCurrentManualSelection ? manualSelectedIds : recommendedIds;
   const activePlayers = players.filter((player) => activeIds.includes(player.id));
   const activeEvaluation = evaluatePlayerPack(
@@ -141,7 +236,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     : activeEvaluation.blockers.length
       ? "Blocked"
       : hasCurrentManualSelection
-        ? selectionSource === "local" ? "Selected locally" : "Custom pack"
+        ? selectionSource === "shared" ? "Selected · shared" : selectionSource === "local" ? "Selected locally" : "Custom pack"
         : "Recommended";
   const momentumRanking = players
     .map((player) => ({ player, momentum: playerMomentumScore(player.id, demoPlayerMomentum) }))
@@ -161,6 +256,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     } catch {
       // Local persistence is a convenience only; planning must still work without storage.
     }
+    void syncSharedSelection(ids);
   }
 
   function togglePlayer(playerId: string) {
@@ -230,7 +326,10 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         <div className={styles.railState} aria-live="polite">
           <span>Live pack</span>
           <strong>{livePackState}</strong>
-          <small>{activeIds.length}/{count} selected · {selectedCampaign.name}{selectionSource === "local" ? " · saved on this device" : ""}</small>
+          <small>
+            {activeIds.length}/{count} selected · {selectedCampaign.name}
+            {selectionSource === "shared" ? " · shared club selection" : selectionSource === "local" ? " · saved on this device" : ""}
+          </small>
         </div>
         <div className={styles.railMetrics}>
           <div><span>Score</span><strong>{selectionComplete ? activeEvaluation.packScore.toFixed(0) : "—"}</strong></div>
@@ -338,11 +437,12 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
             <h2>{selectionComplete ? "Your current pack" : `Select ${count - activeIds.length} more player${count - activeIds.length === 1 ? "" : "s"}`}</h2>
             <p>Change the recommendation only when the trade-off is worth it. Every add/remove recalculates cost, fit, momentum, scarcity and blockers.</p>
           </div>
-          <button type="button" onClick={() => {
+          <button type="button" disabled={remoteBusy} onClick={() => {
             setManualSelectedIds([]);
             setManualContext("");
             setSelectionSource("recommended");
             setCountOverride(null);
+            if (activeClubId) setRemoteStatus("Showing AVELA recommendation locally · shared selection unchanged");
             try { window.localStorage.removeItem(selectionStorageKey); } catch {}
           }}>Reset recommendation</button>
         </div>
@@ -380,14 +480,23 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
 
       <section className={styles.workflowExit} aria-label="Continue campaign workflow">
         <div>
-          <span>Scenario boundary</span>
-          <strong>This player pack is a planning scenario until the campaign records it.</strong>
-          <p>Changing the pack here recalculates fit, cost, scarcity and blockers. The selected pack is remembered on this device for this campaign, but it does not approve talent use or write a final player commitment into the shared club workspace.</p>
+          <span>Selection state</span>
+          <strong>{selectionSource === "shared" ? "Selected pack is shared with authorised club users." : "This player pack is still a planning selection."}</strong>
+          <p>{remoteStatus || "Changing the pack recalculates fit, cost, scarcity and blockers. Selection does not approve talent use or create a final player commitment."}</p>
+          {clubs.length > 1 ? (
+            <label>
+              Club
+              <select value={activeClubId} onChange={(event) => {
+                setActiveClubId(event.target.value);
+                void loadSharedSelection(event.target.value, campaignId);
+              }}>
+                {clubs.map((club) => <option key={club.id} value={club.id}>{club.name}</option>)}
+              </select>
+            </label>
+          ) : null}
         </div>
         <Link href="/app/campaigns">Return to Campaigns →</Link>
       </section>
-
-      <section className={styles.workflowExit} aria-label="Continue campaign workflow"><div><span>Scenario boundary</span><strong>This player pack is a planning scenario until the campaign records it.</strong><p>Changing the pack here recalculates fit, cost, scarcity and blockers, but it does not approve talent use or write a final player commitment into the campaign.</p></div><Link href="/app/campaigns">Return to Campaigns →</Link></section>
 
       <details className={styles.evidencePanel}>
         <summary>
