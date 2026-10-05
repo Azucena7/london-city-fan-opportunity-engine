@@ -119,9 +119,9 @@ export default async function SeasonIntelligencePage() {
 
       <section className={styles.calendarToolbar}>
         <div>
-          <button type="button" aria-label="Previous month">‹</button>
+          <span aria-hidden="true">‹</span>
           <strong>{monthLabel}</strong>
-          <button type="button" aria-label="Next month">›</button>
+          <span aria-hidden="true">›</span>
         </div>
         <div className={styles.legend}>
           <span><i data-kind="fixture" />Fixture</span>

@@ -14,41 +14,41 @@ export function MatchPlanDecision({
   nextApproval: string;
   signalCount: number;
 }) {
-  const [approved, setApproved] = useState(false);
+  const [reviewed, setReviewed] = useState(false);
   const blocked = decisionState === "HOLD" || blockerCount > 0;
 
   return (
     <aside className={styles.bar} aria-label="Match plan review status">
       <div className={styles.status}>
-        <span>{blocked ? "Review required" : approved ? "Approved for handoff" : "Ready for review"}</span>
+        <span>{blocked ? "Review required" : reviewed ? "Reviewed in this session" : "Ready for review"}</span>
         <strong>
           {blocked
             ? `${blockerCount} gate${blockerCount === 1 ? "" : "s"} must be resolved before handoff.`
-            : approved
-              ? "Draft reviewed. Ready for the club's execution workflow."
+            : reviewed
+              ? "Draft reviewed locally. No approval has been written to the club system."
               : `${signalCount} signals support the current draft.`}
         </strong>
       </div>
 
       <div className={styles.next}>
         <span>Next decision</span>
-        <strong>{blocked ? nextApproval : approved ? "Hand off to the execution owner." : "Review the draft and approve the handoff."}</strong>
+        <strong>{blocked ? nextApproval : reviewed ? "Continue to the execution workflow when the club records its real approval." : "Review the draft before the club records its real approval."}</strong>
       </div>
 
       {blocked ? (
         <a className={styles.primary} href="#approval-gates">Review blockers</a>
       ) : (
         <button
-          className={approved ? styles.approved : styles.primary}
+          className={reviewed ? styles.approved : styles.primary}
           type="button"
-          onClick={() => setApproved((value) => !value)}
+          onClick={() => setReviewed((value) => !value)}
         >
-          {approved ? "Approved for handoff ✓" : "Approve draft for handoff"}
+          {reviewed ? "Reviewed locally ✓" : "Mark as reviewed locally"}
         </button>
       )}
 
       <p>
-        Review state only. This demo environment does not send campaigns, commit spend or execute club actions automatically.
+        Local review state only. This browser action is not a persisted club approval and does not send campaigns, commit spend or execute club actions.
       </p>
     </aside>
   );
