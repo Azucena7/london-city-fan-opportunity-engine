@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
   demoAppearances,
@@ -340,6 +341,8 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         </div>
         <Link href="/app/campaigns">Return to Campaigns →</Link>
       </section>
+
+      <section className={styles.workflowExit} aria-label="Continue campaign workflow"><div><span>Scenario boundary</span><strong>This player pack is a planning scenario until the campaign records it.</strong><p>Changing the pack here recalculates fit, cost, scarcity and blockers, but it does not approve talent use or write a final player commitment into the campaign.</p></div><Link href="/app/campaigns">Return to Campaigns →</Link></section>
 
       <details className={styles.evidencePanel}>
         <summary>
