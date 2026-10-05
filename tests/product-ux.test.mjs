@@ -1739,3 +1739,41 @@ test("content guard follows the Decision Center home", () => {
   assert.match(guard, /need your attention/);
   assert.doesNotMatch(guard, /What needs attention today\?/);
 });
+
+
+test("Calendar Intelligence derives relationships without treating disconnected layers as clear", () => {
+  const page = read("src/app/app/season/page.tsx");
+  const engine = read("src/lib/calendarIntelligence.ts");
+  const internal = read("src/lib/calendarIntelligenceServer.ts");
+  const panel = read("src/components/CalendarRelationshipPanel.tsx");
+
+  assert.match(page, /buildCalendarRelationships/);
+  assert.match(page, /getInternalCalendarRelationships/);
+  assert.match(page, /CalendarRelationshipPanel/);
+
+  assert.match(engine, /"conflict"/);
+  assert.match(engine, /"sequence"/);
+  assert.match(engine, /"content-transfer"/);
+  assert.match(engine, /"resource-efficiency"/);
+  assert.match(engine, /"avoidance"/);
+  assert.match(engine, /Compressed fixture window/);
+  assert.match(engine, /Sequence opportunity/);
+  assert.match(engine, /campaign-clash/);
+  assert.match(engine, /fixtureScores/);
+  assert.match(engine, /No automatic plan change is implied/);
+
+  assert.match(internal, /availability_windows/);
+  assert.match(internal, /off-day/);
+  assert.match(internal, /christmas-break/);
+  assert.match(internal, /international-duty/);
+  assert.match(internal, /personal-calendar/);
+  assert.match(internal, /Internal personal availability/);
+  assert.doesNotMatch(internal, /select=[^\n]*detail/);
+  assert.doesNotMatch(internal, /source_ref/);
+
+  assert.match(panel, /Men&apos;s team calendar · not connected/);
+  assert.match(panel, /Sponsor event calendar · not connected/);
+  assert.match(panel, /disconnected calendar layers remain explicitly unknown/);
+  assert.match(panel, /Relationship ≠ automatic decision/);
+  assert.match(panel, /does not silently move dates, contact people or alter the official campaign/);
+});
