@@ -204,7 +204,7 @@ export default async function ClubAppHome() {
         </section>
       ) : null}
 
-      <section className={styles.workspaceGrid} aria-label="Opportunity Radar and Campaign execution decision queue and latest intelligence">
+      <section className={styles.workspaceGrid} aria-label="Opportunity Radar, Campaign execution, Club context, Learning and AVELA decision loop summary">
         <div className={styles.queue}>
           <div className={styles.sectionHead}>
             <div><span>Decision queue</span><h2>What should I look at next?</h2></div>
