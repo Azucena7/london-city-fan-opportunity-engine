@@ -113,3 +113,10 @@
   .searchPlaceholder span{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .iconStatus{display:none}
 }
+
+
+/* Workspace shell legibility baseline */
+.viewIndicator span{font-size:10px}
+.viewIndicator strong{font-size:12px}
+.searchPlaceholder span{font-size:11px}
+.filterStatus{font-size:11px}
