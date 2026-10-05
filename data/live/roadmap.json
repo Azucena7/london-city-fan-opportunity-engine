@@ -287,5 +287,23 @@
       "en": "Bromley Women v Reading at CopperJax and Tottenham v London City at BetWright both start at 14:00, while the London City match is live on Sky Sports Football. Tag travel, broadcast and local-football messages separately; make venue and purchase route unmistakable, then compare measured engagement without inferring attendance transfer.",
       "es": "Bromley Women–Reading en CopperJax y Tottenham–London City en BetWright empiezan ambos a las 14:00, mientras el partido de London City se emite en Sky Sports Football. Etiquetar por separado los mensajes de viaje, retransmisión y fútbol local; dejar inequívocos sede y recorrido de compra y comparar engagement medido sin inferir transferencia de asistencia."
     }
+  },
+  {
+    "id": "tottenham-to-everton-conversion-2026-10-05",
+    "fixtureId": "2026-10-18-eve-h",
+    "relatedFixtureIds": [
+      "2026-10-04-tot-a"
+    ],
+    "area": "Content, CRM & Data",
+    "status": "next",
+    "due": "2026-10-06",
+    "title": {
+      "en": "Convert the Tottenham statement win into Everton demand",
+      "es": "Convertir la victoria ante Tottenham en demanda para Everton"
+    },
+    "reason": {
+      "en": "London City's confirmed 6–1 away win provides a strong content hook, while Tottenham's reported 2,377 attendance remains separate from sales and scans. Launch tagged Everton variants for prior home buyers, known away buyers and broadcast audiences, and reconcile away ticketing before claiming conversion or retention.",
+      "es": "La victoria visitante confirmada por 1–6 ofrece un fuerte gancho de contenido, mientras que la asistencia de 2.377 reportada por Tottenham sigue separada de ventas y scans. Lanzar variantes etiquetadas para Everton dirigidas a compradores anteriores en casa, compradores visitantes conocidos y audiencias de retransmisión, y conciliar el ticketing visitante antes de afirmar conversión o retención."
+    }
   }
 ]
