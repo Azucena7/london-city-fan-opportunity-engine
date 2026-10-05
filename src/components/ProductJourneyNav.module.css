@@ -39,3 +39,28 @@
 @media(max-width:900px) and (pointer:coarse){
   .workLink{min-height:44px}.mobileMenu summary{min-height:44px;display:flex;align-items:center;justify-content:center}.mobileMenuPanel a{min-height:44px}
 }
+
+
+/* Decision-work navigation hierarchy */
+.navGroup{display:grid;gap:2px}
+.navGroup+.navGroup{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)}
+.navGroup .sectionLabel{padding-bottom:5px;color:#7890A3;font-size:9px}
+.workLink{min-height:40px;padding-top:6px;padding-bottom:6px}
+.workLink small{display:none}
+.workLink.active{min-height:48px}
+.workLink.active small{display:block}
+.secondary{margin-top:12px}
+.secondary .sectionLabel{font-size:9px}
+.bottomLabel{padding:5px 8px 2px;color:#6F879A;font-size:9px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+.positioning{margin-bottom:2px}
+
+@media(min-width:901px){
+  .sidebar{width:220px}
+}
+
+@media(max-width:900px){
+  .navGroup{display:contents}
+  .navGroup+.navGroup{margin:0;padding:0;border:0}
+  .workLink.active{min-height:40px}
+  .workLink.active small{display:none}
+}

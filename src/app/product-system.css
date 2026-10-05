@@ -186,7 +186,7 @@ textarea:focus-visible{
 }
 
 /* Application shell: tool first, website second */
-.productAppShell{margin-left:232px;width:calc(100% - 232px);background:var(--product-bg)}
+.productAppShell{margin-left:220px;width:calc(100% - 220px);background:var(--product-bg)}
 .productAppShell>header,
 .productAppShell>section,
 .productAppShell>div:not([class*="ProductJourneyNav"]){
