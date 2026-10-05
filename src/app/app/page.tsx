@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import { calendar, campaignPlans, currentState, partnerCommercialPack, pilotReadiness } from "@/lib/data";
+import { calendar, campaignPlans, currentState, eventLandscape, partnerCommercialPack, pilotReadiness } from "@/lib/data";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildDecisionAlerts, decisionSummary, type DecisionPriority } from "@/lib/decisionIntelligence";
 import { getDecisionCenterOpsState } from "@/lib/decisionCenterOverview";
+import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
+import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
+import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
@@ -44,15 +47,31 @@ export default async function ClubAppHome() {
     .slice(0, 8);
 
   const clubContext = await getCurrentClubOperatingContext();
-  const radar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id), clubContext);
-  const alerts = buildDecisionAlerts(radar);
-  const summary = decisionSummary(alerts);
-  const attention = alerts.filter((item) => ["act-now", "review", "blocked"].includes(item.priority));
-  const primary = attention[0] ?? alerts[0] ?? null;
-  const recentChanges = alerts
-    .flatMap((alert) => alert.events.map((event) => ({ ...event, alert })))
-    .sort((a,b) => b.at.localeCompare(a.at))
-    .slice(0, 6);
+  const opportunityRadar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id), clubContext);
+  const calendarToDate = calendar.map((item) => item.date).sort().at(-1) ?? today;
+  const externalCalendarRelationships = buildCalendarRelationships({
+    fixtures: calendar,
+    campaignPlans,
+    eventLandscape,
+    fromDate: today
+  });
+  const internalCalendar = await getInternalCalendarRelationships({
+    clubId: clubContext?.clubId,
+    fixtures: calendar,
+    campaignPlans,
+    fromDate: today,
+    toDate: calendarToDate
+  });
+  const calendarRelationships = [...externalCalendarRelationships, ...internalCalendar.relationships];
+  const radar = applyCalendarDecisionPressure(opportunityRadar, calendarRelationships);
+  const fixtureAlerts = buildDecisionAlerts(
+    radar.map((item) => ({ ...item, radarState: item.attentionState }))
+  ).map((alert) => {
+    const item = alert.fixtureId ? radar.find((candidate) => candidate.fixtureId === alert.fixtureId) : null;
+    return item && item.attentionState !== item.radarState
+      ? { ...alert, changed: item.attentionReason }
+      : alert;
+  });
 
   const horizonEnd = new Date(today + "T00:00:00Z");
   horizonEnd.setUTCDate(horizonEnd.getUTCDate() + 30);
@@ -64,6 +83,26 @@ export default async function ClubAppHome() {
     to: horizonEndIso
   });
 
+  const priorityWeight: Record<DecisionPriority, number> = {
+    blocked: 5,
+    "act-now": 4,
+    review: 3,
+    monitor: 2,
+    "on-track": 1
+  };
+  const alerts = [...opsState.crossAlerts, ...fixtureAlerts]
+    .sort((a,b) =>
+      priorityWeight[b.priority] - priorityWeight[a.priority]
+      || (b.events[0]?.at ?? "").localeCompare(a.events[0]?.at ?? "")
+    );
+  const summary = decisionSummary(alerts);
+  const attention = alerts.filter((item) => ["act-now", "review", "blocked"].includes(item.priority));
+  const primary = attention[0] ?? alerts[0] ?? null;
+  const recentChanges = alerts
+    .flatMap((alert) => alert.events.map((event) => ({ ...event, alert })))
+    .sort((a,b) => b.at.localeCompare(a.at))
+    .slice(0, 6);
+
   const activeCampaigns = campaignPlans.campaigns.filter((campaign) =>
     campaign.schedule.some((item) => item.state !== "complete")
   );
@@ -73,8 +112,6 @@ export default async function ClubAppHome() {
 
   const partnerCandidates = partnerCommercialPack.packs.length;
   const partnerRecommended = pilotReadiness.candidates.find((candidate) => candidate.decision === "recommended-for-review") ?? null;
-  const contractState = "Not connected";
-
   const timeline = [
     ...upcoming
       .filter((fixture) => fixture.date <= horizonEndIso.slice(0, 10))
@@ -95,10 +132,20 @@ export default async function ClubAppHome() {
           title: item.action.en,
           detail: campaign.title.en
         }))
-    )
+    ),
+    ...calendarRelationships
+      .filter((item) => item.date >= today && item.date <= horizonEndIso.slice(0, 10))
+      .slice(0, 5)
+      .map((item) => ({
+        id: "calendar-" + item.id,
+        date: item.date,
+        type: "Calendar pressure",
+        title: item.title,
+        detail: item.type.replaceAll("-", " ") + " · " + item.strength
+      }))
   ]
     .sort((a,b) => a.date.localeCompare(b.date))
-    .slice(0, 10);
+    .slice(0, 12);
 
   return (
     <main className={`${styles.shell} productAppShell`}>
@@ -108,7 +155,7 @@ export default async function ClubAppHome() {
         <div>
           <span>AVELA · Decision Center</span>
           <h1>{summary.attention ? `${summary.attention} thing${summary.attention === 1 ? "" : "s"} need your attention.` : "Everything important is currently under control."}</h1>
-          <p>Start here. AVELA brings together current evidence, urgency, blockers and deadlines so you can see what changed and what to do next without opening every workspace.</p>
+          <p>Start here. AVELA brings together current evidence, calendar pressure, capacity, blockers and deadlines so you can see what changed and what to do next without opening every workspace.</p>
         </div>
         <div className={styles.refresh}>
           <span>Engine refresh</span>
@@ -209,29 +256,28 @@ export default async function ClubAppHome() {
       <section className={styles.clubState} aria-label="Club state overview">
         <div className={styles.sectionHead}>
           <div><span>Club state</span><h2>Can the club absorb what is coming?</h2></div>
-          <p>Only connected or explicitly known state is summarised here. Missing operational data stays unknown.</p>
+          <p>Each source resolves independently. Missing integrations stay unknown instead of wiping out connected evidence.</p>
         </div>
         <div className={styles.clubStateGrid}>
           <article data-state={opsState.capacity.state}>
             <span>Operational capacity</span>
-            <strong>{
-              opsState.capacity.state === "unknown" ? "Unknown" :
-              opsState.capacity.state === "overloaded" ? "Overloaded" :
-              opsState.capacity.state === "tight" ? "Tight" : "Available"
-            }</strong>
-            <p>{opsState.capacity.utilisation !== null ? opsState.capacity.utilisation + "% of recorded capacity committed" : "Connect workload and capacity data before treating the plan as feasible."}</p>
+            <strong>{opsState.capacity.state === "unknown" ? "Unknown" : opsState.capacity.state === "overloaded" ? "Overloaded" : opsState.capacity.state === "tight" ? "Tight" : "Available"}</strong>
+            <p>{opsState.capacity.utilisation !== null ? opsState.capacity.utilisation + "% of recorded capacity committed" : "Capacity evidence is not connected for this window."}</p>
             <small>{opsState.capacity.blockers} blocked workload item{opsState.capacity.blockers === 1 ? "" : "s"}</small>
           </article>
 
           <article data-state={opsState.availability.state}>
             <span>Availability</span>
-            <strong>{
-              opsState.availability.state === "unknown" ? "Unknown" :
-              opsState.availability.state === "blocked" ? "Blocked windows" :
-              opsState.availability.state === "tight" ? "Constraints present" : "No recorded conflict"
-            }</strong>
+            <strong>{opsState.availability.state === "unknown" ? "Unknown" : opsState.availability.state === "blocked" ? "Blocked windows" : opsState.availability.state === "tight" ? "Constraints present" : "No recorded conflict"}</strong>
             <p>{opsState.availability.hardUnavailable} hard unavailable · {opsState.availability.protectedOrBusy} protected / busy · {opsState.availability.internationalDuty} international</p>
             <small>Next 30 days</small>
+          </article>
+
+          <article data-state={radar.filter((item) => item.calendarPressure.state === "Act now").length > 0 ? "overdue" : radar.filter((item) => item.calendarPressure.state === "Review").length > 0 ? "review" : "clear"}>
+            <span>Calendar pressure</span>
+            <strong>{radar.filter((item) => item.calendarPressure.state === "Act now").length > 0 ? radar.filter((item) => item.calendarPressure.state === "Act now").length + " act now" : radar.filter((item) => item.calendarPressure.state === "Review").length > 0 ? radar.filter((item) => item.calendarPressure.state === "Review").length + " review" : "Clear"}</strong>
+            <p>Calendar pressure can elevate attention without changing opportunity potential.</p>
+            <Link href="/app/season">Open Calendar Intelligence →</Link>
           </article>
 
           <article data-state={campaignsAtRisk > 0 ? "tight" : "clear"}>
@@ -241,29 +287,39 @@ export default async function ClubAppHome() {
             <Link href="/app/campaigns">Review execution →</Link>
           </article>
 
-          <article data-state={partnerRecommended ? "review" : "unknown"}>
-            <span>Sponsor opportunities</span>
-            <strong>{partnerCandidates}</strong>
-            <p>{partnerRecommended ? "One partner opportunity is recommended for review." : "No partner opportunity currently clears the review threshold."}</p>
-            <small>Prospecting only · not contract fulfilment</small>
-          </article>
-
           <article data-state={opsState.requests.state}>
             <span>Requests</span>
-            <strong>{
-              opsState.requests.state === "unknown" ? "Unknown" :
-              opsState.requests.overdue > 0 ? opsState.requests.overdue + " overdue" :
-              opsState.requests.pending > 0 ? opsState.requests.pending + " waiting" : "Clear"
-            }</strong>
+            <strong>{opsState.requests.state === "unknown" ? "Unknown" : opsState.requests.overdue > 0 ? opsState.requests.overdue + " overdue" : opsState.requests.pending > 0 ? opsState.requests.pending + " waiting" : "Clear"}</strong>
             <p>{opsState.requests.nextRecipient ? "Next response: " + opsState.requests.nextRecipient : "No pending Team Manager, Activation or Protocol response is recorded."}</p>
             <small>{opsState.requests.pending} open heads-up / formal request{opsState.requests.pending === 1 ? "" : "s"}</small>
           </article>
 
-          <article data-state="unknown">
+          <article data-state={opsState.contractImpacts.state}>
+            <span>Contract impacts</span>
+            <strong>{opsState.contractImpacts.state === "unknown" ? "Unknown" : opsState.contractImpacts.pending > 0 ? opsState.contractImpacts.pending + " review" : "Clear"}</strong>
+            <p>{opsState.contractImpacts.acknowledged} acknowledged impact{opsState.contractImpacts.acknowledged === 1 ? "" : "s"} still open.</p>
+            <small>Sanitised impact state only</small>
+          </article>
+
+          <article data-state={opsState.execution.state}>
+            <span>Execution sync</span>
+            <strong>{opsState.execution.state === "unknown" ? "Unknown" : opsState.execution.blockedItems > 0 ? opsState.execution.blockedItems + " blocked" : opsState.execution.state === "syncing" ? "Syncing" : "On track"}</strong>
+            <p>{opsState.execution.completedItems}/{opsState.execution.totalItems} synced external work items complete.</p>
+            <small>{opsState.execution.packages} external package{opsState.execution.packages === 1 ? "" : "s"}</small>
+          </article>
+
+          <article data-state={opsState.continuity.state === "at-risk" ? "tight" : opsState.continuity.state === "unknown" ? "unknown" : "clear"}>
+            <span>Team continuity</span>
+            <strong>{opsState.continuity.state === "unknown" ? "Unknown" : opsState.continuity.openCases > 0 ? opsState.continuity.openCases + " active transition" + (opsState.continuity.openCases === 1 ? "" : "s") : "Covered"}</strong>
+            <p>{opsState.continuity.state === "unknown" ? "Continuity protocol is not connected." : opsState.continuity.unconfirmedSuccessors + " successor gap" + (opsState.continuity.unconfirmedSuccessors === 1 ? "" : "s") + " · " + opsState.continuity.unresolvedItems + " handover item" + (opsState.continuity.unresolvedItems === 1 ? "" : "s") + " unresolved."}</p>
+            <Link href="/app/access">Open Team continuity →</Link>
+          </article>
+
+          <article data-state={opsState.contracts.state === "connected" ? "clear" : "unknown"}>
             <span>Verified contracts</span>
-            <strong>{contractState}</strong>
-            <p>No sponsor or player legal agreement is currently verified in AVELA.</p>
-            <small>Do not infer rights from planning data</small>
+            <strong>{opsState.contracts.state === "unknown" ? "Unknown" : opsState.contracts.activeDocuments + " active"}</strong>
+            <p>{opsState.contracts.state === "unknown" ? "Contract Intelligence persistence is not connected." : opsState.contracts.verifiedClauses + " verified clauses available."}</p>
+            <small>Verified legal truth only</small>
           </article>
         </div>
       </section>

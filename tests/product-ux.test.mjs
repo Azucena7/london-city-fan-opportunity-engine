@@ -81,7 +81,6 @@ test("social sharing matches the current AVELA product story", () => {
   assert.doesNotMatch(card, /\+280/);
 });
 
-
 test("Brighton club activation intelligence includes the observed England v Spain watchalong", () => {
   const activations = JSON.parse(read("data/seed/club-activations.json"));
   const watchalong = activations.observations.find((item) => item.id === "brighton-england-spain-watchalong");
@@ -997,18 +996,6 @@ test("club surfaces use explicit loading states and mobile-first controls", () =
   assert.match(learningCss, /fixturePicker\{display:grid/);
 });
 
-test("homepage sells the decision layer with a low-friction pilot path", () => {
-  const page = read("src/app/page.tsx");
-  const ecosystem = read("src/components/CommercialEcosystem.tsx");
-  assert.match(page, /Read the signals/);
-  assert.match(page, /Decision intelligence for football clubs/);
-  assert.match(ecosystem, /Keep your specialist tools/);
-  assert.match(page, /See how AVELA could fit your club/);
-  assert.match(page, /No rip-and-replace programme is required/);
-  assert.match(page, /live\?\.nextAction\.label/);
-  assert.match(page, /London City Live/);
-});
-
 test("National Rail RDM is registered as approved access awaiting a data product", () => {
   const data = JSON.parse(read("data/live/source-health.json"));
   const rdm = data.sources.find((source) => source.id === "national-rail-rdm");
@@ -1116,7 +1103,6 @@ test("commercial home turns London City proof into a concrete 90-day pilot path"
   assert.match(css, /pilotSteps/);
 });
 
-
 test("AVELA visual system removes olive identity and simplifies club app navigation", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
   const navCss = read("src/components/ProductJourneyNav.module.css");
@@ -1138,22 +1124,6 @@ test("AVELA visual system removes olive identity and simplifies club app navigat
   assert.match(navCss, /#2F8F83/);
   assert.match(commercial, /#102742/i);
 });
-
-
-test("commercial home uses lightweight decision motion instead of decorative video", () => {
-  const page = read("src/app/page.tsx");
-  const stage = read("src/components/CommercialSignalStage.tsx");
-  const stageCss = read("src/components/CommercialSignalStage.module.css");
-  const ecosystem = read("src/components/CommercialEcosystem.tsx");
-  assert.match(page, /CommercialSignalStage/);
-  assert.match(ecosystem, /Priority/);
-  assert.match(ecosystem, /Decision/);
-  assert.match(ecosystem, /Action/);
-  assert.match(stage, /decisionPulse/);
-  assert.match(stage, /tracer/);
-  assert.match(stageCss, /prefers-reduced-motion:no-preference/);
-});
-
 
 test("AVELA uses an application shell with a left sidebar and bounded work area", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
@@ -1181,7 +1151,6 @@ test("commercial and London City surfaces use bounded reading widths and demo fr
   assert.match(liveCss, /width:min\(980px/);
   assert.match(clubs, /INDEPENDENT DEMO/);
 });
-
 
 test("Intelligence Sources exposes Blinkfire as public demo evidence without faking private access", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
@@ -1440,7 +1409,6 @@ test("commercial navigation enters the guided product demo and labels London Cit
   assert.match(nav, /href="\/app\/demo">Try product/);
   assert.doesNotMatch(nav, /href="\/app\/matches">Try product/);
 });
-
 
 test("Player Assets keeps the live pack decision visible and navigable", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
@@ -1742,6 +1710,242 @@ test("content guard follows the Decision Center home", () => {
 });
 
 
+test("Calendar Intelligence derives relationships without treating disconnected layers as clear", () => {
+  const page = read("src/app/app/season/page.tsx");
+  const engine = read("src/lib/calendarIntelligence.ts");
+  const internal = read("src/lib/calendarIntelligenceServer.ts");
+  const panel = read("src/components/CalendarRelationshipPanel.tsx");
+
+  assert.match(page, /buildCalendarRelationships/);
+  assert.match(page, /getInternalCalendarRelationships/);
+  assert.match(page, /CalendarRelationshipPanel/);
+
+  assert.match(engine, /"conflict"/);
+  assert.match(engine, /"sequence"/);
+  assert.match(engine, /"content-transfer"/);
+  assert.match(engine, /"resource-efficiency"/);
+  assert.match(engine, /"avoidance"/);
+  assert.match(engine, /Compressed fixture window/);
+  assert.match(engine, /Sequence opportunity/);
+  assert.match(engine, /campaign-clash/);
+  assert.match(engine, /fixtureScores/);
+  assert.match(engine, /no automatic plan change is implied/i);
+
+  assert.match(internal, /availability_windows/);
+  assert.match(internal, /off-day/);
+  assert.match(internal, /christmas-break/);
+  assert.match(internal, /international-duty/);
+  assert.match(internal, /personal-calendar/);
+  assert.match(internal, /Internal personal availability/);
+  assert.doesNotMatch(internal, /select=[^\n]*detail/);
+  assert.doesNotMatch(internal, /source_ref/);
+
+  assert.match(panel, /Men&apos;s team calendar · not connected/);
+  assert.match(panel, /Sponsor event calendar · not connected/);
+  assert.match(panel, /disconnected calendar layers remain explicitly unknown/);
+  assert.match(panel, /Relationship ≠ automatic decision/);
+  assert.match(panel, /does not silently move dates, contact people or alter the official campaign/);
+});
+
+
+test("calendar pressure can elevate attention without changing opportunity score", () => {
+  const page = read("src/app/app/matches/page.tsx");
+  const pressure = read("src/lib/calendarDecisionPressure.ts");
+
+  assert.match(page, /opportunityRadar = buildOpportunityRadar/);
+  assert.match(page, /applyCalendarDecisionPressure/);
+  assert.match(page, /Attention driver:/);
+  assert.match(page, /Opportunity state ·/);
+  assert.match(page, /Calendar pressure/);
+
+  assert.match(pressure, /attentionState/);
+  assert.match(pressure, /calendarPressure/);
+  assert.match(pressure, /Calendar pressure elevates/);
+  assert.match(pressure, /internalBlocks/);
+  assert.match(pressure, /highConflicts/);
+  assert.match(pressure, /sequenceOpportunities/);
+  assert.match(pressure, /radarWeight/);
+  assert.match(pressure, /pressureWeight/);
+  assert.doesNotMatch(pressure, /opportunityScore\s*[+*\-/]/);
+  assert.doesNotMatch(pressure, /rank\s*=\s*.*calendar/i);
+});
+
+
+test("Decision Center integrates calendar attention and resilient cross-system state", () => {
+  const page = read("src/app/app/page.tsx");
+  const helper = read("src/lib/decisionCenterOverview.ts");
+  const css = read("src/app/app/home.module.css");
+
+  assert.match(page, /applyCalendarDecisionPressure/);
+  assert.match(page, /radarState: item\.attentionState/);
+  assert.match(page, /item\.attentionReason/);
+  assert.match(page, /Calendar pressure/);
+  assert.match(page, /Contract impacts/);
+  assert.match(page, /Execution sync/);
+  assert.match(page, /Verified contracts/);
+  assert.match(page, /Calendar pressure can elevate attention without changing opportunity potential/);
+  assert.match(page, /Calendar pressure/);
+  assert.match(page, /calendarRelationships/);
+
+  assert.match(helper, /contract_documents/);
+  assert.match(helper, /contract_clauses/);
+  assert.match(helper, /contract_impact_reviews/);
+  assert.match(helper, /external_work_packages/);
+  assert.match(helper, /if \(workloadResponse\.ok && capacityResponse\.ok\)/);
+  assert.match(helper, /if \(availabilityResponse\.ok\)/);
+  assert.match(helper, /if \(requestsResponse\.ok\)/);
+  assert.match(helper, /if \(contractsResponse\.ok && clausesResponse\.ok\)/);
+  assert.match(helper, /if \(impactsResponse\.ok\)/);
+  assert.match(helper, /if \(executionResponse\.ok\)/);
+  assert.doesNotMatch(helper, /!workloadResponse\.ok \|\| !capacityResponse\.ok \|\| !availabilityResponse\.ok/);
+
+  assert.match(css, /grid-template-columns:repeat\(4,1fr\)/);
+  assert.match(css, /data-state="syncing"/);
+});
+
+
+test("Decision Center promotes sanitized contract and execution issues into the attention queue", () => {
+  const page = read("src/app/app/page.tsx");
+  const helper = read("src/lib/decisionCenterOverview.ts");
+
+  assert.match(page, /opsState\.crossAlerts/);
+  assert.match(page, /priorityWeight/);
+  assert.match(page, /blocked: 5/);
+  assert.match(page, /decisionSummary\(alerts\)/);
+  assert.match(page, /What should I look at next\\?/);
+
+  assert.match(helper, /crossAlerts: DecisionAlert\[\]/);
+  assert.match(helper, /contract_impact_reviews/);
+  assert.match(helper, /external_work_packages/);
+  assert.match(helper, /Contract change ·/);
+  assert.match(helper, /External work blocked/);
+  assert.match(helper, /sanitised impact review/);
+  assert.doesNotMatch(helper, /source_fragment/);
+  assert.doesNotMatch(helper, /extracted_value/);
+  assert.doesNotMatch(helper, /sync_error/);
+  assert.doesNotMatch(helper, /title: "Contract change · " \+ item\.entity_type \+ " " \+ item\.entity_id/);
+});
+
+
+test("work-system orchestration derives vendor-neutral work without becoming a task manager", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const lib = read("src/lib/workSystemOrchestration.ts");
+  const component = read("src/components/ExternalWorkPackagePreview.tsx");
+
+  assert.match(lib, /WorkSystemId = "asana" \| "monday" \| "jira" \| "notion" \| "other"/);
+  assert.match(lib, /interface WorkSystemAdapter/);
+  assert.match(lib, /createWorkPackage/);
+  assert.match(lib, /syncWorkPackage/);
+  assert.match(lib, /deriveCampaignWorkPackage/);
+  assert.match(lib, /dependencyKeys/);
+  assert.match(lib, /estimatedMinutes/);
+  assert.doesNotMatch(lib, /fetch\(/);
+  assert.doesNotMatch(lib, /api\.asana|monday\.com|atlassian|notion\.com/i);
+
+  assert.match(component, /AVELA derives the work package/);
+  assert.match(component, /Not connected/);
+  assert.match(component, /Preview only · no external task has been created/);
+  assert.match(component, /AVELA orchestrates; it does not replace project management/);
+
+  assert.match(page, /deriveCampaignWorkPackage/);
+  assert.match(page, /ExternalWorkPackagePreview/);
+  assert.match(page, /estimatedMinutes: workPackage\?\.estimatedMinutes/);
+  assert.match(page, /taskCount: workPackage\?\.items\.length/);
+  assert.match(page, /dependencyCount: workDependencyCount/);
+});
+
+
+test("external work sync stores only the operational projection AVELA needs", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const component = read("src/components/ExternalExecutionSync.tsx");
+  const route = read("src/app/api/work-system/status/route.ts");
+  const migration = read("supabase/migrations/20261005002000_work_system_sync_projection.sql");
+
+  assert.match(page, /ExternalExecutionSync/);
+  assert.match(component, /Only operational state required for decision intelligence is synced back/);
+  assert.match(component, /External system owns task execution/);
+  assert.match(component, /does not duplicate comments, attachments or full task history/);
+  assert.match(component, /safeExternalUrl/);
+  assert.ok(component.includes("^https:\\/\\/"));
+
+  assert.match(route, /external_work_packages/);
+  assert.match(route, /external_work_item_links/);
+  assert.match(route, /work_system_connections/);
+  assert.match(route, /assignee_label/);
+  assert.match(route, /blocker_label/);
+  assert.doesNotMatch(route, /comment|attachment|description|body_text/i);
+
+  assert.match(migration, /Provider credentials and task bodies remain outside AVELA/);
+  assert.match(migration, /connection_ref/);
+  assert.doesNotMatch(migration, /access_token|refresh_token|api_key|client_secret/i);
+  assert.match(migration, /completed_count cannot exceed item_count/);
+  assert.match(migration, /blocked_count cannot exceed item_count/);
+  assert.match(migration, /club_has_permission\(club_id,'connections','view'\)/);
+  assert.match(migration, /club_has_permission\(club_id,'campaigns','view'\)/);
+});
+
+
+test("work-system routing stays explainable and confirmation-gated", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const routing = read("src/lib/workSystemRouting.ts");
+  const server = read("src/lib/workSystemRoutingServer.ts");
+  const component = read("src/components/WorkRoutingPlan.tsx");
+  const migration = read("supabase/migrations/20261005003500_work_system_routing_policy.sql");
+
+  assert.match(page, /getWorkRoutingRules/);
+  assert.match(page, /routeWorkPackage/);
+  assert.match(page, /WorkRoutingPlan/);
+
+  assert.match(routing, /highest-priority matching rule/);
+  assert.match(routing, /No enabled work-system routing rule matches this package/);
+  assert.match(routing, /unroutedItemKeys/);
+  assert.match(routing, /requireConfirmation/);
+
+  assert.match(server, /work_routing_rules/);
+  assert.match(server, /work_system_connections/);
+  assert.match(server, /state=eq\.connected/);
+
+  assert.match(component, /No route configured/);
+  assert.match(component, /Confirmation/);
+  assert.match(component, /AVELA does not dispatch this package automatically/);
+
+  assert.match(migration, /require_confirmation boolean not null default true check \(require_confirmation = true\)/);
+  assert.match(migration, /external work routing currently requires human confirmation/);
+  assert.match(migration, /routing destination_system must match the selected connection/);
+  assert.match(migration, /enabled routing rule requires a connected destination/);
+  assert.doesNotMatch(migration, /access_token|refresh_token|api_key|client_secret/i);
+});
+
+
+
+test("homepage sells the decision layer with a low-friction pilot path", () => {
+  const page = read("src/app/page.tsx");
+  const ecosystem = read("src/components/CommercialEcosystem.tsx");
+  assert.match(page, /Read the signals/);
+  assert.match(page, /Decision intelligence for football clubs/);
+  assert.match(ecosystem, /Keep your specialist tools/);
+  assert.match(page, /See how AVELA could fit your club/);
+  assert.match(page, /No rip-and-replace programme is required/);
+  assert.match(page, /live\?\.nextAction\.label/);
+  assert.match(page, /London City Live/);
+});
+
+
+test("commercial home uses lightweight decision motion instead of decorative video", () => {
+  const page = read("src/app/page.tsx");
+  const stage = read("src/components/CommercialSignalStage.tsx");
+  const stageCss = read("src/components/CommercialSignalStage.module.css");
+  const ecosystem = read("src/components/CommercialEcosystem.tsx");
+  assert.match(page, /CommercialSignalStage/);
+  assert.match(ecosystem, /Priority/);
+  assert.match(ecosystem, /Decision/);
+  assert.match(ecosystem, /Action/);
+  assert.match(stage, /decisionPulse/);
+  assert.match(stage, /tracer/);
+  assert.match(stageCss, /prefers-reduced-motion:no-preference/);
+});
+
+
 test("commercial home explains why AVELA complements specialist tools and general AI", () => {
   const home = read("src/app/page.tsx");
   const ecosystem = read("src/components/CommercialEcosystem.tsx");
@@ -1813,72 +2017,4 @@ test("Opportunity Brief follows decision readiness execution evidence memory hie
   assert.match(css, /decisionLens/);
   assert.match(css, /phaseIntro/);
   assert.match(css, /phaseNumber/);
-});
-
-
-test("Decision Center surfaces cross-workspace club state without turning unknowns into zeros", () => {
-  const page = read("src/app/app/page.tsx");
-  const helper = read("src/lib/decisionCenterOverview.ts");
-  const css = read("src/app/app/home.module.css");
-
-  assert.match(page, /Club state/);
-  assert.match(page, /Can the club absorb what is coming\?/);
-  assert.match(page, /Operational capacity/);
-  assert.match(page, /Availability/);
-  assert.match(page, /Sponsor opportunities/);
-  assert.match(page, /Requests/);
-  assert.match(page, /Verified contracts/);
-  assert.match(page, /Next 30 days/);
-  assert.match(page, /Prospecting only · not contract fulfilment/);
-  assert.match(page, /No sponsor or player legal agreement is currently verified in AVELA/);
-
-  assert.match(helper, /state: "unknown"/);
-  assert.match(helper, /utilisation: null/);
-  assert.match(helper, /hard-unavailable/);
-  assert.match(helper, /international-duty/);
-  assert.match(helper, /operational_requests/);
-  assert.match(helper, /heads-up,formal-request/);
-  assert.match(helper, /nextRecipient/);
-  assert.doesNotMatch(helper, /utilisation: 0/);
-
-  assert.match(css, /clubStateGrid/);
-  assert.match(css, /timeline/);
-});
-
-
-test("Calendar Intelligence derives relationships without treating disconnected layers as clear", () => {
-  const page = read("src/app/app/season/page.tsx");
-  const engine = read("src/lib/calendarIntelligence.ts");
-  const internal = read("src/lib/calendarIntelligenceServer.ts");
-  const panel = read("src/components/CalendarRelationshipPanel.tsx");
-
-  assert.match(page, /buildCalendarRelationships/);
-  assert.match(page, /getInternalCalendarRelationships/);
-  assert.match(page, /CalendarRelationshipPanel/);
-
-  assert.match(engine, /"conflict"/);
-  assert.match(engine, /"sequence"/);
-  assert.match(engine, /"content-transfer"/);
-  assert.match(engine, /"resource-efficiency"/);
-  assert.match(engine, /"avoidance"/);
-  assert.match(engine, /Compressed fixture window/);
-  assert.match(engine, /Sequence opportunity/);
-  assert.match(engine, /campaign-clash/);
-  assert.match(engine, /fixtureScores/);
-  assert.match(engine, /no automatic plan change is implied/i);
-
-  assert.match(internal, /availability_windows/);
-  assert.match(internal, /off-day/);
-  assert.match(internal, /christmas-break/);
-  assert.match(internal, /international-duty/);
-  assert.match(internal, /personal-calendar/);
-  assert.match(internal, /Internal personal availability/);
-  assert.doesNotMatch(internal, /select=[^\n]*detail/);
-  assert.doesNotMatch(internal, /source_ref/);
-
-  assert.match(panel, /Men&apos;s team calendar · not connected/);
-  assert.match(panel, /Sponsor event calendar · not connected/);
-  assert.match(panel, /disconnected calendar layers remain explicitly unknown/);
-  assert.match(panel, /Relationship ≠ automatic decision/);
-  assert.match(panel, /does not silently move dates, contact people or alter the official campaign/);
 });
