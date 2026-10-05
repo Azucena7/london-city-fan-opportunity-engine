@@ -2404,3 +2404,21 @@ test("global navigation groups decision work instead of exposing every module eq
   assert.match(nav, /const utilityItems/);
   assert.match(nav, /Help & methodology/);
 });
+
+
+test("core operational surfaces keep text at or above 10px", () => {
+  const files = [
+    "src/components/PlayerAssetPlanner.module.css",
+    "src/app/app/matches/matches.module.css",
+    "src/app/app/executive/executive.module.css",
+    "src/app/app/contracts/contracts.module.css",
+    "src/app/app/sponsors/sponsors.module.css",
+    "src/app/app/campaigns/campaigns.module.css",
+    "src/components/AppWorkspaceShell.module.css"
+  ];
+
+  for (const file of files) {
+    const css = read(file);
+    assert.doesNotMatch(css, /font-size:(?:8|9)px/);
+  }
+});
