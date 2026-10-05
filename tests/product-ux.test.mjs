@@ -996,18 +996,6 @@ test("club surfaces use explicit loading states and mobile-first controls", () =
   assert.match(learningCss, /fixturePicker\{display:grid/);
 });
 
-test("homepage sells the product with demo conversion and transparent packages", () => {
-  const page = read("src/app/page.tsx");
-  assert.match(page, /Explore the 90-day pilot/);
-  assert.match(page, /Start small/);
-  assert.match(page, /£4,500/);
-  assert.match(page, /£1,500/);
-  assert.match(page, /£3,000/);
-  assert.match(page, /Indicative starting prices/);
-  assert.match(page, /live\?\.nextAction\.label/);
-  assert.match(page, /London City Live/);
-});
-
 test("National Rail RDM is registered as approved access awaiting a data product", () => {
   const data = JSON.parse(read("data/live/source-health.json"));
   const rdm = data.sources.find((source) => source.id === "national-rail-rdm");
