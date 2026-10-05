@@ -84,31 +84,36 @@ export function DecisionHistoryPanel({
     setBusy(eventType);
     setMessage("");
     const now = new Date().toISOString();
-    const response = await fetch("/api/decision-history", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        clubId: activeClubId,
-        decisionId,
-        subjectType,
-        subjectId,
-        eventType,
-        sourceType: "user",
-        eventKey: `${decisionId}:${eventType}:${now}`,
-        state: eventType === "committed" ? "production-confirmed" : "executed-confirmed",
-        label: eventType === "committed" ? "Decision confirmed for production" : "Execution confirmed",
-        detail: detail.trim() || (eventType === "committed" ? recommendation : "Club user confirmed what actually went live."),
-        metadata: { recommendation }
-      })
-    });
-    if (response.ok) {
-      setDetail("");
-      setMessage(eventType === "committed" ? "Decision recorded." : "Execution recorded.");
-      await load(activeClubId);
-    } else {
-      setMessage("This update could not be recorded.");
+    try {
+      const response = await fetch("/api/decision-history", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClubId,
+          decisionId,
+          subjectType,
+          subjectId,
+          eventType,
+          sourceType: "user",
+          eventKey: `${decisionId}:${eventType}:${now}`,
+          state: eventType === "committed" ? "production-confirmed" : "executed-confirmed",
+          label: eventType === "committed" ? "Decision confirmed for production" : "Execution confirmed",
+          detail: detail.trim() || (eventType === "committed" ? recommendation : "Club user confirmed what actually went live."),
+          metadata: { recommendation }
+        })
+      });
+      if (response.ok) {
+        setDetail("");
+        setMessage(eventType === "committed" ? "Decision recorded in club memory." : "Execution recorded in club memory.");
+        await load(activeClubId);
+      } else {
+        setMessage("This update could not be recorded. No club history was changed.");
+      }
+    } catch {
+      setMessage("The club workspace is unreachable. No club history was changed.");
+    } finally {
+      setBusy(null);
     }
-    setBusy(null);
   }
 
   if (configured === false) return null;
