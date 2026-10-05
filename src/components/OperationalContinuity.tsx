@@ -52,27 +52,42 @@ export function OperationalContinuity(){
   const [busy,setBusy]=useState("");
 
   async function load(id:string){
-    const response=await fetch("/api/operational-continuity?clubId="+encodeURIComponent(id),{cache:"no-store"});
-    const result=await response.json() as {enabled?:boolean;cases?:ContinuityCase[];items?:ContinuityItem[];message?:string};
-    setEnabled(Boolean(result.enabled));
-    setCases(response.ok&&Array.isArray(result.cases)?result.cases:[]);
-    setItems(response.ok&&Array.isArray(result.items)?result.items:[]);
-    setMessage(result.message??"");
+    try{
+      const response=await fetch("/api/operational-continuity?clubId="+encodeURIComponent(id),{cache:"no-store"});
+      const result=await response.json() as {enabled?:boolean;cases?:ContinuityCase[];items?:ContinuityItem[];message?:string};
+      setEnabled(Boolean(result.enabled));
+      setCases(response.ok&&Array.isArray(result.cases)?result.cases:[]);
+      setItems(response.ok&&Array.isArray(result.items)?result.items:[]);
+      setMessage(response.ok?(result.message??""):result.message??"Operational continuity could not be loaded.");
+    }catch{
+      setEnabled(false);
+      setCases([]);
+      setItems([]);
+      setMessage("Operational continuity service is unreachable. No continuity data was changed.");
+    }
   }
 
   useEffect(()=>{void(async()=>{
-    const response=await fetch("/api/auth/session",{cache:"no-store"});
-    const result=await response.json() as {authenticated?:boolean;clubs?:Club[]};
-    const next=Array.isArray(result.clubs)?result.clubs:[];
-    setClubs(next);
-    if(result.authenticated&&next.length){setClubId(next[0].id);await load(next[0].id);}
+    try{
+      const response=await fetch("/api/auth/session",{cache:"no-store"});
+      const result=await response.json() as {authenticated?:boolean;clubs?:Club[]};
+      const next=Array.isArray(result.clubs)?result.clubs:[];
+      setClubs(next);
+      if(result.authenticated&&next.length){setClubId(next[0].id);await load(next[0].id);}
+      else setMessage("Sign in to manage operational continuity.");
+    }catch{
+      setClubs([]);
+      setEnabled(false);
+      setMessage("Account state could not be loaded. No continuity data was changed.");
+    }
   })();},[]);
 
   async function createCase(){
     if(!clubId||!departingRole.trim()||!ownerRole.trim())return;
     setBusy("create");
     setMessage("");
-    const response=await fetch("/api/operational-continuity",{
+    try{
+      const response=await fetch("/api/operational-continuity",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({clubId,departingRole,continuityOwnerRole:ownerRole,effectiveAt:effectiveAt||null,note})
@@ -80,33 +95,47 @@ export function OperationalContinuity(){
     const result=await response.json() as {error?:string;warning?:string};
     setMessage(response.ok?(result.warning??"Continuity case created."):result.error??"Continuity case could not be created.");
     if(response.ok){setDepartingRole("");setOwnerRole("");setEffectiveAt("");setNote("");await load(clubId);}
-    setBusy("");
+    }catch{
+      setMessage("Operational continuity service is unreachable. No continuity case was created.");
+    }finally{
+      setBusy("");
+    }
   }
 
   async function updateItem(id:string,state:ContinuityItem["state"]){
     setBusy(id+state);
-    const response=await fetch("/api/operational-continuity",{
-      method:"PATCH",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({clubId,target:"item",id,state})
-    });
-    const result=await response.json() as {error?:string};
-    setMessage(response.ok?"Handover item updated.":result.error??"Handover item could not be updated.");
-    if(response.ok)await load(clubId);
-    setBusy("");
+    try{
+      const response=await fetch("/api/operational-continuity",{
+        method:"PATCH",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({clubId,target:"item",id,state})
+      });
+      const result=await response.json() as {error?:string};
+      setMessage(response.ok?"Handover item updated.":result.error??"Handover item could not be updated.");
+      if(response.ok)await load(clubId);
+    }catch{
+      setMessage("Operational continuity service is unreachable. Handover state was not changed.");
+    }finally{
+      setBusy("");
+    }
   }
 
   async function updateCase(id:string,patch:Record<string,string>){
     setBusy(id+JSON.stringify(patch));
-    const response=await fetch("/api/operational-continuity",{
-      method:"PATCH",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({clubId,target:"case",id,...patch})
-    });
-    const result=await response.json() as {error?:string};
-    setMessage(response.ok?"Continuity case updated.":result.error??"Continuity case could not be updated.");
-    if(response.ok)await load(clubId);
-    setBusy("");
+    try{
+      const response=await fetch("/api/operational-continuity",{
+        method:"PATCH",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({clubId,target:"case",id,...patch})
+      });
+      const result=await response.json() as {error?:string};
+      setMessage(response.ok?"Continuity case updated.":result.error??"Continuity case could not be updated.");
+      if(response.ok)await load(clubId);
+    }catch{
+      setMessage("Operational continuity service is unreachable. Continuity state was not changed.");
+    }finally{
+      setBusy("");
+    }
   }
 
   const openCases=cases.filter(item=>item.state!=="closed");
