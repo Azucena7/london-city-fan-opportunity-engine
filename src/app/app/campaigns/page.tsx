@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { campaignPlans } from "@/lib/data";
 import { demoCommercialCampaigns } from "@/lib/clubStrategy";
+import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./campaigns.module.css";
 
 export const metadata: Metadata = {
@@ -21,80 +22,129 @@ export default function CampaignsPage() {
   const primary = needsDecision[0] ?? campaignRows[0] ?? null;
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="campaigns" />
-      <div className={styles.assetShortcut}><span>Need player talent for an activation?</span><Link href="/app/players">Optimise player pack →</Link></div>
-      <header className={styles.header}>
-        <div>
-          <span className={styles.eyebrow}>AVELA · Campaigns</span>
-          <h1>What needs a decision before it can move?</h1>
-          <p>Campaigns can start from a fixture or a commercial calendar moment such as season tickets, Christmas, retail, community or sponsor activity. AVELA keeps the next approval, blocker and execution path visible; approval and launch remain with the club.</p>
-        </div>
-        <div className={styles.summary}><span>Needs decision</span><strong>{needsDecision.length}</strong><small>{campaigns.length + demoCommercialCampaigns.length} total campaign drafts</small></div>
-      </header>
+    <AppWorkspaceShell
+      active="campaigns"
+      eyebrow="AVELA · Campaigns"
+      title="Campaigns"
+      subtitle={needsDecision.length + " need a decision · " + (campaigns.length + demoCommercialCampaigns.length) + " total drafts"}
+      actions={<><WorkspaceViewSwitcher value="board" /><WorkspaceFilterButton /></>}
+    >
+      <p className={styles.contractCopy}>productAppShell · Campaigns can start from a fixture or a commercial calendar moment such as season tickets, Christmas, retail, community or sponsor activity.</p>
+
+      <section className={styles.campaignSummary} aria-label="Campaign status summary">
+        <WorkspaceCard tone="action"><span>Needs decision</span><strong>{needsDecision.length}</strong><small>Approval or scope gate</small></WorkspaceCard>
+        <WorkspaceCard><span>Fixture campaigns</span><strong>{campaigns.length}</strong><small>Driven by match opportunity</small></WorkspaceCard>
+        <WorkspaceCard tone="accent"><span>Commercial calendar</span><strong>{demoCommercialCampaigns.length}</strong><small>Seasonal / non-fixture</small></WorkspaceCard>
+        <WorkspaceCard><span>Player asset route</span><strong>{demoCommercialCampaigns.filter((item) => item.playerNeed > 0).length}</strong><small>Campaigns needing talent</small></WorkspaceCard>
+      </section>
 
       {primary ? (
-        <section className={styles.primaryDecision} aria-label="Highest priority campaign decision">
-          <div className={styles.primaryCopy}>
-            <span>{primary.needsDecision ? "Decision required" : "Next campaign"}</span>
-            <h2>{primary.campaign.title.en}</h2>
-            <p>{primary.campaign.objective.en}</p>
-            <strong>Next decision · {primary.campaign.nextApproval?.en ?? "Review required"}</strong>
+        <WorkspaceCard className={styles.primaryDecision} tone="action">
+          <WorkspaceSectionHeader
+            eyebrow={primary.needsDecision ? "Decision required" : "Next campaign"}
+            title={primary.campaign.title.en}
+            action={<WorkspaceBadge tone={primary.needsDecision ? "coral" : "teal"}>{primary.campaign.status}</WorkspaceBadge>}
+          />
+          <div className={styles.primaryGrid}>
+            <div className={styles.primaryBrief}>
+              <p>{primary.campaign.objective.en}</p>
+              <div><span>Next decision</span><strong>{primary.campaign.nextApproval?.en ?? "Review required"}</strong></div>
+            </div>
+            <div className={styles.primaryFacts}>
+              <div><span>Approvals ready</span><strong>{primary.approvalCount}/{primary.approvalTotal}</strong></div>
+              <div><span>Activations</span><strong>{primary.campaign.activations?.length ?? 0}</strong></div>
+              <div><span>Fixture</span><strong>{primary.campaign.fixtureId}</strong></div>
+            </div>
+            <Link href={"/app/matches/" + primary.campaign.fixtureId}>Open decision workspace →</Link>
           </div>
-          <div className={styles.primaryFacts}>
-            <div><span>Status</span><strong>{primary.campaign.status}</strong></div>
-            <div><span>Approvals ready</span><strong>{primary.approvalCount}/{primary.approvalTotal}</strong></div>
-            <div><span>Activations</span><strong>{primary.campaign.activations?.length ?? 0}</strong></div>
-            <Link href={`/app/matches/${primary.campaign.fixtureId}`}>Open decision workspace →</Link>
-          </div>
-        </section>
+        </WorkspaceCard>
       ) : null}
 
-      <div className={styles.workflowLinks} aria-label="Campaign workflow shortcuts">
-        <a href="#fixture-campaigns">Fixture campaigns</a>
-        <a href="#commercial-calendar">Commercial calendar</a>
-        <Link href="/app/season">Check Calendar pressure →</Link>
-        <Link href="/app/learning">Review outcomes →</Link>
-      </div>
+      <section className={styles.workspaceGrid}>
+        <WorkspaceCard className={styles.boardCard}>
+          <WorkspaceSectionHeader
+            eyebrow="Execution board"
+            title="Fixture campaigns"
+            action={<Link href="/app/season">Calendar view →</Link>}
+          />
+          <div className={styles.board}>
+            <section>
+              <header><span>Needs decision</span><b>{needsDecision.length}</b></header>
+              <div>
+                {campaignRows.filter((item) => item.needsDecision).map(({ campaign, approvalCount, approvalTotal }) => (
+                  <article key={campaign.id} className={styles.campaignCard} data-needs-decision="true">
+                    <div className={styles.meta}><WorkspaceBadge tone="coral">{campaign.status}</WorkspaceBadge><small>{campaign.fixtureId}</small></div>
+                    <h3>{campaign.title.en}</h3>
+                    <p>{campaign.objective.en}</p>
+                    <div className={styles.progressBar} aria-label={approvalCount + " of " + approvalTotal + " approvals ready"}><span style={{ width: (approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0) + "%" }} /></div>
+                    <div className={styles.cardFacts}>
+                      <span>Approvals <b>{approvalCount}/{approvalTotal}</b></span>
+                      <span>Activations <b>{campaign.activations?.length ?? 0}</b></span>
+                    </div>
+                    <div className={styles.nextDecision}><span>Next decision</span><strong>{campaign.nextApproval?.en ?? "Review required"}</strong></div>
+                    <Link href={"/app/matches/" + campaign.fixtureId}>Open →</Link>
+                  </article>
+                ))}
+                {!needsDecision.length ? <p className={styles.empty}>No campaign is waiting for a human decision.</p> : null}
+              </div>
+            </section>
 
-      <section id="fixture-campaigns" className={styles.list} aria-label="Campaign drafts">
-        {campaignRows.map(({ campaign, approvalCount, approvalTotal, needsDecision: rowNeedsDecision }) => {
-          return (
-            <article key={campaign.id} className={styles.card} data-needs-decision={rowNeedsDecision ? "true" : "false"}>
-              <div className={styles.meta}><span>{campaign.status}</span><span>{campaign.fixtureId}</span></div>
-              <h2>{campaign.title.en}</h2>
-              <p>{campaign.objective.en}</p>
-              <div className={styles.progressBar} aria-label={`${approvalCount} of ${approvalTotal} approvals ready`}>
-                <span style={{ width: `${approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0}%` }} />
+            <section>
+              <header><span>Ready / moving</span><b>{campaignRows.filter((item) => !item.needsDecision).length}</b></header>
+              <div>
+                {campaignRows.filter((item) => !item.needsDecision).map(({ campaign, approvalCount, approvalTotal }) => (
+                  <article key={campaign.id} className={styles.campaignCard}>
+                    <div className={styles.meta}><WorkspaceBadge tone="teal">{campaign.status}</WorkspaceBadge><small>{campaign.fixtureId}</small></div>
+                    <h3>{campaign.title.en}</h3>
+                    <p>{campaign.objective.en}</p>
+                    <div className={styles.progressBar}><span style={{ width: (approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0) + "%" }} /></div>
+                    <div className={styles.cardFacts}>
+                      <span>Approvals <b>{approvalCount}/{approvalTotal}</b></span>
+                      <span>Activations <b>{campaign.activations?.length ?? 0}</b></span>
+                    </div>
+                    <Link href={"/app/matches/" + campaign.fixtureId}>Open →</Link>
+                  </article>
+                ))}
               </div>
-              <div className={styles.facts}>
-                <div><span>Activations</span><strong>{campaign.activations?.length ?? 0}</strong></div>
-                <div><span>Approvals ready</span><strong>{approvalCount}/{approvalTotal}</strong></div>
-                <div><span>Next decision</span><strong>{campaign.nextApproval?.en ?? "Review required"}</strong></div>
+            </section>
+
+            <section>
+              <header><span>Commercial calendar</span><b>{demoCommercialCampaigns.length}</b></header>
+              <div>
+                {demoCommercialCampaigns.map((campaign) => (
+                  <article key={campaign.id} className={styles.campaignCard}>
+                    <div className={styles.meta}><WorkspaceBadge>{campaign.type.replaceAll("-", " ")}</WorkspaceBadge><small>{campaign.activationDate}</small></div>
+                    <h3>{campaign.name}</h3>
+                    <p>{campaign.objective}</p>
+                    <div className={styles.cardFacts}>
+                      <span>Players <b>{campaign.playerNeed}</b></span>
+                      <span>Window <b>{campaign.start} → {campaign.end}</b></span>
+                    </div>
+                    <Link href="/app/players">Optimise pack →</Link>
+                  </article>
+                ))}
               </div>
-              <Link href={`/app/matches/${campaign.fixtureId}`}>Open fixture campaign →</Link>
-            </article>
-          );
-        })}
+            </section>
+          </div>
+        </WorkspaceCard>
+
+        <aside className={styles.sideRail}>
+          <WorkspaceCard className={styles.quickCard}>
+            <WorkspaceSectionHeader eyebrow="Quick actions" title="Move work forward" />
+            <Link href="/app/players"><span>Player assets</span><strong>Optimise talent pack →</strong></Link>
+            <Link href="/app/season"><span>Calendar pressure</span><strong>Check timing collisions →</strong></Link>
+            <Link href="/app/learning"><span>Learning</span><strong>Review outcomes →</strong></Link>
+          </WorkspaceCard>
+
+          <WorkspaceDrawer label="Operating rule" title="AVELA drafts. The club approves.">
+            <p>Recommendations can prepare scope, talent, timing and handoff. Approval and launch remain human-controlled.</p>
+          </WorkspaceDrawer>
+
+          <WorkspaceDrawer label="Campaign model" title="Fixture + commercial calendar">
+            <p>Campaigns that do not need a fixture to exist remain first-class work: season tickets, Christmas, retail, community and sponsor activity.</p>
+          </WorkspaceDrawer>
+        </aside>
       </section>
-      <section id="commercial-calendar" className={styles.seasonal} aria-label="Seasonal commercial campaigns">
-        <div className={styles.seasonalHead}>
-          <div><span>Commercial calendar</span><h2>Campaigns that do not need a fixture to exist.</h2></div>
-          <Link href="/app/players">Plan player assets →</Link>
-        </div>
-        <div className={styles.seasonalGrid}>
-          {demoCommercialCampaigns.map((campaign) => (
-            <article key={campaign.id}>
-              <div><span>{campaign.type.replaceAll("-", " ")}</span><strong>{campaign.playerNeed} player{campaign.playerNeed === 1 ? "" : "s"}</strong></div>
-              <h3>{campaign.name}</h3>
-              <p>{campaign.objective}</p>
-              <small>{campaign.start} → {campaign.end} · activation {campaign.activationDate}</small>
-              <Link href="/app/players">Optimise pack →</Link>
-            </article>
-          ))}
-        </div>
-      </section>
-      <footer className={styles.principle}><span>Operating rule</span><strong>AVELA drafts. The club approves.</strong></footer>
-    </main>
+    </AppWorkspaceShell>
   );
 }
