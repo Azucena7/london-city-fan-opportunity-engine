@@ -20,6 +20,18 @@ import {
 import styles from "./PlayerAssetPlanner.module.css";
 
 type Club = { id: string; name: string; role: string; permissions?: string[] };
+type SharedPackSelection = {
+  campaign_id: string;
+  status: "selected" | "approved" | "committed";
+  selected_player_ids: string[];
+  player_count: number;
+  snapshot?: {
+    activationDate?: string;
+    channel?: string;
+    territory?: string;
+    campaignName?: string;
+  };
+};
 
 const sportingLabel: Record<SportingAvailability, string> = {
   available: "Sporting available",
@@ -67,6 +79,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   const [remoteStatus, setRemoteStatus] = useState("");
   const [remoteBusy, setRemoteBusy] = useState(false);
   const [sharedStatus, setSharedStatus] = useState<"selected" | "approved" | "committed" | null>(null);
+  const [sharedSelections, setSharedSelections] = useState<SharedPackSelection[]>([]);
   const selectionStorageKey = `avela:player-pack:${campaignId}`;
 
   useEffect(() => {
@@ -132,9 +145,17 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         if (result.authenticated && nextClubs.length) {
           const clubId = nextClubs[0].id;
           setActiveClubId(clubId);
-          await loadSharedSelection(clubId, campaignId);
+          const [selectionResponse] = await Promise.all([
+            fetch(`/api/player-pack-selection?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" }),
+            loadSharedSelection(clubId, campaignId)
+          ]);
+          if (selectionResponse.ok) {
+            const selectionResult = await selectionResponse.json() as { selections?: SharedPackSelection[] };
+            setSharedSelections(Array.isArray(selectionResult.selections) ? selectionResult.selections : []);
+          }
         } else {
           setActiveClubId("");
+          setSharedSelections([]);
           setRemoteStatus("Local planning only");
         }
       } catch {
@@ -194,6 +215,27 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     [sporting, commercialOverride]
   );
 
+  const committedAppearances = useMemo(
+    () => sharedSelections
+      .filter((selection) => selection.status === "committed")
+      .flatMap((selection) => selection.selected_player_ids.map((playerId) => ({
+        id: `committed:${selection.campaign_id}:${playerId}`,
+        playerId,
+        date: selection.snapshot?.activationDate ?? selectedCampaign.activationDate,
+        status: "reserved" as const,
+        category: "campaign-commitment",
+        channel: selection.snapshot?.channel ?? "club-social",
+        territory: selection.snapshot?.territory ?? "UK",
+        owner: "club-workspace",
+        evidence: `Committed talent pack · ${selection.snapshot?.campaignName ?? selection.campaign_id}`
+      }))),
+    [sharedSelections, selectedCampaign.activationDate]
+  );
+  const planningAppearances = useMemo(
+    () => [...demoAppearances, ...committedAppearances],
+    [committedAppearances]
+  );
+
   const request: ActivationRequest = {
     date: selectedCampaign.activationDate,
     category: selectedCampaign.category,
@@ -206,7 +248,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   const packs = recommendPlayerPacks(
     players,
     request,
-    demoAppearances,
+    planningAppearances,
     Math.min(count, players.length),
     { fit: 30, balance: 15, engagement: 10, cost: 12, opportunityCost: 13, sportingAvailability: 5, momentum: 15 },
     demoPosts,
@@ -227,7 +269,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   const activeEvaluation = evaluatePlayerPack(
     activePlayers,
     request,
-    demoAppearances,
+    planningAppearances,
     { fit: 30, balance: 15, engagement: 10, cost: 12, opportunityCost: 13, sportingAvailability: 5, momentum: 15 },
     demoPosts,
     true,
@@ -324,7 +366,24 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         setManualContext("shared");
         setRemoteStatus(nextStatus === "approved"
           ? "Approved in club workspace · not yet committed"
-          : "Committed in club workspace · talent use still requires downstream operational execution");
+          : "Committed in club workspace · now reserved in player capacity planning");
+        if (nextStatus === "committed") {
+          setSharedSelections((current) => [
+            ...current.filter((item) => item.campaign_id !== campaignId),
+            {
+              campaign_id: campaignId,
+              status: "committed",
+              selected_player_ids: activeIds,
+              player_count: activeIds.length,
+              snapshot: {
+                campaignName: selectedCampaign.name,
+                activationDate: selectedCampaign.activationDate,
+                channel: selectedCampaign.channel,
+                territory: selectedCampaign.territory
+              }
+            }
+          ]);
+        }
       } else {
         setRemoteStatus(result?.error || "Player pack status could not be advanced.");
       }
@@ -602,7 +661,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
 
           <section id="player-status" className={styles.playerGrid} aria-label="Player asset status">
             {players.map((player) => {
-              const capacity = playerCapacity(player, demoAppearances);
+              const capacity = playerCapacity(player, planningAppearances);
               const duty = demoInternationalDuty.find((item) => item.playerId === player.id && item.state !== "released");
               return (
                 <article key={player.id}>

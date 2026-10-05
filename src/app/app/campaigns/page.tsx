@@ -4,6 +4,7 @@ import { campaignPlans } from "@/lib/data";
 import { demoCommercialCampaigns } from "@/lib/clubStrategy";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
 import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
+import { CommercialCampaignBoard } from "@/components/CommercialCampaignBoard";
 import styles from "./campaigns.module.css";
 
 export const metadata: Metadata = {
@@ -111,18 +112,7 @@ export default function CampaignsPage() {
             <section>
               <header><span>Commercial calendar</span><b>{demoCommercialCampaigns.length}</b></header>
               <div>
-                {demoCommercialCampaigns.map((campaign) => (
-                  <article key={campaign.id} className={styles.campaignCard}>
-                    <div className={styles.meta}><WorkspaceBadge>{campaign.type.replaceAll("-", " ")}</WorkspaceBadge><small>{campaign.activationDate}</small></div>
-                    <h3>{campaign.name}</h3>
-                    <p>{campaign.objective}</p>
-                    <div className={styles.cardFacts}>
-                      <span>Players <b>{campaign.playerNeed}</b></span>
-                      <span>Window <b>{campaign.start} → {campaign.end}</b></span>
-                    </div>
-                    <Link href={"/app/players?campaign=" + encodeURIComponent(campaign.id)}>Optimise pack →</Link>
-                  </article>
-                ))}
+                <CommercialCampaignBoard />
               </div>
             </section>
           </div>
