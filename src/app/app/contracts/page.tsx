@@ -53,15 +53,31 @@ export default function ContractsPage() {
         </div>
       </WorkspaceCard>
 
+      <section className={styles.contractVisualGrid}>
+        <WorkspaceCard className={styles.impactGraphCard}>
+          <WorkspaceSectionHeader eyebrow="Impact map" title="See which decisions a clause can change" />
+          <ContractImpactGraph />
+        </WorkspaceCard>
+        <WorkspaceCard className={styles.controlFlowCard}>
+          <WorkspaceSectionHeader eyebrow="Governance flow" title="Clause → impact → review" />
+          <div className={styles.controlFlow}>
+            <div><span>01</span><strong>Document</strong><small>External source of record</small></div>
+            <i>→</i>
+            <div><span>02</span><strong>Verified clause</strong><small>Provenance retained</small></div>
+            <i>→</i>
+            <div><span>03</span><strong>Affected decisions</strong><small>Sponsor · player · campaign · fixture</small></div>
+            <i>→</i>
+            <div data-alert="true"><span>04</span><strong>Review required</strong><small>No silent propagation</small></div>
+          </div>
+        </WorkspaceCard>
+      </section>
+
       <section className={styles.workspaceGrid}>
         <div className={styles.queueSurface}>
           <ContractReviewQueue />
         </div>
 
         <aside className={styles.sideRail}>
-          <WorkspaceDrawer label="Contract Impact Graph" title="Which decisions need review?">
-            <ContractImpactGraph />
-          </WorkspaceDrawer>
 
           <WorkspaceDrawer label="Sponsor contracts" title="What AVELA should understand">
             <ul className={styles.fieldList}>{sponsorFields.map((field) => <li key={field}>{field}</li>)}</ul>
