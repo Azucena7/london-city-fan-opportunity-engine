@@ -479,3 +479,79 @@ before insert or update on public.player_pack_selections
 for each row execute function public.enforce_player_pack_status_transition();
 
 revoke all on function public.enforce_player_pack_status_transition() from public, anon, authenticated;
+
+
+-- Unified campaign persistence for fixture-led and commercial campaigns.
+create table if not exists public.campaign_records (
+  id uuid primary key default gen_random_uuid(),
+  club_id uuid not null references public.clubs(id) on delete cascade,
+  campaign_key text not null,
+  campaign_kind text not null check (campaign_kind in ('fixture','commercial')),
+  fixture_id text,
+  status text not null default 'draft' check (status in ('draft','review-ready','approved','committed','handoff-ready')),
+  state jsonb not null default '{}'::jsonb,
+  updated_by uuid not null references auth.users(id),
+  updated_at timestamptz not null default now(),
+  unique (club_id, campaign_key)
+);
+
+alter table public.campaign_records enable row level security;
+revoke all on public.campaign_records from anon;
+grant select, insert, update on public.campaign_records to authenticated;
+
+drop policy if exists "campaign viewers can read campaign records" on public.campaign_records;
+create policy "campaign viewers can read campaign records"
+on public.campaign_records for select
+to authenticated
+using (public.club_has_permission(club_id, 'campaigns', 'view'));
+
+drop policy if exists "campaign editors can insert campaign records" on public.campaign_records;
+create policy "campaign editors can insert campaign records"
+on public.campaign_records for insert
+to authenticated
+with check (
+  updated_by=(select auth.uid())
+  and (
+    (status in ('draft','review-ready','handoff-ready') and public.club_has_permission(club_id,'campaigns','edit'))
+    or
+    (status in ('approved','committed') and public.club_has_permission(club_id,'campaigns','approve'))
+  )
+);
+
+drop policy if exists "campaign editors can update campaign records" on public.campaign_records;
+create policy "campaign editors can update campaign records"
+on public.campaign_records for update
+to authenticated
+using (public.club_has_permission(club_id,'campaigns','view'))
+with check (
+  updated_by=(select auth.uid())
+  and (
+    (status in ('draft','review-ready','handoff-ready') and public.club_has_permission(club_id,'campaigns','edit'))
+    or
+    (status in ('approved','committed') and public.club_has_permission(club_id,'campaigns','approve'))
+  )
+);
+
+create index if not exists campaign_records_club_kind_updated_idx
+on public.campaign_records(club_id,campaign_kind,updated_at desc);
+
+create index if not exists campaign_records_fixture_idx
+on public.campaign_records(club_id,fixture_id)
+where fixture_id is not null;
+
+insert into public.campaign_records (
+  club_id,campaign_key,campaign_kind,fixture_id,status,state,updated_by,updated_at
+)
+select
+  club_id,
+  fixture_id,
+  'fixture',
+  fixture_id,
+  case when status='approved' then 'approved' when status='review-ready' then 'review-ready' else 'draft' end,
+  state,
+  updated_by,
+  updated_at
+from public.campaign_workspaces
+on conflict (club_id,campaign_key) do nothing;
+
+notify pgrst,'reload schema';

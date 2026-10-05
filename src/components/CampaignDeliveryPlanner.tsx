@@ -219,14 +219,14 @@ export function CampaignDeliveryPlanner({
 
   async function loadClubWorkspace(clubId: string) {
     setRemoteReady(false);
-    const response = await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
+    const response = await fetch(`/api/campaign-record/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" });
     const result = await response.json() as {
-      workspace?: { state?: Record<string, unknown>; status?: string } | null;
+      record?: { state?: Record<string, unknown>; status?: string } | null;
       error?: string;
     };
 
-    if (response.ok && result.workspace?.state) {
-      applyWorkspaceState(result.workspace.state, result.workspace.status);
+    if (response.ok && result.record?.state) {
+      applyWorkspaceState(result.record.state, result.record.status);
     }
 
     if (response.ok) {
@@ -274,11 +274,13 @@ export function CampaignDeliveryPlanner({
       setRemoteSaving(true);
       setRemoteSaveError(null);
       try {
-        const response = await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}`, {
+        const response = await fetch(`/api/campaign-record/${encodeURIComponent(fixtureId)}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             clubId: activeClubId,
+            campaignKind: "fixture",
+            fixtureId,
             status: workspaceStatus,
             state: {
               version: 1,

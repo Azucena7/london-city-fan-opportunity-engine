@@ -1473,6 +1473,21 @@ test("Workspace accessibility baseline covers focus, touch targets, drawers and 
   assert.match(setup, /aria-live="polite"/);
 });
 
+test("Fixture campaign builder uses the unified campaign record contract", () => {
+  const planner = read("src/components/CampaignDeliveryPlanner.tsx");
+  const route = read("src/app/api/campaign-record/[campaignKey]/route.ts");
+  const migration = read("supabase/bootstrap/campaign_workspace.sql");
+  assert.match(planner, /\/api\/campaign-record\//);
+  assert.doesNotMatch(planner, /\/api\/campaign-workspace\//);
+  assert.match(planner, /campaignKind: "fixture"/);
+  assert.match(route, /campaign_records/);
+  assert.match(route, /campaign_kind/);
+  assert.match(route, /campaign_key/);
+  assert.match(migration, /create table if not exists public\.campaign_records/);
+  assert.match(migration, /campaign_kind in \('fixture','commercial'\)/);
+  assert.match(migration, /from public\.campaign_workspaces/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
