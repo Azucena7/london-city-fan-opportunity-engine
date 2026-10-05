@@ -165,6 +165,51 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     })();
   }, [campaignId]); // eslint-disable-line react-hooks/exhaustive-deps -- shared selection follows the campaign
 
+  async function syncCommercialCampaignRecord(
+    talentStatus: "selected" | "approved" | "committed",
+    ids: string[]
+  ) {
+    if (!activeClubId || selectedCampaign.type === "fixture") return true;
+    try {
+      const response = await fetch(`/api/campaign-record/${encodeURIComponent(campaignId)}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClubId,
+          campaignKind: "commercial",
+          status: "draft",
+          state: {
+            version: 1,
+            source: "commercial-calendar",
+            campaign: {
+              id: selectedCampaign.id,
+              name: selectedCampaign.name,
+              type: selectedCampaign.type,
+              objective: selectedCampaign.objective,
+              start: selectedCampaign.start,
+              end: selectedCampaign.end,
+              activationDate: selectedCampaign.activationDate,
+              category: selectedCampaign.category,
+              channel: selectedCampaign.channel,
+              territory: selectedCampaign.territory,
+              owner: selectedCampaign.owner,
+              budget: selectedCampaign.budget,
+              playerNeed: selectedCampaign.playerNeed
+            },
+            talent: {
+              status: talentStatus,
+              selectedPlayerIds: ids,
+              playerCount: ids.length
+            }
+          }
+        })
+      });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  }
+
   async function syncSharedSelection(ids: string[]) {
     if (!activeClubId || ids.length !== count) {
       if (activeClubId && ids.length !== count) setRemoteStatus("Complete the pack to sync shared selection.");
@@ -191,10 +236,13 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         })
       });
       if (response.ok) {
+        const recordSynced = await syncCommercialCampaignRecord("selected", ids);
         setSelectionSource("shared");
         setManualContext("shared");
         setSharedStatus("selected");
-        setRemoteStatus("Synced to club workspace · selected");
+        setRemoteStatus(recordSynced
+          ? "Synced to club workspace · selected"
+          : "Player selection synced · campaign record sync pending");
       } else {
         const result = await response.json().catch(() => null) as { error?: string } | null;
         setRemoteStatus(result?.error || "Shared selection could not be synced. Local selection is unchanged.");
@@ -361,12 +409,17 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
       });
       const result = await response.json().catch(() => null) as { error?: string } | null;
       if (response.ok) {
+        const recordSynced = await syncCommercialCampaignRecord(nextStatus, activeIds);
         setSharedStatus(nextStatus);
         setSelectionSource("shared");
         setManualContext("shared");
         setRemoteStatus(nextStatus === "approved"
-          ? "Approved in club workspace · not yet committed"
-          : "Committed in club workspace · now reserved in player capacity planning");
+          ? recordSynced
+            ? "Approved in club workspace · not yet committed"
+            : "Talent approved · campaign record sync pending"
+          : recordSynced
+            ? "Committed in club workspace · now reserved in player capacity planning"
+            : "Talent committed · campaign record sync pending");
         if (nextStatus === "committed") {
           setSharedSelections((current) => [
             ...current.filter((item) => item.campaign_id !== campaignId),
