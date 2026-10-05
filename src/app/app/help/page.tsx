@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
-import { WorkspaceBadge, WorkspaceCard, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
+import { DecisionStateBadge, EvidenceStateBadge, WorkspaceCard, WorkspaceSectionHeader, type UniversalDecisionState, type UniversalEvidenceState } from "@/components/WorkspaceUI";
 import styles from "./help.module.css";
 
 export const metadata: Metadata = {
@@ -9,21 +9,21 @@ export const metadata: Metadata = {
   description: "Understand AVELA workflows, decision states, evidence states and methodology."
 };
 
-const decisionStates = [
+const decisionStates: Array<[UniversalDecisionState, string, string]> = [
   ["ACT", "A material opportunity is ready for action or immediate review.", "act"],
   ["REVIEW", "A human decision is required before work can move forward.", "review"],
   ["BLOCKED", "A required approval, source, constraint or dependency is missing.", "blocked"],
   ["MONITOR", "Watch the evidence; AVELA does not recommend action yet.", "monitor"],
   ["READY", "The current stage is prepared for the next governed step.", "ready"],
   ["MEASURED", "Authorised outcome evidence is available after execution.", "measured"]
-] as const;
+];
 
-const evidenceStates = [
-  ["Observed", "Directly present in an authorised or public source."],
-  ["Verified", "Reviewed and accepted for decision use with provenance."],
-  ["Modelled", "Scenario or estimate; useful for planning, not treated as fact."],
-  ["Missing", "Required evidence is unavailable; AVELA should say so explicitly."]
-] as const;
+const evidenceStates: Array<[UniversalEvidenceState, string, string]> = [
+  ["OBSERVED", "Observed", "Directly present in an authorised or public source."],
+  ["VERIFIED", "Verified", "Reviewed and accepted for decision use with provenance."],
+  ["MODELLED", "Modelled", "Scenario or estimate; useful for planning, not treated as fact."],
+  ["MISSING", "Missing", "Required evidence is unavailable; AVELA should say so explicitly."]
+];
 
 const workflows = [
   { title: "Fixture decision", path: "Fixture → signals → opportunity → recommended play → review", href: "/app/matches" },
@@ -68,7 +68,7 @@ export default function HelpPage() {
         <div className={styles.stateGrid}>
           {decisionStates.map(([label,copy,tone]) => (
             <article key={label} data-tone={tone}>
-              <WorkspaceBadge tone={label === "ACT" ? "coral" : label === "REVIEW" ? "warning" : label === "BLOCKED" ? "danger" : label === "READY" || label === "MEASURED" ? "success" : "teal"}>{label}</WorkspaceBadge>
+              <DecisionStateBadge state={label} />
               <p>{copy}</p>
             </article>
           ))}
@@ -78,7 +78,7 @@ export default function HelpPage() {
       <section className={styles.section}>
         <WorkspaceSectionHeader eyebrow="Evidence language" title="Truth state before visual confidence" />
         <div className={styles.evidenceGrid}>
-          {evidenceStates.map(([label,copy]) => <article key={label}><strong>{label}</strong><p>{copy}</p></article>)}
+          {evidenceStates.map(([state,label,copy]) => <article key={state}><EvidenceStateBadge state={state} label={label} /><p>{copy}</p></article>)}
         </div>
       </section>
 
