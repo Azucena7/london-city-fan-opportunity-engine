@@ -1323,6 +1323,9 @@ test("Player Asset Planning works for fixture and non-fixture commercial campaig
   assert.match(planner, /campaignOptions/);
   assert.match(planner, /selectedCampaign\.activationDate/);
   assert.match(planner, /selectedCampaign\.playerNeed/);
+  assert.match(planner, /avela:player-pack/);
+  assert.match(planner, /saved on this device/);
+  assert.match(planner, /does not approve talent use/);
   assert.match(campaigns, /Campaigns that do not need a fixture to exist/);
   assert.match(campaigns, /season tickets, Christmas, retail, community or sponsor activity/i);
   assert.ok(data.commercialCampaigns.some((item) => item.type === "season-ticket"));
