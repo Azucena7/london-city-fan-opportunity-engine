@@ -68,3 +68,45 @@
 @media(max-width:620px){
   .summary{grid-template-columns:1fr 1fr}
 }
+
+
+/* Sponsor workspace legibility pass */
+.summary{gap:10px}
+.summary>section{min-height:100px;padding:14px}
+.summary span{font-size:10px}
+.summary strong{font-size:20px}
+.summary small{font-size:11px!important;line-height:1.4}
+
+.primary{padding:16px}
+.primaryGrid{gap:12px}
+.primaryCopy{padding:17px}
+.primaryCopy>strong{font-size:15px}
+.primaryCopy>p{font-size:12px!important;line-height:1.5}
+.primaryCopy>span{font-size:10px}
+.primaryCopy>b{font-size:13px;line-height:1.4}
+.primaryFacts>div{padding:13px}
+.primaryFacts span{font-size:10px}
+.primaryFacts strong{font-size:17px}
+
+.pipeline{padding:16px}
+.table{margin-top:11px}
+.tableHead{padding:10px 8px;font-size:10px}
+.row>summary{padding:12px 8px}
+.row>summary>span>strong{font-size:12px}
+.row>summary>span>small{font-size:10px!important;line-height:1.35}
+.partnerCell>b{width:24px;height:24px;font-size:10px}
+.rowDetail{gap:12px;padding:14px}
+.rowDetail>div>span{font-size:10px}
+.rowDetail p{font-size:11px!important;line-height:1.5}
+.rowDetail ul{font-size:11px;line-height:1.55}
+.evidenceList{gap:8px}
+.evidenceList article{padding:9px}
+.evidenceList article>strong{font-size:11px}
+.evidenceList article>p{font-size:10px!important}
+
+.truthBoundary{padding:16px}
+.truthBoundary p{font-size:12px!important;line-height:1.5}
+.gateList{gap:8px}
+.gateList article{padding:10px}
+.gateList strong{font-size:11px}
+.gateList small{font-size:10px!important}

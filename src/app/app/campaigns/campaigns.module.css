@@ -105,3 +105,59 @@
 .conflictResolution button{margin-top:5px;border:1px solid #E5B7A7;border-radius:7px;background:#fff;padding:7px 8px;font-size:8px;font-weight:900;color:#8E4E39;cursor:pointer}
 .conflictResolution button:disabled{opacity:.55;cursor:not-allowed}
 .reopenRequired,.applyStatus{display:block;margin-top:5px!important;font-size:7px!important;line-height:1.35;color:#7C655D!important}
+
+
+/* Campaign workspace legibility pass */
+.campaignSummary{gap:10px}
+.campaignSummary>section{min-height:100px;padding:14px}
+.campaignSummary span{font-size:10px}
+.campaignSummary strong{font-size:26px}
+.campaignSummary small{font-size:11px!important;line-height:1.4}
+
+.primaryDecision{padding:16px}
+.primaryGrid{gap:12px}
+.primaryBrief{padding:16px}
+.primaryBrief>p{font-size:12px!important;line-height:1.5}
+.primaryBrief span{font-size:10px}
+.primaryBrief strong{font-size:13px;line-height:1.4}
+.primaryFacts>div{padding:13px}
+.primaryFacts span{font-size:10px}
+.primaryFacts strong{font-size:14px}
+.primaryGrid>a{min-width:168px;font-size:12px;min-height:42px}
+
+.boardCard{padding:16px}
+.boardCard [class*="sectionHeader"] a{font-size:11px}
+.board{gap:10px}
+.board>section{border-radius:10px}
+.board>section>header{padding:11px 12px}
+.board>section>header span{font-size:10px}
+.board>section>header b{min-width:24px;height:24px;font-size:10px}
+.board>section>div{gap:9px;padding:9px}
+
+.campaignCard{padding:13px;border-radius:9px}
+.meta small{font-size:10px!important}
+.campaignCard h3{font-size:14px!important;line-height:1.3!important}
+.campaignCard p{font-size:11px!important;line-height:1.5}
+.cardFacts span,.cardFacts b{font-size:10px}
+.nextDecision{padding:9px}
+.nextDecision span{font-size:10px}
+.nextDecision strong{font-size:11px;line-height:1.35}
+.campaignCard>a{font-size:11px}
+.empty{font-size:11px!important}
+
+.quickCard{padding:16px}
+.quickCard>a{padding:11px 0}
+.quickCard>a span{font-size:10px}
+.quickCard>a strong{font-size:12px}
+.sideRail p{font-size:11px!important;line-height:1.5}
+
+.talentState span{font-size:10px}
+.talentState strong{font-size:12px}
+.talentState small{font-size:11px;line-height:1.4}
+.talentConflictAlert strong{font-size:11px}
+.talentConflictAlert small{font-size:10px!important;line-height:1.4}
+.conflictResolution span{font-size:9px}
+.conflictResolution strong{font-size:11px}
+.conflictResolution p{font-size:10px!important;line-height:1.45}
+.conflictResolution button{min-height:36px;font-size:10px}
+.reopenRequired,.applyStatus{font-size:9px!important;line-height:1.4}
