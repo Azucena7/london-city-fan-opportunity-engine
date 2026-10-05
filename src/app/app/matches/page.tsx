@@ -60,6 +60,8 @@ export default async function MatchesPage() {
   const radarWithoutCurrent = priority
     ? radar.filter((item) => item.fixtureId !== priority.fixtureId)
     : radar;
+  const urgencyY = (urgency: string) => urgency === "High" ? 18 : urgency === "Medium" ? 48 : 76;
+  const opportunityX = (score: number | null) => Math.max(8, Math.min(92, score ?? 18));
 
   const explorerItems = radar.map((item) => {
     const campaign = campaignPlans.campaigns.find((entry) => entry.fixtureId === item.fixtureId) ?? null;
@@ -146,6 +148,36 @@ export default async function MatchesPage() {
           </div>
         </WorkspaceCard>
       ) : null}
+
+      <WorkspaceCard className={styles.opportunityMapCard}>
+        <WorkspaceSectionHeader eyebrow="Opportunity map" title="See urgency and opportunity at a glance" action={<span className={styles.mapHint}>Bubble size = material signals</span>} />
+        <div className={styles.opportunityMap} role="group" aria-label="Opportunity versus urgency map. Higher position means greater urgency; further right means higher opportunity score.">
+          <span className={styles.axisY}>Urgency</span>
+          <span className={styles.axisX}>Opportunity →</span>
+          <div className={styles.mapGrid} />
+          {radar.map((item) => (
+            <Link
+              href={"/app/matches/" + item.fixtureId}
+              key={item.fixtureId}
+              className={styles.mapPoint}
+              data-state={item.attentionState.replaceAll(" ", "").toLowerCase()}
+              style={{
+                left: opportunityX(item.opportunityScore) + "%",
+                top: urgencyY(item.urgency) + "%",
+                width: 34 + Math.min(26, item.materialSignalCount * 5),
+                height: 34 + Math.min(26, item.materialSignalCount * 5)
+              }}
+              aria-label={item.opponent + ". Opportunity score " + (item.opportunityScore ?? "not available") + ". Urgency " + item.urgency + ". " + item.attentionState}
+            >
+              <strong>{item.opponent.slice(0, 3).toUpperCase()}</strong>
+              <small>{item.opportunityScore ?? "—"}</small>
+            </Link>
+          ))}
+        </div>
+        <div className={styles.mapLegend} aria-label="Opportunity map legend">
+          <span data-tone="act">Act now</span><span data-tone="review">Review</span><span data-tone="monitor">Monitor</span><span data-tone="none">No material opportunity</span>
+        </div>
+      </WorkspaceCard>
 
       <section className={styles.workspaceGrid}>
         <WorkspaceCard className={styles.inboxCard}>
