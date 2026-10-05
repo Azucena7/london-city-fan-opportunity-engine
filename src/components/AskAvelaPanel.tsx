@@ -53,19 +53,24 @@ export function AskAvelaPanel({
     setStatus("");
     setReply(null);
 
-    const response = await fetch("/api/ask-avela", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fixtureId, message: value, clubId: activeClubId || undefined, mode: activeMode })
-    });
-    const result = await response.json() as Reply & { error?: string };
-    if (response.ok) {
-      setReply(result);
-      setMessage("");
-    } else {
-      setStatus(result.error || "Ask AVELA could not respond.");
+    try {
+      const response = await fetch("/api/ask-avela", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fixtureId, message: value, clubId: activeClubId || undefined, mode: activeMode })
+      });
+      const result = await response.json() as Reply & { error?: string };
+      if (response.ok) {
+        setReply(result);
+        setMessage("");
+      } else {
+        setStatus(result.error || "Ask AVELA could not respond.");
+      }
+    } catch {
+      setStatus("Ask AVELA is temporarily unreachable. Your message has not been submitted.");
+    } finally {
+      setBusy(false);
     }
-    setBusy(false);
   }
 
   async function confirmContext() {
@@ -74,35 +79,40 @@ export function AskAvelaPanel({
     setStatus("");
     const candidate = reply.candidateContext;
     const now = new Date().toISOString();
-    const response = await fetch("/api/decision-history", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        clubId: activeClubId,
-        decisionId,
-        subjectType: "fixture",
-        subjectId: fixtureId,
-        eventType: "context-added",
-        sourceType: "user",
-        eventKey: `${decisionId}:context:${now}`,
-        state: "confirmed-internal-context",
-        label: candidate.signal || "Internal context added",
-        detail: candidate.detail || candidate.subject || "Club user added internal context.",
-        metadata: {
-          subject: candidate.subject,
-          confidence: candidate.confidence,
-          validUntil: candidate.validUntil
-        }
-      })
-    });
+    try {
+      const response = await fetch("/api/decision-history", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClubId,
+          decisionId,
+          subjectType: "fixture",
+          subjectId: fixtureId,
+          eventType: "context-added",
+          sourceType: "user",
+          eventKey: `${decisionId}:context:${now}`,
+          state: "confirmed-internal-context",
+          label: candidate.signal || "Internal context added",
+          detail: candidate.detail || candidate.subject || "Club user added internal context.",
+          metadata: {
+            subject: candidate.subject,
+            confidence: candidate.confidence,
+            validUntil: candidate.validUntil
+          }
+        })
+      });
 
-    if (response.ok) {
-      setStatus("Internal context added to the decision memory.");
-      setReply((current) => current ? { ...current, candidateContext: null } : current);
-    } else {
-      setStatus("This context could not be saved.");
+      if (response.ok) {
+        setStatus("Internal context added to the decision memory.");
+        setReply((current) => current ? { ...current, candidateContext: null } : current);
+      } else {
+        setStatus("This context could not be saved.");
+      }
+    } catch {
+      setStatus("The context could not be saved because the club workspace is unreachable.");
+    } finally {
+      setSaving(false);
     }
-    setSaving(false);
   }
 
   return (

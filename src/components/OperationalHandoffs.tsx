@@ -91,50 +91,60 @@ export function OperationalHandoffs({
     if (!activeClubId || busy) return;
     setBusy(id + stage);
     setStatus("");
-    const response = await fetch("/api/operational-requests", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, clubId: activeClubId, stage })
-    });
-    if (response.ok) {
-      setStatus(stage === "confirmed" ? "Handoff confirmed." : stage === "alternative" ? "Alternative requested." : "Availability issue recorded.");
-      await load(activeClubId);
-    } else {
-      setStatus("This handoff response could not be saved.");
+    try {
+      const response = await fetch("/api/operational-requests", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, clubId: activeClubId, stage })
+      });
+      if (response.ok) {
+        setStatus(stage === "confirmed" ? "Handoff confirmed in club workspace." : stage === "alternative" ? "Alternative requested in club workspace." : "Availability issue recorded in club workspace.");
+        await load(activeClubId);
+      } else {
+        setStatus("This handoff response could not be saved. No request state was changed.");
+      }
+    } catch {
+      setStatus("The club workspace is unreachable. No request state was changed.");
+    } finally {
+      setBusy(null);
     }
-    setBusy(null);
   }
 
   async function create(preset: Preset) {
     if (!activeClubId || busy) return;
     setBusy(preset.requestType + preset.recipientRole);
     setStatus("");
-    const response = await fetch("/api/operational-requests", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        clubId: activeClubId,
-        decisionId,
-        requestType: preset.requestType,
-        stage: preset.stage,
-        recipientRole: preset.recipientRole,
-        subject: preset.subject,
-        detail: recommendation,
-        eventAt: eventAt || undefined,
-        requirements: {
-          fixture: fixtureLabel,
-          recommendation,
-          purpose: preset.hint
-        }
-      })
-    });
-    if (response.ok) {
-      setStatus(preset.stage === "heads-up" ? "Heads-up created." : "Request created.");
-      await load(activeClubId);
-    } else {
-      setStatus("This handoff could not be created.");
+    try {
+      const response = await fetch("/api/operational-requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubId: activeClubId,
+          decisionId,
+          requestType: preset.requestType,
+          stage: preset.stage,
+          recipientRole: preset.recipientRole,
+          subject: preset.subject,
+          detail: recommendation,
+          eventAt: eventAt || undefined,
+          requirements: {
+            fixture: fixtureLabel,
+            recommendation,
+            purpose: preset.hint
+          }
+        })
+      });
+      if (response.ok) {
+        setStatus(preset.stage === "heads-up" ? "Heads-up created in club workspace." : "Request created in club workspace.");
+        await load(activeClubId);
+      } else {
+        setStatus("This handoff could not be created. No request was recorded.");
+      }
+    } catch {
+      setStatus("The club workspace is unreachable. No request was recorded.");
+    } finally {
+      setBusy(null);
     }
-    setBusy(null);
   }
 
   if (!clubs.length) return null;
