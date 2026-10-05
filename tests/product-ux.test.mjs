@@ -1833,3 +1833,26 @@ test("Decision Center integrates calendar attention and resilient cross-system s
   assert.match(css, /grid-template-columns:repeat\(4,1fr\)/);
   assert.match(css, /data-state="syncing"/);
 });
+
+
+test("Decision Center promotes sanitized contract and execution issues into the attention queue", () => {
+  const page = read("src/app/app/page.tsx");
+  const helper = read("src/lib/decisionCenterOverview.ts");
+
+  assert.match(page, /opsState\.crossAlerts/);
+  assert.match(page, /priorityWeight/);
+  assert.match(page, /blocked: 5/);
+  assert.match(page, /decisionSummary\(alerts\)/);
+  assert.match(page, /What needs attention/);
+
+  assert.match(helper, /crossAlerts: DecisionAlert\[\]/);
+  assert.match(helper, /contract_impact_reviews/);
+  assert.match(helper, /external_work_packages/);
+  assert.match(helper, /Contract change ·/);
+  assert.match(helper, /External work blocked/);
+  assert.match(helper, /sanitised impact review/);
+  assert.doesNotMatch(helper, /source_fragment/);
+  assert.doesNotMatch(helper, /extracted_value/);
+  assert.doesNotMatch(helper, /sync_error/);
+  assert.doesNotMatch(helper, /title: "Contract change · " \+ item\.entity_type \+ " " \+ item\.entity_id/);
+});
