@@ -1,1 +1,17 @@
 .shell{min-height:100vh;background:var(--product-bg);color:var(--product-ink);padding:0 28px 64px}@media(max-width:900px){.shell{padding:0 18px 48px}}
+.planningBoundary{
+  max-width:1120px;
+  margin:24px auto 0;
+  padding:12px 14px;
+  display:grid;
+  grid-template-columns:120px minmax(220px,.65fr) minmax(0,1.35fr);
+  gap:14px;
+  align-items:center;
+  border:1px solid var(--product-line);
+  border-radius:10px;
+  background:#fff;
+}
+.planningBoundary span{color:var(--product-accent);font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.planningBoundary strong{font-size:11px}
+.planningBoundary p{margin:0;color:var(--product-muted);font-size:11px;line-height:1.45}
+@media(max-width:760px){.planningBoundary{grid-template-columns:1fr;gap:5px}}
