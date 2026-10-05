@@ -1370,6 +1370,24 @@ test("Player pack governance requires effective approval permission and valid li
   assert.match(migration, /Committed player pack status is immutable/);
 });
 
+test("Campaigns surface talent lifecycle and committed packs consume planning capacity", () => {
+  const campaigns = read("src/app/app/campaigns/page.tsx");
+  const board = read("src/components/CommercialCampaignBoard.tsx");
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  const collectionRoute = read("src/app/api/player-pack-selection/route.ts");
+  assert.match(campaigns, /CommercialCampaignBoard/);
+  assert.match(board, /recommended/);
+  assert.match(board, /selected/);
+  assert.match(board, /approved/);
+  assert.match(board, /committed/);
+  assert.match(board, /Open talent pack/);
+  assert.match(collectionRoute, /player_pack_selections/);
+  assert.match(planner, /committedAppearances/);
+  assert.match(planner, /planningAppearances/);
+  assert.match(planner, /Committed talent pack/);
+  assert.match(planner, /now reserved in player capacity planning/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
