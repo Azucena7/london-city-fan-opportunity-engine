@@ -2,48 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
 import { CommercialSignalStage } from "@/components/CommercialSignalStage";
+import { CommercialEcosystem } from "@/components/CommercialEcosystem";
+import { CommercialFAQ } from "@/components/CommercialFAQ";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { decisionValidation } from "@/lib/data";
 import styles from "./commercial-home.module.css";
 
 export const metadata: Metadata = {
-  title: "AVELA · Growth Intelligence for Women’s Football",
+  title: "AVELA · Decision Intelligence for Football Clubs",
   description:
-    "Turn every fixture into a growth opportunity. AVELA helps women’s football clubs detect the moments, audiences and actions worth acting on."
+    "AVELA connects signals, club context and operational constraints to show football clubs what needs attention, what to do next and whether they can realistically deliver it."
 };
 
-const packages = [
-  {
-    name: "Pilot",
-    price: "£4,500",
-    cadence: "one-off · 90 days",
-    description: "Prove the workflow across six home fixtures before committing to a full-season rollout.",
-    features: ["6 home fixtures", "Opportunity Radar", "Recommended play", "Campaign draft", "Learning review"],
-    cta: "Explore pilot"
-  },
-  {
-    name: "Club",
-    price: "£1,500",
-    cadence: "per month · annual",
-    description: "The growth-intelligence layer for one club across the season.",
-    features: ["Full home calendar", "Continuous monitoring", "Club context", "Campaign workflow", "Learning loop"],
-    cta: "Explore Club"
-  },
-  {
-    name: "Club Pro",
-    price: "£3,000",
-    cadence: "per month · annual",
-    description: "Deeper data connections, custom signals and a more embedded operating model.",
-    features: ["Everything in Club", "CRM / ticketing support", "Custom signals", "Measurement framework", "Priority implementation"],
-    cta: "Discuss Club Pro"
-  }
-];
-
-const flow = [
-  ["01", "Read", "Fixture, audience, city, player, culture and demand signals."],
-  ["02", "Decide", "Prioritise one opportunity worth attention now."],
-  ["03", "Act", "Turn the accepted play into channels, assets, owners and timing."],
-  ["04", "Learn", "Compare what was predicted, executed and measured before the next fixture."]
+const roles = [
+  ["Marketing", "Campaign opportunity, audience, timing and capacity."],
+  ["Commercial", "Sponsor obligations, activations, rights and renewal context."],
+  ["Executives", "Risks, priorities, representation and major opportunities."],
+  ["Operations", "Dependencies, approvals, deadlines and bottlenecks."]
 ] as const;
 
 export default function Home() {
@@ -56,60 +31,111 @@ export default function Home() {
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>Growth intelligence for women’s football</span>
-          <h1>Know where to act before the moment passes.</h1>
+          <span className={styles.eyebrow}>Decision intelligence for football clubs</span>
+          <h1>Read the signals.<br />Move the club.</h1>
           <p className={styles.heroLead}>
-            AVELA turns every home fixture into a live growth decision — reading the signals around the match,
-            identifying what matters now and showing the club one play worth reviewing.
+            AVELA combines external signals, club context, contracts, player availability, calendars and operational
+            capacity to show your team what needs attention, what to do next and whether you can realistically deliver it.
           </p>
           <div className={styles.heroActions}>
-            <Link className={styles.primary} href="/for-clubs#demo">Explore the 90-day pilot</Link>
-            <Link className={styles.textLink} href="/live/london-city">See a live fixture decision ↗</Link>
+            <Link className={styles.primary} href="/live/london-city">See AVELA on a real fixture</Link>
+            <Link className={styles.secondaryAction} href="/for-clubs#demo">Discuss a club pilot</Link>
           </div>
           <div className={styles.heroMeta}>
             <span>Works above your existing stack.</span>
-            <span>Human approval before activation.</span>
-            <span>Learns fixture to fixture.</span>
+            <span>Human approval for material decisions.</span>
+            <span>Built around women&apos;s football. Designed for football clubs.</span>
           </div>
         </div>
         <CommercialSignalStage />
       </section>
 
-      <section className={styles.signalTicker} aria-label="Women’s-football signal layer">
-        <span>PLAYER MOMENTUM</span>
-        <span>FAMILY & GRASSROOTS</span>
-        <span>ATTENDANCE DEMAND</span>
-        <span>CULTURAL CROSSOVER</span>
-        <span>FIXTURE OVERLAP</span>
-        <span>PARTNER FIT</span>
+      <section className={styles.signalTicker} aria-label="AVELA intelligence inputs">
+        <span>FIXTURES</span>
+        <span>SPONSORS</span>
+        <span>PLAYERS</span>
+        <span>CONTRACTS</span>
+        <span>CALENDARS</span>
+        <span>CAPACITY</span>
+        <span>PERFORMANCE</span>
+        <span>INTERNAL CONTEXT</span>
+      </section>
+
+      <section className={styles.problem}>
+        <div>
+          <span className={styles.kicker}>The problem is not missing data</span>
+          <h2>Your club already has the signals. They are fragmented across people, platforms and calendars.</h2>
+        </div>
+        <div className={styles.problemCopy}>
+          <p>CRM knows who can be reached. Ticketing knows who bought. Analytics knows what performed. Contracts know what is owed. Calendars know who is available. Work systems know what the team is already carrying.</p>
+          <p><strong>People still have to join that context manually before almost every important decision.</strong></p>
+        </div>
+      </section>
+
+      <CommercialEcosystem />
+
+      <section className={styles.example} aria-labelledby="example-title">
+        <div className={styles.exampleIntro}>
+          <span className={styles.kicker}>What a decision looks like</span>
+          <h2 id="example-title">From several weak signals to one operationally viable action.</h2>
+        </div>
+        <div className={styles.exampleGrid}>
+          <div className={styles.exampleSignals}>
+            <article><span>09:12 · Performance</span><strong>Player momentum rises materially.</strong></article>
+            <article><span>Contract</span><strong>Partner player appearances remain to be delivered.</strong></article>
+            <article><span>Calendar</span><strong>International availability risk is approaching.</strong></article>
+            <article><span>Operations</span><strong>Creative capacity is already close to saturation.</strong></article>
+          </div>
+          <div className={styles.exampleDecision}>
+            <span>AVELA · Review</span>
+            <h3>Act before the availability window closes.</h3>
+            <p>Use the strongest viable player window, reduce the creative package and send an early heads-up to the operational owners.</p>
+            <div className={styles.exampleFacts}>
+              <div><span>Impact</span><strong>High</strong></div>
+              <div><span>Urgency</span><strong>High</strong></div>
+              <div><span>Feasibility</span><strong>Medium</strong></div>
+            </div>
+            <div className={styles.exampleActions}><span>Why?</span><span>Alternative</span><span>Ask AVELA</span><span>Commit plan</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.notAnother}>
+        <div className={styles.notAnotherTitle}>
+          <span className={styles.kicker}>What AVELA is — and is not</span>
+          <h2>Not another dashboard. Not another task manager. Not just another AI assistant.</h2>
+        </div>
+        <div className={styles.notAnotherRows}>
+          <article><span>Dashboards</span><strong>Show information.</strong><p>AVELA identifies which change deserves attention and what decision it creates.</p></article>
+          <article><span>General AI</span><strong>Answers when someone asks.</strong><p>AVELA maintains structured club context and continuously surfaces the next question worth answering.</p></article>
+          <article><span>Work tools</span><strong>Organise delivery.</strong><p>AVELA decides what work is worth doing, who or what is needed and whether the club can absorb it.</p></article>
+        </div>
+        <div className={styles.llmStatement}>
+          <strong>The LLM is part of AVELA. It is not the product.</strong>
+          <p>General AI can help a person think. AVELA is designed to help a club operate across changing evidence, constraints and decisions.</p>
+        </div>
       </section>
 
       <section className={styles.liveProof}>
         <div className={styles.liveCopy}>
           <span className={styles.kicker}>Proof in public</span>
           <h2>See what AVELA saw before London City announced it.</h2>
-          <p>
-            The Brighton hypothesis was time-stamped on 15 September. A comparable London City activation became public
-            on 18 September. That is evidence of relevance — not evidence that the club saw or used AVELA.
-          </p>
-          <div className={styles.proofTimeline} aria-hidden="true"><span>15 SEP</span><i /><b>3 DAYS</b><i /><span>18 SEP</span></div>
+          <p>The Brighton hypothesis was time-stamped before a comparable London City activation became public. It is evidence of relevance, not evidence that the club saw or used AVELA.</p>
           <div className={styles.proofPair}>
-            <article><span>15 Sep · AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
-            <article><span>18 Sep · London City announced</span><strong>{proof.observedAction.en}</strong></article>
+            <article><span>AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
+            <article><span>London City later announced</span><strong>{proof.observedAction.en}</strong></article>
           </div>
           <div className={styles.proofActions}>
-            <Link className={styles.primaryLight} href="/case-study">See the evidence</Link>
-            <Link className={styles.proofTextLink} href="/live/london-city">Open London City Live ↗</Link>
+            <Link className={styles.coralButton} href="/case-study">See the evidence</Link>
+            <Link className={styles.darkTextLink} href="/live/london-city">Open London City Live ↗</Link>
           </div>
         </div>
         <div className={styles.livePanel}>
-          <div className={styles.liveTop}>
-            <span>Current live case</span>
-            <strong>{live?.fixture.opponent ?? "Next home fixture"}</strong>
-          </div>
+          <span>Current live case</span>
+          <strong>{live?.fixture.opponent ?? "Next home fixture"}</strong>
           <div className={styles.liveDecision}>
             <span>Opportunity</span>
-            <strong>{live?.opportunity ?? "Review current evidence."}</strong>
+            <h3>{live?.opportunity ?? "Review current evidence."}</h3>
           </div>
           <div className={styles.liveFacts}>
             <div><span>State</span><strong>{live?.decisionState ?? "HOLD"}</strong></div>
@@ -119,129 +145,50 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.manifesto}>
-        <div>
-          <span className={styles.kicker}>The missing layer</span>
-          <h2>Clubs already have tools. What they lack is the decision between the signal and the campaign.</h2>
-        </div>
-        <div className={styles.manifestoText}>
-          <p>
-            Ticketing knows who bought. CRM knows who can be reached. Social knows what was published.
-            None of them decides which opportunity deserves attention for the next home fixture.
-          </p>
-          <p>
-            AVELA sits above those systems and turns changing context into a clear, explainable growth decision.
-          </p>
-        </div>
-      </section>
-
-      <section className={styles.motionStory} aria-label="AVELA live decision loop">
-        <div className={styles.motionHeader}>
-          <span className={styles.kicker}>Product in motion</span>
-          <h2>Watch the decision form.</h2>
-          <p>Signals do not become another dashboard. They move through one controlled loop until a club has a decision worth reviewing.</p>
-        </div>
-        <div className={styles.motionTrack}>
-          <article><span>01 · Fixture</span><strong>Everton · Home</strong><i /></article>
-          <article><span>02 · Signals</span><strong>Return demand + family fit</strong><i /></article>
-          <article className={styles.motionHot}><span>03 · Opportunity</span><strong>Return-attendance moment</strong><i /></article>
-          <article><span>04 · Play</span><strong>Build the return path</strong><i /></article>
-          <article><span>05 · Learning</span><strong>Measure what moved</strong></article>
-        </div>
-      </section>
-
-      <section className={styles.productTheatre} id="how-it-works">
-        <div className={styles.productIntro}>
-          <span className={styles.kicker}>How AVELA works</span>
-          <h2>One continuous loop. Four distinct decisions.</h2>
-        </div>
-        <div className={styles.flow}>
-          {flow.map(([num,title,copy]) => (
-            <article key={title}>
-              <span>{num}</span>
-              <div>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.difference}>
-        <div className={styles.differenceTitle}>
-          <span className={styles.kicker}>What AVELA is — and is not</span>
-          <h2>Built to sharpen the club’s judgement, not replace the club’s stack.</h2>
-        </div>
-        <div className={styles.differenceRows}>
-          <div><span>01</span><strong>Systems of record stay where they are.</strong><p>CRM, ticketing, social and analytics remain the places clubs store and execute work.</p></div>
-          <div><span>02</span><strong>Evidence stays separate from preference.</strong><p>Club objectives explain fit. They do not manufacture an opportunity or inflate confidence.</p></div>
-          <div><span>03</span><strong>Execution stays truthful.</strong><p>Connected routes are explicit. Unsupported actions remain handoffs rather than simulated automation.</p></div>
-        </div>
-      </section>
-
       <section className={styles.roles}>
         <div>
-          <span className={styles.kicker}>Built for lean teams</span>
-          <h2>The intelligence capacity you do not have to hire.</h2>
+          <span className={styles.kicker}>One decision layer, different perspectives</span>
+          <h2>AVELA should make sense to the people who already run the club.</h2>
         </div>
-        <div className={styles.roleRail}>
-          <span>GROWTH</span>
-          <span>MARKETING</span>
-          <span>TICKETING</span>
-          <span>COMMERCIAL</span>
-          <span>PARTNERSHIPS</span>
-          <span>LEADERSHIP</span>
+        <div className={styles.roleGrid}>
+          {roles.map(([role, description]) => <article key={role}><span>{role}</span><p>{description}</p></article>)}
         </div>
       </section>
 
-      <section className={styles.pricing} id="pricing">
-        <div className={styles.pricingIntro}>
+      <section className={styles.pilot}>
+        <div>
           <span className={styles.kicker}>Start small</span>
-          <h2>Prove the decision loop before you scale it.</h2>
-          <p>Indicative starting prices. Final scope depends on club data access and integrations.</p>
+          <h2>Prove the decision loop before you expand the integration footprint.</h2>
+          <p>A useful pilot can start with a limited set of fixtures, existing public evidence and a small amount of club-approved context. No rip-and-replace programme is required.</p>
         </div>
-        <div className={styles.priceGrid}>
-          {packages.map((item,index) => (
-            <article key={item.name} className={index === 1 ? styles.featured : ""}>
-              <div className={styles.priceTop}>
-                <span>{item.name}</span>
-                <strong>{item.price}</strong>
-                <small>{item.cadence}</small>
-              </div>
-              <p>{item.description}</p>
-              <ul>{item.features.map(feature => <li key={feature}>{feature}</li>)}</ul>
-              <Link href="/for-clubs#demo">{item.cta} →</Link>
-            </article>
-          ))}
+        <div className={styles.pilotSteps}>
+          <article><span>01</span><strong>4–6 fixtures</strong><p>Use the real calendar.</p></article>
+          <article><span>02</span><strong>1–2 workflows</strong><p>Focus on decisions that matter.</p></article>
+          <article><span>03</span><strong>Existing stack</strong><p>Add only the integrations that improve confidence.</p></article>
+          <article><span>04</span><strong>Measured learning</strong><p>Compare recommendation, decision, execution and result.</p></article>
+        </div>
+        <div className={styles.pilotActions}>
+          <Link className={styles.primary} href="/for-clubs#demo">See how AVELA could fit your club</Link>
+          <Link className={styles.textLink} href="/app/demo">Try the guided product demo ↗</Link>
         </div>
       </section>
+
+      <CommercialFAQ />
 
       <section className={styles.finalCta}>
         <div>
-          <span className={styles.kicker}>Bring your next six home fixtures</span>
-          <h2>Run AVELA as a 90-day decision pilot.</h2>
-          <p>
-            Start with the real calendar. AVELA ranks the fixtures, explains the signals, proposes the play and preserves
-            what was predicted so the club can review what actually happened.
-          </p>
-          <div className={styles.pilotPromise}>
-            <span>01 · Radar across six home fixtures</span>
-            <span>02 · Opportunity briefs and signal what-if</span>
-            <span>03 · Campaign drafts with human approval</span>
-            <span>04 · Prediction vs reality learning review</span>
-          </div>
+          <span>AVELA</span>
+          <h2>You do not need another platform to manage. You need a better way to decide what deserves attention across the platforms you already have.</h2>
         </div>
         <div>
-          <Link className={styles.primaryDark} href="/for-clubs#demo">Explore the 90-day pilot</Link>
-          <Link className={styles.finalLink} href="/app/demo">Try the 3-minute product demo ↗</Link>
-          <Link className={styles.finalLink} href="/case-study">Review London City proof ↗</Link>
+          <Link className={styles.coralButton} href="/for-clubs#demo">Explore a club pilot</Link>
+          <Link className={styles.finalLink} href="/live/london-city">See a live fixture decision ↗</Link>
         </div>
       </section>
 
       <footer className={styles.footer}>
         <strong>AVELA</strong>
-        <span>Growth intelligence for women’s football.</span>
+        <span>Decision intelligence for football clubs.</span>
         <span>London City Live is an independent public case study.</span>
       </footer>
     </main>
