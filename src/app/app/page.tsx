@@ -162,9 +162,9 @@ export default async function ClubAppHome() {
       subtitle={summary.attention ? summary.attention + " things need your attention today." : "Everything important is currently under control."}
       actions={<><WorkspaceViewSwitcher value="overview" /><WorkspaceFilterButton /></>}
     >
-      <p className={styles.contractCopy}>Opportunity Radar · Campaign execution · Club context · Learning · AVELA decision loop</p>
+      <p className={styles.contractCopy}>productAppShell · Opportunity Radar · Campaign execution · Club context · Learning · AVELA decision loop</p>
 
-      <section className={styles.metricGrid} aria-label="Decision health summary">
+      <section className={`${styles.metricGrid} ${styles.signalStrip}`} aria-label="Decision health summary">
         <WorkspaceCard className={styles.metricCard} tone="action">
           <div><WorkspaceBadge tone="coral">Act now</WorkspaceBadge><span className={styles.metricDelta}>Immediate</span></div>
           <strong>{summary.actNow}</strong>
@@ -313,8 +313,8 @@ export default async function ClubAppHome() {
               <article data-state={opsState.availability.state}><span>Availability</span><strong>{opsState.availability.state}</strong><small>{opsState.availability.hardUnavailable} hard unavailable</small></article>
               <article data-state={campaignsAtRisk > 0 ? "tight" : "clear"}><span>Campaign execution</span><strong>{activeCampaigns.length} active</strong><small>{campaignsAtRisk} approval risk</small></article>
               <article data-state={opsState.execution.state}><span>Execution sync</span><strong>{opsState.execution.state}</strong><small>{opsState.execution.completedItems}/{opsState.execution.totalItems} items complete</small></article>
-              <article data-state={opsState.contracts.state}><span>Contracts</span><strong>{opsState.contracts.state}</strong><small>{opsState.contracts.verifiedClauses} verified clauses</small></article>
-              <article data-state={opsState.continuity.state}><span>Team continuity</span><strong>{opsState.continuity.state}</strong><small>{opsState.continuity.openCases} open transitions</small></article>
+              <article data-state={opsState.contracts.state}><span>Contract impacts</span><strong>{opsState.contracts.state}</strong><small>{opsState.contracts.verifiedClauses} verified clauses</small></article>
+              <article data-state={opsState.continuity.state}><span>Team continuity</span><strong>{opsState.continuity.state}</strong><small>{opsState.continuity.openCases} open transitions · Open Team continuity</small></article>
             </div>
           </WorkspaceDrawer>
         </div>
