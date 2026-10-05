@@ -85,3 +85,10 @@
   .board>section{min-width:280px;scroll-snap-align:start}
   .board>section:last-child{grid-column:auto}
 }
+
+.talentState{display:grid;gap:2px;padding:8px 0;border-top:1px solid var(--product-line)}
+.talentState span{font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.06em;color:var(--product-muted)}
+.talentState strong{font-size:11px;text-transform:capitalize;color:var(--product-ink)}
+.talentState strong[data-status="approved"]{color:#8a5b00}
+.talentState strong[data-status="committed"]{color:var(--product-accent)}
+.talentState small{font-size:10px;line-height:1.35;color:var(--product-muted)}
