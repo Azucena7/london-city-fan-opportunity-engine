@@ -950,7 +950,7 @@ test("AVELA commercial home uses an editorial product-theatre identity with purp
   assert.match(motionCss, /prefers-reduced-motion:no-preference/);
 
   assert.match(homeCss, /--avela-paper:#f8f6f1/i);
-  assert.match(homeCss, /--avela-coral:#ef8b6c/i);
+  assert.match(homeCss, /--avela-coral:#f08a6a/i);
   assert.match(homeCss, /exampleGrid/);
   assert.match(homeCss, /liveProof/);
 
