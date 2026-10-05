@@ -170,3 +170,18 @@
   .mobileMenu summary{min-height:44px;display:flex;align-items:center;justify-content:center}
   .mobileMenuPanel a{min-height:44px}
 }
+
+
+/* Global workspace navigation legibility pass */
+.brandCopy strong{font-size:15px}
+.brandCopy small,.workspace,.sectionLabel,.positioning{font-size:10px}
+.workLink{min-height:46px;grid-template-columns:28px 1fr;gap:10px;padding:7px 9px}
+.glyph{width:26px;height:26px}
+.workLink strong{font-size:12px}
+.workLink small{font-size:10px;line-height:1.35}
+.secondary a,.bottom a{font-size:11px;min-height:34px;display:flex;align-items:center}
+@media(max-width:900px){
+  .workLink{min-height:40px;padding:8px 10px}
+  .workLink strong{font-size:11px}
+  .mobileMenu summary{font-size:11px}
+}
