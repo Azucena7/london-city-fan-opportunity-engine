@@ -136,3 +136,25 @@
 @keyframes rowWake{0%,100%{transform:translateX(0)}8%{transform:translateX(3px)}16%{transform:translateX(0)}}
 @keyframes decisionWake{0%,100%{border-color:rgba(255,255,255,.13)}50%{border-color:rgba(255,101,79,.58);box-shadow:0 0 0 6px rgba(255,101,79,.05)}}
 @media(max-width:700px){.decisionPulse{position:relative;right:auto;bottom:auto;margin-top:18px;width:max-content;max-width:100%}}
+
+
+/* Distinctive product-stage refinement */
+.stage{
+  min-height:580px;
+  padding:30px;
+  border-radius:18px 18px 54px 18px;
+  box-shadow:0 26px 70px rgba(16,39,66,.18);
+}
+.grid{opacity:.11;background-size:54px 54px}
+.topline span,.label,.footer span{font-size:11px}
+.topline strong{font-size:13px}
+.row{min-height:80px}
+.num{font-size:11px}
+.row strong{font-size:18px;line-height:1.25}
+.state{font-size:10px;padding:7px 9px;border-radius:999px}
+.footer strong{font-size:14px}
+.decisionPulse{font-size:10px;border-radius:999px;padding:9px 12px}
+@media(max-width:700px){
+  .stage{padding:22px;border-radius:16px 16px 36px 16px}
+  .row{min-height:86px}
+}
