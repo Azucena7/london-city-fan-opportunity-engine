@@ -2435,3 +2435,18 @@ test("commercial home makes AVELA value and capability horizon explicit", () => 
   assert.match(demo, /illustrative product simulation/);
   assert.match(demo, /When the context changes, the recommendation should change with it/);
 });
+
+
+test("commercial home uses an interactive fixture-marketing decision demo", () => {
+  const demo = read("src/components/CommercialDecisionDemo.tsx");
+  const page = read("src/app/page.tsx");
+  assert.match(demo, /"use client"/);
+  assert.match(demo, /useState/);
+  assert.match(demo, /Change the signal\. Watch the marketing play change\./);
+  assert.match(demo, /Recommended marketing play/);
+  assert.match(demo, /Audience/);
+  assert.match(demo, /Channel/);
+  assert.match(demo, /Spend posture/);
+  assert.match(page, /Illustrative decision/);
+  assert.match(page, /Observed evidence/);
+});
