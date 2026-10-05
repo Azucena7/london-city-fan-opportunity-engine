@@ -43,3 +43,13 @@
   .clubBar select,.grid select,.grid input,.grid textarea{width:100%}
   .chips button{min-height:44px}
 }
+
+
+/* P0 AVELA visual cleanup */
+.head h1,.empty h1{font-size:clamp(36px,4.5vw,54px);letter-spacing:-.045em}
+.chips .selected{background:var(--product-navy);border-color:var(--product-navy)}
+.ready{background:var(--product-navy)!important}
+.ready button{background:var(--product-accent);color:#fff}
+.head>div>span,.empty>span,.grid article>span,.score span,.clubBar div span,.setupJourney span,.loadingState>span{font-size:10px}
+.setupJourney small{font-size:11px}
+@media(max-width:800px){.head h1,.empty h1{font-size:clamp(34px,10vw,48px)}}
