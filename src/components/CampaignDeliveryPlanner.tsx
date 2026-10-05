@@ -825,7 +825,7 @@ export function CampaignDeliveryPlanner({
                   <span>3</span><strong>Lock</strong><small>{hasReservation ? "Scope locked" : `${effortToLock} units to lock`}</small>
                 </div>
                 <div className={launchHandoffReady ? styles.reviewStepActive : ""}>
-                  <span>4</span><strong>Launch</strong><small>handoff only today</small>
+                  <span>4</span><strong>Handoff</strong><small>external execution only</small>
                 </div>
               </div>
 
@@ -841,7 +841,7 @@ export function CampaignDeliveryPlanner({
                   {reservationBusy ? "Locking…" : "Lock reviewed scope"}
                 </button>
               ) : launchHandoffReady ? (
-                <button className={styles.launch} type="button" disabled>Launch campaign · connector required</button>
+                <button className={styles.launch} type="button" disabled>External launch required</button>
               ) : (
                 <button className={styles.launch} type="button" disabled={!canPrepareLaunch} onClick={() => void prepareLaunchHandoff()}>
                   Prepare launch handoff
@@ -849,7 +849,7 @@ export function CampaignDeliveryPlanner({
               )}
 
               {hasReservation ? <button className={styles.reopen} type="button" disabled={reservationBusy} onClick={() => void reopenCampaign()}>Reopen campaign scope</button> : null}
-              <small className={styles.guardrail}>Launch is not simulated: unsupported channels remain explicit handoffs. No CRM send, social publish or media spend happens from this button today.</small>
+              <small className={styles.guardrail}>AVELA prepares the handoff only. External tools or club operators must execute the launch; no CRM send, social publish or media spend happens here.</small>
             </aside>
           </div>
 

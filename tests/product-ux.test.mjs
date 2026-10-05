@@ -483,7 +483,7 @@ test("campaign flow reviews and locks scope before a truthful launch handoff", (
   assert.match(builder, /Scope/);
   assert.match(builder, /Review/);
   assert.match(builder, /Lock/);
-  assert.match(builder, /Launch/);
+  assert.match(builder, /Handoff/);
   assert.match(builder, /Lock reviewed scope/);
   assert.match(builder, /campaign:reserve/);
   assert.match(builder, /campaign:release/);
@@ -491,8 +491,8 @@ test("campaign flow reviews and locks scope before a truthful launch handoff", (
   assert.match(builder, /Scope locked by reservation/);
   assert.match(builder, /Reopen campaign scope/);
   assert.match(builder, /Prepare launch handoff/);
-  assert.match(builder, /Launch campaign · connector required/);
-  assert.match(builder, /Launch is not simulated/);
+  assert.match(builder, /External launch required/);
+  assert.match(builder, /AVELA prepares the handoff only/);
   assert.match(builder, /No CRM send, social publish or media spend happens/);
 });
 
