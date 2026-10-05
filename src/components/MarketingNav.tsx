@@ -9,13 +9,13 @@ export function MarketingNav() {
         AVELA
       </Link>
       <div className={styles.links}>
-        <Link href="/#how-it-works">Product</Link>
-        <Link href="/live/london-city">London City demo</Link>
-        <Link href="/#pricing">Pricing</Link>
+        <Link href="/#integrations">How it fits</Link>
+        <Link href="/live/london-city">Live case</Link>
+        <Link href="/#faq">FAQ</Link>
       </div>
       <div className={styles.actions}>
         <Link className={styles.login} href="/app/demo">Try product</Link>
-        <Link className={styles.demo} href="/for-clubs#demo">90-day pilot</Link>
+        <Link className={styles.demo} href="/for-clubs#demo">Club pilot</Link>
       </div>
     </nav>
   );
