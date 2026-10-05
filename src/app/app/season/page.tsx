@@ -94,12 +94,18 @@ export default async function SeasonIntelligencePage() {
 
       <header className={styles.header}>
         <div>
-          <span>Season Intelligence · 2026/27</span>
-          <h1>Are we getting better across the season?</h1>
-          <p>This view aggregates fixture-level evidence without turning missing data into zero. It shows where AVELA has campaigns, measured outcomes and repeated patterns — and where the season is still unmeasured.</p>
+          <span>Calendar · Season Intelligence · 2026/27</span>
+          <h1>What is coming, and what could collide?</h1>
+          <p>Calendar Intelligence leads with dated conflicts, sequence opportunities and availability pressure. The season view below then answers the longer question: Are we getting better across the season?</p>
         </div>
         <Link href="/app/executive">Executive view →</Link>
       </header>
+
+      <CalendarRelationshipPanel
+        relationships={calendarRelationships}
+        internalState={internalCalendar.state}
+        externalState={eventLandscape.state}
+      />
 
       <section className={styles.kpis} aria-label="Season summary">
         <article><span>Home fixtures</span><strong>{homeFixtures.length}</strong><small>{scoredFixtures.length} currently have an opportunity score</small></article>
@@ -107,12 +113,6 @@ export default async function SeasonIntelligencePage() {
         <article><span>Approval readiness</span><strong>{approvalsReady}/{allApprovals.length}</strong><small>ready across current campaign drafts</small></article>
         <article><span>Measured outcomes</span><strong>{measuredOutcomes}</strong><small>fixtures with connected outcome evidence</small></article>
       </section>
-
-      <CalendarRelationshipPanel
-        relationships={calendarRelationships}
-        internalState={internalCalendar.state}
-        externalState={eventLandscape.state}
-      />
 
       <section className={styles.visualGrid}>
         <article className={styles.chartCard}>
