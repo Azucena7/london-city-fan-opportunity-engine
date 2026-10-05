@@ -56,7 +56,7 @@ export function WorkspaceDrawer({
     <details className={styles.drawer}>
       <summary>
         <div><span>{label}</span><strong>{title}</strong></div>
-        <b>Open</b>
+        <b aria-hidden="true"><span className={styles.whenClosed}>Open</span><span className={styles.whenOpen}>Close</span></b>
       </summary>
       <div className={styles.drawerBody}>{children}</div>
     </details>
