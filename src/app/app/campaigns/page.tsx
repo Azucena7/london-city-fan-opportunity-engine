@@ -5,6 +5,7 @@ import { demoCommercialCampaigns } from "@/lib/clubStrategy";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
 import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import { CommercialCampaignBoard } from "@/components/CommercialCampaignBoard";
+import { DecisionContextTrail } from "@/components/DecisionContextTrail";
 import styles from "./campaigns.module.css";
 
 export const metadata: Metadata = {
@@ -21,6 +22,13 @@ export default function CampaignsPage() {
   });
   const needsDecision = campaignRows.filter((item) => item.needsDecision);
   const primary = needsDecision[0] ?? campaignRows[0] ?? null;
+  const lifecycleStage = (item: (typeof campaignRows)[number]) => {
+    if (item.needsDecision) return "Review";
+    const incomplete = item.campaign.schedule?.some((entry) => entry.state !== "complete") ?? false;
+    if (incomplete) return "Ready";
+    return "Learning";
+  };
+  const lifecycleStages = ["Draft", "Review", "Ready", "Handoff", "Learning"] as const;
 
   return (
     <AppWorkspaceShell
@@ -30,7 +38,21 @@ export default function CampaignsPage() {
       subtitle={needsDecision.length + " need a decision · " + (campaigns.length + demoCommercialCampaigns.length) + " total drafts"}
       actions={<><WorkspaceViewSwitcher value="board" /><WorkspaceFilterButton /></>}
     >
+      <DecisionContextTrail current="Campaigns" />
       <p className={styles.contractCopy}>productAppShell · Campaigns can start from a fixture or a commercial calendar moment such as season tickets, Christmas, retail, community or sponsor activity.</p>
+
+      <WorkspaceCard className={styles.lifecycleCard}>
+        <WorkspaceSectionHeader eyebrow="Campaign lifecycle" title="Draft → Review → Ready → Handoff → Learning" />
+        <div className={styles.lifecycle}>
+          {lifecycleStages.map((stage, index) => (
+            <div key={stage} data-stage={stage.toLowerCase()}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{stage}</strong>
+              <small>{campaignRows.filter((item) => lifecycleStage(item) === stage).length} campaigns</small>
+            </div>
+          ))}
+        </div>
+      </WorkspaceCard>
 
       <section className={styles.campaignSummary} aria-label="Campaign status summary">
         <WorkspaceCard tone="action"><span>Needs decision</span><strong>{needsDecision.length}</strong><small>Approval or scope gate</small></WorkspaceCard>
@@ -56,7 +78,10 @@ export default function CampaignsPage() {
               <div><span>Activations</span><strong>{primary.campaign.activations?.length ?? 0}</strong></div>
               <div><span>Fixture</span><strong>{primary.campaign.fixtureId}</strong></div>
             </div>
-            <Link href={"/app/matches/" + primary.campaign.fixtureId}>Open decision workspace →</Link>
+            <div className={styles.primaryActions}>
+              <Link href={"/app/matches/" + primary.campaign.fixtureId}>Open decision workspace →</Link>
+              <Link href={"/app/players?campaign=" + primary.campaign.id}>Optimise player pack →</Link>
+            </div>
           </div>
         </WorkspaceCard>
       ) : null}
@@ -121,7 +146,7 @@ export default function CampaignsPage() {
         <aside className={styles.sideRail}>
           <WorkspaceCard className={styles.quickCard}>
             <WorkspaceSectionHeader eyebrow="Quick actions" title="Move work forward" />
-            <Link href="/app/players"><span>Player assets</span><strong>Optimise talent pack →</strong></Link>
+            <Link href={primary ? "/app/players?campaign=" + primary.campaign.id : "/app/players"}><span>Player assets</span><strong>Optimise talent pack →</strong></Link>
             <Link href="/app/season"><span>Calendar pressure</span><strong>Check timing collisions →</strong></Link>
             <Link href="/app/learning"><span>Learning</span><strong>Review outcomes →</strong></Link>
           </WorkspaceCard>
