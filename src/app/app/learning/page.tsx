@@ -10,6 +10,7 @@ import { getCurrentProductResults } from "@/lib/productResults";
 import { calendar, currentState } from "@/lib/data";
 import { AppWorkspaceShell, WorkspaceFilterButton } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, EvidenceStateBadge } from "@/components/WorkspaceUI";
+import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
 
 export const metadata: Metadata = {
   title: "Learning",
@@ -51,6 +52,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
       subtitle={selected ? selected.opponent + " · " + selected.date : "Close the loop from observed outcome to next decision."}
       actions={<WorkspaceFilterButton label="Fixture filters" />}
     >
+      <DecisionHandoffStrip active="learning" fixtureId={selectedId} />
 
       <nav className={styles.fixturePicker} aria-label="Choose a fixture to review">
         <strong>Review a fixture</strong>

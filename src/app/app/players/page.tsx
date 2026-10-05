@@ -5,6 +5,7 @@ import { PlayerContractHealth } from "@/components/PlayerContractHealth";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
 import { WorkspaceDrawer } from "@/components/WorkspaceUI";
 import { DecisionContextTrail } from "@/components/DecisionContextTrail";
+import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
 import { campaignPlans } from "@/lib/data";
 import styles from "./players.module.css";
 
@@ -33,6 +34,7 @@ export default async function PlayerAssetsPage({ searchParams }: { searchParams:
         campaignId={campaign?.id ?? null}
         current="Players"
       />
+      <DecisionHandoffStrip active="players" fixtureId={campaign?.fixtureId ?? null} campaignId={campaign?.id ?? null} />
 
       <section className={styles.planningBoundary}>
         <span>Planning layer</span>
