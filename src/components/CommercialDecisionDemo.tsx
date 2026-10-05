@@ -3,22 +3,22 @@ import styles from "./CommercialDecisionDemo.module.css";
 
 const scenarios = [
   {
-    label: "01 · Player window",
-    signals: ["Momentum rises", "Sponsor appearance due", "International call-up risk"],
-    decision: "Use the strongest viable player window now.",
-    outcome: "Earlier action · lower conflict risk"
+    label: "01 · Early fixture read",
+    signals: ["Ticket pace below target", "Family audience reachable", "Weekend home fixture"],
+    decision: "Prioritise a family return-attendance campaign.",
+    outcome: "Audience: families · Message: come back together"
   },
   {
-    label: "02 · Matchday demand",
-    signals: ["Family demand signal", "Local event collision", "CRM audience available"],
-    decision: "Shift the offer and audience before media spend.",
-    outcome: "Sharper targeting · less wasted activation"
+    label: "02 · Context shifts",
+    signals: ["Local event collision", "Organic interest rises", "Paid media capacity limited"],
+    decision: "Narrow the audience and move spend closer to high-intent segments.",
+    outcome: "Audience: warm CRM · Channel: owned first"
   },
   {
-    label: "03 · Commercial rights",
-    signals: ["Partner objective", "Rights verified", "Creative capacity tight"],
-    decision: "Reduce scope, protect the right and keep the opportunity viable.",
-    outcome: "Commercial value · operationally deliverable"
+    label: "03 · Demand strengthens",
+    signals: ["Sales velocity improves", "Player content overperforms", "Inventory pressure increases"],
+    decision: "Stop discount-led messaging and switch to urgency plus player-led creative.",
+    outcome: "Message: scarcity · Creative: player-led"
   }
 ] as const;
 
@@ -26,9 +26,12 @@ export function CommercialDecisionDemo() {
   return (
     <section className={styles.wrap} aria-labelledby="decision-demo-title">
       <div className={styles.intro}>
-        <span>See AVELA think</span>
-        <h2 id="decision-demo-title">When the context changes, the recommendation should change with it.</h2>
-        <p>This is an illustrative product simulation. It shows the decision pattern AVELA is designed to support; it is not a live club action feed.</p>
+        <span>See AVELA think about a match</span>
+        <h2 id="decision-demo-title">One fixture. Different signals. A different marketing decision.</h2>
+        <p>
+          Illustrative matchday simulation: AVELA reads demand, audience, timing, local context and club capacity,
+          then changes the recommended marketing play as the picture changes.
+        </p>
       </div>
 
       <div className={styles.stage}>
@@ -37,7 +40,7 @@ export function CommercialDecisionDemo() {
           <article key={scenario.label} className={styles.scenario} style={{ "--delay": `${index * 2.4}s` } as CSSProperties}>
             <div className={styles.scenarioHead}>
               <span>{scenario.label}</span>
-              <strong>Context changes</strong>
+              <strong>Match context changes</strong>
             </div>
             <div className={styles.signalStack}>
               {scenario.signals.map((signal, signalIndex) => (
@@ -49,7 +52,7 @@ export function CommercialDecisionDemo() {
             </div>
             <div className={styles.flowArrow} aria-hidden="true">→</div>
             <div className={styles.decision}>
-              <span>AVELA decision</span>
+              <span>Recommended marketing play</span>
               <strong>{scenario.decision}</strong>
               <small>{scenario.outcome}</small>
             </div>
@@ -58,7 +61,7 @@ export function CommercialDecisionDemo() {
       </div>
 
       <div className={styles.footer}>
-        <span>Signal</span><i>→</i><span>Constraint</span><i>→</i><span>Decision</span><i>→</i><strong>Measured learning</strong>
+        <span>Fixture</span><i>→</i><span>Signals</span><i>→</i><span>Audience + offer + channel</span><i>→</i><strong>Measured matchday learning</strong>
       </div>
     </section>
   );
