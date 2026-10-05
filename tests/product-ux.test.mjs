@@ -536,7 +536,7 @@ test("match plan keeps delivery effort visible without an in-product credit payw
   assert.match(builder, /Lock reviewed scope/);
   assert.match(builder, /Prepare launch handoff/);
   assert.match(builder, /External launch required/);
-  assert.match(builder, /Launch is not simulated/);
+  assert.match(builder, /External tools or club operators must execute the launch/);
   assert.doesNotMatch(builder, /Explorer · preview only/);
   assert.doesNotMatch(builder, /included credits/);
   assert.doesNotMatch(builder, /Upgrade to reveal/);
