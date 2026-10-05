@@ -97,14 +97,14 @@ export function CommercialCampaignBoard() {
           .filter((item): item is Selection => Boolean(item))
           .sort((a, b) => governanceRank(b.status) - governanceRank(a.status)
             || (a.snapshot?.activationDate ?? "").localeCompare(b.snapshot?.activationDate ?? ""))[0] ?? null;
-        const protectCurrent = Boolean(selection) && (
+        const protectCurrent = selection ? (
           !strongestCompeting
           || governanceRank(selection.status) > governanceRank(strongestCompeting.status)
           || (
             governanceRank(selection.status) === governanceRank(strongestCompeting.status)
             && campaign.activationDate <= (strongestCompeting.snapshot?.activationDate ?? campaign.activationDate)
           )
-        );
+        ) : false;
         const shouldChangeCurrent = conflictRows.length > 0 && !protectCurrent;
         const eligibleAlternatives = shouldChangeCurrent
           ? recommendPlayerPacks(
