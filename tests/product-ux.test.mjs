@@ -2271,3 +2271,23 @@ test("Opportunity Brief follows decision readiness execution evidence memory hie
   assert.match(css, /phaseIntro/);
   assert.match(css, /phaseNumber/);
 });
+
+
+test("campaign workflow preserves lifecycle and decision context", () => {
+  const campaigns = read("src/app/app/campaigns/page.tsx");
+  const players = read("src/app/app/players/page.tsx");
+  const fixture = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const trail = read("src/components/DecisionContextTrail.tsx");
+
+  assert.match(campaigns, /Draft/);
+  assert.match(campaigns, /Review/);
+  assert.match(campaigns, /Ready/);
+  assert.match(campaigns, /Handoff/);
+  assert.match(campaigns, /Learning/);
+  assert.match(campaigns, /\/app\/players\?campaign=/);
+  assert.match(players, /initialCampaignId/);
+  assert.match(players, /DecisionContextTrail/);
+  assert.match(fixture, /DecisionContextTrail/);
+  assert.match(trail, /Campaign context preserved/);
+  assert.doesNotMatch(campaigns, /\bLive\b/);
+});
