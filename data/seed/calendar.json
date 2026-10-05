@@ -151,7 +151,7 @@
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
     "venue": "Brisbane Road",
-    "status": "scheduled",
+    "status": "final",
     "sourceDiscrepancies": [
       {
         "field": "kickoff",
@@ -172,7 +172,11 @@
           }
         ]
       }
-    ]
+    ],
+    "result": {
+      "for": 6,
+      "against": 1
+    }
   },
   {
     "id": "2026-10-18-eve-h",
