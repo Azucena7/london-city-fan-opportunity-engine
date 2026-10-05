@@ -76,19 +76,24 @@ export function ContractReviewQueue() {
     if (!clubId || busy) return;
     setBusy(clauseId + reviewState);
     setMessage("");
-    const response = await fetch("/api/contracts/review", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ clubId, clauseId, reviewState })
-    });
-    const result = await response.json() as { error?: string };
-    if (response.ok) {
-      setMessage(reviewState === "verified" ? "Clause verified." : "Clause review state updated.");
-      await load(clubId);
-    } else {
-      setMessage(result.error ?? "Clause could not be updated.");
+    try {
+      const response = await fetch("/api/contracts/review", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ clubId, clauseId, reviewState })
+      });
+      const result = await response.json() as { error?: string };
+      if (response.ok) {
+        setMessage(reviewState === "verified" ? "Clause verified in the club contract record." : "Clause review state updated in the club contract record.");
+        await load(clubId);
+      } else {
+        setMessage(result.error ?? "Clause could not be updated. Contract truth was not changed.");
+      }
+    } catch {
+      setMessage("The contract service is unreachable. Contract truth was not changed.");
+    } finally {
+      setBusy("");
     }
-    setBusy("");
   }
 
   const counts = useMemo(() => ({
