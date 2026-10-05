@@ -83,7 +83,7 @@ export default function SponsorsPage() {
 
       <WorkspaceCard className={styles.matrixCard}>
         <WorkspaceSectionHeader eyebrow="Opportunity matrix" title="Strategic fit × evidence readiness" action={<span className={styles.matrixHint}>Bubble size = relevant fixtures</span>} />
-        <div className={styles.sponsorMatrix}>
+        <div className={styles.sponsorMatrix} role="group" aria-label="Sponsor matrix. Higher position means stronger evidence readiness; further right means stronger strategic fit.">
           <span className={styles.matrixY}>Evidence readiness</span>
           <span className={styles.matrixX}>Strategic fit →</span>
           <div className={styles.matrixGrid} />
@@ -98,14 +98,20 @@ export default function SponsorsPage() {
                 width: 42 + Math.min(28, item.pack.recommendedFixtureIds.length * 6),
                 height: 42 + Math.min(28, item.pack.recommendedFixtureIds.length * 6)
               }}
-              title={item.pack.candidate}
+              aria-label={item.pack.candidate + ". Readiness " + (item.readiness?.weightedScore ?? "not available") + ". Stage " + stageOf(item)}
             >
               <strong>{item.pack.candidate.slice(0, 3).toUpperCase()}</strong>
               <small>{item.readiness?.weightedScore ?? "—"}</small>
             </div>
           ))}
         </div>
-        <div className={styles.pipelineStages}>
+        <div className={styles.matrixLegend} aria-label="Sponsor matrix legend">
+          <span data-tone="explore">Explore</span>
+          <span data-tone="validate">Validate</span>
+          <span data-tone="review">Review</span>
+          <span data-tone="ready">Ready</span>
+        </div>
+        <div className={styles.pipelineStages} aria-label="Sponsor pipeline summary">
           {["explore","validate","review","ready"].map((stage) => (
             <div key={stage}>
               <span>{stage}</span>
