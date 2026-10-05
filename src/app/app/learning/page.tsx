@@ -99,7 +99,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </article>
         <article data-stage="next">
           <span>04 · Next decision</span>
-          <strong>{nextLearning.recommendation}</strong>
+          <strong>{nextLearning.change}</strong>
           <p>{nextFixture ? "Apply to " + nextFixture.opponent + " · " + nextFixture.date : "No next home fixture is currently available."}</p>
         </article>
       </section>
