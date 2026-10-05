@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
 
 type ProductJourneyNavProps = {
-  active?: "home" | "campaigns" | "matches" | "demo" | "learning" | "setup" | "access" | "sources" | "executive" | "season" | "players" | "sponsors" | "contracts";
+  active?: "home" | "campaigns" | "matches" | "demo" | "learning" | "setup" | "access" | "sources" | "executive" | "season" | "players" | "sponsors" | "contracts" | "help";
 };
 
 const workItems = [
@@ -84,6 +84,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
         <div className={styles.positioning}>
           <span>Signals</span><i>→</i><span>Context</span><i>→</i><strong>Action</strong>
         </div>
+        <Link href="/app/help" className={active === "help" ? styles.secondaryActive : ""} aria-current={active === "help" ? "page" : undefined}>Help & methodology</Link>
         <Link href="/app/demo" className={active === "demo" ? styles.secondaryActive : ""} aria-current={active === "demo" ? "page" : undefined}>Product demo</Link>
         <Link href="/">AVELA website ↗</Link>
       </div>
@@ -113,6 +114,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
               {item.displayLabel}
             </Link>
           ))}
+          <Link href="/app/help" aria-current={active === "help" ? "page" : undefined} className={active === "help" ? styles.mobileActive : ""}>Help & methodology</Link>
           <Link href="/app/demo" aria-current={active === "demo" ? "page" : undefined} className={active === "demo" ? styles.mobileActive : ""}>Product demo</Link>
           <Link href="/">AVELA website ↗</Link>
         </div>
