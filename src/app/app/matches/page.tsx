@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { OpportunityExplorer } from "@/components/OpportunityExplorer";
-import { calendar, campaignPlans, currentState } from "@/lib/data";
+import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
+import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
+import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
+import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
 import styles from "./matches.module.css";
 
 export const metadata: Metadata = {
@@ -29,7 +32,25 @@ export default async function MatchesPage() {
     .slice(0, 8);
 
   const clubContext = await getCurrentClubOperatingContext();
-  const radar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id), clubContext);
+  const opportunityRadar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id), clubContext);
+  const calendarToDate = calendar.map((item) => item.date).sort().at(-1) ?? today;
+  const externalCalendarRelationships = buildCalendarRelationships({
+    fixtures: calendar,
+    campaignPlans,
+    eventLandscape,
+    fromDate: today
+  });
+  const internalCalendar = await getInternalCalendarRelationships({
+    clubId: clubContext?.clubId,
+    fixtures: calendar,
+    campaignPlans,
+    fromDate: today,
+    toDate: calendarToDate
+  });
+  const radar = applyCalendarDecisionPressure(
+    opportunityRadar,
+    [...externalCalendarRelationships, ...internalCalendar.relationships]
+  );
   const priority = radar[0] ?? null;
   const currentFixture = priority
     ? upcoming.find((fixture) => fixture.id === priority.fixtureId) ?? null
@@ -73,8 +94,8 @@ export default async function MatchesPage() {
           <span className={styles.eyebrow}>AVELA · Opportunity Radar</span>
           <h1>Where should the club act next?</h1>
           <p>
-            Upcoming home fixtures are re-prioritised whenever the validated evidence state refreshes, using opportunity potential,
-            evidence confidence and time to act. The ranking is a decision aid, not an attendance forecast.
+            Upcoming home fixtures are re-prioritised whenever validated evidence refreshes. Opportunity potential stays separate
+            from calendar pressure; the final attention order can rise because of timing, internal constraints or fixture collisions.
           </p>
         </div>
         <div className={styles.engineState}>
@@ -85,10 +106,10 @@ export default async function MatchesPage() {
 
       <section className={styles.radarSummary} aria-label="Opportunity radar summary">
         <div><span>Fixtures watched</span><strong>{radar.length}</strong></div>
-        <div><span>Act now</span><strong>{radar.filter((item) => item.radarState === "Act now").length}</strong></div>
-        <div><span>Needs review</span><strong>{radar.filter((item) => item.radarState === "Review").length}</strong></div>
-        <div><span>Monitoring</span><strong>{radar.filter((item) => item.radarState === "Monitor").length}</strong></div>
-        <div><span>No material opportunity</span><strong>{radar.filter((item) => item.radarState === "No material opportunity").length}</strong></div>
+        <div><span>Act now</span><strong>{radar.filter((item) => item.attentionState === "Act now").length}</strong></div>
+        <div><span>Needs review</span><strong>{radar.filter((item) => item.attentionState === "Review").length}</strong></div>
+        <div><span>Monitoring</span><strong>{radar.filter((item) => item.attentionState === "Monitor").length}</strong></div>
+        <div><span>No material opportunity</span><strong>{radar.filter((item) => item.attentionState === "No material opportunity").length}</strong></div>
       </section>
 
       {clubContext ? (
@@ -142,10 +163,11 @@ export default async function MatchesPage() {
               <strong>{live?.opportunity ?? "Review current evidence."}</strong>
               <div className={styles.priorityMetrics}>
                 <div><span>Opportunity score</span><b>{priority?.opportunityScore ?? "—"}</b></div>
-                <div><span>Urgency</span><b>{priority?.urgency ?? "—"}</b></div>
-                <div><span>Signal movement</span><b>{priority?.signalChangeLabel ?? "—"}</b></div>
+                <div><span>Attention</span><b>{priority?.attentionState ?? "—"}</b></div>
+                <div><span>Calendar pressure</span><b>{priority?.calendarPressure.state ?? "—"}</b></div>
               </div>
               <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
+              <p><b>Attention driver:</b> {priority?.attentionReason ?? "No calendar pressure adjustment."}</p>
               {priority?.clubFit ? (
                 <div className={styles.priorityClubFit}>
                   <span>Club fit · advisory only</span>
@@ -209,14 +231,16 @@ export default async function MatchesPage() {
                 ) : null}
               </div>
               <div className={styles.radarEvidence}>
-                <span className={styles[`state${item.radarState.replaceAll(" ", "")}`]}>{item.radarState}</span>
+                <span className={styles[`state${item.attentionState.replaceAll(" ", "")}`]}>{item.attentionState}</span>
                 <div className={styles.radarScoreline}>
                   <b>{item.opportunityScore ?? "—"}<small>score</small></b>
                   <b>{item.urgency}<small>urgency</small></b>
+                  <b>{item.calendarPressure.state}<small>calendar</small></b>
                 </div>
                 <strong>{item.confidence} confidence</strong>
                 <small>{item.materialSignalCount} material · {item.signalCount} total signals</small>
-                <small className={styles.signalMovement}>{item.signalChangeLabel}</small>
+                <small>Opportunity state · {item.radarState}</small>
+                <small className={styles.signalMovement}>{item.attentionReason}</small>
                 <Link href={`/app/matches/${item.fixtureId}`}>Review →</Link>
               </div>
             </article>
