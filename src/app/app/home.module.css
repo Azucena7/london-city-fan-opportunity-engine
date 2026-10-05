@@ -1,3 +1,4 @@
+.signalStrip{}
 .contractCopy{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 .metricGrid{
@@ -24,7 +25,7 @@
   align-items:start;
 }
 .recommendationCard{padding:14px;min-height:260px}
-.recommendationBody{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;margin-top:14px;padding:15px;border-radius:8px;background:#102742;color:#fff}
+.recommendationBody{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;margin-top:14px;padding:15px;border-radius:8px;background:var(--product-navy);color:#fff}
 .recommendationBody h2{margin:0!important;color:#fff!important;font-size:22px!important;line-height:1.12!important;letter-spacing:-.025em!important}
 .recommendationBody p{margin:7px 0 0!important;color:#C5D1DB!important;font-size:12px!important;line-height:1.45}
 .recommendationBody>a{align-self:end;min-height:34px;display:inline-flex;align-items:center;padding:7px 10px;border-radius:7px;background:#EF8B6C;color:#fff;text-decoration:none;font-size:10px;font-weight:900;white-space:nowrap}
