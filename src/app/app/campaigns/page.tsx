@@ -54,6 +54,7 @@ export default function CampaignsPage() {
         <a href="#fixture-campaigns">Fixture campaigns</a>
         <a href="#commercial-calendar">Commercial calendar</a>
         <Link href="/app/season">Check Calendar pressure →</Link>
+        <Link href="/app/learning">Review outcomes →</Link>
       </div>
 
       <section id="fixture-campaigns" className={styles.list} aria-label="Campaign drafts">
