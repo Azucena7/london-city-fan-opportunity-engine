@@ -8,3 +8,21 @@
 .avela p{font-size:11px;line-height:1.5}
 .outputs article{padding:15px;border-radius:10px}
 .outputs strong{font-size:13px}
+
+
+/* Premium ecosystem surfaces */
+.map{
+  border-radius:18px;
+  background:linear-gradient(135deg,#f2ebe1,#eee4d6);
+  box-shadow:0 16px 44px rgba(13,34,56,.045);
+}
+.inputs{
+  background:rgba(13,34,56,.10);
+}
+.inputs article,.outputs article{
+  background:#fffdfa;
+}
+.avela{
+  background:linear-gradient(155deg,#173852,#0d2238);
+  box-shadow:0 20px 52px rgba(13,34,56,.18);
+}

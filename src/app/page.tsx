@@ -47,19 +47,34 @@ export default function Home() {
             <span>Human approval for material decisions.</span>
             <span>Built around women&apos;s football. Designed for football clubs.</span>
           </div>
+          <div className={styles.heroProof} aria-label="AVELA operating loop">
+            <div><span>01</span><strong>Read</strong><small>Signals + context</small></div>
+            <i>→</i>
+            <div><span>02</span><strong>Decide</strong><small>Priority + feasibility</small></div>
+            <i>→</i>
+            <div><span>03</span><strong>Move</strong><small>Action + owner</small></div>
+            <i>→</i>
+            <div><span>04</span><strong>Learn</strong><small>Outcome retained</small></div>
+          </div>
         </div>
         <CommercialSignalStage />
       </section>
 
       <section className={styles.signalTicker} aria-label="AVELA intelligence inputs">
-        <span>FIXTURES</span>
-        <span>SPONSORS</span>
-        <span>PLAYERS</span>
-        <span>CONTRACTS</span>
-        <span>CALENDARS</span>
-        <span>CAPACITY</span>
-        <span>PERFORMANCE</span>
-        <span>INTERNAL CONTEXT</span>
+        <div className={styles.signalTrack}>
+          {[0, 1].map((copy) => (
+            <div className={styles.signalSet} aria-hidden={copy === 1} key={copy}>
+              <span>FIXTURES</span><b>•</b>
+              <span>SPONSORS</span><b>•</b>
+              <span>PLAYERS</span><b>•</b>
+              <span>CONTRACTS</span><b>•</b>
+              <span>CALENDARS</span><b>•</b>
+              <span>CAPACITY</span><b>•</b>
+              <span>PERFORMANCE</span><b>•</b>
+              <span>INTERNAL CONTEXT</span><b>•</b>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className={styles.problem}>
@@ -78,10 +93,10 @@ export default function Home() {
       <section className={styles.valueCreated} aria-labelledby="value-created-title">
         <div className={styles.valueIntro}>
           <span className={styles.kicker}>The value AVELA adds</span>
-          <h2 id="value-created-title">The gain is not another insight. It is a better operating decision.</h2>
+          <h2 id="value-created-title">Better decisions. Less manual coordination.</h2>
           <p>
-            AVELA connects evidence that normally lives in different teams, then turns it into a decision the club can
-            actually act on. The pilot should prove value in the operating metrics below — not rely on vague AI claims.
+            AVELA connects evidence across teams and turns it into a decision the club can act on.
+            A pilot should prove that in operating metrics, not vague AI claims.
           </p>
         </div>
         <div className={styles.valueGrid}>
@@ -96,11 +111,47 @@ export default function Home() {
 
       <CommercialDecisionDemo />
 
+      <div className={styles.storyBridge} aria-hidden="true">
+        <span>Illustrative decision</span>
+        <i>→</i>
+        <strong>Observed evidence</strong>
+      </div>
+
+      <section className={styles.liveProof}>
+        <div className={styles.liveCopy}>
+          <span className={styles.kicker}>Proof in public</span>
+          <h2>See what AVELA saw before London City announced it.</h2>
+          <p>The Brighton hypothesis was time-stamped before a comparable London City activation became public. It is evidence of relevance, not evidence that the club saw or used AVELA.</p>
+          <div className={styles.proofPair}>
+            <article><span>AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
+            <article><span>London City later announced</span><strong>{proof.observedAction.en}</strong></article>
+          </div>
+          <div className={styles.proofActions}>
+            <Link className={styles.coralButton} href="/case-study">See the evidence</Link>
+            <Link className={styles.darkTextLink} href="/live/london-city">Open London City Live ↗</Link>
+          </div>
+        </div>
+        <div className={styles.livePanel}>
+          <span>Current live case</span>
+          <strong>{live?.fixture.opponent ?? "Next home fixture"}</strong>
+          <div className={styles.liveDecision}>
+            <span>Opportunity</span>
+            <h3>{live?.opportunity ?? "Review current evidence."}</h3>
+          </div>
+          <div className={styles.liveFacts}>
+            <div><span>State</span><strong>{live?.decisionState ?? "HOLD"}</strong></div>
+            <div><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
+            <div><span>Do next</span><strong>{live?.nextAction.label ?? "Review evidence"}</strong></div>
+          </div>
+        </div>
+      </section>
+
+
       <section className={styles.capabilityHorizon} aria-labelledby="capability-horizon-title">
         <div className={styles.capabilityIntro}>
           <span className={styles.kicker}>What AVELA can become</span>
-          <h2 id="capability-horizon-title">Start as a decision layer. Grow into the club&apos;s operating intelligence.</h2>
-          <p>Capability expands with authorised data, connectors and governance. The stages below separate what exists now from what becomes possible as the club connects more context.</p>
+          <h2 id="capability-horizon-title">Start with the decision loop. Expand only when more context adds value.</h2>
+          <p>The stages below separate what exists now from what becomes possible with authorised club data and connectors.</p>
         </div>
         <div className={styles.horizonGrid}>
           <article data-stage="now">
@@ -140,32 +191,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.example} aria-labelledby="example-title">
-        <div className={styles.exampleIntro}>
-          <span className={styles.kicker}>What a decision looks like</span>
-          <h2 id="example-title">From several weak signals to one operationally viable action.</h2>
-        </div>
-        <div className={styles.exampleGrid}>
-          <div className={styles.exampleSignals}>
-            <article><span>09:12 · Performance</span><strong>Player momentum rises materially.</strong></article>
-            <article><span>Contract</span><strong>Partner player appearances remain to be delivered.</strong></article>
-            <article><span>Calendar</span><strong>International availability risk is approaching.</strong></article>
-            <article><span>Operations</span><strong>Creative capacity is already close to saturation.</strong></article>
-          </div>
-          <div className={styles.exampleDecision}>
-            <span>AVELA · Review</span>
-            <h3>Act before the availability window closes.</h3>
-            <p>Use the strongest viable player window, reduce the creative package and send an early heads-up to the operational owners.</p>
-            <div className={styles.exampleFacts}>
-              <div><span>Impact</span><strong>High</strong></div>
-              <div><span>Urgency</span><strong>High</strong></div>
-              <div><span>Feasibility</span><strong>Medium</strong></div>
-            </div>
-            <div className={styles.exampleActions}><span>Why?</span><span>Alternative</span><span>Ask AVELA</span><span>Commit plan</span></div>
-          </div>
-        </div>
-      </section>
-
       <section className={styles.notAnother}>
         <div className={styles.notAnotherTitle}>
           <span className={styles.kicker}>What AVELA is — and is not</span>
@@ -179,35 +204,6 @@ export default function Home() {
         <div className={styles.llmStatement}>
           <strong>The LLM is part of AVELA. It is not the product.</strong>
           <p>General AI can help a person think. AVELA is designed to help a club operate across changing evidence, constraints and decisions.</p>
-        </div>
-      </section>
-
-      <section className={styles.liveProof}>
-        <div className={styles.liveCopy}>
-          <span className={styles.kicker}>Proof in public</span>
-          <h2>See what AVELA saw before London City announced it.</h2>
-          <p>The Brighton hypothesis was time-stamped before a comparable London City activation became public. It is evidence of relevance, not evidence that the club saw or used AVELA.</p>
-          <div className={styles.proofPair}>
-            <article><span>AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
-            <article><span>London City later announced</span><strong>{proof.observedAction.en}</strong></article>
-          </div>
-          <div className={styles.proofActions}>
-            <Link className={styles.coralButton} href="/case-study">See the evidence</Link>
-            <Link className={styles.darkTextLink} href="/live/london-city">Open London City Live ↗</Link>
-          </div>
-        </div>
-        <div className={styles.livePanel}>
-          <span>Current live case</span>
-          <strong>{live?.fixture.opponent ?? "Next home fixture"}</strong>
-          <div className={styles.liveDecision}>
-            <span>Opportunity</span>
-            <h3>{live?.opportunity ?? "Review current evidence."}</h3>
-          </div>
-          <div className={styles.liveFacts}>
-            <div><span>State</span><strong>{live?.decisionState ?? "HOLD"}</strong></div>
-            <div><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
-            <div><span>Do next</span><strong>{live?.nextAction.label ?? "Review evidence"}</strong></div>
-          </div>
         </div>
       </section>
 
@@ -244,7 +240,7 @@ export default function Home() {
       <section className={styles.finalCta}>
         <div>
           <span>AVELA</span>
-          <h2>You do not need another platform to manage. You need a better way to decide what deserves attention across the platforms you already have.</h2>
+          <h2>Turn the next fixture into a better decision — without replacing the stack you already use.</h2>
         </div>
         <div>
           <Link className={styles.coralButton} href="/for-clubs#demo">Explore a club pilot</Link>
