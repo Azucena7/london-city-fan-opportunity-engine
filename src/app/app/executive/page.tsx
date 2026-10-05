@@ -33,6 +33,16 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   const results = getCurrentProductResults(selectedId);
   const approvals = campaign?.approvals.filter((item) => item.state !== "ready") ?? [];
   const measured = results?.state === "measured";
+  const decisionPosition = live.decisionState === "HOLD" ? 18 : live.decisionState === "REVIEW" ? 52 : 84;
+  const signalHighlights = live.liveSignals.slice(0, 4);
+  const flow = [
+    { label: "Signals", state: radarItem?.materialSignalCount ? "ready" : "muted" },
+    { label: "Opportunity", state: radarItem?.opportunityScore ? "ready" : "muted" },
+    { label: "Campaign", state: campaign ? "ready" : "muted" },
+    { label: "Approval", state: approvals.length ? "review" : "ready" },
+    { label: "Activation", state: campaign && approvals.length === 0 ? "ready" : "muted" },
+    { label: "Measurement", state: measured ? "ready" : "muted" }
+  ];
 
   if (!fixture || !live) return null;
 
@@ -52,25 +62,44 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
         <WorkspaceBadge tone={live.decisionState === "HOLD" ? "warning" : "teal"}>{live.decisionState}</WorkspaceBadge>
       </div>
 
-      <WorkspaceCard className={styles.hero} tone="action">
-        <div className={styles.heroCopy}>
+      <WorkspaceCard className={styles.cockpit} tone="action">
+        <div className={styles.cockpitMain}>
           <span>Executive decision brief</span>
           <h1>{campaign?.title.en ?? live.opportunity}</h1>
           <p>{live.whyNow}</p>
+          <div className={styles.signalHighlights}>
+            {signalHighlights.map((signal) => <span key={signal.id}>{signal.title}</span>)}
+          </div>
         </div>
-        <div className={styles.heroState}>
-          <span>Recommendation state</span>
+        <div className={styles.decisionDial}>
+          <span>Decision posture</span>
+          <div className={styles.dialTrack}>
+            <i style={{ left: decisionPosition + "%" }} />
+          </div>
+          <div className={styles.dialLabels}><b>HOLD</b><b>REVIEW</b><b>ACT</b></div>
           <strong>{live.decisionState}</strong>
           <small>{live.confidence.label} confidence · {radarItem?.urgency ?? "Watch"} urgency</small>
         </div>
       </WorkspaceCard>
 
-      <section className={styles.scoreStrip} aria-label="Executive summary metrics">
-        <WorkspaceCard><span>Opportunity</span><strong>{radarItem?.opportunityScore ?? "—"}</strong><small>{radarItem?.opportunityLabel ?? "Under review"}</small></WorkspaceCard>
-        <WorkspaceCard><span>Evidence</span><strong>{radarItem?.materialSignalCount ?? 0}</strong><small>material signals</small></WorkspaceCard>
-        <WorkspaceCard tone={approvals.length ? "action" : "accent"}><span>Open gates</span><strong>{approvals.length}</strong><small>{approvals.length ? "human decision required" : "no blocking gate"}</small></WorkspaceCard>
-        <WorkspaceCard tone={measured ? "accent" : "default"}><span>Measurement</span><strong>{measured ? "Observed" : "Pending"}</strong><small>{measured ? "club evidence connected" : "outcome not yet established"}</small></WorkspaceCard>
+      <section className={styles.executiveMetrics} aria-label="Executive summary metrics">
+        <article><span>Opportunity</span><strong>{radarItem?.opportunityScore ?? "—"}</strong><small>{radarItem?.opportunityLabel ?? "Under review"}</small></article>
+        <article><span>Evidence</span><strong>{radarItem?.materialSignalCount ?? 0}</strong><small>material signals</small></article>
+        <article data-tone={approvals.length ? "review" : "ready"}><span>Open gates</span><strong>{approvals.length}</strong><small>{approvals.length ? "human decision required" : "no blocking gate"}</small></article>
+        <article data-tone={measured ? "ready" : "muted"}><span>Measurement</span><strong>{measured ? "Observed" : "Pending"}</strong><small>{measured ? "club evidence connected" : "outcome not yet established"}</small></article>
       </section>
+
+      <WorkspaceCard className={styles.flowCard}>
+        <WorkspaceSectionHeader eyebrow="Decision path" title="From signal to measurable action" />
+        <div className={styles.decisionFlow}>
+          {flow.map((step, index) => (
+            <div key={step.label} data-state={step.state}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{step.label}</strong>
+            </div>
+          ))}
+        </div>
+      </WorkspaceCard>
 
       <section className={styles.storyGrid}>
         <WorkspaceCard className={styles.decisionCard} tone="action">
