@@ -219,7 +219,7 @@ export default async function MatchesPage() {
         <summary>How Radar prioritisation works</summary>
         <div>
           <p><strong>Opportunity potential</strong> is evidence-led. <strong>Calendar pressure</strong> can elevate attention without changing opportunity score.</p>
-          <p>Signals, confidence, urgency and calendar constraints stay inspectable inside each fixture workspace.</p>
+          <p>Signals, confidence, urgency and calendar constraints stay inspectable inside each fixture workspace. The ranking is a decision aid, not an attendance forecast.</p>
         </div>
       </details>
     </AppWorkspaceShell>
