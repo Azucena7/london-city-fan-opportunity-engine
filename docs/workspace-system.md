@@ -101,3 +101,33 @@ The user should not need to scroll through multiple editorial sections to unders
 10. Team / Setup / Executive
 
 Each migrated surface must reuse the shared shell and UI primitives before any page-specific styling is added.
+
+## CSS ownership
+
+Keep each visual concern owned by one canonical layer. Page modules may extend the system, but they should not restate shared shell, navigation or readability rules.
+
+- `ProductJourneyNav.module.css`: internal app sidebar and mobile app navigation.
+- `AppWorkspaceShell.module.css`: internal app topbar, pagebar and workspace chrome.
+- `WorkspaceUI.module.css`: shared cards, badges, section headers and drawers.
+- `product-system.css`: app-wide accessibility, focus, interaction and application-shell baseline.
+- `navigation-v2.css`: public/case-study navigation refinements. Do not add new app-sidebar rules here.
+- `workspace-structure.css`: legacy/public workspace structures and case-study navigation foundations.
+- `product-ux.css`: shared public-product interaction surfaces; avoid redefining navigation unless a legacy surface still depends on it.
+- `readability.css`: reading-surface adjustments only; do not use it as a generic override layer.
+- `case-study.css`: shared case-study foundation.
+- `case-study-technical.css`: technical case-study-only rules.
+- `case-study-commercial.css`: commercial/evidence case-study-only rules.
+- page/component CSS modules: only local layout and component-specific presentation.
+
+When changing a shared visual rule, edit the canonical owner rather than appending a new "pass", "cleanup" or "refinement" block at the end of another stylesheet. If an override is genuinely required, document why the canonical owner cannot express it.
+
+## Regression rule
+
+Before merging CSS refactors:
+
+1. verify every class referenced by the component still exists;
+2. keep mobile breakpoints and focus states intact;
+3. preserve evidence/truth-state semantics;
+4. run the full Quality Gate, including production build;
+5. treat visual browser verification as required when browser automation is available.
+
