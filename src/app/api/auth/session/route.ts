@@ -19,7 +19,7 @@ export async function GET() {
     : [];
 
   const clubIds = memberships.map((item) => item.club_id);
-  let clubs: Array<{ id: string; name: string; role: string }> = [];
+  let clubs: Array<{ id: string; name: string; role: string; permissions: string[] }> = [];
 
   if (clubIds.length) {
     const clubsResponse = await supabaseRequest(
@@ -28,9 +28,16 @@ export async function GET() {
     const rows = clubsResponse.ok
       ? await clubsResponse.json() as Array<{ id: string; name: string }>
       : [];
+    const permissionResponse = await supabaseRequest("/rest/v1/rpc/club_permission_matrix", { method: "POST", body: "{}" });
+    const permissionRows = permissionResponse.ok
+      ? await permissionResponse.json() as Array<{ club_id: string; area: string; action: string }>
+      : [];
     clubs = rows.map((club) => ({
       ...club,
-      role: memberships.find((item) => item.club_id === club.id)?.role ?? "viewer"
+      role: memberships.find((item) => item.club_id === club.id)?.role ?? "viewer",
+      permissions: permissionRows
+        .filter((item) => item.club_id === club.id)
+        .map((item) => `${item.area}:${item.action}`)
     }));
   }
 

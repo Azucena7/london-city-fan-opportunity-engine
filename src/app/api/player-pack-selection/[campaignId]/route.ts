@@ -54,6 +54,36 @@ export async function PUT(request: Request, { params }: { params: Promise<{ camp
   if (!clubId || !campaignId) return NextResponse.json({ error: "clubId and campaignId are required." }, { status: 400 });
   if (selectedPlayerIds.length !== playerCount) return NextResponse.json({ error: "Selected players must match playerCount." }, { status: 400 });
 
+  const currentResponse = await supabaseRequest(
+    `/rest/v1/player_pack_selections?club_id=eq.${encodeURIComponent(clubId)}&campaign_id=eq.${encodeURIComponent(campaignId)}&select=status,selected_player_ids,player_count&limit=1`
+  );
+  const currentRows = currentResponse.ok
+    ? await currentResponse.json() as Array<{ status: "selected" | "approved" | "committed"; selected_player_ids: string[]; player_count: number }>
+    : [];
+  const current = currentRows[0] ?? null;
+
+  if (status === "approved") {
+    if (!current || current.status !== "selected") {
+      return NextResponse.json({ error: "Only a selected pack can be approved." }, { status: 409 });
+    }
+    if (Number(snapshot.blockerCount ?? 0) > 0) {
+      return NextResponse.json({ error: "Resolve player-pack blockers before approval." }, { status: 409 });
+    }
+  }
+  if (status === "committed" && (!current || current.status !== "approved")) {
+    return NextResponse.json({ error: "Only an approved pack can be committed." }, { status: 409 });
+  }
+  if (status === "selected" && current && current.status !== "selected") {
+    return NextResponse.json({ error: "Approved or committed packs cannot be overwritten as selected." }, { status: 409 });
+  }
+  if ((status === "approved" || status === "committed") && current) {
+    const sameIds = current.selected_player_ids.length === selectedPlayerIds.length
+      && current.selected_player_ids.every((id) => selectedPlayerIds.includes(id));
+    if (!sameIds || current.player_count !== playerCount) {
+      return NextResponse.json({ error: "Approval state can only advance for the currently selected pack." }, { status: 409 });
+    }
+  }
+
   const response = await supabaseRequest(
     "/rest/v1/player_pack_selections?on_conflict=club_id,campaign_id",
     {
