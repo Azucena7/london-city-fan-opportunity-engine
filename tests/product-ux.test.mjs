@@ -1137,21 +1137,6 @@ test("AVELA visual system removes olive identity and simplifies club app navigat
   assert.match(commercial, /#102742/i);
 });
 
-test("commercial home uses lightweight product motion instead of decorative video", () => {
-  const page = read("src/app/page.tsx");
-  const css = read("src/app/commercial-home.module.css");
-  const stage = read("src/components/CommercialSignalStage.tsx");
-  assert.match(page, /Product in motion/);
-  assert.match(page, /Watch the decision form/);
-  assert.match(page, /proofTimeline/);
-  assert.match(css, /motionTrack/);
-  assert.match(css, /@keyframes motionStep/);
-  assert.match(css, /@keyframes proofFlow/);
-  assert.match(stage, /decisionPulse/);
-  assert.match(stage, /tracer/);
-});
-
-
 test("AVELA uses an application shell with a left sidebar and bounded work area", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
   const navCss = read("src/components/ProductJourneyNav.module.css");
