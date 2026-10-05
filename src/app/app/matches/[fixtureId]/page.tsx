@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionContextTrail } from "@/components/DecisionContextTrail";
+import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
 import { MatchSignalControls } from "@/components/MatchSignalControls";
@@ -95,6 +96,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         campaignId={campaign?.id ?? null}
         current="Decision workspace"
       />
+      <DecisionHandoffStrip active="decision" fixtureId={fixture.id} campaignId={campaign?.id ?? null} />
       <div className={styles.shell}>
 
       <div className={styles.backRow}>
@@ -122,11 +124,11 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </div>
         <div className={styles.contextLinks}>
           <Link className={styles.executiveLink} href={`/app/executive?fixture=${fixture.id}`}>Executive view</Link>
-          <a href="#decision">Decision</a>
-          <a href="#readiness">Can we do it?</a>
-          <a href="#execute">Execute</a>
-          <a href="#evidence">Why?</a>
-          <a href="#learning">Learning</a>
+          <a href="#decision">01 Decide</a>
+          <a href="#readiness">02 Feasibility</a>
+          <a href="#execute">03 Build</a>
+          <a href="#evidence">04 Evidence</a>
+          <a href="#learning">06 Learn</a>
         </div>
       </nav>
 
@@ -241,6 +243,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </details>
       </section>
 
+      <details className={styles.phasePanel}>
+        <summary><span>02</span><div><strong>Feasibility</strong><small>Availability, timing, capacity and club constraints.</small></div><b>Open phase →</b></summary>
       <section id="readiness" className={styles.phaseIntro} aria-label="Decision readiness">
         <div>
           <span className={styles.phaseNumber}>02</span>
@@ -327,6 +331,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </section>
       )}
 
+      </details>
+
+      <details className={styles.phasePanel}>
+        <summary><span>03</span><div><strong>Build & route</strong><small>Campaign plan, owners, approvals and handoffs.</small></div><b>Open phase →</b></summary>
       <section id="execute" className={styles.phaseIntro} aria-label="Execution plan">
         <div>
           <span className={styles.phaseNumber}>03</span>
@@ -401,6 +409,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </div>
       </section>
 
+      </details>
+
+      <details className={styles.phasePanel}>
+        <summary><span>04</span><div><strong>Evidence & impact</strong><small>Challenge the signals, assumptions and commercial scenario.</small></div><b>Open phase →</b></summary>
       <section id="evidence" className={styles.phaseIntro} aria-label="Evidence and reasoning">
         <div>
           <span className={styles.phaseNumber}>04</span>
@@ -468,6 +480,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         </details>
       </section>
 
+      </details>
+
+      <details className={styles.phasePanel}>
+        <summary><span>05</span><div><strong>Human decision</strong><small>Approve, modify or hold before any external launch.</small></div><b>Open phase →</b></summary>
       <section className={styles.phaseIntro} aria-label="Human decision">
         <div>
           <span className={styles.phaseNumber}>05</span>
@@ -486,6 +502,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         signalCount={live.liveSignals.length}
       />
 
+      </details>
+
+      <details className={styles.phasePanel}>
+        <summary><span>06</span><div><strong>Decision memory</strong><small>Preserve what AVELA recommended, what the club chose and what happened.</small></div><b>Open phase →</b></summary>
       <section className={styles.phaseIntro} aria-label="Decision memory">
         <div>
           <span className={styles.phaseNumber}>06</span>
@@ -506,6 +526,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       />
 
       <AskAvelaPanel fixtureId={fixture.id} decisionId={`fixture:${fixture.id}`} />
+
+      </details>
 
       <section id="learning" className={styles.footerActions}>
         <div>
