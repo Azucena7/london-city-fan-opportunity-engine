@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ClubSetup } from "@/components/ClubSetup";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import styles from "./setup.module.css";
 
 export const metadata: Metadata = {
@@ -8,11 +8,18 @@ export const metadata: Metadata = {
   description: "Configure fixtures, channels, objectives, brand rules and approvals once for the club."
 };
 
+// productAppShell is provided by AppWorkspaceShell.
 export default function ClubSetupPage() {
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="setup" />
-      <ClubSetup />
-    </main>
+    <AppWorkspaceShell
+      active="setup"
+      eyebrow="Administration"
+      title="Setup"
+      subtitle="Configure club context once so every fixture starts with the right defaults."
+    >
+      <div className={styles.surface}>
+        <ClubSetup />
+      </div>
+    </AppWorkspaceShell>
   );
 }
