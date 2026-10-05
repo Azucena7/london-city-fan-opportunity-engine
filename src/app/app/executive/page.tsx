@@ -71,9 +71,9 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
             {signalHighlights.map((signal) => <span key={signal.id}>{signal.title}</span>)}
           </div>
         </div>
-        <div className={styles.decisionDial}>
+        <div className={styles.decisionDial} aria-label={"Decision posture: " + live.decisionState}>
           <span>Decision posture</span>
-          <div className={styles.dialTrack}>
+          <div className={styles.dialTrack} aria-hidden="true">
             <i style={{ left: decisionPosition + "%" }} />
           </div>
           <div className={styles.dialLabels}><b>HOLD</b><b>REVIEW</b><b>ACT</b></div>
@@ -91,9 +91,9 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
 
       <WorkspaceCard className={styles.flowCard}>
         <WorkspaceSectionHeader eyebrow="Decision path" title="From signal to measurable action" />
-        <div className={styles.decisionFlow}>
+        <div className={styles.decisionFlow} role="list" aria-label="Decision path">
           {flow.map((step, index) => (
-            <div key={step.label} data-state={step.state}>
+            <div key={step.label} data-state={step.state} role="listitem" aria-label={step.label + ": " + step.state}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <strong>{step.label}</strong>
             </div>
