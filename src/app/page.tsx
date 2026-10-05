@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
 import { CommercialSignalStage } from "@/components/CommercialSignalStage";
 import { CommercialEcosystem } from "@/components/CommercialEcosystem";
+import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import { CommercialFAQ } from "@/components/CommercialFAQ";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { decisionValidation } from "@/lib/data";
@@ -92,6 +93,8 @@ export default function Home() {
           <article><span>06</span><strong>Increase organisational leverage</strong><p>Let specialist teams keep their tools while AVELA reduces the work required to connect them around one priority.</p><small>Measure: manual analysis replaced or shortened</small></article>
         </div>
       </section>
+
+      <CommercialDecisionDemo />
 
       <section className={styles.capabilityHorizon} aria-labelledby="capability-horizon-title">
         <div className={styles.capabilityIntro}>
