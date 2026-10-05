@@ -81,6 +81,7 @@ export function CampaignDeliveryPlanner({
   const [activeClubId, setActiveClubId] = useState<string | null>(null);
   const [remoteReady, setRemoteReady] = useState(false);
   const [remoteSaving, setRemoteSaving] = useState(false);
+  const [remoteSaveError, setRemoteSaveError] = useState<string | null>(null);
   const [accountEmail, setAccountEmail] = useState("");
   const [accountPassword, setAccountPassword] = useState("");
   const [accountError, setAccountError] = useState<string | null>(null);
@@ -271,8 +272,9 @@ export function CampaignDeliveryPlanner({
 
     const timer = window.setTimeout(async () => {
       setRemoteSaving(true);
+      setRemoteSaveError(null);
       try {
-        await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}`, {
+        const response = await fetch(`/api/campaign-workspace/${encodeURIComponent(fixtureId)}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -291,6 +293,9 @@ export function CampaignDeliveryPlanner({
             }
           })
         });
+        if (!response.ok) setRemoteSaveError("Club sync failed. Changes remain saved on this device.");
+      } catch {
+        setRemoteSaveError("Club sync unavailable. Changes remain saved on this device.");
       } finally {
         setRemoteSaving(false);
       }
@@ -861,15 +866,19 @@ export function CampaignDeliveryPlanner({
                   {activeClubId
                     ? remoteSaving
                       ? "Saving to club…"
-                      : `Saved to ${clubs.find((club) => club.id === activeClubId)?.name ?? "club"}`
+                      : remoteSaveError
+                        ? "Saved on device · club sync pending"
+                        : `Saved to ${clubs.find((club) => club.id === activeClubId)?.name ?? "club"}`
                     : workspaceLoaded
                       ? "Saved on this device"
                       : "Loading workspace…"}
                 </strong>
                 <small>
-                  {activeClubId
-                    ? `${clubs.find((club) => club.id === activeClubId)?.role ?? "member"} · ${workspaceStatus === "review-ready" ? "ready for review" : "draft in progress"}`
-                    : workspaceStatus === "review-ready" ? "Marked ready for review" : "Draft in progress"}
+                  {remoteSaveError
+                    ? remoteSaveError
+                    : activeClubId
+                      ? `${clubs.find((club) => club.id === activeClubId)?.role ?? "member"} · ${workspaceStatus === "review-ready" ? "ready for review" : "draft in progress"}`
+                      : workspaceStatus === "review-ready" ? "Marked ready for review" : "Draft in progress"}
                 </small>
               </div>
             </div>
