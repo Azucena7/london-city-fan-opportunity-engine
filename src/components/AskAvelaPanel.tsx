@@ -103,7 +103,7 @@ export function AskAvelaPanel({
       });
 
       if (response.ok) {
-        setStatus("Internal context added to the decision memory.");
+        setStatus("Internal context recorded in the club workspace.");
         setReply((current) => current ? { ...current, candidateContext: null } : current);
       } else {
         setStatus("This context could not be saved.");
