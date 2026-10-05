@@ -1797,3 +1797,35 @@ test("external work sync stores only the operational projection AVELA needs", ()
   assert.match(migration, /club_has_permission\(club_id,'connections','view'\)/);
   assert.match(migration, /club_has_permission\(club_id,'campaigns','view'\)/);
 });
+
+
+test("work-system routing stays explainable and confirmation-gated", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const routing = read("src/lib/workSystemRouting.ts");
+  const server = read("src/lib/workSystemRoutingServer.ts");
+  const component = read("src/components/WorkRoutingPlan.tsx");
+  const migration = read("supabase/migrations/20261005003500_work_system_routing_policy.sql");
+
+  assert.match(page, /getWorkRoutingRules/);
+  assert.match(page, /routeWorkPackage/);
+  assert.match(page, /WorkRoutingPlan/);
+
+  assert.match(routing, /highest-priority matching rule/);
+  assert.match(routing, /No enabled work-system routing rule matches this package/);
+  assert.match(routing, /unroutedItemKeys/);
+  assert.match(routing, /requireConfirmation/);
+
+  assert.match(server, /work_routing_rules/);
+  assert.match(server, /work_system_connections/);
+  assert.match(server, /state=eq\.connected/);
+
+  assert.match(component, /No route configured/);
+  assert.match(component, /Confirmation/);
+  assert.match(component, /AVELA does not dispatch this package automatically/);
+
+  assert.match(migration, /require_confirmation boolean not null default true check \(require_confirmation = true\)/);
+  assert.match(migration, /external work routing currently requires human confirmation/);
+  assert.match(migration, /routing destination_system must match the selected connection/);
+  assert.match(migration, /enabled routing rule requires a connected destination/);
+  assert.doesNotMatch(migration, /access_token|refresh_token|api_key|client_secret/i);
+});
