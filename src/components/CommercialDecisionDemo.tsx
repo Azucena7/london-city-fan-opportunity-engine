@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import styles from "./CommercialDecisionDemo.module.css";
 
 const scenarios = [
@@ -33,14 +34,14 @@ export function CommercialDecisionDemo() {
       <div className={styles.stage}>
         <div className={styles.rail} aria-hidden="true"><i /><i /><i /></div>
         {scenarios.map((scenario, index) => (
-          <article key={scenario.label} className={styles.scenario} style={{ "--delay": `${index * 2.4}s` } as React.CSSProperties}>
+          <article key={scenario.label} className={styles.scenario} style={{ "--delay": `${index * 2.4}s` } as CSSProperties}>
             <div className={styles.scenarioHead}>
               <span>{scenario.label}</span>
               <strong>Context changes</strong>
             </div>
             <div className={styles.signalStack}>
               {scenario.signals.map((signal, signalIndex) => (
-                <div key={signal} style={{ "--signal-delay": `${index * 2.4 + signalIndex * 0.28}s` } as React.CSSProperties}>
+                <div key={signal} style={{ "--signal-delay": `${index * 2.4 + signalIndex * 0.28}s` } as CSSProperties}>
                   <span>{String(signalIndex + 1).padStart(2, "0")}</span>
                   <strong>{signal}</strong>
                 </div>
