@@ -287,3 +287,47 @@
 .governanceActions button{border:1px solid var(--product-line);border-radius:8px;background:#fff;padding:8px 10px;font-size:10px;font-weight:900;color:var(--product-ink);cursor:pointer}
 .governanceActions button:disabled{opacity:.55;cursor:not-allowed}
 .governanceActions a{white-space:nowrap}
+
+
+/* Workspace legibility pass: keep planning dense, but never microscopic. */
+.head>div>span,.need>span,.sectionHead span,.summary span,.playerTop span,.capacity span,.state>span,.packHead span,.packMetrics span,
+.campaignContext span,.momentumTop span,.simulatorHead span,.liveMetrics span,.changeStory span,.railState span,.railMetrics span,
+.briefMain>span,.briefFacts span,.heroPackIntro>span,.heroScore>span,.heroPlayers span,.heroMetrics span,.alternativeHead>span,
+.evidencePanel>summary>span,.workflowExit span{font-size:11px}
+
+.head p,.sectionHead p,.alertGrid p,.packGrid p,.simulatorHead p,.changeStory p,.workflowExit p,
+.heroPackIntro p,.heroWhy p,.demoNote{font-size:12px!important;line-height:1.5!important}
+
+.summary small,.state small,.need small,.alertGrid small,.packPlayers small,.momentumDimensions b,.momentumDimensions small,
+.momentumSource,.liveMetrics small,.railState small,.heroScore>small,.heroPlayers small{font-size:11px!important;line-height:1.4}
+
+.playerGrid label,.momentumGrid button,.usePack,.simulatorHead>button,.governanceActions button,.railLinks a{font-size:12px}
+.railLinks a,.governanceActions button,.momentumGrid button,.usePack,.simulatorHead>button{min-height:38px}
+.decisionRail{border-radius:10px;overflow:hidden;box-shadow:0 8px 22px rgba(16,39,66,.06)}
+.decisionRail>.railState,.decisionRail>.railLinks{padding:12px 14px}
+.railMetrics>div{padding:12px}
+.railState strong{font-size:14px}
+.railMetrics strong{font-size:15px}
+.briefBuilder{margin-top:16px;box-shadow:none}
+.briefMain{padding:16px}
+.briefFacts article{padding:14px 16px}
+.recommendation{padding:20px 0 12px}
+.heroPack{box-shadow:none}
+.heroPackIntro{padding:22px}
+.heroPackIntro h3{font-size:clamp(24px,2.6vw,32px)}
+.heroPlayers>div,.heroMetrics>div{padding:14px 16px}
+.alerts,.packs,.momentum,.playerGrid{padding:18px 0}
+.sectionHead{align-items:center;gap:20px;margin-bottom:12px}
+.sectionHead h2,.simulatorHead h2{font-size:19px!important}
+.playerGrid>article,.packGrid>article,.momentumGrid>article{padding:16px}
+.packPlayers strong{font-size:12px}
+.campaignContext>div,.campaignContext>article{padding:13px}
+.campaignContext strong{font-size:12px}
+.campaignContext select,.playerGrid select{min-height:40px;font-size:12px}
+.currentPlayers>button,.emptySlot{font-size:12px}
+.changeChips b{font-size:11px}
+.evidencePanel>summary{padding:16px 18px}
+.evidencePanel>summary>strong{font-size:14px}
+.evidencePanel>summary>small{font-size:12px;line-height:1.45}
+.evidenceBody{padding:0 18px 20px}
+@media(max-width:900px){.sectionHead{align-items:flex-start}}
