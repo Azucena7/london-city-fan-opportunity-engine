@@ -25,3 +25,14 @@
 @media(pointer:coarse){
   .drawer>summary{min-height:48px}
 }
+
+
+/* Shared component legibility baseline */
+.sectionHeader span{font-size:10px}
+.sectionHeader h2{font-size:16px!important}
+.badge{min-height:24px;padding:4px 8px;font-size:10px}
+.drawer>summary{padding:13px 15px}
+.drawer>summary span{font-size:10px}
+.drawer>summary strong{font-size:13px}
+.drawer>summary b{font-size:11px}
+.drawerBody{padding:15px}
