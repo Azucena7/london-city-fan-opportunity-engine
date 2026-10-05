@@ -2354,3 +2354,21 @@ test("player assets uses a guided progressive-disclosure funnel", () => {
   assert.match(planner, /<details id="scenario"/);
   assert.match(planner, /Decision evidence/);
 });
+
+
+test("sponsors uses a guided commercial decision funnel", () => {
+  const sponsors = read("src/app/app/sponsors/page.tsx");
+
+  assert.match(sponsors, /Sponsor decision workflow/);
+  assert.match(sponsors, /Opportunity/);
+  assert.match(sponsors, /Evidence/);
+  assert.match(sponsors, /Rights/);
+  assert.match(sponsors, /Review/);
+  assert.match(sponsors, /Commit/);
+  assert.match(sponsors, /Explore mode/);
+  assert.match(sponsors, /Opportunity matrix/);
+  assert.match(sponsors, /Prospecting queue/);
+  assert.match(sponsors, /Contract truth/);
+  assert.match(sponsors, /Approval gates/);
+  assert.match(sponsors, /Human review before commitment/);
+});

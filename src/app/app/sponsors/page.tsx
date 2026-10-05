@@ -50,6 +50,14 @@ export default function SponsorsPage() {
       subtitle="Pipeline opportunities, evidence quality and verified obligations in one workspace."
       actions={<><WorkspaceViewSwitcher value="list" /><WorkspaceFilterButton /></>}
     >
+      <nav className={styles.guidedSteps} aria-label="Sponsor decision workflow">
+        <a href="#opportunity" aria-current="step"><span>01</span><strong>Opportunity</strong><small>What looks worth pursuing</small></a>
+        <a href="#evidence"><span>02</span><strong>Evidence</strong><small>What is verified or missing</small></a>
+        <a href="#rights"><span>03</span><strong>Rights</strong><small>What contract truth allows</small></a>
+        <a href="#review"><span>04</span><strong>Review</strong><small>What still needs approval</small></a>
+        <a href="#commit"><span>05</span><strong>Commit</strong><small>Only after governed review</small></a>
+      </nav>
+
       <section className={styles.summary} aria-label="Sponsor opportunity summary">
         <WorkspaceCard><span>Prospecting</span><strong>{candidates.length}</strong><small>Current partner concepts</small></WorkspaceCard>
         <WorkspaceCard tone="accent"><span>Recommended</span><strong>{recommended?.pack.candidate ?? "—"}</strong><small>{recommended?.readiness?.weightedScore ?? "—"} readiness</small></WorkspaceCard>
@@ -58,7 +66,7 @@ export default function SponsorsPage() {
       </section>
 
       {recommended ? (
-        <WorkspaceCard className={styles.primary} tone="action">
+        <div id="opportunity"><WorkspaceCard className={styles.primary} tone="action">
           <WorkspaceSectionHeader
             eyebrow="Recommended for review"
             title={recommended.pack.candidate}
@@ -78,10 +86,15 @@ export default function SponsorsPage() {
               <div><span>Unresolved</span><strong>{recommended.evidence.missing}</strong></div>
             </div>
           </div>
-        </WorkspaceCard>
+        </WorkspaceCard></div>
       ) : null}
 
-      <WorkspaceCard className={styles.matrixCard}>
+      <details className={styles.explorePanel}>
+        <summary>
+          <div><span>Explore mode</span><strong>Opportunity matrix</strong><small>Open when you want to compare the broader commercial landscape.</small></div>
+          <b>Open matrix →</b>
+        </summary>
+        <WorkspaceCard className={styles.matrixCard}>
         <WorkspaceSectionHeader eyebrow="Opportunity matrix" title="Commercial readiness × evidence readiness" action={<span className={styles.matrixHint}>Bubble size = relevant fixtures</span>} />
         <div className={styles.sponsorMatrix} role="group" aria-label="Sponsor matrix. Higher position means stronger evidence readiness; further right means stronger commercial readiness.">
           <span className={styles.matrixY}>Evidence readiness</span>
@@ -119,12 +132,18 @@ export default function SponsorsPage() {
             </div>
           ))}
         </div>
-      </WorkspaceCard>
+        </WorkspaceCard>
+      </details>
 
       <section className={styles.workspaceGrid}>
-        <WorkspaceCard className={styles.pipeline}>
-          <WorkspaceSectionHeader eyebrow="Prospecting queue" title="Compare before outreach" />
-          <div className={styles.table} role="table" aria-label="Sponsor prospecting queue">
+        <details className={styles.explorePanel}>
+          <summary>
+            <div><span>Explore mode</span><strong>Prospecting queue</strong><small>Open to compare alternatives before outreach.</small></div>
+            <b>Open queue →</b>
+          </summary>
+          <WorkspaceCard className={styles.pipeline}>
+            <WorkspaceSectionHeader eyebrow="Prospecting queue" title="Compare before outreach" />
+            <div className={styles.table} role="table" aria-label="Sponsor prospecting queue">
             <div className={styles.tableHead} role="row">
               <span>Partner</span><span>Opportunity</span><span>Readiness</span><span>Evidence</span><span>Fixtures</span><span>Status</span>
             </div>
@@ -154,20 +173,21 @@ export default function SponsorsPage() {
                 </div>
               </details>
             ))}
-          </div>
-        </WorkspaceCard>
+            </div>
+          </WorkspaceCard>
+        </details>
 
         <aside className={styles.sideRail}>
-          <WorkspaceCard className={styles.truthBoundary}>
+          <div id="evidence"><WorkspaceCard className={styles.truthBoundary}>
             <WorkspaceSectionHeader eyebrow="Truth boundary" title="Prospecting ≠ contract truth" />
             <p>Partner ideas can be ranked before outreach. Rights and obligations only become contract truth after governed verification.</p>
-          </WorkspaceCard>
+          </WorkspaceCard></div>
 
-          <WorkspaceDrawer label="Contract truth" title="Verified rights & obligations">
+          <div id="rights"><WorkspaceDrawer label="Contract truth" title="Verified rights & obligations">
             <SponsorContractHealth />
-          </WorkspaceDrawer>
+          </WorkspaceDrawer></div>
 
-          <WorkspaceDrawer label="Approval gates" title={waitingGates.length + " still waiting"}>
+          <div id="review"><WorkspaceDrawer label="Approval gates" title={waitingGates.length + " still waiting"}>
             <div className={styles.gateList}>
               {partnerCommercialPack.approvalGates.map((gate) => (
                 <article key={gate.id} data-state={gate.state}>
@@ -177,7 +197,12 @@ export default function SponsorsPage() {
                 </article>
               ))}
             </div>
-          </WorkspaceDrawer>
+          </WorkspaceDrawer></div>
+
+          <div id="commit"><WorkspaceCard className={styles.commitBoundary}>
+            <WorkspaceSectionHeader eyebrow="Commit boundary" title="Human review before commitment" />
+            <p>AVELA can rank and prepare the opportunity. A commercial owner must still verify rights, resolve approval gates and make any external commitment.</p>
+          </WorkspaceCard></div>
         </aside>
       </section>
     </AppWorkspaceShell>
