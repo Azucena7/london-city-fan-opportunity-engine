@@ -64,7 +64,7 @@ export default async function ClubAppHome() {
   });
   const calendarRelationships = [...externalCalendarRelationships, ...internalCalendar.relationships];
   const radar = applyCalendarDecisionPressure(opportunityRadar, calendarRelationships);
-  const alerts = buildDecisionAlerts(
+  const fixtureAlerts = buildDecisionAlerts(
     radar.map((item) => ({ ...item, radarState: item.attentionState }))
   ).map((alert) => {
     const item = alert.fixtureId ? radar.find((candidate) => candidate.fixtureId === alert.fixtureId) : null;
@@ -72,13 +72,6 @@ export default async function ClubAppHome() {
       ? { ...alert, changed: item.attentionReason }
       : alert;
   });
-  const summary = decisionSummary(alerts);
-  const attention = alerts.filter((item) => ["act-now", "review", "blocked"].includes(item.priority));
-  const primary = attention[0] ?? alerts[0] ?? null;
-  const recentChanges = alerts
-    .flatMap((alert) => alert.events.map((event) => ({ ...event, alert })))
-    .sort((a,b) => b.at.localeCompare(a.at))
-    .slice(0, 6);
 
   const horizonEnd = new Date(today + "T00:00:00Z");
   horizonEnd.setUTCDate(horizonEnd.getUTCDate() + 30);
@@ -89,6 +82,26 @@ export default async function ClubAppHome() {
     from: currentState.updated_at,
     to: horizonEndIso
   });
+
+  const priorityWeight: Record<DecisionPriority, number> = {
+    blocked: 5,
+    "act-now": 4,
+    review: 3,
+    monitor: 2,
+    "on-track": 1
+  };
+  const alerts = [...opsState.crossAlerts, ...fixtureAlerts]
+    .sort((a,b) =>
+      priorityWeight[b.priority] - priorityWeight[a.priority]
+      || (b.events[0]?.at ?? "").localeCompare(a.events[0]?.at ?? "")
+    );
+  const summary = decisionSummary(alerts);
+  const attention = alerts.filter((item) => ["act-now", "review", "blocked"].includes(item.priority));
+  const primary = attention[0] ?? alerts[0] ?? null;
+  const recentChanges = alerts
+    .flatMap((alert) => alert.events.map((event) => ({ ...event, alert })))
+    .sort((a,b) => b.at.localeCompare(a.at))
+    .slice(0, 6);
 
   const activeCampaigns = campaignPlans.campaigns.filter((campaign) =>
     campaign.schedule.some((item) => item.state !== "complete")
