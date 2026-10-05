@@ -1132,9 +1132,9 @@ test("AVELA uses an application shell with a left sidebar and bounded work area"
   assert.match(nav, /aside className=\{styles\.sidebar\}/);
   assert.match(nav, /Club workflow/);
   assert.match(navCss, /position:fixed/);
-  assert.match(navCss, /width:232px/);
-  assert.match(system, /margin-left:232px/);
-  assert.match(system, /width:calc\(100% - 232px\)/);
+  assert.match(navCss, /width:220px/);
+  assert.match(system, /margin-left:220px/);
+  assert.match(system, /width:calc\(100% - 220px\)/);
   assert.match(system, /@media\(max-width:900px\)\{\.productAppShell\{margin-left:0;width:100%\}\}/);
   assert.doesNotMatch(system, /\.productAppShell\{padding-left:232px/);
   assert.match(system, /max-width:1120px/);
@@ -2391,4 +2391,16 @@ test("campaigns and fixture workspace use progressive decision disclosure", () =
   assert.match(fixture, /05/);
   assert.match(fixture, /06 Learn/);
   assert.ok((fixture.match(/className=\{styles\.phasePanel\}/g) ?? []).length >= 5);
+});
+
+
+test("global navigation groups decision work instead of exposing every module equally", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+
+  assert.match(nav, /label: "Decide"/);
+  assert.match(nav, /label: "Plan & execute"/);
+  assert.match(nav, /label: "Learn"/);
+  assert.match(nav, /Club system/);
+  assert.match(nav, /const utilityItems/);
+  assert.match(nav, /Help & methodology/);
 });
