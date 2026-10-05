@@ -257,3 +257,20 @@
   .simulator{padding:18px}
   .evidenceBody{padding:0 14px 18px}
 }
+
+/* Shared workspace density */
+.wrap{max-width:none;width:100%;padding:4px 0 24px}
+.head{grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:center;padding:0 0 12px}
+.head h1{margin:4px 0 6px;font-size:clamp(22px,2.8vw,30px)!important;line-height:1.08;letter-spacing:-.035em}
+.head p{font-size:12px;line-height:1.5}
+.need{padding-left:14px}
+.alerts,.packs,.momentum{padding:22px 0}
+.playerGrid{padding:22px 0}
+.sectionHead{margin-bottom:10px}
+.sectionHead h2,.simulatorHead h2{font-size:20px!important}
+.recommendation{padding:18px 0 12px}
+.simulator{padding:18px}
+@media(max-width:900px){
+  .head{grid-template-columns:1fr;align-items:start}
+  .need{padding:12px 0 0;border-left:0;border-top:1px solid var(--product-line)}
+}

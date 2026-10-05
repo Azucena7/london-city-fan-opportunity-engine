@@ -1,13 +1,13 @@
 .shell{min-height:100vh;background:var(--product-bg,#F6F7F9);color:var(--product-ink,#10131A);padding:46px 32px 72px}
-.content{max-width:1120px;margin:0 auto}
-.eyebrow{display:block;color:var(--product-muted,#69707D);font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.content{max-width:760px;margin:0;padding:18px;border:1px solid var(--product-line,#D9DDE5);border-radius:12px;background:#fff}
+.eyebrow{display:block;color:var(--product-muted,#69707D);font-size:10px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
 .title{max-width:720px;margin:8px 0 10px;font-size:clamp(28px,4vw,48px);letter-spacing:-.04em}
-.copy{max-width:620px;margin:0;color:var(--product-muted,#69707D);font-size:14px;line-height:1.55}
-.skeleton{display:grid;gap:10px;margin-top:28px}
-.skeleton span{display:block;height:72px;border:1px solid var(--product-line,#D9DDE5);border-radius:8px;background:linear-gradient(90deg,#fff,#F0F1F4,#fff);background-size:200% 100%;animation:pulse 1.4s ease-in-out infinite}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
-.actions button,.actions a{min-height:40px;padding:10px 14px;border:1px solid var(--product-line,#D9DDE5);border-radius:7px;background:#fff;color:var(--product-ink,#10131A);font:inherit;font-size:11px;font-weight:850;text-decoration:none;cursor:pointer}
-.actions button{background:var(--product-accent,#6657FF);border-color:var(--product-accent,#6657FF);color:#fff}
+.copy{max-width:620px;margin:6px 0 0;color:var(--product-muted,#69707D);font-size:12px;line-height:1.55}
+.skeleton{display:grid;gap:8px;margin-top:18px}
+.skeleton span{display:block;height:58px;border:1px solid var(--product-line,#D9DDE5);border-radius:8px;background:linear-gradient(90deg,#fff,#F0F3F4,#fff);background-size:200% 100%;animation:pulse 1.4s ease-in-out infinite}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.actions button,.actions a{min-height:38px;padding:9px 12px;border:1px solid var(--product-line,#D9DDE5);border-radius:7px;background:#fff;color:var(--product-ink,#10131A);font:inherit;font-size:11px;font-weight:850;text-decoration:none;cursor:pointer}
+.actions button{background:var(--product-navy,#102742);border-color:var(--product-navy,#102742);color:#fff}
 @keyframes pulse{0%{background-position:0 0}100%{background-position:-200% 0}}
-@media(max-width:900px){.shell{padding:30px 18px 52px}}
+@media(max-width:900px){.shell{padding:30px 18px 52px}.content{padding:14px}}
 @media(prefers-reduced-motion:reduce){.skeleton span{animation:none}}

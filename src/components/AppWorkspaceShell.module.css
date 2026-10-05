@@ -71,3 +71,19 @@
   .topbar{grid-template-columns:minmax(0,1fr) auto}
   .pagebar{min-height:0}
 }
+/* Responsive workspace density polish */
+@media(max-width:900px){
+  .topbar{top:54px}
+  .pagebar{gap:8px}
+  .actions{padding-bottom:2px;scrollbar-width:none}
+  .actions::-webkit-scrollbar{display:none}
+}
+@media(max-width:620px){
+  .topbar{padding:7px 10px}
+  .search{height:34px}
+  .profile{height:34px;padding-right:4px}
+  .pagebar{padding:9px 12px}
+  .titleRow h1{font-size:19px!important;white-space:normal}
+  .titleRow p{font-size:11px!important}
+  .content{padding:10px 10px 20px}
+}
