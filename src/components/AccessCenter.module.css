@@ -54,3 +54,36 @@
 .head>div>span,.empty>span,.grid article>span,.authGrid article>span,.state span,.accountBar span,.accessFlow span,.accessSuccess span,.loadingState>span{font-size:10px}
 .accessFlow small{font-size:11px}
 @media(max-width:800px){.head h1,.empty h1{font-size:clamp(34px,10vw,48px)}}
+
+
+/* Shared Team/Access workspace density */
+.wrap{width:100%;padding:4px 0 24px}
+.head{grid-template-columns:minmax(0,1fr) 260px;gap:20px;align-items:center}
+.head h1,.empty h1{font-size:clamp(24px,3vw,34px);line-height:1.08;letter-spacing:-.035em}
+.head p,.empty p{font-size:12px;line-height:1.5}
+.state{padding-left:16px}
+.state span,.accountBar span,.accessFlow span,.accessSuccess span,.loadingState>span{font-size:10px}
+.state strong{font-size:13px}
+.state small{font-size:11px;line-height:1.4}
+.authGrid,.grid{margin-top:18px}
+.authGrid article,.grid article{padding:18px}
+.authGrid h2,.grid h2{font-size:18px}
+.authGrid label,.grid label{font-size:11px}
+.authGrid input,.grid select,.grid textarea{min-height:42px}
+.authGrid p,.grid article>p{font-size:12px;line-height:1.5}
+.authGrid button,.grid button,.accountBar button{min-height:42px;font-size:12px}
+.accountBar{margin-top:18px;padding:14px 16px}
+.rows>div{padding:11px 12px}
+.rows strong{font-size:12px}
+.rows small{font-size:11px}
+.reviewList>div{padding:12px}
+.reviewList strong{font-size:12px}
+.reviewList small{font-size:11px}
+.guardrail strong,.guardrail p{font-size:12px}
+.accessFlow{margin-top:20px}
+.accessFlow>div{padding:14px}
+.accessFlow strong{font-size:13px}
+.accessFlow small{font-size:11px}
+.accessSuccess{padding:16px 18px}
+.accessSuccess strong{font-size:17px}
+.accessSuccess p{font-size:12px;line-height:1.5}
