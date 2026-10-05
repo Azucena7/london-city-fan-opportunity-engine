@@ -107,6 +107,11 @@ const nwslPublicBenchmark = [
 ] as const;
 
 export function IntelligenceSources() {
+  const sourceRows = sources.map((source) => ({ source, health: aggregateHealth(source.healthIds) }));
+  const operational = sourceRows.filter((item) => item.health.primary?.state === "operational").length;
+  const degraded = sourceRows.filter((item) => item.health.primary?.state === "degraded").length;
+  const access = sourceRows.filter((item) => ["requires-access","not-configured","blocked"].includes(item.health.primary?.state ?? "")).length;
+  const coverage = Math.round((operational / Math.max(1, sourceRows.length)) * 100);
   return (
     <section className={styles.wrap}>
       <header className={styles.head}>
@@ -122,9 +127,30 @@ export function IntelligenceSources() {
         </div>
       </header>
 
+      <section className={styles.healthMap} aria-label="Source health overview">
+        <div className={styles.coverageDial} style={{ "--coverage": coverage + "%" } as React.CSSProperties}>
+          <span>Operational coverage</span>
+          <strong>{coverage}%</strong>
+          <small>{operational} of {sourceRows.length} source groups operational</small>
+        </div>
+        <div className={styles.healthSummary}>
+          <div data-state="operational"><span>Operational</span><strong>{operational}</strong><small>Decision evidence refreshing normally</small></div>
+          <div data-state="degraded"><span>Degraded</span><strong>{degraded}</strong><small>Available with reduced confidence or freshness</small></div>
+          <div data-state="access"><span>Needs access / setup</span><strong>{access}</strong><small>Private or unconfigured evidence</small></div>
+        </div>
+        <div className={styles.healthRows}>
+          {sourceRows.map(({ source, health }) => (
+            <article key={source.name} data-state={health.primary?.state ?? "unknown"}>
+              <div><span>{source.category}</span><strong>{source.name}</strong></div>
+              <b>{health.label}</b>
+              <small>{health.latest ? "Last success " + new Date(health.latest).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) : "No successful private refresh"}</small>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <div className={styles.sourceList}>
-        {sources.map((source) => {
-          const health = aggregateHealth(source.healthIds);
+        {sourceRows.map(({ source, health }) => {
           return (
           <article key={source.name} className={styles.source}>
             <div className={styles.sourceTop}>
