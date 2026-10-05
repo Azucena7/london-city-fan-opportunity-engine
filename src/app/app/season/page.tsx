@@ -10,7 +10,7 @@ import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
-import { WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
+import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./season.module.css";
 
 export const metadata: Metadata = {
@@ -189,12 +189,12 @@ export default async function SeasonIntelligencePage() {
                   <div className={styles.signals}><span>Evidence</span><strong>{row.materialSignals}</strong><small>material signals</small></div>
                   <div className={styles.campaign}>
                     <span>Campaign</span>
-                    <strong>{row.campaign ? row.campaign.status : "None"}</strong>
+                    {row.campaign ? <DecisionStateBadge state={row.approvalsTotal > 0 && row.approvalsReady < row.approvalsTotal ? "REVIEW" : "READY"} label={row.campaign.status} /> : <DecisionStateBadge state="MONITOR" label="None" />}
                     <div><i><em style={{ width: approvalPct + "%" }} /></i><small>{row.approvalsTotal ? row.approvalsReady + "/" + row.approvalsTotal + " approvals" : "No gates"}</small></div>
                   </div>
                   <div className={styles.outcome}>
                     <span>Outcome</span>
-                    <strong>{row.measuredOutcome ? "Measured" : row.attendance !== null ? "Attendance only" : "Pending"}</strong>
+                    <DecisionStateBadge state={row.measuredOutcome ? "MEASURED" : "MONITOR"} label={row.measuredOutcome ? "Measured" : row.attendance !== null ? "Attendance only" : "Pending"} />
                     <Link href={row.measuredOutcome || row.attendance !== null ? "/app/learning?fixture=" + row.id : "/app/matches/" + row.id}>Open →</Link>
                   </div>
                 </article>
