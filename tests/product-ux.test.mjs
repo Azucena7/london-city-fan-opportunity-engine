@@ -1324,7 +1324,7 @@ test("Player Asset Planning works for fixture and non-fixture commercial campaig
   assert.match(planner, /selectedCampaign\.activationDate/);
   assert.match(planner, /selectedCampaign\.playerNeed/);
   assert.match(planner, /avela:player-pack/);
-  assert.match(planner, /saved on this device/);
+  assert.match(planner, /window\.localStorage\.setItem\(selectionStorageKey/);
   assert.match(planner, /does not approve talent use/);
   assert.match(campaigns, /Campaigns that do not need a fixture to exist/);
   assert.match(campaigns, /season tickets, Christmas, retail, community or sponsor activity/i);
@@ -1341,7 +1341,7 @@ test("Player pack selection syncs complete planning choices through club-scoped 
   assert.match(planner, /player-pack-selection/);
   assert.match(planner, /Synced to club workspace · selected/);
   assert.match(planner, /Complete the pack to sync shared selection/);
-  assert.match(planner, /shared club selection/);
+  assert.match(planner, /setSelectionSource\("shared"\)/);
   assert.match(route, /player_pack_selections/);
   assert.match(route, /status: "selected"/);
   assert.match(route, /selectedPlayerIds/);
@@ -1668,13 +1668,14 @@ test("Player Assets keeps the live pack decision visible and navigable", () => {
   const css = read("src/components/PlayerAssetPlanner.module.css");
   const readme = read("README.md");
 
-  for (const id of ["campaign-context", "availability", "player-status", "momentum", "packs", "scenario"]) {
+  for (const id of ["campaign-context", "constraints", "availability", "player-status", "momentum", "packs", "compare", "scenario", "commit"]) {
     assert.match(planner, new RegExp(`id="${id}"`));
   }
-  assert.match(planner, /Player asset planning sections/);
-  assert.match(planner, /Live pack/);
-  assert.match(planner, /livePackState/);
-  assert.match(css, /\.decisionRail/);
+  assert.match(planner, /Player pack workflow/);
+  assert.match(planner, /Recommended pack/);
+  assert.match(planner, /<details id="compare"/);
+  assert.match(planner, /<details id="scenario"/);
+  assert.match(css, /\.guidedSteps/);
   assert.match(css, /position:sticky/);
   assert.match(readme, /\/app\/players/);
   assert.doesNotMatch(readme, /\/app\/player-assets/);
@@ -2338,4 +2339,18 @@ test("calendar exposes a next-decision rail and shared handoffs", () => {
   assert.match(handoff, /Campaign/);
   assert.match(handoff, /Players/);
   assert.match(handoff, /Learning/);
+});
+
+
+test("player assets uses a guided progressive-disclosure funnel", () => {
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+
+  assert.match(planner, /Player pack workflow/);
+  assert.match(planner, /Step 02 · Constraints/);
+  assert.match(planner, /Step 03 · Recommended pack/);
+  assert.match(planner, /Step 04 · Compare/);
+  assert.match(planner, /id="commit"/);
+  assert.match(planner, /<details id="compare"/);
+  assert.match(planner, /<details id="scenario"/);
+  assert.match(planner, /Decision evidence/);
 });
