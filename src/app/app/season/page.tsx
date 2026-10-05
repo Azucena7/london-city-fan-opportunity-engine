@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarRelationshipPanel } from "@/components/CalendarRelationshipPanel";
+import { TalentPressurePanel } from "@/components/TalentPressurePanel";
 import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
@@ -228,6 +229,10 @@ export default async function SeasonIntelligencePage() {
               ))}
             </div>
             <p className={styles.note}>This measures drafted activation volume, not channel performance or incremental impact.</p>
+          </WorkspaceDrawer>
+
+          <WorkspaceDrawer label="Talent pressure" title="Player conflicts & weekly load">
+            <TalentPressurePanel />
           </WorkspaceDrawer>
 
           <WorkspaceDrawer label="Player assets" title="Player asset utilisation">
