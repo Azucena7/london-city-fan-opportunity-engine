@@ -132,11 +132,13 @@ textarea:focus-visible{
 }
 
 @media (pointer:coarse){
-  .productShell a,
-  .productShell button,
-  .productAppShell a,
-  .productAppShell button{
+  .productShell :is(a,button,summary,select,input),
+  .productAppShell :is(a,button,summary,select,input){
     min-height:44px;
+  }
+  .productShell :is(button,summary,a),
+  .productAppShell :is(button,summary,a){
+    min-width:44px;
   }
 }
 
