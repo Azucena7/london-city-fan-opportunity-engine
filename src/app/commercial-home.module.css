@@ -199,3 +199,164 @@
   .finalCta{padding:64px 20px}
   .footer{grid-template-columns:1fr}
 }
+
+
+/* Commercial value + capability horizon */
+.valueCreated,.capabilityHorizon{
+  width:min(1120px,calc(100% - 48px));
+  margin:0 auto;
+  padding:104px 0;
+  border-top:1px solid var(--avela-line);
+}
+.valueIntro,.capabilityIntro{
+  display:grid;
+  grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+  gap:22px 44px;
+  align-items:start;
+  margin-bottom:36px;
+}
+.valueIntro h2,.capabilityIntro h2{
+  margin:0;
+  max-width:850px;
+  font-size:clamp(38px,4.5vw,60px);
+  line-height:.97;
+  letter-spacing:-.052em;
+}
+.valueIntro p,.capabilityIntro p{
+  grid-column:2;
+  max-width:760px;
+  margin:0;
+  color:var(--avela-muted);
+  font-size:15px;
+  line-height:1.62;
+}
+.valueGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  border:1px solid var(--avela-line);
+  background:var(--avela-line);
+}
+.valueGrid article{
+  min-height:250px;
+  padding:22px;
+  background:#fff;
+}
+.valueGrid article>span,.valueGrid article>strong,.valueGrid article>small{display:block}
+.valueGrid article>span{
+  color:var(--avela-coral);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.valueGrid article>strong{
+  margin-top:28px;
+  font-size:19px;
+  line-height:1.25;
+}
+.valueGrid article>p{
+  margin:10px 0 0;
+  color:var(--avela-muted);
+  font-size:13px;
+  line-height:1.5;
+}
+.valueGrid article>small{
+  margin-top:20px;
+  padding-top:12px;
+  border-top:1px solid var(--avela-line);
+  color:var(--avela-teal);
+  font-size:10px;
+  font-weight:850;
+  line-height:1.4;
+}
+.capabilityHorizon{
+  padding-top:104px;
+}
+.horizonGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.horizonGrid article{
+  min-height:330px;
+  padding:24px;
+  border:1px solid var(--avela-line);
+  background:#fff;
+}
+.horizonGrid article[data-stage="now"]{border-top:4px solid var(--avela-teal)}
+.horizonGrid article[data-stage="connected"]{border-top:4px solid var(--avela-coral)}
+.horizonGrid article[data-stage="vision"]{border-top:4px solid var(--avela-sand)}
+.horizonGrid span,.horizonGrid strong{display:block}
+.horizonGrid span{
+  color:var(--avela-teal);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.horizonGrid article[data-stage="connected"] span{color:var(--avela-coral-dark)}
+.horizonGrid article[data-stage="vision"] span{color:#8c7458}
+.horizonGrid strong{
+  margin-top:18px;
+  font-size:22px;
+  line-height:1.2;
+  letter-spacing:-.02em;
+}
+.horizonGrid ul{
+  margin:26px 0 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:11px;
+}
+.horizonGrid li{
+  position:relative;
+  padding-left:17px;
+  color:var(--avela-muted);
+  font-size:13px;
+  line-height:1.45;
+}
+.horizonGrid li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.55em;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--avela-teal);
+}
+.horizonGrid article[data-stage="connected"] li::before{background:var(--avela-coral)}
+.horizonGrid article[data-stage="vision"] li::before{background:#b79d7d}
+.horizonBoundary{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:18px;
+  align-items:center;
+  margin-top:14px;
+  padding:16px 18px;
+  background:var(--avela-sand-soft);
+  border-left:3px solid var(--avela-coral);
+}
+.horizonBoundary strong{
+  font-size:12px;
+  white-space:nowrap;
+}
+.horizonBoundary p{
+  margin:0;
+  color:var(--avela-muted);
+  font-size:12px;
+  line-height:1.5;
+}
+@media(max-width:960px){
+  .valueIntro,.capabilityIntro{grid-template-columns:1fr}
+  .valueIntro p,.capabilityIntro p{grid-column:1}
+  .valueGrid,.horizonGrid{grid-template-columns:1fr 1fr}
+  .horizonBoundary{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .valueCreated,.capabilityHorizon{width:min(100% - 30px,1120px);padding:72px 0}
+  .valueGrid,.horizonGrid{grid-template-columns:1fr}
+  .valueGrid article,.horizonGrid article{min-height:auto}
+  .horizonBoundary strong{white-space:normal}
+}

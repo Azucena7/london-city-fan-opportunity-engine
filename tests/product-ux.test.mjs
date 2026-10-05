@@ -2422,3 +2422,16 @@ test("core operational surfaces keep text at or above 10px", () => {
     assert.doesNotMatch(css, /font-size:(?:8|9)px/);
   }
 });
+
+
+test("commercial home makes AVELA value and capability horizon explicit", () => {
+  const page = read("src/app/page.tsx");
+  const demo = read("src/components/CommercialDecisionDemo.tsx");
+
+  assert.match(page, /The value AVELA adds/);
+  assert.match(page, /What AVELA can become/);
+  assert.match(page, /Vision is not current capability/);
+  assert.match(page, /CommercialDecisionDemo/);
+  assert.match(demo, /illustrative product simulation/);
+  assert.match(demo, /When the context changes, the recommendation should change with it/);
+});

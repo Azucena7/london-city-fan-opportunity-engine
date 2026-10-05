@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
 import { CommercialSignalStage } from "@/components/CommercialSignalStage";
 import { CommercialEcosystem } from "@/components/CommercialEcosystem";
+import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import { CommercialFAQ } from "@/components/CommercialFAQ";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { decisionValidation } from "@/lib/data";
@@ -34,8 +35,8 @@ export default function Home() {
           <span className={styles.eyebrow}>Decision intelligence for football clubs</span>
           <h1>Read the signals.<br />Move the club.</h1>
           <p className={styles.heroLead}>
-            AVELA combines external signals, club context, contracts, player availability, calendars and operational
-            capacity to show your team what needs attention, what to do next and whether you can realistically deliver it.
+            AVELA turns fragmented club context into governed next moves — helping teams spot opportunities earlier,
+            decide faster, use scarce assets better and carry learning from one fixture into the next.
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.primary} href="/live/london-city">See AVELA on a real fixture</Link>
@@ -73,6 +74,71 @@ export default function Home() {
       </section>
 
       <CommercialEcosystem />
+
+      <section className={styles.valueCreated} aria-labelledby="value-created-title">
+        <div className={styles.valueIntro}>
+          <span className={styles.kicker}>The value AVELA adds</span>
+          <h2 id="value-created-title">The gain is not another insight. It is a better operating decision.</h2>
+          <p>
+            AVELA connects evidence that normally lives in different teams, then turns it into a decision the club can
+            actually act on. The pilot should prove value in the operating metrics below — not rely on vague AI claims.
+          </p>
+        </div>
+        <div className={styles.valueGrid}>
+          <article><span>01</span><strong>Catch opportunities earlier</strong><p>Surface material changes before they disappear inside dashboards, inboxes or individual memory.</p><small>Measure: signal → review time</small></article>
+          <article><span>02</span><strong>Reduce coordination cost</strong><p>Bring player, sponsor, calendar, rights and capacity constraints into the same decision instead of reconciling them manually.</p><small>Measure: handoffs + decision cycle time</small></article>
+          <article><span>03</span><strong>Use scarce assets better</strong><p>Optimise player windows, commercial rights, creative capacity and campaign timing around the highest-value viable option.</p><small>Measure: asset utilisation + conflicts avoided</small></article>
+          <article><span>04</span><strong>Make decisions safer</strong><p>Keep evidence, assumptions, approvals and contract truth visible before the club commits externally.</p><small>Measure: blocked risks resolved before launch</small></article>
+          <article><span>05</span><strong>Learn across fixtures</strong><p>Preserve recommendation, club decision, execution and outcome so the next comparable decision starts smarter.</p><small>Measure: learning reused in later decisions</small></article>
+          <article><span>06</span><strong>Increase organisational leverage</strong><p>Let specialist teams keep their tools while AVELA reduces the work required to connect them around one priority.</p><small>Measure: manual analysis replaced or shortened</small></article>
+        </div>
+      </section>
+
+      <CommercialDecisionDemo />
+
+      <section className={styles.capabilityHorizon} aria-labelledby="capability-horizon-title">
+        <div className={styles.capabilityIntro}>
+          <span className={styles.kicker}>What AVELA can become</span>
+          <h2 id="capability-horizon-title">Start as a decision layer. Grow into the club&apos;s operating intelligence.</h2>
+          <p>Capability expands with authorised data, connectors and governance. The stages below separate what exists now from what becomes possible as the club connects more context.</p>
+        </div>
+        <div className={styles.horizonGrid}>
+          <article data-stage="now">
+            <span>Now · Product today</span>
+            <strong>Detect, prioritise, recommend and govern.</strong>
+            <ul>
+              <li>Fixture-led opportunity radar</li>
+              <li>Campaign and player-pack recommendations</li>
+              <li>Sponsor, rights and calendar constraints</li>
+              <li>Decision evidence, approvals and learning trace</li>
+            </ul>
+          </article>
+          <article data-stage="connected">
+            <span>Next · With club integrations</span>
+            <strong>Make decisions with richer operational truth.</strong>
+            <ul>
+              <li>CRM and ticketing audience evidence</li>
+              <li>Private performance and sponsor measurement</li>
+              <li>Live work-capacity and calendar context</li>
+              <li>Authorised handoffs into club systems</li>
+            </ul>
+          </article>
+          <article data-stage="vision">
+            <span>Horizon · Product direction</span>
+            <strong>Continuously optimise the club&apos;s growth choices.</strong>
+            <ul>
+              <li>Cross-fixture resource allocation</li>
+              <li>Scenario planning across campaigns and assets</li>
+              <li>Proactive detection of commercial and fan opportunities</li>
+              <li>Institutional memory that compounds across seasons</li>
+            </ul>
+          </article>
+        </div>
+        <div className={styles.horizonBoundary}>
+          <strong>Vision is not current capability.</strong>
+          <p>AVELA should only claim an integration, automated action or evidence source when it is actually authorised and operational for that club.</p>
+        </div>
+      </section>
 
       <section className={styles.example} aria-labelledby="example-title">
         <div className={styles.exampleIntro}>
