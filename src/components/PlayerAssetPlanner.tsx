@@ -41,9 +41,12 @@ const fixtureBrief = {
   playerNeed: 3
 };
 
-export function PlayerAssetPlanner() {
+export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: string }) {
   const campaignOptions = [fixtureBrief, ...demoCommercialCampaigns];
-  const [campaignId, setCampaignId] = useState(campaignOptions[0]?.id ?? fixtureBrief.id);
+  const resolvedInitialCampaignId = campaignOptions.some((item) => item.id === initialCampaignId)
+    ? initialCampaignId!
+    : campaignOptions[0]?.id ?? fixtureBrief.id;
+  const [campaignId, setCampaignId] = useState(resolvedInitialCampaignId);
   const selectedCampaign = campaignOptions.find((item) => item.id === campaignId) ?? fixtureBrief;
   const [countOverride, setCountOverride] = useState<number | null>(null);
   const count = countOverride ?? selectedCampaign.playerNeed;
