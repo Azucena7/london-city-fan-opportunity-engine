@@ -1594,7 +1594,8 @@ test("Learning accepts governed aggregate outcomes without supporter-level data"
   assert.match(route, /descriptive evidence, not a causal uplift claim/);
   assert.doesNotMatch(route, /supporter_id|email|postcode|payment/i);
   assert.match(panel, /without supporter-level data/);
-  assert.match(panel, /No names, emails, supporter IDs, postcodes, payment details or free-text supporter data/);
+  assert.match(panel, /stores aggregate metrics plus source metadata only/);
+  assert.match(panel, /Do not enter names, emails, supporter IDs, postcodes or payment details/);
   assert.match(panel, /results:administer/);
   assert.match(trace, /Club-reported aggregate/);
   assert.match(trace, /incrementality is not established/);
