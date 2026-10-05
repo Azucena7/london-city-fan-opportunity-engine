@@ -25,41 +25,33 @@ export function AppWorkspaceShell({
       <ProductJourneyNav active={active} />
       <div className={`${styles.frame} productAppShell`}>
         <header className={styles.topbar}>
-          <div className={styles.contextControls}>
-            <label className={styles.compactSelect}>
+          <div className={styles.contextControls} aria-label="Workspace context">
+            <div className={styles.contextChip}>
               <span>Club</span>
-              <select defaultValue="london-city" aria-label="Club">
-                <option value="london-city">London City</option>
-              </select>
-            </label>
-            <label className={styles.compactSelect}>
+              <strong>London City</strong>
+            </div>
+            <div className={styles.contextChip}>
               <span>Window</span>
-              <select defaultValue="30d" aria-label="Time window">
-                <option value="7d">Next 7 days</option>
-                <option value="30d">Next 30 days</option>
-                <option value="season">Season</option>
-              </select>
-            </label>
+              <strong>Next 30 days</strong>
+            </div>
           </div>
 
-          <label className={styles.search}>
+          <div className={styles.searchPlaceholder} aria-label="Search unavailable in this pilot">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
-            <input type="search" placeholder="Search signals, campaigns, players…" aria-label="Search AVELA" />
-            <kbd>⌘K</kbd>
-          </label>
+            <span>Search is not enabled in this pilot</span>
+          </div>
 
           <div className={styles.utility}>
             <Link href="/app/season" className={styles.iconButton} aria-label="Open calendar">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
             </Link>
-            <button type="button" className={styles.iconButton} aria-label="Notifications">
+            <span className={styles.iconStatus} aria-label="Notifications are not enabled in this pilot" title="Notifications are not enabled in this pilot">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
-              <span className={styles.notificationDot} />
-            </button>
-            <button type="button" className={styles.profile} aria-label="Open profile">
+            </span>
+            <div className={styles.profileStatus} aria-label="Current demo profile">
               <span>MT</span>
               <small>Marta</small>
-            </button>
+            </div>
           </div>
         </header>
 
@@ -85,27 +77,26 @@ export function WorkspaceViewSwitcher({
 }: {
   value?: "overview" | "list" | "board" | "calendar";
 }) {
-  const items = [
-    ["overview", "Overview"],
-    ["list", "List"],
-    ["board", "Board"],
-    ["calendar", "Calendar"]
-  ] as const;
+  const labels = {
+    overview: "Overview",
+    list: "List",
+    board: "Board",
+    calendar: "Calendar"
+  } as const;
 
   return (
-    <div className={styles.viewSwitcher} aria-label="View">
-      {items.map(([key, label]) => (
-        <button key={key} type="button" data-active={value === key ? "true" : "false"}>{label}</button>
-      ))}
+    <div className={styles.viewIndicator} aria-label={`Current view: ${labels[value]}`}>
+      <span>View</span>
+      <strong>{labels[value]}</strong>
     </div>
   );
 }
 
 export function WorkspaceFilterButton({ label = "Filters" }: { label?: string }) {
   return (
-    <button className={styles.filterButton} type="button">
+    <span className={styles.filterStatus} aria-label={`${label} are not enabled in this pilot`} title={`${label} are not enabled in this pilot`}>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
       {label}
-    </button>
+    </span>
   );
 }
