@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { ContractReviewQueue } from "@/components/ContractReviewQueue";
 import { ContractImpactGraph } from "@/components/ContractImpactGraph";
 import styles from "./contracts.module.css";
@@ -30,21 +30,26 @@ const playerFields = [
 
 export default function ContractsPage() {
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="contracts" />
-
-      <header className={styles.header}>
-        <div>
-          <span>AVELA · Contract Intelligence</span>
-          <h1>Verified rights and obligations — not extracted text treated as truth.</h1>
-          <p>AVELA can use reviewed contract intelligence to improve recommendations, alerts and fulfilment while the club&apos;s legal or document system remains the source of record.</p>
-        </div>
-        <aside className={styles.state}>
+    <AppWorkspaceShell
+      active="contracts"
+      eyebrow="Club system"
+      title="Contract intelligence"
+      subtitle="Verify rights, obligations and restrictions before they are allowed to influence recommendations."
+      actions={<Link className={styles.sourceLink} href="/app/sources">Review sources</Link>}
+    >
+      <section className={styles.summaryGrid}>
+        <article className={styles.truthCard}>
           <span>Truth boundary</span>
           <strong>Extraction is candidate evidence.</strong>
           <p>Only clauses explicitly verified by authorised governance users may become contract truth inside AVELA.</p>
-        </aside>
-      </header>
+        </article>
+
+        <article className={styles.summaryCard}>
+          <span>Operating rule</span>
+          <strong>Legal systems remain the source of record.</strong>
+          <p>AVELA operationalises verified clauses with provenance; it does not replace document management or legal approval.</p>
+        </article>
+      </section>
 
       <section className={styles.flow} aria-label="Contract verification lifecycle">
         <article><span>01</span><strong>Detected / uploaded</strong><p>Document discovered from an approved repository or uploaded by an authorised user.</p></article>
@@ -62,7 +67,6 @@ export default function ContractsPage() {
       </section>
 
       <ContractReviewQueue />
-
       <ContractImpactGraph />
 
       <section className={styles.grids}>
@@ -97,6 +101,6 @@ export default function ContractsPage() {
         </div>
         <Link href="/app/sources">Review data sources →</Link>
       </section>
-    </main>
+    </AppWorkspaceShell>
   );
 }
