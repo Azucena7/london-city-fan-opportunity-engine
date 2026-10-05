@@ -229,7 +229,7 @@ export function ContractReviewQueue() {
         ) : null}
       </div>
 
-      {message ? <p className={styles.message}>{message}</p> : null}
+      {message ? <p className={styles.message} role="status" aria-live="polite">{message}</p> : null}
     </section>
   );
 }

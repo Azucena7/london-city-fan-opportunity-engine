@@ -163,3 +163,10 @@
   .workLink strong{font-size:10px}
   .mobileMenuPanel{width:min(230px,calc(100vw - 24px))}
 }
+
+/* Accessibility: keep mobile navigation targets comfortably tappable. */
+@media(max-width:900px) and (pointer:coarse){
+  .workLink{min-height:44px}
+  .mobileMenu summary{min-height:44px;display:flex;align-items:center;justify-content:center}
+  .mobileMenuPanel a{min-height:44px}
+}

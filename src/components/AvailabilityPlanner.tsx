@@ -169,7 +169,7 @@ export function AvailabilityPlanner({
         )}
       </div>
 
-      {status ? <p className={styles.status}>{status}</p> : null}
+      {status ? <p className={styles.status} role="status" aria-live="polite">{status}</p> : null}
     </section>
   );
 }

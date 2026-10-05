@@ -18,3 +18,10 @@
 .drawer>summary b{color:var(--product-teal);font-size:10px}
 .drawer[open]>summary{border-bottom:1px solid #E0E5E8;background:#FAFCFC}
 .drawerBody{padding:14px}
+.drawer>summary{min-height:44px}
+.whenOpen{display:none!important}
+.drawer[open]>summary .whenClosed{display:none!important}
+.drawer[open]>summary .whenOpen{display:inline!important}
+@media(pointer:coarse){
+  .drawer>summary{min-height:48px}
+}
