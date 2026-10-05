@@ -40,7 +40,7 @@
 }
 .evidenceDrawer>summary::-webkit-details-marker,.interpretation>summary::-webkit-details-marker{display:none}
 .evidenceDrawer>summary strong,.interpretation>summary strong{display:block;margin-top:3px;font-size:10px}
-.evidenceDrawer>summary>span,.interpretation>summary>span{color:#2F8F83;font-size:9px;font-weight:850}
+.evidenceDrawer>summary>span,.interpretation>summary>span{color:var(--product-accent);font-size:9px;font-weight:850}
 .evidenceDrawer[open]>summary,.interpretation[open]>summary{border-bottom:1px solid #E5E9EC;background:#FAFCFC}
 .evidenceDrawerBody,.interpretationBody{padding:12px}
 .interpretationBody>p{margin:0 0 10px!important;color:#74828D!important;font-size:9px!important;line-height:1.45}
