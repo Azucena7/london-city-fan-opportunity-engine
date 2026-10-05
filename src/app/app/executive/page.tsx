@@ -33,7 +33,10 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   const results = getCurrentProductResults(selectedId);
   const approvals = campaign?.approvals.filter((item) => item.state !== "ready") ?? [];
   const measured = results?.state === "measured";
-  const decisionPosition = live.decisionState === "HOLD" ? 18 : live.decisionState === "REVIEW" ? 52 : 84;
+
+  if (!fixture || !live) return null;
+
+  const decisionPosition = live.decisionState === "HOLD" ? 18 : live.decisionState === "READY FOR REVIEW" ? 58 : 84;
   const signalHighlights = live.liveSignals.slice(0, 4);
   const flow = [
     { label: "Signals", state: radarItem?.materialSignalCount ? "ready" : "muted" },
@@ -43,8 +46,6 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
     { label: "Activation", state: campaign && approvals.length === 0 ? "ready" : "muted" },
     { label: "Measurement", state: measured ? "ready" : "muted" }
   ];
-
-  if (!fixture || !live) return null;
 
   return (
     <AppWorkspaceShell
