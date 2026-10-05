@@ -104,7 +104,7 @@ export function DecisionHistoryPanel({
       });
       if (response.ok) {
         setDetail("");
-        setMessage(eventType === "committed" ? "Decision recorded in club memory." : "Execution recorded in club memory.");
+        setMessage(eventType === "committed" ? "Final decision recorded in the club workspace." : "Execution recorded in the club workspace.");
         await load(activeClubId);
       } else {
         setMessage("This update could not be recorded. No club history was changed.");
@@ -147,8 +147,8 @@ export function DecisionHistoryPanel({
 
       <div className={styles.stages}>
         <div className={styles.stageComplete}><span>1</span><strong>Recommended</strong><small>Current AVELA recommendation</small></div>
-        <div className={state.committed ? styles.stageComplete : styles.stageActive}><span>2</span><strong>Committed</strong><small>{state.committed ? "Production decision recorded" : "Confirm final decision"}</small></div>
-        <div className={state.executed ? styles.stageComplete : state.committed ? styles.stageActive : styles.stagePending}><span>3</span><strong>Executed</strong><small>{state.executed ? "Actual execution recorded" : "Confirm what went live"}</small></div>
+        <div className={state.committed ? styles.stageComplete : styles.stageActive}><span>2</span><strong>Committed</strong><small>{state.committed ? "Production decision recorded" : "Record final decision"}</small></div>
+        <div className={state.executed ? styles.stageComplete : state.committed ? styles.stageActive : styles.stagePending}><span>3</span><strong>Executed</strong><small>{state.executed ? "Actual execution recorded" : "Record what went live"}</small></div>
         <div className={state.measured || state.learned ? styles.stageComplete : styles.stagePending}><span>4</span><strong>Learned</strong><small>{state.learned ? "Learning recorded" : state.measured ? "Outcome measured" : "Waiting for outcome"}</small></div>
       </div>
 
@@ -162,8 +162,8 @@ export function DecisionHistoryPanel({
           <textarea value={detail} onChange={(event) => setDetail(event.target.value)} placeholder="e.g. We launched CRM + Instagram on 8 Oct with two players instead of three." rows={3} />
         </label>
         <div className={styles.captureActions}>
-          <button type="button" disabled={Boolean(busy)} onClick={() => void record("committed")}>{busy === "committed" ? "Saving…" : "Confirm decision to production"}</button>
-          <button type="button" disabled={Boolean(busy)} onClick={() => void record("executed")}>{busy === "executed" ? "Saving…" : "Confirm what went live"}</button>
+          <button type="button" disabled={Boolean(busy)} onClick={() => void record("committed")}>{busy === "committed" ? "Saving…" : "Record final decision"}</button>
+          <button type="button" disabled={Boolean(busy)} onClick={() => void record("executed")}>{busy === "executed" ? "Saving…" : "Record what went live"}</button>
         </div>
         {message ? <p className={styles.message}>{message}</p> : null}
       </div>

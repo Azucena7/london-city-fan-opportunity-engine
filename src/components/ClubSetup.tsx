@@ -43,7 +43,7 @@ export function ClubSetup() {
       setMustAvoid(result.setup.brand_rules?.mustAvoid ?? mustAvoid);
       setApprovalOwner(result.setup.approval_rules?.owner ?? "Marketing");
       setRequiresApproval(result.setup.approval_rules?.required ?? true);
-      setStatus("Saved club setup loaded.");
+      setStatus("Club setup loaded from the club workspace.");
     } else {
       setStatus("No saved setup yet. Configure the club once below.");
     }
