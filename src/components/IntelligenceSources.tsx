@@ -128,7 +128,7 @@ export function IntelligenceSources() {
       </header>
 
       <section className={styles.healthMap} aria-label="Source health overview">
-        <div className={styles.coverageDial} style={{ "--coverage": coverage + "%" } as React.CSSProperties}>
+        <div className={styles.coverageDial} style={{ background: `conic-gradient(#2F8F83 0 ${coverage}%, #E7EBED ${coverage}% 100%)` }}>
           <span>Operational coverage</span>
           <strong>{coverage}%</strong>
           <small>{operational} of {sourceRows.length} source groups operational</small>
