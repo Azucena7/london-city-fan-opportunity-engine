@@ -1414,6 +1414,19 @@ test("Campaigns warns about near-term talent conflicts before approval", () => {
   assert.match(css, /talentConflictAlert/);
 });
 
+test("AVELA recommends a resolution for near-term player conflicts", () => {
+  const board = read("src/components/CommercialCampaignBoard.tsx");
+  const css = read("src/app/app/campaigns/campaigns.module.css");
+  assert.match(board, /governanceRank/);
+  assert.match(board, /Protect this pack/);
+  assert.match(board, /Change this pack/);
+  assert.match(board, /Manual resolution required/);
+  assert.match(board, /recommendPlayerPacks/);
+  assert.match(board, /Best alternative:/);
+  assert.match(board, /opportunity cost/);
+  assert.match(css, /conflictResolution/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");

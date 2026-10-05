@@ -2,7 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { demoCommercialCampaigns, demoPlayers } from "@/lib/clubStrategy";
+import {
+  demoAppearances,
+  demoCommercialCampaigns,
+  demoInternationalDuty,
+  demoPlayerMomentum,
+  demoPlayers,
+  demoPosts,
+  recommendPlayerPacks
+} from "@/lib/clubStrategy";
 import { WorkspaceBadge } from "@/components/WorkspaceUI";
 import styles from "@/app/app/campaigns/campaigns.module.css";
 
@@ -15,6 +23,12 @@ type Selection = {
   snapshot?: { activationDate?: string; campaignName?: string };
   updated_at?: string;
 };
+
+function governanceRank(status: Selection["status"]) {
+  if (status === "committed") return 3;
+  if (status === "approved") return 2;
+  return 1;
+}
 
 export function CommercialCampaignBoard() {
   const [selections, setSelections] = useState<Selection[]>([]);
@@ -71,9 +85,52 @@ export function CommercialCampaignBoard() {
             playerId,
             days,
             status: other.status,
-            campaignName: other.snapshot?.campaignName ?? otherCampaign?.name ?? other.campaign_id
+            campaignId: other.campaign_id,
+            campaignName: other.snapshot?.campaignName ?? otherCampaign?.name ?? other.campaign_id,
+            activationDate: bDate
           }));
         }) : [];
+
+        const conflictPlayerIds = new Set(conflictRows.map((item) => item.playerId));
+        const strongestCompeting = conflictRows
+          .map((conflict) => byCampaign.get(conflict.campaignId))
+          .filter((item): item is Selection => Boolean(item))
+          .sort((a, b) => governanceRank(b.status) - governanceRank(a.status)
+            || (a.snapshot?.activationDate ?? "").localeCompare(b.snapshot?.activationDate ?? ""))[0] ?? null;
+        const protectCurrent = Boolean(selection) && (
+          !strongestCompeting
+          || governanceRank(selection.status) > governanceRank(strongestCompeting.status)
+          || (
+            governanceRank(selection.status) === governanceRank(strongestCompeting.status)
+            && campaign.activationDate <= (strongestCompeting.snapshot?.activationDate ?? campaign.activationDate)
+          )
+        );
+        const shouldChangeCurrent = conflictRows.length > 0 && !protectCurrent;
+        const eligibleAlternatives = shouldChangeCurrent
+          ? recommendPlayerPacks(
+              demoPlayers.filter((player) => !conflictPlayerIds.has(player.id)),
+              {
+                date: campaign.activationDate,
+                category: campaign.category,
+                channel: campaign.channel,
+                territory: campaign.territory,
+                owner: campaign.owner,
+                budget: campaign.budget
+              },
+              demoAppearances,
+              Math.min(campaign.playerNeed, demoPlayers.length - conflictPlayerIds.size),
+              { fit: 30, balance: 15, engagement: 10, cost: 12, opportunityCost: 13, sportingAvailability: 5, momentum: 15 },
+              demoPosts,
+              true,
+              demoInternationalDuty,
+              demoPlayerMomentum
+            )
+          : [];
+        const resolutionPack = eligibleAlternatives[0] ?? null;
+        const currentCost = selection
+          ? selection.selected_player_ids.reduce((sum, id) => sum + (demoPlayers.find((player) => player.id === id)?.fee ?? 0), 0)
+          : null;
+        const costDelta = resolutionPack && currentCost !== null ? resolutionPack.totalFee - currentCost : null;
 
         return (
           <article key={campaign.id} className={styles.campaignCard}>
@@ -107,6 +164,17 @@ export function CommercialCampaignBoard() {
                     return `${player?.name ?? conflict.playerId} · ${conflict.days === 0 ? "same day" : conflict.days + "d"} vs ${conflict.campaignName} (${conflict.status})`;
                   }).join(" · ")}
                 </small>
+                <div className={styles.conflictResolution}>
+                  <span>AVELA resolution</span>
+                  <strong>{protectCurrent ? "Protect this pack" : resolutionPack ? "Change this pack" : "Manual resolution required"}</strong>
+                  <p>
+                    {protectCurrent
+                      ? "This campaign has the stronger governance state or earlier equal-priority date. Resolve the competing campaign first."
+                      : resolutionPack
+                        ? `Best alternative: ${resolutionPack.players.map((item) => item.player.name).join(" · ")} · score ${resolutionPack.packScore.toFixed(0)} · £${resolutionPack.totalFee}${costDelta === null ? "" : ` · ${costDelta >= 0 ? "+" : ""}£${costDelta} vs current`} · opportunity cost ${resolutionPack.opportunityCost.toFixed(0)}.`
+                        : "No eligible alternative pack satisfies the current date, contract, availability, budget and duty constraints."}
+                  </p>
+                </div>
               </div>
             ) : null}
             <Link href={"/app/players?campaign=" + encodeURIComponent(campaign.id)}>
