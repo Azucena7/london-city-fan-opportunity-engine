@@ -1503,6 +1503,19 @@ test("Commercial campaigns use the unified shared campaign record", () => {
   assert.match(collection, /campaign_kind/);
 });
 
+test("Sources uses source-health as the operational connector truth", () => {
+  const data = JSON.parse(read("data/live/source-health.json"));
+  const sources = read("src/components/IntelligenceSources.tsx");
+  assert.ok(data.sources.some((source) => source.id === "blinkfire" && source.state === "requires-access"));
+  assert.ok(data.sources.some((source) => source.id === "avela-web-analytics" && source.state === "operational"));
+  assert.ok(data.decisions.some((decision) => decision.id === "media-sponsor-learning" && decision.requiredSourceIds.includes("blinkfire")));
+  assert.match(sources, /sourceHealth/);
+  assert.match(sources, /aggregateHealth/);
+  assert.match(sources, /Last successful/);
+  assert.match(sources, /No private successful refresh recorded/);
+  assert.doesNotMatch(sources, /stateLabel:/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
