@@ -1129,12 +1129,13 @@ test("AVELA visual system removes olive identity and simplifies club app navigat
   assert.match(nav, />Club<\/span>/);
   assert.doesNotMatch(nav, /label: "London City Live"/);
   assert.doesNotMatch(nav, /primaryItems[\s\S]*label: "Credits"/);
-  assert.match(system, /--product-accent:#6657FF/);
-  assert.match(system, /--product-signal:#FF654F/);
-  assert.match(system, /--product-bg:#F6F7F9/);
+  assert.match(system, /--product-accent:#2F8F83/);
+  assert.match(system, /--product-signal:#EF8B6C/);
+  assert.match(system, /--product-bg:#F8F6F1/);
   assert.doesNotMatch(system, /#C7EA3A/);
   assert.doesNotMatch(system, /#526D00/i);
-  assert.match(navCss, /#6657FF/);
+  assert.match(navCss, /#102742/);
+  assert.match(navCss, /#2F8F83/);
   assert.match(commercial, /#102742/i);
 });
 
@@ -1760,4 +1761,24 @@ test("commercial home explains why AVELA complements specialist tools and genera
   assert.match(faq, /What would a pilot look like/);
   assert.match(nav, /How it fits/);
   assert.match(nav, /FAQ/);
+});
+
+
+test("product shell uses the prepared AVELA navy teal coral identity without changing semantic risk colours", () => {
+  const system = read("src/app/product-system.css");
+  const nav = read("src/components/ProductJourneyNav.module.css");
+  const home = read("src/app/app/home.module.css");
+  const ask = read("src/components/AskAvelaPanel.module.css");
+
+  assert.match(system, /--product-navy:#102742/);
+  assert.match(system, /--product-teal:#2F8F83/);
+  assert.match(system, /--product-coral:#EF8B6C/);
+  assert.match(system, /--product-sand:#E8DCCB/);
+  assert.match(system, /--product-success:#16845B/);
+  assert.match(system, /--product-warning:#D78A1E/);
+  assert.match(system, /--product-danger:#D94A4A/);
+  assert.match(nav, /background:var\(--product-navy/);
+  assert.match(nav, /brandMark::after/);
+  assert.match(home, /background:var\(--product-navy\)/);
+  assert.match(ask, /background:var\(--product-navy\)/);
 });
