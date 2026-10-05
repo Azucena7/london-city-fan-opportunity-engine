@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import { calendar, campaignPlans, currentState, eventLandscape, partnerCommercialPack, pilotReadiness } from "@/lib/data";
+import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildDecisionAlerts, decisionSummary, type DecisionPriority } from "@/lib/decisionIntelligence";
@@ -101,7 +101,7 @@ export default async function ClubAppHome() {
   const recentChanges = alerts
     .flatMap((alert) => alert.events.map((event) => ({ ...event, alert })))
     .sort((a,b) => b.at.localeCompare(a.at))
-    .slice(0, 6);
+    .slice(0, 3);
 
   const activeCampaigns = campaignPlans.campaigns.filter((campaign) =>
     campaign.schedule.some((item) => item.state !== "complete")
@@ -110,8 +110,6 @@ export default async function ClubAppHome() {
     campaign.approvals.some((approval) => approval.state !== "ready")
   ).length;
 
-  const partnerCandidates = partnerCommercialPack.packs.length;
-  const partnerRecommended = pilotReadiness.candidates.find((candidate) => candidate.decision === "recommended-for-review") ?? null;
   const timeline = [
     ...upcoming
       .filter((fixture) => fixture.date <= horizonEndIso.slice(0, 10))
@@ -213,7 +211,7 @@ export default async function ClubAppHome() {
             <Link href="/app/matches">Open full Radar →</Link>
           </div>
           <div className={styles.alertList}>
-            {alerts.slice(0, 6).map((item) => (
+            {alerts.slice(0, 3).map((item) => (
               <article className={styles.alertCard} key={item.id}>
                 <div className={styles.alertState}>
                   <span className={styles.priorityPill} data-state={item.priority}>{prioritySymbol[item.priority]} {priorityLabel[item.priority]}</span>
@@ -342,43 +340,6 @@ export default async function ClubAppHome() {
         </div>
       </section>
 
-      <section className={styles.overview} aria-label="Workspace overview">
-        <article>
-          <span>Opportunity Radar</span>
-          <strong>{radar.length}</strong>
-          <p>Upcoming home fixtures currently monitored by the engine.</p>
-          <Link href="/app/matches">View opportunities →</Link>
-        </article>
-        <article>
-          <span>Campaign execution</span>
-          <strong>{alerts.filter((item) => item.events.some((event) => event.kind === "blocker")).length}</strong>
-          <p>Current decisions with an unresolved approval dependency.</p>
-          <Link href="/app/campaigns">View campaigns →</Link>
-        </article>
-        <article>
-          <span>Sponsor intelligence</span>
-          <strong>{partnerRecommended ? "Review" : "Prospecting"}</strong>
-          <p>{partnerCandidates} partner opportunities are modelled separately from verified contract obligations.</p>
-          <Link href="/app/sources">Review source boundary →</Link>
-        </article>
-        <article>
-          <span>Club context</span>
-          <strong>{clubContext ? "Active" : "Evidence only"}</strong>
-          <p>{clubContext ? `${clubContext.connectedChannels.length} channels and ${clubContext.priorityObjectives.length} objectives available to explain execution fit.` : "Connect club context to improve execution guidance without rewriting evidence."}</p>
-          <Link href={clubContext ? "/app/sources" : "/app/setup"}>{clubContext ? "Review sources →" : "Complete setup →"}</Link>
-        </article>
-        <article>
-          <span>Learning</span>
-          <strong>History</strong>
-          <p>Measured outcomes stay separate from recommendations so future decisions can learn from what actually happened.</p>
-          <Link href="/app/learning">Open learning →</Link>
-        </article>
-      </section>
-
-      <section className={styles.loop}>
-        <span>AVELA decision loop</span>
-        <div><b>Sense</b><i>→</i><b>Prioritise</b><i>→</i><strong>Recommend</strong><i>→</i><b>Decide</b><i>→</i><b>Execute</b><i>→</i><b>Learn</b></div>
-      </section>
     </main>
   );
 }
