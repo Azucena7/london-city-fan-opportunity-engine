@@ -1,19 +1,19 @@
-.commercialShell { padding-bottom: 64px; }
+.commercialShell { padding-bottom:64px;--avela-navy:#102742;--avela-teal:#2f8f83;--avela-coral:#ef8b6c;--avela-paper:#f8f6f1;--avela-line:rgba(16,39,66,.14); }
 .commercialLanguage { display: flex; justify-content: flex-end; margin: 18px 0; }
-.commercialHero, .commercialPanel { max-width: 920px; margin: 24px auto; padding: clamp(22px, 4vw, 44px); background: #FFFFFF; border: 1px solid #DADDE3; border-radius: 20px; color: #15171C; }
-.commercialHero h1 { max-width: 20ch; font-size: clamp(36px, 4.2vw, 52px); line-height: 1.1; letter-spacing: -.035em; }
+.commercialHero, .commercialPanel { max-width:1040px; margin:24px auto; padding:clamp(28px,4vw,46px); background:#FFFFFF; border:1px solid var(--avela-line); border-radius:16px; color:var(--avela-navy); }
+.commercialHero h1 { max-width:18ch; font-size:clamp(44px,5.4vw,68px); line-height:.98; letter-spacing:-.05em; }
 .commercialHero p, .commercialPanel p { max-width: 72ch; font-size: 16px; line-height: 1.65; }
-.commercialHero .eyebrow { font-size: 12px; }
-.commercialScope { font-weight: 700; }
-.commercialPanel h2 { margin: 0 0 20px; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; }
-.commercialPanel h3, .commercialTwoColumns h3 { font-size: 20px; line-height: 1.35; }
+.commercialHero .eyebrow { color:var(--avela-teal); font-size:11px; letter-spacing:.12em; }
+.commercialScope { font-weight:700; color:var(--avela-teal); }
+.commercialPanel h2 { margin:0 0 20px; font-size:clamp(28px,3.4vw,40px); line-height:1.2; letter-spacing:-.035em; }
+.commercialPanel h3, .commercialTwoColumns h3 { font-size:21px; line-height:1.35; }
 .commercialTwoColumns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .commercialTwoColumns > * { min-width: 0; }
 .commercialTableWrap { overflow-x: auto; max-width: 100%; margin: 20px 0; }
 .commercialTable { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 16px; line-height: 1.55; }
 .commercialTable caption { text-align: left; padding: 0 0 16px; font-size: 14px; color: #69707D; }
 .commercialTable th, .commercialTable td { padding: 16px; vertical-align: top; text-align: left; border-bottom: 1px solid #DADDE3; overflow-wrap: anywhere; }
-.commercialTable thead th { background: #F1F2F5; color: #15171C; }
+.commercialTable thead th { background:#eef4f2; color:#15171C; }
 .commercialSteps { padding-left: 24px; }
 .commercialSteps li { padding-left: 8px; margin-bottom: 24px; font-size: 18px; }
 .commercialSteps p { margin-top: 8px; }
@@ -23,8 +23,9 @@
 .commercialBrief { display: block; width: 100%; box-sizing: border-box; padding: 18px; border: 1px solid #B5BAC4; border-radius: 10px; background: #F6F7F9; color: #15171C; font: inherit; font-size: 16px; line-height: 1.6; resize: vertical; margin-bottom: 20px; }
 .commercialPanel button { cursor: pointer; font: inherit; min-height: 48px; }
 .commercialPanel a, .commercialHero a { overflow-wrap: anywhere; }
-.commercialHero a.productButton { color: #fff; text-decoration: none; }
-.commercialPanel :is(button, select, textarea, a):focus-visible, .commercialHero a:focus-visible { outline: 3px solid #6657FF; outline-offset: 4px; }
+.commercialHero a.productButton { background:var(--avela-navy); border-color:var(--avela-navy); color:#fff; text-decoration:none; }
+.commercialPanel button.productButton{background:var(--avela-navy);border-color:var(--avela-navy);color:#fff}
+.commercialPanel :is(button, select, textarea, a):focus-visible, .commercialHero a:focus-visible { outline:3px solid var(--avela-coral); outline-offset:4px; }
 #pilot-discussion { scroll-margin-top: 32px; }
 @media (max-width: 760px) {
   .commercialTwoColumns { grid-template-columns: 1fr; gap: 20px; }
@@ -32,42 +33,7 @@
   .commercialTable th, .commercialTable td { padding: 12px; }
 }
 
-.commercialHero,.commercialPanel{border-radius:12px}
-.commercialHero{margin-top:42px}
+.commercialHero,.commercialPanel{border-radius:16px}
+.commercialHero{margin-top:48px;padding:clamp(30px,5vw,58px);background:linear-gradient(145deg,#fff 0 70%,#f3ece2 100%)}
 .commercialPanel{margin-top:18px}
 .commercialHero p,.commercialPanel p{max-width:66ch}
-
-
-/* AVELA commercial pilot identity alignment */
-.commercialShell{
-  --avela-navy:#102742;
-  --avela-teal:#2f8f83;
-  --avela-coral:#ef8b6c;
-  --avela-paper:#f8f6f1;
-  --avela-line:rgba(16,39,66,.14);
-}
-.commercialHero,.commercialPanel{
-  max-width:1040px;
-  border-radius:16px;
-  border-color:var(--avela-line);
-  color:var(--avela-navy);
-}
-.commercialHero{
-  margin-top:48px;
-  padding:clamp(30px,5vw,58px);
-  background:linear-gradient(145deg,#fff 0 70%,#f3ece2 100%);
-}
-.commercialHero h1{
-  max-width:18ch;
-  font-size:clamp(44px,5.4vw,68px);
-  line-height:.98;
-  letter-spacing:-.05em;
-}
-.commercialHero .eyebrow{color:var(--avela-teal);font-size:11px;letter-spacing:.12em}
-.commercialScope{color:var(--avela-teal)}
-.commercialPanel{padding:clamp(28px,4vw,46px)}
-.commercialPanel h2{font-size:clamp(28px,3.4vw,40px);letter-spacing:-.035em}
-.commercialPanel h3,.commercialTwoColumns h3{font-size:21px}
-.commercialTable thead th{background:#eef4f2}
-.commercialHero a.productButton,.commercialPanel button.productButton{background:var(--avela-navy);border-color:var(--avela-navy);color:#fff}
-.commercialPanel :is(button, select, textarea, a):focus-visible,.commercialHero a:focus-visible{outline-color:var(--avela-coral)}

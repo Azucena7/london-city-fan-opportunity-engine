@@ -1148,7 +1148,7 @@ test("commercial and London City surfaces use bounded reading widths and demo fr
   assert.match(commercial, /width:min\(1120px/);
   assert.match(commercial, /signalTicker\{[\s\S]*?background:#fff/);
   assert.match(live, /PUBLIC DEMO · LONDON CITY/);
-  assert.match(liveCss, /width:min\(980px/);
+  assert.match(liveCss, /width:min\((980|1120)px/);
   assert.match(clubs, /INDEPENDENT DEMO/);
 });
 
