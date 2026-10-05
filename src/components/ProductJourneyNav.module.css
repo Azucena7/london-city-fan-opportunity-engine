@@ -6,7 +6,8 @@
   padding:18px 12px 14px;
   display:flex;
   flex-direction:column;
-  background:var(--product-navy,#102742);\n  background:linear-gradient(180deg,var(--product-navy,#102742) 0%,#0B1F36 100%);
+  background:var(--product-navy,#102742);
+  background:linear-gradient(180deg,var(--product-navy,#102742) 0%,#0B1F36 100%);
   border-right:1px solid rgba(255,255,255,.08);
   box-shadow:18px 0 44px rgba(16,39,66,.08);
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
