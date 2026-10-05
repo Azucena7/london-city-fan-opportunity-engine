@@ -1814,3 +1814,33 @@ test("Opportunity Brief follows decision readiness execution evidence memory hie
   assert.match(css, /phaseIntro/);
   assert.match(css, /phaseNumber/);
 });
+
+
+test("Decision Center surfaces cross-workspace club state without turning unknowns into zeros", () => {
+  const page = read("src/app/app/page.tsx");
+  const helper = read("src/lib/decisionCenterOverview.ts");
+  const css = read("src/app/app/home.module.css");
+
+  assert.match(page, /Club state/);
+  assert.match(page, /Can the club absorb what is coming\?/);
+  assert.match(page, /Operational capacity/);
+  assert.match(page, /Availability/);
+  assert.match(page, /Sponsor opportunities/);
+  assert.match(page, /Requests/);
+  assert.match(page, /Verified contracts/);
+  assert.match(page, /Next 30 days/);
+  assert.match(page, /Prospecting only · not contract fulfilment/);
+  assert.match(page, /No sponsor or player legal agreement is currently verified in AVELA/);
+
+  assert.match(helper, /state: "unknown"/);
+  assert.match(helper, /utilisation: null/);
+  assert.match(helper, /hard-unavailable/);
+  assert.match(helper, /international-duty/);
+  assert.match(helper, /operational_requests/);
+  assert.match(helper, /heads-up,formal-request/);
+  assert.match(helper, /nextRecipient/);
+  assert.doesNotMatch(helper, /utilisation: 0/);
+
+  assert.match(css, /clubStateGrid/);
+  assert.match(css, /timeline/);
+});
