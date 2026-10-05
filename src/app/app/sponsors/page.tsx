@@ -29,6 +29,18 @@ export default function SponsorsPage() {
 
   const recommended = candidates.find((item) => item.readiness?.decision === "recommended-for-review") ?? candidates[0] ?? null;
   const waitingGates = partnerCommercialPack.approvalGates.filter((gate) => gate.state !== "ready");
+  const matrixX = (score: number | null | undefined) => Math.max(12, Math.min(88, score ?? 35));
+  const matrixY = (item: (typeof candidates)[number]) => {
+    const total = item.evidence.verified + item.evidence.modelled + item.evidence.missing;
+    const evidenceRatio = total ? item.evidence.verified / total : 0;
+    return Math.max(14, Math.min(84, 86 - evidenceRatio * 68));
+  };
+  const stageOf = (item: (typeof candidates)[number]) => {
+    if (item.readiness?.decision === "recommended-for-review") return "review";
+    if (item.evidence.missing > item.evidence.verified) return "validate";
+    if ((item.readiness?.weightedScore ?? 0) >= 60) return "ready";
+    return "explore";
+  };
 
   return (
     <AppWorkspaceShell
@@ -68,6 +80,46 @@ export default function SponsorsPage() {
           </div>
         </WorkspaceCard>
       ) : null}
+
+      <WorkspaceCard className={styles.matrixCard}>
+        <WorkspaceSectionHeader eyebrow="Opportunity matrix" title="Strategic fit × evidence readiness" action={<span className={styles.matrixHint}>Bubble size = relevant fixtures</span>} />
+        <div className={styles.sponsorMatrix} role="group" aria-label="Sponsor matrix. Higher position means stronger evidence readiness; further right means stronger strategic fit.">
+          <span className={styles.matrixY}>Evidence readiness</span>
+          <span className={styles.matrixX}>Strategic fit →</span>
+          <div className={styles.matrixGrid} />
+          {candidates.map((item) => (
+            <div
+              key={item.pack.id}
+              className={styles.sponsorBubble}
+              data-stage={stageOf(item)}
+              style={{
+                left: matrixX(item.readiness?.weightedScore) + "%",
+                top: matrixY(item) + "%",
+                width: 42 + Math.min(28, item.pack.recommendedFixtureIds.length * 6),
+                height: 42 + Math.min(28, item.pack.recommendedFixtureIds.length * 6)
+              }}
+              aria-label={item.pack.candidate + ". Readiness " + (item.readiness?.weightedScore ?? "not available") + ". Stage " + stageOf(item)}
+            >
+              <strong>{item.pack.candidate.slice(0, 3).toUpperCase()}</strong>
+              <small>{item.readiness?.weightedScore ?? "—"}</small>
+            </div>
+          ))}
+        </div>
+        <div className={styles.matrixLegend} aria-label="Sponsor matrix legend">
+          <span data-tone="explore">Explore</span>
+          <span data-tone="validate">Validate</span>
+          <span data-tone="review">Review</span>
+          <span data-tone="ready">Ready</span>
+        </div>
+        <div className={styles.pipelineStages} aria-label="Sponsor pipeline summary">
+          {["explore","validate","review","ready"].map((stage) => (
+            <div key={stage}>
+              <span>{stage}</span>
+              <strong>{candidates.filter((item) => stageOf(item) === stage).length}</strong>
+            </div>
+          ))}
+        </div>
+      </WorkspaceCard>
 
       <section className={styles.workspaceGrid}>
         <WorkspaceCard className={styles.pipeline}>

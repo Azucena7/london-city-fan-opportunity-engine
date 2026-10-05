@@ -53,15 +53,31 @@ export default function ContractsPage() {
         </div>
       </WorkspaceCard>
 
+      <section className={styles.contractVisualGrid}>
+        <WorkspaceCard className={styles.impactGraphCard}>
+          <WorkspaceSectionHeader eyebrow="Impact map" title="See which decisions a clause can change" />
+          <ContractImpactGraph />
+        </WorkspaceCard>
+        <WorkspaceCard className={styles.controlFlowCard}>
+          <WorkspaceSectionHeader eyebrow="Governance flow" title="Clause → impact → review" />
+          <div className={styles.controlFlow} role="list" aria-label="Contract governance flow">
+            <div role="listitem"><span>01</span><strong>Document</strong><small>External source of record</small></div>
+            <i aria-hidden="true">→</i>
+            <div role="listitem"><span>02</span><strong>Verified clause</strong><small>Provenance retained</small></div>
+            <i aria-hidden="true">→</i>
+            <div role="listitem"><span>03</span><strong>Affected decisions</strong><small>Sponsor · player · campaign · fixture</small></div>
+            <i aria-hidden="true">→</i>
+            <div data-alert="true" role="listitem"><span>04</span><strong>Review required</strong><small>No silent propagation</small></div>
+          </div>
+        </WorkspaceCard>
+      </section>
+
       <section className={styles.workspaceGrid}>
         <div className={styles.queueSurface}>
           <ContractReviewQueue />
         </div>
 
         <aside className={styles.sideRail}>
-          <WorkspaceDrawer label="Contract Impact Graph" title="Which decisions need review?">
-            <ContractImpactGraph />
-          </WorkspaceDrawer>
 
           <WorkspaceDrawer label="Sponsor contracts" title="What AVELA should understand">
             <ul className={styles.fieldList}>{sponsorFields.map((field) => <li key={field}>{field}</li>)}</ul>
@@ -73,7 +89,7 @@ export default function ContractsPage() {
 
           <WorkspaceDrawer label="Control rule" title="A verified clause changes only what it affects">
             <div className={styles.impactFlow}>
-              <span>Document</span><i>→</i><span>Verified clause</span><i>→</i><span>Affected decision</span><i>→</i><strong>Review required</strong>
+              <span>Document</span><i aria-hidden="true">→</i><span>Verified clause</span><i aria-hidden="true">→</i><span>Affected decision</span><i aria-hidden="true">→</i><strong>Review required</strong>
             </div>
             <p>A verified amendment should move affected sponsors, players, campaigns, fixtures or season instances back to review rather than silently changing them.</p>
           </WorkspaceDrawer>
