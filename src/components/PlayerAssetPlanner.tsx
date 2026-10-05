@@ -326,13 +326,6 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   );
   const baseline = packs[0] ?? null;
   const selectionComplete = activeIds.length === count;
-  const livePackState = !selectionComplete
-    ? "Incomplete"
-    : activeEvaluation.blockers.length
-      ? "Blocked"
-      : hasCurrentManualSelection
-        ? selectionSource === "shared" ? "Selected · shared" : selectionSource === "local" ? "Selected locally" : "Custom pack"
-        : "Recommended";
   const momentumRanking = players
     .map((player) => ({ player, momentum: playerMomentumScore(player.id, demoPlayerMomentum) }))
     .sort((a,b) => (b.momentum.score ?? -1) - (a.momentum.score ?? -1));
