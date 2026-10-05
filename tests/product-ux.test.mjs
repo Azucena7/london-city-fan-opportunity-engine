@@ -1760,7 +1760,7 @@ test("Calendar Intelligence derives relationships without treating disconnected 
   assert.match(engine, /Sequence opportunity/);
   assert.match(engine, /campaign-clash/);
   assert.match(engine, /fixtureScores/);
-  assert.match(engine, /No automatic plan change is implied/);
+  assert.match(engine, /no automatic plan change is implied/i);
 
   assert.match(internal, /availability_windows/);
   assert.match(internal, /off-day/);
