@@ -308,6 +308,13 @@ export default async function ClubAppHome() {
             <small>{opsState.execution.packages} external package{opsState.execution.packages === 1 ? "" : "s"}</small>
           </article>
 
+          <article data-state={opsState.continuity.state === "at-risk" ? "tight" : opsState.continuity.state === "unknown" ? "unknown" : "clear"}>
+            <span>Team continuity</span>
+            <strong>{opsState.continuity.state === "unknown" ? "Unknown" : opsState.continuity.openCases > 0 ? opsState.continuity.openCases + " active transition" + (opsState.continuity.openCases === 1 ? "" : "s") : "Covered"}</strong>
+            <p>{opsState.continuity.state === "unknown" ? "Continuity protocol is not connected." : opsState.continuity.unconfirmedSuccessors + " successor gap" + (opsState.continuity.unconfirmedSuccessors === 1 ? "" : "s") + " · " + opsState.continuity.unresolvedItems + " handover item" + (opsState.continuity.unresolvedItems === 1 ? "" : "s") + " unresolved."}</p>
+            <Link href="/app/access">Open Team continuity →</Link>
+          </article>
+
           <article data-state={opsState.contracts.state === "connected" ? "clear" : "unknown"}>
             <span>Verified contracts</span>
             <strong>{opsState.contracts.state === "unknown" ? "Unknown" : opsState.contracts.activeDocuments + " active"}</strong>
