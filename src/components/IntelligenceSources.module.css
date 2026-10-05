@@ -11,3 +11,8 @@
 .flow strong{color:var(--product-orange)}
 .sourceTop span,.sourceTop>strong,.columns>div>span,.evidenceGrid span,.publicBenchmark small,.benchmarkRows small{font-size:10px}
 .columns li,.source>a,.evidenceGrid p,.publicBenchmark>a{font-size:11px}
+
+.healthMeta{display:grid;gap:4px;margin:14px 0;padding:10px 11px;border:1px solid var(--product-line);border-radius:7px;background:#FAFBFB}
+.healthMeta span{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.055em;color:var(--product-muted)}
+.healthMeta strong{font-size:10px;color:var(--product-ink)}
+.healthMeta small{font-size:9px!important;line-height:1.45;color:var(--product-muted)!important}
