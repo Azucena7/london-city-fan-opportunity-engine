@@ -94,7 +94,7 @@ export default async function MatchesPage() {
       subtitle="Fixture opportunity inbox · evidence rank stays separate from calendar pressure."
       actions={<><WorkspaceViewSwitcher value="list" /><WorkspaceFilterButton /></>}
     >
-      <p className={styles.contractCopy}>productAppShell · The club does not create a plan first. Fixture → signals → opportunity → recommended play → human review → activation → learning. Monitoring.</p>
+      <p className={styles.contractCopy}>productAppShell · The club does not create a plan first. Fixture → signals → opportunity → recommended play → human review → activation → learning. Monitoring. Upcoming home fixtures are re-prioritised whenever the validated evidence state refreshes.</p>
 
       <section className={styles.radarSummary} aria-label="Opportunity radar summary">
         <WorkspaceCard><span>Fixtures watched</span><strong>{radar.length}</strong><small>Next home fixtures</small></WorkspaceCard>
@@ -124,7 +124,7 @@ export default async function MatchesPage() {
                 <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
                 <p className={styles.contractInline}><b>Attention driver:</b> {priority?.attentionReason ?? "No calendar pressure adjustment."}</p>
               </div>
-              <Link href={"/app/matches/" + currentFixture.id}>Open opportunity brief →</Link>
+              <Link href={`/app/matches/${currentFixture.id}`}>Open opportunity brief →</Link>
             </div>
 
             <div className={styles.priorityMetrics}>
