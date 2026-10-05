@@ -1516,6 +1516,17 @@ test("Sources uses source-health as the operational connector truth", () => {
   assert.doesNotMatch(sources, /stateLabel:/);
 });
 
+test("Decision Center elevates source reliability and talent pressure", () => {
+  const overview = read("src/lib/decisionCenterOverview.ts");
+  assert.match(overview, /source-health-/);
+  assert.match(overview, /Required evidence is not fully operational/);
+  assert.match(overview, /player_pack_selections/);
+  assert.match(overview, /Talent pressure/);
+  assert.match(overview, /Shared club talent selections create a near-term capacity conflict/);
+  assert.match(overview, /committed/);
+  assert.match(overview, /days <= 7/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");

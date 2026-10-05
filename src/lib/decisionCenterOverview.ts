@@ -1,4 +1,5 @@
 import { supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import sourceHealth from "../../data/live/source-health.json";
 import type { DecisionAlert } from "@/lib/decisionIntelligence";
 
 export type DecisionCenterOpsState = {
@@ -90,8 +91,10 @@ export async function getDecisionCenterOpsState({
     `/rest/v1/operational_continuity_cases?club_id=eq.${encodeURIComponent(clubId)}&state=not.eq.closed&select=id,departing_role,continuity_owner_role,successor_status,state,effective_at,created_at&order=created_at.desc&limit=100`;
   const continuityItemsPath =
     `/rest/v1/operational_continuity_items?club_id=eq.${encodeURIComponent(clubId)}&state=in.(pending,transferred)&select=id,case_id,state&limit=800`;
+  const talentPath =
+    `/rest/v1/player_pack_selections?club_id=eq.${encodeURIComponent(clubId)}&status=in.(selected,approved,committed)&select=id,campaign_id,status,selected_player_ids,player_count,snapshot,updated_at&order=updated_at.desc&limit=250`;
 
-  const [workloadResponse, capacityResponse, availabilityResponse, requestsResponse, contractsResponse, clausesResponse, impactsResponse, executionResponse, continuityCasesResponse, continuityItemsResponse] =
+  const [workloadResponse, capacityResponse, availabilityResponse, requestsResponse, contractsResponse, clausesResponse, impactsResponse, executionResponse, continuityCasesResponse, continuityItemsResponse, talentResponse] =
     await Promise.all([
       supabaseRequest(workloadPath),
       supabaseRequest(capacityPath),
@@ -102,7 +105,8 @@ export async function getDecisionCenterOpsState({
       supabaseRequest(impactsPath),
       supabaseRequest(executionPath),
       supabaseRequest(continuityCasesPath),
-      supabaseRequest(continuityItemsPath)
+      supabaseRequest(continuityItemsPath),
+      supabaseRequest(talentPath)
     ]);
 
   if (workloadResponse.ok && capacityResponse.ok) {
@@ -307,6 +311,96 @@ export async function getDecisionCenterOpsState({
           at: item.last_sync_at ?? from,
           label: blocked > 0 ? "External work blocked" : "External sync issue",
           detail: blocked + " blocked · " + (item.completed_count ?? 0) + "/" + (item.item_count ?? 0) + " complete",
+          kind: "blocker"
+        }]
+      };
+    }));
+  }
+
+
+  const sourceById = new Map(sourceHealth.sources.map((source) => [source.id, source]));
+  for (const decision of sourceHealth.decisions) {
+    const required = decision.requiredSourceIds
+      .map((id) => sourceById.get(id))
+      .filter((source): source is (typeof sourceHealth.sources)[number] => Boolean(source));
+    const unhealthy = required.filter((source) => source.state !== "operational");
+    if (!unhealthy.length) continue;
+    const blocking = unhealthy.some((source) => source.state === "blocked" || source.state === "not-configured");
+    result.crossAlerts.push({
+      id: "source-health-" + decision.id,
+      category: "operations",
+      priority: blocking ? "blocked" : "review",
+      title: "Decision reliability · " + decision.label.en,
+      recommendation: decision.nextAction.en,
+      why: unhealthy.map((source) => source.label.en + " is " + source.state.replaceAll("-", " ")).join(" · "),
+      changed: "Required evidence is not fully operational.",
+      deadline: "Before relying on this decision",
+      impact: blocking ? "High" : "Medium",
+      confidence: "High",
+      href: "/app/sources",
+      events: unhealthy.map((source) => ({
+        id: "source-health-event-" + decision.id + "-" + source.id,
+        at: source.lastAttemptAt ?? source.lastSuccessfulAt ?? sourceHealth.checkedAt,
+        label: source.label.en,
+        detail: source.state.replaceAll("-", " ") + " · " + source.method,
+        kind: "blocker" as const
+      }))
+    });
+  }
+
+  if (talentResponse.ok) {
+    const talent = await talentResponse.json() as Array<{
+      id: string;
+      campaign_id: string;
+      status: "selected" | "approved" | "committed";
+      selected_player_ids?: string[];
+      snapshot?: { activationDate?: string; campaignName?: string };
+      updated_at: string;
+    }>;
+    const overlaps: Array<{
+      a: typeof talent[number];
+      b: typeof talent[number];
+      playerIds: string[];
+      days: number;
+    }> = [];
+    for (let i = 0; i < talent.length; i += 1) {
+      for (let j = i + 1; j < talent.length; j += 1) {
+        const a = talent[i];
+        const b = talent[j];
+        const aDate = a.snapshot?.activationDate;
+        const bDate = b.snapshot?.activationDate;
+        if (!aDate || !bDate || a.campaign_id === b.campaign_id) continue;
+        const playerIds = (a.selected_player_ids ?? []).filter((id) => (b.selected_player_ids ?? []).includes(id));
+        if (!playerIds.length) continue;
+        const days = Math.round(Math.abs(Date.parse(aDate) - Date.parse(bDate)) / 86400000);
+        if (days <= 7) overlaps.push({ a, b, playerIds, days });
+      }
+    }
+
+    result.crossAlerts.push(...overlaps.slice(0, 12).map((overlap, index): DecisionAlert => {
+      const locked = overlap.a.status === "committed" && overlap.b.status === "committed";
+      const sameDay = overlap.days === 0;
+      const labelA = overlap.a.snapshot?.campaignName ?? overlap.a.campaign_id;
+      const labelB = overlap.b.snapshot?.campaignName ?? overlap.b.campaign_id;
+      return {
+        id: "talent-overlap-" + index + "-" + overlap.a.id + "-" + overlap.b.id,
+        category: "player",
+        priority: locked && sameDay ? "blocked" : "review",
+        title: "Talent pressure · " + overlap.playerIds.length + " shared player" + (overlap.playerIds.length === 1 ? "" : "s"),
+        recommendation: locked
+          ? "Resolve the committed talent conflict before further campaign execution."
+          : "Review the lower-priority pack and apply an alternative before approval.",
+        why: labelA + " and " + labelB + " reuse talent " + (sameDay ? "on the same day." : overlap.days + " days apart."),
+        changed: "Shared club talent selections create a near-term capacity conflict.",
+        deadline: sameDay ? "Before either activation" : "Before the earlier activation",
+        impact: locked ? "High" : "Medium",
+        confidence: "High",
+        href: "/app/campaigns",
+        events: [{
+          id: "talent-overlap-event-" + overlap.a.id + "-" + overlap.b.id,
+          at: [overlap.a.updated_at, overlap.b.updated_at].sort().at(-1) ?? from,
+          label: "Shared player overlap",
+          detail: overlap.a.status + " ↔ " + overlap.b.status + " · " + (sameDay ? "same day" : overlap.days + " days apart"),
           kind: "blocker"
         }]
       };
