@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { ClubSetup } from "@/components/ClubSetup";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import styles from "./setup.module.css";
 
 export const metadata: Metadata = {
   title: "Club setup · AVELA",
@@ -10,9 +9,13 @@ export const metadata: Metadata = {
 
 export default function ClubSetupPage() {
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="setup" />
+    <AppWorkspaceShell
+      active="setup"
+      eyebrow="Club system"
+      title="Club setup"
+      subtitle="Set the operating defaults once so every fixture, campaign and recommendation starts with the right context."
+    >
       <ClubSetup />
-    </main>
+    </AppWorkspaceShell>
   );
 }
