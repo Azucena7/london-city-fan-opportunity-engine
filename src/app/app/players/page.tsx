@@ -13,13 +13,13 @@ export default function PlayerAssetsPage() {
   return (
     <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="players" />
-      <PlayerContractHealth />
       <section className={styles.planningBoundary}>
         <span>Planning layer</span>
         <strong>Scenario optimiser · not legal contract truth</strong>
-        <p>The planner below can model availability, momentum, cost and opportunity cost. Until verified club agreements are connected, its agreement/quota data remains demo planning context.</p>
+        <p>AVELA recommends a pack from the planning evidence available. Verified contract truth remains separate and is shown after the decision workspace.</p>
       </section>
       <PlayerAssetPlanner />
+      <PlayerContractHealth />
     </main>
   );
 }
