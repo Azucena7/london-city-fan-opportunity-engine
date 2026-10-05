@@ -555,3 +555,6 @@ from public.campaign_workspaces
 on conflict (club_id,campaign_key) do nothing;
 
 notify pgrst,'reload schema';
+
+create index if not exists campaign_records_updated_by_idx
+on public.campaign_records(updated_by);
