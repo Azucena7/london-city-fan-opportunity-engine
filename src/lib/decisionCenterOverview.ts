@@ -1,4 +1,5 @@
 import { supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import type { DecisionAlert } from "@/lib/decisionIntelligence";
 
 export type DecisionCenterOpsState = {
   capacity: {
@@ -37,6 +38,7 @@ export type DecisionCenterOpsState = {
     completedItems: number;
     totalItems: number;
   };
+  crossAlerts: DecisionAlert[];
 };
 
 const unknownState = (): DecisionCenterOpsState => ({
@@ -45,7 +47,8 @@ const unknownState = (): DecisionCenterOpsState => ({
   requests: { state: "unknown", pending: 0, overdue: 0, nextRecipient: null },
   contracts: { state: "unknown", activeDocuments: 0, verifiedClauses: 0 },
   contractImpacts: { state: "unknown", pending: 0, acknowledged: 0 },
-  execution: { state: "unknown", packages: 0, blockedItems: 0, completedItems: 0, totalItems: 0 }
+  execution: { state: "unknown", packages: 0, blockedItems: 0, completedItems: 0, totalItems: 0 },
+  crossAlerts: []
 });
 
 export async function getDecisionCenterOpsState({
@@ -73,9 +76,9 @@ export async function getDecisionCenterOpsState({
   const clausesPath =
     `/rest/v1/contract_clauses?club_id=eq.${encodeURIComponent(clubId)}&review_state=eq.verified&select=id&limit=1000`;
   const impactsPath =
-    `/rest/v1/contract_impact_reviews?club_id=eq.${encodeURIComponent(clubId)}&review_state=in.(pending,acknowledged)&select=review_state&limit=250`;
+    `/rest/v1/contract_impact_reviews?club_id=eq.${encodeURIComponent(clubId)}&review_state=in.(pending,acknowledged)&select=id,entity_type,entity_id,relationship_type,review_state,reason,created_at&order=created_at.desc&limit=250`;
   const executionPath =
-    `/rest/v1/external_work_packages?club_id=eq.${encodeURIComponent(clubId)}&sync_state=not.in.(archived)&select=sync_state,item_count,completed_count,blocked_count&limit=250`;
+    `/rest/v1/external_work_packages?club_id=eq.${encodeURIComponent(clubId)}&sync_state=not.in.(archived)&select=id,decision_id,title,sync_state,item_count,completed_count,blocked_count,last_sync_at,sync_error&order=updated_at.desc&limit=250`;
 
   const [workloadResponse, capacityResponse, availabilityResponse, requestsResponse, contractsResponse, clausesResponse, impactsResponse, executionResponse] =
     await Promise.all([
@@ -141,7 +144,15 @@ export async function getDecisionCenterOpsState({
   }
 
   if (impactsResponse.ok) {
-    const impacts = await impactsResponse.json() as Array<{ review_state?: string | null }>;
+    const impacts = await impactsResponse.json() as Array<{
+      id: string;
+      entity_type: "sponsor" | "player" | "campaign" | "fixture" | "season" | "decision";
+      entity_id: string;
+      relationship_type: string;
+      review_state: "pending" | "acknowledged";
+      reason: string;
+      created_at: string;
+    }>;
     const pending = impacts.filter((item) => item.review_state === "pending").length;
     const acknowledged = impacts.filter((item) => item.review_state === "acknowledged").length;
     result.contractImpacts = {
@@ -149,14 +160,49 @@ export async function getDecisionCenterOpsState({
       pending,
       acknowledged
     };
+
+    result.crossAlerts.push(...impacts.slice(0, 12).map((item): DecisionAlert => {
+      const href =
+        item.entity_type === "fixture" ? "/app/matches/" + encodeURIComponent(item.entity_id) :
+        item.entity_type === "player" ? "/app/players" :
+        item.entity_type === "sponsor" ? "/app/sponsors" :
+        item.entity_type === "campaign" ? "/app/campaigns" :
+        item.entity_type === "season" ? "/app/season" : "/app";
+
+      return {
+        id: "contract-impact-" + item.id,
+        category: "contract",
+        priority: item.review_state === "pending" ? "review" : "monitor",
+        title: "Contract change · " + item.entity_type + " " + item.entity_id,
+        recommendation: "Review the affected " + item.entity_type + " before the next commitment.",
+        why: item.reason,
+        changed: "Verified material contract truth changed the review state of this " + item.entity_type + ".",
+        deadline: "Before next commitment",
+        impact: item.relationship_type === "blocks" || item.relationship_type === "requires" ? "High" : "Medium",
+        confidence: "High",
+        href,
+        events: [{
+          id: "contract-impact-event-" + item.id,
+          at: item.created_at,
+          label: "Verified contract impact",
+          detail: item.relationship_type.replaceAll("-", " ") + " · sanitised impact review",
+          kind: "blocker"
+        }]
+      };
+    }));
   }
 
   if (executionResponse.ok) {
     const packages = await executionResponse.json() as Array<{
-      sync_state?: string | null;
+      id: string;
+      decision_id: string;
+      title: string;
+      sync_state: string;
       item_count?: number | null;
       completed_count?: number | null;
       blocked_count?: number | null;
+      last_sync_at?: string | null;
+      sync_error?: string | null;
     }>;
     const blockedItems = packages.reduce((sum, item) => sum + Math.max(0, item.blocked_count ?? 0), 0);
     const totalItems = packages.reduce((sum, item) => sum + Math.max(0, item.item_count ?? 0), 0);
@@ -169,6 +215,35 @@ export async function getDecisionCenterOpsState({
       completedItems,
       totalItems
     };
+
+    const executionAlerts = packages.filter((item) =>
+      (item.blocked_count ?? 0) > 0 || ["partial","error"].includes(item.sync_state)
+    );
+    result.crossAlerts.push(...executionAlerts.slice(0, 12).map((item): DecisionAlert => {
+      const fixtureId = item.decision_id.startsWith("fixture:") ? item.decision_id.slice("fixture:".length) : null;
+      const blocked = Math.max(0, item.blocked_count ?? 0);
+      return {
+        id: "execution-" + item.id,
+        fixtureId: fixtureId ?? undefined,
+        category: "operations",
+        priority: blocked > 0 ? "blocked" : "review",
+        title: item.title + " · execution",
+        recommendation: blocked > 0 ? "Resolve " + blocked + " blocked external work item" + (blocked === 1 ? "" : "s") + "." : "Review the external sync issue before relying on execution progress.",
+        why: blocked > 0 ? "External execution state contains blocked work." : "The connected work package is only partially synced or has an error.",
+        changed: item.sync_error ? "Sync issue: " + item.sync_error : "External execution state requires review.",
+        deadline: "Operational window",
+        impact: blocked > 0 ? "High" : "Medium",
+        confidence: "High",
+        href: fixtureId ? "/app/matches/" + encodeURIComponent(fixtureId) : "/app/campaigns",
+        events: [{
+          id: "execution-event-" + item.id,
+          at: item.last_sync_at ?? from,
+          label: blocked > 0 ? "External work blocked" : "External sync issue",
+          detail: blocked + " blocked · " + (item.completed_count ?? 0) + "/" + (item.item_count ?? 0) + " complete",
+          kind: "blocker"
+        }]
+      };
+    }));
   }
 
   return result;
