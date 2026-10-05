@@ -61,7 +61,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <p>
             {live?.fixturePhase === "pre-match"
               ? "The fixture is still ahead. This screen keeps the measurement plan explicit now, then switches to observed outcomes when authorised post-match evidence arrives."
-              : "Start with what we know after matchday, then turn it into one bounded change for the next fixture. Attribution and causal claims stay separate so the club does not confuse correlation with incrementality."}
+              : "What do we know after matchday? Start there, then turn it into one bounded change for the next fixture. Attribution and causal claims stay separate so the club does not confuse correlation with incrementality."}
           </p>
         </div>
         <aside className={styles.stateCard}>
