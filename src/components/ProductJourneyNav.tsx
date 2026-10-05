@@ -6,36 +6,39 @@ type ProductJourneyNavProps = {
 };
 
 const workItems = [
-  { key: "home", label: "Home", hint: "What needs attention", href: "/app", glyph: "H" },
-  { key: "matches", label: "Radar", hint: "Prioritise fixtures", href: "/app/matches", glyph: "R" },
-  { key: "campaigns", label: "Campaigns", hint: "Review drafted plays", href: "/app/campaigns", glyph: "C" },
-  { key: "players", label: "Player assets", hint: "Plan talent usage", href: "/app/players", glyph: "P" },
-  { key: "sponsors", label: "Sponsors", hint: "Track rights & opportunities", href: "/app/sponsors", glyph: "S" },
-  { key: "learning", label: "Learning", hint: "Close the loop", href: "/app/learning", glyph: "L" },
-  { key: "season", label: "Season", hint: "See the whole pattern", href: "/app/season", glyph: "O" }
+  { key: "home", label: "Home", hint: "Priorities & next moves", href: "/app", glyph: "⌂" },
+  { key: "matches", label: "Radar", hint: "Signals → opportunities", href: "/app/matches", glyph: "↗" },
+  { key: "campaigns", label: "Campaigns", hint: "Plans in execution", href: "/app/campaigns", glyph: "▦" },
+  { key: "players", label: "Player assets", hint: "Availability & best fit", href: "/app/players", glyph: "◎" },
+  { key: "sponsors", label: "Sponsors", hint: "Rights, needs & fit", href: "/app/sponsors", glyph: "◇" },
+  { key: "learning", label: "Learning", hint: "Outcomes & insight", href: "/app/learning", glyph: "∿" },
+  { key: "season", label: "Season", hint: "Calendar & context", href: "/app/season", glyph: "◫" }
 ] as const;
 
 const workspaceItems = [
   { key: "executive", label: "Executive view", href: "/app/executive" },
   { key: "contracts", label: "Contracts", href: "/app/contracts" },
-  { key: "sources", label: "Sources", href: "/app/sources" },
-  { key: "setup", label: "Setup", href: "/app/setup" },
-  { key: "access", label: "Team", href: "/app/access" }
+  { key: "sources", label: "Signals & sources", href: "/app/sources" },
+  { key: "setup", label: "Configuration", href: "/app/setup" },
+  { key: "access", label: "Team & access", href: "/app/access" }
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
   return (
     <aside className={styles.sidebar} aria-label="AVELA club app navigation">
       <div className={styles.top}>
-        <Link className={styles.brand} href="/app">
+        <Link className={styles.brand} href="/app" aria-label="AVELA home">
           <span className={styles.brandMark} aria-hidden="true" />
-          <span>AVELA</span>
+          <span className={styles.brandCopy}>
+            <strong>AVELA</strong>
+            <small>Decision intelligence</small>
+          </span>
         </Link>
-        <span className={styles.workspace}>Club workspace</span>
+        <span className={styles.workspace}>Club marketing workspace</span>
       </div>
 
       <nav className={styles.primary} aria-label="Club workflow">
-        <span className={styles.sectionLabel}>Workspace</span>
+        <span className={styles.sectionLabel}>Decision workspace</span>
         {workItems.map((item) => (
           <Link
             key={item.key}
@@ -53,7 +56,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
       </nav>
 
       <nav className={styles.secondary} aria-label="Club settings">
-        <span className={styles.sectionLabel}>Club</span>
+        <span className={styles.sectionLabel}>Club system</span>
         {workspaceItems.map((item) => (
           <Link
             key={item.key}
@@ -67,6 +70,9 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
       </nav>
 
       <div className={styles.bottom}>
+        <div className={styles.positioning}>
+          <span>Signals</span><i>→</i><span>Context</span><i>→</i><strong>Action</strong>
+        </div>
         <Link href="/app/demo" className={active === "demo" ? styles.secondaryActive : ""} aria-current={active === "demo" ? "page" : undefined}>Product demo</Link>
         <Link href="/">AVELA website ↗</Link>
       </div>
