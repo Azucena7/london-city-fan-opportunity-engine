@@ -136,7 +136,7 @@ test("club campaign workspace supports authenticated multi-user persistence with
 
   assert.match(builder, /Connect club workspace/);
   assert.match(builder, /Pilot account sign-in/);
-  assert.match(builder, /Saved to \$\{clubs/);
+  assert.match(builder, /Synced to \$\{clubs/);
   assert.match(builder, /\/api\/campaign-workspace/);
   assert.match(builder, /\/api\/delivery-effort/);
   assert.match(builder, /eventKey/);
@@ -222,7 +222,7 @@ test("campaign builder can generate real CRM and vertical-video drafts through a
   assert.match(builder, /Generate draft/);
   assert.match(builder, /Generative production/);
   assert.match(builder, /effort units already generated/);
-  assert.match(builder, /Saved on this device/);
+  assert.match(builder, /Local on this device/);
   assert.match(builder, /localStorage/);
   assert.match(builder, /campaign-workspace/);
   assert.match(builder, /Review campaign/);
