@@ -1527,6 +1527,19 @@ test("Decision Center elevates source reliability and talent pressure", () => {
   assert.match(overview, /days <= 7/);
 });
 
+test("Learning separates recommendation, human decision, execution and outcome evidence", () => {
+  const trace = read("src/components/LearningCampaignTrace.tsx");
+  const page = read("src/app/app/learning/page.tsx");
+  assert.match(trace, /AVELA recommendation/);
+  assert.match(trace, /Club decision/);
+  assert.match(trace, /Launch handoff prepared · execution not proven/);
+  assert.match(trace, /Observed club outcome connected/);
+  assert.match(trace, /No shared learning decision recorded/);
+  assert.match(trace, /\/api\/decision-history/);
+  assert.match(trace, /Shared decision history is unreachable/);
+  assert.match(page, /measured=\{Boolean\(measured\)\}/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
