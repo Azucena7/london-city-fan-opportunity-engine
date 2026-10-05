@@ -1540,6 +1540,26 @@ test("Learning separates recommendation, human decision, execution and outcome e
   assert.match(page, /measured=\{Boolean\(measured\)\}/);
 });
 
+test("External work handoff requires human confirmation and remains proposed until a real adapter acts", () => {
+  const route = read("src/app/api/work-system/handoff/route.ts");
+  const control = read("src/components/WorkHandoffConfirmation.tsx");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const sync = read("src/components/ExternalExecutionSync.tsx");
+  assert.match(route, /work_system_connections/);
+  assert.match(route, /state=eq\.connected/);
+  assert.match(route, /work_routing_rules/);
+  assert.match(route, /require_confirmation=eq\.true/);
+  assert.match(route, /external_work_packages/);
+  assert.match(route, /sync_state: "proposed"/);
+  assert.doesNotMatch(route, /external_work_item_links/);
+  assert.match(route, /No external tasks were created/);
+  assert.match(control, /Confirm handoff package/);
+  assert.match(control, /External tasks have not been created yet/);
+  assert.match(control, /campaigns:edit/);
+  assert.match(page, /WorkHandoffConfirmation/);
+  assert.match(sync, /avela:execution-handoff-proposed/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");

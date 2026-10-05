@@ -50,28 +50,51 @@ export function ExternalExecutionSync({decisionId}:{decisionId:string}){
   const [message,setMessage]=useState("");
 
   async function load(id:string){
-    const response=await fetch("/api/work-system/status?clubId="+encodeURIComponent(id)+"&decisionId="+encodeURIComponent(decisionId),{cache:"no-store"});
-    const result=await response.json() as {
-      enabled?:boolean;
-      packages?:PackageRow[];
-      items?:ItemRow[];
-      connections?:ConnectionRow[];
-      message?:string;
-    };
-    setEnabled(Boolean(result.enabled));
-    setPackages(response.ok&&Array.isArray(result.packages)?result.packages:[]);
-    setItems(response.ok&&Array.isArray(result.items)?result.items:[]);
-    setConnections(response.ok&&Array.isArray(result.connections)?result.connections:[]);
-    setMessage(result.message??"");
+    try{
+      const response=await fetch("/api/work-system/status?clubId="+encodeURIComponent(id)+"&decisionId="+encodeURIComponent(decisionId),{cache:"no-store"});
+      const result=await response.json() as {
+        enabled?:boolean;
+        packages?:PackageRow[];
+        items?:ItemRow[];
+        connections?:ConnectionRow[];
+        message?:string;
+      };
+      setEnabled(Boolean(result.enabled));
+      setPackages(response.ok&&Array.isArray(result.packages)?result.packages:[]);
+      setItems(response.ok&&Array.isArray(result.items)?result.items:[]);
+      setConnections(response.ok&&Array.isArray(result.connections)?result.connections:[]);
+      setMessage(response.ok?(result.message??""):result.message??"External execution state could not be loaded.");
+    }catch{
+      setEnabled(false);
+      setPackages([]);
+      setItems([]);
+      setConnections([]);
+      setMessage("External execution service is unreachable. No sync state was changed.");
+    }
   }
 
   useEffect(()=>{void(async()=>{
-    const response=await fetch("/api/auth/session",{cache:"no-store"});
-    const result=await response.json() as {authenticated?:boolean;clubs?:Club[]};
-    const next=Array.isArray(result.clubs)?result.clubs:[];
-    setClubs(next);
-    if(result.authenticated&&next.length){setClubId(next[0].id);await load(next[0].id);}
+    try{
+      const response=await fetch("/api/auth/session",{cache:"no-store"});
+      const result=await response.json() as {authenticated?:boolean;clubs?:Club[]};
+      const next=Array.isArray(result.clubs)?result.clubs:[];
+      setClubs(next);
+      if(result.authenticated&&next.length){setClubId(next[0].id);await load(next[0].id);}
+    }catch{
+      setClubs([]);
+      setEnabled(false);
+      setMessage("Account state could not be loaded. External sync state remains unchanged.");
+    }
   })();},[decisionId]); // eslint-disable-line react-hooks/exhaustive-deps -- reload is intentionally keyed by decision
+
+  useEffect(()=>{
+    const refresh=(event:Event)=>{
+      const detail=(event as CustomEvent<{decisionId?:string}>).detail;
+      if(detail?.decisionId===decisionId&&clubId) void load(clubId);
+    };
+    window.addEventListener("avela:execution-handoff-proposed",refresh);
+    return()=>window.removeEventListener("avela:execution-handoff-proposed",refresh);
+  },[clubId,decisionId]); // eslint-disable-line react-hooks/exhaustive-deps -- refresh current projection only
 
   const total=useMemo(()=>packages.reduce((sum,item)=>sum+item.item_count,0),[packages]);
   const done=useMemo(()=>packages.reduce((sum,item)=>sum+item.completed_count,0),[packages]);

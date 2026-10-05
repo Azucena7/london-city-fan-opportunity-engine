@@ -18,6 +18,7 @@ import { OperationalCapacityPanel } from "@/components/OperationalCapacityPanel"
 import { ExternalWorkPackagePreview } from "@/components/ExternalWorkPackagePreview";
 import { ExternalExecutionSync } from "@/components/ExternalExecutionSync";
 import { WorkRoutingPlan } from "@/components/WorkRoutingPlan";
+import { WorkHandoffConfirmation } from "@/components/WorkHandoffConfirmation";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -342,6 +343,14 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       {workPackage ? <ExternalWorkPackagePreview workPackage={workPackage} /> : null}
 
       {workRoutingPlan ? <WorkRoutingPlan plan={workRoutingPlan} /> : null}
+
+      {workPackage && workRoutingPlan ? (
+        <WorkHandoffConfirmation
+          decisionId={`fixture:${fixture.id}`}
+          workPackage={workPackage}
+          plan={workRoutingPlan}
+        />
+      ) : null}
 
       <ExternalExecutionSync decisionId={`fixture:${fixture.id}`} />
 
