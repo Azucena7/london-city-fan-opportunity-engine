@@ -1,43 +1,48 @@
 .planningBoundary{
   display:grid;
-  grid-template-columns:120px minmax(220px,.65fr) minmax(0,1.35fr);
-  gap:14px;
+  grid-template-columns:132px minmax(260px,.72fr) minmax(0,1.28fr);
+  gap:18px;
   align-items:center;
-  padding:10px 12px;
-  margin-bottom:10px;
-  border:1px solid #E1E6E9;
-  border-radius:9px;
+  padding:14px 16px;
+  margin-bottom:12px;
+  border:1px solid var(--product-line);
+  border-radius:12px;
   background:#fff;
 }
-.planningBoundary span{color:var(--product-accent);font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
-.planningBoundary strong{font-size:10px}
-.planningBoundary p{margin:0!important;color:#7A8893!important;font-size:10px!important;line-height:1.4}
+.planningBoundary span{color:var(--product-accent);font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+.planningBoundary strong{font-size:13px;line-height:1.35}
+.planningBoundary p{margin:0!important;color:var(--product-muted)!important;font-size:12px!important;line-height:1.5}
+
+.workflowContext{
+  display:flex;justify-content:space-between;gap:20px;align-items:center;
+  margin-bottom:12px;padding:13px 16px;border:1px solid var(--product-line);border-radius:12px;background:#F8FAFB;
+}
+.workflowContext div{display:grid;gap:4px}
+.workflowContext span{font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--product-accent)}
+.workflowContext strong{font-size:13px;color:var(--product-ink)}
+.workflowContext small{font-size:11px;line-height:1.45;color:var(--product-muted)}
+.workflowContext a{font-size:12px;font-weight:850;text-decoration:none;color:var(--product-ink);white-space:nowrap}
+
 .plannerSurface{
-  border:1px solid #E0E5E8;
-  border-radius:10px;
+  border:1px solid var(--product-line);
+  border-radius:12px;
   background:#fff;
   overflow:hidden;
 }
-.plannerSurface :global([class*="wrap"]){max-width:none!important;margin:0!important;padding:14px!important}
+.plannerSurface :global([class*="wrap"]){max-width:none!important;margin:0!important;padding:18px!important}
 .plannerSurface :global([class*="head"]){padding-top:0!important}
-.plannerSurface :global(h1){font-size:24px!important}
-.plannerSurface :global(h2){font-size:15px!important}
-.plannerSurface :global(h3){font-size:12px!important}
-.plannerSurface :global(p){font-size:10px!important}
-.contractDrawer{margin-top:10px}
+.plannerSurface :global(h1){font-size:26px!important}
+.plannerSurface :global(h2){font-size:18px!important}
+.plannerSurface :global(h3){font-size:14px!important}
+.plannerSurface :global(p){font-size:12px!important;line-height:1.5!important}
+
+.contractDrawer{margin-top:12px}
 .contractDrawer :global([class*="wrap"]){max-width:none!important;margin:0!important}
 .contractDrawer :global(section){box-shadow:none!important}
-@media(max-width:760px){
-  .planningBoundary{grid-template-columns:1fr;gap:4px}
-}
 
-.workflowContext{
-  display:flex;justify-content:space-between;gap:16px;align-items:center;
-  margin-bottom:10px;padding:10px 12px;border:1px solid #E1E6E9;border-radius:9px;background:#F8FAFB;
+@media(max-width:900px){
+  .planningBoundary{grid-template-columns:1fr;gap:6px}
 }
-.workflowContext div{display:grid;gap:2px}
-.workflowContext span{font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--product-accent)}
-.workflowContext strong{font-size:11px;color:var(--product-ink)}
-.workflowContext small{font-size:10px;line-height:1.4;color:#74818C}
-.workflowContext a{font-size:11px;font-weight:850;text-decoration:none;color:var(--product-ink);white-space:nowrap}
-@media(max-width:760px){.workflowContext{align-items:flex-start;flex-direction:column}}
+@media(max-width:760px){
+  .workflowContext{align-items:flex-start;flex-direction:column}
+}
