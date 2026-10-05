@@ -20,7 +20,7 @@ export type CalendarRelationship = {
   title: string;
   rationale: string;
   fixtureIds: string[];
-  sourceKind: "fixture" | "campaign" | "external-event";
+  sourceKind: "fixture" | "campaign" | "external-event" | "internal-availability";
   sourceLabel: string;
   sourceUrl?: string | null;
   evidence: string[];
