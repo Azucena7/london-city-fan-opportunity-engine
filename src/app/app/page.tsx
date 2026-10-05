@@ -164,6 +164,35 @@ export default async function ClubAppHome() {
     >
       <p className={styles.contractCopy}>productAppShell · Opportunity Radar · Campaign execution · Club context · Learning · AVELA decision loop · Calendar pressure can elevate attention without changing opportunity potential. <span data-state="syncing">Execution sync</span></p>
 
+      <WorkspaceCard className={styles.attentionInbox} tone="action">
+        <WorkspaceSectionHeader
+          eyebrow="Today"
+          title="What needs your attention now"
+          action={<span className={styles.inboxCount}>{attention.length} open</span>}
+        />
+        <div className={styles.attentionList}>
+          {attention.slice(0, 5).map((item, index) => (
+            <Link href={item.href} key={item.id} className={styles.attentionItem} data-priority={item.priority}>
+              <span className={styles.attentionRank}>{String(index + 1).padStart(2, "0")}</span>
+              <div className={styles.attentionCopy}>
+                <div>
+                  <strong>{item.title}</strong>
+                  <WorkspaceBadge tone={item.priority === "act-now" ? "coral" : item.priority === "blocked" ? "danger" : "warning"}>{priorityLabel[item.priority]}</WorkspaceBadge>
+                </div>
+                <p>{item.recommendation}</p>
+                <small>{item.changed}</small>
+              </div>
+              <div className={styles.attentionMeta}>
+                <span>{item.category}</span>
+                <strong>{item.deadline}</strong>
+                <b>Open →</b>
+              </div>
+            </Link>
+          ))}
+          {!attention.length ? <div className={styles.attentionEmpty}>No material decision currently needs intervention.</div> : null}
+        </div>
+      </WorkspaceCard>
+
       <section className={`${styles.metricGrid} ${styles.signalStrip}`} aria-label="Decision health summary">
         <WorkspaceCard className={styles.metricCard} tone="action">
           <div><WorkspaceBadge tone="coral">Act now</WorkspaceBadge><span className={styles.metricDelta}>Immediate</span></div>
