@@ -1,63 +1,126 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useState } from "react";
 import styles from "./CommercialDecisionDemo.module.css";
 
 const scenarios = [
   {
-    label: "01 · Early fixture read",
-    signals: ["Ticket pace below target", "Family audience reachable", "Weekend home fixture"],
+    id: "soft-demand",
+    tab: "Sales pace soft",
+    phase: "Early fixture read",
+    signals: [
+      ["Ticketing", "Sales pace below the comparable home fixture"],
+      ["CRM", "Family buyers from recent home matches are reachable"],
+      ["Timing", "Weekend fixture leaves a strong family window"]
+    ],
     decision: "Prioritise a family return-attendance campaign.",
-    outcome: "Audience: families · Message: come back together"
+    audience: "Recent family buyers",
+    channel: "CRM + owned social",
+    message: "Come back together",
+    spend: "Hold broad paid"
   },
   {
-    label: "02 · Context shifts",
-    signals: ["Local event collision", "Organic interest rises", "Paid media capacity limited"],
-    decision: "Narrow the audience and move spend closer to high-intent segments.",
-    outcome: "Audience: warm CRM · Channel: owned first"
+    id: "local-collision",
+    tab: "Local collision",
+    phase: "Context shifts",
+    signals: [
+      ["City", "A competing local event compresses the afternoon window"],
+      ["Interest", "Organic match interest is rising"],
+      ["Capacity", "Paid media and creative capacity are limited"]
+    ],
+    decision: "Narrow the audience and move activity closer to high-intent segments.",
+    audience: "Warm CRM segments",
+    channel: "Owned first",
+    message: "Make the match fit the day",
+    spend: "Targeted only"
   },
   {
-    label: "03 · Demand strengthens",
-    signals: ["Sales velocity improves", "Player content overperforms", "Inventory pressure increases"],
+    id: "demand-rising",
+    tab: "Demand rising",
+    phase: "Demand strengthens",
+    signals: [
+      ["Ticketing", "Sales velocity improves materially"],
+      ["Content", "Player-led creative is outperforming generic graphics"],
+      ["Inventory", "Availability is tightening in priority areas"]
+    ],
     decision: "Stop discount-led messaging and switch to urgency plus player-led creative.",
-    outcome: "Message: scarcity · Creative: player-led"
+    audience: "High-intent + lookalikes",
+    channel: "Player-led social + CRM",
+    message: "Be there before it fills",
+    spend: "Scale selectively"
   }
 ] as const;
 
 export function CommercialDecisionDemo() {
+  const [activeId, setActiveId] = useState<(typeof scenarios)[number]["id"]>("soft-demand");
+  const active = scenarios.find((scenario) => scenario.id === activeId) ?? scenarios[0];
+
   return (
     <section className={styles.wrap} aria-labelledby="decision-demo-title">
       <div className={styles.intro}>
-        <span>See AVELA think about a match</span>
-        <h2 id="decision-demo-title">One fixture. Different signals. A different marketing decision.</h2>
+        <span>Try the matchday decision</span>
+        <h2 id="decision-demo-title">Change the signal. Watch the marketing play change.</h2>
         <p>
-          Illustrative matchday simulation: AVELA reads demand, audience, timing, local context and club capacity,
-          then changes the recommended marketing play as the picture changes.
+          Illustrative simulation: choose what changes around the fixture. AVELA updates the recommended audience,
+          channel, message and spend posture instead of treating every home match the same.
         </p>
       </div>
 
-      <div className={styles.stage}>
-        <div className={styles.rail} aria-hidden="true"><i /><i /><i /></div>
-        {scenarios.map((scenario, index) => (
-          <article key={scenario.label} className={styles.scenario} style={{ "--delay": `${index * 2.4}s` } as CSSProperties}>
-            <div className={styles.scenarioHead}>
-              <span>{scenario.label}</span>
-              <strong>Match context changes</strong>
-            </div>
-            <div className={styles.signalStack}>
-              {scenario.signals.map((signal, signalIndex) => (
-                <div key={signal} style={{ "--signal-delay": `${index * 2.4 + signalIndex * 0.28}s` } as CSSProperties}>
-                  <span>{String(signalIndex + 1).padStart(2, "0")}</span>
-                  <strong>{signal}</strong>
-                </div>
-              ))}
-            </div>
-            <div className={styles.flowArrow} aria-hidden="true">→</div>
-            <div className={styles.decision}>
-              <span>Recommended marketing play</span>
-              <strong>{scenario.decision}</strong>
-              <small>{scenario.outcome}</small>
-            </div>
-          </article>
+      <div className={styles.scenarioTabs} role="tablist" aria-label="Change match context">
+        {scenarios.map((scenario) => (
+          <button
+            key={scenario.id}
+            type="button"
+            role="tab"
+            aria-selected={active.id === scenario.id}
+            className={active.id === scenario.id ? styles.activeTab : ""}
+            onClick={() => setActiveId(scenario.id)}
+          >
+            <span>{scenario.phase}</span>
+            <strong>{scenario.tab}</strong>
+          </button>
         ))}
+      </div>
+
+      <div className={styles.interactiveStage} role="tabpanel">
+        <div className={styles.fixtureHeader}>
+          <div>
+            <span>Home fixture · Marketing intelligence</span>
+            <strong>Matchday growth decision</strong>
+          </div>
+          <i>LIVE SIMULATION</i>
+        </div>
+
+        <div className={styles.interactiveGrid}>
+          <div className={styles.signalColumn}>
+            <span className={styles.columnLabel}>What AVELA is reading</span>
+            {active.signals.map(([label, signal], index) => (
+              <article key={label}>
+                <span>{String(index + 1).padStart(2, "0")} · {label}</span>
+                <strong>{signal}</strong>
+              </article>
+            ))}
+          </div>
+
+          <div className={styles.decisionCore} aria-hidden="true">
+            <span>Signals</span>
+            <i>→</i>
+            <strong>AVELA</strong>
+            <i>→</i>
+            <span>Play</span>
+          </div>
+
+          <div className={styles.recommendation}>
+            <span>Recommended marketing play</span>
+            <h3>{active.decision}</h3>
+            <div className={styles.playGrid}>
+              <div><span>Audience</span><strong>{active.audience}</strong></div>
+              <div><span>Channel</span><strong>{active.channel}</strong></div>
+              <div><span>Message</span><strong>{active.message}</strong></div>
+              <div><span>Spend posture</span><strong>{active.spend}</strong></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className={styles.footer}>
