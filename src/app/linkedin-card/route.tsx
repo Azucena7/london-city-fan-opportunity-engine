@@ -9,8 +9,8 @@ export async function GET() {
           height: "630px",
           display: "flex",
           padding: "52px",
-          color: "#10131A",
-          background: "linear-gradient(135deg, #F7F8FA 0%, #EFF2F6 100%)",
+          color: "#102742",
+          background: "linear-gradient(135deg, #F8F6F1 0%, #F1E9DE 100%)",
           fontFamily: "Arial, Helvetica, sans-serif"
         }}
       >
@@ -21,7 +21,7 @@ export async function GET() {
                 width: "12px",
                 height: "12px",
                 display: "flex",
-                background: "#6657FF",
+                background: "#2F8F83",
                 marginRight: "12px",
                 transform: "rotate(45deg)",
                 borderRadius: "3px"
@@ -30,15 +30,15 @@ export async function GET() {
             AVELA
           </div>
 
-          <div style={{ display: "flex", marginTop: "62px", color: "#5B50D6", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em" }}>
-            GROWTH INTELLIGENCE FOR WOMEN’S FOOTBALL
+          <div style={{ display: "flex", marginTop: "62px", color: "#2F8F83", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em" }}>
+            DECISION INTELLIGENCE FOR FOOTBALL CLUBS
           </div>
 
           <div style={{ display: "flex", marginTop: "18px", fontSize: "58px", lineHeight: 0.98, fontWeight: 800, letterSpacing: "-0.045em" }}>
-            Know where to act before the moment passes.
+            READ THE SIGNALS. MOVE THE CLUB.
           </div>
 
-          <div style={{ display: "flex", marginTop: "24px", color: "#69707D", fontSize: "20px", lineHeight: 1.35 }}>
+          <div style={{ display: "flex", marginTop: "24px", color: "#637282", fontSize: "20px", lineHeight: 1.35 }}>
             Fixture in. Opportunity out. Learn from what happened.
           </div>
 
@@ -54,11 +54,11 @@ export async function GET() {
             flexDirection: "column",
             padding: "24px",
             borderRadius: "24px",
-            background: "#10131A",
-            color: "#F7F8FA"
+            background: "#102742",
+            color: "#F8F6F1"
           }}
         >
-          <div style={{ display: "flex", color: "#B9C0CC", fontSize: "10px", fontWeight: 800, letterSpacing: "0.1em" }}>
+          <div style={{ display: "flex", color: "#C6D2DD", fontSize: "10px", fontWeight: 800, letterSpacing: "0.1em" }}>
             CURRENT PRODUCT FLOW
           </div>
 
@@ -69,10 +69,10 @@ export async function GET() {
             ["04", "Learning", "What changes for the next match?"]
           ].map(([num, label, detail]) => (
             <div key={num} style={{ display: "flex", padding: "16px 0", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-              <div style={{ display: "flex", width: "40px", color: "#BDB7FF", fontSize: "11px", fontWeight: 800 }}>{num}</div>
+              <div style={{ display: "flex", width: "40px", color: "#74C9BB", fontSize: "11px", fontWeight: 800 }}>{num}</div>
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "flex", color: "#F7F8FA", fontSize: "18px", fontWeight: 800 }}>{label}</div>
-                <div style={{ display: "flex", color: "#B9C0CC", marginTop: "4px", fontSize: "11px" }}>{detail}</div>
+                <div style={{ display: "flex", color: "#F8F6F1", fontSize: "18px", fontWeight: 800 }}>{label}</div>
+                <div style={{ display: "flex", color: "#C6D2DD", marginTop: "4px", fontSize: "11px" }}>{detail}</div>
               </div>
             </div>
           ))}
@@ -84,7 +84,7 @@ export async function GET() {
               padding: "15px 16px",
               borderRadius: "14px",
               color: "#FFFFFF",
-              background: "#6657FF",
+              background: "#2F8F83",
               flexDirection: "column"
             }}
           >
