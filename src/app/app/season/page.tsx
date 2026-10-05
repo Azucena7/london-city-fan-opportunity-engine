@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductJourneyNav } from "@/components/ProductJourneyNav";
-import { calendar, campaignPlans } from "@/lib/data";
+import { CalendarRelationshipPanel } from "@/components/CalendarRelationshipPanel";
+import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { demoAppearances, demoPlayerMomentum, demoPlayers, playerCapacity, playerMomentumScore } from "@/lib/clubStrategy";
+import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
+import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
+import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import styles from "./season.module.css";
 
 export const metadata: Metadata = {
@@ -16,7 +20,7 @@ function shortDate(date: string) {
   return new Date(date + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 }
 
-export default function SeasonIntelligencePage() {
+export default async function SeasonIntelligencePage() {
   const homeFixtures = calendar.filter((item) => item.homeAway === "home").sort((a,b) => a.date.localeCompare(b.date));
   const fixtureRows = homeFixtures.map((fixture) => {
     const opportunity = getCurrentProductOpportunity(fixture.id);
@@ -63,6 +67,27 @@ export default function SeasonIntelligencePage() {
   const maxChannel = Math.max(1, ...channelCounts.map((item) => item.count));
   const maxAttendance = Math.max(1, ...measuredAttendance.map((item) => item.attendance ?? 0));
 
+  const clubContext = await getCurrentClubOperatingContext();
+  const fromDate = currentState.updated_at.slice(0, 10);
+  const toDate = calendar.map((item) => item.date).sort().at(-1) ?? fromDate;
+  const externalRelationships = buildCalendarRelationships({
+    fixtures: calendar,
+    campaignPlans,
+    eventLandscape,
+    fromDate
+  });
+  const internalCalendar = await getInternalCalendarRelationships({
+    clubId: clubContext?.clubId,
+    fixtures: calendar,
+    campaignPlans,
+    fromDate,
+    toDate
+  });
+  const relationshipPriority = { high: 0, medium: 1, context: 2 } as const;
+  const calendarRelationships = [...externalRelationships, ...internalCalendar.relationships]
+    .sort((a,b) => relationshipPriority[a.strength] - relationshipPriority[b.strength] || a.date.localeCompare(b.date))
+    .slice(0, 40);
+
   return (
     <main className={`${styles.shell} productAppShell`}>
       <ProductJourneyNav active="season" />
@@ -82,6 +107,12 @@ export default function SeasonIntelligencePage() {
         <article><span>Approval readiness</span><strong>{approvalsReady}/{allApprovals.length}</strong><small>ready across current campaign drafts</small></article>
         <article><span>Measured outcomes</span><strong>{measuredOutcomes}</strong><small>fixtures with connected outcome evidence</small></article>
       </section>
+
+      <CalendarRelationshipPanel
+        relationships={calendarRelationships}
+        internalState={internalCalendar.state}
+        externalState={eventLandscape.state}
+      />
 
       <section className={styles.visualGrid}>
         <article className={styles.chartCard}>
