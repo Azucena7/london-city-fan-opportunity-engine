@@ -1,187 +1,41 @@
 .sidebar{
-  position:fixed;
-  inset:0 auto 0 0;
-  z-index:40;
-  width:232px;
-  padding:18px 12px 14px;
-  display:flex;
-  flex-direction:column;
+  position:fixed;inset:0 auto 0 0;z-index:40;width:232px;
+  padding:18px 12px 14px;display:flex;flex-direction:column;
   background:var(--product-navy,#102742);
-  background:linear-gradient(180deg,var(--product-navy,#102742) 0%,#0B1F36 100%);
   border-right:1px solid rgba(255,255,255,.08);
-  box-shadow:18px 0 44px rgba(16,39,66,.08);
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-.top{padding:0 8px 18px;border-bottom:1px solid rgba(255,255,255,.10)}
+.top{padding:0 8px 14px;border-bottom:1px solid rgba(255,255,255,.10)}
 .brand{display:flex;align-items:center;gap:11px;color:#F8F6F1;text-decoration:none}
-.brandMark{
-  position:relative;
-  width:27px;
-  height:31px;
-  flex:0 0 auto;
-  background:linear-gradient(145deg,#F8F6F1 0 46%,#2F8F83 47% 68%,#EF8B6C 69% 79%,transparent 80%);
-  clip-path:polygon(50% 0,100% 100%,60% 78%,48% 52%,34% 78%,0 100%);
-}
-.brandMark::after{
-  content:"";
-  position:absolute;
-  left:9px;
-  top:10px;
-  width:10px;
-  height:16px;
-  background:#102742;
-  clip-path:polygon(50% 0,100% 100%,57% 72%,48% 50%,35% 74%,0 100%);
-}
-.brandCopy{display:grid;gap:2px}
-.brandCopy strong{font-size:14px;letter-spacing:.12em}
-.brandCopy small{color:#A9B8C5;font-size:8px;font-weight:750;letter-spacing:.055em;text-transform:uppercase}
-.workspace{display:block;margin-top:12px;color:#8095A8;font-size:8px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-.primary,.secondary{display:grid;gap:3px;padding:18px 0 0}
-.sectionLabel{padding:0 9px 7px;color:#6F879A;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
-.workLink{
-  display:grid;
-  grid-template-columns:30px 1fr;
-  gap:10px;
-  align-items:center;
-  min-height:48px;
-  padding:8px 9px;
-  border:1px solid transparent;
-  border-radius:10px;
-  color:#B7C5D1;
-  text-decoration:none;
-}
-.workLink:hover{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.05);color:#F8F6F1}
-.workLink strong,.workLink small{display:block}
-.workLink strong{font-size:11px;line-height:1.2}
-.workLink small{margin-top:3px;font-size:8px;color:#7F94A6;line-height:1.25}
-.glyph{
-  display:grid;
-  place-items:center;
-  width:28px;
-  height:28px;
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:8px;
-  background:rgba(255,255,255,.025);
-  font-size:12px;
-  font-weight:900;
-  color:#91A5B6;
-}
-.active{
-  background:linear-gradient(90deg,rgba(47,143,131,.22),rgba(255,255,255,.065));
-  border-color:rgba(116,201,187,.14);
-  color:#fff;
-  box-shadow:inset 3px 0 0 #74C9BB;
-}
-.active .glyph{border-color:rgba(116,201,187,.36);background:rgba(47,143,131,.19);color:#86D8CC}
-.active small{color:#A9D8D1}
-.secondary{margin-top:10px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
-.secondary a,.bottom a{padding:8px 9px;border-radius:8px;color:#9FB0BF;text-decoration:none;font-size:10px;font-weight:750}
+.brandMark{position:relative;width:27px;height:31px;flex:0 0 auto;background:linear-gradient(145deg,#F8F6F1 0 46%,#2F8F83 47% 68%,#EF8B6C 69% 79%,transparent 80%);clip-path:polygon(50% 0,100% 100%,60% 78%,48% 52%,34% 78%,0 100%)}
+.brandMark::after{content:"";position:absolute;left:9px;top:10px;width:10px;height:16px;background:#102742;clip-path:polygon(50% 0,100% 100%,57% 72%,48% 50%,35% 74%,0 100%)}
+.brandCopy{display:grid;gap:2px}.brandCopy strong{font-size:15px;letter-spacing:.12em}.brandCopy small{color:#A9B8C5;font-size:10px;font-weight:750;letter-spacing:.055em;text-transform:uppercase}
+.workspace{display:block;margin-top:12px;color:#8095A8;font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.primary,.secondary{display:grid;gap:2px;padding-top:14px}.sectionLabel{padding:0 9px 7px;color:#6F879A;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.workLink{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;min-height:46px;padding:7px 9px;border:1px solid transparent;border-radius:7px;color:#B7C5D1;text-decoration:none}
+.workLink:hover{background:rgba(255,255,255,.055);color:#F8F6F1}.workLink strong,.workLink small{display:block}.workLink strong{font-size:12px;line-height:1.2}.workLink small{margin-top:2px;font-size:10px;color:#7F94A6;line-height:1.35}
+.glyph{display:grid;place-items:center;width:26px;height:26px;border:0;border-radius:6px;background:rgba(255,255,255,.045);font-size:12px;font-weight:900;color:#91A5B6}.glyph svg{display:block}
+.active{background:rgba(255,255,255,.09);border-color:transparent;color:#fff;box-shadow:inset 2px 0 0 #74C9BB}.active .glyph{background:rgba(47,143,131,.19);color:#86D8CC}.active small{color:#A9D8D1}
+.secondary{margin-top:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+.secondary a,.bottom a{min-height:34px;display:flex;align-items:center;padding:7px 8px;border-radius:6px;color:#9FB0BF;text-decoration:none;font-size:11px;font-weight:750}
 .secondary a:hover,.bottom a:hover,.secondaryActive{background:rgba(255,255,255,.055)!important;color:#fff!important}
 .bottom{margin-top:auto;display:grid;gap:3px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
-.positioning{display:flex;align-items:center;gap:5px;padding:0 9px 9px;color:#72879A;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.055em}
-.positioning i{color:#EF8B6C;font-style:normal}.positioning strong{color:#86D8CC}
+.positioning{display:flex;align-items:center;gap:5px;padding:0 9px 9px;color:#72879A;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.055em}.positioning i{color:#EF8B6C;font-style:normal}.positioning strong{color:#86D8CC}
 .mobileMenu{display:none}
 
 @media(max-width:900px){
-  .sidebar{
-    position:sticky;top:0;width:auto;height:auto;inset:auto;
-    padding:8px 10px;
-    display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;
-    background:rgba(16,39,66,.97);backdrop-filter:blur(14px);
-    border-right:0;border-bottom:1px solid rgba(255,255,255,.08);
-    box-shadow:0 8px 28px rgba(16,39,66,.10)
-  }
-  .top{padding:0;border:0}.workspace,.brandCopy small,.secondary,.bottom,.workLink small,.glyph{display:none}
-  .brand{padding:5px 4px}.brandMark{width:18px;height:20px}.brandCopy strong{font-size:11px}
-  .primary{display:flex;justify-content:flex-start;gap:2px;padding:0;min-width:0;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none}
-  .primary::-webkit-scrollbar{display:none}.sectionLabel{display:none}
-  .workLink{display:flex;grid-template-columns:none;gap:0;min-height:36px;padding:8px 9px;white-space:nowrap;border-radius:7px;flex:0 0 auto}
-  .workLink strong{font-size:9px}
-  .active{box-shadow:inset 0 -2px 0 #74C9BB}
-  .mobileMenu{display:block;position:relative}
-  .mobileMenu summary{list-style:none;cursor:pointer;padding:8px 9px;border:1px solid rgba(255,255,255,.15);border-radius:7px;background:rgba(255,255,255,.06);color:#F8F6F1;font-size:9px;font-weight:850}
-  .mobileMenu summary::-webkit-details-marker{display:none}
+  .sidebar{position:sticky;top:0;width:auto;height:auto;inset:auto;min-height:54px;padding:8px 10px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;background:rgba(16,39,66,.97);backdrop-filter:blur(14px);border-right:0;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 8px 28px rgba(16,39,66,.10)}
+  .top{padding:0;border:0}.workspace,.brandCopy small,.secondary,.bottom,.workLink small,.glyph,.sectionLabel{display:none}
+  .brand{min-width:72px;padding:5px 4px}.brandMark{width:18px;height:20px}.brandCopy strong{font-size:11px}
+  .primary{display:flex;justify-content:flex-start;gap:2px;padding:0 2px;min-width:0;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none}.primary::-webkit-scrollbar{display:none}.primary .workLink:nth-of-type(n+5){display:none}
+  .workLink{display:flex;grid-template-columns:none;gap:0;min-height:40px;padding:8px 10px;white-space:nowrap;border-radius:7px;flex:0 0 auto}.workLink strong{font-size:11px}.active{box-shadow:inset 0 -2px 0 #74C9BB}
+  .mobileMenu{display:block;position:relative}.mobileMenu summary{list-style:none;cursor:pointer;min-width:54px;min-height:38px;padding:8px 9px;border:1px solid rgba(255,255,255,.15);border-radius:7px;background:rgba(255,255,255,.06);color:#F8F6F1;font-size:11px;font-weight:850;text-align:center}.mobileMenu summary::-webkit-details-marker{display:none}
   .mobileMenuPanel{position:absolute;right:0;top:calc(100% + 8px);z-index:60;width:220px;padding:9px;display:grid;gap:2px;background:#fff;border:1px solid #D8DEE3;border-radius:10px;box-shadow:0 12px 32px rgba(16,19,26,.14)}
-  .mobileMenuPanel>span{padding:8px 8px 4px;color:#8FA3B5;font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
-  .mobileMenuPanel a{padding:9px 8px;border-radius:7px;color:#637282;text-decoration:none;font-size:11px;font-weight:750}
-  .mobileMenuPanel a:hover,.mobileActive{background:#EEF3F5!important;color:#102742!important}
-}
-
-/* P0 legibility and mobile hierarchy */
-.brandCopy small,.workspace,.sectionLabel,.positioning{font-size:10px}
-.workLink strong{font-size:12px}
-.workLink small{font-size:10px;line-height:1.35}
-.secondary a,.bottom a{font-size:11px}
-.glyph svg{display:block}
-@media(max-width:900px){
-  .primary .workLink:nth-of-type(n+5){display:none}
-  .workLink strong{font-size:11px}
-  .mobileMenu summary{font-size:11px;min-height:38px}
-  .mobileMenuPanel>span{font-size:10px}
-  .mobileMenuPanel a{font-size:12px;min-height:38px;display:flex;align-items:center}
-}
-
-
-/* Workspace system: compact SaaS navigation */
-.sidebar{
-  background:var(--product-navy,#102742);
-  box-shadow:none;
-}
-.top{padding-bottom:14px}
-.primary{gap:2px;padding-top:14px}
-.workLink{
-  min-height:42px;
-  grid-template-columns:26px 1fr;
-  gap:9px;
-  padding:6px 8px;
-  border-radius:7px;
-}
-.glyph{width:24px;height:24px;border:0;border-radius:6px;background:rgba(255,255,255,.045)}
-.workLink strong{font-size:11px}
-.workLink small{font-size:9px;margin-top:2px}
-.active{background:rgba(255,255,255,.09);border-color:transparent;box-shadow:inset 2px 0 0 #74C9BB}
-.secondary{margin-top:8px;padding-top:12px}
-.secondary a,.bottom a{padding:7px 8px;border-radius:6px;font-size:10px}
-.workspace,.sectionLabel,.positioning{font-size:9px}
-@media(max-width:900px){
-  .workLink{min-height:34px;padding:7px 8px}
-  .workLink strong{font-size:10px}
-}
-/* Responsive workspace navigation polish */
-@media(max-width:900px){
-  .sidebar{min-height:54px}
-  .brand{min-width:72px}
-  .primary{padding-inline:2px}
-  .workLink{min-height:38px;padding:8px 10px}
-  .mobileMenu summary{min-width:54px;text-align:center}
+  .mobileMenuPanel>span{padding:8px 8px 4px;color:#8FA3B5;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.mobileMenuPanel a{min-height:38px;display:flex;align-items:center;padding:9px 8px;border-radius:7px;color:#637282;text-decoration:none;font-size:12px;font-weight:750}.mobileMenuPanel a:hover,.mobileActive{background:#EEF3F5!important;color:#102742!important}
 }
 @media(max-width:620px){
-  .sidebar{grid-template-columns:auto minmax(0,1fr) auto;padding:7px 8px;gap:6px}
-  .brandCopy strong{font-size:10px}
-  .brandMark{width:16px;height:18px}
-  .workLink{padding:7px 8px}
-  .workLink strong{font-size:10px}
-  .mobileMenuPanel{width:min(230px,calc(100vw - 24px))}
+  .sidebar{grid-template-columns:auto minmax(0,1fr) auto;padding:7px 8px;gap:6px}.brandCopy strong{font-size:10px}.brandMark{width:16px;height:18px}.workLink{padding:7px 8px}.workLink strong{font-size:10px}.mobileMenuPanel{width:min(230px,calc(100vw - 24px))}
 }
-
-/* Accessibility: keep mobile navigation targets comfortably tappable. */
 @media(max-width:900px) and (pointer:coarse){
-  .workLink{min-height:44px}
-  .mobileMenu summary{min-height:44px;display:flex;align-items:center;justify-content:center}
-  .mobileMenuPanel a{min-height:44px}
-}
-
-
-/* Global workspace navigation legibility pass */
-.brandCopy strong{font-size:15px}
-.brandCopy small,.workspace,.sectionLabel,.positioning{font-size:10px}
-.workLink{min-height:46px;grid-template-columns:28px 1fr;gap:10px;padding:7px 9px}
-.glyph{width:26px;height:26px}
-.workLink strong{font-size:12px}
-.workLink small{font-size:10px;line-height:1.35}
-.secondary a,.bottom a{font-size:11px;min-height:34px;display:flex;align-items:center}
-@media(max-width:900px){
-  .workLink{min-height:40px;padding:8px 10px}
-  .workLink strong{font-size:11px}
-  .mobileMenu summary{font-size:11px}
+  .workLink{min-height:44px}.mobileMenu summary{min-height:44px;display:flex;align-items:center;justify-content:center}.mobileMenuPanel a{min-height:44px}
 }
