@@ -47,19 +47,34 @@ export default function Home() {
             <span>Human approval for material decisions.</span>
             <span>Built around women&apos;s football. Designed for football clubs.</span>
           </div>
+          <div className={styles.heroProof} aria-label="AVELA operating loop">
+            <div><span>01</span><strong>Read</strong><small>Signals + context</small></div>
+            <i>→</i>
+            <div><span>02</span><strong>Decide</strong><small>Priority + feasibility</small></div>
+            <i>→</i>
+            <div><span>03</span><strong>Move</strong><small>Action + owner</small></div>
+            <i>→</i>
+            <div><span>04</span><strong>Learn</strong><small>Outcome retained</small></div>
+          </div>
         </div>
         <CommercialSignalStage />
       </section>
 
       <section className={styles.signalTicker} aria-label="AVELA intelligence inputs">
-        <span>FIXTURES</span>
-        <span>SPONSORS</span>
-        <span>PLAYERS</span>
-        <span>CONTRACTS</span>
-        <span>CALENDARS</span>
-        <span>CAPACITY</span>
-        <span>PERFORMANCE</span>
-        <span>INTERNAL CONTEXT</span>
+        <div className={styles.signalTrack}>
+          {[0, 1].map((copy) => (
+            <div className={styles.signalSet} aria-hidden={copy === 1} key={copy}>
+              <span>FIXTURES</span><b>•</b>
+              <span>SPONSORS</span><b>•</b>
+              <span>PLAYERS</span><b>•</b>
+              <span>CONTRACTS</span><b>•</b>
+              <span>CALENDARS</span><b>•</b>
+              <span>CAPACITY</span><b>•</b>
+              <span>PERFORMANCE</span><b>•</b>
+              <span>INTERNAL CONTEXT</span><b>•</b>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className={styles.problem}>
