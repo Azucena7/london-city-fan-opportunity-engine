@@ -293,9 +293,9 @@ export function CampaignDeliveryPlanner({
             }
           })
         });
-        if (!response.ok) setRemoteSaveError("Club sync failed. Changes remain saved on this device.");
+        if (!response.ok) setRemoteSaveError("Club sync failed. Changes remain local on this device.");
       } catch {
-        setRemoteSaveError("Club sync unavailable. Changes remain saved on this device.");
+        setRemoteSaveError("Club sync unavailable. Changes remain local on this device.");
       } finally {
         setRemoteSaving(false);
       }
@@ -867,10 +867,10 @@ export function CampaignDeliveryPlanner({
                     ? remoteSaving
                       ? "Saving to club…"
                       : remoteSaveError
-                        ? "Saved on device · club sync pending"
-                        : `Saved to ${clubs.find((club) => club.id === activeClubId)?.name ?? "club"}`
+                        ? "Local on device · club sync pending"
+                        : `Synced to ${clubs.find((club) => club.id === activeClubId)?.name ?? "club"} workspace`
                     : workspaceLoaded
-                      ? "Saved on this device"
+                      ? "Local on this device"
                       : "Loading workspace…"}
                 </strong>
                 <small>
