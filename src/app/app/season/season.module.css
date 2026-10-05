@@ -4,3 +4,17 @@
 .playerTwinBars b{font-size:8px;color:var(--product-muted)}
 .playerTwinBars i{display:block;height:5px;margin:0;background:#ECEEF2}
 .playerTwinBars em{display:block;height:100%;background:var(--product-accent)}
+
+
+/* Decision workspace surface */
+.shell{padding:0 28px 64px}
+.header{padding:34px 0 22px!important;border-bottom:0!important}
+.kpis{gap:10px!important;background:transparent!important;border:0!important}
+.kpis article{border:1px solid var(--product-line)!important;border-radius:12px!important;background:#fff!important;box-shadow:0 8px 24px rgba(16,39,66,.035)}
+.visualGrid{gap:12px!important}
+.chartCard,.attendanceChart,.channelBars,.patterns,.playerAssets{border:1px solid var(--product-line)!important;border-radius:14px!important;background:#fff!important;box-shadow:0 10px 30px rgba(16,39,66,.04)}
+.seasonTimeline{border:1px solid var(--product-line)!important;border-radius:14px!important;overflow:hidden;background:#fff!important}
+.fixture{border-radius:9px!important}
+.patternGrid,.playerUsageGrid{gap:10px!important}
+.patternGrid article,.playerUsageGrid article{border:1px solid var(--product-line)!important;border-radius:11px!important;background:#FCFCFB!important}
+@media(max-width:900px){.shell{padding:0 18px 48px}}
