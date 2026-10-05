@@ -2372,3 +2372,23 @@ test("sponsors uses a guided commercial decision funnel", () => {
   assert.match(sponsors, /Approval gates/);
   assert.match(sponsors, /Human review before commitment/);
 });
+
+
+test("campaigns and fixture workspace use progressive decision disclosure", () => {
+  const campaigns = read("src/app/app/campaigns/page.tsx");
+  const fixture = read("src/app/app/matches/[fixtureId]/page.tsx");
+
+  assert.match(campaigns, /Portfolio overview/);
+  assert.match(campaigns, /All campaign work/);
+  assert.match(campaigns, /Decision required/);
+  assert.match(campaigns, /Open decision workspace/);
+
+  assert.match(fixture, /DecisionHandoffStrip active="decision"/);
+  assert.match(fixture, /01 Decide/);
+  assert.match(fixture, /02 Feasibility/);
+  assert.match(fixture, /03 Build/);
+  assert.match(fixture, /04 Evidence/);
+  assert.match(fixture, /05/);
+  assert.match(fixture, /06 Learn/);
+  assert.ok((fixture.match(/className=\{styles\.phasePanel\}/g) ?? []).length >= 5);
+});
