@@ -7,7 +7,7 @@ import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
-import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
+import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./executive.module.css";
 
 export const metadata: Metadata = {
@@ -36,6 +36,12 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
 
   if (!fixture || !live) return null;
 
+  const executiveState = live.decisionState === "HOLD"
+    ? "BLOCKED"
+    : live.decisionState === "READY FOR REVIEW"
+      ? "REVIEW"
+      : "ACT";
+
   const decisionPosition = live.decisionState === "HOLD" ? 18 : live.decisionState === "READY FOR REVIEW" ? 58 : 84;
   const signalHighlights = live.liveSignals.slice(0, 4);
   const flow = [
@@ -60,7 +66,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
       <div className={styles.contextBar}>
         <Link href={"/app/matches/" + selectedId}>← Back to workspace</Link>
         <span>{fixture.opponent} · {fixture.date} · {fixture.kickoff ?? "TBC"}</span>
-        <WorkspaceBadge tone={live.decisionState === "HOLD" ? "warning" : "teal"}>{live.decisionState}</WorkspaceBadge>
+        <DecisionStateBadge state={executiveState} label={live.decisionState} />
       </div>
 
       <WorkspaceCard className={styles.cockpit} tone="action">
