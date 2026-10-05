@@ -98,32 +98,42 @@ export function AccessCenter() {
   async function signUp() {
     setBusy(true);
     setMessage("Creating account…");
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
-    const result = await response.json() as { error?: string; next?: string };
-    setBusy(false);
-    setMessage(response.ok ? result.next || "Check your email to confirm the account." : result.error || "Account could not be created.");
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+      const result = await response.json() as { error?: string; next?: string };
+      setMessage(response.ok ? result.next || "Check your email to confirm the account." : result.error || "Account could not be created.");
+    } catch {
+      setMessage("Account service is unreachable. No account was created.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function signIn() {
     setBusy(true);
     setMessage("Signing in…");
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
-    const result = await response.json() as { error?: string };
-    setBusy(false);
-    if (!response.ok) {
-      setMessage(result.error || "Sign-in failed.");
-      return;
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+      const result = await response.json() as { error?: string };
+      if (!response.ok) {
+        setMessage(result.error || "Sign-in failed.");
+        return;
+      }
+      setPassword("");
+      await refresh();
+    } catch {
+      setMessage("Sign-in service is unreachable. No session was created.");
+    } finally {
+      setBusy(false);
     }
-    setPassword("");
-    await refresh();
   }
 
   async function signOut() {
@@ -136,32 +146,42 @@ export function AccessCenter() {
     if (!clubId) return;
     setBusy(true);
     setMessage("Sending access request…");
-    const response = await fetch("/api/access", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ clubId, requestedRole, note })
-    });
-    const result = await response.json() as { error?: string };
-    setBusy(false);
-    setMessage(response.ok ? "Access request submitted for club review." : result.error || "Access request could not be sent.");
-    if (response.ok) {
-      setNote("");
-      await refresh();
+    try {
+      const response = await fetch("/api/access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ clubId, requestedRole, note })
+      });
+      const result = await response.json() as { error?: string };
+      setMessage(response.ok ? "Access request submitted for club review." : result.error || "Access request could not be sent.");
+      if (response.ok) {
+        setNote("");
+        await refresh();
+      }
+    } catch {
+      setMessage("Access service is unreachable. No access request was submitted.");
+    } finally {
+      setBusy(false);
     }
   }
 
   async function approveRequest(requestId: string, role: string) {
     setBusy(true);
     setMessage("Approving membership…");
-    const response = await fetch("/api/access/approve", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ requestId, role })
-    });
-    const result = await response.json() as { error?: string };
-    setBusy(false);
-    setMessage(response.ok ? "Membership approved." : result.error || "Request could not be approved.");
-    if (response.ok) await refresh();
+    try {
+      const response = await fetch("/api/access/approve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ requestId, role })
+      });
+      const result = await response.json() as { error?: string };
+      setMessage(response.ok ? "Membership approved in the club access record." : result.error || "Request could not be approved.");
+      if (response.ok) await refresh();
+    } catch {
+      setMessage("Access service is unreachable. Membership was not approved.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   if (configured === null) {
