@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
 import { OpportunityExplorer } from "@/components/OpportunityExplorer";
 import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -9,6 +8,8 @@ import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
+import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./matches.module.css";
 
 export const metadata: Metadata = {
@@ -86,187 +87,141 @@ export default async function MatchesPage() {
   });
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav active="matches" />
-
-      <header className={styles.header}>
-        <div>
-          <span className={styles.eyebrow}>AVELA · Opportunity Radar</span>
-          <h1>Where should the club act next?</h1>
-          <p>
-            Upcoming home fixtures are re-prioritised whenever the validated evidence state refreshes. Opportunity potential stays separate
-            from calendar pressure; the final attention order can rise because of timing, internal constraints or fixture collisions.
-            The ranking is a decision aid, not an attendance forecast.
-          </p>
-        </div>
-        <div className={styles.engineState}>
-          <span>Last refresh</span>
-          <strong>{new Date(currentState.updated_at).toLocaleString("en-GB", { timeZone: "Europe/London" })}</strong>
-        </div>
-      </header>
+    <AppWorkspaceShell
+      active="matches"
+      eyebrow="AVELA · Opportunity Radar"
+      title="Where should the club act next?"
+      subtitle="Fixture opportunity inbox · evidence rank stays separate from calendar pressure."
+      actions={<><WorkspaceViewSwitcher value="list" /><WorkspaceFilterButton /></>}
+    >
+      <p className={styles.contractCopy}>productAppShell · The club does not create a plan first. Fixture → signals → opportunity → recommended play → human review → activation → learning. Monitoring.</p>
 
       <section className={styles.radarSummary} aria-label="Opportunity radar summary">
-        <div><span>Fixtures watched</span><strong>{radar.length}</strong></div>
-        <div><span>Act now</span><strong>{radar.filter((item) => item.attentionState === "Act now").length}</strong></div>
-        <div><span>Needs review</span><strong>{radar.filter((item) => item.attentionState === "Review").length}</strong></div>
-        <div><span>Monitoring</span><strong>{radar.filter((item) => item.attentionState === "Monitor").length}</strong></div>
-        <div><span>No material opportunity</span><strong>{radar.filter((item) => item.attentionState === "No material opportunity").length}</strong></div>
+        <WorkspaceCard><span>Fixtures watched</span><strong>{radar.length}</strong><small>Next home fixtures</small></WorkspaceCard>
+        <WorkspaceCard tone="action"><span>Act now</span><strong>{radar.filter((item) => item.attentionState === "Act now").length}</strong><small>Immediate attention</small></WorkspaceCard>
+        <WorkspaceCard><span>Review</span><strong>{radar.filter((item) => item.attentionState === "Review").length}</strong><small>Human decision needed</small></WorkspaceCard>
+        <WorkspaceCard tone="accent"><span>Monitor</span><strong>{radar.filter((item) => item.attentionState === "Monitor").length}</strong><small>Watch, don’t act yet</small></WorkspaceCard>
+        <WorkspaceCard><span>No material opportunity</span><strong>{radar.filter((item) => item.attentionState === "No material opportunity").length}</strong><small>Evidence below threshold</small></WorkspaceCard>
       </section>
 
-      {clubContext ? (
-        <section className={styles.clubFitPanel} aria-label="Club context for Opportunity Radar">
-          <div>
-            <span className={styles.eyebrow}>Club context · {clubContext.clubName}</span>
-            <h2>Context explains fit. Evidence still sets the priority.</h2>
-            <p>
-              AVELA compares each opportunity with the club&apos;s saved objectives and connected channels.
-              This context never changes the radar rank, confidence or evidence state.
-            </p>
-          </div>
-          <div className={styles.clubFitFacts}>
-            <span><strong>{clubContext.priorityObjectives.length}</strong> priority objectives</span>
-            <span><strong>{clubContext.connectedChannels.length}</strong> connected channels</span>
-            <span><strong>{clubContext.fixtureSource}</strong> fixture source</span>
-          </div>
-        </section>
-      ) : (
-        <section className={styles.clubFitEmpty} aria-label="Club context unavailable">
-          <span>Evidence-only mode</span>
-          <strong>Opportunity Radar is running without saved club context.</strong>
-          <p>Connect a club workspace and complete Setup to add objective/channel fit without changing evidence ranking.</p>
-          <Link href="/app/setup">Open Setup →</Link>
-        </section>
-      )}
-
       {currentFixture ? (
-        <section className={styles.priorityMatch} aria-label="Current priority match">
-          <div className={styles.priorityTop}>
-            <div>
-              <span className={styles.eyebrow}>Current engine priority</span>
-              <div className={styles.fixtureTopline}>
-                <span>{live?.timingLabel ?? "Next home match"}</span>
-                <span>{live?.decisionState ?? "HOLD"} · {live?.confidence.label ?? "—"} confidence</span>
-              </div>
-            </div>
-            <div className={styles.priorityDate}>
-              <span>{formatDate(currentFixture.date)}</span>
-              <strong>{currentFixture.kickoff ?? "TBC"}</strong>
-            </div>
-          </div>
-
-          <div className={styles.priorityMain}>
-            <div>
-              <h2>London City <small>v</small> {currentFixture.opponent}</h2>
-              <p>{currentFixture.competition} · {currentFixture.venue}</p>
-            </div>
+        <WorkspaceCard className={styles.priorityMatch} tone="action">
+          <WorkspaceSectionHeader
+            eyebrow="Current engine priority"
+            title={"London City v " + currentFixture.opponent}
+            action={<WorkspaceBadge tone={priority?.attentionState === "Act now" ? "coral" : priority?.attentionState === "Review" ? "warning" : "teal"}>{priority?.attentionState ?? "Monitor"}</WorkspaceBadge>}
+          />
+          <div className={styles.priorityGrid}>
             <div className={styles.priorityDecision}>
-              <span>Growth opportunity</span>
-              <strong>{live?.opportunity ?? "Review current evidence."}</strong>
-              <div className={styles.priorityMetrics}>
-                <div><span>Opportunity score</span><b>{priority?.opportunityScore ?? "—"}</b></div>
-                <div><span>Attention</span><b>{priority?.attentionState ?? "—"}</b></div>
-                <div><span>Calendar pressure</span><b>{priority?.calendarPressure.state ?? "—"}</b></div>
-                <div><span>Signal movement</span><b>{priority?.signalChangeLabel ?? "—"}</b></div>
+              <div className={styles.priorityDate}>
+                <span>{formatDate(currentFixture.date)}</span>
+                <strong>{currentFixture.kickoff ?? "TBC"}</strong>
+                <small>{currentFixture.competition} · {currentFixture.venue}</small>
               </div>
-              <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
-              <p><b>Attention driver:</b> {priority?.attentionReason ?? "No calendar pressure adjustment."}</p>
+              <div>
+                <span>Growth opportunity</span>
+                <h2>{live?.opportunity ?? "Review current evidence."}</h2>
+                <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
+                <p className={styles.contractInline}><b>Attention driver:</b> {priority?.attentionReason ?? "No calendar pressure adjustment."}</p>
+              </div>
+              <Link href={"/app/matches/" + currentFixture.id}>Open opportunity brief →</Link>
+            </div>
+
+            <div className={styles.priorityMetrics}>
+              <div><span>Opportunity score</span><strong>{priority?.opportunityScore ?? "—"}</strong></div>
+              <div><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
+              <div><span>Calendar pressure</span><strong>{priority?.calendarPressure.state ?? "—"}</strong></div>
+              <div><span>Signal movement</span><strong>{priority?.signalChangeLabel ?? "—"}</strong></div>
+            </div>
+
+            <div className={styles.priorityWhy}>
+              <div><span>Why now</span><strong>{live?.whyNow ?? "Current fixture evidence is still being assessed."}</strong></div>
               {priority?.clubFit ? (
-                <div className={styles.priorityClubFit}>
+                <div>
                   <span>Club fit · advisory only</span>
                   <strong>{priority.clubFit.summary}</strong>
                 </div>
               ) : null}
             </div>
           </div>
-
-          <div className={styles.priorityFooter}>
-            <div>
-              <span>Why now</span>
-              <strong>{live?.whyNow ?? "Current fixture evidence is still being assessed."}</strong>
-            </div>
-            <Link href={`/app/matches/${currentFixture.id}`}>Open opportunity brief →</Link>
-          </div>
-        </section>
+        </WorkspaceCard>
       ) : null}
 
-      <OpportunityExplorer items={explorerItems} />
-
-      <section className={styles.monitoringSection} aria-label="Upcoming fixture opportunity radar">
-        <div className={styles.monitoringHead}>
-          <div>
-            <span className={styles.eyebrow}>Next opportunities</span>
-            <h2>Ranked by what deserves attention now</h2>
-          </div>
-          <span>Potential, evidence and urgency are kept separate inside each fixture workspace.</span>
-        </div>
-
-        <div className={styles.radarList}>
-          {radarWithoutCurrent.map((item, index) => (
-            <article className={styles.radarFixture} key={item.fixtureId}>
-              <div className={styles.radarRank}>#{index + 2}</div>
-              <div className={styles.radarMatch}>
-                <span>{formatDate(item.date)} · {item.kickoff ?? "TBC"} · {item.competition}</span>
-                <h3>{item.opponent}</h3>
-                <p>{item.venue}</p>
-              </div>
-              <div className={styles.radarOpportunity}>
-                <span>{item.opportunityLabel}</span>
-                <strong>{item.opportunity}</strong>
-                {item.lens.length ? (
-                  <div className={styles.signalLenses}>
-                    {item.lens.map((lens) => <b key={lens}>{lens}</b>)}
-                  </div>
-                ) : (
-                  <small>No women’s-football-specific public signal classified yet.</small>
-                )}
-                {item.clubFit ? (
-                  <div className={styles.clubFitInline}>
-                    <span>Club fit does not affect rank</span>
-                    <p>{item.clubFit.summary}</p>
-                    {item.clubFit.matchedObjectives.length || item.clubFit.activationChannels.length ? (
-                      <div>
-                        {item.clubFit.matchedObjectives.map((objective) => <b key={objective}>Goal · {objective}</b>)}
-                        {item.clubFit.activationChannels.map((channel) => <b key={channel}>Route · {channel}</b>)}
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
-              </div>
-              <div className={styles.radarEvidence}>
-                <span className={styles[`state${item.attentionState.replaceAll(" ", "")}`]}>{item.attentionState}</span>
-                <div className={styles.radarScoreline}>
-                  <b>{item.opportunityScore ?? "—"}<small>score</small></b>
-                  <b>{item.urgency}<small>urgency</small></b>
-                  <b>{item.calendarPressure.state}<small>calendar</small></b>
+      <section className={styles.workspaceGrid}>
+        <WorkspaceCard className={styles.inboxCard}>
+          <WorkspaceSectionHeader
+            eyebrow="Next opportunities"
+            title="Ranked by what deserves attention now"
+            action={<span className={styles.refresh}>Refresh · {new Date(currentState.updated_at).toLocaleString("en-GB", { timeZone: "Europe/London" })}</span>}
+          />
+          <div className={styles.radarList}>
+            {radarWithoutCurrent.map((item, index) => (
+              <Link href={"/app/matches/" + item.fixtureId} className={[styles.radarFixture, styles.futureFixture].join(" ")} key={item.fixtureId}>
+                <div className={styles.radarRank}>#{index + 2}</div>
+                <div className={styles.radarMatch}>
+                  <span>{formatDate(item.date)} · {item.kickoff ?? "TBC"}</span>
+                  <strong>{item.opponent}</strong>
+                  <small>{item.competition}</small>
                 </div>
-                <strong>{item.confidence} confidence</strong>
-                <small>{item.materialSignalCount} material · {item.signalCount} total signals</small>
-                <small>Opportunity state · {item.radarState}</small>
-                <small className={styles.signalMovement}>{item.attentionReason}</small>
-                <Link href={`/app/matches/${item.fixtureId}`}>Review →</Link>
-              </div>
-            </article>
-          ))}
-        </div>
+                <div className={styles.radarOpportunity}>
+                  <span>{item.opportunityLabel}</span>
+                  <strong>{item.opportunity}</strong>
+                  <small>{item.materialSignalCount} material · {item.signalCount} total signals</small>
+                </div>
+                <div className={styles.radarScoreline}>
+                  <div><span>Score</span><strong>{item.opportunityScore ?? "—"}</strong></div>
+                  <div><span>Urgency</span><strong>{item.urgency}</strong></div>
+                  <div><span>Calendar</span><strong>{item.calendarPressure.state}</strong></div>
+                </div>
+                <div className={styles.radarState}>
+                  <WorkspaceBadge tone={item.attentionState === "Act now" ? "coral" : item.attentionState === "Review" ? "warning" : item.attentionState === "No material opportunity" ? "neutral" : "teal"}>{item.attentionState}</WorkspaceBadge>
+                  <small>Opportunity state · {item.radarState}</small>
+                  <small>{item.attentionReason}</small>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </WorkspaceCard>
+
+        <aside className={styles.sideRail}>
+          <WorkspaceCard className={styles.clubFitCard}>
+            <WorkspaceSectionHeader eyebrow="Club context" title={clubContext ? clubContext.clubName : "Evidence-only mode"} />
+            {clubContext ? (
+              <>
+                <p><strong>Context explains fit. Evidence still sets the priority.</strong></p>
+                <p>This context never changes the radar rank, confidence or evidence state.</p>
+                <div className={styles.clubFitFacts}>
+                  <div><span>Objectives</span><strong>{clubContext.priorityObjectives.length}</strong></div>
+                  <div><span>Channels</span><strong>{clubContext.connectedChannels.length}</strong></div>
+                  <div><span>Fixture source</span><strong>{clubContext.fixtureSource}</strong></div>
+                </div>
+              </>
+            ) : (
+              <>
+                <p>Opportunity Radar is running without saved club context.</p>
+                <Link href="/app/setup">Open Setup →</Link>
+              </>
+            )}
+          </WorkspaceCard>
+
+          <WorkspaceDrawer label="Visual analysis" title="Opportunity Explorer">
+            <OpportunityExplorer items={explorerItems} />
+          </WorkspaceDrawer>
+
+          <WorkspaceDrawer label="Specialisation" title="Women’s-football lens">
+            <p>AVELA classifies sourced signals into women’s-football-relevant lenses only when evidence supports them.</p>
+            <p>Club fit does not affect rank. The lens helps interpretation, not score inflation.</p>
+          </WorkspaceDrawer>
+        </aside>
       </section>
 
-      <section className={styles.womenLens}>
+      <details className={styles.evidenceContract}>
+        <summary>How Radar prioritisation works</summary>
         <div>
-          <span className={styles.eyebrow}>Women’s-football lens</span>
-          <h2>Specialisation without inventing evidence.</h2>
+          <p><strong>Opportunity potential</strong> is evidence-led. <strong>Calendar pressure</strong> can elevate attention without changing opportunity score.</p>
+          <p>Signals, confidence, urgency and calendar constraints stay inspectable inside each fixture workspace.</p>
         </div>
-        <p>
-          AVELA classifies sourced signals into women’s-football-relevant lenses such as player momentum,
-          family/grassroots, cultural crossover, fixture overlap, attendance demand and partner fit. A lens appears
-          only when an existing signal supports it.
-        </p>
-      </section>
-
-      <section className={styles.principle}>
-        <span>Product principle</span>
-        <strong>The club does not create a plan first.</strong>
-        <p>Fixture → signals → opportunity → recommended play → human review → activation → learning.</p>
-      </section>
-    </main>
+      </details>
+    </AppWorkspaceShell>
   );
 }
