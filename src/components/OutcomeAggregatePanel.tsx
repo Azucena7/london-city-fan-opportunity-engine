@@ -190,7 +190,7 @@ export function OutcomeAggregatePanel({
           <button type="button" disabled={busy || !sourceLabel.trim() || !observedAt} onClick={() => void save()}>
             {busy ? "Saving…" : "Save club-reported aggregate"}
           </button>
-          <p>No names, emails, supporter IDs, postcodes, payment details or free-text supporter data are accepted by this endpoint.</p>
+          <p>This form stores aggregate metrics plus source metadata only. Do not enter names, emails, supporter IDs, postcodes or payment details.</p>
         </details>
       ) : (
         <p className={styles.readOnly}>Results administration permission is required to record or update aggregate outcomes.</p>
