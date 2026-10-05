@@ -2318,3 +2318,24 @@ test("universal state primitives keep decision and evidence semantics consistent
   assert.match(help, /DecisionStateBadge/);
   assert.match(help, /EvidenceStateBadge/);
 });
+
+
+test("calendar exposes a next-decision rail and shared handoffs", () => {
+  const season = read("src/app/app/season/page.tsx");
+  const campaigns = read("src/app/app/campaigns/page.tsx");
+  const players = read("src/app/app/players/page.tsx");
+  const learning = read("src/app/app/learning/page.tsx");
+  const handoff = read("src/components/DecisionHandoffStrip.tsx");
+
+  assert.match(season, /Next decision window/);
+  assert.match(season, /Decision flow/);
+  assert.match(season, /fixtureIds\.includes\(nextRow\.id\)/);
+  assert.match(season, /Next handoff/);
+  assert.match(campaigns, /DecisionHandoffStrip active="campaign"/);
+  assert.match(players, /DecisionHandoffStrip active="players"/);
+  assert.match(learning, /DecisionHandoffStrip active="learning"/);
+  assert.match(handoff, /Decide/);
+  assert.match(handoff, /Campaign/);
+  assert.match(handoff, /Players/);
+  assert.match(handoff, /Learning/);
+});
