@@ -1800,3 +1800,36 @@ test("calendar pressure can elevate attention without changing opportunity score
   assert.doesNotMatch(pressure, /opportunityScore\s*[+*\-/]/);
   assert.doesNotMatch(pressure, /rank\s*=\s*.*calendar/i);
 });
+
+
+test("Decision Center integrates calendar attention and resilient cross-system state", () => {
+  const page = read("src/app/app/page.tsx");
+  const helper = read("src/lib/decisionCenterOverview.ts");
+  const css = read("src/app/app/home.module.css");
+
+  assert.match(page, /applyCalendarDecisionPressure/);
+  assert.match(page, /radarState: item\.attentionState/);
+  assert.match(page, /item\.attentionReason/);
+  assert.match(page, /Calendar pressure/);
+  assert.match(page, /Contract impacts/);
+  assert.match(page, /Execution sync/);
+  assert.match(page, /Verified contracts/);
+  assert.match(page, /Calendar pressure can elevate attention without changing opportunity potential/);
+  assert.match(page, /Calendar pressure/);
+  assert.match(page, /calendarRelationships/);
+
+  assert.match(helper, /contract_documents/);
+  assert.match(helper, /contract_clauses/);
+  assert.match(helper, /contract_impact_reviews/);
+  assert.match(helper, /external_work_packages/);
+  assert.match(helper, /if \(workloadResponse\.ok && capacityResponse\.ok\)/);
+  assert.match(helper, /if \(availabilityResponse\.ok\)/);
+  assert.match(helper, /if \(requestsResponse\.ok\)/);
+  assert.match(helper, /if \(contractsResponse\.ok && clausesResponse\.ok\)/);
+  assert.match(helper, /if \(impactsResponse\.ok\)/);
+  assert.match(helper, /if \(executionResponse\.ok\)/);
+  assert.doesNotMatch(helper, /!workloadResponse\.ok \|\| !capacityResponse\.ok \|\| !availabilityResponse\.ok/);
+
+  assert.match(css, /grid-template-columns:repeat\(4,1fr\)/);
+  assert.match(css, /data-state="syncing"/);
+});
