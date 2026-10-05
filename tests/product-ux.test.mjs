@@ -1334,6 +1334,24 @@ test("Player Asset Planning works for fixture and non-fixture commercial campaig
 });
 
 
+test("Player pack selection syncs complete planning choices through club-scoped RLS", () => {
+  const planner = read("src/components/PlayerAssetPlanner.tsx");
+  const route = read("src/app/api/player-pack-selection/[campaignId]/route.ts");
+  const migration = read("supabase/bootstrap/campaign_workspace.sql");
+  assert.match(planner, /player-pack-selection/);
+  assert.match(planner, /Synced to club workspace · selected/);
+  assert.match(planner, /Complete the pack to sync shared selection/);
+  assert.match(planner, /shared club selection/);
+  assert.match(route, /player_pack_selections/);
+  assert.match(route, /status: "selected"/);
+  assert.match(route, /selectedPlayerIds/);
+  assert.match(migration, /create table if not exists public\.player_pack_selections/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /'campaigns', 'edit'/);
+  assert.match(migration, /'campaigns', 'approve'/);
+  assert.match(migration, /status in \('selected','approved','committed'\)/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");

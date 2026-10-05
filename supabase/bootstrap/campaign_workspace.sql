@@ -378,3 +378,63 @@ for each row execute function private.apply_confirmed_admin_invite();
 
 create index if not exists club_admin_invites_claimed_by_idx
 on private.club_admin_invites(claimed_by);
+
+
+-- Shared player-pack selection state for fixture-led and commercial campaigns.
+create table if not exists public.player_pack_selections (
+  id uuid primary key default gen_random_uuid(),
+  club_id uuid not null references public.clubs(id) on delete cascade,
+  campaign_id text not null,
+  status text not null default 'selected' check (status in ('selected','approved','committed')),
+  selected_player_ids text[] not null default '{}',
+  player_count integer not null check (player_count >= 0),
+  snapshot jsonb not null default '{}'::jsonb,
+  updated_by uuid not null references auth.users(id),
+  updated_at timestamptz not null default now(),
+  unique (club_id, campaign_id)
+);
+
+alter table public.player_pack_selections enable row level security;
+revoke all on public.player_pack_selections from anon;
+grant select, insert, update on public.player_pack_selections to authenticated;
+
+drop policy if exists "campaign viewers can read player pack selections" on public.player_pack_selections;
+create policy "campaign viewers can read player pack selections"
+on public.player_pack_selections for select
+to authenticated
+using (public.club_has_permission(club_id, 'campaigns', 'view'));
+
+drop policy if exists "campaign editors can insert player pack selections" on public.player_pack_selections;
+create policy "campaign editors can insert player pack selections"
+on public.player_pack_selections for insert
+to authenticated
+with check (
+  updated_by = (select auth.uid())
+  and (
+    (status = 'selected' and public.club_has_permission(club_id, 'campaigns', 'edit'))
+    or
+    (status in ('approved','committed') and public.club_has_permission(club_id, 'campaigns', 'approve'))
+  )
+);
+
+drop policy if exists "campaign editors can update player pack selections" on public.player_pack_selections;
+create policy "campaign editors can update player pack selections"
+on public.player_pack_selections for update
+to authenticated
+using (public.club_has_permission(club_id, 'campaigns', 'view'))
+with check (
+  updated_by = (select auth.uid())
+  and (
+    (status = 'selected' and public.club_has_permission(club_id, 'campaigns', 'edit'))
+    or
+    (status in ('approved','committed') and public.club_has_permission(club_id, 'campaigns', 'approve'))
+  )
+);
+
+create index if not exists player_pack_selections_club_campaign_idx
+on public.player_pack_selections(club_id, campaign_id);
+
+create index if not exists player_pack_selections_updated_by_idx
+on public.player_pack_selections(updated_by);
+
+notify pgrst, 'reload schema';
