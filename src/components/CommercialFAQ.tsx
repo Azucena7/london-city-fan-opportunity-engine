@@ -19,9 +19,10 @@ const groups = [
   {
     title: "Existing stack",
     items: [
-      ["Does AVELA replace Blinkfire or sponsorship analytics tools?", "No. Specialist platforms can remain the source for sponsorship, content, audience and media-performance intelligence. AVELA can use that evidence alongside contracts, player availability, fixtures, calendars and capacity to inform wider club decisions."],
+      ["Does AVELA replace Blinkfire or sponsorship analytics tools?", "No. Specialist platforms can remain the source for sponsorship, content, audience and media-performance intelligence. In the current public environment, AVELA can use public Blinkfire evidence as context; private club-specific Blinkfire measurement requires authorised club access. AVELA combines that evidence with contracts, player availability, fixtures, calendars and capacity to inform wider club decisions."],
       ["Does AVELA replace our CRM, ticketing or BI tools?", "No. Those systems remain systems of record. AVELA sits above them as a decision layer: what deserves attention, what should happen next, and whether the club can execute it."],
-      ["Do we need to integrate everything before starting?", "No. AVELA can start with fixtures, public signals and a limited amount of club context. Additional sources improve confidence and operational intelligence over time."]
+      ["Do we need to integrate everything before starting?", "No. AVELA can start with fixtures, public signals and a limited amount of club context. Additional sources improve confidence and operational intelligence over time."],
+      ["What is actually connected today?", "The public AVELA environment uses its live public-signal sources and AVELA-owned web analytics where available. Club-private CRM, ticketing and Blinkfire data are not treated as connected unless the club authorises them. The Sources screen exposes operational, degraded, requires-access and not-configured states instead of collapsing them into one 'connected' label."]
     ]
   },
   {
@@ -29,6 +30,7 @@ const groups = [
     items: [
       ["Can AVELA understand player, sponsor and calendar constraints?", "Yes. The product model supports player availability, internal off-days, international duty, sponsor obligations, executive diaries, protocol requirements, approval gates and operational capacity."],
       ["Can AVELA explain why a recommendation changed?", "Yes. Recommendation changes should be traceable to material evidence such as a new signal, changed availability, deadline, blocker, contract context or capacity constraint."],
+      ["Does AVELA send CRM messages, publish social posts or create external tasks automatically?", "Not by default. AVELA prepares and governs the decision, campaign and handoff. A human can confirm a routed work package, but it remains 'proposed' in AVELA until a real authorised adapter creates tasks in the external system. Publishing, sends and media spend remain in the club's execution tools unless a specific authorised connector is added."],
       ["Who can see sensitive club information?", "Access is role-based. Sensitive information such as contracts, internal availability, executive calendars or commercial terms can be restricted while still contributing to a decision at the appropriate permission level."]
     ]
   },
