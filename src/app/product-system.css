@@ -1,32 +1,38 @@
 :root{
-  --product-bg:#F6F7F9;
+  --product-bg:#F8F6F1;
   --product-surface:#FFFFFF;
-  --product-surface-2:#EFF2F6;
-  --product-ink:#10131A;
-  --product-muted:#69707D;
-  --product-line:#D9DDE5;
-  --product-accent:#6657FF;
-  --product-accent-soft:#ECEAFF;
+  --product-surface-2:#F1E9DE;
+  --product-ink:#102742;
+  --product-muted:#637282;
+  --product-line:#D8DEE3;
+  --product-accent:#2F8F83;
+  --product-accent-soft:#E3F2EF;
   --product-accent-ink:#FFFFFF;
-  --product-signal:#FF654F;
-  --product-signal-soft:#FFF0ED;
-  --product-inverse:#10131A;
-  --product-inverse-muted:#B9C0CC;
+  --product-signal:#EF8B6C;
+  --product-signal-soft:#FCEAE4;
+  --product-inverse:#102742;
+  --product-inverse-muted:#B6C4D0;
   --product-success:#16845B;
-  --product-warning:#E99A24;
+  --product-warning:#D78A1E;
   --product-danger:#D94A4A;
   --product-info:#4A70D8;
   --product-missing:#8A909B;
+  --product-navy:#102742;
+  --product-navy-2:#173653;
+  --product-teal:#2F8F83;
+  --product-coral:#EF8B6C;
+  --product-sand:#E8DCCB;
+  --product-paper:#F8F6F1;
   --product-radius-sm:8px;
   --product-radius-md:12px;
   --product-radius-lg:18px;
-  --product-shadow:0 22px 70px rgba(16,19,26,.08);
+  --product-shadow:0 22px 70px rgba(16,39,66,.08);
   --product-space-xs:8px;
   --product-space-sm:14px;
   --product-space-md:22px;
   --product-space-lg:36px;
   --product-space-xl:64px;
-  --product-orange:#FF654F;
+  --product-orange:#EF8B6C;
   --product-display:clamp(38px,4.8vw,58px);
   --product-title:clamp(26px,3vw,38px);
   --product-body:16px;
@@ -178,7 +184,7 @@ textarea:focus-visible{
 }
 
 /* Application shell: tool first, website second */
-.productAppShell{margin-left:232px;width:calc(100% - 232px);background:#F6F7F9}
+.productAppShell{margin-left:232px;width:calc(100% - 232px);background:var(--product-bg)}
 .productAppShell>header,
 .productAppShell>section,
 .productAppShell>div:not([class*="ProductJourneyNav"]){
@@ -192,7 +198,7 @@ textarea:focus-visible{
 @media(max-width:900px){.productAppShell{margin-left:0;width:100%}}
 
 /* Final density and surface consistency */
-.productAppShell{background:#F7F8FA}
+.productAppShell{background:var(--product-bg)}
 .productAppShell :is(h1,h2,h3){color:var(--product-ink)}
 .productAppShell :is(p,small){color:var(--product-muted)}
 .productAppShell :is(article,section,div){box-sizing:border-box}
