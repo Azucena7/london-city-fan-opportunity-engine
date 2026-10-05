@@ -238,7 +238,7 @@ export function AccessCenter() {
         <div className={styles.state}>
           <span>Account state</span>
           <strong>{authenticated ? "Signed in" : "Not signed in"}</strong>
-          <small>{message}</small>
+          <small role="status" aria-live="polite">{message}</small>
         </div>
       </header>
 
