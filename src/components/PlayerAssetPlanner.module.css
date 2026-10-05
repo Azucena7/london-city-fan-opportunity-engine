@@ -282,3 +282,8 @@
 .workflowExit p{margin:0!important;font-size:10px!important;line-height:1.45;color:var(--product-muted)!important}
 .workflowExit a{white-space:nowrap;font-size:11px;font-weight:900;text-decoration:none;color:var(--product-ink)}
 @media(max-width:760px){.workflowExit{align-items:flex-start;flex-direction:column}}
+
+.governanceActions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.governanceActions button{border:1px solid var(--product-line);border-radius:8px;background:#fff;padding:8px 10px;font-size:10px;font-weight:900;color:var(--product-ink);cursor:pointer}
+.governanceActions button:disabled{opacity:.55;cursor:not-allowed}
+.governanceActions a{white-space:nowrap}
