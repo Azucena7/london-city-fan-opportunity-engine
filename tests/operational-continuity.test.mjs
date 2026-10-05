@@ -10,6 +10,7 @@ test("operational continuity is embedded in the Team workspace",()=>{
   assert.match(page,/OperationalContinuity/);
   assert.match(component,/Staff can change\. The operating memory should not\./);
   assert.match(component,/Access removal is the final step, not the first/);
+  assert.match(component,/Do not deactivate the departing owner yet/);
   assert.match(component,/open decisions, requests, work packages, contracts, calendars, sources, access and tacit operating knowledge/i);
 });
 
