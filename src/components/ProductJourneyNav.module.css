@@ -120,3 +120,30 @@
   .mobileMenuPanel>span{font-size:10px}
   .mobileMenuPanel a{font-size:12px;min-height:38px;display:flex;align-items:center}
 }
+
+
+/* Workspace system: compact SaaS navigation */
+.sidebar{
+  background:var(--product-navy,#102742);
+  box-shadow:none;
+}
+.top{padding-bottom:14px}
+.primary{gap:2px;padding-top:14px}
+.workLink{
+  min-height:42px;
+  grid-template-columns:26px 1fr;
+  gap:9px;
+  padding:6px 8px;
+  border-radius:7px;
+}
+.glyph{width:24px;height:24px;border:0;border-radius:6px;background:rgba(255,255,255,.045)}
+.workLink strong{font-size:11px}
+.workLink small{font-size:9px;margin-top:2px}
+.active{background:rgba(255,255,255,.09);border-color:transparent;box-shadow:inset 2px 0 0 #74C9BB}
+.secondary{margin-top:8px;padding-top:12px}
+.secondary a,.bottom a{padding:7px 8px;border-radius:6px;font-size:10px}
+.workspace,.sectionLabel,.positioning{font-size:9px}
+@media(max-width:900px){
+  .workLink{min-height:34px;padding:7px 8px}
+  .workLink strong{font-size:10px}
+}
