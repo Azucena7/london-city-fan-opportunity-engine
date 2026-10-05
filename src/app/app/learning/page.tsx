@@ -123,7 +123,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </summary>
         <div className={styles.evidenceDrawerBody}>
           <ProductDataStateLegend />
-          {selectedId ? <LearningCampaignTrace fixtureId={selectedId} /> : null}
+          {selectedId ? <LearningCampaignTrace fixtureId={selectedId} measured={Boolean(measured)} /> : null}
         </div>
       </details>
 
