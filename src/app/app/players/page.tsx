@@ -4,6 +4,8 @@ import { PlayerAssetPlanner } from "@/components/PlayerAssetPlanner";
 import { PlayerContractHealth } from "@/components/PlayerContractHealth";
 import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
 import { WorkspaceDrawer } from "@/components/WorkspaceUI";
+import { DecisionContextTrail } from "@/components/DecisionContextTrail";
+import { campaignPlans } from "@/lib/data";
 import styles from "./players.module.css";
 
 export const metadata: Metadata = {
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
 export default async function PlayerAssetsPage({ searchParams }: { searchParams: Promise<{ campaign?: string }> }) {
   const params = await searchParams;
   const initialCampaignId = params.campaign;
+  const campaign = campaignPlans.campaigns.find((item) => item.id === initialCampaignId) ?? null;
   return (
     <AppWorkspaceShell
       active="players"
@@ -23,6 +26,14 @@ export default async function PlayerAssetsPage({ searchParams }: { searchParams:
       subtitle="Build the best activation pack from availability, fit, momentum, cost and season scarcity."
       actions={<><WorkspaceViewSwitcher value="overview" /><WorkspaceFilterButton /></>}
     >
+      <DecisionContextTrail
+        fixtureLabel={campaign ? campaign.fixtureId : null}
+        fixtureHref={campaign ? "/app/matches/" + campaign.fixtureId : null}
+        campaignLabel={campaign?.title.en ?? null}
+        campaignId={campaign?.id ?? null}
+        current="Players"
+      />
+
       <section className={styles.planningBoundary}>
         <span>Planning layer</span>
         <strong>Scenario optimiser · not legal contract truth</strong>

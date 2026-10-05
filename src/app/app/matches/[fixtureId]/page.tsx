@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
+import { DecisionContextTrail } from "@/components/DecisionContextTrail";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
 import { MatchSignalControls } from "@/components/MatchSignalControls";
@@ -87,6 +88,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       subtitle={`${fixture.date} · ${fixture.kickoff ?? "TBC"} · ${fixture.competition}`}
       actions={<Link className={styles.workspaceAction} href={`/app/executive?fixture=${fixture.id}`}>Executive view</Link>}
     >
+      <DecisionContextTrail
+        fixtureLabel={"London City v " + fixture.opponent}
+        fixtureHref={"/app/matches/" + fixture.id}
+        campaignLabel={campaign?.title.en ?? null}
+        campaignId={campaign?.id ?? null}
+        current="Decision workspace"
+      />
       <div className={styles.shell}>
 
       <div className={styles.backRow}>
