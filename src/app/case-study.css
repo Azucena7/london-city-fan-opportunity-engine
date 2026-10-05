@@ -1336,3 +1336,46 @@
   .caseStudyRealityHeader > b { transform:rotate(90deg); text-align:center; }
 }
 
+
+
+/* AVELA commercial case-study identity alignment */
+.commercialCaseStudy{
+  --case-navy:#102742;
+  --case-accent:#74c9bb;
+  --case-accent-soft:rgba(47,143,131,.10);
+}
+.commercialCaseStudy .caseStudyHero{
+  padding-top:86px;
+}
+.commercialCaseStudy .eyebrow,
+.commercialCaseStudy .caseStudyTextLink,
+.commercialCaseStudy .caseStudyChallengeGrid span,
+.commercialCaseStudy .caseStudyCampaignFacts strong,
+.commercialCaseStudy .caseStudyPlaybooks b,
+.commercialCaseStudy .caseStudyProductGrid>article>span,
+.commercialCaseStudy .caseStudyProductGrid a,
+.commercialCaseStudy .caseStudyPilotSteps span{
+  color:#2f8f83;
+}
+.commercialCaseStudy .caseStudyHeroCommercial h1{
+  font-size:clamp(54px,7.8vw,100px);
+  line-height:.92;
+}
+.commercialCaseStudy .caseStudyButton.primary,
+.commercialCaseStudy .caseStudyModeNav .active,
+.commercialCaseStudy .caseStudyCampaignLead{
+  background:#74c9bb;
+  color:#102742;
+}
+.commercialCaseStudy .caseStudyCampaignCard,
+.commercialCaseStudy .caseStudyBrowser{
+  border-radius:18px 18px 52px 18px;
+}
+.commercialCaseStudy .caseStudyMetricGrid article,
+.commercialCaseStudy .caseStudyProductGrid article,
+.commercialCaseStudy .caseStudyValueGrid article{
+  border-radius:14px;
+}
+.commercialCaseStudy .caseStudyCommercialQuote{
+  color:#102742;
+}
