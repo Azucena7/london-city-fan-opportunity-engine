@@ -2590,6 +2590,21 @@ test("AVELA category separates the workspace from cross-functional orchestration
   assert.match(help, /orchestrates the evidence, constraints, timing and ownership across functions/);
 });
 
+test("shared workspace shell and support pages keep operational microcopy readable", () => {
+  const files = [
+    "src/components/AppWorkspaceShell.module.css",
+    "src/components/ProductJourneyNav.module.css",
+    "src/app/app/setup/setup.module.css",
+    "src/app/app/help/help.module.css",
+    "src/app/app/sources/sources.module.css",
+    "src/app/app/access/access.module.css"
+  ];
+  for (const file of files) {
+    const css = read(file);
+    assert.doesNotMatch(css, /font-size:(?:8|9|10)px/);
+  }
+});
+
 test("extended workspace pages keep operational microcopy readable", () => {
   const files = [
     "src/app/app/players/players.module.css",
