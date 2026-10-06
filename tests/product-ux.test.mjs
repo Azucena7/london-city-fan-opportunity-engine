@@ -2662,3 +2662,13 @@ test("route-specific commercial and case-study CSS is not shipped from the root 
   assert.match(cases, /case-study-commercial\.css/);
   assert.match(clubs, /commercial-pilot\.css/);
 });
+
+test("Radar and Operating Pack reflect the broader commercial decision category", () => {
+  const radar = read("src/app/app/matches/page.tsx");
+  const pack = read("src/app/pilot/operating-pack/page.tsx");
+  assert.doesNotMatch(radar, />Growth opportunity</);
+  assert.match(radar, />Opportunity</);
+  assert.match(pack, /MarketingNav/);
+  assert.doesNotMatch(pack, /ProductJourneyNav|productAppShell/);
+  assert.match(pack, /utm_source=operating_pack/);
+});
