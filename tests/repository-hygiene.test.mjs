@@ -724,3 +724,13 @@ test("maintained product docs use the current AVELA category and pilot scope", (
   assert.match(pack, /4–6 fixture or campaign window/);
   assert.doesNotMatch(pack, /90-day pilot · operating pack|Choose six home fixtures/);
 });
+
+test("London City proof owns its case and shared commercial styles", () => {
+  const root = readFileSync("src/app/layout.tsx", "utf8");
+  const live = readFileSync("src/app/live/london-city/layout.tsx", "utf8");
+  const study = readFileSync("src/app/case-study/layout.tsx", "utf8");
+  assert.doesNotMatch(root, /case-brand\.css/);
+  assert.match(live, /case-brand\.css/);
+  assert.match(live, /commercial-pilot\.css/);
+  assert.match(study, /case-brand\.css/);
+});
