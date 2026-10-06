@@ -1,13 +1,56 @@
 "use client";
 
 import Link from "next/link";
+import { FormEvent, useState } from "react";
 import { MarketingNav } from "./MarketingNav";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLanguage } from "./LanguageProvider";
 
+type LeadState = "idle" | "submitting" | "success" | "error";
+
 export function ClubPilotProposition() {
   const { lang } = useLanguage();
   const es = lang === "es";
+  const [leadState, setLeadState] = useState<LeadState>("idle");
+  const [leadError, setLeadError] = useState("");
+
+  async function submitLead(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLeadState("submitting");
+    setLeadError("");
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const params = new URLSearchParams(window.location.search);
+
+    const response = await fetch("/api/commercial-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        clubName: data.get("clubName"),
+        role: data.get("role"),
+        workEmail: data.get("workEmail"),
+        priority: data.get("priority"),
+        consent: data.get("consent") === "yes",
+        website: data.get("website"),
+        sourcePath: window.location.pathname,
+        utmSource: params.get("utm_source"),
+        utmMedium: params.get("utm_medium"),
+        utmCampaign: params.get("utm_campaign"),
+        utmContent: params.get("utm_content")
+      })
+    }).catch(() => null);
+
+    if (!response?.ok) {
+      const payload = await response?.json().catch(() => null) as { error?: string } | null;
+      setLeadError(payload?.error || (es ? "No se ha podido enviar. Inténtalo de nuevo." : "Your request could not be sent. Please try again."));
+      setLeadState("error");
+      return;
+    }
+
+    form.reset();
+    setLeadState("success");
+  }
 
   return <main className="productShell commercialShell">
     <MarketingNav />
@@ -19,8 +62,9 @@ export function ClubPilotProposition() {
       <p>{es ? "Empieza con 4–6 partidos o una campaña acotada y uno o dos flujos reales del equipo. AVELA trabaja con el stack actual, añade el contexto que falta y hace visible qué decisión tomar, quién debe moverla y cómo aprender del resultado." : "Start with 4–6 fixtures or a bounded campaign window and one or two real team workflows. AVELA works with the existing stack, adds the missing context and makes clear what to decide, who should move it and how to learn from the result."}</p>
       <p className="commercialScope">{es ? "4–6 partidos o campaña · 1–2 flujos · un objetivo prioritario" : "4–6 fixtures or campaign · 1–2 workflows · one priority objective"}</p>
       <div className="caseOverviewLinks">
-        <Link className="productButton" href="/pilot?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero">{es ? "Ver cómo funciona el piloto →" : "See how the pilot works →"}</Link>
+        <a className="productButton" href="#demo">{es ? "Solicitar un piloto →" : "Request a club pilot →"}</a>
         <Link href="/app/demo?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=hero">{es ? "Probar la demo guiada →" : "Try the guided demo →"}</Link>
+        <Link href="/pilot?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero">{es ? "Ver cómo funciona →" : "See how the pilot works →"}</Link>
       </div>
     </header>
 
@@ -30,7 +74,7 @@ export function ClubPilotProposition() {
       <div className="commercialTwoColumns">
         <article>
           <h3>{es ? "Antes de actuar" : "Before action"}</h3>
-          <p>{es ? "Una ficha de decisión con oportunidad, audiencia, mensaje, responsable, bloqueos y plan de medición. La recomendación no activa nada sin aprobación humana." : "A decision view with opportunity, audience, message, owner, blockers and measurement plan. The recommendation activates nothing without human approval."}</p>
+          <p>{es ? "Una vista de decisión con oportunidad, audiencia, mensaje, responsable, bloqueos y plan de medición. La recomendación no activa nada sin aprobación humana." : "A decision view with opportunity, audience, message, owner, blockers and measurement plan. The recommendation activates nothing without human approval."}</p>
         </article>
         <article>
           <h3>{es ? "Después de actuar" : "After action"}</h3>
@@ -43,21 +87,9 @@ export function ClubPilotProposition() {
       <p className="eyebrow">{es ? "EMPIEZA CON LO QUE YA TIENES" : "START WITH WHAT YOU ALREADY HAVE"}</p>
       <h2>{es ? "No hace falta conectar todo para empezar." : "You do not need to connect everything before starting."}</h2>
       <div className="commercialThreeColumns">
-        <article>
-          <span>01</span>
-          <h3>{es ? "Contexto público" : "Public context"}</h3>
-          <p>{es ? "Calendario, oferta, campañas y señales públicas permiten formular y priorizar hipótesis." : "Calendar, offer, campaigns and public signals are enough to form and prioritise hypotheses."}</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h3>{es ? "Agregados autorizados" : "Authorised aggregates"}</h3>
-          <p>{es ? "Compras, accesos, repetición e ingresos agregados mejoran la revisión del resultado." : "Aggregate purchases, scans, repeat visits and revenue improve outcome review."}</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h3>{es ? "Activación en el club" : "Club-side activation"}</h3>
-          <p>{es ? "El club mantiene audiencias, consentimiento y ejecución en sus propias herramientas." : "The club keeps audiences, consent and execution inside its own tools."}</p>
-        </article>
+        <article><span>01</span><h3>{es ? "Contexto público" : "Public context"}</h3><p>{es ? "Calendario, oferta, campañas y señales públicas permiten formular y priorizar hipótesis." : "Calendar, offer, campaigns and public signals are enough to form and prioritise hypotheses."}</p></article>
+        <article><span>02</span><h3>{es ? "Agregados autorizados" : "Authorised aggregates"}</h3><p>{es ? "Compras, accesos, repetición e ingresos agregados mejoran la revisión del resultado." : "Aggregate purchases, scans, repeat visits and revenue improve outcome review."}</p></article>
+        <article><span>03</span><h3>{es ? "Activación en el club" : "Club-side activation"}</h3><p>{es ? "El club mantiene audiencias, consentimiento y ejecución en sus propias herramientas." : "The club keeps audiences, consent and execution inside its own tools."}</p></article>
       </div>
       <p className="commercialNote">{es ? "AVELA no necesita nombres o emails de aficionados para demostrar el flujo de decisión. Los permisos y cualquier acceso privado se acuerdan antes de transferir datos." : "AVELA does not need supporter names or emails to prove the decision workflow. Permissions and any private-data access are agreed before transfer."}</p>
     </section>
@@ -91,11 +123,67 @@ export function ClubPilotProposition() {
     </section>
 
     <section className="commercialPanel commercialNextStep" id="demo" aria-labelledby="discussion-title">
-      <p className="eyebrow">{es ? "SIGUIENTE PASO" : "NEXT STEP"}</p>
-      <h2 id="discussion-title">{es ? "Comprueba primero si el flujo merece un piloto." : "First decide whether the workflow is worth piloting."}</h2>
-      <p>{es ? "Puedes recorrer el producto en tres minutos o ver exactamente cómo se estructura un piloto. Sin migración, sin compromiso y sin pedir datos personales desde esta página." : "Walk through the product in three minutes or see exactly how the pilot is structured. No migration, no commitment and no personal data requested on this page."}</p>
-      <div className="caseOverviewLinks">
-        <Link className="productButton" href="/app/demo?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=next_step">{es ? "Probar la demo guiada →" : "Try the guided demo →"}</Link>
+      <p className="eyebrow">{es ? "SOLICITAR PILOTO" : "REQUEST A PILOT"}</p>
+      <h2 id="discussion-title">{es ? "Cuéntanos qué decisión quieres mejorar." : "Tell us which decision you want to improve."}</h2>
+      <p>{es ? "Cuatro datos bastan para iniciar la conversación. No pedimos datos de aficionados ni acceso a sistemas en este paso." : "Four details are enough to start the conversation. No supporter data or system access is requested at this stage."}</p>
+
+      {leadState === "success" ? (
+        <div className="commercialLeadSuccess" role="status">
+          <strong>{es ? "Solicitud recibida." : "Request received."}</strong>
+          <p>{es ? "Ya tenemos el contexto básico para revisar si AVELA encaja con ese flujo." : "We now have the basic context needed to review whether AVELA fits that workflow."}</p>
+          <Link href="/app/demo?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=lead_success">{es ? "Mientras tanto, prueba la demo guiada →" : "Meanwhile, try the guided demo →"}</Link>
+        </div>
+      ) : (
+        <form className="commercialLeadForm" onSubmit={submitLead}>
+          <div className="commercialLeadGrid">
+            <label>
+              <span>{es ? "Club" : "Club"}</span>
+              <input name="clubName" autoComplete="organization" maxLength={120} required />
+            </label>
+            <label>
+              <span>{es ? "Tu función" : "Your role"}</span>
+              <input name="role" autoComplete="organization-title" maxLength={120} placeholder={es ? "Marketing, CRM, Commercial…" : "Marketing, CRM, Commercial…"} required />
+            </label>
+            <label>
+              <span>{es ? "Email de trabajo" : "Work email"}</span>
+              <input name="workEmail" type="email" autoComplete="email" maxLength={254} required />
+            </label>
+            <label className="commercialLeadWide">
+              <span>{es ? "Prioridad (opcional)" : "Priority (optional)"}</span>
+              <select name="priority" defaultValue="">
+                <option value="">{es ? "Selecciona si ya lo sabes" : "Choose if you already know"}</option>
+                <option value="Matchday & ticketing">Matchday & ticketing</option>
+                <option value="CRM & fan engagement">CRM & fan engagement</option>
+                <option value="Sponsorship & commercial">Sponsorship & commercial</option>
+                <option value="Player & content assets">Player & content assets</option>
+                <option value="Campaign planning">Campaign planning</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label className="commercialHoneypot" aria-hidden="true">
+            Website
+            <input name="website" tabIndex={-1} autoComplete="off" />
+          </label>
+
+          <label className="commercialConsent">
+            <input name="consent" type="checkbox" value="yes" required />
+            <span>{es ? "Acepto que AVELA use estos datos para responder a mi solicitud de piloto. No se solicitan datos de aficionados." : "I agree that AVELA may use these details to respond to my pilot request. No supporter data is requested."}</span>
+          </label>
+
+          <div className="commercialSubmitRow">
+            <button className="productButton" type="submit" disabled={leadState === "submitting"}>
+              {leadState === "submitting" ? (es ? "Enviando…" : "Sending…") : (es ? "Solicitar conversación →" : "Request a conversation →")}
+            </button>
+            <span>{es ? "Sin migración ni compromiso." : "No migration or commitment."}</span>
+          </div>
+          {leadState === "error" ? <p className="commercialLeadError" role="alert">{leadError}</p> : null}
+        </form>
+      )}
+
+      <div className="caseOverviewLinks commercialSecondaryLinks">
+        <Link href="/app/demo?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=next_step">{es ? "Probar la demo guiada →" : "Try the guided demo →"}</Link>
         <Link href="/pilot?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=next_step">{es ? "Ver estructura del piloto →" : "See the pilot structure →"}</Link>
       </div>
     </section>
