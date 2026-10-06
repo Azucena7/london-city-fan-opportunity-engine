@@ -112,7 +112,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
           <WorkspaceSectionHeader eyebrow="01 · Decision" title="What should we do?" />
           <strong>{live.recommendedAction}</strong>
           <p>{live.nextAction.label} · Owner: {live.nextAction.owner} · {live.nextAction.deadline}</p>
-          <Link href={"/app/matches/" + selectedId}>Open decision workspace →</Link>
+          <Link href={"/app/matches/" + selectedId}>Review the decision →</Link>
         </WorkspaceCard>
 
         <WorkspaceCard>
@@ -149,8 +149,8 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
           <strong>{live.decisionState === "HOLD" ? "The opportunity is visible, but the evidence or approvals do not support launch yet." : "The opportunity is ready for human review; execution remains controlled by the club."}</strong>
         </div>
         <div>
-          <Link href={"/app/matches/" + selectedId + "#campaign"}>Open campaign detail →</Link>
-          <Link href={"/app/learning?fixture=" + selectedId}>Open learning →</Link>
+          <Link href={"/app/matches/" + selectedId + "#campaign"}>Review campaign readiness →</Link>
+          <Link href={"/app/learning?fixture=" + selectedId}>Review outcome evidence →</Link>
         </div>
       </WorkspaceCard>
     </AppWorkspaceShell>
