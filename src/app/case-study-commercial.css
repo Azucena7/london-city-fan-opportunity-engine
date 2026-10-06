@@ -211,3 +211,74 @@
 .commercialCaseStudy .caseStudyCommercialQuote{
   color:#102742;
 }
+
+
+/* Commercial case study coherence pass */
+.commercialCaseStudy{
+  --case-navy:#0d2238;
+  --case-accent:#8ad9cc;
+  --case-accent-soft:rgba(50,156,145,.10);
+}
+.commercialCaseStudy .caseStudyHero{
+  padding-top:72px;
+  padding-bottom:60px;
+}
+.commercialCaseStudy .caseStudyHeroCommercial h1{
+  max-width:980px;
+  font-size:clamp(54px,7vw,92px);
+  line-height:.93;
+}
+.commercialCaseStudy .caseStudyHeroLede{
+  max-width:760px;
+  font-size:19px;
+  line-height:1.58;
+}
+.commercialCaseStudy .caseStudyButton{
+  border-radius:12px;
+  font-size:13px;
+}
+.commercialCaseStudy .caseStudyButton.primary{
+  background:#f08a6a;
+  border-color:#f08a6a;
+}
+.commercialCaseStudy .caseStudySection{
+  padding-top:72px;
+  padding-bottom:72px;
+}
+.commercialCaseStudy .caseStudySection h2{
+  max-width:860px;
+  font-size:clamp(38px,4.8vw,60px);
+}
+.commercialCaseStudy .caseStudyChallengeGrid,
+.commercialCaseStudy .caseStudyMetricGrid,
+.commercialCaseStudy .caseStudyValueGrid{
+  gap:12px;
+}
+.commercialCaseStudy .caseStudyChallengeGrid article,
+.commercialCaseStudy .caseStudyMetricGrid article,
+.commercialCaseStudy .caseStudyValueGrid article,
+.commercialCaseStudy .caseStudyEvidenceStates article,
+.commercialCaseStudy .caseStudyPilotSteps article{
+  border-radius:14px;
+  background:#fffdfa;
+  border-color:rgba(13,34,56,.11);
+}
+.commercialCaseStudy .caseStudyCampaignCard,
+.commercialCaseStudy .caseStudyBrowser{
+  border-radius:18px 18px 44px 18px;
+}
+.commercialCaseStudy .caseStudyRealityCheck{
+  border-radius:16px;
+}
+.commercialCaseStudy .caseStudyFullCta{
+  border-radius:16px;
+  background:linear-gradient(135deg,#e8f3f0,#fffdfa);
+}
+.commercialCaseStudy .caseStudyFullCta a{
+  border-radius:12px;
+  font-size:13px;
+}
+@media(max-width:720px){
+  .commercialCaseStudy .caseStudyHero{padding-top:52px}
+  .commercialCaseStudy .caseStudySection{padding-top:54px;padding-bottom:54px}
+}
