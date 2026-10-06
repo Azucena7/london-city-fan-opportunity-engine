@@ -39,6 +39,23 @@ const sources = [
     href: "/app/matches"
   },
   {
+    name: "Matchday travel",
+    category: "Weather · road · rail · routing",
+    healthIds: ["open-meteo", "tfl-road", "national-rail-rdm"],
+    summary: "Combines verified matchday weather with road and rail disruption readiness, while keeping modelled corridors separate from live routing.",
+    available: [
+      "Live Open-Meteo forecast context",
+      "Official club directions as fallback",
+      "Territory and modelled corridor context"
+    ],
+    connected: [
+      "TfL road adapter is implemented but requires credentials",
+      "National Rail / RDM account is approved but product endpoint remains pending",
+      "No journey route is labelled live without a timestamped provider response"
+    ],
+    href: "/app/matches"
+  },
+  {
     name: "Web analytics",
     category: "Traffic · response",
     healthIds: ["avela-web-analytics"],
