@@ -119,7 +119,7 @@ export default function CampaignsPage() {
                       <span>Activations <b>{campaign.activations?.length ?? 0}</b></span>
                     </div>
                     <div className={styles.nextDecision}><span>Next decision</span><strong>{campaign.nextApproval?.en ?? "Review required"}</strong></div>
-                    <Link href={"/app/matches/" + campaign.fixtureId}>Open →</Link>
+                    <Link href={"/app/matches/" + campaign.fixtureId}>Review campaign decision →</Link>
                   </article>
                 ))}
                 {!needsDecision.length ? <p className={styles.empty}>No campaign is waiting for a human decision.</p> : null}
@@ -139,7 +139,7 @@ export default function CampaignsPage() {
                       <span>Approvals <b>{approvalCount}/{approvalTotal}</b></span>
                       <span>Activations <b>{campaign.activations?.length ?? 0}</b></span>
                     </div>
-                    <Link href={"/app/matches/" + campaign.fixtureId}>Open →</Link>
+                    <Link href={"/app/matches/" + campaign.fixtureId}>Review campaign decision →</Link>
                   </article>
                 ))}
               </div>
