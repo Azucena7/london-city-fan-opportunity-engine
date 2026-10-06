@@ -615,6 +615,13 @@
 }
 .signalTicker{
   background:#0a1c2e;
+  color:#dce8ef;
+}
+.signalTicker .signalSet span{
+  color:#dce8ef;
+}
+.signalTicker .signalSet b{
+  color:var(--avela-coral);
 }
 @media(prefers-reduced-motion:no-preference){
   .valueGrid article,.horizonGrid article,.pilotSteps article{
