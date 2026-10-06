@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PlayerAssetPlanner } from "@/components/PlayerAssetPlanner";
 import { PlayerContractHealth } from "@/components/PlayerContractHealth";
-import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { WorkspaceDrawer } from "@/components/WorkspaceUI";
 import { DecisionContextTrail } from "@/components/DecisionContextTrail";
 import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
@@ -22,10 +22,9 @@ export default async function PlayerAssetsPage({ searchParams }: { searchParams:
   return (
     <AppWorkspaceShell
       active="players"
-      eyebrow="Player Asset Planning"
-      title="Players"
-      subtitle="Build the best activation pack from availability, fit, momentum, cost and season scarcity."
-      actions={<><WorkspaceViewSwitcher value="overview" /><WorkspaceFilterButton /></>}
+      eyebrow="Player pack optimiser"
+      title={campaign ? "Who should we use for this campaign?" : "Build the best player pack"}
+      subtitle="Balance fit, availability, momentum, cost, contract usage and season opportunity cost before committing talent."
     >
       <DecisionContextTrail
         fixtureLabel={campaign ? campaign.fixtureId : null}
@@ -37,9 +36,9 @@ export default async function PlayerAssetsPage({ searchParams }: { searchParams:
       <DecisionHandoffStrip active="players" fixtureId={campaign?.fixtureId ?? null} campaignId={campaign?.id ?? null} />
 
       <section className={styles.planningBoundary}>
-        <span>Planning layer</span>
-        <strong>Scenario optimiser · not legal contract truth</strong>
-        <p>AVELA recommends a pack from planning evidence. Verified contract truth remains separate and opens only when you need to validate the recommendation.</p>
+        <span>Decision guardrail</span>
+        <strong>Optimise first. Verify contract truth before commitment.</strong>
+        <p>AVELA ranks viable player combinations from planning evidence; verified clauses stay separate until the recommendation needs to be committed.</p>
       </section>
 
       <section className={styles.workflowContext} aria-label="Player planning workflow context">
