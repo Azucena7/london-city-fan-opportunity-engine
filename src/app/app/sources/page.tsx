@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { IntelligenceSources } from "@/components/IntelligenceSources";
-import { AppWorkspaceShell, WorkspaceFilterButton } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import styles from "./sources.module.css";
 
 export const metadata: Metadata = {
@@ -13,10 +13,9 @@ export default function SourcesPage() {
   return (
     <AppWorkspaceShell
       active="sources"
-      eyebrow="Integrations"
-      title="Sources"
-      subtitle="Connected, public-demo and permissioned evidence feeding AVELA decisions."
-      actions={<WorkspaceFilterButton label="Source filters" />}
+      eyebrow="Decision evidence"
+      title="Which source would improve the next decision?"
+      subtitle="See what is connected, what AVELA can already use publicly and which missing inputs still limit confidence."
     >
       <div className={styles.surface}>
         <IntelligenceSources />
