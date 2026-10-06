@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
-import { calendar } from "@/lib/data";
+import { calendar, currentState } from "@/lib/data";
 
 const base = "https://avela-growth-intelligence.vercel.app";
-const updated = new Date("2026-10-03T00:00:00Z");
+const updated = new Date(currentState.updated_at);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const matchday = calendar
@@ -20,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/case-study`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/cases`, lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/live/london-city`, lastModified: updated, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${base}/live/london-city/everton`, lastModified: updated, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${base}/live/london-city/brighton`, lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/pilot`, lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
     ...matchday
   ];
