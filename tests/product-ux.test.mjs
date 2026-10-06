@@ -2624,3 +2624,17 @@ test("For Clubs removes the legacy copy-a-brief interaction", () => {
   assert.match(page, /See how the pilot works/);
   assert.match(page, /Explore an AVELA pilot without changing your stack/);
 });
+
+test("commercial funnel CTAs carry readable internal attribution", () => {
+  const home = read("src/app/page.tsx");
+  const nav = read("src/components/MarketingNav.tsx");
+  const clubs = read("src/components/ClubPilotProposition.tsx");
+  for (const source of [home, nav, clubs]) {
+    assert.match(source, /utm_medium=internal_cta/);
+  }
+  assert.match(home, /utm_campaign=club_pilot/);
+  assert.match(home, /utm_campaign=guided_demo/);
+  assert.match(home, /utm_campaign=live_case/);
+  assert.match(nav, /utm_source=avela_nav/);
+  assert.match(clubs, /utm_source=for_clubs/);
+});
