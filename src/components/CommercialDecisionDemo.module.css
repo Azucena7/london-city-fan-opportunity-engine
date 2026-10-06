@@ -587,3 +587,30 @@
   .changeBanner{grid-template-columns:1fr}
   .changeBanner .delta{grid-column:1;grid-row:auto}
 }
+
+
+/* Commercial coherence pass */
+.intro>span{font-size:12px}
+.intro p{font-size:15px;line-height:1.65}
+.scenarioTabs button span,
+.fixtureHeader span,
+.columnLabel,
+.signalColumn article span,
+.decisionCore span,
+.recommendation>span,
+.playGrid span,
+.fixtureStrip span,
+.changeBanner span,
+.expected span{font-size:11px}
+.scenarioTabs button strong{font-size:15px}
+.fixtureHeader strong{font-size:16px}
+.fixtureHeader i{font-size:11px}
+.signalColumn article strong{font-size:14px;line-height:1.45}
+.decisionCore strong{font-size:11px}
+.playGrid strong{font-size:13px;line-height:1.4}
+.fixtureStrip strong{font-size:13px}
+.changeBanner strong{font-size:13px}
+.changeBanner .delta{font-size:12px}
+.rationale{font-size:14px;line-height:1.6}
+.expected strong{font-size:13px}
+.footer{font-size:11px}
