@@ -45,7 +45,7 @@ export function MatchdayCompanionWidget({
 
       {attention ? (
         <div className={styles.attention} data-level={attention.level}>
-          <span>{attention.level} · {attention.label}</span>
+          <span>{attention.level === "inform" ? "MONITOR" : attention.level.toUpperCase()} · {attention.label}</span>
           <strong>{attention.title}</strong>
           <small>{attention.reason}</small>
         </div>
