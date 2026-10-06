@@ -158,7 +158,7 @@ export default function Home() {
       <section className={styles.pilot}>
         <div>
           <span className={styles.kicker}>Start small</span>
-          <h2>Prove the decision loop before you expand the integration footprint.</h2>
+          <h2>Prove AVELA on 4–6 fixtures before you integrate more.</h2>
           <p>A useful pilot can start with a limited set of fixtures, existing public evidence and a small amount of club-approved context. No rip-and-replace programme is required.</p>
         </div>
         <div className={styles.pilotSteps}>
@@ -168,7 +168,7 @@ export default function Home() {
           <article><span>04</span><strong>Measured learning</strong><p>Compare recommendation, decision, execution and result.</p></article>
         </div>
         <div className={styles.pilotActions}>
-          <Link className={styles.primary} href="/for-clubs#demo">See how AVELA could fit your club</Link>
+          <Link className={styles.primary} href="/for-clubs#demo">Design a 4–6 fixture pilot</Link>
           <Link className={styles.textLink} href="/app/demo">Try the guided product demo ↗</Link>
         </div>
       </section>
@@ -181,7 +181,7 @@ export default function Home() {
           <h2>Turn the next fixture into a better decision — without replacing the stack you already use.</h2>
         </div>
         <div>
-          <Link className={styles.coralButton} href="/for-clubs#demo">Explore a club pilot</Link>
+          <Link className={styles.coralButton} href="/for-clubs#demo">Design your club pilot</Link>
           <Link className={styles.finalLink} href="/live/london-city">See a live fixture decision ↗</Link>
         </div>
       </section>
