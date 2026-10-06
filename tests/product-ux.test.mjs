@@ -2499,3 +2499,10 @@ test("commercial nav identifies the internal AVELA workspace clearly", () => {
   assert.match(nav, /Open workspace/);
   assert.match(nav, /marketing and commercial product navigation/);
 });
+
+test("commercial mobile hero preserves safe horizontal gutters", () => {
+  const css = read("src/app/commercial-home.module.css");
+  assert.match(css, /padding:42px 20px 38px/);
+  assert.match(css, /heroCopy\{width:100%;min-width:0\}/);
+  assert.match(css, /heroMeta strong\{color:#fff\}/);
+});
