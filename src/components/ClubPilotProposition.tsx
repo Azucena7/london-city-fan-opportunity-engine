@@ -38,10 +38,10 @@ export function ClubPilotProposition() {
     <MarketingNav />
     <div className="commercialLanguage"><LanguageSwitcher /></div>
     <header className="commercialHero">
-      <p className="eyebrow">{es ? "PARA CLUBES · PILOTO PROPUESTO" : "FOR CLUBS · PROPOSED PILOT"}</p>
-      <h1>{es ? "Añade la capa de decisión sin sustituir el stack del club." : "Add the decision layer without replacing the club stack."}</h1>
-      <p>{es ? "Empieza con pocos partidos y flujos de decisión. Conecta solo el contexto que mejora la decisión y compara después lo que AVELA recomendó con lo que el club hizo y aprendió." : "Start with a small number of fixtures and workflows. Connect only the context that improves the decision, then compare what AVELA recommended with what the club actually did and learned."}</p>
-      <p className="commercialScope">{es ? "4–6 partidos · 1–2 flujos de decisión · un objetivo prioritario" : "4–6 fixtures · 1–2 decision workflows · one priority objective"}</p>
+      <p className="eyebrow">{es ? "PARA EQUIPOS DE MARKETING Y COMERCIAL · PILOTO PROPUESTO" : "FOR MARKETING & COMMERCIAL TEAMS · PROPOSED PILOT"}</p>
+      <h1>{es ? "Demuestra mejores decisiones del club antes de añadir más integración." : "Prove better club decisions before adding more integration."}</h1>
+      <p>{es ? "Empieza con 4–6 partidos o una campaña acotada y uno o dos flujos de marketing/comercial. Mantén el stack actual, añade solo el contexto que mejora la decisión y compara recomendación, ejecución y aprendizaje." : "Start with 4–6 fixtures or a bounded campaign window and one or two marketing/commercial workflows. Keep the existing stack, add only the context that improves the decision, then compare recommendation, execution and learning."}</p>
+      <p className="commercialScope">{es ? "4–6 partidos o campaña acotada · 1–2 flujos · un objetivo prioritario" : "4–6 fixtures or campaign window · 1–2 workflows · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
       <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar el brief del piloto →" : "Prepare the pilot brief →"}</a></div>
       <p><Link href="/app/demo">{es ? "Probar la demo guiada de 3 minutos →" : "Try the 3-minute guided demo →"}</Link></p>
