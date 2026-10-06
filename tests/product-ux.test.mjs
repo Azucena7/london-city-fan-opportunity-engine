@@ -1729,7 +1729,7 @@ test("guided demo sells the decision workflow without implying unsupported execu
   assert.match(demo, /Review & handoff/);
   assert.match(demo, /Handoff principle/);
   assert.match(demo, /never presents an unsupported action as executed/);
-  assert.match(demo, /Use this workflow on your next six home fixtures/);
+  assert.match(demo, /Use this workflow on a focused club pilot/);
   assert.doesNotMatch(demo, /credit cost/);
   assert.doesNotMatch(demo, /Review & launch/);
 });
