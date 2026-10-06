@@ -163,7 +163,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
       <WorkspaceCard className={styles.cockpit} tone="action">
         <div className={styles.cockpitMain}>
           <span>Executive decision brief</span>
-          <h1>{campaign?.title.en ?? live.opportunity}</h1>
+          <h2>{campaign?.title.en ?? live.opportunity}</h2>
           <p>{live.whyNow}</p>
           <div className={styles.signalHighlights}>
             {signalHighlights.map((signal) => <span key={signal.id}>{signal.title}</span>)}
