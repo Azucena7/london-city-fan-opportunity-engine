@@ -145,3 +145,10 @@
 .changeItems b{display:grid;place-items:center;flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:#FCEDE8;color:#B95F43;font-size:8px}
 @media(max-width:900px){.changeStrip{grid-template-columns:1fr}.changeItems{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.changeItems{display:flex;overflow-x:auto;scrollbar-width:none}.changeItems::-webkit-scrollbar{display:none}.changeItems span{min-width:210px;flex:0 0 210px}}
+
+.matchdayAlert{display:grid;grid-template-columns:minmax(220px,.7fr) minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:12px;padding:13px 14px;border:1px solid #E5DCD7;border-radius:12px;background:#FFF9F6}
+.matchdayAlert span{display:block;color:#B8684F;font-size:9px;font-weight:900;letter-spacing:.075em;text-transform:uppercase}
+.matchdayAlert strong{display:block;margin-top:4px;color:#102742;font-size:13px}.matchdayAlert small{display:block;margin-top:3px;color:#8A969F;font-size:9px}
+.matchdayAlert p{margin:0!important;color:#61717D!important;font-size:10px!important;line-height:1.45}.matchdayAlert a{padding:8px 10px;border-radius:8px;background:#102742;color:#fff;text-decoration:none;font-size:9px;font-weight:900}
+.matchdayAlert[data-state="review"]{background:#FFFBF3;border-color:#ECE3C8}
+@media(max-width:760px){.matchdayAlert{grid-template-columns:1fr}.matchdayAlert a{width:100%;text-align:center}}
