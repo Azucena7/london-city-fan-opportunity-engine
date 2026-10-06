@@ -2652,3 +2652,18 @@ test("commercial pilot pages separate buying story from operating detail", () =>
   assert.match(pilot, /Open the Operating Pack/);
   assert.doesNotMatch(pilot, /Prepare a club pilot discussion/);
 });
+
+test("route-specific commercial and case-study CSS is not shipped from the root layout", () => {
+  const root = read("src/app/layout.tsx");
+  const cases = read("src/app/case-study/layout.tsx");
+  const clubs = read("src/app/for-clubs/layout.tsx");
+
+  assert.doesNotMatch(root, /case-study\.css/);
+  assert.doesNotMatch(root, /case-study-technical\.css/);
+  assert.doesNotMatch(root, /case-study-commercial\.css/);
+  assert.doesNotMatch(root, /commercial-pilot\.css/);
+  assert.match(cases, /case-study\.css/);
+  assert.match(cases, /case-study-technical\.css/);
+  assert.match(cases, /case-study-commercial\.css/);
+  assert.match(clubs, /commercial-pilot\.css/);
+});
