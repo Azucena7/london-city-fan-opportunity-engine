@@ -37,7 +37,7 @@ export function AppWorkspaceShell({
           </div>
 
           <div className={styles.topbarContext}>
-            <span>Decision intelligence workspace</span>
+            <span>Marketing & commercial workspace</span>
           </div>
 
           <div className={styles.utility}>
