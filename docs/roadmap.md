@@ -4,22 +4,26 @@
 
 Initial go-to-market: **women’s football**.
 
-Technology architecture: **football-wide opportunity engine**.
+Technology architecture: **football-wide decision orchestration workspace**.
 
 Working product name: **AVELA**.
 
-Primary category: **Growth Intelligence for Women’s Football**.
+Primary category: **Marketing & Commercial Decision Workspace for Football Clubs**.
+
+Strategic differentiator: **cross-functional decision orchestration**.
+
+Initial vertical and proof focus: **women’s football**.
 
 Core loop:
 
-**Fixture → Context → Signals → Opportunity → Recommended Play → Activation → Measurement → Learning**
+**Signals + context + constraints → Priority → Decision → Action → Learning**
 
 ## Phase A - Positioning and product shell
 
-- Reframe the commercial site around women’s-football growth intelligence.
+- Position the commercial site around the Marketing & Commercial Decision Workspace category.
 - Keep London City Live as the public proof environment.
-- Lead with “Every fixture is a growth opportunity.”
-- Make fixture-first navigation the default.
+- Lead with “Read the signals. Move the club.” and explain cross-functional decision orchestration beneath it.
+- Keep fixtures as a primary decision trigger while supporting campaigns and commercial moments that do not require a fixture.
 - Preserve the existing evidence and trust-state architecture.
 
 ## Phase B - Women’s-football signal layer
@@ -127,7 +131,7 @@ Private club data:
 
 Integration principle:
 
-**Keep the existing stack. Add the intelligence layer.**
+**Keep the existing stack. Orchestrate the decision across it.**
 
 ## Phase I - League intelligence
 
