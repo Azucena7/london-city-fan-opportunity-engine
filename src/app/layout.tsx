@@ -5,7 +5,6 @@ import "./intelligence-surfaces.css";
 import "./i18n.css";
 import "./workspace-structure.css";
 import "./product-ux.css";
-import "./navigation-v2.css";
 import "./product-system.css";
 import "./product-shell.css";
 import "./readability.css";
