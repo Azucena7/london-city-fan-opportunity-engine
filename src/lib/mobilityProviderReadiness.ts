@@ -1,3 +1,5 @@
+import sourceHealthRaw from "../../data/live/source-health.json";
+
 export type MobilityProviderState = "live" | "degraded" | "not-configured";
 
 export type MobilityProviderReadiness = {
@@ -13,13 +15,31 @@ export type MobilityProviderReadiness = {
   fallback: string;
 };
 
+type SourceHealthItem = {
+  id: string;
+  state: string;
+  lastSuccessfulAt?: string | null;
+  lastAttemptAt?: string | null;
+  note?: { en?: string };
+};
+
+const sourceHealth = sourceHealthRaw as { sources?: SourceHealthItem[] };
+const railHealth = sourceHealth.sources?.find((item) => item.id === "national-rail-rdm") ?? null;
+
+function mapRailState(): MobilityProviderState {
+  if (!railHealth) return "not-configured";
+  if (railHealth.state === "operational") return "live";
+  if (railHealth.state === "degraded") return "degraded";
+  return "not-configured";
+}
+
 export const mobilityProviderReadiness: MobilityProviderReadiness[] = [
   {
     id: "road",
     label: "Road & traffic",
     state: "not-configured",
-    provider: "Traffic provider pending",
-    sourceUrl: null,
+    provider: "TfL / traffic provider pending",
+    sourceUrl: "https://api.tfl.gov.uk/",
     checkedAt: null,
     freshnessMinutes: null,
     scope: "Material road incidents and closures that could affect supporter arrival.",
@@ -29,14 +49,14 @@ export const mobilityProviderReadiness: MobilityProviderReadiness[] = [
   {
     id: "rail",
     label: "Rail",
-    state: "not-configured",
-    provider: "Rail Data Marketplace / operator feed pending",
-    sourceUrl: null,
-    checkedAt: null,
+    state: mapRailState(),
+    provider: "National Rail / Rail Data Marketplace",
+    sourceUrl: "https://raildata.org.uk/",
+    checkedAt: railHealth?.lastAttemptAt ?? railHealth?.lastSuccessfulAt ?? null,
     freshnessMinutes: null,
     scope: "Service disruption and station-level context relevant to matchday corridors.",
     decisionRule: "Surface only disruption relevant to the fixture window and selected origin corridors.",
-    fallback: "Keep rail guidance informational and direct supporters to official operator information."
+    fallback: railHealth?.note?.en ?? "Keep rail guidance informational and direct supporters to official operator information."
   },
   {
     id: "routing",
