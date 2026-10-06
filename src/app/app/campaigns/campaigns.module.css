@@ -7,7 +7,7 @@
 .campaignSummary strong{margin-top:9px;font-size:26px;line-height:1;letter-spacing:-.04em}
 .campaignSummary small{margin-top:4px!important;color:#8C99A3!important;font-size:11px!important;line-height:1.4}
 
-.primaryDecision{padding:16px;margin-bottom:12px}
+.primaryDecision{padding:18px;margin-bottom:14px}
 .primaryGrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.65fr) auto;gap:12px;align-items:stretch;margin-top:10px}
 .primaryBrief{padding:16px;border-radius:8px;background:var(--product-navy);color:#fff}
 .primaryBrief>p{margin:0!important;color:#C6D1DA!important;font-size:12px!important;line-height:1.5}
@@ -23,7 +23,7 @@
 .primaryFacts strong{margin-top:4px;font-size:14px}
 .primaryGrid>a{align-self:stretch;display:flex;align-items:center;justify-content:center;min-width:168px;min-height:42px;padding:10px 12px;border-radius:8px;background:#EF8B6C;color:#fff;text-decoration:none;text-align:center;font-size:12px;font-weight:900}
 
-.workspaceGrid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,.35fr);gap:12px;align-items:start}
+.workspaceGrid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(250px,.25fr);gap:12px;align-items:start}
 .boardCard{padding:16px}
 .boardCard [class*="sectionHeader"] a{color:#2F8F83;text-decoration:none;font-size:11px;font-weight:850}
 .board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px;align-items:start}
@@ -141,3 +141,8 @@
 @media(max-width:620px){
   .portfolioPanel>summary{align-items:flex-start;flex-direction:column}
 }
+
+/* Decision-led campaign hierarchy */
+.primaryDecision{box-shadow:0 10px 30px rgba(16,39,66,.05)}
+.portfolioPanel>summary small{max-width:620px}
+.quickCard{background:#FAFBFB}
