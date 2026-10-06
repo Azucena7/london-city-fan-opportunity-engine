@@ -85,7 +85,7 @@
 .scenarioHead span,.scenarioHead strong{display:block}
 .scenarioHead span{
   color:#ef8b6c;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.09em;
   text-transform:uppercase;
@@ -113,7 +113,7 @@
 }
 .signalStack span{
   color:#88a1b5;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
 }
 .signalStack strong{
@@ -138,7 +138,7 @@
 .decision span,.decision strong,.decision small{display:block}
 .decision span{
   color:#2f8f83;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -164,7 +164,7 @@
   max-width:1120px;
   margin:18px auto 0;
   color:#90a6b7;
-  font-size:10px;
+  font-size:11px;
   font-weight:850;
   letter-spacing:.05em;
   text-transform:uppercase;
@@ -252,7 +252,7 @@
 }
 .scenarioTabs button span,.scenarioTabs button strong{display:block}
 .scenarioTabs button span{
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.1em;
   text-transform:uppercase;
@@ -286,7 +286,7 @@
 .fixtureHeader span,.fixtureHeader strong{display:block}
 .fixtureHeader span{
   color:#8ad9cc;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.11em;
   text-transform:uppercase;
@@ -297,7 +297,7 @@
   border:1px solid rgba(138,217,204,.18);
   border-radius:999px;
   color:#8ad9cc;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   font-style:normal;
   letter-spacing:.09em;
@@ -318,7 +318,7 @@
 .columnLabel{
   margin-bottom:5px;
   color:#86a0b4;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.1em;
   text-transform:uppercase;
@@ -332,7 +332,7 @@
 .signalColumn article span,.signalColumn article strong{display:block}
 .signalColumn article span{
   color:#f08a6a;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -354,7 +354,7 @@
   background:linear-gradient(180deg,rgba(50,156,145,.05),rgba(240,138,106,.05));
 }
 .decisionCore span{
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   text-transform:uppercase;
   letter-spacing:.08em;
@@ -369,7 +369,7 @@
   border-radius:50%;
   color:#0d2238;
   background:#8ad9cc;
-  font-size:10px;
+  font-size:11px;
   letter-spacing:.05em;
   box-shadow:0 0 0 9px rgba(138,217,204,.06);
 }
@@ -380,7 +380,7 @@
 }
 .recommendation>span{
   color:#329c91;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.1em;
   text-transform:uppercase;
@@ -405,7 +405,7 @@
 .playGrid span,.playGrid strong{display:block}
 .playGrid span{
   color:#667686;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -470,7 +470,7 @@
 .fixtureStrip span,.fixtureStrip strong{display:block}
 .fixtureStrip span{
   color:#8299ab;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.1em;
   text-transform:uppercase;
@@ -515,7 +515,7 @@
 .changeBanner span,.changeBanner strong{display:block}
 .changeBanner span{
   color:#8ea5b7;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.1em;
   text-transform:uppercase;
@@ -553,7 +553,7 @@
 .expected span,.expected strong{display:block}
 .expected span{
   color:#329c91;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.09em;
   text-transform:uppercase;
