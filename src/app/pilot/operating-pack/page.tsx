@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { MarketingNav } from "@/components/MarketingNav";
 import { crmTicketingLive, crmTicketingReadiness } from "@/lib/data";
 import styles from "./operating-pack.module.css";
 
@@ -36,8 +36,8 @@ export default function OperatingPackPage() {
   const requiresAccess = crmTicketingReadiness.coverage.filter((item) => item.state === "requires-access").length;
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav />
+    <main className={styles.shell}>
+      <MarketingNav />
 
       <header className={styles.hero}>
         <div>
@@ -188,8 +188,8 @@ export default function OperatingPackPage() {
           <h2>The next step is to replace demo assumptions with one club&apos;s real fixture and fan data.</h2>
         </div>
         <div className={styles.actions}>
-          <Link className={styles.primary} href="/pilot/rehearsal">Open pilot rehearsal</Link>
-          <Link className={styles.secondary} href="/app/matches">Open club workspace</Link>
+          <Link className={styles.primary} href="/pilot/rehearsal?utm_source=operating_pack&utm_medium=internal_cta&utm_campaign=pilot_rehearsal&utm_content=final_cta">Open pilot rehearsal</Link>
+          <Link className={styles.secondary} href="/app/demo?utm_source=operating_pack&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=final_cta">Open guided workspace</Link>
         </div>
       </section>
     </main>
