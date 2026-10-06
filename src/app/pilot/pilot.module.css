@@ -131,3 +131,30 @@
 .cta .eyebrow{color:#8ad9cc}
 .cta .button{background:#ef8b6c;color:#102742}
 @media(max-width:600px){.hero,.outcomes,.section,.week,.cta{width:min(100% - 30px,1080px)}.hero{padding-top:54px}.heroActions{flex-direction:column;align-items:stretch}}
+
+
+/* Commercial pilot coherence pass */
+.hero,.outcomes,.section,.week,.cta{width:min(1120px,calc(100% - 48px))}
+.hero{padding-top:68px}
+.hero h1{font-size:clamp(46px,6vw,74px)}
+.hero p{font-size:17px;line-height:1.58}
+.pilotCard{padding-left:24px}
+.outcomes{padding-bottom:54px}
+.section{padding:62px 0}
+.week{
+  padding:38px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#e8f3f0,#fffdfa 78%);
+}
+.cta{
+  margin-bottom:54px;
+  padding:42px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#0b1d31,#102742 62%,#173653);
+}
+.button,.secondary{font-size:13px}
+@media(max-width:600px){
+  .hero,.outcomes,.section,.week,.cta{width:min(100% - 30px,1120px)}
+  .section{padding:48px 0}
+  .week,.cta{padding:26px 22px}
+}
