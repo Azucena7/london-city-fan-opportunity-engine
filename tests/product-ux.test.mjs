@@ -2576,3 +2576,21 @@ test("system pages avoid nested primary headings and microtext below 10px", () =
   assert.doesNotMatch(setupCss, /font-size:(?:8|9)px/);
   assert.doesNotMatch(helpCss, /font-size:(?:8|9)px/);
 });
+
+test("AVELA category separates the workspace from cross-functional orchestration and specialist intelligence", () => {
+  const ecosystem = read("src/components/CommercialEcosystem.tsx");
+  const demo = read("src/components/CommercialDecisionDemo.tsx");
+  const pilot = read("src/app/pilot/page.tsx");
+  const pack = read("src/app/pilot/operating-pack/page.tsx");
+  const help = read("src/app/app/help/page.tsx");
+
+  assert.match(ecosystem, /cross-functional decision orchestration/);
+  assert.match(ecosystem, /Decision Orchestration/);
+  assert.match(ecosystem, /orchestrates the decision across them/);
+  assert.match(demo, /Home fixture · Decision orchestration/);
+  assert.match(demo, /Marketing & commercial decision/);
+  assert.doesNotMatch(pilot, /Growth Intelligence Playbook/);
+  assert.match(pilot, /Decision Playbook/);
+  assert.doesNotMatch(pack, /Growth Intelligence Pilot/);
+  assert.match(help, /orchestrates the evidence, constraints, timing and ownership across functions/);
+});
