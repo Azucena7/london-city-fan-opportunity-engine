@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SponsorContractHealth } from "@/components/SponsorContractHealth";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, EvidenceStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
@@ -77,6 +78,9 @@ export default function SponsorsPage() {
               <p>{recommended.readiness?.rationale.en ?? recommended.pack.whyFit.en}</p>
               <span>Commercial ask</span>
               <b>{recommended.pack.commercialAsk.en}</b>
+              {["journey-technology","rail"].includes(recommended.pack.category) && recommended.pack.recommendedFixtureIds[0] ? (
+                <Link href={"/app/matches/" + recommended.pack.recommendedFixtureIds[0]}>Open Matchday Companion context →</Link>
+              ) : null}
             </div>
             <div className={styles.primaryFacts}>
               <div><span>Readiness</span><strong>{recommended.readiness?.weightedScore ?? "—"}</strong></div>
