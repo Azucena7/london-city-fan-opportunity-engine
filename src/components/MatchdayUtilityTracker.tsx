@@ -43,3 +43,32 @@ export function MatchdayOfficialDirectionsLink({
     </a>
   );
 }
+
+
+export function MatchdayOfficialTicketingLink({
+  fixtureId,
+  href,
+  children
+}: {
+  fixtureId: string;
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      onClick={() => {
+        void emitMeasurementEvent({
+          eventName: "matchday_official_ticketing_opened",
+          fixtureId,
+          locale: "en",
+          properties: { surface: "matchday-companion" }
+        });
+      }}
+    >
+      {children}
+    </a>
+  );
+}
