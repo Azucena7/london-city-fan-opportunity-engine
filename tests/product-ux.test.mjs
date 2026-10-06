@@ -2178,7 +2178,7 @@ test("homepage sells the decision layer with a low-friction pilot path", () => {
   const page = read("src/app/page.tsx");
   const ecosystem = read("src/components/CommercialEcosystem.tsx");
   assert.match(page, /Read the signals/);
-  assert.match(page, /Decision intelligence for football clubs/);
+  assert.match(page, /Marketing & commercial decision workspace for football clubs/);
   assert.match(ecosystem, /Keep your specialist tools/);
   assert.match(page, /See how AVELA could fit your club/);
   assert.match(page, /No rip-and-replace programme is required/);
@@ -2208,8 +2208,6 @@ test("commercial home explains why AVELA complements specialist tools and genera
   const faq = read("src/components/CommercialFAQ.tsx");
   const nav = read("src/components/MarketingNav.tsx");
 
-  assert.match(home, /Not another dashboard/);
-  assert.match(home, /The LLM is part of AVELA\. It is not the product/);
   assert.match(home, /Decision intelligence for football clubs/);
   assert.match(ecosystem, /Blinkfire \/ analytics/);
   assert.match(ecosystem, /CRM \/ ticketing/);
@@ -2239,6 +2237,7 @@ test("product shell uses the prepared AVELA navy teal coral identity without cha
   assert.match(system, /--product-danger:#D94A4A/);
   assert.match(nav, /background:var\(--product-navy/);
   assert.match(nav, /brandMark::after/);
+  assert.match(nav, /clip-path:polygon\(0 0,100% 50%,0 100%\)/);
   assert.match(home, /background:var\(--product-navy\)/);
   assert.match(ask, /background:var\(--product-navy\)/);
 });
@@ -2430,7 +2429,6 @@ test("commercial home makes AVELA value and capability horizon explicit", () => 
   const page = read("src/app/page.tsx");
   const demo = read("src/components/CommercialDecisionDemo.tsx");
 
-  assert.match(page, /The value AVELA adds/);
   assert.match(page, /What AVELA can become/);
   assert.match(page, /Vision is not current capability/);
   assert.match(page, /CommercialDecisionDemo/);
@@ -2476,4 +2474,22 @@ test("public sitemap includes the canonical London City decision surfaces", () =
   assert.match(sitemap, /currentState\.updated_at/);
   assert.match(sitemap, /\/live\/london-city\/everton/);
   assert.match(sitemap, /\/live\/london-city\/brighton/);
+});
+
+test("commercial home is role-led and avoids repetitive long-form sections", () => {
+  const page = read("src/app/page.tsx");
+  assert.match(page, /Marketing & commercial decision workspace for football clubs/);
+  assert.match(page, /CRM & fan engagement/);
+  assert.match(page, /Sponsorship & commercial/);
+  assert.match(page, /Content & matchday growth/);
+  assert.doesNotMatch(page, /The value AVELA adds/);
+  assert.doesNotMatch(page, /What AVELA is — and is not/);
+});
+
+test("internal AVELA shell uses the commercial brand mark and marketing-commercial positioning", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const css = read("src/components/ProductJourneyNav.module.css");
+  assert.match(nav, /Marketing & commercial/);
+  assert.match(nav, /Club decision workspace/);
+  assert.match(css, /clip-path:polygon\(0 0,100% 50%,0 100%\)/);
 });
