@@ -33,7 +33,7 @@ import { getWorkRoutingRules } from "@/lib/workSystemRoutingServer";
 import styles from "./match-plan.module.css";
 
 export const metadata: Metadata = {
-  title: "Opportunity Brief · AVELA",
+  title: "Opportunity Brief",
   description: "One fixture workspace for the opportunity, recommended play, activation, signals, evidence and impact."
 };
 
