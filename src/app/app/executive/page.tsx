@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExecutiveShareActions } from "@/components/ExecutiveShareActions";
-import { calendar, campaignPlans, currentState } from "@/lib/data";
+import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
+import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
+import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
+import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
 import { getMaterialMatchdayAlert } from "@/lib/matchdayDecisionAlert";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
@@ -23,13 +26,31 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   const upcoming = calendar
     .filter((item) => item.homeAway === "home" && item.date >= today && item.status !== "final")
     .sort((a,b) => a.date.localeCompare(b.date));
-  const radar = buildOpportunityRadar(upcoming.map((item) => item.id), clubContext);
+  const opportunityRadar = buildOpportunityRadar(upcoming.map((item) => item.id), clubContext);
+  const calendarToDate = calendar.map((item) => item.date).sort().at(-1) ?? today;
+  const externalCalendarRelationships = buildCalendarRelationships({
+    fixtures: calendar,
+    campaignPlans,
+    eventLandscape,
+    fromDate: today
+  });
+  const internalCalendar = await getInternalCalendarRelationships({
+    clubId: clubContext?.clubId,
+    fixtures: calendar,
+    campaignPlans,
+    fromDate: today,
+    toDate: calendarToDate
+  });
+  const radar = applyCalendarDecisionPressure(
+    opportunityRadar,
+    [...externalCalendarRelationships, ...internalCalendar.relationships]
+  );
   const selectedId = params.fixture && calendar.some((item) => item.id === params.fixture)
     ? params.fixture
     : radar[0]?.fixtureId ?? currentState.next_home_fixture_id;
   const fixture = calendar.find((item) => item.id === selectedId);
   const live = getCurrentProductOpportunity(selectedId);
-  const radarItem = buildOpportunityRadar([selectedId], clubContext)[0] ?? null;
+  const radarItem = radar.find((item) => item.fixtureId === selectedId) ?? null;
   const campaign = campaignPlans.campaigns.find((item) => item.fixtureId === selectedId) ?? null;
   const results = getCurrentProductResults(selectedId);
   const approvals = campaign?.approvals.filter((item) => item.state !== "ready") ?? [];
