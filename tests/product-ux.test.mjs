@@ -2609,15 +2609,15 @@ test("commercial home stylesheet contains only current home surfaces", () => {
   }
 });
 
-test("For Clubs removes the legacy copy-a-brief interaction", () => {
+test("For Clubs retires the copy-a-brief interaction in favour of real lead capture", () => {
   const page = read("src/components/ClubPilotProposition.tsx");
-  assert.doesNotMatch(page, /useState/);
   assert.doesNotMatch(page, /pilot-brief/);
   assert.doesNotMatch(page, /copyBrief/);
   assert.doesNotMatch(page, /Prepare the pilot brief/);
   assert.doesNotMatch(page, /A brief with an opportunity/);
-  assert.match(page, /See how the pilot works/);
-  assert.match(page, /First decide whether the workflow is worth piloting/);
+  assert.match(page, /useState<LeadState>/);
+  assert.match(page, /Request a club pilot/);
+  assert.match(page, /Tell us which decision you want to improve/);
 });
 
 test("commercial funnel CTAs carry readable internal attribution", () => {
@@ -2681,7 +2681,7 @@ test("public Matchday utility keeps operational microcopy at 10px or above", () 
 test("commercial pilot request captures a real lead", () => {
   const page = read("src/components/ClubPilotProposition.tsx");
   const route = read("src/app/api/commercial-lead/route.ts");
-  const migration = read("supabase/migrations/20261006202500_commercial_leads_capture.sql");
+  const migration = read("supabase/migrations/20261006202937_commercial_leads_capture.sql");
 
   assert.match(page, /\/api\/commercial-lead/);
   assert.match(page, /name="clubName"/);
