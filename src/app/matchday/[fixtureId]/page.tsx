@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { calendar, mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import { MatchdayOfficialDirectionsLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
+import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
 import styles from "./matchday.module.css";
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
   const matchDate = new Intl.DateTimeFormat("en-GB", { weekday:"long", day:"numeric", month:"long", year:"numeric" })
     .format(new Date(fixture.date + "T12:00:00Z"));
   const providerSummary = summariseMobilityProviderReadiness();
+  const weather = getMatchdayWeatherContext(fixtureId, fixture.date);
 
   return (
     <main className={styles.shell}>
@@ -65,6 +67,15 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
           <strong>{pilot ? "Pilot candidate" : "Matchday guidance"}</strong>
           <small>{pilot?.purpose.en ?? "Official supporter travel guidance."}</small>
         </article>
+      </section>
+
+      <section className={styles.weatherBand} data-level={weather.materiality}>
+        <div>
+          <span>WEATHER CONTEXT</span>
+          <strong>{weather.state === "forecast" ? (weather.precipitationProbability ?? "—") + "% rain · " + (weather.windKmh ?? "—") + " km/h wind" : "Forecast not yet in the operational window"}</strong>
+          <small>{weather.source ?? "Open-Meteo"}{weather.generatedAt ? " · updated " + new Date(weather.generatedAt).toLocaleString("en-GB", { timeZone: "Europe/London", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : ""}</small>
+        </div>
+        <p>{weather.supporterAction}</p>
       </section>
 
       <section className={styles.plan}>
