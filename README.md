@@ -1,14 +1,14 @@
 # AVELA
 
-Growth intelligence for women’s football clubs that turns fan, ticketing, fixture, territory and market signals into the next best action for each fixture — then measures what happened and improves the next decision.
+The marketing & commercial decision workspace for football clubs. AVELA joins fan, fixture, campaign, player, sponsor, rights, calendar and operational context so teams can decide what to do next — then learn from what actually happened.
 
 London City Lionesses is currently used as the live demonstration environment.
 
 ## Product proposition
 
-**Turn every fixture into a growth opportunity.**
+**Read the signals. Move the club.**
 
-The club-facing product is designed around one simple operating loop:
+The club-facing product uses cross-functional decision orchestration to turn fragmented context into one simple operating loop:
 
 1. **Match detected** — the scheduled fixture refresh starts the work automatically.
 2. **Plan generated** — signals are interpreted into one recommended activation draft.
@@ -33,7 +33,7 @@ The club-facing product is designed around one simple operating loop:
 ### Commercial / implementation
 - **/** — commercial product home.
 - **/for-clubs** — club proposition and pilot discussion.
-- **/pilot** — 90-day / 6-fixture Growth Intelligence Pilot proposition.
+- **/pilot** — focused marketing & commercial decision pilot proposition: 4–6 fixtures or a bounded campaign window, one or two workflows.
 - **/pilot/operating-pack** — onboarding, data trust, roles and measurement design.
 - **/pilot/rehearsal** — synthetic end-to-end rehearsal of the privacy-safe club-data path.
 - **/cases** — product use cases.
@@ -52,19 +52,19 @@ Historical URLs are preserved only as permanent redirects into the canonical AVE
 
 ## Commercial entry product
 
-### 90-Day Growth Intelligence Pilot
+### Focused Marketing & Commercial Decision Pilot
 
-Six home-fixture decision cycles.
+4–6 fixtures or a bounded campaign window, focused on one or two real decision workflows.
 
-For every fixture:
+For every decision cycle:
 
-- one priority growth opportunity;
+- one priority opportunity;
 - one recommended action plan;
 - audience, owner, timing and measurement;
 - decision blockers and confidence;
 - post-match result and learning.
 
-At the end of the pilot, the club receives a **Growth Intelligence Playbook** covering who attends, who returns, what converts, where growth exists, which assumptions failed and what to prioritise next.
+At the end of the pilot, the club has an evidence-based decision on whether to **continue, adjust or stop**: which workflows improved, which constraints or data gaps mattered, what learning carried forward and whether deeper integration is justified.
 
 ## Product principles
 
