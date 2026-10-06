@@ -187,7 +187,7 @@
 .heroWhy strong{color:var(--product-ink)}
 
 .alternatives{margin-top:16px}
-.alternativeHead{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:10px}
+.alternativeHead{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;margin-bottom:10px}
 .alternativeHead>strong{font-size:11px;color:var(--product-muted)}
 .alternativeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .alternativeGrid>article{padding:18px;border:1px solid var(--product-line);border-radius:12px;background:#fff}
