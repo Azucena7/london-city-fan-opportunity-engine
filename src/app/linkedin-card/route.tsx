@@ -31,7 +31,7 @@ export async function GET() {
           </div>
 
           <div style={{ display: "flex", marginTop: "62px", color: "#2F8F83", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em" }}>
-            DECISION INTELLIGENCE FOR FOOTBALL CLUBS
+            THE DECISION WORKSPACE FOR CLUB MARKETING & COMMERCIAL TEAMS
           </div>
 
           <div style={{ display: "flex", marginTop: "18px", fontSize: "58px", lineHeight: 0.98, fontWeight: 800, letterSpacing: "-0.045em" }}>
@@ -39,7 +39,7 @@ export async function GET() {
           </div>
 
           <div style={{ display: "flex", marginTop: "24px", color: "#637282", fontSize: "20px", lineHeight: 1.35 }}>
-            Fixture in. Opportunity out. Learn from what happened.
+            Signals in. Better club decisions out. Learn from what happened.
           </div>
 
           <div style={{ display: "flex", marginTop: "auto", color: "#8A909B", fontSize: "14px" }}>
@@ -89,7 +89,7 @@ export async function GET() {
             }}
           >
             <div style={{ display: "flex", fontSize: "9px", fontWeight: 800, letterSpacing: "0.08em", opacity: 0.7 }}>
-              90-DAY PILOT · 6 FIXTURES
+              4–6 FIXTURE PILOT · 1–2 WORKFLOWS
             </div>
             <div style={{ display: "flex", marginTop: "6px", fontSize: "17px", fontWeight: 800 }}>
               Fixture → Opportunity → Campaign → Learning
