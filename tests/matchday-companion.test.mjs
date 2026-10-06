@@ -27,6 +27,10 @@ test("Matchday Companion measurement stays privacy safe", () => {
     assert.ok(event, "missing " + name);
     assert.deepEqual(event.allowedProperties, ["surface"]);
   }
+  const travelSource = events.get("matchday_external_travel_source_opened");
+  assert.ok(travelSource, "missing matchday_external_travel_source_opened");
+  assert.deepEqual(travelSource.allowedProperties, ["surface", "source"]);
+  assert.deepEqual(travelSource.requiredProperties, ["surface", "source"]);
 });
 
 test("Matchday Companion territory context never treats club postcode data as public", () => {
@@ -102,4 +106,18 @@ test("Player pack governance explains why approval is unavailable", () => {
   assert.match(players, /Club workspace access is required to approve or commit a pack/);
   assert.match(players, /Complete the \{count\}-player pack before approval/);
   assert.match(players, /Your role can plan the pack but cannot approve campaign talent/);
+});
+
+
+test("Matchday live source links are allowlisted, bounded and measurable", () => {
+  const landing = read("src/app/matchday/[fixtureId]/page.tsx");
+  const tracker = read("src/components/MatchdayUtilityTracker.tsx");
+  const measurement = read("src/lib/measurement.ts");
+  const ingest = read("src/app/api/measurement/events/route.ts");
+
+  assert.match(landing, /source="road"/);
+  assert.match(landing, /source="rail"/);
+  assert.match(tracker, /matchday_external_travel_source_opened/);
+  assert.match(measurement, /matchday_external_travel_source_opened/);
+  assert.match(ingest, /properties\.source === "road" \|\| properties\.source === "rail"/);
 });
