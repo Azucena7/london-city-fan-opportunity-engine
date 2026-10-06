@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { calendar, mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
-import { MatchdayOfficialDirectionsLink, MatchdayOfficialTicketingLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
+import { MatchdayExternalTravelLink, MatchdayOfficialDirectionsLink, MatchdayOfficialTicketingLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
 import { getVerifiedFixtureTicketUrl } from "@/lib/verifiedFixtureTicketing";
 import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
 import styles from "./matchday.module.css";
@@ -127,16 +127,16 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
           <p>Use official live sources for current road and rail conditions, then return here for the fixture-specific matchday context.</p>
         </div>
         <div className={styles.networkGrid}>
-          <a href="https://tfl.gov.uk/traffic/status" target="_blank" rel="noreferrer">
+          <MatchdayExternalTravelLink fixtureId={fixtureId} source="road" href="https://tfl.gov.uk/traffic/status">
             <span>ROAD · LIVE SOURCE</span>
             <strong>Check TfL traffic status ↗</strong>
             <small>Incidents, closures and exceptional delays across London.</small>
-          </a>
-          <a href="https://www.nationalrail.co.uk/" target="_blank" rel="noreferrer">
+          </MatchdayExternalTravelLink>
+          <MatchdayExternalTravelLink fixtureId={fixtureId} source="rail" href="https://www.nationalrail.co.uk/">
             <span>RAIL · LIVE SOURCE</span>
             <strong>Check National Rail ↗</strong>
             <small>Journey planning, live departures and disruption information.</small>
-          </a>
+          </MatchdayExternalTravelLink>
           <MatchdayOfficialDirectionsLink fixtureId={fixtureId} href="https://www.londoncitylionesses.com/hayes-lane-directions">
             <span>STADIUM · CLUB SOURCE</span>
             <strong>Open London City directions ↗</strong>
