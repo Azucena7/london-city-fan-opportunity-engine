@@ -80,3 +80,18 @@ test("Travel partner prospecting stays internal until approved", () => {
   assert.match(widget, /Review partner opportunity/);
   assert.doesNotMatch(publicLanding, /partnerCommercialPack|relationshipState|Review partner opportunity/);
 });
+
+
+test("Critical interactive controls expose selection and async state", () => {
+  const players = read("src/components/PlayerAssetPlanner.tsx");
+  const setup = read("src/components/ClubSetup.tsx");
+  const access = read("src/components/AccessCenter.tsx");
+  const handoffs = read("src/components/OperationalHandoffs.tsx");
+
+  assert.match(players, /aria-pressed=\{count === value\}/);
+  assert.match(players, /role="status" aria-live="polite"/);
+  assert.match(setup, /aria-pressed=\{channels\.includes\(channel\)\}/);
+  assert.match(setup, /aria-busy=\{saving\}/);
+  assert.match(access, /aria-busy=\{busy\}/);
+  assert.match(handoffs, /role="status" aria-live="polite"/);
+});
