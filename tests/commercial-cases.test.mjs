@@ -25,19 +25,15 @@ test("commercial stories distinguish proposals, delivery and commercial outcomes
   assert.match(story, /\/app\/learning\?fixture=\$\{fixture\.id\}/);
 });
 
-test("pilot discussion remains local with honest copy and no fabricated contact", async () => {
+test("pilot path stays honest and low-friction without fabricated contact", async () => {
   const page = await source("src/components/ClubPilotProposition.tsx");
-  assert.match(page, /navigator\.clipboard\.writeText\(brief\)/);
-  assert.match(page, /catch \{\s*setCopyState\("manual"\)/);
-  assert.match(page, /readOnly value=\{brief\}/);
-  assert.match(page, /No request has been sent/);
+  assert.doesNotMatch(page, /navigator\.clipboard|pilot-brief|copyBrief/);
   assert.doesNotMatch(page, /mailto:|commercialContact|contactHref/);
-  assert.match(page, /No guaranteed commercial outcomes/);
-  assert.match(page, /No live CRM or ticketing access is connected today/);
   assert.doesNotMatch(page, /fetch\(|onSubmit|type="email"/);
-  assert.match(page, /htmlFor="pilot-goal"/);
-  assert.match(page, /htmlFor="pilot-data"/);
-  assert.match(page, /aria-live="polite"/);
+  assert.match(page, /No migration, no commitment and no personal data requested on this page/);
+  assert.match(page, /Try the guided demo/);
+  assert.match(page, /See the pilot structure/);
+  assert.match(page, /AVELA does not need supporter names or emails/);
 });
 
 test("new commercial views are discoverable from the product and case overview", async () => {
