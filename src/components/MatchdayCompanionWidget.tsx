@@ -2,16 +2,19 @@ import Link from "next/link";
 import { mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import { getMatchdayTerritoryContext } from "@/lib/matchdayTerritoryContext";
+import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
 import styles from "./MatchdayCompanionWidget.module.css";
 
 export function MatchdayCompanionWidget({
   fixtureId,
   fixtureLabel,
-  venue
+  venue,
+  fixtureDate
 }: {
   fixtureId: string;
   fixtureLabel: string;
   venue: string;
+  fixtureDate: string;
 }) {
   const pilot = mobilityPartnership.pilots.find((item) => item.fixtureId === fixtureId) ?? null;
   const corridors = [...mobilityPartnership.corridors]
@@ -21,6 +24,7 @@ export function MatchdayCompanionWidget({
   const state = pilot ? "Pilot candidate" : "Monitor";
   const providerSummary = summariseMobilityProviderReadiness();
   const territory = getMatchdayTerritoryContext();
+  const weather = getMatchdayWeatherContext(fixtureId, fixtureDate);
 
   return (
     <section className={styles.shell} aria-label="Matchday Companion">
@@ -35,6 +39,15 @@ export function MatchdayCompanionWidget({
           <strong>{state}</strong>
           <small>{providerSummary.configured}/{providerSummary.total} provider layers configured · {providerSummary.state.replace("-", " ")}</small>
         </div>
+      </div>
+
+      <div className={styles.weather} data-level={weather.materiality}>
+        <div>
+          <span>Live weather context</span>
+          <strong>{weather.state === "forecast" ? (weather.precipitationProbability ?? "—") + "% rain · " + (weather.windKmh ?? "—") + " km/h wind" : "Waiting for operational forecast window"}</strong>
+          <small>{weather.source ?? "Open-Meteo"}{weather.generatedAt ? " · updated " + new Date(weather.generatedAt).toLocaleString("en-GB", { timeZone: "Europe/London", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : ""}</small>
+        </div>
+        <p>{weather.supporterAction}</p>
       </div>
 
       <div className={styles.summary}>
