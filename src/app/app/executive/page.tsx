@@ -44,6 +44,8 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
 
   const decisionPosition = live.decisionState === "HOLD" ? 18 : live.decisionState === "READY FOR REVIEW" ? 58 : 84;
   const signalHighlights = live.liveSignals.slice(0, 4);
+  const attentionNow = radar.filter((item) => item.attentionState === "Act now" || item.attentionState === "Review").length;
+  const topThree = radar.slice(0, 3);
   const flow = [
     { label: "Signals", state: radarItem?.materialSignalCount ? "ready" : "muted" },
     { label: "Opportunity", state: radarItem?.opportunityScore ? "ready" : "muted" },
@@ -61,6 +63,39 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
       subtitle="One decision brief: opportunity, evidence, blockers, activation and measurement."
       actions={<ExecutiveShareActions />}
     >
+
+      <section className={styles.morningRead} aria-label="Executive morning read">
+        <div className={styles.morningIntro}>
+          <span>Morning read</span>
+          <strong>{attentionNow ? attentionNow + " fixture decision" + (attentionNow === 1 ? "" : "s") + " need attention now." : "No fixture decision needs immediate attention."}</strong>
+          <small>Start with the highest-value decision, then scan blockers and measurement before opening detail.</small>
+        </div>
+        <div className={styles.morningPriority}>
+          <span>#1 priority</span>
+          <strong>{radar[0]?.opponent ?? fixture.opponent}</strong>
+          <small>{radar[0]?.attentionState ?? live.decisionState} · score {radar[0]?.opportunityScore ?? "—"} · {radar[0]?.urgency ?? "Watch"} urgency</small>
+        </div>
+        <div className={styles.morningMetric}>
+          <span>Open gates</span>
+          <strong>{approvals.length}</strong>
+          <small>{approvals.length ? "Human decision required" : "No blocking gate"}</small>
+        </div>
+        <div className={styles.morningMetric}>
+          <span>Measurement</span>
+          <strong>{measured ? "Observed" : "Pending"}</strong>
+          <small>{measured ? "Outcome evidence connected" : "Do not overclaim impact"}</small>
+        </div>
+        <div className={styles.morningQueue}>
+          <span>Next in queue</span>
+          <div>
+            {topThree.map((item, index) => (
+              <Link key={item.fixtureId} href={"/app/executive?fixture=" + item.fixtureId}>
+                <b>{index + 1}</b><strong>{item.opponent}</strong><small>{item.attentionState}</small>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <div className={styles.contextBar}>
         <Link href={"/app/matches/" + selectedId}>← Back to workspace</Link>
