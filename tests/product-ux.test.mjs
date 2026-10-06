@@ -1123,7 +1123,7 @@ test("AVELA visual system removes olive identity and simplifies club app navigat
   assert.doesNotMatch(system, /#C7EA3A/i);
   assert.doesNotMatch(system, /#526D00/i);
   assert.match(navCss, /#102742/i);
-  assert.match(navCss, /#2F8F83/i);
+  assert.match(navCss, /#74C9BB|rgba\(47,143,131/);
   assert.match(commercial, /#102742/i);
 });
 
