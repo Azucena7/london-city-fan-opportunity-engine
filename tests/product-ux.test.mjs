@@ -2470,3 +2470,10 @@ test("live product timing cannot lag behind the real London date", () => {
   assert.match(executive, /currentProductDate\(currentState\.updated_at\)/);
   assert.match(season, /currentProductDate\(currentState\.updated_at\)/);
 });
+
+test("public sitemap includes the canonical London City decision surfaces", () => {
+  const sitemap = read("src/app/sitemap.ts");
+  assert.match(sitemap, /currentState\.updated_at/);
+  assert.match(sitemap, /\/live\/london-city\/everton/);
+  assert.match(sitemap, /\/live\/london-city\/brighton/);
+});
