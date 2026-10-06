@@ -33,7 +33,7 @@ export default function PilotPage() {
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.button} href="/app/demo?utm_source=pilot&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=hero">Try the guided demo</Link>
-            <Link className={styles.secondary} href="/for-clubs?utm_source=pilot&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">For clubs</Link>
+            <Link className={styles.secondary} href="/for-clubs?utm_source=pilot&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Request a club pilot</Link>
           </div>
         </div>
         <aside className={styles.pilotCard}>
@@ -112,7 +112,7 @@ export default function PilotPage() {
           <p>The Operating Pack covers onboarding, data contract, roles, privacy and measurement design. The guided demo shows the product flow in three minutes.</p>
         </div>
         <div className={styles.ctaActions}>
-          <Link className={styles.button} href="/app/demo?utm_source=pilot&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=final_cta">Try the guided demo</Link>
+          <Link className={styles.button} href="/for-clubs?utm_source=pilot&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Request a club pilot</Link>\n          <Link className={styles.secondary} href="/app/demo?utm_source=pilot&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=final_cta">Try the guided demo</Link>
           <Link className={styles.secondary} href="/pilot/operating-pack?utm_source=pilot&utm_medium=internal_cta&utm_campaign=operating_pack&utm_content=final_cta">Open the Operating Pack</Link>
           <Link className={styles.secondary} href="/live/london-city?utm_source=pilot&utm_medium=internal_cta&utm_campaign=live_case&utm_content=final_cta">See the public live case</Link>
         </div>
