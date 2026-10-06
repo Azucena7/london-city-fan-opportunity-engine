@@ -49,3 +49,8 @@
 .weather[data-level="medium"]{background:#FFFBF3}
 .weather[data-level="low"]{background:#F4FAF8}
 @media(max-width:760px){.weather{grid-template-columns:1fr}}
+
+.attention{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;align-items:center;padding:11px 16px;border-bottom:1px solid #E4E8EB;background:#F8FAFB}
+.attention span{font-size:8px;font-weight:900;letter-spacing:.075em;text-transform:uppercase;color:#72818D}.attention strong{font-size:12px;color:#102742}.attention small{grid-column:2;color:#7E8B95;font-size:9px;line-height:1.4}
+.attention[data-level="act"]{background:#FFF5F1}.attention[data-level="act"] span{color:#B95F43}.attention[data-level="review"]{background:#FFFBF3}.attention[data-level="review"] span{color:#9A7A22}.attention[data-level="inform"]{background:#F4FAF8}.attention[data-level="inform"] span{color:#2F8F83}
+@media(max-width:760px){.attention{grid-template-columns:1fr}.attention small{grid-column:auto}}
