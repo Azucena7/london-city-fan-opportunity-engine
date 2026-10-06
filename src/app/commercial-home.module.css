@@ -722,3 +722,23 @@
     white-space:nowrap;
   }
 }
+
+
+/* Commercial v3 — shorter, denser, role-led */
+.hero{padding:72px 0 62px;gap:48px}
+.heroLead{font-size:18px;line-height:1.52}
+.heroMeta{margin-top:22px;padding-top:14px}
+.heroMeta strong{color:var(--avela-navy)}
+.problem{padding:72px 0;gap:52px}
+.liveCopy,.livePanel{padding-top:64px;padding-bottom:64px}
+.pilot{padding:72px 0;gap:48px}
+.finalCta{padding-top:64px!important;padding-bottom:64px!important}
+@media(max-width:900px){
+  .hero{padding:56px 0 48px}
+  .problem,.pilot{padding:56px 0}
+}
+@media(max-width:620px){
+  .hero{padding:42px 0 38px}
+  .heroLead{font-size:16px}
+  .problem,.pilot{padding:44px 0}
+}
