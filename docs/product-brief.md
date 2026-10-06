@@ -15,7 +15,7 @@ London City Lionesses.
 ## Core promise
 **Read the signals. Move the club.**
 
-AVELA joins validated signals, club context, operational constraints and ownership across fixtures, campaigns and commercial moments — then helps marketing and commercial teams decide what deserves attention, what to do next and whether the club can realistically deliver it.
+AVELA joins validated signals refreshed on a scheduled cadence with club context, operational constraints and ownership across fixtures, campaigns and commercial moments — then helps marketing and commercial teams decide what deserves attention, what to do next and whether the club can realistically deliver it.
 
 The technology remains football-wide by design. The initial go-to-market and product specialization are women’s football.
 
