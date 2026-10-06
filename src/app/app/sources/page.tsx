@@ -4,7 +4,7 @@ import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import styles from "./sources.module.css";
 
 export const metadata: Metadata = {
-  title: "Intelligence sources · AVELA",
+  title: "Intelligence sources",
   description: "See which data sources are connected, available as public demo evidence, or still require club access."
 };
 
