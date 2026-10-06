@@ -2638,3 +2638,17 @@ test("commercial funnel CTAs carry readable internal attribution", () => {
   assert.match(nav, /utm_source=avela_nav/);
   assert.match(clubs, /utm_source=for_clubs/);
 });
+
+test("commercial pilot pages separate buying story from operating detail", () => {
+  const clubs = read("src/components/ClubPilotProposition.tsx");
+  const pilot = read("src/app/pilot/page.tsx");
+  assert.doesNotMatch(clubs, /<table/);
+  assert.match(clubs, /START WITH WHAT YOU ALREADY HAVE/);
+  assert.match(clubs, /Define\. Test\. Learn\./);
+  assert.doesNotMatch(pilot, /ProductJourneyNav/);
+  assert.match(pilot, /MarketingNav/);
+  assert.match(pilot, /Prove better decisions before integrating more/);
+  assert.match(pilot, /The output is a decision about AVELA too/);
+  assert.match(pilot, /Open the Operating Pack/);
+  assert.doesNotMatch(pilot, /Prepare a club pilot discussion/);
+});
