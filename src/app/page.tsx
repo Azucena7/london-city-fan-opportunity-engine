@@ -10,9 +10,9 @@ import { decisionValidation } from "@/lib/data";
 import styles from "./commercial-home.module.css";
 
 export const metadata: Metadata = {
-  title: "AVELA · Marketing & Commercial Intelligence for Football Clubs",
+  title: "AVELA · The Decision Workspace for Football Club Marketing & Commercial Teams",
   description:
-    "AVELA is a marketing and commercial decision workspace for football clubs, connecting fan, fixture, player, sponsor and operational context to the next best action."
+    "AVELA is the decision workspace for football club marketing and commercial teams, connecting fan, campaign, fixture, player, sponsor and operational context to the next best action."
 };
 
 
@@ -26,10 +26,10 @@ export default function Home() {
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>Marketing & commercial decision workspace for football clubs</span>
+          <span className={styles.eyebrow}>Built for football club marketing & commercial teams</span>
           <h1>Read the signals.<br />Move the club.</h1>
           <p className={styles.heroLead}>
-            AVELA helps club marketing and commercial teams decide what to do next around every fixture — joining fan demand, CRM, content, players, sponsors, rights, timing and delivery constraints in one operating view.
+            AVELA helps marketing and commercial teams decide what to do next across fixtures, campaigns and commercial moments — joining fan demand, CRM, content, players, sponsors, rights, timing and delivery constraints in one operating view.
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.primary} href="/live/london-city">See AVELA on a real fixture</Link>
@@ -70,7 +70,7 @@ export default function Home() {
       <section className={styles.liveProof}>
         <div className={styles.liveCopy}>
           <span className={styles.kicker}>Proof in public</span>
-          <h2>See what AVELA saw before London City announced it.</h2>
+          <h2>A time-stamped AVELA hypothesis. What London City announced next.</h2>
           <p>The Brighton hypothesis was time-stamped before a comparable London City activation became public. It is evidence of relevance, not evidence that the club saw or used AVELA.</p>
           <div className={styles.proofPair}>
             <article><span>AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
@@ -122,7 +122,7 @@ export default function Home() {
       <section className={styles.finalCta}>
         <div>
           <span>AVELA</span>
-          <h2>Turn the next fixture into a better decision — without replacing the stack you already use.</h2>
+          <h2>Turn the next club opportunity into a better decision — without replacing the stack you already use.</h2>
         </div>
         <div>
           <Link className={styles.coralButton} href="/for-clubs#demo">Design your club pilot</Link>
@@ -132,7 +132,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <strong>AVELA</strong>
-        <span>Marketing & commercial intelligence for football clubs.</span>
+        <span>The decision workspace for football club marketing & commercial teams.</span>
         <span>London City Live is an independent public case study.</span>
       </footer>
     </main>
