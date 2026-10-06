@@ -128,3 +128,20 @@
 .morningQueue{grid-column:2/-1;padding:12px 14px!important}.morningQueue>div{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}.morningQueue a{display:grid;grid-template-columns:22px 1fr auto;gap:7px;align-items:center;padding:8px 9px;border-radius:8px;background:#F7F9FA;color:#20364C;text-decoration:none}.morningQueue b{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#E7F1EF;color:#2F8F83;font-size:9px}.morningQueue strong{font-size:11px}.morningQueue small{color:#86939D;font-size:9px}
 @media(max-width:980px){.morningRead{grid-template-columns:1fr 1fr}.morningIntro{grid-row:auto;grid-column:1/-1}.morningQueue{grid-column:1/-1}}
 @media(max-width:620px){.morningRead{grid-template-columns:1fr}.morningIntro,.morningQueue{grid-column:auto}.morningQueue>div{display:flex;overflow-x:auto;scrollbar-width:none}.morningQueue>div::-webkit-scrollbar{display:none}.morningQueue a{min-width:190px;flex:0 0 190px}}
+
+
+.changeStrip{
+  display:grid;
+  grid-template-columns:210px minmax(0,1fr);
+  gap:10px;
+  align-items:stretch;
+  margin-bottom:12px;
+}
+.changeStrip>div:first-child{padding:12px 14px;border:1px solid #E0E5E8;border-radius:12px;background:#FFF9F6}
+.changeStrip>div:first-child span{display:block;color:#B8684F;font-size:9px;font-weight:900;letter-spacing:.075em;text-transform:uppercase}
+.changeStrip>div:first-child strong{display:block;margin-top:7px;color:#102742;font-size:13px}
+.changeItems{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.changeItems span{display:flex;gap:7px;align-items:flex-start;padding:10px 11px;border:1px solid #E0E5E8;border-radius:10px;background:#fff;color:#566875;font-size:10px;line-height:1.4}
+.changeItems b{display:grid;place-items:center;flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:#FCEDE8;color:#B95F43;font-size:8px}
+@media(max-width:900px){.changeStrip{grid-template-columns:1fr}.changeItems{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.changeItems{display:flex;overflow-x:auto;scrollbar-width:none}.changeItems::-webkit-scrollbar{display:none}.changeItems span{min-width:210px;flex:0 0 210px}}
