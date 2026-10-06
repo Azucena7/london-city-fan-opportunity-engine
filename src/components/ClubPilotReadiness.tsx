@@ -144,7 +144,7 @@ export function ClubPilotReadiness() {
         <div className={styles.summary} data-state={planningBlocked ? "blocked" : planningLimited ? "limited" : "ready"}>
           <span>Planning</span>
           <strong>{loading ? "Checking…" : planningBlocked ? "Not ready" : planningLimited ? "Ready with limits" : "Ready"}</strong>
-          <small>{measurementReady ? "Outcome measurement ready" : "Outcome measurement still limited"}</small>
+          <small>{measurementReady ? "Outcome measurement ready" : planningBlocked ? "Resolve the blocked setup checks below" : "Planning can proceed; outcome measurement is still limited"}</small>
         </div>
       </div>
 
@@ -166,7 +166,7 @@ export function ClubPilotReadiness() {
         </p>
       </div>
 
-      {message ? <p className={styles.message} role="status" aria-live="polite">{message}</p> : null}
+      {message ? <p className={styles.message} role="status" aria-live="polite">{message} {planningBlocked ? "Resolve the blocked prerequisites before treating the club as pilot-ready." : "You can continue planning with the limits shown above."}</p> : null}
     </section>
   );
 }
