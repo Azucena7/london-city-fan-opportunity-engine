@@ -6,7 +6,7 @@ import styles from "./operating-pack.module.css";
 
 export const metadata: Metadata = {
   title: "Pilot Operating Pack",
-  description: "The practical onboarding, data, roles and weekly cadence for a 90-day Growth Intelligence Pilot."
+  description: "The practical onboarding, data, roles and weekly cadence for a 90-day AVELA marketing and commercial decision pilot."
 };
 
 const roles = [
