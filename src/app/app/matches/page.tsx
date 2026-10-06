@@ -129,7 +129,7 @@ export default async function MatchesPage() {
                 <small>{currentFixture.competition} · {currentFixture.venue}</small>
               </div>
               <div>
-                <span>Growth opportunity</span>
+                <span>Opportunity</span>
                 <h2>{live?.opportunity ?? "Review current evidence."}</h2>
                 <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
                 <p className={styles.contractInline}><b>Attention driver:</b> {priority?.attentionReason ?? "No calendar pressure adjustment."}</p>
