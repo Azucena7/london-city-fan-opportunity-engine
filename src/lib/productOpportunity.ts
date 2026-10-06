@@ -295,10 +295,14 @@ export function getCurrentProductOpportunity(requestedFixtureId?: string): Produ
     nextScheduledAction && nextScheduledAction.date < referenceDate
       ? "overdue" as const
       : "planned" as const;
-  const nextRequiredAction =
+  const nextRequiredActionBase =
     blockers.length > 0
       ? campaign?.nextApproval.en ?? `Resolve: ${blockers[0]}`
       : recommendedAction;
+  const nextRequiredAction =
+    nextActionStatus === "overdue"
+      ? `OVERDUE · ${nextRequiredActionBase}`
+      : nextRequiredActionBase;
 
   const measurementEvidence = conversionEvidenceConnected
     ? {
