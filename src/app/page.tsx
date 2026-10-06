@@ -32,8 +32,8 @@ export default function Home() {
             AVELA helps marketing and commercial teams decide what to do next across fixtures, campaigns and commercial moments — joining fan demand, CRM, content, players, sponsors, rights, timing and delivery constraints in one operating view.
           </p>
           <div className={styles.heroActions}>
-            <Link className={styles.primary} href="/live/london-city">See AVELA on a real fixture</Link>
-            <Link className={styles.secondaryAction} href="/for-clubs#demo">Discuss a club pilot</Link>
+            <Link className={styles.primary} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See AVELA on a real fixture</Link>
+            <Link className={styles.secondaryAction} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Discuss a club pilot</Link>
           </div>
           <div className={styles.heroMeta}>
             <span><strong>For:</strong> Marketing</span>
@@ -77,8 +77,8 @@ export default function Home() {
             <article><span>London City later announced</span><strong>{proof.observedAction.en}</strong></article>
           </div>
           <div className={styles.proofActions}>
-            <Link className={styles.coralButton} href="/case-study">See the evidence</Link>
-            <Link className={styles.darkTextLink} href="/live/london-city">Open London City Live ↗</Link>
+            <Link className={styles.coralButton} href="/case-study?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=proof&utm_content=london_city">See the evidence</Link>
+            <Link className={styles.darkTextLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=proof">Open London City Live ↗</Link>
           </div>
         </div>
         <div className={styles.livePanel}>
@@ -112,8 +112,8 @@ export default function Home() {
           <article><span>04</span><strong>Measured learning</strong><p>Compare recommendation, decision, execution and result.</p></article>
         </div>
         <div className={styles.pilotActions}>
-          <Link className={styles.primary} href="/for-clubs#demo">Design a 4–6 fixture pilot</Link>
-          <Link className={styles.textLink} href="/app/demo">Try the guided product demo ↗</Link>
+          <Link className={styles.primary} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=pilot_section#demo">Design a 4–6 fixture pilot</Link>
+          <Link className={styles.textLink} href="/app/demo?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=pilot_section">Try the guided product demo ↗</Link>
         </div>
       </section>
 
@@ -125,8 +125,8 @@ export default function Home() {
           <h2>Turn the next club opportunity into a better decision — without replacing the stack you already use.</h2>
         </div>
         <div>
-          <Link className={styles.coralButton} href="/for-clubs#demo">Design your club pilot</Link>
-          <Link className={styles.finalLink} href="/live/london-city">See a live fixture decision ↗</Link>
+          <Link className={styles.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Design your club pilot</Link>
+          <Link className={styles.finalLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=final_cta">See a live fixture decision ↗</Link>
         </div>
       </section>
 
