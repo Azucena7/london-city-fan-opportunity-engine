@@ -383,7 +383,9 @@ test("shared visual system avoids the retired lcl CSS namespace", () => {
     assert.doesNotMatch(readFileSync(path, "utf8"), /--lcl-/);
   }
   assert.equal(existsSync("src/app/brand.css"), false);
-  assert.match(readFileSync("src/app/layout.tsx", "utf8"), /case-brand\.css/);
+  assert.doesNotMatch(readFileSync("src/app/layout.tsx", "utf8"), /case-brand\.css/);
+  assert.match(readFileSync("src/app/live/london-city/layout.tsx", "utf8"), /case-brand\.css/);
+  assert.match(readFileSync("src/app/case-study/layout.tsx", "utf8"), /case-brand\.css/);
 });
 
 
