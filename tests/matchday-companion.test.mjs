@@ -1,0 +1,43 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+
+const read = (path) => readFileSync(path, "utf8");
+
+test("Matchday Companion keeps live and modelled travel separate", () => {
+  const widget = read("src/components/MatchdayCompanionWidget.tsx");
+  const provider = read("src/lib/mobilityProviderReadiness.ts");
+  const api = read("src/app/api/matchday/[fixtureId]/travel/route.ts");
+
+  assert.match(widget, /planning signal only/);
+  assert.match(provider, /Do not present a route as live until an authorised provider returns a timestamped route response/);
+  assert.match(api, /Never present modelled travel friction as a live route/);
+});
+
+test("Matchday Companion measurement stays privacy safe", () => {
+  const measurement = JSON.parse(read("data/live/experiment-measurement.json"));
+  const prohibited = new Set(measurement.prohibitedFields);
+  for (const field of ["address", "postcode", "ip_address", "user_agent", "supporter_id"]) {
+    assert.equal(prohibited.has(field), true, field + " must remain prohibited");
+  }
+
+  const events = new Map(measurement.events.map((event) => [event.name, event]));
+  for (const name of ["matchday_utility_opened", "matchday_official_directions_opened"]) {
+    const event = events.get(name);
+    assert.ok(event, "missing " + name);
+    assert.deepEqual(event.allowedProperties, ["surface"]);
+  }
+});
+
+test("Matchday Companion territory context never treats club postcode data as public", () => {
+  const territory = read("src/lib/matchdayTerritoryContext.ts");
+  assert.match(territory, /authorisedPostcodeState: crmTicketingLive\.datasetState/);
+  assert.match(territory, /exact supporter postcodes are not exposed/i);
+});
+
+test("TfL road adapter fails closed when credentials are absent", () => {
+  const road = read("src/app/api/matchday/road/route.ts");
+  assert.match(road, /if \(!appId \|\| !appKey\)/);
+  assert.match(road, /state: "not-configured"/);
+  assert.match(road, /MATERIAL_RADIUS_KM/);
+});
