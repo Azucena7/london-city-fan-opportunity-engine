@@ -409,3 +409,8 @@
   .simulatorSummary small{text-align:left}
   .alternativeHead{align-items:flex-start;flex-direction:column}
 }
+
+@media(max-width:620px){
+  .need button,.governanceActions button,.governanceActions a{min-height:44px}
+  .governanceActions small{display:block;width:100%;color:var(--product-muted);font-size:11px;line-height:1.4}
+}
