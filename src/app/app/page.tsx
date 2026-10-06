@@ -81,7 +81,7 @@ export default async function ClubAppHome() {
 
   const opsState = await getDecisionCenterOpsState({
     clubId: clubContext?.clubId,
-    from: currentState.updated_at,
+    from: today + "T00:00:00Z",
     to: horizonEndIso
   });
 
