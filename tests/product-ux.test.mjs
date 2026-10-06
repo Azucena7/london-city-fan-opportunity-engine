@@ -1250,8 +1250,6 @@ test("Campaigns uses a semantic navigation state instead of the legacy brief key
 
 test("Radar includes an interactive visual Opportunity Explorer", () => {
   const radar = read("src/app/app/matches/page.tsx");
-  const executive = read("src/app/app/executive/page.tsx");
-  const season = read("src/app/app/season/page.tsx");
   const explorer = read("src/components/OpportunityExplorer.tsx");
   assert.match(radar, /OpportunityExplorer/);
   assert.match(explorer, /Opportunity map/);
@@ -2433,7 +2431,6 @@ test("commercial home makes AVELA value and capability horizon explicit", () => 
 
 test("commercial home uses an interactive fixture-marketing decision demo", () => {
   const demo = read("src/components/CommercialDecisionDemo.tsx");
-  const page = read("src/app/page.tsx");
   assert.match(demo, /"use client"/);
   assert.match(demo, /useState/);
   assert.match(demo, /Change the signal\. Watch the marketing play change\./);
