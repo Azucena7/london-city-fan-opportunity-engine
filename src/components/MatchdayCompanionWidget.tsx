@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
+import { getMatchdayTerritoryContext } from "@/lib/matchdayTerritoryContext";
 import styles from "./MatchdayCompanionWidget.module.css";
 
 export function MatchdayCompanionWidget({
@@ -19,6 +20,7 @@ export function MatchdayCompanionWidget({
   const maxFriction = corridors[0]?.travelFriction ?? null;
   const state = pilot ? "Pilot candidate" : "Monitor";
   const providerSummary = summariseMobilityProviderReadiness();
+  const territory = getMatchdayTerritoryContext();
 
   return (
     <section className={styles.shell} aria-label="Matchday Companion">
@@ -71,6 +73,24 @@ export function MatchdayCompanionWidget({
             <p>{corridor.note.en}</p>
           </article>
         ))}
+      </div>
+
+      <div className={styles.territory}>
+        <div>
+          <span>Territory intelligence</span>
+          <strong>{territory.priorityTerritories.slice(0,3).map((item) => item.borough || item.name).join(" · ")}</strong>
+          <small>{territory.geographySource}</small>
+        </div>
+        <div>
+          <span>Public community nodes</span>
+          <strong>{territory.publicCommunityNodes.length}</strong>
+          <small>Public locations with source URLs and postcodes; suitable for local reach context.</small>
+        </div>
+        <div>
+          <span>Club postcode sectors</span>
+          <strong>{territory.authorisedPostcodeState === "club-aggregate" ? "Connected" : "Requires access"}</strong>
+          <small>{territory.authorisedPostcodeState === "club-aggregate" ? "Use aggregated sector patterns only." : "No authorised supporter postcode aggregate connected."}</small>
+        </div>
       </div>
 
       <div className={styles.providers}>
