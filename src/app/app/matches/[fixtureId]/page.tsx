@@ -104,19 +104,6 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         <span>{live.timingLabel}</span>
       </div>
 
-      <section className={styles.hero}>
-        <div>
-          <span className={styles.eyebrow}>Next home match · {fixture.competition}</span>
-          <h2>Opportunity and decision state</h2>
-          <p>{fixture.date} · {fixture.kickoff ?? "TBC"} · {fixture.venue}</p>
-        </div>
-        <aside className={`${styles.stateCard} ${live.decisionState === "HOLD" ? styles.holdState : styles.readyState}`}>
-          <span>Plan state</span>
-          <strong>{live.decisionState}</strong>
-          <p>{live.confidence.label} confidence · {live.liveSignals.length} sourced signals</p>
-        </aside>
-      </section>
-
       <nav className={styles.contextNav} aria-label="Opportunity workspace sections">
         <div>
           <span>{fixture.opponent}</span>
@@ -159,28 +146,6 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
             <strong>{live.nextAction.label}</strong>
             <small>{approvals.length ? live.primaryBlocker : "No blocking gate"}</small>
           </article>
-        </div>
-      </section>
-
-      <section className={styles.executiveStrip} aria-label="Executive opportunity summary">
-        <article><span>Opportunity score</span><strong>{radarItem?.opportunityScore ?? "—"}</strong><small>{radarItem?.opportunityLabel ?? "Under review"}</small></article>
-        <article><span>Decision state</span><strong>{radarItem?.radarState ?? "Review"}</strong><small>{radarItem?.urgency ?? "Watch"} urgency</small></article>
-        <article><span>Evidence</span><strong>{radarItem?.materialSignalCount ?? 0} material</strong><small>{radarItem?.signalCount ?? 0} total signals</small></article>
-        <article><span>Signal movement</span><strong>{radarItem?.signalChangeLabel ?? "No recent movement"}</strong><small>Last 7 days</small></article>
-      </section>
-
-      <section className={styles.decisionLens} aria-label="Decision lens">
-        <div>
-          <span>What AVELA thinks</span>
-          <strong>{live.decisionState === "HOLD" ? "Do not launch yet." : "This opportunity is ready for human review."}</strong>
-        </div>
-        <div>
-          <span>Why now</span>
-          <strong>{live.whyNow}</strong>
-        </div>
-        <div>
-          <span>What happens next</span>
-          <strong>{live.nextAction.label}</strong>
         </div>
       </section>
 
