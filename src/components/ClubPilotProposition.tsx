@@ -18,8 +18,8 @@ export function ClubPilotProposition() {
       <p>{es ? "Empieza con 4–6 partidos o una campaña acotada y uno o dos flujos de marketing/comercial. Mantén el stack actual, añade solo el contexto que mejora la decisión y compara recomendación, ejecución y aprendizaje." : "Start with 4–6 fixtures or a bounded campaign window and one or two marketing/commercial workflows. Keep the existing stack, add only the context that improves the decision, then compare recommendation, execution and learning."}</p>
       <p className="commercialScope">{es ? "4–6 partidos o campaña acotada · 1–2 flujos · un objetivo prioritario" : "4–6 fixtures or campaign window · 1–2 workflows · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
-      <div className="caseOverviewLinks"><Link className="productButton" href="/pilot">{es ? "Ver cómo funciona el piloto →" : "See how the pilot works →"}</Link></div>
-      <p><Link href="/app/demo">{es ? "Probar la demo guiada de 3 minutos →" : "Try the 3-minute guided demo →"}</Link></p>
+      <div className="caseOverviewLinks"><Link className="productButton" href="/pilot?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero">{es ? "Ver cómo funciona el piloto →" : "See how the pilot works →"}</Link></div>
+      <p><Link href="/app/demo?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=hero">{es ? "Probar la demo guiada de 3 minutos →" : "Try the 3-minute guided demo →"}</Link></p>
     </header>
 
     <section className="commercialPanel">
@@ -52,7 +52,7 @@ export function ClubPilotProposition() {
 
     <section className="commercialPanel">
       <p className="eyebrow">{es ? "DEMO INDEPENDIENTE" : "INDEPENDENT DEMO"}</p><h2>{es ? "London City: ejemplo de cómo funciona el método" : "London City: an example of how the method works"}</h2>
-      <div className="commercialTwoColumns"><article><h3>Everton</h3><p>{es ? "Una propuesta de repetición pendiente de audiencia, aprobación y tracking. No está activada." : "A repeat-visit proposal awaiting audience, approval and tracking. Not activated."}</p><Link href="/live/london-city/everton">{es ? "Ver decisión propuesta →" : "View the proposed decision →"}</Link></article><article><h3>Brighton</h3><p>{es ? "Una coincidencia entre hipótesis y anuncio público. Ejecución e impacto comercial aún no verificados." : "Alignment between a hypothesis and a public announcement. Delivery and commercial impact remain unverified."}</p><Link href="/live/london-city/brighton">{es ? "Ver comparación histórica →" : "View the historical comparison →"}</Link></article></div>
+      <div className="commercialTwoColumns"><article><h3>Everton</h3><p>{es ? "Una propuesta de repetición pendiente de audiencia, aprobación y tracking. No está activada." : "A repeat-visit proposal awaiting audience, approval and tracking. Not activated."}</p><Link href="/live/london-city/everton?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=live_case&utm_content=everton">{es ? "Ver decisión propuesta →" : "View the proposed decision →"}</Link></article><article><h3>Brighton</h3><p>{es ? "Una coincidencia entre hipótesis y anuncio público. Ejecución e impacto comercial aún no verificados." : "Alignment between a hypothesis and a public announcement. Delivery and commercial impact remain unverified."}</p><Link href="/live/london-city/brighton?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=live_case&utm_content=brighton">{es ? "Ver comparación histórica →" : "View the historical comparison →"}</Link></article></div>
       <p>{es ? "London City es un caso de demostración independiente. No implica que el club sea cliente, haya visto esta demo o la haya utilizado." : "London City is an independent demonstration case. It does not imply the club is a customer or has seen or used this demo."}</p>
     </section>
 
@@ -61,8 +61,8 @@ export function ClubPilotProposition() {
       <h2 id="discussion-title">{es ? "Explora un piloto AVELA sin cambiar tu stack." : "Explore an AVELA pilot without changing your stack."}</h2>
       <p>{es ? "Empieza entendiendo el alcance, viendo la demo y decidiendo si uno o dos flujos reales del equipo merecen probarse durante una ventana acotada." : "Start by understanding the scope, seeing the product and deciding whether one or two real team workflows are worth testing in a bounded window."}</p>
       <div className="caseOverviewLinks">
-        <Link className="productButton" href="/pilot">{es ? "Ver estructura del piloto →" : "See the pilot structure →"}</Link>
-        <Link href="/app/demo">{es ? "Probar la demo guiada →" : "Try the guided demo →"}</Link>
+        <Link className="productButton" href="/pilot?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=next_step">{es ? "Ver estructura del piloto →" : "See the pilot structure →"}</Link>
+        <Link href="/app/demo?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=next_step">{es ? "Probar la demo guiada →" : "Try the guided demo →"}</Link>
       </div>
       <p>{es ? "Cuando activemos el formulario de contacto, este será el punto para solicitar una conversación con AVELA. Hasta entonces no pedimos datos personales desde esta página." : "When the contact form is activated, this will be the point to request an AVELA conversation. Until then, this page does not collect personal data."}</p>
     </section>
