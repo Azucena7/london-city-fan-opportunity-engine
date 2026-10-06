@@ -6,7 +6,7 @@ import styles from "./operating-pack.module.css";
 
 export const metadata: Metadata = {
   title: "Pilot Operating Pack",
-  description: "The practical onboarding, data, roles and weekly cadence for a 90-day AVELA marketing and commercial decision pilot."
+  description: "The practical onboarding, data, roles and operating cadence for a focused AVELA marketing and commercial decision pilot."
 };
 
 const roles = [
@@ -23,10 +23,10 @@ const measurementDesign = [
 ];
 
 const success = [
-  "Every fixture has one explicit opportunity and decision owner.",
+  "Every pilot decision cycle has one explicit opportunity and decision owner.",
   "Every recommended action has a measurement plan before launch.",
   "Ticketing and CRM evidence can be matched locally with a pseudonymous supporter key and stored as aggregate evidence.",
-  "Post-match learning changes at least one subsequent fixture decision.",
+  "Observed learning changes at least one subsequent decision.",
   "The club can explain what is measured, assumed and still missing."
 ];
 
@@ -41,11 +41,11 @@ export default function OperatingPackPage() {
 
       <header className={styles.hero}>
         <div>
-          <span className={styles.eyebrow}>90-day pilot · operating pack</span>
+          <span className={styles.eyebrow}>Focused decision pilot · operating pack</span>
           <h1>Turn the pilot proposition into an executable club workflow.</h1>
           <p>
             This is the operational layer behind the sales page: what we need in week zero, who owns what,
-            how each fixture cycle runs and what evidence defines success.
+            how each decision cycle runs and what evidence defines success.
           </p>
         </div>
         <aside className={styles.status}>
@@ -61,7 +61,7 @@ export default function OperatingPackPage() {
           <h2>Onboarding before the first fixture decision.</h2>
         </div>
         <div className={styles.steps}>
-          <article><span>01</span><h3>Confirm scope</h3><p>Choose six home fixtures, primary commercial outcomes and named decision owners.</p></article>
+          <article><span>01</span><h3>Confirm scope</h3><p>Choose the agreed 4–6 fixture or campaign window, primary commercial outcomes and named decision owners.</p></article>
           <article><span>02</span><h3>Connect minimum data</h3><p>Fixture keys, ticket transactions, scans, campaign identifiers and a pseudonymous supporter key.</p></article>
           <article><span>03</span><h3>Set measurement rules</h3><p>Agree attribution boundaries, privacy rules, baseline windows and what counts as a valid result.</p></article>
           <article><span>04</span><h3>Run the first dry cycle</h3><p>Generate one opportunity, review assumptions, test the action plan and confirm the post-match scorecard.</p></article>
@@ -140,7 +140,7 @@ export default function OperatingPackPage() {
           <h2>Decide the strength of evidence before the campaign launches.</h2>
           <p>
             The pilot can report attribution with campaign identifiers, but incremental impact needs a counterfactual.
-            Each fixture should choose the strongest practical design in advance.
+            Each decision cycle should choose the strongest practical design in advance.
           </p>
         </div>
         <div className={styles.measurementGrid}>
