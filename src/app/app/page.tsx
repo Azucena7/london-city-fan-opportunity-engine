@@ -8,7 +8,7 @@ import { getDecisionCenterOpsState } from "@/lib/decisionCenterOverview";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
-import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader, type UniversalDecisionState } from "@/components/WorkspaceUI";
 import styles from "./home.module.css";
 
@@ -166,11 +166,9 @@ export default async function ClubAppHome() {
     <AppWorkspaceShell
       active="home"
       eyebrow="Decision Center"
-      title="Good morning, Marta."
+      title="Today’s decisions"
       subtitle={summary.attention ? summary.attention + " things need your attention today." : "Everything important is currently under control."}
-      actions={<><WorkspaceViewSwitcher value="overview" /><WorkspaceFilterButton /></>}
     >
-      <p className={styles.contractCopy}>productAppShell · Opportunity Radar · Campaign execution · Club context · Learning · AVELA decision loop · Calendar pressure can elevate attention without changing opportunity potential. <span data-state="syncing">Execution sync</span></p>
 
       <WorkspaceCard className={styles.attentionInbox} tone="action">
         <WorkspaceSectionHeader
