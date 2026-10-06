@@ -4,15 +4,18 @@
 AVELA
 
 ## Category
-Growth Intelligence for Women’s Football.
+Marketing & Commercial Decision Workspace for Football Clubs.
+
+## Strategic differentiator
+Cross-functional decision orchestration.
 
 ## Live demonstration environment
 London City Lionesses.
 
 ## Core promise
-**Turn every fixture into a growth opportunity.**
+**Read the signals. Move the club.**
 
-AVELA refreshes the validated signals around a match on a scheduled cadence — fixture, audience, city, culture, ticketing, sponsors, player momentum and club context — then helps the club decide where to act next.
+AVELA joins validated signals, club context, operational constraints and ownership across fixtures, campaigns and commercial moments — then helps marketing and commercial teams decide what deserves attention, what to do next and whether the club can realistically deliver it.
 
 The technology remains football-wide by design. The initial go-to-market and product specialization are women’s football.
 
@@ -20,27 +23,27 @@ The technology remains football-wide by design. The initial go-to-market and pro
 
 AVELA is not a replacement for CRM, ticketing, BI, engagement or activation tools.
 
-It is the intelligence layer above them:
+It is the decision workspace across them:
 
-**Fixture → Context → Signals → Opportunity → Recommended Play → Activation → Measurement → Learning**
+**Signals + context + constraints → Priority → Decision → Action → Learning**
 
-The central question is not “who are our fans?” but:
+The central question is not “what does each system know?” but:
 
-**“What should we do about this fixture, now?”**
+**“What should the club do next — and can it actually deliver it?”**
 
 ## Primary commercial entry product
 
-### 90-Day Growth Intelligence Pilot
-Six fixture-by-fixture decision cycles combining the platform with a light intelligence service.
+### Focused Marketing & Commercial Decision Pilot
+4–6 fixtures or a bounded campaign window, focused on one or two real decision workflows. The pilot tests decision quality, execution fit and reusable learning before deeper integration.
 
 The pilot is designed to prove value before asking a club to adopt a broader system.
 
 ## Product engines
 
-### 1. Match Intelligence
+### 1. Fixture & Match Intelligence
 Starts from the scheduled fixture refresh and re-evaluates the changing context around each match as validated evidence is refreshed.
 
-### 2. Audience Growth
+### 2. Audience Opportunity
 Identifies the most actionable audience opportunity around the fixture, including families, grassroots, cultural crossover, international demand, first-time visitors and repeat attendance.
 
 ### 3. Attendance
@@ -53,7 +56,7 @@ Connects match context, audience, player momentum and partner categories to time
 Turns an accepted opportunity into audience, message, channels, assets, owners, timing, estimated delivery effort, budget range and measurement.
 
 ### 6. Learning
-Compares what the engine predicted, what the club executed and what happened after matchday so the next fixture starts smarter.
+Compares what AVELA recommended, what the club decided, what was executed and what happened so the next decision starts smarter.
 
 ## Women’s-football signal layer
 
