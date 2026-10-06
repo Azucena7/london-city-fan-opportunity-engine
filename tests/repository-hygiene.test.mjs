@@ -736,3 +736,15 @@ test("London City proof owns its case and shared commercial styles", () => {
   assert.match(live, /commercial-pilot\.css/);
   assert.match(study, /case-brand\.css/);
 });
+
+test("ProductJourney navigation CSS is route scoped", () => {
+  const root = readFileSync("src/app/layout.tsx", "utf8");
+  const app = readFileSync("src/app/app/layout.tsx", "utf8");
+  const cases = readFileSync("src/app/cases/layout.tsx", "utf8");
+  const rehearsal = readFileSync("src/app/pilot/rehearsal/layout.tsx", "utf8");
+
+  assert.doesNotMatch(root, /navigation-v2\.css/);
+  assert.match(app, /navigation-v2\.css/);
+  assert.match(cases, /navigation-v2\.css/);
+  assert.match(rehearsal, /navigation-v2\.css/);
+});
