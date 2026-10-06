@@ -1,9 +1,9 @@
 import Link from "next/link";
 import styles from "./MarketingNav.module.css";
 
-export function MarketingNav() {
+export function MarketingNav({ variant = "light" }: { variant?: "light" | "dark" }) {
   return (
-    <nav className={styles.nav} aria-label="AVELA marketing and commercial product navigation">
+    <nav className={`${styles.nav} ${variant === "dark" ? styles.dark : ""}`} aria-label="AVELA marketing and commercial product navigation">
       <Link className={styles.brand} href="/">
         <span className={styles.mark} aria-hidden="true" />
         AVELA
