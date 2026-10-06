@@ -25,14 +25,6 @@ const priorityLabel: Record<DecisionPriority, string> = {
   monitor: "Monitor"
 };
 
-const prioritySymbol: Record<DecisionPriority, string> = {
-  "act-now": "●",
-  review: "●",
-  blocked: "■",
-  "on-track": "●",
-  monitor: "○"
-};
-
 function stateForPriority(priority: DecisionPriority): UniversalDecisionState {
   if (priority === "act-now") return "ACT";
   if (priority === "review") return "REVIEW";
