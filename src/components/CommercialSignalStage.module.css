@@ -250,3 +250,14 @@
   .stage::after{top:66px;right:16px}
   .topline{padding-right:62px}
 }
+
+
+/* Commercial coherence pass */
+.topline span,.label,.footer span{font-size:12px}
+.topline strong{font-size:14px}
+.num{font-size:12px}
+.row strong{font-size:18px;line-height:1.3}
+.state{font-size:11px;padding:7px 10px}
+.footer strong{font-size:15px}
+.decisionPulse{font-size:11px}
+.stage::after{font-size:11px}
