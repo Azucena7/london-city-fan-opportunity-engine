@@ -1,3 +1,4 @@
+import "../navigation-v2.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
