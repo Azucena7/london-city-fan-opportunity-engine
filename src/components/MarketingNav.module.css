@@ -21,13 +21,13 @@
   background:var(--avela-paper,#f8f6f1);clip-path:polygon(0 0,100% 50%,0 100%);
 }
 .links{display:flex;justify-content:center;gap:20px}
-.links a,.login{color:var(--avela-muted,#637282);text-decoration:none;font-size:10px;font-weight:820;letter-spacing:.03em}
+.links a,.login{color:var(--avela-muted,#637282);text-decoration:none;font-size:12px;font-weight:820;letter-spacing:.03em}
 .links a:hover,.login:hover{color:var(--avela-navy,#102742)}
 .actions{display:flex;align-items:center;gap:14px}
 .login{white-space:nowrap}
 .demo{
   display:inline-flex;justify-content:center;min-height:40px;padding:10px 14px;
-  background:var(--avela-navy,#102742);color:#fff;text-decoration:none;font-size:10px;font-weight:900;white-space:nowrap;
+  background:var(--avela-navy,#102742);color:#fff;text-decoration:none;font-size:12px;font-weight:900;white-space:nowrap;
 }
 @media(prefers-reduced-motion:no-preference){.demo{transition:transform .18s ease,box-shadow .18s ease}.demo:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,39,66,.14)}}
 @media(max-width:860px){
@@ -41,8 +41,8 @@
 /* Commercial navigation refinement */
 .nav{padding:20px 0}
 .brand{font-size:15px}
-.links a,.login{font-size:11px}
-.demo{min-height:42px;padding:11px 15px;font-size:11px;border-radius:999px}
+.links a,.login{font-size:12px}
+.demo{min-height:42px;padding:11px 15px;font-size:12px;border-radius:999px}
 
 
 /* Premium commercial nav */
@@ -101,7 +101,7 @@
     list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
     min-height:42px;padding:9px 12px;border:1px solid rgba(13,34,56,.14);
     border-radius:10px;color:#0d2238;background:rgba(255,255,255,.5);
-    font-size:11px;font-weight:850
+    font-size:12px;font-weight:850
   }
   .mobileMenu summary::-webkit-details-marker{display:none}
   .mobilePanel{
