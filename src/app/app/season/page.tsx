@@ -9,6 +9,7 @@ import { demoAppearances, demoPlayerMomentum, demoPlayers, playerCapacity, playe
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
+import { currentProductDate } from "@/lib/currentProductDate";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./season.module.css";
