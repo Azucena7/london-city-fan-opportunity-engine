@@ -19,3 +19,9 @@
 .future article small{display:block;margin-top:9px;color:#8B97A0;font-size:9px;text-transform:capitalize}
 .future article[data-state="live"]{background:#F2FAF8;border-color:#D5EAE6}
 .future article[data-state="degraded"]{background:#FFF9F6;border-color:#F0DED6}
+
+.weatherBand{display:grid;grid-template-columns:minmax(240px,.75fr) minmax(0,1.25fr);gap:26px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(16,39,66,.13)}
+.weatherBand span{display:block;color:#7E8D98;font-size:9px;font-weight:900;letter-spacing:.08em}.weatherBand strong{display:block;margin-top:6px;font-size:15px}.weatherBand small{display:block;margin-top:4px;color:#7C8993;font-size:9px}.weatherBand p{margin:0;color:#61717D;font-size:11px;line-height:1.5}
+.weatherBand[data-level="high"]{background:linear-gradient(90deg,rgba(255,245,241,.9),rgba(255,245,241,0))}
+.weatherBand[data-level="medium"]{background:linear-gradient(90deg,rgba(255,251,243,.9),rgba(255,251,243,0))}
+@media(max-width:680px){.weatherBand{grid-template-columns:1fr;gap:8px}}
