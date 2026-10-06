@@ -848,5 +848,41 @@
         "checkedAt": "2026-10-05"
       }
     ]
+  },
+  {
+    "id": "broadcast-everton-sky-youtube-2026-10-06",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-06T09:47:40+01:00",
+    "title": {
+      "en": "Everton will be shown on Sky Sports and BWSL YouTube",
+      "es": "Everton se emitirá en Sky Sports y YouTube de la BWSL"
+    },
+    "summary": {
+      "en": "The official WSL broadcast selection confirms London City v Everton at 14:00 BST on 18 October on Sky Sports and the BWSL YouTube channel. The club's official ticket page still offers standard and VIP tickets. Broadcast availability is confirmed; its effect on ticket demand is not measured.",
+      "es": "La selección oficial de retransmisiones de la WSL confirma London City–Everton a las 14:00 BST del 18 de octubre en Sky Sports y el canal de YouTube de la BWSL. La página oficial del club sigue ofreciendo entradas estándar y VIP. La retransmisión está confirmada; su efecto sobre la demanda de entradas no está medido."
+    },
+    "marketingAction": {
+      "en": "Separate the in-person Oktoberfest and VIP journeys from a remote-viewer content journey; keep proximity audiences focused on the on-site experience, tag broadcast engagement, and retarget consented remote viewers without treating reach as ticket demand.",
+      "es": "Separar los recorridos presenciales de Oktoberfest y VIP de un recorrido de contenido para espectadores remotos; mantener a las audiencias de proximidad centradas en la experiencia en el estadio, etiquetar el engagement de retransmisión y reimpactar a espectadores remotos consentidos sin tratar alcance como demanda de entradas."
+    },
+    "sourceName": "WSL Football / London City Lionesses",
+    "sourceUrl": "https://www.wslfootball.com/news/wsl/barclays-women-s-super-league-round-five-broadcast-picks-confirmed",
+    "sources": [
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/news/wsl/barclays-women-s-super-league-round-five-broadcast-picks-confirmed",
+        "checkedAt": "2026-10-06"
+      },
+      {
+        "name": "London City Lionesses Everton matchday",
+        "url": "https://www.londoncitylionesses.com/everton-h-2627",
+        "checkedAt": "2026-10-06"
+      }
+    ]
   }
 ]
