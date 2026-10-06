@@ -6,7 +6,7 @@ import { WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/compon
 import styles from "./access.module.css";
 
 export const metadata: Metadata = {
-  title: "Access & team · AVELA",
+  title: "Access & team",
   description: "Create an AVELA pilot account, request club access, review memberships and protect operational continuity during staff changes."
 };
 
