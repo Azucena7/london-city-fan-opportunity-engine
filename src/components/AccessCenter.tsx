@@ -220,7 +220,7 @@ export function AccessCenter() {
     return (
       <section className={styles.empty}>
         <span>Access & team</span>
-        <h1>Club access is not available in this environment yet.</h1>
+        <h2>Club access is not available in this environment yet.</h2>
         <p>The decision workspace remains closed until identity and membership services are configured. No club data is exposed in the meantime.</p>
       </section>
     );
@@ -231,7 +231,7 @@ export function AccessCenter() {
       <header className={styles.head}>
         <div>
           <span>Access & team</span>
-          <h1>Secure pilot access without opening the club workspace.</h1>
+          <h2>Secure pilot access without opening the club workspace.</h2>
           <p>
             Users create and confirm their own account first. Club data remains inaccessible until an authorised club admin approves a membership.
           </p>
