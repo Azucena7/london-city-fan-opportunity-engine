@@ -8,7 +8,7 @@ import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
-import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./matches.module.css";
 
@@ -99,15 +99,12 @@ export default async function MatchesPage() {
   return (
     <AppWorkspaceShell
       active="matches"
-      eyebrow="AVELA · Opportunity Radar"
+      eyebrow="Opportunity Radar"
       title="Where should the club act next?"
-      subtitle="Fixture opportunity inbox · evidence rank stays separate from calendar pressure."
-      actions={<><WorkspaceViewSwitcher value="list" /><WorkspaceFilterButton /></>}
+      subtitle="Upcoming home fixtures ranked by evidence, urgency and decision pressure."
     >
-      <p className={styles.contractCopy}>productAppShell · The club does not create a plan first. Fixture → signals → opportunity → recommended play → human review → activation → learning. Monitoring. Upcoming home fixtures are re-prioritised whenever the validated evidence state refreshes.</p>
 
       <section className={styles.radarSummary} aria-label="Opportunity radar summary">
-        <WorkspaceCard><span>Fixtures watched</span><strong>{radar.length}</strong><small>Next home fixtures</small></WorkspaceCard>
         <WorkspaceCard tone="action"><span>Act now</span><strong>{radar.filter((item) => item.attentionState === "Act now").length}</strong><small>Immediate attention</small></WorkspaceCard>
         <WorkspaceCard><span>Review</span><strong>{radar.filter((item) => item.attentionState === "Review").length}</strong><small>Human decision needed</small></WorkspaceCard>
         <WorkspaceCard tone="accent"><span>Monitor</span><strong>{radar.filter((item) => item.attentionState === "Monitor").length}</strong><small>Watch, don’t act yet</small></WorkspaceCard>
