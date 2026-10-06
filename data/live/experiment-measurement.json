@@ -178,6 +178,24 @@
         "surface": "string"
       },
       "state": "provider-ready"
+    },
+    {
+      "name": "matchday_official_ticketing_opened",
+      "source": "mobility",
+      "label": {
+        "en": "Official ticketing opened",
+        "es": "Ticketing oficial abierto"
+      },
+      "allowedProperties": [
+        "surface"
+      ],
+      "requiredProperties": [
+        "surface"
+      ],
+      "propertyTypes": {
+        "surface": "string"
+      },
+      "state": "provider-ready"
     }
   ],
   "cohorts": [
