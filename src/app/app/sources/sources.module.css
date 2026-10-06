@@ -6,7 +6,7 @@
 }
 .surface :global([class*="wrap"]){max-width:none!important;margin:0!important;padding:16px!important}
 .surface :global([class*="head"]){padding:0 0 14px!important}
-.surface :global([class*="head"] h1){font-size:26px!important}
+.surface :global([class*="head"] h2){font-size:26px!important}
 .surface :global([class*="sourceList"]){margin-top:12px!important;gap:10px!important}
 .surface :global([class*="source"]){padding:16px!important;border-radius:10px!important}
 .surface :global([class*="sourceTop"] h2){font-size:17px!important}
