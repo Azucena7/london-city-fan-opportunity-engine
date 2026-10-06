@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SponsorContractHealth } from "@/components/SponsorContractHealth";
-import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, EvidenceStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import { partnerCommercialPack, pilotReadiness } from "@/lib/data";
 import styles from "./sponsors.module.css";
@@ -45,10 +45,9 @@ export default function SponsorsPage() {
   return (
     <AppWorkspaceShell
       active="sponsors"
-      eyebrow="Sponsor Intelligence"
-      title="Sponsors"
-      subtitle="Pipeline opportunities, evidence quality and verified obligations in one workspace."
-      actions={<><WorkspaceViewSwitcher value="list" /><WorkspaceFilterButton /></>}
+      eyebrow="Sponsor opportunity intelligence"
+      title="Which partner opportunity is worth pursuing?"
+      subtitle="Rank commercial fit, evidence readiness, rights and approval gates before outreach or commitment."
     >
       <nav className={styles.guidedSteps} aria-label="Sponsor decision workflow">
         <a href="#opportunity" aria-current="step"><span>01</span><strong>Opportunity</strong><small>What looks worth pursuing</small></a>
