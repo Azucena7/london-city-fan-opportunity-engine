@@ -748,3 +748,8 @@ test("ProductJourney navigation CSS is route scoped", () => {
   assert.match(cases, /navigation-v2\.css/);
   assert.match(rehearsal, /navigation-v2\.css/);
 });
+
+test("retired demand-history and league-benchmark CSS stays removed", () => {
+  const css = readFileSync("src/app/intelligence-surfaces.css", "utf8");
+  assert.doesNotMatch(css, /\.demandHistory|\.leagueBenchmark/);
+});
