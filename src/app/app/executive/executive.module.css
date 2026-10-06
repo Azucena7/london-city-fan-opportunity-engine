@@ -93,3 +93,22 @@
 .flowCard{padding:16px!important;margin-bottom:12px}.decisionFlow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:14px;border:1px solid #E0E5E8;border-radius:10px;overflow:hidden}.decisionFlow>div{position:relative;min-height:88px;padding:14px 12px;background:#FAFBFB;border-right:1px solid #E0E5E8}.decisionFlow>div:last-child{border-right:0}.decisionFlow>div::after{content:"";position:absolute;top:50%;right:-6px;z-index:2;width:12px;height:12px;border-top:1px solid #CBD4DA;border-right:1px solid #CBD4DA;background:#FAFBFB;transform:translateY(-50%) rotate(45deg)}.decisionFlow>div:last-child::after{display:none}.decisionFlow span{display:block;color:#92A0AB;font-size:10px;font-weight:900}.decisionFlow strong{display:block;margin-top:10px;font-size:12px}.decisionFlow [data-state="ready"]{background:#F2FAF8}.decisionFlow [data-state="review"]{background:#FFF6F1}.decisionFlow [data-state="muted"]{background:#FAFBFB;color:#7C8994}
 @media(max-width:900px){.cockpit{grid-template-columns:1fr}.decisionDial{border-left:0;border-top:1px solid #DDE4E8}.executiveMetrics{grid-template-columns:1fr 1fr}.decisionFlow{grid-template-columns:repeat(3,1fr)}.decisionFlow>div:nth-child(3){border-right:0}.decisionFlow>div:nth-child(3)::after{display:none}}
 @media(max-width:620px){.executiveMetrics{grid-template-columns:1fr}.decisionFlow{grid-template-columns:1fr 1fr}.decisionFlow>div:nth-child(3){border-right:1px solid #E0E5E8}.decisionFlow>div:nth-child(3)::after{display:block}.decisionFlow>div:nth-child(even){border-right:0}.decisionFlow>div:nth-child(even)::after{display:none}}
+
+@media(max-width:620px){
+  .decisionFlow{display:flex;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none}
+  .decisionFlow::-webkit-scrollbar{display:none}
+  .decisionFlow>div,
+  .decisionFlow>div:nth-child(3),
+  .decisionFlow>div:nth-child(even){
+    min-width:132px;
+    flex:0 0 132px;
+    border-right:1px solid #E0E5E8;
+    border-top:0;
+    scroll-snap-align:start;
+  }
+  .decisionFlow>div::after,
+  .decisionFlow>div:nth-child(3)::after,
+  .decisionFlow>div:nth-child(even)::after{display:none}
+  .cockpitMain{padding:22px 20px}
+  .decisionDial{padding:20px}
+}
