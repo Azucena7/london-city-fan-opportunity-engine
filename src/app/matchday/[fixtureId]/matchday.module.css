@@ -29,3 +29,13 @@
 .ticketing{display:flex;justify-content:space-between;gap:30px;align-items:center;margin-top:18px;padding:24px 28px;border:1px solid rgba(16,39,66,.13);border-radius:18px;background:#EEF7F4}
 .ticketing>div{max-width:720px}.ticketing span{display:block;color:#2F8F83;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.ticketing h2{margin:6px 0 0;font-size:24px;letter-spacing:-.035em}.ticketing p{margin:7px 0 0;color:#65757F;font-size:11px;line-height:1.5}.ticketing a{flex:0 0 auto;padding:11px 14px;border-radius:9px;background:#102742;color:#fff;text-decoration:none;font-size:11px;font-weight:900}
 @media(max-width:680px){.ticketing{align-items:flex-start;flex-direction:column;padding:22px}.ticketing a{width:100%;text-align:center}}
+
+
+.networkChecks{padding:34px 0 16px}
+.networkGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+.networkGrid>a{display:flex;min-height:142px;flex-direction:column;padding:18px;border:1px solid rgba(16,39,66,.12);border-radius:14px;background:#fff;color:#102742;text-decoration:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.networkGrid>a:hover{transform:translateY(-2px);border-color:rgba(47,143,131,.45);box-shadow:0 10px 28px rgba(16,39,66,.08)}
+.networkGrid span{color:#2F8F83;font-size:9px;font-weight:900;letter-spacing:.08em}
+.networkGrid strong{display:block;margin-top:10px;font-size:15px;line-height:1.3}
+.networkGrid small{display:block;margin-top:auto;padding-top:16px;color:#72808B;font-size:10px;line-height:1.45}
+@media(max-width:760px){.networkGrid{grid-template-columns:1fr}}
