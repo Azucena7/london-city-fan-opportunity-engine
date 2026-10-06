@@ -147,50 +147,6 @@ export default function Home() {
       </section>
 
 
-      <section className={styles.capabilityHorizon} aria-labelledby="capability-horizon-title">
-        <div className={styles.capabilityIntro}>
-          <span className={styles.kicker}>What AVELA can become</span>
-          <h2 id="capability-horizon-title">Start with the decision loop. Expand only when more context adds value.</h2>
-          <p>The stages below separate what exists now from what becomes possible with authorised club data and connectors.</p>
-        </div>
-        <div className={styles.horizonGrid}>
-          <article data-stage="now">
-            <span>Now · Product today</span>
-            <strong>Detect, prioritise, recommend and govern.</strong>
-            <ul>
-              <li>Fixture-led opportunity radar</li>
-              <li>Campaign and player-pack recommendations</li>
-              <li>Sponsor, rights and calendar constraints</li>
-              <li>Decision evidence, approvals and learning trace</li>
-            </ul>
-          </article>
-          <article data-stage="connected">
-            <span>Next · With club integrations</span>
-            <strong>Make decisions with richer operational truth.</strong>
-            <ul>
-              <li>CRM and ticketing audience evidence</li>
-              <li>Private performance and sponsor measurement</li>
-              <li>Live work-capacity and calendar context</li>
-              <li>Authorised handoffs into club systems</li>
-            </ul>
-          </article>
-          <article data-stage="vision">
-            <span>Horizon · Product direction</span>
-            <strong>Continuously optimise the club&apos;s growth choices.</strong>
-            <ul>
-              <li>Cross-fixture resource allocation</li>
-              <li>Scenario planning across campaigns and assets</li>
-              <li>Proactive detection of commercial and fan opportunities</li>
-              <li>Institutional memory that compounds across seasons</li>
-            </ul>
-          </article>
-        </div>
-        <div className={styles.horizonBoundary}>
-          <strong>Vision is not current capability.</strong>
-          <p>AVELA should only claim an integration, automated action or evidence source when it is actually authorised and operational for that club.</p>
-        </div>
-      </section>
-
       <section className={styles.notAnother}>
         <div className={styles.notAnotherTitle}>
           <span className={styles.kicker}>What AVELA is — and is not</span>
@@ -204,16 +160,6 @@ export default function Home() {
         <div className={styles.llmStatement}>
           <strong>The LLM is part of AVELA. It is not the product.</strong>
           <p>General AI can help a person think. AVELA is designed to help a club operate across changing evidence, constraints and decisions.</p>
-        </div>
-      </section>
-
-      <section className={styles.roles}>
-        <div>
-          <span className={styles.kicker}>One decision layer, different perspectives</span>
-          <h2>AVELA should make sense to the people who already run the club.</h2>
-        </div>
-        <div className={styles.roleGrid}>
-          {roles.map(([role, description]) => <article key={role}><span>{role}</span><p>{description}</p></article>)}
         </div>
       </section>
 
