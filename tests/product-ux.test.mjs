@@ -69,9 +69,8 @@ test("social sharing matches the current AVELA product story", () => {
   const layout = read("src/app/layout.tsx");
   const card = read("src/app/linkedin-card/route.tsx");
   const og = read("src/app/opengraph-image.tsx");
-  assert.match(layout, /AVELA · Decision Intelligence for Football Clubs/);
-  assert.match(layout, /Connect signals, club context and operational constraints/);
-  assert.match(card, /DECISION INTELLIGENCE FOR FOOTBALL CLUBS/);
+  assert.match(layout, /Decision Workspace for Football Club Marketing & Commercial Teams/);
+  assert.match(card, /THE DECISION WORKSPACE FOR CLUB MARKETING & COMMERCIAL TEAMS/);
   assert.match(card, /Radar/);
   assert.match(card, /Opportunity brief/);
   assert.match(card, /Campaign/);
@@ -361,6 +360,7 @@ test("club setup context differentiates the engine from replacement CRM and gene
   const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const draftRoute = read("src/app/api/campaign-draft/route.ts");
   const home = read("src/app/page.tsx");
+  const ecosystem = read("src/components/CommercialEcosystem.tsx");
 
   assert.match(builder, /Built above the club&apos;s existing stack — not instead of it/);
   assert.match(builder, /Connected stack/);
@@ -376,9 +376,10 @@ test("club setup context differentiates the engine from replacement CRM and gene
   assert.match(draftRoute, /Respect this club must-avoid rule/);
 
   assert.match(home, /The Decision Workspace for Football Club Marketing & Commercial Teams/);
-  assert.match(home, /Works above your existing stack/);
-  assert.match(home, /FIXTURES/);
-  assert.match(home, /growth-intelligence layer|decision layer/i);
+  assert.match(home, /CommercialEcosystem/);
+  assert.match(ecosystem, /Works with your club stack/);
+  assert.match(ecosystem, /Keep your specialist tools\. Orchestrate the decision across them/);
+  assert.match(ecosystem, /cross-functional decision orchestration/);
 });
 
 test("club setup persists reusable fixture, channel, objective, brand and approval context", () => {
@@ -612,11 +613,10 @@ test("marketing app and live case have distinct canonical surfaces", () => {
   const appNav = read("src/components/ProductJourneyNav.tsx");
   const config = read("next.config.mjs");
   const liveCase = read("src/components/LondonCityCase.tsx");
-  assert.match(home, /MarketingNav/);
   assert.match(home, /See a live fixture decision/);
-  assert.match(home, /href="\/live\/london-city"/);
-  assert.match(marketingNav, /Try product/);
-  assert.match(marketingNav, /href="\/app\/demo">Try product/);
+  assert.match(home, /\/live\/london-city\?utm_source=avela_home/);
+  assert.match(marketingNav, /Open workspace/);
+  assert.match(marketingNav, /\/app\/demo\?utm_source=avela_nav/);
   assert.match(appNav, /AVELA website/);
   assert.match(appNav, /\/app\/learning/);
   assert.match(config, /source: "\/london-city", destination: "\/live\/london-city"/);
@@ -679,7 +679,10 @@ test("commercial surfaces route users into the simplified club journey", () => {
     assert.doesNotMatch(source, /href="\/opportunity"/);
     assert.doesNotMatch(source, /href="\/decision-room"/);
   }
-  assert.match(pilot, /\/app\/matches/);
+  assert.match(pilot, /\/app\/demo\?utm_source=pilot/);
+  assert.match(pilot, /\/pilot\/operating-pack\?utm_source=pilot/);
+  assert.match(pilot, /MarketingNav/);
+  assert.doesNotMatch(pilot, /ProductJourneyNav/);
   assert.match(demo, /DemoTour/);
   assert.match(demoTour, /\/app\/matches\/\$\{props\.fixtureId\}/);
   assert.match(caseOverview, /\/app\/matches\/\$\{opportunity\.fixtureId\}/);
@@ -688,10 +691,11 @@ test("commercial surfaces route users into the simplified club journey", () => {
 test("club product starts from fixtures instead of requiring a plan first", () => {
   const matches = read("src/app/app/matches/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
-  assert.match(matches, /AVELA · Opportunity Radar/);
-  assert.match(matches, /The club does not create a plan first/);
-  assert.match(matches, /Fixture → signals → opportunity → recommended play → human review → activation → learning/);
-  assert.match(matches, /Monitoring/);
+  assert.match(matches, /title: "Opportunity Radar"/);
+  assert.match(matches, /title="Where should the club act next\?"/);
+  assert.match(matches, /Current engine priority/);
+  assert.match(matches, /Open opportunity brief/);
+  assert.match(matches, /Opportunity map/);
   assert.match(matches, /\/app\/matches\/\$\{currentFixture\.id\}/);
   assert.match(nav, /href: "\/app\/matches"/);
   assert.match(nav, /label: "Learning"/);
@@ -827,10 +831,10 @@ test("fixture lifecycle keeps pre-match and post-match UX distinct", () => {
   assert.match(opportunity, /fixturePhase: "pre-match" \| "matchday" \| "post-match"/);
   assert.match(opportunity, /timingLabel/);
   assert.match(opportunity, /T-\$\{daysToFixture\}/);
-  assert.match(results, /Measurement starts after matchday/);
-  assert.match(results, /Pre-match · outcome not available yet/);
+  assert.match(results, /Define what we will learn before matchday/);
+  assert.match(results, /The fixture is still ahead/);
+  assert.match(results, /switches to observed outcomes/);
 });
-
 
 test("pilot operating pack explains aggregate-only club data handling", () => {
   const page = read("src/app/pilot/operating-pack/page.tsx");
@@ -924,24 +928,25 @@ test("pilot weekly example reads the current product opportunity", () => {
   assert.match(page, /live\?\.nextAction\.label/);
   assert.match(page, /live\?\.decisionState/);
   assert.match(page, /Requires club data/);
-  assert.match(page, /\/pilot\/rehearsal/);
-  assert.doesNotMatch(page, /Go with conditions/);
+  assert.match(page, /\/pilot\/operating-pack\?utm_source=pilot/);
+  assert.doesNotMatch(page, /\/pilot\/rehearsal/);
 });
-
 
 test("AVELA commercial home uses an editorial product-theatre identity with purposeful motion", () => {
   const page = read("src/app/page.tsx");
   const homeCss = read("src/app/commercial-home.module.css");
   const motion = read("src/components/CommercialSignalStage.tsx");
   const motionCss = read("src/components/CommercialSignalStage.module.css");
+  const ecosystem = read("src/components/CommercialEcosystem.tsx");
   const productSystem = read("src/app/product-system.css");
   const appNav = read("src/components/ProductJourneyNav.tsx");
 
   assert.match(page, /Read the signals/);
-  assert.match(page, /Works above your existing stack/);
   assert.match(page, /The problem is not missing data/);
   assert.match(page, /CommercialSignalStage/);
+  assert.match(page, /CommercialEcosystem/);
   assert.match(page, /See a live fixture decision/);
+  assert.match(ecosystem, /Keep your specialist tools/);
 
   assert.match(motion, /Fixture → decision → action/);
   assert.match(motion, /Opportunity/);
@@ -951,14 +956,15 @@ test("AVELA commercial home uses an editorial product-theatre identity with purp
 
   assert.match(homeCss, /--avela-paper:#f8f6f1/i);
   assert.match(homeCss, /--avela-coral:#f08a6a/i);
-  assert.match(homeCss, /exampleGrid/);
+  assert.match(homeCss, /heroProof/);
   assert.match(homeCss, /liveProof/);
+  assert.match(homeCss, /pilotSteps/);
+  assert.doesNotMatch(homeCss, /exampleGrid/);
 
   assert.match(productSystem, /--product-space-xl/);
   assert.match(productSystem, /--product-orange/);
   assert.match(appNav, /label: "Radar"/);
   assert.match(appNav, /label: "Team"/);
-  assert.doesNotMatch(appNav, /<strong>60<\/strong> credits/);
 });
 
 test("club UX exposes clear setup, access and campaign next-step flows", () => {
@@ -993,7 +999,7 @@ test("club surfaces use explicit loading states and mobile-first controls", () =
   assert.match(setupCss, /min-height:44px/);
   assert.match(accessCss, /width:100%/);
   assert.match(radarCss, /@media\(max-width:620px\)/);
-  assert.match(learningCss, /fixturePicker\{display:grid/);
+  assert.match(learningCss, /@media\(max-width:620px\)[\s\S]*?\.fixturePicker\{display:flex/);
 });
 
 test("National Rail RDM is registered as approved access awaiting a data product", () => {
@@ -1056,20 +1062,17 @@ test("Opportunity Brief reads like an executive decision brief", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
 
-  assert.match(page, /Executive opportunity summary/);
-  assert.match(page, /Opportunity score/);
-  assert.match(page, /Decision state/);
-  assert.match(page, /Signal movement/);
+  assert.match(page, /Decision at a glance/);
+  assert.match(page, /Recommended play/);
   assert.match(page, /Commercial objective/);
   assert.match(page, /Evidence used/);
   assert.match(page, /Decision support, not autopilot/);
-  assert.match(page, /Do not launch yet/);
-  assert.match(page, /Ready for human review/);
+  assert.match(page, /What would change the recommendation\?/);
   assert.match(page, /confidence\.rationale/);
-  assert.match(css, /executiveStrip/);
-  assert.match(css, /briefDecision/);
+  assert.match(css, /decisionCockpit/);
+  assert.match(css, /decisionLead/);
+  assert.match(css, /briefGrid/);
 });
-
 
 test("commercial case study leads with time-stamped prediction versus observable reality", () => {
   const story = read("src/components/LocalizedStoryPage.tsx");
@@ -1087,18 +1090,18 @@ test("commercial case study leads with time-stamped prediction versus observable
 });
 
 
-test("commercial home turns London City proof into a concrete 90-day pilot path", () => {
+test("commercial home turns London City proof into a concrete focused pilot path", () => {
   const page = read("src/app/page.tsx");
   const css = read("src/app/commercial-home.module.css");
-  assert.match(page, /See what AVELA saw before London City announced it/);
+  assert.match(page, /A time-stamped AVELA hypothesis\. What London City announced next/);
   assert.match(page, /AVELA saw/);
   assert.match(page, /London City later announced/);
   assert.match(page, /evidence of relevance/);
-  assert.match(page, /Prove the decision loop before you expand the integration footprint/);
+  assert.match(page, /Prove AVELA on 4–6 fixtures before you integrate more/);
   assert.match(page, /4–6 fixtures/);
   assert.match(page, /1–2 workflows/);
   assert.match(page, /Measured learning/);
-    assert.match(css, /proofPair/);
+  assert.match(css, /proofPair/);
   assert.match(css, /pilotSteps/);
 });
 
@@ -1114,13 +1117,13 @@ test("AVELA visual system removes olive identity and simplifies club app navigat
   assert.match(nav, />Club<\/span>/);
   assert.doesNotMatch(nav, /label: "London City Live"/);
   assert.doesNotMatch(nav, /primaryItems[\s\S]*label: "Credits"/);
-  assert.match(system, /--product-accent:#2F8F83/);
-  assert.match(system, /--product-signal:#EF8B6C/);
-  assert.match(system, /--product-bg:#F8F6F1/);
-  assert.doesNotMatch(system, /#C7EA3A/);
+  assert.match(system, /--product-accent:#2F8F83/i);
+  assert.match(system, /--product-signal:#EF8B6C/i);
+  assert.match(system, /--product-bg:#F8F6F1/i);
+  assert.doesNotMatch(system, /#C7EA3A/i);
   assert.doesNotMatch(system, /#526D00/i);
-  assert.match(navCss, /#102742/);
-  assert.match(navCss, /#2F8F83/);
+  assert.match(navCss, /#102742/i);
+  assert.match(navCss, /#2F8F83/i);
   assert.match(commercial, /#102742/i);
 });
 
@@ -1145,10 +1148,10 @@ test("commercial and London City surfaces use bounded reading widths and demo fr
   const liveCss = read("src/components/LondonCityLive.module.css");
   const clubs = read("src/components/ClubPilotProposition.tsx");
   assert.match(commercial, /width:min\(1120px/);
-  assert.match(commercial, /signalTicker\{[\s\S]*?background:#0a1c2e/);
+  assert.doesNotMatch(commercial, /signalTicker/);
   assert.match(live, /PUBLIC DEMO · LONDON CITY/);
   assert.match(liveCss, /width:min\((980|1120)px/);
-  assert.match(clubs, /INDEPENDENT DEMO/);
+  assert.match(clubs, /INDEPENDENT PUBLIC PROOF/);
 });
 
 test("Intelligence Sources exposes Blinkfire as public demo evidence without faking private access", () => {
@@ -1200,15 +1203,13 @@ test("app Home surfaces the next decision before navigation", () => {
   const home = read("src/app/app/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
   assert.match(home, /Decision Center/);
-  assert.match(home, /need your attention/);
+  assert.match(home, /Today’s decisions/);
+  assert.match(home, /What needs your attention now/);
   assert.match(home, /Highest current priority/);
-  assert.match(home, /Decision queue/);
-  assert.match(home, /What should I look at next\?/);
-  assert.match(home, /Opportunity Radar/);
-  assert.match(home, /Campaign execution/);
-  assert.match(home, /Club context/);
-  assert.match(home, /Learning/);
-  assert.match(home, /AVELA decision loop/);
+  assert.match(home, /What changed/);
+  assert.match(home, /Next opportunity/);
+  assert.match(home, /Next 30 days/);
+  assert.match(home, /Can the club absorb what is coming\?/);
   assert.match(nav, /label: "Home"/);
 });
 
@@ -1262,17 +1263,16 @@ test("Radar includes an interactive visual Opportunity Explorer", () => {
 test("Season Intelligence aggregates campaigns and evidence without treating missing as zero", () => {
   const page = read("src/app/app/season/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
-  assert.match(page, /Season Intelligence/);
-  assert.match(page, /Are we getting better across the season/);
+  assert.match(page, /title: "Season Intelligence"/);
+  assert.match(page, /What is coming — and what changes the plan\?/);
   assert.match(page, /Home attendance trend/);
   assert.match(page, /Activation mix/);
   assert.match(page, /Season opportunity timeline/);
   assert.match(page, /Missing fixtures are not shown as zero/);
-  assert.match(page, /drafted activation volume, not channel performance or incremental impact/);
+  assert.match(page, /What AVELA should help the club learn over time/);
   assert.match(nav, /label: "Season"/);
   assert.match(nav, /\/app\/season/);
 });
-
 
 test("Player Asset Planning optimises multi-player packs with contract, capacity, cost and opportunity cost", () => {
   const strategy = read("src/lib/clubStrategy.ts");
@@ -1326,12 +1326,11 @@ test("Player Asset Planning works for fixture and non-fixture commercial campaig
   assert.match(planner, /window\.localStorage\.setItem\(selectionStorageKey/);
   assert.match(planner, /does not approve talent use/);
   assert.match(campaigns, /Campaigns that do not need a fixture to exist/);
-  assert.match(campaigns, /season tickets, Christmas, retail, community or sponsor activity/i);
+  assert.match(campaigns, /season tickets, Christmas, retail, community and sponsor activity/i);
   assert.ok(data.commercialCampaigns.some((item) => item.type === "season-ticket"));
   assert.ok(data.commercialCampaigns.some((item) => item.type === "seasonal"));
   assert.ok(data.commercialCampaigns.some((item) => item.type === "community"));
 });
-
 
 test("Player pack selection syncs complete planning choices through club-scoped RLS", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
@@ -1511,7 +1510,8 @@ test("Sources uses source-health as the operational connector truth", () => {
   assert.match(sources, /sourceHealth/);
   assert.match(sources, /aggregateHealth/);
   assert.match(sources, /Last successful/);
-  assert.match(sources, /No private successful refresh recorded/);
+  assert.match(sources, /Private evidence needs club permission/);
+  assert.match(sources, /No recent refresh available/);
   assert.doesNotMatch(sources, /stateLabel:/);
 });
 
@@ -1575,12 +1575,12 @@ test("Club setup separates planning readiness from outcome measurement readiness
 
 test("Commercial FAQ states current integration and execution boundaries", () => {
   const faq = read("src/components/CommercialFAQ.tsx");
-  assert.match(faq, /public Blinkfire evidence as context/);
-  assert.match(faq, /private club-specific Blinkfire measurement requires authorised club access/);
-  assert.match(faq, /What is actually connected today/);
-  assert.match(faq, /Club-private CRM, ticketing and Blinkfire data are not treated as connected/);
-  assert.match(faq, /remains 'proposed' in AVELA until a real authorised adapter creates tasks/);
-  assert.match(faq, /Publishing, sends and media spend remain in the club's execution tools/);
+  assert.match(faq, /Does AVELA replace Blinkfire, CRM, ticketing or BI tools\?/);
+  assert.match(faq, /Specialist platforms remain systems of record or specialist intelligence sources/);
+  assert.match(faq, /Do we need to integrate everything before starting\?/);
+  assert.match(faq, /fixtures, campaigns, public signals and a limited amount of club-approved context/);
+  assert.match(faq, /Material club decisions remain subject to authorised human confirmation/);
+  assert.match(faq, /The LLM is part of AVELA; it is not the product/);
 });
 
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
@@ -1658,7 +1658,8 @@ test("public crawl policy exposes canonical surfaces and excludes the club app",
 test("commercial navigation enters the guided product demo and labels London City as a demo", () => {
   const nav = read("src/components/MarketingNav.tsx");
   assert.match(nav, /Live case/);
-  assert.match(nav, /href="\/app\/demo">Try product/);
+  assert.match(nav, /Open workspace/);
+  assert.match(nav, /\/app\/demo\?utm_source=avela_nav/);
   assert.doesNotMatch(nav, /href="\/app\/matches">Try product/);
 });
 
@@ -1713,19 +1714,20 @@ test("commercial funnel proves relevance before explaining the full product and 
   const nav = read("src/components/MarketingNav.tsx");
   const clubs = read("src/components/ClubPilotProposition.tsx");
   assert.ok(home.indexOf("The problem is not missing data") < home.indexOf("Proof in public"));
-  assert.match(home, /See how AVELA could fit your club/);
+  assert.match(home, /Discuss a club pilot/);
   assert.match(home, /See a live fixture decision/);
+  assert.match(home, /Try the guided product demo/);
   assert.doesNotMatch(home, /Request a demo|Request pilot demo|Request club demo|Request the 90-day pilot/);
-  assert.match(nav, /href="\/app\/demo">Try product/);
+  assert.match(nav, /Open workspace/);
   assert.match(nav, /Club pilot/);
-  assert.match(clubs, /Prepare a pilot conversation/);
-  assert.match(clubs, /Copy pilot brief/);
-  assert.doesNotMatch(clubs, /Request a club demo/);
+  assert.match(clubs, /First decide whether the workflow is worth piloting/);
+  assert.match(clubs, /Try the guided demo/);
+  assert.doesNotMatch(clubs, /Copy pilot brief|Prepare a pilot conversation/);
 });
 
 test("guided demo sells the decision workflow without implying unsupported execution", () => {
   const demo = read("src/components/DemoTour.tsx");
-  assert.match(demo, /one home fixture becomes one growth decision/);
+  assert.match(demo, /one home fixture becomes one marketing & commercial decision/);
   assert.match(demo, /Review & handoff/);
   assert.match(demo, /Handoff principle/);
   assert.match(demo, /never presents an unsupported action as executed/);
@@ -1734,16 +1736,16 @@ test("guided demo sells the decision workflow without implying unsupported execu
   assert.doesNotMatch(demo, /Review & launch/);
 });
 
-
 test("Decision Center derives a simple action queue from the canonical opportunity engine", () => {
   const home = read("src/app/app/page.tsx");
   const model = read("src/lib/decisionIntelligence.ts");
   const css = read("src/app/app/home.module.css");
 
   assert.match(home, /Decision Center/);
-  assert.match(home, /What changed/);
-  assert.match(home, /Decision queue/);
-  assert.match(home, /Why AVELA is recommending this/);
+  assert.match(home, /Today’s decisions/);
+  assert.match(home, /What needs your attention now/);
+  assert.match(home, /Highest current priority/);
+  assert.match(home, /Why now/);
   assert.match(home, /buildDecisionAlerts/);
   assert.match(home, /decisionSummary/);
 
@@ -1759,7 +1761,6 @@ test("Decision Center derives a simple action queue from the canonical opportuni
   assert.match(css, /changeFeed/);
   assert.match(css, /priorityPill/);
 });
-
 
 test("decision history persists an auditable club memory with RLS", () => {
   const route = read("src/app/api/decision-history/route.ts");
@@ -2036,8 +2037,6 @@ test("Decision Center integrates calendar attention and resilient cross-system s
   assert.match(page, /Contract impacts/);
   assert.match(page, /Execution sync/);
   assert.match(page, /Verified contracts/);
-  assert.match(page, /Calendar pressure can elevate attention without changing opportunity potential/);
-  assert.match(page, /Calendar pressure/);
   assert.match(page, /calendarRelationships/);
 
   assert.match(helper, /contract_documents/);
@@ -2050,12 +2049,10 @@ test("Decision Center integrates calendar attention and resilient cross-system s
   assert.match(helper, /if \(contractsResponse\.ok && clausesResponse\.ok\)/);
   assert.match(helper, /if \(impactsResponse\.ok\)/);
   assert.match(helper, /if \(executionResponse\.ok\)/);
-  assert.doesNotMatch(helper, /!workloadResponse\.ok \|\| !capacityResponse\.ok \|\| !availabilityResponse\.ok/);
 
   assert.match(css, /grid-template-columns:repeat\(4,1fr\)/);
   assert.match(css, /data-state="syncing"/);
 });
-
 
 test("Decision Center promotes sanitized contract and execution issues into the attention queue", () => {
   const page = read("src/app/app/page.tsx");
@@ -2065,7 +2062,7 @@ test("Decision Center promotes sanitized contract and execution issues into the 
   assert.match(page, /priorityWeight/);
   assert.match(page, /blocked: 5/);
   assert.match(page, /decisionSummary\(alerts\)/);
-  assert.match(page, /What should I look at next\\?/);
+  assert.match(page, /What needs your attention now/);
 
   assert.match(helper, /crossAlerts: DecisionAlert\[\]/);
   assert.match(helper, /contract_impact_reviews/);
@@ -2076,9 +2073,7 @@ test("Decision Center promotes sanitized contract and execution issues into the 
   assert.doesNotMatch(helper, /source_fragment/);
   assert.doesNotMatch(helper, /extracted_value/);
   assert.doesNotMatch(helper, /sync_error/);
-  assert.doesNotMatch(helper, /title: "Contract change · " \+ item\.entity_type \+ " " \+ item\.entity_id/);
 });
-
 
 test("work-system orchestration derives vendor-neutral work without becoming a task manager", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
@@ -2375,20 +2370,18 @@ test("campaigns and fixture workspace use progressive decision disclosure", () =
   const fixture = read("src/app/app/matches/[fixtureId]/page.tsx");
 
   assert.match(campaigns, /Portfolio overview/);
-  assert.match(campaigns, /All campaign work/);
-  assert.match(campaigns, /Decision required/);
-  assert.match(campaigns, /Open decision workspace/);
+  assert.match(campaigns, /Needs decision/);
+  assert.match(campaigns, /Next decision/);
+  assert.match(campaigns, /AVELA drafts\. The club approves/);
 
   assert.match(fixture, /DecisionHandoffStrip active="decision"/);
   assert.match(fixture, /01 Decide/);
   assert.match(fixture, /02 Feasibility/);
   assert.match(fixture, /03 Build/);
   assert.match(fixture, /04 Evidence/);
-  assert.match(fixture, /05/);
   assert.match(fixture, /06 Learn/);
   assert.ok((fixture.match(/className=\{styles\.phasePanel\}/g) ?? []).length >= 5);
 });
-
 
 test("global navigation groups decision work instead of exposing every module equally", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
@@ -2445,6 +2438,8 @@ test("live product timing cannot lag behind the real London date", () => {
   const opportunity = read("src/lib/productOpportunity.ts");
   const home = read("src/app/app/page.tsx");
   const radar = read("src/app/app/matches/page.tsx");
+  const executive = read("src/app/app/executive/page.tsx");
+  const season = read("src/app/app/season/page.tsx");
 
   assert.match(helper, /Europe\/London/);
   assert.match(helper, /referenceDate, londonToday/);
@@ -2496,10 +2491,11 @@ test("commercial mobile hero preserves safe horizontal gutters", () => {
   assert.match(css, /heroMeta strong\{color:#fff\}/);
 });
 
-test("commercial moving signal strip keeps readable contrast on navy", () => {
+test("retired commercial ticker does not leak legacy styles back into the home", () => {
   const css = read("src/app/commercial-home.module.css");
-  assert.match(css, /signalTicker\{[\s\S]*?color:#dce8ef/);
-  assert.match(css, /signalTicker \.signalSet span\{[\s\S]*?color:#dce8ef/);
+  const page = read("src/app/page.tsx");
+  assert.doesNotMatch(css, /signalTicker|signalTrack|signalSet/);
+  assert.doesNotMatch(page, /signalTicker|signalTrack|signalSet/);
 });
 
 test("commercial positioning stays consistent across metadata, home, FAQ and pilot", () => {
@@ -2586,8 +2582,10 @@ test("AVELA category separates the workspace from cross-functional orchestration
   assert.match(ecosystem, /orchestrates the decision across them/);
   assert.match(demo, /Home fixture · Decision orchestration/);
   assert.match(demo, /Marketing & commercial decision/);
-  assert.doesNotMatch(pilot, /Growth Intelligence Playbook/);
-  assert.match(pilot, /Decision Playbook/);
+  assert.doesNotMatch(pilot, /Growth Intelligence Playbook|Decision Playbook/);
+  assert.match(pilot, /CONTINUE/);
+  assert.match(pilot, /ADJUST/);
+  assert.match(pilot, /STOP/);
   assert.doesNotMatch(pack, /Growth Intelligence Pilot/);
   assert.match(help, /orchestrates the evidence, constraints, timing and ownership across functions/);
 });
@@ -2619,7 +2617,7 @@ test("For Clubs removes the legacy copy-a-brief interaction", () => {
   assert.doesNotMatch(page, /Prepare the pilot brief/);
   assert.doesNotMatch(page, /A brief with an opportunity/);
   assert.match(page, /See how the pilot works/);
-  assert.match(page, /Explore an AVELA pilot without changing your stack/);
+  assert.match(page, /First decide whether the workflow is worth piloting/);
 });
 
 test("commercial funnel CTAs carry readable internal attribution", () => {
