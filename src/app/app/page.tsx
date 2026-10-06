@@ -269,31 +269,6 @@ export default async function ClubAppHome() {
           </div>
         </WorkspaceCard>
 
-        <WorkspaceCard className={styles.queueCard}>
-          <WorkspaceSectionHeader
-            eyebrow="Decision queue"
-            title="What should I look at next?"
-            action={<Link href="/app/matches">Open full Radar →</Link>}
-          />
-          <div className={styles.queueList}>
-            {alerts.slice(0, 4).map((item) => (
-              <Link href={item.href} key={item.id} className={styles.queueRow}>
-                <div className={styles.queuePriority}>
-                  <span data-state={item.priority}>{prioritySymbol[item.priority]}</span>
-                </div>
-                <div className={styles.queueMain}>
-                  <div><strong>{item.title}</strong><DecisionStateBadge state={stateForPriority(item.priority)} label={priorityLabel[item.priority]} /></div>
-                  <p>{item.recommendation}</p>
-                </div>
-                <div className={styles.queueMeta}>
-                  <span>{item.category}</span>
-                  <b>{item.deadline}</b>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </WorkspaceCard>
-
         <WorkspaceCard className={styles.signalCard}>
           <WorkspaceSectionHeader eyebrow="Signals" title="What changed" action={<Link href="/app/matches">View all →</Link>} />
           <div className={`${styles.signalList} ${styles.changeFeed}`}>
