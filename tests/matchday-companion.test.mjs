@@ -22,7 +22,7 @@ test("Matchday Companion measurement stays privacy safe", () => {
   }
 
   const events = new Map(measurement.events.map((event) => [event.name, event]));
-  for (const name of ["matchday_utility_opened", "matchday_official_directions_opened"]) {
+  for (const name of ["matchday_utility_opened", "matchday_official_directions_opened", "matchday_official_ticketing_opened"]) {
     const event = events.get(name);
     assert.ok(event, "missing " + name);
     assert.deepEqual(event.allowedProperties, ["surface"]);
@@ -40,4 +40,19 @@ test("TfL road adapter fails closed when credentials are absent", () => {
   assert.match(road, /if \(!appId \|\| !appKey\)/);
   assert.match(road, /state: "not-configured"/);
   assert.match(road, /MATERIAL_RADIUS_KM/);
+});
+
+
+test("Matchday Companion does not infer checkout or ticket inventory from a commercial landing", () => {
+  const resolver = read("src/lib/verifiedFixtureTicketing.ts");
+  const landing = read("src/app/matchday/[fixtureId]/page.tsx");
+  assert.match(resolver, /looksLikeOfficialTicketRoute/);
+  assert.match(resolver, /buytickets|seatselection|checkout|purchase/);
+  assert.doesNotMatch(landing, /InStock/);
+});
+
+test("Executive escalation ignores informational matchday context", () => {
+  const alertLogic = read("src/lib/matchdayDecisionAlert.ts");
+  assert.match(alertLogic, /MatchdayAttentionLevel = "inform" \| "review" \| "act"/);
+  assert.match(alertLogic, /attention\.level === "inform"/);
 });
