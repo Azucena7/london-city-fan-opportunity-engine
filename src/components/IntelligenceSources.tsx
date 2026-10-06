@@ -134,7 +134,7 @@ export function IntelligenceSources() {
       <header className={styles.head}>
         <div>
           <span>Intelligence connectors</span>
-          <h1>Make the club stack think together.</h1>
+          <h2>Make the club stack think together.</h2>
           <p>AVELA should not recreate specialist systems. It should turn their evidence into a fixture-level decision, then send measured outcomes back into the learning loop.</p>
         </div>
         <div className={styles.legend}>
