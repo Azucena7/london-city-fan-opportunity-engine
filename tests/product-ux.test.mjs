@@ -2590,6 +2590,19 @@ test("AVELA category separates the workspace from cross-functional orchestration
   assert.match(help, /orchestrates the evidence, constraints, timing and ownership across functions/);
 });
 
+test("core workspace pages keep operational microcopy readable", () => {
+  const files = [
+    "src/app/app/home.module.css",
+    "src/app/app/matches/matches.module.css",
+    "src/app/app/campaigns/campaigns.module.css",
+    "src/app/app/season/season.module.css"
+  ];
+  for (const file of files) {
+    const css = read(file);
+    assert.doesNotMatch(css, /font-size:(?:8|9|10)px/);
+  }
+});
+
 test("commercial product storytelling keeps microcopy at 10px or above", () => {
   const files = [
     "src/app/commercial-home.module.css",
