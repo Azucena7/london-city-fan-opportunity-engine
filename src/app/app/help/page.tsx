@@ -5,7 +5,7 @@ import { DecisionStateBadge, EvidenceStateBadge, WorkspaceCard, WorkspaceSection
 import styles from "./help.module.css";
 
 export const metadata: Metadata = {
-  title: "Help · AVELA",
+  title: "Help",
   description: "Understand AVELA workflows, decision states, evidence states and methodology."
 };
 
