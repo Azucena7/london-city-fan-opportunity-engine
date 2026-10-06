@@ -2613,3 +2613,14 @@ test("commercial home stylesheet contains only current home surfaces", () => {
     assert.doesNotMatch(css, new RegExp("\\." + legacy + "(?:[^A-Za-z0-9_-]|$)"));
   }
 });
+
+test("For Clubs removes the legacy copy-a-brief interaction", () => {
+  const page = read("src/components/ClubPilotProposition.tsx");
+  assert.doesNotMatch(page, /useState/);
+  assert.doesNotMatch(page, /pilot-brief/);
+  assert.doesNotMatch(page, /copyBrief/);
+  assert.doesNotMatch(page, /Prepare the pilot brief/);
+  assert.doesNotMatch(page, /A brief with an opportunity/);
+  assert.match(page, /See how the pilot works/);
+  assert.match(page, /Explore an AVELA pilot without changing your stack/);
+});
