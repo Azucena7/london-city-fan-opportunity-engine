@@ -46,21 +46,13 @@ function isMaterial(item: TflDisruption) {
 
 export async function GET() {
   const appId = process.env.TFL_APP_ID;
-  const appKey = process.env.TFL_APP_KEY;
-  if (!appId || !appKey) {
-    return NextResponse.json({
-      state: "not-configured",
-      provider: "Transport for London Unified API",
-      checkedAt: new Date().toISOString(),
-      incidents: []
-    }, { headers: { "cache-control": "no-store" } });
-  }
+  const appKey = process.env.TFL_APP_KEY ?? process.env.TFL_API_KEY;
 
   try {
     const url = new URL("https://api.tfl.gov.uk/Road/all/Disruption");
     url.searchParams.set("stripContent", "true");
-    url.searchParams.set("app_id", appId);
-    url.searchParams.set("app_key", appKey);
+    if (appId) url.searchParams.set("app_id", appId);
+    if (appKey) url.searchParams.set("app_key", appKey);
 
     const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(5000) });
     if (!response.ok) {
