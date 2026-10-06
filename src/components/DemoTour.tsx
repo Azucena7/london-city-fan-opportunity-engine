@@ -34,7 +34,7 @@ export function DemoTour(props: Props) {
       <header className={styles.hero}>
         <div>
           <span>3-minute guided demo</span>
-          <h1>See how one home fixture becomes one growth decision.</h1>
+          <h1>See how one home fixture becomes one marketing & commercial decision.</h1>
           <p>This walkthrough uses the same product logic and current public evidence as the club workspace. Nothing here is a separate mock dashboard.</p>
         </div>
         <Link href={props.fixtureId ? `/app/matches/${props.fixtureId}` : "/app/matches"}>Skip to full workspace →</Link>
@@ -125,7 +125,7 @@ export function DemoTour(props: Props) {
           ) : (
             <>
               <Link className={styles.primary} href={props.fixtureId ? `/app/matches/${props.fixtureId}` : "/app/matches"}>Explore the full workspace →</Link>
-              <Link href="/for-clubs#demo">Use this workflow on your next six home fixtures →</Link>
+              <Link href="/for-clubs?utm_source=guided_demo&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=completion#demo">Use this workflow on a focused club pilot →</Link>
             </>
           )}
         </div>
