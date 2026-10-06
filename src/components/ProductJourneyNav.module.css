@@ -7,8 +7,8 @@
 }
 .top{padding:0 8px 14px;border-bottom:1px solid rgba(255,255,255,.10)}
 .brand{display:flex;align-items:center;gap:11px;color:#F8F6F1;text-decoration:none}
-.brandMark{position:relative;width:27px;height:31px;flex:0 0 auto;background:linear-gradient(145deg,#F8F6F1 0 46%,#2F8F83 47% 68%,#EF8B6C 69% 79%,transparent 80%);clip-path:polygon(50% 0,100% 100%,60% 78%,48% 52%,34% 78%,0 100%)}
-.brandMark::after{content:"";position:absolute;left:9px;top:10px;width:10px;height:16px;background:#102742;clip-path:polygon(50% 0,100% 100%,57% 72%,48% 50%,35% 74%,0 100%)}
+.brandMark{position:relative;width:24px;height:24px;flex:0 0 auto;clip-path:polygon(0 0,100% 50%,0 100%);background:linear-gradient(135deg,#329c91 0 48%,#f08a6a 48% 72%,#e7d9c6 72%)}
+.brandMark::after{content:"";position:absolute;left:5px;top:7px;width:9px;height:10px;background:#102742;clip-path:polygon(0 0,100% 50%,0 100%)}
 .brandCopy{display:grid;gap:2px}.brandCopy strong{font-size:15px;letter-spacing:.12em}.brandCopy small{color:#A9B8C5;font-size:10px;font-weight:750;letter-spacing:.055em;text-transform:uppercase}
 .workspace{display:block;margin-top:12px;color:#8095A8;font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
 .primary,.secondary{display:grid;gap:2px;padding-top:14px}.sectionLabel{padding:0 9px 7px;color:#6F879A;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
