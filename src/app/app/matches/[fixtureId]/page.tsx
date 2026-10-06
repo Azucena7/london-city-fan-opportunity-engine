@@ -17,6 +17,7 @@ import { OperationalHandoffs } from "@/components/OperationalHandoffs";
 import { AvailabilityPlanner } from "@/components/AvailabilityPlanner";
 import { CalendarSlotFinder } from "@/components/CalendarSlotFinder";
 import { OperationalCapacityPanel } from "@/components/OperationalCapacityPanel";
+import { MatchdayCompanionWidget } from "@/components/MatchdayCompanionWidget";
 import { ExternalWorkPackagePreview } from "@/components/ExternalWorkPackagePreview";
 import { ExternalExecutionSync } from "@/components/ExternalExecutionSync";
 import { WorkRoutingPlan } from "@/components/WorkRoutingPlan";
@@ -244,6 +245,12 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           externalParties: handoffActivations.length,
           unknownInputs: Math.min(5, live.missing.length)
         }}
+      />
+
+      <MatchdayCompanionWidget
+        fixtureId={fixture.id}
+        fixtureLabel={`London City v ${fixture.opponent}`}
+        venue={fixture.venue}
       />
 
       {clubContext ? (
