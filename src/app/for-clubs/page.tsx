@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { ClubPilotProposition } from "@/components/ClubPilotProposition";
 
 export const metadata: Metadata = {
-  title: "For clubs · AVELA Decision Intelligence Pilot",
-  description: "Start with 4–6 fixtures and one or two decision workflows. Keep your existing stack and prove whether AVELA improves decision speed, coordination and learning."
+  title: "For Clubs · Marketing & Commercial Pilot",
+  description: "Run a focused AVELA pilot with a football club marketing or commercial team: 4–6 fixtures or a bounded campaign window, one or two workflows and measurable decision outcomes."
 };
 
 export default function ForClubsPage() {
