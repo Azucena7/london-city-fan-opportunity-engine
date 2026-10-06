@@ -25,3 +25,7 @@
 .weatherBand[data-level="high"]{background:linear-gradient(90deg,rgba(255,245,241,.9),rgba(255,245,241,0))}
 .weatherBand[data-level="medium"]{background:linear-gradient(90deg,rgba(255,251,243,.9),rgba(255,251,243,0))}
 @media(max-width:680px){.weatherBand{grid-template-columns:1fr;gap:8px}}
+
+.ticketing{display:flex;justify-content:space-between;gap:30px;align-items:center;margin-top:18px;padding:24px 28px;border:1px solid rgba(16,39,66,.13);border-radius:18px;background:#EEF7F4}
+.ticketing>div{max-width:720px}.ticketing span{display:block;color:#2F8F83;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.ticketing h2{margin:6px 0 0;font-size:24px;letter-spacing:-.035em}.ticketing p{margin:7px 0 0;color:#65757F;font-size:11px;line-height:1.5}.ticketing a{flex:0 0 auto;padding:11px 14px;border-radius:9px;background:#102742;color:#fff;text-decoration:none;font-size:11px;font-weight:900}
+@media(max-width:680px){.ticketing{align-items:flex-start;flex-direction:column;padding:22px}.ticketing a{width:100%;text-align:center}}
