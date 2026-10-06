@@ -56,12 +56,11 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   return (
     <AppWorkspaceShell
       active="executive"
-      eyebrow={"Executive · " + fixture.opponent}
-      title="Executive"
-      subtitle="Presentation-ready decision brief · current opportunity, campaign, evidence and learning state."
+      eyebrow={"Executive decision · " + fixture.opponent}
+      title="What does leadership need to decide?"
+      subtitle="One decision brief: opportunity, evidence, blockers, activation and measurement."
       actions={<ExecutiveShareActions />}
     >
-      <p className={styles.contractCopy}>productAppShell · Executive decision brief · Board takeaway.</p>
 
       <div className={styles.contextBar}>
         <Link href={"/app/matches/" + selectedId}>← Back to workspace</Link>
