@@ -2,9 +2,9 @@
 .card.accent{border-color:#CDE4DF;background:#FBFEFD}
 .card.action{border-color:#F2D7CD;background:#FFFCFA}
 .sectionHeader{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:34px}
-.sectionHeader span{display:block;color:#8A97A2;font-size:10px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.sectionHeader span{display:block;color:#8A97A2;font-size:12px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
 .sectionHeader h2{margin:2px 0 0!important;font-size:16px!important;line-height:1.22!important;letter-spacing:-.02em!important}
-.badge{display:inline-flex;align-items:center;min-height:24px;padding:4px 8px;border-radius:999px;background:#F1F4F6;color:#657582;font-size:10px;font-weight:850;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;min-height:24px;padding:4px 8px;border-radius:999px;background:#F1F4F6;color:#657582;font-size:12px;font-weight:850;white-space:nowrap}
 .badge[data-tone="teal"]{background:#E7F4F1;color:#26776F}
 .badge[data-tone="coral"]{background:#FCEDE8;color:#B95F43}
 .badge[data-tone="warning"]{background:#FFF3DC;color:#9A6A12}
@@ -13,9 +13,9 @@
 .drawer{border:1px solid #E0E5E8;border-radius:12px;background:#fff;overflow:hidden;box-shadow:0 1px 2px rgba(16,39,66,.018)}
 .drawer>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:13px 15px}
 .drawer>summary::-webkit-details-marker{display:none}
-.drawer>summary span{display:block;color:#8A97A2;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.06em}
+.drawer>summary span{display:block;color:#8A97A2;font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.06em}
 .drawer>summary strong{display:block;margin-top:3px;font-size:13px}
-.drawer>summary b{color:var(--product-teal);font-size:11px}
+.drawer>summary b{color:var(--product-teal);font-size:12px}
 .drawer[open]>summary{border-bottom:1px solid #E0E5E8;background:#FAFCFC}
 .drawerBody{padding:15px}
 .drawer>summary{min-height:44px}
