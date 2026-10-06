@@ -6,7 +6,7 @@ import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import styles from "./demo.module.css";
 
 export const metadata: Metadata = {
-  title: "Guided demo · AVELA",
+  title: "Guided demo",
   description: "A three-minute guided walkthrough of the club workflow from fixture signal to campaign and launch readiness."
 };
 
