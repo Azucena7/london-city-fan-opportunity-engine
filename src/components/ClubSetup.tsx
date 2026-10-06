@@ -123,11 +123,11 @@ export function ClubSetup() {
   }
 
   if (configured === false) {
-    return <section className={styles.empty}><span>Club setup</span><h1>Club onboarding is ready for Supabase configuration.</h1></section>;
+    return <section className={styles.empty}><span>Club setup</span><h2>Club onboarding is ready for Supabase configuration.</h2></section>;
   }
 
   if (!clubs.length) {
-    return <section className={styles.empty}><span>Club setup</span><h1>Sign in to configure the club once.</h1><p>Fixtures, channels, objectives and approval rules are shared club context.</p></section>;
+    return <section className={styles.empty}><span>Club setup</span><h2>Sign in to configure the club once.</h2><p>Fixtures, channels, objectives and approval rules are shared club context.</p></section>;
   }
 
   return (
@@ -135,7 +135,7 @@ export function ClubSetup() {
       <header className={styles.head}>
         <div>
           <span>Club setup</span>
-          <h1>Configure once. Let every fixture start with context.</h1>
+          <h2>Configure once. Let every fixture start with context.</h2>
           <p>This is operating context for the engine, not a campaign brief. It should reduce repeated setup work across the season.</p>
         </div>
         <div className={styles.score}><span>Setup completeness</span><strong>{completeness}%</strong><small role="status" aria-live="polite">{status}</small></div>
