@@ -262,7 +262,7 @@ export function AccessCenter() {
             <h2>Create account</h2>
             <label>Work email<input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
             <label>Password<input type="password" autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
-            <button type="button" disabled={busy} onClick={() => void signUp()}>Create account</button>
+            <button type="button" disabled={busy} aria-busy={busy} onClick={() => void signUp()}>Create account</button>
             <p>Email confirmation is required before the account can sign in. If the confirmation link opens a fallback page, return here afterwards and try Sign in — confirmation may already have completed.</p>
           </article>
           <article>
@@ -270,7 +270,7 @@ export function AccessCenter() {
             <h2>Sign in</h2>
             <label>Work email<input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
             <label>Password<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
-            <button type="button" disabled={busy} onClick={() => void signIn()}>Sign in</button>
+            <button type="button" disabled={busy} aria-busy={busy} onClick={() => void signIn()}>Sign in</button>
             <p>Signing in does not grant club access by itself.</p>
           </article>
         </div>
@@ -286,7 +286,7 @@ export function AccessCenter() {
 
           <div className={styles.accountBar}>
             <div><span>Signed in as</span><strong>{email}</strong></div>
-            <button type="button" onClick={() => void signOut()}>Sign out</button>
+            <button type="button" aria-busy={busy} disabled={busy} onClick={() => void signOut()}>{busy ? "Working…" : "Sign out"}</button>
           </div>
 
           <div className={styles.grid}>
@@ -313,7 +313,7 @@ export function AccessCenter() {
                   <label>Club<select value={clubId} onChange={(event) => setClubId(event.target.value)}>{availableClubs.map((club) => <option key={club.id} value={club.id}>{club.name}</option>)}</select></label>
                   <label>Requested role<select value={requestedRole} onChange={(event) => setRequestedRole(event.target.value)}>{requestableRoles.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
                   <label>Context<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="Role, team and why access is needed." /></label>
-                  <button type="button" disabled={busy} onClick={() => void requestAccess()}>Request access</button>
+                  <button type="button" disabled={busy} aria-busy={busy} onClick={() => void requestAccess()}>Request access</button>
                 </>
               ) : <p>No additional club workspace is available to request from this account.</p>}
             </article>
@@ -349,7 +349,7 @@ export function AccessCenter() {
                       }}>
                         {approvalRoles.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                       </select>
-                      <button type="button" disabled={busy} onClick={() => void approveRequest(request.id, request.requested_role)}>Approve</button>
+                      <button type="button" disabled={busy} aria-busy={busy} onClick={() => void approveRequest(request.id, request.requested_role)}>Approve</button>
                     </div>
                   ))}
                 </div>
