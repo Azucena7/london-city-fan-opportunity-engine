@@ -9,6 +9,7 @@ import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
 import { getMaterialMatchdayAlert } from "@/lib/matchdayDecisionAlert";
+import { currentProductDate } from "@/lib/currentProductDate";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./matches.module.css";
@@ -35,7 +36,7 @@ function stateForAttention(value: string | null | undefined) {
 }
 
 export default async function MatchesPage() {
-  const today = currentState.updated_at.slice(0, 10);
+  const today = currentProductDate(currentState.updated_at);
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a, b) => a.date.localeCompare(b.date))
