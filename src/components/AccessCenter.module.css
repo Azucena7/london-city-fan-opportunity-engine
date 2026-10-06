@@ -54,3 +54,8 @@
   .accessFlow{grid-template-columns:1fr}.accessFlow>div+div{border-left:0;border-top:1px solid var(--product-line)}
   .authGrid input,.grid select,.grid textarea{width:100%}.authGrid button,.grid button,.accountBar button{width:100%}
 }
+
+@media(max-width:800px){
+  .authGrid button,.grid button,.accountBar button{min-height:44px}
+  .authGrid input,.grid select,.grid textarea{min-height:44px}
+}
