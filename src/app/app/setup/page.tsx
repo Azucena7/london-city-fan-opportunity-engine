@@ -6,7 +6,7 @@ import { WorkspaceCard, WorkspaceSectionHeader } from "@/components/WorkspaceUI"
 import styles from "./setup.module.css";
 
 export const metadata: Metadata = {
-  title: "Club setup · AVELA",
+  title: "Club setup",
   description: "Configure fixtures, channels, objectives, brand rules and approvals once for the club."
 };
 
