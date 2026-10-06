@@ -10,7 +10,7 @@ import { decisionValidation } from "@/lib/data";
 import styles from "./commercial-home.module.css";
 
 export const metadata: Metadata = {
-  title: "AVELA · The Decision Workspace for Football Club Marketing & Commercial Teams",
+  title: "The Decision Workspace for Football Club Marketing & Commercial Teams",
   description:
     "AVELA is the decision workspace for football club marketing and commercial teams, connecting fan, campaign, fixture, player, sponsor and operational context to the next best action."
 };
