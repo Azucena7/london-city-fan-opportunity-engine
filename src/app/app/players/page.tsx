@@ -10,7 +10,7 @@ import { campaignPlans } from "@/lib/data";
 import styles from "./players.module.css";
 
 export const metadata: Metadata = {
-  title: "Player Assets · AVELA",
+  title: "Player Assets",
   description: "Plan commercial player usage across contracts, availability, international duty, cost and season opportunity cost."
 };
 
