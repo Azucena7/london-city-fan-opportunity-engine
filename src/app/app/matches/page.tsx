@@ -236,7 +236,7 @@ export default async function MatchesPage() {
             ) : (
               <>
                 <p>Opportunity Radar is running without saved club context.</p>
-                <Link href="/app/setup">Open Setup →</Link>
+                <Link href="/app/setup">Add club context →</Link>
               </>
             )}
           </WorkspaceCard>
