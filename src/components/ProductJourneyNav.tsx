@@ -62,10 +62,10 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
           <span className={styles.brandMark} aria-hidden="true" />
           <span className={styles.brandCopy}>
             <strong>AVELA</strong>
-            <small>Decision intelligence</small>
+            <small>Marketing & commercial</small>
           </span>
         </Link>
-        <span className={styles.workspace}>Club marketing workspace</span>
+        <span className={styles.workspace}>Club decision workspace</span>
       </div>
 
       <nav className={styles.primary} aria-label="Club workflow">
