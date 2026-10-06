@@ -15,7 +15,7 @@ import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHea
 import styles from "./executive.module.css";
 
 export const metadata: Metadata = {
-  title: "Executive view · AVELA",
+  title: "Executive view",
   description: "A presentation-ready executive view of the current fixture opportunity, evidence, campaign and learning state."
 };
 
