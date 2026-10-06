@@ -6,6 +6,7 @@ import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
+import { getMaterialMatchdayAlert } from "@/lib/matchdayDecisionAlert";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./executive.module.css";
@@ -33,6 +34,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   const results = getCurrentProductResults(selectedId);
   const approvals = campaign?.approvals.filter((item) => item.state !== "ready") ?? [];
   const measured = results?.state === "measured";
+  const matchdayAlert = fixture ? getMaterialMatchdayAlert(selectedId, fixture.date) : null;
 
   if (!fixture || !live) return null;
 
@@ -47,6 +49,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   const attentionNow = radar.filter((item) => item.attentionState === "Act now" || item.attentionState === "Review").length;
   const topThree = radar.slice(0, 3);
   const changedSinceReview = [
+    ...(matchdayAlert ? [matchdayAlert.title] : []),
     ...signalHighlights.slice(0, 2).map((signal) => signal.title),
     approvals.length ? approvals.length + " approval gate" + (approvals.length === 1 ? "" : "s") + " still open" : "No approval gate currently blocks the selected decision",
     measured ? "Outcome evidence is now available" : "Outcome evidence is still pending"
@@ -101,6 +104,18 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
           </div>
         </div>
       </section>
+
+      {matchdayAlert ? (
+        <section className={styles.matchdayAlert} data-state={matchdayAlert.state}>
+          <div>
+            <span>{matchdayAlert.label}</span>
+            <strong>{matchdayAlert.title}</strong>
+            <small>{matchdayAlert.source}</small>
+          </div>
+          <p>{matchdayAlert.detail}</p>
+          <Link href={"/matchday/" + selectedId}>Open fan utility →</Link>
+        </section>
+      ) : null}
 
       <section className={styles.changeStrip} aria-label="What changed since the last review">
         <div>
