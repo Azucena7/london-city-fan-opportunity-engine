@@ -15,7 +15,7 @@ export function getMatchdayTerritoryContext() {
       transfers: typeof item.transfers === "number" ? item.transfers : null
     }));
 
-  const publicCommunityNodes = grassroots.map((item: any) => ({
+  const publicCommunityNodes = grassroots.map((item) => ({
     name: String(item.name ?? "Community node"),
     operator: String(item.operator ?? ""),
     postcode: String(item.postcode ?? ""),
