@@ -763,3 +763,15 @@ test("duplicate global source-health CSS stays removed", () => {
   assert.match(ux, /\.sourceHealthCenter/);
   assert.match(ux, /\.sourceHealthList/);
 });
+
+test("prediction proof is the only remaining intelligence surface stylesheet", () => {
+  const css = readFileSync("src/app/intelligence-surfaces.css", "utf8");
+  const root = readFileSync("src/app/layout.tsx", "utf8");
+  const study = readFileSync("src/app/case-study/layout.tsx", "utf8");
+
+  assert.match(css, /\.caseStudyPredictionProof/);
+  assert.match(css, /\.predictionProofFlow/);
+  assert.doesNotMatch(css, /\.audienceReach|\.crmReadiness|\.campaignPlan|\.decisionValidation|\.partnerDecisionStrip|\.sourceHealthCenter/);
+  assert.doesNotMatch(root, /intelligence-surfaces\.css/);
+  assert.match(study, /intelligence-surfaces\.css/);
+});
