@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AppWorkspaceShell, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { ClubSetup } from "@/components/ClubSetup";
 import { ClubPilotReadiness } from "@/components/ClubPilotReadiness";
 import { WorkspaceCard, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
@@ -14,10 +14,9 @@ export default function ClubSetupPage() {
   return (
     <AppWorkspaceShell
       active="setup"
-      eyebrow="Administration"
-      title="Club setup"
-      subtitle="Set the operating defaults once so every fixture, campaign and recommendation starts with the right context."
-      actions={<WorkspaceViewSwitcher value="overview" />}
+      eyebrow="Club operating context"
+      title="What must AVELA know once — so every decision starts smarter?"
+      subtitle="Set fixtures, channels, objectives, brand rules and approval ownership once, then reuse them across every decision surface."
     >
       <WorkspaceCard className={styles.readinessPath}>
         <WorkspaceSectionHeader eyebrow="Setup journey" title="Get the club ready in the order AVELA needs it" />
