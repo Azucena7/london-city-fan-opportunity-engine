@@ -1,3 +1,4 @@
+import "../case-brand.css";
 import "../case-study.css";
 import "../case-study-technical.css";
 import "../case-study-commercial.css";
