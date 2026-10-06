@@ -120,6 +120,31 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
         <p>{weather.supporterAction}</p>
       </section>
 
+      <section className={styles.networkChecks} aria-label="Live travel checks">
+        <div className={styles.sectionHead}>
+          <span>CHECK BEFORE YOU LEAVE</span>
+          <h2>Live network information, without pretending AVELA is the transport operator.</h2>
+          <p>Use official live sources for current road and rail conditions, then return here for the fixture-specific matchday context.</p>
+        </div>
+        <div className={styles.networkGrid}>
+          <a href="https://tfl.gov.uk/traffic/status" target="_blank" rel="noreferrer">
+            <span>ROAD · LIVE SOURCE</span>
+            <strong>Check TfL traffic status ↗</strong>
+            <small>Incidents, closures and exceptional delays across London.</small>
+          </a>
+          <a href="https://www.nationalrail.co.uk/" target="_blank" rel="noreferrer">
+            <span>RAIL · LIVE SOURCE</span>
+            <strong>Check National Rail ↗</strong>
+            <small>Journey planning, live departures and disruption information.</small>
+          </a>
+          <MatchdayOfficialDirectionsLink fixtureId={fixtureId} href="https://www.londoncitylionesses.com/hayes-lane-directions">
+            <span>STADIUM · CLUB SOURCE</span>
+            <strong>Open London City directions ↗</strong>
+            <small>Ground access, station, parking and walking guidance from the club.</small>
+          </MatchdayOfficialDirectionsLink>
+        </div>
+      </section>
+
       <section className={styles.plan}>
         <div className={styles.sectionHead}>
           <span>PLAN YOUR ARRIVAL</span>
