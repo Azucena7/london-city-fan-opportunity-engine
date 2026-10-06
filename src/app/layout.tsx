@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./intelligence-surfaces.css";
-import "./case-brand.css";
 import "./i18n.css";
 import "./workspace-structure.css";
 import "./product-ux.css";
