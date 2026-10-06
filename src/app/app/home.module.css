@@ -2,7 +2,6 @@
 .changeFeed{}
 .primaryDecision{}
 .signalStrip{}
-.contractCopy{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 .metricGrid{
   display:grid;
@@ -56,24 +55,6 @@
 .legend i{width:7px;height:7px;border-radius:50%;background:#D8DEE3}
 .legend i[data-tone="coral"]{background:#EF8B6C}.legend i[data-tone="warning"]{background:#D78A1E}.legend i[data-tone="teal"]{background:#2F8F83}
 .legend b{color:#20364C;font-size:12px}
-
-.queueCard{padding:16px}
-.queueCard [class*="sectionHeader"] a,.signalCard [class*="sectionHeader"] a,.nextCard [class*="sectionHeader"] a,.calendarCard [class*="sectionHeader"] a{color:#2F8F83;text-decoration:none;font-size:12px;font-weight:850}
-.queueList{margin-top:9px;border-top:1px solid #E5E9EC}
-.queueRow{display:grid;grid-template-columns:30px minmax(0,1fr) 132px;gap:12px;align-items:center;padding:12px 2px;border-bottom:1px solid #EEF1F3;color:#20364C;text-decoration:none}
-.queueRow:hover{background:#FAFCFC}
-.queuePriority{display:grid;place-items:center}
-.queuePriority>span{display:grid;place-items:center;width:24px;height:24px;border-radius:6px;background:#EFF3F5;color:#7C8791;font-size:12px}
-.queuePriority>span[data-state="act-now"]{background:#FCEDE8;color:#D76D4E}
-.queuePriority>span[data-state="review"]{background:#FFF3DC;color:#B67A16}
-.queuePriority>span[data-state="blocked"]{background:#F3F4F5;color:#697680}
-.queueMain>div{display:flex;align-items:center;gap:7px;min-width:0}
-.queueMain strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
-.queueMain p{margin:3px 0 0!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#7B8994!important;font-size:12px!important}
-.queueMeta{text-align:right}
-.queueMeta span,.queueMeta b{display:block}
-.queueMeta span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#8A97A2;font-size:12px}
-.queueMeta b{margin-top:3px;font-size:12px}
 
 .signalCard{padding:16px}
 .signalList{display:grid;margin-top:9px}
@@ -137,10 +118,7 @@
   .recommendationBody{grid-template-columns:1fr;align-items:start}
   .recommendationBody>a{justify-self:start}
   .donutWrap{grid-template-columns:112px 1fr}
-  .donut{width:106px;height:106px}
-  .queueRow{grid-template-columns:24px minmax(0,1fr)}
-  .queueMeta{grid-column:2;text-align:left;display:flex;gap:8px}
-  .calendarStrip{display:flex;overflow-x:auto;padding-bottom:4px;scroll-snap-type:x proximity}
+  .donut{width:106px;height:106px}  .calendarStrip{display:flex;overflow-x:auto;padding-bottom:4px;scroll-snap-type:x proximity}
   .calendarStrip article{min-width:150px;scroll-snap-align:start}
   .readinessGrid{grid-template-columns:1fr 1fr}
 }
