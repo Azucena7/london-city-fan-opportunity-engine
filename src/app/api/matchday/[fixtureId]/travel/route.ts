@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { calendar, mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import { getMatchdayTerritoryContext } from "@/lib/matchdayTerritoryContext";
+import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +15,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ fix
 
   const pilot = mobilityPartnership.pilots.find((item) => item.fixtureId === fixtureId) ?? null;
   const territory = getMatchdayTerritoryContext();
+  const weather = getMatchdayWeatherContext(fixtureId, fixture.date);
   const corridors = [...mobilityPartnership.corridors]
     .sort((a,b) => (b.travelFriction + b.territoryOpportunity) - (a.travelFriction + a.territoryOpportunity));
 
@@ -29,6 +31,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ fix
     },
     providerSummary: summariseMobilityProviderReadiness(),
     providers: mobilityProviderReadiness,
+    weather,
     territory: {
       source: territory.geographySource,
       priorityTerritories: territory.priorityTerritories,
