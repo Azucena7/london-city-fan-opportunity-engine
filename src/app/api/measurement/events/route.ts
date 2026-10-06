@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import measurement from "../../../../../data/live/experiment-measurement.json";
 import experience from "../../../../../data/live/experience-demand-validation.json";
 import mobility from "../../../../../data/live/mobility-partnership.json";
+import calendar from "../../../../../data/seed/calendar.json";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -24,7 +25,7 @@ type Envelope = {
 
 const commonFields = new Set(measurement.commonFields);
 const eventContracts = new Map(measurement.events.map((item) => [item.name, item]));
-const fixtureIds = new Set(experience.fixtures.map((item) => item.id));
+const fixtureIds = new Set(calendar.filter((item) => item.homeAway === "home").map((item) => item.id));
 const experiments = new Map(measurement.experiments.map((item) => [item.id, item.fixtureId]));
 const conceptIds = new Set(experience.concepts.map((item) => item.id));
 const origins = new Map(experience.origins.map((item) => [item.id, item.market]));
