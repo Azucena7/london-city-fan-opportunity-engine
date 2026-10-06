@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { calendar, mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
-import { MatchdayOfficialDirectionsLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
+import { MatchdayOfficialDirectionsLink, MatchdayOfficialTicketingLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
 import { getVerifiedFixtureTicketUrl } from "@/lib/verifiedFixtureTicketing";
 import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
 import styles from "./matchday.module.css";
@@ -65,7 +65,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
               name: "London City Lionesses",
               url: "https://www.londoncitylionesses.com/"
             },
-            ...(ticketing ? { offers: { "@type": "Offer", url: ticketing.url, availability: "https://schema.org/InStock" } } : {})
+            ...(ticketing ? { offers: { "@type": "Offer", url: ticketing.url } } : {})
           }).replace(/</g, "\\u003c")
         }}
       />
@@ -150,7 +150,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
             <h2>Continue to the verified club ticket route.</h2>
             <p>AVELA only shows this CTA when a fixture-specific official source has been observed and stored.</p>
           </div>
-          <a href={ticketing.url} target="_blank" rel="noreferrer">{ticketing.label} ↗</a>
+          <MatchdayOfficialTicketingLink fixtureId={fixtureId} href={ticketing.url}>{ticketing.label} ↗</MatchdayOfficialTicketingLink>
         </section>
       ) : null}
 
