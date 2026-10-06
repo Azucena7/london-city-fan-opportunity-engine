@@ -76,8 +76,10 @@
   .kpis,.timeline{grid-template-columns:1fr 1fr}
 }
 @media(max-width:620px){
-  .fixturePicker{display:grid;grid-template-columns:1fr;gap:2px}
-  .fixturePicker a{width:100%}
+  .fixturePicker{display:flex;gap:6px;padding:9px 10px;scroll-snap-type:x proximity;scrollbar-width:none}
+  .fixturePicker::-webkit-scrollbar{display:none}
+  .fixturePicker>strong{position:sticky;left:0;z-index:2;padding:7px 8px 7px 0;background:#fff}
+  .fixturePicker a{width:auto;scroll-snap-align:start}
   .fixtureFacts,.kpis,.timeline,.interpretationGrid,.stateList{grid-template-columns:1fr}
   .evidenceDrawer>summary,.interpretation>summary,.next{align-items:flex-start;flex-direction:column}
   .actions{width:100%}
