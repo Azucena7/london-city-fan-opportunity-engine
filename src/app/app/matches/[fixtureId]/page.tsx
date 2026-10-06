@@ -251,6 +251,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         fixtureId={fixture.id}
         fixtureLabel={`London City v ${fixture.opponent}`}
         venue={fixture.venue}
+        fixtureDate={fixture.date}
       />
 
       {clubContext ? (
