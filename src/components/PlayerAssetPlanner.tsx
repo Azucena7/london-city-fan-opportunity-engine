@@ -453,8 +453,8 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         <div className={styles.need}>
           <span>Players needed</span>
           <div>
-            {[1,2,3,4].map((value) => <button type="button" key={value} className={count === value ? styles.active : ""} onClick={() => setCountOverride(value)}>{value}</button>)}
-            <button type="button" className={count >= 5 ? styles.active : ""} onClick={() => setCountOverride(Math.min(5, players.length))}>5+</button>
+            {[1,2,3,4].map((value) => <button type="button" key={value} aria-pressed={count === value} className={count === value ? styles.active : ""} onClick={() => setCountOverride(value)}>{value}</button>)}
+            <button type="button" aria-pressed={count >= 5} className={count >= 5 ? styles.active : ""} onClick={() => setCountOverride(Math.min(5, players.length))}>5+</button>
           </div>
           <small>Brief default · {selectedCampaign.playerNeed} player{selectedCampaign.playerNeed === 1 ? "" : "s"}</small>
         </div>
@@ -648,7 +648,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         <div>
           <span>Selection state</span>
           <strong>{sharedStatus === "committed" ? "Player pack committed in the club workspace." : sharedStatus === "approved" ? "Player pack approved and awaiting commitment." : selectionSource === "shared" ? "Selected pack is shared with authorised club users." : "This player pack is still a planning selection."}</strong>
-          <p>{remoteStatus || "Changing the pack recalculates fit, cost, scarcity and blockers. Selection does not approve talent use or create a final player commitment."}</p>
+          <p role="status" aria-live="polite">{remoteStatus || "Changing the pack recalculates fit, cost, scarcity and blockers. Selection does not approve talent use or create a final player commitment."}</p>
           {clubs.length > 1 ? (
             <label>
               Club
@@ -663,12 +663,12 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         </div>
         <div className={styles.governanceActions}>
           {sharedStatus === "selected" && canApprove && selectionComplete && activeEvaluation.blockers.length === 0 ? (
-            <button type="button" disabled={remoteBusy} onClick={() => void advanceSharedStatus("approved")}>
+            <button type="button" disabled={remoteBusy} aria-busy={remoteBusy} onClick={() => void advanceSharedStatus("approved")}>
               {remoteBusy ? "Updating…" : "Approve selected pack"}
             </button>
           ) : null}
           {sharedStatus === "approved" && canApprove ? (
-            <button type="button" disabled={remoteBusy} onClick={() => void advanceSharedStatus("committed")}>
+            <button type="button" disabled={remoteBusy} aria-busy={remoteBusy} onClick={() => void advanceSharedStatus("committed")}>
               {remoteBusy ? "Updating…" : "Commit approved pack"}
             </button>
           ) : null}
@@ -786,7 +786,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
                       </div>
                     ) : <p>No current momentum evidence.</p>}
                     <small className={styles.momentumSource}>{signal ? `Snapshot ${signal.observedAt} · ${momentum.availableDimensions}/4 dimensions available` : "No evidence snapshot"}</small>
-                    <button type="button" onClick={() => togglePlayer(player.id)} disabled={!isSelected && activeIds.length >= count}>
+                    <button type="button" aria-pressed={isSelected} onClick={() => togglePlayer(player.id)} disabled={!isSelected && activeIds.length >= count}>
                       {isSelected ? "Remove from pack" : activeIds.length >= count ? "Pack full" : "Add to pack"}
                     </button>
                   </article>
