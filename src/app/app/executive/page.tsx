@@ -46,6 +46,11 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   const signalHighlights = live.liveSignals.slice(0, 4);
   const attentionNow = radar.filter((item) => item.attentionState === "Act now" || item.attentionState === "Review").length;
   const topThree = radar.slice(0, 3);
+  const changedSinceReview = [
+    ...signalHighlights.slice(0, 2).map((signal) => signal.title),
+    approvals.length ? approvals.length + " approval gate" + (approvals.length === 1 ? "" : "s") + " still open" : "No approval gate currently blocks the selected decision",
+    measured ? "Outcome evidence is now available" : "Outcome evidence is still pending"
+  ].slice(0, 4);
   const flow = [
     { label: "Signals", state: radarItem?.materialSignalCount ? "ready" : "muted" },
     { label: "Opportunity", state: radarItem?.opportunityScore ? "ready" : "muted" },
@@ -94,6 +99,16 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className={styles.changeStrip} aria-label="What changed since the last review">
+        <div>
+          <span>Changed since last review</span>
+          <strong>{new Date(currentState.updated_at).toLocaleString("en-GB", { timeZone: "Europe/London", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</strong>
+        </div>
+        <div className={styles.changeItems}>
+          {changedSinceReview.map((item, index) => <span key={item}><b>{index + 1}</b>{item}</span>)}
         </div>
       </section>
 
