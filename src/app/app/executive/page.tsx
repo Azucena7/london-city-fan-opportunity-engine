@@ -48,7 +48,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   const signalHighlights = live.liveSignals.slice(0, 4);
   const attentionNow = radar.filter((item) => item.attentionState === "Act now" || item.attentionState === "Review").length;
   const topThree = radar.slice(0, 3);
-  const changedSinceReview = [
+  const currentChanges = [
     ...(matchdayAlert ? [matchdayAlert.title] : []),
     ...signalHighlights.slice(0, 2).map((signal) => signal.title),
     approvals.length ? approvals.length + " approval gate" + (approvals.length === 1 ? "" : "s") + " still open" : "No approval gate currently blocks the selected decision",
@@ -117,13 +117,13 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
         </section>
       ) : null}
 
-      <section className={styles.changeStrip} aria-label="What changed since the last review">
+      <section className={styles.changeStrip} aria-label="Latest evidence and current changes">
         <div>
-          <span>Changed since last review</span>
+          <span>Latest evidence · current changes</span>
           <strong>{new Date(currentState.updated_at).toLocaleString("en-GB", { timeZone: "Europe/London", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</strong>
         </div>
         <div className={styles.changeItems}>
-          {changedSinceReview.map((item, index) => <span key={item}><b>{index + 1}</b>{item}</span>)}
+          {currentChanges.map((item, index) => <span key={item}><b>{index + 1}</b>{item}</span>)}
         </div>
       </section>
 
