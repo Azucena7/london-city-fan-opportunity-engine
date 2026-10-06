@@ -48,6 +48,11 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   const signalHighlights = live.liveSignals.slice(0, 4);
   const attentionNow = radar.filter((item) => item.attentionState === "Act now" || item.attentionState === "Review").length;
   const topThree = radar.slice(0, 3);
+  const queueFixtureIds = new Set(radar.map((item) => item.fixtureId));
+  const queueOpenGates = campaignPlans.campaigns
+    .filter((item) => queueFixtureIds.has(item.fixtureId))
+    .reduce((total, item) => total + item.approvals.filter((approval) => approval.state !== "ready").length, 0);
+  const queueMeasured = radar.filter((item) => getCurrentProductResults(item.fixtureId)?.state === "measured").length;
   const currentChanges = [
     ...(matchdayAlert ? [matchdayAlert.title] : []),
     ...signalHighlights.slice(0, 2).map((signal) => signal.title),
@@ -84,14 +89,14 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
           <small>{radar[0]?.attentionState ?? live.decisionState} · score {radar[0]?.opportunityScore ?? "—"} · {radar[0]?.urgency ?? "Watch"} urgency</small>
         </div>
         <div className={styles.morningMetric}>
-          <span>Open gates</span>
-          <strong>{approvals.length}</strong>
-          <small>{approvals.length ? "Human decision required" : "No blocking gate"}</small>
+          <span>Queue gates</span>
+          <strong>{queueOpenGates}</strong>
+          <small>{queueOpenGates ? "Open approvals across upcoming decisions" : "No open approval gate in the current queue"}</small>
         </div>
         <div className={styles.morningMetric}>
-          <span>Measurement</span>
-          <strong>{measured ? "Observed" : "Pending"}</strong>
-          <small>{measured ? "Outcome evidence connected" : "Do not overclaim impact"}</small>
+          <span>Measured decisions</span>
+          <strong>{queueMeasured}/{radar.length}</strong>
+          <small>{queueMeasured ? "Upcoming decisions with outcome evidence" : "No upcoming decision has measured outcome evidence yet"}</small>
         </div>
         <div className={styles.morningQueue}>
           <span>Next in queue</span>
