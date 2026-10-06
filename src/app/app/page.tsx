@@ -8,6 +8,7 @@ import { getDecisionCenterOpsState } from "@/lib/decisionCenterOverview";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
+import { currentProductDate } from "@/lib/currentProductDate";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader, type UniversalDecisionState } from "@/components/WorkspaceUI";
 import styles from "./home.module.css";
@@ -41,7 +42,7 @@ function shortDate(value: string) {
 }
 
 export default async function ClubAppHome() {
-  const today = currentState.updated_at.slice(0, 10);
+  const today = currentProductDate(currentState.updated_at);
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a,b) => a.date.localeCompare(b.date))
