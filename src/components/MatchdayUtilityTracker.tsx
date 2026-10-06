@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { emitMeasurementEvent } from "@/lib/measurement";
 
 export function MatchdayUtilityTracker({ fixtureId }: { fixtureId: string }) {
@@ -23,7 +23,7 @@ export function MatchdayOfficialDirectionsLink({
 }: {
   fixtureId: string;
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <a
