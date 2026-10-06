@@ -34,12 +34,41 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
     .sort((a,b) => (b.travelFriction + b.territoryOpportunity) - (a.travelFriction + a.territoryOpportunity));
   const matchDate = new Intl.DateTimeFormat("en-GB", { weekday:"long", day:"numeric", month:"long", year:"numeric" })
     .format(new Date(fixture.date + "T12:00:00Z"));
+  const eventStart = fixture.kickoff ? `${fixture.date}T${fixture.kickoff}:00` : fixture.date;
   const providerSummary = summariseMobilityProviderReadiness();
   const weather = getMatchdayWeatherContext(fixtureId, fixture.date);
   const ticketing = getVerifiedFixtureTicketUrl(fixtureId);
 
   return (
     <main className={styles.shell}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SportsEvent",
+            name: `London City Lionesses v ${fixture.opponent}`,
+            startDate: eventStart,
+            eventStatus: "https://schema.org/EventScheduled",
+            location: {
+              "@type": "Place",
+              name: fixture.venue,
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Bromley",
+                addressRegion: "London",
+                addressCountry: "GB"
+              }
+            },
+            organizer: {
+              "@type": "SportsOrganization",
+              name: "London City Lionesses",
+              url: "https://www.londoncitylionesses.com/"
+            },
+            ...(ticketing ? { offers: { "@type": "Offer", url: ticketing.url, availability: "https://schema.org/InStock" } } : {})
+          }).replace(/</g, "\\u003c")
+        }}
+      />
       <MatchdayUtilityTracker fixtureId={fixtureId} />
       <header className={styles.top}>
         <Link href="/live/london-city" className={styles.brand}>LONDON CITY · MATCHDAY</Link>
