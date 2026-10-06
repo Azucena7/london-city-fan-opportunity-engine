@@ -228,7 +228,6 @@ test("canonical public surfaces use the AVELA production host", () => {
     "src/app/layout.tsx",
     "scripts/refresh-data.mjs",
     "scripts/refresh-public-signals.mjs",
-    "src/components/ClubPilotProposition.tsx",
     "data/contracts/campaign-plan.schema.json",
     "data/contracts/pilot-readiness.schema.json",
     "data/contracts/crm-ticketing.schema.json",
@@ -245,7 +244,6 @@ test("canonical public surfaces use the AVELA production host", () => {
     assert.ok(!source.includes(legacy), `${path} should not reference the historical host`);
   }
 });
-
 
 test("retired credit-ledger API alias stays removed", () => {
   assert.equal(existsSync("src/app/api/credit-ledger/route.ts"), false);
@@ -340,9 +338,9 @@ test("commercial home keeps one canonical CSS layer", () => {
   assert.doesNotMatch(css, /tickerTint/);
   assert.doesNotMatch(css, /animation:\s*none!important/);
   assert.doesNotMatch(css, /Reading-width and hierarchy reset|Remove legacy oversized\/full-bleed behavior/);
-  assert.equal((css.match(/^\.signalTicker\{/gm) ?? []).length, 1);
+  assert.equal((css.match(/^\.signalTicker\{/gm) ?? []).length, 0);
+  assert.doesNotMatch(css, /\.exampleGrid|\.valueCreated|\.capabilityHorizon|\.storyBridge/);
 });
-
 
 test("construction-era stylesheet names stay retired", () => {
   const layout = readFileSync("src/app/layout.tsx", "utf8");
@@ -361,15 +359,16 @@ test("construction-era stylesheet names stay retired", () => {
 
 
 test("case study styles stay split in cascade order", () => {
-  const layout = readFileSync("src/app/layout.tsx", "utf8");
-  const base = layout.indexOf('import "./case-study.css";');
-  const technical = layout.indexOf('import "./case-study-technical.css";');
-  const commercial = layout.indexOf('import "./case-study-commercial.css";');
+  const root = readFileSync("src/app/layout.tsx", "utf8");
+  const layout = readFileSync("src/app/case-study/layout.tsx", "utf8");
+  const base = layout.indexOf('import "../case-study.css";');
+  const technical = layout.indexOf('import "../case-study-technical.css";');
+  const commercial = layout.indexOf('import "../case-study-commercial.css";');
+  assert.doesNotMatch(root, /case-study\.css/);
   assert.ok(base >= 0 && technical > base && commercial > technical);
   assert.match(readFileSync("src/app/case-study-technical.css", "utf8"), /Technical case study/);
   assert.match(readFileSync("src/app/case-study-commercial.css", "utf8"), /Evidence-led evaluation case study/);
 });
-
 
 test("shared visual system avoids the retired lcl CSS namespace", () => {
   const activeStyles = [
@@ -522,11 +521,11 @@ test("refresh language matches the scheduled as-built automation", () => {
   assert.match(runbook, /active daily workflow already refreshes its declared public sources/);
   assert.doesNotMatch(runbook, /after this pull request is merged/);
   assert.match(readme, /scheduled fixture refresh starts the work automatically/);
-  assert.match(radar, /re-prioritised whenever the validated evidence state refreshes/);
+  assert.match(radar, /buildOpportunityRadar/);
+  assert.match(radar, /currentProductDate\(currentState\.updated_at\)/);
   assert.doesNotMatch(radar, /continuously re-prioritised/);
   assert.match(socialCard, /Scheduled fixture refresh starts monitoring/);
 });
-
 
 test("canonical delivery-effort storage is versioned and application-facing", () => {
   const migration = readFileSync("supabase/migrations/20261004193752_create_delivery_effort_events.sql", "utf8");
