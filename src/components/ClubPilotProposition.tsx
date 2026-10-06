@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { MarketingNav } from "./MarketingNav";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -9,30 +8,6 @@ import { useLanguage } from "./LanguageProvider";
 export function ClubPilotProposition() {
   const { lang } = useLanguage();
   const es = lang === "es";
-  const [goal, setGoal] = useState("repeat");
-  const [readiness, setReadiness] = useState("public");
-  const [copyState, setCopyState] = useState<"idle" | "copied" | "manual">("idle");
-  const goals = es ? { repeat: "Repetición de visita", attendance: "Asistencia", revenue: "Ingresos por partido" } : { repeat: "Repeat visits", attendance: "Attendance", revenue: "Matchday revenue" };
-  const dataOptions = es ? { public: "Solo datos públicos por ahora", aggregate: "Datos agregados disponibles, sujetos a autorización", review: "Acceso a datos pendiente de revisión" } : { public: "Public data only for now", aggregate: "Aggregate data available, subject to authorisation", review: "Data access still under review" };
-  const brief = [
-    es ? "CONVERSACIÓN SOBRE UN PILOTO · PROPUESTA, NO APROBACIÓN" : "PILOT DISCUSSION · PROPOSAL, NOT APPROVAL",
-    `${es ? "Objetivo prioritario" : "Priority objective"}: ${goals[goal as keyof typeof goals]}`,
-    `${es ? "Disponibilidad de datos" : "Data readiness"}: ${dataOptions[readiness as keyof typeof dataOptions]}`,
-    es ? "Alcance propuesto: 4–6 partidos y uno o dos flujos de decisión, sujeto al calendario y a un acuerdo con el club." : "Proposed scope: 4–6 fixtures and one or two decision workflows, subject to the club calendar and agreement.",
-    es ? "A acordar: responsable, partidos, KPI, comparación, permisos, precio y umbrales para continuar o parar." : "To agree: owner, fixtures, KPI, comparison, permissions, price and continue/stop thresholds.",
-    es ? "No compartir nombres, emails ni registros individuales. El club conserva audiencias y consentimiento; el entorno piloto recibe resultados agregados autorizados." : "Do not share names, emails or individual records. The club retains audiences and consent; the pilot environment receives authorised aggregate outcomes.",
-    es ? "Sin resultados comerciales garantizados. Datos públicos por sí solos no validan conversión o repetición." : "No guaranteed commercial outcomes. Public data alone cannot establish conversion or repeat visits.",
-    "https://avela-growth-intelligence.vercel.app/for-clubs"
-  ].join("\n\n");
-
-  async function copyBrief() {
-    try {
-      await navigator.clipboard.writeText(brief);
-      setCopyState("copied");
-    } catch {
-      setCopyState("manual");
-    }
-  }
 
   return <main className="productShell commercialShell">
     <MarketingNav />
@@ -43,17 +18,17 @@ export function ClubPilotProposition() {
       <p>{es ? "Empieza con 4–6 partidos o una campaña acotada y uno o dos flujos de marketing/comercial. Mantén el stack actual, añade solo el contexto que mejora la decisión y compara recomendación, ejecución y aprendizaje." : "Start with 4–6 fixtures or a bounded campaign window and one or two marketing/commercial workflows. Keep the existing stack, add only the context that improves the decision, then compare recommendation, execution and learning."}</p>
       <p className="commercialScope">{es ? "4–6 partidos o campaña acotada · 1–2 flujos · un objetivo prioritario" : "4–6 fixtures or campaign window · 1–2 workflows · one priority objective"}</p>
       <p>{es ? "Alcance a acordar según el calendario del club. Es una propuesta de trabajo, no una promesa de crecimiento ni un piloto ya contratado." : "Scope to agree against the club calendar. This is a working proposal, not a growth guarantee or a contracted pilot."}</p>
-      <div className="caseOverviewLinks"><a className="productButton" href="#demo">{es ? "Preparar el brief del piloto →" : "Prepare the pilot brief →"}</a></div>
+      <div className="caseOverviewLinks"><Link className="productButton" href="/pilot">{es ? "Ver cómo funciona el piloto →" : "See how the pilot works →"}</Link></div>
       <p><Link href="/app/demo">{es ? "Probar la demo guiada de 3 minutos →" : "Try the 3-minute guided demo →"}</Link></p>
     </header>
 
     <section className="commercialPanel">
       <h2>{es ? "Qué recibe el club" : "What the club receives"}</h2>
       <div className="commercialTwoColumns">
-        <article><h3>{es ? "Antes: una decisión, no otra lista de señales" : "Before: a decision, not another signal list"}</h3><p>{es ? "Brief con oportunidad, audiencia propuesta, mensaje, responsable, bloqueos y plan de medición. No activa campañas sin aprobación." : "A brief with an opportunity, proposed audience, message, owner, blockers and measurement plan. No campaign activation without approval."}</p></article>
+        <article><h3>{es ? "Antes: una decisión, no otra lista de señales" : "Before: a decision, not another signal list"}</h3><p>{es ? "Ficha de decisión con oportunidad, audiencia propuesta, mensaje, responsable, bloqueos y plan de medición. No activa campañas sin aprobación." : "A decision view with the opportunity, proposed audience, message, owner, blockers and measurement plan. No campaign activation without approval."}</p></article>
         <article><h3>{es ? "Después: aprender sin exagerar resultados" : "After: learn without overstating outcomes"}</h3><p>{es ? "Revisión de lo ejecutado y del KPI acordado. Separar atribución de incremento; registrar también pruebas sin resultado o sin datos." : "Review delivery and the agreed KPI. Separate attribution from incremental change; record tests with no result or missing data too."}</p></article>
       </div>
-      <p>{es ? "Incluye una revisión de preparación, un conjunto acotado de fichas de decisión y un cierre del piloto con recomendaciones para continuar, ajustar o detener." : "Includes a readiness review, a focused set of decision briefs and a pilot review recommending whether to continue, adjust or stop."}</p>
+      <p>{es ? "Incluye una revisión de preparación, un conjunto acotado de fichas de decisión y un cierre del piloto con recomendaciones para continuar, ajustar o detener." : "Includes a readiness review, a focused set of decision views and a pilot review recommending whether to continue, adjust or stop."}</p>
     </section>
 
     <section className="commercialPanel">
@@ -82,17 +57,14 @@ export function ClubPilotProposition() {
     </section>
 
     <section className="commercialPanel" id="demo" aria-labelledby="discussion-title">
-      <h2 id="discussion-title">{es ? "Preparar una conversación sobre el piloto" : "Prepare a pilot conversation"}</h2>
-      <p>{es ? "Selecciona el punto de partida y copia un resumen para compartir por tu propio canal. Estas selecciones no se envían ni solicitan datos personales." : "Select a starting point and copy a summary to share through your own channel. These selections are not submitted and request no personal data."}</p>
-      <div className="commercialTwoColumns commercialFields">
-        <label htmlFor="pilot-goal">{es ? "Objetivo prioritario" : "Priority objective"}<select id="pilot-goal" value={goal} onChange={(event) => { setGoal(event.target.value); setCopyState("idle"); }}>{Object.entries(goals).map(([key, value]) => <option key={key} value={key}>{value}</option>)}</select></label>
-        <label htmlFor="pilot-data">{es ? "Disponibilidad de datos" : "Data readiness"}<select id="pilot-data" value={readiness} onChange={(event) => { setReadiness(event.target.value); setCopyState("idle"); }}>{Object.entries(dataOptions).map(([key, value]) => <option key={key} value={key}>{value}</option>)}</select></label>
+      <p className="eyebrow">{es ? "SIGUIENTE PASO" : "NEXT STEP"}</p>
+      <h2 id="discussion-title">{es ? "Explora un piloto AVELA sin cambiar tu stack." : "Explore an AVELA pilot without changing your stack."}</h2>
+      <p>{es ? "Empieza entendiendo el alcance, viendo la demo y decidiendo si uno o dos flujos reales del equipo merecen probarse durante una ventana acotada." : "Start by understanding the scope, seeing the product and deciding whether one or two real team workflows are worth testing in a bounded window."}</p>
+      <div className="caseOverviewLinks">
+        <Link className="productButton" href="/pilot">{es ? "Ver estructura del piloto →" : "See the pilot structure →"}</Link>
+        <Link href="/app/demo">{es ? "Probar la demo guiada →" : "Try the guided demo →"}</Link>
       </div>
-      <label className="commercialBriefLabel" htmlFor="pilot-brief">{es ? "Resumen listo para copiar" : "Summary ready to copy"}</label>
-      <textarea id="pilot-brief" className="commercialBrief" readOnly value={brief} rows={13} />
-      <button className="productButton" type="button" onClick={copyBrief}>{es ? "Copiar brief del piloto" : "Copy pilot brief"}</button>
-      <p role="status" aria-live="polite">{copyState === "copied" ? (es ? "Resumen copiado. No se ha enviado ninguna solicitud." : "Summary copied. No request has been sent.") : copyState === "manual" ? (es ? "No se pudo acceder al portapapeles. Selecciona el resumen y cópialo manualmente." : "Clipboard access was unavailable. Select the summary and copy it manually.") : (es ? "Este resumen no reserva ni activa un piloto. Puedes copiarlo y compartirlo por el canal que prefieras." : "This summary does not book or activate a pilot. You can copy it and share it through your preferred channel.")}</p>
-      <Link href="/pilot">{es ? "Consultar el detalle operativo del piloto →" : "Read the pilot operating detail →"}</Link>
+      <p>{es ? "Cuando activemos el formulario de contacto, este será el punto para solicitar una conversación con AVELA. Hasta entonces no pedimos datos personales desde esta página." : "When the contact form is activated, this will be the point to request an AVELA conversation. Until then, this page does not collect personal data."}</p>
     </section>
   </main>;
 }
