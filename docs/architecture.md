@@ -63,7 +63,7 @@ The application and persistence contract is **delivery effort / units** through 
 
 - `/` — commercial AVELA product site.
 - `/for-clubs` — club proposition and pilot path.
-- `/pilot` — 90-day / 6-fixture pilot proposition.
+- `/pilot` — focused marketing & commercial decision pilot: 4–6 fixtures or a bounded campaign window, one or two workflows.
 - `/case-study` — evidence and methodology.
 - `/live/london-city` — independent public demonstration.
 - `/app/demo` — guided product workflow using demo-safe evidence.
@@ -169,7 +169,7 @@ There is no hidden TransportAPI fallback.
 
 ## Decision and execution boundary
 
-AVELA is a decision layer above the club's existing stack, not a replacement CRM, ticketing platform or publishing suite.
+AVELA is a marketing & commercial decision workspace above the club's existing stack. Its differentiator is cross-functional decision orchestration, not replacement of CRM, ticketing, analytics or publishing tools.
 
 The product may:
 
