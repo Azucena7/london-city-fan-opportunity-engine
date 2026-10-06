@@ -17,6 +17,15 @@ export function MarketingNav() {
         <Link className={styles.login} href="/app/demo">Open workspace</Link>
         <Link className={styles.demo} href="/for-clubs#demo">Club pilot</Link>
       </div>
+      <details className={styles.mobileMenu}>
+        <summary>Menu</summary>
+        <div className={styles.mobilePanel}>
+          <Link href="/#integrations">How it fits</Link>
+          <Link href="/live/london-city">Live case</Link>
+          <Link href="/#faq">FAQ</Link>
+          <Link href="/app/demo">Open workspace</Link>
+        </div>
+      </details>
     </nav>
   );
 }
