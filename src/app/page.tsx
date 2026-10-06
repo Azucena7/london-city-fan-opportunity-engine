@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <main className={styles.shell}>
-      <MarketingNav />
+      <MarketingNav variant="dark" />
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
