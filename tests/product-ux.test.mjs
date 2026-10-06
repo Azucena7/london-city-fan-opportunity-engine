@@ -2672,3 +2672,8 @@ test("Radar and Operating Pack reflect the broader commercial decision category"
   assert.doesNotMatch(pack, /ProductJourneyNav|productAppShell/);
   assert.match(pack, /utm_source=operating_pack/);
 });
+
+test("public Matchday utility keeps operational microcopy at 10px or above", () => {
+  const css = read("src/app/matchday/[fixtureId]/matchday.module.css");
+  assert.doesNotMatch(css, /font-size:(?:8|9)px/);
+});
