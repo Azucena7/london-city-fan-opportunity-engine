@@ -6,6 +6,7 @@ import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
+import { currentProductDate } from "@/lib/currentProductDate";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 export default async function ExecutiveViewPage({ searchParams }: { searchParams: Promise<{ fixture?: string }> }) {
   const params = await searchParams;
   const clubContext = await getCurrentClubOperatingContext();
-  const today = currentState.updated_at.slice(0,10);
+  const today = currentProductDate(currentState.updated_at);
   const upcoming = calendar
     .filter((item) => item.homeAway === "home" && item.date >= today && item.status !== "final")
     .sort((a,b) => a.date.localeCompare(b.date));
