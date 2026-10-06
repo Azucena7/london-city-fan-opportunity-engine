@@ -65,7 +65,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
       <header className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>Learning · {selected?.opponent} · {selected?.date}</span>
-          <h1>{live?.fixturePhase === "pre-match" ? "Define what we will learn before matchday." : "Turn the outcome into one next move."}</h1>
+          <h2>{live?.fixturePhase === "pre-match" ? "Define what we will learn before matchday." : "Turn the outcome into one next move."}</h2>
           <p>
             {live?.fixturePhase === "pre-match"
               ? "The fixture is still ahead. This screen keeps the measurement plan explicit now, then switches to observed outcomes when authorised post-match evidence arrives."
