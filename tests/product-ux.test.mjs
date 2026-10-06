@@ -1251,6 +1251,8 @@ test("Campaigns uses a semantic navigation state instead of the legacy brief key
 
 test("Radar includes an interactive visual Opportunity Explorer", () => {
   const radar = read("src/app/app/matches/page.tsx");
+  const executive = read("src/app/app/executive/page.tsx");
+  const season = read("src/app/app/season/page.tsx");
   const explorer = read("src/components/OpportunityExplorer.tsx");
   assert.match(radar, /OpportunityExplorer/);
   assert.match(explorer, /Opportunity map/);
@@ -2464,4 +2466,6 @@ test("live product timing cannot lag behind the real London date", () => {
   assert.match(opportunity, /OVERDUE ·/);
   assert.match(home, /currentProductDate\(currentState\.updated_at\)/);
   assert.match(radar, /currentProductDate\(currentState\.updated_at\)/);
+  assert.match(executive, /currentProductDate\(currentState\.updated_at\)/);
+  assert.match(season, /currentProductDate\(currentState\.updated_at\)/);
 });
