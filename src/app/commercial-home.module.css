@@ -725,20 +725,32 @@
 
 
 /* Commercial v3 — shorter, denser, role-led */
-.hero{padding:72px 0 62px;gap:48px}
+.hero{
+  padding:72px max(24px,calc((100vw - 1180px)/2)) 62px;
+  gap:48px;
+}
 .heroLead{font-size:18px;line-height:1.52}
 .heroMeta{margin-top:22px;padding-top:14px}
-.heroMeta strong{color:var(--avela-navy)}
+.heroMeta strong{color:#fff}
 .problem{padding:72px 0;gap:52px}
 .liveCopy,.livePanel{padding-top:64px;padding-bottom:64px}
 .pilot{padding:72px 0;gap:48px}
 .finalCta{padding-top:64px!important;padding-bottom:64px!important}
 @media(max-width:900px){
-  .hero{padding:56px 0 48px}
+  .hero{padding:56px 24px 48px}
   .problem,.pilot{padding:56px 0}
 }
 @media(max-width:620px){
-  .hero{padding:42px 0 38px}
+  .hero{
+    padding:42px 20px 38px;
+  }
+  .heroCopy{width:100%;min-width:0}
+  .hero h1{
+    max-width:7.5ch;
+    overflow-wrap:normal;
+    word-break:normal;
+  }
   .heroLead{font-size:16px}
+  .heroActions,.heroMeta,.heroProof{width:100%;min-width:0}
   .problem,.pilot{padding:44px 0}
 }
