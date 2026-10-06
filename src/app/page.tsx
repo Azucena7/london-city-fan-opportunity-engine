@@ -15,12 +15,6 @@ export const metadata: Metadata = {
     "AVELA connects signals, club context and operational constraints to show football clubs what needs attention, what to do next and whether they can realistically deliver it."
 };
 
-const roles = [
-  ["Marketing", "Campaign opportunity, audience, timing and capacity."],
-  ["Commercial", "Sponsor obligations, activations, rights and renewal context."],
-  ["Executives", "Risks, priorities, representation and major opportunities."],
-  ["Operations", "Dependencies, approvals, deadlines and bottlenecks."]
-] as const;
 
 export default function Home() {
   const live = getCurrentProductOpportunity();
