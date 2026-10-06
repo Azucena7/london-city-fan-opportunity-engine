@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { calendar, mobilityPartnership } from "@/lib/data";
+import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import styles from "./matchday.module.css";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
     .sort((a,b) => (b.travelFriction + b.territoryOpportunity) - (a.travelFriction + a.territoryOpportunity));
   const matchDate = new Intl.DateTimeFormat("en-GB", { weekday:"long", day:"numeric", month:"long", year:"numeric" })
     .format(new Date(fixture.date + "T12:00:00Z"));
+  const providerSummary = summariseMobilityProviderReadiness();
 
   return (
     <main className={styles.shell}>
@@ -51,10 +53,10 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
           <strong>{fixture.venue}</strong>
           <small>Bromley · London</small>
         </article>
-        <article data-state="pending">
+        <article data-state={providerSummary.state === "live" ? "known" : "pending"}>
           <span>Live disruption</span>
-          <strong>Provider not connected yet</strong>
-          <small>Check official transport information before travelling.</small>
+          <strong>{providerSummary.configured}/{providerSummary.total} layers configured</strong>
+          <small>{providerSummary.state === "live" ? "Live travel context available." : "Use official transport information before travelling."}</small>
         </article>
         <article data-state={pilot ? "pilot" : "known"}>
           <span>Journey service</span>
@@ -96,12 +98,16 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
       </section>
 
       <section className={styles.future}>
-        <span>COMING WITH LIVE PROVIDERS</span>
+        <span>LIVE TRAVEL READINESS</span>
         <div>
-          <article><strong>Traffic & incidents</strong><p>Material road disruption and estimated impact on arrival.</p></article>
-          <article><strong>Rail status</strong><p>Relevant service changes, not generic network noise.</p></article>
-          <article><strong>Best departure window</strong><p>Fixture-aware guidance from selected origin corridors.</p></article>
-          <article><strong>Matchday experience</strong><p>Doors, fan zone, family area, food and pre/post-match activity.</p></article>
+          {mobilityProviderReadiness.map((provider) => (
+            <article key={provider.id} data-state={provider.state}>
+              <strong>{provider.label}</strong>
+              <p>{provider.state === "live" ? provider.scope : provider.fallback}</p>
+              <small>{provider.state.replace("-", " ")} · {provider.provider}</small>
+            </article>
+          ))}
+          <article><strong>Matchday experience</strong><p>Doors, fan zone, family area, food and pre/post-match activity.</p><small>Club content layer</small></article>
         </div>
       </section>
 
