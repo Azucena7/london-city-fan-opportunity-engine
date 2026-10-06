@@ -662,6 +662,11 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
           ) : null}
         </div>
         <div className={styles.governanceActions}>
+          {!activeClubId ? <small>Club workspace access is required to approve or commit a pack.</small>
+            : !selectionComplete ? <small>Complete the {count}-player pack before approval.</small>
+            : activeEvaluation.blockers.length ? <small>Resolve {activeEvaluation.blockers.length} blocker{activeEvaluation.blockers.length === 1 ? "" : "s"} before approval.</small>
+            : !canApprove ? <small>Your role can plan the pack but cannot approve campaign talent.</small>
+            : null}
           {sharedStatus === "selected" && canApprove && selectionComplete && activeEvaluation.blockers.length === 0 ? (
             <button type="button" disabled={remoteBusy} aria-busy={remoteBusy} onClick={() => void advanceSharedStatus("approved")}>
               {remoteBusy ? "Updating…" : "Approve selected pack"}
