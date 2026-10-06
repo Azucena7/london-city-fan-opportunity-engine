@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AccessCenter } from "@/components/AccessCenter";
 import { OperationalContinuity } from "@/components/OperationalContinuity";
-import { AppWorkspaceShell, WorkspaceFilterButton } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./access.module.css";
 
@@ -15,10 +15,9 @@ export default function AccessPage() {
   return (
     <AppWorkspaceShell
       active="access"
-      eyebrow="Administration"
-      title="Team"
-      subtitle="Memberships, access requests, roles and operational continuity."
-      actions={<WorkspaceFilterButton label="Team filters" />}
+      eyebrow="Decision ownership"
+      title="Who can approve what — and who keeps continuity?"
+      subtitle="Roles, access and handover should protect decisions, not create another admin workflow."
     >
       <WorkspaceCard className={styles.ownershipCard}>
         <WorkspaceSectionHeader eyebrow="Decision ownership" title="Who typically owns which AVELA gate?" />
