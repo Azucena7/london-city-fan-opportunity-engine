@@ -7,7 +7,7 @@ import { WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/compon
 import styles from "./contracts.module.css";
 
 export const metadata: Metadata = {
-  title: "Contracts · AVELA",
+  title: "Contracts",
   description: "Review extracted sponsor and player clauses with provenance before verified contract intelligence can affect club decisions."
 };
 
