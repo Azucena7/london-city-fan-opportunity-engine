@@ -95,3 +95,11 @@ test("Critical interactive controls expose selection and async state", () => {
   assert.match(access, /aria-busy=\{busy\}/);
   assert.match(handoffs, /role="status" aria-live="polite"/);
 });
+
+
+test("Player pack governance explains why approval is unavailable", () => {
+  const players = read("src/components/PlayerAssetPlanner.tsx");
+  assert.match(players, /Club workspace access is required to approve or commit a pack/);
+  assert.match(players, /Complete the \{count\}-player pack before approval/);
+  assert.match(players, /Your role can plan the pack but cannot approve campaign talent/);
+});
