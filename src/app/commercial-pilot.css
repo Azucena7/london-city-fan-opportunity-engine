@@ -46,3 +46,24 @@
 .commercialNote{margin-top:20px;padding:16px 18px;border-left:3px solid var(--avela-teal);background:#eef4f2;color:#566778}
 .commercialNextStep{background:linear-gradient(135deg,#f1e7d8,#fffdfa)}
 @media(max-width:800px){.commercialThreeColumns{grid-template-columns:1fr}}
+
+.commercialLeadForm{margin-top:28px}
+.commercialLeadGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.commercialLeadGrid label{display:grid;gap:8px;min-width:0}
+.commercialLeadGrid label>span,.commercialConsent span{font-size:13px;line-height:1.4;font-weight:700;color:var(--avela-navy)}
+.commercialLeadGrid input,.commercialLeadGrid select{width:100%;min-height:50px;padding:12px 14px;border:1px solid rgba(16,39,66,.22);border-radius:10px;background:#fff;color:var(--avela-navy);font:inherit}
+.commercialLeadGrid input:focus,.commercialLeadGrid select:focus{border-color:var(--avela-teal);outline:3px solid rgba(47,143,131,.14);outline-offset:1px}
+.commercialLeadWide{grid-column:1/-1;max-width:520px}
+.commercialConsent{display:flex;align-items:flex-start;gap:10px;margin:18px 0}
+.commercialConsent input{margin-top:3px;width:18px;height:18px;accent-color:var(--avela-teal);flex:0 0 auto}
+.commercialSubmitRow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.commercialSubmitRow button{border:0;border-radius:10px;padding:0 18px}
+.commercialSubmitRow button:disabled{cursor:wait;opacity:.7}
+.commercialSubmitRow>span{color:#667686;font-size:12px}
+.commercialHoneypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.commercialLeadError{margin:14px 0 0!important;color:#9b2c2c!important;font-weight:700}
+.commercialLeadSuccess{margin-top:26px;padding:22px;border:1px solid rgba(47,143,131,.28);border-radius:14px;background:#eef4f2}
+.commercialLeadSuccess strong{display:block;font-size:20px}
+.commercialLeadSuccess p{margin:7px 0 12px}
+.commercialSecondaryLinks{margin-top:24px;padding-top:18px;border-top:1px solid var(--avela-line)}
+@media(max-width:800px){.commercialLeadGrid{grid-template-columns:1fr}.commercialLeadWide{grid-column:auto;max-width:none}}
