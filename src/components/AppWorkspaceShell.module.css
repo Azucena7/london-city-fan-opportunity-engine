@@ -132,3 +132,12 @@
   .content{padding:11px 10px 22px}
   .titleRow h1{line-height:1.15!important}
 }
+
+/* Shared keyboard focus treatment for the AVELA workspace */
+.shell :is(a,button,input,select,textarea,summary):focus-visible{
+  outline:3px solid rgba(47,143,131,.34);
+  outline-offset:2px;
+}
+.shell :is(button,input,select,textarea):disabled{
+  cursor:not-allowed;
+}
