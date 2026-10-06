@@ -348,9 +348,11 @@ test("construction-era stylesheet names stay retired", () => {
     assert.equal(existsSync(path), false, `${path} is a construction-era artifact`);
     assert.ok(!layout.includes(path.split("/").at(-1)), `${path} should not be imported`);
   }
-  for (const path of ["src/app/workspace-structure.css", "src/app/case-study.css", "src/app/case-study-technical.css", "src/app/case-study-commercial.css", "src/app/product-ux.css"]) {
+  for (const path of ["src/app/case-study.css", "src/app/case-study-technical.css", "src/app/case-study-commercial.css", "src/app/product-ux.css"]) {
     assert.equal(existsSync(path), true, `${path} is a canonical stylesheet`);
   }
+  assert.equal(existsSync("src/app/workspace-structure.css"), false, "retired workspace stylesheet should stay deleted");
+  assert.doesNotMatch(layout, /workspace-structure\.css/);
 
   const workflow = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
   assert.match(workflow, /avela-data-bot/);
@@ -373,7 +375,6 @@ test("case study styles stay split in cascade order", () => {
 test("shared visual system avoids the retired lcl CSS namespace", () => {
   const activeStyles = [
     "src/app/case-brand.css",
-    "src/app/workspace-structure.css",
     "src/app/case-study.css",
     "src/app/case-study-technical.css",
     "src/app/case-study-commercial.css",
@@ -462,7 +463,6 @@ test("active CSS avoids construction-phase labels", () => {
   for (const path of [
     "src/app/case-study.css",
     "src/app/navigation-v2.css",
-    "src/app/workspace-structure.css",
     "src/app/product-ux.css"
   ]) {
     const css = readFileSync(path, "utf8");
@@ -572,13 +572,10 @@ test("active AVELA surfaces use demo and pilot terminology rather than prototype
 
   const nav = readFileSync("src/components/NavTabs.tsx", "utf8");
   const brand = readFileSync("src/app/case-brand.css", "utf8");
-  const workspace = readFileSync("src/app/workspace-structure.css", "utf8");
   assert.match(nav, /evidenceMark/);
   assert.doesNotMatch(nav, /prototypeMark/);
   assert.match(brand, /\.evidenceMark/);
-  assert.match(workspace, /\.evidenceMark/);
   assert.doesNotMatch(brand, /prototypeMark/);
-  assert.doesNotMatch(workspace, /prototypeMark/);
 
   const measurement = readFileSync("src/lib/measurement.ts", "utf8");
   assert.match(measurement, /utm_medium"\), "demo"/);
@@ -708,7 +705,9 @@ test("feature intelligence styles stay outside the base globals layer", () => {
   assert.doesNotMatch(intelligence, /\.sourceHealthCenter\s*\{/);
   assert.match(ux, /\.sourceHealthCenter\s*\{/);
   assert.match(intelligence, /\.caseStudyPredictionProof\s*\{/);
-  assert.match(layout, /intelligence-surfaces\.css/);
+  const study = readFileSync("src/app/case-study/layout.tsx", "utf8");
+  assert.doesNotMatch(layout, /intelligence-surfaces\.css/);
+  assert.match(study, /intelligence-surfaces\.css/);
 });
 
 test("maintained product docs use the current AVELA category and pilot scope", () => {
