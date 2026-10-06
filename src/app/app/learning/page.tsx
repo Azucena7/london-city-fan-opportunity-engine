@@ -243,8 +243,8 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <h2>Learning should send the user back to the next match, not to a report archive.</h2>
         </div>
         <div className={styles.actions}>
-          <Link className={styles.primary} href="/app/matches">Back to matches</Link>
-          {selectedId ? <Link className={styles.secondary} href={`/app/matches/${selectedId}`}>Open match record</Link> : null}
+          <Link className={styles.primary} href="/app/matches">Apply learning to next match</Link>
+          {selectedId ? <Link className={styles.secondary} href={`/app/matches/${selectedId}`}>Inspect this match decision</Link> : null}
         </div>
       </section>
     </AppWorkspaceShell>
