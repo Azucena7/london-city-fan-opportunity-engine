@@ -10,7 +10,7 @@ import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
 import styles from "./campaigns.module.css";
 
 export const metadata: Metadata = {
-  title: "Campaigns | AVELA",
+  title: "Campaigns",
   description: "Review fixture-led and seasonal campaign drafts, approval state and the next human decision."
 };
 
