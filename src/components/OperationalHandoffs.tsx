@@ -175,7 +175,7 @@ export function OperationalHandoffs({
             </div>
             <h3>{preset.title}</h3>
             <p>{preset.hint}</p>
-            <button type="button" disabled={Boolean(busy)} onClick={() => void create(preset)}>
+            <button type="button" disabled={Boolean(busy)} aria-busy={Boolean(busy)} onClick={() => void create(preset)}>
               {busy === preset.requestType + preset.recipientRole ? "Creating…" : preset.stage === "heads-up" ? "Create pre-alert" : "Create request"}
             </button>
           </article>
@@ -196,9 +196,9 @@ export function OperationalHandoffs({
                 <small>{new Date(request.updated_at).toLocaleString("en-GB")}</small>
                 {request.stage === "heads-up" || request.stage === "formal-request" ? (
                   <div>
-                    <button type="button" disabled={Boolean(busy)} onClick={() => void updateRequest(request.id, "confirmed")}>Confirm</button>
-                    <button type="button" disabled={Boolean(busy)} onClick={() => void updateRequest(request.id, "alternative")}>Alternative</button>
-                    <button type="button" disabled={Boolean(busy)} onClick={() => void updateRequest(request.id, "unavailable")}>Unavailable</button>
+                    <button type="button" disabled={Boolean(busy)} aria-busy={Boolean(busy)} onClick={() => void updateRequest(request.id, "confirmed")}>Confirm</button>
+                    <button type="button" disabled={Boolean(busy)} aria-busy={Boolean(busy)} onClick={() => void updateRequest(request.id, "alternative")}>Alternative</button>
+                    <button type="button" disabled={Boolean(busy)} aria-busy={Boolean(busy)} onClick={() => void updateRequest(request.id, "unavailable")}>Unavailable</button>
                   </div>
                 ) : null}
               </div>
@@ -207,7 +207,7 @@ export function OperationalHandoffs({
         </div>
       </details>
 
-      {status ? <p className={styles.status}>{status}</p> : null}
+      {status ? <p className={styles.status} role="status" aria-live="polite">{status}</p> : null}
     </section>
   );
 }
