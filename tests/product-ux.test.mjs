@@ -2594,3 +2594,15 @@ test("AVELA category separates the workspace from cross-functional orchestration
   assert.doesNotMatch(pack, /Growth Intelligence Pilot/);
   assert.match(help, /orchestrates the evidence, constraints, timing and ownership across functions/);
 });
+
+test("commercial product storytelling keeps microcopy at 10px or above", () => {
+  const files = [
+    "src/app/commercial-home.module.css",
+    "src/components/CommercialDecisionDemo.module.css",
+    "src/components/CommercialSignalStage.module.css"
+  ];
+  for (const file of files) {
+    const css = read(file);
+    assert.doesNotMatch(css, /font-size:(?:8|9)px/);
+  }
+});
