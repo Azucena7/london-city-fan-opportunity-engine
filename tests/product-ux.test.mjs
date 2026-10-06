@@ -2530,3 +2530,20 @@ test("commercial sitemap never uses a future fixture date as lastModified", () =
   assert.match(sitemap, /lastModified: updated/);
   assert.doesNotMatch(sitemap, /lastModified: new Date\(item\.date/);
 });
+
+test("app workspace keeps one primary heading and consistent product positioning", () => {
+  const shell = read("src/components/AppWorkspaceShell.tsx");
+  const executive = read("src/app/app/executive/page.tsx");
+  const learning = read("src/app/app/learning/page.tsx");
+  const setup = read("src/components/ClubSetup.tsx");
+  const access = read("src/components/AccessCenter.tsx");
+  const help = read("src/app/app/help/page.tsx");
+
+  assert.match(shell, /Marketing & commercial workspace/);
+  assert.doesNotMatch(shell, /Decision intelligence workspace/);
+  assert.doesNotMatch(executive, /<h1>/);
+  assert.doesNotMatch(learning, /<h1>/);
+  assert.doesNotMatch(setup, /<h1>/);
+  assert.doesNotMatch(access, /<h1>/);
+  assert.match(help, /decision workspace for football club marketing and commercial teams/);
+});
