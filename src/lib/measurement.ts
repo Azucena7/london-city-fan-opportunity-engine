@@ -3,7 +3,8 @@ export type MeasurementEventName =
   | "experience_validation_complete"
   | "mobility_scenario_evaluated"
   | "matchday_utility_opened"
-  | "matchday_official_directions_opened";
+  | "matchday_official_directions_opened"
+  | "matchday_official_ticketing_opened";
 
 export type MeasurementDeliveryState =
   | "delivered"
