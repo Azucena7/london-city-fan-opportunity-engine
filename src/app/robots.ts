@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: ["/", "/for-clubs", "/case-study", "/cases", "/live/london-city", "/pilot"],
+      allow: ["/", "/for-clubs", "/case-study", "/cases", "/live/london-city", "/pilot", "/matchday/"],
       disallow: ["/app/", "/api/"]
     },
     sitemap: "https://avela-growth-intelligence.vercel.app/sitemap.xml"
