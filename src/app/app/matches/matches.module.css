@@ -96,6 +96,12 @@
 .evidenceContract>div{padding:0 15px 15px}
 .evidenceContract p{margin:5px 0 0!important;color:#74828D!important;font-size:11px!important;line-height:1.5}
 
+/* Dynamic radar state classes used by the fixture list */
+.stateNomaterialopportunity{color:#7C8791}
+.stateActnow{color:#C15F43}
+.stateReview{color:#9A6A12}
+.stateMonitor{color:#2F8F83}
+
 @media(max-width:1180px){
   .radarSummary{grid-template-columns:repeat(3,1fr)}
   .priorityGrid{grid-template-columns:1fr}
