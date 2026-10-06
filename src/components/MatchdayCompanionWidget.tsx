@@ -3,6 +3,7 @@ import { mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import { getMatchdayTerritoryContext } from "@/lib/matchdayTerritoryContext";
 import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
+import { getMatchdayAttention } from "@/lib/matchdayDecisionAlert";
 import styles from "./MatchdayCompanionWidget.module.css";
 
 export function MatchdayCompanionWidget({
@@ -25,6 +26,7 @@ export function MatchdayCompanionWidget({
   const providerSummary = summariseMobilityProviderReadiness();
   const territory = getMatchdayTerritoryContext();
   const weather = getMatchdayWeatherContext(fixtureId, fixtureDate);
+  const attention = getMatchdayAttention(fixtureId, fixtureDate);
 
   return (
     <section className={styles.shell} aria-label="Matchday Companion">
@@ -40,6 +42,14 @@ export function MatchdayCompanionWidget({
           <small>{providerSummary.configured}/{providerSummary.total} provider layers configured · {providerSummary.state.replace("-", " ")}</small>
         </div>
       </div>
+
+      {attention ? (
+        <div className={styles.attention} data-level={attention.level}>
+          <span>{attention.level} · {attention.label}</span>
+          <strong>{attention.title}</strong>
+          <small>{attention.reason}</small>
+        </div>
+      ) : null}
 
       <div className={styles.weather} data-level={weather.materiality}>
         <div>
