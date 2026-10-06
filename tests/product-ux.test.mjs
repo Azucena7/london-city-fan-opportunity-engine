@@ -2593,8 +2593,13 @@ test("AVELA category separates the workspace from cross-functional orchestration
 test("commercial product storytelling keeps microcopy at 10px or above", () => {
   const files = [
     "src/app/commercial-home.module.css",
+    "src/app/commercial-pilot.css",
+    "src/app/pilot/pilot.module.css",
+    "src/components/MarketingNav.module.css",
     "src/components/CommercialDecisionDemo.module.css",
-    "src/components/CommercialSignalStage.module.css"
+    "src/components/CommercialSignalStage.module.css",
+    "src/components/CommercialEcosystem.module.css",
+    "src/components/CommercialFAQ.module.css"
   ];
   for (const file of files) {
     const css = read(file);
@@ -2607,6 +2612,8 @@ test("commercial home stylesheet contains only current home surfaces", () => {
   for (const legacy of ["example","notAnother","roles","valueCreated","capabilityHorizon","storyBridge","signalTicker"]) {
     assert.doesNotMatch(css, new RegExp("\\." + legacy + "(?:[^A-Za-z0-9_-]|$)"));
   }
+  assert.doesNotMatch(css, /1180px/);
+  assert.match(css, /1120px/);
 });
 
 test("For Clubs retires the copy-a-brief interaction in favour of real lead capture", () => {
