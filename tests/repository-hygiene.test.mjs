@@ -706,3 +706,21 @@ test("feature intelligence styles stay outside the base globals layer", () => {
   assert.match(intelligence, /\.caseStudyPredictionProof\s*\{/);
   assert.match(layout, /intelligence-surfaces\.css/);
 });
+
+test("maintained product docs use the current AVELA category and pilot scope", () => {
+  const docs = [
+    "README.md",
+    "docs/roadmap.md",
+    "docs/product-brief.md",
+    "docs/womens-football-product-thesis.md",
+    "docs/avela-commercial-v2.md",
+    "docs/architecture.md"
+  ].map((path) => readFileSync(path, "utf8")).join("\n");
+  const pack = readFileSync("src/app/pilot/operating-pack/page.tsx", "utf8");
+
+  assert.match(docs, /Marketing & Commercial Decision Workspace for Football Clubs/);
+  assert.match(docs, /cross-functional decision orchestration/i);
+  assert.doesNotMatch(docs, /Growth Intelligence for Women’s Football|90-Day Growth Intelligence Pilot|Six home-fixture decision cycles/);
+  assert.match(pack, /4–6 fixture or campaign window/);
+  assert.doesNotMatch(pack, /90-day pilot · operating pack|Choose six home fixtures/);
+});
