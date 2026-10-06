@@ -67,6 +67,9 @@ function validPropertyValues(eventName: string, properties: Record<string, Primi
   if (eventName === "matchday_utility_opened" || eventName === "matchday_official_directions_opened" || eventName === "matchday_official_ticketing_opened") {
     return properties.surface === "matchday-companion";
   }
+  if (eventName === "matchday_external_travel_source_opened") {
+    return properties.surface === "matchday-companion" && (properties.source === "road" || properties.source === "rail");
+  }
   return false;
 }
 
