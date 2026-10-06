@@ -8,6 +8,7 @@ import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
 import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
+import { getMaterialMatchdayAlert } from "@/lib/matchdayDecisionAlert";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./matches.module.css";
@@ -65,6 +66,7 @@ export default async function MatchesPage() {
     ? upcoming.find((fixture) => fixture.id === priority.fixtureId) ?? null
     : null;
   const live = priority ? getCurrentProductOpportunity(priority.fixtureId) : null;
+  const priorityMatchdayAlert = currentFixture ? getMaterialMatchdayAlert(currentFixture.id, currentFixture.date) : null;
   const radarWithoutCurrent = priority
     ? radar.filter((item) => item.fixtureId !== priority.fixtureId)
     : radar;
@@ -130,6 +132,7 @@ export default async function MatchesPage() {
                 <h2>{live?.opportunity ?? "Review current evidence."}</h2>
                 <p><b>Do next:</b> {live?.nextAction.label ?? "No action is currently required."}</p>
                 <p className={styles.contractInline}><b>Attention driver:</b> {priority?.attentionReason ?? "No calendar pressure adjustment."}</p>
+                {priorityMatchdayAlert ? <p className={styles.matchdayInline}><b>{priorityMatchdayAlert.label}:</b> {priorityMatchdayAlert.title}</p> : null}
               </div>
               <Link href={`/app/matches/${currentFixture.id}`}>Open opportunity brief →</Link>
             </div>
