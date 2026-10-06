@@ -67,3 +67,166 @@
 .commercialLeadSuccess p{margin:7px 0 12px}
 .commercialSecondaryLinks{margin-top:24px;padding-top:18px;border-top:1px solid var(--avela-line)}
 @media(max-width:800px){.commercialLeadGrid{grid-template-columns:1fr}.commercialLeadWide{grid-column:auto;max-width:none}}
+
+
+/* For Clubs coherence pass */
+.commercialShell{
+  padding-bottom:88px;
+  background:
+    linear-gradient(180deg,#f8f6f1 0 260px,#f4f1eb 260px 100%);
+}
+.commercialLanguage{
+  width:min(1120px,calc(100% - 48px));
+  margin:18px auto 0;
+}
+.commercialHero,.commercialPanel{
+  width:min(1120px,calc(100% - 48px));
+  max-width:none;
+  box-sizing:border-box;
+}
+.commercialHero{
+  position:relative;
+  overflow:hidden;
+  margin:28px auto 0;
+  padding:clamp(42px,6vw,76px);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:20px 20px 56px 20px;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(138,217,204,.17),transparent 24%),
+    radial-gradient(circle at 22% 86%,rgba(240,138,106,.12),transparent 27%),
+    linear-gradient(145deg,#0b1d31 0%,#102742 54%,#173653 100%);
+  box-shadow:0 28px 74px rgba(13,34,56,.14);
+}
+.commercialHero::after{
+  content:"4–6 FIXTURES";
+  position:absolute;
+  right:34px;
+  top:34px;
+  padding:8px 11px;
+  border:1px solid rgba(138,217,204,.22);
+  border-radius:999px;
+  color:#9edfd5;
+  background:rgba(8,27,45,.52);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+.commercialHero h1{
+  max-width:14ch;
+  margin:18px 0 24px;
+  font-size:clamp(52px,6.2vw,78px);
+  line-height:.94;
+  color:#fff;
+}
+.commercialHero p{color:#c6d2dd}
+.commercialHero .eyebrow{color:#8ad9cc;font-size:12px}
+.commercialScope{
+  display:inline-flex;
+  margin-top:8px;
+  padding:9px 12px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  color:#fff;
+  background:rgba(255,255,255,.045);
+  font-size:13px;
+}
+.commercialHero a.productButton{
+  background:#f08a6a;
+  border-color:#f08a6a;
+  color:#0d2238;
+}
+.commercialHero .caseOverviewLinks a:not(.productButton){color:#dbe6ee}
+.commercialPanel{
+  margin:0 auto;
+  padding:64px 0;
+  border:0;
+  border-radius:0;
+  border-top:1px solid rgba(16,39,66,.12);
+  background:transparent;
+}
+.commercialPanel:first-of-type{margin-top:64px}
+.commercialPanel h2{
+  max-width:760px;
+  margin-bottom:28px;
+  font-size:clamp(34px,4.2vw,50px);
+  line-height:1.02;
+}
+.commercialPanel h3,.commercialTwoColumns h3{font-size:22px}
+.commercialTwoColumns{
+  gap:14px;
+}
+.commercialTwoColumns article{
+  padding:24px;
+  border:1px solid rgba(16,39,66,.10);
+  border-radius:14px;
+  background:#fffdfa;
+}
+.commercialThreeColumns{
+  gap:14px;
+}
+.commercialThreeColumns article{
+  min-height:190px;
+  padding:24px;
+}
+.commercialThreeColumns span{font-size:11px}
+.commercialThreeColumns p{font-size:15px;line-height:1.62}
+.commercialSteps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  padding:0;
+  list-style:none;
+  counter-reset:steps;
+}
+.commercialSteps li{
+  position:relative;
+  margin:0;
+  padding:50px 22px 22px;
+  border:1px solid rgba(16,39,66,.10);
+  border-radius:14px;
+  background:#fffdfa;
+  font-size:18px;
+}
+.commercialSteps li::before{
+  counter-increment:steps;
+  content:"0" counter(steps);
+  position:absolute;
+  top:18px;
+  left:22px;
+  color:#ef8b6c;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+.commercialSteps p{font-size:15px;line-height:1.6}
+.commercialNote{
+  margin-top:22px;
+  padding:18px 20px;
+  border-left:0;
+  border:1px solid rgba(47,143,131,.16);
+  border-radius:12px;
+  background:#eaf3f1;
+}
+.commercialNextStep{
+  margin-top:40px;
+  padding:46px;
+  border:1px solid rgba(16,39,66,.12);
+  border-radius:20px;
+  background:linear-gradient(135deg,#efe3d3 0%,#fffdfa 62%);
+  box-shadow:0 20px 56px rgba(13,34,56,.07);
+}
+.commercialLeadGrid{gap:16px}
+.commercialLeadGrid label>span,.commercialConsent span{font-size:14px}
+.commercialLeadGrid input,.commercialLeadGrid select{border-radius:12px}
+.commercialSubmitRow button{border-radius:12px}
+.commercialSubmitRow>span{font-size:13px}
+@media(max-width:800px){
+  .commercialLanguage,.commercialHero,.commercialPanel{width:min(100% - 30px,1120px)}
+  .commercialHero{padding:36px 24px 42px}
+  .commercialHero::after{position:static;display:inline-flex;margin-top:24px}
+  .commercialPanel{padding:48px 0}
+  .commercialPanel:first-of-type{margin-top:42px}
+  .commercialSteps{grid-template-columns:1fr}
+  .commercialNextStep{padding:28px 22px}
+}
