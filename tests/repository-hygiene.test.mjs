@@ -753,3 +753,11 @@ test("retired demand-history and league-benchmark CSS stays removed", () => {
   const css = readFileSync("src/app/intelligence-surfaces.css", "utf8");
   assert.doesNotMatch(css, /\.demandHistory|\.leagueBenchmark/);
 });
+
+test("duplicate global source-health CSS stays removed", () => {
+  const intel = readFileSync("src/app/intelligence-surfaces.css", "utf8");
+  const ux = readFileSync("src/app/product-ux.css", "utf8");
+  assert.doesNotMatch(intel, /\.sourceHealthCenter|\.decisionReliability/);
+  assert.match(ux, /\.sourceHealthCenter/);
+  assert.match(ux, /\.sourceHealthList/);
+});
