@@ -143,7 +143,7 @@ export function IntelligenceSources() {
             <article key={source.name} data-state={health.primary?.state ?? "unknown"}>
               <div><span>{source.category}</span><strong>{source.name}</strong></div>
               <b>{health.label}</b>
-              <small>{health.latest ? "Last success " + new Date(health.latest).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) : "No successful private refresh"}</small>
+              <small>{health.latest ? "Last successful refresh " + new Date(health.latest).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) : health.primary?.state === "requires-access" ? "Private evidence needs club permission" : health.primary?.state === "not-configured" ? "Connection not configured yet" : health.primary?.state === "blocked" ? "Evidence currently blocked" : "No recent refresh available"}</small>
             </article>
           ))}
         </div>
@@ -163,7 +163,7 @@ export function IntelligenceSources() {
             <p>{source.summary}</p>
             <div className={styles.healthMeta}>
               <span>Source health · {health.items.map((item) => item.id).join(" · ")}</span>
-              <strong>{health.latest ? "Last successful " + new Date(health.latest).toLocaleString("en-GB", { timeZone: "UTC" }) + " UTC" : "No private successful refresh recorded"}</strong>
+              <strong>{health.latest ? "Last successful " + new Date(health.latest).toLocaleString("en-GB", { timeZone: "UTC" }) + " UTC" : health.primary?.state === "requires-access" ? "Club permission required before private evidence can improve this decision" : health.primary?.state === "not-configured" ? "Configure this source when the club is ready to use it" : health.primary?.state === "blocked" ? "Resolve the source blocker before relying on this evidence" : "No recent refresh available"}</strong>
               <small>{health.primary?.ownerAction?.en ?? health.primary?.note?.en ?? "No owner action required."}</small>
             </div>
             <div className={styles.columns}>
