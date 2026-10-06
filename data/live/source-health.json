@@ -122,6 +122,28 @@
       }
     },
     {
+      "id": "tfl-road",
+      "label": {
+        "en": "TfL road disruption",
+        "es": "Incidencias viarias TfL"
+      },
+      "category": "matchday-road-disruption",
+      "access": "api-key",
+      "state": "not-configured",
+      "method": "official-api",
+      "cadence": "fixture-windows",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Configure TfL Unified API credentials, then validate the fixture-scoped road disruption adapter.",
+        "es": "Configurar las credenciales de la API Unified de TfL y validar después el adaptador de incidencias viarias limitado al partido."
+      },
+      "note": {
+        "en": "The adapter is implemented but remains non-live until a timestamped TfL response is validated. No road condition is inferred when credentials are absent.",
+        "es": "El adaptador está implementado, pero no se considera live hasta validar una respuesta de TfL con timestamp. No se infiere el estado de la carretera cuando faltan credenciales."
+      },
+      "lastAttemptAt": null
+    },
+    {
       "id": "national-rail-rdm",
       "label": {
         "en": "National Rail / Rail Data Marketplace",
