@@ -2506,3 +2506,9 @@ test("commercial mobile hero preserves safe horizontal gutters", () => {
   assert.match(css, /heroCopy\{width:100%;min-width:0\}/);
   assert.match(css, /heroMeta strong\{color:#fff\}/);
 });
+
+test("commercial moving signal strip keeps readable contrast on navy", () => {
+  const css = read("src/app/commercial-home.module.css");
+  assert.match(css, /signalTicker\{[\s\S]*?color:#dce8ef/);
+  assert.match(css, /signalTicker \.signalSet span\{[\s\S]*?color:#dce8ef/);
+});
