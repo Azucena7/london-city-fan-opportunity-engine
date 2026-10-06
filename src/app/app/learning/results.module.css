@@ -47,7 +47,7 @@
 .interpretationGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
 .interpretationGrid article{padding:11px;border:1px solid #E5E9EC;border-radius:7px;background:#FAFBFB}
 .interpretationGrid span,.interpretationGrid strong{display:block}
-.interpretationGrid span{font-size:9px;color:#87949E;font-weight:900;text-transform:uppercase}
+.interpretationGrid span{font-size:10px;color:#87949E;font-weight:900;text-transform:uppercase}
 .interpretationGrid strong{margin-top:4px;font-size:11px;line-height:1.4}
 .interpretationGrid p{margin:4px 0 0!important;color:#87949E!important;font-size:10px!important;line-height:1.4}
 
