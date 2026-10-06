@@ -446,9 +446,9 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
     <section className={styles.wrap}>
       <header className={styles.head}>
         <div>
-          <span>Player Asset Planning</span>
-          <h1>Who should we use for this activation?</h1>
-          <p>Tell AVELA the campaign and how many players you need. The recommendation balances fit, availability, international duty, cost, remaining usage, momentum and season opportunity cost.</p>
+          <span>Optimisation brief</span>
+          <h1>Choose the need. AVELA ranks the best viable combinations.</h1>
+          <p>The recommendation balances fit, availability, international duty, cost, remaining usage, momentum and season opportunity cost — and re-ranks when constraints change.</p>
         </div>
         <div className={styles.need}>
           <span>Players needed</span>
