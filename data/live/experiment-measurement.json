@@ -196,6 +196,27 @@
         "surface": "string"
       },
       "state": "provider-ready"
+    },
+    {
+      "name": "matchday_external_travel_source_opened",
+      "source": "mobility",
+      "label": {
+        "en": "External live travel source opened",
+        "es": "Fuente externa de viaje en directo abierta"
+      },
+      "allowedProperties": [
+        "surface",
+        "source"
+      ],
+      "requiredProperties": [
+        "surface",
+        "source"
+      ],
+      "propertyTypes": {
+        "surface": "string",
+        "source": "string"
+      },
+      "state": "provider-ready"
     }
   ],
   "cohorts": [
