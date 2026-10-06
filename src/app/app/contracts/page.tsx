@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { ContractReviewQueue } from "@/components/ContractReviewQueue";
 import { ContractImpactGraph } from "@/components/ContractImpactGraph";
 import { WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
@@ -33,10 +33,9 @@ export default function ContractsPage() {
   return (
     <AppWorkspaceShell
       active="contracts"
-      eyebrow="Contract intelligence"
-      title="Contracts"
-      subtitle="Turn reviewed rights and obligations into decision constraints without treating extracted text as legal truth."
-      actions={<><WorkspaceViewSwitcher value="list" /><WorkspaceFilterButton /></>}
+      eyebrow="Contract decision intelligence"
+      title="Which verified clause changes a club decision?"
+      subtitle="Turn reviewed rights and obligations into explicit constraints without treating extracted text as legal truth."
     >
       <section className={styles.summary} aria-label="Contract verification lifecycle">
         <WorkspaceCard tone="action"><span>01 · Detected</span><strong>Document</strong><small>Approved repository or authorised upload.</small></WorkspaceCard>
