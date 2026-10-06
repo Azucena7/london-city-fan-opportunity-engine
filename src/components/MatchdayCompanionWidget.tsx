@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { mobilityPartnership } from "@/lib/data";
+import { mobilityPartnership, partnerCommercialPack } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import { getMatchdayTerritoryContext } from "@/lib/matchdayTerritoryContext";
 import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
@@ -27,6 +27,10 @@ export function MatchdayCompanionWidget({
   const territory = getMatchdayTerritoryContext();
   const weather = getMatchdayWeatherContext(fixtureId, fixtureDate);
   const attention = getMatchdayAttention(fixtureId, fixtureDate);
+  const travelPartner = partnerCommercialPack.packs.find((pack) =>
+    ["journey-technology","rail"].includes(pack.category) &&
+    pack.recommendedFixtureIds.includes(fixtureId)
+  ) ?? null;
 
   return (
     <section className={styles.shell} aria-label="Matchday Companion">
@@ -115,6 +119,18 @@ export function MatchdayCompanionWidget({
           <small>{territory.authorisedPostcodeState === "club-aggregate" ? "Use aggregated sector patterns only." : "No authorised supporter postcode aggregate connected."}</small>
         </div>
       </div>
+
+      {travelPartner ? (
+        <div className={styles.partnerOpportunity}>
+          <div>
+            <span>Commercial opportunity</span>
+            <strong>{travelPartner.title.en}</strong>
+            <small>{travelPartner.candidate} · {travelPartner.relationshipState.replaceAll("-", " ")}</small>
+          </div>
+          <p>{travelPartner.proposition.en}</p>
+          <Link href="/app/sponsors">Review partner opportunity →</Link>
+        </div>
+      ) : null}
 
       <div className={styles.providers}>
         {mobilityProviderReadiness.map((provider) => (
