@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { calendar, mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
+import { MatchdayOfficialDirectionsLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
 import styles from "./matchday.module.css";
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
 
   return (
     <main className={styles.shell}>
+      <MatchdayUtilityTracker fixtureId={fixtureId} />
       <header className={styles.top}>
         <Link href="/live/london-city" className={styles.brand}>LONDON CITY · MATCHDAY</Link>
         <span>Travel information · supporter service</span>
@@ -94,7 +96,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
           <h2>Check the club’s latest ground information before you leave.</h2>
           <p>Station, parking, walking and access advice can change. The club’s official directions remain the source of truth until live journey providers are connected here.</p>
         </div>
-        <a href="https://www.londoncitylionesses.com/hayes-lane-directions" target="_blank" rel="noreferrer">Open official directions ↗</a>
+        <MatchdayOfficialDirectionsLink fixtureId={fixtureId} href="https://www.londoncitylionesses.com/hayes-lane-directions">Open official directions ↗</MatchdayOfficialDirectionsLink>
       </section>
 
       <section className={styles.future}>
