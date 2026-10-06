@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { mobilityPartnership } from "@/lib/data";
+import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import styles from "./MatchdayCompanionWidget.module.css";
 
 export function MatchdayCompanionWidget({
@@ -17,7 +18,7 @@ export function MatchdayCompanionWidget({
     .slice(0, 3);
   const maxFriction = corridors[0]?.travelFriction ?? null;
   const state = pilot ? "Pilot candidate" : "Monitor";
-  const liveProviderConnected = false;
+  const providerSummary = summariseMobilityProviderReadiness();
 
   return (
     <section className={styles.shell} aria-label="Matchday Companion">
@@ -27,10 +28,10 @@ export function MatchdayCompanionWidget({
           <h2>Could travel friction change this matchday decision?</h2>
           <p>AVELA turns access, transport, weather and disruption context into a supporter-service decision — without pretending modelled routes are live travel data.</p>
         </div>
-        <div className={styles.state} data-live={liveProviderConnected ? "true" : "false"}>
+        <div className={styles.state} data-live={providerSummary.state === "live" ? "true" : "false"}>
           <span>Journey layer</span>
           <strong>{state}</strong>
-          <small>{liveProviderConnected ? "Live provider connected" : "Live traffic / routing provider not connected yet"}</small>
+          <small>{providerSummary.configured}/{providerSummary.total} provider layers configured · {providerSummary.state.replace("-", " ")}</small>
         </div>
       </div>
 
@@ -68,6 +69,16 @@ export function MatchdayCompanionWidget({
               <b>{corridor.travelFriction}</b>
             </div>
             <p>{corridor.note.en}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className={styles.providers}>
+        {mobilityProviderReadiness.map((provider) => (
+          <article key={provider.id} data-state={provider.state}>
+            <span>{provider.label}</span>
+            <strong>{provider.state.replace("-", " ")}</strong>
+            <small>{provider.provider}</small>
           </article>
         ))}
       </div>
