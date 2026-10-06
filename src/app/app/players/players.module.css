@@ -18,7 +18,7 @@
   margin-bottom:12px;padding:13px 16px;border:1px solid var(--product-line);border-radius:12px;background:#F8FAFB;
 }
 .workflowContext div{display:grid;gap:4px}
-.workflowContext span{font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--product-accent)}
+.workflowContext span{font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--product-accent)}
 .workflowContext strong{font-size:13px;color:var(--product-ink)}
 .workflowContext small{font-size:11px;line-height:1.45;color:var(--product-muted)}
 .workflowContext a{font-size:12px;font-weight:850;text-decoration:none;color:var(--product-ink);white-space:nowrap}
