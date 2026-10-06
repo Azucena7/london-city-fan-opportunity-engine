@@ -2493,3 +2493,9 @@ test("internal AVELA shell uses the commercial brand mark and marketing-commerci
   assert.match(nav, /Club decision workspace/);
   assert.match(css, /clip-path:polygon\(0 0,100% 50%,0 100%\)/);
 });
+
+test("commercial nav identifies the internal AVELA workspace clearly", () => {
+  const nav = read("src/components/MarketingNav.tsx");
+  assert.match(nav, /Open workspace/);
+  assert.match(nav, /marketing and commercial product navigation/);
+});
