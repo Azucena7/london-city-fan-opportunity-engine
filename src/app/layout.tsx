@@ -5,15 +5,11 @@ import "./intelligence-surfaces.css";
 import "./case-brand.css";
 import "./i18n.css";
 import "./workspace-structure.css";
-import "./case-study.css";
-import "./case-study-technical.css";
-import "./case-study-commercial.css";
 import "./product-ux.css";
 import "./navigation-v2.css";
 import "./product-system.css";
 import "./product-shell.css";
 import "./readability.css";
-import "./commercial-pilot.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { cookies } from "next/headers";
 
