@@ -72,3 +72,11 @@ test("Source governance exposes Matchday Companion dependencies", () => {
   assert.ok(decision, "missing matchday-travel source decision");
   assert.deepEqual(decision.requiredSourceIds, ["club-public-web", "open-meteo"]);
 });
+
+
+test("Travel partner prospecting stays internal until approved", () => {
+  const widget = read("src/components/MatchdayCompanionWidget.tsx");
+  const publicLanding = read("src/app/matchday/[fixtureId]/page.tsx");
+  assert.match(widget, /Review partner opportunity/);
+  assert.doesNotMatch(publicLanding, /partnerCommercialPack|relationshipState|Review partner opportunity/);
+});
