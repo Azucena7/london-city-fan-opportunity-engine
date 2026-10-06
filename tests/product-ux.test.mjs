@@ -2461,6 +2461,7 @@ test("live product timing cannot lag behind the real London date", () => {
   assert.match(helper, /referenceDate, londonToday/);
   assert.match(opportunity, /currentProductDate/);
   assert.match(opportunity, /nextActionStatus/);
+  assert.match(opportunity, /OVERDUE ·/);
   assert.match(home, /currentProductDate\(currentState\.updated_at\)/);
   assert.match(radar, /currentProductDate\(currentState\.updated_at\)/);
 });
