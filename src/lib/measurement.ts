@@ -4,7 +4,8 @@ export type MeasurementEventName =
   | "mobility_scenario_evaluated"
   | "matchday_utility_opened"
   | "matchday_official_directions_opened"
-  | "matchday_official_ticketing_opened";
+  | "matchday_official_ticketing_opened"
+  | "matchday_external_travel_source_opened";
 
 export type MeasurementDeliveryState =
   | "delivered"
