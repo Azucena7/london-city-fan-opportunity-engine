@@ -25,15 +25,19 @@ test("commercial stories distinguish proposals, delivery and commercial outcomes
   assert.match(story, /\/app\/learning\?fixture=\$\{fixture\.id\}/);
 });
 
-test("pilot path stays honest and low-friction without fabricated contact", async () => {
+test("pilot path stays honest and low-friction with real lead capture", async () => {
   const page = await source("src/components/ClubPilotProposition.tsx");
-  assert.doesNotMatch(page, /navigator\.clipboard|pilot-brief|copyBrief/);
-  assert.doesNotMatch(page, /mailto:|commercialContact|contactHref/);
-  assert.doesNotMatch(page, /fetch\(|onSubmit|type="email"/);
-  assert.match(page, /No migration, no commitment and no personal data requested on this page/);
+  const route = await source("src/app/api/commercial-lead/route.ts");
+  assert.doesNotMatch(page, /navigator\.clipboard|pilot-brief|copyBrief|mailto:/);
+  assert.match(page, /fetch\("\/api\/commercial-lead"/);
+  assert.match(page, /onSubmit=\{submitLead\}/);
+  assert.match(page, /type="email"/);
+  assert.match(page, /No supporter data or system access is requested at this stage/);
+  assert.match(page, /Request a conversation/);
   assert.match(page, /Try the guided demo/);
   assert.match(page, /See the pilot structure/);
   assert.match(page, /AVELA does not need supporter names or emails/);
+  assert.match(route, /commercial_leads/);
 });
 
 test("new commercial views are discoverable from the product and case overview", async () => {
