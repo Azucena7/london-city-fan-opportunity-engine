@@ -100,12 +100,10 @@ export default function Home() {
           </p>
         </div>
         <div className={styles.valueGrid}>
-          <article><span>01</span><strong>Catch opportunities earlier</strong><p>Surface material changes before they disappear inside dashboards, inboxes or individual memory.</p><small>Measure: signal → review time</small></article>
-          <article><span>02</span><strong>Reduce coordination cost</strong><p>Bring player, sponsor, calendar, rights and capacity constraints into the same decision instead of reconciling them manually.</p><small>Measure: handoffs + decision cycle time</small></article>
-          <article><span>03</span><strong>Use scarce assets better</strong><p>Optimise player windows, commercial rights, creative capacity and campaign timing around the highest-value viable option.</p><small>Measure: asset utilisation + conflicts avoided</small></article>
-          <article><span>04</span><strong>Make decisions safer</strong><p>Keep evidence, assumptions, approvals and contract truth visible before the club commits externally.</p><small>Measure: blocked risks resolved before launch</small></article>
-          <article><span>05</span><strong>Learn across fixtures</strong><p>Preserve recommendation, club decision, execution and outcome so the next comparable decision starts smarter.</p><small>Measure: learning reused in later decisions</small></article>
-          <article><span>06</span><strong>Increase organisational leverage</strong><p>Let specialist teams keep their tools while AVELA reduces the work required to connect them around one priority.</p><small>Measure: manual analysis replaced or shortened</small></article>
+          <article><span>01</span><strong>Catch the moment earlier</strong><p>Surface the change that matters before it disappears inside dashboards, inboxes or individual memory.</p><small>Signal → decision time</small></article>
+          <article><span>02</span><strong>Make one joined-up decision</strong><p>Bring audience, player, sponsor, calendar, rights and capacity constraints into the same recommendation.</p><small>Handoffs + decision cycle</small></article>
+          <article><span>03</span><strong>Use scarce assets where they matter</strong><p>Allocate player windows, rights, creative capacity and spend around the highest-value viable play.</p><small>Asset utilisation + conflicts avoided</small></article>
+          <article><span>04</span><strong>Make the next fixture smarter</strong><p>Retain recommendation, decision, execution and outcome so learning compounds instead of resetting every match.</p><small>Learning reused later</small></article>
         </div>
       </section>
 
