@@ -224,7 +224,7 @@ export default async function SeasonIntelligencePage() {
                   <div className={styles.outcome}>
                     <span>Next handoff</span>
                     <DecisionStateBadge state={row.measuredOutcome ? "MEASURED" : row.campaign && row.approvalsTotal > 0 && row.approvalsReady < row.approvalsTotal ? "REVIEW" : row.campaign ? "READY" : "ACT"} label={row.measuredOutcome ? "Learning" : row.campaign && row.approvalsTotal > 0 && row.approvalsReady < row.approvalsTotal ? "Approval" : row.campaign ? "Campaign" : "Decide"} />
-                    <Link href={row.measuredOutcome ? "/app/learning?fixture=" + row.id : row.campaign ? "/app/campaigns" : "/app/matches/" + row.id}>Open →</Link>
+                    <Link href={row.measuredOutcome ? "/app/learning?fixture=" + row.id : row.campaign ? "/app/campaigns" : "/app/matches/" + row.id}>{row.measuredOutcome ? "Review learning →" : row.campaign ? "Review campaign →" : "Open decision →"}</Link>
                   </div>
                 </article>
               );
