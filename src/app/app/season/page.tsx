@@ -14,7 +14,7 @@ import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHea
 import styles from "./season.module.css";
 
 export const metadata: Metadata = {
-  title: "Season Intelligence · AVELA",
+  title: "Season Intelligence",
   description: "Season-level view of opportunities, campaigns, activation mix, attendance evidence and learning coverage."
 };
 
