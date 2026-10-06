@@ -2677,3 +2677,21 @@ test("public Matchday utility keeps operational microcopy at 10px or above", () 
   const css = read("src/app/matchday/[fixtureId]/matchday.module.css");
   assert.doesNotMatch(css, /font-size:(?:8|9)px/);
 });
+
+test("commercial pilot request captures a real lead", () => {
+  const page = read("src/components/ClubPilotProposition.tsx");
+  const route = read("src/app/api/commercial-lead/route.ts");
+  const migration = read("supabase/migrations/20261006202500_commercial_leads_capture.sql");
+
+  assert.match(page, /\/api\/commercial-lead/);
+  assert.match(page, /name="clubName"/);
+  assert.match(page, /name="workEmail"/);
+  assert.match(page, /name="consent"/);
+  assert.match(page, /commercialHoneypot/);
+  assert.match(route, /commercial_leads/);
+  assert.match(route, /return=minimal/);
+  assert.match(route, /Honeypot/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /grant insert on public\.commercial_leads to anon, authenticated/);
+  assert.doesNotMatch(migration, /grant select on public\.commercial_leads/);
+});
