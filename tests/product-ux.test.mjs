@@ -2450,3 +2450,17 @@ test("commercial home uses an interactive fixture-marketing decision demo", () =
   assert.match(page, /Illustrative decision/);
   assert.match(page, /Observed evidence/);
 });
+
+test("live product timing cannot lag behind the real London date", () => {
+  const helper = read("src/lib/currentProductDate.ts");
+  const opportunity = read("src/lib/productOpportunity.ts");
+  const home = read("src/app/app/page.tsx");
+  const radar = read("src/app/app/matches/page.tsx");
+
+  assert.match(helper, /Europe\/London/);
+  assert.match(helper, /referenceDate, londonToday/);
+  assert.match(opportunity, /currentProductDate/);
+  assert.match(opportunity, /nextActionStatus/);
+  assert.match(home, /currentProductDate\(currentState\.updated_at\)/);
+  assert.match(radar, /currentProductDate\(currentState\.updated_at\)/);
+});
