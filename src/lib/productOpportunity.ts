@@ -8,6 +8,7 @@ import {
 } from "@/lib/data";
 import type { CampaignPlan, CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
 import { classifyWomensFootballSignal, type WomensFootballSignalLens } from "@/lib/womensFootballSignals";
+import { currentProductDate } from "@/lib/currentProductDate";
 
 
 export type ProductEvidenceState = "known" | "assumption" | "missing";
@@ -205,8 +206,8 @@ export function getCurrentProductOpportunity(requestedFixtureId?: string): Produ
   if (!current) return null;
 
   const { calendarFixture, fixture } = current;
-  const engineReference = (currentState.updated_at as string | undefined) ?? calendarFixture.date;
-  const timing = fixtureTiming(engineReference, calendarFixture.date);
+  const referenceDate = currentProductDate((currentState.updated_at as string | undefined) ?? calendarFixture.date);
+  const timing = fixtureTiming(referenceDate, calendarFixture.date);
   const campaign = currentCampaign(calendarFixture.id);
   const signals = evidenceSignals(calendarFixture.id, campaign);
   const currentFixtureSummary =
@@ -290,7 +291,6 @@ export function getCurrentProductOpportunity(requestedFixtureId?: string): Produ
   const nextScheduledAction = campaign?.schedule.find((item) => item.state !== "complete");
   const primaryMeasurement = campaign?.measurement.find((item) => item.id === "purchase-scan-repeat")
     ?? campaign?.measurement[0];
-  const referenceDate = ((currentState.updated_at as string | undefined) ?? calendarFixture.date).slice(0, 10);
   const nextActionStatus =
     nextScheduledAction && nextScheduledAction.date < referenceDate
       ? "overdue" as const
