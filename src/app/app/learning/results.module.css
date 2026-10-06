@@ -15,7 +15,7 @@
 }
 .hero>div,.stateCard{padding:16px;border:1px solid #E0E5E8;border-radius:11px;background:#fff}
 .eyebrow{color:#81909C;font-size:10px;font-weight:900;letter-spacing:.055em;text-transform:uppercase}
-.hero h1{margin:5px 0 0!important;font-size:23px!important;line-height:1.15!important;letter-spacing:-.025em!important}
+.hero h2{margin:5px 0 0!important;font-size:23px!important;line-height:1.15!important;letter-spacing:-.025em!important}
 .hero>div>p{margin:7px 0 0!important;color:#74828D!important;font-size:12px!important;line-height:1.5}
 .stateCard span,.stateCard strong,.stateCard p{display:block}
 .stateCard span{color:#A86A1A;font-size:10px;font-weight:900;text-transform:uppercase}
