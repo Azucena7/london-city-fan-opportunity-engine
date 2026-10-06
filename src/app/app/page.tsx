@@ -13,7 +13,7 @@ import { DecisionStateBadge, WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, Wor
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
-  title: "Decision Center · AVELA",
+  title: "Decision Center",
   description: "See what changed, what needs attention, why it matters and what AVELA recommends next."
 };
 
