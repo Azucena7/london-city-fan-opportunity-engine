@@ -435,3 +435,24 @@
   .heroActions,.heroMeta,.heroProof{width:100%;min-width:0}
   .problem,.pilot{padding:44px 0}
 }
+
+
+/* Commercial alignment pass */
+.hero{
+  padding-left:max(24px,calc((100vw - 1120px)/2));
+  padding-right:max(24px,calc((100vw - 1120px)/2));
+}
+.problem,.pilot{padding-top:80px;padding-bottom:80px}
+.liveCopy,.livePanel{padding-top:72px;padding-bottom:72px}
+.finalCta{
+  padding-left:max(24px,calc((100vw - 1120px)/2));
+  padding-right:max(24px,calc((100vw - 1120px)/2));
+}
+.problemCopy p,.pilot>div:first-child>p{font-size:16px;line-height:1.65}
+.pilotSteps article{padding:20px}
+.pilotSteps strong{font-size:17px}
+.pilotSteps p{font-size:13px;line-height:1.5}
+@media(max-width:650px){
+  .problem,.pilot{padding-top:52px;padding-bottom:52px}
+  .liveCopy,.livePanel{padding-top:56px;padding-bottom:56px}
+}
