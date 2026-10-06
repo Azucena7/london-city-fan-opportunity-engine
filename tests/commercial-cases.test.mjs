@@ -41,17 +41,19 @@ test("new commercial views are discoverable from the product and case overview",
     source("src/components/MarketingNav.tsx"), source("src/components/ProductJourneyNav.tsx"),
     source("src/app/page.tsx"), source("src/app/pilot/page.tsx"), source("src/components/LondonCityCase.tsx")
   ]);
-  assert.match(marketingNav, /\/for-clubs#demo/);
-  assert.match(product, /\/for-clubs#demo/);
-  assert.match(pilot, /href[=:]\s*"\/for-clubs"/);
+  assert.match(marketingNav, /\/for-clubs\?utm_source=avela_nav/);
+  assert.match(product, /\/for-clubs\?utm_source=avela_home/);
+  assert.match(pilot, /\/for-clubs\?utm_source=pilot/);
   assert.doesNotMatch(appNav, /href[=:]\s*"\/for-clubs"/);
   assert.match(appNav, /href="\/"/);
   assert.match(overview, /href="\/live\/london-city\/everton"/);
   assert.match(overview, /href="\/live\/london-city\/brighton"/);
 });
 
-test("commercial primary link retains readable text against its dark button", async () => {
+test("commercial pilot cards and primary link retain readable styling", async () => {
   const css = await source("src/app/commercial-pilot.css");
   assert.match(css, /\.commercialHero a\.productButton \{[^}]*color:#fff/);
-  assert.match(css, /\.commercialTableWrap \{ overflow-x: auto;/);
+  assert.match(css, /\.commercialThreeColumns\{/);
+  assert.match(css, /\.commercialNextStep\{/);
 });
+
