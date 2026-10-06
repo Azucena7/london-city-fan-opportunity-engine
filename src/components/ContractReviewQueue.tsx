@@ -205,9 +205,9 @@ export function ContractReviewQueue() {
                         <small>Verified {clause.reviewed_at ? new Date(clause.reviewed_at).toLocaleString("en-GB") : ""}</small>
                       ) : (
                         <>
-                          <button type="button" disabled={Boolean(busy)} onClick={() => void review(clause.id, "needs-review")}>Needs review</button>
-                          <button type="button" disabled={Boolean(busy)} onClick={() => void review(clause.id, "rejected")}>Reject</button>
-                          <button type="button" disabled={Boolean(busy)} onClick={() => void review(clause.id, "verified")}>
+                          <button type="button" disabled={Boolean(busy)} aria-busy={Boolean(busy)} onClick={() => void review(clause.id, "needs-review")}>Needs review</button>
+                          <button type="button" disabled={Boolean(busy)} aria-busy={Boolean(busy)} onClick={() => void review(clause.id, "rejected")}>Reject</button>
+                          <button type="button" disabled={Boolean(busy)} aria-busy={Boolean(busy)} onClick={() => void review(clause.id, "verified")}>
                             {busy === clause.id + "verified" ? "Verifying…" : "Verify clause"}
                           </button>
                         </>
