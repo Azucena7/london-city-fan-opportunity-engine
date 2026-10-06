@@ -7,7 +7,7 @@ import { partnerCommercialPack, pilotReadiness } from "@/lib/data";
 import styles from "./sponsors.module.css";
 
 export const metadata: Metadata = {
-  title: "Sponsors · AVELA",
+  title: "Sponsors",
   description: "Prioritise partner opportunities separately from verified sponsor rights, obligations and fulfilment evidence."
 };
 
