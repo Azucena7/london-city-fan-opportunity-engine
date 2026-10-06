@@ -128,3 +128,26 @@
 .links a,.login{font-size:13px;letter-spacing:.015em}
 .demo{min-height:44px;padding:11px 16px;font-size:13px}
 .mobileMenu summary,.mobilePanel a{font-size:13px}
+
+
+/* Home-only integrated dark navigation */
+.dark{
+  color:#fff;
+  border-bottom-color:rgba(255,255,255,.09);
+  background:rgba(11,29,49,.94);
+  box-shadow:0 1px 0 rgba(255,255,255,.05);
+}
+.dark .brand{color:#fff}
+.dark .mark::after{background:#0b1d31}
+.dark .links a,.dark .login{color:#aebfcd}
+.dark .links a:hover,.dark .login:hover{color:#fff}
+.dark .demo{
+  color:#0d2238;
+  background:#f08a6a;
+  box-shadow:0 10px 24px rgba(240,138,106,.14);
+}
+.dark .mobileMenu summary{
+  color:#fff;
+  border-color:rgba(255,255,255,.16);
+  background:rgba(255,255,255,.06);
+}
