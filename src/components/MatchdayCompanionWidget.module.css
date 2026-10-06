@@ -39,3 +39,13 @@
 .territory strong{display:block;margin-top:5px;color:#102742;font-size:12px;line-height:1.35}
 .territory small{display:block;margin-top:4px;color:#84919B;font-size:9px;line-height:1.4}
 @media(max-width:760px){.territory{grid-template-columns:1fr}}
+
+.weather{display:grid;grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr);gap:18px;align-items:center;padding:13px 16px;border-bottom:1px solid #E4E8EB;background:#FBFCFC}
+.weather span{display:block;color:#7E8D98;font-size:8px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+.weather strong{display:block;margin-top:5px;color:#102742;font-size:13px}
+.weather small{display:block;margin-top:4px;color:#85919B;font-size:9px}
+.weather p{margin:0!important;color:#60717E!important;font-size:10px!important;line-height:1.45}
+.weather[data-level="high"]{background:#FFF5F1}
+.weather[data-level="medium"]{background:#FFFBF3}
+.weather[data-level="low"]{background:#F4FAF8}
+@media(max-width:760px){.weather{grid-template-columns:1fr}}
