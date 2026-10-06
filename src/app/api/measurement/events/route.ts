@@ -63,6 +63,9 @@ function validPropertyValues(eventName: string, properties: Record<string, Primi
       && categoricalBands.occupancy_band.has(properties.occupancy_band as string)
       && categoricalBands.opportunity_score_band.has(properties.opportunity_score_band as string);
   }
+  if (eventName === "matchday_utility_opened" || eventName === "matchday_official_directions_opened") {
+    return properties.surface === "matchday-companion";
+  }
   return false;
 }
 
