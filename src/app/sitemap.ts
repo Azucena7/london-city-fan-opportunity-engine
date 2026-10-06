@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((item) => item.homeAway === "home")
     .map((item) => ({
       url: `${base}/matchday/${item.id}`,
-      lastModified: new Date(item.date + "T12:00:00Z"),
+      lastModified: updated,
       changeFrequency: "weekly" as const,
       priority: 0.7
     }));
