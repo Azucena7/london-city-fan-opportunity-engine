@@ -39,10 +39,11 @@ test("Matchday Companion territory context never treats club postcode data as pu
   assert.match(territory, /exact supporter postcodes are not exposed/i);
 });
 
-test("TfL road adapter fails closed when credentials are absent", () => {
+test("TfL road adapter supports current API key naming and anonymous fallback", () => {
   const road = read("src/app/api/matchday/road/route.ts");
-  assert.match(road, /if \(!appId \|\| !appKey\)/);
-  assert.match(road, /state: "not-configured"/);
+  assert.match(road, /TFL_APP_KEY \?\? process\.env\.TFL_API_KEY/);
+  assert.match(road, /if \(appId\) url\.searchParams\.set\("app_id", appId\)/);
+  assert.match(road, /if \(appKey\) url\.searchParams\.set\("app_key", appKey\)/);
   assert.match(road, /MATERIAL_RADIUS_KM/);
 });
 
