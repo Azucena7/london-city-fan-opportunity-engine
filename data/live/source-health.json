@@ -372,6 +372,30 @@
         "en": "Use public Blinkfire evidence only as context until the club authorises a private connector; do not treat AVELA product traffic as campaign outcome evidence.",
         "es": "Usar la evidencia pública de Blinkfire solo como contexto hasta que el club autorice un conector privado; no tratar el tráfico del producto AVELA como evidencia de resultados de campaña."
       }
+    },
+    {
+      "id": "matchday-travel",
+      "label": {
+        "en": "Matchday travel confidence",
+        "es": "Confianza de viaje en matchday"
+      },
+      "question": {
+        "en": "Can the club publish fixture-specific travel guidance without overstating live conditions?",
+        "es": "¿Puede el club publicar indicaciones de viaje específicas del partido sin sobredimensionar las condiciones en vivo?"
+      },
+      "route": "/app/matches",
+      "requiredSourceIds": [
+        "club-public-web",
+        "open-meteo"
+      ],
+      "supportingSourceIds": [
+        "tfl-road",
+        "national-rail-rdm"
+      ],
+      "nextAction": {
+        "en": "Use official club directions and live weather now; activate road and rail escalation only after timestamped provider responses are validated.",
+        "es": "Usar ahora las indicaciones oficiales del club y el tiempo en vivo; activar alertas viarias y ferroviarias sólo tras validar respuestas de proveedor con timestamp."
+      }
     }
   ]
 }
