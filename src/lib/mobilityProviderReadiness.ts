@@ -24,12 +24,13 @@ type SourceHealthItem = {
 };
 
 const sourceHealth = sourceHealthRaw as { sources?: SourceHealthItem[] };
+const roadHealth = sourceHealth.sources?.find((item) => item.id === "tfl-road") ?? null;
 const railHealth = sourceHealth.sources?.find((item) => item.id === "national-rail-rdm") ?? null;
 
-function mapRailState(): MobilityProviderState {
-  if (!railHealth) return "not-configured";
-  if (railHealth.state === "operational") return "live";
-  if (railHealth.state === "degraded") return "degraded";
+function mapSourceState(item: SourceHealthItem | null): MobilityProviderState {
+  if (!item) return "not-configured";
+  if (item.state === "operational") return "live";
+  if (item.state === "degraded") return "degraded";
   return "not-configured";
 }
 
@@ -37,19 +38,19 @@ export const mobilityProviderReadiness: MobilityProviderReadiness[] = [
   {
     id: "road",
     label: "Road & traffic",
-    state: "not-configured",
-    provider: "TfL / traffic provider pending",
+    state: mapSourceState(roadHealth),
+    provider: "Transport for London Unified API",
     sourceUrl: "https://api.tfl.gov.uk/",
-    checkedAt: null,
+    checkedAt: roadHealth?.lastAttemptAt ?? roadHealth?.lastSuccessfulAt ?? null,
     freshnessMinutes: null,
     scope: "Material road incidents and closures that could affect supporter arrival.",
     decisionRule: "Escalate only when a verified incident materially affects a relevant supporter corridor or recommended arrival window.",
-    fallback: "Show official club directions and do not infer live road conditions."
+    fallback: roadHealth?.note?.en ?? "Show official club directions and do not infer live road conditions."
   },
   {
     id: "rail",
     label: "Rail",
-    state: mapRailState(),
+    state: mapSourceState(railHealth),
     provider: "National Rail / Rail Data Marketplace",
     sourceUrl: "https://raildata.org.uk/",
     checkedAt: railHealth?.lastAttemptAt ?? railHealth?.lastSuccessfulAt ?? null,
