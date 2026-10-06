@@ -1,7 +1,9 @@
 export type MeasurementEventName =
   | "experience_concept_selected"
   | "experience_validation_complete"
-  | "mobility_scenario_evaluated";
+  | "mobility_scenario_evaluated"
+  | "matchday_utility_opened"
+  | "matchday_official_directions_opened";
 
 export type MeasurementDeliveryState =
   | "delivered"
