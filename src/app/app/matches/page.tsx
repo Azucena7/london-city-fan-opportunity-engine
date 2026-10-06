@@ -14,7 +14,7 @@ import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHea
 import styles from "./matches.module.css";
 
 export const metadata: Metadata = {
-  title: "Opportunity Radar · AVELA",
+  title: "Opportunity Radar",
   description: "Upcoming home fixtures ranked by opportunity potential, confidence and urgency."
 };
 
