@@ -15,7 +15,7 @@ export function MarketingNav() {
       </div>
       <div className={styles.actions}>
         <Link className={styles.login} href="/app/demo?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=desktop">Open workspace</Link>
-        <Link className={styles.demo} href="/for-clubs?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=desktop#demo">Club pilot</Link>
+        <Link className={styles.demo} href="/for-clubs?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=desktop#demo">Request pilot</Link>
       </div>
       <details className={styles.mobileMenu}>
         <summary>Menu</summary>
@@ -24,6 +24,7 @@ export function MarketingNav() {
           <Link href="/live/london-city?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=live_case&utm_content=mobile">Live case</Link>
           <Link href="/#faq">FAQ</Link>
           <Link href="/app/demo?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=mobile">Open workspace</Link>
+          <Link href="/for-clubs?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=mobile#demo">Request pilot</Link>
         </div>
       </details>
     </nav>
