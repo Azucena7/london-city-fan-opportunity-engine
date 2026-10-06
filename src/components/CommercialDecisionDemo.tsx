@@ -119,8 +119,8 @@ export function CommercialDecisionDemo() {
       <div className={styles.interactiveStage} role="tabpanel">
         <div className={styles.fixtureHeader}>
           <div>
-            <span>Home fixture · Marketing intelligence</span>
-            <strong>Matchday growth decision</strong>
+            <span>Home fixture · Decision orchestration</span>
+            <strong>Marketing & commercial decision</strong>
           </div>
           <i>LIVE SIMULATION</i>
         </div>
