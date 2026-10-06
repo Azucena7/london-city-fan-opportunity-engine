@@ -8,7 +8,7 @@ import { deriveNextFixtureLearning } from "@/lib/learningRecommendation";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { calendar, currentState } from "@/lib/data";
-import { AppWorkspaceShell, WorkspaceFilterButton } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, EvidenceStateBadge } from "@/components/WorkspaceUI";
 import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
 
@@ -47,10 +47,9 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
   return (
     <AppWorkspaceShell
       active="learning"
-      eyebrow="Outcomes & learning"
-      title="Learning"
-      subtitle={selected ? selected.opponent + " · " + selected.date : "Close the loop from observed outcome to next decision."}
-      actions={<WorkspaceFilterButton label="Fixture filters" />}
+      eyebrow="Decision learning"
+      title="What should change for the next fixture?"
+      subtitle={selected ? selected.opponent + " · " + selected.date + " · turn observed outcome into one bounded next move" : "Close the loop from observed outcome to the next decision."}
     >
       <DecisionHandoffStrip active="learning" fixtureId={selectedId} />
 
@@ -66,7 +65,7 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
       <header className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>Learning · {selected?.opponent} · {selected?.date}</span>
-          <h1>{live?.fixturePhase === "pre-match" ? "Measurement starts after matchday." : "What should change for the next match?"}</h1>
+          <h1>{live?.fixturePhase === "pre-match" ? "Define what we will learn before matchday." : "Turn the outcome into one next move."}</h1>
           <p>
             {live?.fixturePhase === "pre-match"
               ? "The fixture is still ahead. This screen keeps the measurement plan explicit now, then switches to observed outcomes when authorised post-match evidence arrives."
