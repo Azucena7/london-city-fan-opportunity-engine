@@ -220,7 +220,8 @@ export function AccessCenter() {
     return (
       <section className={styles.empty}>
         <span>Access & team</span>
-        <h1>Club accounts are not configured in this environment.</h1>
+        <h1>Club access is not available in this environment yet.</h1>
+        <p>The decision workspace remains closed until identity and membership services are configured. No club data is exposed in the meantime.</p>
       </section>
     );
   }
@@ -301,7 +302,7 @@ export function AccessCenter() {
                     </div>
                   ))}
                 </div>
-              ) : <p>No active club membership yet.</p>}
+              ) : <p>No active club membership yet. Request access below to unlock an approved club workspace.</p>}
             </article>
 
             <article>
@@ -314,7 +315,7 @@ export function AccessCenter() {
                   <label>Context<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="Role, team and why access is needed." /></label>
                   <button type="button" disabled={busy} onClick={() => void requestAccess()}>Request access</button>
                 </>
-              ) : <p>No additional clubs are available to request.</p>}
+              ) : <p>No additional club workspace is available to request from this account.</p>}
             </article>
 
             <article>
@@ -329,7 +330,7 @@ export function AccessCenter() {
                     </div>
                   ))}
                 </div>
-              ) : <p>No access request has been submitted.</p>}
+              ) : <p>No access request has been submitted. When one is sent, its review state will appear here.</p>}
             </article>
 
             <article className={styles.admin}>
@@ -352,7 +353,7 @@ export function AccessCenter() {
                     </div>
                   ))}
                 </div>
-              ) : <p>No pending requests visible to this account.</p>}
+              ) : <p>No pending requests need action from this account.</p>}
             </article>
           </div>
         </>
