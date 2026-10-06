@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-10-05T12:32:34.236Z",
+  "updated_at": "2026-10-06T12:11:09.112Z",
   "status": "active",
   "next_home_fixture_id": "2026-10-18-eve-h",
   "last_completed_home_fixture_id": "2026-09-26-bha-h",
   "weather": {
     "status": "forecast",
     "valid_for": "2026-10-18",
-    "generated_at": "2026-10-05T12:32:34.081Z",
+    "generated_at": "2026-10-06T12:11:08.976Z",
     "precipitation_probability_max": 18,
     "precipitation_sum": 0,
-    "temperature_max": 19.2,
-    "temperature_min": 11.2,
-    "wind_speed_max": 11,
+    "temperature_max": 14.5,
+    "temperature_min": 5.8,
+    "wind_speed_max": 5.4,
     "source": "Open-Meteo"
   },
   "attendance_momentum": {
@@ -19,14 +19,14 @@
     "basis": "5,402 measured attendance at the Manchester United opener"
   },
   "attention_availability": 35,
-  "material_changes": 1,
+  "material_changes": 0,
   "source_failures": [],
   "public_signal_changes": 1,
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-10-05T12:32:34.236Z",
-    "lastSuccessfulAt": "2026-10-05T12:32:34.236Z",
+    "lastAttemptAt": "2026-10-06T12:11:09.112Z",
+    "lastSuccessfulAt": "2026-10-06T12:11:09.112Z",
     "state": "fresh",
     "sources": [
       {
@@ -34,7 +34,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-05T12:32:34.236Z",
+        "checkedAt": "2026-10-06T12:11:09.112Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -42,7 +42,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-05T12:32:34.236Z",
+        "checkedAt": "2026-10-06T12:11:09.112Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       }
     ]
