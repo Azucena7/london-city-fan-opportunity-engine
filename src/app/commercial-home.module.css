@@ -89,7 +89,6 @@
 .problemCopy{align-self:end;padding-left:28px;border-left:1px solid var(--avela-line)}
 .problemCopy p{margin:0 0 18px;color:var(--avela-muted);font-size:16px;line-height:1.62}
 .problemCopy strong{color:var(--avela-navy)}
-.exampleIntro .kicker{align-self:start}
 .liveProof{
   width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.72fr);
   background:var(--avela-navy);color:#fff;
@@ -163,7 +162,7 @@
   max-width:none;
   grid-template-columns:minmax(0,1.02fr) minmax(420px,.98fr);
   gap:56px;
-  padding:104px max(24px,calc((100vw - 1180px)/2)) 92px;
+  padding:104px max(24px,calc((100vw - 1120px)/2)) 92px;
   overflow:hidden;
   color:#fff;
   background:
@@ -260,9 +259,6 @@
 @keyframes heroOrbit{
   from{transform:translate3d(0,0,0) scale(.96)}
   to{transform:translate3d(-36px,44px,0) scale(1.08)}
-}
-@keyframes signalMarquee{
-  to{transform:translateX(-50%)}
 }
 @keyframes proofWake{
   0%,100%{opacity:.58;transform:translateY(0)}
@@ -407,7 +403,7 @@
 
 /* Commercial v3 — shorter,denser,role-led */
 .hero{
-  padding:72px max(24px,calc((100vw - 1180px)/2)) 62px;
+  padding:72px max(24px,calc((100vw - 1120px)/2)) 62px;
   gap:48px;
 }
 .heroLead{font-size:18px;line-height:1.52}
