@@ -2561,3 +2561,18 @@ test("all core app decision surfaces keep operational copy at 10px or above", ()
     assert.doesNotMatch(css, /font-size:(?:8|9)px/);
   }
 });
+
+test("system pages avoid nested primary headings and microtext below 10px", () => {
+  const sources = read("src/components/IntelligenceSources.tsx");
+  const sourcesCss = read("src/app/app/sources/sources.module.css");
+  const setupCss = read("src/app/app/setup/setup.module.css");
+  const accessCss = read("src/app/app/access/access.module.css");
+  const helpCss = read("src/app/app/help/help.module.css");
+
+  assert.doesNotMatch(sources, /<h1>/);
+  assert.doesNotMatch(sourcesCss, /\[class\*="head"\] h1/);
+  assert.doesNotMatch(setupCss, /\[class\*="(?:head|empty)"\] h1/);
+  assert.doesNotMatch(accessCss, /\[class\*="(?:head|empty)"\] h1/);
+  assert.doesNotMatch(setupCss, /font-size:(?:8|9)px/);
+  assert.doesNotMatch(helpCss, /font-size:(?:8|9)px/);
+});
