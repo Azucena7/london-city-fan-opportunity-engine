@@ -56,3 +56,19 @@ test("Executive escalation ignores informational matchday context", () => {
   assert.match(alertLogic, /MatchdayAttentionLevel = "inform" \| "review" \| "act"/);
   assert.match(alertLogic, /attention\.level === "inform"/);
 });
+
+
+test("Matchday Companion uses the universal decision language in the UI", () => {
+  const widget = read("src/components/MatchdayCompanionWidget.tsx");
+  assert.match(widget, /attention\.level === "inform" \? "MONITOR"/);
+});
+
+test("Source governance exposes Matchday Companion dependencies", () => {
+  const sources = read("src/components/IntelligenceSources.tsx");
+  const health = JSON.parse(read("data/live/source-health.json"));
+  assert.match(sources, /name: "Matchday travel"/);
+  assert.match(sources, /"open-meteo", "tfl-road", "national-rail-rdm"/);
+  const decision = health.decisions.find((item) => item.id === "matchday-travel");
+  assert.ok(decision, "missing matchday-travel source decision");
+  assert.deepEqual(decision.requiredSourceIds, ["club-public-web", "open-meteo"]);
+});
