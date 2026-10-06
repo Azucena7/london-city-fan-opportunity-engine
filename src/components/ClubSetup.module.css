@@ -42,3 +42,7 @@
   .grid{grid-template-columns:1fr}.grid article,.grid article:nth-child(even){border-right:0;padding:16px 0}
   .chips button{min-height:44px}.readyAction{align-items:flex-start;flex-direction:column}
 }
+
+@media(max-width:800px){
+  .ready button,.clubBar select,.grid select,.grid input{min-height:44px}
+}
