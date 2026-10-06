@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "AVELA — decision intelligence for football clubs";
+export const alt = "AVELA — decision workspace for football club marketing and commercial teams";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,7 +34,7 @@ export default function Image() {
           </div>
 
           <div style={{ color: "#2F8F83", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em", marginTop: "70px" }}>
-            DECISION INTELLIGENCE FOR FOOTBALL CLUBS
+            THE DECISION WORKSPACE FOR CLUB MARKETING & COMMERCIAL TEAMS
           </div>
 
           <div style={{ fontSize: "60px", lineHeight: 0.98, fontWeight: 800, letterSpacing: "-0.045em", marginTop: "18px" }}>
@@ -42,7 +42,7 @@ export default function Image() {
           </div>
 
           <div style={{ fontSize: "20px", lineHeight: 1.35, color: "#637282", marginTop: "24px" }}>
-            See what matters now, what to do next, and how much evidence the club really has.
+            See what matters now, what to do next and whether the club can realistically deliver it.
           </div>
         </div>
 
