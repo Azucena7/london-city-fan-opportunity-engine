@@ -82,25 +82,6 @@ export default function Home() {
         </div>
       </section>
 
-      <CommercialEcosystem />
-
-      <section className={styles.valueCreated} aria-labelledby="value-created-title">
-        <div className={styles.valueIntro}>
-          <span className={styles.kicker}>The value AVELA adds</span>
-          <h2 id="value-created-title">Better decisions. Less manual coordination.</h2>
-          <p>
-            AVELA connects evidence across teams and turns it into a decision the club can act on.
-            A pilot should prove that in operating metrics, not vague AI claims.
-          </p>
-        </div>
-        <div className={styles.valueGrid}>
-          <article><span>01</span><strong>Catch the moment earlier</strong><p>Surface the change that matters before it disappears inside dashboards, inboxes or individual memory.</p><small>Signal → decision time</small></article>
-          <article><span>02</span><strong>Make one joined-up decision</strong><p>Bring audience, player, sponsor, calendar, rights and capacity constraints into the same recommendation.</p><small>Handoffs + decision cycle</small></article>
-          <article><span>03</span><strong>Use scarce assets where they matter</strong><p>Allocate player windows, rights, creative capacity and spend around the highest-value viable play.</p><small>Asset utilisation + conflicts avoided</small></article>
-          <article><span>04</span><strong>Make the next fixture smarter</strong><p>Retain recommendation, decision, execution and outcome so learning compounds instead of resetting every match.</p><small>Learning reused later</small></article>
-        </div>
-      </section>
-
       <CommercialDecisionDemo />
 
       <div className={styles.storyBridge} aria-hidden="true">
@@ -138,6 +119,25 @@ export default function Home() {
         </div>
       </section>
 
+
+      <CommercialEcosystem />
+
+      <section className={styles.valueCreated} aria-labelledby="value-created-title">
+        <div className={styles.valueIntro}>
+          <span className={styles.kicker}>The value AVELA adds</span>
+          <h2 id="value-created-title">Better decisions. Less manual coordination.</h2>
+          <p>
+            AVELA connects evidence across teams and turns it into a decision the club can act on.
+            A pilot should prove that in operating metrics, not vague AI claims.
+          </p>
+        </div>
+        <div className={styles.valueGrid}>
+          <article><span>01</span><strong>Catch the moment earlier</strong><p>Surface the change that matters before it disappears inside dashboards, inboxes or individual memory.</p><small>Signal → decision time</small></article>
+          <article><span>02</span><strong>Make one joined-up decision</strong><p>Bring audience, player, sponsor, calendar, rights and capacity constraints into the same recommendation.</p><small>Handoffs + decision cycle</small></article>
+          <article><span>03</span><strong>Use scarce assets where they matter</strong><p>Allocate player windows, rights, creative capacity and spend around the highest-value viable play.</p><small>Asset utilisation + conflicts avoided</small></article>
+          <article><span>04</span><strong>Make the next fixture smarter</strong><p>Retain recommendation, decision, execution and outcome so learning compounds instead of resetting every match.</p><small>Learning reused later</small></article>
+        </div>
+      </section>
 
       <section className={styles.notAnother}>
         <div className={styles.notAnotherTitle}>
