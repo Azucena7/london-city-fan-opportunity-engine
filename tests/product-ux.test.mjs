@@ -2606,3 +2606,10 @@ test("commercial product storytelling keeps microcopy at 10px or above", () => {
     assert.doesNotMatch(css, /font-size:(?:8|9)px/);
   }
 });
+
+test("commercial home stylesheet contains only current home surfaces", () => {
+  const css = read("src/app/commercial-home.module.css");
+  for (const legacy of ["example","notAnother","roles","valueCreated","capabilityHorizon","storyBridge","signalTicker"]) {
+    assert.doesNotMatch(css, new RegExp("\\." + legacy + "(?:[^A-Za-z0-9_-]|$)"));
+  }
+});
