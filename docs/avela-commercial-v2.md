@@ -2,11 +2,13 @@
 
 ## Positioning
 
-**Category:** Decision intelligence for football clubs.
+**Category:** Marketing & Commercial Decision Workspace for Football Clubs.
 
 **Primary promise:** Read the signals. Move the club.
 
-**Core distinction:** Specialist tools remain systems of record. AVELA becomes the decision layer across them.
+**Strategic differentiator:** Cross-functional decision orchestration.
+
+**Core distinction:** Specialist tools remain systems of record. AVELA orchestrates the evidence, constraints, timing and ownership needed to make the decision across them.
 
 ### Messaging guardrails
 
@@ -37,7 +39,7 @@ The triangular mark should suggest A / sail / direction / flow. The CSS mark is 
 
 1. Hero: category + promise.
 2. Fragmentation problem.
-3. Existing-stack / decision-layer diagram.
+3. Existing-stack / decision-orchestration diagram.
 4. Concrete cross-domain decision example.
 5. Dashboard vs general AI vs work-management distinction.
 6. Independent public proof.
@@ -64,7 +66,7 @@ Primary CTA: **See AVELA on a real fixture**
 
 Secondary CTA: **Discuss a club pilot**
 
-Final CTA: **See how AVELA could fit your club**
+Final CTA: **Try the guided demo** / **See the pilot structure**
 
 Avoid high-friction forms on first contact. A future lead form should initially request only:
 - Club
@@ -73,11 +75,12 @@ Avoid high-friction forms on first contact. A future lead form should initially 
 - Optional biggest challenge
 
 Suggested challenge choices:
-- Matchday growth
-- Sponsorship
+- Matchday demand & attendance
+- Sponsorship / activations
 - Player assets
 - Campaign coordination
 - Operational capacity
+- Decisions across teams & tools
 - Other
 
 ## Next implementation step after commercial V2 validation
@@ -95,7 +98,7 @@ Suggested challenge choices:
 A real lead-capture form has been prepared as a draft in Tally:
 
 - Form ID: `9qz9YX`
-- Title: `AVELA Club Pilot Interest`
+- Title: `AVELA Club Pilot`
 - Required: Club, Role, Work email
 - Optional: Biggest challenge, additional context
 - Hidden tracking: utm_source, utm_medium, utm_campaign, utm_content
