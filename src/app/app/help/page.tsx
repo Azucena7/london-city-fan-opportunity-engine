@@ -30,7 +30,8 @@ const workflows = [
   { title: "Campaign", path: "Decision → campaign scope → approvals → handoff → measurement", href: "/app/campaigns" },
   { title: "Player assets", path: "Campaign need → recommended pack → alternatives → commit", href: "/app/players" },
   { title: "Sponsor intelligence", path: "Opportunity → evidence → readiness → review → governed commitment", href: "/app/sponsors" },
-  { title: "Learning", path: "Recommendation → execution evidence → outcome → next decision", href: "/app/learning" }
+  { title: "Learning", path: "Recommendation → execution evidence → outcome → next decision", href: "/app/learning" },
+  { title: "Matchday Companion", path: "Travel context → materiality → fan utility → measured response", href: "/app/matches" }
 ] as const;
 
 const faqs = [
@@ -115,6 +116,7 @@ export default function HelpPage() {
             <Link href="/app/season"><span>What is coming or colliding?</span><strong>Calendar</strong></Link>
             <Link href="/app/learning"><span>What did we learn?</span><strong>Learning</strong></Link>
             <Link href="/app/sources"><span>What evidence is available?</span><strong>Sources</strong></Link>
+            <Link href="/app/matches"><span>What could affect supporter arrival?</span><strong>Matchday Companion</strong></Link>
           </div>
         </WorkspaceCard>
       </section>
