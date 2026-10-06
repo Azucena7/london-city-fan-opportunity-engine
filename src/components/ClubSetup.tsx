@@ -165,14 +165,14 @@ export function ClubSetup() {
         <article>
           <span>02 · Channels</span>
           <h2>Where can the club actually activate?</h2>
-          <div className={styles.chips}>{channelOptions.map((channel) => <button disabled={!canEdit} className={channels.includes(channel) ? styles.selected : ""} key={channel} type="button" onClick={() => toggle(channel, channels, setChannels)}>{channel}</button>)}</div>
+          <div className={styles.chips}>{channelOptions.map((channel) => <button disabled={!canEdit} aria-pressed={channels.includes(channel)} className={channels.includes(channel) ? styles.selected : ""} key={channel} type="button" onClick={() => toggle(channel, channels, setChannels)}>{channel}</button>)}</div>
           <p>Selected channels constrain campaign recipes; unsupported channels remain handoffs.</p>
         </article>
 
         <article>
           <span>03 · Objectives</span>
           <h2>What should the engine optimise for first?</h2>
-          <div className={styles.chips}>{objectiveOptions.map((objective) => <button disabled={!canEdit} className={objectives.includes(objective) ? styles.selected : ""} key={objective} type="button" onClick={() => toggle(objective, objectives, setObjectives)}>{objective}</button>)}</div>
+          <div className={styles.chips}>{objectiveOptions.map((objective) => <button disabled={!canEdit} aria-pressed={objectives.includes(objective)} className={objectives.includes(objective) ? styles.selected : ""} key={objective} type="button" onClick={() => toggle(objective, objectives, setObjectives)}>{objective}</button>)}</div>
           <p>Objectives guide prioritisation; they do not override evidence or approval gates.</p>
         </article>
 
@@ -197,7 +197,7 @@ export function ClubSetup() {
           <p>The next home fixture can use these settings as club defaults. Fixture-specific signals and evidence still determine the actual recommendation.</p>
           <div className={styles.readyAction}>
             <span>{completeness >= 80 ? "Next fixture can use this context." : "Complete the missing context above."}</span>
-            <button type="button" disabled={!canEdit || saving} onClick={() => void saveSetup()}>{!canEdit ? "Admin role required" : saving ? "Saving…" : "Save and use for next fixture"}</button>
+            <button type="button" disabled={!canEdit || saving} aria-busy={saving} onClick={() => void saveSetup()}>{!canEdit ? "Admin role required" : saving ? "Saving…" : "Save and use for next fixture"}</button>
           </div>
         </article>
       </div>
