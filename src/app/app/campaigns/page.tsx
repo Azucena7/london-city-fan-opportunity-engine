@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { campaignPlans } from "@/lib/data";
 import { demoCommercialCampaigns } from "@/lib/clubStrategy";
-import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import { CommercialCampaignBoard } from "@/components/CommercialCampaignBoard";
 import { DecisionContextTrail } from "@/components/DecisionContextTrail";
@@ -34,14 +34,12 @@ export default function CampaignsPage() {
   return (
     <AppWorkspaceShell
       active="campaigns"
-      eyebrow="AVELA · Campaigns"
-      title="Campaigns"
-      subtitle={needsDecision.length + " need a decision · " + (campaigns.length + demoCommercialCampaigns.length) + " total drafts"}
-      actions={<><WorkspaceViewSwitcher value="board" /><WorkspaceFilterButton /></>}
+      eyebrow="Campaign decisions"
+      title="What needs a campaign decision?"
+      subtitle={needsDecision.length + " need a decision · " + (campaigns.length + demoCommercialCampaigns.length) + " active drafts across fixtures and the commercial calendar"}
     >
       <DecisionContextTrail current="Campaigns" />
       <DecisionHandoffStrip active="campaign" fixtureId={primary?.campaign.fixtureId ?? null} campaignId={primary?.campaign.id ?? null} />
-      <p className={styles.contractCopy}>productAppShell · Campaigns can start from a fixture or a commercial calendar moment such as season tickets, Christmas, retail, community or sponsor activity.</p>
 
       <details className={styles.portfolioPanel}>
         <summary>
@@ -87,7 +85,7 @@ export default function CampaignsPage() {
               <div><span>Fixture</span><strong>{primary.campaign.fixtureId}</strong></div>
             </div>
             <div className={styles.primaryActions}>
-              <Link href={"/app/matches/" + primary.campaign.fixtureId}>Open decision workspace →</Link>
+              <Link href={"/app/matches/" + primary.campaign.fixtureId}>Resolve this decision →</Link>
               <Link href={"/app/players?campaign=" + primary.campaign.id}>Optimise player pack →</Link>
             </div>
           </div>
