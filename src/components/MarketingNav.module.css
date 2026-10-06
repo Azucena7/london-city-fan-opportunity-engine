@@ -121,3 +121,10 @@
   .mark{width:17px;height:17px}
   .demo{min-height:40px;padding:9px 11px}
 }
+
+
+/* Commercial coherence pass */
+.links{gap:24px}
+.links a,.login{font-size:13px;letter-spacing:.015em}
+.demo{min-height:44px;padding:11px 16px;font-size:13px}
+.mobileMenu summary,.mobilePanel a{font-size:13px}
