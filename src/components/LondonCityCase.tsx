@@ -112,6 +112,35 @@ export function LondonCityCase({ calendar, reviewedAt, validation, actions, oppo
           </article>
         </section>
 
+        <section className={styles.proofTimeline} aria-label="Evidence timeline">
+          <div className={styles.proofHead}>
+            <span className={styles.eyebrow}>{es ? "LÍNEA DE PRUEBA" : "PROOF TIMELINE"}</span>
+            <h2>{es ? "Qué dijo AVELA, qué publicó el club y qué sigue sin demostrarse." : "What AVELA said, what the club published, and what still remains unproven."}</h2>
+          </div>
+          <div className={styles.proofSteps}>
+            <article data-tone="engine">
+              <span>01 · AVELA</span>
+              <strong>{historical.hypothesisGeneratedAt ? date(historical.hypothesisGeneratedAt.slice(0,10)) : "—"}</strong>
+              <p>{historical.hypothesis[lang]}</p>
+            </article>
+            <article data-tone="club">
+              <span>02 · {es ? "ANUNCIO PÚBLICO" : "PUBLIC CLUB ACTION"}</span>
+              <strong>{historical.observedAt ? date(historical.observedAt) : "—"}</strong>
+              <p>{historical.observedAction[lang]}</p>
+            </article>
+            <article data-tone="read">
+              <span>03 · {es ? "LECTURA" : "INTERPRETATION"}</span>
+              <strong>{es ? "Coincidencia relevante, no causalidad" : "Relevant alignment, not causality"}</strong>
+              <p>{historical.caveat[lang]}</p>
+            </article>
+            <article data-tone="now">
+              <span>04 · {es ? "SIGUIENTE PRUEBA" : "NEXT TEST"}</span>
+              <strong>Everton · 18 Oct</strong>
+              <p>{es ? "Probar repetición usando el contexto público de Oktoberfest y la zona familiar, sin asumir demanda ni impacto." : "Test repeat attendance using the public Oktoberfest and family-area context, without assuming demand or impact."}</p>
+            </article>
+          </div>
+        </section>
+
         <section className={styles.history}>
           <div className={styles.historyHead}>
             <span className={styles.eyebrow}>{es ? "ARCHIVO DEL CASO" : "CASE JOURNAL"}</span>
