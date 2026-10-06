@@ -116,23 +116,9 @@
   .ctaActions{flex-direction:column}
 }
 
-\n.heroActions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}\n
+.heroActions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
 /* Commercial pilot refinement */
-.hero,.outcomes,.section,.week,.cta{width:min(1080px,calc(100% - 48px))}
-.hero{padding-top:72px}
-.hero h1{max-width:13ch}
-.pilotCard{border-left-color:#2f8f83}
-.eyebrow,.pilotCard span,.playbook span{color:#2f8f83}
-.outcomes,.section{border-color:rgba(16,39,66,.14)}
-.dataGrid article,.playbook article{background:#fffdfa;border-color:rgba(16,39,66,.14)}
-.week{background:linear-gradient(135deg,#e8f3f0,#fffdfa 82%);border-color:rgba(47,143,131,.28)}
-.num{border-color:rgba(47,143,131,.42);color:#2f8f83}
-.cta{background:#102742}
-.cta .eyebrow{color:#8ad9cc}
-.cta .button{background:#ef8b6c;color:#102742}
-@media(max-width:600px){.hero,.outcomes,.section,.week,.cta{width:min(100% - 30px,1080px)}.hero{padding-top:54px}.heroActions{flex-direction:column;align-items:stretch}}
-
-
 /* Commercial pilot coherence pass */
 .hero,.outcomes,.section,.week,.cta{width:min(1120px,calc(100% - 48px))}
 .hero{padding-top:68px}
