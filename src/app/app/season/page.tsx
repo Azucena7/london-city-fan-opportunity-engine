@@ -9,7 +9,7 @@ import { demoAppearances, demoPlayerMomentum, demoPlayers, playerCapacity, playe
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
 import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
-import { AppWorkspaceShell, WorkspaceFilterButton, WorkspaceViewSwitcher } from "@/components/AppWorkspaceShell";
+import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./season.module.css";
 
@@ -123,12 +123,10 @@ export default async function SeasonIntelligencePage() {
   return (
     <AppWorkspaceShell
       active="season"
-      eyebrow="Calendar · Season Intelligence · 2026/27"
-      title="Calendar"
-      subtitle="What is coming, what could collide and where the club has room to act."
-      actions={<><WorkspaceViewSwitcher value="calendar" /><WorkspaceFilterButton /></>}
+      eyebrow="Calendar intelligence · 2026/27"
+      title="What is coming — and what changes the plan?"
+      subtitle="Fixtures, campaigns, talent pressure and external context in one decision calendar."
     >
-      <p className={styles.contractCopy}>productAppShell · Season Intelligence · Are we getting better across the season? · Missing fixtures are not shown as zero. · This measures drafted activation volume, not channel performance or incremental impact.</p>
 
       {nextRow ? (
         <section className={styles.nextMoveRail} aria-label="Next calendar decision">
@@ -153,9 +151,7 @@ export default async function SeasonIntelligencePage() {
 
       <section className={styles.calendarToolbar}>
         <div>
-          <span aria-hidden="true">‹</span>
           <strong>{monthLabel}</strong>
-          <span aria-hidden="true">›</span>
         </div>
         <div className={styles.legend}>
           <span><i data-kind="fixture" />Fixture</span>
