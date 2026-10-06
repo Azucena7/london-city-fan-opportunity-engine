@@ -227,16 +227,16 @@
   {
     "id": "everton-review-3",
     "fixtureId": "2026-10-18-eve-h",
-    "area": "Marketing / Measurement",
-    "status": "planned",
-    "due": "2026-10-11",
+    "area": "Content, CRM & Measurement",
+    "status": "next",
+    "due": "2026-10-07",
     "title": {
-      "en": "Approve separate messages and ticket measurement",
-      "es": "Aprobar mensajes separados y medición de entradas"
+      "en": "Separate Everton matchday and broadcast journeys",
+      "es": "Separar los recorridos presencial y de retransmisión de Everton"
     },
     "reason": {
-      "en": "Keep families and themed-matchday audiences distinct; approve tracking before activation.",
-      "es": "Diferenciar familias y público de la jornada temática; aprobar seguimiento antes de activar."
+      "en": "The 18 October fixture is confirmed for 14:00 BST on Sky Sports and BWSL YouTube while standard and VIP tickets remain available. Keep local acquisition focused on Oktoberfest, family and VIP value; build a distinct tagged route for remote viewers and measure ticket conversion, broadcast engagement and later retargeting separately.",
+      "es": "El partido del 18 de octubre está confirmado a las 14:00 BST en Sky Sports y YouTube de la BWSL, mientras siguen disponibles entradas estándar y VIP. Mantener la captación local centrada en Oktoberfest, familias y valor VIP; crear una ruta etiquetada distinta para espectadores remotos y medir por separado conversión de entradas, engagement de retransmisión y retargeting posterior."
     }
   },
   {
