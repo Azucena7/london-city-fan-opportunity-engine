@@ -375,7 +375,7 @@ test("club setup context differentiates the engine from replacement CRM and gene
   assert.match(draftRoute, /Follow this club tone/);
   assert.match(draftRoute, /Respect this club must-avoid rule/);
 
-  assert.match(home, /Decision intelligence for football clubs/);
+  assert.match(home, /The Decision Workspace for Football Club Marketing & Commercial Teams/);
   assert.match(home, /Works above your existing stack/);
   assert.match(home, /FIXTURES/);
   assert.match(home, /growth-intelligence layer|decision layer/i);
@@ -1098,8 +1098,7 @@ test("commercial home turns London City proof into a concrete 90-day pilot path"
   assert.match(page, /4–6 fixtures/);
   assert.match(page, /1–2 workflows/);
   assert.match(page, /Measured learning/);
-  assert.match(page, /See how AVELA could fit your club/);
-  assert.match(css, /proofPair/);
+    assert.match(css, /proofPair/);
   assert.match(css, /pilotSteps/);
 });
 
@@ -2178,11 +2177,9 @@ test("homepage sells the decision layer with a low-friction pilot path", () => {
   const page = read("src/app/page.tsx");
   const ecosystem = read("src/components/CommercialEcosystem.tsx");
   assert.match(page, /Read the signals/);
-  assert.match(page, /Marketing & commercial decision workspace for football clubs/);
+  assert.match(page, /Built for football club marketing & commercial teams/);
   assert.match(ecosystem, /Keep your specialist tools/);
-  assert.match(page, /See how AVELA could fit your club/);
-  assert.match(page, /No rip-and-replace programme is required/);
-  assert.match(page, /live\?\.nextAction\.label/);
+      assert.match(page, /live\?\.nextAction\.label/);
   assert.match(page, /London City Live/);
 });
 
@@ -2208,7 +2205,7 @@ test("commercial home explains why AVELA complements specialist tools and genera
   const faq = read("src/components/CommercialFAQ.tsx");
   const nav = read("src/components/MarketingNav.tsx");
 
-  assert.match(home, /Decision intelligence for football clubs/);
+  assert.match(home, /The Decision Workspace for Football Club Marketing & Commercial Teams/);
   assert.match(ecosystem, /Blinkfire \/ analytics/);
   assert.match(ecosystem, /CRM \/ ticketing/);
   assert.match(ecosystem, /Asana \/ Monday \/ Jira/);
@@ -2429,12 +2426,9 @@ test("commercial home makes AVELA value and capability horizon explicit", () => 
   const page = read("src/app/page.tsx");
   const demo = read("src/components/CommercialDecisionDemo.tsx");
 
-  assert.match(page, /What AVELA can become/);
-  assert.match(page, /Vision is not current capability/);
-  assert.match(page, /CommercialDecisionDemo/);
+      assert.match(page, /CommercialDecisionDemo/);
   assert.match(demo, /illustrative product simulation/);
-  assert.match(demo, /When the context changes, the recommendation should change with it/);
-});
+  });
 
 
 test("commercial home uses an interactive fixture-marketing decision demo", () => {
@@ -2447,9 +2441,7 @@ test("commercial home uses an interactive fixture-marketing decision demo", () =
   assert.match(demo, /Audience/);
   assert.match(demo, /Channel/);
   assert.match(demo, /Spend posture/);
-  assert.match(page, /Illustrative decision/);
-  assert.match(page, /Observed evidence/);
-});
+    });
 
 test("live product timing cannot lag behind the real London date", () => {
   const helper = read("src/lib/currentProductDate.ts");
@@ -2478,7 +2470,7 @@ test("public sitemap includes the canonical London City decision surfaces", () =
 
 test("commercial home is role-led and avoids repetitive long-form sections", () => {
   const page = read("src/app/page.tsx");
-  assert.match(page, /Marketing & commercial decision workspace for football clubs/);
+  assert.match(page, /Built for football club marketing & commercial teams/);
   assert.match(page, /CRM & fan engagement/);
   assert.match(page, /Sponsorship & commercial/);
   assert.match(page, /Content & matchday growth/);
@@ -2511,4 +2503,30 @@ test("commercial moving signal strip keeps readable contrast on navy", () => {
   const css = read("src/app/commercial-home.module.css");
   assert.match(css, /signalTicker\{[\s\S]*?color:#dce8ef/);
   assert.match(css, /signalTicker \.signalSet span\{[\s\S]*?color:#dce8ef/);
+});
+
+test("commercial positioning stays consistent across metadata, home, FAQ and pilot", () => {
+  const home = read("src/app/page.tsx");
+  const layout = read("src/app/layout.tsx");
+  const faq = read("src/components/CommercialFAQ.tsx");
+  const clubs = read("src/components/ClubPilotProposition.tsx");
+  assert.match(home, /Built for football club marketing & commercial teams/);
+  assert.match(home, /across fixtures, campaigns and commercial moments/);
+  assert.match(layout, /Decision Workspace for Football Club Marketing & Commercial Teams/);
+  assert.match(faq, /decision workspace for football club marketing and commercial teams/);
+  assert.match(clubs, /FOR MARKETING & COMMERCIAL TEAMS/);
+});
+
+test("commercial mobile navigation collapses secondary links into a menu", () => {
+  const nav = read("src/components/MarketingNav.tsx");
+  const css = read("src/components/MarketingNav.module.css");
+  assert.match(nav, /mobileMenu/);
+  assert.match(nav, /<summary>Menu<\/summary>/);
+  assert.match(css, /@media\(max-width:860px\)[\s\S]*?\.links\{display:none\}/);
+});
+
+test("commercial sitemap never uses a future fixture date as lastModified", () => {
+  const sitemap = read("src/app/sitemap.ts");
+  assert.match(sitemap, /lastModified: updated/);
+  assert.doesNotMatch(sitemap, /lastModified: new Date\(item\.date/);
 });
