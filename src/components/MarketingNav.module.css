@@ -88,3 +88,36 @@
     padding:12px 15px;
   }
 }
+
+/* Commercial v4 mobile navigation: one-row first impression */
+.mobileMenu{display:none}
+@media(max-width:860px){
+  .nav{grid-template-columns:auto 1fr auto auto;gap:10px}
+  .links{display:none}
+  .actions{grid-column:auto;grid-row:auto}
+  .login{display:none}
+  .mobileMenu{display:block;position:relative}
+  .mobileMenu summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    min-height:42px;padding:9px 12px;border:1px solid rgba(13,34,56,.14);
+    border-radius:10px;color:#0d2238;background:rgba(255,255,255,.5);
+    font-size:11px;font-weight:850
+  }
+  .mobileMenu summary::-webkit-details-marker{display:none}
+  .mobilePanel{
+    position:absolute;right:0;top:calc(100% + 8px);width:210px;padding:8px;
+    display:grid;gap:2px;background:#fffdfa;border:1px solid rgba(13,34,56,.12);
+    border-radius:12px;box-shadow:0 16px 42px rgba(13,34,56,.14)
+  }
+  .mobilePanel a{
+    min-height:42px;display:flex;align-items:center;padding:9px 10px;border-radius:8px;
+    color:#455767;text-decoration:none;font-size:12px;font-weight:750
+  }
+  .mobilePanel a:hover{background:#edf4f2;color:#0d2238}
+}
+@media(max-width:560px){
+  .nav{padding:10px 15px}
+  .brand{font-size:13px}
+  .mark{width:17px;height:17px}
+  .demo{min-height:40px;padding:9px 11px}
+}
