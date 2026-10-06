@@ -2547,3 +2547,17 @@ test("app workspace keeps one primary heading and consistent product positioning
   assert.doesNotMatch(access, /<h1>/);
   assert.match(help, /decision workspace for football club marketing and commercial teams/);
 });
+
+test("all core app decision surfaces keep operational copy at 10px or above", () => {
+  const files = [
+    "src/components/ProductJourneyNav.module.css",
+    "src/components/MatchdayCompanionWidget.module.css",
+    "src/app/app/matches/[fixtureId]/match-plan.module.css",
+    "src/app/app/learning/results.module.css",
+    "src/app/app/executive/executive.module.css"
+  ];
+  for (const file of files) {
+    const css = read(file);
+    assert.doesNotMatch(css, /font-size:(?:8|9)px/);
+  }
+});
