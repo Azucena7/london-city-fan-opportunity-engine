@@ -70,7 +70,7 @@ export default async function SeasonIntelligencePage() {
   const maxAttendance = Math.max(1, ...measuredAttendance.map((item) => item.attendance ?? 0));
 
   const clubContext = await getCurrentClubOperatingContext();
-  const fromDate = currentState.updated_at.slice(0, 10);
+  const fromDate = currentProductDate(currentState.updated_at);
   const toDate = calendar.map((item) => item.date).sort().at(-1) ?? fromDate;
   const externalRelationships = buildCalendarRelationships({
     fixtures: calendar,
