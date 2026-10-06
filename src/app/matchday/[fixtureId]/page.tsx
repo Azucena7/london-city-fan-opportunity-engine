@@ -4,13 +4,25 @@ import { notFound } from "next/navigation";
 import { calendar, mobilityPartnership } from "@/lib/data";
 import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import { MatchdayOfficialDirectionsLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
+import { getVerifiedFixtureTicketUrl } from "@/lib/verifiedFixtureTicketing";
 import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
 import styles from "./matchday.module.css";
 
-export const metadata: Metadata = {
-  title: "Matchday Journey · London City",
-  description: "Plan your London City matchday journey with fixture, venue and travel guidance in one place."
-};
+export async function generateMetadata({ params }: { params: Promise<{ fixtureId: string }> }): Promise<Metadata> {
+  const { fixtureId } = await params;
+  const fixture = calendar.find((item) => item.id === fixtureId && item.homeAway === "home");
+  if (!fixture) return { title: "Matchday Journey · London City" };
+  return {
+    title: `London City v ${fixture.opponent} · Matchday Journey`,
+    description: `Plan travel to ${fixture.venue} for London City v ${fixture.opponent} on ${fixture.date}. Fixture details, travel context and official directions in one place.`,
+    alternates: { canonical: `/matchday/${fixture.id}` },
+    openGraph: {
+      title: `London City v ${fixture.opponent} · Matchday Journey`,
+      description: `Travel guidance and matchday context for London City v ${fixture.opponent}.`,
+      type: "website"
+    }
+  };
+}
 
 export default async function MatchdayJourneyPage({ params }: { params: Promise<{ fixtureId: string }> }) {
   const { fixtureId } = await params;
@@ -24,6 +36,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
     .format(new Date(fixture.date + "T12:00:00Z"));
   const providerSummary = summariseMobilityProviderReadiness();
   const weather = getMatchdayWeatherContext(fixtureId, fixture.date);
+  const ticketing = getVerifiedFixtureTicketUrl(fixtureId);
 
   return (
     <main className={styles.shell}>
@@ -100,6 +113,17 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
           ))}
         </div>
       </section>
+
+      {ticketing ? (
+        <section className={styles.ticketing}>
+          <div>
+            <span>OFFICIAL TICKETS</span>
+            <h2>Continue to the verified club ticket route.</h2>
+            <p>AVELA only shows this CTA when a fixture-specific official source has been observed and stored.</p>
+          </div>
+          <a href={ticketing.url} target="_blank" rel="noreferrer">{ticketing.label} ↗</a>
+        </section>
+      ) : null}
 
       <section className={styles.help}>
         <div>
