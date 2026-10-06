@@ -3,7 +3,7 @@ import styles from "./MarketingNav.module.css";
 
 export function MarketingNav() {
   return (
-    <nav className={styles.nav} aria-label="Product website navigation">
+    <nav className={styles.nav} aria-label="AVELA marketing and commercial product navigation">
       <Link className={styles.brand} href="/">
         <span className={styles.mark} aria-hidden="true" />
         AVELA
@@ -14,7 +14,7 @@ export function MarketingNav() {
         <Link href="/#faq">FAQ</Link>
       </div>
       <div className={styles.actions}>
-        <Link className={styles.login} href="/app/demo">Try product</Link>
+        <Link className={styles.login} href="/app/demo">Open workspace</Link>
         <Link className={styles.demo} href="/for-clubs#demo">Club pilot</Link>
       </div>
     </nav>
