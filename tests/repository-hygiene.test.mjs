@@ -774,3 +774,11 @@ test("prediction proof is the only remaining intelligence surface stylesheet", (
   assert.doesNotMatch(root, /intelligence-surfaces\.css/);
   assert.match(study, /intelligence-surfaces\.css/);
 });
+
+test("retired product shell stylesheet stays deleted", () => {
+  const root = readFileSync("src/app/layout.tsx", "utf8");
+  assert.equal(existsSync("src/app/product-shell.css"), false);
+  assert.doesNotMatch(root, /product-shell\.css/);
+  assert.match(readFileSync("src/app/product-system.css", "utf8"), /\.productShell/);
+  assert.match(readFileSync("src/app/product-system.css", "utf8"), /\.productAppShell/);
+});
