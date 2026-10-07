@@ -46,3 +46,5 @@
 @media(max-width:760px){
   .workflowContext{align-items:flex-start;flex-direction:column}
 }
+
+.contractJump{display:inline-block;margin:0 0 12px;color:var(--product-ink);font-size:12px;font-weight:900;text-decoration:none;border-bottom:1px solid var(--product-ink)}
