@@ -61,3 +61,12 @@ test("commercial pilot cards and primary link retain readable styling", async ()
   assert.match(css, /\.commercialNextStep\{/);
 });
 
+
+test("commercial home connects public proof to the multi-cycle pilot", async () => {
+  const home = await source("src/app/page.tsx");
+  assert.match(home, /The club pilot is a separate test/);
+  assert.match(home, /Brighton, Everton, Crystal Palace and Manchester City/);
+  assert.match(home, /See the 4-cycle London City pilot window/);
+  assert.match(home, /href="\/pilot\?utm_source=avela_home/);
+});
+
