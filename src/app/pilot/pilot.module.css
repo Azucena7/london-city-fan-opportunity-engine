@@ -144,3 +144,21 @@
   .section{padding:48px 0}
   .week,.cta{padding:26px 22px}
 }
+
+.pilotWindow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--product-line);border-radius:16px;overflow:hidden;background:#fff}
+.pilotWindow article{position:relative;min-height:238px;padding:20px;background:#fff}
+.pilotWindow article+article{border-left:1px solid var(--product-line)}
+.pilotWindow article::after{content:"";position:absolute;top:50%;right:-8px;z-index:2;width:16px;height:16px;border-top:1px solid var(--product-line);border-right:1px solid var(--product-line);background:#fff;transform:translateY(-50%) rotate(45deg)}
+.pilotWindow article:last-child::after{display:none}
+.pilotWindow article[data-state="observed"]{border-top:4px solid #2F8F83;background:#F7FBFA}
+.pilotWindow article[data-state="active"]{border-top:4px solid #EF8B6C;background:#FFF9F6}
+.pilotWindow article[data-state="next"]{border-top:4px solid #D9A550;background:#FFFDF8}
+.pilotWindowTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.pilotWindowTop span{font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--product-accent)}
+.pilotWindowTop b{font-size:11px;color:var(--product-muted);text-align:right}
+.pilotWindow h3{margin:22px 0 0;font-size:20px;letter-spacing:-.025em}
+.pilotWindow p{margin:9px 0 0;color:var(--product-ink);font-size:13px;line-height:1.5}
+.pilotWindow small{display:block;margin-top:14px;padding-top:12px;border-top:1px solid var(--product-line);color:var(--product-muted);font-size:11px;line-height:1.5}
+.pilotWindowNote{margin:12px 0 0;color:var(--product-muted);font-size:12px;line-height:1.5}
+@media(max-width:900px){.pilotWindow{grid-template-columns:1fr 1fr}.pilotWindow article:nth-child(2)::after{display:none}.pilotWindow article:nth-child(n+3){border-top:1px solid var(--product-line)}}
+@media(max-width:620px){.pilotWindow{grid-template-columns:1fr}.pilotWindow article+article{border-left:0;border-top:1px solid var(--product-line)}.pilotWindow article::after{display:none}.pilotWindow article{min-height:auto}}
