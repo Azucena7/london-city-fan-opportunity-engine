@@ -120,6 +120,10 @@ export function ClubPilotProposition() {
         </article>
       </div>
       <p className="commercialNote">{es ? "London City es un caso de demostración independiente. No implica que el club sea cliente, haya visto AVELA o haya utilizado la herramienta." : "London City is an independent demonstration case. It does not imply the club is a customer or has seen or used AVELA."}</p>
+      <p className="commercialNote">{es ? "La ventana de piloto muestra cómo debería cambiar la decisión entre Brighton, Everton, Crystal Palace y Manchester City a medida que cambian el contexto, la evidencia y las restricciones." : "The pilot window shows how the decision should change across Brighton, Everton, Crystal Palace and Manchester City as context, evidence and constraints change."}</p>
+      <div className="caseOverviewLinks">
+        <Link href="/pilot?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=multi_cycle_proof">{es ? "Ver los 4 ciclos del piloto →" : "See the 4-cycle pilot window →"}</Link>
+      </div>
     </section>
 
     <section className="commercialPanel commercialNextStep" id="demo" aria-labelledby="discussion-title">
