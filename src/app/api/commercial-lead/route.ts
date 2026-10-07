@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { supabaseServerConfigured, supabaseServerRequest } from "@/lib/supabaseServer";
 
 type LeadBody = {
   clubName?: string;
@@ -22,7 +22,7 @@ function clean(value: unknown, max: number) {
 }
 
 export async function POST(request: Request) {
-  if (!supabaseConfigured()) {
+  if (!supabaseServerConfigured()) {
     return NextResponse.json({ error: "Lead capture is not configured." }, { status: 503 });
   }
 
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Club, role, a valid work email and consent are required." }, { status: 400 });
   }
 
-  const response = await supabaseRequest("/rest/v1/commercial_leads", {
+  const response = await supabaseServerRequest("/rest/v1/commercial_leads", {
     method: "POST",
     headers: { Prefer: "return=minimal" },
     body: JSON.stringify({
