@@ -2766,3 +2766,9 @@ test("shared operational components keep microcopy readable", () => {
   }
 });
 
+
+test("Sources connection center keeps connector microcopy readable", () => {
+  const css = read("src/components/IntelligenceSources.module.css");
+  assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
+});
+
