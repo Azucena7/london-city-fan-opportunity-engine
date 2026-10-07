@@ -2379,6 +2379,7 @@ test("campaigns and fixture workspace use progressive decision disclosure", () =
   assert.match(fixture, /02 Feasibility/);
   assert.match(fixture, /03 Build/);
   assert.match(fixture, /04 Evidence/);
+  assert.match(fixture, /05 Human decision/);
   assert.match(fixture, /06 Learn/);
   assert.ok((fixture.match(/className=\{styles\.phasePanel\}/g) ?? []).length >= 5);
 });
@@ -2783,5 +2784,21 @@ test("Sources routes recommended connections into dedicated Setup flow", () => {
   assert.match(setup, /Grant access/);
   assert.match(setup, /Verify refresh/);
   assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
+});
+
+
+
+test("contract health stays readable and links operational decisions back to contract truth", () => {
+  const playerHealth = read("src/components/PlayerContractHealth.module.css");
+  const sponsorHealth = read("src/components/SponsorContractHealth.module.css");
+  const players = read("src/app/app/players/page.tsx");
+  const sponsors = read("src/app/app/sponsors/page.tsx");
+  for (const css of [playerHealth, sponsorHealth]) {
+    assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
+  }
+  assert.match(players, /href="\/app\/contracts"/);
+  assert.match(players, /Review contract truth/);
+  assert.match(sponsors, /href="\/app\/contracts"/);
+  assert.match(sponsors, /Review contract truth/);
 });
 
