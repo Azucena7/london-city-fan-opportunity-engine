@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-06T12:11:09.112Z",
+  "checkedAt": "2026-10-07T11:57:21.904Z",
   "state": "operational",
   "source": {
     "name": "Ticketmaster Discovery API",
@@ -1634,8 +1634,8 @@
     }
   ],
   "refresh": {
-    "lastAttemptAt": "2026-10-06T12:11:09.112Z",
-    "lastSuccessfulAt": "2026-10-06T12:11:09.112Z",
+    "lastAttemptAt": "2026-10-07T11:57:21.904Z",
+    "lastSuccessfulAt": "2026-10-07T11:57:21.904Z",
     "message": null
   },
   "sources": [
