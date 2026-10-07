@@ -2802,3 +2802,17 @@ test("contract health stays readable and links operational decisions back to con
   assert.match(sponsors, /Review contract truth/);
 });
 
+
+test("Learning makes the AVELA closed loop explicit and readable", () => {
+  const model = read("src/lib/learningRecommendation.ts");
+  const component = read("src/components/NextFixtureLearning.tsx");
+  const css = read("src/components/NextFixtureLearning.module.css");
+  assert.match(model, /learned: string/);
+  assert.match(component, /What AVELA learned/);
+  assert.match(component, /learning\.learned/);
+  assert.match(component, /Repeat/);
+  assert.match(component, /Change/);
+  assert.match(component, /Measure next/);
+  assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
+});
+
