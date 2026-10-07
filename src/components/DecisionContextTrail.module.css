@@ -1,5 +1,5 @@
 .trail{display:flex;align-items:center;gap:7px;min-height:38px;margin-bottom:10px;padding:8px 10px;border:1px solid var(--product-line);border-radius:9px;background:#fff;overflow-x:auto;white-space:nowrap}
-.trail a,.trail span,.trail strong,.trail small{font-size:10px}
+.trail a,.trail span,.trail strong,.trail small{font-size:11px}
 .trail a{color:#667783;text-decoration:none;font-weight:800}.trail a:hover{color:var(--product-accent)}
 .trail i{color:#B0BAC1;font-style:normal}.trail strong{color:var(--product-ink)}.trail small{margin-left:auto;color:#88959F}
 @media(max-width:620px){.trail small{display:none}}
