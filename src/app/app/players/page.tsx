@@ -56,6 +56,7 @@ export default async function PlayerAssetsPage({ searchParams }: { searchParams:
 
       <div className={styles.contractDrawer}>
         <WorkspaceDrawer label="Decision evidence" title="Verified contract health">
+          <Link className={styles.contractJump} href="/app/contracts">Review contract truth →</Link>
           <PlayerContractHealth />
         </WorkspaceDrawer>
       </div>
