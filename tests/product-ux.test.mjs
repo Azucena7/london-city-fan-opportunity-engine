@@ -2831,3 +2831,14 @@ test("club pilot demonstrates a bounded multi-cycle learning window", () => {
   assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
 });
 
+
+test("Opportunity Brief keeps internal headings at workspace scale", () => {
+  const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
+  assert.match(css, /decisionLead h2\{[^}]*font-size:clamp\(26px,3vw,34px\)/);
+  assert.match(css, /briefIntro h2\{[^}]*font-size:clamp\(25px,2\.8vw,32px\)/);
+  assert.match(css, /clubExecutionIntro h2\{[^}]*font-size:clamp\(25px,2\.8vw,32px\)/);
+  assert.match(css, /phaseIntro h2\{[^}]*font-size:clamp\(24px,2\.6vw,30px\)/);
+  assert.doesNotMatch(css, /decisionLead h2\{[^}]*52px/);
+  assert.doesNotMatch(css, /briefIntro h2\{[^}]*44px/);
+});
+
