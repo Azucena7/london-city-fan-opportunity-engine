@@ -26,6 +26,11 @@ export function NextFixtureLearning({
         </div>
       </div>
 
+      <div className={styles.learned}>
+        <span>What AVELA learned</span>
+        <strong>{learning.learned}</strong>
+      </div>
+
       <div className={styles.actions}>
         <article>
           <span>Repeat</span>
