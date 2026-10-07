@@ -884,5 +884,41 @@
         "checkedAt": "2026-10-06"
       }
     ]
+  },
+  {
+    "id": "tickets-liverpool-away-general-sale-2026-10-07",
+    "fixtureId": "2026-10-25-liv-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-07T09:32:02+01:00",
+    "title": {
+      "en": "Liverpool away general sale opens with NFC entry requirements",
+      "es": "La venta general visitante de Liverpool abre con acceso mediante NFC"
+    },
+    "summary": {
+      "en": "London City confirms away tickets are on sale and general sale opens at 10:00 BST on 7 October for the 14:00 fixture on 25 October at BrewDog/St Helens Stadium. Liverpool lists full-price tickets at £10 adult and £3.50 junior, group discounts from six tickets and a mandatory smartphone NFC pass. Free coach travel is announced but its booking release remains pending. Availability is not evidence of sales.",
+      "es": "London City confirma que las entradas visitantes están a la venta y que la venta general abre a las 10:00 BST del 7 de octubre para el partido del 25 de octubre a las 14:00 en BrewDog/St Helens Stadium. Liverpool publica precios de £10 adulto y £3,50 junior, descuentos para grupos desde seis entradas y pase NFC obligatorio en smartphone. Se anuncia autocar gratuito, pero la apertura de su reserva sigue pendiente. La disponibilidad no demuestra ventas."
+    },
+    "marketingAction": {
+      "en": "Activate the official away-ticket journey today for consented away, family and group audiences; make the venue alias, 14:00 kickoff and NFC requirement explicit, tag clicks and purchases, and issue a separate transport update only when free-coach booking opens.",
+      "es": "Activar hoy el recorrido oficial de entradas visitantes para audiencias consentidas de away, familias y grupos; dejar explícitos el alias de la sede, las 14:00 y el requisito NFC, etiquetar clics y compras, y enviar una actualización separada de transporte solo cuando abra la reserva del autocar gratuito."
+    },
+    "sourceName": "London City Lionesses / Liverpool FC",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-information-liverpool-away",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-liverpool-away",
+        "checkedAt": "2026-10-07"
+      },
+      {
+        "name": "Liverpool FC",
+        "url": "https://www.liverpoolfc.com/tickets/match/liverpool-women-v-london-city-lionesses-womens-super-league-2026-27",
+        "checkedAt": "2026-10-07"
+      }
+    ]
   }
 ]
