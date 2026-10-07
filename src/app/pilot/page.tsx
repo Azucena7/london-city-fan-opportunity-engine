@@ -16,6 +16,37 @@ const cycle = [
   ["04", "Learn", "Compare recommendation, execution and outcome so the next decision gets better."]
 ];
 
+const pilotWindow = [
+  {
+    fixture: "Brighton · 26 Sep",
+    state: "Observed",
+    focus: "Experience + retention",
+    decision: "Extend the football day, protect service confidence and learn from repeat behaviour.",
+    evidence: "Public activation + reported attendance; CRM, scans and spend remain gated."
+  },
+  {
+    fixture: "Everton · 18 Oct",
+    state: "Active",
+    focus: "Segmentation + VIP + broadcast",
+    decision: "Separate family, Oktoberfest, VIP and remote-viewer journeys instead of one generic campaign.",
+    evidence: "Official matchday proposition, VIP availability and broadcast context."
+  },
+  {
+    fixture: "Crystal Palace · 28 Oct",
+    state: "Next",
+    focus: "Bundle + ticketing",
+    decision: "Test bundle versus single-match journeys and measure purchase and scan behaviour per fixture.",
+    evidence: "Official three-game cup bundle and sale windows."
+  },
+  {
+    fixture: "Manchester City · 1 Nov",
+    state: "Next",
+    focus: "Pricing + CRM cohorts",
+    decision: "Use prior buyers, registered prospects and priority cohorts with verified price windows.",
+    evidence: "Official ticket launch; conversion remains unmeasured until club data is connected."
+  }
+] as const;
+
 export default function PilotPage() {
   const live = getCurrentProductOpportunity();
 
@@ -76,6 +107,29 @@ export default function PilotPage() {
           <article><strong>Commercial context</strong><span>Sponsor rights, player assets, contracts, campaigns and priority moments.</span></article>
           <article><strong>Operational context</strong><span>Calendar pressure, availability, ownership, approvals and delivery capacity.</span></article>
         </div>
+      </section>
+
+
+      <section className={styles.section}>
+        <div className={styles.sectionHead}>
+          <span className={styles.eyebrow}>Example pilot window · London City</span>
+          <h2>Four cycles. Four different decisions. One learning system.</h2>
+          <p>This is how a bounded pilot becomes useful: not by repeating the same dashboard four times, but by testing whether AVELA adapts the decision as fixture context, evidence and commercial constraints change.</p>
+        </div>
+        <div className={styles.pilotWindow}>
+          {pilotWindow.map((item, index) => (
+            <article key={item.fixture} data-state={item.state.toLowerCase()}>
+              <div className={styles.pilotWindowTop}>
+                <span>{String(index + 1).padStart(2, "0")} · {item.state}</span>
+                <b>{item.focus}</b>
+              </div>
+              <h3>{item.fixture}</h3>
+              <p>{item.decision}</p>
+              <small>{item.evidence}</small>
+            </article>
+          ))}
+        </div>
+        <p className={styles.pilotWindowNote}>The public London City case provides proof of method, not proof of club adoption. A real club pilot would replace public-only evidence with authorised club sources and pre-agreed success measures.</p>
       </section>
 
       <section className={styles.week}>
