@@ -2816,3 +2816,18 @@ test("Learning makes the AVELA closed loop explicit and readable", () => {
   assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
 });
 
+
+test("club pilot demonstrates a bounded multi-cycle learning window", () => {
+  const pilot = read("src/app/pilot/page.tsx");
+  const css = read("src/app/pilot/pilot.module.css");
+  assert.match(pilot, /Example pilot window · London City/);
+  assert.match(pilot, /Brighton · 26 Sep/);
+  assert.match(pilot, /Everton · 18 Oct/);
+  assert.match(pilot, /Crystal Palace · 28 Oct/);
+  assert.match(pilot, /Manchester City · 1 Nov/);
+  assert.match(pilot, /Observed/);
+  assert.match(pilot, /Active/);
+  assert.match(pilot, /public London City case provides proof of method, not proof of club adoption/);
+  assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
+});
+
