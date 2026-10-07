@@ -1622,7 +1622,8 @@ test("mobile app navigation keeps settings and utility destinations reachable", 
   const nav = read("src/components/ProductJourneyNav.tsx");
   const css = read("src/components/ProductJourneyNav.module.css");
   assert.match(nav, /className=\{styles\.mobileMenu\}/);
-  assert.match(nav, />More<\/summary>/);
+  assert.match(nav, /mobileOverflowLabel/);
+  assert.match(nav, /mobileOverflowActive \? mobileOverflowLabel : "More"/);
   for (const label of ["Executive view", "Sources", "Setup", "Team", "Product demo"]) {
     assert.match(nav, new RegExp(label));
   }
