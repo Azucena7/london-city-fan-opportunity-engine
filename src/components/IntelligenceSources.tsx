@@ -19,7 +19,7 @@ const sources = [
       "Private club-level data is not accessed in this demo"
     ],
     href: "https://www.blinkfire.com/d/landing/resources",
-    connectHref: "/app/setup",
+    connectHref: "/app/setup#connections",
     connectionMode: "API / MCP / warehouse",
     decisionGain: "Adds club-specific media, sponsorship and audience performance to post-activation learning.",
     priority: 3
@@ -32,7 +32,7 @@ const sources = [
     available: ["Synthetic demo schema and aggregate measurement model"],
     connected: ["Real club data requires an authorised club integration"],
     href: "/app/setup",
-    connectHref: "/app/setup",
+    connectHref: "/app/setup#connections",
     connectionMode: "API / warehouse / secure export",
     decisionGain: "Unlocks purchases, scans, realised price, retention and consent-safe audience evidence.",
     priority: 1
@@ -45,7 +45,7 @@ const sources = [
     available: ["Fixture calendar", "Public event context", "Competition overlap"],
     connected: ["Live public-signal layer"],
     href: "/app/matches",
-    connectHref: "/app/setup",
+    connectHref: "/app/setup#connections",
     connectionMode: "Feed / calendar / public APIs",
     decisionGain: "Improves fixture timing, local context and collision detection around every match.",
     priority: 4
@@ -66,7 +66,7 @@ const sources = [
       "No journey route is labelled live without a timestamped provider response"
     ],
     href: "/app/matches",
-    connectHref: "/app/setup",
+    connectHref: "/app/setup#connections",
     connectionMode: "Provider credentials / API",
     decisionGain: "Improves matchday travel confidence, disruption awareness and fan-service timing.",
     priority: 5
@@ -79,7 +79,7 @@ const sources = [
     available: ["Vercel Web Analytics on AVELA properties"],
     connected: ["Club-owned analytics remains a separate permissioned source"],
     href: "/",
-    connectHref: "/app/setup",
+    connectHref: "/app/setup#connections",
     connectionMode: "Analytics integration",
     decisionGain: "Adds landing-page response and campaign traffic evidence to the learning loop.",
     priority: 2
@@ -194,7 +194,7 @@ export function IntelligenceSources() {
             <h2>Connect the sources that will improve decisions most.</h2>
             <p>AVELA ranks missing or unconfigured sources by the decision value they unlock. Connected sources stay visible here with health and freshness; missing sources show why they matter before the club spends time integrating them.</p>
           </div>
-          <Link href="/app/setup" className={styles.manageConnections}>Manage club connections →</Link>
+          <Link href="/app/setup#connections" className={styles.manageConnections}>Manage club connections →</Link>
         </div>
         <div className={styles.recommendationGrid}>
           {sourceRows
