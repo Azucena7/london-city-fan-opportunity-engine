@@ -11,8 +11,17 @@ function resolveSupabaseKey() {
     || process.env.NEXT_PUBLIC_CLUB_SUPABASE_PUBLISHABLE_KEY;
 }
 
+function resolveSupabaseServerKey() {
+  return process.env.CLUB_SUPABASE_SECRET_KEY
+    || process.env.CLUB_SUPABASE_SERVICE_ROLE_KEY;
+}
+
 export function supabaseConfigured() {
   return Boolean(resolveSupabaseUrl() && resolveSupabaseKey());
+}
+
+export function supabaseServerConfigured() {
+  return Boolean(resolveSupabaseUrl() && resolveSupabaseServerKey());
 }
 
 export function supabasePublicConfig() {
@@ -52,6 +61,22 @@ export async function supabaseRequest(path: string, init: RequestInit = {}) {
   headers.set("Content-Type", "application/json");
 
   return fetch(`${url}${path}`, {
+    ...init,
+    headers,
+    cache: "no-store"
+  });
+}
+
+export async function supabaseServerRequest(path: string, init: RequestInit = {}) {
+  const url = resolveSupabaseUrl();
+  const key = resolveSupabaseServerKey();
+  if (!url || !key) throw new Error("Supabase server credentials are not configured.");
+  const headers = new Headers(init.headers);
+  headers.set("apikey", key);
+  headers.set("Authorization", `Bearer ${key}`);
+  headers.set("Content-Type", "application/json");
+
+  return fetch(`${url.replace(/\/$/, "")}${path}`, {
     ...init,
     headers,
     cache: "no-store"
