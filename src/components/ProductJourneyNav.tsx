@@ -31,6 +31,7 @@ const navGroups = [
 ] as const;
 
 const workItems = [...navGroups[0].items, ...navGroups[1].items, ...navGroups[2].items] as const;
+const mobileOverflowKeys = new Set<string>(["sponsors", "season", "learning"]);
 
 function NavIcon({ name }: { name: string }) {
   const common = { viewBox: "0 0 24 24", width: 16, height: 16, fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
@@ -76,7 +77,11 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
               <Link
                 key={item.key}
                 href={item.href}
-                className={[styles.workLink, active === item.key ? styles.active : ""].join(" ")}
+                className={[
+                  styles.workLink,
+                  mobileOverflowKeys.has(item.key) ? styles.mobileOverflow : "",
+                  active === item.key ? styles.active : ""
+                ].join(" ")}
                 aria-current={active === item.key ? "page" : undefined}
               >
                 <span className={styles.glyph} aria-hidden="true"><NavIcon name={item.icon} /></span>
