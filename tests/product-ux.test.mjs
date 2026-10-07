@@ -2857,3 +2857,13 @@ test("mobile workspace navigation keeps only four primary destinations visible",
   assert.doesNotMatch(css, /nth-of-type\(n\+5\)/);
 });
 
+
+test("mobile overflow keeps the active destination visible in More", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const css = read("src/components/ProductJourneyNav.module.css");
+  assert.match(nav, /mobileOverflowActive/);
+  assert.match(nav, /mobileOverflowLabel/);
+  assert.match(nav, /styles\.mobileMenuActive/);
+  assert.match(css, /\.mobileMenuActive\{/);
+});
+
