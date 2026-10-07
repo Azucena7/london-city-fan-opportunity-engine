@@ -116,6 +116,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <a href="#readiness">02 Feasibility</a>
           <a href="#execute">03 Build</a>
           <a href="#evidence">04 Evidence</a>
+          <a href="#impact">05 Human decision</a>
           <a href="#learning">06 Learn</a>
         </div>
       </nav>
