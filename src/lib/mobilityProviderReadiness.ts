@@ -34,18 +34,29 @@ function mapSourceState(item: SourceHealthItem | null): MobilityProviderState {
   return "not-configured";
 }
 
+function mapRoadState(item: SourceHealthItem | null): MobilityProviderState {
+  const sourceState = mapSourceState(item);
+  if (!item || sourceState !== "not-configured") return sourceState;
+  // TfL's road-disruption endpoint supports an anonymous runtime fallback.
+  // Keep it degraded until a timestamped runtime response is observed rather than
+  // claiming the provider is fully live from static source-health alone.
+  return "degraded";
+}
+
 export const mobilityProviderReadiness: MobilityProviderReadiness[] = [
   {
     id: "road",
     label: "Road & traffic",
-    state: mapSourceState(roadHealth),
+    state: mapRoadState(roadHealth),
     provider: "Transport for London Unified API",
     sourceUrl: "https://api.tfl.gov.uk/",
     checkedAt: roadHealth?.lastAttemptAt ?? roadHealth?.lastSuccessfulAt ?? null,
     freshnessMinutes: null,
     scope: "Material road incidents and closures that could affect supporter arrival.",
     decisionRule: "Escalate only when a verified incident materially affects a relevant supporter corridor or recommended arrival window.",
-    fallback: roadHealth?.note?.en ?? "Show official club directions and do not infer live road conditions."
+    fallback: mapSourceState(roadHealth) === "not-configured"
+      ? "TfL anonymous fallback is available at runtime; treat it as degraded until a timestamped live response is observed. Credentials improve reliability."
+      : roadHealth?.note?.en ?? "Show official club directions and do not infer live road conditions."
   },
   {
     id: "rail",

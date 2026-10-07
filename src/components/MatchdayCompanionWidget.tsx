@@ -43,7 +43,7 @@ export function MatchdayCompanionWidget({
         <div className={styles.state} data-live={providerSummary.state === "live" ? "true" : "false"}>
           <span>Journey layer</span>
           <strong>{state}</strong>
-          <small>{providerSummary.configured}/{providerSummary.total} provider layers configured · {providerSummary.state.replace("-", " ")}</small>
+          <small>{providerSummary.configured}/{providerSummary.total} provider layers available · {providerSummary.state.replace("-", " ")}</small>
         </div>
       </div>
 
@@ -145,7 +145,7 @@ export function MatchdayCompanionWidget({
       <div className={styles.actions}>
         <div>
           <span>Next product step</span>
-          <strong>Connect one authorised journey / traffic provider, preserve source timestamps, then let AVELA decide when travel deserves communication.</strong>
+          <strong>Use the live road check when available, connect authorised rail / routing providers, preserve source timestamps, then let AVELA decide when travel deserves communication.</strong>
         </div>
         <Link href={"/matchday/" + fixtureId}>Preview fan utility →</Link>
       </div>

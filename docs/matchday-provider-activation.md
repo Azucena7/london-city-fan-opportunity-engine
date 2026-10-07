@@ -4,22 +4,24 @@ This note defines when a mobility layer may move from `not-configured` to `live`
 
 ## Road / traffic — TfL Unified API
 
-Environment variables:
+Optional reliability credentials:
 - `TFL_APP_ID`
 - `TFL_APP_KEY`
+
+The adapter also supports TfL's anonymous public fallback. Missing credentials therefore mean degraded readiness, not that the road layer is unusable.
 
 Adapter:
 - `GET /api/matchday/road`
 
 Activation rule:
-1. Credentials are configured outside the repository.
-2. The adapter returns HTTP 200.
-3. The response includes `state: "live"` and a current `checkedAt`.
-4. Incidents are filtered to the configured Hayes Lane radius.
-5. Executive escalation only occurs for material incidents; provider availability alone remains informational.
+1. The adapter returns HTTP 200, with or without optional credentials.
+2. The response includes `state: "live"` and a current `checkedAt`.
+3. Incidents are filtered to the configured Hayes Lane radius.
+4. Executive escalation only occurs for material incidents; provider availability alone remains informational.
+5. Credentials may be added outside the repository for reliability and quota headroom.
 
 Failure behaviour:
-- Missing credentials => `not-configured`.
+- Missing credentials => anonymous fallback; readiness remains `degraded` until a timestamped live response is observed.
 - Upstream error or timeout => `degraded`.
 - Never infer road conditions from stale or absent data.
 
