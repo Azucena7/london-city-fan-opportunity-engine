@@ -45,6 +45,12 @@ test("TfL road adapter supports current API key naming and anonymous fallback", 
   assert.match(road, /if \(appId\) url\.searchParams\.set\("app_id", appId\)/);
   assert.match(road, /if \(appKey\) url\.searchParams\.set\("app_key", appKey\)/);
   assert.match(road, /MATERIAL_RADIUS_KM/);
+
+  const readiness = read("src/lib/mobilityProviderReadiness.ts");
+  const widget = read("src/components/MatchdayCompanionWidget.tsx");
+  assert.match(readiness, /function mapRoadState/);
+  assert.match(readiness, /TfL anonymous fallback is available at runtime/);
+  assert.match(widget, /provider layers available/);
 });
 
 
