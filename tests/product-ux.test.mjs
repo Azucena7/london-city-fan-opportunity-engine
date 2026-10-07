@@ -2749,3 +2749,20 @@ test("commercial pilot request captures a real lead", () => {
   assert.match(migration, /grant insert on public\.commercial_leads to anon, authenticated/);
   assert.doesNotMatch(migration, /grant select on public\.commercial_leads/);
 });
+
+test("shared operational components keep microcopy readable", () => {
+  const files = [
+    "src/components/ClubPilotReadiness.module.css",
+    "src/components/ClubSetup.module.css",
+    "src/components/DecisionContextTrail.module.css",
+    "src/components/MatchdayCompanionWidget.module.css",
+    "src/components/PlayerAssetPlanner.module.css",
+    "src/app/commercial-pilot.css",
+    "src/components/AccessCenter.module.css"
+  ];
+  for (const file of files) {
+    const css = read(file);
+    assert.doesNotMatch(css, /font-size:(?:8|9|10)px/);
+  }
+});
+
