@@ -81,3 +81,11 @@ test("commercial lead capture requires server-side Supabase credentials", async 
   assert.match(server, /supabaseServerRequest/);
 });
 
+
+test("For Clubs surfaces the multi-cycle pilot window", async () => {
+  const page = await source("src/components/ClubPilotProposition.tsx");
+  assert.match(page, /Brighton, Everton, Crystal Palace and Manchester City/);
+  assert.match(page, /See the 4-cycle pilot window/);
+  assert.match(page, /utm_content=multi_cycle_proof/);
+});
+
