@@ -56,6 +56,9 @@ const utilityItems = [
 ] as const;
 
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
+  const mobileOverflowActive = Boolean(active && mobileOverflowKeys.has(active));
+  const mobileOverflowLabel = workItems.find((item) => item.key === active)?.displayLabel ?? "More";
+
   return (
     <aside className={styles.sidebar} aria-label="AVELA club app navigation">
       <div className={styles.top}>
@@ -123,7 +126,9 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
       </div>
 
       <details className={styles.mobileMenu}>
-        <summary>More</summary>
+        <summary className={mobileOverflowActive ? styles.mobileMenuActive : ""}>
+          {mobileOverflowActive ? mobileOverflowLabel : "More"}
+        </summary>
         <div className={styles.mobileMenuPanel}>
           <span>Club</span>
           {[...workspaceItems, ...utilityItems].map((item) => (
