@@ -46,7 +46,8 @@ export default function ClubSetupPage() {
       </WorkspaceCard>
 
 
-      <WorkspaceCard id="connections" className={styles.connectionSetup}>
+      <div id="connections" className={styles.connectionAnchor}>
+      <WorkspaceCard className={styles.connectionSetup}>
         <WorkspaceSectionHeader
           eyebrow="Source connections"
           title="Connect once. Improve every downstream decision."
@@ -65,6 +66,7 @@ export default function ClubSetupPage() {
           <p>A configured credential is not the same as a healthy source. AVELA keeps setup state, health, freshness and permission state separate so the club always knows what evidence is actually usable.</p>
         </div>
       </WorkspaceCard>
+      </div>
 
       <div className={styles.readinessSurface}>
         <ClubPilotReadiness />
