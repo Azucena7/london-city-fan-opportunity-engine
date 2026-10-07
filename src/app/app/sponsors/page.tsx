@@ -187,6 +187,7 @@ export default function SponsorsPage() {
           </WorkspaceCard></div>
 
           <div id="rights"><WorkspaceDrawer label="Contract truth" title="Verified rights & obligations">
+            <Link className={styles.contractJump} href="/app/contracts">Review contract truth →</Link>
             <SponsorContractHealth />
           </WorkspaceDrawer></div>
 
