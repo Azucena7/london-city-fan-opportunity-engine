@@ -2842,3 +2842,14 @@ test("Opportunity Brief keeps internal headings at workspace scale", () => {
   assert.doesNotMatch(css, /briefIntro h2\{[^}]*44px/);
 });
 
+
+test("mobile workspace navigation keeps only four primary destinations visible", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  const css = read("src/components/ProductJourneyNav.module.css");
+  assert.match(nav, /mobileOverflowKeys/);
+  assert.match(nav, /"sponsors", "season", "learning"/);
+  assert.match(nav, /styles\.mobileOverflow/);
+  assert.match(css, /\.mobileOverflow\{display:none!important\}/);
+  assert.doesNotMatch(css, /nth-of-type\(n\+5\)/);
+});
+
