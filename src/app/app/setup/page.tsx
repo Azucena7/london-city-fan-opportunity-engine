@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { ClubSetup } from "@/components/ClubSetup";
 import { ClubPilotReadiness } from "@/components/ClubPilotReadiness";
@@ -42,6 +43,27 @@ export default function ClubSetupPage() {
       <WorkspaceCard className={styles.introCard}>
         <WorkspaceSectionHeader eyebrow="Operating model" title="One setup layer for every AVELA decision surface" />
         <p>Fixtures, channels, objectives, brand rules and approval ownership should be configured here once and reused everywhere else. Pilot readiness sits above configuration so missing prerequisites are visible before a club tries to execute.</p>
+      </WorkspaceCard>
+
+
+      <WorkspaceCard id="connections" className={styles.connectionSetup}>
+        <WorkspaceSectionHeader
+          eyebrow="Source connections"
+          title="Connect once. Improve every downstream decision."
+          action={<Link href="/app/sources">Review source recommendations →</Link>}
+        />
+        <p className={styles.connectionLead}>Sources recommends what to add next; Setup is where the club completes the connection. AVELA should only mark a source operational after permissions, credentials and a successful refresh are confirmed.</p>
+        <div className={styles.connectionSteps} aria-label="Source connection setup flow">
+          <div><span>01</span><strong>Choose source</strong><small>Start from AVELA’s recommended priority or a club-selected system.</small></div>
+          <div><span>02</span><strong>Grant access</strong><small>API, MCP, warehouse, secure export or provider credentials.</small></div>
+          <div><span>03</span><strong>Map evidence</strong><small>Define what fields may influence which decision surfaces.</small></div>
+          <div><span>04</span><strong>Verify refresh</strong><small>Confirm source, timestamp, permissions and first successful sync.</small></div>
+          <div><span>05</span><strong>Go operational</strong><small>Only then can the source improve confidence, recommendations or learning.</small></div>
+        </div>
+        <div className={styles.connectionBoundary}>
+          <strong>Connection rule</strong>
+          <p>A configured credential is not the same as a healthy source. AVELA keeps setup state, health, freshness and permission state separate so the club always knows what evidence is actually usable.</p>
+        </div>
       </WorkspaceCard>
 
       <div className={styles.readinessSurface}>
