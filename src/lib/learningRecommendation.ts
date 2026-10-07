@@ -4,6 +4,7 @@ import type { ProductResults } from "@/lib/productResults";
 export type NextFixtureLearning = {
   confidence: "Low" | "Medium" | "High";
   evidenceState: "missing" | "descriptive" | "measured";
+  learned: string;
   repeat: string;
   change: string;
   measure: string;
@@ -18,6 +19,7 @@ export function deriveNextFixtureLearning(
     return {
       confidence: "Low",
       evidenceState: "missing",
+      learned: "AVELA has not learned enough to scale this play yet; the next improvement is better outcome evidence.",
       repeat: "Keep the audience hypothesis provisional rather than scaling it.",
       change: "Do not increase campaign scope or spend based on unmeasured outcomes.",
       measure: "Connect matched purchase, scan and repeat evidence for the fixture before promoting the hypothesis.",
@@ -52,6 +54,10 @@ export function deriveNextFixtureLearning(
   return {
     confidence,
     evidenceState,
+    learned:
+      repeatRate >= 0.2
+        ? "Observed repeat behaviour supports keeping recent-home attendees in the next comparable test, but not automatic scaling."
+        : "Observed behaviour does not yet justify making the recent-attendee cohort the only acquisition audience.",
     repeat,
     change,
     measure,
