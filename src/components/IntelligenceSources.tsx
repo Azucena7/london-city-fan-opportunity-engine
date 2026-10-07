@@ -18,7 +18,11 @@ const sources = [
       "MCP / warehouse delivery also inherit Blinkfire account permissions",
       "Private club-level data is not accessed in this demo"
     ],
-    href: "https://www.blinkfire.com/d/landing/resources"
+    href: "https://www.blinkfire.com/d/landing/resources",
+    connectHref: "/app/setup",
+    connectionMode: "API / MCP / warehouse",
+    decisionGain: "Adds club-specific media, sponsorship and audience performance to post-activation learning.",
+    priority: 3
   },
   {
     name: "Club ticketing / CRM",
@@ -27,7 +31,11 @@ const sources = [
     summary: "Adds purchases, scans, repeat attendance, realised price and consent-safe cohort evidence.",
     available: ["Synthetic demo schema and aggregate measurement model"],
     connected: ["Real club data requires an authorised club integration"],
-    href: "/app/setup"
+    href: "/app/setup",
+    connectHref: "/app/setup",
+    connectionMode: "API / warehouse / secure export",
+    decisionGain: "Unlocks purchases, scans, realised price, retention and consent-safe audience evidence.",
+    priority: 1
   },
   {
     name: "Fixtures + public context",
@@ -36,7 +44,11 @@ const sources = [
     summary: "Provides the time anchor that starts monitoring and contextual signals around each home fixture.",
     available: ["Fixture calendar", "Public event context", "Competition overlap"],
     connected: ["Live public-signal layer"],
-    href: "/app/matches"
+    href: "/app/matches",
+    connectHref: "/app/setup",
+    connectionMode: "Feed / calendar / public APIs",
+    decisionGain: "Improves fixture timing, local context and collision detection around every match.",
+    priority: 4
   },
   {
     name: "Matchday travel",
@@ -53,7 +65,11 @@ const sources = [
       "National Rail / RDM account is approved but product endpoint remains pending",
       "No journey route is labelled live without a timestamped provider response"
     ],
-    href: "/app/matches"
+    href: "/app/matches",
+    connectHref: "/app/setup",
+    connectionMode: "Provider credentials / API",
+    decisionGain: "Improves matchday travel confidence, disruption awareness and fan-service timing.",
+    priority: 5
   },
   {
     name: "Web analytics",
@@ -62,7 +78,11 @@ const sources = [
     summary: "Provides aggregate website response and campaign landing behaviour where instrumentation is available.",
     available: ["Vercel Web Analytics on AVELA properties"],
     connected: ["Club-owned analytics remains a separate permissioned source"],
-    href: "/"
+    href: "/",
+    connectHref: "/app/setup",
+    connectionMode: "Analytics integration",
+    decisionGain: "Adds landing-page response and campaign traffic evidence to the learning loop.",
+    priority: 2
   }
 ] as const;
 
@@ -163,6 +183,45 @@ export function IntelligenceSources() {
               <small>{health.latest ? "Last successful refresh " + new Date(health.latest).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) : health.primary?.state === "requires-access" ? "Private evidence needs club permission" : health.primary?.state === "not-configured" ? "Connection not configured yet" : health.primary?.state === "blocked" ? "Evidence currently blocked" : "No recent refresh available"}</small>
             </article>
           ))}
+        </div>
+      </section>
+
+
+      <section className={styles.connectionCenter} aria-label="Recommended source connections">
+        <div className={styles.connectionIntro}>
+          <div>
+            <span>Connection center</span>
+            <h2>Connect the sources that will improve decisions most.</h2>
+            <p>AVELA ranks missing or unconfigured sources by the decision value they unlock. Connected sources stay visible here with health and freshness; missing sources show why they matter before the club spends time integrating them.</p>
+          </div>
+          <Link href="/app/setup" className={styles.manageConnections}>Manage club connections →</Link>
+        </div>
+        <div className={styles.recommendationGrid}>
+          {sourceRows
+            .filter(({ health }) => health.primary?.state !== "operational")
+            .sort((a, b) => a.source.priority - b.source.priority)
+            .map(({ source, health }, index) => (
+              <article key={source.name} data-priority={index === 0 ? "high" : "normal"}>
+                <div className={styles.recommendationTop}>
+                  <span>{index === 0 ? "Recommended next" : "Available to connect"}</span>
+                  <b>{health.label}</b>
+                </div>
+                <h3>{source.name}</h3>
+                <p>{source.decisionGain}</p>
+                <div className={styles.connectionMeta}>
+                  <span>Connection</span>
+                  <strong>{source.connectionMode}</strong>
+                </div>
+                <Link href={source.connectHref}>{index === 0 ? "Start recommended connection →" : "Configure connection →"}</Link>
+              </article>
+            ))}
+          {!sourceRows.some(({ health }) => health.primary?.state !== "operational") ? (
+            <article className={styles.allConnected}>
+              <span>All core sources operational</span>
+              <strong>No priority connection is missing.</strong>
+              <p>Use source health below to monitor freshness, permissions and degraded feeds.</p>
+            </article>
+          ) : null}
         </div>
       </section>
 
