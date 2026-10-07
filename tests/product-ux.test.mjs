@@ -2772,3 +2772,16 @@ test("Sources connection center keeps connector microcopy readable", () => {
   assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
 });
 
+
+test("Sources routes recommended connections into dedicated Setup flow", () => {
+  const sources = read("src/components/IntelligenceSources.tsx");
+  const setup = read("src/app/app/setup/page.tsx");
+  const css = read("src/app/app/setup/setup.module.css");
+  assert.match(sources, /\/app\/setup#connections/);
+  assert.match(setup, /id="connections"/);
+  assert.match(setup, /Source connections/);
+  assert.match(setup, /Grant access/);
+  assert.match(setup, /Verify refresh/);
+  assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
+});
+
