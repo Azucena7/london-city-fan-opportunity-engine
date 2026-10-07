@@ -305,5 +305,20 @@
       "en": "London City's confirmed 6–1 away win provides a strong content hook, while Tottenham's reported 2,377 attendance remains separate from sales and scans. Launch tagged Everton variants for prior home buyers, known away buyers and broadcast audiences, and reconcile away ticketing before claiming conversion or retention.",
       "es": "La victoria visitante confirmada por 1–6 ofrece un fuerte gancho de contenido, mientras que la asistencia de 2.377 reportada por Tottenham sigue separada de ventas y scans. Lanzar variantes etiquetadas para Everton dirigidas a compradores anteriores en casa, compradores visitantes conocidos y audiencias de retransmisión, y conciliar el ticketing visitante antes de afirmar conversión o retención."
     }
+  },
+  {
+    "id": "liverpool-away-sale-access-2026-10-07",
+    "fixtureId": "2026-10-25-liv-a",
+    "area": "Ticketing, CRM & Supporter Services",
+    "status": "next",
+    "due": "2026-10-07",
+    "title": {
+      "en": "Launch Liverpool away sale and NFC access journey",
+      "es": "Lanzar la venta visitante de Liverpool y el recorrido de acceso NFC"
+    },
+    "reason": {
+      "en": "General sale opens at 10:00 BST today for the 25 October 14:00 fixture. Send the official purchase route to consented away, family and group segments, state BrewDog/St Helens Stadium and the mandatory smartphone NFC pass, measure clicks and purchases, and hold transport messaging until free-coach booking is live.",
+      "es": "La venta general abre hoy a las 10:00 BST para el partido del 25 de octubre a las 14:00. Enviar la ruta oficial de compra a segmentos consentidos de away, familias y grupos, indicar BrewDog/St Helens Stadium y el pase NFC obligatorio en smartphone, medir clics y compras y mantener en espera el mensaje de transporte hasta que la reserva del autocar gratuito esté activa."
+    }
   }
 ]
