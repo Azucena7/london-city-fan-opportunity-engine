@@ -2733,10 +2733,11 @@ test("public Matchday utility keeps operational microcopy at 10px or above", () 
   assert.doesNotMatch(css, /font-size:(?:8|9)px/);
 });
 
-test("commercial pilot request captures a real lead", () => {
+test("commercial pilot request captures a real lead through the server-only path", () => {
   const page = read("src/components/ClubPilotProposition.tsx");
   const route = read("src/app/api/commercial-lead/route.ts");
-  const migration = read("supabase/migrations/20261006202937_commercial_leads_capture.sql");
+  const createMigration = read("supabase/migrations/20261006202937_commercial_leads_capture.sql");
+  const lockMigration = read("supabase/migrations/20261007101900_lock_commercial_leads_to_server.sql");
 
   assert.match(page, /\/api\/commercial-lead/);
   assert.match(page, /name="clubName"/);
@@ -2744,11 +2745,14 @@ test("commercial pilot request captures a real lead", () => {
   assert.match(page, /name="consent"/);
   assert.match(page, /commercialHoneypot/);
   assert.match(route, /commercial_leads/);
+  assert.match(route, /supabaseServerRequest/);
   assert.match(route, /return=minimal/);
   assert.match(route, /Honeypot/);
-  assert.match(migration, /enable row level security/);
-  assert.match(migration, /grant insert on public\.commercial_leads to anon, authenticated/);
-  assert.doesNotMatch(migration, /grant select on public\.commercial_leads/);
+  assert.match(createMigration, /enable row level security/);
+  assert.match(lockMigration, /revoke insert on table public\.commercial_leads from anon/);
+  assert.match(lockMigration, /revoke insert on table public\.commercial_leads from authenticated/);
+  assert.match(lockMigration, /drop policy if exists "public can submit commercial leads"/);
+  assert.doesNotMatch(createMigration, /grant select on public\.commercial_leads/);
 });
 
 test("shared operational components keep microcopy readable", () => {
