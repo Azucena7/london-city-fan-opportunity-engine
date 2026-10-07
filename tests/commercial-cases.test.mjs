@@ -38,6 +38,9 @@ test("pilot path stays honest and low-friction with real lead capture", async ()
   assert.match(page, /See the pilot structure/);
   assert.match(page, /AVELA does not need supporter names or emails/);
   assert.match(route, /commercial_leads/);
+  assert.match(route, /supabaseServerConfigured/);
+  assert.match(route, /supabaseServerRequest/);
+  assert.doesNotMatch(route, /supabaseRequest\(/);
 });
 
 test("new commercial views are discoverable from the product and case overview", async () => {
@@ -68,5 +71,13 @@ test("commercial home connects public proof to the multi-cycle pilot", async () 
   assert.match(home, /Brighton, Everton, Crystal Palace and Manchester City/);
   assert.match(home, /See the 4-cycle London City pilot window/);
   assert.match(home, /href="\/pilot\?utm_source=avela_home/);
+});
+
+
+test("commercial lead capture requires server-side Supabase credentials", async () => {
+  const server = await source("src/lib/supabaseServer.ts");
+  assert.match(server, /CLUB_SUPABASE_SECRET_KEY/);
+  assert.match(server, /CLUB_SUPABASE_SERVICE_ROLE_KEY/);
+  assert.match(server, /supabaseServerRequest/);
 });
 
