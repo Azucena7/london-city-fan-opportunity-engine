@@ -920,5 +920,41 @@
         "checkedAt": "2026-10-07"
       }
     ]
+  },
+  {
+    "id": "tickets-west-ham-cup-away-2026-10-08",
+    "fixtureId": "2026-10-21-whu-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-08T10:03:12+01:00",
+    "title": {
+      "en": "West Ham cup away tickets are on general sale from £1",
+      "es": "Las entradas visitantes de copa ante West Ham están en venta general desde £1"
+    },
+    "summary": {
+      "en": "London City confirms away tickets are on sale for the 19:00 BST Subway Players Cup fixture on 21 October at Chigwell Construction Stadium. West Ham lists the venue as Victoria Road and confirms general sale, with tickets at £5 adult, £3 over-66/under-21 and £1 under-18; accessibility tickets use the relevant concession rate and include a Personal Assistant if required. The venue names refer to the same ground. Availability is not evidence of sales.",
+      "es": "London City confirma que están a la venta las entradas visitantes para el partido de Subway Players Cup del 21 de octubre a las 19:00 BST en Chigwell Construction Stadium. West Ham denomina la sede Victoria Road y confirma la venta general, con entradas a £5 adulto, £3 mayores de 66/menores de 21 y £1 menores de 18; las entradas accesibles usan la tarifa de concesión correspondiente e incluyen acompañante cuando sea necesario. Ambos nombres se refieren al mismo estadio. La disponibilidad no demuestra ventas."
+    },
+    "marketingAction": {
+      "en": "Launch a tagged low-price away journey for families, students and existing away audiences; show both venue names, the RM10 7XL postcode, 19:00 kickoff and accessibility route prominently, then measure clicks and purchases without converting availability into demand.",
+      "es": "Lanzar un recorrido visitante etiquetado de bajo precio para familias, estudiantes y audiencias away existentes; mostrar de forma destacada ambos nombres de la sede, el código postal RM10 7XL, las 19:00 y la ruta de accesibilidad, y medir clics y compras sin convertir disponibilidad en demanda."
+    },
+    "sourceName": "London City Lionesses / West Ham United",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+        "checkedAt": "2026-10-08"
+      },
+      {
+        "name": "West Ham United",
+        "url": "https://www.whufc.com/en/womens-team-matches/london-city-lionesses-h-0",
+        "checkedAt": "2026-10-08"
+      }
+    ]
   }
 ]
