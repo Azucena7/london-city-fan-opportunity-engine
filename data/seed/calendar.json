@@ -258,9 +258,9 @@
     "status": "scheduled"
   },
   {
-    "id": "2026-11-07-bir-h",
-    "date": "2026-11-07",
-    "kickoff": "12:00",
+    "id": "2026-11-08-birmingham-c-h",
+    "date": "2026-11-08",
+    "kickoff": "14:30",
     "opponent": "Birmingham City",
     "homeAway": "home",
     "competition": "Barclays Women's Super League",
@@ -268,9 +268,9 @@
     "status": "scheduled"
   },
   {
-    "id": "2026-11-14-ars-a",
-    "date": "2026-11-14",
-    "kickoff": "17:30",
+    "id": "2026-11-15-arsenal-a",
+    "date": "2026-11-15",
+    "kickoff": "16:30",
     "opponent": "Arsenal",
     "homeAway": "away",
     "competition": "Barclays Women's Super League",
@@ -288,9 +288,9 @@
     "status": "scheduled"
   },
   {
-    "id": "2026-11-22-cry-h",
-    "date": "2026-11-22",
-    "kickoff": "14:00",
+    "id": "2026-11-21-crystal-pala-h",
+    "date": "2026-11-21",
+    "kickoff": "17:15",
     "opponent": "Crystal Palace",
     "homeAway": "home",
     "competition": "Barclays Women's Super League",
