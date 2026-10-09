@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-08T12:12:09.101Z",
+  "checkedAt": "2026-10-09T12:03:30.871Z",
   "state": "operational",
   "source": {
     "name": "Ticketmaster Discovery API",
@@ -1590,8 +1590,8 @@
     }
   ],
   "refresh": {
-    "lastAttemptAt": "2026-10-08T12:12:09.101Z",
-    "lastSuccessfulAt": "2026-10-08T12:12:09.101Z",
+    "lastAttemptAt": "2026-10-09T12:03:30.871Z",
+    "lastSuccessfulAt": "2026-10-09T12:03:30.871Z",
     "message": null
   },
   "sources": [
@@ -1608,6 +1608,6 @@
       "url": "https://fixturedownload.com/"
     }
   ],
-  "rawEventCount": 607,
-  "excludedEventCount": 577
+  "rawEventCount": 609,
+  "excludedEventCount": 579
 }
