@@ -956,5 +956,41 @@
         "checkedAt": "2026-10-08"
       }
     ]
+  },
+  {
+    "id": "tickets-birmingham-home-launch-2026-10-09",
+    "fixtureId": "2026-11-08-birmingham-c-h",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-09T09:30:26+01:00",
+    "title": {
+      "en": "Birmingham home priority sale opens with an early-bird deadline",
+      "es": "Abre la venta prioritaria ante Birmingham con plazo early-bird"
+    },
+    "summary": {
+      "en": "London City confirms the Birmingham City home fixture for Sunday 8 November at 14:30 GMT at the CopperJax Community Stadium. Season-ticket and Hat-trick holders receive early access from 9 October, registered-interest supporters from 12 October, and early-bird general sale opens 14 October; prices start at £14 adult and £6 child and increase on 21 October. Ticket availability and access windows are confirmed, but sales and attendance are not measured.",
+      "es": "London City confirma el partido en casa ante Birmingham City para el domingo 8 de noviembre a las 14:30 GMT en el CopperJax Community Stadium. Abonados y titulares del pack Hat-trick tienen acceso anticipado desde el 9 de octubre, los registrados como interesados desde el 12 de octubre y la venta general early-bird abre el 14 de octubre; los precios parten de £14 adulto y £6 niño y suben el 21 de octubre. La disponibilidad y las ventanas de acceso están confirmadas, pero ventas y asistencia no están medidas."
+    },
+    "marketingAction": {
+      "en": "Run a segmented sequence for holders today, registered-interest supporters on 12 October and general audiences on 14 October; make Sunday 8 November, 14:30 and the 21 October price step-up explicit, tag each cohort and measure purchases separately from attendance. Include the wheelchair request route and state that Blue Badge parking is unavailable unless a seasonal space was pre-confirmed.",
+      "es": "Ejecutar una secuencia segmentada para abonados y titulares hoy, interesados registrados el 12 de octubre y audiencias generales el 14 de octubre; hacer explícitos el domingo 8 de noviembre, las 14:30 y la subida de precio del 21 de octubre, etiquetar cada cohorte y medir compras por separado de la asistencia. Incluir la ruta de solicitud para silla de ruedas e indicar que no hay parking Blue Badge salvo plaza de temporada confirmada previamente."
+    },
+    "sourceName": "London City Lionesses / WSL Football",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-sales-information-london-city-vs-birmingham-city",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-sales-information-london-city-vs-birmingham-city",
+        "checkedAt": "2026-10-09"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/clubs/london-city-lionesses/fixtures",
+        "checkedAt": "2026-10-09"
+      }
+    ]
   }
 ]
