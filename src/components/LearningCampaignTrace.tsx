@@ -28,6 +28,7 @@ export function LearningCampaignTrace({ fixtureId, measured }: { fixtureId: stri
   const [activeClubId, setActiveClubId] = useState("");
   const [events, setEvents] = useState<Activity[]>([]);
   const [decisionEvents, setDecisionEvents] = useState<DecisionEvent[]>([]);
+  const [aggregateOutcome, setAggregateOutcome] = useState<{ evidence_state?: "reported" | "verified"; source_label?: string; observed_at?: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadMessage, setLoadMessage] = useState("");
   const [configured, setConfigured] = useState<boolean | null>(null);
@@ -36,21 +37,25 @@ export function LearningCampaignTrace({ fixtureId, measured }: { fixtureId: stri
     setLoading(true);
     setLoadMessage("");
     try {
-      const [campaignResponse, decisionResponse] = await Promise.all([
+      const [campaignResponse, decisionResponse, outcomeResponse] = await Promise.all([
         fetch(`/api/campaign-history/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" }),
-        fetch(`/api/decision-history?clubId=${encodeURIComponent(clubId)}&decisionId=${encodeURIComponent("fixture:" + fixtureId)}`, { cache: "no-store" })
+        fetch(`/api/decision-history?clubId=${encodeURIComponent(clubId)}&decisionId=${encodeURIComponent("fixture:" + fixtureId)}`, { cache: "no-store" }),
+        fetch(`/api/outcome-aggregate/${encodeURIComponent(fixtureId)}?clubId=${encodeURIComponent(clubId)}`, { cache: "no-store" })
       ]);
       const campaignResult = await campaignResponse.json() as { events?: Activity[] };
       const decisionResult = await decisionResponse.json() as { events?: DecisionEvent[] };
+      const outcomeResult = await outcomeResponse.json() as { outcome?: { evidence_state?: "reported" | "verified"; source_label?: string; observed_at?: string } | null };
       setEvents(campaignResponse.ok && Array.isArray(campaignResult.events) ? campaignResult.events : []);
       setDecisionEvents(decisionResponse.ok && Array.isArray(decisionResult.events) ? decisionResult.events : []);
-      if (!campaignResponse.ok || !decisionResponse.ok) {
+      setAggregateOutcome(outcomeResponse.ok ? outcomeResult.outcome ?? null : null);
+      if (!campaignResponse.ok || !decisionResponse.ok || !outcomeResponse.ok) {
         setLoadMessage("Some shared decision history could not be loaded. Missing evidence is not inferred.");
       }
     } catch {
       setEvents([]);
       setDecisionEvents([]);
-      setLoadMessage("Shared decision history is unreachable. Learning will not infer execution or approval.");
+      setAggregateOutcome(null);
+      setLoadMessage("Shared decision history is unreachable. Learning will not infer execution, approval or outcome evidence.");
     } finally {
       setLoading(false);
     }
@@ -79,6 +84,15 @@ export function LearningCampaignTrace({ fixtureId, measured }: { fixtureId: stri
       }
     })();
   }, [fixtureId]); // eslint-disable-line react-hooks/exhaustive-deps -- reload account state when the selected fixture changes
+
+  useEffect(() => {
+    const refresh = (event: Event) => {
+      const detail = (event as CustomEvent<{ fixtureId?: string }>).detail;
+      if (detail?.fixtureId === fixtureId && activeClubId) void loadHistory(activeClubId);
+    };
+    window.addEventListener("avela:outcome-aggregate-updated", refresh);
+    return () => window.removeEventListener("avela:outcome-aggregate-updated", refresh);
+  }, [activeClubId, fixtureId]); // eslint-disable-line react-hooks/exhaustive-deps -- refresh current fixture evidence only
 
   const trace = useMemo(() => {
     const activityTypes = new Set(events.map((event) => event.event_type));
@@ -155,10 +169,22 @@ export function LearningCampaignTrace({ fixtureId, measured }: { fixtureId: stri
           <strong>{trace.executed?.label ?? (trace.handoff ? "Launch handoff prepared · execution not proven" : "No execution evidence")}</strong>
           <p>{trace.executed?.detail ?? (trace.handoff ? "A handoff exists, but no executed decision event proves that an external system or operator completed the action." : "No connector or user execution record is available.")}</p>
         </article>
-        <article data-state={measured || trace.measuredEvent ? "recorded" : "missing"}>
+        <article data-state={measured || trace.measuredEvent || aggregateOutcome ? "recorded" : "missing"}>
           <span>04 · Outcome</span>
-          <strong>{measured ? "Observed club outcome connected" : trace.measuredEvent?.label ?? "Outcome not measured"}</strong>
-          <p>{measured ? "Authorised aggregate result evidence is available for this fixture." : trace.measuredEvent?.detail ?? "No outcome is promoted from workflow activity alone."}</p>
+          <strong>{
+            measured
+              ? "Observed club outcome connected"
+              : aggregateOutcome
+                ? `Club-reported aggregate · ${aggregateOutcome.evidence_state ?? "reported"}`
+                : trace.measuredEvent?.label ?? "Outcome not measured"
+          }</strong>
+          <p>{
+            measured
+              ? "Authorised aggregate result evidence is available for this fixture."
+              : aggregateOutcome
+                ? `${aggregateOutcome.source_label ?? "Authorised aggregate"} · descriptive evidence only; incrementality is not established.`
+                : trace.measuredEvent?.detail ?? "No outcome is promoted from workflow activity alone."
+          }</p>
         </article>
         <article data-state={trace.learned ? "recorded" : "missing"}>
           <span>05 · Learning</span>

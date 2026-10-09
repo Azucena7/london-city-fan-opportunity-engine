@@ -1,0 +1,25 @@
+.wrap{margin:12px 0;padding:16px;border:1px solid var(--product-line);border-radius:10px;background:#fff}
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:16px;align-items:start}
+.head>div:first-child>span{display:block;color:var(--product-accent);font-size:9px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.head h2{margin:4px 0 5px;font-size:18px}
+.head p{margin:0;color:var(--product-muted);font-size:10px;line-height:1.5}
+.state{padding:10px;border:1px solid var(--product-line);border-radius:8px;background:#FAFBFB}
+.state span,.state strong,.state small{display:block}.state span{font-size:8px;font-weight:900;text-transform:uppercase;color:var(--product-muted)}
+.state strong{margin-top:4px;font-size:11px}.state small{margin-top:3px;color:var(--product-muted);font-size:8px;line-height:1.35}
+.state[data-state="reported"]{background:#FFF9F0}.state[data-state="verified"]{background:#F3FAF8}
+.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:12px}
+.metrics article{padding:9px;border:1px solid var(--product-line);border-radius:7px;background:#FAFBFB}
+.metrics span,.metrics strong{display:block}.metrics span{font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:var(--product-muted)}
+.metrics strong{margin-top:4px;font-size:12px}
+.entry{margin-top:12px;border-top:1px solid var(--product-line);padding-top:10px}
+.entry summary{cursor:pointer;font-size:10px;font-weight:900;color:var(--product-ink)}
+.form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.form label{display:grid;gap:4px;font-size:8px;font-weight:850;color:var(--product-muted)}
+.form input{min-height:36px;border:1px solid var(--product-line);border-radius:7px;padding:7px 8px;background:#fff;color:var(--product-ink);font-size:10px}
+.entry button{margin-top:10px;min-height:36px;padding:8px 10px;border:1px solid #BFDAD5;border-radius:7px;background:#F1FAF8;color:#24746B;font-size:9px;font-weight:900;cursor:pointer}
+.entry button:disabled{opacity:.55;cursor:not-allowed}
+.entry>p,.readOnly,.status{margin:8px 0 0!important;color:var(--product-muted)!important;font-size:8px!important;line-height:1.4}
+.status{padding-top:8px;border-top:1px solid var(--product-line)}
+@media(max-width:1000px){.metrics{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.head{grid-template-columns:1fr}.form{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.metrics,.form{grid-template-columns:1fr 1fr}}

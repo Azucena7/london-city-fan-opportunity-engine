@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./results.module.css";
 import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { LearningCampaignTrace } from "@/components/LearningCampaignTrace";
+import { OutcomeAggregatePanel } from "@/components/OutcomeAggregatePanel";
 import { NextFixtureLearning } from "@/components/NextFixtureLearning";
 import { deriveNextFixtureLearning } from "@/lib/learningRecommendation";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -153,6 +154,13 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         <div className={styles.evidenceDrawerBody}>
           <ProductDataStateLegend />
           {selectedId ? <LearningCampaignTrace fixtureId={selectedId} measured={Boolean(measured)} /> : null}
+      {selectedId && live?.fixture ? (
+        <OutcomeAggregatePanel
+          fixtureId={selectedId}
+          fixtureLabel={live.fixture.opponent}
+          fixtureDate={live.fixture.date}
+        />
+      ) : null}
         </div>
       </details>
 

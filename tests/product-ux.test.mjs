@@ -1583,6 +1583,25 @@ test("Commercial FAQ states current integration and execution boundaries", () =>
   assert.match(faq, /The LLM is part of AVELA; it is not the product/);
 });
 
+test("Learning accepts governed aggregate outcomes without supporter-level data", () => {
+  const route = read("src/app/api/outcome-aggregate/[fixtureId]/route.ts");
+  const panel = read("src/components/OutcomeAggregatePanel.tsx");
+  const trace = read("src/components/LearningCampaignTrace.tsx");
+  const migration = read("supabase/migrations/20261005135500_club_outcome_aggregates.sql");
+  assert.match(route, /club_outcome_aggregates/);
+  assert.match(route, /evidence_state: "reported"/);
+  assert.match(route, /descriptive evidence, not a causal uplift claim/);
+  assert.doesNotMatch(route, /supporter_id|email|postcode|payment/i);
+  assert.match(panel, /without supporter-level data/);
+  assert.match(panel, /stores aggregate metrics plus source metadata only/);
+  assert.match(panel, /Do not enter names, emails, supporter IDs, postcodes or payment details/);
+  assert.match(panel, /results:administer/);
+  assert.match(trace, /Club-reported aggregate/);
+  assert.match(trace, /incrementality is not established/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /results','administer/);
+});
+
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
