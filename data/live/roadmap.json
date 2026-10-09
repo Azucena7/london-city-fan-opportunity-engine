@@ -335,5 +335,20 @@
       "en": "General sale is live for 21 October at 19:00 BST, with £5 adult, £3 concession and £1 under-18 tickets. Target consented family, student and away segments, make Chigwell Construction Stadium / Victoria Road and RM10 7XL explicit, include the accessibility purchase route, and measure clicks and purchases separately from attendance.",
       "es": "La venta general está activa para el 21 de octubre a las 19:00 BST, con entradas de £5 adulto, £3 concesión y £1 menores de 18. Dirigirse a segmentos consentidos de familias, estudiantes y away, hacer explícitos Chigwell Construction Stadium / Victoria Road y RM10 7XL, incluir la ruta de compra accesible y medir clics y compras por separado de la asistencia."
     }
+  },
+  {
+    "id": "birmingham-home-sale-2026-10-09",
+    "fixtureId": "2026-11-08-birmingham-c-h",
+    "area": "Ticketing, CRM & Marketing Operations",
+    "status": "next",
+    "due": "2026-10-09",
+    "title": {
+      "en": "Launch the Birmingham priority and early-bird journey",
+      "es": "Lanzar el recorrido prioritario y early-bird de Birmingham"
+    },
+    "reason": {
+      "en": "The official sale sequence starts with season-ticket and Hat-trick holders today, registered-interest supporters on 12 October and general early-bird sale on 14 October, with prices rising on 21 October. Correct every planning asset to Sunday 8 November at 14:30, segment and tag each cohort, include accessibility and Blue Badge parking guidance, and measure purchases without converting availability into sales or attendance.",
+      "es": "La secuencia oficial empieza hoy con abonados y titulares del pack Hat-trick, sigue con los interesados registrados el 12 de octubre y la venta general early-bird el 14 de octubre, con subida de precios el 21 de octubre. Corregir todos los activos de planificación al domingo 8 de noviembre a las 14:30, segmentar y etiquetar cada cohorte, incluir la guía de accesibilidad y parking Blue Badge y medir compras sin convertir disponibilidad en ventas ni asistencia."
+    }
   }
 ]
