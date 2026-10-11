@@ -992,5 +992,36 @@
         "checkedAt": "2026-10-09"
       }
     ]
+  },
+  {
+    "id": "retail-gk-home-shirt-out-of-stock-2026-10-11",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "medium",
+    "observedAt": "2026-10-11T10:06:28+01:00",
+    "title": {
+      "en": "Goalkeeper home shirt is out of stock",
+      "es": "La camiseta local de portera está agotada"
+    },
+    "summary": {
+      "en": "London City's official retail page currently marks the 2026/27 goalkeeper home shirt as out of stock, while adult away, youth away, home and youth home shirts remain presented as available routes. This confirms product availability only; it does not disclose units sold, demand, revenue or the cause of the stock-out.",
+      "es": "La página oficial de retail de London City marca actualmente como agotada la camiseta local de portera 2026/27, mientras mantiene visibles las rutas de camiseta visitante adulta y juvenil, local y local juvenil. Esto confirma únicamente disponibilidad de producto; no publica unidades vendidas, demanda, ingresos ni la causa del agotado."
+    },
+    "marketingAction": {
+      "en": "Remove or suppress goalkeeper-home-shirt purchase calls to action from Everton matchday and CRM creative, route supporters to genuinely available products, and add a consented restock-interest capture if operationally supported. Measure restock registrations and later purchases separately; do not present the stock-out as sales performance.",
+      "es": "Retirar o suprimir los CTAs de compra de la camiseta local de portera en la creatividad y CRM de Everton, dirigir a productos realmente disponibles y añadir una captura consentida de interés en reposición si existe soporte operativo. Medir por separado registros de reposición y compras posteriores; no presentar el agotado como rendimiento de ventas."
+    },
+    "sourceName": "London City Lionesses · Official retail page",
+    "sourceUrl": "https://www.londoncitylionesses.com/retail",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/retail",
+        "checkedAt": "2026-10-11"
+      }
+    ]
   }
 ]
