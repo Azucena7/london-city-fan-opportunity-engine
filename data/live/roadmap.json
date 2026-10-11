@@ -350,5 +350,20 @@
       "en": "The official sale sequence starts with season-ticket and Hat-trick holders today, registered-interest supporters on 12 October and general early-bird sale on 14 October, with prices rising on 21 October. Correct every planning asset to Sunday 8 November at 14:30, segment and tag each cohort, include accessibility and Blue Badge parking guidance, and measure purchases without converting availability into sales or attendance.",
       "es": "La secuencia oficial empieza hoy con abonados y titulares del pack Hat-trick, sigue con los interesados registrados el 12 de octubre y la venta general early-bird el 14 de octubre, con subida de precios el 21 de octubre. Corregir todos los activos de planificación al domingo 8 de noviembre a las 14:30, segmentar y etiquetar cada cohorte, incluir la guía de accesibilidad y parking Blue Badge y medir compras sin convertir disponibilidad en ventas ni asistencia."
     }
+  },
+  {
+    "id": "retail-gk-shirt-stock-route-2026-10-11",
+    "fixtureId": "2026-10-18-eve-h",
+    "area": "Merchandise, E-commerce & CRM",
+    "status": "next",
+    "due": "2026-10-12",
+    "title": {
+      "en": "Remove the sold-out goalkeeper shirt from Everton journeys",
+      "es": "Retirar la camiseta de portera agotada de los recorridos de Everton"
+    },
+    "reason": {
+      "en": "The official shop marks the goalkeeper home shirt out of stock one week before Everton. Audit scheduled matchday, email and social links; suppress unavailable-product CTAs, route to confirmed available kit and merchandise, and add a consented restock alert only if fulfilment can support it. Treat the signal as availability, not measured sales or demand.",
+      "es": "La tienda oficial marca agotada la camiseta local de portera a una semana de Everton. Auditar enlaces programados de matchday, email y social; suprimir CTAs del producto no disponible, dirigir a equipaciones y merchandising confirmados como disponibles y añadir alerta de reposición consentida solo si fulfillment puede soportarla. Tratar la señal como disponibilidad, no como ventas o demanda medidas."
+    }
   }
 ]
