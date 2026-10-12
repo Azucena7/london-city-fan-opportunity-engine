@@ -365,5 +365,20 @@
       "en": "The official shop marks the goalkeeper home shirt out of stock one week before Everton. Audit scheduled matchday, email and social links; suppress unavailable-product CTAs, route to confirmed available kit and merchandise, and add a consented restock alert only if fulfilment can support it. Treat the signal as availability, not measured sales or demand.",
       "es": "La tienda oficial marca agotada la camiseta local de portera a una semana de Everton. Auditar enlaces programados de matchday, email y social; suprimir CTAs del producto no disponible, dirigir a equipaciones y merchandising confirmados como disponibles y añadir alerta de reposición consentida solo si fulfillment puede soportarla. Tratar la señal como disponibilidad, no como ventas o demanda medidas."
     }
+  },
+  {
+    "id": "sponsorship-rights-audit-everton-2026-10-12",
+    "fixtureId": "2026-10-18-eve-h",
+    "area": "Commercial Partnerships, Hospitality & Legal",
+    "status": "next",
+    "due": "2026-10-14",
+    "title": {
+      "en": "Audit sponsorship rights before the Everton hospitality push",
+      "es": "Auditar derechos de patrocinio antes del impulso de hospitality para Everton"
+    },
+    "reason": {
+      "en": "Bromley FC has confirmed Hospitality Finder as official social media sponsor and networking partner, supported by a ticket-and-VIP launch activation. Check shared-venue, Broomfields, social, networking and hospitality inventory and any category exclusivity before outreach or creative approval. The partnership demonstrates local category appetite but does not prove that London City is restricted or that the activation converts.",
+      "es": "Bromley FC ha confirmado a Hospitality Finder como patrocinador oficial de redes sociales y socio de networking, con una activación de lanzamiento basada en entradas y VIP. Comprobar el inventario de sede compartida, Broomfields, social, networking y hospitality y cualquier exclusividad de categoría antes de outreach o aprobación creativa. El acuerdo demuestra interés local en la categoría, pero no prueba que London City esté restringido ni que la activación convierta."
+    }
   }
 ]
