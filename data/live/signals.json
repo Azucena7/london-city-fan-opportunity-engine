@@ -1023,5 +1023,46 @@
         "checkedAt": "2026-10-11"
       }
     ]
+  },
+  {
+    "id": "sponsorship-bromley-hospitality-finder-2026-10-12",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "sponsorship",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "medium",
+    "observedAt": "2026-10-12T09:54:50+01:00",
+    "title": {
+      "en": "Bromley FC adds Hospitality Finder as social media and networking partner",
+      "es": "Bromley FC incorpora a Hospitality Finder como partner de redes y networking"
+    },
+    "summary": {
+      "en": "Bromley FC and Hospitality Finder confirm a partnership covering official social media sponsorship and business networking. The launch activation combines a signed Bromley shirt, match tickets and VIP hospitality, with a winner due to be selected on 30 October. The agreement is confirmed; any effect on London City's rights, category exclusivity or partner inventory is not published and remains inferred pending an internal rights check.",
+      "es": "Bromley FC y Hospitality Finder confirman un acuerdo de patrocinio oficial de redes sociales y networking empresarial. La activación de lanzamiento combina una camiseta firmada de Bromley, entradas y hospitality VIP, con elección de ganador prevista para el 30 de octubre. El acuerdo está confirmado; cualquier efecto sobre los derechos, exclusividad de categoría o inventario comercial de London City no está publicado y sigue inferido hasta una revisión interna de derechos."
+    },
+    "marketingAction": {
+      "en": "Before the Everton partner and hospitality push, audit shared-venue, Broomfields, social, networking and hospitality rights for conflicts or adjacency. Do not assume the Bromley agreement binds London City. If rights are clear, use the local evidence to build a distinct women-first hospitality/networking package and measure qualified leads, introductions and bookings.",
+      "es": "Antes del impulso de partners y hospitality para Everton, auditar posibles conflictos o adyacencias en derechos de sede compartida, Broomfields, social, networking y hospitality. No asumir que el acuerdo de Bromley vincula a London City. Si los derechos están libres, usar la evidencia local para construir un paquete diferenciado de hospitality y networking centrado en fútbol femenino y medir leads cualificados, introducciones y reservas."
+    },
+    "sourceName": "Bromley FC / Hospitality Finder",
+    "sourceUrl": "https://www.bromleyfc.co.uk/news/commercial",
+    "sources": [
+      {
+        "name": "Bromley FC commercial news",
+        "url": "https://www.bromleyfc.co.uk/news/commercial",
+        "checkedAt": "2026-10-12"
+      },
+      {
+        "name": "Bromley Football Club LinkedIn",
+        "url": "https://uk.linkedin.com/company/bromleyfc",
+        "checkedAt": "2026-10-12"
+      },
+      {
+        "name": "Hospitality Finder LinkedIn",
+        "url": "https://uk.linkedin.com/company/hospitalityfinder",
+        "checkedAt": "2026-10-12"
+      }
+    ]
   }
 ]
