@@ -13,7 +13,8 @@ export function AppWorkspaceShell({
   children,
   actions
 }: {
-  active: ActiveNav;
+  /** Omit on system states (loading, not found) so no destination is marked current. */
+  active?: ActiveNav;
   title: string;
   subtitle?: string;
   eyebrow?: string;

@@ -5,7 +5,6 @@ import styles from "./route-state.module.css";
 export default function AppNotFound() {
   return (
     <AppWorkspaceShell
-      active="home"
       eyebrow="System state"
       title="Workspace not found"
       subtitle="The fixture, campaign or workspace may have moved."

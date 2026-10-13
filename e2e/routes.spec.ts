@@ -70,4 +70,6 @@ test("unknown fixture renders the not-found state", async ({ page }) => {
   await page.goto("/app/matches/not-a-fixture");
   await expect(page.getByRole("heading", { level: 1, name: "Workspace not found" })).toBeVisible();
   await expect(page.locator("h1")).toHaveCount(1);
+  // System states must not claim a destination (it used to mark Home as current).
+  await expect(page.locator('aside a[aria-current="page"]')).toHaveCount(0);
 });
