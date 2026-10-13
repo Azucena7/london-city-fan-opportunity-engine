@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
-import { CommercialSignalStage } from "@/components/CommercialSignalStage";
+import { OpportunityEngineStage } from "@/components/OpportunityEngineStage";
 import { CommercialEcosystem } from "@/components/CommercialEcosystem";
 import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import { CommercialFAQ } from "@/components/CommercialFAQ";
@@ -10,11 +10,14 @@ import { decisionValidation } from "@/lib/data";
 import styles from "./commercial-home.module.css";
 
 export const metadata: Metadata = {
-  title: "The Decision Workspace for Football Club Marketing & Commercial Teams",
+  title: "The Opportunity Engine for Football Club Marketing & Commercial Teams",
   description:
-    "AVELA is the decision workspace for football club marketing and commercial teams, connecting fan, campaign, fixture, player, sponsor and operational context to the next best action."
+    "AVELA reads what is changing around each match and connects it with demand, rights and availability inside the club — then shows what changed, why it matters and what move is worth preparing."
 };
 
+function shortDate(value: string) {
+  return new Date(value.length === 10 ? `${value}T12:00:00Z` : value).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+}
 
 export default function Home() {
   const live = getCurrentProductOpportunity();
@@ -26,76 +29,55 @@ export default function Home() {
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>Built for football club marketing & commercial teams</span>
-          <h1>Read the signals.<br />Move the club.</h1>
-          <p className={styles.heroLead}>
-            AVELA helps marketing and commercial teams decide what to do next across fixtures, campaigns and commercial moments — joining fan demand, CRM, content, players, sponsors, rights, timing and delivery constraints in one operating view.
-          </p>
-          <div className={styles.heroActions}>
-            <Link className={styles.primary} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See AVELA on a real fixture</Link>
-            <Link className={styles.secondaryAction} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Request a club pilot</Link>
+          <div>
+            <span className={styles.eyebrow}>The Opportunity Engine for football club marketing & commercial teams</span>
+            <h1>See what could change the match.</h1>
           </div>
-          <div className={styles.heroMeta}>
-            <span><strong>For:</strong> Marketing</span>
-            <span>CRM & fan engagement</span>
-            <span>Sponsorship & commercial</span>
-            <span>Content & matchday growth</span>
-          </div>
-          <div className={styles.heroProof} aria-label="AVELA operating loop">
-            <div><span>01</span><strong>Read</strong><small>Signals + context</small></div>
-            <i>→</i>
-            <div><span>02</span><strong>Decide</strong><small>Priority + feasibility</small></div>
-            <i>→</i>
-            <div><span>03</span><strong>Move</strong><small>Action + owner</small></div>
-            <i>→</i>
-            <div><span>04</span><strong>Learn</strong><small>Outcome retained</small></div>
+          <div className={styles.heroAside}>
+            <p className={styles.heroLead}>
+              AVELA connects what is happening outside the club with demand, rights and availability inside it — then shows what changed, why it matters and what move is worth preparing.
+            </p>
+            <div className={styles.heroActions}>
+              <Link className={styles.primary} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See the London City example</Link>
+              <Link className={styles.secondaryAction} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Request a club pilot</Link>
+            </div>
+            <div className={styles.heroMeta}>
+              <span><strong>For:</strong> Marketing</span>
+              <span>Commercial & partnerships</span>
+              <span>Fan engagement</span>
+            </div>
           </div>
         </div>
-        <CommercialSignalStage />
+        <OpportunityEngineStage live={live} />
       </section>
 
-      <section className={styles.problem}>
-        <div>
-          <span className={styles.kicker}>The problem is not missing data</span>
-          <h2>Your club already has the signals. They are fragmented across people, platforms and calendars.</h2>
+      <section className={styles.liveProof} aria-labelledby="proof-title">
+        <div className={styles.liveCopy}>
+          <span className={styles.kicker}>Proof in public · London City</span>
+          <h2 id="proof-title">A time-stamped AVELA hypothesis. What London City announced next.</h2>
+          <p>{proof.caveat.en} London City is an independent demonstration, not a customer: this is evidence of relevance. The club pilot is a separate test, on your own authorised data.</p>
         </div>
-        <div className={styles.problemCopy}>
-          <p>CRM knows who can be reached. Ticketing knows who bought. Analytics knows what performed. Contracts know what is owed. Calendars know who is available. Work systems know what the team is already carrying.</p>
-          <p><strong>People still have to join that context manually before almost every important decision.</strong></p>
+        <ol className={styles.proofFlow}>
+          <li>
+            <span>Fixture + wider football{proof.liveValidation ? ` · ${shortDate(proof.liveValidation.fixtureDate)}` : ""}</span>
+            <strong>{proof.title.en}</strong>
+          </li>
+          <li>
+            <span>AVELA saw · time-stamped {shortDate(proof.hypothesisGeneratedAt)}</span>
+            <strong>{proof.hypothesis.en}</strong>
+          </li>
+          <li>
+            <span>London City later announced · {shortDate(proof.observedAt)}</span>
+            <strong>{proof.observedAction.en}</strong>
+          </li>
+        </ol>
+        <div className={styles.proofActions}>
+          <Link className={styles.coralButton} href="/case-study?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=proof&utm_content=london_city">See the evidence</Link>
+          <Link className={styles.darkTextLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=proof">Open London City Live ↗</Link>
         </div>
       </section>
 
       <CommercialDecisionDemo />
-
-      <section className={styles.liveProof}>
-        <div className={styles.liveCopy}>
-          <span className={styles.kicker}>Proof in public</span>
-          <h2>A time-stamped AVELA hypothesis. What London City announced next.</h2>
-          <p>The Brighton hypothesis was time-stamped before a comparable London City activation became public. It is evidence of relevance, not evidence that the club saw or used AVELA. The club pilot is a separate test: multiple real decisions, authorised club data and pre-agreed measurement.</p>
-          <div className={styles.proofPair}>
-            <article><span>AVELA saw</span><strong>{proof.hypothesis.en}</strong></article>
-            <article><span>London City later announced</span><strong>{proof.observedAction.en}</strong></article>
-          </div>
-          <div className={styles.proofActions}>
-            <Link className={styles.coralButton} href="/case-study?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=proof&utm_content=london_city">See the evidence</Link>
-            <Link className={styles.darkTextLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=proof">Open London City Live ↗</Link>
-          </div>
-        </div>
-        <div className={styles.livePanel}>
-          <span>Current live case</span>
-          <strong>{live?.fixture.opponent ?? "Next home fixture"}</strong>
-          <div className={styles.liveDecision}>
-            <span>Opportunity</span>
-            <h3>{live?.opportunity ?? "Review current evidence."}</h3>
-          </div>
-          <div className={styles.liveFacts}>
-            <div><span>State</span><strong>{live?.decisionState ?? "HOLD"}</strong></div>
-            <div><span>Confidence</span><strong>{live?.confidence.label ?? "—"}</strong></div>
-            <div><span>Do next</span><strong>{live?.nextAction.label ?? "Review evidence"}</strong></div>
-          </div>
-        </div>
-      </section>
-
 
       <CommercialEcosystem />
 
@@ -133,7 +115,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <strong>AVELA</strong>
-        <span>The decision workspace for football club marketing & commercial teams.</span>
+        <span>The Opportunity Engine for football club marketing & commercial teams.</span>
         <span>London City Live is an independent public case study.</span>
       </footer>
     </main>

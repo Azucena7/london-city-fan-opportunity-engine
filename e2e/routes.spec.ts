@@ -161,3 +161,20 @@ test("public commercial pages share the public header, never the workspace sideb
     await expect(page.getByRole("complementary", { name: "AVELA club app navigation" }), route).toHaveCount(0);
   }
 });
+
+test("home leads with the Opportunity Engine and keeps live and pilot signals apart", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("See what could change the match.");
+  const engine = page.getByRole("figure", { name: "AVELA Opportunity Engine" });
+  await expect(engine).toBeVisible();
+  await expect(engine.getByText("Reading now").first()).toBeVisible();
+  await expect(engine.getByRole("listitem").filter({ hasText: "Transport" })).toContainText("In a pilot");
+  for (const output of ["What changed", "Why it matters", "Prepared move"]) {
+    await expect(engine.getByText(output, { exact: true })).toBeVisible();
+  }
+  await expect(page.getByText(/London City is an independent demonstration, not a customer/)).toBeVisible();
+  // The home is full-bleed: its first band spans the viewport without horizontal scroll.
+  const width = page.viewportSize()!.width;
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  expect(await page.locator("main").evaluate((main) => main.getBoundingClientRect().width)).toBe(width);
+});
