@@ -96,3 +96,18 @@ test("Radar shows the news radar as unreviewed context", async ({ page }) => {
   await expect(panel).toContainText("They never change a score, confidence or rank.");
   await expect(panel).toContainText("Watching: London City Lionesses (UK)");
 });
+
+test("Sources lists every registered source and filters by state", async ({ page }) => {
+  await page.goto("/app/sources");
+  await page.waitForLoadState("networkidle");
+  const table = page.getByRole("table", { name: /Source register/ });
+  const all = await table.locator("tbody tr").count();
+  expect(all).toBeGreaterThanOrEqual(13);
+  const filters = page.getByRole("navigation", { name: "Filter the source register" });
+  await filters.getByRole("link", { name: /Needs attention/ }).click();
+  await expect(page).toHaveURL(/state=attention/);
+  await expect(filters.getByRole("link", { name: /Needs attention/ })).toHaveAttribute("aria-current", "true");
+  const attention = await table.locator("tbody tr").count();
+  expect(attention).toBeLessThan(all);
+  await expect(table.locator("tbody tr", { hasText: "Operational" })).toHaveCount(0);
+});

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IntelligenceSources } from "@/components/IntelligenceSources";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
+import { parseSourceFilter } from "@/lib/sourceRegister";
 import styles from "./sources.module.css";
 
 export const metadata: Metadata = {
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
 };
 
 // productAppShell is provided by AppWorkspaceShell.
-export default function SourcesPage() {
+export default async function SourcesPage({ searchParams }: { searchParams: Promise<{ state?: string | string[] }> }) {
+  const filter = parseSourceFilter((await searchParams).state);
   return (
     <AppWorkspaceShell
       active="sources"
@@ -18,7 +20,7 @@ export default function SourcesPage() {
       subtitle="See what is connected, what AVELA can already use publicly and which missing inputs still limit confidence."
     >
       <div className={styles.surface}>
-        <IntelligenceSources />
+        <IntelligenceSources filter={filter} />
       </div>
     </AppWorkspaceShell>
   );
