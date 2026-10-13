@@ -2,29 +2,29 @@ import styles from "./CommercialMorningRead.module.css";
 
 const priorities = [
   {
-    state: "Decision",
-    title: "Everton · family return-attendance play",
-    detail: "Demand is soft. CRM audience is reachable. Rights and timing are clear.",
-    action: "Review recommendation"
+    state: "External pressure",
+    title: "Saturday · rail disruption + rain now affect the attendance plan",
+    detail: "Walk-up confidence is lower. AVELA recommends earlier CRM, clearer travel messaging and a review of the walk-up assumption.",
+    action: "Review matchday response"
   },
   {
-    state: "Partner risk",
-    title: "Northline · 2 contractual activations still unscheduled",
-    detail: "Renewal window approaching. Two suitable home fixtures remain.",
-    action: "Review activation plan"
+    state: "Competing attention",
+    title: "Major televised fixture overlaps the strongest campaign window",
+    detail: "The message and send timing should move rather than compete head-on for the same attention window.",
+    action: "Adjust campaign timing"
   },
   {
-    state: "Commercial opportunity",
-    title: "Open matchday inventory · family category",
-    detail: "No exclusivity conflict detected. Inventory and operational capacity available.",
+    state: "Opportunity",
+    title: "School holiday + no major city conflict opens a stronger family window",
+    detail: "Family proposition fit improves. Rights and operational capacity still need to remain clear before launch.",
     action: "Open opportunity"
   }
 ] as const;
 
 const signals = [
-  ["3", "decisions need attention"],
-  ["1", "partner obligation at risk"],
-  ["2", "commercial opportunities"],
+  ["2", "fixtures with external attendance pressure"],
+  ["1", "travel disruption requiring action"],
+  ["2", "opportunity windows strengthened"],
   ["Ready", "next matchday except creative approval"]
 ] as const;
 
@@ -32,12 +32,12 @@ export function CommercialMorningRead() {
   return (
     <section className={styles.wrap} aria-labelledby="morning-read-title">
       <div className={styles.intro}>
-        <span>What you see first</span>
+        <span>What AVELA sees before you do</span>
         <div>
-          <h2 id="morning-read-title">Start the day knowing where commercial attention is needed.</h2>
+          <h2 id="morning-read-title">Start the day knowing what outside the club could change the plan.</h2>
           <p>
-            AVELA prepares the read before the meeting: what changed, what matters, what is at risk,
-            what is ready, and where a decision is needed.
+            Weather, transport, city events, competing football and calendar moments are easy to miss.
+            AVELA brings only the signals that materially change attendance, timing, activation or execution into the morning read.
           </p>
         </div>
       </div>
@@ -48,7 +48,7 @@ export function CommercialMorningRead() {
             <span>Tuesday · 08:42</span>
             <strong>Morning commercial read</strong>
           </div>
-          <div className={styles.status}>Prepared from connected club context</div>
+          <div className={styles.status}>Synthetic external + club context</div>
         </div>
 
         <div className={styles.signalStrip}>
@@ -62,7 +62,7 @@ export function CommercialMorningRead() {
 
         <div className={styles.body}>
           <div className={styles.priorityList}>
-            <div className={styles.columnLabel}>Needs your attention</div>
+            <div className={styles.columnLabel}>What changed outside the club</div>
             {priorities.map((item, index) => (
               <article key={item.title}>
                 <div className={styles.rank}>{String(index + 1).padStart(2, "0")}</div>
@@ -80,23 +80,23 @@ export function CommercialMorningRead() {
             <div className={styles.columnLabel}>Next matchday</div>
             <div className={styles.matchdayCard}>
               <span>Home · 18 Oct</span>
-              <strong>Commercially ready</strong>
+              <strong>Plan needs one adjustment</strong>
               <div className={styles.readyLine}>
                 <i />
-                <span>5 workstreams ready</span>
+                <span>Rights, people and partner plan clear</span>
               </div>
               <div className={styles.reviewLine}>
                 <i />
-                <span>Creative approval needs review</span>
+                <span>Transport pressure changes fan messaging</span>
               </div>
               <div className={styles.matchdayMeta}>
-                <div><span>Partners</span><strong>4 active</strong></div>
-                <div><span>People</span><strong>Cleared</strong></div>
-                <div><span>Rights</span><strong>Reviewed</strong></div>
+                <div><span>Weather</span><strong>Rain risk</strong></div>
+                <div><span>Travel</span><strong>Disruption</strong></div>
+                <div><span>Attention</span><strong>Competing fixture</strong></div>
               </div>
               <div className={styles.nextAction}>
                 <span>Director decision</span>
-                <strong>Approve creative route</strong>
+                <strong>Approve earlier CRM + travel message</strong>
               </div>
             </div>
           </aside>
@@ -104,8 +104,8 @@ export function CommercialMorningRead() {
       </div>
 
       <div className={styles.caption}>
-        <strong>Not another dashboard.</strong>
-        <span>AVELA surfaces exceptions and prepared decisions so the team does not spend the morning rebuilding context.</span>
+        <strong>The value is not more data.</strong>
+        <span>It is knowing which external signal should actually change the club's next decision.</span>
       </div>
     </section>
   );
