@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { MarketingNav } from "./MarketingNav";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLanguage } from "./LanguageProvider";
+import { FIRST_TOUCH_KEY, leadAttribution } from "@/lib/firstTouch";
 
 type LeadState = "idle" | "submitting" | "success" | "error";
 
@@ -21,7 +22,9 @@ export function ClubPilotProposition() {
 
     const form = event.currentTarget;
     const data = new FormData(form);
-    const params = new URLSearchParams(window.location.search);
+    let storedFirstTouch: string | null = null;
+    try { storedFirstTouch = window.localStorage.getItem(FIRST_TOUCH_KEY); } catch { storedFirstTouch = null; }
+    const attribution = leadAttribution(window.location.search, storedFirstTouch);
 
     const response = await fetch("/api/commercial-lead", {
       method: "POST",
@@ -34,10 +37,7 @@ export function ClubPilotProposition() {
         consent: data.get("consent") === "yes",
         website: data.get("website"),
         sourcePath: window.location.pathname,
-        utmSource: params.get("utm_source"),
-        utmMedium: params.get("utm_medium"),
-        utmCampaign: params.get("utm_campaign"),
-        utmContent: params.get("utm_content")
+        ...attribution
       })
     }).catch(() => null);
 
