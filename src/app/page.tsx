@@ -13,7 +13,7 @@ import styles from "./commercial-home.module.css";
 export const metadata: Metadata = {
   title: "The Decision Workspace for Football Club Marketing & Commercial Teams",
   description:
-    "AVELA prepares better football club marketing and commercial decisions by joining signals, rights, people, partners, timing, execution and learning in one operating view."
+    "AVELA helps football club marketing and commercial teams see what needs attention, what can be monetised, what is at risk and what is ready to execute."
 };
 
 export default function Home() {
@@ -26,29 +26,29 @@ export default function Home() {
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>Built for football club marketing & commercial teams</span>
+          <span className={styles.eyebrow}>For football club marketing & commercial teams</span>
           <h1>Read the signals.<br />Move the club.</h1>
           <p className={styles.heroLead}>
-            AVELA prepares what should happen next across fixtures, campaigns and commercial moments — joining fan demand, CRM, content, players, partners, rights, timing and delivery constraints, then showing what needs a human decision.
+            AVELA shows you what needs attention now, what commercial opportunities are emerging, what obligations are at risk, and what is actually ready to execute — without replacing the systems your team already uses.
           </p>
           <div className={styles.heroActions}>
-            <Link className={styles.primary} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See AVELA on a real fixture</Link>
+            <Link className={styles.primary} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See a real AVELA decision</Link>
             <Link className={styles.secondaryAction} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Request a club pilot</Link>
           </div>
           <div className={styles.heroMeta}>
-            <span><strong>For:</strong> Marketing</span>
-            <span>CRM & fan engagement</span>
-            <span>Sponsorship & commercial</span>
-            <span>Content & matchday growth</span>
+            <span><strong>See</strong> what needs attention</span>
+            <span><strong>Spot</strong> revenue opportunities</span>
+            <span><strong>Protect</strong> partner delivery</span>
+            <span><strong>Know</strong> what is ready to execute</span>
           </div>
           <div className={styles.heroProof} aria-label="AVELA operating loop">
-            <div><span>01</span><strong>Read</strong><small>Signals + context</small></div>
+            <div><span>01</span><strong>Read</strong><small>What changed</small></div>
             <i>→</i>
-            <div><span>02</span><strong>Decide</strong><small>Priority + feasibility</small></div>
+            <div><span>02</span><strong>Decide</strong><small>What matters now</small></div>
             <i>→</i>
-            <div><span>03</span><strong>Move</strong><small>Activation + execution</small></div>
+            <div><span>03</span><strong>Move</strong><small>What is ready</small></div>
             <i>→</i>
-            <div><span>04</span><strong>Learn</strong><small>Evidence retained</small></div>
+            <div><span>04</span><strong>Learn</strong><small>What improves next</small></div>
           </div>
         </div>
         <CommercialSignalStage />
@@ -56,12 +56,12 @@ export default function Home() {
 
       <section className={styles.problem}>
         <div>
-          <span className={styles.kicker}>The problem is not missing data</span>
-          <h2>Your club already has the signals. They are fragmented across people, platforms and calendars.</h2>
+          <span className={styles.kicker}>The commercial reality</span>
+          <h2>Important decisions are still assembled manually from six different places.</h2>
         </div>
         <div className={styles.problemCopy}>
-          <p>CRM knows who can be reached. Ticketing knows who bought. Analytics knows what performed. Contracts know what is owed. Calendars know who is available. Work systems know what the team is already carrying.</p>
-          <p><strong>People still have to join that context manually before almost every important decision — and then translate the decision into executable work.</strong></p>
+          <p>CRM, ticketing, analytics, contracts, calendars and work-management tools each hold part of the answer.</p>
+          <p><strong>AVELA joins that context before the meeting, so your team spends less time reconstructing the situation and more time deciding what to do.</strong></p>
         </div>
       </section>
 
@@ -87,7 +87,7 @@ export default function Home() {
           <span>Current live case</span>
           <strong>{live?.fixture.opponent ?? "Next home fixture"}</strong>
           <div className={styles.liveDecision}>
-            <span>Opportunity</span>
+            <span>What needs attention</span>
             <h3>{live?.opportunity ?? "Review current evidence."}</h3>
           </div>
           <div className={styles.liveFacts}>
@@ -102,19 +102,19 @@ export default function Home() {
 
       <section className={styles.pilot}>
         <div>
-          <span className={styles.kicker}>Start with the marketing team</span>
-          <h2>Prove AVELA on 4–6 fixtures before you integrate more.</h2>
-          <p>Start with one marketing/commercial workflow, a limited fixture window and the systems you already use. The aim is to prove that better context leads to better prepared decisions, cleaner execution and reusable learning before deeper integration is earned.</p>
+          <span className={styles.kicker}>Start small, prove value</span>
+          <h2>Test whether AVELA improves the decisions your team already makes every week.</h2>
+          <p>Start with 4–6 fixtures or a bounded commercial workflow. Use the systems you already have, measure whether AVELA shortens decision time, improves execution readiness and catches opportunities or risks earlier.</p>
         </div>
         <div className={styles.pilotSteps}>
           <article><span>01</span><strong>4–6 fixtures</strong><p>Use the real calendar.</p></article>
           <article><span>02</span><strong>1–2 workflows</strong><p>Focus on decisions that matter.</p></article>
-          <article><span>03</span><strong>Existing stack</strong><p>Add only the integrations that improve confidence.</p></article>
-          <article><span>04</span><strong>Measured learning</strong><p>Compare recommendation, decision, execution and result.</p></article>
+          <article><span>03</span><strong>Existing stack</strong><p>Add only what improves confidence.</p></article>
+          <article><span>04</span><strong>Measured learning</strong><p>Compare decision, execution and result.</p></article>
         </div>
         <div className={styles.pilotActions}>
           <Link className={styles.primary} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=pilot_section#demo">Request a 4–6 fixture pilot</Link>
-          <Link className={styles.textLink} href="/pilot?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=multi_cycle_proof">See the 4-cycle public demonstration ↗</Link>
+          <Link className={styles.textLink} href="/pilot?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=multi_cycle_proof">See the public demonstration ↗</Link>
           <Link className={styles.textLink} href="/app/demo?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=pilot_section">Try the guided product demo ↗</Link>
         </div>
       </section>
@@ -124,7 +124,7 @@ export default function Home() {
       <section className={styles.finalCta}>
         <div>
           <span>AVELA</span>
-          <h2>Turn fragmented club context into a prepared decision, an executable plan and better learning — without replacing your stack.</h2>
+          <h2>Know what deserves attention, what can be monetised and what is ready to move.</h2>
         </div>
         <div>
           <Link className={styles.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Request your club pilot</Link>
