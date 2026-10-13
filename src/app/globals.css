@@ -1,14 +1,17 @@
 * { box-sizing: border-box; }
 
+/* Base reading tokens shared by every page. The case-study layouts redefine them
+   in case-brand.css; the app and commercial surfaces use the --product-* tokens
+   in product-system.css. */
 :root {
-  --bg: #07110d;
-  --surface: #0e1c16;
-  --surface-2: #13251d;
-  --ink: #f4f3ee;
-  --muted: #9eaaa3;
-  --line: rgba(16,33,27,.12);
+  --bg: #f3f2ec;
+  --surface: #fff;
+  --surface-2: #eeede6;
+  --ink: #10211b;
+  --muted: #52615a;
+  --line: #d7d8d1;
   --accent: #d8ff4f;
-  --hot: #ff6b3d;
+  --hot: #a83c3c;
 }
 
 html, body {
@@ -16,7 +19,6 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 body { min-height: 100vh; }

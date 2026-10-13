@@ -30,7 +30,6 @@
 .detailAction{grid-column:1 / -1;display:flex;align-items:center;padding-top:4px}
 .detailAction a{display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;border-radius:8px;background:var(--product-surface-2);color:var(--product-ink);font-size:14px;font-weight:800;line-height:1.5;text-decoration:none}
 .detailAction a:hover{text-decoration:underline;text-underline-offset:4px}
-.detailAction a:focus-visible,.textLink:focus-visible,.button:focus-visible{outline:3px solid #22634a;outline-offset:4px}
 .detailAction>span{margin:0;font-size:14px;text-transform:none;letter-spacing:0}
 
 .read{padding:38px 0 44px;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;border-bottom:1px solid var(--product-line)}

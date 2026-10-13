@@ -118,17 +118,11 @@
   a,button{transition:color .16s ease,background-color .16s ease,border-color .16s ease,transform .16s ease}
 }
 
-/* Product accessibility + interaction baseline */
-.productShell :focus-visible,
-.productAppShell :focus-visible,
-a:focus-visible,
-button:focus-visible,
-summary:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible{
+/* The single keyboard focus treatment for AVELA (app, commercial site and case pages).
+   Solid teal keeps at least 3:1 contrast on paper, white and navy surfaces. */
+:focus-visible{
   outline:3px solid var(--product-accent);
-  outline-offset:3px;
+  outline-offset:2px;
 }
 
 @media (pointer:coarse){

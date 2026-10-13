@@ -18,11 +18,6 @@
 
 .skipLink:focus { transform: translateY(0); }
 
-:where(a, button, summary, input, select):focus-visible {
-  outline: 3px solid var(--case-accent, #32e6d4);
-  outline-offset: 3px;
-}
-
 .operationsNav {
   display: flex;
   align-items: center;
