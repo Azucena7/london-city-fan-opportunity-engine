@@ -14,6 +14,7 @@
     "refresh:data": "node scripts/refresh-data.mjs",
     "refresh:public-signals": "node scripts/refresh-public-signals.mjs",
     "import:crm": "node scripts/import-crm-ticketing.mjs",
+    "import:trends": "node scripts/import-trends-export.mjs",
     "rehearse:pilot": "node scripts/run-pilot-rehearsal.mjs",
     "validate:crm-demo": "node scripts/validate-crm-ticketing-demo.mjs",
     "validate:crm-live": "node scripts/validate-crm-ticketing-live.mjs",

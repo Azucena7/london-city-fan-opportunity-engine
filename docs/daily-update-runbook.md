@@ -67,6 +67,6 @@ The workflow also supports **Run workflow** from the GitHub Actions page.
 - Public YouTube subscriber and channel-view counts: weekly, at T-7/T+1/T+7/T+30, or after a measured change.
 - Fixture video/live-stream views: T+1 and T+7; keep live, replay and highlights separate where available.
 - Eleven TV and broadcaster distribution: confirm before each fixture; add reported reach only when sourced.
-- Google Trends: preserve matched-query snapshots for GB and Spain at announcement, T-7, T+1, T+7 and T+30. The 0–100 index is relative within a query and must not be treated as search volume.
+- Google Trends: preserve matched-query snapshots for GB and Spain at announcement, T-7, T+1, T+7 and T+30. The 0–100 index is relative within a query and must not be treated as search volume. Until official API access is granted, open the comparison set's `exploreUrl` from `data/live/search-demand.json`, choose "Download CSV" on the interest-over-time chart, and run `npm run import:trends -- <comparison-set-id> <path/to/multiTimeline.csv>`. The importer rejects exports for another market or with different terms.
 - Search-demand capture states are explicit: `measured`, `insufficient-sample`, `source-unavailable` or `requires-access`. Never replace a failed capture with zero, and do not pass a hospitality gate from player interest alone.
 - CRM/ticketing: use consent-safe fixture and campaign IDs; never commit personal data or credentials.
