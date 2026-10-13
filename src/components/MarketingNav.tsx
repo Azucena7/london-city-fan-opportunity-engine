@@ -9,7 +9,7 @@ export function MarketingNav({ variant = "light" }: { variant?: "light" | "dark"
         AVELA
       </Link>
       <div className={styles.links}>
-        <Link href="/#integrations">How it fits</Link>
+        <Link href="/#how-it-works">How it works</Link>
         <Link href="/live/london-city?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=live_case&utm_content=desktop">Live case</Link>
         <Link href="/#faq">FAQ</Link>
       </div>
@@ -20,7 +20,7 @@ export function MarketingNav({ variant = "light" }: { variant?: "light" | "dark"
       <details className={styles.mobileMenu}>
         <summary>Menu</summary>
         <div className={styles.mobilePanel}>
-          <Link href="/#integrations">How it fits</Link>
+          <Link href="/#how-it-works">How it works</Link>
           <Link href="/live/london-city?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=live_case&utm_content=mobile">Live case</Link>
           <Link href="/#faq">FAQ</Link>
           <Link href="/app/demo?utm_source=avela_nav&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=mobile">Open workspace</Link>
