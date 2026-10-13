@@ -34,6 +34,7 @@ export function AskAvelaPanel({
   const [busy, setBusy] = useState(false);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState("");
+  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     void (async () => {
@@ -41,6 +42,7 @@ export function AskAvelaPanel({
       const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
       setClubs(nextClubs);
+      setAuthenticated(Boolean(result.authenticated));
       if (result.authenticated && nextClubs.length) setActiveClubId(nextClubs[0].id);
     })();
   }, []);
@@ -48,7 +50,7 @@ export function AskAvelaPanel({
   async function ask(nextMessage?: string, nextMode?: AskMode) {
     const value = (nextMessage ?? message).trim();
     const activeMode = nextMode ?? mode;
-    if (!value || busy) return;
+    if (!value || busy || !authenticated) return;
     setBusy(true);
     setStatus("");
     setReply(null);
@@ -176,8 +178,11 @@ export function AskAvelaPanel({
                       "The club has an internal off-day.",
                       "This was launched yesterday."
                     ]
-              ).map((prompt) => <button type="button" key={prompt} onClick={() => void ask(prompt, mode)}>{prompt}</button>)}
+              ).map((prompt) => <button type="button" key={prompt} disabled={!authenticated} onClick={() => void ask(prompt, mode)}>{prompt}</button>)}
             </div>
+            {!authenticated ? (
+              <p className={styles.status}>Ask AVELA is limited to approved accounts. <a href="/app/access">Sign in</a> to use it.</p>
+            ) : null}
           </div>
 
           {reply ? (
@@ -222,7 +227,7 @@ export function AskAvelaPanel({
               }
               rows={3}
             />
-            <button type="button" disabled={busy || !message.trim()} onClick={() => void ask()}>
+            <button type="button" disabled={busy || !authenticated || !message.trim()} onClick={() => void ask()}>
               {busy ? "Thinking…" : mode === "ask" ? "Ask AVELA" : mode === "tell" ? "Review context" : "Explore change"}
             </button>
             {status ? <p className={styles.status}>{status}</p> : null}

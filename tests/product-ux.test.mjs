@@ -1829,6 +1829,25 @@ test("Ask AVELA is grounded in the current decision and treats new user informat
   assert.match(route, /AI_GATEWAY_API_KEY/);
 });
 
+test("AI routes are closed unless the caller is an approved signed-in account", async () => {
+  const access = read("src/lib/aiAccess.ts");
+  const env = read(".env.example");
+  assert.match(access, /AI_ALLOWED_EMAILS/);
+  assert.match(access, /email_confirmed_at/);
+  assert.match(access, /!allowed\.size/);
+  assert.match(env, /AI_ALLOWED_EMAILS=/);
+  for (const path of ["src/app/api/ask-avela/route.ts", "src/app/api/campaign-draft/route.ts"]) {
+    const route = read(path);
+    const guard = route.indexOf("await requireAiAccess()");
+    assert.ok(guard > 0, path + " must call requireAiAccess");
+    assert.ok(guard < route.indexOf("AI_GATEWAY_API_KEY"), path + " must check access before using the gateway");
+    assert.ok(guard < route.indexOf("request.json()"), path + " must check access before reading the request");
+  }
+  const panel = read("src/components/AskAvelaPanel.tsx");
+  assert.match(panel, /limited to approved accounts/);
+  assert.match(panel, /disabled=\{busy \|\| !authenticated/);
+});
+
 
 test("opportunity brief can create role-specific heads-ups and operational requests", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
