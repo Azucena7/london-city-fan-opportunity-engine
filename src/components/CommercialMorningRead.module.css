@@ -1,0 +1,274 @@
+.wrap{
+  width:min(1120px,calc(100% - 48px));
+  margin:0 auto;
+  padding:58px 0 62px;
+  border-top:1px solid var(--avela-line);
+}
+.intro{
+  display:grid;
+  grid-template-columns:170px minmax(0,1fr);
+  gap:28px;
+  align-items:start;
+}
+.intro>span{
+  padding-top:5px;
+  color:var(--avela-teal);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.intro h2{
+  margin:0;
+  max-width:650px;
+  font-size:clamp(30px,3vw,40px);
+  line-height:1.06;
+  letter-spacing:-.035em;
+}
+.intro p{
+  max-width:650px;
+  margin:10px 0 0;
+  color:var(--avela-muted);
+  font-size:15px;
+  line-height:1.55;
+}
+.cockpit{
+  margin-top:28px;
+  overflow:hidden;
+  border:1px solid rgba(16,39,66,.14);
+  border-radius:18px;
+  background:#fffdfa;
+  box-shadow:0 22px 60px rgba(16,39,66,.08);
+}
+.cockpitTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:16px 18px;
+  color:#fff;
+  background:linear-gradient(145deg,#173653,#102742);
+}
+.cockpitTop span,.cockpitTop strong{display:block}
+.cockpitTop span{
+  color:#9edfd5;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.cockpitTop strong{
+  margin-top:4px;
+  font-size:16px;
+}
+.status{
+  padding:7px 9px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  color:#c5d1da;
+  font-size:10px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.signalStrip{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--avela-line);
+  background:#f3ece3;
+}
+.signalStrip>div{
+  min-height:78px;
+  padding:14px 16px;
+}
+.signalStrip>div+div{border-left:1px solid var(--avela-line)}
+.signalStrip strong,.signalStrip span{display:block}
+.signalStrip strong{
+  font-size:23px;
+  line-height:1;
+  letter-spacing:-.03em;
+}
+.signalStrip span{
+  max-width:180px;
+  margin-top:7px;
+  color:var(--avela-muted);
+  font-size:11px;
+  line-height:1.35;
+}
+.body{
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(270px,.65fr);
+}
+.priorityList{
+  padding:18px;
+}
+.columnLabel{
+  margin-bottom:8px;
+  color:var(--avela-muted);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.priorityList article{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  gap:14px;
+  align-items:center;
+  padding:15px 0;
+  border-top:1px solid var(--avela-line);
+}
+.rank{
+  color:var(--avela-coral);
+  font-size:11px;
+  font-weight:900;
+}
+.priorityCopy>span{
+  color:var(--avela-teal);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.priorityCopy h3{
+  margin:5px 0 0;
+  font-size:16px;
+  line-height:1.25;
+  letter-spacing:-.015em;
+}
+.priorityCopy p{
+  margin:6px 0 0;
+  color:var(--avela-muted);
+  font-size:12px;
+  line-height:1.45;
+}
+.priorityList button{
+  align-self:center;
+  padding:9px 11px;
+  border:1px solid var(--avela-line);
+  border-radius:9px;
+  color:var(--avela-navy);
+  background:#fff;
+  font:inherit;
+  font-size:10px;
+  font-weight:900;
+}
+.readiness{
+  padding:18px;
+  border-left:1px solid var(--avela-line);
+  background:#f8f3ec;
+}
+.matchdayCard{
+  padding:18px;
+  border-radius:14px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(138,217,204,.15),transparent 28%),
+    linear-gradient(155deg,#173653,#102742);
+}
+.matchdayCard>span{
+  color:#9edfd5;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.matchdayCard>strong{
+  display:block;
+  margin-top:8px;
+  font-size:21px;
+  line-height:1.05;
+}
+.readyLine,.reviewLine{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:16px;
+  font-size:11px;
+}
+.readyLine i,.reviewLine i{
+  width:8px;
+  height:8px;
+  flex:none;
+  border-radius:50%;
+}
+.readyLine i{background:#8ad9cc}
+.reviewLine i{background:var(--avela-coral)}
+.matchdayMeta{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  margin-top:18px;
+  background:rgba(255,255,255,.11);
+}
+.matchdayMeta>div{
+  padding:10px;
+  background:rgba(9,26,44,.78);
+}
+.matchdayMeta span,.matchdayMeta strong{display:block}
+.matchdayMeta span{
+  color:#90a7b8;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+.matchdayMeta strong{
+  margin-top:4px;
+  font-size:10px;
+}
+.nextAction{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.nextAction span,.nextAction strong{display:block}
+.nextAction span{
+  color:#9edfd5;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.nextAction strong{
+  margin-top:4px;
+  font-size:13px;
+}
+.caption{
+  display:flex;
+  gap:8px;
+  align-items:baseline;
+  margin-top:14px;
+  color:var(--avela-muted);
+  font-size:12px;
+  line-height:1.5;
+}
+.caption strong{color:var(--avela-navy)}
+@media(prefers-reduced-motion:no-preference){
+  .priorityList article{transition:transform .2s ease,background .2s ease}
+  .priorityList article:hover{transform:translateX(3px)}
+  .matchdayCard{animation:cardWake 7s ease-in-out infinite}
+}
+@keyframes cardWake{
+  0%,100%{box-shadow:none}
+  50%{box-shadow:0 0 0 6px rgba(138,217,204,.04)}
+}
+@media(max-width:820px){
+  .intro{grid-template-columns:1fr;gap:12px}
+  .signalStrip{grid-template-columns:1fr 1fr}
+  .signalStrip>div:nth-child(3){border-left:0;border-top:1px solid var(--avela-line)}
+  .signalStrip>div:nth-child(4){border-top:1px solid var(--avela-line)}
+  .body{grid-template-columns:1fr}
+  .readiness{border-left:0;border-top:1px solid var(--avela-line)}
+}
+@media(max-width:620px){
+  .wrap{width:min(100% - 30px,1120px);padding:44px 0}
+  .intro h2{font-size:clamp(28px,8vw,36px)}
+  .cockpitTop{align-items:flex-start}
+  .status{display:none}
+  .signalStrip{grid-template-columns:1fr}
+  .signalStrip>div+div{border-left:0;border-top:1px solid var(--avela-line)}
+  .priorityList article{grid-template-columns:28px 1fr}
+  .priorityList button{grid-column:2;justify-self:start}
+  .matchdayMeta{grid-template-columns:1fr}
+  .caption{display:block}
+}
