@@ -93,3 +93,22 @@ test("the rail marks the phase on screen and counts open approval gates", async 
   await expect(rail.locator('a[aria-current="location"]')).toHaveCount(1);
   await expect(rail.locator('a[href="#execute"]')).toHaveAccessibleName(/approval gates? open/);
 });
+
+test("Build & route puts the next actions before the campaign and the handoffs", async ({ page }) => {
+  await page.goto(brief + "#execute");
+  await page.waitForLoadState("networkidle");
+  const headings = await page.locator("details", { has: page.locator("#execute") }).locator("h2").allTextContents();
+  const at = (text: string) => headings.findIndex((heading) => heading.includes(text));
+  expect(at("Review the draft, then execute the next actions.")).toBeGreaterThan(-1);
+  expect(at("Review the draft")).toBeLessThan(at("approval-ready campaign"));
+  expect(at("approval-ready campaign")).toBeLessThan(at("Hand the work to the people and tools that run it."));
+});
+
+test("jumping to a phase keeps its heading clear of the sticky bars", async ({ page }) => {
+  await page.goto(brief + "#evidence");
+  await page.waitForLoadState("networkidle");
+  const covered = await page.evaluate(() => Math.max(0, ...[...document.querySelectorAll("body *")]
+    .filter((element) => ["sticky", "fixed"].includes(getComputedStyle(element).position) && element.getBoundingClientRect().top < 200 && element.getBoundingClientRect().height < 300)
+    .map((element) => element.getBoundingClientRect().bottom)));
+  await expect.poll(async () => (await page.locator("#evidence").boundingBox())?.y ?? 0).toBeGreaterThanOrEqual(covered);
+});

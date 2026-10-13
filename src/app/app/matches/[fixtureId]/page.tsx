@@ -357,37 +357,6 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         <p>AVELA prepares the work and routes requests, while the club keeps final control over what is committed and launched.</p>
       </section>
 
-      <div id="campaign">
-      <CampaignDeliveryPlanner
-        objective={campaign?.objective.en ?? live.opportunity}
-        audience={campaign?.audiences[0]?.label.en ?? live.audience.label}
-        proposition={campaign?.proposition.en ?? live.recommendedAction}
-        unresolvedGates={approvals.length}
-        fixtureId={fixture.id}
-      />
-      </div>
-
-      {workPackage ? <ExternalWorkPackagePreview workPackage={workPackage} /> : null}
-
-      {workRoutingPlan ? <WorkRoutingPlan plan={workRoutingPlan} /> : null}
-
-      {workPackage && workRoutingPlan ? (
-        <WorkHandoffConfirmation
-          decisionId={`fixture:${fixture.id}`}
-          workPackage={workPackage}
-          plan={workRoutingPlan}
-        />
-      ) : null}
-
-      <ExternalExecutionSync decisionId={`fixture:${fixture.id}`} />
-
-      <OperationalHandoffs
-        decisionId={`fixture:${fixture.id}`}
-        fixtureLabel={`London City v ${fixture.opponent}`}
-        eventAt={fixture.date ? `${fixture.date}T${fixture.kickoff ?? "12:00"}:00` : null}
-        recommendation={campaign?.title.en ?? live.recommendedAction}
-      />
-
       <section className={styles.actionsSection} id="approval-gates">
         <div className={styles.sectionHead}>
           <div>
@@ -418,6 +387,46 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
             </article>
           ))}
         </div>
+      </section>
+
+      <div id="campaign">
+      <CampaignDeliveryPlanner
+        objective={campaign?.objective.en ?? live.opportunity}
+        audience={campaign?.audiences[0]?.label.en ?? live.audience.label}
+        proposition={campaign?.proposition.en ?? live.recommendedAction}
+        unresolvedGates={approvals.length}
+        fixtureId={fixture.id}
+      />
+      </div>
+
+      <section className={styles.handoffGroup} aria-labelledby="handoff-heading">
+        <div className={styles.sectionHead}>
+          <div>
+            <span className={styles.eyebrow}>Route to club systems</span>
+            <h2 id="handoff-heading">Hand the work to the people and tools that run it.</h2>
+          </div>
+        </div>
+
+        {workPackage ? <ExternalWorkPackagePreview workPackage={workPackage} /> : null}
+
+        {workRoutingPlan ? <WorkRoutingPlan plan={workRoutingPlan} /> : null}
+
+        {workPackage && workRoutingPlan ? (
+          <WorkHandoffConfirmation
+            decisionId={`fixture:${fixture.id}`}
+            workPackage={workPackage}
+            plan={workRoutingPlan}
+          />
+        ) : null}
+
+        <ExternalExecutionSync decisionId={`fixture:${fixture.id}`} />
+
+        <OperationalHandoffs
+          decisionId={`fixture:${fixture.id}`}
+          fixtureLabel={`London City v ${fixture.opponent}`}
+          eventAt={fixture.date ? `${fixture.date}T${fixture.kickoff ?? "12:00"}:00` : null}
+          recommendation={campaign?.title.en ?? live.recommendedAction}
+        />
       </section>
 
       </details>
