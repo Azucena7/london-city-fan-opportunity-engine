@@ -145,3 +145,10 @@ test("every campaign has an address: commercial records render, fixture campaign
   await page.goto("/app/campaigns/not-a-campaign");
   await expect(page.getByRole("heading", { level: 1, name: "Workspace not found" })).toBeVisible();
 });
+
+test("Players lists the constraints before recommending a pack", async ({ page }) => {
+  await page.goto("/app/players");
+  await page.waitForLoadState("networkidle");
+  const constraints = page.getByRole("list", { name: "Constraints affecting this campaign" });
+  await expect(constraints.getByRole("listitem").first()).toContainText(/International (duty|window)|pre-alert/);
+});
