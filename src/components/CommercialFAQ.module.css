@@ -84,3 +84,51 @@
   .group h3{padding-top:18px;padding-bottom:4px}
   .group p{padding-right:28px}
 }
+
+
+/* v4 — FAQ should close the story, not compete with primary sections */
+.wrap{
+  padding-top:58px;
+  padding-bottom:58px;
+}
+.intro{
+  grid-template-columns:170px minmax(0,1fr);
+  gap:28px;
+  align-items:start;
+}
+.intro h2{
+  max-width:650px;
+  font-size:clamp(30px,3vw,40px);
+  line-height:1.06;
+  letter-spacing:-.035em;
+}
+.intro p{
+  max-width:650px;
+  margin-top:10px;
+  font-size:15px;
+  line-height:1.55;
+}
+.groups{margin-top:30px}
+.group{
+  grid-template-columns:170px minmax(0,1fr);
+  gap:28px;
+}
+.group summary{
+  padding-top:18px;
+  padding-bottom:18px;
+  font-size:15px;
+  line-height:1.4;
+}
+.group summary::after{top:14px}
+.group p{
+  padding-bottom:20px;
+  font-size:14px;
+  line-height:1.6;
+}
+@media(max-width:760px){
+  .wrap{padding-top:44px;padding-bottom:44px}
+  .intro h2{
+    font-size:clamp(28px,8vw,36px);
+  }
+  .groups{margin-top:24px}
+}
