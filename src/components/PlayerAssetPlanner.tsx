@@ -447,7 +447,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
       <header className={styles.head}>
         <div>
           <span>Optimisation brief</span>
-          <h1>Choose the need. AVELA ranks the best viable combinations.</h1>
+          <h2>Choose the need. AVELA ranks the best viable combinations.</h2>
           <p>The recommendation balances fit, availability, international duty, cost, remaining usage, momentum and season opportunity cost — and re-ranks when constraints change.</p>
         </div>
         <div className={styles.need}>

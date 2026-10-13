@@ -38,3 +38,9 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Install Chromium for browser tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Browser regression tests (desktop + mobile)
+        run: npm run test:e2e
