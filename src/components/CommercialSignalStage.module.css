@@ -333,3 +333,137 @@
     margin:10px auto;
   }
 }
+
+
+/* Mobile fail-safe: abandon orbital composition entirely */
+@media(max-width:640px){
+  .stage{
+    min-height:0;
+    padding:16px;
+    border-radius:14px;
+    overflow:hidden;
+  }
+
+  .engineScene{
+    display:block;
+    min-height:0;
+    padding-top:14px;
+  }
+
+  .signalOrbit{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    min-height:0;
+    padding:0;
+  }
+
+  .signalOrbit::before,
+  .signalOrbit::after{
+    display:none !important;
+  }
+
+  .signalNode,
+  .node1,
+  .node2,
+  .node3,
+  .node4,
+  .node5,
+  .node6{
+    position:static !important;
+    inset:auto !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    transform:none !important;
+    margin:0 !important;
+  }
+
+  .signalNode{
+    display:grid;
+    grid-template-columns:92px minmax(0,1fr);
+    gap:10px;
+    align-items:center;
+    padding:10px 12px;
+    border-radius:9px;
+    background:rgba(7,24,40,.72);
+  }
+
+  .signalNode::after{
+    display:none !important;
+  }
+
+  .signalNode span{
+    margin:0;
+    font-size:8px;
+    line-height:1.2;
+  }
+
+  .signalNode strong{
+    margin:0;
+    font-size:11px;
+    line-height:1.25;
+    text-align:right;
+  }
+
+  .engineCore{
+    position:static !important;
+    display:flex;
+    order:7;
+    width:100% !important;
+    height:auto !important;
+    min-height:116px;
+    margin:8px 0 0 !important;
+    padding:18px;
+    transform:none !important;
+    border-radius:12px;
+  }
+
+  .engineCore strong{
+    font-size:22px;
+    line-height:1.02;
+  }
+
+  .engineCore small{
+    max-width:none;
+    font-size:8px;
+  }
+
+  .engineCore i{
+    right:16px;
+    bottom:16px;
+  }
+
+  .output{
+    display:block;
+    margin-top:12px;
+  }
+
+  .output>div{
+    margin-top:8px;
+    padding:11px 12px;
+  }
+
+  .footer{
+    display:block;
+    margin-top:14px;
+    padding-top:12px;
+  }
+
+  .footer span,
+  .footer strong{
+    display:block;
+  }
+
+  .footer strong{
+    margin-top:4px;
+  }
+}
+
+@media(max-width:640px) and (prefers-reduced-motion:no-preference){
+  .signalNode,
+  .engineCore,
+  .outputHot{
+    animation:none !important;
+  }
+}
