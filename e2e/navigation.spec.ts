@@ -3,9 +3,14 @@ import { expect, test } from "@playwright/test";
 test.describe("mobile workspace navigation", () => {
   test.skip(({ isMobile }) => !isMobile, "mobile-only behaviour");
 
+  // /app streams a loading shell first; wait for the page to settle so only one sidebar exists.
+  const sidebar = (page: import("@playwright/test").Page) =>
+    page.getByRole("complementary", { name: "AVELA club app navigation" });
+
   test("shows the four primary destinations and keeps the rest in More", async ({ page }) => {
     await page.goto("/app");
-    const nav = page.getByRole("navigation", { name: "Club workflow" });
+    await page.waitForLoadState("networkidle");
+    const nav = sidebar(page).getByRole("navigation", { name: "Club workflow" });
     for (const label of ["Home", "Radar", "Campaigns", "Players"]) {
       await expect(nav.getByRole("link", { name: label, exact: true })).toBeVisible();
     }
@@ -13,17 +18,27 @@ test.describe("mobile workspace navigation", () => {
       await expect(nav.getByRole("link", { name: label, exact: true })).toBeHidden();
     }
 
-    const more = page.locator("summary", { hasText: "More" });
+    const more = sidebar(page).locator("summary");
+    await expect(more).toHaveText("More");
     await more.click();
-    await expect(page.getByRole("link", { name: "Sponsors", exact: true }).last()).toBeVisible();
+    await expect(sidebar(page).locator("details").getByRole("link", { name: "Sponsors", exact: true })).toBeVisible();
   });
 
-  test("More carries the active destination when it lives in the overflow", async ({ page }) => {
-    await page.goto("/app/sponsors");
-    await page.waitForLoadState("networkidle");
-    const summary = page.getByRole("complementary", { name: "AVELA club app navigation" }).locator("summary");
-    await expect(summary).toHaveText("Sponsors");
-  });
+  for (const [route, label] of [
+    ["/app/sponsors", "Sponsors"],
+    ["/app/season", "Calendar"],
+    ["/app/executive", "Executive view"],
+    ["/app/contracts", "Contracts"],
+    ["/app/sources", "Sources"],
+    ["/app/access", "Team"],
+    ["/app/help", "Help"]
+  ] as const) {
+    test(`More carries the active destination on ${route}`, async ({ page }) => {
+      await page.goto(route);
+      await page.waitForLoadState("networkidle");
+      await expect(sidebar(page).locator("summary")).toHaveText(label);
+    });
+  }
 
   test("the page does not scroll horizontally", async ({ page }) => {
     for (const route of ["/app", "/app/matches", "/app/campaigns", "/app/players"]) {
