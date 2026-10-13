@@ -9,6 +9,12 @@ const signals = [
   ["Demand", "CRM + sales"]
 ] as const;
 
+const outputs = [
+  ["What changed", "Travel friction + competing attention"],
+  ["Why it matters", "Walk-up assumption is weaker"],
+  ["Prepared move", "Earlier CRM + clearer travel message"]
+] as const;
+
 export function CommercialSignalStage() {
   return (
     <div className={styles.stage} aria-label="AVELA opportunity engine">
@@ -20,35 +26,39 @@ export function CommercialSignalStage() {
       </div>
 
       <div className={styles.engineScene}>
-        <div className={styles.signalOrbit} aria-label="Signals feeding the opportunity engine">
-          {signals.map(([label, value], index) => (
-            <div className={[styles.signalNode, styles["node" + (index + 1)]].join(" ")} key={label}>
+        <div className={styles.signalStack}>
+          <span className={styles.columnLabel}>Signals entering the engine</span>
+          {signals.map(([label, value]) => (
+            <div className={styles.signalNode} key={label}>
               <span>{label}</span>
               <strong>{value}</strong>
             </div>
           ))}
+        </div>
 
+        <div className={styles.engineColumn}>
           <div className={styles.engineCore}>
             <span>AVELA</span>
-            <strong>Opportunity<br />Engine</strong>
-            <small>detect · interpret · prepare</small>
-            <i aria-hidden="true" />
+            <strong>Opportunity Engine</strong>
+            <small>detect · interpret · validate · prepare</small>
+          </div>
+          <div className={styles.engineFlow} aria-hidden="true">
+            <i /><i /><i />
+          </div>
+          <div className={styles.engineNote}>
+            <span>Decision logic</span>
+            <strong>External signal + club context → actionability</strong>
           </div>
         </div>
 
         <div className={styles.output}>
-          <div>
-            <span>What changed</span>
-            <strong>Travel friction + competing attention</strong>
-          </div>
-          <div>
-            <span>Why it matters</span>
-            <strong>Walk-up assumption is weaker</strong>
-          </div>
-          <div className={styles.outputHot}>
-            <span>Prepared move</span>
-            <strong>Earlier CRM + travel message</strong>
-          </div>
+          <span className={styles.columnLabel}>Decision output</span>
+          {outputs.map(([label, value], index) => (
+            <div className={index === outputs.length - 1 ? styles.outputHot : ""} key={label}>
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
         </div>
       </div>
 
