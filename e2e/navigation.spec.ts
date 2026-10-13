@@ -41,10 +41,18 @@ test.describe("mobile workspace navigation", () => {
   }
 
   test("the page does not scroll horizontally", async ({ page }) => {
-    for (const route of ["/app", "/app/matches", "/app/campaigns", "/app/players"]) {
+    // Compare with the device width: on mobile, innerWidth grows with an overflowing layout,
+    // so scrollWidth - innerWidth stays 0 even when the page is twice the screen width.
+    const deviceWidth = page.viewportSize()?.width ?? 0;
+    for (const route of [
+      "/app", "/app/matches", "/app/matches/2026-10-18-eve-h", "/app/campaigns",
+      "/app/players", "/app/sponsors", "/app/contracts", "/app/season", "/app/learning", "/app/executive",
+      "/app/sources", "/app/setup", "/app/access", "/app/help", "/app/demo"
+    ]) {
       await page.goto(route);
-      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-      expect(overflow, `${route} horizontal overflow (px)`).toBeLessThanOrEqual(1);
+      await page.waitForLoadState("networkidle");
+      const width = await page.evaluate(() => document.documentElement.scrollWidth);
+      expect(width, `${route} page width (px) on a ${deviceWidth}px screen`).toBeLessThanOrEqual(deviceWidth + 1);
     }
   });
 });
