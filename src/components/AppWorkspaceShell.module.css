@@ -1,6 +1,12 @@
+/* AVELA app shell: topbar, page bar and content frame.
+   No !important: where a global rule competes (.productAppShell in product-system.css),
+   these selectors are one step more specific instead. */
+
 .shell{min-height:100vh;background:#F4F6F7;color:var(--product-ink);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.frame{min-height:100vh!important;padding:0!important;background:#F5F7F8!important}
-.frame>header,.frame>div{max-width:none!important;margin-left:0!important;margin-right:0!important}
+.shell>.frame{min-height:100vh;padding:0;background:#F5F7F8}
+.shell>.frame>:is(.topbar,.pagebar,.content){max-width:none;margin-left:0;margin-right:0}
+
+/* Topbar */
 .topbar{
   position:sticky;top:0;z-index:30;
   height:58px;
@@ -14,8 +20,15 @@
   backdrop-filter:blur(16px) saturate(130%);
 }
 .contextControls{display:flex;gap:8px;align-items:center}
+.contextChip{display:flex;align-items:center;gap:7px;height:34px;padding:0 10px;border:1px solid #E2E7EA;border-radius:8px;background:#fff;box-shadow:0 1px 1px rgba(16,39,66,.02)}
+.contextChip span{font-size:12px;font-weight:850;color:#8895A1;text-transform:uppercase;letter-spacing:.055em}
+.contextChip strong{font-size:12px;color:#20364C}
+.topbarContext{min-width:0;display:flex;align-items:center;color:#92A0AA}
+.topbarContext span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:850;letter-spacing:.055em;text-transform:uppercase;color:#82919D}
 .utility{display:flex;justify-content:flex-end;gap:7px;align-items:center}
-.iconButton{position:relative;width:34px;height:34px;padding:0;display:grid;place-items:center;border:1px solid #DDE3E7;border-radius:8px;background:#fff;color:#607181;text-decoration:none}
+.iconButton{position:relative;width:34px;height:34px;padding:0;display:grid;place-items:center;border:1px solid #DDE3E7;border-radius:8px;background:#fff;color:#607181;text-decoration:none;box-shadow:0 1px 1px rgba(16,39,66,.02)}
+
+/* Page bar */
 .pagebar{
   min-height:76px;
   padding:14px 22px;
@@ -25,83 +38,48 @@
   align-items:center;
   border-bottom:1px solid #E2E7EA;
   background:#fff;
+  box-shadow:0 1px 0 rgba(16,39,66,.02);
 }
 .pagebar>div:first-child{min-width:0}
-.eyebrow{display:block;margin-bottom:3px;color:#8694A0;font-size:12px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.eyebrow{display:block;margin-bottom:3px;color:#7C8B96;font-size:12px;font-weight:850;letter-spacing:.075em;text-transform:uppercase}
 .titleRow{display:flex;gap:16px;align-items:baseline;min-width:0;max-width:1180px}
-.titleRow h1{margin:0!important;font-size:25px!important;line-height:1.08!important;letter-spacing:-.035em!important;white-space:nowrap}
-.titleRow p{margin:0!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#71808B!important;font-size:12px!important;line-height:1.45!important}
+.titleRow h1{margin:0;font-size:25px;line-height:1.08;letter-spacing:-.035em;white-space:nowrap}
+.pagebar .titleRow p{margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#71808B;font-size:12px;line-height:1.45}
 .actions{display:flex;gap:8px;align-items:center}
-.content{padding:18px 22px 32px;max-width:none!important}
+
+/* Content */
+.content{padding:18px 22px 32px}
+.shell :is(button,input,select,textarea):disabled{cursor:not-allowed}
+/* Keyboard focus comes from the global :focus-visible rule in product-system.css. */
+
 @media(max-width:1100px){
   .topbar{grid-template-columns:auto minmax(180px,1fr) auto}
 }
 @media(max-width:900px){
-  .topbar{top:53px;height:auto;min-height:54px;padding:8px 12px;grid-template-columns:1fr auto}
+  /* Sits under the 54px mobile navigation bar. */
+  .topbar{top:54px;height:auto;min-height:54px;padding:8px 12px;grid-template-columns:1fr auto}
   .contextControls{display:none}
+  .contextChip span{display:none}
+  .topbarContext{grid-column:1}
+  .topbarContext span{font-size:11px}
   .utility{grid-column:2}
-  .pagebar{padding:10px 14px;align-items:flex-start;flex-direction:column}
+  .pagebar{padding:10px 14px;align-items:flex-start;flex-direction:column;gap:8px}
   .titleRow{display:block}
-  .titleRow h1{font-size:21px!important}
-  .titleRow p{margin-top:3px!important;white-space:normal}
-  .actions{width:100%;overflow-x:auto}
+  .titleRow h1{font-size:21px}
+  .pagebar .titleRow p{margin-top:3px;white-space:normal}
+  .actions{width:100%;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .actions::-webkit-scrollbar{display:none}
   .content{padding:12px 14px 24px}
+}
+@media(max-width:620px){
+  .topbar{padding:7px 10px}
+  .pagebar{padding:10px 12px 11px}
+  .titleRow h1{font-size:19px;line-height:1.15;white-space:normal}
+  .pagebar .titleRow p{font-size:11px}
+  .content{padding:11px 10px 22px}
 }
 @media(max-width:560px){
   .iconButton:first-child{display:none}
   .topbar{grid-template-columns:minmax(0,1fr) auto}
   .pagebar{min-height:0}
-}
-/* Responsive workspace density polish */
-@media(max-width:900px){
-  .topbar{top:54px}
-  .pagebar{gap:8px}
-  .actions{padding-bottom:2px;scrollbar-width:none}
-  .actions::-webkit-scrollbar{display:none}
-}
-@media(max-width:620px){
-  .topbar{padding:7px 10px}
-  .pagebar{padding:9px 12px}
-  .titleRow h1{font-size:19px!important;white-space:normal}
-  .titleRow p{font-size:11px!important}
-  .content{padding:10px 10px 20px}
-}
-
-/* Functional affordance audit */
-.contextChip{display:flex;align-items:center;gap:7px;height:34px;padding:0 10px;border:1px solid #DDE3E7;border-radius:8px;background:#fff}
-.contextChip span{font-size:12px;font-weight:850;color:#8895A1;text-transform:uppercase;letter-spacing:.055em}
-.contextChip strong{font-size:12px;color:#20364C}
-.viewIndicator,.filterStatus{min-height:34px;display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid #DDE3E7;border-radius:8px;background:#F7F9FA;color:#788692}
-.viewIndicator span{font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.055em}
-.viewIndicator strong{font-size:12px;color:#20364C}
-.filterStatus{color:#96A1AA;cursor:default}
-.filterStatus{font-size:12px;font-weight:850}
-@media(max-width:900px){
-  .contextChip span{display:none}
-}
-@media(max-width:560px){
-}
-
-.topbarContext{min-width:0;display:flex;align-items:center;color:#92A0AA}
-.topbarContext span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:850;letter-spacing:.055em;text-transform:uppercase}
-.filterStatus{border-style:dashed!important;background:#FAFBFC!important;color:#8996A0!important}
-.filterStatus::before{content:"Context";font-size:11px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:#A1ACB5}
-@media(max-width:900px){.topbarContext{grid-column:1}.topbarContext span{font-size:11px}}
-
-
-/* Final workspace visual polish */
-.topbarContext span{color:#82919D}
-.contextChip{border-color:#E2E7EA;box-shadow:0 1px 1px rgba(16,39,66,.02)}
-.iconButton{box-shadow:0 1px 1px rgba(16,39,66,.02)}
-.pagebar{box-shadow:0 1px 0 rgba(16,39,66,.02)}
-.eyebrow{color:#7C8B96;letter-spacing:.075em}
-@media(max-width:620px){
-  .pagebar{padding:10px 12px 11px}
-  .content{padding:11px 10px 22px}
-  .titleRow h1{line-height:1.15!important}
-}
-
-/* Keyboard focus comes from the global :focus-visible rule in product-system.css. */
-.shell :is(button,input,select,textarea):disabled{
-  cursor:not-allowed;
 }
