@@ -31,8 +31,8 @@
 }
 .plannerSurface :global([class*="wrap"]){max-width:none!important;margin:0!important;padding:18px!important}
 .plannerSurface :global([class*="head"]){padding-top:0!important}
-.plannerSurface :global(h1){font-size:26px!important}
 .plannerSurface :global(h2){font-size:18px!important}
+.plannerSurface :global(header[class*="head"] h2){font-size:26px!important}
 .plannerSurface :global(h3){font-size:14px!important}
 .plannerSurface :global(p){font-size:12px!important;line-height:1.5!important}
 

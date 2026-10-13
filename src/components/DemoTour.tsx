@@ -34,7 +34,7 @@ export function DemoTour(props: Props) {
       <header className={styles.hero}>
         <div>
           <span>3-minute guided demo</span>
-          <h1>See how one home fixture becomes one marketing & commercial decision.</h1>
+          <h2>See how one home fixture becomes one marketing & commercial decision.</h2>
           <p>This walkthrough uses the same product logic and current public evidence as the club workspace. Nothing here is a separate mock dashboard.</p>
         </div>
         <Link href={props.fixtureId ? `/app/matches/${props.fixtureId}` : "/app/matches"}>Skip to full workspace →</Link>

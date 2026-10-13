@@ -130,6 +130,7 @@ Every pull request runs linting, typechecking, regression tests, data-contract v
 npm run lint
 npm test
 npm run build
+npm run test:e2e   # browser regression tests against the build (desktop + mobile Chromium)
 ```
 
 

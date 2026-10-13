@@ -8,3 +8,5 @@ node_modules/
 *.tsbuildinfo
 data/private/
 secrets/
+test-results/
+playwright-report/
