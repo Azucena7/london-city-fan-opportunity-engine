@@ -1064,5 +1064,36 @@
         "checkedAt": "2026-10-12"
       }
     ]
+  },
+  {
+    "id": "tickets-full-season-sold-out-11-game-launch-2026-10-13",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-13T10:11:53+01:00",
+    "title": {
+      "en": "Full Season Tickets sold out; 11-game ticket opens from Everton",
+      "es": "Los abonos completos se agotan; abre un abono de 11 partidos desde Everton"
+    },
+    "summary": {
+      "en": "London City's official season-ticket page confirms that Full Season Tickets are sold out and now offers an 11-game Season Ticket covering every home BWSL fixture from Everton onwards. This is a confirmed product sell-out and a confirmed alternative product launch; no season-ticket quantity, revenue, scans or attendance figure is published.",
+      "es": "La página oficial de abonos de London City confirma que los abonos completos están agotados y ofrece ahora un abono de 11 partidos que cubre todos los encuentros de BWSL en casa desde Everton. Es un agotado confirmado del producto y un lanzamiento confirmado de una alternativa; no se publica cantidad de abonos, ingresos, scans ni asistencia."
+    },
+    "marketingAction": {
+      "en": "Remove Full Season Ticket purchase CTAs from active Everton and evergreen journeys, replace them with clearly labelled 11-game Season Ticket messaging for high-intent and repeat-buyer audiences, and keep single-match and Hat-trick options distinct. Tag each product route and measure purchases separately without using sell-out status as an attendance claim.",
+      "es": "Retirar los CTAs de compra del abono completo de los recorridos activos de Everton y evergreen, sustituirlos por mensajes claramente etiquetados del abono de 11 partidos para audiencias de alta intención y compradores recurrentes, y mantener separadas las opciones de partido único y pack Hat-trick. Etiquetar cada ruta de producto y medir compras por separado sin usar el agotado como afirmación de asistencia."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/seasontickets",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/seasontickets",
+        "checkedAt": "2026-10-13"
+      }
+    ]
   }
 ]
