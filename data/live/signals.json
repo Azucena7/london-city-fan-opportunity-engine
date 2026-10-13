@@ -1095,5 +1095,28 @@
         "checkedAt": "2026-10-13"
       }
     ]
+  },
+  {
+    "id": "weather-2026-10-18-eve-h",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "weather",
+    "state": "forecast",
+    "direction": "positive",
+    "materiality": "low",
+    "observedAt": "2026-10-13T15:13:41.107Z",
+    "title": {
+      "en": "Matchday weather is currently low risk",
+      "es": "El riesgo meteorológico actual para el matchday es bajo"
+    },
+    "summary": {
+      "en": "10% maximum rain probability, 0 mm and 20.2 km/h maximum wind. Forecast, not measured weather.",
+      "es": "10% de probabilidad máxima de lluvia, 0 mm y viento máximo de 20.2 km/h. Es forecast, no tiempo medido."
+    },
+    "marketingAction": {
+      "en": "Keep normal acquisition active and retain service messaging as a contingency.",
+      "es": "Mantener activa la captación normal y conservar mensajes de servicio como contingencia."
+    },
+    "sourceName": "Open-Meteo",
+    "sourceUrl": "https://open-meteo.com/"
   }
 ]
