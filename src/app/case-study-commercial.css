@@ -254,6 +254,10 @@
 .commercialCaseStudy .caseStudyValueGrid{
   gap:12px;
 }
+/* Value cards are light; their headings otherwise inherit the dark-theme ink. */
+.commercialCaseStudy .caseStudyValueGrid h3{
+  color:#102742;
+}
 .commercialCaseStudy .caseStudyChallengeGrid article,
 .commercialCaseStudy .caseStudyMetricGrid article,
 .commercialCaseStudy .caseStudyValueGrid article,

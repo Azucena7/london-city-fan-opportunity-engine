@@ -87,6 +87,13 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </aside>
       </header>
 
+      {/* The learning outcome comes first: what AVELA learned, then repeat / change / measure next. */}
+      <NextFixtureLearning
+        learning={nextLearning}
+        nextFixtureId={nextFixture?.id}
+        nextFixtureLabel={nextFixture ? `${nextFixture.opponent} · ${nextFixture.date}` : undefined}
+      />
+
       <section className={styles.learningStory} aria-label="Learning journey">
         <article data-stage="before">
           <span>01 · Before</span>
@@ -139,12 +146,6 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </article>
       </section>
 
-      <NextFixtureLearning
-        learning={nextLearning}
-        nextFixtureId={nextFixture?.id}
-        nextFixtureLabel={nextFixture ? `${nextFixture.opponent} · ${nextFixture.date}` : undefined}
-      />
-
       <details className={styles.evidenceDrawer}>
         <summary>
           <div><span className={styles.eyebrow}>Decision evidence</span><strong>Why AVELA is changing — or not changing — the next fixture decision</strong></div>
@@ -189,58 +190,10 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         </div>
       </details>
 
-      <section className={styles.learningLoop}>
-        <div className={styles.sectionHead}>
-          <span className={styles.eyebrow}>Learning loop</span>
-          <h2>From hypothesis to the next fixture decision.</h2>
-        </div>
-
-        <div className={styles.timeline}>
-          <article>
-            <span>01 · HYPOTHESIS</span>
-            <strong>Repeat recent attendees are more valuable to activate than a cold audience.</strong>
-            <p>Defined before execution.</p>
-          </article>
-          <article>
-            <span>02 · MEASURE</span>
-            <strong>Match audience → campaign → purchase → scan → repeat.</strong>
-            <p>{measured ? "Current fixture purchase and scan evidence is connected." : "Blocked until club CRM/ticketing data is connected."}</p>
-          </article>
-          <article>
-            <span>03 · LEARN</span>
-            <strong>{measured ? "Use observed repeat, attribution and attendance quality to update the hypothesis without claiming causation." : "Promote the hypothesis only when the result supports it."}</strong>
-            <p>No confidence uplift without evidence.</p>
-          </article>
-          <article>
-            <span>04 · APPLY</span>
-            <strong>Change the next fixture audience, timing or investment decision.</strong>
-            <p>The learning must affect a real choice.</p>
-          </article>
-        </div>
-      </section>
-
-      <section className={styles.resultState}>
-        <div>
-          <span className={styles.eyebrow}>{measured ? "Measured state" : "What happens when data arrives"}</span>
-          <h2>{measured ? "The product has moved from hypothesis to observed outcome." : "Measured results replace placeholders automatically."}</h2>
-          <p>
-            {measured
-              ? "The values above come from authorised aggregate club CRM/ticketing evidence. They can strengthen, weaken or redirect the next fixture decision, but they do not establish incremental lift on their own."
-              : "The product never presents illustrative outcomes as if they happened. Until attribution exists, the honest result state is “not measured yet”."}
-          </p>
-        </div>
-        <div className={styles.stateList}>
-          <div><span>Current</span><strong>{measured ? "Observed result" : "Hypothesis"}</strong></div>
-          <div><span>Evidence state</span><strong>{measured ? "Live club data" : "Missing club data"}</strong></div>
-          <div><span>Decision effect</span><strong>Confidence changes only if supported</strong></div>
-          <div><span>Causal claim</span><strong>{results?.interpretation.causalClaim ? "Supported" : "Not established"}</strong></div>
-        </div>
-      </section>
-
       <section className={styles.next}>
         <div>
           <span className={styles.eyebrow}>Close the loop</span>
-          <h2>Learning should send the user back to the next match, not to a report archive.</h2>
+          <h2>Apply this learning to the next fixture decision.</h2>
         </div>
         <div className={styles.actions}>
           <Link className={styles.primary} href="/app/matches">Apply learning to next match</Link>

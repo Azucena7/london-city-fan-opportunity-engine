@@ -49,3 +49,5 @@
 .allConnected{grid-column:1/-1}
 @media(max-width:900px){.connectionIntro{align-items:flex-start;flex-direction:column}.recommendationGrid{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.recommendationGrid{grid-template-columns:1fr}}
+/* The Blinkfire panel is dark; override the global navy heading colour. */
+.blinkfire .blinkfireIntro h2{color:#fff}
