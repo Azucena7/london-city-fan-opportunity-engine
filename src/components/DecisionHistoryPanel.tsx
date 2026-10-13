@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import styles from "./DecisionHistoryPanel.module.css";
+import { DECISION_RECORDED_EVENT } from "./MatchPlanDecision";
 
 type Club = { id: string; name: string; role: string };
 type DecisionEvent = {
@@ -68,6 +69,13 @@ export function DecisionHistoryPanel({
       }
     })();
   }, [decisionId]); // eslint-disable-line react-hooks/exhaustive-deps -- reload when decision changes
+
+  useEffect(() => {
+    if (!activeClubId) return;
+    const reload = () => void load(activeClubId);
+    window.addEventListener(DECISION_RECORDED_EVENT, reload);
+    return () => window.removeEventListener(DECISION_RECORDED_EVENT, reload);
+  }, [activeClubId]); // eslint-disable-line react-hooks/exhaustive-deps -- load only depends on the active club
 
   const state = useMemo(() => {
     const types = new Set(events.map((event) => event.event_type));
