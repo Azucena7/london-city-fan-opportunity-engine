@@ -112,7 +112,7 @@ export default function PilotPage() {
 
       <section className={styles.section}>
         <div className={styles.sectionHead}>
-          <span className={styles.eyebrow}>Example pilot window · London City</span>
+          <span className={styles.eyebrow}>Public demonstration · London City (independent case)</span>
           <h2>Four cycles. Four different decisions. One learning system.</h2>
           <p>This is how a bounded pilot becomes useful: not by repeating the same dashboard four times, but by testing whether AVELA adapts the decision as fixture context, evidence and commercial constraints change.</p>
         </div>

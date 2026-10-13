@@ -27,12 +27,12 @@ export function AppWorkspaceShell({
         <header className={styles.topbar}>
           <div className={styles.contextControls} aria-label="Workspace context">
             <div className={styles.contextChip}>
-              <span>Club</span>
-              <strong>London City</strong>
+              <span>Environment</span>
+              <strong>Public demonstration</strong>
             </div>
             <div className={styles.contextChip}>
-              <span>Window</span>
-              <strong>Next 30 days</strong>
+              <span>Data</span>
+              <strong>Public sources</strong>
             </div>
           </div>
 
@@ -47,10 +47,6 @@ export function AppWorkspaceShell({
             <Link href="/app/season" className={styles.iconButton} aria-label="Open calendar">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
             </Link>
-            <div className={styles.profileStatus} aria-label="Current demo profile">
-              <span>MT</span>
-              <small>Marta</small>
-            </div>
           </div>
         </header>
 

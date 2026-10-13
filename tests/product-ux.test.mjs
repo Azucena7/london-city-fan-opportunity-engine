@@ -1114,7 +1114,7 @@ test("AVELA visual system removes olive identity and simplifies club app navigat
   assert.match(nav, /Campaigns/);
   assert.match(nav, /Learning/);
   assert.match(nav, /const workspaceItems/);
-  assert.match(nav, />Club<\/span>/);
+  assert.match(nav, />Club system<\/span>/);
   assert.doesNotMatch(nav, /label: "London City Live"/);
   assert.doesNotMatch(nav, /primaryItems[\s\S]*label: "Credits"/);
   assert.match(system, /--product-accent:#2F8F83/i);
@@ -1228,7 +1228,8 @@ test("Opportunity Brief keeps long-form work navigable with a sticky context rai
   assert.match(page, /href="#readiness"/);
   assert.match(page, /href="#execute"/);
   assert.match(page, /href="#evidence"/);
-  assert.match(page, /href="#learning"/);
+  assert.match(page, /href="#human-decision"/);
+  assert.match(page, /href="#decision-memory"/);
   assert.match(css, /position:sticky/);
 });
 
@@ -2825,7 +2826,8 @@ test("Learning makes the AVELA closed loop explicit and readable", () => {
 test("club pilot demonstrates a bounded multi-cycle learning window", () => {
   const pilot = read("src/app/pilot/page.tsx");
   const css = read("src/app/pilot/pilot.module.css");
-  assert.match(pilot, /Example pilot window · London City/);
+  assert.match(pilot, /Public demonstration · London City \(independent case\)/);
+  assert.doesNotMatch(pilot, /pilot window · London City/);
   assert.match(pilot, /Brighton · 26 Sep/);
   assert.match(pilot, /Everton · 18 Oct/);
   assert.match(pilot, /Crystal Palace · 28 Oct/);
@@ -2866,5 +2868,35 @@ test("mobile overflow keeps the active destination visible in More", () => {
   assert.match(nav, /mobileOverflowLabel/);
   assert.match(nav, /styles\.mobileMenuActive/);
   assert.match(css, /\.mobileMenuActive\{/);
+});
+
+test("mobile More carries active context for every non-primary destination", () => {
+  const nav = read("src/components/ProductJourneyNav.tsx");
+  assert.match(nav, /mobileOverflowActive = Boolean\(active && !mobilePrimaryKeys\.has\(active\)\)/);
+  for (const key of ["executive", "contracts", "sources", "setup", "access", "help", "demo"]) {
+    assert.ok(nav.includes(`key: "${key}"`) || nav.includes(`${key}: "`), `${key} needs a mobile overflow label`);
+  }
+});
+
+test("app shell does not present a London City user or club context", () => {
+  const shell = read("src/components/AppWorkspaceShell.tsx");
+  assert.doesNotMatch(shell, /Marta|<strong>London City<\/strong>/);
+  assert.match(shell, /Public demonstration/);
+});
+
+test("Decision Center does not draw invented trend lines", () => {
+  const home = read("src/app/app/page.tsx");
+  assert.doesNotMatch(home, /<path d="M2 /);
+  assert.doesNotMatch(home, /metricDelta/);
+});
+
+test("Opportunity Brief phase links target their own phases and open collapsed panels", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  assert.match(page, /href="#human-decision">05 Human decision/);
+  assert.match(page, /id="human-decision"/);
+  assert.match(page, /href="#decision-memory">06 Learn/);
+  assert.match(page, /id="decision-memory"/);
+  assert.doesNotMatch(page, /href="#impact">05/);
+  assert.match(page, /<PhaseAnchorOpener \/>/);
 });
 

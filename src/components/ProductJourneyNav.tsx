@@ -55,9 +55,18 @@ const utilityItems = [
   { key: "access", label: "Team", href: "/app/access" }
 ] as const;
 
+const mobilePrimaryKeys = new Set<string>(workItems.filter((item) => !mobileOverflowKeys.has(item.key)).map((item) => item.key));
+const mobileOverflowLabels: Record<string, string> = {
+  ...Object.fromEntries(workItems.map((item) => [item.key, item.displayLabel])),
+  ...Object.fromEntries([...workspaceItems, ...utilityItems].map((item) => [item.key, item.label])),
+  help: "Help",
+  demo: "Demo"
+};
+
 export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
-  const mobileOverflowActive = Boolean(active && mobileOverflowKeys.has(active));
-  const mobileOverflowLabel = workItems.find((item) => item.key === active)?.displayLabel ?? "More";
+  // Every destination outside the four mobile primary links lives in More, so More must carry its active context.
+  const mobileOverflowActive = Boolean(active && !mobilePrimaryKeys.has(active));
+  const mobileOverflowLabel = (active && mobileOverflowLabels[active]) || "More";
 
   return (
     <aside className={styles.sidebar} aria-label="AVELA club app navigation">
@@ -130,7 +139,18 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
           {mobileOverflowActive ? mobileOverflowLabel : "More"}
         </summary>
         <div className={styles.mobileMenuPanel}>
-          <span>Club</span>
+          <span>Plan & learn</span>
+          {workItems.filter((item) => mobileOverflowKeys.has(item.key)).map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              aria-current={active === item.key ? "page" : undefined}
+              className={active === item.key ? styles.mobileActive : ""}
+            >
+              {item.displayLabel}
+            </Link>
+          ))}
+          <span>Club system</span>
           {[...workspaceItems, ...utilityItems].map((item) => (
             <Link
               key={item.key}
@@ -139,17 +159,6 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
               className={active === item.key ? styles.mobileActive : ""}
             >
               {item.label}
-            </Link>
-          ))}
-          <span>More</span>
-          {workItems.slice(4).map((item) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              aria-current={active === item.key ? "page" : undefined}
-              className={active === item.key ? styles.mobileActive : ""}
-            >
-              {item.displayLabel}
             </Link>
           ))}
           <Link href="/app/help" aria-current={active === "help" ? "page" : undefined} className={active === "help" ? styles.mobileActive : ""}>Help & methodology</Link>

@@ -103,7 +103,7 @@ export default function Home() {
         <div>
           <span className={styles.kicker}>Start with the marketing team</span>
           <h2>Prove AVELA on 4–6 fixtures before you integrate more.</h2>
-          <p>Start with one marketing/commercial workflow, a limited fixture window and the systems you already use. See how the decision changes across Brighton, Everton, Crystal Palace and Manchester City before deeper integration is earned.</p>
+          <p>Start with one marketing/commercial workflow, a limited fixture window and the systems you already use. Our independent public demonstration shows how the decision changes across Brighton, Everton, Crystal Palace and Manchester City; your pilot uses your own authorised data before deeper integration is earned.</p>
         </div>
         <div className={styles.pilotSteps}>
           <article><span>01</span><strong>4–6 fixtures</strong><p>Use the real calendar.</p></article>
@@ -113,7 +113,7 @@ export default function Home() {
         </div>
         <div className={styles.pilotActions}>
           <Link className={styles.primary} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=pilot_section#demo">Request a 4–6 fixture pilot</Link>
-          <Link className={styles.textLink} href="/pilot?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=multi_cycle_proof">See the 4-cycle London City pilot window ↗</Link>
+          <Link className={styles.textLink} href="/pilot?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=multi_cycle_proof">See the 4-cycle public demonstration ↗</Link>
           <Link className={styles.textLink} href="/app/demo?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=pilot_section">Try the guided product demo ↗</Link>
         </div>
       </section>
