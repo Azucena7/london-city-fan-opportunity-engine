@@ -416,3 +416,8 @@
 }
 /* The recommended pack names sit on navy; override the global navy heading colour. */
 .heroPack .heroPackIntro h3{color:#fff}
+.constraintList{display:grid;gap:6px;margin:8px 0 0;padding:0;list-style:none}
+.constraintList li{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;padding:7px 10px;border-left:3px solid var(--product-signal);border-radius:6px;background:#fff;font-size:12px;line-height:1.4;color:var(--product-ink)}
+.constraintList li[data-kind="alert"]{border-left-color:#D9A21B}
+.constraintList b{font-weight:850}
+.constraintList span{color:var(--product-muted);font-size:12px;font-weight:600;letter-spacing:0;text-transform:none}

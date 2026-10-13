@@ -119,6 +119,25 @@ export function activationBlockers(player: Player, request: ActivationRequest, a
   if (appearances.some((a) => a.playerId === player.id && a.date === request.date && a.status !== "cancelled")) reasons.push("collision");
   return reasons;
 }
+// Plain-language reasons for the codes activationBlockers() returns.
+export const BLOCKER_LABELS: Record<string, string> = {
+  agreement: "No signed, validated agreement",
+  dates: "Outside the contract dates",
+  channel: "Channel not covered",
+  territory: "Territory not covered",
+  conflict: "Category conflict",
+  availability: "Date not confirmed",
+  sportingAvailability: "Sporting unavailable",
+  internationalDuty: "International duty",
+  budget: "Over budget",
+  owner: "No owner assigned",
+  quotaUnknown: "Appearance quota unknown",
+  quota: "Appearance quota used",
+  collision: "Already booked that day"
+};
+export function blockerLabel(code: string) {
+  return BLOCKER_LABELS[code] ?? code;
+}
 export type Weights = { fit: number; balance: number; engagement: number };
 export function recommendPlayers(players: Player[], request: ActivationRequest, appearances: Appearance[], weights: Weights, posts: Post[], intelligence: boolean, duties: InternationalDuty[] = demoInternationalDuty) {
   if (Object.values(weights).some((v) => !Number.isFinite(v) || v < 0) || weights.fit + weights.balance + (intelligence ? weights.engagement : 0) <= 0) throw new Error("weights");

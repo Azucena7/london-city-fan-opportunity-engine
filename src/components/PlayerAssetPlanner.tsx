@@ -4,6 +4,7 @@ import { fetchClubSession } from "@/lib/clubSessionClient";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
+  blockerLabel,
   demoAppearances,
   demoCommercialCampaigns,
   demoInternationalDuty,
@@ -442,6 +443,11 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   }
 
   const internationalAlerts = internationalAvailabilityAlerts(players, demoInternationalDuty, selectedCampaign.start, selectedCampaign.end);
+  // Constraints first: who in the current pack is blocked, and why, before any recommendation.
+  const packBlockers = activeEvaluation.players
+    .filter((item) => item.blockers.length)
+    .map((item) => ({ id: item.player.id, name: item.player.name, reasons: item.blockers.map(blockerLabel) }));
+  const packOverBudget = activeEvaluation.totalFee > selectedCampaign.budget;
 
   return (
     <section className={styles.wrap}>
@@ -501,6 +507,22 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
           <span>Step 02 · Constraints</span>
           <strong>{activeEvaluation.blockers.length ? activeEvaluation.blockers.length + " blocker" + (activeEvaluation.blockers.length === 1 ? "" : "s") + " in the current pack" : "No hard blocker in the current pack"}</strong>
           <small>{internationalAlerts.length} international-duty alert{internationalAlerts.length === 1 ? "" : "s"} · sporting and commercial availability stay inspectable</small>
+          {packBlockers.length || packOverBudget || internationalAlerts.length ? (
+            <ul className={styles.constraintList} aria-label="Constraints affecting this campaign">
+              {packBlockers.map((item) => (
+                <li key={item.id} data-kind="blocker"><b>{item.name}</b><span>{item.reasons.join(" · ")}</span></li>
+              ))}
+              {packOverBudget ? (
+                <li data-kind="blocker"><b>Pack cost</b><span>£{activeEvaluation.totalFee.toLocaleString("en-GB")} against a £{selectedCampaign.budget.toLocaleString("en-GB")} budget</span></li>
+              ) : null}
+              {internationalAlerts.map((alert) => (
+                <li key={alert.playerId + alert.start} data-kind="alert">
+                  <b>{alert.playerName}</b>
+                  <span>{alert.visibility === "internal" ? "Internal pre-alert" : alert.state === "public-confirmed" ? "International duty confirmed" : "International window"} · {alert.team} · {alert.start} → {alert.end}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
         <a href="#availability">Inspect constraints →</a>
       </section>
