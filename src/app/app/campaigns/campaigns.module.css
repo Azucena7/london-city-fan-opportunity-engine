@@ -137,3 +137,5 @@
 .primaryDecision{box-shadow:0 10px 30px rgba(16,39,66,.05)}
 .portfolioPanel>summary small{max-width:620px}
 .quickCard{background:#FAFBFB}
+.campaignCard h3 a{color:inherit;text-decoration:none}
+.campaignCard h3 a:hover{text-decoration:underline}

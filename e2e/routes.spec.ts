@@ -6,6 +6,7 @@ const appRoutes = [
   "/app",
   "/app/matches",
   "/app/campaigns",
+  "/app/campaigns/christmas-2026",
   "/app/players",
   "/app/sponsors",
   "/app/contracts",
@@ -125,4 +126,22 @@ test("Radar filters the next opportunities by attention state", async ({ page })
   const reviewCount = Number(await filters.getByRole("link", { name: /^Review/ }).locator("span").textContent());
   await expect(list).toHaveCount(reviewCount);
   expect(reviewCount).toBeLessThanOrEqual(all);
+});
+
+test("every campaign has an address: commercial records render, fixture campaigns open their brief", async ({ page }) => {
+  await page.goto("/app/campaigns");
+  await page.waitForLoadState("networkidle");
+  const record = page.getByRole("link", { name: "Season tickets 2027" });
+  await expect(record).toHaveAttribute("href", "/app/campaigns/season-tickets-2027");
+  await page.goto("/app/campaigns/season-tickets-2027");
+  await expect(page.locator("h1").first()).toHaveText("Season tickets 2027");
+  await expect(page.getByText("Synthetic demo brief.")).toBeVisible();
+  await expect(page.getByRole("link", { name: /Choose the 4 players/ })).toHaveAttribute("href", "/app/players?campaign=season-tickets-2027");
+
+  await page.goto("/app/campaigns/everton-home-2026-10-18");
+  await expect(page).toHaveURL(/\/app\/matches\/2026-10-18-eve-h#execute$/);
+
+  // Streaming /app/loading.tsx means notFound() answers 200, so assert the not-found state itself.
+  await page.goto("/app/campaigns/not-a-campaign");
+  await expect(page.getByRole("heading", { level: 1, name: "Workspace not found" })).toBeVisible();
 });

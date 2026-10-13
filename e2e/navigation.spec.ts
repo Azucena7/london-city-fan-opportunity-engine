@@ -45,7 +45,7 @@ test.describe("mobile workspace navigation", () => {
     // so scrollWidth - innerWidth stays 0 even when the page is twice the screen width.
     const deviceWidth = page.viewportSize()?.width ?? 0;
     for (const route of [
-      "/app", "/app/matches", "/app/matches/2026-10-18-eve-h", "/app/campaigns",
+      "/app", "/app/matches", "/app/matches/2026-10-18-eve-h", "/app/campaigns", "/app/campaigns/christmas-2026",
       "/app/players", "/app/sponsors", "/app/contracts", "/app/season", "/app/learning", "/app/executive",
       "/app/sources", "/app/setup", "/app/access", "/app/help", "/app/demo"
     ]) {
