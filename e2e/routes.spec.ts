@@ -111,3 +111,18 @@ test("Sources lists every registered source and filters by state", async ({ page
   expect(attention).toBeLessThan(all);
   await expect(table.locator("tbody tr", { hasText: "Operational" })).toHaveCount(0);
 });
+
+test("Radar filters the next opportunities by attention state", async ({ page }) => {
+  await page.goto("/app/matches");
+  await page.waitForLoadState("networkidle");
+  const filters = page.getByRole("navigation", { name: "Filter next opportunities by attention" });
+  // Opportunity rows are the fixture links that start with their radar rank (#n).
+  const list = page.locator('a[href^="/app/matches/"]').filter({ hasText: /^#\d+/ });
+  const all = await list.count();
+  await filters.getByRole("link", { name: /^Review/ }).click();
+  await expect(page).toHaveURL(/attention=review/);
+  await expect(filters.getByRole("link", { name: /^Review/ })).toHaveAttribute("aria-current", "true");
+  const reviewCount = Number(await filters.getByRole("link", { name: /^Review/ }).locator("span").textContent());
+  await expect(list).toHaveCount(reviewCount);
+  expect(reviewCount).toBeLessThanOrEqual(all);
+});
