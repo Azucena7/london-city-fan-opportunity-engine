@@ -227,3 +227,109 @@
   .output{grid-template-columns:1fr}
   .footer{align-items:flex-start;flex-direction:column;gap:5px}
 }
+
+
+/* Mobile engine composition — replace radial layout with a readable signal grid */
+@media(max-width:560px){
+  .engineScene{
+    display:block;
+    min-height:0;
+    padding-top:16px;
+  }
+
+  .signalOrbit{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-areas:
+      "n1 n2"
+      "n3 n4"
+      "core core"
+      "n5 n6";
+    gap:10px;
+    min-height:0;
+    padding:0;
+  }
+
+  .signalOrbit::before,
+  .signalOrbit::after{
+    display:none;
+  }
+
+  .signalNode{
+    position:relative;
+    inset:auto;
+    min-width:0;
+    width:100%;
+    padding:10px 11px;
+  }
+
+  .signalNode span{
+    font-size:8px;
+  }
+
+  .signalNode strong{
+    font-size:11px;
+  }
+
+  .node1{grid-area:n1}
+  .node2{grid-area:n2}
+  .node3{grid-area:n3}
+  .node4{grid-area:n4}
+  .node5{grid-area:n5}
+  .node6{grid-area:n6}
+
+  .engineCore{
+    grid-area:core;
+    position:relative;
+    left:auto;
+    top:auto;
+    width:156px;
+    height:156px;
+    margin:12px auto;
+    transform:none;
+  }
+
+  .engineCore strong{
+    font-size:20px;
+  }
+
+  .engineCore small{
+    max-width:120px;
+    line-height:1.3;
+  }
+
+  .output{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    margin-top:16px;
+  }
+
+  .output>div{
+    padding:12px 13px;
+  }
+
+  .footer{
+    margin-top:16px;
+  }
+}
+
+@media(max-width:380px){
+  .signalOrbit{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "n1"
+      "n2"
+      "n3"
+      "n4"
+      "core"
+      "n5"
+      "n6";
+  }
+
+  .engineCore{
+    width:148px;
+    height:148px;
+    margin:10px auto;
+  }
+}
