@@ -28,26 +28,19 @@ export default function Home() {
           <span className={styles.eyebrow}>The opportunity engine for football club marketing & commercial teams</span>
           <h1>See what could change the match.</h1>
           <p className={styles.heroLead}>
-            AVELA connects signals outside the club — weather, transport, city events, competing football and calendar moments — with demand, rights and availability inside it. Then it shows what changed, why it matters and what move is worth preparing.
+            AVELA connects what is happening outside the club with what the club knows inside — then shows which opportunity, pressure or decision should change.
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.primary} href="/case-study?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=proof&utm_content=hero">See the London City example</Link>
             <Link className={styles.secondaryAction} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Request a club pilot</Link>
           </div>
-          <div className={styles.heroMeta}>
-            <span><strong>Detect</strong> what the team is not watching</span>
-            <span><strong>Interpret</strong> the impact on attendance</span>
-            <span><strong>Discover</strong> opportunity windows</span>
-            <span><strong>Prepare</strong> the next decision</span>
-          </div>
-          <div className={styles.heroProof} aria-label="AVELA opportunity loop">
-            <div><span>01</span><strong>Signals</strong><small>Outside + inside the club</small></div>
-            <i>→</i>
-            <div><span>02</span><strong>Impact</strong><small>What actually changed</small></div>
-            <i>→</i>
-            <div><span>03</span><strong>Opportunity</strong><small>What is worth doing</small></div>
-            <i>→</i>
-            <div><span>04</span><strong>Learn</strong><small>What improves next time</small></div>
+          <div className={styles.heroMeta} aria-label="Signals AVELA can combine">
+            <span><strong>Weather</strong></span>
+            <span><strong>Transport</strong></span>
+            <span><strong>City events</strong></span>
+            <span><strong>Competing football</strong></span>
+            <span><strong>Calendar</strong></span>
+            <span><strong>Demand</strong></span>
           </div>
         </div>
         <CommercialSignalStage />
