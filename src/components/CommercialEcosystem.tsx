@@ -1,12 +1,10 @@
 import styles from "./CommercialEcosystem.module.css";
 
 const inputs = [
-  ["Performance", "Blinkfire / analytics"],
-  ["Fans", "CRM / ticketing"],
-  ["Work", "Asana / Monday / Jira"],
-  ["Time", "Google / Microsoft calendars"],
-  ["Rights", "Contracts / documents"],
-  ["Context", "Fixtures + internal knowledge"]
+  ["Data & intelligence", "CRM · ticketing · analytics · Blinkfire"],
+  ["Documents & rights", "Drive · SharePoint · contracts"],
+  ["Planning & context", "Fixtures · calendars · player availability"],
+  ["Execution", "Asana · Monday · ClickUp · Trello · other tools"]
 ] as const;
 
 export function CommercialEcosystem() {
@@ -14,10 +12,13 @@ export function CommercialEcosystem() {
     <section className={styles.wrap} id="integrations" aria-labelledby="ecosystem-title">
       <div className={styles.copy}>
         <span>Works with your club stack</span>
-        <h2 id="ecosystem-title">Keep your specialist tools. Orchestrate the decision across them.</h2>
-        <p>Your existing tools remain systems of record. AVELA provides cross-functional decision orchestration across them — joining the evidence, constraints, timing and ownership needed to decide what deserves attention and what can realistically be delivered.</p>
+        <h2 id="ecosystem-title">Keep your specialist tools. Let AVELA connect the decision across them.</h2>
+        <p>
+          Your existing systems remain systems of record. AVELA sits above them as the operating layer that
+          joins evidence, rights, timing, ownership and capacity — then prepares the action and tracks whether it is ready.
+        </p>
       </div>
-      <div className={styles.map} aria-label="Existing club systems feed AVELA cross-functional decision orchestration">
+      <div className={styles.map} aria-label="Existing club systems feed AVELA decision orchestration">
         <div className={styles.inputs}>
           {inputs.map(([label, detail], index) => (
             <article key={label}>
@@ -30,17 +31,18 @@ export function CommercialEcosystem() {
         <div className={styles.avela}>
           <span>AVELA</span>
           <strong>Decision Orchestration</strong>
-          <p>Evidence + context + constraints + ownership</p>
+          <p>Evidence + context + constraints + ownership + readiness</p>
         </div>
         <div className={styles.outputs}>
           <article><span>01</span><strong>Priority</strong></article>
           <article><span>02</span><strong>Decision</strong></article>
-          <article><span>03</span><strong>Action</strong></article>
+          <article><span>03</span><strong>Activation</strong></article>
+          <article><span>04</span><strong>Learning</strong></article>
         </div>
       </div>
       <div className={styles.note}>
-        <strong>Specialist platforms optimise individual domains. AVELA orchestrates the decision across them.</strong>
-        <p>Performance data, sponsor rights, player availability, executive calendars, creative capacity and fixture context can all affect the same decision.</p>
+        <strong>AVELA does not replace specialist platforms — it reduces the manual work between them.</strong>
+        <p>Performance, sponsor rights, player availability, contracts, calendars and execution capacity can all change the same decision. AVELA keeps that context together.</p>
       </div>
     </section>
   );
