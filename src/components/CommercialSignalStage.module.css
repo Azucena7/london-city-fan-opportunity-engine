@@ -274,3 +274,12 @@
 @media(max-width:700px){
   .stage{min-height:0}
 }
+
+/* Hero proportion pass */
+.stage{min-height:600px}
+.row{min-height:68px}
+.row strong{font-size:17px}
+@keyframes traceSignal{0%{transform:translateY(-48px);opacity:0}12%{opacity:1}78%{opacity:1}100%{transform:translateY(365px);opacity:0}}
+@media(max-width:700px){
+  .row{min-height:78px}
+}
