@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useState } from "react";
 import styles from "./SponsorContractHealth.module.css";
 
@@ -40,7 +41,7 @@ export function SponsorContractHealth(){
   }
 
   useEffect(()=>{void(async()=>{
-    const response=await fetch("/api/auth/session",{cache:"no-store"});
+    const response=await fetchClubSession();
     const result=await response.json() as {authenticated?:boolean;clubs?:Club[]};
     const next=Array.isArray(result.clubs)?result.clubs:[];
     setClubs(next);

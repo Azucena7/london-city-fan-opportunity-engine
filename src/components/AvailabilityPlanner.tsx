@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import { assessAvailability, type AvailabilityWindow } from "@/lib/availabilityIntelligence";
 import styles from "./AvailabilityPlanner.module.css";
@@ -70,7 +71,7 @@ export function AvailabilityPlanner({
   useEffect(() => {
     void (async () => {
       try {
-      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const response = await fetchClubSession();
       const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
       setClubs(nextClubs);

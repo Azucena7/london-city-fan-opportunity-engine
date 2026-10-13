@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession, invalidateClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./AccessCenter.module.css";
 
@@ -43,9 +44,10 @@ export function AccessCenter() {
   const [message, setMessage] = useState("Loading account state…");
   const [busy, setBusy] = useState(false);
 
-  async function refresh() {
+  async function refresh({ fresh = false }: { fresh?: boolean } = {}) {
     try {
-    const sessionResponse = await fetch("/api/auth/session", { cache: "no-store" });
+    if (fresh) invalidateClubSession();
+    const sessionResponse = await fetchClubSession();
     const session = await sessionResponse.json() as {
       configured?: boolean;
       authenticated?: boolean;
@@ -138,7 +140,7 @@ export function AccessCenter() {
         return;
       }
       setPassword("");
-      await refresh();
+      await refresh({ fresh: true });
     } catch {
       setMessage("Sign-in service is unreachable. No session was created.");
     } finally {
@@ -156,7 +158,7 @@ export function AccessCenter() {
         return;
       }
       setPassword("");
-      await refresh();
+      await refresh({ fresh: true });
     } catch {
       setMessage("Sign-out service is unreachable. Your current session may still be active.");
     } finally {
@@ -178,7 +180,7 @@ export function AccessCenter() {
       setMessage(response.ok ? "Access request submitted for club review." : result.error || "Access request could not be sent.");
       if (response.ok) {
         setNote("");
-        await refresh();
+        await refresh({ fresh: true });
       }
     } catch {
       setMessage("Access service is unreachable. No access request was submitted.");
@@ -198,7 +200,7 @@ export function AccessCenter() {
       });
       const result = await response.json() as { error?: string };
       setMessage(response.ok ? "Membership approved in the club access record." : result.error || "Request could not be approved.");
-      if (response.ok) await refresh();
+      if (response.ok) await refresh({ fresh: true });
     } catch {
       setMessage("Access service is unreachable. Membership was not approved.");
     } finally {

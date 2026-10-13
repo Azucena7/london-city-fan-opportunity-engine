@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./LearningCampaignTrace.module.css";
 
@@ -59,7 +60,7 @@ export function LearningCampaignTrace({ fixtureId, measured }: { fixtureId: stri
   useEffect(() => {
     void (async () => {
       try {
-        const response = await fetch("/api/auth/session", { cache: "no-store" });
+        const response = await fetchClubSession();
         const result = await response.json() as { configured?: boolean; authenticated?: boolean; clubs?: Club[] };
         setConfigured(Boolean(result.configured));
         const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];

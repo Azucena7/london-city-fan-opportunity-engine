@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./ClubSetup.module.css";
 
@@ -57,7 +58,7 @@ export function ClubSetup() {
   useEffect(() => {
     void (async () => {
       try {
-      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const response = await fetchClubSession();
       const result = await response.json() as { configured?: boolean; authenticated?: boolean; clubs?: Club[] };
       setConfigured(Boolean(result.configured));
       const next = Array.isArray(result.clubs) ? result.clubs : [];

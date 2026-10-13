@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./ExternalExecutionSync.module.css";
 
@@ -75,7 +76,7 @@ export function ExternalExecutionSync({decisionId}:{decisionId:string}){
 
   useEffect(()=>{void(async()=>{
     try{
-      const response=await fetch("/api/auth/session",{cache:"no-store"});
+      const response=await fetchClubSession();
       const result=await response.json() as {authenticated?:boolean;clubs?:Club[]};
       const next=Array.isArray(result.clubs)?result.clubs:[];
       setClubs(next);

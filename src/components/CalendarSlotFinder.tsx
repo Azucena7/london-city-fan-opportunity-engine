@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import type { AvailabilityWindow } from "@/lib/availabilityIntelligence";
 import { rankSchedulingSlots, type SchedulingRequirement } from "@/lib/schedulingIntelligence";
@@ -64,7 +65,7 @@ export function CalendarSlotFinder({
 
   useEffect(() => {
     void (async () => {
-      const session = await fetch("/api/auth/session", { cache: "no-store" });
+      const session = await fetchClubSession();
       const sessionResult = await session.json() as { authenticated?: boolean; clubs?: Club[] };
       const nextClubs = Array.isArray(sessionResult.clubs) ? sessionResult.clubs : [];
       setClubs(nextClubs);

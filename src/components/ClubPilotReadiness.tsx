@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import sourceHealth from "../../data/live/source-health.json";
 import styles from "./ClubPilotReadiness.module.css";
@@ -25,7 +26,7 @@ export function ClubPilotReadiness() {
   useEffect(() => {
     void (async () => {
       try {
-        const sessionResponse = await fetch("/api/auth/session", { cache: "no-store" });
+        const sessionResponse = await fetchClubSession();
         const session = await sessionResponse.json() as { authenticated?: boolean; clubs?: Club[] };
         const firstClub = session.clubs?.[0] ?? null;
         setClub(firstClub);
