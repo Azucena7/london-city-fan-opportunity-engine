@@ -42,7 +42,7 @@ export function CommercialEcosystem() {
       </div>
       <div className={styles.note}>
         <strong>AVELA does not replace CRM, analytics, rights systems or work tools.</strong>
-        <p>Those systems help validate and execute the opportunity. The engine's distinctive role is connecting them with external context the team would otherwise have to monitor manually.</p>
+        <p>Those systems help validate and execute the opportunity. The engine’s distinctive role is connecting them with external context the team would otherwise have to monitor manually.</p>
       </div>
     </section>
   );
