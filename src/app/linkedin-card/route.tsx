@@ -31,11 +31,11 @@ export async function GET() {
           </div>
 
           <div style={{ display: "flex", marginTop: "62px", color: "#2F8F83", fontSize: "14px", fontWeight: 800, letterSpacing: "0.12em" }}>
-            THE DECISION WORKSPACE FOR CLUB MARKETING & COMMERCIAL TEAMS
+            THE OPPORTUNITY ENGINE FOR CLUB MARKETING & COMMERCIAL TEAMS
           </div>
 
           <div style={{ display: "flex", marginTop: "18px", fontSize: "58px", lineHeight: 0.98, fontWeight: 800, letterSpacing: "-0.045em" }}>
-            READ THE SIGNALS. MOVE THE CLUB.
+            SEE WHAT COULD CHANGE THE MATCH.
           </div>
 
           <div style={{ display: "flex", marginTop: "24px", color: "#637282", fontSize: "20px", lineHeight: 1.35 }}>

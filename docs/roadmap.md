@@ -22,7 +22,7 @@ Core loop:
 
 - Position the commercial site around the Marketing & Commercial Decision Workspace category.
 - Keep London City Live as the public proof environment.
-- Lead with “Read the signals. Move the club.” and explain cross-functional decision orchestration beneath it.
+- Lead with “See what could change the match.” and the Opportunity Engine (signal → what changed → why it matters → prepared move); the workspace is where the move is run.
 - Keep fixtures as a primary decision trigger while supporting campaigns and commercial moments that do not require a fixture.
 - Preserve the existing evidence and trust-state architecture.
 

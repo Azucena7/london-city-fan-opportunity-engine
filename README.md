@@ -1,12 +1,12 @@
 # AVELA
 
-The marketing & commercial decision workspace for football clubs. AVELA joins fan, fixture, campaign, player, sponsor, rights, calendar and operational context so teams can decide what to do next — then learn from what actually happened.
+The Opportunity Engine for football club marketing & commercial teams. AVELA reads what is changing around each match — weather, city events, competing football, calendar moments — connects it with demand, rights and availability inside the club, and shows which decision it should change. The workspace is where the team then prepares the move and learns from what actually happened.
 
 London City Lionesses is currently used as the live demonstration environment.
 
 ## Product proposition
 
-**Read the signals. Move the club.**
+**See what could change the match.** Only the signals that change the decision.
 
 The club-facing product uses cross-functional decision orchestration to turn fragmented context into one simple operating loop:
 

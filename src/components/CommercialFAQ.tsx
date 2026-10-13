@@ -4,7 +4,7 @@ const groups = [
   {
     title: "Product",
     items: [
-      ["What exactly is AVELA?", "AVELA is the decision workspace for football club marketing and commercial teams. It connects signals and club context to prioritise what deserves attention, recommend what to do next and show whether the club can realistically deliver it."],
+      ["What exactly is AVELA?", "AVELA is the Opportunity Engine for football club marketing and commercial teams. It reads what is changing around each match — weather, city events, competing football, calendar moments — connects it with demand, rights and availability inside the club, and shows which decision it should change. The workspace is where the team then prepares and runs the move."],
       ["Why can’t we just use ChatGPT, Claude or another LLM?", "General AI can help someone reason when the right context is supplied. AVELA keeps club context structured across campaigns, fixtures, players, sponsors, calendars, capacity and previous decisions, then carries that context into the next decision. The LLM is part of AVELA; it is not the product."],
       ["Does AVELA make decisions without humans?", "AVELA can detect, prioritise and recommend automatically. Material club decisions remain subject to authorised human confirmation, with evidence, assumptions and unknowns visible."]
     ]
@@ -12,7 +12,7 @@ const groups = [
   {
     title: "Existing stack",
     items: [
-      ["Does AVELA replace Blinkfire, CRM, ticketing or BI tools?", "No. Specialist platforms remain systems of record or specialist intelligence sources. AVELA sits above them as the decision workspace, combining performance, fan, sponsor, player, calendar and capacity context around the same decision."],
+      ["Does AVELA replace Blinkfire, CRM, ticketing or BI tools?", "No. Specialist platforms remain systems of record or specialist intelligence sources. AVELA sits above them as the Opportunity Engine, combining performance, fan, sponsor, player, calendar and capacity context around the same decision."],
       ["Do we need to integrate everything before starting?", "No. AVELA can start with fixtures, campaigns, public signals and a limited amount of club-approved context. Additional sources improve confidence and operational intelligence over time."]
     ]
   },
