@@ -5,24 +5,37 @@ const sources = [
   ["Performance", "Analytics + Blinkfire"],
   ["Rights", "Drive + contracts"],
   ["Capacity", "People + calendars"],
-  ["Execution", "Asana / Monday / ClickUp / Trello"]
+  ["Execution", "Work-management tools"]
+] as const;
+
+const steps = [
+  ["01", "Read", "Signals + context"],
+  ["02", "Decide", "Priority + feasibility"],
+  ["03", "Prepare", "Activation + work order"],
+  ["04", "Learn", "Evidence retained"]
+] as const;
+
+const outcomes = [
+  ["Activation ready", "or the blocker is explicit"],
+  ["Work prepared", "for the club's execution tool"],
+  ["Next decision improved", "because the outcome is retained"]
 ] as const;
 
 const plays = [
   {
     kicker: "Grow the fixture",
-    title: "Turn a signal into a campaign that can actually ship.",
-    detail: "Audience, channel, offer, owner, constraints and measurement are prepared around the same decision."
+    title: "Signal → campaign",
+    detail: "Audience, channel, offer and measurement prepared together."
   },
   {
     kicker: "Deliver the partnership",
-    title: "Turn contract truth into activations, readiness and proof.",
-    detail: "Obligations, rights, matchday windows, work orders and reporting stay connected."
+    title: "Contract → activation",
+    detail: "Rights, obligations, readiness and proof stay connected."
   },
   {
     kicker: "Deploy the right people",
-    title: "Use players and staff with rights, capacity and value exchange visible.",
-    detail: "Commercial fit never overrides availability, contractual truth or human approval."
+    title: "Rights → best-fit people",
+    detail: "Availability, capacity and value exchange remain visible."
   }
 ] as const;
 
@@ -31,38 +44,51 @@ export function CommercialOperatingFlow() {
     <section className={styles.wrap} aria-labelledby="operating-flow-title">
       <div className={styles.intro}>
         <span>From signal to execution</span>
-        <h2 id="operating-flow-title">AVELA prepares what should happen next — then shows what needs your decision.</h2>
-        <p>
-          The club keeps its specialist systems. AVELA turns fragmented context into a prepared decision,
-          checks whether it can happen, and carries the result into execution and learning.
-        </p>
+        <div>
+          <h2 id="operating-flow-title">From fragmented context to a prepared decision.</h2>
+          <p>
+            AVELA does the joining before the meeting: what changed, what matters, what can happen,
+            what is prepared, and what still needs a human decision.
+          </p>
+        </div>
       </div>
 
       <div className={styles.stage} aria-label="AVELA operating flow">
+        <div className={styles.sourcesLabel}>Club context</div>
         <div className={styles.sourceRail}>
-          {sources.map(([label, detail], index) => (
+          {sources.map(([label, detail]) => (
             <div className={styles.source} key={label}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div><small>{label}</small><strong>{detail}</strong></div>
+              <small>{label}</small>
+              <strong>{detail}</strong>
             </div>
           ))}
         </div>
 
         <div className={styles.engine}>
-          <div className={styles.engineHalo} aria-hidden="true" />
-          <span className={styles.engineLabel}>AVELA</span>
-          <strong>Decision orchestration</strong>
-          <div className={styles.engineFlow}>
-            <span>Read</span><i>→</i><span>Decide</span><i>→</i><span>Check</span><i>→</i><span>Prepare</span>
+          <div className={styles.engineMark}>
+            <span>AVELA</span>
+            <strong>Decision orchestration</strong>
           </div>
-          <p>Evidence + context + rights + timing + ownership + capacity</p>
-          <div className={styles.engineAction}>Human approval where it matters</div>
+          <div className={styles.stepRail}>
+            {steps.map(([num, label, detail], index) => (
+              <div className={styles.step} key={label}>
+                <span>{num}</span>
+                <div><strong>{label}</strong><small>{detail}</small></div>
+                {index < steps.length - 1 ? <i aria-hidden="true">→</i> : null}
+              </div>
+            ))}
+          </div>
+          <div className={styles.approval}>Human approval where it matters</div>
         </div>
 
-        <div className={styles.outputRail}>
-          <div><span>01</span><strong>Activation ready</strong><small>or clearly blocked</small></div>
-          <div><span>02</span><strong>Work prepared</strong><small>for the club&apos;s execution tool</small></div>
-          <div><span>03</span><strong>Evidence retained</strong><small>to improve the next decision</small></div>
+        <div className={styles.outcomes}>
+          {outcomes.map(([title, detail], index) => (
+            <div key={title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{title}</strong>
+              <small>{detail}</small>
+            </div>
+          ))}
         </div>
       </div>
 
