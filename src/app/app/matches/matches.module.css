@@ -138,3 +138,4 @@
 @media(max-width:620px){.opportunityMap{height:300px}.mapPoint{width:38px!important;height:38px!important}.mapPoint strong{font-size:11px}.mapPoint small{font-size:11px}}
 
 .matchdayInline{margin-top:7px!important;padding:8px 10px!important;border-left:3px solid #D97859;background:#FFF8F5;color:#6A4D43!important;font-size:11px!important;line-height:1.45!important}
+.radarEmpty{margin:4px 0 12px;font-size:13px;color:var(--product-muted)}

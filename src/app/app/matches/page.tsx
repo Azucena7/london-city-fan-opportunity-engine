@@ -3,6 +3,7 @@ import Link from "next/link";
 import { OpportunityExplorer } from "@/components/OpportunityExplorer";
 import { calendar, campaignPlans, currentState, eventLandscape, newsRadar, newsRadarConfig } from "@/lib/data";
 import { NewsRadarPanel } from "@/components/NewsRadarPanel";
+import { FilterBar } from "@/components/FilterBar";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
@@ -36,7 +37,16 @@ function stateForAttention(value: string | null | undefined) {
   return "MONITOR" as const;
 }
 
-export default async function MatchesPage() {
+const ATTENTION_FILTERS = [
+  { value: "act-now", label: "Act now", state: "Act now" },
+  { value: "review", label: "Review", state: "Review" },
+  { value: "monitor", label: "Monitor", state: "Monitor" },
+  { value: "none", label: "No material opportunity", state: "No material opportunity" }
+] as const;
+
+export default async function MatchesPage({ searchParams }: { searchParams: Promise<{ attention?: string | string[] }> }) {
+  const requested = (await searchParams).attention;
+  const attentionFilter = ATTENTION_FILTERS.find((option) => option.value === requested) ?? null;
   const today = currentProductDate(currentState.updated_at);
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
@@ -72,6 +82,9 @@ export default async function MatchesPage() {
   const radarWithoutCurrent = priority
     ? radar.filter((item) => item.fixtureId !== priority.fixtureId)
     : radar;
+  const shownOpportunities = attentionFilter
+    ? radarWithoutCurrent.filter((item) => item.attentionState === attentionFilter.state)
+    : radarWithoutCurrent;
   const urgencyY = (urgency: string) => urgency === "High" ? 18 : urgency === "Medium" ? 48 : 76;
   const opportunityX = (score: number | null) => Math.max(8, Math.min(92, score ?? 18));
 
@@ -196,10 +209,25 @@ export default async function MatchesPage() {
             title="Ranked by what deserves attention now"
             action={<span className={styles.refresh}>Refresh · {new Date(currentState.updated_at).toLocaleString("en-GB", { timeZone: "Europe/London" })}</span>}
           />
+          <FilterBar
+            label="Filter next opportunities by attention"
+            basePath="/app/matches"
+            param="attention"
+            current={attentionFilter?.value ?? "all"}
+            options={[
+              { value: "all", label: "All", count: radarWithoutCurrent.length },
+              ...ATTENTION_FILTERS.map((option) => ({
+                value: option.value,
+                label: option.label,
+                count: radarWithoutCurrent.filter((item) => item.attentionState === option.state).length
+              }))
+            ]}
+          />
+          {shownOpportunities.length ? null : <p className={styles.radarEmpty}>No other upcoming fixture is in this state.</p>}
           <div className={styles.radarList}>
-            {radarWithoutCurrent.map((item, index) => (
+            {shownOpportunities.map((item) => (
               <Link href={"/app/matches/" + item.fixtureId} className={[styles.radarFixture, styles.futureFixture].join(" ")} key={item.fixtureId}>
-                <div className={styles.radarRank}>#{index + 2}</div>
+                <div className={styles.radarRank}>#{radar.indexOf(item) + 1}</div>
                 <div className={styles.radarMatch}>
                   <span>{formatDate(item.date)} · {item.kickoff ?? "TBC"}</span>
                   <strong>{item.opponent}</strong>
