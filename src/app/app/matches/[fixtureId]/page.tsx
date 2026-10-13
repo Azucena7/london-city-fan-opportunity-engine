@@ -23,6 +23,7 @@ import { ExternalExecutionSync } from "@/components/ExternalExecutionSync";
 import { WorkRoutingPlan } from "@/components/WorkRoutingPlan";
 import { WorkHandoffConfirmation } from "@/components/WorkHandoffConfirmation";
 import { PhaseAnchorOpener } from "@/components/PhaseAnchorOpener";
+import { PhaseScrollSpy } from "@/components/PhaseScrollSpy";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -34,6 +35,8 @@ import { getWorkRoutingRules } from "@/lib/workSystemRoutingServer";
 import { BRIEF_DECISION_IDS, summariseSourceCoverage } from "@/lib/sourceCoverage";
 import sourceHealth from "../../../../../data/live/source-health.json";
 import styles from "./match-plan.module.css";
+
+const BRIEF_PHASE_IDS = ["decision", "readiness", "execute", "evidence", "human-decision", "decision-memory"];
 
 export const metadata: Metadata = {
   title: "Opportunity Brief",
@@ -118,13 +121,17 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <Link className={styles.executiveLink} href={`/app/executive?fixture=${fixture.id}`}>Executive view</Link>
           <a href="#decision">01 Decide</a>
           <a href="#readiness">02 Feasibility</a>
-          <a href="#execute">03 Build & route</a>
+          <a href="#execute">
+            03 Build & route
+            {approvals.length ? <span className={styles.railCount} aria-label={`, ${approvals.length} approval gate${approvals.length === 1 ? "" : "s"} open`}>{approvals.length}</span> : null}
+          </a>
           <a href="#evidence">04 Evidence & impact</a>
           <a href="#human-decision">05 Human decision</a>
           <a href="#decision-memory">06 Learn</a>
         </div>
       </nav>
       <PhaseAnchorOpener />
+      <PhaseScrollSpy railLabel="Opportunity workspace sections" phaseIds={BRIEF_PHASE_IDS} />
 
       <section id="decision" className={styles.decisionCockpit} aria-label="Decision at a glance">
         <div className={styles.decisionLead}>

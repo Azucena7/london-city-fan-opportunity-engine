@@ -81,3 +81,15 @@ test("the section rail stays in view on desktop and scrolls away on mobile", asy
     await expect(page).toHaveURL(/#evidence$/);
   }
 });
+
+test("the rail marks the phase on screen and counts open approval gates", async ({ page, isMobile }) => {
+  test.skip(Boolean(isMobile), "the rail is sticky on desktop only");
+  await page.goto(brief);
+  await page.waitForLoadState("networkidle");
+  const rail = page.getByRole("navigation", { name: "Opportunity workspace sections" });
+  await expect(rail.locator('a[aria-current="location"]')).toHaveAttribute("href", "#decision");
+  await rail.locator('a[href="#evidence"]').click();
+  await expect(rail.locator('a[aria-current="location"]')).toHaveAttribute("href", "#evidence");
+  await expect(rail.locator('a[aria-current="location"]')).toHaveCount(1);
+  await expect(rail.locator('a[href="#execute"]')).toHaveAccessibleName(/approval gates? open/);
+});
