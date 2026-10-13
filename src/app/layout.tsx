@@ -11,14 +11,14 @@ import { cookies } from "next/headers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://avela-growth-intelligence.vercel.app"),
   title: {
-    default: "AVELA · Decision Workspace for Football Club Marketing & Commercial Teams",
+    default: "AVELA · The Opportunity Engine for Football Club Marketing & Commercial Teams",
     template: "%s | AVELA"
   },
   description:
-    "AVELA helps football club marketing and commercial teams decide what to do next across fixtures, campaigns and commercial moments.",
+    "AVELA connects external signals and club context to detect opportunities, attendance pressure and decision changes before matchday.",
   openGraph: {
-    title: "AVELA · Decision Workspace for Football Club Marketing & Commercial Teams",
-    description: "Read the signals. Move the club.",
+    title: "AVELA · The Opportunity Engine for Football Club Marketing & Commercial Teams",
+    description: "See what could change the match.",
     url: "/",
     siteName: "AVELA",
     type: "website",
@@ -26,13 +26,13 @@ export const metadata: Metadata = {
       url: "/linkedin-card",
       width: 1200,
       height: 630,
-      alt: "AVELA — decision workspace for football club marketing and commercial teams"
+      alt: "AVELA — opportunity engine for football club marketing and commercial teams"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "AVELA · Decision Workspace for Football Club Marketing & Commercial Teams",
-    description: "Read the signals. Decide what to do next.",
+    title: "AVELA · The Opportunity Engine for Football Club Marketing & Commercial Teams",
+    description: "See what could change the match.",
     images: ["/linkedin-card"]
   }
 };
