@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useState } from "react";
 import styles from "./OperationalHandoffs.module.css";
 
@@ -76,7 +77,7 @@ export function OperationalHandoffs({
 
   useEffect(() => {
     void (async () => {
-      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const response = await fetchClubSession();
       const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
       setClubs(nextClubs);

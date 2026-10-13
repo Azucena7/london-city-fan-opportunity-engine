@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./DecisionHistoryPanel.module.css";
 import { DECISION_RECORDED_EVENT } from "./MatchPlanDecision";
@@ -58,7 +59,7 @@ export function DecisionHistoryPanel({
 
   useEffect(() => {
     void (async () => {
-      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const response = await fetchClubSession();
       const result = await response.json() as { configured?: boolean; authenticated?: boolean; clubs?: Club[] };
       setConfigured(Boolean(result.configured));
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];

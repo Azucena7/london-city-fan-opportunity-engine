@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useState } from "react";
 import type { WorkPackage } from "@/lib/workSystemOrchestration";
 import type { RoutedWorkPackage } from "@/lib/workSystemRouting";
@@ -26,7 +27,7 @@ export function WorkHandoffConfirmation({
   useEffect(() => {
     void (async () => {
       try {
-        const response = await fetch("/api/auth/session", { cache: "no-store" });
+        const response = await fetchClubSession();
         const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
         const next = Array.isArray(result.clubs) ? result.clubs : [];
         setClubs(next);

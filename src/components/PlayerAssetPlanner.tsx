@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -138,7 +139,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
   useEffect(() => {
     void (async () => {
       try {
-        const response = await fetch("/api/auth/session", { cache: "no-store" });
+        const response = await fetchClubSession();
         const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
         const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
         setClubs(nextClubs);

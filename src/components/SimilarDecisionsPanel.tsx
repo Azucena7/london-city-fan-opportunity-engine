@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./SimilarDecisionsPanel.module.css";
@@ -42,7 +43,7 @@ export function SimilarDecisionsPanel({ fixtureId }: { fixtureId: string }) {
 
   useEffect(() => {
     void (async () => {
-      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const response = await fetchClubSession();
       const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
       setClubs(nextClubs);

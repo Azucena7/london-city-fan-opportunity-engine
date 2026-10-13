@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import { assessOperationalCapacity, type CapacityWindow, type OperationalPlanInput, type WorkloadItem } from "@/lib/operationalCapacity";
 import styles from "./OperationalCapacityPanel.module.css";
@@ -61,7 +62,7 @@ export function OperationalCapacityPanel({
 
   useEffect(() => {
     void (async () => {
-      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const response = await fetchClubSession();
       const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
       const nextClubs = Array.isArray(result.clubs) ? result.clubs : [];
       setClubs(nextClubs);

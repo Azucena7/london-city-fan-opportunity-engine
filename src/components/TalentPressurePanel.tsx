@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { demoPlayers } from "@/lib/clubStrategy";
@@ -39,7 +40,7 @@ export function TalentPressurePanel() {
   useEffect(() => {
     void (async () => {
       try {
-        const sessionResponse = await fetch("/api/auth/session", { cache: "no-store" });
+        const sessionResponse = await fetchClubSession();
         const session = await sessionResponse.json() as { authenticated?: boolean; clubs?: Club[] };
         const clubId = session.clubs?.[0]?.id;
         if (!session.authenticated || !clubId) {

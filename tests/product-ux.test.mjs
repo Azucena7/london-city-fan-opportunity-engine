@@ -450,7 +450,7 @@ test("Learning compares recorded campaign workflow with measured outcomes withou
   assert.match(trace, /Use ticketing, CRM, scan and revenue evidence to assess outcomes/);
   assert.match(trace, /credible counterfactual/);
   assert.match(trace, /\/api\/campaign-history/);
-  assert.match(trace, /\/api\/auth\/session/);
+  assert.match(trace, /fetchClubSession\(\)/);
 });
 
 test("campaign history records shared fixture milestones without conflating them with the credit ledger", () => {
@@ -1845,6 +1845,20 @@ test("Ask AVELA is grounded in the current decision and treats new user informat
   assert.match(route, /candidateContext/);
   assert.match(route, /do not claim it has been saved or applied/);
   assert.match(route, /AI_GATEWAY_API_KEY/);
+});
+
+test("workspace panels share one de-duplicated club session request", () => {
+  const client = read("src/lib/clubSessionClient.ts");
+  assert.match(client, /fetch\("\/api\/auth\/session"/);
+  assert.match(client, /response\.clone\(\)/);
+  assert.match(client, /export function invalidateClubSession/);
+  for (const component of ["AskAvelaPanel", "DecisionHistoryPanel", "MatchPlanDecision", "CampaignDeliveryPlanner", "AccessCenter", "PlayerAssetPlanner"]) {
+    const source = read(`src/components/${component}.tsx`);
+    assert.doesNotMatch(source, /"\/api\/auth\/session"/, component + " must use fetchClubSession");
+    assert.match(source, /fetchClubSession\(\)/);
+  }
+  assert.match(read("src/components/AccessCenter.tsx"), /invalidateClubSession\(\)/);
+  assert.match(read("src/components/CampaignDeliveryPlanner.tsx"), /invalidateClubSession\(\)/);
 });
 
 test("AI routes are closed unless the caller is an approved signed-in account", async () => {

@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import styles from "./ContractImpactGraph.module.css";
@@ -41,7 +42,7 @@ export function ContractImpactGraph(){
   }
 
   useEffect(()=>{void(async()=>{
-    const response=await fetch("/api/auth/session",{cache:"no-store"});
+    const response=await fetchClubSession();
     const result=await response.json() as {authenticated?:boolean;clubs?:Club[]};
     const next=Array.isArray(result.clubs)?result.clubs:[];
     setClubs(next);

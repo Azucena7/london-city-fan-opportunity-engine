@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession } from "@/lib/clubSessionClient";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -51,7 +52,7 @@ export function CommercialCampaignBoard() {
   useEffect(() => {
     void (async () => {
       try {
-        const sessionResponse = await fetch("/api/auth/session", { cache: "no-store" });
+        const sessionResponse = await fetchClubSession();
         const session = await sessionResponse.json() as { authenticated?: boolean; clubs?: Club[] };
         const firstClub = session.clubs?.[0] ?? null;
         const clubId = firstClub?.id;

@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchClubSession, invalidateClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./CampaignDeliveryPlanner.module.css";
 
@@ -237,7 +238,7 @@ export function CampaignDeliveryPlanner({
 
   async function loadAccountSession() {
     try {
-      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const response = await fetchClubSession();
       const result = await response.json() as {
         authenticated?: boolean;
         configured?: boolean;
@@ -321,11 +322,13 @@ export function CampaignDeliveryPlanner({
     }
 
     setAccountPassword("");
+    invalidateClubSession();
     await loadAccountSession();
   }
 
   async function signOutOfClubWorkspace() {
     await fetch("/api/auth/logout", { method: "POST" });
+    invalidateClubSession();
     setClubs([]);
     setActiveClubId(null);
     setRemoteReady(false);
