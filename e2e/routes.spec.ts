@@ -152,3 +152,12 @@ test("Players lists the constraints before recommending a pack", async ({ page }
   const constraints = page.getByRole("list", { name: "Constraints affecting this campaign" });
   await expect(constraints.getByRole("listitem").first()).toContainText(/International (duty|window)|pre-alert/);
 });
+
+test("public commercial pages share the public header, never the workspace sidebar", async ({ page }) => {
+  for (const route of ["/", "/for-clubs", "/pilot", "/pilot/operating-pack", "/pilot/rehearsal", "/cases", "/live/london-city"]) {
+    await page.goto(route);
+    await page.waitForLoadState("networkidle");
+    await expect(page.getByRole("navigation", { name: "AVELA marketing and commercial product navigation" }), route).toHaveCount(1);
+    await expect(page.getByRole("complementary", { name: "AVELA club app navigation" }), route).toHaveCount(0);
+  }
+});
