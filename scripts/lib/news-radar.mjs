@@ -83,11 +83,15 @@ function key(item) {
 
 /**
  * Merges fresh headlines into the stored list: keeps the first time each headline was seen and
- * the feeds that found it, drops items older than the retention window, newest first.
+ * the feeds that found it, drops excluded outlets and items older than the retention window,
+ * newest first. Exclusions also remove headlines stored before the outlet was excluded, and a
+ * headline found only by a search that is no longer configured is dropped.
  */
 export function mergeHeadlines(existing, incoming, now, config) {
   const cutoff = new Date(now);
   cutoff.setUTCDate(cutoff.getUTCDate() - config.retentionDays);
+  const excluded = new Set((config.excludeOutlets ?? []).map((outlet) => outlet.toLowerCase()));
+  const feeds = new Set(config.feeds.map((feed) => feed.id));
   const byKey = new Map(existing.map((item) => [key(item), item]));
   for (const item of incoming) {
     const previous = byKey.get(key(item));
@@ -100,6 +104,9 @@ export function mergeHeadlines(existing, incoming, now, config) {
   }
   return [...byKey.values()]
     .filter((item) => item.publishedAt >= cutoff.toISOString())
+    .filter((item) => !excluded.has((item.outlet ?? "").toLowerCase()))
+    .map((item) => ({ ...item, feedIds: item.feedIds.filter((id) => feeds.has(id)) }))
+    .filter((item) => item.feedIds.length > 0)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, config.maxItems);
 }
