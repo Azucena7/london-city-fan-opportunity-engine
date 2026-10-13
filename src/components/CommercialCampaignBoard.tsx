@@ -212,7 +212,7 @@ export function CommercialCampaignBoard() {
               <WorkspaceBadge>{campaign.type.replaceAll("-", " ")}</WorkspaceBadge>
               <small>{campaign.activationDate}</small>
             </div>
-            <h3>{campaign.name}</h3>
+            <h3><Link href={"/app/campaigns/" + encodeURIComponent(campaign.id)}>{campaign.name}</Link></h3>
             <p>{campaign.objective}</p>
             <div className={styles.cardFacts}>
               <span>Players <b>{campaign.playerNeed}</b></span>
