@@ -66,3 +66,18 @@ test("the brief says which sources behind it are not operational", async ({ page
   await expect(coverage).toContainText(/(\d+ of \d+|All \d+) sources behind this brief are operational/);
   await expect(coverage.getByRole("link", { name: "Source status →" })).toHaveAttribute("href", "/app/sources");
 });
+
+test("the section rail stays in view on desktop and scrolls away on mobile", async ({ page, isMobile }) => {
+  await page.goto(brief);
+  await page.waitForLoadState("networkidle");
+  const rail = page.getByRole("navigation", { name: "Opportunity workspace sections" });
+  await page.evaluate(() => window.scrollTo(0, 2500));
+  const box = await rail.boundingBox();
+  if (isMobile) {
+    expect(box?.y ?? -1).toBeLessThan(0);
+  } else {
+    expect(Math.round(box?.y ?? 0)).toBe(66);
+    await rail.getByRole("link", { name: "04 Evidence & impact" }).click();
+    await expect(page).toHaveURL(/#evidence$/);
+  }
+});
