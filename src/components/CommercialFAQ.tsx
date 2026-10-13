@@ -4,15 +4,17 @@ const groups = [
   {
     title: "Product",
     items: [
-      ["What exactly is AVELA?", "AVELA is the decision workspace for football club marketing and commercial teams. It connects signals and club context to prioritise what deserves attention, recommend what to do next and show whether the club can realistically deliver it."],
-      ["Why can’t we just use ChatGPT, Claude or another LLM?", "General AI can help someone reason when the right context is supplied. AVELA keeps club context structured across campaigns, fixtures, players, sponsors, calendars, capacity and previous decisions, then carries that context into the next decision. The LLM is part of AVELA; it is not the product."],
-      ["Does AVELA make decisions without humans?", "AVELA can detect, prioritise and recommend automatically. Material club decisions remain subject to authorised human confirmation, with evidence, assumptions and unknowns visible."]
+      ["What exactly is AVELA?", "AVELA is the decision workspace for football club marketing and commercial teams. It joins signals, rights, people, partner obligations, timing and delivery constraints to prepare what should happen next, show what needs a human decision and retain what was learned."],
+      ["Why can’t we just use ChatGPT, Claude or another LLM?", "General AI can reason when the right context is supplied. AVELA keeps club context structured across campaigns, fixtures, players, partners, contracts, calendars, capacity, execution and previous outcomes, then carries that context into the next decision. The LLM is part of AVELA; it is not the product."],
+      ["Does AVELA make decisions without humans?", "AVELA can detect, prioritise, prepare and recommend automatically. Material club decisions remain subject to authorised human confirmation, with evidence, assumptions, blockers and unknowns visible."]
     ]
   },
   {
     title: "Existing stack",
     items: [
-      ["Does AVELA replace Blinkfire, CRM, ticketing or BI tools?", "No. Specialist platforms remain systems of record or specialist intelligence sources. AVELA sits above them as the decision workspace, combining performance, fan, sponsor, player, calendar and capacity context around the same decision."],
+      ["Does AVELA replace Blinkfire, CRM, ticketing or BI tools?", "No. Specialist platforms remain systems of record or specialist intelligence sources. AVELA sits above them as the decision workspace, combining performance, fan, sponsor, player, calendar, rights and capacity context around the same decision."],
+      ["Does AVELA replace Asana, Monday, ClickUp or another work-management tool?", "No. AVELA prepares the work, checks readiness and keeps the decision context. The club can continue using its preferred execution tool for tasks, comments, files and day-to-day delivery."],
+      ["Do contracts need to be uploaded into AVELA?", "Not necessarily. The intended model is connector-first: contracts can remain in the club's document source, such as Drive or SharePoint, while AVELA uses reviewed structured contract truth for rights, obligations and decisions."],
       ["Do we need to integrate everything before starting?", "No. AVELA can start with fixtures, campaigns, public signals and a limited amount of club-approved context. Additional sources improve confidence and operational intelligence over time."]
     ]
   },
