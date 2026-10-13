@@ -139,19 +139,17 @@ export default function SponsorsPage() {
       </details>
 
       <section className={styles.workspaceGrid}>
-        <details className={styles.explorePanel}>
-          <summary>
-            <div><span>Explore mode</span><strong>Prospecting queue</strong><small>Open to compare alternatives before outreach.</small></div>
-            <b>Open queue →</b>
-          </summary>
-          <WorkspaceCard className={styles.pipeline}>
+        <WorkspaceCard className={styles.pipeline}>
             <WorkspaceSectionHeader eyebrow="Prospecting queue" title="Compare before outreach" />
-            <div className={styles.table} role="table" aria-label="Sponsor prospecting queue">
-            <div className={styles.tableHead} role="row">
+            {/* Each row is a disclosure, so this is a list of expandable rows, not an ARIA table.
+                The column header is visual only and hidden from assistive technology. */}
+            <div className={styles.table} role="list" aria-label="Sponsor prospecting queue">
+            <div className={styles.tableHead} aria-hidden="true">
               <span>Partner</span><span>Opportunity</span><span>Readiness</span><span>Evidence</span><span>Fixtures</span><span>Status</span>
             </div>
             {candidates.map(({ pack, readiness, evidence }) => (
-              <details className={styles.row} key={pack.id}>
+              <div role="listitem" key={pack.id}>
+              <details className={styles.row}>
                 <summary>
                   <span className={styles.partnerCell}><b>#{readiness?.rank ?? "—"}</b><strong>{pack.candidate}</strong><small>{pack.category.replaceAll("-", " ")}</small></span>
                   <span className={styles.opportunityCell}><strong>{pack.title.en}</strong><small>{pack.proposition.en}</small></span>
@@ -175,10 +173,10 @@ export default function SponsorsPage() {
                   </div>
                 </div>
               </details>
+              </div>
             ))}
             </div>
-          </WorkspaceCard>
-        </details>
+        </WorkspaceCard>
 
         <aside className={styles.sideRail}>
           <div id="evidence"><WorkspaceCard className={styles.truthBoundary}>
