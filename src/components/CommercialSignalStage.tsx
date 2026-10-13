@@ -1,51 +1,60 @@
 import styles from "./CommercialSignalStage.module.css";
 
-const signalRows = [
-  ["01", "Fixture", "Everton · Home · 18 Oct", "Reading"],
-  ["02", "External context", "Rain · rail works · televised fixture", "Changed"],
-  ["03", "Opportunity", "Family return-attendance moment", "Detected"],
-  ["04", "Recommendation", "Earlier CRM + travel message", "Prepared"],
-  ["05", "Execution", "Owner + work order + readiness", "Ready"],
-  ["06", "Learning", "Attendance response feeds next match", "Feeds back"]
+const signals = [
+  ["Weather", "Rain risk"],
+  ["Transport", "Rail works"],
+  ["City", "Major event"],
+  ["Football", "TV overlap"],
+  ["Calendar", "School holiday"],
+  ["Demand", "CRM + sales"]
 ] as const;
 
 export function CommercialSignalStage() {
   return (
-    <div className={styles.stage} aria-label="AVELA product flow">
+    <div className={styles.stage} aria-label="AVELA opportunity engine">
       <div className={styles.grid} aria-hidden="true" />
-      <div className={styles.signalRail} aria-hidden="true">
-        <span className={styles.pulseA} />
-        <span className={styles.pulseB} />
-        <span className={styles.pulseC} />
-        <i className={styles.tracer} />
-      </div>
 
       <div className={styles.topline}>
-        <span>External + club context</span>
-        <strong>Signal → impact → decision → execution</strong>
+        <span>AVELA Opportunity Engine</span>
+        <strong>External signals + club context</strong>
       </div>
 
-      <div className={styles.rows}>
-        {signalRows.map(([num, label, value, state], index) => (
-          <div className={styles.row} key={label}>
-            <span className={styles.num}>{num}</span>
-            <div>
-              <span className={styles.label}>{label}</span>
+      <div className={styles.engineScene}>
+        <div className={styles.signalOrbit} aria-label="Signals feeding the opportunity engine">
+          {signals.map(([label, value], index) => (
+            <div className={[styles.signalNode, styles["node" + (index + 1)]].join(" ")} key={label}>
+              <span>{label}</span>
               <strong>{value}</strong>
             </div>
-            <span className={[styles.state, index >= 1 && index <= 4 ? styles.hot : ""].join(" ")}>
-              {state}
-            </span>
+          ))}
+
+          <div className={styles.engineCore}>
+            <span>AVELA</span>
+            <strong>Opportunity<br />Engine</strong>
+            <small>detect · interpret · prepare</small>
+            <i aria-hidden="true" />
           </div>
-        ))}
+        </div>
+
+        <div className={styles.output}>
+          <div>
+            <span>What changed</span>
+            <strong>Travel friction + competing attention</strong>
+          </div>
+          <div>
+            <span>Why it matters</span>
+            <strong>Walk-up assumption is weaker</strong>
+          </div>
+          <div className={styles.outputHot}>
+            <span>Prepared move</span>
+            <strong>Earlier CRM + travel message</strong>
+          </div>
+        </div>
       </div>
 
       <div className={styles.footer}>
-        <span>AVELA</span>
+        <span>Not more data.</span>
         <strong>Only the signals that change the plan.</strong>
-      </div>
-      <div className={styles.decisionPulse} aria-hidden="true">
-        <span>detect</span><i>→</i><span>judge</span><i>→</i><strong>move</strong><i>→</i><span>learn</span>
       </div>
     </div>
   );
