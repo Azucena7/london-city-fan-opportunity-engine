@@ -640,15 +640,17 @@ test("daily refresh tolerates delayed GitHub schedule starts", () => {
   const refreshData = readFileSync("scripts/refresh-data.mjs", "utf8");
   const refreshSignals = readFileSync("scripts/refresh-public-signals.mjs", "utf8");
 
-  assert.match(workflow, /cron: "30 5 \* \* \*"/);
-  assert.match(workflow, /cron: "30 6 \* \* \*"/);
+  const slots = [...workflow.matchAll(/cron: "(\d+) (\d+) \* \* \*"/g)];
+  assert.ok(slots.length >= 3, "several slots so one starts early despite GitHub delays");
+  assert.ok(slots.every(([, minute]) => minute !== "0" && minute !== "30"), "avoid the busiest minutes");
   assert.match(workflow, /EVENT_NAME: \$\{\{ github\.event_name \}\}/);
-  assert.match(workflow, /SCHEDULE: \$\{\{ github\.event\.schedule \}\}/);
   assert.match(workflow, /push:\n    branches: \[main\]/);
   assert.match(workflow, /scripts\/refresh-data\.mjs/);
   assert.match(workflow, /scripts\/refresh-public-signals\.mjs/);
   assert.match(workflow, /if \[ "\$EVENT_NAME" != "schedule" \]/);
-  assert.match(workflow, /TZ=Europe\/London date \+%z/);
+  assert.match(workflow, /jq -r '\.updated_at \/\/ empty' data\/live\/current\.json/);
+  assert.match(workflow, /TZ=Europe\/London date \+%F/);
+  assert.ok(workflow.indexOf("actions/checkout") < workflow.indexOf("id: schedule_gate"), "the gate reads the checked-out data");
   assert.match(workflow, /steps\.schedule_gate\.outputs\.run_refresh == 'true'/);
 
   assert.doesNotMatch(refreshData, /Not the 06:30 Europe\/London run/);
