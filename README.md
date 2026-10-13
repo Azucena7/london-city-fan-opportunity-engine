@@ -93,7 +93,7 @@ Public and editorial data live under `data/seed` and `data/live`. Authorised CRM
 
 ## Daily data refresh
 
-GitHub Actions runs `npm run refresh:data` and `npm run refresh:public-signals` every day at 06:30 Europe/London.
+GitHub Actions runs `npm run refresh:data` and `npm run refresh:public-signals` once per Europe/London day, normally early in the London morning (see `docs/automations-and-agents.md`).
 
 The first refreshes the official fixture calendar, results and matchday weather. The second ranks a deliberately narrow set of attention competitors: simultaneous WSL, London men's football, England, nationally prominent men's fixtures and exceptional major sport. Routine culture and entertainment are excluded.
 

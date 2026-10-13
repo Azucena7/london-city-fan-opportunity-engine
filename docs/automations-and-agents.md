@@ -7,7 +7,7 @@ AVELA currently uses **deterministic scheduled workflows and validation scripts*
 The active automation layer is GitHub Actions:
 
 - workflow: `.github/workflows/daily-data-refresh.yml`;
-- scheduled around **06:30 Europe/London**, with UTC slots that cover daylight-saving changes;
+- scheduled in three UTC slots (22:17, 01:47, 04:17) because GitHub starts scheduled jobs hours late; a gate lets only the first run that starts on a new **Europe/London** day refresh, so data normally lands early in the London morning;
 - can also be started manually with `workflow_dispatch`;
 - runs on Node.js 24;
 - refreshes repository-backed public data;

@@ -1,6 +1,6 @@
 # Daily update runbook
 
-The site now separates code from live content. GitHub Actions refreshes the official fixture calendar and matchday weather state every day at 06:30 Europe/London. The two UTC schedules handle daylight-saving changes; the script exits outside the correct local hour.
+The site now separates code from live content. GitHub Actions refreshes the official fixture calendar and matchday weather state once per Europe/London day. GitHub starts scheduled jobs hours late, so the workflow has three UTC slots (22:17, 01:47, 04:17); the first run that starts on a new London day refreshes and later slots that day skip.
 
 ## What is automatic
 
