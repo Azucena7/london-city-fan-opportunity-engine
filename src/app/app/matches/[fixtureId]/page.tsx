@@ -31,6 +31,8 @@ import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { deriveCampaignWorkPackage } from "@/lib/workSystemOrchestration";
 import { routeWorkPackage } from "@/lib/workSystemRouting";
 import { getWorkRoutingRules } from "@/lib/workSystemRoutingServer";
+import { BRIEF_DECISION_IDS, summariseSourceCoverage } from "@/lib/sourceCoverage";
+import sourceHealth from "../../../../../data/live/source-health.json";
 import styles from "./match-plan.module.css";
 
 export const metadata: Metadata = {
@@ -51,6 +53,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
   const radarItem = buildOpportunityRadar([fixtureId], clubContext)[0] ?? null;
   const clubFit = radarItem?.clubFit ?? null;
   const defaults = getCurrentImpactDefaults(fixtureId);
+  const coverage = summariseSourceCoverage(sourceHealth, BRIEF_DECISION_IDS);
   const actions = campaign?.schedule.filter((item) => item.state !== "complete").slice(0, 3) ?? [];
   const approvals = campaign?.approvals.filter((item) => item.state !== "ready") ?? [];
   const activationChannels = campaign?.activations.map((item) => item.channel) ?? [];
@@ -151,6 +154,31 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
             <small>{approvals.length ? live.primaryBlocker : "No blocking gate"}</small>
           </article>
         </div>
+      </section>
+
+      <section className={styles.sourceCoverage} aria-label="Evidence coverage">
+        <div className={styles.sourceCoverageHead}>
+          <span className={styles.eyebrow}>Evidence coverage</span>
+          <strong>
+            {coverage.gaps.length
+              ? `${coverage.operational} of ${coverage.total} sources behind this brief are operational`
+              : `All ${coverage.total} sources behind this brief are operational`}
+          </strong>
+          <Link href="/app/sources">Source status →</Link>
+        </div>
+        {coverage.gaps.length ? (
+          <>
+            <ul>
+              {coverage.gaps.map((gap) => (
+                <li key={gap.id}>
+                  <b>{gap.label}</b> · {gap.state}
+                  <small>{gap.role === "required" ? "Required for" : "Supports"} {gap.affects.join(", ")}</small>
+                </li>
+              ))}
+            </ul>
+            <p>A source that is not operational counts as unknown, never as zero.</p>
+          </>
+        ) : null}
       </section>
 
       <section className={styles.opportunityBrief} aria-label="Opportunity brief">
