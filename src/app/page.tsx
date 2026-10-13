@@ -14,7 +14,7 @@ import styles from "./commercial-home.module.css";
 export const metadata: Metadata = {
   title: "The Decision Workspace for Football Club Marketing & Commercial Teams",
   description:
-    "AVELA helps football club marketing and commercial teams see what needs attention, what can be monetised, what is at risk and what is ready to execute."
+    "AVELA helps football club marketing and commercial teams detect external signals that change attendance, timing and activation decisions — then prepare the next move."
 };
 
 export default function Home() {
@@ -30,17 +30,17 @@ export default function Home() {
           <span className={styles.eyebrow}>For football club marketing & commercial teams</span>
           <h1>Read the signals.<br />Move the club.</h1>
           <p className={styles.heroLead}>
-            AVELA shows you what needs attention now, what commercial opportunities are emerging, what obligations are at risk, and what is actually ready to execute — without replacing the systems your team already uses.
+            AVELA watches the signals your team cannot realistically monitor all day — weather, transport, city events, competing football, audience demand, rights and availability — then shows what changed, why it matters and what you should do next.
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.primary} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See a real AVELA decision</Link>
             <Link className={styles.secondaryAction} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Request a club pilot</Link>
           </div>
           <div className={styles.heroMeta}>
-            <span><strong>See</strong> what needs attention</span>
-            <span><strong>Spot</strong> revenue opportunities</span>
-            <span><strong>Protect</strong> partner delivery</span>
-            <span><strong>Know</strong> what is ready to execute</span>
+            <span><strong>Detect</strong> external pressure early</span>
+            <span><strong>Spot</strong> attendance opportunities</span>
+            <span><strong>Adjust</strong> timing, message and offer</span>
+            <span><strong>Prepare</strong> the next move</span>
           </div>
           <div className={styles.heroProof} aria-label="AVELA operating loop">
             <div><span>01</span><strong>Read</strong><small>What changed</small></div>
