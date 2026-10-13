@@ -880,3 +880,31 @@ export type Territory = {
   [key: string]: unknown;
 };
 
+
+export type NewsRadarConfig = {
+  version: string;
+  note: LocalizedText;
+  feeds: Array<{ id: string; label: string; query: string; language: string; country: string }>;
+  topics: Array<{ id: string; label: string; keywords: string[] }>;
+  fixtureWindowDays: number;
+  retentionDays: number;
+  maxItems: number;
+};
+
+export type NewsRadarData = {
+  version: string;
+  checkedAt: string | null;
+  lastSuccessfulAt: string | null;
+  failures: string[];
+  items: Array<{
+    id: string;
+    title: string;
+    outlet: string | null;
+    url: string;
+    publishedAt: string;
+    firstSeenAt: string;
+    feedIds: string[];
+    topics: string[];
+    fixtureIds: string[];
+  }>;
+};

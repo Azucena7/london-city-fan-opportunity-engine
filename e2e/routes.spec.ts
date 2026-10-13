@@ -87,3 +87,12 @@ test("unknown fixture renders the not-found state", async ({ page }) => {
   // System states must not claim a destination (it used to mark Home as current).
   await expect(page.locator('aside a[aria-current="page"]')).toHaveCount(0);
 });
+
+test("Radar shows the news radar as unreviewed context", async ({ page }) => {
+  await page.goto("/app/matches");
+  await page.waitForLoadState("networkidle");
+  const panel = page.locator("section", { hasText: "Unreviewed headlines" }).last();
+  await expect(panel).toContainText("News radar");
+  await expect(panel).toContainText("They never change a score, confidence or rank.");
+  await expect(panel).toContainText("Watching: London City Lionesses (UK)");
+});

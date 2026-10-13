@@ -24,8 +24,10 @@ import decisionValidationRaw from "../../data/live/decision-validation.json";
 import partnerCommercialPackRaw from "../../data/live/partner-commercial-pack.json";
 import pilotReadinessRaw from "../../data/live/pilot-readiness.json";
 import eventLandscapeRaw from "../../data/live/event-landscape.json";
+import newsRadarRaw from "../../data/live/news-radar.json";
+import newsRadarConfigRaw from "../../data/seed/news-radar.json";
 import { buildPostMatchScorecards } from "./postmatch";
-import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingLiveDataset, CrmTicketingReadiness, EventLandscapeData, ExperienceDemandData, DecisionValidationData, ExperimentMeasurementData, Fixture, LeagueAttendanceBenchmark, LiveSignal, MobilityPartnershipData, PartnerCommercialPackData, PilotReadinessData, PostMatchReview, SearchDemandData, Territory } from "./models";
+import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingLiveDataset, CrmTicketingReadiness, EventLandscapeData, ExperienceDemandData, DecisionValidationData, ExperimentMeasurementData, Fixture, LeagueAttendanceBenchmark, LiveSignal, MobilityPartnershipData, NewsRadarConfig, NewsRadarData, PartnerCommercialPackData, PilotReadinessData, PostMatchReview, SearchDemandData, Territory } from "./models";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -53,4 +55,6 @@ export const decisionValidation = decisionValidationRaw as DecisionValidationDat
 export const partnerCommercialPack = partnerCommercialPackRaw as PartnerCommercialPackData;
 export const pilotReadiness = pilotReadinessRaw as PilotReadinessData;
 export const eventLandscape = eventLandscapeRaw as EventLandscapeData;
+export const newsRadar = newsRadarRaw as NewsRadarData;
+export const newsRadarConfig = newsRadarConfigRaw as NewsRadarConfig;
 export const postMatchScorecards = buildPostMatchScorecards(calendar, postmatchReviews, crmTicketingDemo);
