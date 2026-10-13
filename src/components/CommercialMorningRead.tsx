@@ -105,7 +105,7 @@ export function CommercialMorningRead() {
 
       <div className={styles.caption}>
         <strong>The value is not more data.</strong>
-        <span>It is knowing which external signal should actually change the club's next decision.</span>
+        <span>It is knowing which external signal should actually change the club’s next decision.</span>
       </div>
     </section>
   );
