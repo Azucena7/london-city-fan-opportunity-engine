@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
 import { CommercialSignalStage } from "@/components/CommercialSignalStage";
 import { CommercialOperatingFlow } from "@/components/CommercialOperatingFlow";
+import { CommercialMorningRead } from "@/components/CommercialMorningRead";
 import { CommercialEcosystem } from "@/components/CommercialEcosystem";
 import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import { CommercialFAQ } from "@/components/CommercialFAQ";
@@ -54,18 +55,7 @@ export default function Home() {
         <CommercialSignalStage />
       </section>
 
-      <section className={styles.problem}>
-        <div>
-          <span className={styles.kicker}>The commercial reality</span>
-          <h2>Important decisions are still assembled manually from six different places.</h2>
-        </div>
-        <div className={styles.problemCopy}>
-          <p>CRM, ticketing, analytics, contracts, calendars and work-management tools each hold part of the answer.</p>
-          <p><strong>AVELA joins that context before the meeting, so your team spends less time reconstructing the situation and more time deciding what to do.</strong></p>
-        </div>
-      </section>
-
-      <CommercialOperatingFlow />
+      <CommercialMorningRead />\n\n      <CommercialDecisionDemo />\n\n      <CommercialOperatingFlow />
 
       <CommercialDecisionDemo />
 
