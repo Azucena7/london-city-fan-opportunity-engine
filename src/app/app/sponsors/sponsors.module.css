@@ -55,15 +55,15 @@
 
 @media(max-width:1180px){
   .summary{grid-template-columns:repeat(2,1fr)}
-  .workspaceGrid{grid-template-columns:1fr}
+  .workspaceGrid{grid-template-columns:minmax(0,1fr)}
   .sideRail{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:900px){
-  .primaryGrid{grid-template-columns:1fr}
+  .primaryGrid{grid-template-columns:minmax(0,1fr)}
   .table{overflow-x:auto}
   .tableHead,.row>summary{min-width:820px}
   .rowDetail{min-width:820px}
-  .sideRail{grid-template-columns:1fr}
+  .sideRail{grid-template-columns:minmax(0,1fr)}
 }
 @media(max-width:620px){
   .summary{grid-template-columns:1fr 1fr}
@@ -148,7 +148,7 @@
   .guidedSteps a:last-child{grid-column:1/-1;border-bottom:0}
 }
 @media(max-width:620px){
-  .guidedSteps{grid-template-columns:1fr}
+  .guidedSteps{grid-template-columns:minmax(0,1fr)}
   .guidedSteps a{border-right:0}
   .explorePanel>summary{align-items:flex-start;flex-direction:column}
 }
