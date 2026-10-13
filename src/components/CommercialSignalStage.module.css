@@ -283,3 +283,20 @@
 @media(max-width:700px){
   .row{min-height:78px}
 }
+
+
+/* v4 — hero stage compactness */
+.stage{
+  min-height:520px;
+  padding:24px;
+}
+.row{min-height:60px}
+.row strong{font-size:16px}
+.topline{padding-bottom:14px}
+.rows{margin-top:12px}
+.footer{margin-top:18px}
+@keyframes traceSignal{0%{transform:translateY(-42px);opacity:0}12%{opacity:1}78%{opacity:1}100%{transform:translateY(315px);opacity:0}}
+@media(max-width:700px){
+  .stage{padding:18px}
+  .row{min-height:70px}
+}
