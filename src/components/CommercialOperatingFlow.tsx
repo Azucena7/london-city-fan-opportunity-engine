@@ -1,11 +1,11 @@
 import styles from "./CommercialOperatingFlow.module.css";
 
 const sources = [
+  ["External context", "Weather · transport · city events · football"],
   ["Demand", "CRM + ticketing"],
   ["Performance", "Analytics + Blinkfire"],
   ["Rights", "Drive + contracts"],
-  ["Capacity", "People + calendars"],
-  ["Execution", "Work-management tools"]
+  ["Capacity", "People + calendars"]
 ] as const;
 
 const steps = [
@@ -47,14 +47,13 @@ export function CommercialOperatingFlow() {
         <div>
           <h2 id="operating-flow-title">Walk into the meeting already knowing where the decision is.</h2>
           <p>
-            Instead of rebuilding the picture from CRM, ticketing, contracts, calendars and task tools,
-            AVELA brings the commercial situation together and prepares the next move.
+            Instead of expecting the team to monitor weather, transport, city agendas, competing football, CRM, contracts and availability at once, AVELA brings the signals that actually change the decision into one operating view.
           </p>
         </div>
       </div>
 
       <div className={styles.stage} aria-label="AVELA operating flow">
-        <div className={styles.sourcesLabel}>What AVELA is reading</div>
+        <div className={styles.sourcesLabel}>External signals + club context</div>
         <div className={styles.sourceRail}>
           {sources.map(([label, detail]) => (
             <div className={styles.source} key={label}>
