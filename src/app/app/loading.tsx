@@ -4,7 +4,6 @@ import styles from "./route-state.module.css";
 export default function AppLoading() {
   return (
     <AppWorkspaceShell
-      active="home"
       eyebrow="System state"
       title="Loading workspace"
       subtitle="Preparing the latest fixture, campaign and evidence context."
