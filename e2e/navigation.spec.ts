@@ -76,6 +76,16 @@ test.describe("desktop workspace navigation", () => {
     });
   }
 
+  test("topbar icons render as line icons, not filled shapes", async ({ page }) => {
+    await page.goto("/app");
+    const icons = page.locator('header a[aria-label="Open AVELA help"] svg, header a[aria-label="Open calendar"] svg');
+    await expect(icons).toHaveCount(2);
+    for (const icon of await icons.all()) {
+      const style = await icon.evaluate((svg) => { const s = getComputedStyle(svg); return { fill: s.fill, width: s.width }; });
+      expect(style).toEqual({ fill: "none", width: "17px" });
+    }
+  });
+
   test("skip link moves focus to the main content", async ({ page }) => {
     await page.goto("/app");
     await page.keyboard.press("Tab");
