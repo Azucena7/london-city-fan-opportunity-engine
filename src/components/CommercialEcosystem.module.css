@@ -173,3 +173,16 @@
 .outputs{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media(max-width:920px){.outputs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.outputs{grid-template-columns:1fr}}
+
+/* Editorial scale alignment */
+.wrap{padding-top:76px;padding-bottom:76px}
+.copy h2{
+  max-width:720px;
+  font-size:clamp(34px,3.7vw,48px);
+  line-height:1.02;
+  letter-spacing:-.044em;
+}
+.map{margin-top:36px;padding:24px}
+@media(max-width:620px){
+  .wrap{padding-top:60px;padding-bottom:60px}
+}
