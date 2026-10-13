@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { OpportunityExplorer } from "@/components/OpportunityExplorer";
-import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
+import { calendar, campaignPlans, currentState, eventLandscape, newsRadar, newsRadarConfig } from "@/lib/data";
+import { NewsRadarPanel } from "@/components/NewsRadarPanel";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
@@ -255,6 +256,8 @@ export default async function MatchesPage() {
           </WorkspaceDrawer>
         </aside>
       </section>
+
+      <NewsRadarPanel radar={newsRadar} config={newsRadarConfig} calendar={calendar} />
 
       <details className={styles.evidenceContract}>
         <summary>How Radar prioritisation works</summary>

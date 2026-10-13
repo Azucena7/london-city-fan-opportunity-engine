@@ -1,0 +1,18 @@
+.panel{margin-top:16px;padding:18px 20px}
+.checked{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--product-muted)}
+.rule{margin:4px 0 0;font-size:13px;color:var(--product-muted)}
+.topics{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none}
+.topics li{padding:4px 9px;border:1px solid var(--product-line);border-radius:999px;font-size:12px;color:var(--product-ink)}
+.topics b{margin-left:4px}
+.list{display:grid;gap:0;margin:12px 0 0;padding:0;list-style:none}
+.list li{padding:11px 0;border-top:1px solid var(--product-line)}
+.list li:first-child{border-top:0}
+.list a{color:var(--product-ink);font-size:14px;font-weight:750;line-height:1.35;text-decoration:none}
+.list a:hover{text-decoration:underline}
+.list small{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin-top:4px;font-size:12px;color:var(--product-muted)}
+.tag,.fixture{padding:1px 7px;border-radius:999px;background:var(--product-accent-soft);color:var(--product-ink);font-size:11px;font-weight:800}
+.fixture{background:var(--product-signal-soft)}
+.list .fixtureLink{display:inline-flex;align-items:center;text-decoration:none}
+.list .fixtureLink:hover .fixture{text-decoration:underline}
+.empty{margin:12px 0 0;font-size:13px;color:var(--product-muted)}
+.searches{margin:12px 0 0;font-size:12px;color:var(--product-muted)}

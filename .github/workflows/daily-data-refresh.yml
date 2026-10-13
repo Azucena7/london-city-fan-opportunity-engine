@@ -8,6 +8,8 @@ on:
       - ".github/workflows/daily-data-refresh.yml"
       - "scripts/refresh-data.mjs"
       - "scripts/refresh-public-signals.mjs"
+      - "scripts/refresh-news-radar.mjs"
+      - "data/seed/news-radar.json"
   schedule:
     # GitHub cron uses UTC and starts scheduled jobs late (observed: 6-7 hours), so a single
     # early-morning slot lands around midday. Three slots spread from the previous evening, on
@@ -67,15 +69,20 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
+      - name: Refresh the news radar
+        if: steps.schedule_gate.outputs.run_refresh == 'true'
+        # Headlines are context only: a news failure must not hold back fixture and signal data.
+        continue-on-error: true
+        run: npm run refresh:news-radar
       - name: Commit material updates
         if: steps.schedule_gate.outputs.run_refresh == 'true'
         run: |
-          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/source-health.json; then
+          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/source-health.json; then
             echo "No data change to publish"
             exit 0
           fi
           git config user.name "avela-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/source-health.json
+          git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/source-health.json
           git commit -m "data: refresh fixture and public signal state"
           git push

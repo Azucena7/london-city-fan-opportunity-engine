@@ -17,6 +17,11 @@ The workflow executes:
 
 1. `npm run refresh:data`
 2. `npm run refresh:public-signals`
+3. `npm run refresh:news-radar` (non-blocking)
+
+### News radar
+
+`refresh:news-radar` reads public Google News RSS searches listed in `data/seed/news-radar.json` and stores the headline, outlet, link and date in `data/live/news-radar.json`. Each headline is tagged with the configured topics and with any upcoming fixture whose opponent it names, and it is kept for `retentionDays`. The Radar page shows these as **unreviewed** headlines: they never create a signal or change a score, confidence or rank. To change what is watched, edit the `feeds` (query, language, country) or the `topics` (keywords) in the seed file; the next refresh applies it, and a push that changes the file runs a refresh straight away. A headline becomes evidence only when someone reviews it and records it as a signal.
 
 Public-source API credentials used by this workflow belong in GitHub Actions repository secrets. Vercel environment variables do not supply secrets to GitHub-hosted jobs.
 
