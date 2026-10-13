@@ -1,5 +1,8 @@
 import Link from "next/link";
 import sourceHealth from "../../data/live/source-health.json";
+import { DataTable } from "@/components/DataTable";
+import { FilterBar } from "@/components/FilterBar";
+import { filterRows, registerRows, type RegisterRow, type SourceFilter } from "@/lib/sourceRegister";
 import styles from "./IntelligenceSources.module.css";
 
 const sources = [
@@ -143,12 +146,25 @@ const nwslPublicBenchmark = [
   { club: "Washington Spirit", engagement: "3.4M", videoViews: "32.7M" }
 ] as const;
 
-export function IntelligenceSources() {
+function formatDay(value: string) {
+  return new Date(value).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+}
+
+const registerColumns = [
+  { key: "source", header: "Source", cell: (row: RegisterRow) => <>{row.name}<small className={styles.registerCategory}>{row.category}</small></> },
+  { key: "state", header: "State", cell: (row: RegisterRow) => <span className={styles.registerState} data-state={row.state}>{row.stateLabel}</span> },
+  { key: "fresh", header: "Last successful", cell: (row: RegisterRow) => row.lastSuccessfulAt ? formatDay(row.lastSuccessfulAt) : <span className={styles.registerMuted}>{row.state === "requires-access" ? "Private evidence needs club permission" : row.state === "not-configured" ? "Connection not configured yet" : row.state === "blocked" ? "Evidence currently blocked" : "No recent refresh available"}</span> },
+  { key: "used", header: "Feeds decisions", cell: (row: RegisterRow) => row.usedBy.length ? row.usedBy.join(" · ") : <span className={styles.registerMuted}>Context only</span> },
+  { key: "next", header: "Next step", cell: (row: RegisterRow) => row.nextStep ?? <span className={styles.registerMuted}>No action needed</span> }
+];
+
+export function IntelligenceSources({ filter = "all" }: { filter?: SourceFilter }) {
   const sourceRows = sources.map((source) => ({ source, health: aggregateHealth(source.healthIds) }));
-  const operational = sourceRows.filter((item) => item.health.primary?.state === "operational").length;
-  const degraded = sourceRows.filter((item) => item.health.primary?.state === "degraded").length;
-  const access = sourceRows.filter((item) => ["requires-access","not-configured","blocked"].includes(item.health.primary?.state ?? "")).length;
-  const coverage = Math.round((operational / Math.max(1, sourceRows.length)) * 100);
+  const register = registerRows(sourceHealth);
+  const operational = register.filter((row) => row.state === "operational").length;
+  const degraded = register.filter((row) => row.state === "degraded").length;
+  const access = register.filter((row) => ["requires-access", "not-configured", "blocked"].includes(row.state)).length;
+  const coverage = Math.round((operational / Math.max(1, register.length)) * 100);
   return (
     <section className={styles.wrap}>
       <header className={styles.head}>
@@ -168,21 +184,32 @@ export function IntelligenceSources() {
         <div className={styles.coverageDial} style={{ background: `conic-gradient(#2F8F83 0 ${coverage}%, #E7EBED ${coverage}% 100%)` }}>
           <span>Operational coverage</span>
           <strong>{coverage}%</strong>
-          <small>{operational} of {sourceRows.length} source groups operational</small>
+          <small>{operational} of {register.length} registered sources operational</small>
         </div>
         <div className={styles.healthSummary}>
           <div data-state="operational"><span>Operational</span><strong>{operational}</strong><small>Decision evidence refreshing normally</small></div>
           <div data-state="degraded"><span>Degraded</span><strong>{degraded}</strong><small>Available with reduced confidence or freshness</small></div>
           <div data-state="access"><span>Needs access / setup</span><strong>{access}</strong><small>Private or unconfigured evidence</small></div>
         </div>
-        <div className={styles.healthRows}>
-          {sourceRows.map(({ source, health }) => (
-            <article key={source.name} data-state={health.primary?.state ?? "unknown"}>
-              <div><span>{source.category}</span><strong>{source.name}</strong></div>
-              <b>{health.label}</b>
-              <small>{health.latest ? "Last successful refresh " + new Date(health.latest).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) : health.primary?.state === "requires-access" ? "Private evidence needs club permission" : health.primary?.state === "not-configured" ? "Connection not configured yet" : health.primary?.state === "blocked" ? "Evidence currently blocked" : "No recent refresh available"}</small>
-            </article>
-          ))}
+        <div className={styles.register}>
+          <FilterBar
+            label="Filter the source register"
+            basePath="/app/sources"
+            param="state"
+            current={filter}
+            options={[
+              { value: "all", label: "All sources", count: register.length },
+              { value: "attention", label: "Needs attention", count: register.length - operational },
+              { value: "operational", label: "Operational", count: operational }
+            ]}
+          />
+          <DataTable
+            caption="Source register: state, freshness, the decisions each source feeds and the next step"
+            columns={registerColumns}
+            rows={filterRows(register, filter)}
+            rowKey={(row) => row.id}
+            empty="No source matches this filter."
+          />
         </div>
       </section>
 

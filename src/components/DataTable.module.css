@@ -1,0 +1,18 @@
+.scroll{overflow-x:auto;border:1px solid var(--product-line);border-radius:10px;background:#fff}
+.table{width:100%;border-collapse:collapse;font-size:13px;color:var(--product-ink)}
+.caption{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.table thead th{padding:10px 14px;border-bottom:1px solid var(--product-line);background:#F8FAFB;text-align:left;font-size:11px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;color:var(--product-muted);white-space:nowrap}
+.table tbody th,.table tbody td{padding:12px 14px;border-top:1px solid var(--product-line);text-align:left;vertical-align:top;line-height:1.4}
+.table tbody tr:first-child th,.table tbody tr:first-child td{border-top:0}
+.table tbody th{font-weight:800}
+.empty{margin:0;padding:18px;border:1px dashed var(--product-line);border-radius:10px;font-size:13px;color:var(--product-muted)}
+
+@media(max-width:760px){
+  .scroll{overflow:visible;border:0;background:transparent}
+  .table,.table tbody,.table tr,.table th,.table td{display:block}
+  .table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .table tbody tr{margin-bottom:10px;border:1px solid var(--product-line);border-radius:10px;background:#fff}
+  .table tbody th,.table tbody td,.table tbody tr:first-child td{padding:10px 14px;border-top:1px solid var(--product-line)}
+  .table tbody th{border-top:0}
+  .table tbody td::before{content:attr(data-label);display:block;margin-bottom:3px;font-size:11px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;color:var(--product-muted)}
+}
