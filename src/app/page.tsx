@@ -55,9 +55,11 @@ export default function Home() {
         <CommercialSignalStage />
       </section>
 
-      <CommercialMorningRead />\n\n      <CommercialDecisionDemo />\n\n      <CommercialOperatingFlow />
+      <CommercialMorningRead />
 
       <CommercialDecisionDemo />
+
+      <CommercialOperatingFlow />
 
       <section className={styles.liveProof}>
         <div className={styles.liveCopy}>
