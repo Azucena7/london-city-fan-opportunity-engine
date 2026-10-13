@@ -443,3 +443,17 @@
 .rationale{font-size:14px;line-height:1.6}
 .expected strong{font-size:13px}
 .footer{font-size:11px}
+
+/* Editorial scale alignment */
+.wrap{padding-top:76px;padding-bottom:76px}
+.intro{margin-bottom:30px}
+.intro h2{
+  max-width:760px;
+  font-size:clamp(34px,3.8vw,50px);
+  line-height:1.02;
+  letter-spacing:-.045em;
+}
+@media(max-width:650px){
+  .wrap{padding-top:60px;padding-bottom:60px}
+  .intro h2{font-size:clamp(32px,9.5vw,42px)}
+}
