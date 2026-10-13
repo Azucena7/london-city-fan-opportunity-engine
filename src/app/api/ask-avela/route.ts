@@ -4,6 +4,7 @@ import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { requireAiAccess } from "@/lib/aiAccess";
 
 type AskIntent = "ask" | "tell" | "change";
 
@@ -40,6 +41,9 @@ function capacityState(activeMinutes: number, availableMinutes: number) {
 }
 
 export async function POST(request: Request) {
+  const access = await requireAiAccess();
+  if (access.denied) return access.denied;
+
   const body = await request.json().catch(() => null) as {
     fixtureId?: string;
     message?: string;

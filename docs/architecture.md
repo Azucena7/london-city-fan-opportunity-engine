@@ -146,6 +146,8 @@ Supported authentication is:
 - `AI_GATEWAY_API_KEY`; or
 - Vercel OIDC where available.
 
+AI routes (`/api/ask-avela`, `/api/campaign-draft`) spend model credit, so they are closed by default. A request is served only when the caller is signed in with a confirmed email listed in `AI_ALLOWED_EMAILS` (comma-separated). Anonymous visitors to the public demo receive `401`; other accounts receive `403`. Leaving `AI_ALLOWED_EMAILS` empty disables AI for everyone.
+
 Generation can produce approval-ready draft material, but it does not publish campaigns, commit media spend, send CRM, or claim external execution.
 
 ## Weather
