@@ -59,6 +59,23 @@ test.describe("desktop workspace navigation", () => {
     await expect(current).toHaveAttribute("href", "/app/campaigns");
   });
 
+  for (const route of ["/app", "/app/matches", "/for-clubs", "/case-study"]) {
+    test(`keyboard focus uses the one solid AVELA outline on ${route}`, async ({ page }) => {
+      await page.goto(route);
+      await page.waitForLoadState("networkidle");
+      // Tab past the skip link to the first real control.
+      await page.keyboard.press("Tab");
+      await page.keyboard.press("Tab");
+      const outline = await page.evaluate(() => {
+        const element = document.activeElement as HTMLElement | null;
+        if (!element || element === document.body) return null;
+        const style = getComputedStyle(element);
+        return { style: style.outlineStyle, width: style.outlineWidth, color: style.outlineColor };
+      });
+      expect(outline).toEqual({ style: "solid", width: "3px", color: "rgb(47, 143, 131)" });
+    });
+  }
+
   test("skip link moves focus to the main content", async ({ page }) => {
     await page.goto("/app");
     await page.keyboard.press("Tab");
