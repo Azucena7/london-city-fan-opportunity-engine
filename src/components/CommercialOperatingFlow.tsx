@@ -9,33 +9,33 @@ const sources = [
 ] as const;
 
 const steps = [
-  ["01", "Read", "Signals + context"],
-  ["02", "Decide", "Priority + feasibility"],
-  ["03", "Prepare", "Activation + work order"],
-  ["04", "Learn", "Evidence retained"]
+  ["01", "See", "What changed"],
+  ["02", "Judge", "What matters"],
+  ["03", "Prepare", "What can move"],
+  ["04", "Learn", "What improves next"]
 ] as const;
 
 const outcomes = [
-  ["Activation ready", "or the blocker is explicit"],
-  ["Work prepared", "for the club's execution tool"],
-  ["Next decision improved", "because the outcome is retained"]
+  ["Attention", "What needs a decision today"],
+  ["Commercial value", "What can be sold, protected or fulfilled"],
+  ["Execution", "What is ready, at risk or blocked"]
 ] as const;
 
 const plays = [
   {
     kicker: "Grow the fixture",
-    title: "Signal → campaign",
-    detail: "Audience, channel, offer and measurement prepared together."
+    title: "Where can we create more demand?",
+    detail: "AVELA turns changing signals into a prepared audience, offer, channel and measurement plan."
   },
   {
     kicker: "Deliver the partnership",
-    title: "Contract → activation",
-    detail: "Rights, obligations, readiness and proof stay connected."
+    title: "Are we fulfilling — or leaving value unused?",
+    detail: "Obligations, rights, activation windows and incremental opportunities stay visible together."
   },
   {
     kicker: "Deploy the right people",
-    title: "Rights → best-fit people",
-    detail: "Availability, capacity and value exchange remain visible."
+    title: "Who can we use, and is it the right use?",
+    detail: "Rights, availability, capacity and commercial fit are checked before the activation is prepared."
   }
 ] as const;
 
@@ -43,18 +43,18 @@ export function CommercialOperatingFlow() {
   return (
     <section className={styles.wrap} aria-labelledby="operating-flow-title">
       <div className={styles.intro}>
-        <span>From signal to execution</span>
+        <span>What AVELA gives you</span>
         <div>
-          <h2 id="operating-flow-title">From fragmented context to a prepared decision.</h2>
+          <h2 id="operating-flow-title">Walk into the meeting already knowing where the decision is.</h2>
           <p>
-            AVELA does the joining before the meeting: what changed, what matters, what can happen,
-            what is prepared, and what still needs a human decision.
+            Instead of rebuilding the picture from CRM, ticketing, contracts, calendars and task tools,
+            AVELA brings the commercial situation together and prepares the next move.
           </p>
         </div>
       </div>
 
       <div className={styles.stage} aria-label="AVELA operating flow">
-        <div className={styles.sourcesLabel}>Club context</div>
+        <div className={styles.sourcesLabel}>What AVELA is reading</div>
         <div className={styles.sourceRail}>
           {sources.map(([label, detail]) => (
             <div className={styles.source} key={label}>
@@ -67,7 +67,7 @@ export function CommercialOperatingFlow() {
         <div className={styles.engine}>
           <div className={styles.engineMark}>
             <span>AVELA</span>
-            <strong>Decision orchestration</strong>
+            <strong>One operating view</strong>
           </div>
           <div className={styles.stepRail}>
             {steps.map(([num, label, detail], index) => (
@@ -78,7 +78,7 @@ export function CommercialOperatingFlow() {
               </div>
             ))}
           </div>
-          <div className={styles.approval}>Human approval where it matters</div>
+          <div className={styles.approval}>You keep the decision</div>
         </div>
 
         <div className={styles.outcomes}>
