@@ -2,11 +2,11 @@ import styles from "./CommercialSignalStage.module.css";
 
 const signalRows = [
   ["01", "Fixture", "Everton · Home · 18 Oct", "Reading"],
-  ["02", "Opportunity", "Return-attendance moment", "Detected"],
-  ["03", "Feasibility", "Rights + people + timing checked", "Checked"],
-  ["04", "Activation", "Family return path prepared", "Prepared"],
+  ["02", "External context", "Rain · rail works · televised fixture", "Changed"],
+  ["03", "Opportunity", "Family return-attendance moment", "Detected"],
+  ["04", "Recommendation", "Earlier CRM + travel message", "Prepared"],
   ["05", "Execution", "Owner + work order + readiness", "Ready"],
-  ["06", "Learning", "Evidence feeds the next decision", "Feeds back"]
+  ["06", "Learning", "Attendance response feeds next match", "Feeds back"]
 ] as const;
 
 export function CommercialSignalStage() {
@@ -21,8 +21,8 @@ export function CommercialSignalStage() {
       </div>
 
       <div className={styles.topline}>
-        <span>Live product flow</span>
-        <strong>Signal → decision → execution → learning</strong>
+        <span>External + club context</span>
+        <strong>Signal → impact → decision → execution</strong>
       </div>
 
       <div className={styles.rows}>
@@ -42,10 +42,10 @@ export function CommercialSignalStage() {
 
       <div className={styles.footer}>
         <span>AVELA</span>
-        <strong>Prepared decisions. Human control.</strong>
+        <strong>Only the signals that change the plan.</strong>
       </div>
       <div className={styles.decisionPulse} aria-hidden="true">
-        <span>read</span><i>→</i><span>decide</span><i>→</i><strong>move</strong><i>→</i><span>learn</span>
+        <span>detect</span><i>→</i><span>judge</span><i>→</i><strong>move</strong><i>→</i><span>learn</span>
       </div>
     </div>
   );
