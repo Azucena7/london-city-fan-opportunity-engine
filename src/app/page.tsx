@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
 import { CommercialSignalStage } from "@/components/CommercialSignalStage";
+import { CommercialOperatingFlow } from "@/components/CommercialOperatingFlow";
 import { CommercialEcosystem } from "@/components/CommercialEcosystem";
 import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import { CommercialFAQ } from "@/components/CommercialFAQ";
@@ -12,9 +13,8 @@ import styles from "./commercial-home.module.css";
 export const metadata: Metadata = {
   title: "The Decision Workspace for Football Club Marketing & Commercial Teams",
   description:
-    "AVELA is the decision workspace for football club marketing and commercial teams, connecting fan, campaign, fixture, player, sponsor and operational context to the next best action."
+    "AVELA prepares better football club marketing and commercial decisions by joining signals, rights, people, partners, timing, execution and learning in one operating view."
 };
-
 
 export default function Home() {
   const live = getCurrentProductOpportunity();
@@ -29,7 +29,7 @@ export default function Home() {
           <span className={styles.eyebrow}>Built for football club marketing & commercial teams</span>
           <h1>Read the signals.<br />Move the club.</h1>
           <p className={styles.heroLead}>
-            AVELA helps marketing and commercial teams decide what to do next across fixtures, campaigns and commercial moments — joining fan demand, CRM, content, players, sponsors, rights, timing and delivery constraints in one operating view.
+            AVELA prepares what should happen next across fixtures, campaigns and commercial moments — joining fan demand, CRM, content, players, partners, rights, timing and delivery constraints, then showing what needs a human decision.
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.primary} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See AVELA on a real fixture</Link>
@@ -46,9 +46,9 @@ export default function Home() {
             <i>→</i>
             <div><span>02</span><strong>Decide</strong><small>Priority + feasibility</small></div>
             <i>→</i>
-            <div><span>03</span><strong>Move</strong><small>Action + owner</small></div>
+            <div><span>03</span><strong>Move</strong><small>Activation + execution</small></div>
             <i>→</i>
-            <div><span>04</span><strong>Learn</strong><small>Outcome retained</small></div>
+            <div><span>04</span><strong>Learn</strong><small>Evidence retained</small></div>
           </div>
         </div>
         <CommercialSignalStage />
@@ -61,9 +61,11 @@ export default function Home() {
         </div>
         <div className={styles.problemCopy}>
           <p>CRM knows who can be reached. Ticketing knows who bought. Analytics knows what performed. Contracts know what is owed. Calendars know who is available. Work systems know what the team is already carrying.</p>
-          <p><strong>People still have to join that context manually before almost every important decision.</strong></p>
+          <p><strong>People still have to join that context manually before almost every important decision — and then translate the decision into executable work.</strong></p>
         </div>
       </section>
+
+      <CommercialOperatingFlow />
 
       <CommercialDecisionDemo />
 
@@ -96,14 +98,13 @@ export default function Home() {
         </div>
       </section>
 
-
       <CommercialEcosystem />
 
       <section className={styles.pilot}>
         <div>
           <span className={styles.kicker}>Start with the marketing team</span>
           <h2>Prove AVELA on 4–6 fixtures before you integrate more.</h2>
-          <p>Start with one marketing/commercial workflow, a limited fixture window and the systems you already use. Our independent public demonstration shows how the decision changes across Brighton, Everton, Crystal Palace and Manchester City; your pilot uses your own authorised data before deeper integration is earned.</p>
+          <p>Start with one marketing/commercial workflow, a limited fixture window and the systems you already use. The aim is to prove that better context leads to better prepared decisions, cleaner execution and reusable learning before deeper integration is earned.</p>
         </div>
         <div className={styles.pilotSteps}>
           <article><span>01</span><strong>4–6 fixtures</strong><p>Use the real calendar.</p></article>
@@ -123,7 +124,7 @@ export default function Home() {
       <section className={styles.finalCta}>
         <div>
           <span>AVELA</span>
-          <h2>Turn the next club opportunity into a better decision — without replacing the stack you already use.</h2>
+          <h2>Turn fragmented club context into a prepared decision, an executable plan and better learning — without replacing your stack.</h2>
         </div>
         <div>
           <Link className={styles.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Request your club pilot</Link>
