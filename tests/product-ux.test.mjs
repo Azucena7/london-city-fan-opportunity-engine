@@ -554,10 +554,27 @@ test("match plan closes with a simple review and handoff gate", () => {
   const decision = read("src/components/MatchPlanDecision.tsx");
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   assert.match(decision, /Review required/);
-  assert.match(decision, /Mark as reviewed locally/);
   assert.match(decision, /does not send campaigns, commit spend or execute club actions/);
   assert.match(page, /MatchPlanDecision/);
   assert.match(page, /id="approval-gates"/);
+});
+
+test("human decision is recorded through the decision history, not held as local state", () => {
+  const decision = read("src/components/MatchPlanDecision.tsx");
+  const history = read("src/components/DecisionHistoryPanel.tsx");
+  const route = read("src/app/api/decision-history/route.ts");
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  assert.doesNotMatch(decision, /reviewed locally/i);
+  assert.match(decision, /fetch\("\/api\/decision-history"/);
+  for (const [eventType, state] of [["approved", "human-approved"], ["changed", "human-modified"], ["reviewed", "human-hold"], ["rejected", "human-rejected"]]) {
+    assert.match(decision, new RegExp(`eventType: "${eventType}", state: "${state}"`));
+    assert.match(route, new RegExp(`"${eventType}"`), eventType + " must be accepted by the existing decision-history contract");
+  }
+  assert.match(decision, /approveBlocked = verdict === "approve" && blocked/);
+  assert.match(decision, /noteRequired && !note\.trim\(\)/);
+  assert.match(decision, /Sign in with club access to record/);
+  assert.match(history, /DECISION_RECORDED_EVENT/);
+  assert.match(page, /decisionId=\{`fixture:\$\{fixture\.id\}`\}/);
 });
 
 test("match plan exposes a review-ready activation draft", () => {

@@ -470,6 +470,9 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       </section>
 
       <MatchPlanDecision
+        decisionId={`fixture:${fixture.id}`}
+        subjectId={fixture.id}
+        recommendation={campaign?.title.en ?? live.recommendedAction}
         decisionState={live.decisionState}
         blockerCount={approvals.length}
         nextApproval={campaign?.nextApproval.en ?? live.primaryBlocker}
