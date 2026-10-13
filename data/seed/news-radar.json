@@ -5,17 +5,136 @@
     "es": "Búsquedas públicas de noticias que AVELA vigila cada mañana. Los titulares son contexto sin revisar: nunca cambian la puntuación, la confianza ni el ranking hasta que alguien los convierte en una señal revisada."
   },
   "feeds": [
-    { "id": "club-uk", "label": "London City Lionesses (UK)", "query": "\"London City Lionesses\"", "language": "en-GB", "country": "GB" },
-    { "id": "club-alt-uk", "label": "London City women (UK)", "query": "\"London City\" WSL OR \"Women's Super League\"", "language": "en-GB", "country": "GB" },
-    { "id": "venue-uk", "label": "Bromley venue and travel (UK)", "query": "\"Hayes Lane\" OR \"CopperJax Community Stadium\" OR \"Bromley\" football", "language": "en-GB", "country": "GB" },
-    { "id": "alexia-es", "label": "Alexia Putellas (Spain)", "query": "\"Alexia Putellas\" \"London City\"", "language": "es", "country": "ES" }
+    {
+      "id": "club-uk",
+      "label": "London City Lionesses (UK)",
+      "query": "\"London City Lionesses\"",
+      "language": "en-GB",
+      "country": "GB"
+    },
+    {
+      "id": "club-wsl-uk",
+      "label": "London City in the WSL (UK)",
+      "query": "\"London City\" (WSL OR \"Women's Super League\")",
+      "language": "en-GB",
+      "country": "GB"
+    },
+    {
+      "id": "venue-hayes-lane-uk",
+      "label": "Hayes Lane venue (UK)",
+      "query": "\"Hayes Lane\" OR \"CopperJax Community Stadium\"",
+      "language": "en-GB",
+      "country": "GB"
+    },
+    {
+      "id": "alexia-es",
+      "label": "Alexia Putellas (Spain)",
+      "query": "\"Alexia Putellas\" \"London City\"",
+      "language": "es",
+      "country": "ES"
+    }
   ],
   "topics": [
-    { "id": "ticketing", "label": "Ticketing", "keywords": ["ticket", "tickets", "sold out", "sell out", "sell-out", "sellout", "season ticket", "attendance", "crowd", "entradas", "taquilla"] },
-    { "id": "squad", "label": "Squad & players", "keywords": ["signs", "signing", "transfer", "injury", "injured", "loan", "contract", "captain", "fichaje", "lesión"] },
-    { "id": "commercial", "label": "Sponsors & partners", "keywords": ["sponsor", "sponsorship", "partner", "partnership", "kit deal", "brand", "patrocinio", "patrocinador"] },
-    { "id": "matchday", "label": "Matchday & travel", "keywords": ["stadium", "venue", "kick-off", "kick off", "rail", "strike", "closure", "weather", "postponed", "estadio"] },
-    { "id": "results", "label": "Results & form", "keywords": ["win", "wins", "beat", "defeat", "draw", "victory", "table", "goal", "victoria", "derrota"] }
+    {
+      "id": "ticketing",
+      "label": "Ticketing",
+      "keywords": [
+        "ticket",
+        "tickets",
+        "sold out",
+        "sell out",
+        "sell-out",
+        "sellout",
+        "season ticket",
+        "attendance",
+        "crowd",
+        "entradas",
+        "taquilla"
+      ]
+    },
+    {
+      "id": "squad",
+      "label": "Squad & players",
+      "keywords": [
+        "signs",
+        "signing",
+        "transfer",
+        "injury",
+        "injured",
+        "loan",
+        "contract",
+        "captain",
+        "fichaje",
+        "lesión",
+        "signings",
+        "debut",
+        "fichajes"
+      ]
+    },
+    {
+      "id": "commercial",
+      "label": "Sponsors & partners",
+      "keywords": [
+        "sponsor",
+        "sponsorship",
+        "partner",
+        "partnership",
+        "kit deal",
+        "brand",
+        "patrocinio",
+        "patrocinador"
+      ]
+    },
+    {
+      "id": "matchday",
+      "label": "Matchday & travel",
+      "keywords": [
+        "stadium",
+        "venue",
+        "kick-off",
+        "kick off",
+        "rail",
+        "strike",
+        "closure",
+        "weather",
+        "postponed",
+        "estadio"
+      ]
+    },
+    {
+      "id": "results",
+      "label": "Results & form",
+      "keywords": [
+        "win",
+        "wins",
+        "beat",
+        "defeat",
+        "draw",
+        "victory",
+        "table",
+        "goal",
+        "victoria",
+        "derrota",
+        "thrash",
+        "thrashes",
+        "rout",
+        "routs",
+        "highlights",
+        "hat-trick",
+        "brace",
+        "goleada",
+        "doblete"
+      ]
+    }
+  ],
+  "excludeOutlets": [
+    "FotMob",
+    "Transfermarkt",
+    "BeSoccer Livescore",
+    "365Scores",
+    "Oddschecker",
+    "WhoScored.com",
+    "Sofascore"
   ],
   "fixtureWindowDays": 45,
   "retentionDays": 21,

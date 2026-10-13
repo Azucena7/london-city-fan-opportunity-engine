@@ -42,7 +42,8 @@ async function main() {
     checkedAt: now,
     lastSuccessfulAt: anySucceeded ? now : radar.lastSuccessfulAt,
     failures,
-    items: anySucceeded ? mergeHeadlines(radar.items, incoming, now, config) : radar.items
+    // Re-tag stored headlines too, so a change to topics or fixtures applies to them as well.
+    items: mergeHeadlines(radar.items, incoming, now, config).map((item) => classify(item, config, fixtures))
   };
   const nextHealth = {
     ...health,

@@ -52,10 +52,10 @@ test("merges repeat headlines, keeps first sighting and drops old ones", () => {
   const first = mergeHeadlines([], parseRss(rss).map((item) => ({ ...item, feedIds: ["club-uk"], topics: [], fixtureIds: [] })), now, config);
   assert.equal(first.length, 2);
   assert.match(first[0].id, /^news-[0-9a-f]{12}$/);
-  const again = mergeHeadlines(first, [{ ...parseRss(rss)[0], feedIds: ["club-alt-uk"], topics: [], fixtureIds: [] }], "2026-10-14T06:00:00.000Z", config);
+  const again = mergeHeadlines(first, [{ ...parseRss(rss)[0], feedIds: ["club-wsl-uk"], topics: [], fixtureIds: [] }], "2026-10-14T06:00:00.000Z", config);
   assert.equal(again.length, 2);
   assert.equal(again[0].firstSeenAt, now);
-  assert.deepEqual(again[0].feedIds, ["club-uk", "club-alt-uk"]);
+  assert.deepEqual(again[0].feedIds, ["club-uk", "club-wsl-uk"]);
   const later = mergeHeadlines(again, [], "2026-11-20T06:00:00.000Z", config);
   assert.equal(later.length, 0, "headlines older than the retention window are dropped");
 });
@@ -68,4 +68,19 @@ test("the radar is configured, wired into the daily refresh and never writes sig
   assert.match(workflow, /git add [^\n]*data\/live\/news-radar\.json/);
   const script = readFileSync("scripts/refresh-news-radar.mjs", "utf8");
   assert.doesNotMatch(script, /signals\.json/);
+});
+
+test("excluded outlets are dropped, including headlines stored before the exclusion", () => {
+  const now = "2026-10-13T06:00:00.000Z";
+  const stored = [{ id: "news-old", title: "Shots per 90 - London City Lionesses (W) stats", outlet: "FotMob", url: "https://x", publishedAt: "2026-10-11T00:00:00.000Z", feedIds: ["club-uk"], topics: [], fixtureIds: [], firstSeenAt: now }];
+  const merged = mergeHeadlines(stored, [], now, { ...config, excludeOutlets: ["fotmob"] });
+  assert.equal(merged.length, 0);
+  assert.ok(config.excludeOutlets.includes("FotMob"));
+});
+
+test("result and squad keywords catch the phrasing real headlines use", () => {
+  const tags = (title) => classify({ title }, config, []).topics;
+  assert.deepEqual(tags("London City Lionesses thrash Tottenham 6-1"), ["results"]);
+  assert.deepEqual(tags("New star signings pushing London City Lionesses to the next level"), ["squad"]);
+  assert.deepEqual(tags("Alexia se exhibe en la goleada del London City"), ["results"]);
 });
