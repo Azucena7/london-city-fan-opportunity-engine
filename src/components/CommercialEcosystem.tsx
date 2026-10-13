@@ -1,24 +1,24 @@
 import styles from "./CommercialEcosystem.module.css";
 
 const inputs = [
-  ["Data & intelligence", "CRM · ticketing · analytics · Blinkfire"],
-  ["Documents & rights", "Drive · SharePoint · contracts"],
-  ["Planning & context", "Fixtures · calendars · player availability"],
-  ["Execution", "Asana · Monday · ClickUp · Trello · other tools"]
+  ["External signals", "Weather · transport · city events · football context"],
+  ["Fan & demand", "CRM · ticketing · analytics · Blinkfire"],
+  ["Commercial truth", "Partners · rights · contracts · people"],
+  ["Planning & execution", "Fixtures · calendars · work-management tools"]
 ] as const;
 
 export function CommercialEcosystem() {
   return (
     <section className={styles.wrap} id="integrations" aria-labelledby="ecosystem-title">
       <div className={styles.copy}>
-        <span>Works with your club stack</span>
-        <h2 id="ecosystem-title">Keep your specialist tools. Let AVELA connect the decision across them.</h2>
+        <span>Signal network + club stack</span>
+        <h2 id="ecosystem-title">AVELA connects what is happening outside the club with what the club can actually do.</h2>
         <p>
-          Your existing systems remain systems of record. AVELA sits above them as the operating layer that
-          joins evidence, rights, timing, ownership and capacity — then prepares the action and tracks whether it is ready.
+          External context creates the signal. Club systems add demand, rights, availability and execution reality.
+          AVELA uses both to decide whether the signal changes the plan.
         </p>
       </div>
-      <div className={styles.map} aria-label="Existing club systems feed AVELA decision orchestration">
+      <div className={styles.map} aria-label="External and club context feed the AVELA Opportunity Engine">
         <div className={styles.inputs}>
           {inputs.map(([label, detail], index) => (
             <article key={label}>
@@ -30,19 +30,19 @@ export function CommercialEcosystem() {
         <div className={styles.flow} aria-hidden="true"><span/><span/><span/></div>
         <div className={styles.avela}>
           <span>AVELA</span>
-          <strong>Decision Orchestration</strong>
-          <p>Evidence + context + constraints + ownership + readiness</p>
+          <strong>Opportunity Engine</strong>
+          <p>Detect · interpret · validate · prepare</p>
         </div>
         <div className={styles.outputs}>
-          <article><span>01</span><strong>Priority</strong></article>
-          <article><span>02</span><strong>Decision</strong></article>
-          <article><span>03</span><strong>Activation</strong></article>
+          <article><span>01</span><strong>Pressure</strong></article>
+          <article><span>02</span><strong>Opportunity</strong></article>
+          <article><span>03</span><strong>Decision</strong></article>
           <article><span>04</span><strong>Learning</strong></article>
         </div>
       </div>
       <div className={styles.note}>
-        <strong>AVELA does not replace specialist platforms — it reduces the manual work between them.</strong>
-        <p>Performance, sponsor rights, player availability, contracts, calendars and execution capacity can all change the same decision. AVELA keeps that context together.</p>
+        <strong>AVELA does not replace CRM, analytics, rights systems or work tools.</strong>
+        <p>Those systems help validate and execute the opportunity. The engine's distinctive role is connecting them with external context the team would otherwise have to monitor manually.</p>
       </div>
     </section>
   );
