@@ -20,7 +20,6 @@
 .secondary a,.bottom a{min-height:34px;display:flex;align-items:center;padding:7px 8px;border-radius:6px;color:#9FB0BF;text-decoration:none;font-size:12px;font-weight:750}
 .secondary a:hover,.bottom a:hover,.secondaryActive{background:rgba(255,255,255,.055)!important;color:#fff!important}
 .bottom{margin-top:auto;display:grid;gap:3px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
-.positioning{display:flex;align-items:center;gap:5px;padding:0 9px 9px;color:#72879A;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.055em}.positioning i{color:#EF8B6C;font-style:normal}.positioning strong{color:#86D8CC}
 .mobileMenu{display:none}
 
 @media(max-width:900px){
@@ -53,7 +52,6 @@
 .secondary{margin-top:12px}
 .secondary .sectionLabel{font-size:12px}
 .bottomLabel{padding:5px 8px 2px;color:#6F879A;font-size:12px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
-.positioning{margin-bottom:2px}
 
 
 @media(max-width:900px){

@@ -27,37 +27,44 @@ export function deriveNextFixtureLearning(
     };
   }
 
-  const repeatRate = results.repeatPurchaseRate ?? 0;
-  const scanRate = results.scanRate ?? 0;
-  const attributed = results.campaignAttributedTickets ?? 0;
+  // Missing is not zero: a metric absent from the export must never drive a recommendation.
+  const repeatRate = results.repeatPurchaseRate;
+  const scanRate = results.scanRate;
+  const attributed = results.campaignAttributedTickets;
 
   const repeat =
-    repeatRate >= 0.2
-      ? "Keep recent-home attendees as a priority audience for the next comparable fixture."
-      : "Keep the recent-attendee cohort as a test cell, but do not make it the only acquisition audience.";
+    repeatRate === null
+      ? "Keep the recent-attendee cohort as a test cell until repeat purchase is measured."
+      : repeatRate >= 0.2
+        ? "Keep recent-home attendees as a priority audience for the next comparable fixture."
+        : "Keep the recent-attendee cohort as a test cell, but do not make it the only acquisition audience.";
 
   const change =
-    scanRate < 0.8
-      ? "Tighten pre-match reminder timing and attendance follow-up before increasing acquisition volume."
-      : attributed === 0
-        ? "Improve campaign tagging and channel-level attribution before increasing campaign complexity."
-        : "Keep the core proposition stable and change only one audience or timing variable in the next test.";
+    scanRate === null
+      ? "Connect scan status before changing reminder timing or acquisition volume."
+      : scanRate < 0.8
+        ? "Tighten pre-match reminder timing and attendance follow-up before increasing acquisition volume."
+        : attributed === null || attributed === 0
+          ? "Improve campaign tagging and channel-level attribution before increasing campaign complexity."
+          : "Keep the core proposition stable and change only one audience or timing variable in the next test.";
 
   const measure =
-    attributed > 0
+    attributed !== null && attributed > 0
       ? "Predefine a holdout or credible comparison group so the next fixture can test incrementality, not only attribution."
       : "Require campaign identifiers on purchase and scan records so channel activity can be matched to observed behaviour.";
 
-  const evidenceState = attributed > 0 && scanRate > 0 ? "measured" : "descriptive";
-  const confidence = evidenceState === "measured" && repeatRate > 0 ? "Medium" : "Low";
+  const evidenceState = attributed !== null && attributed > 0 && scanRate !== null && scanRate > 0 ? "measured" : "descriptive";
+  const confidence = evidenceState === "measured" && repeatRate !== null && repeatRate > 0 ? "Medium" : "Low";
 
   return {
     confidence,
     evidenceState,
     learned:
-      repeatRate >= 0.2
-        ? "Observed repeat behaviour supports keeping recent-home attendees in the next comparable test, but not automatic scaling."
-        : "Observed behaviour does not yet justify making the recent-attendee cohort the only acquisition audience.",
+      repeatRate === null
+        ? "Repeat purchase is not measured yet, so AVELA cannot say whether recent attendees should stay a priority audience."
+        : repeatRate >= 0.2
+          ? "Observed repeat behaviour supports keeping recent-home attendees in the next comparable test, but not automatic scaling."
+          : "Observed behaviour does not yet justify making the recent-attendee cohort the only acquisition audience.",
     repeat,
     change,
     measure,

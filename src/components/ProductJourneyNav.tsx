@@ -122,9 +122,6 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
       </nav>
 
       <div className={styles.bottom}>
-        <div className={styles.positioning}>
-          <span>Signals</span><i>→</i><span>Context</span><i>→</i><strong>Action</strong>
-        </div>
         <span className={styles.bottomLabel}>Workspace</span>
         {utilityItems.map((item) => (
           <Link key={item.key} href={item.href} className={active === item.key ? styles.secondaryActive : ""} aria-current={active === item.key ? "page" : undefined}>{item.label}</Link>

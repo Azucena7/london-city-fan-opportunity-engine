@@ -26,12 +26,12 @@
 .kpis{grid-template-columns:repeat(4,1fr)}
 .fixtureFacts article,.kpis article{padding:13px 14px;border:1px solid #E1E6E9;border-radius:10px;background:#fff}
 .fixtureFacts span,.fixtureFacts strong,.kpis span,.kpis strong{display:block}
-.fixtureFacts span,.kpis span,.timeline span,.stateList span{color:#86939D;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.045em}
+.fixtureFacts span,.kpis span{color:#86939D;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.045em}
 .fixtureFacts strong{margin-top:5px;font-size:15px}
 .kpis strong{margin-top:6px;font-size:22px;letter-spacing:-.03em}
 .kpis p{margin:4px 0 0!important;color:#83909A!important;font-size:11px!important;line-height:1.4}
 
-.evidenceDrawer,.interpretation,.learningLoop,.resultState,.next{
+.evidenceDrawer,.interpretation,.next{
   margin-top:12px;border:1px solid #E0E5E8;border-radius:11px;background:#fff
 }
 .evidenceDrawer>summary,.interpretation>summary{
@@ -50,19 +50,8 @@
 .interpretationGrid strong{margin-top:4px;font-size:11px;line-height:1.4}
 .interpretationGrid p{margin:4px 0 0!important;color:#87949E!important;font-size:11px!important;line-height:1.4}
 
-.learningLoop,.resultState,.next{padding:15px}
-.sectionHead{margin-bottom:9px}
-.sectionHead h2,.resultState h2,.next h2{margin:4px 0 0!important;font-size:16px!important;line-height:1.25!important}
-.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.timeline article{padding:11px;border:1px solid #E5E9EC;border-radius:7px;background:#FAFBFB}
-.timeline strong{display:block;margin-top:4px;font-size:11px;line-height:1.4}
-.timeline p{margin:5px 0 0!important;color:#84919B!important;font-size:11px!important;line-height:1.45}
-
-.resultState{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-.resultState>div:first-child>p{margin:7px 0 0!important;color:#7A8893!important;font-size:11px!important;line-height:1.5}
-.stateList{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.stateList>div{padding:10px;border-radius:7px;background:#F6F8F9}
-.stateList strong{display:block;margin-top:3px;font-size:11px;line-height:1.4}
+.next{padding:15px}
+.next h2{margin:4px 0 0!important;font-size:16px!important;line-height:1.25!important}
 
 .next{display:flex;justify-content:space-between;gap:14px;align-items:center}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
@@ -71,15 +60,15 @@
 .secondary{border:1px solid #DDE3E7;background:#fff;color:#20364C}
 
 @media(max-width:900px){
-  .hero,.resultState{grid-template-columns:1fr}
-  .kpis,.timeline{grid-template-columns:1fr 1fr}
+  .hero{grid-template-columns:1fr}
+  .kpis{grid-template-columns:1fr 1fr}
 }
 @media(max-width:620px){
   .fixturePicker{display:flex;gap:6px;padding:9px 10px;scroll-snap-type:x proximity;scrollbar-width:none}
   .fixturePicker::-webkit-scrollbar{display:none}
   .fixturePicker>strong{position:sticky;left:0;z-index:2;padding:7px 8px 7px 0;background:#fff}
   .fixturePicker a{width:auto;scroll-snap-align:start}
-  .fixtureFacts,.kpis,.timeline,.interpretationGrid,.stateList{grid-template-columns:1fr}
+  .fixtureFacts,.kpis,.interpretationGrid{grid-template-columns:1fr}
   .evidenceDrawer>summary,.interpretation>summary,.next{align-items:flex-start;flex-direction:column}
   .actions{width:100%}
   .primary,.secondary{flex:1;justify-content:center}

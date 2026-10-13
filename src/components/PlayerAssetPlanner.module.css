@@ -414,3 +414,5 @@
   .need button,.governanceActions button,.governanceActions a{min-height:44px}
   .governanceActions small{display:block;width:100%;color:var(--product-muted);font-size:11px;line-height:1.4}
 }
+/* The recommended pack names sit on navy; override the global navy heading colour. */
+.heroPack .heroPackIntro h3{color:#fff}
