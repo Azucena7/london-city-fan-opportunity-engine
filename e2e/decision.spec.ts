@@ -58,3 +58,11 @@ test.describe("human decision on the Opportunity Brief", () => {
     await expect(memory).not.toContainText("Decide in step 05");
   });
 });
+
+test("the brief says which sources behind it are not operational", async ({ page }) => {
+  await page.goto(brief);
+  await page.waitForLoadState("networkidle");
+  const coverage = page.getByRole("region", { name: "Evidence coverage" }).last();
+  await expect(coverage).toContainText(/(\d+ of \d+|All \d+) sources behind this brief are operational/);
+  await expect(coverage.getByRole("link", { name: "Source status →" })).toHaveAttribute("href", "/app/sources");
+});
