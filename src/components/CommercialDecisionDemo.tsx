@@ -3,81 +3,83 @@
 import { useState } from "react";
 import styles from "./CommercialDecisionDemo.module.css";
 
+// Each scenario starts from something outside the club. Internal context then validates
+// whether it is worth acting on. Illustrative only: no club data sits behind these lines.
 const scenarios = [
   {
-    id: "soft-demand",
-    tab: "Sales pace soft",
-    phase: "Early fixture read",
-    trigger: "Demand risk detected",
-    delta: "↓ sales velocity vs comparable fixture",
-    confidence: "High",
-    signals: [
-      ["Ticketing", "Sales pace below the comparable home fixture"],
-      ["CRM", "Family buyers from recent home matches are reachable"],
-      ["Timing", "Weekend fixture leaves a strong family window"]
-    ],
-    decision: "Prioritise a family return-attendance campaign.",
-    rationale: "Demand is soft, but the club already has a reachable family audience and a fixture window that suits them. AVELA favours precision over broad paid reach.",
-    audience: "Recent family buyers",
-    channel: "CRM + owned social",
-    message: "Come back together",
-    spend: "Hold broad paid",
-    expected: "Improve conversion without inflating acquisition cost"
-  },
-  {
-    id: "local-collision",
-    tab: "Local collision",
-    phase: "Context shifts",
-    trigger: "Attention window compressed",
-    delta: "↓ usable matchday window",
+    id: "competing-kickoff",
+    tab: "Competing kick-off",
+    phase: "Competing football",
+    trigger: "A nearby Premier League match now kicks off 30 minutes earlier",
+    delta: "↓ usable family window",
     confidence: "Medium-high",
     signals: [
-      ["City", "A competing local event compresses the afternoon window"],
-      ["Interest", "Organic match interest is rising"],
-      ["Capacity", "Paid media and creative capacity are limited"]
+      ["Competing football", "A London Premier League kick-off moves into the same afternoon window"],
+      ["CRM", "Family buyers from recent home matches are reachable"],
+      ["Calendar", "Weekend fixture with no school-day clash"]
     ],
-    decision: "Narrow the audience and move activity closer to high-intent segments.",
-    rationale: "The fixture still has interest, but the wider day is more competitive and team capacity is constrained. AVELA protects effort by concentrating on warm audiences.",
-    audience: "Warm CRM segments",
-    channel: "Owned first",
-    message: "Make the match fit the day",
-    spend: "Targeted only",
-    expected: "Preserve efficiency while reducing wasted reach"
+    decision: "Re-invite recent family buyers early, before the clash fills their afternoon.",
+    rationale: "The clash compresses the day, not the club's appeal. AVELA moves the ask earlier and concentrates it on people who already came, instead of buying broad reach against a bigger fixture.",
+    audience: "Recent family buyers",
+    channel: "CRM + owned social",
+    message: "Make our match your afternoon",
+    spend: "Hold broad paid",
+    expected: "Protect attendance without paying to compete for the same attention"
   },
   {
-    id: "demand-rising",
-    tab: "Demand rising",
-    phase: "Demand strengthens",
-    trigger: "Momentum detected",
-    delta: "↑ sales velocity + content response",
+    id: "rail-disruption",
+    tab: "Rail disruption",
+    phase: "Transport",
+    trigger: "Planned engineering works close the main rail line on matchday",
+    delta: "↓ easy routes to the stadium",
     confidence: "High",
     signals: [
-      ["Ticketing", "Sales velocity improves materially"],
-      ["Content", "Player-led creative is outperforming generic graphics"],
-      ["Inventory", "Availability is tightening in priority areas"]
+      ["Transport", "Rail replacement buses on the line most fans use"],
+      ["Ticketing", "Many recent buyers travel from areas served by that line"],
+      ["Rights", "The travel partner has unused matchday activation rights"]
     ],
-    decision: "Stop discount-led messaging and switch to urgency plus player-led creative.",
-    rationale: "The fixture no longer needs a demand subsidy. AVELA shifts the play toward scarcity and the creative format already earning attention.",
-    audience: "High-intent + lookalikes",
+    decision: "Send a travel plan with the reminder and activate the travel partner.",
+    rationale: "The risk is not interest but friction. AVELA turns the disruption into a useful message and a partner moment the contract already allows.",
+    audience: "Ticket holders on the affected line",
+    channel: "CRM + partner channels",
+    message: "Here is the easiest way in",
+    spend: "No paid spend",
+    expected: "Reduce no-shows and deliver a partner obligation at the same time"
+  },
+  {
+    id: "broadcast-pick",
+    tab: "Broadcast pick",
+    phase: "Broadcast window",
+    trigger: "The match is picked for live TV",
+    delta: "↑ reach · ↓ reason to attend",
+    confidence: "Medium",
+    signals: [
+      ["Broadcast", "Live TV pick confirmed for the fixture"],
+      ["Content", "Player-led clips are outperforming generic graphics"],
+      ["Inventory", "Seats remain in family areas"]
+    ],
+    decision: "Sell what the stadium adds that the broadcast cannot, with player-led creative.",
+    rationale: "Broadcast exposure helps the sponsor story but gives undecided fans a reason to stay home. AVELA shifts the message to the in-stadium experience and uses the format already earning attention.",
+    audience: "Warm, undecided local fans",
     channel: "Player-led social + CRM",
-    message: "Be there before it fills",
-    spend: "Scale selectively",
-    expected: "Capture momentum without unnecessary discounting"
+    message: "Be there, not just watching",
+    spend: "Targeted only",
+    expected: "Keep the TV pick from cannibalising the gate"
   }
 ] as const;
 
 export function CommercialDecisionDemo() {
-  const [activeId, setActiveId] = useState<(typeof scenarios)[number]["id"]>("soft-demand");
+  const [activeId, setActiveId] = useState<(typeof scenarios)[number]["id"]>("competing-kickoff");
   const active = scenarios.find((scenario) => scenario.id === activeId) ?? scenarios[0];
 
   return (
     <section className={styles.wrap} aria-labelledby="decision-demo-title">
       <div className={styles.intro}>
-        <span>Try the matchday decision</span>
-        <h2 id="decision-demo-title">Change the signal. Watch the marketing play change.</h2>
+        <span>Try it: change the context</span>
+        <h2 id="decision-demo-title">Change what happens around the match. Watch the plan change.</h2>
         <p>
-          This is an illustrative product simulation. AVELA reads the fixture as a moving situation, not a static campaign brief.
-          Change the context and the recommended audience, channel, message and spend posture change with it.
+          This is an illustrative product simulation. Each scenario starts outside the club; internal context then decides
+          whether it is worth acting on. Change the context and the audience, channel, message and spend posture change with it.
         </p>
       </div>
 
@@ -85,7 +87,7 @@ export function CommercialDecisionDemo() {
         <div><span>Fixture</span><strong>Home match · 18 Oct</strong></div>
         <div><span>Objective</span><strong>Attendance + repeat visit</strong></div>
         <div><span>Decision window</span><strong>T−12 days</strong></div>
-        <div className={styles.liveState}><i /> <strong>Monitoring live context</strong></div>
+        <div className={styles.liveState}><i /> <strong>Illustrative fixture</strong></div>
       </div>
 
       <div className={styles.scenarioTabs} role="tablist" aria-label="Change match context">
@@ -119,10 +121,10 @@ export function CommercialDecisionDemo() {
       <div className={styles.interactiveStage} role="tabpanel">
         <div className={styles.fixtureHeader}>
           <div>
-            <span>Home fixture · Decision orchestration</span>
+            <span>Home fixture · Illustrative simulation</span>
             <strong>Marketing & commercial decision</strong>
           </div>
-          <i>LIVE SIMULATION</i>
+          <i>SIMULATION</i>
         </div>
 
         <div className={styles.interactiveGrid}>
@@ -163,7 +165,7 @@ export function CommercialDecisionDemo() {
       </div>
 
       <div className={styles.footer}>
-        <span>Fixture</span><i>→</i><span>Signals</span><i>→</i><span>Audience + offer + channel</span><i>→</i><strong>Measured matchday learning</strong>
+        <span>Signal</span><i>→</i><span>Impact</span><i>→</i><span>Prepared move</span><i>→</i><strong>Measured matchday learning</strong>
       </div>
     </section>
   );

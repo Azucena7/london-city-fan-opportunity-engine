@@ -5,6 +5,8 @@ import { OpportunityEngineStage } from "@/components/OpportunityEngineStage";
 import { CommercialEcosystem } from "@/components/CommercialEcosystem";
 import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import { CommercialFAQ } from "@/components/CommercialFAQ";
+import { MorningCommercialRead } from "@/components/MorningCommercialRead";
+import { EngineUseCases, HowTheEngineWorks } from "@/components/EngineStory";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { decisionValidation } from "@/lib/data";
 import styles from "./commercial-home.module.css";
@@ -77,7 +79,13 @@ export default function Home() {
         </div>
       </section>
 
+      <MorningCommercialRead live={live} />
+
       <CommercialDecisionDemo />
+
+      <HowTheEngineWorks />
+
+      <EngineUseCases />
 
       <CommercialEcosystem />
 

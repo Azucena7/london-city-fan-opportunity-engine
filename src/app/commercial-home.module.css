@@ -82,7 +82,7 @@
 }
 
 .pilot h2,.finalCta h2{
-  margin:11px 0 0;font-size:clamp(38px,4.5vw,60px);line-height:.97;letter-spacing:-.052em;font-weight:760;
+  margin:11px 0 0;font-size:clamp(30px,3.2vw,42px);line-height:1.04;letter-spacing:-.04em;font-weight:760;
 }
 .liveProof{
   width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.72fr);
@@ -107,7 +107,7 @@
   background:var(--avela-sand);color:var(--avela-navy);
 }
 .finalCta>div:first-child>span{color:var(--avela-teal);font-size:11px;font-weight:900;letter-spacing:.16em}
-.finalCta h2{max-width:900px;font-size:clamp(34px,4vw,52px)}
+.finalCta h2{max-width:900px;font-size:clamp(30px,3.2vw,42px)}
 .finalCta>div:last-child{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .footer{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;padding:28px 0 52px;color:var(--avela-muted);font-size:12px}
 .footer strong{color:var(--avela-navy);letter-spacing:.12em}
@@ -301,7 +301,7 @@
     gap:8px;
   }
   .pilot h2,.finalCta h2{
-    font-size:clamp(34px,10vw,46px);
+    font-size:clamp(28px,8vw,36px);
     line-height:.98;
   }
   .liveCopy h2{

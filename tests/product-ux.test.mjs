@@ -378,8 +378,8 @@ test("club setup context differentiates the engine from replacement CRM and gene
   assert.match(home, /The Opportunity Engine for Football Club Marketing & Commercial Teams/);
   assert.match(home, /CommercialEcosystem/);
   assert.match(ecosystem, /Works with your club stack/);
-  assert.match(ecosystem, /Keep your specialist tools\. Orchestrate the decision across them/);
-  assert.match(ecosystem, /cross-functional decision orchestration/);
+  assert.match(ecosystem, /Keep your specialist tools\. AVELA reads across them/);
+  assert.match(ecosystem, /are not competitors/);
 });
 
 test("club setup persists reusable fixture, channel, objective, brand and approval context", () => {
@@ -2240,9 +2240,9 @@ test("commercial home uses lightweight decision motion instead of decorative vid
   const stageCss = read("src/components/OpportunityEngineStage.module.css");
   const ecosystem = read("src/components/CommercialEcosystem.tsx");
   assert.match(page, /OpportunityEngineStage/);
-  assert.match(ecosystem, /Priority/);
-  assert.match(ecosystem, /Decision/);
-  assert.match(ecosystem, /Action/);
+  assert.match(ecosystem, /What changed/);
+  assert.match(ecosystem, /Why it matters/);
+  assert.match(ecosystem, /Prepared move/);
   assert.match(stage, /styles\.core/);
   assert.match(stage, /styles\.outputs/);
   assert.match(stageCss, /prefers-reduced-motion:no-preference/);
@@ -2495,7 +2495,7 @@ test("commercial home uses an interactive fixture-marketing decision demo", () =
   const demo = read("src/components/CommercialDecisionDemo.tsx");
   assert.match(demo, /"use client"/);
   assert.match(demo, /useState/);
-  assert.match(demo, /Change the signal\. Watch the marketing play change\./);
+  assert.match(demo, /Change what happens around the match\. Watch the plan change\./);
   assert.match(demo, /Recommended marketing play/);
   assert.match(demo, /Audience/);
   assert.match(demo, /Channel/);
@@ -2645,10 +2645,10 @@ test("AVELA category separates the workspace from cross-functional orchestration
   const pack = read("src/app/pilot/operating-pack/page.tsx");
   const help = read("src/app/app/help/page.tsx");
 
-  assert.match(ecosystem, /cross-functional decision orchestration/);
-  assert.match(ecosystem, /Decision Orchestration/);
-  assert.match(ecosystem, /orchestrates the decision across them/);
-  assert.match(demo, /Home fixture · Decision orchestration/);
+  assert.match(ecosystem, /Opportunity Engine/);
+  assert.match(ecosystem, /remain systems of record/);
+  assert.match(ecosystem, /External signals/);
+  assert.match(demo, /Home fixture · Illustrative simulation/);
   assert.match(demo, /Marketing & commercial decision/);
   assert.doesNotMatch(pilot, /Growth Intelligence Playbook|Decision Playbook/);
   assert.match(pilot, /CONTINUE/);
@@ -2977,4 +2977,28 @@ test("hero engine reads signal states from the source register instead of claimi
   assert.match(stage, /In a pilot/);
   assert.match(stage, /signal families read live today/);
   assert.match(stage, /live\?\.recommendedAction/);
+});
+
+test("commercial home follows the Opportunity Engine story order", () => {
+  const page = read("src/app/page.tsx");
+  const order = ["<OpportunityEngineStage", "styles.liveProof", "<MorningCommercialRead", "<CommercialDecisionDemo", "<HowTheEngineWorks", "<EngineUseCases", "<CommercialEcosystem", "styles.pilot}", "<CommercialFAQ", "styles.finalCta"];
+  const positions = order.map((marker) => page.indexOf(marker));
+  positions.forEach((position, index) => assert.ok(position > -1, order[index]));
+  assert.deepEqual([...positions].sort((a, b) => a - b), positions);
+});
+
+test("demo scenarios start outside the club and stay labelled as illustrative", () => {
+  const demo = read("src/components/CommercialDecisionDemo.tsx");
+  assert.match(demo, /Competing kick-off/);
+  assert.match(demo, /Rail disruption/);
+  assert.match(demo, /Broadcast pick/);
+  assert.doesNotMatch(demo, /LIVE SIMULATION|Monitoring live context/);
+});
+
+test("commercial FAQ refuses prediction claims and says what is read today", () => {
+  const faq = read("src/components/CommercialFAQ.tsx");
+  assert.match(faq, /Does AVELA predict attendance\?/);
+  assert.match(faq, /does not promise forecasts or a magic score/);
+  assert.match(faq, /What does AVELA read today\?/);
+  assert.match(faq, /shown as not connected, never filled in/);
 });
