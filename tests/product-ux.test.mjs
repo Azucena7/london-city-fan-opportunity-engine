@@ -2314,9 +2314,20 @@ test("Opportunity Brief follows decision readiness execution evidence memory hie
   assert.match(page, /OperationalCapacityPanel/);
   assert.match(page, /OperationalHandoffs/);
 
-  assert.match(css, /decisionLens/);
   assert.match(css, /phaseIntro/);
   assert.match(css, /phaseNumber/);
+  assert.match(page, /styles\.phaseIntro/);
+  assert.match(page, /styles\.phaseNumber/);
+});
+
+test("Opportunity Brief stylesheet only styles classes the page renders, without !important", () => {
+  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
+  const classes = new Set([...css.matchAll(/\.([a-zA-Z][\w-]*)/g)].map((match) => match[1]));
+  for (const name of classes) {
+    assert.match(page, new RegExp(`styles\\.${name}\\b`), `.${name} is not rendered by the brief`);
+  }
+  assert.doesNotMatch(css, /!important/);
 });
 
 
