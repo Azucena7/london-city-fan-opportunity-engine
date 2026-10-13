@@ -259,3 +259,81 @@
   .sourceRail{grid-template-columns:1fr}
   .stepRail{grid-template-columns:1fr}
 }
+
+
+/* v4 — slimmer and more directional */
+.wrap{padding-top:58px;padding-bottom:58px}
+.intro{
+  grid-template-columns:170px minmax(0,1fr);
+  gap:28px;
+}
+.intro h2{
+  max-width:650px;
+  font-size:clamp(30px,3vw,40px);
+  line-height:1.06;
+  letter-spacing:-.035em;
+}
+.intro p{
+  max-width:650px;
+  font-size:15px;
+  line-height:1.55;
+}
+.stage{
+  margin-top:28px;
+  padding:16px;
+  border-radius:14px;
+}
+.sourceRail{gap:6px}
+.source{
+  min-height:56px;
+  padding:10px;
+}
+.source strong{font-size:11px}
+.engine{
+  grid-template-columns:170px minmax(0,1fr) auto;
+  min-height:0;
+  margin-top:8px;
+  padding:16px 18px;
+  gap:14px;
+  border-radius:12px 12px 24px 12px;
+}
+.engineMark strong{font-size:18px}
+.step{padding:6px 8px}
+.step strong{font-size:11px}
+.step small{font-size:9px}
+.approval{
+  padding:8px 9px;
+  font-size:9px;
+}
+.outcomes{
+  gap:6px;
+  margin-top:8px;
+}
+.outcomes>div{
+  min-height:60px;
+  padding:11px 12px;
+}
+.outcomes strong{font-size:12px}
+.outcomes small{font-size:10px}
+.playGrid{
+  margin-top:20px;
+}
+.playGrid article{
+  min-height:120px;
+  padding-top:18px;
+  padding-bottom:18px;
+}
+.playGrid h3{
+  margin-top:10px;
+  font-size:20px;
+}
+.playGrid p{
+  margin-top:7px;
+  font-size:12px;
+  line-height:1.5;
+}
+@media(max-width:720px){
+  .wrap{padding-top:44px;padding-bottom:44px}
+  .intro{grid-template-columns:1fr}
+  .intro h2{font-size:clamp(28px,8vw,36px)}
+}
