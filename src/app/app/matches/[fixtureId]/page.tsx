@@ -22,6 +22,7 @@ import { ExternalWorkPackagePreview } from "@/components/ExternalWorkPackagePrev
 import { ExternalExecutionSync } from "@/components/ExternalExecutionSync";
 import { WorkRoutingPlan } from "@/components/WorkRoutingPlan";
 import { WorkHandoffConfirmation } from "@/components/WorkHandoffConfirmation";
+import { PhaseAnchorOpener } from "@/components/PhaseAnchorOpener";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -114,12 +115,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <Link className={styles.executiveLink} href={`/app/executive?fixture=${fixture.id}`}>Executive view</Link>
           <a href="#decision">01 Decide</a>
           <a href="#readiness">02 Feasibility</a>
-          <a href="#execute">03 Build</a>
-          <a href="#evidence">04 Evidence</a>
-          <a href="#impact">05 Human decision</a>
-          <a href="#learning">06 Learn</a>
+          <a href="#execute">03 Build & route</a>
+          <a href="#evidence">04 Evidence & impact</a>
+          <a href="#human-decision">05 Human decision</a>
+          <a href="#decision-memory">06 Learn</a>
         </div>
       </nav>
+      <PhaseAnchorOpener />
 
       <section id="decision" className={styles.decisionCockpit} aria-label="Decision at a glance">
         <div className={styles.decisionLead}>
@@ -458,7 +460,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
 
       <details className={styles.phasePanel}>
         <summary><span>05</span><div><strong>Human decision</strong><small>Approve, modify or hold before any external launch.</small></div><b>Open phase →</b></summary>
-      <section className={styles.phaseIntro} aria-label="Human decision">
+      <section id="human-decision" className={styles.phaseIntro} aria-label="Human decision">
         <div>
           <span className={styles.phaseNumber}>05</span>
           <div>
@@ -479,8 +481,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       </details>
 
       <details className={styles.phasePanel}>
-        <summary><span>06</span><div><strong>Decision memory</strong><small>Preserve what AVELA recommended, what the club chose and what happened.</small></div><b>Open phase →</b></summary>
-      <section className={styles.phaseIntro} aria-label="Decision memory">
+        <summary><span>06</span><div><strong>Learn · decision memory</strong><small>Preserve what AVELA recommended, what the club chose and what happened.</small></div><b>Open phase →</b></summary>
+      <section id="decision-memory" className={styles.phaseIntro} aria-label="Decision memory">
         <div>
           <span className={styles.phaseNumber}>06</span>
           <div>

@@ -62,6 +62,18 @@ test("Matchday Companion does not infer checkout or ticket inventory from a comm
   assert.doesNotMatch(landing, /InStock/);
 });
 
+test("Matchday demo is labelled independent and kept out of search results", () => {
+  const landing = read("src/app/matchday/[fixtureId]/page.tsx");
+  const sitemap = read("src/app/sitemap.ts");
+  const robots = read("src/app/robots.ts");
+  assert.match(landing, /index: false/);
+  assert.match(landing, /INDEPENDENT MATCHDAY DEMO/);
+  assert.match(landing, /not an official London City service/);
+  assert.doesNotMatch(landing, /application\/ld\+json|SportsOrganization|organizer/);
+  assert.doesNotMatch(sitemap, /\/matchday\//);
+  assert.doesNotMatch(robots, /"\/matchday\/"/);
+});
+
 test("Executive escalation ignores informational matchday context", () => {
   const alertLogic = read("src/lib/matchdayDecisionAlert.ts");
   assert.match(alertLogic, /MatchdayAttentionLevel = "inform" \| "review" \| "act"/);

@@ -69,7 +69,8 @@ test("commercial home connects public proof to the multi-cycle pilot", async () 
   const home = await source("src/app/page.tsx");
   assert.match(home, /The club pilot is a separate test/);
   assert.match(home, /Brighton, Everton, Crystal Palace and Manchester City/);
-  assert.match(home, /See the 4-cycle London City pilot window/);
+  assert.match(home, /See the 4-cycle public demonstration/);
+  assert.doesNotMatch(home, /London City pilot/);
   assert.match(home, /href="\/pilot\?utm_source=avela_home/);
 });
 
@@ -82,10 +83,11 @@ test("commercial lead capture requires server-side Supabase credentials", async 
 });
 
 
-test("For Clubs surfaces the multi-cycle pilot window", async () => {
+test("For Clubs surfaces the multi-cycle public demonstration", async () => {
   const page = await source("src/components/ClubPilotProposition.tsx");
   assert.match(page, /Brighton, Everton, Crystal Palace and Manchester City/);
-  assert.match(page, /See the 4-cycle pilot window/);
+  assert.match(page, /See the 4-cycle public demonstration/);
+  assert.doesNotMatch(page, /pilot window/);
   assert.match(page, /utm_content=multi_cycle_proof/);
 });
 

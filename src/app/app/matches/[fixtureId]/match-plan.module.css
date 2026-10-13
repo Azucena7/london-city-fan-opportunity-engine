@@ -121,7 +121,7 @@
 .contextLinks{display:flex;gap:3px;align-items:center;overflow-x:auto}
 .contextLinks a{padding:7px 9px;border-radius:6px;color:var(--product-muted);text-decoration:none;font-size:11px;font-weight:850;white-space:nowrap}
 .contextLinks a:hover{background:#fff;color:var(--product-ink)}
-#decision,#campaign,#signals,#impact,#learning{scroll-margin-top:62px}
+#decision,#campaign,#signals,#impact,#learning,#human-decision,#decision-memory{scroll-margin-top:62px}
 @media(max-width:760px){.contextNav{top:53px;align-items:flex-start;flex-direction:column;padding:9px 0}.contextNav>div:first-child strong{white-space:normal}.contextLinks{width:100%}}
 
 /* Decision-first Opportunity Brief hierarchy */

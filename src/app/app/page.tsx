@@ -194,28 +194,24 @@ export default async function ClubAppHome() {
 
       <section className={`${styles.metricGrid} ${styles.signalStrip}`} aria-label="Decision health summary">
         <WorkspaceCard className={styles.metricCard} tone="action">
-          <div><DecisionStateBadge state="ACT" label="Act now" /><span className={styles.metricDelta}>Immediate</span></div>
+          <div><DecisionStateBadge state="ACT" label="Act now" /></div>
           <strong>{summary.actNow}</strong>
           <small>Decisions needing action</small>
-          <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 21 18 18 31 20 45 12 58 15 72 7 98 4"/></svg>
         </WorkspaceCard>
         <WorkspaceCard className={styles.metricCard}>
-          <div><DecisionStateBadge state="REVIEW" label="Review" /><span className={styles.metricDelta}>Soon</span></div>
+          <div><DecisionStateBadge state="REVIEW" label="Review" /></div>
           <strong>{summary.review}</strong>
           <small>Needs a human decision</small>
-          <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 18 18 17 31 14 45 16 58 11 72 12 98 8"/></svg>
         </WorkspaceCard>
         <WorkspaceCard className={styles.metricCard}>
-          <div><DecisionStateBadge state={summary.blocked ? "BLOCKED" : "READY"} label="Blocked" /><span className={styles.metricDelta}>Dependencies</span></div>
+          <div><DecisionStateBadge state={summary.blocked ? "BLOCKED" : "READY"} label="Blocked" /></div>
           <strong>{summary.blocked}</strong>
           <small>Unresolved blockers</small>
-          <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 20 18 20 31 18 45 18 58 14 72 14 98 14"/></svg>
         </WorkspaceCard>
         <WorkspaceCard className={styles.metricCard} tone="accent">
-          <div><DecisionStateBadge state="READY" label="On track" /><span className={styles.metricDelta}>Healthy</span></div>
+          <div><DecisionStateBadge state="READY" label="On track" /></div>
           <strong>{summary.onTrack}</strong>
           <small>No intervention required</small>
-          <svg viewBox="0 0 100 26" aria-hidden="true"><path d="M2 22 18 19 31 16 45 14 58 12 72 8 98 6"/></svg>
         </WorkspaceCard>
       </section>
 

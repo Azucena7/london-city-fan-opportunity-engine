@@ -11,10 +11,13 @@ import styles from "./matchday.module.css";
 export async function generateMetadata({ params }: { params: Promise<{ fixtureId: string }> }): Promise<Metadata> {
   const { fixtureId } = await params;
   const fixture = calendar.find((item) => item.id === fixtureId && item.homeAway === "home");
-  if (!fixture) return { title: "Matchday Journey · London City" };
+  // Independent demonstration surface: keep it out of search results so it is never mistaken for an official club service.
+  const robots = { index: false, follow: false };
+  if (!fixture) return { title: "Matchday Journey · Independent demo", robots };
   return {
-    title: `London City v ${fixture.opponent} · Matchday Journey`,
-    description: `Plan travel to ${fixture.venue} for London City v ${fixture.opponent} on ${fixture.date}. Fixture details, travel context and official directions in one place.`,
+    robots,
+    title: `London City v ${fixture.opponent} · Matchday Journey (independent demo)`,
+    description: `Independent AVELA demonstration, not an official club service. Plan travel to ${fixture.venue} for London City v ${fixture.opponent} on ${fixture.date}. Fixture details, travel context and official directions in one place.`,
     alternates: { canonical: `/matchday/${fixture.id}` },
     openGraph: {
       title: `London City v ${fixture.opponent} · Matchday Journey`,
@@ -34,45 +37,16 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
     .sort((a,b) => (b.travelFriction + b.territoryOpportunity) - (a.travelFriction + a.territoryOpportunity));
   const matchDate = new Intl.DateTimeFormat("en-GB", { weekday:"long", day:"numeric", month:"long", year:"numeric" })
     .format(new Date(fixture.date + "T12:00:00Z"));
-  const eventStart = fixture.kickoff ? `${fixture.date}T${fixture.kickoff}:00` : fixture.date;
   const providerSummary = summariseMobilityProviderReadiness();
   const weather = getMatchdayWeatherContext(fixtureId, fixture.date);
   const ticketing = getVerifiedFixtureTicketUrl(fixtureId);
 
   return (
     <main className={styles.shell}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SportsEvent",
-            name: `London City Lionesses v ${fixture.opponent}`,
-            startDate: eventStart,
-            eventStatus: "https://schema.org/EventScheduled",
-            location: {
-              "@type": "Place",
-              name: fixture.venue,
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Bromley",
-                addressRegion: "London",
-                addressCountry: "GB"
-              }
-            },
-            organizer: {
-              "@type": "SportsOrganization",
-              name: "London City Lionesses",
-              url: "https://www.londoncitylionesses.com/"
-            },
-            ...(ticketing ? { offers: { "@type": "Offer", url: ticketing.url } } : {})
-          }).replace(/</g, "\\u003c")
-        }}
-      />
       <MatchdayUtilityTracker fixtureId={fixtureId} />
       <header className={styles.top}>
-        <Link href="/live/london-city" className={styles.brand}>LONDON CITY · MATCHDAY</Link>
-        <span>Travel information · supporter service</span>
+        <Link href="/live/london-city" className={styles.brand}>AVELA · INDEPENDENT MATCHDAY DEMO</Link>
+        <span>Public information · not an official London City service</span>
       </header>
 
       <section className={styles.hero}>
