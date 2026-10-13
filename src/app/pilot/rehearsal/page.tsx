@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { MarketingNav } from "@/components/MarketingNav";
 import { crmTicketingDemo } from "@/lib/data";
 import { buildRepeatCohort, summariseCrmTicketing } from "@/lib/crmTicketingMetrics";
 import styles from "./rehearsal.module.css";
@@ -36,8 +36,8 @@ export default function PilotRehearsalPage() {
   const scanRate = scanBase > 0 ? summary.scans / scanBase : null;
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav />
+    <main className={`${styles.shell} productShell`}>
+      <MarketingNav />
 
       <header className={styles.hero}>
         <div>

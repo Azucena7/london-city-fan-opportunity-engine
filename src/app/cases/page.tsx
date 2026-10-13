@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductJourneyNav } from "@/components/ProductJourneyNav";
+import { MarketingNav } from "@/components/MarketingNav";
 import { getFeaturedProductCases } from "@/lib/productCases";
 import styles from "./cases.module.css";
 
@@ -13,8 +13,8 @@ export default function CasesPage() {
   const cases = getFeaturedProductCases();
 
   return (
-    <main className={`${styles.shell} productAppShell`}>
-      <ProductJourneyNav />
+    <main className={`${styles.shell} productShell`}>
+      <MarketingNav />
 
       <header className={styles.hero}>
         <span className={styles.eyebrow}>Fixture use cases</span>
