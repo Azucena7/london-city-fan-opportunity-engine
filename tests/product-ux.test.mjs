@@ -1812,7 +1812,10 @@ test("opportunity brief records the final decision and actual execution separate
 
   assert.match(page, /DecisionHistoryPanel/);
   assert.match(page, /decisionId=\{\`fixture:\$\{fixture\.id\}\`\}/);
-  assert.match(component, /Record final decision/);
+  // The club's verdict is recorded once, in the Human decision step; memory records execution.
+  assert.doesNotMatch(component, /Record final decision/);
+  assert.match(component, /HUMAN_DECISION_STATES/);
+  assert.match(component, /Decide in step 05/);
   assert.match(component, /Record what went live/);
   assert.match(component, /Recommended → decided → executed → learned/);
   assert.match(component, /\/api\/decision-history/);

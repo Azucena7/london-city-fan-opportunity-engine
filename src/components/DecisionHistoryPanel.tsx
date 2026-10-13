@@ -3,7 +3,7 @@
 import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./DecisionHistoryPanel.module.css";
-import { DECISION_RECORDED_EVENT } from "./MatchPlanDecision";
+import { DECISION_RECORDED_EVENT, HUMAN_DECISION_STATES } from "./MatchPlanDecision";
 
 type Club = { id: string; name: string; role: string };
 type DecisionEvent = {
@@ -48,7 +48,7 @@ export function DecisionHistoryPanel({
   const [events, setEvents] = useState<DecisionEvent[]>([]);
   const [configured, setConfigured] = useState<boolean | null>(null);
   const [detail, setDetail] = useState("");
-  const [busy, setBusy] = useState<"committed" | "executed" | null>(null);
+  const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
 
   async function load(clubId: string) {
@@ -80,17 +80,20 @@ export function DecisionHistoryPanel({
 
   const state = useMemo(() => {
     const types = new Set(events.map((event) => event.event_type));
+    // The club's verdict is recorded once, in the Human decision step (MatchPlanDecision).
+    // Legacy "committed" events from the earlier flow still count as a decision.
+    const decision = [...events].reverse().find((event) => (event.state && HUMAN_DECISION_STATES.has(event.state)) || event.event_type === "committed") ?? null;
     return {
-      committed: types.has("committed"),
+      decision,
       executed: types.has("executed"),
       measured: types.has("measured"),
       learned: types.has("learned")
     };
   }, [events]);
 
-  async function record(eventType: "committed" | "executed") {
+  async function recordExecution() {
     if (!activeClubId || busy) return;
-    setBusy(eventType);
+    setBusy(true);
     setMessage("");
     const now = new Date().toISOString();
     try {
@@ -102,18 +105,18 @@ export function DecisionHistoryPanel({
           decisionId,
           subjectType,
           subjectId,
-          eventType,
+          eventType: "executed",
           sourceType: "user",
-          eventKey: `${decisionId}:${eventType}:${now}`,
-          state: eventType === "committed" ? "production-confirmed" : "executed-confirmed",
-          label: eventType === "committed" ? "Decision confirmed for production" : "Execution confirmed",
-          detail: detail.trim() || (eventType === "committed" ? recommendation : "Club user confirmed what actually went live."),
+          eventKey: `${decisionId}:executed:${now}`,
+          state: "executed-confirmed",
+          label: "Execution confirmed",
+          detail: detail.trim() || "Club user confirmed what actually went live.",
           metadata: { recommendation }
         })
       });
       if (response.ok) {
         setDetail("");
-        setMessage(eventType === "committed" ? "Final decision recorded in the club workspace." : "Execution recorded in the club workspace.");
+        setMessage("Execution recorded in the club workspace.");
         await load(activeClubId);
       } else {
         setMessage("This update could not be recorded. No club history was changed.");
@@ -121,7 +124,7 @@ export function DecisionHistoryPanel({
     } catch {
       setMessage("The club workspace is unreachable. No club history was changed.");
     } finally {
-      setBusy(null);
+      setBusy(false);
     }
   }
 
@@ -156,8 +159,8 @@ export function DecisionHistoryPanel({
 
       <div className={styles.stages}>
         <div className={styles.stageComplete}><span>1</span><strong>Recommended</strong><small>Current AVELA recommendation</small></div>
-        <div className={state.committed ? styles.stageComplete : styles.stageActive}><span>2</span><strong>Committed</strong><small>{state.committed ? "Production decision recorded" : "Record final decision"}</small></div>
-        <div className={state.executed ? styles.stageComplete : state.committed ? styles.stageActive : styles.stagePending}><span>3</span><strong>Executed</strong><small>{state.executed ? "Actual execution recorded" : "Record what went live"}</small></div>
+        <div className={state.decision ? styles.stageComplete : styles.stageActive}><span>2</span><strong>Decided</strong><small>{state.decision ? state.decision.label : <a href="#human-decision">Decide in step 05</a>}</small></div>
+        <div className={state.executed ? styles.stageComplete : state.decision ? styles.stageActive : styles.stagePending}><span>3</span><strong>Executed</strong><small>{state.executed ? "Actual execution recorded" : "Record what went live"}</small></div>
         <div className={state.measured || state.learned ? styles.stageComplete : styles.stagePending}><span>4</span><strong>Learned</strong><small>{state.learned ? "Learning recorded" : state.measured ? "Outcome measured" : "Waiting for outcome"}</small></div>
       </div>
 
@@ -167,12 +170,11 @@ export function DecisionHistoryPanel({
           <strong>{recommendation}</strong>
         </div>
         <label>
-          What changed or what actually went live?
+          What actually went live?
           <textarea value={detail} onChange={(event) => setDetail(event.target.value)} placeholder="e.g. We launched CRM + Instagram on 8 Oct with two players instead of three." rows={3} />
         </label>
         <div className={styles.captureActions}>
-          <button type="button" disabled={Boolean(busy)} onClick={() => void record("committed")}>{busy === "committed" ? "Saving…" : "Record final decision"}</button>
-          <button type="button" disabled={Boolean(busy)} onClick={() => void record("executed")}>{busy === "executed" ? "Saving…" : "Record what went live"}</button>
+          <button type="button" disabled={busy} aria-busy={busy} onClick={() => void recordExecution()}>{busy ? "Saving…" : "Record what went live"}</button>
         </div>
         {message ? <p className={styles.message}>{message}</p> : null}
       </div>

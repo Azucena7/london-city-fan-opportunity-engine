@@ -17,7 +17,7 @@ const verdicts: Record<Verdict, { label: string; eventType: "approved" | "change
   reject: { label: "Reject", eventType: "rejected", state: "human-rejected", recorded: "Rejected by the club", noteRequired: true }
 };
 
-const humanStates = new Set(Object.values(verdicts).map((item) => item.state));
+export const HUMAN_DECISION_STATES: ReadonlySet<string> = new Set(Object.values(verdicts).map((item) => item.state));
 
 export const DECISION_RECORDED_EVENT = "avela:decision-recorded";
 
@@ -51,7 +51,7 @@ export function MatchPlanDecision({
     const response = await fetch(`/api/decision-history?clubId=${encodeURIComponent(clubId)}&decisionId=${encodeURIComponent(decisionId)}`, { cache: "no-store" });
     const result = await response.json().catch(() => null) as { events?: RecordedDecision[] } | null;
     const events = response.ok && Array.isArray(result?.events) ? result.events : [];
-    setLatest(events.filter((event) => event.state && humanStates.has(event.state)).at(-1) ?? null);
+    setLatest(events.filter((event) => event.state && HUMAN_DECISION_STATES.has(event.state)).at(-1) ?? null);
   }
 
   useEffect(() => {
