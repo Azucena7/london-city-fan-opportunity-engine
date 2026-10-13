@@ -21,9 +21,9 @@
   grid-column:2;
   margin:0;
   max-width:780px;
-  font-size:clamp(38px,4.6vw,62px);
-  line-height:.97;
-  letter-spacing:-.055em;
+  font-size:clamp(30px,3.2vw,42px);
+  line-height:1.04;
+  letter-spacing:-.04em;
 }
 .copy p{
   grid-column:2;

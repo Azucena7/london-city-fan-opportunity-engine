@@ -178,3 +178,13 @@ test("home leads with the Opportunity Engine and keeps live and pilot signals ap
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   expect(await page.locator("main").evaluate((main) => main.getBoundingClientRect().width)).toBe(width);
 });
+
+test("home Morning Commercial Read marks unconnected signals instead of filling them in", async ({ page }) => {
+  await page.goto("/");
+  const read = page.getByRole("region", { name: "What a commercial lead reads before the first meeting." });
+  await expect(read).toBeVisible();
+  await expect(read.getByRole("listitem").filter({ hasText: "Transport" })).toContainText("Not connected");
+  await expect(read.getByRole("listitem").filter({ hasText: "Recommended next move" })).toContainText("Live");
+  await page.getByRole("tab", { name: /Rail disruption/ }).click();
+  await expect(page.getByRole("tabpanel")).toContainText("Send a travel plan with the reminder");
+});
