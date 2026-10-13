@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { reviewedKickoff } from "./lib/fixture-kickoff.mjs";
+import { applyWeatherSignal } from "./lib/weather-signal.mjs";
 
 const FIXTURES_URL = "https://www.londoncitylionesses.com/fixtures";
 const CALENDAR_PATH = new URL("../data/seed/calendar.json", import.meta.url);
@@ -214,30 +215,7 @@ async function main() {
     material_changes: materialChangeCount(existing, calendar),
     source_failures: fixtureRefresh.ok ? [] : [`Club fixtures: ${fixtureRefresh.message}`]
   };
-  const nextSignals = signals.map((signal) => {
-    if (signal.category !== "weather" || signal.fixtureId !== nextHome?.id) return signal;
-    if (weather.status !== "forecast") return { ...signal, state: "waiting", observedAt: nextCurrent.updated_at };
-    const adverse = (weather.precipitation_probability_max ?? 0) >= 60 || (weather.wind_speed_max ?? 0) >= 45;
-    return {
-      ...signal,
-      state: "forecast",
-      direction: adverse ? "negative" : "positive",
-      materiality: adverse ? "high" : "low",
-      observedAt: weather.generated_at,
-      title: adverse
-        ? { en: "Weather risk has entered the action threshold", es: "El riesgo meteorológico ha entrado en el umbral de acción" }
-        : { en: "Matchday weather is currently low risk", es: "El riesgo meteorológico actual para el matchday es bajo" },
-      summary: {
-        en: `${weather.precipitation_probability_max}% maximum rain probability, ${weather.precipitation_sum} mm and ${weather.wind_speed_max} km/h maximum wind. Forecast, not measured weather.`,
-        es: `${weather.precipitation_probability_max}% de probabilidad máxima de lluvia, ${weather.precipitation_sum} mm y viento máximo de ${weather.wind_speed_max} km/h. Es forecast, no tiempo medido.`
-      },
-      marketingAction: adverse
-        ? { en: "Prioritise access, covered arrival and service messaging; review outdoor activations.", es: "Priorizar acceso, llegada cubierta y mensajes de servicio; revisar activaciones exteriores." }
-        : { en: "Keep normal acquisition active and retain service messaging as a contingency.", es: "Mantener activa la captación normal y conservar mensajes de servicio como contingencia." },
-      sourceName: "Open-Meteo",
-      sourceUrl: "https://open-meteo.com/"
-    };
-  });
+  const nextSignals = applyWeatherSignal(signals, nextHome?.id ?? null, weather, nextCurrent.updated_at);
   if (DRY_RUN) {
     console.log(JSON.stringify({ fixtures: calendar.length, fixtureRefresh, nextHome, weather, materialChanges: nextCurrent.material_changes, sourceHealth: nextSourceHealth.sources.filter((source) => source.id === "club-public-web" || source.id === "open-meteo") }, null, 2));
     return;
