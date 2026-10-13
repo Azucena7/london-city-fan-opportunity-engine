@@ -16,7 +16,7 @@ export function DecisionContextTrail({
 }) {
   return (
     <nav className={styles.trail} aria-label="Decision context">
-      <Link href="/app">London City</Link>
+      <Link href="/app">Workspace</Link>
       {fixtureLabel ? (
         <>
           <i aria-hidden="true">/</i>

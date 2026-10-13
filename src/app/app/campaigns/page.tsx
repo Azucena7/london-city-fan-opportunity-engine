@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { campaignPlans } from "@/lib/data";
+import { calendar, campaignPlans } from "@/lib/data";
 import { demoCommercialCampaigns } from "@/lib/clubStrategy";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
@@ -13,6 +13,14 @@ export const metadata: Metadata = {
   title: "Campaigns",
   description: "Review fixture-led and seasonal campaign drafts, approval state and the next human decision."
 };
+
+// "v Everton · 18 Oct" instead of the internal fixture id.
+function fixtureLabel(fixtureId: string) {
+  const fixture = calendar.find((item) => item.id === fixtureId);
+  if (!fixture) return fixtureId;
+  const date = new Date(fixture.date + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+  return (fixture.homeAway === "home" ? "v " : "@ ") + fixture.opponent + " · " + date;
+}
 
 export default function CampaignsPage() {
   const campaigns = campaignPlans.campaigns ?? [];
@@ -82,7 +90,7 @@ export default function CampaignsPage() {
             <div className={styles.primaryFacts}>
               <div><span>Approvals ready</span><strong>{primary.approvalCount}/{primary.approvalTotal}</strong></div>
               <div><span>Activations</span><strong>{primary.campaign.activations?.length ?? 0}</strong></div>
-              <div><span>Fixture</span><strong>{primary.campaign.fixtureId}</strong></div>
+              <div><span>Fixture</span><strong>{fixtureLabel(primary.campaign.fixtureId)}</strong></div>
             </div>
             <div className={styles.primaryActions}>
               <Link href={"/app/matches/" + primary.campaign.fixtureId}>Resolve this decision →</Link>
@@ -93,15 +101,10 @@ export default function CampaignsPage() {
       ) : null}
 
       <section className={styles.workspaceGrid}>
-        <details className={styles.portfolioPanel}>
-          <summary>
-            <div><span>Explore mode</span><strong>All campaign work</strong><small>Open the board only when you need to browse or compare across campaigns.</small></div>
-            <b>Open board →</b>
-          </summary>
-          <WorkspaceCard className={styles.boardCard}>
+        <WorkspaceCard className={styles.boardCard}>
           <WorkspaceSectionHeader
             eyebrow="Execution board"
-            title="Fixture campaigns"
+            title="All campaign work"
             action={<Link href="/app/season">Calendar view →</Link>}
           />
           <div className={styles.board}>
@@ -110,7 +113,7 @@ export default function CampaignsPage() {
               <div>
                 {campaignRows.filter((item) => item.needsDecision).map(({ campaign, approvalCount, approvalTotal }) => (
                   <article key={campaign.id} className={styles.campaignCard} data-needs-decision="true">
-                    <div className={styles.meta}><DecisionStateBadge state="REVIEW" label={campaign.status} /><small>{campaign.fixtureId}</small></div>
+                    <div className={styles.meta}><DecisionStateBadge state="REVIEW" label={campaign.status} /><small>{fixtureLabel(campaign.fixtureId)}</small></div>
                     <h3>{campaign.title.en}</h3>
                     <p>{campaign.objective.en}</p>
                     <div className={styles.progressBar} aria-label={approvalCount + " of " + approvalTotal + " approvals ready"}><span style={{ width: (approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0) + "%" }} /></div>
@@ -131,7 +134,7 @@ export default function CampaignsPage() {
               <div>
                 {campaignRows.filter((item) => !item.needsDecision).map(({ campaign, approvalCount, approvalTotal }) => (
                   <article key={campaign.id} className={styles.campaignCard}>
-                    <div className={styles.meta}><DecisionStateBadge state="READY" label={campaign.status} /><small>{campaign.fixtureId}</small></div>
+                    <div className={styles.meta}><DecisionStateBadge state="READY" label={campaign.status} /><small>{fixtureLabel(campaign.fixtureId)}</small></div>
                     <h3>{campaign.title.en}</h3>
                     <p>{campaign.objective.en}</p>
                     <div className={styles.progressBar}><span style={{ width: (approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0) + "%" }} /></div>
@@ -152,8 +155,7 @@ export default function CampaignsPage() {
               </div>
             </section>
           </div>
-          </WorkspaceCard>
-        </details>
+        </WorkspaceCard>
 
         <aside className={styles.sideRail}>
           <WorkspaceCard className={styles.quickCard}>

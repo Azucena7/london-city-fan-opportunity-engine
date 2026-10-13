@@ -53,6 +53,20 @@ test("app page titles keep workspace scale, not landing-page scale", async ({ pa
   }
 });
 
+test("core work is visible without opening a panel", async ({ page }) => {
+  await page.goto("/app/campaigns");
+  await expect(page.getByRole("heading", { name: "All campaign work" })).toBeVisible();
+  await expect(page.locator("header", { hasText: "Needs decision" })).toBeVisible();
+  // Fixtures are shown by name, not by internal id.
+  await expect(page.locator("text=/\\d{4}-\\d{2}-\\d{2}-[a-z]+-h/")).toHaveCount(0);
+
+  await page.goto("/app/sponsors");
+  const queue = page.getByRole("list", { name: "Sponsor prospecting queue" });
+  await expect(queue).toBeVisible();
+  expect(await queue.getByRole("listitem").count()).toBeGreaterThan(0);
+  await expect(page.locator('[role="table"]')).toHaveCount(0);
+});
+
 test("Radar opens a fixture Opportunity Brief", async ({ page }) => {
   await page.goto("/app/matches");
   const brief = page.locator('a[href^="/app/matches/"]').first();
