@@ -6,6 +6,7 @@ import "./product-ux.css";
 import "./product-system.css";
 import "./readability.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { FirstTouchRecorder } from "@/components/FirstTouchRecorder";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
@@ -55,6 +56,7 @@ export default async function RootLayout({
         <LanguageProvider initialLang={initialLang}>
           <div id="main-content" tabIndex={-1}>{children}</div>
         </LanguageProvider>
+        <FirstTouchRecorder />
         <Analytics />
       </body>
     </html>
