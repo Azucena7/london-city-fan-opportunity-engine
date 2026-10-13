@@ -44,6 +44,15 @@ for (const route of [...appRoutes, ...publicRoutes]) {
   });
 }
 
+test("app page titles keep workspace scale, not landing-page scale", async ({ page, isMobile }) => {
+  for (const route of ["/app", "/app/matches", "/app/players", "/app/executive"]) {
+    await page.goto(route);
+    await page.waitForLoadState("networkidle");
+    const size = await page.locator("h1").evaluate((heading) => getComputedStyle(heading).fontSize);
+    expect(size, `${route} h1`).toBe(isMobile ? "19px" : "25px");
+  }
+});
+
 test("Radar opens a fixture Opportunity Brief", async ({ page }) => {
   await page.goto("/app/matches");
   const brief = page.locator('a[href^="/app/matches/"]').first();

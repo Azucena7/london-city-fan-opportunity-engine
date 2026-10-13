@@ -66,31 +66,3 @@ export function AppWorkspaceShell({
     </div>
   );
 }
-
-export function WorkspaceViewSwitcher({
-  value = "overview"
-}: {
-  value?: "overview" | "list" | "board" | "calendar";
-}) {
-  const labels = {
-    overview: "Overview",
-    list: "List",
-    board: "Board",
-    calendar: "Calendar"
-  } as const;
-
-  return (
-    <div className={styles.viewIndicator} aria-label={`Current layout: ${labels[value]}`}>
-      <span>Layout</span>
-      <strong>{labels[value]}</strong>
-    </div>
-  );
-}
-
-export function WorkspaceFilterButton({ label = "Filters" }: { label?: string }) {
-  return (
-    <span className={styles.filterStatus} aria-label={`${label} context`}>
-      {label}
-    </span>
-  );
-}
