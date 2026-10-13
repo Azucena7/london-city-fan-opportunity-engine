@@ -186,3 +186,35 @@
 @media(max-width:620px){
   .wrap{padding-top:60px;padding-bottom:60px}
 }
+
+
+/* v4 — compact integration story */
+.wrap{padding-top:58px;padding-bottom:58px}
+.copy{
+  grid-template-columns:170px minmax(0,1fr);
+  gap:28px;
+}
+.copy h2{
+  max-width:650px;
+  font-size:clamp(30px,3vw,40px);
+  line-height:1.06;
+  letter-spacing:-.035em;
+}
+.copy p{
+  max-width:650px;
+  font-size:15px;
+  line-height:1.55;
+}
+.map{
+  margin-top:28px;
+  padding:18px;
+  gap:16px;
+}
+.inputs article{min-height:78px;padding:13px}
+.avela{padding:24px 22px}
+.avela strong{font-size:24px}
+.outputs article{min-height:54px;padding:13px 14px}
+.note{margin-top:20px}
+@media(max-width:620px){
+  .wrap{padding-top:44px;padding-bottom:44px}
+}
