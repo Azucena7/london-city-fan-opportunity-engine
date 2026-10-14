@@ -277,7 +277,9 @@ test("Opportunity Radar applies club context as advisory fit without changing ev
   assert.doesNotMatch(rankFn, /ClubOperatingContext|priorityObjectives|connectedChannels|clubContext/);
   assert.match(radar, /const rank = priorityRank\(\s*item\.score,\s*item\.confidence\.label,\s*item\.daysToFixture,\s*materialSignalCount,\s*item\.decisionState === "READY FOR REVIEW"\s*\)/s);
 
-  assert.match(matches, /getCurrentClubOperatingContext/);
+  // Club context is loaded once, in the shared decision queue the Radar reads.
+  assert.match(read("src/lib/decisionQueue.ts"), /getCurrentClubOperatingContext/);
+  assert.match(matches, /getDecisionQueue\(\)/);
   assert.match(matches, /Context explains fit\. Evidence still sets the priority/);
   assert.match(matches, /This context never changes the radar rank, confidence or evidence state/);
   assert.match(matches, /Club fit · advisory only/);
@@ -2062,9 +2064,11 @@ test("Calendar Intelligence derives relationships without treating disconnected 
 test("calendar pressure can elevate attention without changing opportunity score", () => {
   const page = read("src/app/app/matches/page.tsx");
   const pressure = read("src/lib/calendarDecisionPressure.ts");
+  const queue = read("src/lib/decisionQueue.ts");
 
-  assert.match(page, /opportunityRadar = buildOpportunityRadar/);
-  assert.match(page, /applyCalendarDecisionPressure/);
+  assert.match(queue, /opportunityRadar = buildOpportunityRadar/);
+  assert.match(queue, /applyCalendarDecisionPressure/);
+  assert.match(page, /getDecisionQueue\(\)/);
   assert.match(page, /Attention driver:/);
   assert.match(page, /Opportunity state ·/);
   assert.match(page, /Calendar pressure/);
@@ -2087,7 +2091,8 @@ test("Decision Center integrates calendar attention and resilient cross-system s
   const helper = read("src/lib/decisionCenterOverview.ts");
   const css = read("src/app/app/home.module.css");
 
-  assert.match(page, /applyCalendarDecisionPressure/);
+  assert.match(read("src/lib/decisionQueue.ts"), /applyCalendarDecisionPressure/);
+  assert.match(page, /getDecisionQueue\(\)/);
   assert.match(page, /radarState: item\.attentionState/);
   assert.match(page, /item\.attentionReason/);
   assert.match(page, /Calendar pressure/);
@@ -2515,10 +2520,10 @@ test("live product timing cannot lag behind the real London date", () => {
   assert.match(opportunity, /currentProductDate/);
   assert.match(opportunity, /nextActionStatus/);
   assert.match(opportunity, /OVERDUE ·/);
-  assert.match(home, /currentProductDate\(currentState\.updated_at\)/);
+  // Home, Radar and Executive take "today" from the shared decision queue.
+  assert.match(read("src/lib/decisionQueue.ts"), /currentProductDate\(currentState\.updated_at\)/);
+  for (const page of [home, radar, executive]) assert.match(page, /getDecisionQueue\(\)/);
   assert.match(home, /from: today \+ "T00:00:00Z"/);
-  assert.match(radar, /currentProductDate\(currentState\.updated_at\)/);
-  assert.match(executive, /currentProductDate\(currentState\.updated_at\)/);
   assert.match(season, /currentProductDate\(currentState\.updated_at\)/);
 });
 

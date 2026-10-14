@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
-import { buildOpportunityRadar } from "@/lib/opportunityRadar";
-import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
+import { campaignPlans } from "@/lib/data";
+import { getDecisionQueue } from "@/lib/decisionQueue";
 import { buildDecisionAlerts, decisionSummary, type DecisionPriority } from "@/lib/decisionIntelligence";
 import { getDecisionCenterOpsState } from "@/lib/decisionCenterOverview";
-import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
-import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
-import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
-import { currentProductDate } from "@/lib/currentProductDate";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader, type UniversalDecisionState } from "@/components/WorkspaceUI";
 import styles from "./home.module.css";
@@ -42,30 +37,8 @@ function shortDate(value: string) {
 }
 
 export default async function ClubAppHome() {
-  const today = currentProductDate(currentState.updated_at);
-  const upcoming = calendar
-    .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
-    .sort((a,b) => a.date.localeCompare(b.date))
-    .slice(0, 8);
-
-  const clubContext = await getCurrentClubOperatingContext();
-  const opportunityRadar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id), clubContext);
-  const calendarToDate = calendar.map((item) => item.date).sort().at(-1) ?? today;
-  const externalCalendarRelationships = buildCalendarRelationships({
-    fixtures: calendar,
-    campaignPlans,
-    eventLandscape,
-    fromDate: today
-  });
-  const internalCalendar = await getInternalCalendarRelationships({
-    clubId: clubContext?.clubId,
-    fixtures: calendar,
-    campaignPlans,
-    fromDate: today,
-    toDate: calendarToDate
-  });
-  const calendarRelationships = [...externalCalendarRelationships, ...internalCalendar.relationships];
-  const radar = applyCalendarDecisionPressure(opportunityRadar, calendarRelationships);
+  // The shared decision queue: the same fixtures and attention order as Radar and Executive.
+  const { today, upcoming, clubContext, calendarRelationships, radar } = await getDecisionQueue();
   const fixtureAlerts = buildDecisionAlerts(
     radar.map((item) => ({ ...item, radarState: item.attentionState }))
   ).map((alert) => {
@@ -92,9 +65,15 @@ export default async function ClubAppHome() {
     monitor: 2,
     "on-track": 1
   };
+  // Fixtures keep the queue's attention order, so Home's first fixture is Radar's #1.
+  const queueRank = (alert: { fixtureId?: string }) => {
+    const index = alert.fixtureId ? radar.findIndex((item) => item.fixtureId === alert.fixtureId) : -1;
+    return index === -1 ? Number.MAX_SAFE_INTEGER : index;
+  };
   const alerts = [...opsState.crossAlerts, ...fixtureAlerts]
     .sort((a,b) =>
       priorityWeight[b.priority] - priorityWeight[a.priority]
+      || queueRank(a) - queueRank(b)
       || (b.events[0]?.at ?? "").localeCompare(a.events[0]?.at ?? "")
     );
   const summary = decisionSummary(alerts);
@@ -147,10 +126,11 @@ export default async function ClubAppHome() {
     .sort((a,b) => a.date.localeCompare(b.date))
     .slice(0, 12);
 
+  // The mix partitions the same attention states Radar counts; holds are counted beside it.
   const healthTotal = Math.max(1, summary.actNow + summary.review + summary.blocked + summary.onTrack + summary.monitor);
   const actDeg = Math.round((summary.actNow / healthTotal) * 360);
   const reviewDeg = actDeg + Math.round((summary.review / healthTotal) * 360);
-  const blockedDeg = reviewDeg + Math.round((summary.blocked / healthTotal) * 360);
+  const blockedDeg = reviewDeg + Math.round((summary.monitor / healthTotal) * 360);
   const onTrackDeg = blockedDeg + Math.round((summary.onTrack / healthTotal) * 360);
   const donutBackground = "conic-gradient(#EF8B6C 0deg " + actDeg + "deg,#D78A1E " + actDeg + "deg " + reviewDeg + "deg,#7C8791 " + reviewDeg + "deg " + blockedDeg + "deg,#2F8F83 " + blockedDeg + "deg " + onTrackDeg + "deg,#D8DEE3 " + onTrackDeg + "deg 360deg)";
   const nextFixture = upcoming[0] ?? null;
@@ -177,6 +157,7 @@ export default async function ClubAppHome() {
                 <div>
                   <strong>{item.title}</strong>
                   <DecisionStateBadge state={stateForPriority(item.priority)} label={priorityLabel[item.priority]} />
+                  {item.onHold ? <DecisionStateBadge state="BLOCKED" label="HOLD" /> : null}
                 </div>
                 <p>{item.recommendation}</p>
                 <small>{item.changed}</small>
@@ -204,9 +185,9 @@ export default async function ClubAppHome() {
           <small>Needs a human decision</small>
         </WorkspaceCard>
         <WorkspaceCard className={styles.metricCard}>
-          <div><DecisionStateBadge state={summary.blocked ? "BLOCKED" : "READY"} label="Blocked" /></div>
-          <strong>{summary.blocked}</strong>
-          <small>Unresolved blockers</small>
+          <div><DecisionStateBadge state={summary.onHold ? "BLOCKED" : "READY"} label="On hold" /></div>
+          <strong>{summary.onHold}</strong>
+          <small>Unresolved blocker before acting</small>
         </WorkspaceCard>
         <WorkspaceCard className={styles.metricCard} tone="accent">
           <div><DecisionStateBadge state="READY" label="On track" /></div>
@@ -252,7 +233,7 @@ export default async function ClubAppHome() {
             <div className={styles.legend}>
               <span><i data-tone="coral" />Act now <b>{summary.actNow}</b></span>
               <span><i data-tone="warning" />Review <b>{summary.review}</b></span>
-              <span><i data-tone="neutral" />Blocked <b>{summary.blocked}</b></span>
+              <span><i data-tone="neutral" />Monitor <b>{summary.monitor}</b></span>
               <span><i data-tone="teal" />On track <b>{summary.onTrack}</b></span>
             </div>
           </div>
