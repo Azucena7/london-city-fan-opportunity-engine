@@ -46,10 +46,13 @@ jobs:
             echo "SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY is not set: keep-alive skipped."
             exit 0
           fi
-          status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 \
+          # A read through PostgREST reaches the database even when row access is denied to the
+          # public role (401 "permission denied" is decided inside Postgres), which is what keeps
+          # the project counted as active. The body is logged so the run shows which it was.
+          status="$(curl -sS -o /tmp/keepalive.json -w '%{http_code}' --max-time 30 \
             -H "apikey: $SUPABASE_PUBLISHABLE_KEY" \
             "${SUPABASE_URL%/}/rest/v1/clubs?select=id&limit=1")"
-          echo "Supabase keep-alive answered HTTP $status"
+          echo "Supabase keep-alive answered HTTP $status: $(head -c 200 /tmp/keepalive.json)"
           if [ "$status" -ge 500 ] || [ "$status" = "000" ]; then
             exit 1
           fi
