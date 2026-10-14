@@ -523,8 +523,10 @@ test("refresh language matches the scheduled as-built automation", () => {
   assert.match(runbook, /active daily workflow already refreshes its declared public sources/);
   assert.doesNotMatch(runbook, /after this pull request is merged/);
   assert.match(readme, /scheduled fixture refresh starts the work automatically/);
-  assert.match(radar, /buildOpportunityRadar/);
-  assert.match(radar, /currentProductDate\(currentState\.updated_at\)/);
+  const queue = readFileSync("src/lib/decisionQueue.ts", "utf8");
+  assert.match(radar, /getDecisionQueue\(\)/);
+  assert.match(queue, /buildOpportunityRadar/);
+  assert.match(queue, /currentProductDate\(currentState\.updated_at\)/);
   assert.doesNotMatch(radar, /continuously re-prioritised/);
   assert.match(socialCard, /Scheduled fixture refresh starts monitoring/);
 });

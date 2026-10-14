@@ -26,11 +26,14 @@ export type DecisionAlert = {
   impact: "High" | "Medium" | "Low";
   confidence: "High" | "Medium" | "Low";
   href: string;
+  /** The fixture's decision is on HOLD: an unresolved blocker stands before acting. */
+  onHold?: boolean;
   events: DecisionEvent[];
 };
 
-function priorityFor(item: OpportunityRadarItem, blocked: boolean): DecisionPriority {
-  if (blocked && item.daysToFixture <= 7) return "blocked";
+// A fixture's priority is its attention state from the decision queue, the same on every
+// surface. Whether the decision is on hold is a separate fact (onHold), not a priority.
+function priorityFor(item: OpportunityRadarItem): DecisionPriority {
   if (item.radarState === "Act now") return "act-now";
   if (item.radarState === "Review") return "review";
   if (item.radarState === "Monitor") return "monitor";
@@ -81,7 +84,8 @@ export function buildDecisionAlerts(radar: OpportunityRadarItem[]): DecisionAler
       id: `fixture-${item.fixtureId}`,
       fixtureId: item.fixtureId,
       category: "fixture",
-      priority: priorityFor(item, blocked),
+      priority: priorityFor(item),
+      onHold: live?.decisionState === "HOLD",
       title: `${item.opponent} · ${item.daysToFixture <= 0 ? "fixture window" : `${item.daysToFixture} days`}`,
       recommendation: live?.nextAction.label ?? item.opportunity,
       why: live?.whyNow ?? "The evidence state currently makes this fixture worth monitoring.",
@@ -104,6 +108,7 @@ export function decisionSummary(alerts: DecisionAlert[]) {
     actNow: alerts.filter((item) => item.priority === "act-now").length,
     review: alerts.filter((item) => item.priority === "review").length,
     blocked: alerts.filter((item) => item.priority === "blocked").length,
+    onHold: alerts.filter((item) => item.onHold || item.priority === "blocked").length,
     onTrack: alerts.filter((item) => item.priority === "on-track").length,
     monitor: alerts.filter((item) => item.priority === "monitor").length,
     attention: alerts.filter((item) => ["act-now", "review", "blocked"].includes(item.priority)).length

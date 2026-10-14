@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { OpportunityExplorer } from "@/components/OpportunityExplorer";
-import { calendar, campaignPlans, currentState, eventLandscape, newsRadar, newsRadarConfig } from "@/lib/data";
+import { calendar, campaignPlans, currentState, newsRadar, newsRadarConfig } from "@/lib/data";
 import { NewsRadarPanel } from "@/components/NewsRadarPanel";
 import { FilterBar } from "@/components/FilterBar";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
-import { buildOpportunityRadar } from "@/lib/opportunityRadar";
-import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
-import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
-import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
-import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
 import { getMaterialMatchdayAlert } from "@/lib/matchdayDecisionAlert";
-import { currentProductDate } from "@/lib/currentProductDate";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./matches.module.css";
+import { getDecisionQueue } from "@/lib/decisionQueue";
 
 export const metadata: Metadata = {
   title: "Opportunity Radar",
@@ -47,32 +42,8 @@ const ATTENTION_FILTERS = [
 export default async function MatchesPage({ searchParams }: { searchParams: Promise<{ attention?: string | string[] }> }) {
   const requested = (await searchParams).attention;
   const attentionFilter = ATTENTION_FILTERS.find((option) => option.value === requested) ?? null;
-  const today = currentProductDate(currentState.updated_at);
-  const upcoming = calendar
-    .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
-    .sort((a, b) => a.date.localeCompare(b.date))
-    .slice(0, 8);
-
-  const clubContext = await getCurrentClubOperatingContext();
-  const opportunityRadar = buildOpportunityRadar(upcoming.map((fixture) => fixture.id), clubContext);
-  const calendarToDate = calendar.map((item) => item.date).sort().at(-1) ?? today;
-  const externalCalendarRelationships = buildCalendarRelationships({
-    fixtures: calendar,
-    campaignPlans,
-    eventLandscape,
-    fromDate: today
-  });
-  const internalCalendar = await getInternalCalendarRelationships({
-    clubId: clubContext?.clubId,
-    fixtures: calendar,
-    campaignPlans,
-    fromDate: today,
-    toDate: calendarToDate
-  });
-  const radar = applyCalendarDecisionPressure(
-    opportunityRadar,
-    [...externalCalendarRelationships, ...internalCalendar.relationships]
-  );
+  // The shared decision queue: the same fixtures and attention order as Home and Executive.
+  const { upcoming, clubContext, radar } = await getDecisionQueue();
   const priority = radar[0] ?? null;
   const currentFixture = priority
     ? upcoming.find((fixture) => fixture.id === priority.fixtureId) ?? null
