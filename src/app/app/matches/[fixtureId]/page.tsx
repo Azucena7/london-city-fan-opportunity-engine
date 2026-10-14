@@ -553,9 +553,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         recommendation={campaign?.title.en ?? preparedMove?.move ?? live.recommendedAction}
       />
 
-      <AskAvelaPanel fixtureId={fixture.id} decisionId={`fixture:${fixture.id}`} />
-
       </details>
+
+      {/* Outside every collapsible phase: the launcher is fixed on screen and must always be reachable. */}
+      <AskAvelaPanel fixtureId={fixture.id} decisionId={`fixture:${fixture.id}`} />
 
       <section id="learning" className={styles.footerActions}>
         <div>
