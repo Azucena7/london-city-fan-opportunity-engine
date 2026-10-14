@@ -1,9 +1,37 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-14T00:17:39.041Z",
-  "lastSuccessfulAt": "2026-10-14T00:17:39.041Z",
+  "checkedAt": "2026-10-14T08:52:03.437Z",
+  "lastSuccessfulAt": "2026-10-14T08:52:03.437Z",
   "failures": [],
   "items": [
+    {
+      "title": "West Ham vs London City | BWSL",
+      "outlet": "WSL Football",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNTkRWWFM3YndJeEVUa19kMXFzM250anVLTllYSlZvVXdGbXNZcThDVmVZSWQ3eG01djYxUnU4WmRwUTFINTlEc2NiYnpoLVA3SHBSUGlZT1M4TXRCMEdyRjZVYzgwV0xkNTZHSUtCLW9WNjNjNzF2LVhrdDFMdzlCQkhXek1NeG11WTZMbkxJSXAxOVRuekZyYW04VDNqVVVidEp4TXh2STdsY1ZF?oc=5",
+      "publishedAt": "2026-10-14T03:23:02.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-17fdcd851dee",
+      "firstSeenAt": "2026-10-14T08:52:03.437Z"
+    },
+    {
+      "title": "London City Lionesses W v Birmingham W 08/11/2026, Player stats",
+      "outlet": "Flashscore.com",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNbFA4eExmc2pIckFjUWZydVljd0hnZ1dOV1AtbTZKTkI2d3JyTnZzaEFIX0hHWGpsSXRRSDR5OGw3YUtOVjJ6eFFmRWpZYTdJd19MVjE1cl9mYkJfMl9JY0lTbHRRZEpfbXotczBVQ0ZJSlFKbU11di1QNF9BQ1ZudGhXQWdMNl9XM1ZSM1M3b2Y5UG9kN01USEZGMW5XQnV0bzVfZ0djUW5OeFNmUHpoUW8wOE8?oc=5",
+      "publishedAt": "2026-10-13T23:05:46.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-11-08-birmingham-c-h"
+      ],
+      "id": "news-1566eb0dd66d",
+      "firstSeenAt": "2026-10-14T08:52:03.437Z"
+    },
     {
       "title": "Women’s Internationals | Peacock scores as Young Lionesses put six past Bosnia & Herzegovina",
       "outlet": "West Ham United",
@@ -410,7 +438,8 @@
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0wR09qcVRNcjBKRHVWeUtZYkY1QkpZRW81ZXFTNEtKMy1OMzk1ZklVZDh1UWd3bnMwMlZPVDBZQ09aX0ZSQVZmOTVaTWpLdmc1ZUpCb09JY1V1MmphellTZFNVM19ESjl3?oc=5",
       "publishedAt": "2026-10-04T07:00:00.000Z",
       "feedIds": [
-        "club-uk"
+        "club-uk",
+        "club-wsl-uk"
       ],
       "topics": [
         "results"
@@ -547,6 +576,24 @@
       "fixtureIds": [],
       "id": "news-03db08cea880",
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
+    },
+    {
+      "title": "Manchester City beat hapless Arsenal as London City Lionesses rout Spurs in statement win",
+      "outlet": "The Independent",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPMFVYVzRrcy1oQ0Y0Nl9VbjgtdnJYVWdfZkNFZnZKaXZwS3p6M1oyOVp2WmtvajFRZWtuUFNadXdUUkVtNE1FX1FBN0poR2NsUjdET21vei1NTldjWnRCUVF2N3VpQ1YycmFoeFEtRER0Nkk5d1Q2QUJHNzBCNlZ2dlZINDFCaUI3SkxIWDFhQzV1bG52TlhzOFI1Z1FSMklGTVBTc0FFWFNTSkU?oc=5",
+      "publishedAt": "2026-10-04T07:00:00.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [
+        "results"
+      ],
+      "fixtureIds": [
+        "2026-11-01-mci-h",
+        "2026-11-15-arsenal-a"
+      ],
+      "id": "news-1105743e01fd",
+      "firstSeenAt": "2026-10-14T08:52:03.437Z"
     },
     {
       "title": "Tottenham Hotspur v London City Lionesses: Women’s Super League Preview",
@@ -819,22 +866,20 @@
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
     },
     {
-      "title": "Putellas Scores First LCL Goal! 🔥 | London City Lionesses v Brighton Highlights | Barclays WSL 26-27",
-      "outlet": "WSL Football",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQR0NjYnk2M1o1c2FzdGFoZ3JmcDZLZU4wOW5Ha05EejY5NW0zeEdzZFk5QnRJblVfaVhxRWxvVkl5VXMwUnRKMV9uNzJYS2tyYkEzeTNFamFsVWNQeEJXc1dpR21GbVJGVXRTbkR3ZTd1LWRJUk92YmpsUnlHSnVQZTllZlN4Zk0xUUI4Qm5PRHZjVUQwdW1OaUxaNlZZMUVhM3RuMXNXSkRNOEpvcUhNRGg4bFE2YmFGdmxRUHI3eTh0dC1UaWc?oc=5",
-      "publishedAt": "2026-09-26T18:54:27.000Z",
+      "title": "Every WSL game live on Sky this weekend including London City vs Brighton, the Merseyside derby and Chelsea vs Arsenal",
+      "outlet": "Sky Sports",
+      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPc09DVVJHN3JiRmJKcjFrSnhrZFYxdWxaekxoMnJjeWpZOVRJLTZwT2R3NGRzdTFEZzRwRXB3NERqX3dLUTdQcHFhem1YZzJxTk5rRUoyelVqZ28tZXM2QXRiamFDanRRY1NIMmIyY2JZSTdHeWdicU9pU0xadXpHcWRFVGFUQjFOYmZhWHZZNDJCeEF0UnNpQ0NHbXVfTUFIcDBWVG44aG5nUW5iYnU1RFkzNXhabUdONEdnTFBoaVJpY21OQkZYamRUTnYzeUZZZFV4dnhTbWszT1hkNFU0SmFwV0RzbkJZQjZzbE1IWlAxdnkxWElONDh3?oc=5",
+      "publishedAt": "2026-09-27T07:00:00.000Z",
       "feedIds": [
-        "club-uk",
         "club-wsl-uk"
       ],
-      "topics": [
-        "results"
-      ],
+      "topics": [],
       "fixtureIds": [
+        "2026-11-15-arsenal-a",
         "2026-11-18-bha-h"
       ],
-      "id": "news-8444585e2756",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
+      "id": "news-1382619c1376",
+      "firstSeenAt": "2026-10-14T08:52:03.437Z"
     },
     {
       "title": "London City vs Brighton | BWSL | WSL Football",
@@ -849,6 +894,24 @@
         "2026-11-18-bha-h"
       ],
       "id": "news-53139c38271f",
+      "firstSeenAt": "2026-10-13T15:58:11.244Z"
+    },
+    {
+      "title": "Putellas Scores First LCL Goal! 🔥 | London City Lionesses v Brighton Highlights | Barclays WSL 26-27",
+      "outlet": "WSL Football",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQR0NjYnk2M1o1c2FzdGFoZ3JmcDZLZU4wOW5Ha05EejY5NW0zeEdzZFk5QnRJblVfaVhxRWxvVkl5VXMwUnRKMV9uNzJYS2tyYkEzeTNFamFsVWNQeEJXc1dpR21GbVJGVXRTbkR3ZTd1LWRJUk92YmpsUnlHSnVQZTllZlN4Zk0xUUI4Qm5PRHZjVUQwdW1OaUxaNlZZMUVhM3RuMXNXSkRNOEpvcUhNRGg4bFE2YmFGdmxRUHI3eTh0dC1UaWc?oc=5",
+      "publishedAt": "2026-09-26T07:00:00.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [
+        "results"
+      ],
+      "fixtureIds": [
+        "2026-11-18-bha-h"
+      ],
+      "id": "news-8444585e2756",
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
     },
     {
@@ -1111,58 +1174,6 @@
       "topics": [],
       "fixtureIds": [],
       "id": "news-0748298c4d96",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "\"¿El Balón de Oro? Prefiero que el fútbol sea el que hable por mí\"",
-      "outlet": "Mundo Deportivo",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQbkhMeEJNUnViRUkyT0tnTHNyTzJwclJySVJPZm5PdzlQbGg0UWxWQXljM0VzbElqUkp3Nl9pTWxvUzNtbmgwXzdhaDdGLWRDdkk5MlRnc2lweXhpb2owaHhiWjBlWFBrVnViVkU2TjZXUGhNWTZrQUVYVGRMU1RJQ2ttNk_SAZIBQVVfeXFMTjJFR0llcXo1X3paR2cxbEJkYk0wQ3BXbU1GUUR0Qy1hRUdLV0lYNG4zbjJLSURjQlZTb2Q2WDUwMGVwVmQ1LU90ODZKUUtNM2xKZ2NETXUxcWRySmdRMHJINmtCbS1UaHlhbTRPclFfUE8xMDhOXy1Tdl9WM195bk1TWU8wQU9YczFSelZuNFFTd2c?oc=5",
-      "publishedAt": "2026-09-26T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-ecd1bc1e604a",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Drone images show huge women’s football training ground taking shape",
-      "outlet": "Kent Online",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOZHBYWE9sNlNvcU5oS3ByTzFYZVQ1QVl0TGdvWUZyRGJkLXBsb3lLbW81N1hERTFtR0tBeThrRXdzMjlhS0diUnB1TmdnSkswNjZGVktIQ3AxQjBFX2lNSTcwLVZfb2RmNklnYXR1ei1aZzVaSlVENWNYYWhNZjJjNVZBa0lvbGJmb2JSRmRjU0dtTjlvX1VwaHpQZUN5eGVzNlQ3T3M2ZWpOQkJ5MXZB?oc=5",
-      "publishedAt": "2026-09-25T07:00:00.000Z",
-      "feedIds": [
-        "club-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-97f6f5179f3b",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas: más de un millón de euros al año, propiedades inmobiliarias y su nuevo canal de YouTube sobre fútbol femenino",
-      "outlet": "El Mundo",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPd3ptdkVLQW5YMy1KRnJPbVo2TG9aT3l1d0REX242aDl0Ymp6c3BiTVZGYW5EV3FSMWhYc3BzbFk4Ynd3aURxT2piaDJSQXZDMUUtcmdKZi1RMFNMMjhvQlNUM0hpMzZJOG9ic1JjZHhtbktvdWc5NTQtNi1TdDBNWNIBgAFBVV95cUxQRllTZnZnSEppalhHYUZ4QVZQTklXT2dwYkNoZGM3RWlLRXpvdWNtRnBKN0FTc0NvTEdMeFhHYUlHNnRmU2tvUmpjc1dFVGQxdmszMEluclgxV1g3X3pxWEZvYzRfMmpzSzhYUTZYVHNOdk9aYW9rUE41WWNOeHEwVw?oc=5",
-      "publishedAt": "2026-09-25T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-aa63c278609f",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas (32 años): “Los chicos pasan muchas horas en los videojuegos y, por el momento actual de la sociedad, la mujer practica más deporte. En los parques veo más a niñas que a niños jugando al fútbol”",
-      "outlet": "SPORT",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNVWlHS1lBc09yTmtqdmRqbFkxSGw0VGdsazE5Vjd1LUJnZnB2UG1VTUZnd3lQcldGTmQ0V3BQbTIwTldMTVN4R3VrOGZtcXBZTUpLQVRjeDN6cE9jMjVaWkV5OXFiMTY0RTlxQXEwYUh5T2FYWUQ1RWw0LWNHZVVBUHRzam01UF9aelZyTTZyWnRjRnPSAZMBQVVfeXFMT1ZyaUpFODUzcnNWZFB1MTlkMnhxd1VQUkhoZFpaWTZlNUxxajRzYmtKWjRTT0dWZFIyUHh5Y0RSUEpFSkpOTnZneWtRNlZsOTBmcDFqWXEyNGVKNDlwTnVtVmxZNG9EVWFCTUNobEU3Z2FUYllXU2JXS1hrVGhNeGd1a0l1UThMb0xncVNmd0pJUERF?oc=5",
-      "publishedAt": "2026-09-25T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-6d9a20e8b01b",
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
     }
   ]
