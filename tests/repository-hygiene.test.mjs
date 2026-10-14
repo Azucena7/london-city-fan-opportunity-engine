@@ -784,3 +784,12 @@ test("retired product shell stylesheet stays deleted", () => {
   assert.match(readFileSync("src/app/product-system.css", "utf8"), /\.productShell/);
   assert.match(readFileSync("src/app/product-system.css", "utf8"), /\.productAppShell/);
 });
+
+test("daily refresh keeps the Supabase project active with the public key only", () => {
+  const workflow = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
+  const step = workflow.slice(workflow.indexOf("Keep the Supabase project active"), workflow.indexOf("Refresh once per Europe/London day"));
+  assert.match(step, /continue-on-error: true/);
+  assert.match(step, /SUPABASE_PUBLISHABLE_KEY: \$\{\{ secrets\.SUPABASE_PUBLISHABLE_KEY \}\}/);
+  assert.match(step, /keep-alive skipped/);
+  assert.doesNotMatch(step, /SERVICE_ROLE|SECRET_KEY/i);
+});
