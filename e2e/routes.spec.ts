@@ -284,3 +284,10 @@ test("Radar rows keep every column inside the row beside the side rail", async (
     expect(overflow, `content past the row edge at ${width}px`).toBeLessThanOrEqual(0);
   }
 });
+
+test("Learning never shows the recommendation as the action the club took", async ({ page }) => {
+  await page.goto("/app/learning");
+  const action = page.getByRole("region", { name: "Learning journey" }).locator('[data-stage="action"]');
+  await expect(action).toContainText("Club action not recorded here");
+  await expect(action.getByRole("link", { name: /Confirm what went live in the decision history/ })).toHaveAttribute("href", /\/app\/matches\/.+#decision-memory$/);
+});
