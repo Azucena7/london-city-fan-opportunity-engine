@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { calendar, mobilityPartnership } from "@/lib/data";
-import { mobilityProviderReadiness, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
+import { mobilityProviderReadiness, railStatusForFixture, summariseMobilityProviderReadiness } from "@/lib/mobilityProviderReadiness";
 import { MatchdayExternalTravelLink, MatchdayOfficialDirectionsLink, MatchdayOfficialTicketingLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
 import { getVerifiedFixtureTicketUrl } from "@/lib/verifiedFixtureTicketing";
 import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
@@ -39,6 +39,13 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
     .format(new Date(fixture.date + "T12:00:00Z"));
   const providerSummary = summariseMobilityProviderReadiness();
   const weather = getMatchdayWeatherContext(fixtureId, fixture.date);
+  const rail = railStatusForFixture(fixture.date);
+  const railChecked = rail ? new Date(rail.checkedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "Europe/London" }) : null;
+  const railLine = rail
+    ? rail.disruptions.length
+      ? `${rail.disruptions.map((item) => `${item.line}: ${item.status.toLowerCase()}`).join(" · ")}. ${rail.disruptions[0].reason ?? ""} Checked ${railChecked}; confirm with the operator before you travel.`.replace(/\s+/g, " ")
+      : `TfL lists no Southeastern or Thameslink disruption for this day (checked ${railChecked}). Works not yet published cannot appear; confirm with the operator before you travel.`
+    : null;
   const ticketing = getVerifiedFixtureTicketUrl(fixtureId);
 
   return (
@@ -168,7 +175,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
           {mobilityProviderReadiness.map((provider) => (
             <article key={provider.id} data-state={provider.state}>
               <strong>{provider.label}</strong>
-              <p>{provider.state === "live" ? provider.scope : provider.fallback}</p>
+              <p>{provider.id === "rail" && provider.state === "live" && provider.provider.includes("TfL") ? railLine ?? "Rail status for this day is read once it is among the next four home fixtures." : provider.state === "live" ? provider.scope : provider.fallback}</p>
               <small>{provider.state.replace("-", " ")} · {provider.provider}</small>
             </article>
           ))}

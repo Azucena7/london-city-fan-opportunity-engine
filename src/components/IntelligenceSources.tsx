@@ -56,7 +56,7 @@ const sources = [
   {
     name: "Matchday travel",
     category: "Weather · road · rail · routing",
-    healthIds: ["open-meteo", "tfl-road", "national-rail-rdm"],
+    healthIds: ["open-meteo", "tfl-road", "tfl-national-rail", "national-rail-rdm"],
     summary: "Combines verified matchday weather with road and rail disruption readiness, while keeping modelled corridors separate from live routing.",
     available: [
       "Live Open-Meteo forecast context",
@@ -64,8 +64,8 @@ const sources = [
       "Territory and modelled corridor context"
     ],
     connected: [
-      "TfL road adapter is implemented but requires credentials",
-      "National Rail / RDM account is approved but product endpoint remains pending",
+      "TfL road disruption read daily near Hayes Lane (anonymous access)",
+      "National Rail status read daily through TfL; the RDM incidents product is not licensed to the organisation country",
       "No journey route is labelled live without a timestamped provider response"
     ],
     href: "/app/matches",

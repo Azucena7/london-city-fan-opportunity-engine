@@ -1,4 +1,5 @@
 import sourceHealthRaw from "../../data/live/source-health.json";
+import tflRailRaw from "../../data/live/tfl-rail.json";
 
 export type MobilityProviderState = "live" | "degraded" | "not-configured";
 
@@ -25,7 +26,22 @@ type SourceHealthItem = {
 
 const sourceHealth = sourceHealthRaw as { sources?: SourceHealthItem[] };
 const roadHealth = sourceHealth.sources?.find((item) => item.id === "tfl-road") ?? null;
-const railHealth = sourceHealth.sources?.find((item) => item.id === "national-rail-rdm") ?? null;
+const rdmHealth = sourceHealth.sources?.find((item) => item.id === "national-rail-rdm") ?? null;
+const tflRailHealth = sourceHealth.sources?.find((item) => item.id === "tfl-national-rail") ?? null;
+// Rail Data Marketplace leads when a product is connected; until then rail status is read
+// through TfL (Southeastern and Thameslink), which is a daily snapshot, not a live feed.
+const railViaRdm = rdmHealth?.state === "operational";
+const railHealth = railViaRdm ? rdmHealth : tflRailHealth ?? rdmHealth;
+
+type RailDisruption = { line: string; status: string; reason: string | null };
+const tflRail = tflRailRaw as { lastSuccessfulAt: string | null; days: Array<{ date: string; disruptions: RailDisruption[] }> };
+
+/** TfL rail status stored for one fixture day, or null when that day was not read. */
+export function railStatusForFixture(date: string) {
+  if (railViaRdm || tflRailHealth?.state !== "operational" || !tflRail.lastSuccessfulAt) return null;
+  const day = tflRail.days.find((entry) => entry.date === date);
+  return day ? { checkedAt: tflRail.lastSuccessfulAt, disruptions: day.disruptions } : null;
+}
 
 function mapSourceState(item: SourceHealthItem | null): MobilityProviderState {
   if (!item) return "not-configured";
@@ -62,11 +78,13 @@ export const mobilityProviderReadiness: MobilityProviderReadiness[] = [
     id: "rail",
     label: "Rail",
     state: mapSourceState(railHealth),
-    provider: "National Rail / Rail Data Marketplace",
-    sourceUrl: "https://raildata.org.uk/",
+    provider: railViaRdm || !tflRailHealth ? "National Rail / Rail Data Marketplace" : "National Rail status via TfL",
+    sourceUrl: railViaRdm || !tflRailHealth ? "https://raildata.org.uk/" : "https://api.tfl.gov.uk/",
     checkedAt: railHealth?.lastAttemptAt ?? railHealth?.lastSuccessfulAt ?? null,
     freshnessMinutes: null,
-    scope: "Service disruption and station-level context relevant to matchday corridors.",
+    scope: railViaRdm || !tflRailHealth
+      ? "Service disruption and station-level context relevant to matchday corridors."
+      : "Southeastern and Thameslink status on the fixture day for Hayes, Bromley South and Bromley North, read daily.",
     decisionRule: "Surface only disruption relevant to the fixture window and selected origin corridors.",
     fallback: railHealth?.note?.en ?? "Keep rail guidance informational and direct supporters to official operator information."
   },
