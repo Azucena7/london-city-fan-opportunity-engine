@@ -25,6 +25,8 @@ import { WorkHandoffConfirmation } from "@/components/WorkHandoffConfirmation";
 import { PhaseAnchorOpener } from "@/components/PhaseAnchorOpener";
 import { PhaseScrollSpy } from "@/components/PhaseScrollSpy";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
+import { getCurrentPreparedMoves } from "@/lib/currentPreparedMoves";
+import { PreparedMoveCard } from "@/components/PreparedMoveCard";
 import { getCurrentImpactDefaults } from "@/lib/productImpactDefaults";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
@@ -52,6 +54,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
   if (!live) notFound();
 
   const campaign = campaignPlans.campaigns.find((item) => item.fixtureId === fixtureId) ?? null;
+  const preparedMove = campaign ? null : getCurrentPreparedMoves().find((item) => item.fixtureId === fixtureId) ?? null;
   const clubContext = await getCurrentClubOperatingContext();
   const radarItem = buildOpportunityRadar([fixtureId], clubContext)[0] ?? null;
   const clubFit = radarItem?.clubFit ?? null;
@@ -162,6 +165,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           </article>
         </div>
       </section>
+
+      {preparedMove ? <PreparedMoveCard draft={preparedMove} /> : null}
 
       <section className={styles.sourceCoverage} aria-label="Evidence coverage">
         <div className={styles.sourceCoverageHead}>

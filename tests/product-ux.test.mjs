@@ -3025,3 +3025,15 @@ test("executive and season read as portfolio views across fixtures", () => {
   assert.match(season, /calendarMoments\(/);
   assert.match(season, /styles\.moment/);
 });
+
+test("fixtures without a campaign plan show an engine draft that stays unapproved", () => {
+  const brief = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const card = read("src/components/PreparedMoveCard.tsx");
+  const executive = read("src/app/app/executive/page.tsx");
+  assert.match(brief, /campaign \? null : getCurrentPreparedMoves\(\)/);
+  assert.match(card, /Prepared move · engine draft/);
+  assert.match(card, /Not approved/);
+  assert.match(card, /No audience size, budget or forecast is implied/);
+  assert.match(executive, /Engine draft/);
+  assert.match(executive, /Outside the next-6 preparation window/);
+});
