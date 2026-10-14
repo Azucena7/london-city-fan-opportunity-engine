@@ -3111,3 +3111,12 @@ test("the pilot window is tracked inside the app, with the end decision left to 
   assert.match(tracker, /London City is an independent demonstration, not a customer/);
   assert.match(tracker, /Public evidence only/);
 });
+
+test("campaign lifecycle stages are reachable from each plan's own state", () => {
+  const page = read("src/app/app/campaigns/page.tsx");
+  assert.match(page, /return "Learning";/);
+  assert.match(page, /item\.approvalCount === 0\) return "Draft"/);
+  assert.match(page, /return started \? "Handoff" : "Ready"/);
+  assert.doesNotMatch(read("src/app/app/sponsors/page.tsx"), /aria-current="step"/);
+  assert.doesNotMatch(read("src/app/app/page.tsx"), /<WorkspaceBadge>Audience<\/WorkspaceBadge>/);
+});
