@@ -42,6 +42,9 @@ export function AccessCenter() {
   const [requestedRole, setRequestedRole] = useState("marketing");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState("Loading account state…");
+  // The header status is the live region; the same text is repeated next to the card that
+  // triggered it, where the person is looking.
+  const [feedbackCard, setFeedbackCard] = useState<"sign-up" | "sign-in" | null>(null);
   const [busy, setBusy] = useState(false);
 
   async function refresh({ fresh = false }: { fresh?: boolean } = {}) {
@@ -106,8 +109,11 @@ export function AccessCenter() {
   const availableClubs = clubs.filter((club) => !activeMemberships.has(club.id));
   const hasMembership = memberships.length > 0;
   const hasPendingRequest = requests.some((request) => request.status === "pending");
+  const authFeedback = feedbackCard === "sign-in" ? message : "";
+  const signUpFeedback = feedbackCard === "sign-up" ? message : "";
 
   async function signUp() {
+    setFeedbackCard("sign-up");
     setBusy(true);
     setMessage("Creating account…");
     try {
@@ -126,6 +132,7 @@ export function AccessCenter() {
   }
 
   async function signIn() {
+    setFeedbackCard("sign-in");
     setBusy(true);
     setMessage("Signing in…");
     try {
@@ -149,6 +156,7 @@ export function AccessCenter() {
   }
 
   async function requestPasswordReset() {
+    setFeedbackCard("sign-in");
     if (!email.trim()) {
       setMessage("Enter your email above, then choose Forgot password.");
       return;
@@ -287,6 +295,7 @@ export function AccessCenter() {
             <label>Work email<input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
             <label>Password<input type="password" autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
             <button type="button" disabled={busy} aria-busy={busy} onClick={() => void signUp()}>Create account</button>
+            {signUpFeedback ? <p className={styles.inlineStatus} aria-hidden="true">{signUpFeedback}</p> : null}
             <p>Email confirmation is required before the account can sign in. If the confirmation link opens a fallback page, return here afterwards and try Sign in — confirmation may already have completed.</p>
           </article>
           <article>
@@ -296,6 +305,7 @@ export function AccessCenter() {
             <label>Password<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
             <button type="button" disabled={busy} aria-busy={busy} onClick={() => void signIn()}>Sign in</button>
             <button type="button" className={styles.linkButton} disabled={busy} onClick={() => void requestPasswordReset()}>Forgot password?</button>
+            {authFeedback ? <p className={styles.inlineStatus} aria-hidden="true">{authFeedback}</p> : null}
             <p>Signing in does not grant club access by itself.</p>
           </article>
         </div>
