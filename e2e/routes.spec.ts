@@ -170,7 +170,8 @@ test("home leads with the Opportunity Engine and keeps live and pilot signals ap
   const engine = page.getByRole("figure", { name: "AVELA Opportunity Engine" });
   await expect(engine).toBeVisible();
   await expect(engine.getByText("Reading now").first()).toBeVisible();
-  await expect(engine.getByRole("listitem").filter({ hasText: "Transport" })).toContainText("In a pilot");
+  // Fan demand needs authorised club data, so it stays in a pilot whatever the public refresh reads.
+  await expect(engine.getByRole("listitem").filter({ hasText: "Fan demand" })).toContainText("In a pilot");
   for (const output of ["What changed", "Why it matters", "Prepared move"]) {
     await expect(engine.getByText(output, { exact: true })).toBeVisible();
   }
@@ -185,7 +186,8 @@ test("home Morning Commercial Read marks unconnected signals instead of filling 
   await page.goto("/");
   const read = page.getByRole("region", { name: "What a commercial lead reads before the first meeting." });
   await expect(read).toBeVisible();
-  await expect(read.getByRole("listitem").filter({ hasText: "Transport" })).toContainText("Not connected");
+  // Transport is either read from a dated TfL snapshot or marked as not connected: never blank.
+  await expect(read.getByRole("listitem").filter({ hasText: "Transport" })).toContainText(/Not connected|TfL snapshot of/);
   await expect(read.getByRole("listitem").filter({ hasText: "Recommended next move" })).toContainText("Live");
   await page.getByRole("tab", { name: /Rail disruption/ }).click();
   await expect(page.getByRole("tabpanel")).toContainText("Send a travel plan with the reminder");

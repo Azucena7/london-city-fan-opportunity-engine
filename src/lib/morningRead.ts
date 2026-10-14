@@ -10,6 +10,8 @@ type Weather = { valid_for?: string; temperature_max?: number; precipitation_pro
 type HealthSource = { id: string; state: string };
 type RoadIncident = { location: string | null; startDate: string | null; endDate: string | null; distanceKm: number | null; material: boolean };
 type RoadSnapshot = { lastSuccessfulAt: string | null; incidents: RoadIncident[] } | null | undefined;
+type RailDisruption = { line: string; status: string; reason: string | null };
+type RailSnapshot = { lastSuccessfulAt: string | null; days: Array<{ date: string; disruptions: RailDisruption[] }> } | null | undefined;
 type Opportunity = {
   fixtureId: string;
   fixture: { opponent: string };
@@ -38,6 +40,7 @@ export type MorningReadInput = {
   live: Opportunity | null;
   moments?: Array<{ fixtureId: string; label: string }>;
   road?: RoadSnapshot;
+  rail?: RailSnapshot;
   horizon?: number;
 };
 
@@ -45,12 +48,16 @@ function day(value: string) {
   return new Date(`${value}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 }
 
-/** Material road incidents whose listed dates cover the fixture day. Open-ended ones count. */
+/** The approach roads: the stored snapshot covers 15 km, the read speaks only for this radius. */
+export const ROAD_NEAR_KM = 5;
+
+/** Material road incidents near the venue whose listed dates cover the fixture day. Open-ended ones count. */
 export function roadClosuresOn(incidents: RoadIncident[], date: string) {
-  return incidents.filter((item) => item.material && (!item.startDate || item.startDate <= date) && (!item.endDate || item.endDate >= date));
+  return incidents.filter((item) => item.material && item.distanceKm !== null && item.distanceKm <= ROAD_NEAR_KM
+    && (!item.startDate || item.startDate <= date) && (!item.endDate || item.endDate >= date));
 }
 
-export function buildMorningRead({ today, calendar, events, signals, weather, sources, live, moments = [], road = null, horizon = 4 }: MorningReadInput): MorningReadLine[] {
+export function buildMorningRead({ today, calendar, events, signals, weather, sources, live, moments = [], road = null, rail = null, horizon = 4 }: MorningReadInput): MorningReadLine[] {
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a, b) => a.date.localeCompare(b.date))
@@ -123,35 +130,52 @@ export function buildMorningRead({ today, calendar, events, signals, weather, so
     state: holidaysLive || windowsLive ? "live" : "not-connected"
   });
 
+  // Transport: road closures and rail status on the next home fixture days, each from its own
+  // TfL snapshot. A mode with no stored snapshot says so instead of reading as clear.
   const roadLive = operational.has("tfl-road") && Boolean(road?.lastSuccessfulAt);
-  const railLive = operational.has("national-rail-rdm");
-  const railNote = railLive ? null : "Rail disruption is not connected yet.";
-  if (roadLive) {
-    const affected = upcoming.flatMap((fixture) => {
-      const closures = roadClosuresOn(road!.incidents, fixture.date);
-      return closures.length ? [{ fixture, closures }] : [];
-    });
-    const first = affected[0];
-    lines.push({
-      id: "transport",
-      label: "Transport",
-      headline: first
-        ? `${first.closures.length} listed road ${first.closures.length === 1 ? "closure" : "closures"} near Hayes Lane on ${first.fixture.opponent} day (${day(first.fixture.date)})`
-        : `No listed road closure near Hayes Lane on the next ${upcoming.length} home fixture days`,
-      detail: [
-        ...(first ? first.closures.slice(0, 2).map((item) => `${item.location ?? "Unnamed location"} · ${item.distanceKm} km`) : []),
-        `TfL snapshot of ${day(road!.lastSuccessfulAt!.slice(0, 10))}: works TfL has not yet published cannot appear.`,
-        ...(railNote ? [railNote] : [])
-      ].join(" ") || null,
-      state: "live"
-    });
+  const railLive = operational.has("tfl-national-rail") && Boolean(rail?.lastSuccessfulAt);
+  const roadHits = roadLive
+    ? upcoming.flatMap((fixture) => {
+        const closures = roadClosuresOn(road!.incidents, fixture.date);
+        return closures.length ? [{ fixture, closures }] : [];
+      })
+    : [];
+  const railHits = railLive
+    ? upcoming.flatMap((fixture) => {
+        const disruptions = rail!.days.find((entry) => entry.date === fixture.date)?.disruptions ?? [];
+        return disruptions.length ? [{ fixture, disruptions }] : [];
+      })
+    : [];
+  const railRead = railLive ? new Set(rail!.days.map((entry) => entry.date)) : new Set<string>();
+  const railCovers = upcoming.filter((fixture) => railRead.has(fixture.date)).length;
+
+  if (roadLive || railLive) {
+    const firstRail = railHits[0];
+    const firstRoad = roadHits[0];
+    const clearModes = [roadLive && !firstRoad ? "road closure" : null, railLive && !firstRail ? "rail disruption" : null].filter(Boolean);
+    const headline = firstRail
+      ? `${firstRail.disruptions[0].line}: ${firstRail.disruptions[0].status.toLowerCase()} on ${firstRail.fixture.opponent} day (${day(firstRail.fixture.date)})`
+      : firstRoad
+        ? `${firstRoad.closures.length} listed road ${firstRoad.closures.length === 1 ? "closure" : "closures"} within ${ROAD_NEAR_KM} km of Hayes Lane on ${firstRoad.fixture.opponent} day (${day(firstRoad.fixture.date)})`
+        // Never claim clear days that were not read: rail may cover fewer days than the window.
+        : `No listed ${clearModes.join(" or ")} ${roadLive && !firstRoad ? `within ${ROAD_NEAR_KM} km of` : "near"} Hayes Lane on ${(railLive ? railCovers : upcoming.length) === 1 ? "the next home fixture day" : `the next ${railLive ? railCovers : upcoming.length} home fixture days`}`;
+    const detail = [
+      ...(firstRail?.disruptions[0].reason ? [firstRail.disruptions[0].reason] : []),
+      ...(firstRail && firstRoad ? [`Road: ${firstRoad.closures.length} listed ${firstRoad.closures.length === 1 ? "closure" : "closures"} on ${firstRoad.fixture.opponent} day.`] : []),
+      ...(!firstRail && firstRoad ? firstRoad.closures.slice(0, 2).map((item) => `${(item.location ?? "Unnamed location").replace(/\s+([,)])/g, "$1")} · ${item.distanceKm} km`) : []),
+      ...(railLive && railCovers < upcoming.length ? [`Rail status read for ${railCovers} of ${upcoming.length} fixture days.`] : []),
+      `TfL snapshot of ${day((railLive ? rail!.lastSuccessfulAt! : road!.lastSuccessfulAt!).slice(0, 10))}: works not yet published cannot appear.`,
+      ...(roadLive ? [] : ["Road disruption is not connected yet."]),
+      ...(railLive ? [] : ["Rail disruption is not connected yet."])
+    ].join(" ");
+    lines.push({ id: "transport", label: "Transport", headline, detail, state: "live" });
   } else {
     lines.push({
       id: "transport",
       label: "Transport",
-      headline: railLive ? "Rail feed is connected; road disruption is not" : "Road and rail disruption is not connected yet",
-      detail: railLive ? null : "TfL and National Rail join in a club pilot. No disruption is inferred without them.",
-      state: railLive ? "live" : "not-connected"
+      headline: "Road and rail disruption is not connected yet",
+      detail: "TfL road and rail status join after the first daily refresh. No disruption is inferred without them.",
+      state: "not-connected"
     });
   }
 

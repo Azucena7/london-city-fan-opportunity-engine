@@ -78,13 +78,13 @@ test("road disruption reads live from the TfL snapshot, with rail still marked a
   };
   const lines = byId(buildMorningRead({ ...base, sources, road }));
   assert.equal(lines.transport.state, "live");
-  assert.equal(lines.transport.headline, "1 listed road closure near Hayes Lane on Birmingham day (8 Nov)");
+  assert.equal(lines.transport.headline, "1 listed road closure within 5 km of Hayes Lane on Birmingham day (8 Nov)");
   assert.match(lines.transport.detail, /\[A21\] Bromley Road · 1.2 km/);
   assert.match(lines.transport.detail, /TfL snapshot of 14 Oct/);
   assert.match(lines.transport.detail, /Rail disruption is not connected yet/);
 
   const quiet = byId(buildMorningRead({ ...base, sources, road: { ...road, incidents: [road.incidents[1]] } }));
-  assert.equal(quiet.transport.headline, "No listed road closure near Hayes Lane on the next 2 home fixture days");
+  assert.equal(quiet.transport.headline, "No listed road closure within 5 km of Hayes Lane on the next 2 home fixture days");
 
   const neverFetched = byId(buildMorningRead({ ...base, sources, road: { lastSuccessfulAt: null, incidents: [] } }));
   assert.equal(neverFetched.transport.state, "not-connected", "operational without a stored snapshot is not live");
@@ -94,4 +94,29 @@ test("open-ended road incidents count on any later fixture day", () => {
   const incidents = [{ location: "X", startDate: "2026-10-01", endDate: null, distanceKm: 3, material: true }];
   assert.equal(roadClosuresOn(incidents, "2026-11-08").length, 1);
   assert.equal(roadClosuresOn(incidents, "2026-09-30").length, 0);
+  assert.equal(roadClosuresOn([{ ...incidents[0], distanceKm: 9.6 }], "2026-11-08").length, 0, "works across south London are not the approach roads");
+});
+
+test("rail disruption on a fixture day leads the transport line; clear modes are named", () => {
+  const sources = [{ id: "tfl-road", state: "operational" }, { id: "tfl-national-rail", state: "operational" }];
+  const road = { lastSuccessfulAt: "2026-10-14T01:20:00Z", incidents: [] };
+  const rail = {
+    lastSuccessfulAt: "2026-10-14T01:21:00Z",
+    days: [
+      { date: "2026-10-18", disruptions: [] },
+      { date: "2026-11-08", disruptions: [{ line: "Southeastern", status: "Part Closure", reason: "No trains between Hayes and Elmers End." }] }
+    ]
+  };
+  const lines = byId(buildMorningRead({ ...base, sources, road, rail }));
+  assert.equal(lines.transport.headline, "Southeastern: part closure on Birmingham day (8 Nov)");
+  assert.match(lines.transport.detail, /No trains between Hayes and Elmers End\./);
+  assert.doesNotMatch(lines.transport.detail, /not connected/);
+
+  const clear = byId(buildMorningRead({ ...base, sources, road, rail: { ...rail, days: rail.days.map((d) => ({ ...d, disruptions: [] })) } }));
+  assert.equal(clear.transport.headline, "No listed road closure or rail disruption within 5 km of Hayes Lane on the next 2 home fixture days");
+
+  const railOnly = byId(buildMorningRead({ ...base, sources: [sources[1]], rail: { ...rail, days: [rail.days[0]] } }));
+  assert.equal(railOnly.transport.headline, "No listed rail disruption near Hayes Lane on the next home fixture day");
+  assert.match(railOnly.transport.detail, /Rail status read for 1 of 2 fixture days\./);
+  assert.match(railOnly.transport.detail, /Road disruption is not connected yet\./);
 });
