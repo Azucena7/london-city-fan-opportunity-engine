@@ -94,7 +94,7 @@ export default function SponsorsPage() {
 
       <details className={styles.explorePanel}>
         <summary>
-          <div><span>Explore mode</span><strong>Opportunity matrix</strong><small>Open when you want to compare the broader commercial landscape.</small></div>
+          <div><span>Explore mode</span><strong>Opportunity matrix</strong><small>Compare every partner concept.</small></div>
           <b>Open matrix →</b>
         </summary>
         <WorkspaceCard className={styles.matrixCard}>
@@ -181,7 +181,7 @@ export default function SponsorsPage() {
         <aside className={styles.sideRail}>
           <div id="evidence"><WorkspaceCard className={styles.truthBoundary}>
             <WorkspaceSectionHeader eyebrow="Truth boundary" title="Prospecting ≠ contract truth" />
-            <p>Partner ideas can be ranked before outreach. Rights and obligations only become contract truth after governed verification.</p>
+            <p>Ideas can be ranked before outreach. Rights and obligations become contract truth only once verified.</p>
           </WorkspaceCard></div>
 
           <div id="rights"><WorkspaceDrawer label="Contract truth" title="Verified rights & obligations">
@@ -203,7 +203,7 @@ export default function SponsorsPage() {
 
           <div id="commit"><WorkspaceCard className={styles.commitBoundary}>
             <WorkspaceSectionHeader eyebrow="Commit boundary" title="Human review before commitment" />
-            <p>AVELA can rank and prepare the opportunity. A commercial owner must still verify rights, resolve approval gates and make any external commitment.</p>
+            <p>AVELA ranks and prepares. A commercial owner verifies rights, clears the gates and makes any commitment.</p>
           </WorkspaceCard></div>
         </aside>
       </section>

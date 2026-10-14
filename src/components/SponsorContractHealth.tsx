@@ -63,7 +63,7 @@ export function SponsorContractHealth(){
       <div>
         <span>Verified contract health</span>
         <h2>What has the club actually committed to?</h2>
-        <p>This section uses active sponsor contracts and verified clauses only. It is deliberately separate from prospecting readiness.</p>
+        <p>Active contracts and verified clauses only, kept separate from prospecting.</p>
       </div>
       <aside>
         {clubs.length > 1 ? (
@@ -116,10 +116,10 @@ export function SponsorContractHealth(){
 
       {!items.length?<div className={styles.empty}>
         <strong>No active verified sponsor contract is available.</strong>
-        <p>AVELA can still rank partner opportunities, but Sponsor Contract Health stays empty until a reviewed contract version becomes active.</p>
+        <p>Partner ranking still works. This fills once a reviewed contract version is active.</p>
       </div>:null}
     </div>
 
-    <div className={styles.rule}><strong>Contract delivery ≠ performance.</strong><p>Rights delivered, campaign performance and rights utilisation remain separate dimensions. Blinkfire can contribute performance evidence; it does not define contractual truth.</p></div>
+    <div className={styles.rule}><strong>Contract delivery ≠ performance.</strong><p>Rights delivered, campaign performance and rights utilisation stay separate. Blinkfire adds performance evidence, not contract truth.</p></div>
   </section>;
 }

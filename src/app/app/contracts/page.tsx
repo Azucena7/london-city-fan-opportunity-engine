@@ -48,7 +48,7 @@ export default function ContractsPage() {
         <WorkspaceSectionHeader eyebrow="Truth boundary" title="Extracted → Reviewed → Active" />
         <div className={styles.truthGrid}>
           <strong>Extraction is candidate evidence.</strong>
-          <p>Only clauses explicitly verified by authorised governance users may become contract truth inside AVELA. Every material field retains document, version, section, source fragment, confidence, verification state and reviewer.</p>
+          <p>Only clauses verified by an authorised reviewer become contract truth. Each keeps its document, version, section and reviewer.</p>
         </div>
       </WorkspaceCard>
 
@@ -90,7 +90,7 @@ export default function ContractsPage() {
             <div className={styles.impactFlow}>
               <span>Document</span><i aria-hidden="true">→</i><span>Verified clause</span><i aria-hidden="true">→</i><span>Affected decision</span><i aria-hidden="true">→</i><strong>Review required</strong>
             </div>
-            <p>A verified amendment should move affected sponsors, players, campaigns, fixtures or season instances back to review rather than silently changing them.</p>
+            <p>A verified amendment sends affected sponsors, players, campaigns and fixtures back to review. Nothing changes silently.</p>
           </WorkspaceDrawer>
         </aside>
       </section>
@@ -99,7 +99,7 @@ export default function ContractsPage() {
         <div>
           <span>Source of record stays external</span>
           <strong>Connect documents; do not rebuild legal document management.</strong>
-          <p>AVELA detects, extracts, verifies and operationalises clauses while retaining the approved source document and version as provenance.</p>
+          <p>AVELA keeps the approved document and version as provenance for every clause.</p>
         </div>
         <Link href="/app/sources">Review data sources →</Link>
       </WorkspaceCard>

@@ -207,10 +207,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         <div className={styles.briefIntro}>
           <span className={styles.eyebrow}>Opportunity brief</span>
           <h2>Why this fixture deserves attention — and what would make us change course.</h2>
-          <p>
-            AVELA separates the opportunity from the evidence behind it. The brief is designed to support a club decision,
-            not to make the decision automatically.
-          </p>
+          <p>The opportunity and its evidence stay separate. AVELA supports the decision; the club makes it.</p>
         </div>
 
         <div className={styles.briefGrid}>
@@ -272,7 +269,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
             <h2>Check availability, timing and capacity before the club commits.</h2>
           </div>
         </div>
-        <p>AVELA should not recommend an attractive idea that cannot survive the club&apos;s real calendar, player constraints or workload.</p>
+        <p>An attractive idea still has to survive the real calendar, player constraints and workload.</p>
       </section>
 
       <AvailabilityPlanner
@@ -312,10 +309,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <div className={styles.clubExecutionIntro}>
             <span className={styles.eyebrow}>Club context · advisory layer</span>
             <h2>How this play fits the club&apos;s real operating setup.</h2>
-            <p>
-              Evidence still determines the opportunity. Club setup only explains strategic fit, executable routes,
-              approval defaults and brand constraints before the campaign is built.
-            </p>
+            <p>Evidence still determines the opportunity. Club setup only shapes routes, approvals and brand rules.</p>
           </div>
 
           <div className={styles.clubExecutionGrid}>
@@ -456,7 +450,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
             <h2>Inspect the evidence, assumptions and missing context behind the recommendation.</h2>
           </div>
         </div>
-        <p>The user can challenge the recommendation without losing the original evidence trail.</p>
+        <p>Challenge the recommendation without losing the evidence trail.</p>
       </section>
 
       <section id="signals" className={styles.signalsSection}>
@@ -552,7 +546,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
             <h2>Preserve the recommendation, the club&apos;s choice and the outcome.</h2>
           </div>
         </div>
-        <p>This is the institutional memory that makes the next comparable decision better.</p>
+        <p>What the club learns here improves the next comparable decision.</p>
       </section>
       <SimilarDecisionsPanel fixtureId={fixture.id} />
 

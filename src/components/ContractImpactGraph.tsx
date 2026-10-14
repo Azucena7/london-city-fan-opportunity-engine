@@ -61,7 +61,7 @@ export function ContractImpactGraph(){
     return <section className={styles.unavailable}>
       <span>Contract Impact Graph</span>
       <strong>No contract-impact queue is available yet.</strong>
-      <p>{message||"Verified material clauses will create review requirements here once the governed persistence layer is enabled."}</p>
+      <p>{message||"Verified clauses will create review items here once contract review is switched on."}</p>
     </section>;
   }
 
@@ -70,7 +70,7 @@ export function ContractImpactGraph(){
       <div>
         <span>Contract Impact Graph</span>
         <h2>Which decisions must be reviewed because verified contract truth changed?</h2>
-        <p>This is a sanitised operational view. It shows the affected entity and relationship, not the underlying legal clause text.</p>
+        <p>Shows the affected entity and relationship, never the clause text.</p>
       </div>
       {clubs.length>1?<label>Club<select value={clubId} onChange={e=>{setClubId(e.target.value);void load(e.target.value);}}>{clubs.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label>:null}
     </div>

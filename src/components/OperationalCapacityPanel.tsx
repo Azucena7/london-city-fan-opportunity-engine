@@ -82,7 +82,7 @@ export function OperationalCapacityPanel({
         <div>
           <span>Operational intelligence</span>
           <h2>Can we realistically deliver this?</h2>
-          <p>AVELA estimates difficulty from time pressure, tasks, dependencies, approvals, teams, external parties and unknowns, then compares the plan with recorded workload and capacity.</p>
+          <p>Difficulty from time pressure, tasks, approvals and unknowns, compared with recorded workload and capacity.</p>
         </div>
         <div className={styles.verdict} data-state={assessment.feasibility.toLowerCase()}>
           <span>Feasibility</span>
@@ -134,7 +134,7 @@ export function OperationalCapacityPanel({
           <span>Capacity windows</span>
           <strong>{capacity.length} record{capacity.length === 1 ? "" : "s"}</strong>
         </div>
-        <p>When Asana, Monday, Jira, Teams or another work system is connected, AVELA can use its tasks and progress here without becoming a second task manager.</p>
+        <p>A connected work system (Asana, Monday, Jira, Teams) can feed its tasks and progress here.</p>
       </div>
     </section>
   );

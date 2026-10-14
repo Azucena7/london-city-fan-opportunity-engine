@@ -126,7 +126,7 @@ export function ContractReviewQueue() {
       <section className={styles.empty}>
         <span>Verification queue</span>
         <strong>Contract persistence is prepared but not enabled in this environment.</strong>
-        <p>{message || "Apply the reviewed persistence migration before connecting legal documents or verifying clauses."}</p>
+        <p>{message || "Contract review is not switched on for this club yet."}</p>
       </section>
     );
   }
@@ -137,7 +137,7 @@ export function ContractReviewQueue() {
         <div>
           <span>Verification queue</span>
           <h2>Review extracted clauses before they can influence decisions.</h2>
-          <p>Every clause keeps provenance, confidence, version and review state. Verification is an explicit governance action.</p>
+          <p>Each clause keeps provenance, confidence, version and review state. Only a reviewer can verify it.</p>
         </div>
         {clubs.length > 1 ? (
           <label>
