@@ -137,6 +137,10 @@ Identity and authorization are separate:
 
 Authentication alone never grants access to a club workspace.
 
+### Password recovery
+
+"Forgot password?" on `/app/access` calls `/api/auth/recover`, which asks Supabase to email a recovery link and answers the same way whether or not the account exists. The link opens `/app/access/reset`; the page reads the short-lived recovery session from the URL fragment, removes it from the address bar, and `/api/auth/reset` sets the new password (at least 10 characters) and signs the person in. Supabase only redirects to allowed URLs: the production site URL and `https://<site>/app/access/reset` must be listed under Authentication → URL Configuration.
+
 ## AI generation
 
 Campaign draft generation is server-side through Vercel AI Gateway.

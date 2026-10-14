@@ -225,3 +225,43 @@ test("Ask AVELA is reachable on a brief without opening any section", async ({ p
   await launcher.click();
   await expect(page.getByRole("complementary", { name: "Ask AVELA" })).toBeVisible();
 });
+
+test("password reset: request a link from sign in, then set a new password from the link", async ({ page }) => {
+  let recovered: Record<string, unknown> | null = null;
+  let reset: Record<string, unknown> | null = null;
+  await page.route("**/api/auth/session", (route) => route.fulfill({ json: { configured: true, authenticated: false, clubs: [] } }));
+  await page.route("**/api/auth/recover", async (route) => {
+    recovered = route.request().postDataJSON();
+    await route.fulfill({ json: { sent: true, next: "If an account exists for that email, a reset link is on its way." } });
+  });
+  await page.route("**/api/auth/reset", async (route) => {
+    reset = route.request().postDataJSON();
+    await route.fulfill({ json: { reset: true } });
+  });
+
+  await page.goto("/app/access");
+  const signIn = page.locator("article", { has: page.getByRole("heading", { name: "Sign in" }) });
+  await signIn.getByRole("button", { name: "Forgot password?" }).click();
+  await expect(page.getByText("Enter your email above, then choose Forgot password.")).toBeVisible();
+  await signIn.getByLabel("Work email").fill("member@example.com");
+  await signIn.getByRole("button", { name: "Forgot password?" }).click();
+  await expect(page.getByText(/If an account exists for that email/)).toBeVisible();
+  expect(recovered).toEqual({ email: "member@example.com" });
+
+  await page.goto("/app/access/reset#access_token=test-token&expires_in=3600&type=recovery");
+  const form = page.getByRole("region", { name: "Choose a new password" });
+  await expect(form).toBeVisible();
+  expect(new URL(page.url()).hash).toBe("");
+  await form.getByLabel("New password", { exact: true }).fill("a-new-password-123");
+  await form.getByLabel("Repeat new password").fill("a-new-password-123");
+  await form.getByRole("button", { name: "Save new password" }).click();
+  await expect(page.getByRole("region", { name: "Password changed" })).toBeVisible();
+  expect(reset).toMatchObject({ accessToken: "test-token", password: "a-new-password-123" });
+});
+
+test("an expired reset link explains itself instead of showing the form", async ({ page }) => {
+  await page.goto("/app/access/reset#error=access_denied&error_code=otp_expired&error_description=Email+link+is+invalid+or+has+expired");
+  const card = page.getByRole("region", { name: "Reset link problem" });
+  await expect(card).toContainText("Email link is invalid or has expired");
+  await expect(card.getByRole("link", { name: "Back to sign in →" })).toHaveAttribute("href", "/app/access");
+});

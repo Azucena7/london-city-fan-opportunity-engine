@@ -148,6 +148,28 @@ export function AccessCenter() {
     }
   }
 
+  async function requestPasswordReset() {
+    if (!email.trim()) {
+      setMessage("Enter your email above, then choose Forgot password.");
+      return;
+    }
+    setBusy(true);
+    setMessage("Sending reset link…");
+    try {
+      const response = await fetch("/api/auth/recover", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      const result = await response.json() as { error?: string; next?: string };
+      setMessage(response.ok ? result.next || "If an account exists for that email, a reset link is on its way." : result.error || "The reset link could not be sent.");
+    } catch {
+      setMessage("Account service is unreachable. No reset email was sent.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function signOut() {
     setBusy(true);
     setMessage("Signing out…");
@@ -273,6 +295,7 @@ export function AccessCenter() {
             <label>Work email<input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
             <label>Password<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
             <button type="button" disabled={busy} aria-busy={busy} onClick={() => void signIn()}>Sign in</button>
+            <button type="button" className={styles.linkButton} disabled={busy} onClick={() => void requestPasswordReset()}>Forgot password?</button>
             <p>Signing in does not grant club access by itself.</p>
           </article>
         </div>
