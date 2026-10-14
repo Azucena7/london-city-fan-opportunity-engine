@@ -395,5 +395,20 @@
       "en": "Full Season Tickets are officially sold out and the club now offers an 11-game Season Ticket covering every home BWSL fixture from Everton onwards. Audit live and scheduled website, CRM, paid and social assets today: remove full-season purchase CTAs, introduce the 11-game product to high-intent and repeat-buyer segments, preserve distinct single-match and Hat-trick choices, and tag purchases by product. The sell-out confirms availability status only; it does not publish volume, revenue, scans or attendance.",
       "es": "Los abonos completos están oficialmente agotados y el club ofrece ahora un abono de 11 partidos que cubre todos los encuentros de BWSL en casa desde Everton. Auditar hoy los activos web, CRM, paid y social activos y programados: retirar los CTAs de compra del abono completo, introducir el producto de 11 partidos a segmentos de alta intención y compradores recurrentes, mantener diferenciadas las opciones de partido único y pack Hat-trick y etiquetar las compras por producto. El agotado confirma solo el estado de disponibilidad; no publica volumen, ingresos, scans ni asistencia."
     }
+  },
+  {
+    "id": "west-ham-calendar-asset-audit-2026-10-14",
+    "fixtureId": "2026-10-21-whu-a",
+    "area": "Ticketing, CRM & Supporter Services",
+    "status": "next",
+    "due": "2026-10-14",
+    "title": {
+      "en": "Correct West Ham time across supporter assets",
+      "es": "Corregir el horario de West Ham en los activos para aficionados"
+    },
+    "reason": {
+      "en": "The repository calendar had 20:00 while both official ticket pages confirm 19:00 BST on 21 October. Replace the wrong time in scheduled emails, travel instructions, social and calendar exports; use Chigwell Construction Stadium / Victoria Road, RM10 7XL. Retain the generic fixture-page discrepancy and recheck ticket-page local time before release. This is data correction, not evidence of rescheduling or demand.",
+      "es": "El calendario del repositorio tenía las 20:00 y ambas páginas oficiales de entradas confirman las 19:00 BST del 21 de octubre. Sustituir la hora errónea en emails programados, instrucciones de viaje, social y exportaciones de calendario; usar Chigwell Construction Stadium / Victoria Road, RM10 7XL. Conservar la discrepancia de la página genérica y verificar la hora local de las páginas de entradas antes de publicar. Es corrección de datos, no evidencia de reprogramación ni demanda."
+    }
   }
 ]
