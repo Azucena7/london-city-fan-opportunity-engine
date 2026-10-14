@@ -99,10 +99,10 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
     return {
       ...item,
       decisionState: decision?.decisionState ?? null,
-      move: plan ? { text: plan.title.en, kind: "Campaign draft" } : draft ? { text: draft.move, kind: draft.moveRecordedAt ? "Engine draft · from signal of " + new Date(draft.moveRecordedAt + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) : "Engine draft" } : null,
+      move: plan ? { text: plan.title.en, kind: "Campaign draft" } : draft ? { text: draft.move, kind: draft.moveRecordedAt ? "Engine draft · from signal of " + new Date(draft.moveRecordedAt + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) + (draft.timingNote ? " · timing out of date" : "") : "Engine draft" } : null,
       inWindow: preparationIds.has(item.fixtureId),
       waitingOn: draft
-        ? "Assign a club owner and review the engine draft"
+        ? draft.timingNote ? "Re-time the engine draft and assign a club owner" : "Assign a club owner and review the engine draft"
         : decision?.decisionState === "HOLD" ? decision.primaryBlocker : null,
       gates,
       moments: moments.filter((moment) => moment.fixtureId === item.fixtureId).map((moment) => moment.label)
