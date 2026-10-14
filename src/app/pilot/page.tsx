@@ -5,6 +5,7 @@ import { MarketingNav } from "@/components/MarketingNav";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { calendar, currentState } from "@/lib/data";
 import { currentProductDate } from "@/lib/currentProductDate";
+import { CYCLE_STATE_KEY, PILOT_WINDOW, cycleStates } from "@/lib/pilotWindow";
 
 export const metadata: Metadata = {
   title: "Club Pilot · The Opportunity Engine for Marketing & Commercial Teams",
@@ -18,66 +19,9 @@ const cycle = [
   ["04", "Learn", "Compare recommendation, execution and outcome so the next read starts from what actually happened."]
 ];
 
-const pilotWindow = [
-  {
-    fixture: "Brighton · 26 Sep",
-    fixtureId: "2026-09-26-bha-h",
-    focus: "Experience + retention",
-    decision: "Extend the football day, protect service confidence and learn from repeat behaviour.",
-    evidence: "Public activation + reported attendance; CRM, scans and spend remain gated."
-  },
-  {
-    fixture: "Everton · 18 Oct",
-    fixtureId: "2026-10-18-eve-h",
-    focus: "Segmentation + VIP + broadcast",
-    decision: "Separate family, Oktoberfest, VIP and remote-viewer journeys instead of one generic campaign.",
-    evidence: "Official matchday proposition, VIP availability and broadcast context."
-  },
-  {
-    fixture: "Crystal Palace · 28 Oct",
-    fixtureId: "2026-10-28-cry-h",
-    focus: "Bundle + ticketing",
-    decision: "Test bundle versus single-match journeys and measure purchase and scan behaviour per fixture.",
-    evidence: "Official three-game cup bundle and sale windows."
-  },
-  {
-    fixture: "Manchester City · 1 Nov",
-    fixtureId: "2026-11-01-mci-h",
-    focus: "Pricing + CRM cohorts",
-    decision: "Use prior buyers, registered prospects and priority cohorts with verified price windows.",
-    evidence: "Official ticket launch; conversion remains unmeasured until club data is connected."
-  }
-] as const;
-
-type CycleState = "Observed" | "Played · evidence pending" | "Active" | "Next";
-
-/**
- * A cycle's state comes from the calendar, never from copy: Observed only once the fixture is
- * played and a public attendance is on record; the first fixture still ahead is Active.
- */
-function cycleStates(today: string): Record<string, CycleState> {
-  const fixtures = pilotWindow.map((item) => calendar.find((fixture) => fixture.id === item.fixtureId));
-  const firstAhead = fixtures.find((fixture) => fixture && fixture.status !== "final" && fixture.date >= today)?.id;
-  return Object.fromEntries(pilotWindow.map((item, index) => {
-    const fixture = fixtures[index];
-    const played = fixture ? fixture.status === "final" || fixture.date < today : false;
-    const state: CycleState = played
-      ? fixture?.attendance ? "Observed" : "Played · evidence pending"
-      : item.fixtureId === firstAhead ? "Active" : "Next";
-    return [item.fixtureId, state];
-  }));
-}
-
-const stateKey: Record<CycleState, string> = {
-  Observed: "observed",
-  "Played · evidence pending": "pending",
-  Active: "active",
-  Next: "next"
-};
-
 export default function PilotPage() {
   const live = getCurrentProductOpportunity();
-  const states = cycleStates(currentProductDate(currentState.updated_at));
+  const states = cycleStates(calendar, currentProductDate(currentState.updated_at));
 
   return (
     <main className={styles.shell}>
@@ -147,8 +91,8 @@ export default function PilotPage() {
           <p>This is how a bounded pilot becomes useful: not by repeating the same dashboard four times, but by testing whether AVELA adapts the decision as fixture context, evidence and commercial constraints change.</p>
         </div>
         <div className={styles.pilotWindow}>
-          {pilotWindow.map((item, index) => (
-            <article key={item.fixture} data-state={stateKey[states[item.fixtureId]]}>
+          {PILOT_WINDOW.map((item, index) => (
+            <article key={item.fixture} data-state={CYCLE_STATE_KEY[states[item.fixtureId]]}>
               <div className={styles.pilotWindowTop}>
                 <span>{String(index + 1).padStart(2, "0")} · {states[item.fixtureId]}</span>
                 <b>{item.focus}</b>

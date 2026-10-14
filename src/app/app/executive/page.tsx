@@ -5,6 +5,7 @@ import { bankHolidays, calendar, campaignPlans, currentState, internationalWindo
 import { calendarMoments } from "@/lib/calendarMoments";
 import { getCurrentPreparedMoves, getPreparationWindowIds } from "@/lib/currentPreparedMoves";
 import { DataTable } from "@/components/DataTable";
+import { PilotWindowTracker } from "@/components/PilotWindowTracker";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { getMaterialMatchdayAlert } from "@/lib/matchdayDecisionAlert";
@@ -168,6 +169,8 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
           ]}
         />
       </section>
+
+      <PilotWindowTracker />
 
       {matchdayAlert ? (
         <section className={styles.matchdayAlert} data-state={matchdayAlert.state}>
