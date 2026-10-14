@@ -51,7 +51,7 @@ export default function SponsorsPage() {
       subtitle="Rank commercial fit, evidence readiness, rights and approval gates before outreach or commitment."
     >
       <nav className={styles.guidedSteps} aria-label="Sponsor decision workflow">
-        <a href="#opportunity" aria-current="step"><span>01</span><strong>Opportunity</strong><small>What looks worth pursuing</small></a>
+        <a href="#opportunity"><span>01</span><strong>Opportunity</strong><small>What looks worth pursuing</small></a>
         <a href="#evidence"><span>02</span><strong>Evidence</strong><small>What is verified or missing</small></a>
         <a href="#rights"><span>03</span><strong>Rights</strong><small>What contract truth allows</small></a>
         <a href="#review"><span>04</span><strong>Review</strong><small>What still needs approval</small></a>

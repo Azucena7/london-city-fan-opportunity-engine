@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { calendar, campaignPlans } from "@/lib/data";
+import { calendar, campaignPlans, currentState } from "@/lib/data";
+import { currentProductDate } from "@/lib/currentProductDate";
 import { demoCommercialCampaigns } from "@/lib/clubStrategy";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
@@ -31,11 +32,17 @@ export default function CampaignsPage() {
   });
   const needsDecision = campaignRows.filter((item) => item.needsDecision);
   const primary = needsDecision[0] ?? campaignRows[0] ?? null;
+  const today = currentProductDate(currentState.updated_at);
+  // Each stage comes from the plan's own state: Learning once its fixture is played, Draft
+  // while no approval has cleared, Review while some gates are still open, Handoff once
+  // approved work has started, Ready when approved and not yet started.
   const lifecycleStage = (item: (typeof campaignRows)[number]) => {
+    const fixture = calendar.find((entry) => entry.id === item.campaign.fixtureId);
+    if (fixture && (fixture.status === "final" || fixture.date < today)) return "Learning";
+    if (item.approvalTotal > 0 && item.approvalCount === 0) return "Draft";
     if (item.needsDecision) return "Review";
-    const incomplete = item.campaign.schedule?.some((entry) => entry.state !== "complete") ?? false;
-    if (incomplete) return "Ready";
-    return "Learning";
+    const started = item.campaign.schedule?.some((entry) => entry.state === "complete") ?? false;
+    return started ? "Handoff" : "Ready";
   };
   const lifecycleStages = ["Draft", "Review", "Ready", "Handoff", "Learning"] as const;
 

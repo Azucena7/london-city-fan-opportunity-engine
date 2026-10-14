@@ -134,6 +134,7 @@ export default async function ClubAppHome() {
   const onTrackDeg = blockedDeg + Math.round((summary.onTrack / healthTotal) * 360);
   const donutBackground = "conic-gradient(#EF8B6C 0deg " + actDeg + "deg,#D78A1E " + actDeg + "deg " + reviewDeg + "deg,#7C8791 " + reviewDeg + "deg " + blockedDeg + "deg,#2F8F83 " + blockedDeg + "deg " + onTrackDeg + "deg,#D8DEE3 " + onTrackDeg + "deg 360deg)";
   const nextFixture = upcoming[0] ?? null;
+  const nextRadar = nextFixture ? radar.find((item) => item.fixtureId === nextFixture.id) ?? null : null;
 
   return (
     <AppWorkspaceShell
@@ -263,9 +264,9 @@ export default async function ClubAppHome() {
                 <small>{nextFixture.venue}</small>
               </div>
               <div className={styles.nextTags}>
-                <WorkspaceBadge tone="teal">Fixture</WorkspaceBadge>
-                <WorkspaceBadge>Audience</WorkspaceBadge>
-                <WorkspaceBadge tone="coral">Opportunity</WorkspaceBadge>
+                {nextRadar ? <WorkspaceBadge tone={nextRadar.attentionState === "Act now" ? "coral" : "teal"}>{nextRadar.attentionState}</WorkspaceBadge> : null}
+                {nextRadar ? <WorkspaceBadge>{nextRadar.daysToFixture <= 0 ? "Fixture window" : nextRadar.daysToFixture + " days"}</WorkspaceBadge> : null}
+                <WorkspaceBadge tone="teal">{nextFixture.competition}</WorkspaceBadge>
               </div>
               <Link className={styles.nextAction} href={"/app/matches/" + nextFixture.id}>Open match workspace →</Link>
             </>
