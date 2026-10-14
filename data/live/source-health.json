@@ -166,6 +166,28 @@
       "lastAttemptAt": "2026-10-14T13:47:20.164Z"
     },
     {
+      "id": "tfl-national-rail",
+      "label": {
+        "en": "National Rail status via TfL",
+        "es": "Estado de National Rail vía TfL"
+      },
+      "category": "matchday-rail-disruption",
+      "access": "public",
+      "state": "not-configured",
+      "method": "public-api",
+      "cadence": "daily",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Runs with the daily data refresh from the TfL Unified API; the first successful run fills it.",
+        "es": "Se ejecuta con la actualización diaria desde la API Unified de TfL; la primera ejecución correcta la rellena."
+      },
+      "note": {
+        "en": "Southeastern and Thameslink line status on each upcoming home fixture day (Hayes, Bromley South, Bromley North), read through TfL. Works not yet published cannot appear; this is not the Rail Data Marketplace feed.",
+        "es": "Estado de las líneas Southeastern y Thameslink en cada próximo día de partido en casa (Hayes, Bromley South, Bromley North), leído a través de TfL. Las obras aún no publicadas no pueden aparecer; no es el feed de Rail Data Marketplace."
+      },
+      "lastAttemptAt": null
+    },
+    {
       "id": "national-rail-rdm",
       "label": {
         "en": "National Rail / Rail Data Marketplace",
@@ -182,8 +204,8 @@
         "es": "Seleccionar y suscribirse en RDM al producto de datos que exponga los datos necesarios de trayectos, horarios o incidencias y registrar después su especificación de entrega y autenticación."
       },
       "note": {
-        "en": "RDM consumer account access is approved. No product-specific endpoint or credentials are connected yet, so national rail routing remains unavailable until an RDM product is validated and connected.",
-        "es": "El acceso de consumidor a RDM está aprobado. Aún no hay endpoint ni credenciales de un producto concreto, por lo que las rutas ferroviarias nacionales siguen sin estar disponibles hasta validar y conectar un producto RDM."
+        "en": "RDM consumer account access is approved, but the Knowledgebase Incidents product is not licensed to the current organisation country, so national rail routing remains unavailable until an RDM product is validated and connected. Rail line status is read separately through TfL.",
+        "es": "El acceso de consumidor a RDM está aprobado, pero el producto Knowledgebase Incidents no tiene licencia para el país de la organización actual, por lo que las rutas ferroviarias nacionales siguen sin estar disponibles hasta validar y conectar un producto RDM. El estado de las líneas se lee por separado a través de TfL."
       }
     },
     {
@@ -458,6 +480,7 @@
       ],
       "supportingSourceIds": [
         "tfl-road",
+        "tfl-national-rail",
         "national-rail-rdm"
       ],
       "nextAction": {

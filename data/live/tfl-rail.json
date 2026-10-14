@@ -1,0 +1,9 @@
+{
+  "version": null,
+  "source": { "name": "Transport for London Unified API · National Rail line status", "url": "https://api.tfl.gov.uk/Line/southeastern,thameslink/Status" },
+  "lines": ["southeastern", "thameslink"],
+  "stations": ["Hayes", "Bromley South", "Bromley North"],
+  "checkedAt": null,
+  "lastSuccessfulAt": null,
+  "days": []
+}

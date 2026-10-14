@@ -16,6 +16,7 @@
     "refresh:news-radar": "node scripts/refresh-news-radar.mjs",
     "refresh:calendar-moments": "node scripts/refresh-calendar-moments.mjs",
     "refresh:tfl-road": "node scripts/refresh-tfl-road.mjs",
+    "refresh:tfl-rail": "node scripts/refresh-tfl-rail.mjs",
     "send:morning-read": "npx -y tsx@4.19.2 --tsconfig tsconfig.json scripts/send-morning-read.ts",
     "import:crm": "node scripts/import-crm-ticketing.mjs",
     "import:trends": "node scripts/import-trends-export.mjs",

@@ -2972,7 +2972,7 @@ test("hero engine reads signal states from the source register instead of claimi
   const lib = read("src/lib/engineSignals.ts");
   const stage = read("src/components/OpportunityEngineStage.tsx");
   assert.match(lib, /state === "operational"/);
-  assert.match(lib, /"tfl-road", "national-rail-rdm"/);
+  assert.match(lib, /"tfl-road", "tfl-national-rail", "national-rail-rdm"/);
   assert.match(lib, /"crm-ticketing"/);
   assert.match(stage, /source-health\.json/);
   assert.match(stage, /Reading now/);
