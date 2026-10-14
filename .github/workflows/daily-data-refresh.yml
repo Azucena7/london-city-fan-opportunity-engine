@@ -92,3 +92,13 @@ jobs:
           git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/bank-holidays.json data/live/source-health.json
           git commit -m "data: refresh fixture and public signal state"
           git push
+      - name: Send the Morning Commercial Read
+        # Daily runs only (scheduled or manual), never on a push. Always lands in the run summary;
+        # it is also emailed when RESEND_API_KEY and MORNING_READ_TO are set as repository secrets.
+        if: steps.schedule_gate.outputs.run_refresh == 'true' && github.event_name != 'push'
+        continue-on-error: true
+        run: npm run send:morning-read
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          MORNING_READ_TO: ${{ secrets.MORNING_READ_TO }}
+          MORNING_READ_FROM: ${{ secrets.MORNING_READ_FROM }}

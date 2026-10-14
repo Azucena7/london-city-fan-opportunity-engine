@@ -19,6 +19,7 @@ The workflow executes:
 2. `npm run refresh:public-signals`
 3. `npm run refresh:news-radar` (non-blocking)
 4. `npm run refresh:calendar-moments` (non-blocking)
+5. `npm run send:morning-read` (non-blocking; scheduled and manual runs only)
 
 ### News radar
 
@@ -27,6 +28,10 @@ The workflow executes:
 ### Calendar moments
 
 `refresh:calendar-moments` fetches England and Wales bank holidays from the GOV.UK API into `data/live/bank-holidays.json` and records the result in the source register (`uk-bank-holidays`). If GOV.UK fails, the stored holidays are kept and the source reads degraded; until the first successful run it reads not configured and no holiday is shown or inferred. FIFA women's international windows are a reviewed seed in `data/seed/international-windows.json` (`fifa-international-windows`): edit it when FIFA revises the calendar, and confirm the June 2027 window before adding it. The app places each upcoming home fixture against both — bank holiday weekend, last home match before a window, inside a window, first home match after it — in the Morning Commercial Read and the Opportunity Engine. These are positions against published dates, never estimates of their effect.
+
+### Morning Commercial Read delivery
+
+`send:morning-read` builds the same Morning Commercial Read the home page shows, plus the engine drafts due to be prepared in the next seven days, from the freshly refreshed data. It always writes the read to the GitHub Actions run summary. It also emails it through Resend when two repository secrets exist: `RESEND_API_KEY` and `MORNING_READ_TO` (one or more addresses, comma-separated). `MORNING_READ_FROM` is optional; without a verified sending domain, Resend's `onboarding@resend.dev` sender only delivers to the Resend account owner's own address. It runs on scheduled and manual runs only — never on a push — and a delivery failure never blocks the data refresh. Recipients live only in secrets, never in the repository.
 
 Public-source API credentials used by this workflow belong in GitHub Actions repository secrets. Vercel environment variables do not supply secrets to GitHub-hosted jobs.
 
