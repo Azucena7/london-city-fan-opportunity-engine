@@ -56,7 +56,9 @@ test("the read goes out once per London day on daily runs, with recipients from 
   assert.match(gate, /jq -r '\.lastSentFor \/\/ empty' data\/live\/morning-read\.json/);
   assert.match(workflow, /if: steps\.schedule_gate\.outputs\.run_refresh == 'true' \|\| steps\.schedule_gate\.outputs\.send_read == 'true'\n\s+run: npm ci|run: npm ci\n\s+if: steps\.schedule_gate\.outputs\.run_refresh == 'true' \|\| steps\.schedule_gate\.outputs\.send_read == 'true'/);
   const step = workflow.slice(workflow.indexOf("Send the Morning Commercial Read"));
-  assert.match(step, /if: steps\.schedule_gate\.outputs\.send_read == 'true'/);
+  // It runs even after a failed refresh or validation, from the last published data.
+  assert.match(step, /if: \$\{\{ !cancelled\(\) && steps\.schedule_gate\.outputs\.send_read == 'true' \}\}/);
+  assert.match(step, /if \[ "\$JOB_STATUS" != "success" \]; then\n\s+git checkout -- data\//);
   assert.match(step, /git add data\/live\/morning-read\.json/);
   assert.match(step, /continue-on-error: true/);
   assert.match(step, /MORNING_READ_TO: \$\{\{ secrets\.MORNING_READ_TO \}\}/);

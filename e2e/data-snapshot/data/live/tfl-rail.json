@@ -1,0 +1,40 @@
+{
+  "version": "2026-10-14",
+  "source": {
+    "name": "Transport for London Unified API · National Rail line status",
+    "url": "https://api.tfl.gov.uk/Line/southeastern,thameslink/Status"
+  },
+  "lines": [
+    "southeastern",
+    "thameslink"
+  ],
+  "stations": [
+    "Hayes",
+    "Bromley South",
+    "Bromley North"
+  ],
+  "checkedAt": "2026-10-14T14:39:12.093Z",
+  "lastSuccessfulAt": "2026-10-14T14:39:12.093Z",
+  "days": [
+    {
+      "fixtureId": "2026-10-18-eve-h",
+      "date": "2026-10-18",
+      "disruptions": []
+    },
+    {
+      "fixtureId": "2026-10-28-cry-h",
+      "date": "2026-10-28",
+      "disruptions": []
+    },
+    {
+      "fixtureId": "2026-11-01-mci-h",
+      "date": "2026-11-01",
+      "disruptions": []
+    },
+    {
+      "fixtureId": "2026-11-08-birmingham-c-h",
+      "date": "2026-11-08",
+      "disruptions": []
+    }
+  ]
+}

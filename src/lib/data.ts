@@ -30,6 +30,7 @@ import newsRadarRaw from "../../data/live/news-radar.json";
 import newsRadarConfigRaw from "../../data/seed/news-radar.json";
 import { buildPostMatchScorecards } from "./postmatch";
 import type { AttendanceHistory, AudienceReachData, CalendarFixture, CampaignPlanData, ClubActivationDataset, CrmTicketingDemo, CrmTicketingLiveDataset, CrmTicketingReadiness, EventLandscapeData, ExperienceDemandData, DecisionValidationData, ExperimentMeasurementData, Fixture, LeagueAttendanceBenchmark, LiveSignal, MobilityPartnershipData, NewsRadarConfig, NewsRadarData, PartnerCommercialPackData, PilotReadinessData, PostMatchReview, SearchDemandData, Territory } from "./models";
+import { productToday } from "@/lib/currentProductDate";
 
 export const territories = territoriesRaw as Territory[];
 export const fixtures = fixturesRaw as Fixture[];
@@ -61,4 +62,4 @@ export const pilotReadiness = pilotReadinessRaw as PilotReadinessData;
 export const eventLandscape = eventLandscapeRaw as EventLandscapeData;
 export const newsRadar = newsRadarRaw as NewsRadarData;
 export const newsRadarConfig = newsRadarConfigRaw as NewsRadarConfig;
-export const postMatchScorecards = buildPostMatchScorecards(calendar, postmatchReviews, crmTicketingDemo);
+export const postMatchScorecards = buildPostMatchScorecards(calendar, postmatchReviews, crmTicketingDemo, new Date(`${productToday()}T12:00:00Z`));
