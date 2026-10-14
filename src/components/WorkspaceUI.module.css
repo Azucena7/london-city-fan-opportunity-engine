@@ -3,7 +3,7 @@
 .card.action{border-color:#F2D7CD;background:#FFFCFA}
 .sectionHeader{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:34px}
 .sectionHeader span{display:block;color:#8A97A2;font-size:12px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
-.sectionHeader h2{margin:2px 0 0!important;font-size:16px!important;line-height:1.22!important;letter-spacing:-.02em!important}
+.sectionHeader h2{margin:2px 0 0;font-size:16px;line-height:1.22;letter-spacing:-.02em}
 .badge{display:inline-flex;align-items:center;min-height:24px;padding:4px 8px;border-radius:999px;background:#F1F4F6;color:#657582;font-size:12px;font-weight:850;white-space:nowrap}
 .badge[data-tone="teal"]{background:#E7F4F1;color:#26776F}
 .badge[data-tone="coral"]{background:#FCEDE8;color:#B95F43}
@@ -19,8 +19,8 @@
 .drawer[open]>summary{border-bottom:1px solid #E0E5E8;background:#FAFCFC}
 .drawerBody{padding:15px}
 .drawer>summary{min-height:44px}
-.whenOpen{display:none!important}
-.drawer[open]>summary .whenClosed{display:none!important}
+.whenOpen{display:none}
+.drawer[open]>summary .whenClosed{display:none}
 .drawer[open]>summary .whenOpen{display:inline!important}
 @media(pointer:coarse){
   .drawer>summary{min-height:48px}
