@@ -89,11 +89,11 @@ export function ClubPilotProposition() {
       <div className="commercialTwoColumns">
         <article>
           <h3>{es ? "Hoy, con fuentes públicas" : "Today, from public sources"}</h3>
-          <p>{es ? "Previsión meteorológica, eventos en la ciudad y fútbol que compite por la misma franja, calendario y anuncios del club, ventanas internacionales y noticias públicas." : "Weather forecasts, city events and football competing for the same slot, the club calendar and announcements, international windows and public news."}</p>
+          <p>{es ? "Previsión meteorológica, eventos en la ciudad y fútbol que compite por la misma franja, calendario y anuncios del club, ventanas internacionales, noticias públicas y cortes de carretera y tren de TfL, revisados a diario." : "Weather forecasts, city events and football competing for the same slot, the club calendar and announcements, international windows, public news, and TfL road and rail disruption, checked daily."}</p>
         </article>
         <article>
           <h3>{es ? "En el piloto, con acceso del club" : "In the pilot, with club access"}</h3>
-          <p>{es ? "Transporte (TfL y National Rail), agregados de CRM y ticketing, derechos y obligaciones con partners, y disponibilidad de jugadoras y staff. Hasta conectarse se muestran como no conectados, nunca se rellenan." : "Transport (TfL and National Rail), CRM and ticketing aggregates, partner rights and obligations, and player and staff availability. Until connected they are shown as not connected, never filled in."}</p>
+          <p>{es ? "Rutas de viaje en directo y feeds de National Rail, agregados de CRM y ticketing, derechos y obligaciones con partners, y disponibilidad de jugadoras y staff. Hasta conectarse se muestran como no conectados, nunca se rellenan." : "Live journey routing and National Rail feeds, CRM and ticketing aggregates, partner rights and obligations, and player and staff availability. Until connected they are shown as not connected, never filled in."}</p>
         </article>
       </div>
     </section>

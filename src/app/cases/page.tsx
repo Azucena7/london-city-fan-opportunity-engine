@@ -79,7 +79,7 @@ export default function CasesPage() {
           </p>
         </div>
         <div className={styles.legend}>
-          <div><span className={styles.legendRepeat}>01</span><strong>Retain</strong><small>Convert recent attendees again</small></div>
+          <div><span className={styles.legendRepeat}>01</span><strong>Retain</strong><small>Convert recent buyers again</small></div>
           <div><span className={styles.legendDefend}>02</span><strong>Defend</strong><small>Protect utilisation of the core</small></div>
           <div><span className={styles.legendAcquire}>03</span><strong>Acquire</strong><small>Use fixture appeal to grow reach</small></div>
         </div>

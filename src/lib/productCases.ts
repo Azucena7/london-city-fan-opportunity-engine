@@ -47,8 +47,8 @@ function buildCase(date: string, opponent: string, opportunityType: string): Pro
 
 export function getFeaturedProductCases(): ProductCase[] {
   return [
-    buildCase("2026-09-26", "Brighton & Hove Albion", "Repeat attendance"),
+    buildCase("2026-09-26", "Brighton & Hove Albion", "Repeat purchase"),
     buildCase("2026-10-18", "Everton", "Defend core"),
-    buildCase("2026-11-22", "Crystal Palace", "Derby acquisition")
+    buildCase("2026-11-21", "Crystal Palace", "Derby acquisition")
   ].filter((item): item is ProductCase => item !== null);
 }

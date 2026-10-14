@@ -65,7 +65,7 @@ const sources = [
     ],
     connected: [
       "TfL road disruption read daily near Hayes Lane (anonymous access)",
-      "National Rail status read daily through TfL; the RDM incidents product is not licensed to the organisation country",
+      "National Rail status read daily through TfL; the RDM incidents product is not licensed for this organisation",
       "No journey route is labelled live without a timestamped provider response"
     ],
     href: "/app/matches",

@@ -237,7 +237,7 @@ export function getCurrentProductOpportunity(requestedFixtureId?: string): Produ
 
   const recommendedAction =
     cohort && cohort.addressableConsentedNonReturners > 0
-      ? `Activate the measured repeat-attendance cohort for ${calendarFixture.opponent} through authorised owned channels and track purchase, scan and repeat.`
+      ? `Activate the measured repeat-purchase cohort for ${calendarFixture.opponent} through authorised owned channels and track purchase, scan and repeat.`
       : strategicActivation?.role.en ??
         "Build the highest-priority audience and validate the measurement plan before activation.";
 
@@ -254,7 +254,7 @@ export function getCurrentProductOpportunity(requestedFixtureId?: string): Produ
   const assumptions = [
     ...(!cohort ? [
       `A meaningful share of previous-home buyers is still available to convert for ${calendarFixture.opponent}.`,
-      "The repeat-attendance cohort is contactable through authorised CRM channels."
+      "The repeat-purchase cohort is contactable through authorised CRM channels."
     ] : []),
     "Repeat-visit propensity is stronger than cold acquisition for this fixture."
   ];
