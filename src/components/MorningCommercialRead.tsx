@@ -1,8 +1,5 @@
-import sourceHealth from "../../data/live/source-health.json";
-import { bankHolidays, calendar, currentState, eventLandscape, internationalWindows, liveSignals } from "@/lib/data";
-import { calendarMoments } from "@/lib/calendarMoments";
-import { currentProductDate } from "@/lib/currentProductDate";
-import { buildMorningRead } from "@/lib/morningRead";
+import { currentState } from "@/lib/data";
+import { getCurrentMorningRead } from "@/lib/currentMorningRead";
 import type { ProductOpportunity } from "@/lib/productOpportunity";
 import styles from "./MorningCommercialRead.module.css";
 
@@ -13,16 +10,7 @@ function readAt(value: string) {
 }
 
 export function MorningCommercialRead({ live }: { live: ProductOpportunity | null }) {
-  const lines = buildMorningRead({
-    today: currentProductDate(currentState.updated_at),
-    calendar,
-    events: eventLandscape.events,
-    signals: liveSignals,
-    weather: currentState.weather,
-    sources: sourceHealth.sources,
-    live,
-    moments: calendarMoments(calendar, bankHolidays.events, internationalWindows.windows)
-  });
+  const lines = getCurrentMorningRead(live);
 
   return (
     <section className={styles.wrap} aria-labelledby="morning-read-title">

@@ -15,6 +15,7 @@
     "refresh:public-signals": "node scripts/refresh-public-signals.mjs",
     "refresh:news-radar": "node scripts/refresh-news-radar.mjs",
     "refresh:calendar-moments": "node scripts/refresh-calendar-moments.mjs",
+    "send:morning-read": "npx -y tsx@4.19.2 --tsconfig tsconfig.json scripts/send-morning-read.ts",
     "import:crm": "node scripts/import-crm-ticketing.mjs",
     "import:trends": "node scripts/import-trends-export.mjs",
     "rehearse:pilot": "node scripts/run-pilot-rehearsal.mjs",
