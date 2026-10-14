@@ -1118,5 +1118,41 @@
     },
     "sourceName": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/"
+  },
+  {
+    "id": "fixture-west-ham-calendar-correction-2026-10-14",
+    "fixtureId": "2026-10-21-whu-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-10-14T09:54:37+01:00",
+    "title": {
+      "en": "West Ham cup calendar requires 19:00 BST, not 20:00",
+      "es": "El calendario de copa ante West Ham requiere las 19:00 BST, no las 20:00"
+    },
+    "summary": {
+      "en": "Main calendar recorded 20:00 on 21 October, matching the generic London City fixture page. Both clubs' ticket pages confirm 19:00 BST at Chigwell Construction Stadium / Victoria Road, RM10 7XL. This corrects repository planning data; it is not a newly announced fixture rescheduling. The generic fixture-page conflict remains visible.",
+      "es": "El calendario de main registraba las 20:00 del 21 de octubre, como la página genérica de partidos de London City. Las páginas de entradas de ambos clubes confirman las 19:00 BST en Chigwell Construction Stadium / Victoria Road, RM10 7XL. Se corrige el dato de planificación del repositorio; no es una nueva reprogramación anunciada. La discrepancia de la página genérica sigue visible."
+    },
+    "marketingAction": {
+      "en": "Audit scheduled CRM, travel guidance, social and calendar exports; replace 20:00 with 19:00 BST and use the ticket pages for final verification. Do not infer any sales or attendance change.",
+      "es": "Auditar CRM programado, guía de viaje, social y exportaciones de calendario; sustituir las 20:00 por las 19:00 BST y usar las páginas de entradas para la verificación final. No inferir cambios de ventas ni asistencia."
+    },
+    "sourceName": "London City Lionesses / West Ham United",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+        "checkedAt": "2026-10-14"
+      },
+      {
+        "name": "West Ham United",
+        "url": "https://www.whufc.com/en/womens-team-matches/london-city-lionesses-h-0",
+        "checkedAt": "2026-10-14"
+      }
+    ]
   }
 ]
