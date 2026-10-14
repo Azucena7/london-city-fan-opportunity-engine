@@ -5,7 +5,8 @@ import ts from "typescript";
 
 const source = await readFile(new URL("../src/lib/preparedMoves.ts", import.meta.url), "utf8");
 const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { buildPreparedMoves, preparationWindow } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+const timing = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+const { buildPreparedMoves, preparationWindow } = timing;
 
 const fixtures = [
   { id: "planned", date: "2026-10-18", opponent: "Everton", homeAway: "home" },
@@ -63,4 +64,25 @@ test("a draft never carries numbers it does not have, and late drafts say so", (
 
 test("the preparation window is the next six home fixtures in date order", () => {
   assert.deepEqual(preparationWindow(fixtures, "2026-10-14", 3).map((fixture) => fixture.id), ["planned", "bundle", "quiet"]);
+});
+
+test("an action written on an earlier day is flagged when its own timing has run out", () => {
+  const { actionTiming } = timing;
+  const birmingham = "Run a segmented sequence for holders today, registered-interest supporters on 12 October and general audiences on 14 October.";
+  assert.equal(
+    actionTiming(birmingham, "2026-10-09", "2026-10-14"),
+    'Timing out of date: written 9 Oct, "today" meant 9 Oct; 12 Oct has passed. Re-time the steps before using it.'
+  );
+  assert.equal(actionTiming(birmingham, "2026-10-14", "2026-10-14"), null, "same day: still current");
+  assert.equal(actionTiming("Prepare separate bundle journeys for the sale windows.", "2026-10-09", "2026-10-14"), null);
+  assert.equal(actionTiming("Open sales on 3 January.", "2026-12-20", "2026-12-28"), null, "a January date written in December is next year");
+  assert.equal(actionTiming(birmingham, null, "2026-10-14"), null);
+});
+
+test("the prepared move carries the timing note for a stale curated action", () => {
+  const stale = { ...signals[0], marketingAction: { en: "Email holders today and open general sale on 12 October. Then measure." } };
+  const move = byId(buildPreparedMoves({ ...base, signals: [stale] })).bundle;
+  assert.match(move.timingNote, /"today" meant 9 Oct; 12 Oct has passed/);
+  assert.equal(byId(buildPreparedMoves(base)).bundle.timingNote, null);
+  assert.equal(byId(buildPreparedMoves(base)).clash.timingNote, null, "engine-written moves have no recorded date");
 });

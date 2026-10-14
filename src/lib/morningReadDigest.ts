@@ -41,7 +41,7 @@ export function renderMorningReadDigest({ today, refreshedAt, nextFixture, lines
   const boundary = "London City demonstration environment, built from public sources. Signals AVELA cannot read are marked, never filled in.";
 
   const moveText = (move: PreparedMove) =>
-    `${move.opponent} (${day(move.date)}): ${move.move} Owner: ${move.ownerRole}. Prepare by ${day(move.prepareBy)}${move.late ? " (late)" : ""}. Not approved.`;
+    `${move.opponent} (${day(move.date)}): ${move.move} Owner: ${move.ownerRole}. Prepare by ${day(move.prepareBy)}${move.late ? " (late)" : ""}.${move.timingNote ? ` ${move.timingNote}` : ""} Not approved.`;
 
   const text = [
     subject,

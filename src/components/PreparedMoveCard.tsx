@@ -16,6 +16,7 @@ export function PreparedMoveCard({ draft }: { draft: PreparedMove }) {
       </div>
       <h2>{draft.move}</h2>
       {draft.moveRecordedAt ? <p className={styles.recorded}>Action recorded with the reviewed signal on {day(draft.moveRecordedAt)}.</p> : null}
+      {draft.timingNote ? <p className={styles.stale} role="note">{draft.timingNote}</p> : null}
       <dl className={styles.facts}>
         <div><dt>Suggested owner</dt><dd>{draft.ownerRole}</dd></div>
         <div><dt>Prepare by</dt><dd>{day(draft.prepareBy)}{draft.late ? " · already inside the week before" : " · T−7"}</dd></div>

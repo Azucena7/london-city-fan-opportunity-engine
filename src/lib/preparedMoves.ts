@@ -28,6 +28,8 @@ export type PreparedMove = {
   move: string;
   /** When the move comes from a reviewed signal: the date its action was written, since it may say "today". */
   moveRecordedAt: string | null;
+  /** Set when the action's own timing has run out: "today" from an earlier day, or dated steps already passed. */
+  timingNote: string | null;
   ownerRole: string;
   prepareBy: string;
   late: boolean;
@@ -63,6 +65,37 @@ function firstSentence(text: string) {
 
 function shiftDate(date: string, days: number) {
   return new Date(Date.parse(`${date}T12:00:00Z`) + days * 86_400_000).toISOString().slice(0, 10);
+}
+
+const MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+const RELATIVE = /\b(today|tonight|tomorrow|this (?:morning|afternoon|evening|week|weekend))\b/i;
+
+function shortDay(date: string) {
+  return new Date(`${date}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+}
+
+/**
+ * Whether an action written on `recordedAt` still reads correctly on `today`. Relative words
+ * ("today", "this week") meant the day it was written; explicit dates ("12 October") are read
+ * in the year the action was written, or the next one when they fall well before it.
+ */
+export function actionTiming(action: string, recordedAt: string | null, today: string): string | null {
+  if (!recordedAt || recordedAt >= today) return null;
+  const parts: string[] = [];
+  const relative = action.match(RELATIVE);
+  if (relative) parts.push(`"${relative[1].toLowerCase()}" meant ${shortDay(recordedAt)}`);
+
+  const year = Number(recordedAt.slice(0, 4));
+  const passed = [...action.matchAll(/\b(\d{1,2}) (January|February|March|April|May|June|July|August|September|October|November|December)\b/gi)]
+    .map((match) => {
+      const month = String(MONTHS.indexOf(match[2].toLowerCase()) + 1).padStart(2, "0");
+      const date = `${year}-${month}-${match[1].padStart(2, "0")}`;
+      return shiftDate(date, 0) < shiftDate(recordedAt, -180) ? `${year + 1}${date.slice(4)}` : date;
+    })
+    .filter((date, index, all) => date < today && all.indexOf(date) === index);
+  if (passed.length) parts.push(`${passed.map(shortDay).join(" and ")} ${passed.length > 1 ? "have" : "has"} passed`);
+
+  return parts.length ? `Timing out of date: written ${shortDay(recordedAt)}, ${parts.join("; ")}. Re-time the steps before using it.` : null;
 }
 
 export const PREPARATION_HORIZON = 6;
@@ -112,6 +145,7 @@ export function buildPreparedMoves({ today, fixtures, signals, events, moments, 
       : beforeWindow ? { move: `Use ${fixture.opponent}, the last home match before the break, to sell the next home fixture.`, ownerRole: "Ticketing & CRM" }
       : { move: "Send a wet-weather matchday message: what is covered and what to bring.", ownerRole: "Matchday operations" };
 
+    const recordedAt = "recordedAt" in primary ? primary.recordedAt ?? null : null;
     const target = shiftDate(fixture.date, -7);
     const prepareBy = target < today ? today : target;
     return [{
@@ -119,7 +153,8 @@ export function buildPreparedMoves({ today, fixtures, signals, events, moments, 
       opponent: fixture.opponent,
       date: fixture.date,
       move: primary.move,
-      moveRecordedAt: ("recordedAt" in primary ? primary.recordedAt : null) ?? null,
+      moveRecordedAt: recordedAt,
+      timingNote: actionTiming(primary.move, recordedAt, today),
       ownerRole: primary.ownerRole,
       prepareBy,
       late: target < today,
