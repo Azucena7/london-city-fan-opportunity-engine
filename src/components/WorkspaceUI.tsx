@@ -65,13 +65,18 @@ export function DecisionStateBadge({
   return <WorkspaceBadge tone={stateTone[state]}>{label ?? state}</WorkspaceBadge>;
 }
 
-export type UniversalEvidenceState = "OBSERVED" | "VERIFIED" | "MODELLED" | "MISSING";
+// The evidence states named in the AI working agreement (CLAUDE.md), kept distinct everywhere.
+export type UniversalEvidenceState = "MEASURED" | "OBSERVED" | "CONFIRMED" | "FORECAST" | "INFERRED" | "MODELLED" | "MISSING" | "PENDING";
 
 const evidenceTone: Record<UniversalEvidenceState, "teal" | "success" | "warning" | "neutral"> = {
+  MEASURED: "success",
   OBSERVED: "teal",
-  VERIFIED: "success",
+  CONFIRMED: "success",
+  FORECAST: "warning",
+  INFERRED: "warning",
   MODELLED: "warning",
-  MISSING: "neutral"
+  MISSING: "neutral",
+  PENDING: "neutral"
 };
 
 export function EvidenceStateBadge({

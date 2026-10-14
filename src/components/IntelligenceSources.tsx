@@ -104,13 +104,13 @@ function aggregateHealth(ids: readonly string[]) {
   const primary = [...items].sort((a, b) => priority[b.state] - priority[a.state])[0] ?? null;
   const className = primary?.state === "operational" ? "connected" : primary?.state === "degraded" ? "demo" : "locked";
   const label = primary?.state === "operational"
-    ? "Operational"
+    ? "Healthy"
     : primary?.state === "degraded"
       ? "Degraded"
       : primary?.state === "blocked"
-        ? "Blocked"
+        ? "Unavailable"
         : primary?.state === "not-configured"
-          ? "Not configured"
+          ? "Planned"
           : primary?.state === "requires-access"
             ? "Requires access"
             : "Unknown";
@@ -182,12 +182,12 @@ export function IntelligenceSources({ filter = "all" }: { filter?: SourceFilter 
 
       <section className={styles.healthMap} aria-label="Source health overview">
         <div className={styles.coverageDial} style={{ background: `conic-gradient(#2F8F83 0 ${coverage}%, #E7EBED ${coverage}% 100%)` }}>
-          <span>Operational coverage</span>
+          <span>Healthy coverage</span>
           <strong>{coverage}%</strong>
-          <small>{operational} of {register.length} registered sources operational</small>
+          <small>{operational} of {register.length} registered sources healthy</small>
         </div>
         <div className={styles.healthSummary}>
-          <div data-state="operational"><span>Operational</span><strong>{operational}</strong><small>Decision evidence refreshing normally</small></div>
+          <div data-state="operational"><span>Healthy</span><strong>{operational}</strong><small>Decision evidence refreshing normally</small></div>
           <div data-state="degraded"><span>Degraded</span><strong>{degraded}</strong><small>Available with reduced confidence or freshness</small></div>
           <div data-state="access"><span>Needs access / setup</span><strong>{access}</strong><small>Private or unconfigured evidence</small></div>
         </div>
@@ -200,7 +200,7 @@ export function IntelligenceSources({ filter = "all" }: { filter?: SourceFilter 
             options={[
               { value: "all", label: "All sources", count: register.length },
               { value: "attention", label: "Needs attention", count: register.length - operational },
-              { value: "operational", label: "Operational", count: operational }
+              { value: "operational", label: "Healthy", count: operational }
             ]}
           />
           <DataTable

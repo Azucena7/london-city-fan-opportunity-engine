@@ -771,9 +771,11 @@ test("canonical club app routes opt into the shared product shell", () => {
   assert.match(system, /padding-bottom:0/);
 });
 
-test("core product surfaces expose a shared Live Modelled Missing trust language", () => {
+test("core product surfaces expose a shared Observed Forecast Modelled Missing trust language", () => {
   const legend = read("src/components/ProductDataStateLegend.tsx");
-  assert.match(legend, />Live</);
+  assert.match(legend, />Observed</);
+  assert.match(legend, />Forecast</);
+  assert.doesNotMatch(legend, />Live</);
   assert.match(legend, />Modelled</);
   assert.match(legend, />Missing</);
 
@@ -2373,7 +2375,7 @@ test("universal state primitives keep decision and evidence semantics consistent
   const help = read("src/app/app/help/page.tsx");
 
   assert.match(ui, /UniversalDecisionState = "ACT" \| "REVIEW" \| "BLOCKED" \| "MONITOR" \| "READY" \| "MEASURED"/);
-  assert.match(ui, /UniversalEvidenceState = "OBSERVED" \| "VERIFIED" \| "MODELLED" \| "MISSING"/);
+  assert.match(ui, /UniversalEvidenceState = "MEASURED" \| "OBSERVED" \| "CONFIRMED" \| "FORECAST" \| "INFERRED" \| "MODELLED" \| "MISSING" \| "PENDING"/);
   assert.match(home, /DecisionStateBadge/);
   assert.match(radar, /DecisionStateBadge/);
   assert.match(campaigns, /DecisionStateBadge/);

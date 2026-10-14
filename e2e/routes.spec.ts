@@ -110,7 +110,7 @@ test("Sources lists every registered source and filters by state", async ({ page
   await expect(filters.getByRole("link", { name: /Needs attention/ })).toHaveAttribute("aria-current", "true");
   const attention = await table.locator("tbody tr").count();
   expect(attention).toBeLessThan(all);
-  await expect(table.locator("tbody tr", { hasText: "Operational" })).toHaveCount(0);
+  await expect(table.locator("tbody tr", { hasText: "Healthy" })).toHaveCount(0);
 });
 
 test("Radar filters the next opportunities by attention state", async ({ page }) => {
