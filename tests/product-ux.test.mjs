@@ -2899,7 +2899,8 @@ test("Learning makes the AVELA closed loop explicit and readable", () => {
 
 
 test("club pilot demonstrates a bounded multi-cycle learning window", () => {
-  const pilot = read("src/app/pilot/page.tsx");
+  // The window and its states live in one module shared by /pilot and the in-app tracker.
+  const pilot = read("src/app/pilot/page.tsx") + read("src/lib/pilotWindow.ts");
   const css = read("src/app/pilot/pilot.module.css");
   assert.match(pilot, /Public demonstration · London City \(independent case\)/);
   assert.doesNotMatch(pilot, /pilot window · London City/);
@@ -3098,4 +3099,15 @@ test("selected sources and daily snapshots are never labelled connected or live"
   assert.doesNotMatch(page, /LIVE TRAVEL READINESS|Live disruption/);
   assert.match(page, /provider\.stateLabel/);
   assert.match(read("src/components/MatchdayCompanionWidget.tsx"), /provider\.stateLabel/);
+});
+
+test("the pilot window is tracked inside the app, with the end decision left to the club", () => {
+  const tracker = read("src/components/PilotWindowTracker.tsx");
+  const executive = read("src/app/app/executive/page.tsx");
+  assert.match(executive, /<PilotWindowTracker \/>/);
+  assert.match(tracker, /cycleStates\(calendar, currentProductDate\(currentState\.updated_at\)\)/);
+  assert.match(tracker, /End of window · decided by the club/);
+  for (const option of ["Continue", "Adjust", "Stop", "Deepen integration"]) assert.match(tracker, new RegExp(`"${option}"`));
+  assert.match(tracker, /London City is an independent demonstration, not a customer/);
+  assert.match(tracker, /Public evidence only/);
 });
