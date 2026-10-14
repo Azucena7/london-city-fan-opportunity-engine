@@ -140,7 +140,7 @@ export function MatchSignalControls({
 
       <div className={styles.explain}>
         <strong>How recalculation works</strong>
-        <p>AVELA recomputes this review scenario from the signals left active. High-materiality measured or confirmed evidence is treated as core evidence and stays locked. Other signals can be excluded temporarily to test whether the play still holds.</p>
+        <p>The scenario uses only the signals left active. Core measured or confirmed evidence stays locked; exclude the rest to test whether the play still holds.</p>
       </div>
 
       <p className={styles.note}>

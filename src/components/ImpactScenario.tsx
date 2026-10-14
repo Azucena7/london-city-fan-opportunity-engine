@@ -147,8 +147,8 @@ export function ImpactScenario({
       </div>
 
       <p className={styles.note}>
-        Scenario, not forecast or observed results. Revenue less activation cost excludes other operating costs, fees and taxes; it is not club profit. Measured audience, repeat-conversion or ticket-value history can seed the model when authorised aggregate club evidence exists.
-        Every input remains editable, and activation cost stays an explicit assumption until the club supplies a measured cost.
+        Scenario, not forecast or observed results. Revenue less activation cost is not club profit: other costs, fees and taxes are excluded.
+        Every input is editable, and activation cost stays an assumption until the club supplies a measured cost.
       </p>
     </section>
   );

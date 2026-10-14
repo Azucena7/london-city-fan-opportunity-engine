@@ -64,7 +64,7 @@ export function SimilarDecisionsPanel({ fixtureId }: { fixtureId: string }) {
         <div>
           <span>Institutional memory</span>
           <h2>Have we made a similar decision before?</h2>
-          <p>AVELA only surfaces precedents with recorded execution, measurement or learning. Similarity is based on visible decision dimensions, not an opaque embedding score.</p>
+          <p>Only precedents with recorded execution, measurement or learning, matched on visible decision dimensions.</p>
         </div>
         {clubs.length > 1 ? (
           <label>
@@ -112,7 +112,7 @@ export function SimilarDecisionsPanel({ fixtureId }: { fixtureId: string }) {
 
       <div className={styles.guardrail}>
         <strong>Memory rule</strong>
-        <p>A similar decision is evidence, not a rule. AVELA should explain the common dimensions and let the current context override the precedent.</p>
+        <p>A similar decision is evidence, not a rule. The current context can override it.</p>
       </div>
     </section>
   );

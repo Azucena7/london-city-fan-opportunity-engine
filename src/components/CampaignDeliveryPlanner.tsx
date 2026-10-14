@@ -597,7 +597,7 @@ export function CampaignDeliveryPlanner({
         <div className={styles.guidedIntro}>
           <span>Campaign path</span>
           <strong>Follow the recommendation. Change only what the club needs to change.</strong>
-          <small>The current stage is highlighted; later stages stay visible so the user always knows what comes next.</small>
+          <small>The current stage is highlighted; the next ones stay visible.</small>
         </div>
         <div className={styles.guidedSteps}>
           {journeySteps.map((step) => (
@@ -687,9 +687,7 @@ export function CampaignDeliveryPlanner({
               <div>
                 <span>Club context applied</span>
                 <strong>Built above the club&apos;s existing stack — not instead of it.</strong>
-                <p>
-                  Campaign recipes use saved channels, objectives, brand rules and approval defaults. Items outside the connected stack stay visible as explicit handoffs rather than pretending the platform can execute them.
-                </p>
+                <p>Uses the club&apos;s saved channels, objectives, brand rules and approvals. Anything outside the connected stack stays an explicit handoff.</p>
               </div>
               <div className={styles.clubContextFacts}>
                 <span><strong>{clubSetup?.connectedChannels.length ?? 0}</strong> connected channels</span>
@@ -727,7 +725,7 @@ export function CampaignDeliveryPlanner({
                   <span>Campaign builder</span>
                   <strong>Add, remove or resize the proposed campaign.</strong>
                 </div>
-                <small>Extra variants cost less than the first asset because they reuse the core campaign concept.</small>
+                <small>Extra variants cost less because they reuse the core concept.</small>
               </div>
 
               {catalogue.map((item) => {
@@ -865,7 +863,7 @@ export function CampaignDeliveryPlanner({
               <div>
                 <span>Generative production</span>
                 <h3>Approval-ready drafts from the campaign strategy.</h3>
-                <p>Generation records the effort already spent on produced drafts. Signed-in club users sync this workspace across devices; otherwise the current device remains the fallback.</p>
+                <p>Signed-in club users sync this workspace across devices; otherwise it stays on this device.</p>
               </div>
               <div className={styles.workspaceState}>
                 <span>Workspace</span>

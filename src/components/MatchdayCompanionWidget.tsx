@@ -144,8 +144,8 @@ export function MatchdayCompanionWidget({
 
       <div className={styles.actions}>
         <div>
-          <span>Next product step</span>
-          <strong>Use the live road check when available, connect authorised rail / routing providers, preserve source timestamps, then let AVELA decide when travel deserves communication.</strong>
+          <span>Supporter view</span>
+          <strong>See the getting-there guidance supporters get for this fixture, with each source&apos;s state.</strong>
         </div>
         <Link href={"/matchday/" + fixtureId}>Preview fan utility →</Link>
       </div>

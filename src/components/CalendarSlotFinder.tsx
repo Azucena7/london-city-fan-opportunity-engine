@@ -158,7 +158,7 @@ export function CalendarSlotFinder({
 
       <div className={styles.guardrail}>
         <strong>Scheduling rule</strong>
-        <p>AVELA can rank calendars, but it will not infer availability from silence. Connect or enter President, General Director, Marketing, Protocol, player and venue calendars to turn unknowns into reliable scheduling recommendations.</p>
+        <p>AVELA will not infer availability from silence. Connect or enter the missing calendars to turn unknowns into reliable slots.</p>
       </div>
     </section>
   );

@@ -146,7 +146,7 @@ export function DecisionHistoryPanel({
         <div>
           <span>Decision memory</span>
           <h2>Recommended → decided → executed → learned.</h2>
-          <p>Record what the club actually committed to and what really happened. AVELA keeps the recommendation separate so future learning is based on reality.</p>
+          <p>Record what the club committed to and what happened, kept apart from what AVELA recommended.</p>
         </div>
         {clubs.length > 1 ? (
           <label>Club

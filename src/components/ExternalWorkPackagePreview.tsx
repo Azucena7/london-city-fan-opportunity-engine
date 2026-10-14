@@ -51,7 +51,7 @@ export function ExternalWorkPackagePreview({ workPackage }: { workPackage: WorkP
 
       <div className={styles.boundary}>
         <strong>AVELA orchestrates; it does not replace project management.</strong>
-        <p>Future adapters should create/update external work and sync back only assignee, due date, status, blockers and workload signals needed for decision intelligence.</p>
+        <p>The external tool runs the work. AVELA only reads back assignee, due date, status and blockers.</p>
       </div>
     </section>
   );
