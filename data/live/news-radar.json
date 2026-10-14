@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-14T09:49:01.950Z",
-  "lastSuccessfulAt": "2026-10-14T09:49:01.950Z",
+  "checkedAt": "2026-10-14T13:47:18.545Z",
+  "lastSuccessfulAt": "2026-10-14T13:47:18.545Z",
   "failures": [],
   "items": [
     {
@@ -231,22 +231,6 @@
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
-      "title": "London City Lionesses thrash Tottenham 6-1 as Putellas scores twice before WSL break",
-      "outlet": "SheKicks",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQZ2hZV2d0UGtqTlZ3Ylg5OTF3cENmdXdvalN3V1JxdUc1YUFFWDIwTjV6b0tKM012SGNaTk9VeXQya3NJLVkwOWhWVVdmWGFJaHFtNVpBdVNLRkozdkVOdmpjd1p4NkFiSWFRSzA1bHU3LUNLUUFoTWZtU21WNW0wQWZGbkdndHRaUS1hM0ZLM2FFVW5hcW81dTg1QjdaWUVRLS1ac0lsbG1GZw?oc=5",
-      "publishedAt": "2026-10-05T21:42:05.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [
-        "results"
-      ],
-      "fixtureIds": [],
-      "id": "news-dd1e2c249b05",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
       "title": "Alexia se sale en Inglaterra",
       "outlet": "SPORT",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSjVFTmh3dVlEZDlOb1ZyZmhzRWhldUE4MkdYQkVIRGwtMjRCUlNtandwY25SZ21JNkV0em5SeG4yNnlCTFhVYjJjenRZT3NIaGRVcW5KTldxTUxGRHFQSmhweFdCcVc2d3hFbW5TWElqT1h0Tld5WEc4bzZPWTFnRXU1dGU3UE150gGIAUFVX3lxTFBKU1lUZFVmOUhzOTJCLW1ZMUREbWROUXFUNlhzWkpGQjItdDlPOVdyQzRTVjdsSFMxUmROeE9xQlJjWDFmMUI2SF92eGVicDE1Njd6QV9Ra0JCNldDWVRlS2tRbTV4YWZ1cnpnbU1ZM0t5WEpHeXpxMldrMG4xRFNrWkdXUnFwUVk?oc=5",
@@ -285,6 +269,22 @@
       ],
       "fixtureIds": [],
       "id": "news-5636cb47af09",
+      "firstSeenAt": "2026-10-13T15:53:25.524Z"
+    },
+    {
+      "title": "London City Lionesses thrash Tottenham 6-1 as Putellas scores twice before WSL break",
+      "outlet": "SheKicks",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQZ2hZV2d0UGtqTlZ3Ylg5OTF3cENmdXdvalN3V1JxdUc1YUFFWDIwTjV6b0tKM012SGNaTk9VeXQya3NJLVkwOWhWVVdmWGFJaHFtNVpBdVNLRkozdkVOdmpjd1p4NkFiSWFRSzA1bHU3LUNLUUFoTWZtU21WNW0wQWZGbkdndHRaUS1hM0ZLM2FFVW5hcW81dTg1QjdaWUVRLS1ac0lsbG1GZw?oc=5",
+      "publishedAt": "2026-10-05T07:00:00.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [
+        "results"
+      ],
+      "fixtureIds": [],
+      "id": "news-dd1e2c249b05",
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
@@ -851,7 +851,7 @@
     {
       "title": "Alexia Putellas marca su primer gol con el London City Lionesses en una victoria crucial sobre el Brighton",
       "outlet": "Goal.com",
-      "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOR1dZamV4LTJfdk5QdUYwaXJ4a0s3MGlEUk9XMW40NFQwWVphR0NiWlZrZkVJN1JsUHJUeGhfWXJ2bzc0OXFXTzhvSFIzdkJERExNUGlIaksyUkFSRmtHLS1qRkNob1MyM2Iyak1FU1RUOG9Vb1lnUGpMWjl1TnB4c0VXaTRYck0zMlNOTFFwTkhuZ19uTnpmMmF6YWNPWlN5RGJVMFN5a3ZyMVZEdWZKdFlLRnR1UlptSmUwMmR4cnlXV1VVNWx3ME5yMUVQQ2szNHpLZGVkZjRLcnBhMng0Rm1HdDJ5X3BhS0dkX2xqa1dVREly?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOcGNNck80dGNJMkw1NTVuamswSjFXVUo3Nmg5RlQzVkdoVlgxTEYtVjJjRGU3OTdublVELWNWLVNQakpoOHMxbWtFZHY5ZDFVU0cxdHZBX2c4SFNJdG5rSWxSZ0Z1SjFENFl4LWx2NVV1YlZQbFJHVU9wUFdYQUI5bXBOODFtVXcxd0xPd1VidEFob1N3ZXg4NW9uSGJBeWJRODJoLUQ1UDNhWEJ1Ynd6YVVpQS1vSGRtc3VvZDlNYlp5N0prc3llcndxN1IwVWxiNHVnaXRNOHA5RTlCYnRKNlpWSUl4WldybWtLckNyMXc?oc=5",
       "publishedAt": "2026-09-27T07:00:00.000Z",
       "feedIds": [
         "alexia-es"
