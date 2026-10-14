@@ -398,7 +398,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       <CampaignDeliveryPlanner
         objective={campaign?.objective.en ?? live.opportunity}
         audience={campaign?.audiences[0]?.label.en ?? live.audience.label}
-        proposition={campaign?.proposition.en ?? live.recommendedAction}
+        proposition={campaign?.proposition.en ?? preparedMove?.move ?? live.recommendedAction}
         unresolvedGates={approvals.length}
         fixtureId={fixture.id}
       />
@@ -430,7 +430,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           decisionId={`fixture:${fixture.id}`}
           fixtureLabel={`London City v ${fixture.opponent}`}
           eventAt={fixture.date ? `${fixture.date}T${fixture.kickoff ?? "12:00"}:00` : null}
-          recommendation={campaign?.title.en ?? live.recommendedAction}
+          recommendation={campaign?.title.en ?? preparedMove?.move ?? live.recommendedAction}
         />
       </section>
 
@@ -523,7 +523,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       <MatchPlanDecision
         decisionId={`fixture:${fixture.id}`}
         subjectId={fixture.id}
-        recommendation={campaign?.title.en ?? live.recommendedAction}
+        recommendation={campaign?.title.en ?? preparedMove?.move ?? live.recommendedAction}
         decisionState={live.decisionState}
         blockerCount={approvals.length}
         nextApproval={campaign?.nextApproval.en ?? live.primaryBlocker}
@@ -550,7 +550,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         decisionId={`fixture:${fixture.id}`}
         subjectType="fixture"
         subjectId={fixture.id}
-        recommendation={campaign?.title.en ?? live.recommendedAction}
+        recommendation={campaign?.title.en ?? preparedMove?.move ?? live.recommendedAction}
       />
 
       <AskAvelaPanel fixtureId={fixture.id} decisionId={`fixture:${fixture.id}`} />

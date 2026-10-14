@@ -3037,3 +3037,15 @@ test("fixtures without a campaign plan show an engine draft that stays unapprove
   assert.match(executive, /Engine draft/);
   assert.match(executive, /Outside the next-6 preparation window/);
 });
+
+test("adopting an engine draft is recorded as a recommendation, never as the club's verdict", () => {
+  const adoption = read("src/components/PreparedMoveAdoption.tsx");
+  const decision = read("src/components/MatchPlanDecision.tsx");
+  assert.match(adoption, /eventType: "recommended", state: "draft-adopted"/);
+  assert.match(adoption, /eventType: "context-added", state: "draft-dismissed"/);
+  assert.match(adoption, /Add a short reason before setting the draft aside/);
+  assert.match(adoption, /nothing has been sent or launched/);
+  for (const state of ["draft-adopted", "draft-dismissed"]) assert.doesNotMatch(decision, new RegExp(state));
+  const brief = read("src/app/app/matches/[fixtureId]/page.tsx");
+  assert.match(brief, /campaign\?\.proposition\.en \?\? preparedMove\?\.move \?\? live\.recommendedAction/);
+});

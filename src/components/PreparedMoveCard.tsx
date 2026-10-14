@@ -1,4 +1,5 @@
 import type { PreparedMove } from "@/lib/preparedMoves";
+import { PreparedMoveAdoption } from "./PreparedMoveAdoption";
 import styles from "./PreparedMoveCard.module.css";
 
 function day(value: string) {
@@ -30,6 +31,7 @@ export function PreparedMoveCard({ draft }: { draft: PreparedMove }) {
           <ul>{draft.gates.map((gate) => <li key={gate}>{gate}</li>)}</ul>
         </div>
       </div>
+      <PreparedMoveAdoption fixtureId={draft.fixtureId} move={draft.move} ownerRole={draft.ownerRole} gates={draft.gates} />
       <p className={styles.boundary}>Drafted by the engine from the signals above. No audience size, budget or forecast is implied; the club team decides whether it becomes a campaign.</p>
     </section>
   );
