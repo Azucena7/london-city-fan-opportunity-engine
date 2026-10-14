@@ -242,10 +242,11 @@ test("password reset: request a link from sign in, then set a new password from 
   await page.goto("/app/access");
   const signIn = page.locator("article", { has: page.getByRole("heading", { name: "Sign in" }) });
   await signIn.getByRole("button", { name: "Forgot password?" }).click();
-  await expect(page.getByText("Enter your email above, then choose Forgot password.")).toBeVisible();
+  // The answer appears inside the sign-in card, where the person clicked.
+  await expect(signIn.getByText("Enter your email above, then choose Forgot password.")).toBeVisible();
   await signIn.getByLabel("Work email").fill("member@example.com");
   await signIn.getByRole("button", { name: "Forgot password?" }).click();
-  await expect(page.getByText(/If an account exists for that email/)).toBeVisible();
+  await expect(signIn.getByText(/If an account exists for that email/)).toBeVisible();
   expect(recovered).toEqual({ email: "member@example.com" });
 
   await page.goto("/app/access/reset#access_token=test-token&expires_in=3600&type=recovery");

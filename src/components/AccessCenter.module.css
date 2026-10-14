@@ -60,3 +60,4 @@
   .authGrid input,.grid select,.grid textarea{min-height:44px}
 }
 .authGrid .linkButton{display:block;width:auto;min-height:0;margin-top:10px;padding:0;border:0;background:transparent;color:var(--product-navy);font-size:12px;font-weight:800;text-decoration:underline;cursor:pointer}
+.authGrid .inlineStatus{margin:10px 0 0;padding:8px 10px;border-radius:8px;background:var(--product-accent-soft,#e8f3f0);color:var(--product-ink);font-size:12px;line-height:1.45}
