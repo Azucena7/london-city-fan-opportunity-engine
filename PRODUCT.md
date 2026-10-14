@@ -2,7 +2,7 @@
 
 ## Product definition
 
-**AVELA is The Decision Workspace for Football Club Marketing & Commercial Teams.**
+**AVELA is The Opportunity Engine for Football Club Marketing & Commercial Teams.**
 
 It connects fan, fixture, campaign, player, sponsor, rights, calendar, operational and external context so a club can move from fragmented signals to a coordinated human decision.
 

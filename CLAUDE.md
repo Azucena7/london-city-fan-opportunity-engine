@@ -2,7 +2,7 @@
 
 ## What AVELA is
 
-AVELA is **The Decision Workspace for Football Club Marketing & Commercial Teams**.
+AVELA is **The Opportunity Engine for Football Club Marketing & Commercial Teams**.
 
 It is not a generic analytics dashboard, CRM, project manager or LLM wrapper. Its job is to combine fragmented club context so teams can decide what to do next, coordinate execution and learn from what actually happened.
 
@@ -20,7 +20,9 @@ The product should make complex cross-functional decisions feel simple on the su
 
 Primary external positioning:
 
-> **The Decision Workspace for Football Club Marketing & Commercial Teams**
+> **The Opportunity Engine for Football Club Marketing & Commercial Teams**
+
+Inside the app, "decision workspace" may still describe the working surface (for example the fixture decision workspace), but it is not the product line.
 
 Useful internal/category language:
 
