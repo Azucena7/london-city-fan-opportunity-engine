@@ -29,11 +29,13 @@ export type RegisterRow = {
 
 export type SourceFilter = "all" | "attention" | "operational";
 
+// Display labels follow the source states in the AI working agreement (planned, configured,
+// verifying, healthy, degraded, unavailable); the stored states in source-health.json are unchanged.
 const STATE_LABELS: Record<string, string> = {
-  operational: "Operational",
+  operational: "Healthy",
   degraded: "Degraded",
-  blocked: "Blocked",
-  "not-configured": "Not configured",
+  blocked: "Unavailable",
+  "not-configured": "Planned",
   "requires-access": "Requires access"
 };
 

@@ -19,10 +19,14 @@ const decisionStates: Array<[UniversalDecisionState, string, string]> = [
 ];
 
 const evidenceStates: Array<[UniversalEvidenceState, string, string]> = [
+  ["MEASURED", "Measured", "Counted from authorised club data, such as ticket scans or CRM conversions."],
   ["OBSERVED", "Observed", "Directly present in an authorised or public source."],
-  ["VERIFIED", "Verified", "Reviewed and accepted for decision use with provenance."],
+  ["CONFIRMED", "Confirmed", "Reviewed and accepted for decision use with provenance."],
+  ["FORECAST", "Forecast", "A published prediction, such as matchday weather; it can change."],
+  ["INFERRED", "Inferred", "Reasoned from other evidence; an assumption until confirmed."],
   ["MODELLED", "Modelled", "Scenario or estimate; useful for planning, not treated as fact."],
-  ["MISSING", "Missing", "Required evidence is unavailable; AVELA should say so explicitly."]
+  ["MISSING", "Missing", "Required evidence is unavailable; AVELA should say so explicitly."],
+  ["PENDING", "Pending", "Expected but not in yet, such as post-match evidence."]
 ];
 
 const workflows = [

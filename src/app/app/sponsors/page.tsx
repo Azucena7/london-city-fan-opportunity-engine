@@ -165,7 +165,7 @@ export default function SponsorsPage() {
                     <span>Evidence & unknowns</span>
                     {pack.evidence.map((item) => (
                       <article key={item.id}>
-                        <EvidenceStateBadge state={item.state === "public-verified" ? "VERIFIED" : item.state === "modelled-scenario" ? "MODELLED" : "MISSING"} label={item.state.replaceAll("-", " ")} />
+                        <EvidenceStateBadge state={item.state === "public-verified" ? "CONFIRMED" : item.state === "modelled-scenario" ? "MODELLED" : "MISSING"} label={item.state.replaceAll("-", " ")} />
                         <strong>{item.label.en}</strong>
                         <p>{item.detail.en}</p>
                       </article>
