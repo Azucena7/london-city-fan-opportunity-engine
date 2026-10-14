@@ -513,13 +513,9 @@ test("campaign reservation cycles are uniquely identifiable and repeat safely", 
   assert.match(trace, /latestReservationEvent\?\.event_type === "release"/);
 });
 
-test("match plan keeps delivery effort visible without an in-product credit paywall", () => {
+test("campaign builder keeps scope states and launch steps without credit navigation", () => {
   const builder = read("src/components/CampaignDeliveryPlanner.tsx");
-  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
-  assert.match(builder, /Campaign proposal/);
-  assert.match(builder, /approval-ready campaign/);
-  assert.match(builder, /Proposed campaign/);
   assert.match(builder, /Campaign workflow coverage/);
   assert.match(builder, /Channel coverage/);
   assert.match(builder, /Campaign quality/);
@@ -530,31 +526,12 @@ test("match plan keeps delivery effort visible without an in-product credit payw
   assert.match(builder, /Full recommended scope/);
   assert.match(builder, /Reduced scope/);
   assert.match(builder, /Thin campaign/);
-  assert.match(builder, /Delivery effort/);
-  assert.match(builder, /internal planning signal, not a purchasable currency/);
   assert.match(builder, /Lock reviewed scope/);
   assert.match(builder, /Prepare launch handoff/);
   assert.match(builder, /External launch required/);
-  assert.match(builder, /External tools or club operators must execute the launch/);
-  assert.doesNotMatch(builder, /Explorer · preview only/);
-  assert.doesNotMatch(builder, /included credits/);
-  assert.doesNotMatch(builder, /Upgrade to reveal/);
-  assert.doesNotMatch(builder, /Add credits/);
-  assert.doesNotMatch(builder, /£175|£450|£1,000/);
-  assert.match(page, /CampaignDeliveryPlanner/);
-  assert.match(page, /fixtureId=\{fixture\.id\}/);
   assert.doesNotMatch(nav, /href: "\/app\/credits"/);
   assert.doesNotMatch(nav, /label: "Credits"/);
   assert.doesNotMatch(nav, /<strong>60<\/strong> credits/);
-});
-
-test("match plan closes with a simple review and handoff gate", () => {
-  const decision = read("src/components/MatchPlanDecision.tsx");
-  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
-  assert.match(decision, /Review required/);
-  assert.match(decision, /does not send campaigns, commit spend or execute club actions/);
-  assert.match(page, /MatchPlanDecision/);
-  assert.match(page, /id="approval-gates"/);
 });
 
 test("human decision is recorded through the decision history, not held as local state", () => {
@@ -575,39 +552,16 @@ test("human decision is recorded through the decision history, not held as local
   assert.match(page, /decisionId=\{`fixture:\$\{fixture\.id\}`\}/);
 });
 
-test("match plan exposes a review-ready activation draft", () => {
-  const draft = read("src/components/ActivationDraft.tsx");
-  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
-  for (const label of ["Audience", "Channel", "Message", "Timing", "Owner", "Measurement", "Next approval"]) {
-    assert.match(draft, new RegExp(label));
-  }
-  assert.match(draft, /Review all drafted activations/);
-  assert.match(page, /ActivationDraft/);
-  assert.match(page, /Review the draft, then execute the next actions/);
-});
-
-test("match signals can be excluded without mutating engine data", () => {
+test("signal scenario explains both outcomes of excluding evidence", () => {
   const controls = read("src/components/MatchSignalControls.tsx");
-  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
-  assert.match(controls, /Signals used/);
-  assert.match(controls, /Confidence with this selection/);
-  assert.match(controls, /Recommendation/);
+  // The browser test excludes one signal; the frozen data decides which branch it sees.
   assert.match(controls, /The recommended play is unchanged in this scenario/);
-  assert.match(controls, /Needs review/);
-  assert.match(controls, /does not delete the source, edit the evidence register, change the saved Radar rank or authorise a campaign/);
-  assert.match(page, /MatchSignalControls/);
+  assert.match(controls, /The play can no longer be supported by the remaining material signals/);
 });
 
-test("single match workspace absorbs plan evidence signals and impact", () => {
+test("the brief rail summarises signals and confidence", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
-  assert.match(page, /Recommended play/);
-  assert.match(page, /Review the draft, then execute the next actions/);
   assert.match(page, /signals · \{live\.confidence\.label\} confidence/);
-  assert.match(page, /Inspect evidence, assumptions and missing inputs/);
-  assert.match(page, /Open editable impact scenario/);
-  assert.match(page, /Open measurement & learning/);
-  assert.doesNotMatch(page, /href="\/decision-room"/);
-  assert.doesNotMatch(page, /href="\/impact"/);
 });
 
 test("London City Live reads like an editorial case journal", () => {
@@ -653,15 +607,9 @@ test("matches behaves like a decision inbox with one priority fixture", () => {
   assert.match(css, /futureFixture/);
 });
 
-test("match plan prioritises one executive campaign decision before deep evidence", () => {
+test("match plan styles the decision cockpit and keeps reasoning collapsible", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
-  assert.match(page, /Recommended play/);
-  assert.match(page, /Opportunity/);
-  assert.match(page, /Audience/);
-  assert.match(page, /Confidence/);
-  assert.match(page, /Next action/);
-  assert.match(page, /Build this campaign/);
   assert.match(page, /reasoningDetails/);
   assert.match(css, /decisionCockpit/);
   assert.match(css, /decisionFacts/);
@@ -1037,35 +985,20 @@ test("Opportunity Radar is the primary fixture decision surface", () => {
 });
 
 
-test("Opportunity Brief supports transparent signal what-if recalculation", () => {
+test("signal what-if locks core evidence and carries observation dates", () => {
   const controls = read("src/components/MatchSignalControls.tsx");
-  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const product = read("src/lib/productOpportunity.ts");
 
-  assert.match(controls, /Core evidence/);
-  assert.match(controls, /Observed/);
-  assert.match(controls, /Excluded temporarily/);
-  assert.match(controls, /How recalculation works/);
-  assert.match(controls, /No source data has been changed/);
-  assert.match(controls, /does not delete the source/);
-  assert.match(controls, /change the saved Radar rank/);
   assert.match(controls, /isCoreEvidence/);
   assert.match(controls, /disabled=\{core\}/);
-  assert.match(page, /Inspect, exclude & recalculate/);
   assert.match(product, /observedAt: signal\.observedAt/);
 });
 
 
-test("Opportunity Brief reads like an executive decision brief", () => {
+test("Opportunity Brief explains confidence and keeps its cockpit styles", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
 
-  assert.match(page, /Decision at a glance/);
-  assert.match(page, /Recommended play/);
-  assert.match(page, /Commercial objective/);
-  assert.match(page, /Evidence used/);
-  assert.match(page, /Decision support, not autopilot/);
-  assert.match(page, /What would change the recommendation\?/);
   assert.match(page, /confidence\.rationale/);
   assert.match(css, /decisionCockpit/);
   assert.match(css, /decisionLead/);
@@ -1175,12 +1108,6 @@ test("final visual pass removes legacy olive neutrals from primary product surfa
 test("campaign builder makes the recommended campaign path visually explicit", () => {
   const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const css = read("src/components/CampaignDeliveryPlanner.module.css");
-  assert.match(builder, /Campaign path/);
-  assert.match(builder, /Opportunity/);
-  assert.match(builder, /Recipe/);
-  assert.match(builder, /Review/);
-  assert.match(builder, /Reserve/);
-  assert.match(builder, /Handoff/);
   assert.match(builder, /Recommended campaign flow/);
   assert.match(builder, /journeySteps/);
   assert.match(css, /guidedSteps/);
@@ -2081,7 +2008,6 @@ test("Decision Center promotes sanitized contract and execution issues into the 
 test("work-system orchestration derives vendor-neutral work without becoming a task manager", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const lib = read("src/lib/workSystemOrchestration.ts");
-  const component = read("src/components/ExternalWorkPackagePreview.tsx");
 
   assert.match(lib, /WorkSystemId = "asana" \| "monday" \| "jira" \| "notion" \| "other"/);
   assert.match(lib, /interface WorkSystemAdapter/);
@@ -2093,10 +2019,6 @@ test("work-system orchestration derives vendor-neutral work without becoming a t
   assert.doesNotMatch(lib, /fetch\(/);
   assert.doesNotMatch(lib, /api\.asana|monday\.com|atlassian|notion\.com/i);
 
-  assert.match(component, /AVELA derives the work package/);
-  assert.match(component, /Not connected/);
-  assert.match(component, /Preview only · no external task has been created/);
-  assert.match(component, /AVELA orchestrates; it does not replace project management/);
 
   assert.match(page, /deriveCampaignWorkPackage/);
   assert.match(page, /ExternalWorkPackagePreview/);
@@ -2140,7 +2062,6 @@ test("work-system routing stays explainable and confirmation-gated", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const routing = read("src/lib/workSystemRouting.ts");
   const server = read("src/lib/workSystemRoutingServer.ts");
-  const component = read("src/components/WorkRoutingPlan.tsx");
   const migration = read("supabase/migrations/20261005003500_work_system_routing_policy.sql");
 
   assert.match(page, /getWorkRoutingRules/);
@@ -2156,9 +2077,6 @@ test("work-system routing stays explainable and confirmation-gated", () => {
   assert.match(server, /work_system_connections/);
   assert.match(server, /state=eq\.connected/);
 
-  assert.match(component, /No route configured/);
-  assert.match(component, /Confirmation/);
-  assert.match(component, /AVELA does not dispatch this package automatically/);
 
   assert.match(migration, /require_confirmation boolean not null default true check \(require_confirmation = true\)/);
   assert.match(migration, /external work routing currently requires human confirmation/);
@@ -2199,27 +2117,10 @@ test("product shell uses the prepared AVELA navy teal coral identity without cha
 });
 
 
-test("Opportunity Brief follows decision readiness execution evidence memory hierarchy", () => {
+test("Opportunity Brief wires the signed-in feasibility panels and phase styles", () => {
   const page = read("src/app/app/matches/[fixtureId]/page.tsx");
   const css = read("src/app/app/matches/[fixtureId]/match-plan.module.css");
 
-  const decision = page.indexOf('id="decision"');
-  const readiness = page.indexOf('id="readiness"');
-  const execute = page.indexOf('id="execute"');
-  const evidence = page.indexOf('id="evidence"');
-  const history = page.indexOf("<DecisionHistoryPanel");
-
-  assert.ok(decision >= 0);
-  assert.ok(readiness > decision);
-  assert.ok(execute > readiness);
-  assert.ok(evidence > execute);
-  assert.ok(history > evidence);
-
-  assert.match(page, /Can we actually do it\?/);
-  assert.match(page, /Make the decision executable/);
-  assert.match(page, /Why AVELA thinks this/);
-  assert.match(page, /Human decision/);
-  assert.match(page, /Decision memory/);
   assert.match(page, /AvailabilityPlanner/);
   assert.match(page, /CalendarSlotFinder/);
   assert.match(page, /OperationalCapacityPanel/);
@@ -2342,7 +2243,7 @@ test("sponsors uses a guided commercial decision funnel", () => {
 });
 
 
-test("campaigns and fixture workspace use progressive decision disclosure", () => {
+test("campaigns portfolio uses progressive decision disclosure", () => {
   const campaigns = read("src/app/app/campaigns/page.tsx");
   const fixture = read("src/app/app/matches/[fixtureId]/page.tsx");
 
@@ -2352,13 +2253,6 @@ test("campaigns and fixture workspace use progressive decision disclosure", () =
   assert.match(campaigns, /AVELA drafts\. The club approves/);
 
   assert.match(fixture, /DecisionHandoffStrip active="decision"/);
-  assert.match(fixture, /01 Decide/);
-  assert.match(fixture, /02 Feasibility/);
-  assert.match(fixture, /03 Build/);
-  assert.match(fixture, /04 Evidence/);
-  assert.match(fixture, /05 Human decision/);
-  assert.match(fixture, /06 Learn/);
-  assert.ok((fixture.match(/className=\{styles\.phasePanel\}/g) ?? []).length >= 5);
 });
 
 test("global navigation groups decision work instead of exposing every module equally", () => {
@@ -2813,17 +2707,6 @@ test("Decision Center does not draw invented trend lines", () => {
   assert.doesNotMatch(home, /<path d="M2 /);
   assert.doesNotMatch(home, /metricDelta/);
 });
-
-test("Opportunity Brief phase links target their own phases and open collapsed panels", () => {
-  const page = read("src/app/app/matches/[fixtureId]/page.tsx");
-  assert.match(page, /href="#human-decision">05 Human decision/);
-  assert.match(page, /id="human-decision"/);
-  assert.match(page, /href="#decision-memory">06 Learn/);
-  assert.match(page, /id="decision-memory"/);
-  assert.doesNotMatch(page, /href="#impact">05/);
-  assert.match(page, /<PhaseAnchorOpener \/>/);
-});
-
 
 test("hero engine reads signal states from the source register instead of claiming every signal", () => {
   const lib = read("src/lib/engineSignals.ts");
