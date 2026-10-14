@@ -340,7 +340,7 @@
 .heroMeta{margin-top:22px;padding-top:14px}
 .heroMeta strong{color:#fff}
 .pilot{padding:72px 0;gap:48px}
-.finalCta{padding-top:64px!important;padding-bottom:64px!important}
+.finalCta{padding-top:64px;padding-bottom:64px}
 @media(max-width:900px){
   .hero{padding:56px 24px 48px}
   .pilot{padding:56px 0}

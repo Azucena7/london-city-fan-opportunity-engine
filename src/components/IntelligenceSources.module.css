@@ -15,7 +15,7 @@
 .healthMeta{display:grid;gap:4px;margin:14px 0;padding:10px 11px;border:1px solid var(--product-line);border-radius:7px;background:#FAFBFB}
 .healthMeta span{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.055em;color:var(--product-muted)}
 .healthMeta strong{font-size:11px;color:var(--product-ink)}
-.healthMeta small{font-size:11px!important;line-height:1.45;color:var(--product-muted)!important}
+.healthMeta small{font-size:11px;line-height:1.45;color:var(--product-muted)}
 
 .healthMap{display:grid;grid-template-columns:190px minmax(0,1fr);gap:14px;margin-top:20px;padding:16px;border:1px solid var(--product-line);border-radius:12px;background:#F8FAFB}
 .coverageDial{grid-row:1/3;align-self:start;width:190px;aspect-ratio:1;min-height:190px;display:grid;place-items:center;align-content:center;border-radius:50%;position:relative}
