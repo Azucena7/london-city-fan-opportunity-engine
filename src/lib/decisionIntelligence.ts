@@ -28,6 +28,8 @@ export type DecisionAlert = {
   href: string;
   /** The fixture's decision is on HOLD: an unresolved blocker stands before acting. */
   onHold?: boolean;
+  /** Who acts next, as the decision record names it. */
+  owner?: string;
   events: DecisionEvent[];
 };
 
@@ -86,6 +88,7 @@ export function buildDecisionAlerts(radar: OpportunityRadarItem[]): DecisionAler
       category: "fixture",
       priority: priorityFor(item),
       onHold: live?.decisionState === "HOLD",
+      owner: live?.nextAction.owner,
       title: `${item.opponent} · ${item.daysToFixture <= 0 ? "fixture window" : `${item.daysToFixture} days`}`,
       recommendation: live?.nextAction.label ?? item.opportunity,
       why: live?.whyNow ?? "The evidence state currently makes this fixture worth monitoring.",

@@ -160,7 +160,7 @@ export default async function ClubAppHome() {
                   {item.onHold ? <DecisionStateBadge state="BLOCKED" label="HOLD" /> : null}
                 </div>
                 <p>{item.recommendation}</p>
-                <small>{item.changed}</small>
+                <small>{item.owner ? "Owner: " + item.owner + " · " : ""}{item.changed}</small>
               </div>
               <div className={styles.attentionMeta}>
                 <span>{item.category}</span>
