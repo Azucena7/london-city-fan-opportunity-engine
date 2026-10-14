@@ -5,6 +5,7 @@
 .campaignContext strong{display:block;margin-top:5px;font-size:11px;line-height:1.35}
 .campaignContext select{width:100%;min-height:36px;margin-top:6px;padding:6px 8px;border:1px solid var(--product-line);background:#fff;color:var(--product-ink);font-weight:800}
 .need small{display:block;margin-top:7px;color:var(--product-muted);font-size:11px}
+.packStepper{display:inline-flex;align-items:center;gap:6px}.packStepper output{min-width:72px;text-align:center;font-weight:900;font-size:13px}.packStepper button:disabled{opacity:.45;cursor:default}
 @media(max-width:900px){.campaignContext{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.campaignContext{grid-template-columns:1fr}}
 
@@ -167,7 +168,7 @@
   cursor:pointer;
 }
 .heroScore{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:22px;background:#F8FBFA;text-align:center}
-.heroScore>strong{display:block;margin-top:6px;font-size:54px;line-height:1;letter-spacing:-.06em;color:var(--product-accent)}
+.heroScore>strong{display:block;margin-top:6px;font-size:40px;line-height:1;letter-spacing:-.06em;color:var(--product-accent)}
 .heroScore>small{margin-top:7px;color:var(--product-muted);font-size:11px}
 .heroPlayers{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--product-line)}
 .heroPlayers>div{padding:14px 16px;border-right:1px solid var(--product-line)}

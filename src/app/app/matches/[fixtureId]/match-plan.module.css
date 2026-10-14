@@ -236,7 +236,6 @@
   .phasePanel>summary>b{grid-column:2}
 }
 
-.contextLinks .executiveLink{border:1px solid var(--product-line);background:#fff;color:var(--product-ink)}
 
 
 /* Evidence coverage: which sources behind the brief are not operational */

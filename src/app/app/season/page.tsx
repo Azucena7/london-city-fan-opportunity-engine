@@ -5,6 +5,7 @@ import { TalentPressurePanel } from "@/components/TalentPressurePanel";
 import { bankHolidays, calendar, campaignPlans, currentState, eventLandscape, internationalWindows } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
+import { decisionBadge } from "@/lib/decisionQueue";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { demoAppearances, demoPlayerMomentum, demoPlayers, playerCapacity, playerMomentumScore } from "@/lib/clubStrategy";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
@@ -116,13 +117,9 @@ export default async function SeasonIntelligencePage() {
   const nextPressure = nextRow
     ? calendarRelationships.filter((item) => item.fixtureIds.includes(nextRow.id) || item.date === nextRow.date).slice(0, 3)
     : [];
-  const nextDecisionState = !nextRow
-    ? "MONITOR"
-    : nextRow.approvalsTotal > 0 && nextRow.approvalsReady < nextRow.approvalsTotal
-      ? "REVIEW"
-      : nextRow.campaign
-        ? "READY"
-        : "ACT";
+  // The next fixture's decision state is the same one Home, Radar and Executive show.
+  const nextDecision = nextRow ? getCurrentProductOpportunity(nextRow.id) : null;
+  const nextDecisionState = nextDecision ? decisionBadge(nextDecision.decisionState) : "MONITOR";
 
   return (
     <AppWorkspaceShell
@@ -140,7 +137,7 @@ export default async function SeasonIntelligencePage() {
             <small>London City v {nextRow.opponent}</small>
           </div>
           <div className={styles.nextMoveState}>
-            <DecisionStateBadge state={nextDecisionState} />
+            <DecisionStateBadge state={nextDecisionState} label={nextDecision?.decisionState} />
             <strong>{nextRow.campaign ? nextRow.campaign.title.en : "No campaign draft yet"}</strong>
             <small>{nextPressure.length ? nextPressure.length + " calendar pressure signals around this fixture" : "No material calendar pressure currently linked"}</small>
           </div>

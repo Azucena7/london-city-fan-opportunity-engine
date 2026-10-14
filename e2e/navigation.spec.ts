@@ -103,3 +103,12 @@ test.describe("desktop workspace navigation", () => {
     await expect(page.locator("#main-content")).toBeFocused();
   });
 });
+
+test("the four primary app destinations fit on a phone without scrolling the bar", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto("/app/campaigns");
+  const nav = page.getByRole("navigation", { name: "Club workflow" });
+  const { scrollWidth, clientWidth } = await nav.evaluate((element) => ({ scrollWidth: element.scrollWidth, clientWidth: element.clientWidth }));
+  expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+  await expect(nav.getByRole("link", { name: /Players/ })).toBeInViewport();
+});

@@ -33,6 +33,14 @@
   .mobileMenuPanel{position:absolute;right:0;top:calc(100% + 8px);z-index:60;width:220px;padding:9px;display:grid;gap:2px;background:#fff;border:1px solid #D8DEE3;border-radius:10px;box-shadow:0 12px 32px rgba(16,19,26,.14)}
   .mobileMenuPanel>span{padding:8px 8px 4px;color:#8FA3B5;font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.mobileMenuPanel a{min-height:38px;display:flex;align-items:center;padding:9px 8px;border-radius:7px;color:#637282;text-decoration:none;font-size:12px;font-weight:750}.mobileMenuPanel a:hover,.mobileActive{background:#EEF3F5!important;color:#102742!important}
 }
+@media(max-width:480px){
+  /* Phones: the brand keeps its mark (the link is labelled "AVELA home") so the four primary
+     destinations fit beside More without scrolling. */
+  .brandCopy{display:none}.brand{min-width:0;padding:5px 2px}
+}
+@media(max-width:400px){
+  .primary .workLink{padding:7px 6px}
+}
 @media(max-width:620px){
   .sidebar{grid-template-columns:auto minmax(0,1fr) auto;padding:7px 8px;gap:6px}.brandCopy strong{font-size:12px}.brandMark{width:16px;height:18px}.workLink{padding:7px 8px}.workLink strong{font-size:12px}.mobileMenuPanel{width:min(230px,calc(100vw - 24px))}
 }
