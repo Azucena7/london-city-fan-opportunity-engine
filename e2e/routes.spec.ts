@@ -190,3 +190,16 @@ test("home Morning Commercial Read marks unconnected signals instead of filling 
   await page.getByRole("tab", { name: /Rail disruption/ }).click();
   await expect(page.getByRole("tabpanel")).toContainText("Send a travel plan with the reminder");
 });
+
+test("Executive lists every upcoming home decision and opens one from the portfolio", async ({ page }) => {
+  await page.goto("/app/executive");
+  const table = page.getByRole("table", { name: /Decision portfolio/ });
+  await expect(table).toBeVisible();
+  const rows = table.locator("tbody tr");
+  expect(await rows.count()).toBeGreaterThan(1);
+  const second = rows.nth(1).getByRole("link");
+  const href = await second.getAttribute("href");
+  expect(href).toMatch(/^\/app\/executive\?fixture=/);
+  await page.goto(href!);
+  await expect(page.getByRole("table", { name: /Decision portfolio/ }).locator('a[aria-current="true"]')).toHaveAttribute("href", href!);
+});

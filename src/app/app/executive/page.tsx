@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExecutiveShareActions } from "@/components/ExecutiveShareActions";
-import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
+import { bankHolidays, calendar, campaignPlans, currentState, eventLandscape, internationalWindows } from "@/lib/data";
+import { calendarMoments } from "@/lib/calendarMoments";
+import { DataTable } from "@/components/DataTable";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -81,6 +83,23 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
     approvals.length ? approvals.length + " approval gate" + (approvals.length === 1 ? "" : "s") + " still open" : "No approval gate currently blocks the selected decision",
     measured ? "Outcome evidence is now available" : "Outcome evidence is still pending"
   ].slice(0, 4);
+  // The portfolio: every upcoming home decision in attention order, so leadership sees what
+  // is blocked, what waits on a gate and which calendar moments sit around each fixture.
+  const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows);
+  const portfolio = radar.map((item) => {
+    const decision = getCurrentProductOpportunity(item.fixtureId);
+    const gates = campaignPlans.campaigns
+      .find((entry) => entry.fixtureId === item.fixtureId)
+      ?.approvals.filter((approval) => approval.state !== "ready").length ?? 0;
+    return {
+      ...item,
+      decisionState: decision?.decisionState ?? null,
+      waitingOn: decision?.decisionState === "HOLD" ? decision.primaryBlocker : null,
+      gates,
+      moments: moments.filter((moment) => moment.fixtureId === item.fixtureId).map((moment) => moment.label)
+    };
+  });
+
   const flow = [
     { label: "Signals", state: radarItem?.materialSignalCount ? "ready" : "muted" },
     { label: "Opportunity", state: radarItem?.opportunityScore ? "ready" : "muted" },
@@ -130,6 +149,39 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
             ))}
           </div>
         </div>
+      </section>
+
+      <section className={styles.portfolio} aria-label="Decision portfolio">
+        <WorkspaceSectionHeader eyebrow="Decision portfolio" title="Every upcoming home decision, in attention order" />
+        <DataTable
+          caption="Decision portfolio: upcoming home fixtures ranked by attention"
+          rows={portfolio}
+          rowKey={(row) => row.fixtureId}
+          empty="No upcoming home fixture is in the queue."
+          columns={[
+            {
+              key: "fixture",
+              header: "Fixture",
+              cell: (row) => (
+                <Link href={"/app/executive?fixture=" + row.fixtureId} aria-current={row.fixtureId === selectedId ? "true" : undefined}>
+                  {row.opponent}
+                </Link>
+              )
+            },
+            { key: "date", header: "Date", cell: (row) => <time className={styles.nowrap} dateTime={row.date}>{new Date(row.date + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" })}</time> },
+            { key: "attention", header: "Attention", cell: (row) => row.attentionState },
+            {
+              key: "decision",
+              header: "Decision",
+              cell: (row) => row.decisionState
+                ? <DecisionStateBadge state={row.decisionState === "HOLD" ? "BLOCKED" : "REVIEW"} label={row.decisionState} />
+                : "Not assessed"
+            },
+            { key: "waiting", header: "Waiting on", cell: (row) => row.waitingOn ?? "—" },
+            { key: "gates", header: "Open gates", cell: (row) => row.gates },
+            { key: "calendar", header: "Calendar moment", cell: (row) => row.moments.length ? row.moments.join(" · ") : "—" }
+          ]}
+        />
       </section>
 
       {matchdayAlert ? (
