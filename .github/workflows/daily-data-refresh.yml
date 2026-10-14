@@ -32,6 +32,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Keep the Supabase project active
+        # Free-tier Supabase projects pause after 7 days without activity, and a paused project
+        # makes every Vercel deployment fail at integration provisioning. One tiny read per run
+        # keeps it active. It uses the public (publishable) key only; any HTTP answer below 500
+        # counts as activity, and a missing secret or failure never blocks the refresh.
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_PUBLISHABLE_KEY" ]; then
+            echo "SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY is not set: keep-alive skipped."
+            exit 0
+          fi
+          status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 \
+            -H "apikey: $SUPABASE_PUBLISHABLE_KEY" \
+            "${SUPABASE_URL%/}/rest/v1/clubs?select=id&limit=1")"
+          echo "Supabase keep-alive answered HTTP $status"
+          if [ "$status" -ge 500 ] || [ "$status" = "000" ]; then
+            exit 1
+          fi
       - name: Refresh once per Europe/London day
         id: schedule_gate
         env:

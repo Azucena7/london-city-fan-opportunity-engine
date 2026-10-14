@@ -21,6 +21,10 @@ The workflow executes:
 4. `npm run refresh:calendar-moments` (non-blocking)
 5. `npm run send:morning-read` (non-blocking; scheduled and manual runs only)
 
+### Supabase keep-alive
+
+Free-tier Supabase projects pause after seven days without activity, and a paused project makes every Vercel deployment fail with "Integration provisioning error". The first step of every daily-refresh run makes one tiny read against the project's REST API using only the public key, so the project never sits idle. It needs two repository secrets: `SUPABASE_URL` (the project URL) and `SUPABASE_PUBLISHABLE_KEY` (the `sb_publishable_…` key; never the secret or service-role key). Without them the step is skipped, and it never blocks the refresh. Upgrading the project to Pro removes the need for it.
+
 ### News radar
 
 `refresh:news-radar` reads public Google News RSS searches listed in `data/seed/news-radar.json` and stores the headline, outlet, link and date in `data/live/news-radar.json`. Each headline is tagged with the configured topics and with any upcoming fixture whose opponent it names, and it is kept for `retentionDays`. The Radar page shows these as **unreviewed** headlines: they never create a signal or change a score, confidence or rank. To change what is watched, edit the `feeds` (query, language, country), the `topics` (keywords) or `excludeOutlets` (aggregators and betting sites to ignore) in the seed file. Every refresh re-tags stored headlines, drops excluded outlets and drops headlines found only by a search that is no longer configured, so a change applies to what is already stored; a push that changes the file runs a refresh straight away. A headline becomes evidence only when someone reviews it and records it as a signal.
