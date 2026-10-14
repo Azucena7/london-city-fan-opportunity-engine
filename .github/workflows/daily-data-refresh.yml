@@ -37,13 +37,24 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
         run: |
+          today="$(TZ=Europe/London date +%F)"
+
+          # The Morning Commercial Read goes out once per London day on a scheduled or manual
+          # run, whether or not this run refreshes: a push-triggered refresh earlier in the day
+          # must not swallow it.
+          last_sent="$(jq -r '.lastSentFor // empty' data/live/morning-read.json)"
+          if [ "$EVENT_NAME" != "push" ] && [ "$last_sent" != "$today" ]; then
+            echo "send_read=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "send_read=false" >> "$GITHUB_OUTPUT"
+          fi
+
           if [ "$EVENT_NAME" != "schedule" ]; then
             echo "run_refresh=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           last_refresh="$(jq -r '.updated_at // empty' data/live/current.json)"
-          today="$(TZ=Europe/London date +%F)"
           last_day=""
           if [ -n "$last_refresh" ]; then
             last_day="$(TZ=Europe/London date -d "$last_refresh" +%F)"
@@ -56,12 +67,12 @@ jobs:
           fi
 
       - uses: actions/setup-node@v7
-        if: steps.schedule_gate.outputs.run_refresh == 'true'
+        if: steps.schedule_gate.outputs.run_refresh == 'true' || steps.schedule_gate.outputs.send_read == 'true'
         with:
           node-version: 24
           cache: npm
       - run: npm ci
-        if: steps.schedule_gate.outputs.run_refresh == 'true'
+        if: steps.schedule_gate.outputs.run_refresh == 'true' || steps.schedule_gate.outputs.send_read == 'true'
       - run: npm run refresh:data
         if: steps.schedule_gate.outputs.run_refresh == 'true'
       - name: Refresh public audience and attendance signals
@@ -93,11 +104,23 @@ jobs:
           git commit -m "data: refresh fixture and public signal state"
           git push
       - name: Send the Morning Commercial Read
-        # Daily runs only (scheduled or manual), never on a push. Always lands in the run summary;
-        # it is also emailed when RESEND_API_KEY and MORNING_READ_TO are set as repository secrets.
-        if: steps.schedule_gate.outputs.run_refresh == 'true' && github.event_name != 'push'
+        # Once per London day on scheduled or manual runs (see the gate). Always lands in the run
+        # summary; it is also emailed when RESEND_API_KEY and MORNING_READ_TO are repository
+        # secrets. The day is recorded only after delivery, so a failed email is retried by the
+        # next scheduled run.
+        if: steps.schedule_gate.outputs.send_read == 'true'
         continue-on-error: true
-        run: npm run send:morning-read
+        run: |
+          npm run send:morning-read
+          if git diff --quiet -- data/live/morning-read.json; then
+            exit 0
+          fi
+          git config user.name "avela-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/live/morning-read.json
+          git commit -m "data: record today's Morning Commercial Read"
+          git pull --rebase origin main
+          git push
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           MORNING_READ_TO: ${{ secrets.MORNING_READ_TO }}
