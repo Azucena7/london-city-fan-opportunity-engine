@@ -1,14 +1,14 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-13T15:58:11.244Z",
-  "lastSuccessfulAt": "2026-10-13T15:58:11.244Z",
+  "checkedAt": "2026-10-14T00:17:39.041Z",
+  "lastSuccessfulAt": "2026-10-14T00:17:39.041Z",
   "failures": [],
   "items": [
     {
       "title": "Women’s Internationals | Peacock scores as Young Lionesses put six past Bosnia & Herzegovina",
       "outlet": "West Ham United",
       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQUVFBOGktcHNRTUZzbnd6MXdadW9tdmo5ZzVOZmg5OXJ1OGdVSVdJYzc0Z2duMGJMN0ZrNENPRG14ZHROUHM3SFVOVlotaXprR0szcUN2NGt6N1pESGJsQTlXN2d4a0Nmc282aWhmMkJ5c0M0cVBsdEkyQUtxOWZYQ29xeWhCZ2lObk04VWdFNm4wSDduLW5Xd0JSYlpJdlpTSHpGbWVqSU83OGdsWWhkVld6eGlVdUloeTJURTVUYjhaQQ?oc=5",
-      "publishedAt": "2026-10-13T14:58:29.000Z",
+      "publishedAt": "2026-10-13T17:25:56.000Z",
       "feedIds": [
         "club-uk"
       ],
@@ -101,6 +101,36 @@
       "fixtureIds": [],
       "id": "news-4d6b9fd69bc1",
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
+    },
+    {
+      "title": "Revamp of town playing field moves step closer as potential designs under way",
+      "outlet": "EDP24",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQYUczcllCMEMwX1dUQjU5RzNtMjZvRDVNRkl2TVdoVFFjVmhJSG9MQjQwX3pqTlhHWjh1WkYwNkd4UG93cEFxTnZnMHM3MmxjSzRzaWsxU3FpcVhhLWUzY0VRUTdpeHNHWlJRSUYwVHhRenNHbm5aRkZpaW55T3VmZlZxWFAxTFAweVJIRV9EVHYxTnlBYkE?oc=5",
+      "publishedAt": "2026-10-09T12:48:13.000Z",
+      "feedIds": [
+        "venue-hayes-lane-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-e8b8338a83d9",
+      "firstSeenAt": "2026-10-14T00:17:39.041Z"
+    },
+    {
+      "title": "Ticket Sales Information: London City vs Birmingham City",
+      "outlet": "London City Lionesses",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPOWF2MV9ZRnNvU1hIeExKN0kwejFoaHdkV0ZfOGt3YzVxUU9hckE1emtDd19INHFST2dXdU5OUG91Q3hmZFNmMFNDNXhOZkJqaTlaTllBa1RJcFlrSEdCSENaZ05qaGZJR1g4SVBITDhaQnlsVXFEdDJkY3A4WFFKdnYwUGwxaFpIT2RuTFFMU05zdWw2dTVwRkdndzQ?oc=5",
+      "publishedAt": "2026-10-08T20:49:17.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [
+        "ticketing"
+      ],
+      "fixtureIds": [
+        "2026-11-08-birmingham-c-h"
+      ],
+      "id": "news-90534576e2c1",
+      "firstSeenAt": "2026-10-14T00:17:39.041Z"
     },
     {
       "title": "WSL fixture details confirmed for November",
@@ -533,6 +563,20 @@
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
+      "title": "Spurs vs London City Lionesses, Women's Super League | How to watch, team news, kit colours, key information",
+      "outlet": "Tottenham Hotspur",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPSDlNZ0lENmxRZW9CY2M4LUg1c2JGMHl2WUFBMG1UTVcxdUx1c2lwVTUyNVNmYkdWYWhnYWRmeG1ST2pHOVhiM2N2al9odi00MGk2SFZ0S2NxVlBJcFZPeW84dDhfZ1hRcGZ6MnZBQTBNZnU5UkI2RlBTc0o2ZGFWNm41WWlTTG13cUZmaVRPcFI1a0R0ZEswUDllNDF2NXd2U2VqQmxIdnROVTNUcTVlWTV4QmZ6eURESWdMRmlKV1JVZ2RUZENaYzdpTk51SWtmOTF4c21qc3hPTHMyS0hhYQ?oc=5",
+      "publishedAt": "2026-10-03T08:00:00.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-66ea83bbc88b",
+      "firstSeenAt": "2026-10-14T00:17:39.041Z"
+    },
+    {
       "title": "Tottenham vs London City Lionesses Prediction: WSL Preview",
       "outlet": "Opta Analyst",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNWDNjM1hDQWhqZjVkU280TnZiZWI0QXFkajZHVFZVd08tOUVyT1lIZGRkT2cwdllaTVJxT1JQVjZ4M3RqZ2MwMGRMTEdaVVBLcHQzVVhZNHdaLVk1YkN0Ynd1RnRPcXNlVXlJMHU3MUR5UDBiRUFrYThZSVZpVThKNjdxanZzdnA3YnlEQmg3cnRobGxnN0MxalBNY3BVUQ?oc=5",
@@ -671,6 +715,19 @@
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
     },
     {
+      "title": "Alexia Putellas, 32 años: \"Los chicos pasan muchas horas en los videojuegos y ahora la mujer practica más deporte\"",
+      "outlet": "El Español",
+      "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxNeU9WOUd0al9nNG9NR1NDTmwxZzRSZUltXzlRY3NFaGsySjZUNnFNUExEZG53VjV5cjNheFpoOWpBS0hhZ3lyQ0tBeWZMOXVWUS02cHQ1M0xxb1kzTVV2RUlnRzFtam54VmFpTFhNV082U3BoZklmR1ZrcjRkLXZwZ19jV2xSbFg3a1REcnFacG1GR3ZjSTZrN0hvNW9iLWlEeWtXenBpVXpCZllVUEkzSUZWei1yb0hFZzFmRzJJdjdFRHc2Q2prUFNIelNqRHZyQmFiVlVYSjk2N1VjNnZ2emFVaDRNbFdadzdKbmdYaElFMVZM0gH6AUFVX3lxTE8zbXE5bWJObElnTUhyVXBDelFNRENxNHpxdG9uZTRPZnI0dE5OX1NobXJ6dDVISWNGZ295RlVVSHJtOElOYk1FTnlIQnF6amdNOXZWMXZHUGszRDhBV2tjQlRkSEtUSXZRdGxvZ1ZCSkJMeWxJbmZBTWRIb1EtdEhZWjV2Z0JnWHpKUHlpcWtLZzktU1F3ckM0VlEybXNnNFAxTXRMYk9KakdkSlFaUjRxNG1WZ0JNRVdabTE4QmJrTnFWRjhHeURmTmdpRnU5c3JsSEhhcHJ4RGNhRlQ0bXFGeGxjVG1TOUt1NDVmSFMzcXU3ejRiVmJ0Y2c?oc=5",
+      "publishedAt": "2026-09-29T07:00:00.000Z",
+      "feedIds": [
+        "alexia-es"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-bc0449549771",
+      "firstSeenAt": "2026-10-14T00:17:39.041Z"
+    },
+    {
       "title": "Alexia Putellas: \"Mi candidatura al Balón de Oro está hecha; es lo que hago en el campo\"",
       "outlet": "MARCA",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOSG9aN3R3VVc4ck5MOGxPaEg1X3BYR1lTSzl5ck12b1pFbUZDMzc4M19lM0lZVVZkelZqbERENUdiQ3ZhVFdwTks0YnlZYWFVLVRGT2M4czQtU1RGQnBldldQNUtfOExOdGEzLWdGU2EzSHlwMlo0U1B6cWVOOVJ0WHZMYjlCWHB3WEZoeEhXbnpkanFSUjktaWcyWDbSAZwBQVVfeXFMT3FJLVFCZDVkOC13NzlGdEI4ODBWR0FndEFpWVJudkVqR2ZmeFZPMzdqVnlmMmZlb3NzR1p5LVpNR1lQWFhzZExnTjd0SGUtN1RZRkdxY2c4a2ZQdXBMV1RKV3Y4SjNyM0c5ZjVsZktlLVBfMHFjc3Z5T0pEMTRSWkF3d29yLUl6WFpUc3g4eVVHZ2kyOGlocWVubDR0?oc=5",
@@ -747,7 +804,7 @@
     {
       "title": "Alexia Putellas marca su primer gol con el London City Lionesses en una victoria crucial sobre el Brighton",
       "outlet": "Goal.com",
-      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOcGNNck80dGNJMkw1NTVuamswSjFXVUo3Nmg5RlQzVkdoVlgxTEYtVjJjRGU3OTdublVELWNWLVNQakpoOHMxbWtFZHY5ZDFVU0cxdHZBX2c4SFNJdG5rSWxSZ0Z1SjFENFl4LWx2NVV1YlZQbFJHVU9wUFdYQUI5bXBOODFtVXcxd0xPd1VidEFob1N3ZXg4NW9uSGJBeWJRODJoLUQ1UDNhWEJ1Ynd6YVVpQS1vSGRtc3VvZDlNYlp5N0prc3llcndxN1IwVWxiNHVnaXRNOHA5RTlCYnRKNlpWSUl4WldybWtLckNyMXc?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOR1dZamV4LTJfdk5QdUYwaXJ4a0s3MGlEUk9XMW40NFQwWVphR0NiWlZrZkVJN1JsUHJUeGhfWXJ2bzc0OXFXTzhvSFIzdkJERExNUGlIaksyUkFSRmtHLS1qRkNob1MyM2Iyak1FU1RUOG9Vb1lnUGpMWjl1TnB4c0VXaTRYck0zMlNOTFFwTkhuZ19uTnpmMmF6YWNPWlN5RGJVMFN5a3ZyMVZEdWZKdFlLRnR1UlptSmUwMmR4cnlXV1VVNWx3ME5yMUVQQ2szNHpLZGVkZjRLcnBhMng0Rm1HdDJ5X3BhS0dkX2xqa1dVREly?oc=5",
       "publishedAt": "2026-09-27T07:00:00.000Z",
       "feedIds": [
         "alexia-es"
@@ -1106,45 +1163,6 @@
       "topics": [],
       "fixtureIds": [],
       "id": "news-6d9a20e8b01b",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Una Champions sin Alexia Putellas por primera vez en 15 temporadas",
-      "outlet": "Mundo Deportivo",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPNnF0Sk5CdlM4aFlVRDN4dnFmc0lXRFU1TzZzNmd0WU5hSU50bWtXODZmcGFnYlUtYkhnR1hfMmhMaFdkUDNOTnZhaUJ6aWZzNWZVU2VEX0lRYnBfUHhndldDcFRhaFRQNVJYY0Vjd05ocFRoWXV0NVF4VV9YWUxkamZrRmxRM3dvTDZkQTQ2QUI5bVJqS0U0Qk1wYXk2Z25qN01WOUx5MWk2Zm9OMkRjZlAtLXVoWHp3eVMxTG4zVnrSAc4BQVVfeXFMTkZIbnRXWi1LUmVQWTNpMkpuVmdwNWxXOUZBMWVzX3ZWS2JWd2tRb1NsYjExYmpERjJxVXRsMnhWTFIwNTYzV283SGlFSkN5M1dZd0J2MzZCbmx5QXQwM180MUhKSzV2Vm5GdzlXcXQ4ZkRsbjBxMmxYZF80Ry1oZjhKR1pnOEJoY1JqQ0ZvQ1pXOUkwVnozOU9RcUJtS3laMElQVnVjdTFBN1VaU21oUExCWVczdnMxVnlPd3NsaU8zNDExMGlzT1pJNVJ4bFE?oc=5",
-      "publishedAt": "2026-09-24T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-e286703feb9e",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Otra realidad para Alexia",
-      "outlet": "Diario AS",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9peV9YbzJDbURma0tBQmc5NjhGOXpNbTRPOGJ3Q0NXYkljbUJVZ3NkZWN4eDlmTW9BSUp5cmt2SWxRdllSdFlFWTdPRUdXV0NhNVNDRFY0MGpNZGJ5TFZWcVRJOFV1LVh6dFdkZzFya2g5Sjhy0gGIAUFVX3lxTE5fdzJyb0FNbG1qZURHZGp5TTJ6LUM1RGsyN3lueXBDNzIxajViNEJyMkRHUU16NlMtS2c2U1VFU2o4blJ5UDVOb1VxXzFybkJHcmtrMlJkNDR1MGloSXlZNE9WTHV3c2N3RmZ5d3R4M3FDVE9rREtnaFU5VlZ2REpsOVFGNy1KNUc?oc=5",
-      "publishedAt": "2026-09-24T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-d078f8a85f5f",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Leicester City vs London City Lionesses: Women's League Cup stats & head-to-head",
-      "outlet": "BBC",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBLcUs4bm5leFB4RVd5RU52aXJEcVRXbEZ4YktOME1qeTlzQnJ0YTVLOFNTaGcxVGFNM0dPZ3l3UzZ5MW9wMkl4WlN2ZGlSSnYxYXFGVFItdk01UU0ydHNtb0RkSGtLQQ?oc=5",
-      "publishedAt": "2026-09-23T07:00:00.000Z",
-      "feedIds": [
-        "club-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-efce10340dfe",
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
     }
   ]

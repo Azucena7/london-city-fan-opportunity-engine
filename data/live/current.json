@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-10-13T15:58:08.083Z",
+  "updated_at": "2026-10-14T00:17:36.090Z",
   "status": "active",
   "next_home_fixture_id": "2026-10-18-eve-h",
   "last_completed_home_fixture_id": "2026-09-26-bha-h",
   "weather": {
     "status": "forecast",
     "valid_for": "2026-10-18",
-    "generated_at": "2026-10-13T15:58:07.787Z",
-    "precipitation_probability_max": 10,
-    "precipitation_sum": 0,
-    "temperature_max": 13.3,
-    "temperature_min": 8.7,
-    "wind_speed_max": 20.2,
+    "generated_at": "2026-10-14T00:17:35.929Z",
+    "precipitation_probability_max": 22,
+    "precipitation_sum": 0.9,
+    "temperature_max": 12.9,
+    "temperature_min": 7.7,
+    "wind_speed_max": 17.3,
     "source": "Open-Meteo"
   },
   "attendance_momentum": {
@@ -25,8 +25,8 @@
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-10-13T15:58:08.083Z",
-    "lastSuccessfulAt": "2026-10-13T15:58:08.083Z",
+    "lastAttemptAt": "2026-10-14T00:17:36.090Z",
+    "lastSuccessfulAt": "2026-10-14T00:17:36.090Z",
     "state": "fresh",
     "sources": [
       {
@@ -34,7 +34,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-13T15:58:08.083Z",
+        "checkedAt": "2026-10-14T00:17:36.090Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -42,7 +42,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-13T15:58:08.083Z",
+        "checkedAt": "2026-10-14T00:17:36.090Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       }
     ]
