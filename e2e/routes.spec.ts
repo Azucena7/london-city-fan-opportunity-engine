@@ -203,3 +203,17 @@ test("Executive lists every upcoming home decision and opens one from the portfo
   await page.goto(href!);
   await expect(page.getByRole("table", { name: /Decision portfolio/ }).locator('a[aria-current="true"]')).toHaveAttribute("href", href!);
 });
+
+test("a fixture without a campaign plan opens with an unapproved engine draft", async ({ page }) => {
+  await page.goto("/app/executive");
+  const table = page.getByRole("table", { name: /Decision portfolio/ });
+  const draftRow = table.locator("tbody tr", { hasText: "Engine draft" }).first();
+  await expect(draftRow).toBeVisible();
+  const href = (await draftRow.getByRole("link").first().getAttribute("href"))!;
+  const fixtureId = new URL(href, "http://x").searchParams.get("fixture");
+  await page.goto(`/app/matches/${fixtureId}`);
+  const card = page.getByRole("region", { name: "Prepared move · engine draft" });
+  await expect(card).toBeVisible();
+  await expect(card).toContainText("Not approved");
+  await expect(card).toContainText("Assign a club owner");
+});

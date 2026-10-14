@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ExecutiveShareActions } from "@/components/ExecutiveShareActions";
 import { bankHolidays, calendar, campaignPlans, currentState, eventLandscape, internationalWindows } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
+import { getCurrentPreparedMoves, getPreparationWindowIds } from "@/lib/currentPreparedMoves";
 import { DataTable } from "@/components/DataTable";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
@@ -86,15 +87,23 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   // The portfolio: every upcoming home decision in attention order, so leadership sees what
   // is blocked, what waits on a gate and which calendar moments sit around each fixture.
   const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows);
+  const preparedMoves = getCurrentPreparedMoves();
+  const preparationIds = getPreparationWindowIds();
   const portfolio = radar.map((item) => {
     const decision = getCurrentProductOpportunity(item.fixtureId);
-    const gates = campaignPlans.campaigns
-      .find((entry) => entry.fixtureId === item.fixtureId)
-      ?.approvals.filter((approval) => approval.state !== "ready").length ?? 0;
+    const plan = campaignPlans.campaigns.find((entry) => entry.fixtureId === item.fixtureId) ?? null;
+    const draft = plan ? null : preparedMoves.find((entry) => entry.fixtureId === item.fixtureId) ?? null;
+    const gates = plan
+      ? plan.approvals.filter((approval) => approval.state !== "ready").length
+      : draft?.gates.length ?? 0;
     return {
       ...item,
       decisionState: decision?.decisionState ?? null,
-      waitingOn: decision?.decisionState === "HOLD" ? decision.primaryBlocker : null,
+      move: plan ? { text: plan.title.en, kind: "Campaign draft" } : draft ? { text: draft.move, kind: draft.moveRecordedAt ? "Engine draft · from signal of " + new Date(draft.moveRecordedAt + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }) : "Engine draft" } : null,
+      inWindow: preparationIds.has(item.fixtureId),
+      waitingOn: draft
+        ? "Assign a club owner and review the engine draft"
+        : decision?.decisionState === "HOLD" ? decision.primaryBlocker : null,
       gates,
       moments: moments.filter((moment) => moment.fixtureId === item.fixtureId).map((moment) => moment.label)
     };
@@ -176,6 +185,13 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
               cell: (row) => row.decisionState
                 ? <DecisionStateBadge state={row.decisionState === "HOLD" ? "BLOCKED" : "REVIEW"} label={row.decisionState} />
                 : "Not assessed"
+            },
+            {
+              key: "move",
+              header: "Prepared move",
+              cell: (row) => row.move
+                ? <span className={styles.move}><small>{row.move.kind}</small>{row.move.text}</span>
+                : <span className={styles.noMove}>{row.inWindow ? "No signal strong enough to prepare a move yet" : "Outside the next-6 preparation window"}</span>
             },
             { key: "waiting", header: "Waiting on", cell: (row) => row.waitingOn ?? "—" },
             { key: "gates", header: "Open gates", cell: (row) => row.gates },
