@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarRelationshipPanel } from "@/components/CalendarRelationshipPanel";
 import { TalentPressurePanel } from "@/components/TalentPressurePanel";
-import { calendar, campaignPlans, currentState, eventLandscape } from "@/lib/data";
+import { bankHolidays, calendar, campaignPlans, currentState, eventLandscape, internationalWindows } from "@/lib/data";
+import { calendarMoments } from "@/lib/calendarMoments";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import { demoAppearances, demoPlayerMomentum, demoPlayers, playerCapacity, playerMomentumScore } from "@/lib/clubStrategy";
@@ -25,6 +26,7 @@ function shortDate(date: string) {
 
 export default async function SeasonIntelligencePage() {
   const homeFixtures = calendar.filter((item) => item.homeAway === "home").sort((a,b) => a.date.localeCompare(b.date));
+  const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows);
   const fixtureRows = homeFixtures.map((fixture) => {
     const opportunity = getCurrentProductOpportunity(fixture.id);
     const campaign = campaignPlans.campaigns.find((item) => item.fixtureId === fixture.id) ?? null;
@@ -36,6 +38,7 @@ export default async function SeasonIntelligencePage() {
       opponent: fixture.opponent,
       date: fixture.date,
       status: fixture.status,
+      moments: moments.filter((moment) => moment.fixtureId === fixture.id).map((moment) => moment.label),
       attendance: fixture.attendance ?? null,
       attendanceState: fixture.attendanceState ?? null,
       score: opportunity?.score ?? null,
@@ -214,6 +217,7 @@ export default async function SeasonIntelligencePage() {
                     <span>{shortDate(row.date)}</span>
                     <strong>{row.opponent}</strong>
                     <small>{row.status.replaceAll("-", " ")}</small>
+                    {row.moments.map((moment) => <span key={moment} className={styles.moment}>{moment}</span>)}
                   </div>
                   <div className={styles.score}><span>Opportunity</span><strong>{row.score ?? "—"}</strong><small>{row.confidence ? row.confidence + " confidence" : "No current score"}</small></div>
                   <div className={styles.signals}><span>Evidence</span><strong>{row.materialSignals}</strong><small>material signals</small></div>

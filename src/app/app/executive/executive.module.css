@@ -123,3 +123,5 @@
 .matchdayAlert p{margin:0!important;color:#61717D!important;font-size:11px!important;line-height:1.45}.matchdayAlert a{padding:8px 10px;border-radius:8px;background:#102742;color:#fff;text-decoration:none;font-size:11px;font-weight:900}
 .matchdayAlert[data-state="review"]{background:#FFFBF3;border-color:#ECE3C8}
 @media(max-width:760px){.matchdayAlert{grid-template-columns:minmax(0,1fr)}.matchdayAlert a{width:100%;text-align:center}}
+.portfolio{margin:0 0 18px}
+.nowrap{white-space:nowrap}

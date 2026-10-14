@@ -3013,3 +3013,15 @@ test("pilot pages keep section headlines at section scale", () => {
     }
   }
 });
+
+test("executive and season read as portfolio views across fixtures", () => {
+  const executive = read("src/app/app/executive/page.tsx");
+  const season = read("src/app/app/season/page.tsx");
+  assert.match(executive, /aria-label="Decision portfolio"/);
+  assert.match(executive, /<DataTable/);
+  assert.match(executive, /rows=\{portfolio\}/);
+  assert.match(executive, /calendarMoments\(/);
+  assert.match(executive, /Waiting on/);
+  assert.match(season, /calendarMoments\(/);
+  assert.match(season, /styles\.moment/);
+});
