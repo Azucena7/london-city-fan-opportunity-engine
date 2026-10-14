@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-14T09:01:40.289Z",
+  "checkedAt": "2026-10-14T09:37:04.809Z",
   "sources": [
     {
       "id": "club-public-web",
@@ -13,13 +13,13 @@
       "state": "operational",
       "method": "scheduled-public-observation",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-14T09:01:39.045Z",
+      "lastSuccessfulAt": "2026-10-14T09:36:59.871Z",
       "ownerAction": null,
       "note": {
         "en": "Fixtures and public activations are observed with source-level evidence and discrepancy preservation.",
         "es": "Los partidos y activaciones públicas se observan con evidencia por fuente y conservación de discrepancias."
       },
-      "lastAttemptAt": "2026-10-14T09:01:39.045Z"
+      "lastAttemptAt": "2026-10-14T09:36:59.871Z"
     },
     {
       "id": "open-meteo",
@@ -32,13 +32,13 @@
       "state": "operational",
       "method": "api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-14T09:01:39.045Z",
+      "lastSuccessfulAt": "2026-10-14T09:36:59.871Z",
       "ownerAction": null,
       "note": {
         "en": "Forecast data is live; it remains a forecast rather than an observed matchday outcome.",
         "es": "La predicción está activa; sigue siendo una previsión y no un resultado observado de matchday."
       },
-      "lastAttemptAt": "2026-10-14T09:01:39.045Z"
+      "lastAttemptAt": "2026-10-14T09:36:59.871Z"
     },
     {
       "id": "youtube-public",
@@ -51,13 +51,13 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "weekly-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-14T09:01:40.289Z",
+      "lastSuccessfulAt": "2026-10-14T09:37:04.809Z",
       "ownerAction": null,
       "note": {
         "en": "Channel statistics are refreshed through the official YouTube Data API.",
         "es": "Las estadísticas del canal se actualizan mediante la API oficial de YouTube Data."
       },
-      "lastAttemptAt": "2026-10-14T09:01:40.289Z"
+      "lastAttemptAt": "2026-10-14T09:37:04.809Z"
     },
     {
       "id": "ticketmaster-events",
@@ -70,13 +70,13 @@
       "state": "operational",
       "method": "official-api",
       "cadence": "daily-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-14T09:01:40.289Z",
+      "lastSuccessfulAt": "2026-10-14T09:37:04.809Z",
       "ownerAction": null,
       "note": {
         "en": "30 strategically relevant sports events remain from 608 candidates; routine culture and entertainment are excluded.",
         "es": "30 citas deportivas estratégicamente relevantes permanecen de 608 candidatas; se excluyen cultura y entretenimiento rutinarios."
       },
-      "lastAttemptAt": "2026-10-14T09:01:40.289Z"
+      "lastAttemptAt": "2026-10-14T09:37:04.809Z"
     },
     {
       "id": "wsl-attendance",
@@ -132,7 +132,7 @@
       "state": "operational",
       "method": "public-rss-search",
       "cadence": "daily",
-      "lastSuccessfulAt": "2026-10-14T09:01:43.403Z",
+      "lastSuccessfulAt": "2026-10-14T09:37:07.796Z",
       "ownerAction": {
         "en": "Runs with the daily data refresh; edit data/seed/news-radar.json to change searches or topics.",
         "es": "Se ejecuta con la actualización diaria; editar data/seed/news-radar.json para cambiar búsquedas o temas."
@@ -141,7 +141,7 @@
         "en": "Public Google News headlines for configured searches. Unreviewed context: headlines never change scores, confidence or rank.",
         "es": "Titulares públicos de Google News para las búsquedas configuradas. Contexto sin revisar: los titulares nunca cambian puntuaciones, confianza ni ranking."
       },
-      "lastAttemptAt": "2026-10-14T09:01:43.403Z"
+      "lastAttemptAt": "2026-10-14T09:37:07.796Z"
     },
     {
       "id": "tfl-road",
@@ -277,7 +277,7 @@
       "state": "operational",
       "method": "public-api",
       "cadence": "daily",
-      "lastSuccessfulAt": "2026-10-14T09:01:44.296Z",
+      "lastSuccessfulAt": "2026-10-14T09:37:09.048Z",
       "ownerAction": {
         "en": "Runs with the daily data refresh from the GOV.UK bank holidays API; the first run fills it.",
         "es": "Se ejecuta con la actualización diaria desde la API de festivos de GOV.UK; la primera ejecución la rellena."
@@ -286,7 +286,7 @@
         "en": "England and Wales bank holidays from GOV.UK. Until the first successful refresh no holiday is shown or inferred.",
         "es": "Festivos de Inglaterra y Gales desde GOV.UK. Hasta la primera actualización correcta no se muestra ni se infiere ningún festivo."
       },
-      "lastAttemptAt": "2026-10-14T09:01:44.296Z"
+      "lastAttemptAt": "2026-10-14T09:37:09.048Z"
     },
     {
       "id": "fifa-international-windows",
