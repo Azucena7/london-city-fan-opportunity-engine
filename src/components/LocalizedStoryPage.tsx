@@ -214,15 +214,18 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
         <div className="caseStudyMetricGrid">
           <article className="featured"><strong>940</strong><span>LSOAs</span><p>{es ? "evaluadas para priorizar oportunidad territorial" : "evaluated for territory opportunity"}</p></article>
           <article><strong>11</strong><span>{es ? "partidos" : "fixtures"}</span><p>{es ? "de WSL en casa reconstruidos para 2025/26" : "2025/26 home WSL matches reconstructed"}</p></article>
-          <article><strong>34,939</strong><span>{es ? "asistentes" : "attendees"}</span><p>{es ? "en el ledger histórico auditable" : "in the auditable historical ledger"}</p></article>
-          <article><strong>5,414</strong><span>{es ? "récord" : "record"}</span><p>{es ? "benchmark ante Arsenal" : "benchmark against Arsenal"}</p></article>
+          <article><strong>34,939</strong><span>{es ? "asistentes · reportado" : "attendees · reported"}</span><p>{es ? "registro partido a partido; WSL Analytics publica 33.775" : "match-by-match ledger; WSL Analytics reports 33,775"}</p></article>
+          <article><strong>5,414</strong><span>{es ? "récord · reportado" : "record · reported"}</span><p>{es ? "ante Arsenal, verificado con Sky Sports" : "against Arsenal, verified with Sky Sports"}</p></article>
         </div>
         <div className="caseStudyEvidenceRail">
           <div><span>{es ? "Media 2025/26" : "2025/26 average"}</span><strong>3,176</strong></div>
           <div><span>{es ? "Mediana" : "Median"}</span><strong>2,982</strong></div>
           <div><span>{es ? "Media Hayes Lane" : "Hayes Lane average"}</span><strong>3,012</strong></div>
-          <div><span>{es ? "Opener actual" : "Current opener"}</span><strong>5,402</strong><small>{es ? "+70% sobre la media anterior" : "+70% vs prior average"}</small></div>
+          <div><span>{es ? "Opener actual · registro del club" : "Current opener · club fixture record"}</span><strong>5,402</strong><small>{es ? "+70% sobre la media anterior" : "+70% vs prior average"}</small></div>
         </div>
+        <p className="caseStudyMetricNote">{es
+          ? "Asistencias publicadas, no medidas por AVELA: la media, la mediana y el total salen del registro partido a partido (corroborado por ESPN). WSL Analytics publica un total de 33.775 (media 3.070); la diferencia se mantiene visible."
+          : "Published attendances, not measured by AVELA: the average, median and total come from the match-by-match ledger (corroborated by ESPN). WSL Analytics reports a 33,775 total (3,070 average); the difference stays visible."}</p>
       </section>
 
       <section className="caseStudySection caseStudyCampaignBridge">

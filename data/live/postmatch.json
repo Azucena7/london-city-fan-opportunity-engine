@@ -7,11 +7,11 @@
     "ticketsSold": 5400,
     "ticketsSoldQualifier": ">",
     "attendance": 5402,
-    "attendanceState": "measured",
+    "attendanceState": "reported",
     "occupancy": "sell-out",
     "headline": {
-      "en": "Near-record opener demand is proven; repeat demand is the next question",
-      "es": "La demanda casi récord del opener está probada; la repetición es la siguiente pregunta"
+      "en": "Near-record opener attendance is on the club record; repeat demand is the next question",
+      "es": "La asistencia casi récord del opener consta en el registro del club; la repetición es la siguiente pregunta"
     },
     "learning": {
       "en": "The opener delivered attendance 70% above the 2025/26 home average and only 12 below the 5,414 record against Arsenal. It proves premium-opponent demand, not the normal home baseline.",

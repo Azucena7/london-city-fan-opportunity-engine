@@ -715,6 +715,12 @@
   border-right: 1px solid var(--line);
 }
 .caseStudyEvidenceRail > div:last-child { border-right: 0; }
+.caseStudyMetricNote {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
 .caseStudyEvidenceRail span,
 .caseStudyEvidenceRail strong,
 .caseStudyEvidenceRail small {

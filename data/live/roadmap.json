@@ -70,7 +70,7 @@
       "es": "Probar la ventana de atención liberada en Bromley"
     },
     "reason": {
-      "en": "With Bromley’s 15:00 away fixture postponed, run a tagged local-football audience test for London City v Brighton and compare conversion with the existing Brighton campaign. Treat any uplift as measured campaign performance, not as attendance until scans are published.",
+      "en": "With Bromley’s 15:00 away fixture postponed, run a tagged local-football audience test for London City v Brighton and report attributed conversion for each campaign separately. Do not describe a difference between the two as uplift without a holdout, and do not treat sales as attendance until scans are published.",
       "es": "Con el partido visitante de Bromley de las 15:00 aplazado, ejecutar una prueba etiquetada para audiencias del fútbol local hacia London City–Brighton y comparar la conversión con la campaña vigente de Brighton. Tratar cualquier mejora como rendimiento medido de campaña, no como asistencia hasta que se publiquen scans."
     }
   },
