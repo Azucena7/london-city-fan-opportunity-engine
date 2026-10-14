@@ -136,7 +136,7 @@ export function MatchdayCompanionWidget({
         {mobilityProviderReadiness.map((provider) => (
           <article key={provider.id} data-state={provider.state}>
             <span>{provider.label}</span>
-            <strong>{provider.state.replace("-", " ")}</strong>
+            <strong>{provider.stateLabel}</strong>
             <small>{provider.provider}</small>
           </article>
         ))}

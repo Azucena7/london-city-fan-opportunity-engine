@@ -81,9 +81,9 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
           <small>Bromley · London</small>
         </article>
         <article data-state={providerSummary.state === "live" ? "known" : "pending"}>
-          <span>Live disruption</span>
-          <strong>{providerSummary.configured}/{providerSummary.total} layers configured</strong>
-          <small>{providerSummary.state === "live" ? "Live travel context available." : "Use official transport information before travelling."}</small>
+          <span>Travel disruption</span>
+          <strong>{providerSummary.live} operational · {providerSummary.degraded} degraded · {providerSummary.total - providerSummary.configured} not connected</strong>
+          <small>{providerSummary.live ? "Road and rail are checked daily; confirm with operators before travelling." : "Use official transport information before travelling."}</small>
         </article>
         <article data-state={pilot ? "pilot" : "known"}>
           <span>Journey service</span>
@@ -170,13 +170,13 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
       </section>
 
       <section className={styles.future}>
-        <span>LIVE TRAVEL READINESS</span>
+        <span>TRAVEL SOURCE READINESS</span>
         <div>
           {mobilityProviderReadiness.map((provider) => (
             <article key={provider.id} data-state={provider.state}>
               <strong>{provider.label}</strong>
               <p>{provider.id === "rail" && provider.state === "live" && provider.provider.includes("TfL") ? railLine ?? "Rail status for this day is read once it is among the next four home fixtures." : provider.state === "live" ? provider.scope : provider.fallback}</p>
-              <small>{provider.state.replace("-", " ")} · {provider.provider}</small>
+              <small>{provider.stateLabel} · {provider.provider}</small>
             </article>
           ))}
           <article><strong>Matchday experience</strong><p>Doors, fan zone, family area, food and pre/post-match activity.</p><small>Club content layer</small></article>

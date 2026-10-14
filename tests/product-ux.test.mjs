@@ -365,7 +365,10 @@ test("club setup context differentiates the engine from replacement CRM and gene
   const ecosystem = read("src/components/CommercialEcosystem.tsx");
 
   assert.match(builder, /Built above the club&apos;s existing stack — not instead of it/);
-  assert.match(builder, /Connected stack/);
+  // A setup selection is not a verified connector; with none selected nothing is in the stack.
+  assert.match(builder, /In club's selected channels/);
+  assert.doesNotMatch(builder, /Connected stack/);
+  assert.match(builder, /if \(!connected\.length\) return false;/);
   assert.match(builder, /Handoff/);
   assert.match(builder, /clubId: activeClubId/);
   assert.match(builder, /\/api\/club-setup/);
@@ -3076,4 +3079,21 @@ test("password recovery never reveals whether an account exists and lands on a r
   assert.match(form, /history\.replaceState/);
   assert.match(form, /params\.get\("type"\) === "recovery"/);
   assert.match(access, /Forgot password\?/);
+});
+
+test("selected sources and daily snapshots are never labelled connected or live", () => {
+  const setup = read("src/components/ClubSetup.tsx");
+  assert.match(setup, /Source selected · not verified/);
+  assert.doesNotMatch(setup, /\? "Connected" :/);
+
+  const readiness = read("src/lib/mobilityProviderReadiness.ts");
+  assert.match(readiness, /stateLabel: labelFor\(mapRoadState\(roadHealth\), roadHealth, true\)/);
+  assert.match(readiness, /stateLabel: labelFor\(mapSourceState\(railHealth\), railHealth, !railViaRdm\)/);
+  assert.match(readiness, /"checked daily · "/);
+
+  const page = read("src/app/matchday/[fixtureId]/page.tsx");
+  assert.match(page, /TRAVEL SOURCE READINESS/);
+  assert.doesNotMatch(page, /LIVE TRAVEL READINESS|Live disruption/);
+  assert.match(page, /provider\.stateLabel/);
+  assert.match(read("src/components/MatchdayCompanionWidget.tsx"), /provider\.stateLabel/);
 });

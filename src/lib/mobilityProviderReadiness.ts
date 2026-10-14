@@ -7,6 +7,8 @@ export type MobilityProviderReadiness = {
   id: "road" | "rail" | "routing";
   label: string;
   state: MobilityProviderState;
+  /** What a person reads: a daily snapshot says "checked daily", never "live". */
+  stateLabel: string;
   provider: string;
   sourceUrl: string | null;
   checkedAt: string | null;
@@ -43,6 +45,16 @@ export function railStatusForFixture(date: string) {
   return day ? { checkedAt: tflRail.lastSuccessfulAt, disruptions: day.disruptions } : null;
 }
 
+function checkedDaily(item: SourceHealthItem | null) {
+  const at = item?.lastSuccessfulAt;
+  return at ? "checked daily · " + new Date(at).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "Europe/London" }) : "checked daily";
+}
+
+function labelFor(state: MobilityProviderState, item: SourceHealthItem | null, dailySnapshot: boolean) {
+  if (state === "live") return dailySnapshot ? checkedDaily(item) : "live";
+  return state.replace("-", " ");
+}
+
 function mapSourceState(item: SourceHealthItem | null): MobilityProviderState {
   if (!item) return "not-configured";
   if (item.state === "operational") return "live";
@@ -64,6 +76,8 @@ export const mobilityProviderReadiness: MobilityProviderReadiness[] = [
     id: "road",
     label: "Road & traffic",
     state: mapRoadState(roadHealth),
+    // The daily refresh stores a TfL snapshot; it is not a live feed.
+    stateLabel: labelFor(mapRoadState(roadHealth), roadHealth, true),
     provider: "Transport for London Unified API",
     sourceUrl: "https://api.tfl.gov.uk/",
     checkedAt: roadHealth?.lastAttemptAt ?? roadHealth?.lastSuccessfulAt ?? null,
@@ -78,6 +92,8 @@ export const mobilityProviderReadiness: MobilityProviderReadiness[] = [
     id: "rail",
     label: "Rail",
     state: mapSourceState(railHealth),
+    // Rail via TfL is a daily snapshot; a connected RDM product would be a live feed.
+    stateLabel: labelFor(mapSourceState(railHealth), railHealth, !railViaRdm),
     provider: railViaRdm || !tflRailHealth ? "National Rail / Rail Data Marketplace" : "National Rail status via TfL",
     sourceUrl: railViaRdm || !tflRailHealth ? "https://raildata.org.uk/" : "https://api.tfl.gov.uk/",
     checkedAt: railHealth?.lastAttemptAt ?? railHealth?.lastSuccessfulAt ?? null,
@@ -92,6 +108,7 @@ export const mobilityProviderReadiness: MobilityProviderReadiness[] = [
     id: "routing",
     label: "Journey routing",
     state: "not-configured",
+    stateLabel: "not configured",
     provider: "Journey technology partner pending",
     sourceUrl: null,
     checkedAt: null,
