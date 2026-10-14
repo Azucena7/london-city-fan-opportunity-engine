@@ -217,3 +217,11 @@ test("a fixture without a campaign plan opens with an unapproved engine draft", 
   await expect(card).toContainText("Not approved");
   await expect(card).toContainText("Assign a club owner");
 });
+
+test("Ask AVELA is reachable on a brief without opening any section", async ({ page }) => {
+  await page.goto("/app/matches/2026-10-18-eve-h");
+  const launcher = page.getByRole("button", { name: "✦ Ask AVELA" });
+  await expect(launcher).toBeVisible();
+  await launcher.click();
+  await expect(page.getByRole("complementary", { name: "Ask AVELA" })).toBeVisible();
+});

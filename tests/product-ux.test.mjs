@@ -3049,3 +3049,10 @@ test("adopting an engine draft is recorded as a recommendation, never as the clu
   const brief = read("src/app/app/matches/[fixtureId]/page.tsx");
   assert.match(brief, /campaign\?\.proposition\.en \?\? preparedMove\?\.move \?\? live\.recommendedAction/);
 });
+
+test("the Ask AVELA launcher is never nested inside a collapsible brief section", () => {
+  const brief = read("src/app/app/matches/[fixtureId]/page.tsx");
+  const panel = brief.indexOf("<AskAvelaPanel");
+  const lastDetailsClose = brief.lastIndexOf("</details>");
+  assert.ok(panel > lastDetailsClose, "AskAvelaPanel must come after the last </details>");
+});
