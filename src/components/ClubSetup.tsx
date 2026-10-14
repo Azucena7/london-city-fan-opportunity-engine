@@ -143,7 +143,7 @@ export function ClubSetup() {
       </header>
 
       <div className={styles.setupJourney} aria-label="Club setup progress">
-        <div className={fixtureSource !== "manual" ? styles.journeyDone : ""}><span>01</span><strong>Fixtures</strong><small>{fixtureSource !== "manual" ? "Connected" : "Needs source"}</small></div>
+        <div className={fixtureSource !== "manual" ? styles.journeyDone : ""}><span>01</span><strong>Fixtures</strong><small>{fixtureSource !== "manual" ? "Source selected · not verified" : "Needs source"}</small></div>
         <div className={channels.length ? styles.journeyDone : ""}><span>02</span><strong>Channels</strong><small>{channels.length ? `${channels.length} active` : "Choose routes"}</small></div>
         <div className={objectives.length ? styles.journeyDone : ""}><span>03</span><strong>Objectives</strong><small>{objectives.length ? `${objectives.length} priorities` : "Choose goals"}</small></div>
         <div className={tone.trim() ? styles.journeyDone : ""}><span>04</span><strong>Brand</strong><small>{tone.trim() ? "Guardrails set" : "Needs rules"}</small></div>

@@ -341,9 +341,11 @@ export function CampaignDeliveryPlanner({
     await loadClubWorkspace(clubId);
   }
 
+  // Channels the club has selected in setup. A selection is not a verified connector, and
+  // with none selected nothing counts as in the club's stack.
   function channelIsConnected(channel: string) {
     const connected = clubSetup?.connectedChannels ?? [];
-    if (!connected.length) return true;
+    if (!connected.length) return false;
     if (connected.includes(channel)) return true;
     if (channel === "CRM" && connected.includes("Email")) return true;
     if (channel === "Social" && connected.some((item) => ["Instagram", "Facebook", "TikTok"].includes(item))) return true;
@@ -741,11 +743,11 @@ export function CampaignDeliveryPlanner({
                         <div className={styles.itemTitle}>
                           <strong>{item.label}</strong>
                           {item.recommended ? <span>Recommended</span> : null}
-                          {activeClubId ? <span className={connectedStack ? styles.stackConnected : styles.stackHandoff}>{connectedStack ? "Connected stack" : "Handoff"}</span> : null}
+                          {activeClubId ? <span className={connectedStack ? styles.stackConnected : styles.stackHandoff}>{connectedStack ? "In club's selected channels" : "Handoff"}</span> : null}
                         </div>
                         <p>{item.detail}</p>
                         <small>{categoryLabels[item.category]} · {item.channels.join(" · ")} · effort {item.baseEffort} units</small>
-                        {activeClubId && !connectedStack ? <p className={styles.stackNote}>Not in the club&apos;s connected channels. This remains a preparation/manual handoff unless a connector is added.</p> : null}
+                        {activeClubId && !connectedStack ? <p className={styles.stackNote}>Not in the club&apos;s selected channels. This remains a preparation/manual handoff unless a connector is added.</p> : null}
                       {item.recommended && !active ? <p className={styles.impactWarning}>If removed: {item.impact}</p> : null}
                       </div>
                     </label>
