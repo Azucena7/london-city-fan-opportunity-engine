@@ -8,6 +8,8 @@ type LandscapeEvent = { name: string; date: string; competition?: string; fixtur
 type Signal = { id: string; fixtureId?: string; state: string; title: { en: string } };
 type Weather = { valid_for?: string; temperature_max?: number; precipitation_probability_max?: number } | null | undefined;
 type HealthSource = { id: string; state: string };
+type RoadIncident = { location: string | null; startDate: string | null; endDate: string | null; distanceKm: number | null; material: boolean };
+type RoadSnapshot = { lastSuccessfulAt: string | null; incidents: RoadIncident[] } | null | undefined;
 type Opportunity = {
   fixtureId: string;
   fixture: { opponent: string };
@@ -35,6 +37,7 @@ export type MorningReadInput = {
   sources: HealthSource[];
   live: Opportunity | null;
   moments?: Array<{ fixtureId: string; label: string }>;
+  road?: RoadSnapshot;
   horizon?: number;
 };
 
@@ -42,7 +45,12 @@ function day(value: string) {
   return new Date(`${value}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 }
 
-export function buildMorningRead({ today, calendar, events, signals, weather, sources, live, moments = [], horizon = 4 }: MorningReadInput): MorningReadLine[] {
+/** Material road incidents whose listed dates cover the fixture day. Open-ended ones count. */
+export function roadClosuresOn(incidents: RoadIncident[], date: string) {
+  return incidents.filter((item) => item.material && (!item.startDate || item.startDate <= date) && (!item.endDate || item.endDate >= date));
+}
+
+export function buildMorningRead({ today, calendar, events, signals, weather, sources, live, moments = [], road = null, horizon = 4 }: MorningReadInput): MorningReadLine[] {
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a, b) => a.date.localeCompare(b.date))
@@ -115,14 +123,37 @@ export function buildMorningRead({ today, calendar, events, signals, weather, so
     state: holidaysLive || windowsLive ? "live" : "not-connected"
   });
 
-  const transportLive = operational.has("tfl-road") || operational.has("national-rail-rdm");
-  lines.push({
-    id: "transport",
-    label: "Transport",
-    headline: transportLive ? "Road and rail feeds are connected" : "Road and rail disruption is not connected yet",
-    detail: transportLive ? null : "TfL and National Rail join in a club pilot. No disruption is inferred without them.",
-    state: transportLive ? "live" : "not-connected"
-  });
+  const roadLive = operational.has("tfl-road") && Boolean(road?.lastSuccessfulAt);
+  const railLive = operational.has("national-rail-rdm");
+  const railNote = railLive ? null : "Rail disruption is not connected yet.";
+  if (roadLive) {
+    const affected = upcoming.flatMap((fixture) => {
+      const closures = roadClosuresOn(road!.incidents, fixture.date);
+      return closures.length ? [{ fixture, closures }] : [];
+    });
+    const first = affected[0];
+    lines.push({
+      id: "transport",
+      label: "Transport",
+      headline: first
+        ? `${first.closures.length} listed road ${first.closures.length === 1 ? "closure" : "closures"} near Hayes Lane on ${first.fixture.opponent} day (${day(first.fixture.date)})`
+        : `No listed road closure near Hayes Lane on the next ${upcoming.length} home fixture days`,
+      detail: [
+        ...(first ? first.closures.slice(0, 2).map((item) => `${item.location ?? "Unnamed location"} · ${item.distanceKm} km`) : []),
+        `TfL snapshot of ${day(road!.lastSuccessfulAt!.slice(0, 10))}: works TfL has not yet published cannot appear.`,
+        ...(railNote ? [railNote] : [])
+      ].join(" ") || null,
+      state: "live"
+    });
+  } else {
+    lines.push({
+      id: "transport",
+      label: "Transport",
+      headline: railLive ? "Rail feed is connected; road disruption is not" : "Road and rail disruption is not connected yet",
+      detail: railLive ? null : "TfL and National Rail join in a club pilot. No disruption is inferred without them.",
+      state: railLive ? "live" : "not-connected"
+    });
+  }
 
   if (live) {
     lines.push({

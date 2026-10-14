@@ -1,4 +1,5 @@
 import sourceHealth from "../../data/live/source-health.json";
+import tflRoad from "../../data/live/tfl-road.json";
 import { bankHolidays, calendar, currentState, eventLandscape, internationalWindows, liveSignals } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
 import { currentProductDate } from "@/lib/currentProductDate";
@@ -15,6 +16,7 @@ export function getCurrentMorningRead(live: ProductOpportunity | null) {
     weather: currentState.weather,
     sources: sourceHealth.sources,
     live,
-    moments: calendarMoments(calendar, bankHolidays.events, internationalWindows.windows)
+    moments: calendarMoments(calendar, bankHolidays.events, internationalWindows.windows),
+    road: tflRoad
   });
 }
