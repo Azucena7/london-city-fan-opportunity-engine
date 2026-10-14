@@ -23,9 +23,10 @@ type TflDisruption = {
 
 function parsePoint(value?: string | null) {
   if (!value) return null;
-  const match = value.match(/POINT\s*\(\s*([-\d.]+)\s+([-\d.]+)\s*\)/i);
+  // TfL sends "[lon,lat]"; WKT "POINT (lon lat)" is accepted too.
+  const match = value.match(/\[\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\]|POINT\s*\(\s*([-\d.]+)\s+([-\d.]+)\s*\)/i);
   if (!match) return null;
-  return { lon: Number(match[1]), lat: Number(match[2]) };
+  return { lon: Number(match[1] ?? match[3]), lat: Number(match[2] ?? match[4]) };
 }
 
 function distanceKm(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {

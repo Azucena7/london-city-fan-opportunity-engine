@@ -5,7 +5,7 @@ import ts from "typescript";
 
 const source = await readFile(new URL("../src/lib/morningRead.ts", import.meta.url), "utf8");
 const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { buildMorningRead } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+const { buildMorningRead, roadClosuresOn } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
 
 const calendar = [
   { id: "past", date: "2026-10-01", opponent: "Past", homeAway: "home", status: "final" },
@@ -65,4 +65,33 @@ test("calendar moments read as not connected until a calendar source is operatio
   assert.equal(on.calendar.state, "live");
   assert.match(on.calendar.headline, /First home match after the international window/);
   assert.match(on.calendar.detail, /Bank holidays join after the first GOV.UK refresh/);
+});
+
+test("road disruption reads live from the TfL snapshot, with rail still marked as not connected", () => {
+  const sources = [{ id: "tfl-road", state: "operational" }];
+  const road = {
+    lastSuccessfulAt: "2026-10-14T01:20:00Z",
+    incidents: [
+      { location: "[A21] Bromley Road", startDate: "2026-11-01", endDate: "2026-11-10", distanceKm: 1.2, material: true },
+      { location: "Hayes Street", startDate: "2026-10-18", endDate: "2026-10-18", distanceKm: 0.8, material: false }
+    ]
+  };
+  const lines = byId(buildMorningRead({ ...base, sources, road }));
+  assert.equal(lines.transport.state, "live");
+  assert.equal(lines.transport.headline, "1 listed road closure near Hayes Lane on Birmingham day (8 Nov)");
+  assert.match(lines.transport.detail, /\[A21\] Bromley Road · 1.2 km/);
+  assert.match(lines.transport.detail, /TfL snapshot of 14 Oct/);
+  assert.match(lines.transport.detail, /Rail disruption is not connected yet/);
+
+  const quiet = byId(buildMorningRead({ ...base, sources, road: { ...road, incidents: [road.incidents[1]] } }));
+  assert.equal(quiet.transport.headline, "No listed road closure near Hayes Lane on the next 2 home fixture days");
+
+  const neverFetched = byId(buildMorningRead({ ...base, sources, road: { lastSuccessfulAt: null, incidents: [] } }));
+  assert.equal(neverFetched.transport.state, "not-connected", "operational without a stored snapshot is not live");
+});
+
+test("open-ended road incidents count on any later fixture day", () => {
+  const incidents = [{ location: "X", startDate: "2026-10-01", endDate: null, distanceKm: 3, material: true }];
+  assert.equal(roadClosuresOn(incidents, "2026-11-08").length, 1);
+  assert.equal(roadClosuresOn(incidents, "2026-09-30").length, 0);
 });

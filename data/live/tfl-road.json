@@ -1,0 +1,9 @@
+{
+  "version": null,
+  "source": { "name": "Transport for London Unified API · Road disruption", "url": "https://api.tfl.gov.uk/Road/all/Disruption" },
+  "venue": { "name": "Hayes Lane, Bromley", "lat": 51.390984, "lon": 0.01771 },
+  "radiusKm": 15,
+  "checkedAt": null,
+  "lastSuccessfulAt": null,
+  "incidents": []
+}
