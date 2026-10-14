@@ -39,6 +39,11 @@ jobs:
       - name: Production build
         run: npm run build
 
+      - name: Build against the frozen e2e data snapshot
+        # The production build above uses today's refreshed data; browser tests use a frozen
+        # snapshot so a fixture being played cannot turn the gate red without a code change.
+        run: npm run build:e2e
+
       - name: Install Chromium for browser tests
         run: npx playwright install --with-deps chromium
 

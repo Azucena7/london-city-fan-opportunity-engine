@@ -1,0 +1,2767 @@
+{
+  "checkedAt": "2026-10-14T14:39:07.249Z",
+  "scope": "Public reach, search interest and fixture conversion",
+  "headline": {
+    "en": "Reach matters only when it can be connected to matchday demand",
+    "es": "El alcance solo importa cuando puede conectarse con la demanda de partido"
+  },
+  "principle": {
+    "en": "Keep subscribers, video views, television audience, search interest, ticket buyers and scans as separate measures. Link them through fixture IDs, campaign tags and cohort analysis.",
+    "es": "Mantener separados suscriptores, visualizaciones, audiencia televisiva, interés de búsqueda, compradores y accesos. Conectarlos mediante IDs de partido, etiquetas de campaña y análisis de cohortes."
+  },
+  "snapshots": [
+    {
+      "id": "audience-baseline-2026-09-14",
+      "observedAt": "2026-09-14T20:00:00+01:00",
+      "label": {
+        "en": "First public baseline",
+        "es": "Primer baseline público"
+      },
+      "fixtureId": "2026-09-04-mun-h",
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14600,
+          "displayValue": "14.6K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-15",
+      "observedAt": "2026-09-15T16:51:19.700Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14700,
+          "displayValue": "14.7K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2020027,
+          "displayValue": "2.0M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-16",
+      "observedAt": "2026-09-16T05:44:14.184Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14700,
+          "displayValue": "14.7K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2029954,
+          "displayValue": "2.0M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-17",
+      "observedAt": "2026-09-17T05:44:03.685Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14600,
+          "displayValue": "14.6K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2040218,
+          "displayValue": "2.0M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-18",
+      "observedAt": "2026-09-18T05:42:48.046Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14700,
+          "displayValue": "14.7K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2044174,
+          "displayValue": "2.0M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-19",
+      "observedAt": "2026-09-19T05:41:48.445Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "fixtureId": "2026-09-26-bha-h",
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14700,
+          "displayValue": "14.7K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2054952,
+          "displayValue": "2.1M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-20",
+      "observedAt": "2026-09-20T05:41:56.167Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14400,
+          "displayValue": "14.4K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 142,
+          "displayValue": "142",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2061586,
+          "displayValue": "2.1M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses/about?hl=en"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-20",
+      "observedAt": "2026-09-20T19:35:29.262Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14400,
+          "displayValue": "14.4K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 145,
+          "displayValue": "145",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2062906,
+          "displayValue": "2.1M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-21",
+      "observedAt": "2026-09-21T05:44:02.456Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14800,
+          "displayValue": "14.8K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 145,
+          "displayValue": "145",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2062906,
+          "displayValue": "2.1M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-22",
+      "observedAt": "2026-09-22T05:43:29.546Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14800,
+          "displayValue": "14.8K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 145,
+          "displayValue": "145",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2085565,
+          "displayValue": "2.1M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-23",
+      "observedAt": "2026-09-23T05:43:24.755Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 14900,
+          "displayValue": "14.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 145,
+          "displayValue": "145",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2096347,
+          "displayValue": "2.1M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-25",
+      "observedAt": "2026-09-25T05:44:10.130Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16000,
+          "displayValue": "16.0K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 147,
+          "displayValue": "147",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2235858,
+          "displayValue": "2.2M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-26",
+      "observedAt": "2026-09-26T05:42:33.326Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16000,
+          "displayValue": "16.0K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 148,
+          "displayValue": "148",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2263585,
+          "displayValue": "2.3M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-27",
+      "observedAt": "2026-09-27T05:43:07.181Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "fixtureId": "2026-09-26-bha-h",
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16100,
+          "displayValue": "16.1K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 149,
+          "displayValue": "149",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2276294,
+          "displayValue": "2.3M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-28",
+      "observedAt": "2026-09-28T05:46:01.555Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16100,
+          "displayValue": "16.1K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 149,
+          "displayValue": "149",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2294689,
+          "displayValue": "2.3M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-29",
+      "observedAt": "2026-09-29T05:45:57.602Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16200,
+          "displayValue": "16.2K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 149,
+          "displayValue": "149",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2294689,
+          "displayValue": "2.3M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-09-30",
+      "observedAt": "2026-09-30T05:47:14.100Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16200,
+          "displayValue": "16.2K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 149,
+          "displayValue": "149",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2312161,
+          "displayValue": "2.3M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-01",
+      "observedAt": "2026-10-01T05:46:46.130Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16600,
+          "displayValue": "16.6K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 151,
+          "displayValue": "151",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2319871,
+          "displayValue": "2.3M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-02",
+      "observedAt": "2026-10-02T05:46:40.306Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16600,
+          "displayValue": "16.6K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 151,
+          "displayValue": "151",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2386792,
+          "displayValue": "2.4M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-04",
+      "observedAt": "2026-10-04T20:18:23.504Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "fixtureId": "2026-09-04-mun-h",
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16700,
+          "displayValue": "16.7K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 153,
+          "displayValue": "153",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2420874,
+          "displayValue": "2.4M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-05",
+      "observedAt": "2026-10-05T12:32:34.236Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16800,
+          "displayValue": "16.8K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 153,
+          "displayValue": "153",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2426349,
+          "displayValue": "2.4M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-06",
+      "observedAt": "2026-10-06T12:11:09.112Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16800,
+          "displayValue": "16.8K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 153,
+          "displayValue": "153",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2443624,
+          "displayValue": "2.4M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-07",
+      "observedAt": "2026-10-07T11:57:21.904Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16800,
+          "displayValue": "16.8K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 153,
+          "displayValue": "153",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2453691,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-08",
+      "observedAt": "2026-10-08T12:12:09.101Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16900,
+          "displayValue": "16.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 154,
+          "displayValue": "154",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2458438,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-09",
+      "observedAt": "2026-10-09T12:03:30.871Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16900,
+          "displayValue": "16.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 154,
+          "displayValue": "154",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2471306,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-10",
+      "observedAt": "2026-10-10T11:19:57.696Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16900,
+          "displayValue": "16.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 154,
+          "displayValue": "154",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2478968,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-11",
+      "observedAt": "2026-10-11T11:33:02.195Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "fixtureId": "2026-10-18-eve-h",
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16900,
+          "displayValue": "16.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 154,
+          "displayValue": "154",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2481924,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-12",
+      "observedAt": "2026-10-12T13:26:28.439Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16900,
+          "displayValue": "16.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 154,
+          "displayValue": "154",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2486867,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-13",
+      "observedAt": "2026-10-13T15:40:36.695Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16900,
+          "displayValue": "16.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 154,
+          "displayValue": "154",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2490375,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    },
+    {
+      "id": "audience-auto-2026-10-14",
+      "observedAt": "2026-10-14T08:52:00.674Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16900,
+          "displayValue": "16.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 154,
+          "displayValue": "154",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2491212,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
+    }
+  ],
+  "impactTimeline": [
+    {
+      "id": "alexia-signing",
+      "date": "2026-07-08",
+      "category": "player",
+      "title": {
+        "en": "Alexia signing announced",
+        "es": "Anuncio del fichaje de Alexia"
+      },
+      "hypothesis": {
+        "en": "International awareness and Spanish search interest should rise first.",
+        "es": "Primero deberían crecer la notoriedad internacional y las búsquedas desde España."
+      }
+    },
+    {
+      "id": "nike-partnership",
+      "date": "2026-09-03",
+      "category": "partner",
+      "title": {
+        "en": "Nike principal partnership",
+        "es": "Patrocinio principal de Nike"
+      },
+      "hypothesis": {
+        "en": "Partner distribution can widen reach beyond football-native audiences.",
+        "es": "La distribución del partner puede ampliar el alcance más allá de la audiencia futbolística."
+      }
+    },
+    {
+      "id": "opener-eleven-launch",
+      "date": "2026-09-04",
+      "category": "broadcast",
+      "title": {
+        "en": "Sold-out opener and Eleven TV launch",
+        "es": "Opener sold out y lanzamiento de Eleven TV"
+      },
+      "hypothesis": {
+        "en": "Separate the match, player, partner and distribution effects before attributing the peak.",
+        "es": "Separar el efecto partido, jugadora, partner y distribución antes de atribuir el pico."
+      }
+    },
+    {
+      "id": "first-audience-baseline",
+      "date": "2026-09-14",
+      "category": "measurement",
+      "title": {
+        "en": "First comparable audience baseline",
+        "es": "Primer baseline comparable de audiencia"
+      },
+      "hypothesis": {
+        "en": "This is the first observation, not evidence of growth or decline.",
+        "es": "Es la primera observación, no evidencia de crecimiento o caída."
+      }
+    },
+    {
+      "id": "brighton-test",
+      "date": "2026-09-26",
+      "category": "fixture",
+      "title": {
+        "en": "Brighton full measurement test",
+        "es": "Prueba completa de medición ante Brighton"
+      },
+      "hypothesis": {
+        "en": "Test whether post-opener attention progresses to ticket intent, scans and repeat behaviour.",
+        "es": "Comprobar si la atención posterior al opener avanza hacia intención, accesos y repetición."
+      }
+    }
+  ],
+  "measurementReadiness": [
+    {
+      "id": "fixture-keys",
+      "label": {
+        "en": "Fixture IDs",
+        "es": "IDs de partido"
+      },
+      "state": "ready",
+      "action": {
+        "en": "Use the same key across content, campaigns and post-match reporting.",
+        "es": "Usar la misma clave en contenido, campañas e informe postpartido."
+      }
+    },
+    {
+      "id": "event-annotations",
+      "label": {
+        "en": "Event annotations",
+        "es": "Anotaciones de eventos"
+      },
+      "state": "ready",
+      "action": {
+        "en": "Keep player, partner, broadcast and fixture effects visible.",
+        "es": "Mantener visibles los efectos de jugadora, partner, emisión y partido."
+      }
+    },
+    {
+      "id": "public-snapshots",
+      "label": {
+        "en": "Public snapshots",
+        "es": "Snapshots públicos"
+      },
+      "state": "ready",
+      "action": {
+        "en": "Automated checks capture weekly and at T-7, T+1, T+7 and T+30.",
+        "es": "Las comprobaciones automatizadas capturan semanalmente y en T-7, T+1, T+7 y T+30."
+      }
+    },
+    {
+      "id": "campaign-tags",
+      "label": {
+        "en": "Tagged ticket links",
+        "es": "Enlaces de ticketing etiquetados"
+      },
+      "state": "planned",
+      "action": {
+        "en": "Create channel, content, campaign and fixture UTMs before Brighton.",
+        "es": "Crear UTMs de canal, contenido, campaña y partido antes de Brighton."
+      }
+    },
+    {
+      "id": "broadcast-reports",
+      "label": {
+        "en": "Broadcaster reporting",
+        "es": "Informes de broadcasters"
+      },
+      "state": "blocked",
+      "action": {
+        "en": "Requires broadcaster or rights-holder data.",
+        "es": "Requiere datos del broadcaster o del titular de derechos."
+      }
+    },
+    {
+      "id": "crm-scans",
+      "label": {
+        "en": "CRM and scans",
+        "es": "CRM y accesos"
+      },
+      "state": "blocked",
+      "action": {
+        "en": "Requires authorised, consent-safe club data.",
+        "es": "Requiere datos autorizados del club y gobernados por consentimiento."
+      }
+    }
+  ],
+  "channels": [
+    {
+      "id": "lcl-youtube",
+      "name": "London City YouTube",
+      "category": "owned",
+      "state": "measured",
+      "role": {
+        "en": "Owned reach and repeat storytelling",
+        "es": "Alcance propio y narrativa recurrente"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "Public subscribers",
+            "es": "Suscriptores públicos"
+          },
+          "value": "16.9K",
+          "state": "measured"
+        },
+        {
+          "label": {
+            "en": "Published videos",
+            "es": "Vídeos publicados"
+          },
+          "value": "154",
+          "state": "measured"
+        },
+        {
+          "label": {
+            "en": "Public channel views",
+            "es": "Visualizaciones públicas del canal"
+          },
+          "value": "2,491,212",
+          "state": "measured"
+        }
+      ],
+      "known": {
+        "en": "Public channel scale, video catalogue and individual public views.",
+        "es": "Escala pública del canal, catálogo de vídeos y visualizaciones públicas por pieza."
+      },
+      "missing": {
+        "en": "Unique viewers, countries, watch time, returning viewers and ticket conversion require channel-owner analytics.",
+        "es": "Usuarios únicos, países, tiempo de visualización, usuarios recurrentes y conversión a entrada requieren acceso del propietario."
+      },
+      "action": {
+        "en": "Tag every fixture video and ticket link with campaign, content and fixture IDs.",
+        "es": "Etiquetar cada vídeo y enlace de entradas con campaña, contenido e ID de partido."
+      },
+      "sourceName": "London City Lionesses on YouTube",
+      "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+    },
+    {
+      "id": "eleven-tv",
+      "name": "Eleven TV by Alexia",
+      "category": "partner",
+      "state": "confirmed",
+      "role": {
+        "en": "Spanish-language distribution and creator-led discovery",
+        "es": "Distribución en castellano y descubrimiento impulsado por creadora"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "WSL rights cadence",
+            "es": "Cadencia de derechos WSL"
+          },
+          "value": "1 match / round",
+          "state": "confirmed"
+        },
+        {
+          "label": {
+            "en": "Confirmed market",
+            "es": "Mercado confirmado"
+          },
+          "value": "Spain",
+          "state": "confirmed"
+        }
+      ],
+      "known": {
+        "en": "Exclusive Spanish rights for one WSL match per round, starting with London City v Manchester United.",
+        "es": "Derechos exclusivos en España para un partido WSL por jornada, comenzando con London City–Manchester United."
+      },
+      "missing": {
+        "en": "Subscribers, live/replay viewers, country mix and referral traffic are not yet available in a reliable public series.",
+        "es": "Suscriptores, audiencia live/replay, mezcla de países y tráfico referido aún no forman una serie pública fiable."
+      },
+      "action": {
+        "en": "Agree a shared post-match data pack and track Eleven-to-ticket traffic with Spanish-language landing pages.",
+        "es": "Acordar un paquete de datos postpartido y medir Eleven→ticket mediante landings en castellano."
+      },
+      "sourceName": "AS",
+      "sourceUrl": "https://as.com/futbol/femenino/alexia-crea-eleven-tv-y-adquiere-los-derechos-de-la-liga-inglesa-f202609-n/"
+    },
+    {
+      "id": "broadcast",
+      "name": "TV & WSL streaming",
+      "category": "broadcast",
+      "state": "confirmed",
+      "role": {
+        "en": "Broad awareness beyond club-owned channels",
+        "es": "Notoriedad amplia fuera de los canales propios"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "Opener UK distribution",
+            "es": "Distribución UK del opener"
+          },
+          "value": "Sky Main Event + Football",
+          "state": "confirmed"
+        },
+        {
+          "label": {
+            "en": "Reported audience",
+            "es": "Audiencia publicada"
+          },
+          "value": "Pending",
+          "state": "pending"
+        }
+      ],
+      "known": {
+        "en": "The opener was carried live on two Sky Sports channels; free highlights remain discoverable.",
+        "es": "El opener se emitió en directo en dos canales de Sky Sports; los highlights gratuitos siguen disponibles."
+      },
+      "missing": {
+        "en": "Linear, streaming, reach, average minute audience and completion should not be inferred from distribution.",
+        "es": "La audiencia lineal, streaming, alcance, minuto medio y finalización no deben inferirse de la distribución."
+      },
+      "action": {
+        "en": "Request fixture-level broadcaster reports and align them with club content and attendance windows.",
+        "es": "Solicitar informes por partido al broadcaster y alinearlos con contenido del club y ventanas de asistencia."
+      },
+      "sourceName": "London City match preview",
+      "sourceUrl": "https://www.londoncitylionesses.com/post/match-preview-london-city-lionesses-vs-manchester-united"
+    },
+    {
+      "id": "search",
+      "name": "Search interest",
+      "category": "search",
+      "state": "ready-to-measure",
+      "role": {
+        "en": "Unaided awareness and high-intent discovery",
+        "es": "Notoriedad espontánea y descubrimiento de alta intención"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "Tracked terms",
+            "es": "Términos a seguir"
+          },
+          "value": "5",
+          "state": "confirmed"
+        },
+        {
+          "label": {
+            "en": "First indexed snapshot",
+            "es": "Primer snapshot indexado"
+          },
+          "value": "Pending",
+          "state": "pending"
+        }
+      ],
+      "known": {
+        "en": "Alexia signing, Nike, fixtures and results provide event dates for annotation.",
+        "es": "El fichaje de Alexia, Nike, partidos y resultados aportan fechas de evento para anotar."
+      },
+      "missing": {
+        "en": "Google Trends is a relative 0–100 index, not search volume; low local samples can be suppressed.",
+        "es": "Google Trends es un índice relativo 0–100, no volumen de búsquedas; las muestras locales pequeñas pueden ocultarse."
+      },
+      "action": {
+        "en": "Track brand, player and ticket-intent queries in GB and Spain; compare peaks, decay and matchweek lift.",
+        "es": "Seguir búsquedas de marca, jugadora e intención de entrada en GB y España; comparar picos, caída y efecto jornada."
+      },
+      "sourceName": "Google Trends comparison",
+      "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&q=London%20City%20Lionesses,Alexia%20Putellas,London%20City%20tickets"
+    },
+    {
+      "id": "crm",
+      "name": "Ticketing + CRM",
+      "category": "conversion",
+      "state": "requires-access",
+      "role": {
+        "en": "Conversion, scans and repeat demand",
+        "es": "Conversión, accesos y demanda repetida"
+      },
+      "metrics": [
+        {
+          "label": {
+            "en": "Connected source",
+            "es": "Fuente conectada"
+          },
+          "value": "No",
+          "state": "pending"
+        },
+        {
+          "label": {
+            "en": "Target attribution",
+            "es": "Atribución objetivo"
+          },
+          "value": "Fixture + campaign",
+          "state": "confirmed"
+        }
+      ],
+      "known": {
+        "en": "Public attendance can close the top-line result.",
+        "es": "La asistencia pública permite cerrar el resultado agregado."
+      },
+      "missing": {
+        "en": "Orders, realised price, campaign source, scans, postcode and first-time/repeat require authorised club data.",
+        "es": "Pedidos, precio realizado, origen de campaña, accesos, postcode y primera visita/repetición requieren datos autorizados del club."
+      },
+      "action": {
+        "en": "Create consent-safe campaign and fixture keys before connecting private data.",
+        "es": "Crear claves seguras de campaña y partido antes de conectar datos privados."
+      },
+      "sourceName": "Club data required",
+      "sourceUrl": "https://avela-growth-intelligence.vercel.app/how-it-works"
+    }
+  ],
+  "funnel": [
+    {
+      "id": "reach",
+      "label": {
+        "en": "Reach",
+        "es": "Alcance"
+      },
+      "measure": {
+        "en": "TV, video, search",
+        "es": "TV, vídeo, búsqueda"
+      }
+    },
+    {
+      "id": "engage",
+      "label": {
+        "en": "Engage",
+        "es": "Interacción"
+      },
+      "measure": {
+        "en": "Watch time, return",
+        "es": "Tiempo, retorno"
+      }
+    },
+    {
+      "id": "intent",
+      "label": {
+        "en": "Intent",
+        "es": "Intención"
+      },
+      "measure": {
+        "en": "Ticket clicks",
+        "es": "Clics a entradas"
+      }
+    },
+    {
+      "id": "buy",
+      "label": {
+        "en": "Buy / scan",
+        "es": "Compra / acceso"
+      },
+      "measure": {
+        "en": "Orders, yield, scans",
+        "es": "Pedidos, yield, accesos"
+      }
+    },
+    {
+      "id": "repeat",
+      "label": {
+        "en": "Repeat",
+        "es": "Repetición"
+      },
+      "measure": {
+        "en": "30/60/90 days",
+        "es": "30/60/90 días"
+      }
+    }
+  ],
+  "searchPlan": {
+    "terms": [
+      "London City Lionesses",
+      "Alexia Putellas London City",
+      "London City tickets",
+      "London City fixtures",
+      "London City Brighton"
+    ],
+    "markets": [
+      "GB",
+      "ES"
+    ],
+    "windows": [
+      "90 days",
+      "12 months"
+    ],
+    "annotations": [
+      {
+        "date": "2026-07-08",
+        "event": {
+          "en": "Alexia signing announced",
+          "es": "Anuncio del fichaje de Alexia"
+        }
+      },
+      {
+        "date": "2026-09-03",
+        "event": {
+          "en": "Nike principal shirt partnership",
+          "es": "Patrocinio principal de Nike"
+        }
+      },
+      {
+        "date": "2026-09-04",
+        "event": {
+          "en": "Sold-out opener and Eleven TV launch",
+          "es": "Opener sold out y lanzamiento de Eleven TV"
+        }
+      }
+    ]
+  },
+  "fixtureTests": [
+    {
+      "fixtureId": "2026-09-04-mun-h",
+      "date": "2026-09-04",
+      "opponent": "Manchester United",
+      "stage": "post-match",
+      "attendance": 5402,
+      "distribution": "Sky Sports Main Event + Football · Eleven TV Spain",
+      "conversionState": "Public attendance measured; media-to-ticket attribution unavailable",
+      "nextAction": {
+        "en": "Use as the baseline event; document unavailable fields rather than backfilling estimates.",
+        "es": "Usarlo como evento baseline; documentar campos no disponibles sin rellenarlos con estimaciones."
+      }
+    },
+    {
+      "fixtureId": "2026-09-26-bha-h",
+      "date": "2026-09-26",
+      "opponent": "Brighton & Hove Albion",
+      "stage": "public pilot active",
+      "attendance": null,
+      "distribution": "Broadcaster / stream assignment to verify",
+      "conversionState": "Public windows scheduled; CRM and scans remain access-dependent",
+      "nextAction": {
+        "en": "Capture T-7 on 19 Sep, T+1 on 27 Sep, T+7 on 3 Oct and T+30 on 26 Oct; use pending for restricted fields.",
+        "es": "Capturar T-7 el 19 sep, T+1 el 27 sep, T+7 el 3 oct y T+30 el 26 oct; usar pendiente en los campos restringidos."
+      }
+    }
+  ],
+  "refresh": {
+    "automated": true,
+    "cadence": "weekly-and-fixture-windows",
+    "lastAttemptAt": "2026-10-14T14:39:07.249Z",
+    "lastSuccessfulAt": "2026-10-14T14:39:07.249Z",
+    "state": "fresh",
+    "sources": [
+      {
+        "id": "lcl-youtube",
+        "label": "London City YouTube",
+        "state": "measured",
+        "confidence": "high",
+        "checkedAt": "2026-10-14T14:39:07.249Z",
+        "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+      },
+      {
+        "id": "ticketmaster-events",
+        "label": "London event landscape",
+        "state": "measured",
+        "confidence": "high",
+        "checkedAt": "2026-10-14T14:39:07.249Z",
+        "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
+      }
+    ]
+  }
+}

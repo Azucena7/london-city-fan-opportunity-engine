@@ -1,0 +1,1158 @@
+[
+  {
+    "id": "experience-charlton-hospitality-2026-09-16",
+    "fixtureId": "2026-09-19-cha-a",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "medium",
+    "observedAt": "2026-09-16T09:21:51+01:00",
+    "title": {
+      "en": "Charlton released hospitality for the London City fixture",
+      "es": "Charlton lanzó hospitality para el partido ante London City"
+    },
+    "summary": {
+      "en": "Club 1905 hospitality is available at £45 per person plus VAT, including two-hour early access, brunch, a player interview and the Player of the Match presentation; private suites cost £1,250 plus VAT for up to ten guests.",
+      "es": "La hospitality Club 1905 está disponible por £45 por persona más IVA, con acceso dos horas antes, brunch, entrevista a una jugadora y entrega del premio a la mejor del partido; las suites privadas cuestan £1.250 más IVA para hasta diez personas."
+    },
+    "marketingAction": {
+      "en": "Surface the official package selectively to partner guests and high-value away audiences; keep it separate from standard ticket messaging and track clicks rather than treating availability as sales.",
+      "es": "Mostrar el paquete oficial de forma selectiva a invitados de partners y audiencias visitantes de alto valor; separarlo del mensaje estándar de entradas y medir clics sin convertir disponibilidad en ventas."
+    },
+    "sourceName": "Charlton Athletic",
+    "sourceUrl": "https://www.cafc.co.uk/news/london-city-lionesses-matchday-hospitality-packages-available"
+  },
+  {
+    "id": "access-charlton-parking-prebook-2026-09-16",
+    "fixtureId": "2026-09-19-cha-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-09-16T09:21:51+01:00",
+    "title": {
+      "en": "The Valley parking now requires a £7 pre-booking",
+      "es": "El parking de The Valley exige ahora reserva previa de £7"
+    },
+    "summary": {
+      "en": "Charlton confirmed on 15 September that all parking for women's home matches must be pre-booked for £7. Supporters arriving by car without a parking e-ticket will be turned away.",
+      "es": "Charlton confirmó el 15 de septiembre que todo el parking para partidos femeninos debe reservarse previamente por £7. Los aficionados que lleguen en coche sin e-ticket serán rechazados."
+    },
+    "marketingAction": {
+      "en": "Send the parking rule and booking link to away ticket holders and add it to matchday travel content before the final pre-match message.",
+      "es": "Enviar la norma y el enlace de reserva a compradores visitantes y añadirlos al contenido de viaje antes del último mensaje prepartido."
+    },
+    "sourceName": "Charlton Athletic",
+    "sourceUrl": "https://www.cafc.co.uk/news/changes-womens-fans-matchday-parking"
+  },
+  {
+    "id": "fixture-charlton-kickoff-1230-2026-09-16",
+    "fixtureId": "2026-09-19-cha-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-09-16T09:21:51+01:00",
+    "title": {
+      "en": "Charlton kickoff is 12:30, not 13:30",
+      "es": "El partido ante Charlton es a las 12:30, no a las 13:30"
+    },
+    "summary": {
+      "en": "London City ticket information, Charlton and WSL Football all confirm a 12:30 BST kickoff on 19 September. Main had regressed to 13:30 after the earlier BST correction; this is a confirmed schedule correction, not a forecast.",
+      "es": "La información de entradas de London City, Charlton y WSL Football confirman las 12:30 BST del 19 de septiembre. Main había vuelto a las 13:30 tras la corrección BST anterior; es una corrección confirmada de calendario, no un forecast."
+    },
+    "marketingAction": {
+      "en": "Immediately replace 13:30 in scheduled email, social, paid media, calendar links and travel information; use 12:30 BST in every supporter touchpoint.",
+      "es": "Sustituir de inmediato las 13:30 en email, social, paid media, enlaces de calendario e información de viaje programados; usar 12:30 BST en todos los puntos de contacto."
+    },
+    "sourceName": "London City Lionesses / Charlton Athletic / WSL Football",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/charlton-athletic-away-ticket-information",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/charlton-athletic-away-ticket-information",
+        "checkedAt": "2026-09-16"
+      },
+      {
+        "name": "Charlton Athletic",
+        "url": "https://www.cafc.co.uk/news/get-your-tickets-london-city-lionesses-h",
+        "checkedAt": "2026-09-16"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/",
+        "checkedAt": "2026-09-16"
+      }
+    ]
+  },
+  {
+    "id": "fixture-time-bst-validation-2026-09-15",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "access",
+    "state": "confirmed",
+    "direction": "neutral",
+    "materiality": "high",
+    "observedAt": "2026-09-15T09:28:57+01:00",
+    "title": {
+      "en": "Eight BST fixture times required correction",
+      "es": "Ocho horarios en periodo BST requerían corrección"
+    },
+    "summary": {
+      "en": "Cross-checking the automated calendar against WSL Football, the Brighton ticket page and host-club fixture notices found one-hour discrepancies in eight fixtures between 12 September and 21 October. The next league match is Charlton at 12:30 and the next home match is Brighton at 17:00.",
+      "es": "El contraste del calendario automático con WSL Football, la página de entradas de Brighton y los avisos de los clubes anfitriones detectó diferencias de una hora en ocho partidos entre el 12 de septiembre y el 21 de octubre. El próximo partido de liga es Charlton a las 12:30 y el próximo en casa es Brighton a las 17:00."
+    },
+    "marketingAction": {
+      "en": "Replace any scheduled CRM, paid, social, ticketing and matchday assets using the displaced times, and validate local time against the competition or ticket page before each campaign is released.",
+      "es": "Sustituir cualquier pieza programada de CRM, paid, social, ticketing y matchday que use los horarios desplazados, y validar la hora local con la competición o la página de entradas antes de publicar cada campaña."
+    },
+    "sourceName": "WSL Football / London City Lionesses / host clubs",
+    "sourceUrl": "https://www.wslfootball.com/clubs/wsl/london-city-lionesses/schedule"
+  },
+  {
+    "id": "attendance-mun-5402",
+    "fixtureId": "2026-09-04-mun-h",
+    "category": "demand",
+    "state": "measured",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-04T21:30:00+01:00",
+    "title": {
+      "en": "The opener established a near-record benchmark",
+      "es": "El opener estableció un benchmark cercano al récord"
+    },
+    "summary": {
+      "en": "5,402 people attended the sold-out Manchester United fixture: 70% above the 2025/26 home average and 12 below the 5,414 record against Arsenal.",
+      "es": "5.402 personas asistieron al sold out ante Manchester United: un 70% sobre la media en casa de 2025/26 y 12 por debajo del récord de 5.414 ante Arsenal."
+    },
+    "marketingAction": {
+      "en": "Target opener buyers who have not yet bought Brighton and measure repeat purchase by territory.",
+      "es": "Impactar a compradores del opener que aún no hayan comprado Brighton y medir repetición por territorio."
+    },
+    "sourceName": "London City match record",
+    "sourceUrl": "https://www.londoncitylionesses.com/fixtures"
+  },
+  {
+    "id": "attention-england-spain",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-21T09:48:30+01:00",
+    "title": {
+      "en": "The Brighton double-header is now a confirmed club activation",
+      "es": "La doble sesión de Brighton ya es una activación confirmada del club"
+    },
+    "summary": {
+      "en": "London City has launched an on-site England v Spain post-match watchalong after the Brighton fixture, with discounted drinks and the international kicking off at 19:45. This converts the previously identified attention overlap into a confirmed retention and matchday-spend activation.",
+      "es": "London City ha lanzado un watchalong en el estadio de Inglaterra–España después del partido ante Brighton, con bebidas rebajadas y comienzo del internacional a las 19:45. Esto convierte el solapamiento de atención ya identificado en una activación confirmada de retención y gasto en matchday."
+    },
+    "marketingAction": {
+      "en": "Promote Brighton plus the watchalong as one extended day out, tag the proposition in CRM and ticket links, and measure ticket conversion, post-match dwell and bar spend separately from attendance.",
+      "es": "Promocionar Brighton más el watchalong como una única jornada ampliada, etiquetar la propuesta en CRM y enlaces de venta, y medir por separado conversión de entradas, permanencia pospartido y gasto en bar, sin confundirlos con asistencia."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong",
+    "confidence": "high",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ldn-city-england-v-spain-watchalong",
+        "checkedAt": "2026-09-21"
+      },
+      {
+        "name": "England Football",
+        "url": "https://www.englandfootball.com/articles/2026/Jul/21/whats-next-for-england-after-fifa-world-cup-20262107",
+        "checkedAt": "2026-09-14"
+      }
+    ]
+  },
+  {
+    "id": "partnership-nike",
+    "category": "sponsorship",
+    "state": "confirmed",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-03T09:00:00+01:00",
+    "title": {
+      "en": "Nike partnership raises the commercial benchmark",
+      "es": "El acuerdo con Nike eleva el benchmark comercial"
+    },
+    "summary": {
+      "en": "The multi-year front-of-shirt agreement combines elite sport, culture, community activation and female-athlete R&D.",
+      "es": "El acuerdo multianual de patrocinio principal combina deporte de élite, cultura, comunidad e I+D para atletas femeninas."
+    },
+    "marketingAction": {
+      "en": "Use the partnership as a proof point for premium partners and build smaller local activation packages around community outcomes.",
+      "es": "Usar el acuerdo como prueba para partners premium y crear paquetes locales de activación vinculados a resultados comunitarios."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/london-city-lionesses-and-nike-announce-landmark-multi-year-deal"
+  },
+  {
+    "id": "weather-brighton-waiting",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "weather",
+    "state": "forecast",
+    "direction": "positive",
+    "materiality": "low",
+    "observedAt": "2026-09-26T05:42:33.155Z",
+    "title": {
+      "en": "Matchday weather is currently low risk",
+      "es": "El riesgo meteorológico actual para el matchday es bajo"
+    },
+    "summary": {
+      "en": "0% maximum rain probability, 0 mm and 11.9 km/h maximum wind. Forecast, not measured weather.",
+      "es": "0% de probabilidad máxima de lluvia, 0 mm y viento máximo de 11.9 km/h. Es forecast, no tiempo medido."
+    },
+    "marketingAction": {
+      "en": "Keep normal acquisition active and retain service messaging as a contingency.",
+      "es": "Mantener activa la captación normal y conservar mensajes de servicio como contingencia."
+    },
+    "sourceName": "Open-Meteo",
+    "sourceUrl": "https://open-meteo.com/"
+  },
+  {
+    "id": "broadcast-brighton-sky-2026-09-21",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-21T09:48:30+01:00",
+    "title": {
+      "en": "Sky Sports is listed for London City v Brighton",
+      "es": "Sky Sports figura para London City–Brighton"
+    },
+    "summary": {
+      "en": "The official WSL schedule lists Sky Sports for the 17:00 BST home fixture on 26 September. Broadcast availability can suppress some marginal in-person demand while extending reach beyond Bromley.",
+      "es": "El calendario oficial de la WSL incluye Sky Sports para el partido en casa del 26 de septiembre a las 17:00 BST. La disponibilidad televisiva puede reducir parte de la demanda presencial marginal, a la vez que amplía el alcance fuera de Bromley."
+    },
+    "marketingAction": {
+      "en": "Keep proximity audiences focused on the extended stadium experience and watchalong; prepare a separate CRM/content path for remote viewers and retarget them toward Everton without using broadcast availability as evidence of ticket sales.",
+      "es": "Mantener a las audiencias de proximidad centradas en la experiencia ampliada en el estadio y el watchalong; preparar una ruta separada de CRM/contenido para espectadores remotos y reimpactarlos hacia Everton sin tratar la retransmisión como evidencia de ventas."
+    },
+    "sourceName": "WSL Football",
+    "sourceUrl": "https://www.wslfootball.com/clubs/wsl/london-city-lionesses/schedule"
+  },
+  {
+    "id": "result-charlton-4-1-2026-09-22",
+    "fixtureId": "2026-09-19-cha-a",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-22T10:16:15+01:00",
+    "title": {
+      "en": "The 4–1 Charlton win creates timely Brighton conversion momentum",
+      "es": "El 4–1 ante Charlton crea impulso para convertir hacia Brighton"
+    },
+    "summary": {
+      "en": "London City’s official results page confirms a 4–1 away win at Charlton on 19 September. This is a confirmed sporting result, not evidence of ticket demand or attendance.",
+      "es": "La página oficial de resultados de London City confirma una victoria visitante por 4–1 ante Charlton el 19 de septiembre. Es un resultado deportivo confirmado, no evidencia de demanda de entradas ni de asistencia."
+    },
+    "marketingAction": {
+      "en": "Use the result in Brighton acquisition and CRM creative while keeping ticket-conversion, sales and attendance claims tied only to their own measured sources.",
+      "es": "Usar el resultado en la creatividad de captación y CRM para Brighton, manteniendo las afirmaciones sobre conversión, ventas y asistencia vinculadas únicamente a sus propias fuentes medidas."
+    },
+    "sourceName": "London City Lionesses fixtures and results",
+    "sourceUrl": "https://www.londoncitylionesses.com/fixtures"
+  },
+  {
+    "id": "experience-brighton-vip-terrace-2026-09-22",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "medium",
+    "observedAt": "2026-09-22T10:16:15+01:00",
+    "title": {
+      "en": "Brighton VIP Terrace is available at £75",
+      "es": "La VIP Terrace para Brighton está disponible por £75"
+    },
+    "summary": {
+      "en": "The official Brighton ticket page offers a £75 VIP Terrace package with halfway-line booth seating, premium bar and food service, a complimentary drink, gifts and stewarded access. This records confirmed availability, not sales.",
+      "es": "La página oficial de entradas para Brighton ofrece una VIP Terrace de £75 con asientos tipo booth en la línea de medio campo, bar y comida premium, una bebida incluida, regalos y acceso asistido. Se registra disponibilidad confirmada, no ventas."
+    },
+    "marketingAction": {
+      "en": "Segment the £75 upgrade to high-intent, group and partner audiences; tag standard and VIP journeys separately and measure clicks and conversion without treating availability as demand.",
+      "es": "Segmentar el upgrade de £75 hacia audiencias de alta intención, grupos y partners; etiquetar por separado los recorridos estándar y VIP y medir clics y conversión sin tratar la disponibilidad como demanda."
+    },
+    "sourceName": "London City Lionesses Brighton ticket page",
+    "sourceUrl": "https://www.londoncitylionesses.com/brighton-h-2627"
+  },
+  {
+    "id": "attention-bromley-mk-dons-postponed-2026-09-23",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "medium",
+    "observedAt": "2026-09-23T10:12:21+01:00",
+    "title": {
+      "en": "Bromley’s 26 September men’s fixture has been postponed",
+      "es": "El partido masculino de Bromley del 26 de septiembre ha sido aplazado"
+    },
+    "summary": {
+      "en": "Bromley FC confirms that its away match at MK Dons, scheduled for 15:00 on 26 September, was postponed because of international call-ups. The removed fixture clash is confirmed; any increase in local availability or Brighton ticket conversion is inferred and remains unmeasured.",
+      "es": "Bromley FC confirma que su partido visitante ante MK Dons, previsto para las 15:00 del 26 de septiembre, fue aplazado por convocatorias internacionales. La eliminación del solapamiento está confirmada; cualquier aumento de disponibilidad local o de conversión de entradas para Brighton es inferido y sigue sin medirse."
+    },
+    "marketingAction": {
+      "en": "Run a time-limited Bromley-area and local-football audience test for Brighton, using separate campaign tags and a holdout where possible; measure clicks and ticket conversion before claiming displaced demand.",
+      "es": "Ejecutar una prueba limitada en el tiempo para audiencias de Bromley y del fútbol local hacia Brighton, con etiquetas de campaña separadas y un grupo de control cuando sea posible; medir clics y conversión antes de atribuir demanda desplazada."
+    },
+    "sourceName": "Bromley FC",
+    "sourceUrl": "https://www.bromleyfc.co.uk/news/2026/september/16/mk-dons--a--and-wycombe--h--postponed-due-to-international-call-ups/"
+  },
+  {
+    "id": "result-leicester-0-2-brighton-4-0-2026-09-24",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-24T09:34:59+01:00",
+    "title": {
+      "en": "London City and Brighton both arrive from decisive cup wins",
+      "es": "London City y Brighton llegan tras victorias claras en copa"
+    },
+    "summary": {
+      "en": "The official WSL Football live feed confirms London City won 2–0 away to Leicester and Brighton beat Charlton 4–0 on 23 September. The results strengthen the sporting proposition for 26 September but are not evidence of ticket sales or attendance.",
+      "es": "El feed oficial de WSL Football confirma que London City ganó 0–2 a Leicester y Brighton venció 4–0 a Charlton el 23 de septiembre. Los resultados refuerzan la propuesta deportiva del 26 de septiembre, pero no son evidencia de ventas de entradas ni de asistencia."
+    },
+    "marketingAction": {
+      "en": "Refresh Brighton creative around two in-form teams and London City’s consecutive away wins; keep standard, VIP and watchalong journeys separately tagged and judge the change through measured conversion.",
+      "es": "Actualizar la creatividad de Brighton en torno a dos equipos en forma y las victorias visitantes consecutivas de London City; mantener etiquetados por separado los recorridos estándar, VIP y watchalong y evaluar el cambio mediante conversión medida."
+    },
+    "sourceName": "WSL Football official match feed",
+    "sourceUrl": "https://www.wslfootball.com/"
+  },
+  {
+    "id": "experience-brighton-final-fan-guide-2026-09-25",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-25T09:18:14+01:00",
+    "title": {
+      "en": "Brighton fan guide confirms a new Broomfields access trial and final matchday timings",
+      "es": "La guía de Brighton confirma una nueva prueba de acceso a Broomfields y los horarios finales"
+    },
+    "summary": {
+      "en": "London City confirms Broomfields opens externally to all fans from 14:00 until it is cleared at 16:45, then reopens to supporters inside the stadium from kickoff; the Fan Zone opens at 15:00 and turnstiles at 15:30. A free sister-club session for girls aged 8–12 runs 15:00–15:45 with limited registration, there is no on-site parking, and tickets remain available with prices rising on matchday. Availability is confirmed, not sales.",
+      "es": "London City confirma que Broomfields abre por el exterior a todos los aficionados de 14:00 hasta su desalojo a las 16:45, y reabre desde el inicio a quienes estén dentro del estadio; la Fan Zone abre a las 15:00 y los tornos a las 15:30. Hay una sesión gratuita de clubes hermanos para niñas de 8–12 años de 15:00 a 15:45 con plazas limitadas, no hay parking en el estadio y siguen disponibles entradas cuyo precio sube el día de partido. Es disponibilidad confirmada, no ventas."
+    },
+    "marketingAction": {
+      "en": "Send one final segmented service message with arrival windows, public-transport/parking guidance and the matchday price step; promote the limited youth session only to eligible families. Tag Broomfields, Fan Zone, hospitality and watchalong journeys separately, then measure entry timing, retail/bar use and post-match dwell without treating ticket availability as demand.",
+      "es": "Enviar un último mensaje de servicio segmentado con ventanas de llegada, transporte/parking y la subida de precio en matchday; promocionar la sesión juvenil limitada solo a familias elegibles. Etiquetar por separado Broomfields, Fan Zone, hospitality y watchalong, y medir hora de entrada, uso de retail/bar y permanencia pospartido sin tratar la disponibilidad de entradas como demanda."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/fan-guide-brigton-hove-albion-h"
+  },
+  {
+    "id": "result-brighton-2-0-2026-09-27",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-27T09:52:54+01:00",
+    "title": {
+      "en": "London City beat Brighton 2–0 as Putellas opened her WSL account",
+      "es": "London City venció 2–0 a Brighton y Putellas estrenó su cuenta en la WSL"
+    },
+    "summary": {
+      "en": "The official WSL result confirms a 2–0 home win on 26 September. Alexia Putellas scored her first London City goal and Lucía Corrales added the second in stoppage time. The result is confirmed; attendance, scans, ticket sales and matchday-spend outcomes remain unpublished and must not be inferred.",
+      "es": "El resultado oficial de la WSL confirma la victoria en casa por 2–0 del 26 de septiembre. Alexia Putellas marcó su primer gol con London City y Lucía Corrales añadió el segundo en el descuento. El resultado está confirmado; asistencia, scans, ventas de entradas y resultados de gasto en matchday siguen sin publicarse y no deben inferirse."
+    },
+    "marketingAction": {
+      "en": "Use Putellas’s first goal, the clean sheet and the home win in Ipswich and Tottenham content, while holding all demand, repeat-purchase and Broomfields/watchalong performance claims until ticketing, scans, CRM and venue data are available.",
+      "es": "Usar el primer gol de Putellas, la portería a cero y la victoria en casa en el contenido para Ipswich y Tottenham, manteniendo en espera cualquier afirmación sobre demanda, repetición y rendimiento de Broomfields/watchalong hasta disponer de datos de ticketing, scans, CRM y venue."
+    },
+    "sourceName": "WSL Football / Sky Sports",
+    "sourceUrl": "https://www.wslfootball.com/",
+    "sources": [
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/",
+        "checkedAt": "2026-09-27"
+      },
+      {
+        "name": "Sky Sports",
+        "url": "https://www.skysports.com/football/news/13591747/london-city-lionesses-2-0-brighton-alexia-putellas-first-wsl-goal-helps-send-london-city-into-second",
+        "checkedAt": "2026-09-27"
+      }
+    ]
+  },
+  {
+    "id": "fixture-tottenham-kickoff-1400-2026-09-28",
+    "fixtureId": "2026-10-04-tot-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-09-28T10:18:00+01:00",
+    "title": {
+      "en": "Tottenham away kickoff is 14:00 BST",
+      "es": "El partido visitante ante Tottenham comienza a las 14:00 BST"
+    },
+    "summary": {
+      "en": "London City's away ticket notice and WSL Football both give 14:00 BST on 4 October at BetWright Stadium. The seed calendar had 13:00. Away tickets are available; availability is not sales.",
+      "es": "La nota de entradas de London City y WSL Football indican las 14:00 BST del 4 de octubre en BetWright Stadium. El calendario tenía las 13:00. Hay entradas visitantes disponibles; disponibilidad no equivale a ventas."
+    },
+    "marketingAction": {
+      "en": "Replace 13:00 in Tottenham CRM, ticketing, calendar links, travel and scheduled content with 14:00 BST; link to the official away ticket route.",
+      "es": "Sustituir las 13:00 por las 14:00 BST en CRM, ticketing, enlaces de calendario, viajes y contenido programado para Tottenham; enlazar la compra oficial de entradas visitantes."
+    },
+    "sourceName": "London City Lionesses / WSL Football",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+        "checkedAt": "2026-09-28"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/clubs/wsl/london-city-lionesses/schedule",
+        "checkedAt": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "tickets-manchester-city-home-sale-2026-09-28",
+    "fixtureId": "2026-11-01-mci-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-09-28T10:18:00+01:00",
+    "title": {
+      "en": "Manchester City home tickets are on sale",
+      "es": "Las entradas para recibir al Manchester City están a la venta"
+    },
+    "summary": {
+      "en": "The club opened priority access to season ticket and Hat-trick bundle holders on 23 September and to previous buyers and registered prospects on 25 September. Early-bird prices start at £14 adult and £6 child for the 1 November, 12:00 home match. The article gives an internally inconsistent day/date for the later price increase, so that deadline needs confirmation. Availability and pricing are confirmed, not sales.",
+      "es": "El club abrió la prioridad a abonados y compradores del pack Hat-trick el 23 de septiembre, y a compradores anteriores e interesados registrados el 25. Los precios anticipados parten de £14 adulto y £6 niño para el partido en casa del 1 de noviembre a las 12:00. El artículo contiene una inconsistencia entre el día y la fecha de la posterior subida de precio, por lo que ese plazo requiere confirmación. Disponibilidad y precios están confirmados, no ventas."
+    },
+    "marketingAction": {
+      "en": "Start segmented CRM for prior buyers, Hat-trick and season ticket holders, and registered prospects; use the official ticket link and price-from copy. Confirm the price-change deadline before any urgency message, and measure conversion rather than infer attendance.",
+      "es": "Iniciar CRM segmentado para compradores anteriores, titulares del pack Hat-trick y abonos, e interesados registrados; usar el enlace oficial y precios desde. Confirmar el plazo de subida antes de crear urgencia, y medir conversión sin inferir asistencia."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-sales-information-london-city-vs-manchester-city"
+  },
+  {
+    "id": "fixture-ipswich-kickoff-parking-2026-09-29",
+    "fixtureId": "2026-09-30-ips-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-29T09:30:00+01:00",
+    "title": {
+      "en": "Ipswich away kickoff is 19:30 and paid parking is available on arrival",
+      "es": "El partido ante Ipswich comienza a las 19:30 y hay parking de pago al llegar"
+    },
+    "summary": {
+      "en": "WSL Football and the official ITFC Women away-ticket page confirm a 19:30 BST kickoff on 30 September at JobServe Community Stadium, not 20:30 as held in the seed calendar. Away tickets remain available and some stadium parking can be bought on arrival via RingGo. Availability is confirmed, not sales; no attendance or scans have been published.",
+      "es": "WSL Football y la página oficial de entradas visitantes de ITFC Women confirman el inicio a las 19:30 BST del 30 de septiembre en JobServe Community Stadium, no a las 20:30 como figuraba en el calendario. Siguen disponibles entradas visitantes y parte del parking del estadio puede pagarse al llegar mediante RingGo. Es disponibilidad confirmada, no ventas; no se han publicado asistencia ni scans."
+    },
+    "marketingAction": {
+      "en": "Immediately replace 20:30 with 19:30 in CRM, calendar links, travel and scheduled content; send the official away-ticket route and parking-on-arrival guidance, then measure clicks and purchases without inferring attendance.",
+      "es": "Sustituir de inmediato las 20:30 por las 19:30 en CRM, enlaces de calendario, viajes y contenido programado; enviar la compra oficial visitante y la indicación de parking al llegar, y medir clics y compras sin inferir asistencia."
+    },
+    "sourceName": "WSL Football / ITFC Women ticketing",
+    "sourceUrl": "https://www.wslfootball.com/news/2026-27-subway-players-cup-league-phase-fixtures-confirmed",
+    "sources": [
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/news/2026-27-subway-players-cup-league-phase-fixtures-confirmed",
+        "checkedAt": "2026-09-29"
+      },
+      {
+        "name": "ITFC Women ticketing",
+        "url": "https://itfcwomen.colchesterstadium.com/Tickets/BuyTickets/SeatSelection/40220?away=true",
+        "checkedAt": "2026-09-29"
+      },
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-ipswich-town-away-subway-players-cup",
+        "checkedAt": "2026-09-29"
+      }
+    ]
+  },
+  {
+    "id": "result-ipswich-wolves-3-1-form-2026-09-30",
+    "fixtureId": "2026-09-30-ips-a",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-09-30T09:55:00+01:00",
+    "title": {
+      "en": "Ipswich and London City both enter tonight's cup tie from wins",
+      "es": "Ipswich y London City llegan al partido de copa de esta noche tras ganar"
+    },
+    "summary": {
+      "en": "Ipswich Town's official match report confirms a 3–1 win over Wolves on 27 September; London City's 2–0 league win over Brighton on 26 September is already confirmed. This strengthens the sporting narrative for tonight's 19:30 cup tie, but it is not evidence of ticket sales, attendance or displaced demand.",
+      "es": "La crónica oficial de Ipswich Town confirma una victoria por 3–1 ante Wolves el 27 de septiembre; la victoria liguera de London City por 2–0 ante Brighton el 26 ya está confirmada. Esto refuerza la narrativa deportiva para el partido de copa de esta noche a las 19:30, pero no constituye evidencia de ventas, asistencia ni demanda desplazada."
+    },
+    "marketingAction": {
+      "en": "Use a 'both teams arrive from wins' frame in same-day social, CRM and live coverage, while keeping the confirmed 19:30 kickoff and parking guidance prominent. Measure clicks and ticket purchases separately and do not infer attendance.",
+      "es": "Usar el enfoque «ambos equipos llegan tras ganar» en social, CRM y cobertura en directo del día de partido, manteniendo visibles la hora confirmada de las 19:30 y la guía de parking. Medir por separado clics y compras sin inferir asistencia."
+    },
+    "sourceName": "Ipswich Town / WSL Football",
+    "sourceUrl": "https://www.itfc.co.uk/news/2026/september/27/town-3-1-wolves/",
+    "sources": [
+      {
+        "name": "Ipswich Town",
+        "url": "https://www.itfc.co.uk/news/2026/september/27/town-3-1-wolves/",
+        "checkedAt": "2026-09-30"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/",
+        "checkedAt": "2026-09-30"
+      }
+    ]
+  },
+  {
+    "id": "result-ipswich-0-1-2026-10-01",
+    "fixtureId": "2026-09-30-ips-a",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-01T09:42:00+01:00",
+    "title": {
+      "en": "London City won 1–0 at Ipswich",
+      "es": "London City ganó 0–1 en Ipswich"
+    },
+    "summary": {
+      "en": "Ipswich Town's official match record confirms London City's 1–0 away win on 30 September. It extends the run to three consecutive wins and three clean sheets. No official attendance, ticket-sales or scan figure has been published, so those measures remain waiting.",
+      "es": "La crónica oficial de Ipswich Town confirma la victoria visitante de London City por 0–1 el 30 de septiembre. Amplía la racha a tres victorias consecutivas y tres porterías a cero. No se ha publicado una cifra oficial de asistencia, ventas o scans, por lo que esas métricas siguen en espera."
+    },
+    "marketingAction": {
+      "en": "Refresh Tottenham content and CRM with the three-win, three-clean-sheet run; keep the confirmed 14:00 kickoff and BetWright Stadium prominent, and measure engagement or ticket conversion without treating form as demand.",
+      "es": "Actualizar el contenido y CRM de Tottenham con la racha de tres victorias y tres porterías a cero; mantener visibles las 14:00 confirmadas y el BetWright Stadium, y medir engagement o conversión sin tratar la forma deportiva como demanda."
+    },
+    "sourceName": "Ipswich Town",
+    "sourceUrl": "https://www.itfc.co.uk/news/2026/september/30/town-0-london-city-lionesses-1/",
+    "sources": [
+      {
+        "name": "Ipswich Town",
+        "url": "https://www.itfc.co.uk/news/2026/september/30/town-0-london-city-lionesses-1/",
+        "checkedAt": "2026-10-01"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/fixtures/index",
+        "checkedAt": "2026-10-01"
+      }
+    ]
+  },
+  {
+    "id": "everton-oktoberfest-2026-10-01",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-01T15:15:00Z",
+    "title": {
+      "en": "Everton has an official Oktoberfest matchday proposition",
+      "es": "Everton cuenta con una propuesta oficial de Oktoberfest"
+    },
+    "summary": {
+      "en": "The club is promoting Everton on 18 October at 14:00 as a Bavarian-themed matchday, with match tickets and VIP Terrace tickets available. Block A remains an alcohol-free family area. Availability is not evidence of sales.",
+      "es": "El club promociona Everton el 18 de octubre a las 14:00 como una jornada de temática bávara, con entradas y VIP Terrace disponibles. El bloque A sigue siendo una zona familiar sin alcohol. La disponibilidad no demuestra ventas."
+    },
+    "marketingAction": {
+      "en": "Draft separate messages for returning supporters and families. Link to the official offer, preserve the alcohol-free family option and measure ticket intent before any spend or club execution.",
+      "es": "Preparar mensajes separados para aficionados que repiten y familias. Enlazar la oferta oficial, conservar la opción familiar sin alcohol y medir intención de compra antes de invertir o ejecutar desde el club."
+    },
+    "sourceName": "London City Lionesses · Everton matchday",
+    "sourceUrl": "https://www.londoncitylionesses.com/everton-h-2627"
+  },
+  {
+    "id": "access-tottenham-online-closed-2026-10-02",
+    "fixtureId": "2026-10-04-tot-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-02T10:00:00+01:00",
+    "title": {
+      "en": "Tottenham away online sales closed; stadium purchase remains available",
+      "es": "La venta visitante online de Tottenham ha cerrado; queda compra en el estadio"
+    },
+    "summary": {
+      "en": "London City's updated away notice states that online tickets are closed and supporters can buy at the stadium on 4 October. Both clubs confirm 14:00 BST; Tottenham confirms Sky Sports Football in the UK. This is a purchase-channel change, not a sell-out or sales count.",
+      "es": "La nota visitante actualizada de London City indica que la venta online ha cerrado y que se podrá comprar en el estadio el 4 de octubre. Ambos clubes confirman las 14:00 BST; Tottenham confirma Sky Sports Football en Reino Unido. Es un cambio de canal de compra, no sold out ni cifra de ventas."
+    },
+    "marketingAction": {
+      "en": "Replace online purchase calls to action with stadium-purchase guidance, show 14:00 and BetWright Stadium, and give non-travellers the UK broadcast option. Do not promise an unverified box-office opening time or ticket quantity.",
+      "es": "Sustituir llamadas a comprar online por la guía de compra en el estadio, mostrar las 14:00 y BetWright Stadium y ofrecer la retransmisión en Reino Unido a quienes no viajen. No prometer hora de taquilla ni cupo sin verificar."
+    },
+    "sourceName": "London City Lionesses / Tottenham Hotspur",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+        "checkedAt": "2026-10-02"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1145195/spurs-vs-london-city-lionesses-womens-super-league-how-to-watch-team-news-kit-colours-key-information",
+        "checkedAt": "2026-10-02"
+      }
+    ]
+  },
+  {
+    "id": "tickets-players-cup-bundle-2026-10-02",
+    "fixtureId": "2026-10-28-cry-h",
+    "relatedFixtureIds": [
+      "2026-11-18-bha-h",
+      "2026-12-16-bri-h"
+    ],
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-02T10:00:00+01:00",
+    "title": {
+      "en": "Three home cup matches offered for the price of two",
+      "es": "Tres partidos de copa en casa por el precio de dos"
+    },
+    "summary": {
+      "en": "The club launched a bundle for Crystal Palace (28 October), Brighton (18 November) and Bristol City (16 December), all at 19:00. Season ticket holders and registered-interest supporters can buy now; bundle general sale starts 5 October. Individual ticket priority opens 8 October and general sale 12 October. Each buyer receives one ticket per person per fixture. Offer availability is confirmed; sales and attendance are not measured.",
+      "es": "El club lanzó un pack para Crystal Palace (28 de octubre), Brighton (18 de noviembre) y Bristol City (16 de diciembre), todos a las 19:00. Ya pueden comprar abonados e interesados registrados; la venta general del pack abre el 5 de octubre. La prioridad individual abre el 8 y la venta general el 12 de octubre. Se entrega una entrada por persona y partido. La oferta está confirmada; ventas y asistencia no están medidas."
+    },
+    "marketingAction": {
+      "en": "Prepare separate bundle and single-match CRM journeys for the official sale windows. Measure bundle purchases, per-fixture scans and repeat attendance separately; avoid counting one bundle as one attendee or as three actual visits.",
+      "es": "Preparar recorridos separados de CRM para pack y partido individual según las ventanas oficiales. Medir compras del pack, scans por fixture y repetición por separado; no contar un pack como una persona asistente ni como tres visitas reales."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/introducing-2026-27-subway-player-s-cup-3-game-bundle",
+    "sources": [
+      {
+        "name": "London City Lionesses announcement",
+        "url": "https://www.londoncitylionesses.com/post/introducing-2026-27-subway-player-s-cup-3-game-bundle",
+        "checkedAt": "2026-10-02"
+      },
+      {
+        "name": "London City Lionesses bundle page",
+        "url": "https://www.londoncitylionesses.com/playerscupbundle",
+        "checkedAt": "2026-10-02"
+      }
+    ]
+  },
+  {
+    "id": "attendance-brighton-4177-reported-2026-10-02",
+    "fixtureId": "2026-09-26-bha-h",
+    "category": "demand",
+    "state": "reported",
+    "confidence": "medium",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-02T10:00:00+01:00",
+    "title": {
+      "en": "Brighton attendance is reported as 4,177",
+      "es": "La asistencia de Brighton se reporta en 4.177"
+    },
+    "summary": {
+      "en": "Football Web Pages and FotMob publish 4,177 attendance for the 26 September 2–0 Brighton fixture. This is a reported attendance figure, not verified club scans or ticket sales. No direct club/league confirmation or counting methodology was found; Football Web Pages also has an outdated venue field. It is 1,225 (22.7%) below the measured 5,402 opener, but this aggregate comparison cannot establish buyer retention.",
+      "es": "Football Web Pages y FotMob publican 4.177 asistentes al 2–0 ante Brighton del 26 de septiembre. Es asistencia reportada, no scans del club verificados ni ventas. No se encontró confirmación directa del club/liga ni metodología de recuento; Football Web Pages además conserva una sede desactualizada. Son 1.225 (22,7%) menos que los 5.402 medidos del opener, pero esta comparación agregada no acredita retención de compradores."
+    },
+    "marketingAction": {
+      "en": "Use the provisional count to review Brighton-to-Everton acquisition and retention plans; request authorised attendance, scans and cohort reconciliation before publishing a retention or no-show rate. Preserve the opener's measured observation.",
+      "es": "Usar la cifra provisional para revisar captación y repetición de Brighton hacia Everton; solicitar conciliación autorizada de asistencia, scans y cohortes antes de publicar tasas de retención o no-show. Conservar la observación medida del opener."
+    },
+    "sourceName": "Football Web Pages / FotMob",
+    "sourceUrl": "https://www.footballwebpages.co.uk/match/2026-2027/womens-super-league/london-city-lionesses/brighton-and-hove-albion-women/589072",
+    "sources": [
+      {
+        "name": "Football Web Pages",
+        "url": "https://www.footballwebpages.co.uk/match/2026-2027/womens-super-league/london-city-lionesses/brighton-and-hove-albion-women/589072",
+        "checkedAt": "2026-10-02"
+      },
+      {
+        "name": "FotMob",
+        "url": "https://www.fotmob.com/matches/brighton-vs-london-city-lionesses/awc12a3z",
+        "checkedAt": "2026-10-02"
+      }
+    ]
+  },
+  {
+    "id": "attention-bromley-women-reading-overlap-2026-10-03",
+    "fixtureId": "2026-10-04-tot-a",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-03T10:17:00+01:00",
+    "title": {
+      "en": "Bromley Women host Reading at the same time as Tottenham–London City",
+      "es": "Bromley Women recibe al Reading a la misma hora que Tottenham–London City"
+    },
+    "summary": {
+      "en": "Bromley FC Women host Reading in the Women's FA Cup at the CopperJax Community Stadium on Sunday 4 October at 14:00, the same kickoff time as Tottenham v London City at BetWright Stadium. Bromley Men's season-ticket holders are offered free entry. Tottenham–London City is also live on Sky Sports Football in the UK. The overlap is confirmed; any effect on travel, viewing or attendance is unmeasured.",
+      "es": "Bromley FC Women recibe al Reading en la Women’s FA Cup en el CopperJax Community Stadium el domingo 4 de octubre a las 14:00, la misma hora que Tottenham–London City en BetWright Stadium. Los abonados del equipo masculino de Bromley tienen entrada gratuita. Tottenham–London City también se emite en Sky Sports Football en Reino Unido. El solapamiento está confirmado; cualquier efecto sobre viaje, audiencia o asistencia no está medido."
+    },
+    "marketingAction": {
+      "en": "Segment Sunday communications into Tottenham travellers, UK broadcast viewers and Bromley local-football audiences. Keep each route and venue explicit, suppress generic same-time local matchday prompts where they could confuse supporters, and measure clicks or attendance independently before claiming displaced demand.",
+      "es": "Segmentar la comunicación del domingo entre viajeros a Tottenham, audiencia de la retransmisión en Reino Unido y público del fútbol local de Bromley. Mostrar claramente cada recorrido y sede, evitar mensajes locales genéricos a la misma hora que puedan confundir y medir por separado clics o asistencia antes de afirmar demanda desplazada."
+    },
+    "sourceName": "Bromley FC Women / Tottenham Hotspur",
+    "sourceUrl": "https://www.bromleyfc.co.uk/news/2026/september/28/bromley-fc-women-remain-unbeaten-after-barking-battle---now-all-eyes-turn-to-raise-the-record/",
+    "sources": [
+      {
+        "name": "Bromley FC Women",
+        "url": "https://www.bromleyfc.co.uk/news/2026/september/28/bromley-fc-women-remain-unbeaten-after-barking-battle---now-all-eyes-turn-to-raise-the-record/",
+        "checkedAt": "2026-10-03"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1145195/spurs-vs-london-city-lionesses-womens-super-league-how-to-watch-team-news-kit-colours-key-information",
+        "checkedAt": "2026-10-03"
+      }
+    ]
+  },
+  {
+    "id": "experience-brighton-vip-sold-out-2026-10-04",
+    "fixtureId": "2026-09-26-bha-h",
+    "relatedFixtureIds": [
+      "2026-10-18-eve-h"
+    ],
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-04T09:54:03+01:00",
+    "title": {
+      "en": "Brighton VIP Terrace sold out; Everton VIP remains available",
+      "es": "La VIP Terrace de Brighton agotó entradas; la VIP de Everton sigue disponible"
+    },
+    "summary": {
+      "en": "London City's official VIP page now confirms that all £75 VIP Terrace tickets for the Brighton fixture sold out and directs supporters to the next VIP opportunity against Everton on 18 October. This is a confirmed sell-out of the VIP product only, not evidence that the full fixture sold out, nor an attendance or scans figure.",
+      "es": "La página VIP oficial de London City confirma ahora que se agotaron todas las entradas de £75 de la VIP Terrace para Brighton y dirige a la siguiente oportunidad VIP, ante Everton el 18 de octubre. Es un sold out confirmado únicamente del producto VIP, no evidencia de que se agotara el aforo completo ni una cifra de asistencia o scans."
+    },
+    "marketingAction": {
+      "en": "Use the confirmed premium-product demand to target consented Brighton VIP buyers, hospitality prospects, groups and partners with Everton VIP availability; capture a waitlist and measure bookings, conversion and yield separately from standard tickets and attendance.",
+      "es": "Usar la demanda confirmada del producto premium para impactar, con consentimiento, a compradores VIP de Brighton, prospects de hospitality, grupos y partners con la disponibilidad VIP de Everton; captar lista de espera y medir reservas, conversión y yield por separado de entradas estándar y asistencia."
+    },
+    "sourceName": "London City Lionesses VIP Terrace",
+    "sourceUrl": "https://www.londoncitylionesses.com/vip-terrace",
+    "sources": [
+      {
+        "name": "London City Lionesses VIP Terrace",
+        "url": "https://www.londoncitylionesses.com/vip-terrace",
+        "checkedAt": "2026-10-04"
+      },
+      {
+        "name": "London City Lionesses Everton matchday",
+        "url": "https://www.londoncitylionesses.com/everton-h-2627",
+        "checkedAt": "2026-10-04"
+      }
+    ]
+  },
+  {
+    "id": "result-tottenham-1-6-2026-10-05",
+    "fixtureId": "2026-10-04-tot-a",
+    "relatedFixtureIds": [
+      "2026-10-18-eve-h"
+    ],
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-05T09:51:25+01:00",
+    "title": {
+      "en": "London City beat Tottenham 6–1 before the Everton campaign",
+      "es": "London City venció 1–6 al Tottenham antes de la campaña de Everton"
+    },
+    "summary": {
+      "en": "The official WSL and Tottenham reports confirm a 6–1 away win on 4 October, ending Tottenham's unbeaten league start. This is a confirmed sporting result and content signal, not evidence of ticket demand, sales or attendance.",
+      "es": "Los informes oficiales de la WSL y Tottenham confirman la victoria visitante por 1–6 del 4 de octubre, que terminó con el inicio liguero invicto del Tottenham. Es un resultado deportivo confirmado y una señal de contenido, no evidencia de demanda, ventas ni asistencia."
+    },
+    "marketingAction": {
+      "en": "Refresh Everton acquisition, CRM and social creative around the statement win, using separate tagged journeys for prior home buyers, known away buyers and broadcast audiences; judge impact through measured ticket conversion.",
+      "es": "Actualizar captación, CRM y creatividad social de Everton alrededor de la victoria, con recorridos etiquetados por separado para compradores anteriores en casa, compradores visitantes conocidos y audiencias de retransmisión; evaluar el impacto mediante conversión de entradas medida."
+    },
+    "sourceName": "WSL Football / Tottenham Hotspur",
+    "sourceUrl": "https://www.wslfootball.com/video/putellas-diani-scored-twice-in-6-goal-rampage-spurs-v-london-city-highlights-barclays-wsl-26-27",
+    "sources": [
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/video/putellas-diani-scored-twice-in-6-goal-rampage-spurs-v-london-city-highlights-barclays-wsl-26-27",
+        "checkedAt": "2026-10-05"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1169984/spurs-women-lionesses-inflict-heavy-defeat-at-brisbane-road",
+        "checkedAt": "2026-10-05"
+      }
+    ]
+  },
+  {
+    "id": "attendance-tottenham-2377-reported-2026-10-05",
+    "fixtureId": "2026-10-04-tot-a",
+    "category": "demand",
+    "state": "reported",
+    "confidence": "high",
+    "direction": "neutral",
+    "materiality": "high",
+    "observedAt": "2026-10-05T09:51:25+01:00",
+    "title": {
+      "en": "Tottenham reports attendance of 2,377",
+      "es": "Tottenham reporta una asistencia de 2.377"
+    },
+    "summary": {
+      "en": "Tottenham's official match report publishes attendance of 2,377 at Brisbane Road. This is a host-club-reported attendance figure; ticket sales, scans, away allocation usage and counting methodology have not been published and must not be inferred.",
+      "es": "El informe oficial de Tottenham publica una asistencia de 2.377 en Brisbane Road. Es una cifra de asistencia reportada por el club anfitrión; no se han publicado ventas, scans, uso del cupo visitante ni metodología de recuento y no deben inferirse."
+    },
+    "marketingAction": {
+      "en": "Use the figure as a provisional away-attendance benchmark, then reconcile London City ticketing, scans and CRM before attributing attendance to the stadium-purchase route, broadcast or campaign activity.",
+      "es": "Usar la cifra como benchmark provisional de asistencia visitante y conciliar después ticketing, scans y CRM de London City antes de atribuir asistencia a la compra en el estadio, la retransmisión o la actividad de campaña."
+    },
+    "sourceName": "Tottenham Hotspur",
+    "sourceUrl": "https://www.tottenhamhotspur.com/news/1169984/spurs-women-lionesses-inflict-heavy-defeat-at-brisbane-road",
+    "sources": [
+      {
+        "name": "Tottenham Hotspur",
+        "url": "https://www.tottenhamhotspur.com/news/1169984/spurs-women-lionesses-inflict-heavy-defeat-at-brisbane-road",
+        "checkedAt": "2026-10-05"
+      }
+    ]
+  },
+  {
+    "id": "broadcast-everton-sky-youtube-2026-10-06",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "attention",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-06T09:47:40+01:00",
+    "title": {
+      "en": "Everton will be shown on Sky Sports and BWSL YouTube",
+      "es": "Everton se emitirá en Sky Sports y YouTube de la BWSL"
+    },
+    "summary": {
+      "en": "The official WSL broadcast selection confirms London City v Everton at 14:00 BST on 18 October on Sky Sports and the BWSL YouTube channel. The club's official ticket page still offers standard and VIP tickets. Broadcast availability is confirmed; its effect on ticket demand is not measured.",
+      "es": "La selección oficial de retransmisiones de la WSL confirma London City–Everton a las 14:00 BST del 18 de octubre en Sky Sports y el canal de YouTube de la BWSL. La página oficial del club sigue ofreciendo entradas estándar y VIP. La retransmisión está confirmada; su efecto sobre la demanda de entradas no está medido."
+    },
+    "marketingAction": {
+      "en": "Separate the in-person Oktoberfest and VIP journeys from a remote-viewer content journey; keep proximity audiences focused on the on-site experience, tag broadcast engagement, and retarget consented remote viewers without treating reach as ticket demand.",
+      "es": "Separar los recorridos presenciales de Oktoberfest y VIP de un recorrido de contenido para espectadores remotos; mantener a las audiencias de proximidad centradas en la experiencia en el estadio, etiquetar el engagement de retransmisión y reimpactar a espectadores remotos consentidos sin tratar alcance como demanda de entradas."
+    },
+    "sourceName": "WSL Football / London City Lionesses",
+    "sourceUrl": "https://www.wslfootball.com/news/wsl/barclays-women-s-super-league-round-five-broadcast-picks-confirmed",
+    "sources": [
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/news/wsl/barclays-women-s-super-league-round-five-broadcast-picks-confirmed",
+        "checkedAt": "2026-10-06"
+      },
+      {
+        "name": "London City Lionesses Everton matchday",
+        "url": "https://www.londoncitylionesses.com/everton-h-2627",
+        "checkedAt": "2026-10-06"
+      }
+    ]
+  },
+  {
+    "id": "tickets-liverpool-away-general-sale-2026-10-07",
+    "fixtureId": "2026-10-25-liv-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-07T09:32:02+01:00",
+    "title": {
+      "en": "Liverpool away general sale opens with NFC entry requirements",
+      "es": "La venta general visitante de Liverpool abre con acceso mediante NFC"
+    },
+    "summary": {
+      "en": "London City confirms away tickets are on sale and general sale opens at 10:00 BST on 7 October for the 14:00 fixture on 25 October at BrewDog/St Helens Stadium. Liverpool lists full-price tickets at £10 adult and £3.50 junior, group discounts from six tickets and a mandatory smartphone NFC pass. Free coach travel is announced but its booking release remains pending. Availability is not evidence of sales.",
+      "es": "London City confirma que las entradas visitantes están a la venta y que la venta general abre a las 10:00 BST del 7 de octubre para el partido del 25 de octubre a las 14:00 en BrewDog/St Helens Stadium. Liverpool publica precios de £10 adulto y £3,50 junior, descuentos para grupos desde seis entradas y pase NFC obligatorio en smartphone. Se anuncia autocar gratuito, pero la apertura de su reserva sigue pendiente. La disponibilidad no demuestra ventas."
+    },
+    "marketingAction": {
+      "en": "Activate the official away-ticket journey today for consented away, family and group audiences; make the venue alias, 14:00 kickoff and NFC requirement explicit, tag clicks and purchases, and issue a separate transport update only when free-coach booking opens.",
+      "es": "Activar hoy el recorrido oficial de entradas visitantes para audiencias consentidas de away, familias y grupos; dejar explícitos el alias de la sede, las 14:00 y el requisito NFC, etiquetar clics y compras, y enviar una actualización separada de transporte solo cuando abra la reserva del autocar gratuito."
+    },
+    "sourceName": "London City Lionesses / Liverpool FC",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-information-liverpool-away",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-liverpool-away",
+        "checkedAt": "2026-10-07"
+      },
+      {
+        "name": "Liverpool FC",
+        "url": "https://www.liverpoolfc.com/tickets/match/liverpool-women-v-london-city-lionesses-womens-super-league-2026-27",
+        "checkedAt": "2026-10-07"
+      }
+    ]
+  },
+  {
+    "id": "tickets-west-ham-cup-away-2026-10-08",
+    "fixtureId": "2026-10-21-whu-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-08T10:03:12+01:00",
+    "title": {
+      "en": "West Ham cup away tickets are on general sale from £1",
+      "es": "Las entradas visitantes de copa ante West Ham están en venta general desde £1"
+    },
+    "summary": {
+      "en": "London City confirms away tickets are on sale for the 19:00 BST Subway Players Cup fixture on 21 October at Chigwell Construction Stadium. West Ham lists the venue as Victoria Road and confirms general sale, with tickets at £5 adult, £3 over-66/under-21 and £1 under-18; accessibility tickets use the relevant concession rate and include a Personal Assistant if required. The venue names refer to the same ground. Availability is not evidence of sales.",
+      "es": "London City confirma que están a la venta las entradas visitantes para el partido de Subway Players Cup del 21 de octubre a las 19:00 BST en Chigwell Construction Stadium. West Ham denomina la sede Victoria Road y confirma la venta general, con entradas a £5 adulto, £3 mayores de 66/menores de 21 y £1 menores de 18; las entradas accesibles usan la tarifa de concesión correspondiente e incluyen acompañante cuando sea necesario. Ambos nombres se refieren al mismo estadio. La disponibilidad no demuestra ventas."
+    },
+    "marketingAction": {
+      "en": "Launch a tagged low-price away journey for families, students and existing away audiences; show both venue names, the RM10 7XL postcode, 19:00 kickoff and accessibility route prominently, then measure clicks and purchases without converting availability into demand.",
+      "es": "Lanzar un recorrido visitante etiquetado de bajo precio para familias, estudiantes y audiencias away existentes; mostrar de forma destacada ambos nombres de la sede, el código postal RM10 7XL, las 19:00 y la ruta de accesibilidad, y medir clics y compras sin convertir disponibilidad en demanda."
+    },
+    "sourceName": "London City Lionesses / West Ham United",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+        "checkedAt": "2026-10-08"
+      },
+      {
+        "name": "West Ham United",
+        "url": "https://www.whufc.com/en/womens-team-matches/london-city-lionesses-h-0",
+        "checkedAt": "2026-10-08"
+      }
+    ]
+  },
+  {
+    "id": "tickets-birmingham-home-launch-2026-10-09",
+    "fixtureId": "2026-11-08-birmingham-c-h",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "positive",
+    "materiality": "high",
+    "observedAt": "2026-10-09T09:30:26+01:00",
+    "title": {
+      "en": "Birmingham home priority sale opens with an early-bird deadline",
+      "es": "Abre la venta prioritaria ante Birmingham con plazo early-bird"
+    },
+    "summary": {
+      "en": "London City confirms the Birmingham City home fixture for Sunday 8 November at 14:30 GMT at the CopperJax Community Stadium. Season-ticket and Hat-trick holders receive early access from 9 October, registered-interest supporters from 12 October, and early-bird general sale opens 14 October; prices start at £14 adult and £6 child and increase on 21 October. Ticket availability and access windows are confirmed, but sales and attendance are not measured.",
+      "es": "London City confirma el partido en casa ante Birmingham City para el domingo 8 de noviembre a las 14:30 GMT en el CopperJax Community Stadium. Abonados y titulares del pack Hat-trick tienen acceso anticipado desde el 9 de octubre, los registrados como interesados desde el 12 de octubre y la venta general early-bird abre el 14 de octubre; los precios parten de £14 adulto y £6 niño y suben el 21 de octubre. La disponibilidad y las ventanas de acceso están confirmadas, pero ventas y asistencia no están medidas."
+    },
+    "marketingAction": {
+      "en": "Run a segmented sequence for holders today, registered-interest supporters on 12 October and general audiences on 14 October; make Sunday 8 November, 14:30 and the 21 October price step-up explicit, tag each cohort and measure purchases separately from attendance. Include the wheelchair request route and state that Blue Badge parking is unavailable unless a seasonal space was pre-confirmed.",
+      "es": "Ejecutar una secuencia segmentada para abonados y titulares hoy, interesados registrados el 12 de octubre y audiencias generales el 14 de octubre; hacer explícitos el domingo 8 de noviembre, las 14:30 y la subida de precio del 21 de octubre, etiquetar cada cohorte y medir compras por separado de la asistencia. Incluir la ruta de solicitud para silla de ruedas e indicar que no hay parking Blue Badge salvo plaza de temporada confirmada previamente."
+    },
+    "sourceName": "London City Lionesses / WSL Football",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-sales-information-london-city-vs-birmingham-city",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-sales-information-london-city-vs-birmingham-city",
+        "checkedAt": "2026-10-09"
+      },
+      {
+        "name": "WSL Football",
+        "url": "https://www.wslfootball.com/clubs/london-city-lionesses/fixtures",
+        "checkedAt": "2026-10-09"
+      }
+    ]
+  },
+  {
+    "id": "retail-gk-home-shirt-out-of-stock-2026-10-11",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "medium",
+    "observedAt": "2026-10-11T10:06:28+01:00",
+    "title": {
+      "en": "Goalkeeper home shirt is out of stock",
+      "es": "La camiseta local de portera está agotada"
+    },
+    "summary": {
+      "en": "London City's official retail page currently marks the 2026/27 goalkeeper home shirt as out of stock, while adult away, youth away, home and youth home shirts remain presented as available routes. This confirms product availability only; it does not disclose units sold, demand, revenue or the cause of the stock-out.",
+      "es": "La página oficial de retail de London City marca actualmente como agotada la camiseta local de portera 2026/27, mientras mantiene visibles las rutas de camiseta visitante adulta y juvenil, local y local juvenil. Esto confirma únicamente disponibilidad de producto; no publica unidades vendidas, demanda, ingresos ni la causa del agotado."
+    },
+    "marketingAction": {
+      "en": "Remove or suppress goalkeeper-home-shirt purchase calls to action from Everton matchday and CRM creative, route supporters to genuinely available products, and add a consented restock-interest capture if operationally supported. Measure restock registrations and later purchases separately; do not present the stock-out as sales performance.",
+      "es": "Retirar o suprimir los CTAs de compra de la camiseta local de portera en la creatividad y CRM de Everton, dirigir a productos realmente disponibles y añadir una captura consentida de interés en reposición si existe soporte operativo. Medir por separado registros de reposición y compras posteriores; no presentar el agotado como rendimiento de ventas."
+    },
+    "sourceName": "London City Lionesses · Official retail page",
+    "sourceUrl": "https://www.londoncitylionesses.com/retail",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/retail",
+        "checkedAt": "2026-10-11"
+      }
+    ]
+  },
+  {
+    "id": "sponsorship-bromley-hospitality-finder-2026-10-12",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "sponsorship",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "medium",
+    "observedAt": "2026-10-12T09:54:50+01:00",
+    "title": {
+      "en": "Bromley FC adds Hospitality Finder as social media and networking partner",
+      "es": "Bromley FC incorpora a Hospitality Finder como partner de redes y networking"
+    },
+    "summary": {
+      "en": "Bromley FC and Hospitality Finder confirm a partnership covering official social media sponsorship and business networking. The launch activation combines a signed Bromley shirt, match tickets and VIP hospitality, with a winner due to be selected on 30 October. The agreement is confirmed; any effect on London City's rights, category exclusivity or partner inventory is not published and remains inferred pending an internal rights check.",
+      "es": "Bromley FC y Hospitality Finder confirman un acuerdo de patrocinio oficial de redes sociales y networking empresarial. La activación de lanzamiento combina una camiseta firmada de Bromley, entradas y hospitality VIP, con elección de ganador prevista para el 30 de octubre. El acuerdo está confirmado; cualquier efecto sobre los derechos, exclusividad de categoría o inventario comercial de London City no está publicado y sigue inferido hasta una revisión interna de derechos."
+    },
+    "marketingAction": {
+      "en": "Before the Everton partner and hospitality push, audit shared-venue, Broomfields, social, networking and hospitality rights for conflicts or adjacency. Do not assume the Bromley agreement binds London City. If rights are clear, use the local evidence to build a distinct women-first hospitality/networking package and measure qualified leads, introductions and bookings.",
+      "es": "Antes del impulso de partners y hospitality para Everton, auditar posibles conflictos o adyacencias en derechos de sede compartida, Broomfields, social, networking y hospitality. No asumir que el acuerdo de Bromley vincula a London City. Si los derechos están libres, usar la evidencia local para construir un paquete diferenciado de hospitality y networking centrado en fútbol femenino y medir leads cualificados, introducciones y reservas."
+    },
+    "sourceName": "Bromley FC / Hospitality Finder",
+    "sourceUrl": "https://www.bromleyfc.co.uk/news/commercial",
+    "sources": [
+      {
+        "name": "Bromley FC commercial news",
+        "url": "https://www.bromleyfc.co.uk/news/commercial",
+        "checkedAt": "2026-10-12"
+      },
+      {
+        "name": "Bromley Football Club LinkedIn",
+        "url": "https://uk.linkedin.com/company/bromleyfc",
+        "checkedAt": "2026-10-12"
+      },
+      {
+        "name": "Hospitality Finder LinkedIn",
+        "url": "https://uk.linkedin.com/company/hospitalityfinder",
+        "checkedAt": "2026-10-12"
+      }
+    ]
+  },
+  {
+    "id": "tickets-full-season-sold-out-11-game-launch-2026-10-13",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "high",
+    "observedAt": "2026-10-13T10:11:53+01:00",
+    "title": {
+      "en": "Full Season Tickets sold out; 11-game ticket opens from Everton",
+      "es": "Los abonos completos se agotan; abre un abono de 11 partidos desde Everton"
+    },
+    "summary": {
+      "en": "London City's official season-ticket page confirms that Full Season Tickets are sold out and now offers an 11-game Season Ticket covering every home BWSL fixture from Everton onwards. This is a confirmed product sell-out and a confirmed alternative product launch; no season-ticket quantity, revenue, scans or attendance figure is published.",
+      "es": "La página oficial de abonos de London City confirma que los abonos completos están agotados y ofrece ahora un abono de 11 partidos que cubre todos los encuentros de BWSL en casa desde Everton. Es un agotado confirmado del producto y un lanzamiento confirmado de una alternativa; no se publica cantidad de abonos, ingresos, scans ni asistencia."
+    },
+    "marketingAction": {
+      "en": "Remove Full Season Ticket purchase CTAs from active Everton and evergreen journeys, replace them with clearly labelled 11-game Season Ticket messaging for high-intent and repeat-buyer audiences, and keep single-match and Hat-trick options distinct. Tag each product route and measure purchases separately without using sell-out status as an attendance claim.",
+      "es": "Retirar los CTAs de compra del abono completo de los recorridos activos de Everton y evergreen, sustituirlos por mensajes claramente etiquetados del abono de 11 partidos para audiencias de alta intención y compradores recurrentes, y mantener separadas las opciones de partido único y pack Hat-trick. Etiquetar cada ruta de producto y medir compras por separado sin usar el agotado como afirmación de asistencia."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://www.londoncitylionesses.com/seasontickets",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/seasontickets",
+        "checkedAt": "2026-10-13"
+      }
+    ]
+  },
+  {
+    "id": "weather-2026-10-18-eve-h",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "weather",
+    "state": "forecast",
+    "direction": "positive",
+    "materiality": "low",
+    "observedAt": "2026-10-14T14:39:07.094Z",
+    "title": {
+      "en": "Matchday weather is currently low risk",
+      "es": "El riesgo meteorológico actual para el matchday es bajo"
+    },
+    "summary": {
+      "en": "16% maximum rain probability, 1.2 mm and 14.8 km/h maximum wind. Forecast, not measured weather.",
+      "es": "16% de probabilidad máxima de lluvia, 1.2 mm y viento máximo de 14.8 km/h. Es forecast, no tiempo medido."
+    },
+    "marketingAction": {
+      "en": "Keep normal acquisition active and retain service messaging as a contingency.",
+      "es": "Mantener activa la captación normal y conservar mensajes de servicio como contingencia."
+    },
+    "sourceName": "Open-Meteo",
+    "sourceUrl": "https://open-meteo.com/"
+  },
+  {
+    "id": "fixture-west-ham-calendar-correction-2026-10-14",
+    "fixtureId": "2026-10-21-whu-a",
+    "category": "access",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-10-14T09:54:37+01:00",
+    "title": {
+      "en": "West Ham cup calendar requires 19:00 BST, not 20:00",
+      "es": "El calendario de copa ante West Ham requiere las 19:00 BST, no las 20:00"
+    },
+    "summary": {
+      "en": "Main calendar recorded 20:00 on 21 October, matching the generic London City fixture page. Both clubs' ticket pages confirm 19:00 BST at Chigwell Construction Stadium / Victoria Road, RM10 7XL. This corrects repository planning data; it is not a newly announced fixture rescheduling. The generic fixture-page conflict remains visible.",
+      "es": "El calendario de main registraba las 20:00 del 21 de octubre, como la página genérica de partidos de London City. Las páginas de entradas de ambos clubes confirman las 19:00 BST en Chigwell Construction Stadium / Victoria Road, RM10 7XL. Se corrige el dato de planificación del repositorio; no es una nueva reprogramación anunciada. La discrepancia de la página genérica sigue visible."
+    },
+    "marketingAction": {
+      "en": "Audit scheduled CRM, travel guidance, social and calendar exports; replace 20:00 with 19:00 BST and use the ticket pages for final verification. Do not infer any sales or attendance change.",
+      "es": "Auditar CRM programado, guía de viaje, social y exportaciones de calendario; sustituir las 20:00 por las 19:00 BST y usar las páginas de entradas para la verificación final. No inferir cambios de ventas ni asistencia."
+    },
+    "sourceName": "London City Lionesses / West Ham United",
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+        "checkedAt": "2026-10-14"
+      },
+      {
+        "name": "West Ham United",
+        "url": "https://www.whufc.com/en/womens-team-matches/london-city-lionesses-h-0",
+        "checkedAt": "2026-10-14"
+      }
+    ]
+  }
+]

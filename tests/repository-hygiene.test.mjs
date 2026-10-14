@@ -793,3 +793,16 @@ test("daily refresh keeps the Supabase project active with the public key only",
   assert.match(step, /keep-alive skipped/);
   assert.doesNotMatch(step, /SERVICE_ROLE|SECRET_KEY/i);
 });
+
+test("the data bot validates refreshed data before pushing to main", () => {
+  const workflow = readFileSync(".github/workflows/daily-data-refresh.yml", "utf8");
+  const validate = workflow.slice(workflow.indexOf("Validate refreshed data before publishing"), workflow.indexOf("Commit material updates"));
+  assert.match(validate, /if: steps\.changes\.outputs\.changed == 'true'/);
+  assert.match(validate, /npm run lint && npm test && npm run build/);
+  assert.match(validate, /git checkout -- data\/seed\/calendar\.json/);
+  assert.match(validate, /exit 1/);
+  const commit = workflow.slice(workflow.indexOf("Commit material updates"), workflow.indexOf("Send the Morning Commercial Read"));
+  assert.match(commit, /if: steps\.changes\.outputs\.changed == 'true'/);
+  assert.ok(commit.indexOf("git pull --rebase origin main") < commit.indexOf("git push"), "rebase before pushing");
+  assert.ok(workflow.indexOf("Validate refreshed data before publishing") < workflow.indexOf("Commit material updates"));
+});

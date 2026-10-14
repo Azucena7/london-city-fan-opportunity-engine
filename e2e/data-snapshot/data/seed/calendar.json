@@ -1,0 +1,489 @@
+[
+  {
+    "id": "2026-09-04-mun-h",
+    "date": "2026-09-04",
+    "kickoff": "19:00",
+    "opponent": "Manchester United",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "CopperJax Community Stadium",
+    "status": "final",
+    "result": {
+      "for": 2,
+      "against": 1
+    },
+    "attendance": 5402,
+    "attendanceState": "measured"
+  },
+  {
+    "id": "2026-09-12-whu-a",
+    "date": "2026-09-12",
+    "kickoff": "12:45",
+    "opponent": "West Ham United",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Chigwell Construction Stadium",
+    "status": "final",
+    "result": {
+      "for": 1,
+      "against": 2
+    }
+  },
+  {
+    "id": "2026-09-19-cha-a",
+    "date": "2026-09-19",
+    "kickoff": "12:30",
+    "opponent": "Charlton",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "The Valley",
+    "status": "final",
+    "result": {
+      "for": 4,
+      "against": 1
+    }
+  },
+  {
+    "id": "2026-09-23-lei-a",
+    "date": "2026-09-23",
+    "kickoff": "19:30",
+    "opponent": "Leicester City",
+    "homeAway": "away",
+    "competition": "Subway Players Cup",
+    "venue": "Meadow Lane",
+    "status": "final",
+    "result": {
+      "for": 2,
+      "against": 0
+    }
+  },
+  {
+    "id": "2026-09-26-bha-h",
+    "date": "2026-09-26",
+    "kickoff": "17:00",
+    "opponent": "Brighton & Hove Albion",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium, Bromley",
+    "status": "final",
+    "sourceDiscrepancies": [
+      {
+        "field": "kickoff",
+        "detectedAt": "2026-09-15T10:00:00Z",
+        "state": "resolved",
+        "values": [
+          {
+            "value": "18:00",
+            "sourceName": "London City fixtures list",
+            "sourceUrl": "https://www.londoncitylionesses.com/fixtures",
+            "checkedAt": "2026-09-16"
+          },
+          {
+            "value": "17:00",
+            "sourceName": "Brighton ticket landing page",
+            "sourceUrl": "https://www.londoncitylionesses.com/brighton-h-2627",
+            "checkedAt": "2026-09-16"
+          }
+        ]
+      }
+    ],
+    "result": {
+      "for": 2,
+      "against": 0
+    },
+    "attendance": 4177,
+    "attendanceState": "reported",
+    "attendanceConfidence": "medium",
+    "attendanceObservedAt": "2026-10-02T10:00:00+01:00",
+    "attendanceSourceUrls": [
+      "https://www.footballwebpages.co.uk/match/2026-2027/womens-super-league/london-city-lionesses/brighton-and-hove-albion-women/589072",
+      "https://www.fotmob.com/matches/brighton-vs-london-city-lionesses/awc12a3z"
+    ]
+  },
+  {
+    "id": "2026-09-30-ips-a",
+    "date": "2026-09-30",
+    "kickoff": "19:30",
+    "opponent": "Ipswich Town",
+    "homeAway": "away",
+    "competition": "Subway Players Cup",
+    "venue": "JobServe Community Stadium",
+    "status": "final",
+    "sourceDiscrepancies": [
+      {
+        "field": "kickoff",
+        "detectedAt": "2026-09-29T09:30:00+01:00",
+        "state": "resolved",
+        "values": [
+          {
+            "value": "20:30",
+            "sourceName": "Existing seed calendar",
+            "sourceUrl": "https://github.com/Azucena7/london-city-fan-opportunity-engine/blob/main/data/seed/calendar.json",
+            "checkedAt": "2026-09-29"
+          },
+          {
+            "value": "19:30",
+            "sourceName": "WSL Football and ITFC Women ticketing",
+            "sourceUrl": "https://www.wslfootball.com/news/2026-27-subway-players-cup-league-phase-fixtures-confirmed",
+            "checkedAt": "2026-09-29"
+          }
+        ]
+      }
+    ],
+    "result": {
+      "for": 1,
+      "against": 0
+    }
+  },
+  {
+    "id": "2026-10-04-tot-a",
+    "date": "2026-10-04",
+    "kickoff": "14:00",
+    "kickoffVerification": {
+      "value": "14:00",
+      "checkedAt": "2026-10-02T10:00:00+01:00",
+      "sourceUrls": [
+        "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+        "https://www.tottenhamhotspur.com/news/1145195/spurs-vs-london-city-lionesses-womens-super-league-how-to-watch-team-news-kit-colours-key-information"
+      ]
+    },
+    "opponent": "Tottenham Hotspur",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Brisbane Road",
+    "status": "final",
+    "sourceDiscrepancies": [
+      {
+        "field": "kickoff",
+        "detectedAt": "2026-09-28T09:18:00Z",
+        "state": "resolved",
+        "values": [
+          {
+            "value": "13:00",
+            "sourceName": "Existing seed calendar",
+            "sourceUrl": "https://github.com/Azucena7/london-city-fan-opportunity-engine/blob/main/data/seed/calendar.json",
+            "checkedAt": "2026-09-28"
+          },
+          {
+            "value": "14:00",
+            "sourceName": "London City away ticket notice and WSL Football",
+            "sourceUrl": "https://www.londoncitylionesses.com/post/tottenham-hotspur-away-ticket-information",
+            "checkedAt": "2026-09-28"
+          }
+        ]
+      }
+    ],
+    "result": {
+      "for": 6,
+      "against": 1
+    }
+  },
+  {
+    "id": "2026-10-18-eve-h",
+    "date": "2026-10-18",
+    "kickoff": "14:00",
+    "kickoffVerification": {
+      "value": "14:00",
+      "checkedAt": "2026-10-01T15:15:00Z",
+      "sourceUrls": [
+        "https://www.londoncitylionesses.com/everton-h-2627",
+        "https://www.wslfootball.com/news/wsl/barclays-women-s-super-league-round-five-broadcast-picks-confirmed"
+      ]
+    },
+    "opponent": "Everton",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium",
+    "status": "scheduled",
+    "sourceDiscrepancies": [
+      {
+        "field": "kickoff",
+        "detectedAt": "2026-10-01T15:15:00Z",
+        "state": "resolved",
+        "values": [
+          {
+            "value": "15:00",
+            "sourceName": "Previous calendar snapshot",
+            "sourceUrl": "https://www.londoncitylionesses.com/fixtures",
+            "checkedAt": "2026-10-01"
+          },
+          {
+            "value": "14:00",
+            "sourceName": "Everton ticket page and WSL broadcast schedule",
+            "sourceUrl": "https://www.londoncitylionesses.com/everton-h-2627",
+            "checkedAt": "2026-10-01"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2026-10-21-whu-a",
+    "date": "2026-10-21",
+    "kickoff": "19:00",
+    "kickoffVerification": {
+      "value": "19:00",
+      "checkedAt": "2026-10-14T09:54:37+01:00",
+      "sourceUrls": [
+        "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+        "https://www.whufc.com/en/womens-team-matches/london-city-lionesses-h-0"
+      ]
+    },
+    "opponent": "West Ham United",
+    "homeAway": "away",
+    "competition": "Subway Players Cup",
+    "venue": "Chigwell Community Stadium",
+    "status": "scheduled",
+    "sourceDiscrepancies": [
+      {
+        "field": "kickoff",
+        "detectedAt": "2026-10-14T09:54:37+01:00",
+        "state": "resolved",
+        "values": [
+          {
+            "value": "20:00",
+            "sourceName": "London City generic fixtures page / previous main calendar",
+            "sourceUrl": "https://www.londoncitylionesses.com/fixtures",
+            "checkedAt": "2026-10-14"
+          },
+          {
+            "value": "19:00 BST",
+            "sourceName": "London City ticket notice and West Ham match page",
+            "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-information-west-ham-away-subway-players-cup",
+            "checkedAt": "2026-10-14"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2026-10-25-liv-a",
+    "date": "2026-10-25",
+    "kickoff": "14:00",
+    "opponent": "Liverpool",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "St Helens Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-10-28-cry-h",
+    "date": "2026-10-28",
+    "kickoff": "19:00",
+    "opponent": "Crystal Palace",
+    "homeAway": "home",
+    "competition": "Subway Players Cup",
+    "venue": "The CopperJax Community Stadium, Bromley",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-11-01-mci-h",
+    "date": "2026-11-01",
+    "kickoff": "12:00",
+    "opponent": "Manchester City",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium, Bromley",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-11-08-birmingham-c-h",
+    "date": "2026-11-08",
+    "kickoff": "14:30",
+    "opponent": "Birmingham City",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-11-15-arsenal-a",
+    "date": "2026-11-15",
+    "kickoff": "16:30",
+    "opponent": "Arsenal",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Emirates Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-11-18-bha-h",
+    "date": "2026-11-18",
+    "kickoff": "19:00",
+    "opponent": "Brighton & Hove Albion",
+    "homeAway": "home",
+    "competition": "Subway Players Cup",
+    "venue": "The CopperJax Community Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-11-21-crystal-pala-h",
+    "date": "2026-11-21",
+    "kickoff": "17:15",
+    "opponent": "Crystal Palace",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium, Bromley",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-12-13-che-a",
+    "date": "2026-12-13",
+    "kickoff": "14:00",
+    "opponent": "Chelsea",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Stamford Bridge",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-12-16-bri-h",
+    "date": "2026-12-16",
+    "kickoff": "19:00",
+    "opponent": "Bristol City",
+    "homeAway": "home",
+    "competition": "Subway Players Cup",
+    "venue": "The CopperJax Community Stadium, Bromley",
+    "status": "scheduled"
+  },
+  {
+    "id": "2026-12-20-avl-a",
+    "date": "2026-12-20",
+    "kickoff": "14:00",
+    "opponent": "Aston Villa",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Villa Park",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-01-10-whu-h",
+    "date": "2027-01-10",
+    "kickoff": "14:00",
+    "opponent": "West Ham United",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium, Bromley",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-01-20-eve-a",
+    "date": "2027-01-20",
+    "kickoff": "19:00",
+    "opponent": "Everton",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Goodison Park",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-01-24-ars-h",
+    "date": "2027-01-24",
+    "kickoff": "14:00",
+    "opponent": "Arsenal",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium, Bromley",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-01-31-mun-a",
+    "date": "2027-01-31",
+    "kickoff": "13:00",
+    "opponent": "Manchester United",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Progress With Unity Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-02-07-cry-a",
+    "date": "2027-02-07",
+    "kickoff": "14:00",
+    "opponent": "Crystal Palace",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "VBS Community Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-02-14-che-h",
+    "date": "2027-02-14",
+    "kickoff": "14:00",
+    "opponent": "Chelsea",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-03-14-liv-h",
+    "date": "2027-03-14",
+    "kickoff": "14:00",
+    "opponent": "Liverpool",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium, Bromley",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-03-17-bha-a",
+    "date": "2027-03-17",
+    "kickoff": "19:45",
+    "opponent": "Brighton & Hove Albion",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Broadfield Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-03-28-bir-a",
+    "date": "2027-03-28",
+    "kickoff": "15:00",
+    "opponent": "Birmingham City",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "St. Andrew's @ Knightshead Park",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-04-04-cha-h",
+    "date": "2027-04-04",
+    "kickoff": "15:00",
+    "opponent": "Charlton",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-05-02-tot-h",
+    "date": "2027-05-02",
+    "kickoff": "15:00",
+    "opponent": "Tottenham Hotspur",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-05-09-mci-a",
+    "date": "2027-05-09",
+    "kickoff": "15:00",
+    "opponent": "Manchester City",
+    "homeAway": "away",
+    "competition": "Barclays Women's Super League",
+    "venue": "Joie Stadium",
+    "status": "scheduled"
+  },
+  {
+    "id": "2027-05-22-avl-h",
+    "date": "2027-05-22",
+    "kickoff": "15:00",
+    "opponent": "Aston Villa",
+    "homeAway": "home",
+    "competition": "Barclays Women's Super League",
+    "venue": "The CopperJax Community Stadium",
+    "status": "scheduled"
+  }
+]

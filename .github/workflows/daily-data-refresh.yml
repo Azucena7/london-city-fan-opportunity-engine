@@ -129,26 +129,51 @@ jobs:
         run: npm run refresh:tfl-rail
         env:
           TFL_APP_KEY: ${{ secrets.TFL_APP_KEY }}
-      - name: Commit material updates
+      - name: Check for material data changes
+        id: changes
         if: steps.schedule_gate.outputs.run_refresh == 'true'
         run: |
           if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/bank-holidays.json data/live/tfl-road.json data/live/tfl-rail.json data/live/source-health.json; then
             echo "No data change to publish"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git diff --stat -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/bank-holidays.json data/live/tfl-road.json data/live/tfl-rail.json data/live/source-health.json
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Validate refreshed data before publishing
+        # The bot pushes straight to main, and pushes made with GITHUB_TOKEN do not start the
+        # Quality Gate. So the same checks run here first: lint and typecheck, unit tests, and
+        # the production build with every data validator. On failure the refreshed files are
+        # discarded, nothing is pushed and the run fails, so the owner is notified.
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          if npm run lint && npm test && npm run build; then
             exit 0
           fi
+          echo "::error::Refreshed data failed validation; nothing was published."
+          git checkout -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/bank-holidays.json data/live/tfl-road.json data/live/tfl-rail.json data/live/source-health.json
+          exit 1
+      - name: Commit material updates
+        if: steps.changes.outputs.changed == 'true'
+        run: |
           git config user.name "avela-data-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/bank-holidays.json data/live/tfl-road.json data/live/tfl-rail.json data/live/source-health.json
           git commit -m "data: refresh fixture and public signal state"
+          git pull --rebase origin main
           git push
       - name: Send the Morning Commercial Read
         # Once per London day on scheduled or manual runs (see the gate). Always lands in the run
         # summary; it is also emailed when RESEND_API_KEY and MORNING_READ_TO are repository
         # secrets. The day is recorded only after delivery, so a failed email is retried by the
         # next scheduled run.
-        if: steps.schedule_gate.outputs.send_read == 'true'
+        # It still goes out when an earlier step failed, read from the last published data.
+        if: ${{ !cancelled() && steps.schedule_gate.outputs.send_read == 'true' }}
         continue-on-error: true
         run: |
+          if [ "$JOB_STATUS" != "success" ]; then
+            git checkout -- data/
+          fi
           npm run send:morning-read
           if git diff --quiet -- data/live/morning-read.json; then
             exit 0
@@ -160,6 +185,7 @@ jobs:
           git pull --rebase origin main
           git push
         env:
+          JOB_STATUS: ${{ job.status }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           MORNING_READ_TO: ${{ secrets.MORNING_READ_TO }}
           MORNING_READ_FROM: ${{ secrets.MORNING_READ_FROM }}

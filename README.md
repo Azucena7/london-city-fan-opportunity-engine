@@ -130,8 +130,11 @@ Every pull request runs linting, typechecking, regression tests, data-contract v
 npm run lint
 npm test
 npm run build
-npm run test:e2e   # browser regression tests against the build (desktop + mobile Chromium)
+npm run build:e2e  # rebuild against the frozen data snapshot in e2e/data-snapshot
+npm run test:e2e   # browser regression tests against that build (desktop + mobile Chromium)
 ```
+
+Browser tests use a frozen copy of the data the daily bot refreshes, with the product date pinned to the snapshot's own date, so a fixture being played never breaks them. When a change needs newer data in those tests, refresh the copy with `npm run e2e:snapshot` and commit it. The daily bot validates refreshed data (lint, unit tests and the production build) before it pushes to `main`.
 
 
 ## Documentation
