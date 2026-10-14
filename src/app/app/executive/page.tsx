@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExecutiveShareActions } from "@/components/ExecutiveShareActions";
-import { bankHolidays, calendar, campaignPlans, currentState, eventLandscape, internationalWindows } from "@/lib/data";
+import { bankHolidays, calendar, campaignPlans, currentState, internationalWindows } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
 import { getCurrentPreparedMoves, getPreparationWindowIds } from "@/lib/currentPreparedMoves";
 import { DataTable } from "@/components/DataTable";
-import { buildOpportunityRadar } from "@/lib/opportunityRadar";
-import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
-import { currentProductDate } from "@/lib/currentProductDate";
-import { buildCalendarRelationships } from "@/lib/calendarIntelligence";
-import { getInternalCalendarRelationships } from "@/lib/calendarIntelligenceServer";
-import { applyCalendarDecisionPressure } from "@/lib/calendarDecisionPressure";
 import { getMaterialMatchdayAlert } from "@/lib/matchdayDecisionAlert";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./executive.module.css";
+import { decisionBadge, getDecisionQueue } from "@/lib/decisionQueue";
 
 export const metadata: Metadata = {
   title: "Executive view",
@@ -25,30 +20,8 @@ export const metadata: Metadata = {
 
 export default async function ExecutiveViewPage({ searchParams }: { searchParams: Promise<{ fixture?: string }> }) {
   const params = await searchParams;
-  const clubContext = await getCurrentClubOperatingContext();
-  const today = currentProductDate(currentState.updated_at);
-  const upcoming = calendar
-    .filter((item) => item.homeAway === "home" && item.date >= today && item.status !== "final")
-    .sort((a,b) => a.date.localeCompare(b.date));
-  const opportunityRadar = buildOpportunityRadar(upcoming.map((item) => item.id), clubContext);
-  const calendarToDate = calendar.map((item) => item.date).sort().at(-1) ?? today;
-  const externalCalendarRelationships = buildCalendarRelationships({
-    fixtures: calendar,
-    campaignPlans,
-    eventLandscape,
-    fromDate: today
-  });
-  const internalCalendar = await getInternalCalendarRelationships({
-    clubId: clubContext?.clubId,
-    fixtures: calendar,
-    campaignPlans,
-    fromDate: today,
-    toDate: calendarToDate
-  });
-  const radar = applyCalendarDecisionPressure(
-    opportunityRadar,
-    [...externalCalendarRelationships, ...internalCalendar.relationships]
-  );
+  // The shared decision queue: the same fixtures and attention order as Home and Radar.
+  const { radar } = await getDecisionQueue();
   const selectedId = params.fixture && calendar.some((item) => item.id === params.fixture)
     ? params.fixture
     : radar[0]?.fixtureId ?? currentState.next_home_fixture_id;
@@ -63,11 +36,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
 
   if (!fixture || !live) return null;
 
-  const executiveState = live.decisionState === "HOLD"
-    ? "BLOCKED"
-    : live.decisionState === "READY FOR REVIEW"
-      ? "REVIEW"
-      : "ACT";
+  const executiveState = decisionBadge(live.decisionState);
 
   const decisionPosition = live.decisionState === "HOLD" ? 18 : live.decisionState === "READY FOR REVIEW" ? 58 : 84;
   const signalHighlights = live.liveSignals.slice(0, 4);
@@ -127,9 +96,9 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
       actions={<ExecutiveShareActions />}
     >
 
-      <section className={styles.morningRead} aria-label="Executive morning read">
+      <section className={styles.morningRead} aria-label="Executive attention summary">
         <div className={styles.morningIntro}>
-          <span>Morning read</span>
+          <span>Attention now</span>
           <strong>{attentionNow ? attentionNow + " fixture decision" + (attentionNow === 1 ? "" : "s") + " need attention now." : "No fixture decision needs immediate attention."}</strong>
           <small>Start with the highest-value decision, then scan blockers and measurement before opening detail.</small>
         </div>
@@ -161,7 +130,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
       </section>
 
       <section className={styles.portfolio} aria-label="Decision portfolio">
-        <WorkspaceSectionHeader eyebrow="Decision portfolio" title="Every upcoming home decision, in attention order" />
+        <WorkspaceSectionHeader eyebrow="Decision portfolio" title={"The next " + radar.length + " home decisions, in attention order"} />
         <DataTable
           caption="Decision portfolio: upcoming home fixtures ranked by attention"
           rows={portfolio}
@@ -183,7 +152,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
               key: "decision",
               header: "Decision",
               cell: (row) => row.decisionState
-                ? <DecisionStateBadge state={row.decisionState === "HOLD" ? "BLOCKED" : "REVIEW"} label={row.decisionState} />
+                ? <DecisionStateBadge state={decisionBadge(row.decisionState)} label={row.decisionState} />
                 : "Not assessed"
             },
             {

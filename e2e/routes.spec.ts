@@ -291,3 +291,25 @@ test("Learning never shows the recommendation as the action the club took", asyn
   await expect(action).toContainText("Club action not recorded here");
   await expect(action.getByRole("link", { name: /Confirm what went live in the decision history/ })).toHaveAttribute("href", /\/app\/matches\/.+#decision-memory$/);
 });
+
+test("Home, Radar and Executive agree on the #1 decision and the attention counts", async ({ page }) => {
+  const count = async (label: string) => Number(await page.locator(`section[aria-label="Opportunity radar summary"] > *`).filter({ hasText: label }).first().locator("strong").innerText());
+
+  await page.goto("/app/matches");
+  const radarTitle = await page.getByText("Current engine priority").locator("xpath=..").locator("h2, h3, strong").first().innerText();
+  const opponent = radarTitle.replace(/^London City v /, "").trim();
+  const actNow = await count("Act now");
+  const review = await count("Review");
+
+  await page.goto("/app");
+  const inbox = page.locator("[data-priority]").first();
+  await expect(inbox).toContainText(opponent);
+  const metrics = page.getByRole("region", { name: "Decision health summary" });
+  await expect(metrics.locator("> *").filter({ hasText: "Act now" }).locator("strong")).toHaveText(String(actNow));
+  await expect(metrics.locator("> *").filter({ hasText: "Review" }).locator("strong")).toHaveText(String(review));
+
+  await page.goto("/app/executive");
+  const summary = page.getByRole("region", { name: "Executive attention summary" });
+  await expect(summary.getByText("#1 priority").locator("xpath=..")).toContainText(opponent);
+  await expect(summary).toContainText(`${actNow + review} fixture decision`);
+});
