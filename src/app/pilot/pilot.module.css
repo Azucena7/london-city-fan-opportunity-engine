@@ -42,7 +42,7 @@
 
 .section{padding:54px 0;border-top:1px solid var(--product-line)}
 .sectionHead{max-width:850px;margin-bottom:26px}
-.sectionHead h2{margin:9px 0 10px;font-size:clamp(32px,4.5vw,48px);line-height:1.03;letter-spacing:-.045em}
+.sectionHead h2{margin:9px 0 10px;font-size:clamp(28px,3.2vw,42px);line-height:1.06;letter-spacing:-.04em}
 .sectionHead p{margin:0;color:var(--product-muted);font-size:16px;line-height:1.5}
 
 .timeline{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
@@ -145,6 +145,7 @@
   .hero,.outcomes,.section,.week,.cta{width:min(100% - 30px,1120px)}
   .section{padding:48px 0}
   .week,.cta{padding:26px 22px}
+  .week h2,.cta h2{font-size:28px}
 }
 
 .pilotWindow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--product-line);border-radius:16px;overflow:hidden;background:#fff}

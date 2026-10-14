@@ -3004,3 +3004,12 @@ test("commercial FAQ refuses prediction claims and says what is read today", () 
   assert.match(faq, /What does AVELA read today\?/);
   assert.match(faq, /shown as not connected, never filled in/);
 });
+
+test("pilot pages keep section headlines at section scale", () => {
+  for (const file of ["src/app/pilot/pilot.module.css", "src/app/pilot/operating-pack/operating-pack.module.css"]) {
+    const css = read(file);
+    for (const match of css.matchAll(/h2\{[^}]*font-size:(?:clamp\([^,]+,[^,]+,(\d+)px\)|(\d+)px)/g)) {
+      assert.ok(Number(match[1] ?? match[2]) <= 42, `${file}: ${match[0]}`);
+    }
+  }
+});
