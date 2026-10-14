@@ -2,7 +2,7 @@
 // Always: the read is written to the GitHub Actions run summary (and stdout).
 // Email: only when RESEND_API_KEY and MORNING_READ_TO are set. Recipients live in secrets,
 // never in the repository. Run with: npx tsx@4.19.2 --tsconfig tsconfig.json scripts/send-morning-read.ts
-import { appendFile } from "node:fs/promises";
+import { appendFile, writeFile } from "node:fs/promises";
 import { currentState } from "@/lib/data";
 import { currentProductDate } from "@/lib/currentProductDate";
 import { getCurrentMorningRead } from "@/lib/currentMorningRead";
@@ -11,6 +11,19 @@ import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { movesDueThisWeek, renderMorningReadDigest } from "@/lib/morningReadDigest";
 
 const SITE_URL = process.env.SITE_URL || "https://avela-growth-intelligence.vercel.app";
+const RECORD_PATH = new URL("../data/live/morning-read.json", import.meta.url);
+
+function londonIsoDate(value = new Date()) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit" }).format(value);
+}
+
+// The daily workflow sends once per London day; it reads this record to know today is done.
+// Only runs inside GitHub Actions record a delivery, so local runs never mark a day as sent.
+async function recordDelivery(delivery: "run-summary" | "email") {
+  if (process.env.GITHUB_ACTIONS !== "true") return;
+  const now = new Date();
+  await writeFile(RECORD_PATH, `${JSON.stringify({ lastSentFor: londonIsoDate(now), lastSentAt: now.toISOString(), delivery }, null, 2)}\n`);
+}
 
 async function main() {
   const live = getCurrentProductOpportunity();
@@ -34,6 +47,7 @@ async function main() {
   const to = (process.env.MORNING_READ_TO ?? "").split(",").map((address) => address.trim()).filter(Boolean);
   if (!apiKey || !to.length) {
     console.log("\nEmail delivery not configured (RESEND_API_KEY and MORNING_READ_TO): the read is in the run summary only.");
+    await recordDelivery("run-summary");
     return;
   }
   if (process.env.REFRESH_DRY_RUN === "1") {
@@ -55,6 +69,7 @@ async function main() {
   });
   if (!response.ok) throw new Error(`Resend returned ${response.status}: ${await response.text()}`);
   console.log(`\nEmailed the Morning Commercial Read to ${to.length} recipient(s).`);
+  await recordDelivery("email");
 }
 
 main().catch((error) => {
