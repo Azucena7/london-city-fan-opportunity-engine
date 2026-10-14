@@ -10,8 +10,8 @@
     "lon": 0.01771
   },
   "radiusKm": 15,
-  "checkedAt": "2026-10-14T13:47:20.164Z",
-  "lastSuccessfulAt": "2026-10-14T13:47:20.164Z",
+  "checkedAt": "2026-10-14T14:39:11.705Z",
+  "lastSuccessfulAt": "2026-10-14T14:39:11.705Z",
   "incidents": [
     {
       "id": "TIMS-235924",
@@ -55,6 +55,17 @@
       "startDate": "2026-09-06",
       "endDate": "2027-01-29",
       "distanceKm": 10.6,
+      "material": true
+    },
+    {
+      "id": "TIMS-236392",
+      "location": "[A23] BRIXTON HILL (SW2 ,SW9 ) (Lambeth)",
+      "severity": "Minimal",
+      "category": "Collisions",
+      "subCategory": "Vehicle collision",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-14",
+      "distanceKm": 12,
       "material": true
     },
     {
@@ -330,17 +341,6 @@
       "startDate": "2026-07-06",
       "endDate": "2026-11-06",
       "distanceKm": 12,
-      "material": false
-    },
-    {
-      "id": "TIMS-236384",
-      "location": "[A13] EAST INDIA DOCK ROAD (E14 ) (Tower Hamlets)",
-      "severity": "No impact",
-      "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-14",
-      "endDate": "2026-10-14",
-      "distanceKm": 13.5,
       "material": false
     },
     {
