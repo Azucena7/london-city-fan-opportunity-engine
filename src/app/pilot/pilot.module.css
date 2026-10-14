@@ -1,4 +1,6 @@
 .shell{
+  /* Full width: the global main width would box in the header and bands. */
+  width:100%;
   min-height:100vh;
   background:#f8f6f1;
   color:#102742;
@@ -51,7 +53,7 @@
 .timeline h3{margin:0 0 7px;font-size:20px}
 .timeline p{margin:0;color:var(--product-muted);line-height:1.5;font-size:14px}
 
-.dataGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.dataGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 .dataGrid article{padding:20px;border-radius:var(--product-radius-md);border:1px solid var(--product-line);background:var(--product-surface)}
 .dataGrid strong{display:block;font-size:18px;margin-bottom:7px}
 .dataGrid span{color:var(--product-muted);font-size:12px;line-height:1.45}

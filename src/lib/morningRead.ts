@@ -19,7 +19,7 @@ type Opportunity = {
 };
 
 export type MorningReadLine = {
-  id: "pressure" | "broadcast" | "weather" | "transport" | "opportunity" | "move";
+  id: "pressure" | "broadcast" | "weather" | "calendar" | "transport" | "opportunity" | "move";
   label: string;
   headline: string;
   detail: string | null;
@@ -34,6 +34,7 @@ export type MorningReadInput = {
   weather: Weather;
   sources: HealthSource[];
   live: Opportunity | null;
+  moments?: Array<{ fixtureId: string; label: string }>;
   horizon?: number;
 };
 
@@ -41,7 +42,7 @@ function day(value: string) {
   return new Date(`${value}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 }
 
-export function buildMorningRead({ today, calendar, events, signals, weather, sources, live, horizon = 4 }: MorningReadInput): MorningReadLine[] {
+export function buildMorningRead({ today, calendar, events, signals, weather, sources, live, moments = [], horizon = 4 }: MorningReadInput): MorningReadLine[] {
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a, b) => a.date.localeCompare(b.date))
@@ -97,6 +98,22 @@ export function buildMorningRead({ today, calendar, events, signals, weather, so
       state: operational.has("open-meteo") ? "live" : "not-connected"
     });
   }
+
+  // Calendar moments: bank holidays and international windows around the next home fixtures.
+  const upcomingIds = new Set(upcoming.map((fixture) => fixture.id));
+  const nearMoments = moments.filter((moment) => upcomingIds.has(moment.fixtureId));
+  const holidaysLive = operational.has("uk-bank-holidays");
+  const windowsLive = operational.has("fifa-international-windows");
+  lines.push({
+    id: "calendar",
+    label: "Calendar moments",
+    headline: nearMoments[0]?.label ?? `No bank holiday or international window around the next ${upcoming.length} home fixtures`,
+    detail: [
+      ...nearMoments.slice(1, 3).map((moment) => moment.label),
+      ...(holidaysLive ? [] : ["Bank holidays join after the first GOV.UK refresh."])
+    ].join(" ") || null,
+    state: holidaysLive || windowsLive ? "live" : "not-connected"
+  });
 
   const transportLive = operational.has("tfl-road") || operational.has("national-rail-rdm");
   lines.push({

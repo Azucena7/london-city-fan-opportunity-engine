@@ -5,15 +5,15 @@ import { MarketingNav } from "@/components/MarketingNav";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 
 export const metadata: Metadata = {
-  title: "Club Pilot · Marketing & Commercial Decision Workspace",
+  title: "Club Pilot · The Opportunity Engine for Marketing & Commercial Teams",
   description: "A focused AVELA pilot for football club marketing and commercial teams: 4–6 fixtures or a bounded campaign window, one or two workflows and measurable decision learning."
 };
 
 const cycle = [
-  ["01", "Read", "Join the relevant signals, club context and constraints around one real decision."],
-  ["02", "Decide", "Make the recommendation, owner, blockers and measurement plan explicit before activation."],
-  ["03", "Move", "Execute through the club's existing tools with human approval and clear ownership."],
-  ["04", "Learn", "Compare recommendation, execution and outcome so the next decision gets better."]
+  ["01", "Signal", "Read what is changing around each fixture and keep only the signals that could change a decision."],
+  ["02", "Prepared move", "Validate it against demand, rights and availability, then make the move, owner, blockers and measurement plan explicit."],
+  ["03", "Execute", "Run it through the club's existing tools with human approval and clear ownership."],
+  ["04", "Learn", "Compare recommendation, execution and outcome so the next read starts from what actually happened."]
 ];
 
 const pilotWindow = [
@@ -57,10 +57,10 @@ export default function PilotPage() {
       <header className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>Focused club pilot · 4–6 fixtures or a bounded campaign window</span>
-          <h1>Prove better decisions before integrating more.</h1>
+          <h1>Point the engine at your next 4–6 fixtures.</h1>
           <p>
-            Test AVELA on one or two real marketing/commercial workflows using the stack the club already has.
-            The pilot is designed to answer a simple question: does cross-functional decision orchestration improve what the team decides, executes and learns?
+            Test AVELA on one or two real marketing and commercial decisions using the stack the club already has.
+            The pilot answers a simple question: does the Opportunity Engine surface the signals that matter early enough to change what the team prepares, executes and learns?
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.button} href="/app/demo?utm_source=pilot&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=hero">Try the guided demo</Link>
@@ -102,6 +102,7 @@ export default function PilotPage() {
           <p>No rip-and-replace programme is required. The pilot can begin with public context and the strongest authorised aggregates the club can provide.</p>
         </div>
         <div className={styles.dataGrid}>
+          <article><strong>External signals</strong><span>Weather, city events, competing football, calendar moments and public news — read from day one.</span></article>
           <article><strong>Ticketing / CRM</strong><span>Demand, purchases, scans, contactability and repeat behaviour where authorised.</span></article>
           <article><strong>Marketing / content</strong><span>Campaign activity, channel response, social and web evidence already available.</span></article>
           <article><strong>Commercial context</strong><span>Sponsor rights, player assets, contracts, campaigns and priority moments.</span></article>

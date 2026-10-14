@@ -56,3 +56,13 @@ test("a held decision says what it is waiting on", () => {
   assert.equal(lines.move.headline, "Build the audience.");
   assert.equal(lines.move.detail, "On hold until: Assign the owner.");
 });
+
+test("calendar moments read as not connected until a calendar source is operational", () => {
+  const moments = [{ fixtureId: "a", label: "First home match after the international window (Everton): internationals return" }];
+  const off = byId(buildMorningRead({ ...base, sources: [], moments }));
+  assert.equal(off.calendar.state, "not-connected");
+  const on = byId(buildMorningRead({ ...base, sources: [{ id: "fifa-international-windows", state: "operational" }], moments }));
+  assert.equal(on.calendar.state, "live");
+  assert.match(on.calendar.headline, /First home match after the international window/);
+  assert.match(on.calendar.detail, /Bank holidays join after the first GOV.UK refresh/);
+});

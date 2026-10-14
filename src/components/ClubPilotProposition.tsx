@@ -57,10 +57,10 @@ export function ClubPilotProposition() {
     <div className="commercialLanguage"><LanguageSwitcher /></div>
 
     <header className="commercialHero">
-      <p className="eyebrow">{es ? "PARA EQUIPOS DE MARKETING Y COMERCIAL · PILOTO PROPUESTO" : "FOR MARKETING & COMMERCIAL TEAMS · PROPOSED PILOT"}</p>
-      <h1>{es ? "Prueba mejores decisiones antes de integrar más." : "Prove better decisions before integrating more."}</h1>
-      <p>{es ? "Empieza con 4–6 partidos o una campaña acotada y uno o dos flujos reales del equipo. AVELA trabaja con el stack actual, añade el contexto que falta y hace visible qué decisión tomar, quién debe moverla y cómo aprender del resultado." : "Start with 4–6 fixtures or a bounded campaign window and one or two real team workflows. AVELA works with the existing stack, adds the missing context and makes clear what to decide, who should move it and how to learn from the result."}</p>
-      <p className="commercialScope">{es ? "4–6 partidos o campaña · 1–2 flujos · un objetivo prioritario" : "4–6 fixtures or campaign · 1–2 workflows · one priority objective"}</p>
+      <p className="eyebrow">{es ? "PARA EQUIPOS DE MARKETING Y COMERCIAL · PILOTO DEL OPPORTUNITY ENGINE" : "FOR MARKETING & COMMERCIAL TEAMS · OPPORTUNITY ENGINE PILOT"}</p>
+      <h1>{es ? "Mira qué podría cambiar tus próximos 4\u2060–\u20606 partidos." : "See what could change your next 4\u2060–\u20606 matches."}</h1>
+      <p>{es ? "Un piloto apunta AVELA a tus propios partidos: las señales externas alrededor de cada uno, unidas a tu demanda, derechos y disponibilidad. Antes de cada partido el equipo recibe qué cambió, por qué importa y qué movimiento conviene preparar; el piloto mide si esos movimientos fueron mejores. Trabaja con el stack actual: no hay que integrarlo todo para empezar." : "A pilot points AVELA at your own fixtures: the external signals around each one, joined with your demand, rights and availability. Before every match the team gets what changed, why it matters and the move worth preparing — and the pilot measures whether those moves were better. It works with the existing stack: nothing has to be integrated first."}</p>
+      <p className="commercialScope">{es ? "4–6 partidos · 1–2 decisiones prioritarias · medición acordada antes" : "4–6 fixtures · 1–2 priority decisions · measurement agreed up front"}</p>
       <div className="caseOverviewLinks">
         <a className="productButton" href="#demo">{es ? "Solicitar un piloto →" : "Request a club pilot →"}</a>
         <Link href="/app/demo?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=hero">{es ? "Probar la demo guiada →" : "Try the guided demo →"}</Link>
@@ -70,15 +70,30 @@ export function ClubPilotProposition() {
 
     <section className="commercialPanel">
       <p className="eyebrow">{es ? "QUÉ RECIBE EL CLUB" : "WHAT THE CLUB GETS"}</p>
-      <h2>{es ? "Una mejor decisión antes. Aprendizaje utilizable después." : "A better decision before. Reusable learning after."}</h2>
+      <h2>{es ? "La señal que importa antes. Aprendizaje utilizable después." : "The signal that matters before. Reusable learning after."}</h2>
       <div className="commercialTwoColumns">
         <article>
           <h3>{es ? "Antes de actuar" : "Before action"}</h3>
-          <p>{es ? "Una vista de decisión con oportunidad, audiencia, mensaje, responsable, bloqueos y plan de medición. La recomendación no activa nada sin aprobación humana." : "A decision view with opportunity, audience, message, owner, blockers and measurement plan. The recommendation activates nothing without human approval."}</p>
+          <p>{es ? "Qué cambió alrededor del partido, por qué importa y un movimiento preparado con audiencia, mensaje, responsable, bloqueos y plan de medición. Nada se activa sin aprobación humana." : "What changed around the match, why it matters and one prepared move with audience, message, owner, blockers and measurement plan. Nothing activates without human approval."}</p>
         </article>
         <article>
           <h3>{es ? "Después de actuar" : "After action"}</h3>
           <p>{es ? "Qué se ejecutó, qué cambió, qué evidencia existe y qué debe cambiar en la siguiente decisión. Sin convertir correlación en causalidad." : "What was executed, what changed, what evidence exists and what should change in the next decision — without turning correlation into causality."}</p>
+        </article>
+      </div>
+    </section>
+
+    <section className="commercialPanel" aria-labelledby="engine-reads-title">
+      <p className="eyebrow">{es ? "QUÉ LEE EL MOTOR" : "WHAT THE ENGINE READS"}</p>
+      <h2 id="engine-reads-title">{es ? "Lo que ya lee hoy, y lo que se conecta en un piloto." : "What it reads today, and what connects in a pilot."}</h2>
+      <div className="commercialTwoColumns">
+        <article>
+          <h3>{es ? "Hoy, con fuentes públicas" : "Today, from public sources"}</h3>
+          <p>{es ? "Previsión meteorológica, eventos en la ciudad y fútbol que compite por la misma franja, calendario y anuncios del club, ventanas internacionales y noticias públicas." : "Weather forecasts, city events and football competing for the same slot, the club calendar and announcements, international windows and public news."}</p>
+        </article>
+        <article>
+          <h3>{es ? "En el piloto, con acceso del club" : "In the pilot, with club access"}</h3>
+          <p>{es ? "Transporte (TfL y National Rail), agregados de CRM y ticketing, derechos y obligaciones con partners, y disponibilidad de jugadoras y staff. Hasta conectarse se muestran como no conectados, nunca se rellenan." : "Transport (TfL and National Rail), CRM and ticketing aggregates, partner rights and obligations, and player and staff availability. Until connected they are shown as not connected, never filled in."}</p>
         </article>
       </div>
     </section>

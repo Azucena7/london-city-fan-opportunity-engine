@@ -1,5 +1,6 @@
 import sourceHealth from "../../data/live/source-health.json";
-import { calendar, currentState, eventLandscape, liveSignals } from "@/lib/data";
+import { bankHolidays, calendar, currentState, eventLandscape, internationalWindows, liveSignals } from "@/lib/data";
+import { calendarMoments } from "@/lib/calendarMoments";
 import { currentProductDate } from "@/lib/currentProductDate";
 import { buildMorningRead } from "@/lib/morningRead";
 import type { ProductOpportunity } from "@/lib/productOpportunity";
@@ -19,7 +20,8 @@ export function MorningCommercialRead({ live }: { live: ProductOpportunity | nul
     signals: liveSignals,
     weather: currentState.weather,
     sources: sourceHealth.sources,
-    live
+    live,
+    moments: calendarMoments(calendar, bankHolidays.events, internationalWindows.windows)
   });
 
   return (

@@ -2764,7 +2764,9 @@ test("commercial pilot pages separate buying story from operating detail", () =>
   assert.match(clubs, /Define\. Test\. Learn\./);
   assert.doesNotMatch(pilot, /ProductJourneyNav/);
   assert.match(pilot, /MarketingNav/);
-  assert.match(pilot, /Prove better decisions before integrating more/);
+  assert.match(pilot, /Point the engine at your next 4–6 fixtures/);
+  assert.match(clubs, /What it reads today, and what connects in a pilot/);
+  assert.match(clubs, /never filled in/);
   assert.match(pilot, /The output is a decision about AVELA too/);
   assert.match(pilot, /Open the Operating Pack/);
   assert.doesNotMatch(pilot, /Prepare a club pilot discussion/);
