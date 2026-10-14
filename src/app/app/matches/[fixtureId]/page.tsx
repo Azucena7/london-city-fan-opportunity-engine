@@ -140,7 +140,18 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <span className={styles.eyebrow}>Recommended play</span>
           <h2>{campaign?.title.en ?? live.opportunity}</h2>
           <p>{live.whyNow}</p>
-          <a href="#campaign">Build this campaign →</a>
+          {/* Feasibility comes before the build: the verdict and owner are visible without opening a phase. */}
+          <div className={styles.feasibilityVerdict} aria-label="Can we do it?">
+            <span>Can we do it?</span>
+            <strong>{approvals.length
+              ? `Not yet · ${approvals.length} approval gate${approvals.length === 1 ? "" : "s"} open`
+              : "No approval gate open · confirm availability and capacity"}</strong>
+            <small>Owner: {live.nextAction.owner} · Player availability and team capacity need club data to confirm.</small>
+          </div>
+          <div className={styles.decisionLinks}>
+            <a href="#readiness">Check feasibility →</a>
+            <a href="#campaign">Build this campaign →</a>
+          </div>
         </div>
 
         <div className={styles.decisionFacts}>

@@ -164,3 +164,13 @@ test.describe("engine draft adoption on a fixture without a campaign plan", () =
     await expect(bar).not.toContainText("Club decision recorded");
   });
 });
+
+test("the brief says whether the play is feasible, and who owns it, before the build", async ({ page, isMobile }) => {
+  test.skip(Boolean(isMobile), "desktop flow");
+  await page.goto(brief);
+  const verdict = page.getByLabel("Can we do it?");
+  await expect(verdict).toContainText(/Not yet · \d+ approval gates? open|No approval gate open/);
+  await expect(verdict).toContainText("Owner:");
+  await page.getByRole("link", { name: "Check feasibility →" }).click();
+  await expect(page.locator("#readiness")).toBeVisible();
+});
