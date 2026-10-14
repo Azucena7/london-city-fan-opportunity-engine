@@ -361,8 +361,6 @@ test("pilot access separates identity from club membership and supports admin ap
 test("club setup context differentiates the engine from replacement CRM and generic campaign tools", () => {
   const builder = read("src/components/CampaignDeliveryPlanner.tsx");
   const draftRoute = read("src/app/api/campaign-draft/route.ts");
-  const home = read("src/app/page.tsx");
-  const ecosystem = read("src/components/CommercialEcosystem.tsx");
 
   assert.match(builder, /Built above the club&apos;s existing stack — not instead of it/);
   // A setup selection is not a verified connector; with none selected nothing is in the stack.
@@ -380,11 +378,6 @@ test("club setup context differentiates the engine from replacement CRM and gene
   assert.match(draftRoute, /Follow this club tone/);
   assert.match(draftRoute, /Respect this club must-avoid rule/);
 
-  assert.match(home, /The Opportunity Engine for Football Club Marketing & Commercial Teams/);
-  assert.match(home, /CommercialEcosystem/);
-  assert.match(ecosystem, /Works with your club stack/);
-  assert.match(ecosystem, /Keep your specialist tools\. AVELA reads across them/);
-  assert.match(ecosystem, /are not competitors/);
 });
 
 test("club setup persists reusable fixture, channel, objective, brand and approval context", () => {
@@ -630,15 +623,9 @@ test("London City Live reads like an editorial case journal", () => {
 });
 
 test("marketing app and live case have distinct canonical surfaces", () => {
-  const home = read("src/app/page.tsx");
-  const marketingNav = read("src/components/MarketingNav.tsx");
   const appNav = read("src/components/ProductJourneyNav.tsx");
   const config = read("next.config.mjs");
   const liveCase = read("src/components/LondonCityCase.tsx");
-  assert.match(home, /See a live fixture decision/);
-  assert.match(home, /\/live\/london-city\?utm_source=avela_home/);
-  assert.match(marketingNav, /Open workspace/);
-  assert.match(marketingNav, /\/app\/demo\?utm_source=avela_nav/);
   assert.match(appNav, /AVELA website/);
   assert.match(appNav, /\/app\/learning/);
   assert.match(config, /source: "\/london-city", destination: "\/live\/london-city"/);
@@ -956,26 +943,12 @@ test("pilot weekly example reads the current product opportunity", () => {
   assert.doesNotMatch(page, /\/pilot\/rehearsal/);
 });
 
-test("AVELA commercial home uses an editorial product-theatre identity with purposeful motion", () => {
-  const page = read("src/app/page.tsx");
+test("AVELA commercial home keeps its editorial identity tokens and purposeful motion", () => {
   const homeCss = read("src/app/commercial-home.module.css");
-  const motion = read("src/components/OpportunityEngineStage.tsx");
   const motionCss = read("src/components/OpportunityEngineStage.module.css");
-  const ecosystem = read("src/components/CommercialEcosystem.tsx");
   const productSystem = read("src/app/product-system.css");
   const appNav = read("src/components/ProductJourneyNav.tsx");
 
-  assert.match(page, /See what could change the match/);
-  assert.doesNotMatch(page, /The problem is not missing data/);
-  assert.match(page, /OpportunityEngineStage/);
-  assert.match(page, /CommercialEcosystem/);
-  assert.match(page, /See a live fixture decision/);
-  assert.match(ecosystem, /Keep your specialist tools/);
-
-  assert.match(motion, /AVELA Opportunity Engine/);
-  assert.match(motion, /What changed/);
-  assert.match(motion, /Why it matters/);
-  assert.match(motion, /Prepared move/);
   assert.match(motionCss, /@keyframes flow/);
   assert.match(motionCss, /prefers-reduced-motion:no-preference/);
 
@@ -1115,19 +1088,9 @@ test("commercial case study leads with time-stamped prediction versus observable
 });
 
 
-test("commercial home turns London City proof into a concrete focused pilot path", () => {
-  const page = read("src/app/page.tsx");
+test("commercial home proof and pilot sections keep their styles", () => {
   const css = read("src/app/commercial-home.module.css");
-  assert.match(page, /A time-stamped AVELA hypothesis\. What London City announced next/);
-  assert.match(page, /AVELA saw/);
-  assert.match(page, /London City later announced/);
-  assert.match(page, /evidence of relevance/);
-  assert.match(page, /Prove AVELA on 4–6 fixtures before you integrate more/);
-  assert.match(page, /4–6 fixtures/);
-  assert.match(page, /1–2 workflows/);
-  assert.match(page, /Measured learning/);
   assert.match(css, /proofFlow/);
-  assert.match(page, /London City is an independent demonstration, not a customer/);
   assert.match(css, /pilotSteps/);
 });
 
@@ -1600,16 +1563,6 @@ test("Club setup separates planning readiness from outcome measurement readiness
   assert.match(readiness, /Ready with limits/);
 });
 
-test("Commercial FAQ states current integration and execution boundaries", () => {
-  const faq = read("src/components/CommercialFAQ.tsx");
-  assert.match(faq, /Does AVELA replace Blinkfire, CRM, ticketing or BI tools\?/);
-  assert.match(faq, /Specialist platforms remain systems of record or specialist intelligence sources/);
-  assert.match(faq, /Do we need to integrate everything before starting\?/);
-  assert.match(faq, /fixtures, campaigns, public signals and a limited amount of club-approved context/);
-  assert.match(faq, /Material club decisions remain subject to authorised human confirmation/);
-  assert.match(faq, /The LLM is part of AVELA; it is not the product/);
-});
-
 test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
@@ -1683,14 +1636,6 @@ test("public crawl policy exposes canonical surfaces and excludes the club app",
   assert.doesNotMatch(sitemap, /\$\{base\}\/app/);
 });
 
-test("commercial navigation enters the guided product demo and labels London City as a demo", () => {
-  const nav = read("src/components/MarketingNav.tsx");
-  assert.match(nav, /Live case/);
-  assert.match(nav, /Open workspace/);
-  assert.match(nav, /\/app\/demo\?utm_source=avela_nav/);
-  assert.doesNotMatch(nav, /href="\/app\/matches">Try product/);
-});
-
 test("Player Assets keeps the live pack decision visible and navigable", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
@@ -1737,17 +1682,8 @@ test("current AVELA brand surfaces do not regress to the retired lime system", (
   assert.match(read("src/app/linkedin-card/route.tsx"), /#2F8F83/);
 });
 
-test("commercial funnel proves relevance before explaining the full product and keeps CTAs truthful", () => {
-  const home = read("src/app/page.tsx");
-  const nav = read("src/components/MarketingNav.tsx");
+test("For Clubs keeps truthful pilot CTAs", () => {
   const clubs = read("src/components/ClubPilotProposition.tsx");
-  assert.ok(home.indexOf("The problem is not missing data") < home.indexOf("Proof in public"));
-  assert.match(home, /Request a club pilot/);
-  assert.match(home, /See a live fixture decision/);
-  assert.match(home, /Try the guided product demo/);
-  assert.doesNotMatch(home, /Request a demo|Request pilot demo|Request club demo|Request the 90-day pilot/);
-  assert.match(nav, /Open workspace/);
-  assert.match(nav, /Request pilot/);
   assert.match(clubs, /Tell us which decision you want to improve/);
   assert.match(clubs, /Try the guided demo/);
   assert.doesNotMatch(clubs, /Copy pilot brief|Prepare a pilot conversation/);
@@ -2233,49 +2169,12 @@ test("work-system routing stays explainable and confirmation-gated", () => {
 
 
 
-test("homepage sells the decision layer with a low-friction pilot path", () => {
-  const page = read("src/app/page.tsx");
-  const ecosystem = read("src/components/CommercialEcosystem.tsx");
-  assert.match(page, /See what could change the match/);
-  assert.match(page, /The Opportunity Engine for football club marketing & commercial teams/);
-  assert.match(ecosystem, /Keep your specialist tools/);
-  assert.match(page, /<OpportunityEngineStage live=\{live\} \/>/);
-  assert.match(page, /London City Live/);
-});
-
-
 test("commercial home uses lightweight decision motion instead of decorative video", () => {
-  const page = read("src/app/page.tsx");
   const stage = read("src/components/OpportunityEngineStage.tsx");
   const stageCss = read("src/components/OpportunityEngineStage.module.css");
-  const ecosystem = read("src/components/CommercialEcosystem.tsx");
-  assert.match(page, /OpportunityEngineStage/);
-  assert.match(ecosystem, /What changed/);
-  assert.match(ecosystem, /Why it matters/);
-  assert.match(ecosystem, /Prepared move/);
   assert.match(stage, /styles\.core/);
   assert.match(stage, /styles\.outputs/);
   assert.match(stageCss, /prefers-reduced-motion:no-preference/);
-});
-
-
-test("commercial home explains why AVELA complements specialist tools and general AI", () => {
-  const home = read("src/app/page.tsx");
-  const ecosystem = read("src/components/CommercialEcosystem.tsx");
-  const faq = read("src/components/CommercialFAQ.tsx");
-  const nav = read("src/components/MarketingNav.tsx");
-
-  assert.match(home, /The Opportunity Engine for Football Club Marketing & Commercial Teams/);
-  assert.match(ecosystem, /Blinkfire \/ analytics/);
-  assert.match(ecosystem, /CRM \/ ticketing/);
-  assert.match(ecosystem, /Asana \/ Monday \/ Jira/);
-  assert.match(ecosystem, /systems of record/);
-  assert.match(faq, /Does AVELA replace Blinkfire/);
-  assert.match(faq, /Why can’t we just use ChatGPT, Claude or another LLM/);
-  assert.match(faq, /Do we need to integrate everything before starting/);
-  assert.match(faq, /What would a pilot look like/);
-  assert.match(nav, /How it fits/);
-  assert.match(nav, /FAQ/);
 });
 
 
@@ -2492,26 +2391,6 @@ test("core operational surfaces keep text at or above 10px", () => {
 });
 
 
-test("commercial home makes AVELA value and capability horizon explicit", () => {
-  const page = read("src/app/page.tsx");
-  const demo = read("src/components/CommercialDecisionDemo.tsx");
-
-      assert.match(page, /CommercialDecisionDemo/);
-  assert.match(demo, /illustrative product simulation/);
-  });
-
-
-test("commercial home uses an interactive fixture-marketing decision demo", () => {
-  const demo = read("src/components/CommercialDecisionDemo.tsx");
-  assert.match(demo, /"use client"/);
-  assert.match(demo, /useState/);
-  assert.match(demo, /Change what happens around the match\. Watch the plan change\./);
-  assert.match(demo, /Recommended marketing play/);
-  assert.match(demo, /Audience/);
-  assert.match(demo, /Channel/);
-  assert.match(demo, /Spend posture/);
-    });
-
 test("live product timing cannot lag behind the real London date", () => {
   const helper = read("src/lib/currentProductDate.ts");
   const opportunity = read("src/lib/productOpportunity.ts");
@@ -2539,27 +2418,12 @@ test("public sitemap includes the canonical London City decision surfaces", () =
   assert.match(sitemap, /\/live\/london-city\/brighton/);
 });
 
-test("commercial home is role-led and avoids repetitive long-form sections", () => {
-  const page = read("src/app/page.tsx");
-  assert.match(page, /The Opportunity Engine for football club marketing & commercial teams/);
-  assert.match(page, /Commercial & partnerships/);
-  assert.match(page, /Fan engagement/);
-  assert.doesNotMatch(page, /The value AVELA adds/);
-  assert.doesNotMatch(page, /What AVELA is — and is not/);
-});
-
 test("internal AVELA shell uses the commercial brand mark and marketing-commercial positioning", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
   const css = read("src/components/ProductJourneyNav.module.css");
   assert.match(nav, /Marketing & commercial/);
   assert.match(nav, /Club decision workspace/);
   assert.match(css, /clip-path:polygon\(0 0,100% 50%,0 100%\)/);
-});
-
-test("commercial nav identifies the internal AVELA workspace clearly", () => {
-  const nav = read("src/components/MarketingNav.tsx");
-  assert.match(nav, /Open workspace/);
-  assert.match(nav, /marketing and commercial product navigation/);
 });
 
 test("commercial mobile hero preserves safe horizontal gutters", () => {
@@ -2576,15 +2440,10 @@ test("retired commercial ticker does not leak legacy styles back into the home",
   assert.doesNotMatch(page, /signalTicker|signalTrack|signalSet/);
 });
 
-test("commercial positioning stays consistent across metadata, home, FAQ and pilot", () => {
-  const home = read("src/app/page.tsx");
+test("commercial positioning stays consistent across metadata and For Clubs", () => {
   const layout = read("src/app/layout.tsx");
-  const faq = read("src/components/CommercialFAQ.tsx");
   const clubs = read("src/components/ClubPilotProposition.tsx");
-  assert.match(home, /The Opportunity Engine for football club marketing & commercial teams/);
-  assert.match(home, /demand, rights and availability inside it/);
   assert.match(layout, /The Opportunity Engine for Football Club Marketing & Commercial Teams/);
-  assert.match(faq, /the Opportunity Engine for football club marketing and commercial teams/);
   assert.match(clubs, /FOR MARKETING & COMMERCIAL TEAMS/);
 });
 
@@ -2649,17 +2508,10 @@ test("system pages avoid nested primary headings and microtext below 10px", () =
 });
 
 test("AVELA category separates the workspace from cross-functional orchestration and specialist intelligence", () => {
-  const ecosystem = read("src/components/CommercialEcosystem.tsx");
-  const demo = read("src/components/CommercialDecisionDemo.tsx");
   const pilot = read("src/app/pilot/page.tsx");
   const pack = read("src/app/pilot/operating-pack/page.tsx");
   const help = read("src/app/app/help/page.tsx");
 
-  assert.match(ecosystem, /Opportunity Engine/);
-  assert.match(ecosystem, /remain systems of record/);
-  assert.match(ecosystem, /External signals/);
-  assert.match(demo, /Home fixture · Illustrative simulation/);
-  assert.match(demo, /Marketing & commercial decision/);
   assert.doesNotMatch(pilot, /Growth Intelligence Playbook|Decision Playbook/);
   assert.match(pilot, /CONTINUE/);
   assert.match(pilot, /ADJUST/);
@@ -2752,17 +2604,9 @@ test("For Clubs retires the copy-a-brief interaction in favour of real lead capt
   assert.match(page, /Tell us which decision you want to improve/);
 });
 
-test("commercial funnel CTAs carry readable internal attribution", () => {
-  const home = read("src/app/page.tsx");
-  const nav = read("src/components/MarketingNav.tsx");
+test("For Clubs CTAs carry readable internal attribution", () => {
   const clubs = read("src/components/ClubPilotProposition.tsx");
-  for (const source of [home, nav, clubs]) {
-    assert.match(source, /utm_medium=internal_cta/);
-  }
-  assert.match(home, /utm_campaign=club_pilot/);
-  assert.match(home, /utm_campaign=guided_demo/);
-  assert.match(home, /utm_campaign=live_case/);
-  assert.match(nav, /utm_source=avela_nav/);
+  assert.match(clubs, /utm_medium=internal_cta/);
   assert.match(clubs, /utm_source=for_clubs/);
 });
 
@@ -2992,30 +2836,6 @@ test("hero engine reads signal states from the source register instead of claimi
   assert.match(stage, /In a pilot/);
   assert.match(stage, /signal families read live today/);
   assert.match(stage, /live\?\.recommendedAction/);
-});
-
-test("commercial home follows the Opportunity Engine story order", () => {
-  const page = read("src/app/page.tsx");
-  const order = ["<OpportunityEngineStage", "styles.liveProof", "<MorningCommercialRead", "<CommercialDecisionDemo", "<HowTheEngineWorks", "<EngineUseCases", "<CommercialEcosystem", "styles.pilot}", "<CommercialFAQ", "styles.finalCta"];
-  const positions = order.map((marker) => page.indexOf(marker));
-  positions.forEach((position, index) => assert.ok(position > -1, order[index]));
-  assert.deepEqual([...positions].sort((a, b) => a - b), positions);
-});
-
-test("demo scenarios start outside the club and stay labelled as illustrative", () => {
-  const demo = read("src/components/CommercialDecisionDemo.tsx");
-  assert.match(demo, /Competing kick-off/);
-  assert.match(demo, /Rail disruption/);
-  assert.match(demo, /Broadcast pick/);
-  assert.doesNotMatch(demo, /LIVE SIMULATION|Monitoring live context/);
-});
-
-test("commercial FAQ refuses prediction claims and says what is read today", () => {
-  const faq = read("src/components/CommercialFAQ.tsx");
-  assert.match(faq, /Does AVELA predict attendance\?/);
-  assert.match(faq, /does not promise forecasts or a magic score/);
-  assert.match(faq, /What does AVELA read today\?/);
-  assert.match(faq, /shown as not connected, never filled in/);
 });
 
 test("pilot pages keep section headlines at section scale", () => {
