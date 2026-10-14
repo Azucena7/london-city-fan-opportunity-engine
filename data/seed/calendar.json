@@ -221,11 +221,6 @@
     "id": "2026-10-21-whu-a",
     "date": "2026-10-21",
     "kickoff": "19:00",
-    "opponent": "West Ham United",
-    "homeAway": "away",
-    "competition": "Subway Players Cup",
-    "venue": "Chigwell Construction Stadium",
-    "status": "scheduled",
     "kickoffVerification": {
       "value": "19:00",
       "checkedAt": "2026-10-14T09:54:37+01:00",
@@ -234,6 +229,11 @@
         "https://www.whufc.com/en/womens-team-matches/london-city-lionesses-h-0"
       ]
     },
+    "opponent": "West Ham United",
+    "homeAway": "away",
+    "competition": "Subway Players Cup",
+    "venue": "Chigwell Community Stadium",
+    "status": "scheduled",
     "sourceDiscrepancies": [
       {
         "field": "kickoff",
