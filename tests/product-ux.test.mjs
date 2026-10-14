@@ -3056,3 +3056,19 @@ test("the Ask AVELA launcher is never nested inside a collapsible brief section"
   const lastDetailsClose = brief.lastIndexOf("</details>");
   assert.ok(panel > lastDetailsClose, "AskAvelaPanel must come after the last </details>");
 });
+
+test("password recovery never reveals whether an account exists and lands on a reset page", () => {
+  const recover = read("src/app/api/auth/recover/route.ts");
+  const reset = read("src/app/api/auth/reset/route.ts");
+  const form = read("src/components/PasswordResetForm.tsx");
+  const access = read("src/components/AccessCenter.tsx");
+  assert.match(recover, /auth\/v1\/recover\?redirect_to=/);
+  assert.match(recover, /\/app\/access\/reset/);
+  assert.match(recover, /If an account exists for that email/);
+  assert.doesNotMatch(recover, /not found|no account/i);
+  assert.match(reset, /method: "PUT"/);
+  assert.match(reset, /password\.length < 10/);
+  assert.match(form, /history\.replaceState/);
+  assert.match(form, /params\.get\("type"\) === "recovery"/);
+  assert.match(access, /Forgot password\?/);
+});

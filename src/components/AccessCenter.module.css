@@ -59,3 +59,4 @@
   .authGrid button,.grid button,.accountBar button{min-height:44px}
   .authGrid input,.grid select,.grid textarea{min-height:44px}
 }
+.authGrid .linkButton{display:block;width:auto;min-height:0;margin-top:10px;padding:0;border:0;background:transparent;color:var(--product-navy);font-size:12px;font-weight:800;text-decoration:underline;cursor:pointer}
