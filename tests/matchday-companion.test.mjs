@@ -90,7 +90,7 @@ test("Source governance exposes Matchday Companion dependencies", () => {
   const sources = read("src/components/IntelligenceSources.tsx");
   const health = JSON.parse(read("data/live/source-health.json"));
   assert.match(sources, /name: "Matchday travel"/);
-  assert.match(sources, /"open-meteo", "tfl-road", "national-rail-rdm"/);
+  assert.match(sources, /"open-meteo", "tfl-road", "tfl-national-rail", "national-rail-rdm"/);
   const decision = health.decisions.find((item) => item.id === "matchday-travel");
   assert.ok(decision, "missing matchday-travel source decision");
   assert.deepEqual(decision.requiredSourceIds, ["club-public-web", "open-meteo"]);
@@ -139,4 +139,15 @@ test("Matchday live source links are allowlisted, bounded and measurable", () =>
   assert.match(tracker, /matchday_external_travel_source_opened/);
   assert.match(measurement, /matchday_external_travel_source_opened/);
   assert.match(ingest, /properties\.source === "road" \|\| properties\.source === "rail"/);
+});
+
+test("Matchday rail reads TfL status for the fixture day until an RDM product is connected", () => {
+  const readiness = read("src/lib/mobilityProviderReadiness.ts");
+  const page = read("src/app/matchday/[fixtureId]/page.tsx");
+  assert.match(readiness, /const railViaRdm = rdmHealth\?\.state === "operational"/);
+  assert.match(readiness, /export function railStatusForFixture/);
+  assert.match(readiness, /National Rail status via TfL/);
+  assert.match(page, /railStatusForFixture\(fixture\.date\)/);
+  assert.match(page, /Works not yet published cannot appear; confirm with the operator before you travel/);
+  assert.match(page, /read once it is among the next four home fixtures/);
 });
