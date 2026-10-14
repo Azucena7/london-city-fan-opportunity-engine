@@ -21,6 +21,9 @@ import {
 } from "@/lib/clubStrategy";
 import styles from "./PlayerAssetPlanner.module.css";
 
+/** The largest pack the planner ranks; every combination is scored, so larger sizes grow fast. */
+const MAX_PACK_SIZE = 8;
+
 type Club = { id: string; name: string; role: string; permissions?: string[] };
 type SharedPackSelection = {
   campaign_id: string;
@@ -462,6 +465,15 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
           <div>
             {[1,2,3,4].map((value) => <button type="button" key={value} aria-pressed={count === value} className={count === value ? styles.active : ""} onClick={() => setCountOverride(value)}>{value}</button>)}
             <button type="button" aria-pressed={count >= 5} className={count >= 5 ? styles.active : ""} onClick={() => setCountOverride(Math.min(5, players.length))}>5+</button>
+            {count >= 5 ? (
+              // 5+ is a real choice: step up to the larger packs a campaign can need. Packs are
+              // ranked over every combination, so the stepper stops at MAX_PACK_SIZE.
+              <span className={styles.packStepper}>
+                <button type="button" aria-label="One fewer player" disabled={count <= 5} onClick={() => setCountOverride(Math.max(5, count - 1))}>−</button>
+                <output aria-live="polite">{count} players</output>
+                <button type="button" aria-label="One more player" disabled={count >= Math.min(MAX_PACK_SIZE, players.length)} onClick={() => setCountOverride(Math.min(MAX_PACK_SIZE, players.length, count + 1))}>+</button>
+              </span>
+            ) : null}
           </div>
           <small>Brief default · {selectedCampaign.playerNeed} player{selectedCampaign.playerNeed === 1 ? "" : "s"}</small>
         </div>

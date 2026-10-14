@@ -2907,8 +2907,10 @@ test("club pilot demonstrates a bounded multi-cycle learning window", () => {
   assert.match(pilot, /Everton · 18 Oct/);
   assert.match(pilot, /Crystal Palace · 28 Oct/);
   assert.match(pilot, /Manchester City · 1 Nov/);
-  assert.match(pilot, /Observed/);
-  assert.match(pilot, /Active/);
+  // Cycle states come from the calendar, not from copy.
+  assert.match(pilot, /function cycleStates/);
+  assert.match(pilot, /fixture\?\.attendance \? "Observed" : "Played · evidence pending"/);
+  assert.doesNotMatch(pilot, /state: "(Observed|Active|Next)"/);
   assert.match(pilot, /public London City case provides proof of method, not proof of club adoption/);
   assert.doesNotMatch(css, /font-size:(?:7|8|9|10)px/);
 });

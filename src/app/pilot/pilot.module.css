@@ -155,6 +155,7 @@
 .pilotWindow article:last-child::after{display:none}
 .pilotWindow article[data-state="observed"]{border-top:4px solid #2F8F83;background:#F7FBFA}
 .pilotWindow article[data-state="active"]{border-top:4px solid #EF8B6C;background:#FFF9F6}
+.pilotWindow article[data-state="pending"]{border-top:4px solid #7C8791;background:#F7F8F9}
 .pilotWindow article[data-state="next"]{border-top:4px solid #D9A550;background:#FFFDF8}
 .pilotWindowTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 .pilotWindowTop span{font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--product-accent)}
