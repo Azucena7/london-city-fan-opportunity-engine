@@ -112,3 +112,55 @@ test("jumping to a phase keeps its heading clear of the sticky bars", async ({ p
     .map((element) => element.getBoundingClientRect().bottom)));
   await expect.poll(async () => (await page.locator("#evidence").boundingBox())?.y ?? 0).toBeGreaterThanOrEqual(covered);
 });
+
+test.describe("engine draft adoption on a fixture without a campaign plan", () => {
+  test.skip(({ isMobile }) => Boolean(isMobile), "desktop flow");
+  // Crystal Palace (28 Oct) has no curated campaign plan, so its brief opens with an engine draft.
+  const draftBrief = "/app/matches/2026-10-28-cry-h";
+
+  test("anonymous visitors see the draft but cannot adopt it", async ({ page }) => {
+    await page.goto(draftBrief);
+    const card = page.getByRole("region", { name: "Prepared move · engine draft" });
+    await expect(card).toContainText("Sign in with club access to adopt this draft");
+    await expect(card.getByRole("button")).toHaveCount(0);
+  });
+
+  test("a member sets a draft aside only with a reason, then adopts it as the working plan", async ({ page }) => {
+    const posted: Array<Record<string, unknown>> = [];
+    let events: Array<Record<string, unknown>> = [];
+    await page.route("**/api/auth/session", (route) => route.fulfill({
+      json: { configured: true, authenticated: true, clubs: [{ id: "club-1", name: "Demo club", role: "admin" }] }
+    }));
+    await page.route("**/api/decision-history**", async (route) => {
+      if (route.request().method() === "POST") {
+        const body = route.request().postDataJSON() as Record<string, unknown>;
+        posted.push(body);
+        events = [...events, { id: String(events.length), event_type: body.eventType, state: body.state, label: body.label, detail: body.detail, created_at: new Date().toISOString() }];
+        return route.fulfill({ json: { persistence: "club", recorded: true } });
+      }
+      return route.fulfill({ json: { persistence: "club", events } });
+    });
+
+    await page.goto(draftBrief);
+    const card = page.getByRole("region", { name: "Prepared move · engine draft" });
+    await card.getByRole("button", { name: "Set aside" }).click();
+    await expect(card.getByRole("status")).toHaveText("Add a short reason before setting the draft aside.");
+    expect(posted).toHaveLength(0);
+
+    await card.getByRole("button", { name: "Use as the working plan" }).click();
+    await expect(card).toContainText("Engine draft adopted as the working plan");
+    await expect(card.getByRole("button", { name: "Adopted as working plan" })).toBeDisabled();
+    expect(posted[0]).toMatchObject({
+      eventType: "recommended",
+      sourceType: "engine",
+      state: "draft-adopted",
+      decisionId: "fixture:2026-10-28-cry-h",
+      subjectType: "fixture"
+    });
+    // Adopting is not the club's verdict: the human decision bar still asks for one.
+    await page.evaluate(() => document.querySelectorAll("details").forEach((panel) => { panel.open = true; }));
+    const bar = page.getByRole("complementary", { name: "Human decision on the recommendation" });
+    await expect(bar).toBeVisible();
+    await expect(bar).not.toContainText("Club decision recorded");
+  });
+});
