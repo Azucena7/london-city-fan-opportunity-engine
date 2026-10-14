@@ -285,6 +285,13 @@ test("Radar rows keep every column inside the row beside the side rail", async (
   }
 });
 
+test("Learning never shows the recommendation as the action the club took", async ({ page }) => {
+  await page.goto("/app/learning");
+  const action = page.getByRole("region", { name: "Learning journey" }).locator('[data-stage="action"]');
+  await expect(action).toContainText("Club action not recorded here");
+  await expect(action.getByRole("link", { name: /Confirm what went live in the decision history/ })).toHaveAttribute("href", /\/app\/matches\/.+#decision-memory$/);
+});
+
 test("Home, Radar and Executive agree on the #1 decision and the attention counts", async ({ page }) => {
   const count = async (label: string) => Number(await page.locator(`section[aria-label="Opportunity radar summary"] > *`).filter({ hasText: label }).first().locator("strong").innerText());
 

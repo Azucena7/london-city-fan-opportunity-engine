@@ -100,10 +100,15 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <strong>{live?.opportunity ?? "Opportunity under review"}</strong>
           <p>{live?.recommendedAction ?? "No recommendation available."}</p>
         </article>
+        {/* What the club actually did is only known once a club member confirms it in the
+            fixture's decision history; the recommendation is never shown as the action taken. */}
         <article data-stage="action">
           <span>02 · Action</span>
-          <strong>{live?.nextAction.label ?? "Club action not recorded"}</strong>
-          <p>{live?.nextAction.owner ? "Owner: " + live.nextAction.owner : "Human-owned execution remains outside AVELA until confirmed."}</p>
+          <strong>Club action not recorded here</strong>
+          <p>
+            {live?.nextAction.label ? "Recommended, not confirmed: " + live.nextAction.label + " " : ""}
+            <Link href={`/app/matches/${selectedId}#decision-memory`}>Confirm what went live in the decision history →</Link>
+          </p>
         </article>
         <article data-stage={measured ? "outcome" : "pending"}>
           <span>03 · Outcome</span>
