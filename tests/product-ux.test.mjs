@@ -2764,7 +2764,9 @@ test("commercial pilot pages separate buying story from operating detail", () =>
   assert.match(clubs, /Define\. Test\. Learn\./);
   assert.doesNotMatch(pilot, /ProductJourneyNav/);
   assert.match(pilot, /MarketingNav/);
-  assert.match(pilot, /Prove better decisions before integrating more/);
+  assert.match(pilot, /Point the engine at your next 4–6 fixtures/);
+  assert.match(clubs, /What it reads today, and what connects in a pilot/);
+  assert.match(clubs, /never filled in/);
   assert.match(pilot, /The output is a decision about AVELA too/);
   assert.match(pilot, /Open the Operating Pack/);
   assert.doesNotMatch(pilot, /Prepare a club pilot discussion/);
@@ -3001,4 +3003,13 @@ test("commercial FAQ refuses prediction claims and says what is read today", () 
   assert.match(faq, /does not promise forecasts or a magic score/);
   assert.match(faq, /What does AVELA read today\?/);
   assert.match(faq, /shown as not connected, never filled in/);
+});
+
+test("pilot pages keep section headlines at section scale", () => {
+  for (const file of ["src/app/pilot/pilot.module.css", "src/app/pilot/operating-pack/operating-pack.module.css"]) {
+    const css = read(file);
+    for (const match of css.matchAll(/h2\{[^}]*font-size:(?:clamp\([^,]+,[^,]+,(\d+)px\)|(\d+)px)/g)) {
+      assert.ok(Number(match[1] ?? match[2]) <= 42, `${file}: ${match[0]}`);
+    }
+  }
 });

@@ -9,6 +9,7 @@ on:
       - "scripts/refresh-data.mjs"
       - "scripts/refresh-public-signals.mjs"
       - "scripts/refresh-news-radar.mjs"
+      - "scripts/refresh-calendar-moments.mjs"
       - "data/seed/news-radar.json"
   schedule:
     # GitHub cron uses UTC and starts scheduled jobs late (observed: 6-7 hours), so a single
@@ -74,15 +75,20 @@ jobs:
         # Headlines are context only: a news failure must not hold back fixture and signal data.
         continue-on-error: true
         run: npm run refresh:news-radar
+      - name: Refresh UK bank holidays
+        if: steps.schedule_gate.outputs.run_refresh == 'true'
+        # Calendar context only: a GOV.UK failure keeps the stored holidays and the rest of the refresh.
+        continue-on-error: true
+        run: npm run refresh:calendar-moments
       - name: Commit material updates
         if: steps.schedule_gate.outputs.run_refresh == 'true'
         run: |
-          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/source-health.json; then
+          if git diff --quiet -- data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/bank-holidays.json data/live/source-health.json; then
             echo "No data change to publish"
             exit 0
           fi
           git config user.name "avela-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/source-health.json
+          git add data/seed/calendar.json data/live/current.json data/live/signals.json data/live/audience-reach.json data/live/event-landscape.json data/live/news-radar.json data/live/bank-holidays.json data/live/source-health.json
           git commit -m "data: refresh fixture and public signal state"
           git push

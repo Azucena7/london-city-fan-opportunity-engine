@@ -14,6 +14,7 @@
     "refresh:data": "node scripts/refresh-data.mjs",
     "refresh:public-signals": "node scripts/refresh-public-signals.mjs",
     "refresh:news-radar": "node scripts/refresh-news-radar.mjs",
+    "refresh:calendar-moments": "node scripts/refresh-calendar-moments.mjs",
     "import:crm": "node scripts/import-crm-ticketing.mjs",
     "import:trends": "node scripts/import-trends-export.mjs",
     "rehearse:pilot": "node scripts/run-pilot-rehearsal.mjs",

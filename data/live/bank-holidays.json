@@ -1,0 +1,8 @@
+{
+  "version": "1",
+  "division": "england-and-wales",
+  "source": { "name": "GOV.UK bank holidays", "url": "https://www.gov.uk/bank-holidays.json" },
+  "checkedAt": null,
+  "lastSuccessfulAt": null,
+  "events": []
+}

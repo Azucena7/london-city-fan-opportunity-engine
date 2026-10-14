@@ -265,6 +265,48 @@
         "es": "Está disponible el tráfico agregado de propiedades de AVELA. Es telemetría del producto, no evidencia de conversión de campañas del club."
       },
       "lastAttemptAt": "2026-10-05T12:32:34.236Z"
+    },
+    {
+      "id": "uk-bank-holidays",
+      "label": {
+        "en": "UK bank holidays",
+        "es": "Festivos de Reino Unido"
+      },
+      "category": "calendar-moments",
+      "access": "public",
+      "state": "not-configured",
+      "method": "public-api",
+      "cadence": "daily",
+      "lastSuccessfulAt": null,
+      "ownerAction": {
+        "en": "Runs with the daily data refresh from the GOV.UK bank holidays API; the first run fills it.",
+        "es": "Se ejecuta con la actualización diaria desde la API de festivos de GOV.UK; la primera ejecución la rellena."
+      },
+      "note": {
+        "en": "England and Wales bank holidays from GOV.UK. Until the first successful refresh no holiday is shown or inferred.",
+        "es": "Festivos de Inglaterra y Gales desde GOV.UK. Hasta la primera actualización correcta no se muestra ni se infiere ningún festivo."
+      }
+    },
+    {
+      "id": "fifa-international-windows",
+      "label": {
+        "en": "FIFA international windows",
+        "es": "Ventanas internacionales FIFA"
+      },
+      "category": "calendar-moments",
+      "access": "public",
+      "state": "operational",
+      "method": "reviewed-seed",
+      "cadence": "per-calendar-revision",
+      "lastSuccessfulAt": "2026-10-13T23:00:00.000Z",
+      "ownerAction": {
+        "en": "Edit data/seed/international-windows.json when FIFA revises the women’s calendar; confirm the June 2027 window before adding it.",
+        "es": "Editar data/seed/international-windows.json cuando FIFA revise el calendario femenino; confirmar la ventana de junio de 2027 antes de añadirla."
+      },
+      "note": {
+        "en": "Women’s international windows from the FIFA 2026–2029 calendar, cross-checked across published copies. Players are away during a window; the matches either side of it are moments for player-led stories.",
+        "es": "Ventanas internacionales femeninas del calendario FIFA 2026–2029, contrastadas entre copias publicadas. Las jugadoras no están durante una ventana; los partidos de antes y después son momentos para historias con jugadoras."
+      }
     }
   ],
   "decisions": [
@@ -284,7 +326,10 @@
         "open-meteo",
         "ticketmaster-events"
       ],
-      "supportingSourceIds": [],
+      "supportingSourceIds": [
+        "uk-bank-holidays",
+        "fifa-international-windows"
+      ],
       "nextAction": {
         "en": "Use the current fixture, weather and strategic event context; preserve source discrepancies when they appear.",
         "es": "Usar el contexto actual de partido, clima y eventos estratégicos; conservar las discrepancias entre fuentes cuando aparezcan."

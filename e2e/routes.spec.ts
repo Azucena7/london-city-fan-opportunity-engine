@@ -159,6 +159,8 @@ test("public commercial pages share the public header, never the workspace sideb
     await page.waitForLoadState("networkidle");
     await expect(page.getByRole("navigation", { name: "AVELA marketing and commercial product navigation" }), route).toHaveCount(1);
     await expect(page.getByRole("complementary", { name: "AVELA club app navigation" }), route).toHaveCount(0);
+    // Public pages are full-bleed: the global main width must not box in their bands.
+    expect(await page.locator("main").first().evaluate((main) => main.getBoundingClientRect().width), route).toBe(page.viewportSize()!.width);
   }
 });
 

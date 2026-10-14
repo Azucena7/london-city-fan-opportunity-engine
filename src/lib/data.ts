@@ -21,6 +21,8 @@ import experienceDemandRaw from "../../data/live/experience-demand-validation.js
 import mobilityPartnershipRaw from "../../data/live/mobility-partnership.json";
 import experimentMeasurementRaw from "../../data/live/experiment-measurement.json";
 import decisionValidationRaw from "../../data/live/decision-validation.json";
+import bankHolidaysRaw from "../../data/live/bank-holidays.json";
+import internationalWindowsRaw from "../../data/seed/international-windows.json";
 import partnerCommercialPackRaw from "../../data/live/partner-commercial-pack.json";
 import pilotReadinessRaw from "../../data/live/pilot-readiness.json";
 import eventLandscapeRaw from "../../data/live/event-landscape.json";
@@ -52,6 +54,8 @@ export const experienceDemand = experienceDemandRaw as ExperienceDemandData;
 export const mobilityPartnership = mobilityPartnershipRaw as MobilityPartnershipData;
 export const experimentMeasurement = experimentMeasurementRaw as ExperimentMeasurementData;
 export const decisionValidation = decisionValidationRaw as DecisionValidationData;
+export const bankHolidays = bankHolidaysRaw as { checkedAt: string | null; lastSuccessfulAt: string | null; events: Array<{ date: string; title: string }> };
+export const internationalWindows = internationalWindowsRaw;
 export const partnerCommercialPack = partnerCommercialPackRaw as PartnerCommercialPackData;
 export const pilotReadiness = pilotReadinessRaw as PilotReadinessData;
 export const eventLandscape = eventLandscapeRaw as EventLandscapeData;

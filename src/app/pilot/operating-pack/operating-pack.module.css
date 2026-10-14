@@ -1,4 +1,5 @@
 .shell{
+  width:100%;
   min-height:100vh;
   background:var(--product-bg);
   color:var(--product-ink);
@@ -16,7 +17,7 @@
 
 .section,.cycle{padding:50px 0;border-top:1px solid var(--product-line)}
 .sectionHead{max-width:850px;margin-bottom:24px}
-.sectionHead h2{margin:8px 0 9px;font-size:clamp(30px,4vw,44px);line-height:1.04;letter-spacing:-.045em}
+.sectionHead h2{margin:8px 0 9px;font-size:clamp(28px,3.2vw,42px);line-height:1.06;letter-spacing:-.04em}
 .sectionHead p{margin:0;color:var(--product-muted);line-height:1.5}
 
 .steps,.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -199,4 +200,4 @@
 @media(max-width:800px){
   .measurementGrid{grid-template-columns:1fr}
 }
-
+@media(max-width:600px){.cta h2{font-size:28px}}
