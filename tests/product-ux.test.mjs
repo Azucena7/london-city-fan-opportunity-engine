@@ -2614,7 +2614,7 @@ test("app workspace keeps one primary heading and consistent product positioning
   assert.doesNotMatch(learning, /<h1>/);
   assert.doesNotMatch(setup, /<h1>/);
   assert.doesNotMatch(access, /<h1>/);
-  assert.match(help, /decision workspace for football club marketing and commercial teams/);
+  assert.match(help, /opportunity engine for football club marketing and commercial teams/);
 });
 
 test("all core app decision surfaces keep operational copy at 10px or above", () => {

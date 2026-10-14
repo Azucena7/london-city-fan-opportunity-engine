@@ -35,7 +35,7 @@ const workflows = [
 ] as const;
 
 const faqs = [
-  ["Is AVELA a dashboard?", "No. AVELA is the decision workspace for football club marketing and commercial teams. It orchestrates the evidence, constraints, timing and ownership across functions, then connects the decision to governed execution and learning."],
+  ["Is AVELA a dashboard?", "No. AVELA is the opportunity engine for football club marketing and commercial teams. It orchestrates the evidence, constraints, timing and ownership across functions, then connects the decision to governed execution and learning."],
   ["Does AVELA replace CRM, ticketing, Blinkfire or project-management tools?", "No. Those systems can remain systems of record or execution. AVELA sits above them as the decision workspace."],
   ["Does AVELA act without humans?", "It can detect, rank and recommend automatically. Material club decisions, external launch, spend and contractual commitments remain human-controlled unless a specific authorised connector says otherwise."],
   ["Why does AVELA sometimes show missing rather than a number?", "Because missing evidence is not zero. AVELA keeps unknown, modelled, observed and verified states separate."],
