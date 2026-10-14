@@ -1,7 +1,7 @@
 .wrap{width:100%;margin:0 auto;padding:4px 0 24px}
 .head{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:18px;align-items:center;padding:0 0 12px;border-bottom:1px solid var(--product-line)}
 .head>div>span,.empty>span,.grid article>span,.score span,.clubBar div span,.setupJourney span,.loadingState>span{font-size:11px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:#748078}
-.head h2,.empty h2{max-width:850px;margin:4px 0 6px;font-size:clamp(22px,2.8vw,30px)!important;line-height:1.08;letter-spacing:-.035em}
+.head h2,.empty h2{max-width:850px;margin:4px 0 6px;font-size:clamp(22px,2.8vw,30px);line-height:1.08;letter-spacing:-.035em}
 .head p,.empty p{max-width:800px;margin:0;color:#657168;font-size:12px;line-height:1.5}
 .score{padding:10px 0 10px 16px;background:transparent;border:0;border-left:1px solid var(--product-line)}
 .score span,.score strong,.score small{display:block}.score strong{margin-top:5px;font-size:24px}.score small{margin-top:4px;color:#69756d}
@@ -20,22 +20,22 @@
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:10px;border-top:1px solid var(--product-line)}
 .grid article{padding:18px;background:transparent;border:0;border-right:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
 .grid article:nth-child(even){border-right:0;padding-left:18px}
-.grid h2{margin:5px 0 12px;font-size:18px!important;letter-spacing:-.035em}
+.grid h2{margin:5px 0 12px;font-size:18px;letter-spacing:-.035em}
 .grid p{margin:12px 0 0;color:#6b776f;line-height:1.45;font-size:12px}.grid textarea{min-height:82px;resize:vertical}.grid label+label{margin-top:12px}
 .chips{display:flex;flex-wrap:wrap;gap:7px}.chips button{min-height:34px;padding:8px 10px;border:1px solid #ccd4ce;border-radius:0;background:transparent;color:#26352c;font-size:11px;font-weight:800;cursor:pointer}
 .chips button:disabled{cursor:default;opacity:.6}.chips .selected{background:var(--product-navy);color:#fff;border-color:var(--product-navy)}
-.check{display:flex!important;grid-template-columns:18px 1fr!important;align-items:center!important;text-transform:none!important;letter-spacing:0!important;font-size:12px!important}.check input{min-height:auto!important}
+.check{display:flex;grid-template-columns:18px 1fr;align-items:center;text-transform:none;letter-spacing:0;font-size:12px}.check input{min-height:auto}
 
-.ready{background:var(--product-navy)!important;color:#f7faf6;border-right:0!important}.ready>span,.ready p{color:#b9c3bc!important}.ready button{margin-top:18px;min-height:42px;padding:9px 13px;border:0;background:var(--product-accent);color:#fff;font-weight:900;cursor:pointer}.ready button:disabled{opacity:.5;cursor:default}
+.ready{background:var(--product-navy);color:#f7faf6;border-right:0}.ready>span,.ready p{color:#b9c3bc}.ready button{margin-top:18px;min-height:42px;padding:9px 13px;border:0;background:var(--product-accent);color:#fff;font-weight:900;cursor:pointer}.ready button:disabled{opacity:.5;cursor:default}
 .readyAction{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
-.readyAction>span{max-width:360px;color:#c4cec7!important;font-size:11px!important;text-transform:none!important;letter-spacing:0!important}.readyAction button{margin-top:0!important}
+.readyAction>span{max-width:360px;color:#c4cec7;font-size:11px;text-transform:none;letter-spacing:0}.readyAction button{margin-top:0}
 
 .empty,.loadingState{width:100%;margin:0 auto;padding:42px 0}
 .loadingState{min-height:360px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--product-line)}
 .loadingState>strong{display:block;margin-top:10px;font-size:clamp(28px,4vw,46px);letter-spacing:-.04em}.loadingState>p{max-width:620px;margin:10px 0 0;color:#657168;line-height:1.5}
 
 @media(max-width:800px){
-  .wrap,.empty,.loadingState{width:100%}.head{grid-template-columns:1fr;align-items:start}.head h2,.empty h2{font-size:26px!important}
+  .wrap,.empty,.loadingState{width:100%}.head{grid-template-columns:1fr;align-items:start}.head h2,.empty h2{font-size:26px}
   .score{border-top:1px solid var(--product-line);border-left:0;padding:10px 0 0}
   .clubBar{flex-direction:column}.clubBar select,.grid select,.grid input,.grid textarea{width:100%}
   .setupJourney{overflow-x:auto;grid-template-columns:repeat(5,minmax(150px,1fr));scrollbar-width:none}.setupJourney::-webkit-scrollbar{display:none}

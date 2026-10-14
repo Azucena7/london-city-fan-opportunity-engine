@@ -22,8 +22,8 @@
 }
 .recommendationCard{padding:16px;min-height:260px}
 .recommendationBody{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;margin-top:14px;padding:17px;border-radius:8px;background:var(--product-navy);color:#fff}
-.recommendationBody h2{margin:0!important;color:#fff!important;font-size:24px!important;line-height:1.12!important;letter-spacing:-.025em!important}
-.recommendationBody p{margin:7px 0 0!important;color:#C5D1DB!important;font-size:12px!important;line-height:1.5}
+.recommendationBody h2{margin:0;color:#fff;font-size:24px;line-height:1.12;letter-spacing:-.025em}
+.recommendationBody p{margin:7px 0 0;color:#C5D1DB;font-size:12px;line-height:1.5}
 .recommendationBody>a{align-self:end;min-height:40px;display:inline-flex;align-items:center;padding:9px 12px;border-radius:7px;background:#EF8B6C;color:#fff;text-decoration:none;font-size:12px;font-weight:900;white-space:nowrap}
 .recommendationMeta{display:grid;grid-template-columns:2fr .8fr .65fr .75fr;gap:0;margin-top:10px;border:1px solid #E4E8EB;border-radius:8px;overflow:hidden}
 .recommendationMeta>div{min-height:68px;padding:12px;background:#fff;border-left:1px solid #E4E8EB}
@@ -34,7 +34,7 @@
 .inlineExplain{margin-top:8px;border-top:1px solid #E5E9EC}
 .inlineExplain summary{padding:9px 0 2px;list-style:none;color:#2F8F83;font-size:12px;font-weight:850;cursor:pointer}
 .inlineExplain summary::-webkit-details-marker{display:none}
-.inlineExplain p{margin:7px 0 0!important;color:#697986!important;font-size:12px!important;line-height:1.5}
+.inlineExplain p{margin:7px 0 0;color:#697986;font-size:12px;line-height:1.5}
 
 .attentionCard{padding:16px;min-height:260px}
 .donutWrap{display:grid;grid-template-columns:132px 1fr;gap:14px;align-items:center;margin-top:22px}
@@ -57,7 +57,7 @@
 .signalIcon{display:grid;place-items:center;width:26px;height:26px;border-radius:6px;background:#E9F5F3;color:#2F8F83;font-size:12px;font-weight:900}
 .signalList strong,.signalList small{display:block}
 .signalList strong{font-size:12px}
-.signalList small{margin-top:2px!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#85929C!important;font-size:12px!important}
+.signalList small{margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#85929C;font-size:12px}
 .signalList b{color:#80909C;font-size:12px;font-weight:750}
 
 .nextCard{padding:16px}
@@ -65,7 +65,7 @@
 .nextVisual span,.nextVisual strong,.nextVisual small{display:block}
 .nextVisual span{color:#9CCFC7;font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.06em}
 .nextVisual strong{margin-top:8px;font-size:28px;line-height:1}
-.nextVisual small{margin-top:5px!important;color:#C4D0DA!important;font-size:12px!important}
+.nextVisual small{margin-top:5px;color:#C4D0DA;font-size:12px}
 .nextTags{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
 .nextAction{display:inline-flex;margin-top:11px;color:#2F8F83;text-decoration:none;font-size:12px;font-weight:900}
 
@@ -80,7 +80,7 @@
 .calendarStrip time{color:#536572;font-size:12px;font-weight:900}
 .calendarStrip span{margin-top:7px;color:#8A97A2;font-size:12px;text-transform:uppercase;font-weight:850}
 .calendarStrip strong{margin-top:4px;font-size:12px;line-height:1.35}
-.calendarStrip small{margin-top:4px!important;color:#8996A0!important;font-size:12px!important;line-height:1.35}
+.calendarStrip small{margin-top:4px;color:#8996A0;font-size:12px;line-height:1.35}
 
 .readinessWrap{grid-column:1/-1}
 .readinessGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
@@ -88,7 +88,7 @@
 .readinessGrid span,.readinessGrid strong,.readinessGrid small{display:block}
 .readinessGrid span{color:#8A97A2;font-size:12px;text-transform:uppercase;font-weight:850}
 .readinessGrid strong{margin-top:6px;font-size:13px;text-transform:capitalize}
-.readinessGrid small{margin-top:3px!important;color:#84929D!important;font-size:12px!important;line-height:1.4}
+.readinessGrid small{margin-top:3px;color:#84929D;font-size:12px;line-height:1.4}
 .readinessGrid article[data-state="tight"] strong,.readinessGrid article[data-state="blocked"] strong,.readinessGrid article[data-state="at-risk"] strong{color:#B56628}
 .readinessGrid article[data-state="unknown"] strong,.readinessGrid article[data-state="unavailable"] strong{color:#7C8791}
 .readinessGrid article[data-state="connected"] strong,.readinessGrid article[data-state="available"] strong,.readinessGrid article[data-state="clear"] strong,.readinessGrid article[data-state="syncing"] strong{color:#2F8F83}
@@ -123,7 +123,7 @@
   .readinessGrid{grid-template-columns:minmax(0,1fr)}
 }
 
-.attentionInbox{padding:16px!important;margin-bottom:12px;border-color:#E4DCD8!important}
+.attentionInbox{padding:16px;margin-bottom:12px;border-color:#E4DCD8}
 .inboxCount{display:inline-flex;align-items:center;min-height:26px;padding:4px 9px;border-radius:999px;background:#FCEDE8;color:#A95E45;font-size:12px;font-weight:900}
 .attentionList{margin-top:12px;border-top:1px solid #E5E9EC}
 .attentionItem{display:grid;grid-template-columns:42px minmax(0,1fr) 150px;gap:14px;align-items:center;padding:14px 4px;border-bottom:1px solid #EDF0F2;color:#20364C;text-decoration:none}
@@ -131,7 +131,7 @@
 .attentionRank{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;background:#F3F5F6;color:#7D8993;font-size:12px;font-weight:900}
 .attentionItem[data-priority="act-now"] .attentionRank{background:#FCEDE8;color:#C66043}
 .attentionItem[data-priority="blocked"] .attentionRank{background:#F0F1F2;color:#5E6870}
-.attentionCopy>div{display:flex;align-items:center;gap:8px}.attentionCopy>div>strong{font-size:13px}.attentionCopy p{margin:4px 0 0!important;color:#6F7D88!important;font-size:12px!important;line-height:1.45}.attentionCopy small{display:block;margin-top:3px;color:#95A0A8;font-size:12px}
+.attentionCopy>div{display:flex;align-items:center;gap:8px}.attentionCopy>div>strong{font-size:13px}.attentionCopy p{margin:4px 0 0;color:#6F7D88;font-size:12px;line-height:1.45}.attentionCopy small{display:block;margin-top:3px;color:#95A0A8;font-size:12px}
 .attentionMeta{text-align:right}.attentionMeta span,.attentionMeta strong,.attentionMeta b{display:block}.attentionMeta span{color:#8A97A2;font-size:12px}.attentionMeta strong{margin-top:3px;font-size:12px}.attentionMeta b{margin-top:6px;color:#2F8F83;font-size:12px}
 .attentionEmpty{padding:20px 4px;color:#7D8993;font-size:12px}
 @media(max-width:700px){.attentionItem{grid-template-columns:34px minmax(0,1fr)}.attentionMeta{grid-column:2;text-align:left;display:flex;gap:8px;align-items:center}.attentionMeta span,.attentionMeta strong,.attentionMeta b{display:inline}}
