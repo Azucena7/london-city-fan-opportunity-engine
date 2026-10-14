@@ -266,3 +266,19 @@ test("an expired reset link explains itself instead of showing the form", async 
   await expect(card).toContainText("Email link is invalid or has expired");
   await expect(card.getByRole("link", { name: "Back to sign in →" })).toHaveAttribute("href", "/app/access");
 });
+
+test("Radar rows keep every column inside the row beside the side rail", async ({ page }) => {
+  for (const width of [1280, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/app/matches");
+    const overflow = await page.evaluate(() => {
+      let worst = 0;
+      for (const row of document.querySelectorAll("a[class*=futureFixture]")) {
+        const edge = row.getBoundingClientRect().right;
+        for (const el of row.querySelectorAll("*")) worst = Math.max(worst, el.getBoundingClientRect().right - edge);
+      }
+      return Math.round(worst);
+    });
+    expect(overflow, `content past the row edge at ${width}px`).toBeLessThanOrEqual(0);
+  }
+});

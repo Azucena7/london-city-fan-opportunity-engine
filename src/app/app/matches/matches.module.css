@@ -49,12 +49,12 @@
 .priorityWhy strong{margin-top:4px;font-size:12px;line-height:1.4}
 
 .workspaceGrid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.45fr);gap:12px;align-items:start}
-.inboxCard{padding:16px}
+.inboxCard{padding:16px;container:radar-list/inline-size}
 .refresh{color:#8A97A2;font-size:11px}
 .radarList{margin-top:10px;border-top:1px solid #E7EBED}
 .radarFixture{
   display:grid;
-  grid-template-columns:38px minmax(130px,.65fr) minmax(230px,1.2fr) minmax(200px,.75fr) minmax(150px,.6fr);
+  grid-template-columns:38px minmax(130px,.65fr) minmax(230px,1.2fr) minmax(220px,.75fr) minmax(150px,.6fr);
   gap:12px;
   align-items:center;
   padding:12px 4px;
@@ -71,7 +71,7 @@
 .radarOpportunity strong{display:block;margin-top:3px;font-size:12px;line-height:1.4}
 .radarOpportunity small{display:block;margin-top:3px!important;color:#8B98A2!important;font-size:11px!important;line-height:1.35}
 .radarScoreline{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.radarScoreline>div{padding:8px;border-radius:6px;background:#F6F8F9}
+.radarScoreline>div{min-width:0;padding:8px;border-radius:6px;background:#F6F8F9}
 .radarScoreline span,.radarScoreline strong{display:block}
 .radarScoreline span{color:#8A97A2;font-size:11px;font-weight:850;text-transform:uppercase}
 .radarScoreline strong{margin-top:3px;font-size:11px}
@@ -112,18 +112,12 @@
 @media(max-width:900px){
   .priorityDecision{grid-template-columns:100px minmax(0,1fr)}
   .priorityDecision>a{grid-column:1/-1;justify-self:start}
-  .radarFixture{grid-template-columns:28px minmax(110px,.7fr) minmax(180px,1.3fr) minmax(140px,.7fr)}
-  .radarState{grid-column:2/-1;display:flex;align-items:center;gap:8px}
   .sideRail{grid-template-columns:1fr}
 }
 @media(max-width:620px){
   .radarSummary{grid-template-columns:1fr 1fr}
   .priorityDecision{grid-template-columns:1fr}
   .priorityDecision>a{grid-column:auto}
-  .radarFixture{grid-template-columns:26px minmax(0,1fr)}
-  .radarOpportunity,.radarScoreline,.radarState{grid-column:2}
-  .radarScoreline{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .radarState{display:grid}
 }
 
 
@@ -139,3 +133,16 @@
 
 .matchdayInline{margin-top:7px!important;padding:8px 10px!important;border-left:3px solid #D97859;background:#FFF8F5;color:#6A4D43!important;font-size:11px!important;line-height:1.45!important}
 .radarEmpty{margin:4px 0 12px;font-size:13px;color:var(--product-muted)}
+
+/* The list sits beside the side rail on wide screens, so its rows follow the card's own width,
+   not the viewport's: five columns only when they fit, then state moves under the row. */
+@container radar-list (max-width:860px){
+  .radarFixture{grid-template-columns:28px minmax(110px,.7fr) minmax(0,1.3fr) minmax(220px,.8fr)}
+  .radarState{grid-column:2/-1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+}
+@container radar-list (max-width:560px){
+  .radarFixture{grid-template-columns:26px minmax(0,1fr)}
+  .radarOpportunity,.radarScoreline,.radarState{grid-column:2}
+  .radarScoreline{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .radarState{display:grid}
+}
