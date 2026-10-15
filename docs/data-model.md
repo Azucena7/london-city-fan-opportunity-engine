@@ -143,6 +143,7 @@ AVELA reads the attendee journey (season tickets, purchases, stadium access) as 
   - `origins`: where supporters travel from, by postcode district (`BR1`, derived from the imported sector `BR1 3`), counted once per supporter, for all buyers and for season-ticket holders. Only the largest districts with at least 10 supporters are listed; everyone else is folded into `otherSupporters`.
 - `audienceDefinitions` are segments for the club CRM to build and send:
   - consented supporters who bought one fixture but not the next;
+  - for the next home fixtures after the export (up to three, from the calendar), consented buyers of each exported fixture. These fixtures have no sales in the export yet, so "has not bought" holds as of the extract; such audiences carry `targetSalesInExport: false`, and the brief says so;
   - consented season-ticket holders who did not scan in;
   - consented first-time buyers.
 

@@ -24,10 +24,18 @@ const kickoffs = Object.fromEntries((Array.isArray(calendar) ? calendar : calend
   .filter((fixture) => fixture.date && fixture.kickoff)
   .map((fixture) => [fixture.id, { date: fixture.date, kickoff: fixture.kickoff }]));
 const records = Array.isArray(parsed) ? parsed : parsed.records;
+// The next home fixtures after the export get repeat audiences even before they have sales.
+const exportedIds = new Set((Array.isArray(records) ? records : []).map((row) => row?.fixture_id));
+const lastExported = [...exportedIds].filter(Boolean).sort().at(-1) ?? "";
+const upcomingFixtureIds = (Array.isArray(calendar) ? calendar : calendar.fixtures)
+  .filter((fixture) => fixture.homeAway === "home" && fixture.id > lastExported && !exportedIds.has(fixture.id))
+  .map((fixture) => fixture.id)
+  .sort()
+  .slice(0, 3);
 
 let output;
 try {
-  output = aggregateCrmRecords(records, { kickoffs });
+  output = aggregateCrmRecords(records, { kickoffs, upcomingFixtureIds });
 } catch (error) {
   console.error("CRM/ticketing import rejected:\n" + error.message);
   process.exit(1);

@@ -40,6 +40,10 @@ test("audiences read as plain criteria and never show a withheld size as a numbe
   const [repeat, , , firstTimers] = aggregate.audienceDefinitions;
   assert.equal(journey.describeAudience(repeat), "bought Manchester United (2026-09-04) · has not bought Everton (2026-10-18) · has consented to contact");
   assert.equal(journey.describeAudience(aggregate.audienceDefinitions[2]), "holds a season ticket · did not scan in at Brighton (2026-09-26) · has consented to contact");
+  assert.equal(
+    journey.describeAudience({ ...repeat, targetSalesInExport: false }),
+    "bought Manchester United (2026-09-04) · has not bought Everton (2026-10-18) (no sales for it in the export yet) · has consented to contact"
+  );
   assert.equal(journey.audienceSizeLabel(repeat.estimatedSize), "About 120");
   assert.equal(journey.audienceSizeLabel(firstTimers.estimatedSize), "Under 10 · size withheld");
 });

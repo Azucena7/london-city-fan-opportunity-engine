@@ -122,3 +122,14 @@ test("the shared validator rejects supporter keys, small cells, fine origins and
   }
   assert.deepEqual(validateAggregate(null), ["dataset must be an object"]);
 });
+
+test("the next fixture without sales still gets repeat audiences, marked as of the export", () => {
+  const opener = Array.from({ length: 34 }, (_, i) => row(i, { fixture_id: "2026-09-04-mun-h" }));
+  const everton = Array.from({ length: 12 }, (_, i) => row(100 + i));
+  const output = aggregateCrmRecords([...opener, ...everton], { kickoffs, upcomingFixtureIds: ["2026-10-28-cry-h", "2026-10-18-eve-h", "2026-09-04-mun-h"] });
+  const ahead = output.audienceDefinitions.filter((item) => item.criteria.notBoughtFixture === "2026-10-28-cry-h");
+  assert.deepEqual(ahead.map((item) => [item.criteria.boughtFixture, item.estimatedSize]), [["2026-09-04-mun-h", 30], ["2026-10-18-eve-h", 10]]);
+  assert.ok(ahead.every((item) => item.targetSalesInExport === false && item.execution === "club-crm"));
+  // Fixtures already in the export, or before it, never get the "no sales yet" variant.
+  assert.equal(output.audienceDefinitions.some((item) => item.targetSalesInExport === false && item.criteria.notBoughtFixture !== "2026-10-28-cry-h"), false);
+});

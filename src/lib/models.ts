@@ -757,6 +757,8 @@ export type CrmAudienceDefinition = {
   };
   estimatedSize: number | null;
   execution: "club-crm";
+  /** False when the target fixture had no sales in the export: "not bought" is as of the extract. */
+  targetSalesInExport?: false;
 };
 
 export type CrmTicketingRepeatCohortAggregate = {
