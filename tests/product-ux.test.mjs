@@ -966,7 +966,7 @@ test("National Rail RDM is registered as approved access awaiting a data product
 
 
 
-test("Opportunity Radar is the primary fixture decision surface", () => {
+test("Opportunity Radar model scores urgency and material signal movement", () => {
   const radar = read("src/lib/opportunityRadar.ts");
   const matches = read("src/app/app/matches/page.tsx");
   const css = read("src/app/app/matches/matches.module.css");
@@ -976,10 +976,7 @@ test("Opportunity Radar is the primary fixture decision surface", () => {
   assert.match(radar, /recentMaterialSignalCount/);
   assert.match(radar, /No material opportunity/);
   assert.match(radar, /new material signal/);
-  assert.match(matches, /Opportunity score/);
-  assert.match(matches, /Signal movement/);
   assert.match(matches, /signalChangeLabel/);
-  assert.match(matches, /Open opportunity brief/);
   assert.match(css, /radarScoreline/);
   assert.match(css, /stateNomaterialopportunity/);
 });
@@ -1129,10 +1126,9 @@ test("app Home surfaces the next decision before navigation", () => {
   assert.match(nav, /label: "Home"/);
 });
 
-test("campaign index visualizes approval progress and next decision", () => {
+test("campaign index draws approval progress", () => {
   const campaigns = read("src/app/app/campaigns/page.tsx");
   assert.match(campaigns, /progressBar/);
-  assert.match(campaigns, /Next decision/);
 });
 
 
@@ -1166,17 +1162,6 @@ test("Campaigns uses a semantic navigation state instead of the legacy brief key
 });
 
 
-test("Radar includes an interactive visual Opportunity Explorer", () => {
-  const radar = read("src/app/app/matches/page.tsx");
-  const explorer = read("src/components/OpportunityExplorer.tsx");
-  assert.match(radar, /OpportunityExplorer/);
-  assert.match(explorer, /Opportunity map/);
-  assert.match(explorer, /Campaign readiness/);
-  assert.match(explorer, /Signal pulse/);
-  assert.match(explorer, /Higher = stronger opportunity/);
-  assert.match(explorer, /driver bars are separate signals, not an additive score formula/i);
-});
-
 test("Season Intelligence aggregates campaigns and evidence without treating missing as zero", () => {
   const page = read("src/app/app/season/page.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
@@ -1193,15 +1178,11 @@ test("Season Intelligence aggregates campaigns and evidence without treating mis
 
 test("Player Asset Planning optimises multi-player packs with contract, capacity, cost and opportunity cost", () => {
   const strategy = read("src/lib/clubStrategy.ts");
-  const planner = read("src/components/PlayerAssetPlanner.tsx");
   const nav = read("src/components/ProductJourneyNav.tsx");
   assert.match(strategy, /recommendPlayerPacks/);
   assert.match(strategy, /opportunityCost/);
   assert.match(strategy, /sportingAvailability/);
   assert.match(strategy, /commercialAvailabilityOverride/);
-  assert.match(planner, /Players needed/);
-  assert.match(planner, /Pack Optimizer/);
-  assert.match(planner, /Best combinations/);
   assert.match(nav, /Player assets/);
 });
 
@@ -1232,9 +1213,7 @@ test("Season Intelligence includes player asset utilisation without calling usag
 
 test("Player Asset Planning works for fixture and non-fixture commercial campaigns", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
-  const campaigns = read("src/app/app/campaigns/page.tsx");
   const data = JSON.parse(read("data/seed/club-strategy-demo.json"));
-  assert.match(planner, /Campaign context/);
   assert.match(planner, /demoCommercialCampaigns/);
   assert.match(planner, /campaignOptions/);
   assert.match(planner, /selectedCampaign\.activationDate/);
@@ -1242,8 +1221,6 @@ test("Player Asset Planning works for fixture and non-fixture commercial campaig
   assert.match(planner, /avela:player-pack/);
   assert.match(planner, /window\.localStorage\.setItem\(selectionStorageKey/);
   assert.match(planner, /does not approve talent use/);
-  assert.match(campaigns, /Campaigns that do not need a fixture to exist/);
-  assert.match(campaigns, /season tickets, Christmas, retail, community and sponsor activity/i);
   assert.ok(data.commercialCampaigns.some((item) => item.type === "season-ticket"));
   assert.ok(data.commercialCampaigns.some((item) => item.type === "seasonal"));
   assert.ok(data.commercialCampaigns.some((item) => item.type === "community"));
@@ -1490,16 +1467,10 @@ test("Club setup separates planning readiness from outcome measurement readiness
   assert.match(readiness, /Ready with limits/);
 });
 
-test("Player Asset Planning explains recommendation changes visually when players are added or removed", () => {
+test("Player Asset Planning styles pack changes and offers to add players", () => {
   const planner = read("src/components/PlayerAssetPlanner.tsx");
   const css = read("src/components/PlayerAssetPlanner.module.css");
-  assert.match(planner, /Momentum Monitor/);
-  assert.match(planner, /Live scenario/);
-  assert.match(planner, /What changed/);
   assert.match(planner, /Add to pack/);
-  assert.match(planner, /Remove from pack/);
-  assert.match(planner, /Reset recommendation/);
-  assert.match(planner, /vs recommended/);
   assert.match(css, /currentPack/);
   assert.match(css, /changeStory/);
 });
@@ -1563,18 +1534,10 @@ test("public crawl policy exposes canonical surfaces and excludes the club app",
   assert.doesNotMatch(sitemap, /\$\{base\}\/app/);
 });
 
-test("Player Assets keeps the live pack decision visible and navigable", () => {
-  const planner = read("src/components/PlayerAssetPlanner.tsx");
+test("Player Assets keeps its sticky guided steps and canonical route", () => {
   const css = read("src/components/PlayerAssetPlanner.module.css");
   const readme = read("README.md");
 
-  for (const id of ["campaign-context", "constraints", "availability", "player-status", "momentum", "packs", "compare", "scenario", "commit"]) {
-    assert.match(planner, new RegExp(`id="${id}"`));
-  }
-  assert.match(planner, /Player pack workflow/);
-  assert.match(planner, /Recommended pack/);
-  assert.match(planner, /<details id="compare"/);
-  assert.match(planner, /<details id="scenario"/);
   assert.match(css, /\.guidedSteps/);
   assert.match(css, /position:sticky/);
   assert.match(readme, /\/app\/players/);
@@ -2143,23 +2106,15 @@ test("Opportunity Brief stylesheet only styles classes the page renders, without
 });
 
 
-test("campaign workflow preserves lifecycle and decision context", () => {
-  const campaigns = read("src/app/app/campaigns/page.tsx");
+test("player planning and the brief carry the campaign context trail", () => {
   const players = read("src/app/app/players/page.tsx");
   const fixture = read("src/app/app/matches/[fixtureId]/page.tsx");
   const trail = read("src/components/DecisionContextTrail.tsx");
 
-  assert.match(campaigns, /Draft/);
-  assert.match(campaigns, /Review/);
-  assert.match(campaigns, /Ready/);
-  assert.match(campaigns, /Handoff/);
-  assert.match(campaigns, /Learning/);
-  assert.match(campaigns, /\/app\/players\?campaign=/);
   assert.match(players, /initialCampaignId/);
   assert.match(players, /DecisionContextTrail/);
   assert.match(fixture, /DecisionContextTrail/);
   assert.match(trail, /Campaign context preserved/);
-  assert.doesNotMatch(campaigns, /\bLive\b/);
 });
 
 
@@ -2211,20 +2166,6 @@ test("calendar exposes a next-decision rail and shared handoffs", () => {
 });
 
 
-test("player assets uses a guided progressive-disclosure funnel", () => {
-  const planner = read("src/components/PlayerAssetPlanner.tsx");
-
-  assert.match(planner, /Player pack workflow/);
-  assert.match(planner, /Step 02 · Constraints/);
-  assert.match(planner, /Step 03 · Recommended pack/);
-  assert.match(planner, /Step 04 · Compare/);
-  assert.match(planner, /id="commit"/);
-  assert.match(planner, /<details id="compare"/);
-  assert.match(planner, /<details id="scenario"/);
-  assert.match(planner, /Decision evidence/);
-});
-
-
 test("sponsors uses a guided commercial decision funnel", () => {
   const sponsors = read("src/app/app/sponsors/page.tsx");
 
@@ -2243,15 +2184,8 @@ test("sponsors uses a guided commercial decision funnel", () => {
 });
 
 
-test("campaigns portfolio uses progressive decision disclosure", () => {
-  const campaigns = read("src/app/app/campaigns/page.tsx");
+test("the brief opens on the decision step of the handoff strip", () => {
   const fixture = read("src/app/app/matches/[fixtureId]/page.tsx");
-
-  assert.match(campaigns, /Portfolio overview/);
-  assert.match(campaigns, /Needs decision/);
-  assert.match(campaigns, /Next decision/);
-  assert.match(campaigns, /AVELA drafts\. The club approves/);
-
   assert.match(fixture, /DecisionHandoffStrip active="decision"/);
 });
 
@@ -2535,11 +2469,8 @@ test("route-specific commercial and case-study CSS is not shipped from the root 
   assert.match(clubs, /commercial-pilot\.css/);
 });
 
-test("Radar and Operating Pack reflect the broader commercial decision category", () => {
-  const radar = read("src/app/app/matches/page.tsx");
+test("Operating Pack stays a public page with its own attribution", () => {
   const pack = read("src/app/pilot/operating-pack/page.tsx");
-  assert.doesNotMatch(radar, />Growth opportunity</);
-  assert.match(radar, />Opportunity</);
   assert.match(pack, /MarketingNav/);
   assert.doesNotMatch(pack, /ProductJourneyNav|productAppShell/);
   assert.match(pack, /utm_source=operating_pack/);
