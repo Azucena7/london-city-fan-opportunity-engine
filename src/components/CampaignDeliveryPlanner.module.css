@@ -7,7 +7,7 @@
 .campaignStats{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:1px;margin:22px 0 0;background:#dfe4e0;border:1px solid #dfe4e0}
 .campaignStats article{padding:14px;background:#f8f9f7}
 .campaignStats span,.campaignStats strong{display:block}
-.campaignStats span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#748078}
+.campaignStats span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#637282}
 .campaignStats strong{margin-top:5px;font-size:14px;line-height:1.35}
 .campaignFlow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
 .campaignFlow>div{padding:14px;border:1px solid #dce2dd}
@@ -23,7 +23,7 @@
 .campaignHealth{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .campaignHealth article{padding:14px;background:#f8f9f7;border:1px solid #dfe4e0}
 .campaignHealth span,.campaignHealth strong,.campaignHealth small{display:block}
-.campaignHealth span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#748078}
+.campaignHealth span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#637282}
 .campaignHealth strong{margin-top:5px;font-size:16px}
 .campaignHealth small{margin-top:5px;color:#747B86;line-height:1.35}
 .impactWarning{margin:8px 0 0;padding:8px 10px;background:#fff4ee;color:#8b4933;border-left:2px solid #d28b6e;font-size:12px;line-height:1.4}
@@ -51,14 +51,14 @@
 .draftTop{display:flex;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid #E3E5EA}
 .draftTop span{font-weight:900}.draftTop strong{font-size:11px;color:#5A4FE0}
 .draftField{padding:14px 0;border-bottom:1px solid #E7E9EE}.draftField:last-child{border-bottom:0}
-.draftField>span{display:block;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#7a857e}
+.draftField>span{display:block;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#637282}
 .draftField p,.draftField ul{margin:6px 0 0;color:#3e4c44;line-height:1.5;font-size:13px}
 .draftField ul{padding-left:18px}
 @media(max-width:900px){.productionHead{flex-direction:column}.draftGrid{grid-template-columns:1fr}.itemCost{flex-wrap:wrap;justify-content:flex-start}}
 
 .workspaceState{display:grid;gap:4px;min-width:190px;padding:10px 12px;background:#f2f4f0;border:1px solid #d8dfda}
 .workspaceState span{font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#78837c}
-.workspaceState strong{font-size:12px}.workspaceState small{color:#6f7b73;font-size:11px}
+.workspaceState strong{font-size:12px}.workspaceState small{color:#637282;font-size:11px}
 .productionActions{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-top:18px;padding:12px 0;border-top:1px solid #E3E5EA;border-bottom:1px solid #E3E5EA}
 .productionActions span{font-size:12px;color:#637068}.productionActions span strong{color:#10131A}
 .productionActions button{min-height:36px;padding:8px 11px;border:1px solid #cdd5cf;background:#fff;color:#10131A;font-size:11px;font-weight:850;cursor:pointer}
@@ -78,7 +78,7 @@
 .reviewFlow>div{display:grid;gap:3px;padding:10px;background:#f5f6f4;border:1px solid #dde2de}
 .reviewFlow>div>span{font-size:9px;font-weight:900;color:#7b867f}
 .reviewFlow>div>strong{font-size:11px}
-.reviewFlow>div>small{color:#748078;font-size:10px;line-height:1.25}
+.reviewFlow>div>small{color:#637282;font-size:10px;line-height:1.25}
 .reviewStepActive{background:#F1EFFF;border-color:#CFCBFF}
 .reopen{width:100%;margin-top:8px;min-height:38px;padding:8px 10px;border:1px solid #cdd5cf;background:#fff;color:#10131A;font-size:11px;font-weight:850;cursor:pointer}
 .reopen:disabled{opacity:.55;cursor:default}

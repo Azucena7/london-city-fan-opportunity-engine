@@ -8,9 +8,9 @@
 }
 .radarSummary>section{min-height:100px;padding:14px}
 .radarSummary span,.radarSummary strong,.radarSummary small{display:block}
-.radarSummary span{color:#81909C;font-size:11px;font-weight:850;letter-spacing:.055em;text-transform:uppercase}
+.radarSummary span{color:#637282;font-size:11px;font-weight:850;letter-spacing:.055em;text-transform:uppercase}
 .radarSummary strong{margin-top:9px;font-size:26px;line-height:1;letter-spacing:-.04em}
-.radarSummary small{margin-top:4px;color:#8C99A3;font-size:11px;line-height:1.4}
+.radarSummary small{margin-top:4px;color:#637282;font-size:11px;line-height:1.4}
 
 .priorityMatch{
   padding:16px;
@@ -40,17 +40,17 @@
 .priorityMetrics{display:grid;grid-template-columns:1fr 1fr;gap:1px;border:1px solid #E4E8EB;border-radius:8px;overflow:hidden;background:#E4E8EB}
 .priorityMetrics>div{padding:13px;background:#fff}
 .priorityMetrics span,.priorityMetrics strong{display:block}
-.priorityMetrics span{color:#8A97A2;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
+.priorityMetrics span{color:#637282;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
 .priorityMetrics strong{margin-top:4px;font-size:14px;line-height:1.25}
 .priorityWhy{display:grid;gap:1px;border:1px solid #E4E8EB;border-radius:8px;overflow:hidden;background:#E4E8EB}
 .priorityWhy>div{padding:13px;background:#FAFBFB}
 .priorityWhy span,.priorityWhy strong{display:block}
-.priorityWhy span{color:#87949E;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
+.priorityWhy span{color:#637282;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
 .priorityWhy strong{margin-top:4px;font-size:12px;line-height:1.4}
 
 .workspaceGrid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.45fr);gap:12px;align-items:start}
 .inboxCard{padding:16px;container:radar-list/inline-size}
-.refresh{color:#8A97A2;font-size:11px}
+.refresh{color:#637282;font-size:11px}
 .radarList{margin-top:10px;border-top:1px solid #E7EBED}
 .radarFixture{
   display:grid;
@@ -64,37 +64,37 @@
 }
 .radarFixture:hover{background:#FAFCFC}
 .futureFixture{min-height:82px}
-.radarRank{color:#98A4AE;font-size:11px;font-weight:900}
-.radarMatch span,.radarOpportunity span{display:block;color:#87949E;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.045em}
+.radarRank{color:#637282;font-size:11px;font-weight:900}
+.radarMatch span,.radarOpportunity span{display:block;color:#637282;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.045em}
 .radarMatch strong{display:block;margin-top:3px;font-size:13px}
-.radarMatch small{display:block;margin-top:2px;color:#8B98A2;font-size:11px;line-height:1.35}
+.radarMatch small{display:block;margin-top:2px;color:#637282;font-size:11px;line-height:1.35}
 .radarOpportunity strong{display:block;margin-top:3px;font-size:12px;line-height:1.4}
-.radarOpportunity small{display:block;margin-top:3px;color:#8B98A2;font-size:11px;line-height:1.35}
+.radarOpportunity small{display:block;margin-top:3px;color:#637282;font-size:11px;line-height:1.35}
 .radarScoreline{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .radarScoreline>div{min-width:0;padding:8px;border-radius:6px;background:#F6F8F9}
 .radarScoreline span,.radarScoreline strong{display:block}
-.radarScoreline span{color:#8A97A2;font-size:11px;font-weight:850;text-transform:uppercase}
+.radarScoreline span{color:#637282;font-size:11px;font-weight:850;text-transform:uppercase}
 .radarScoreline strong{margin-top:3px;font-size:11px}
 .radarState{display:grid;justify-items:start;gap:4px}
-.radarState small{color:#87949E;font-size:11px;line-height:1.35}
+.radarState small{color:#637282;font-size:11px;line-height:1.35}
 
 .sideRail{display:grid;gap:10px}
 .clubFitCard{padding:16px}
-.clubFitCard p{margin:9px 0 0;color:#72808C;font-size:11px;line-height:1.5}
+.clubFitCard p{margin:9px 0 0;color:#637282;font-size:11px;line-height:1.5}
 .clubFitCard p strong{color:#20364C}
 .clubFitCard>a{display:inline-flex;margin-top:10px;color:#2F8F83;text-decoration:none;font-size:11px;font-weight:900}
 .clubFitFacts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:11px}
 .clubFitFacts>div{padding:10px;border-radius:7px;background:#F6F8F9}
 .clubFitFacts>div:last-child{grid-column:1/-1}
 .clubFitFacts span,.clubFitFacts strong{display:block}
-.clubFitFacts span{color:#8A97A2;font-size:11px;text-transform:uppercase;font-weight:850}
+.clubFitFacts span{color:#637282;font-size:11px;text-transform:uppercase;font-weight:850}
 .clubFitFacts strong{margin-top:3px;font-size:12px;line-height:1.35}
 
 .evidenceContract{margin-top:12px;border:1px solid #E0E5E8;border-radius:10px;background:#fff}
 .evidenceContract>summary{list-style:none;cursor:pointer;padding:13px 15px;color:#536572;font-size:11px;font-weight:850}
 .evidenceContract>summary::-webkit-details-marker{display:none}
 .evidenceContract>div{padding:0 15px 15px}
-.evidenceContract p{margin:5px 0 0;color:#74828D;font-size:11px;line-height:1.5}
+.evidenceContract p{margin:5px 0 0;color:#637282;font-size:11px;line-height:1.5}
 
 /* Dynamic radar state classes used by the fixture list */
 .stateNomaterialopportunity{color:#7C8791}
@@ -125,8 +125,8 @@
 .mapHint{color:#83909B;font-size:11px}
 .opportunityMap{position:relative;height:360px;margin-top:14px;border:1px solid #E0E5E8;border-radius:12px;background:linear-gradient(180deg,#FFF8F4 0 34%,#FBFCFC 34% 67%,#F2FAF8 67% 100%);overflow:hidden}
 .mapGrid{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(16,39,66,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(16,39,66,.06) 1px,transparent 1px);background-size:25% 100%,100% 33.333%}
-.axisY{position:absolute;top:14px;left:14px;z-index:2;color:#7C8994;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
-.axisX{position:absolute;right:14px;bottom:12px;z-index:2;color:#7C8994;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.axisY{position:absolute;top:14px;left:14px;z-index:2;color:#637282;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.axisX{position:absolute;right:14px;bottom:12px;z-index:2;color:#637282;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
 .mapPoint{position:absolute;z-index:3;display:grid;place-items:center;align-content:center;border:3px solid #fff;border-radius:50%;box-shadow:0 5px 14px rgba(16,39,66,.15);text-decoration:none;transform:translate(-50%,-50%);transition:transform .16s ease,box-shadow .16s ease}.mapPoint:hover{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 8px 20px rgba(16,39,66,.22)}.mapPoint strong{font-size:11px;line-height:1}.mapPoint small{margin-top:2px;font-size:11px;font-weight:900}.mapPoint[data-state="actnow"]{background:#EF8B6C;color:#fff}.mapPoint[data-state="review"]{background:#EAB95F;color:#5B4211}.mapPoint[data-state="monitor"]{background:#74C9BB;color:#173B36}.mapPoint[data-state="nomaterialopportunity"]{background:#DCE2E6;color:#53616D}
 .mapLegend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.mapLegend span{display:inline-flex;align-items:center;gap:6px;color:#667681;font-size:11px}.mapLegend span::before{content:"";width:9px;height:9px;border-radius:50%;background:#DCE2E6}.mapLegend span[data-tone="act"]::before{background:#EF8B6C}.mapLegend span[data-tone="review"]::before{background:#EAB95F}.mapLegend span[data-tone="monitor"]::before{background:#74C9BB}
 @media(max-width:620px){.opportunityMap{height:300px}.mapPoint{width:38px!important;height:38px!important}.mapPoint strong{font-size:11px}.mapPoint small{font-size:11px}}

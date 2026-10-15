@@ -54,7 +54,10 @@
 
 .contractVisualGrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr);gap:12px;margin-bottom:12px}
 .impactGraphCard,.controlFlowCard{padding:16px}
+.controlFlowCard{container-type:inline-size}
 .impactGraphCard :global([class*="wrap"]){max-width:none;margin:12px 0 0;padding:0}
-.controlFlow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:8px;align-items:center;margin-top:14px}.controlFlow>div{min-height:126px;padding:14px;border:1px solid #E3E8EB;border-radius:10px;background:#FAFBFB}.controlFlow>div[data-alert="true"]{border-color:#F1C6B9;background:#FFF4EF}.controlFlow>div>span,.controlFlow>div>strong,.controlFlow>div>small{display:block}.controlFlow>div>span{color:#8A97A2;font-size:11px;font-weight:900}.controlFlow>div>strong{margin-top:14px;font-size:12px;color:#102742}.controlFlow>div>small{margin-top:6px;color:#7A8792;font-size:11px;line-height:1.4}.controlFlow>i{color:#2F8F83;font-style:normal;font-weight:900}
+.controlFlow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:center;margin-top:14px}.controlFlow>div{min-height:126px;padding:14px;border:1px solid #E3E8EB;border-radius:10px;background:#FAFBFB}.controlFlow>div[data-alert="true"]{border-color:#F1C6B9;background:#FFF4EF}.controlFlow>div>span,.controlFlow>div>strong,.controlFlow>div>small{display:block}.controlFlow>div>span{color:#637282;font-size:11px;font-weight:900}.controlFlow>div>strong{margin-top:14px;font-size:12px;color:#102742}.controlFlow>div>small{margin-top:6px;color:#637282;font-size:11px;line-height:1.4}.controlFlow>i{color:#2F8F83;font-style:normal;font-weight:900}
 @media(max-width:1180px){.contractVisualGrid{grid-template-columns:1fr}.controlFlow{grid-template-columns:1fr auto 1fr auto 1fr auto 1fr}}
+/* The card sits in a narrow column on wide screens too: stack the flow whenever the card is narrow. */
+@container (max-width:620px){.controlFlow{grid-template-columns:repeat(2,minmax(0,1fr))}.controlFlow>i{display:none}.controlFlow>div{min-height:auto}}
 @media(max-width:760px){.controlFlow{grid-template-columns:1fr}.controlFlow>i{transform:rotate(90deg);justify-self:center}.controlFlow>div{min-height:auto}}
