@@ -2,25 +2,37 @@
 
 ## Product direction
 
-Initial go-to-market: **women’s football**.
-
-Technology architecture: **football-wide decision orchestration workspace**.
-
 Working product name: **AVELA**.
 
-Primary category: **Marketing & Commercial Decision Workspace for Football Clubs**.
+Primary positioning: **The Opportunity Engine for Football Club Marketing & Commercial Teams**.
 
-Strategic differentiator: **cross-functional decision orchestration**.
+Inside the app, the working surface is a decision workspace (earlier category name: Marketing & Commercial Decision Workspace for Football Clubs). Internal category language: **cross-functional decision orchestration**.
 
-Initial vertical and proof focus: **women’s football**.
+Initial go-to-market and proof focus: **women’s football**. The technology is football-wide.
 
-Core loop:
+Core loop: **Read → Decide → Move → Learn**, expanded as signal → context → decision → feasibility → execution → evidence → human decision → learning.
 
-**Signals + context + constraints → Priority → Decision → Action → Learning**
+London City Lionesses is a live demonstration environment, not a customer. The club pilot is a separate proposition on authorised club data.
+
+## Status at a glance (October 2026)
+
+Status is what the public build does today. "Built" means a working surface, not that it runs on a club's private data.
+
+| Phase | Status | Where it lives |
+|---|---|---|
+| A · Positioning and product shell | Built | `/`, `/for-clubs`, `/pilot`, app shell |
+| B · Women’s-football signal layer | Partly built: public demand, access, attention, sponsorship and weather signals; calendar moments; TfL road and rail; news radar; international duty in Player assets; exclude-and-recalculate on the brief | `data/live/*`, `/app/matches/[fixtureId]`, `/app/players` |
+| C · Opportunity Radar | Built: ranking by opportunity, urgency and signal movement; "no material opportunity" is a valid result; Morning Commercial Read | `/app/matches`, `/app` |
+| D · Opportunity Brief | Built | `/app/matches/[fixtureId]` |
+| E · Activation builder | Built: channels, asset list, owners, timing, delivery effort, editable scope and approval gates; nothing is published or spent from AVELA | Brief phase 03, `/app/campaigns` |
+| F · Commercial modules | Sponsor opportunity built; attendance scenarios such as big-stadium transfer not yet | `/app/sponsors`, `/app/contracts` |
+| G · Measurement and memory | Partly built: decision history, Learning, T+1 / T+7 / T+30 post-match windows; T+60 / T+90 not yet | `/app/learning`, brief phase 06 |
+| H · Club-grade integrations | Source centre and setup built; aggregate CRM/ticketing import script; no live private connector in the public build | `/app/sources`, `/app/setup` |
+| I · League intelligence | Not started | — |
 
 ## Phase A - Positioning and product shell
 
-- Position the commercial site around the Marketing & Commercial Decision Workspace category.
+- Position the commercial site as the Opportunity Engine for football club marketing and commercial teams; the decision workspace is where the move is run.
 - Keep London City Live as the public proof environment.
 - Lead with “See what could change the match.” and the Opportunity Engine (signal → what changed → why it matters → prepared move); the workspace is where the move is run.
 - Keep fixtures as a primary decision trigger while supporting campaigns and commercial moments that do not require a fixture.
@@ -115,7 +127,7 @@ For each fixture preserve:
 - which signals were useful;
 - which audience / channel / offer patterns repeated.
 
-Add T+1, T+7, T+30, T+60 and T+90 closure states where data access supports them.
+Add T+1, T+7, T+30, T+60 and T+90 closure states where data access supports them (T+1, T+7 and T+30 exist today).
 
 ## Phase H - Club-grade integrations
 
