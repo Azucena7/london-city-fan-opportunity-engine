@@ -87,7 +87,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
     ? deriveCampaignWorkPackage({ campaign, decisionId: `fixture:${fixture.id}` })
     : null;
   const workRoutingRules = await getWorkRoutingRules(clubContext?.clubId);
-  const supporterAggregate = await getSupporterAggregate();
+  const supporterAggregate = await getSupporterAggregate(clubContext?.clubId);
   const crmAudiences = audiencesForFixture(supporterAggregate, fixtureId).map((audience) => ({
     audience,
     purpose: AUDIENCE_PURPOSE[audience.purpose],

@@ -106,3 +106,19 @@ test("supporter origins are postcode districts, counted once per supporter, with
 test("an export without postcode sectors has no origins rather than empty ones", () => {
   assert.equal(aggregateCrmRecords(Array.from({ length: 12 }, (_, i) => row(i)), { kickoffs }).fixtureSummaries[0].origins, null);
 });
+
+test("the shared validator rejects supporter keys, small cells, fine origins and member lists", async () => {
+  const { validateAggregate } = await import("../scripts/lib/crm-aggregate-validate.mjs");
+  const output = aggregateCrmRecords(Array.from({ length: 30 }, (_, i) => row(i, { postcode_sector: "BR1 3", ticket_type: "season" })), { kickoffs });
+  assert.deepEqual(validateAggregate(output), []);
+  const tampered = structuredClone(output);
+  tampered.fixtureSummaries[0].supporter_id_hash = "supporter0001";
+  tampered.fixtureSummaries[0].entryTiming["after-kickoff"] = 3;
+  tampered.fixtureSummaries[0].origins.all.districts.push({ district: "BR1 3", supporters: 12 });
+  tampered.audienceDefinitions[0].members = ["supporter0001"];
+  const errors = validateAggregate(tampered).join("\n");
+  for (const expected of [/forbidden repository field supporter_id_hash/, /entryTiming.after-kickoff: small cell/, /postcode districts, never finer/, /never a list of supporters/]) {
+    assert.match(errors, expected);
+  }
+  assert.deepEqual(validateAggregate(null), ["dataset must be an object"]);
+});
