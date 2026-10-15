@@ -78,3 +78,18 @@ test("a campaign opened from Campaigns keeps its context in Player assets", asyn
   const standalone = await open(page, "/app/players");
   await expect(standalone).toContainText("Standalone player planning");
 });
+
+test("Learning shows when each measurement window can close, without closing it early", async ({ page }) => {
+  // The opener (4 Sep) is 40 days old on the frozen snapshot date (14 Oct).
+  const learning = await open(page, "/app/learning?fixture=2026-09-04-mun-h");
+  const windows = page.getByRole("region", { name: "Measurement windows" }).getByRole("listitem");
+  await expect(windows).toHaveCount(5);
+  await expect(windows.nth(0)).toContainText("T+1");
+  await expect(windows.nth(0)).toContainText("Public facts in");
+  for (const index of [1, 2]) await expect(windows.nth(index)).toContainText("Due · needs club data");
+  await expect(windows.nth(3)).toContainText("T+60 · 3 Nov 2026");
+  for (const index of [3, 4]) await expect(windows.nth(index)).toContainText("Not due yet");
+  await expect(windows.nth(4)).toContainText("T+90 · 3 Dec 2026");
+  for (const index of [1, 2, 3, 4]) await expect(windows.nth(index)).not.toContainText("Public facts in");
+  await expect(learning).toContainText("When each part of this fixture can be closed");
+});

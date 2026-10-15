@@ -7,7 +7,10 @@ import { NextFixtureLearning } from "@/components/NextFixtureLearning";
 import { deriveNextFixtureLearning } from "@/lib/learningRecommendation";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
-import { calendar, currentState } from "@/lib/data";
+import { calendar, crmTicketingDemo, currentState, postmatchReviews } from "@/lib/data";
+import { buildPostMatchScorecards } from "@/lib/postmatch";
+import { productToday } from "@/lib/currentProductDate";
+import type { PostMatchScorecardWindow } from "@/lib/models";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, EvidenceStateBadge } from "@/components/WorkspaceUI";
 import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
@@ -30,6 +33,24 @@ function currency(value: number | null) {
   }).format(value);
 }
 
+function shortDate(iso: string) {
+  return new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+}
+
+function addDays(iso: string, days: number) {
+  const date = new Date(iso + "T12:00:00Z");
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
+// What a closure window can honestly claim from public data: T+1 closes on the public result and
+// attendance; every later window needs authorised club data, so reaching it is not closing it.
+function windowState(window: PostMatchScorecardWindow, dueDate: string) {
+  if (window.status === "complete") return { label: "Public facts in", detail: "Result and attendance are on the public record." };
+  if (window.status === "partial") return { label: "Due · needs club data", detail: "The window has opened; closing it needs authorised club evidence." };
+  return { label: "Not due yet", detail: "Opens on " + shortDate(dueDate) + "." };
+}
+
 // productAppShell is provided by AppWorkspaceShell.
 export default async function ResultsLearningPage({ searchParams }: { searchParams: Promise<{ fixture?: string }> }) {
   const params = await searchParams;
@@ -43,6 +64,11 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
     .filter((item) => item.homeAway === "home" && item.status === "scheduled" && item.id !== selectedId)
     .sort((a, b) => a.date.localeCompare(b.date))[0] ?? null;
   const nextLearning = deriveNextFixtureLearning(live, results);
+  // Closure windows are recomputed per request so a long-running server never shows yesterday's state.
+  const scorecard = selected
+    ? buildPostMatchScorecards(calendar, postmatchReviews, crmTicketingDemo, new Date(`${productToday()}T12:00:00Z`))
+      .find((card) => card.fixtureId === selected.id && card.mode === "public")
+    : undefined;
 
   return (
     <AppWorkspaceShell
@@ -126,6 +152,27 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
         <article><span>Recorded attendance</span><strong>{selected.attendance?.toLocaleString("en-GB") ?? "Not measured yet"}</strong></article>
         <article><span>Commercial impact</span><strong>{measured ? "Descriptive club evidence connected" : "Not measured yet"}</strong></article>
+      </section> : null}
+
+      {scorecard ? <section className={styles.windows} aria-label="Measurement windows">
+        <div className={styles.windowsHead}>
+          <span className={styles.eyebrow}>Measurement windows</span>
+          <strong>When each part of this fixture can be closed</strong>
+        </div>
+        <ol>
+          {scorecard.windows.map((window) => {
+            const due = addDays(scorecard.fixtureDate, window.dueAfterDays);
+            const state = windowState(window, due);
+            return (
+              <li key={window.id} data-status={window.status}>
+                <span>{window.id} · {shortDate(due)}</span>
+                <strong>{window.objective.en}</strong>
+                <b>{state.label}</b>
+                <small>{state.detail}</small>
+              </li>
+            );
+          })}
+        </ol>
       </section> : null}
 
       <section className={styles.kpis}>
