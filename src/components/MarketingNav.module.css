@@ -91,6 +91,19 @@
   box-shadow:0 10px 24px rgba(240,138,106,.14);
 }
 
+/* The commercial home: flush with the board's 8px tiles and margins, flat, no blur. */
+.board{
+  padding:14px clamp(16px,2.4vw,40px) 6px;
+  border-bottom:0;
+  background:#102742;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.board .demo{border-radius:0;box-shadow:none}
+.board{grid-template-columns:calc(42% - 4px) minmax(0,1fr) auto;gap:0 28px}
+.board .links{justify-content:flex-start}
+
 @media(prefers-reduced-motion:no-preference){
   .demo{transition:transform .18s ease,box-shadow .18s ease}
   .demo:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,39,66,.14)}

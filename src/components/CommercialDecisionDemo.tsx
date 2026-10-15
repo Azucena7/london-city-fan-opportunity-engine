@@ -75,14 +75,14 @@ export function CommercialDecisionDemo() {
   return (
     <section className={styles.wrap} aria-labelledby="decision-demo-title">
       <div className={styles.intro}>
-        <span>Try it: change the context</span>
         <h2 id="decision-demo-title">Change what happens around the match. Watch the plan change.</h2>
         <p>
-          This is an illustrative product simulation. Each scenario starts outside the club; internal context then decides
+          Try it: change the context. This is an illustrative product simulation. Each scenario starts outside the club; internal context then decides
           whether it is worth acting on. Change the context and the audience, channel, message and spend posture change with it.
         </p>
       </div>
 
+      <div className={styles.product} data-ui>
       <div className={styles.fixtureStrip} aria-label="Illustrative match state">
         <div><span>Fixture</span><strong>Home match · 18 Oct</strong></div>
         <div><span>Objective</span><strong>Attendance + repeat visit</strong></div>
@@ -130,9 +130,9 @@ export function CommercialDecisionDemo() {
         <div className={styles.interactiveGrid}>
           <div className={styles.signalColumn}>
             <span className={styles.columnLabel}>What AVELA is reading</span>
-            {active.signals.map(([label, signal], index) => (
+            {active.signals.map(([label, signal]) => (
               <article key={label}>
-                <span>{String(index + 1).padStart(2, "0")} · {label}</span>
+                <span>{label}</span>
                 <strong>{signal}</strong>
               </article>
             ))}
@@ -162,6 +162,8 @@ export function CommercialDecisionDemo() {
             </div>
           </div>
         </div>
+      </div>
+
       </div>
 
       <div className={styles.footer}>
