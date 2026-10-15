@@ -99,6 +99,14 @@ for (const [index, item] of (dataset.fixtureSummaries ?? []).entries()) {
     for (const [field, value] of Object.entries(counts ?? {})) if (!safeCount(value)) errors.push(`${ref}.ticketTypes.${type}.${field}: small cell must be suppressed`);
   }
   for (const [band, value] of Object.entries(item.entryTiming ?? {})) if (!safeCount(value)) errors.push(`${ref}.entryTiming.${band}: small cell must be suppressed`);
+  for (const [group, origin] of Object.entries(item.origins ?? {})) {
+    if (!origin) continue;
+    if (!safeCount(origin.supporters) || !safeCount(origin.otherSupporters)) errors.push(`${ref}.origins.${group}: small cell must be suppressed`);
+    for (const district of origin.districts ?? []) {
+      if (!/^[A-Z]{1,2}[0-9][A-Z0-9]?$/.test(district.district ?? "")) errors.push(`${ref}.origins.${group}: origins are postcode districts, never finer`);
+      if (!(Number.isInteger(district.supporters) && district.supporters >= threshold)) errors.push(`${ref}.origins.${group}.${district.district}: districts under ${threshold} supporters must not be listed`);
+    }
+  }
   if (item.seasonTicketScanRate !== undefined && item.seasonTicketScanRate !== null &&
       (typeof item.seasonTicketScanRate !== "number" || item.seasonTicketScanRate < 0 || item.seasonTicketScanRate > 1)) {
     errors.push(`${ref}: seasonTicketScanRate must be null or between 0 and 1`);

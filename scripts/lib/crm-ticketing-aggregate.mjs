@@ -171,6 +171,30 @@ export function aggregateCrmRecords(records, options = {}) {
   };
 }
 
+// Where supporters travel from, by postcode district ("BR1" from sector "BR1 3"): coarser than the
+// imported sector, counted once per supporter, small districts folded into "other".
+const ORIGIN_DISTRICTS = 12;
+function originDistricts(rows) {
+  const located = rows.filter((row) => row.postcode_sector);
+  if (!located.length) return null;
+  const count = (subset) => {
+    const bySupporter = new Map(subset.map((row) => [row.supporter_id_hash, row.postcode_sector.split(" ")[0]]));
+    const tally = new Map();
+    for (const district of bySupporter.values()) tally.set(district, (tally.get(district) ?? 0) + 1);
+    const ranked = [...tally].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    const shown = ranked.filter(([, n]) => n >= SMALL_CELL).slice(0, ORIGIN_DISTRICTS);
+    const other = bySupporter.size - shown.reduce((sum, [, n]) => sum + n, 0);
+    return {
+      supporters: suppress(bySupporter.size),
+      districts: shown.map(([district, supporters]) => ({ district, supporters })),
+      // Everyone outside the shown districts, itself suppressed when small.
+      otherSupporters: suppress(other)
+    };
+  };
+  const season = located.filter((row) => row.ticket_type === "season");
+  return { all: count(located), seasonTicketHolders: season.length ? count(season) : null };
+}
+
 // Season-ticket attendance and entry timing for one fixture, with small cells suppressed.
 function journeyBreakdowns(rows, kickoff) {
   const typed = rows.filter((row) => ticketTypes.has(row.ticket_type));
@@ -194,7 +218,8 @@ function journeyBreakdowns(rows, kickoff) {
     // Null when the export carries no ticket_type, so "not supplied" never reads as zero.
     ticketTypes: typed.length ? byType : null,
     seasonTicketScanRate: season.length >= SMALL_CELL ? seasonScans / season.length : null,
-    entryTiming
+    entryTiming,
+    origins: originDistricts(rows)
   };
 }
 

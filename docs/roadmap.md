@@ -158,6 +158,27 @@ Potential league product:
 
 Any cross-club benchmarking must respect data rights, privacy and contractual boundaries.
 
+## Subproduct track: Matchday Companion (later, not in the current focus)
+
+A supporter-facing "how to get to the stadium" utility with real-time travel signals and a sponsorable mobility layer. The core product already has the pieces it needs to decide; this track turns them into a fan product.
+
+What exists today:
+
+- `/matchday/[fixtureId]`: the fan-facing utility, with live-versus-modelled source states.
+- Daily TfL road and rail snapshots, used by the Morning Read.
+- `data/live/mobility-partnership.json`: corridors, partner models and guardrails, still at planning-scenario stage.
+- Supporter origins by postcode district, from authorised club aggregates (see `docs/data-model.md`).
+
+Why it stays out of the core focus for now: the club user's question is "what should we do for this fixture", and origins already answer that inside the Opportunity Engine (which corridors to watch, where to activate, what evidence a mobility partner would need). A fan app adds a separate audience, live-service reliability and a sponsor sale.
+
+Start it only when all three hold:
+
+1. A pilot club supplies origin aggregates for at least two fixtures, so corridors come from its own supporters rather than public geography.
+2. A live provider covers the main corridors. TfL road and rail are in place; National Rail Darwin/RDM is blocked by licence country.
+3. A named sponsor category (rail operator, ride-hail, coach, bike, parking) or a club partner wants the placement, measured against an agreed baseline.
+
+Guardrails carried over: modelled routes are never shown as live, no individual supporter location is used, and any partner reporting stays aggregate.
+
 ## Live public proof programme
 
 Continue London City Live with:

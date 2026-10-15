@@ -83,3 +83,26 @@ test("audiences are criteria for the club CRM with rounded sizes, never supporte
 test("an unknown ticket_type is rejected at import", () => {
   assert.throws(() => aggregateCrmRecords([row(1, { ticket_type: "vip" })]), /invalid ticket_type/);
 });
+
+test("supporter origins are postcode districts, counted once per supporter, with small districts folded away", () => {
+  const rows = [
+    // 14 supporters from BR1 (two sectors), one of them buying two tickets.
+    ...Array.from({ length: 14 }, (_, i) => row(i, { postcode_sector: i % 2 ? "BR1 3" : "BR1 4", ticket_type: i < 11 ? "season" : "single" })),
+    row(14, { supporter_id_hash: "supporter0000", postcode_sector: "BR1 4", ticket_id_hash: "ticket99999", order_id_hash: "order99999" }),
+    // 12 from SE9 and 3 from DA1, which is too small to list.
+    ...Array.from({ length: 12 }, (_, i) => row(100 + i, { postcode_sector: "SE9 5" })),
+    ...Array.from({ length: 3 }, (_, i) => row(200 + i, { postcode_sector: "DA1 2" }))
+  ];
+  const { origins } = aggregateCrmRecords(rows, { kickoffs }).fixtureSummaries[0];
+  assert.deepEqual(origins.all, {
+    supporters: 29,
+    districts: [{ district: "BR1", supporters: 14 }, { district: "SE9", supporters: 12 }],
+    otherSupporters: null
+  });
+  assert.deepEqual(origins.seasonTicketHolders, { supporters: 11, districts: [{ district: "BR1", supporters: 11 }], otherSupporters: 0 });
+  assert.doesNotMatch(JSON.stringify(origins), /BR1 3|BR1 4|DA1/, "sectors and small districts never appear");
+});
+
+test("an export without postcode sectors has no origins rather than empty ones", () => {
+  assert.equal(aggregateCrmRecords(Array.from({ length: 12 }, (_, i) => row(i)), { kickoffs }).fixtureSummaries[0].origins, null);
+});
