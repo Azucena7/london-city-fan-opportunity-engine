@@ -1,0 +1,85 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { aggregateCrmRecords, SMALL_CELL } from "../scripts/lib/crm-ticketing-aggregate.mjs";
+
+// Synthetic ticket-grain rows generated in the test; nothing here is club data.
+function row(index, overrides = {}) {
+  return {
+    schema_version: "1.0",
+    fixture_id: "2026-10-18-eve-h",
+    channel: "owned",
+    supporter_id_hash: `supporter${String(index).padStart(4, "0")}`,
+    order_id_hash: `order${String(index).padStart(5, "0")}`,
+    ticket_id_hash: `ticket${String(index).padStart(5, "0")}`,
+    order_timestamp: "2026-10-10T10:00:00Z",
+    ticket_product: "Adult",
+    quantity: 1,
+    realised_unit_price: 12,
+    currency: "GBP",
+    scan_status: "scanned",
+    // 18 Oct 2026 is British Summer Time: 12:30Z is 13:30 in London, 30 minutes before a 14:00 kickoff.
+    scan_timestamp: "2026-10-18T12:30:00Z",
+    consent_status: "consented",
+    source_system: "test",
+    extracted_at: "2026-10-19T09:00:00Z",
+    ...overrides
+  };
+}
+
+const kickoffs = { "2026-10-18-eve-h": { date: "2026-10-18", kickoff: "14:00" } };
+
+test("season-ticket attendance is reported, with small groups suppressed", () => {
+  const rows = [
+    ...Array.from({ length: 20 }, (_, i) => row(i, { ticket_type: "season", scan_status: i < 15 ? "scanned" : "not_scanned", scan_timestamp: i < 15 ? "2026-10-18T12:30:00Z" : undefined })),
+    ...Array.from({ length: 4 }, (_, i) => row(100 + i, { ticket_type: "hospitality" }))
+  ];
+  const [summary] = aggregateCrmRecords(rows, { kickoffs }).fixtureSummaries;
+  assert.deepEqual(summary.ticketTypes.season, { tickets: 20, scans: 15 });
+  assert.equal(summary.seasonTicketScanRate, 0.75);
+  // Four hospitality tickets could single people out.
+  assert.deepEqual(summary.ticketTypes.hospitality, { tickets: null, scans: null });
+});
+
+test("an export without ticket_type reports breakdowns as not supplied, never zero", () => {
+  const [summary] = aggregateCrmRecords(Array.from({ length: 12 }, (_, i) => row(i)), { kickoffs }).fixtureSummaries;
+  assert.equal(summary.ticketTypes, null);
+  assert.equal(summary.seasonTicketScanRate, null);
+});
+
+test("entry timing groups scans by London time before kickoff", () => {
+  const times = { "2026-10-18T11:30:00Z": 12, "2026-10-18T12:10:00Z": 11, "2026-10-18T12:45:00Z": 10, "2026-10-18T13:05:00Z": 3 };
+  let index = 0;
+  const rows = Object.entries(times).flatMap(([scan, count]) => Array.from({ length: count }, () => row(index++, { scan_timestamp: scan })));
+  const [summary] = aggregateCrmRecords(rows, { kickoffs }).fixtureSummaries;
+  assert.deepEqual(summary.entryTiming, {
+    "more-than-60-before": 12,
+    "60-to-30-before": 11,
+    "30-to-0-before": 10,
+    "after-kickoff": null,
+    unknown: 0
+  });
+  assert.equal(aggregateCrmRecords(rows).fixtureSummaries[0].entryTiming, null, "without a kickoff there is no timing");
+});
+
+test("audiences are criteria for the club CRM with rounded sizes, never supporter lists", () => {
+  const opener = Array.from({ length: 40 }, (_, i) => row(i, { fixture_id: "2026-09-04-mun-h", first_time_buyer: i < 25 }));
+  const everton = Array.from({ length: 13 }, (_, i) => row(i, { ticket_id_hash: `evticket${String(i).padStart(4, "0")}`, order_id_hash: `evorder${String(i).padStart(4, "0")}` }));
+  const output = aggregateCrmRecords([...opener, ...everton], { kickoffs });
+  const repeat = output.audienceDefinitions.find((item) => item.id === "repeat-non-returners:2026-09-04-mun-h:2026-10-18-eve-h");
+  assert.equal(repeat.estimatedSize, 30, "27 non-returners round to 30");
+  assert.equal(repeat.execution, "club-crm");
+  assert.deepEqual(repeat.criteria, { boughtFixture: "2026-09-04-mun-h", notBoughtFixture: "2026-10-18-eve-h", consent: "consented" });
+  // Only forward-in-time cohorts become audiences.
+  assert.equal(output.audienceDefinitions.some((item) => item.id.startsWith("repeat-non-returners:2026-10-18")), false);
+  const firstTimers = output.audienceDefinitions.find((item) => item.id === "first-time-buyers:2026-09-04-mun-h");
+  assert.equal(firstTimers.estimatedSize, 30, "25 first-time buyers round to the nearest ten");
+  assert.equal(output.audienceDefinitions.find((item) => item.id === "season-no-shows:2026-09-04-mun-h").estimatedSize, null);
+  for (const item of output.audienceDefinitions) assert.ok(item.estimatedSize === null || item.estimatedSize >= SMALL_CELL);
+  assert.deepEqual(output.privacy, { smallCellThreshold: 10, audienceSizesRoundedTo: 10 });
+  const serialised = JSON.stringify(output);
+  assert.doesNotMatch(serialised, /supporter0|order0|ticket0|evticket/, "no supporter, order or ticket keys leave the importer");
+});
+
+test("an unknown ticket_type is rejected at import", () => {
+  assert.throws(() => aggregateCrmRecords([row(1, { ticket_type: "vip" })]), /invalid ticket_type/);
+});

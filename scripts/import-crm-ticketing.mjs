@@ -18,11 +18,16 @@ if (sourcePath === repoRoot || sourcePath.startsWith(repoRoot + sep)) {
 }
 
 const parsed = JSON.parse(await readFile(sourcePath, "utf8"));
+// Kickoffs let scans be grouped by how early supporters arrive; only date and kickoff time are used.
+const calendar = JSON.parse(await readFile(resolve(repoRoot, "data/seed/calendar.json"), "utf8"));
+const kickoffs = Object.fromEntries((Array.isArray(calendar) ? calendar : calendar.fixtures)
+  .filter((fixture) => fixture.date && fixture.kickoff)
+  .map((fixture) => [fixture.id, { date: fixture.date, kickoff: fixture.kickoff }]));
 const records = Array.isArray(parsed) ? parsed : parsed.records;
 
 let output;
 try {
-  output = aggregateCrmRecords(records);
+  output = aggregateCrmRecords(records, { kickoffs });
 } catch (error) {
   console.error("CRM/ticketing import rejected:\n" + error.message);
   process.exit(1);
@@ -34,6 +39,8 @@ console.log(JSON.stringify({
   sourceRecordsProcessedLocally: records.length,
   fixtureSummaries: output.fixtureSummaries.length,
   repeatCohorts: output.repeatCohorts.length,
+  audienceDefinitions: output.audienceDefinitions.length,
+  smallCellThreshold: output.privacy.smallCellThreshold,
   target: "data/live/crm-ticketing.json",
   state: output.datasetState,
   rawRecordsStoredInRepository: false
