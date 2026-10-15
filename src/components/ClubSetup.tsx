@@ -2,6 +2,7 @@
 
 import { fetchClubSession } from "@/lib/clubSessionClient";
 import { useEffect, useMemo, useState } from "react";
+import { MAX_VENUES, type ClubVenue, type VenueCapacityState } from "@/lib/clubVenues";
 import styles from "./ClubSetup.module.css";
 
 type Club = { id: string; name: string; role: string };
@@ -9,6 +10,38 @@ type FixtureSource = "manual" | "calendar-feed" | "ticketing";
 
 const channelOptions = ["CRM", "Email", "Instagram", "Facebook", "TikTok", "Push", "SMS", "Web"];
 const objectiveOptions = ["Repeat attendance", "Ticket conversion", "Family acquisition", "Local growth", "Revenue per fan", "Retention"];
+
+// Form state keeps capacities as typed text; the API validates and stores numbers.
+type VenueDraft = Omit<ClubVenue, "aliases" | "totalCapacity" | "sellableCapacity" | "asOf"> & {
+  aliases: string;
+  totalCapacity: string;
+  sellableCapacity: string;
+  asOf: string;
+};
+
+function toDraft(venue: ClubVenue): VenueDraft {
+  return {
+    ...venue,
+    aliases: venue.aliases.join("\n"),
+    totalCapacity: venue.totalCapacity?.toString() ?? "",
+    sellableCapacity: venue.sellableCapacity?.toString() ?? "",
+    asOf: venue.asOf ?? ""
+  };
+}
+
+function fromDraft(draft: VenueDraft) {
+  return {
+    ...draft,
+    aliases: draft.aliases.split("\n").map((alias) => alias.trim()).filter(Boolean),
+    totalCapacity: draft.totalCapacity.trim() || null,
+    sellableCapacity: draft.sellableCapacity.trim() || null,
+    asOf: draft.asOf || null
+  };
+}
+
+const emptyVenue = (home: boolean): VenueDraft => ({
+  id: "", name: "", aliases: "", home, totalCapacity: "", sellableCapacity: "", capacityState: "public-reported", source: "", asOf: ""
+});
 
 export function ClubSetup() {
   const [clubs, setClubs] = useState<Club[]>([]);
@@ -21,6 +54,8 @@ export function ClubSetup() {
   const [mustAvoid, setMustAvoid] = useState("Unverified urgency, invented scarcity, unsupported ticket claims.");
   const [approvalOwner, setApprovalOwner] = useState("Marketing");
   const [requiresApproval, setRequiresApproval] = useState(true);
+  const [venues, setVenues] = useState<VenueDraft[]>([]);
+  const [venuesAvailable, setVenuesAvailable] = useState(true);
   const [status, setStatus] = useState("Loading setup…");
   const [saving, setSaving] = useState(false);
 
@@ -35,8 +70,12 @@ export function ClubSetup() {
         priority_objectives?: string[];
         brand_rules?: { tone?: string; mustAvoid?: string };
         approval_rules?: { owner?: string; required?: boolean };
+        venues?: ClubVenue[];
       } | null;
+      venuesAvailable?: boolean;
     };
+    setVenuesAvailable(result.venuesAvailable !== false);
+    setVenues(Array.isArray(result.setup?.venues) ? result.setup.venues.map(toDraft) : []);
 
     if (response.ok && result.setup) {
       setFixtureSource(result.setup.fixture_source ?? "manual");
@@ -78,11 +117,16 @@ export function ClubSetup() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps -- initial account bootstrap only
 
   const role = clubs.find((club) => club.id === activeClubId)?.role ?? "";
+  const venuesWithCapacity = venues.filter((venue) => venue.name.trim() && (venue.totalCapacity.trim() || venue.sellableCapacity.trim())).length;
+
+  function updateVenue(index: number, patch: Partial<VenueDraft>) {
+    setVenues((current) => current.map((venue, position) => position === index ? { ...venue, ...patch } : venue));
+  }
   const canEdit = role === "admin";
   const completeness = useMemo(() => {
-    const checks = [fixtureSource !== "manual", channels.length > 0, objectives.length > 0, tone.trim().length > 0, approvalOwner.trim().length > 0];
+    const checks = [fixtureSource !== "manual", channels.length > 0, objectives.length > 0, tone.trim().length > 0, approvalOwner.trim().length > 0, venuesWithCapacity > 0];
     return Math.round((checks.filter(Boolean).length / checks.length) * 100);
-  }, [approvalOwner, channels.length, fixtureSource, objectives.length, tone]);
+  }, [approvalOwner, channels.length, fixtureSource, objectives.length, tone, venuesWithCapacity]);
 
   function toggle(value: string, current: string[], setter: (next: string[]) => void) {
     setter(current.includes(value) ? current.filter((item) => item !== value) : [...current, value]);
@@ -102,10 +146,16 @@ export function ClubSetup() {
           connectedChannels: channels,
           priorityObjectives: objectives,
           brandRules: { tone, mustAvoid },
-          approvalRules: { owner: approvalOwner, required: requiresApproval }
+          approvalRules: { owner: approvalOwner, required: requiresApproval },
+          ...(venuesAvailable ? { venues: venues.filter((venue) => venue.name.trim()).map(fromDraft) } : {})
         })
       });
-      setStatus(response.ok ? "Club setup saved to the club workspace." : "Club setup could not be saved. Existing club defaults were not changed.");
+      const result = await response.json().catch(() => ({})) as { venuesSaved?: boolean };
+      setStatus(!response.ok
+        ? "Club setup could not be saved. Existing club defaults were not changed."
+        : venuesAvailable && result.venuesSaved === false
+          ? "Club setup saved. Venues were not stored: the club database needs the venues update."
+          : "Club setup saved to the club workspace.");
     } catch {
       setStatus("The club workspace is unreachable. Existing club defaults were not changed.");
     } finally {
@@ -148,6 +198,7 @@ export function ClubSetup() {
         <div className={objectives.length ? styles.journeyDone : ""}><span>03</span><strong>Objectives</strong><small>{objectives.length ? `${objectives.length} priorities` : "Choose goals"}</small></div>
         <div className={tone.trim() ? styles.journeyDone : ""}><span>04</span><strong>Brand</strong><small>{tone.trim() ? "Guardrails set" : "Needs rules"}</small></div>
         <div className={approvalOwner.trim() ? styles.journeyDone : ""}><span>05</span><strong>Approval</strong><small>{approvalOwner.trim() ? approvalOwner : "Needs owner"}</small></div>
+        <div className={venuesWithCapacity ? styles.journeyDone : ""}><span>06</span><strong>Venues</strong><small>{venuesWithCapacity ? `${venuesWithCapacity} with capacity` : "Add capacity"}</small></div>
       </div>
 
       <div className={styles.clubBar}>
@@ -190,6 +241,33 @@ export function ClubSetup() {
           <label>Default owner<input disabled={!canEdit} value={approvalOwner} onChange={(event) => setApprovalOwner(event.target.value)} /></label>
           <label className={styles.check}><input disabled={!canEdit} type="checkbox" checked={requiresApproval} onChange={(event) => setRequiresApproval(event.target.checked)} /> Require campaign approval before scope lock</label>
           <p>Existing campaign permissions and RLS still control who can view, edit and approve.</p>
+        </article>
+
+        <article className={styles.venues} aria-label="Venues and capacity">
+          <span>06 · Venues</span>
+          <h2>Where does the club play, and how many can it sell?</h2>
+          {!venuesAvailable ? <p role="note">Venues need a club database update before they can be saved here.</p> : null}
+          {venues.map((venue, index) => (
+            <fieldset key={index} disabled={!canEdit || !venuesAvailable}>
+              <legend>{venue.name.trim() || `Venue ${index + 1}`}{venue.home ? " · home" : ""}</legend>
+              <label>Venue name<input value={venue.name} onChange={(event) => updateVenue(index, { name: event.target.value })} /></label>
+              <label>Other names in fixture feeds<textarea value={venue.aliases} placeholder="One per line" onChange={(event) => updateVenue(index, { aliases: event.target.value })} /></label>
+              <label>Total capacity<input inputMode="numeric" value={venue.totalCapacity} onChange={(event) => updateVenue(index, { totalCapacity: event.target.value.replace(/[^0-9]/g, "") })} /></label>
+              <label>Sellable for home fixtures<input inputMode="numeric" value={venue.sellableCapacity} onChange={(event) => updateVenue(index, { sellableCapacity: event.target.value.replace(/[^0-9]/g, "") })} /></label>
+              <label>Capacity state<select value={venue.capacityState} onChange={(event) => updateVenue(index, { capacityState: event.target.value as VenueCapacityState })}>
+                <option value="club-confirmed">Confirmed by the club</option>
+                <option value="public-reported">Public figure, not verified</option>
+              </select></label>
+              <label>Source<input value={venue.source} placeholder="e.g. Safety certificate 2026/27" onChange={(event) => updateVenue(index, { source: event.target.value })} /></label>
+              <label>As of<input type="date" value={venue.asOf} onChange={(event) => updateVenue(index, { asOf: event.target.value })} /></label>
+              <label className={styles.check}><input type="checkbox" checked={venue.home} onChange={(event) => updateVenue(index, { home: event.target.checked })} /> Regular home venue</label>
+              <button type="button" onClick={() => setVenues((current) => current.filter((_, position) => position !== index))}>Remove venue</button>
+            </fieldset>
+          ))}
+          {canEdit && venuesAvailable && venues.length < MAX_VENUES ? (
+            <button type="button" onClick={() => setVenues((current) => [...current, emptyVenue(current.length === 0)])}>Add venue</button>
+          ) : null}
+          <p>Capacity is the denominator for occupancy and venue scenarios. A venue without a figure stays unknown, never zero. Supporter and ticket records do not belong here.</p>
         </article>
 
         <article className={styles.ready}>

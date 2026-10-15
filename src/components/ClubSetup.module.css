@@ -11,7 +11,7 @@
 .clubBar select,.grid select,.grid input,.grid textarea{min-height:40px;padding:8px 10px;border:1px solid #ccd4ce;background:#fff;color:#132019;font:inherit}
 .clubBar div span,.clubBar div strong,.clubBar div small{display:block}.clubBar div strong{margin-top:4px;text-transform:capitalize}.clubBar div small{margin-top:3px;color:#748078}
 
-.setupJourney{display:grid;grid-template-columns:repeat(5,1fr);margin-top:12px;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
+.setupJourney{display:grid;grid-template-columns:repeat(6,1fr);margin-top:12px;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
 .setupJourney>div{position:relative;display:grid;gap:4px;padding:14px 16px 14px 0}
 .setupJourney>div+div{padding-left:16px;border-left:1px solid var(--product-line)}
 .setupJourney strong{font-size:13px}.setupJourney small{color:#7b867f;font-size:11px}
@@ -27,6 +27,13 @@
 .check{display:flex;grid-template-columns:18px 1fr;align-items:center;text-transform:none;letter-spacing:0;font-size:12px}.check input{min-height:auto}
 
 .ready{background:var(--product-navy);color:#f7faf6;border-right:0}.ready>span,.ready p{color:#b9c3bc}.ready button{margin-top:18px;min-height:42px;padding:9px 13px;border:0;background:var(--product-accent);color:#fff;font-weight:900;cursor:pointer}.ready button:disabled{opacity:.5;cursor:default}
+.ready{grid-column:1/-1}
+.venues fieldset{display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:10px 12px;min-width:0;margin:12px 0 0;padding:12px;border:1px solid var(--product-line)}
+.venues legend{padding:0 4px;font-size:12px;font-weight:850}
+.venues fieldset label+label{margin-top:0}
+.venues fieldset .check,.venues fieldset button{grid-column:1/-1}
+.venues button{justify-self:start;min-height:34px;margin-top:12px;padding:8px 10px;border:1px solid #ccd4ce;background:transparent;color:#26352c;font-size:11px;font-weight:800;cursor:pointer}
+.venues fieldset button{margin-top:0}
 .readyAction{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
 .readyAction>span{max-width:360px;color:#c4cec7;font-size:11px;text-transform:none;letter-spacing:0}.readyAction button{margin-top:0}
 
@@ -38,8 +45,9 @@
   .wrap,.empty,.loadingState{width:100%}.head{grid-template-columns:1fr;align-items:start}.head h2,.empty h2{font-size:26px}
   .score{border-top:1px solid var(--product-line);border-left:0;padding:10px 0 0}
   .clubBar{flex-direction:column}.clubBar select,.grid select,.grid input,.grid textarea{width:100%}
-  .setupJourney{overflow-x:auto;grid-template-columns:repeat(5,minmax(150px,1fr));scrollbar-width:none}.setupJourney::-webkit-scrollbar{display:none}
+  .setupJourney{overflow-x:auto;grid-template-columns:repeat(6,minmax(150px,1fr));scrollbar-width:none}.setupJourney::-webkit-scrollbar{display:none}
   .grid{grid-template-columns:1fr}.grid article,.grid article:nth-child(even){border-right:0;padding:16px 0}
+  .venues fieldset{grid-template-columns:1fr}
   .chips button{min-height:44px}.readyAction{align-items:flex-start;flex-direction:column}
 }
 

@@ -134,6 +134,18 @@ makes missing club access explicit. It never treats absent private data as zero.
 The synthetic rehearsal may use repository-owned `synthetic-demo` rows to validate calculations.
 Synthetic records must never be combined with measured club results or presented as production evidence.
 
+## ClubVenue (club setup)
+
+Entered once per club in `/app/setup` and stored in `club_setup.venues` (at most 10):
+
+- `name` and `aliases`: every spelling a fixture feed uses, so one ground is one venue
+- `home`: the regular home venue
+- `totalCapacity` and `sellableCapacity`: whole numbers; sellable is what a home fixture can actually sell after away, segregation and hospitality holds, and never exceeds the total
+- `capacityState`: `club-confirmed`, `public-reported` or `missing`
+- `source` and `asOf`: where the figure comes from and when
+
+A missing figure stays `missing`, never 0, and occupancy is only computed when both attendance and a capacity exist. Venues are club-level operating context: supporter, order and ticket records never belong here.
+
 ## PostMatchScorecard
 
 Generated per canonical `fixture_id` from the calendar, public post-match observations and,
