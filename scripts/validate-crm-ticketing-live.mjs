@@ -88,6 +88,35 @@ for (const [index, item] of (dataset.repeatCohorts ?? []).entries()) {
   }
 }
 
+// Journey breakdowns and audience definitions (optional, from the aggregate importer) must never
+// expose a small group: every count is 0, null (suppressed) or at least the small-cell threshold.
+const threshold = dataset.privacy?.smallCellThreshold ?? 10;
+if (dataset.privacy && threshold < 10) errors.push("privacy.smallCellThreshold cannot be below 10");
+const safeCount = (value) => value === null || value === 0 || (Number.isInteger(value) && value >= threshold);
+for (const [index, item] of (dataset.fixtureSummaries ?? []).entries()) {
+  const ref = `fixtureSummaries[${index}]`;
+  for (const [type, counts] of Object.entries(item.ticketTypes ?? {})) {
+    for (const [field, value] of Object.entries(counts ?? {})) if (!safeCount(value)) errors.push(`${ref}.ticketTypes.${type}.${field}: small cell must be suppressed`);
+  }
+  for (const [band, value] of Object.entries(item.entryTiming ?? {})) if (!safeCount(value)) errors.push(`${ref}.entryTiming.${band}: small cell must be suppressed`);
+  if (item.seasonTicketScanRate !== undefined && item.seasonTicketScanRate !== null &&
+      (typeof item.seasonTicketScanRate !== "number" || item.seasonTicketScanRate < 0 || item.seasonTicketScanRate > 1)) {
+    errors.push(`${ref}: seasonTicketScanRate must be null or between 0 and 1`);
+  }
+}
+const audienceIds = new Set();
+for (const [index, item] of (dataset.audienceDefinitions ?? []).entries()) {
+  const ref = `audienceDefinitions[${index}]`;
+  if (!item.id || audienceIds.has(item.id)) errors.push(`${ref}: id must be present and unique`);
+  audienceIds.add(item.id);
+  if (item.execution !== "club-crm") errors.push(`${ref}: audiences are executed in the club CRM`);
+  if (item.criteria?.consent !== "consented") errors.push(`${ref}: audiences are consented supporters only`);
+  if (!(item.estimatedSize === null || (Number.isInteger(item.estimatedSize) && item.estimatedSize >= threshold && item.estimatedSize % 10 === 0))) {
+    errors.push(`${ref}: estimatedSize must be null or a rounded size of at least ${threshold}`);
+  }
+  if (Array.isArray(item.members) || Array.isArray(item.supporters)) errors.push(`${ref}: audiences carry criteria, never a list of supporters`);
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exitCode = 1;
@@ -96,6 +125,7 @@ if (errors.length) {
     state: dataset.datasetState,
     fixtureSummaries: dataset.fixtureSummaries.length,
     repeatCohorts: dataset.repeatCohorts.length,
+    audienceDefinitions: dataset.audienceDefinitions?.length ?? 0,
     extractedAt: dataset.extractedAt,
     rawSupporterRecordsStored: false
   }, null, 2));

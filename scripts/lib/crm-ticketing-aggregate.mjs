@@ -12,6 +12,35 @@ const forbidden = new Set([
 const channels = new Set(["owned","partner","broadcast","paid","organic","direct","community","unknown"]);
 const scanStates = new Set(["scanned","not_scanned","unknown"]);
 const consentStates = new Set(["consented","not_consented","unknown"]);
+// Optional: how the ticket was held. Season-ticket holders are the club's core recurring audience.
+const ticketTypes = new Set(["season","single","hospitality","complimentary","unknown"]);
+
+// Breakdowns and audience sizes below this many supporters are suppressed (shown as null), so a
+// segment can never single out a handful of people. Audience sizes are also rounded to tens.
+export const SMALL_CELL = 10;
+const suppress = (count) => (count > 0 && count < SMALL_CELL ? null : count);
+const roundedSize = (count) => (count < SMALL_CELL ? null : Math.round(count / 10) * 10);
+
+// Minutes from a scan to kickoff, in London local time. Positive means before kickoff.
+function minutesBeforeKickoff(scanTimestamp, kickoff) {
+  if (!kickoff?.date || !/^\d{2}:\d{2}$/.test(kickoff.kickoff ?? "")) return null;
+  const scan = new Date(scanTimestamp);
+  if (Number.isNaN(scan.getTime())) return null;
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+  }).formatToParts(scan).map((part) => [part.type, part.value]));
+  if (`${parts.year}-${parts.month}-${parts.day}` !== kickoff.date) return null;
+  const [hour, minute] = kickoff.kickoff.split(":").map(Number);
+  return hour * 60 + minute - (Number(parts.hour) * 60 + Number(parts.minute));
+}
+
+function entryBand(minutes) {
+  if (minutes === null) return "unknown";
+  if (minutes > 60) return "more-than-60-before";
+  if (minutes > 30) return "60-to-30-before";
+  if (minutes >= 0) return "30-to-0-before";
+  return "after-kickoff";
+}
 
 export function validateCrmRecords(records) {
   const errors = [];
@@ -52,6 +81,7 @@ export function validateCrmRecords(records) {
     if (row.scan_status === "scanned" && !row.scan_timestamp) errors.push(`${ref}: scanned ticket requires scan_timestamp`);
     if (row.scan_status !== "scanned" && row.scan_timestamp) errors.push(`${ref}: unscanned ticket cannot have scan_timestamp`);
     if (row.postcode_sector && !/^[A-Z]{1,2}[0-9][A-Z0-9]? [0-9]$/.test(row.postcode_sector)) errors.push(`${ref}: postcode_sector must be aggregated to sector level`);
+    if (row.ticket_type !== undefined && row.ticket_type !== null && !ticketTypes.has(row.ticket_type)) errors.push(`${ref}: invalid ticket_type`);
     if (ticketIds.has(row.ticket_id_hash)) errors.push(`${ref}: duplicate ticket_id_hash`);
     ticketIds.add(row.ticket_id_hash);
   }
@@ -59,7 +89,11 @@ export function validateCrmRecords(records) {
   return errors;
 }
 
-export function aggregateCrmRecords(records) {
+/**
+ * @param records ticket-grain rows (external, never stored)
+ * @param options.kickoffs fixtureId → { date: "YYYY-MM-DD", kickoff: "HH:MM" } in London time, for entry timing
+ */
+export function aggregateCrmRecords(records, options = {}) {
   const errors = validateCrmRecords(records);
   if (errors.length) throw new Error(errors.join("\n"));
 
@@ -86,7 +120,8 @@ export function aggregateCrmRecords(records) {
       firstTimeBuyers: firstTimeBuyers.size,
       consentedBuyers: consentedBuyers.size,
       campaignAttributedTickets: rows.filter((row) => row.campaign_id).length,
-      postcodeSectors: postcodeSectors.size
+      postcodeSectors: postcodeSectors.size,
+      ...journeyBreakdowns(rows, options.kickoffs?.[fixtureId])
     };
   });
 
@@ -119,6 +154,7 @@ export function aggregateCrmRecords(records) {
   }
 
   const extractedAt = records.map((row) => row.extracted_at).filter(Boolean).sort().at(-1) ?? null;
+  const audienceDefinitions = buildAudienceDefinitions(records, fixtureIds, repeatCohorts);
 
   return {
     datasetState: "club-aggregate",
@@ -128,7 +164,72 @@ export function aggregateCrmRecords(records) {
       en: "Authorised club CRM/ticketing data aggregated locally. No supporter, order or ticket hashes are stored in the repository.",
       es: "Datos autorizados de CRM/ticketing del club agregados localmente. No se almacenan hashes de aficionados, pedidos ni entradas en el repositorio."
     },
+    privacy: { smallCellThreshold: SMALL_CELL, audienceSizesRoundedTo: 10 },
     fixtureSummaries,
-    repeatCohorts
+    repeatCohorts,
+    audienceDefinitions
   };
+}
+
+// Season-ticket attendance and entry timing for one fixture, with small cells suppressed.
+function journeyBreakdowns(rows, kickoff) {
+  const typed = rows.filter((row) => ticketTypes.has(row.ticket_type));
+  const byType = {};
+  for (const type of ticketTypes) {
+    const ofType = typed.filter((row) => row.ticket_type === type);
+    if (!ofType.length) continue;
+    byType[type] = { tickets: suppress(ofType.length), scans: suppress(ofType.filter((row) => row.scan_status === "scanned").length) };
+  }
+  const season = typed.filter((row) => row.ticket_type === "season");
+  const seasonScans = season.filter((row) => row.scan_status === "scanned").length;
+
+  let entryTiming = null;
+  if (kickoff) {
+    const bands = { "more-than-60-before": 0, "60-to-30-before": 0, "30-to-0-before": 0, "after-kickoff": 0, unknown: 0 };
+    for (const row of rows.filter((item) => item.scan_status === "scanned")) bands[entryBand(minutesBeforeKickoff(row.scan_timestamp, kickoff))] += 1;
+    entryTiming = Object.fromEntries(Object.entries(bands).map(([band, count]) => [band, suppress(count)]));
+  }
+
+  return {
+    // Null when the export carries no ticket_type, so "not supplied" never reads as zero.
+    ticketTypes: typed.length ? byType : null,
+    seasonTicketScanRate: season.length >= SMALL_CELL ? seasonScans / season.length : null,
+    entryTiming
+  };
+}
+
+// Segment definitions the club's CRM can build and send. AVELA shares criteria and a rounded
+// size only: never a list of supporters. Consented supporters only.
+function buildAudienceDefinitions(records, fixtureIds, repeatCohorts) {
+  const definitions = [];
+  const consented = records.filter((row) => row.consent_status === "consented");
+  for (const cohort of repeatCohorts) {
+    if (cohort.sourceFixtureId >= cohort.targetFixtureId) continue;
+    definitions.push({
+      id: `repeat-non-returners:${cohort.sourceFixtureId}:${cohort.targetFixtureId}`,
+      purpose: "repeat-attendance",
+      criteria: { boughtFixture: cohort.sourceFixtureId, notBoughtFixture: cohort.targetFixtureId, consent: "consented" },
+      estimatedSize: roundedSize(cohort.addressableConsentedNonReturners)
+    });
+  }
+  for (const fixtureId of fixtureIds) {
+    const rows = consented.filter((row) => row.fixture_id === fixtureId);
+    const seasonNoShows = new Set(rows.filter((row) => row.ticket_type === "season" && row.scan_status === "not_scanned").map((row) => row.supporter_id_hash));
+    const firstTimers = new Set(rows.filter((row) => row.first_time_buyer).map((row) => row.supporter_id_hash));
+    definitions.push(
+      {
+        id: `season-no-shows:${fixtureId}`,
+        purpose: "season-ticket-retention",
+        criteria: { fixture: fixtureId, ticketType: "season", scanStatus: "not_scanned", consent: "consented" },
+        estimatedSize: roundedSize(seasonNoShows.size)
+      },
+      {
+        id: `first-time-buyers:${fixtureId}`,
+        purpose: "second-visit",
+        criteria: { fixture: fixtureId, firstTimeBuyer: true, consent: "consented" },
+        estimatedSize: roundedSize(firstTimers.size)
+      }
+    );
+  }
+  return definitions.map((definition) => ({ ...definition, execution: "club-crm" }));
 }

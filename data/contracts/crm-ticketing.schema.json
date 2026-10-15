@@ -41,6 +41,7 @@
       "ticket_id_hash": { "type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$" },
       "order_timestamp": { "type": "string", "format": "date-time" },
       "ticket_product": { "type": "string", "minLength": 1, "maxLength": 100 },
+      "ticket_type": { "type": ["string", "null"], "enum": ["season", "single", "hospitality", "complimentary", "unknown", null], "description": "Optional. How the ticket was held; season tickets let the club see season-ticket holder attendance." },
       "quantity": { "const": 1 },
       "realised_unit_price": { "type": "number", "minimum": 0 },
       "currency": { "const": "GBP" },

@@ -131,6 +131,23 @@ for that aggregation path and are not persisted in the repository-backed live da
 The repository aggregate contains fixture summaries and repeat cohorts, with a dataset state that
 makes missing club access explicit. It never treats absent private data as zero.
 
+### Attendee journey, kept aggregate (v1.0, additive)
+
+AVELA reads the attendee journey (season tickets, purchases, stadium access) as aggregates only. Supporter profiles stay in the club's CRM.
+
+- Optional input `ticket_type`: `season`, `single`, `hospitality`, `complimentary` or `unknown`. Exports without it remain valid; breakdowns then read as not supplied (`null`), never zero.
+- Per fixture, the importer adds:
+  - `ticketTypes`: tickets and scans by type;
+  - `seasonTicketScanRate`: how many season-ticket holders actually came;
+  - `entryTiming`: scans by London time before kickoff (more than 60 minutes, 60 to 30, 30 to 0, after kickoff). Kickoffs come from the fixture calendar.
+- `audienceDefinitions` are segments for the club CRM to build and send:
+  - consented supporters who bought one fixture but not the next;
+  - consented season-ticket holders who did not scan in;
+  - consented first-time buyers.
+
+  Each carries criteria, a purpose and a rounded size, with `execution: "club-crm"`. AVELA never receives or sends a list of supporters.
+- Small-cell protection: any breakdown or audience below 10 supporters is suppressed to `null`, and audience sizes are rounded to the nearest 10. `scripts/validate-crm-ticketing-live.mjs` rejects a dataset that breaks either rule.
+
 The synthetic rehearsal may use repository-owned `synthetic-demo` rows to validate calculations.
 Synthetic records must never be combined with measured club results or presented as production evidence.
 
