@@ -67,3 +67,16 @@ test("Club setup stores venues only when sent and keeps loading without the venu
   assert.match(migration, /add column if not exists venues jsonb not null default '\[\]'::jsonb/);
   assert.match(migration, /jsonb_array_length\(venues\) <= 10/);
 });
+
+test("the occupancy line names what is missing instead of guessing", async () => {
+  const { occupancySummary } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+  assert.equal(occupancySummary(4177, "The CopperJax Community Stadium", []).value, "Capacity not configured");
+  const venues = sanitiseVenues([
+    { name: "CopperJax Community Stadium", aliases: [], totalCapacity: 5000, sellableCapacity: 4600, capacityState: "club-confirmed" },
+    { name: "The Valley" }
+  ]);
+  assert.deepEqual(occupancySummary(4177, "The CopperJax Community Stadium, Bromley", venues), { value: "91% of sellable capacity", detail: "CopperJax Community Stadium · club-confirmed capacity" });
+  assert.equal(occupancySummary(undefined, "CopperJax Community Stadium", venues).value, "Attendance not recorded");
+  assert.equal(occupancySummary(4177, "The Valley", venues).value, "Capacity missing");
+  assert.equal(occupancySummary(4177, "Meadow Lane", venues).value, "Venue not configured");
+});

@@ -11,6 +11,10 @@ import { calendar, crmTicketingDemo, currentState, postmatchReviews } from "@/li
 import { buildPostMatchScorecards } from "@/lib/postmatch";
 import { productToday } from "@/lib/currentProductDate";
 import type { PostMatchScorecardWindow } from "@/lib/models";
+import { SupporterJourneyPanel } from "@/components/SupporterJourneyPanel";
+import { getSupporterAggregate, journeyForFixture } from "@/lib/supporterJourney";
+import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
+import { occupancySummary } from "@/lib/clubVenues";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, EvidenceStateBadge } from "@/components/WorkspaceUI";
 import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
@@ -64,6 +68,8 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
     .filter((item) => item.homeAway === "home" && item.status === "scheduled" && item.id !== selectedId)
     .sort((a, b) => a.date.localeCompare(b.date))[0] ?? null;
   const nextLearning = deriveNextFixtureLearning(live, results);
+  const [clubContext, supporterAggregate] = await Promise.all([getCurrentClubOperatingContext(), getSupporterAggregate()]);
+  const occupancyNow = occupancySummary(selected?.attendance, selected?.venue, clubContext?.venues ?? []);
   // Closure windows are recomputed per request so a long-running server never shows yesterday's state.
   const scorecard = selected
     ? buildPostMatchScorecards(calendar, postmatchReviews, crmTicketingDemo, new Date(`${productToday()}T12:00:00Z`))
@@ -152,7 +158,12 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
         <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
         <article><span>Recorded attendance</span><strong>{selected.attendance?.toLocaleString("en-GB") ?? "Not measured yet"}</strong></article>
         <article><span>Commercial impact</span><strong>{measured ? "Descriptive club evidence connected" : "Not measured yet"}</strong></article>
+        <article><span>Occupancy</span><strong>{occupancyNow.value}</strong><small>{occupancyNow.detail}</small></article>
       </section> : null}
+
+      {selected && live?.fixturePhase !== "pre-match" ? (
+        <SupporterJourneyPanel summary={journeyForFixture(supporterAggregate, selected.id)} fixtureLabel={`${selected.opponent} · ${selected.date}`} />
+      ) : null}
 
       {scorecard ? <section className={styles.windows} aria-label="Measurement windows">
         <div className={styles.windowsHead}>

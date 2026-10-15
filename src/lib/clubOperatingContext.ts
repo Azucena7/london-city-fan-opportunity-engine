@@ -1,4 +1,5 @@
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { sanitiseVenues, type ClubVenue } from "@/lib/clubVenues";
 
 export type ClubOperatingContext = {
   clubId: string;
@@ -11,6 +12,8 @@ export type ClubOperatingContext = {
   approvalRequired?: boolean;
   brandTone?: string;
   brandMustAvoid?: string;
+  /** Configured venues; empty until the club adds them (or before the venues migration). */
+  venues: ClubVenue[];
 };
 
 export async function getCurrentClubOperatingContext(): Promise<ClubOperatingContext | null> {
@@ -28,14 +31,15 @@ export async function getCurrentClubOperatingContext(): Promise<ClubOperatingCon
   const membership = memberships[0];
   if (!membership) return null;
 
-  const [clubResponse, setupResponse] = await Promise.all([
+  const setupPath = `/rest/v1/club_setup?club_id=eq.${encodeURIComponent(membership.club_id)}&limit=1&select=fixture_source,connected_channels,priority_objectives,approval_rules,brand_rules`;
+  const [clubResponse, setupWithVenues] = await Promise.all([
     supabaseRequest(
       `/rest/v1/clubs?id=eq.${encodeURIComponent(membership.club_id)}&select=id,name&limit=1`
     ),
-    supabaseRequest(
-      `/rest/v1/club_setup?club_id=eq.${encodeURIComponent(membership.club_id)}&select=fixture_source,connected_channels,priority_objectives,approval_rules,brand_rules&limit=1`
-    )
+    supabaseRequest(setupPath + ",venues")
   ]);
+  // Before the venues migration is applied, read the rest of the setup without them.
+  const setupResponse = setupWithVenues.ok ? setupWithVenues : await supabaseRequest(setupPath);
 
   if (!clubResponse.ok) return null;
 
@@ -50,6 +54,7 @@ export async function getCurrentClubOperatingContext(): Promise<ClubOperatingCon
         priority_objectives?: string[];
         approval_rules?: { owner?: string; required?: boolean };
         brand_rules?: { tone?: string; mustAvoid?: string };
+        venues?: unknown;
       }>
     : [];
   const setup = setups[0];
@@ -64,6 +69,7 @@ export async function getCurrentClubOperatingContext(): Promise<ClubOperatingCon
     approvalOwner: setup?.approval_rules?.owner,
     approvalRequired: setup?.approval_rules?.required,
     brandTone: setup?.brand_rules?.tone,
-    brandMustAvoid: setup?.brand_rules?.mustAvoid
+    brandMustAvoid: setup?.brand_rules?.mustAvoid,
+    venues: sanitiseVenues(setup?.venues)
   };
 }

@@ -103,3 +103,17 @@ export function occupancy(attendance: number | null | undefined, venue: ClubVenu
   if (denominator === null || typeof attendance !== "number" || !Number.isFinite(attendance) || attendance < 0) return null;
   return attendance / denominator;
 }
+
+/** The occupancy line for a played fixture, saying exactly which piece is missing when it cannot be computed. */
+export function occupancySummary(attendance: number | null | undefined, venueName: string | null | undefined, venues: ClubVenue[]) {
+  if (!venues.length) return { value: "Capacity not configured", detail: "Add venues in Club setup." };
+  const venue = matchVenue(venueName, venues);
+  if (!venue) return { value: "Venue not configured", detail: `${venueName || "This venue"} is not in Club setup.` };
+  const share = occupancy(attendance, venue);
+  if (share === null) {
+    return { value: venue.totalCapacity === null && venue.sellableCapacity === null ? "Capacity missing" : "Attendance not recorded", detail: venue.name };
+  }
+  const basis = venue.sellableCapacity !== null ? "sellable" : "total";
+  const state = venue.capacityState === "club-confirmed" ? "club-confirmed capacity" : "public capacity, not verified";
+  return { value: `${Math.round(share * 100)}% of ${basis} capacity`, detail: `${venue.name} · ${state}` };
+}
