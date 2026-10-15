@@ -140,6 +140,7 @@ AVELA reads the attendee journey (season tickets, purchases, stadium access) as 
   - `ticketTypes`: tickets and scans by type;
   - `seasonTicketScanRate`: how many season-ticket holders actually came;
   - `entryTiming`: scans by London time before kickoff (more than 60 minutes, 60 to 30, 30 to 0, after kickoff). Kickoffs come from the fixture calendar.
+  - `origins`: where supporters travel from, by postcode district (`BR1`, derived from the imported sector `BR1 3`), counted once per supporter, for all buyers and for season-ticket holders. Only the largest districts with at least 10 supporters are listed; everyone else is folded into `otherSupporters`.
 - `audienceDefinitions` are segments for the club CRM to build and send:
   - consented supporters who bought one fixture but not the next;
   - consented season-ticket holders who did not scan in;
