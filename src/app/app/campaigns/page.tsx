@@ -123,7 +123,7 @@ export default function CampaignsPage() {
                     <div className={styles.meta}><DecisionStateBadge state="REVIEW" label={campaign.status} /><small>{fixtureLabel(campaign.fixtureId)}</small></div>
                     <h3>{campaign.title.en}</h3>
                     <p>{campaign.objective.en}</p>
-                    <div className={styles.progressBar} aria-label={approvalCount + " of " + approvalTotal + " approvals ready"}><span style={{ width: (approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0) + "%" }} /></div>
+                    <div className={styles.progressBar} role="progressbar" aria-valuemin={0} aria-valuemax={approvalTotal} aria-valuenow={approvalCount} aria-label={approvalCount + " of " + approvalTotal + " approvals ready"}><span style={{ width: (approvalTotal ? Math.round((approvalCount / approvalTotal) * 100) : 0) + "%" }} /></div>
                     <div className={styles.cardFacts}>
                       <span>Approvals <b>{approvalCount}/{approvalTotal}</b></span>
                       <span>Activations <b>{campaign.activations?.length ?? 0}</b></span>

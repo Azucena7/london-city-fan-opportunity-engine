@@ -11,7 +11,7 @@
 .brandMark::after{content:"";position:absolute;left:5px;top:7px;width:9px;height:10px;background:#102742;clip-path:polygon(0 0,100% 50%,0 100%)}
 .brandCopy{display:grid;gap:2px}.brandCopy strong{font-size:15px;letter-spacing:.12em}.brandCopy small{color:#A9B8C5;font-size:12px;font-weight:750;letter-spacing:.055em;text-transform:uppercase}
 .workspace{display:block;margin-top:12px;color:#8095A8;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-.primary,.secondary{display:grid;gap:2px;padding-top:14px}.sectionLabel{padding:0 9px 7px;color:#6F879A;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.primary,.secondary{display:grid;gap:2px;padding-top:14px}.sectionLabel{padding:0 9px 7px;color:#8AA0B1;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
 .workLink{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;min-height:46px;padding:7px 9px;border:1px solid transparent;border-radius:7px;color:#B7C5D1;text-decoration:none}
 .workLink:hover{background:rgba(255,255,255,.055);color:#F8F6F1}.workLink strong,.workLink small{display:block}.workLink strong{font-size:12px;line-height:1.2}.workLink small{margin-top:2px;font-size:12px;color:#7F94A6;line-height:1.35}
 .glyph{display:grid;place-items:center;width:26px;height:26px;border:0;border-radius:6px;background:rgba(255,255,255,.045);font-size:12px;font-weight:900;color:#91A5B6}.glyph svg{display:block}
@@ -59,7 +59,7 @@
 .workLink.active small{display:block}
 .secondary{margin-top:12px}
 .secondary .sectionLabel{font-size:12px}
-.bottomLabel{padding:5px 8px 2px;color:#6F879A;font-size:12px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+.bottomLabel{padding:5px 8px 2px;color:#8AA0B1;font-size:12px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
 
 
 @media(max-width:900px){

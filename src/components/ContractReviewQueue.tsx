@@ -45,6 +45,7 @@ export function ContractReviewQueue() {
   const [enabled, setEnabled] = useState<boolean | null>(null);
   const [busy, setBusy] = useState("");
   const [message, setMessage] = useState("");
+  const [checked, setChecked] = useState(false);
 
   async function load(id: string) {
     try {
@@ -74,6 +75,7 @@ export function ContractReviewQueue() {
       const result = await response.json() as { authenticated?: boolean; clubs?: Club[] };
       const next = Array.isArray(result.clubs) ? result.clubs : [];
       setClubs(next);
+      setChecked(true);
       if (result.authenticated && next.length) {
         setClubId(next[0].id);
         await load(next[0].id);
@@ -82,6 +84,7 @@ export function ContractReviewQueue() {
       }
       } catch {
         setClubs([]);
+        setChecked(true);
         setEnabled(false);
         setMessage("Account state could not be loaded. Contract truth was not changed.");
       }
@@ -119,7 +122,16 @@ export function ContractReviewQueue() {
     rejected: clauses.filter((item) => item.review_state === "rejected").length
   }), [clauses]);
 
-  if (!clubs.length) return null;
+  // Signed out: name the queue and what unlocks it rather than rendering an empty frame.
+  if (!clubs.length) {
+    return checked ? (
+      <section className={styles.empty}>
+        <span>Verification queue</span>
+        <strong>Sign in as a club member to review extracted clauses.</strong>
+        <p>{message || "Extracted clauses stay candidate evidence until a club reviewer verifies them."}</p>
+      </section>
+    ) : null;
+  }
 
   if (enabled === false) {
     return (

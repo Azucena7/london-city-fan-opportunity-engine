@@ -483,6 +483,7 @@ export function PlayerAssetPlanner({ initialCampaignId }: { initialCampaignId?: 
         <div className={styles.briefMain}>
           <span>Campaign context</span>
           <select
+            aria-label="Campaign context"
             value={campaignId}
             onChange={(event) => {
               setCampaignId(event.target.value);

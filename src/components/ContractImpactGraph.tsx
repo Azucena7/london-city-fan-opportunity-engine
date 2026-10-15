@@ -32,6 +32,7 @@ export function ContractImpactGraph(){
   const [impacts,setImpacts]=useState<Impact[]>([]);
   const [enabled,setEnabled]=useState<boolean|null>(null);
   const [message,setMessage]=useState("");
+  const [checked,setChecked]=useState(false);
 
   async function load(id:string){
     const response=await fetch("/api/contracts/impacts?clubId="+encodeURIComponent(id),{cache:"no-store"});
@@ -46,6 +47,7 @@ export function ContractImpactGraph(){
     const result=await response.json() as {authenticated?:boolean;clubs?:Club[]};
     const next=Array.isArray(result.clubs)?result.clubs:[];
     setClubs(next);
+    setChecked(true);
     if(result.authenticated&&next.length){setClubId(next[0].id);await load(next[0].id);}
   })();},[]);
 
@@ -55,7 +57,12 @@ export function ContractImpactGraph(){
     resolved:impacts.filter(item=>item.review_state==="resolved").length
   }),[impacts]);
 
-  if(!clubs.length)return null;
+  // Signed out (or no club yet): say what would appear here instead of leaving the card blank.
+  if(!clubs.length)return checked?<section className={styles.unavailable}>
+      <span>Contract Impact Graph</span>
+      <strong>Sign in as a club member to see the decisions a verified clause affects.</strong>
+      <p>Links to sponsors, players, campaigns and fixtures come only from clauses a club reviewer has verified, never from public data.</p>
+    </section>:null;
 
   if(enabled===false){
     return <section className={styles.unavailable}>

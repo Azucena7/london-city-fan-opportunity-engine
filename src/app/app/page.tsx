@@ -275,7 +275,7 @@ export default async function ClubAppHome() {
 
         <WorkspaceCard className={styles.calendarCard}>
           <WorkspaceSectionHeader eyebrow="Calendar" title="Next 30 days" action={<Link href="/app/season">Month view →</Link>} />
-          <div className={styles.calendarStrip}>
+          <div className={styles.calendarStrip} tabIndex={0} role="region" aria-label="Next 30 days">
             {timeline.slice(0, 7).map((item) => (
               <article key={item.id} data-type={item.type}>
                 <time>{shortDate(item.date)}</time>

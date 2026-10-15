@@ -189,7 +189,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
           <span>Latest evidence · current changes</span>
           <strong>{new Date(currentState.updated_at).toLocaleString("en-GB", { timeZone: "Europe/London", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</strong>
         </div>
-        <div className={styles.changeItems}>
+        <div className={styles.changeItems} tabIndex={0} role="region" aria-label="Current changes">
           {currentChanges.map((item, index) => <span key={item}><b>{index + 1}</b>{item}</span>)}
         </div>
       </section>
@@ -229,7 +229,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
 
       <WorkspaceCard className={styles.flowCard}>
         <WorkspaceSectionHeader eyebrow="Decision path" title="From signal to measurable action" />
-        <div className={styles.decisionFlow} role="list" aria-label="Decision path">
+        <div className={styles.decisionFlow} role="list" aria-label="Decision path" tabIndex={0}>
           {flow.map((step, index) => (
             <div key={step.label} data-state={step.state} role="listitem" aria-label={step.label + ": " + step.state}>
               <span>{String(index + 1).padStart(2, "0")}</span>

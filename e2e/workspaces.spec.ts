@@ -112,3 +112,25 @@ test("without club data, the brief offers no CRM audience and says why", async (
   await expect(audiences.getByRole("button", { name: "Copy criteria" })).toHaveCount(0);
   await expect(audiences).toContainText("No supporter list leaves the club's systems");
 });
+
+test("Contracts explains its signed-out panels, fits the screen and toggles drawer labels", async ({ page }) => {
+  await page.goto("/app/contracts");
+  await expect(page.getByText("Sign in as a club member to see the decisions a verified clause affects.")).toBeVisible();
+  await expect(page.getByText("Sign in as a club member to review extracted clauses.")).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
+  const drawer = page.locator("details").filter({ hasText: "Sponsor contracts" }).first();
+  const label = drawer.locator("summary b");
+  // Both words are in the DOM; only one may be shown at a time.
+  await expect.poll(() => label.innerText()).toMatch(/^open$/i);
+  await drawer.locator("summary").click();
+  await expect.poll(() => label.innerText()).toMatch(/^close$/i);
+});
+
+test("workspace controls carry accessible names and scroll strips are reachable by keyboard", async ({ page }) => {
+  await page.goto("/app/players");
+  await expect(page.getByRole("combobox", { name: "Campaign context" })).toBeVisible();
+  await page.goto("/app/campaigns");
+  expect(await page.getByRole("progressbar").count()).toBeGreaterThan(0);
+  await page.goto("/app");
+  await expect(page.getByRole("region", { name: "Next 30 days" })).toHaveAttribute("tabindex", "0");
+});
