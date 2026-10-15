@@ -5,16 +5,16 @@ const demo = JSON.parse(await readFile(new URL("../data/demo/brighton-crm-ticket
 const aggregate = aggregateCrmRecords(demo.records);
 
 const currentFixtureId = "2026-09-26-bha-h";
-const previousFixtureId = "2026-09-06-mun-h";
+// The opener; the synthetic rows cover Brighton only, so the repeat cohort is reported as missing.
+const previousFixtureId = "2026-09-04-mun-h";
 const current = aggregate.fixtureSummaries.find((item) => item.fixtureId === currentFixtureId);
 const cohort = aggregate.repeatCohorts.find((item) =>
   item.sourceFixtureId === previousFixtureId && item.targetFixtureId === currentFixtureId
 );
 
 if (!current) throw new Error("Rehearsal is missing the current Brighton fixture summary.");
-if (!cohort) throw new Error("Rehearsal is missing the opener → Brighton repeat cohort.");
 if (current.campaignAttributedTickets <= 0) throw new Error("Rehearsal must exercise campaign attribution.");
-if (cohort.sourceConsentedBuyers <= 0) throw new Error("Rehearsal must exercise a consented repeat cohort.");
+if (cohort && cohort.sourceConsentedBuyers <= 0) throw new Error("A rehearsal repeat cohort must have consented buyers.");
 
 const scanBase = current.scans + current.noShows;
 const output = {
@@ -25,14 +25,15 @@ const output = {
     outputScope: aggregate.scope
   },
   opportunity: {
-    audienceState: "measured-in-rehearsal",
-    addressableRepeatCohort: cohort.addressableConsentedNonReturners,
+    audienceState: cohort ? "measured-in-rehearsal" : "requires-second-fixture",
+    // Missing, not zero, when the rehearsal has no previous-fixture rows.
+    addressableRepeatCohort: cohort ? cohort.addressableConsentedNonReturners : null,
     conversionEvidenceConnected: current.campaignAttributedTickets > 0
   },
   results: {
     campaignAttributedTickets: current.campaignAttributedTickets,
     grossTicketRevenue: current.grossTicketRevenue,
-    repeatPurchaseRate: cohort.sourceConsentedBuyers > 0 ? cohort.alreadyPurchasedTarget / cohort.sourceConsentedBuyers : null,
+    repeatPurchaseRate: cohort?.sourceConsentedBuyers ? cohort.alreadyPurchasedTarget / cohort.sourceConsentedBuyers : null,
     scanRate: scanBase > 0 ? current.scans / scanBase : null
   },
   interpretation: {
