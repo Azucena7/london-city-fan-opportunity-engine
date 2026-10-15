@@ -26,7 +26,7 @@ Status is what the public build does today. "Built" means a working surface, not
 | D · Opportunity Brief | Built | `/app/matches/[fixtureId]` |
 | E · Activation builder | Built: channels, asset list, owners, timing, delivery effort, editable scope and approval gates; nothing is published or spent from AVELA | Brief phase 03, `/app/campaigns` |
 | F · Commercial modules | Sponsor opportunity built; attendance scenarios such as big-stadium transfer not yet | `/app/sponsors`, `/app/contracts` |
-| G · Measurement and memory | Partly built: decision history, Learning, T+1 / T+7 / T+30 post-match windows; T+60 / T+90 not yet | `/app/learning`, brief phase 06 |
+| G · Measurement and memory | Partly built: decision history and Learning, with T+1 / T+7 / T+30 / T+60 / T+90 closure windows; every window after T+1 needs authorised club data to close | `/app/learning`, brief phase 06 |
 | H · Club-grade integrations | Source centre and setup built; aggregate CRM/ticketing import script; no live private connector in the public build | `/app/sources`, `/app/setup` |
 | I · League intelligence | Not started | — |
 
@@ -127,7 +127,7 @@ For each fixture preserve:
 - which signals were useful;
 - which audience / channel / offer patterns repeated.
 
-Add T+1, T+7, T+30, T+60 and T+90 closure states where data access supports them (T+1, T+7 and T+30 exist today).
+Add T+1, T+7, T+30, T+60 and T+90 closure states where data access supports them (all five are tracked in Learning today; only T+1 can close on public data).
 
 ## Phase H - Club-grade integrations
 
