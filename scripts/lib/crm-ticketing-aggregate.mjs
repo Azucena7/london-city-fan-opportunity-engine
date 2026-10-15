@@ -92,6 +92,8 @@ export function validateCrmRecords(records) {
 /**
  * @param records ticket-grain rows (external, never stored)
  * @param options.kickoffs fixtureId → { date: "YYYY-MM-DD", kickoff: "HH:MM" } in London time, for entry timing
+ * @param options.upcomingFixtureIds home fixtures after the export with no sales in it yet; each gets
+ *   repeat audiences (bought an exported fixture, has not bought this one as of the extract)
  */
 export function aggregateCrmRecords(records, options = {}) {
   const errors = validateCrmRecords(records);
@@ -154,7 +156,13 @@ export function aggregateCrmRecords(records, options = {}) {
   }
 
   const extractedAt = records.map((row) => row.extracted_at).filter(Boolean).sort().at(-1) ?? null;
-  const audienceDefinitions = buildAudienceDefinitions(records, fixtureIds, repeatCohorts);
+  // Fixtures still ahead of the export have no rows of their own, so every consented buyer of an
+  // exported fixture is, as of the extract, someone who has not bought them yet.
+  const lastExported = fixtureIds.at(-1) ?? "";
+  const upcomingFixtureIds = [...new Set(options.upcomingFixtureIds ?? [])]
+    .filter((id) => !fixtureIds.includes(id) && id > lastExported)
+    .sort();
+  const audienceDefinitions = buildAudienceDefinitions(records, fixtureIds, repeatCohorts, upcomingFixtureIds);
 
   return {
     datasetState: "club-aggregate",
@@ -225,7 +233,7 @@ function journeyBreakdowns(rows, kickoff) {
 
 // Segment definitions the club's CRM can build and send. AVELA shares criteria and a rounded
 // size only: never a list of supporters. Consented supporters only.
-function buildAudienceDefinitions(records, fixtureIds, repeatCohorts) {
+function buildAudienceDefinitions(records, fixtureIds, repeatCohorts, upcomingFixtureIds = []) {
   const definitions = [];
   const consented = records.filter((row) => row.consent_status === "consented");
   for (const cohort of repeatCohorts) {
@@ -236,6 +244,18 @@ function buildAudienceDefinitions(records, fixtureIds, repeatCohorts) {
       criteria: { boughtFixture: cohort.sourceFixtureId, notBoughtFixture: cohort.targetFixtureId, consent: "consented" },
       estimatedSize: roundedSize(cohort.addressableConsentedNonReturners)
     });
+  }
+  for (const targetFixtureId of upcomingFixtureIds) {
+    for (const sourceFixtureId of fixtureIds) {
+      const sourceConsented = new Set(consented.filter((row) => row.fixture_id === sourceFixtureId).map((row) => row.supporter_id_hash));
+      definitions.push({
+        id: `repeat-non-returners:${sourceFixtureId}:${targetFixtureId}`,
+        purpose: "repeat-attendance",
+        criteria: { boughtFixture: sourceFixtureId, notBoughtFixture: targetFixtureId, consent: "consented" },
+        estimatedSize: roundedSize(sourceConsented.size),
+        targetSalesInExport: false
+      });
+    }
   }
   for (const fixtureId of fixtureIds) {
     const rows = consented.filter((row) => row.fixture_id === fixtureId);

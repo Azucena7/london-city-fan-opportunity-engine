@@ -49,7 +49,9 @@ export function describeAudience(audience: CrmAudienceDefinition) {
   const { criteria } = audience;
   const parts: string[] = [];
   if (criteria.boughtFixture) parts.push(`bought ${fixtureLabel(criteria.boughtFixture)}`);
-  if (criteria.notBoughtFixture) parts.push(`has not bought ${fixtureLabel(criteria.notBoughtFixture)}`);
+  if (criteria.notBoughtFixture) {
+    parts.push(`has not bought ${fixtureLabel(criteria.notBoughtFixture)}${audience.targetSalesInExport === false ? " (no sales for it in the export yet)" : ""}`);
+  }
   if (criteria.ticketType === "season") parts.push("holds a season ticket");
   if (criteria.fixture && criteria.scanStatus === "not_scanned") parts.push(`did not scan in at ${fixtureLabel(criteria.fixture)}`);
   if (criteria.fixture && criteria.firstTimeBuyer) parts.push(`first purchase was ${fixtureLabel(criteria.fixture)}`);
