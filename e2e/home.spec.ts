@@ -131,3 +131,39 @@ test("home and navigation calls to action are truthful and carry internal attrib
   }
   await expect(home).not.toContainText(/Request a demo|Request pilot demo|Request club demo|Request the 90-day pilot/);
 });
+
+test("home keeps safe gutters and no sideways scroll on a phone", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  for (const locator of [
+    page.getByRole("heading", { level: 1 }),
+    page.getByRole("link", { name: "See the London City example" }),
+    page.getByRole("link", { name: "Request a club pilot" }),
+    page.getByRole("heading", { name: "Prove AVELA on 4–6 fixtures before you integrate more." })
+  ]) {
+    const box = (await locator.boundingBox())!;
+    expect(box.x).toBeGreaterThanOrEqual(16);
+    expect(box.x + box.width).toBeLessThanOrEqual(390 - 16);
+  }
+});
+
+test("home hero motion is dropped for visitors who ask for reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const engine = page.getByRole("figure", { name: "AVELA Opportunity Engine" });
+  expect(await engine.evaluate((figure) => getComputedStyle(figure.parentElement!).animationName)).toBe("none");
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.reload();
+  expect(await engine.evaluate((figure) => getComputedStyle(figure.parentElement!).animationName)).not.toBe("none");
+});
+
+test("home proof is a dated record and the FAQ keeps answers one click away", async ({ page }) => {
+  await page.goto("/");
+  const record = page.getByRole("table", { name: "The London City hypothesis, in the order it happened" });
+  await expect(record.getByRole("rowheader")).toHaveText(["Fixture + wider football", "AVELA saw · time-stamped", "London City later announced"]);
+  const faq = page.getByRole("region", { name: "Where AVELA fits — and where it does not." });
+  const question = faq.locator("summary").filter({ hasText: "Does AVELA predict attendance?" });
+  await question.click();
+  await expect(faq.getByText("does not promise forecasts or a magic score")).toBeVisible();
+});

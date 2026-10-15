@@ -18,15 +18,11 @@ const useCases = [
 export function HowTheEngineWorks() {
   return (
     <section className={styles.how} id="how-it-works" aria-labelledby="how-title">
-      <div className={styles.head}>
-        <span>How the engine works</span>
-        <h2 id="how-title">Only the signals that change the decision.</h2>
-      </div>
+      <h2 id="how-title">Only the signals that change the decision.</h2>
       <ol className={styles.steps}>
-        {steps.map(([title, body], index) => (
+        {steps.map(([title, body]) => (
           <li key={title}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{title}</strong>
+            <h3>{title}</h3>
             <p>{body}</p>
           </li>
         ))}
@@ -38,8 +34,7 @@ export function HowTheEngineWorks() {
 export function EngineUseCases() {
   return (
     <section className={styles.cases} aria-labelledby="cases-title">
-      <div className={styles.head}>
-        <span>Where clubs use it</span>
+      <div className={styles.statement}>
         <h2 id="cases-title">Four decisions the engine is built to change.</h2>
         <p>The signal comes first. Internal context validates the opportunity; it never replaces the signal.</p>
       </div>
@@ -47,8 +42,8 @@ export function EngineUseCases() {
         {useCases.map(([title, signal, decision]) => (
           <article key={title}>
             <h3>{title}</h3>
-            <div><span>Signal</span><p>{signal}</p></div>
-            <div><span>Decision it changes</span><p>{decision}</p></div>
+            <p><span>Signal</span>{signal}</p>
+            <p><span>Decision it changes</span>{decision}</p>
           </article>
         ))}
       </div>

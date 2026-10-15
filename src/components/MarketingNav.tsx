@@ -1,9 +1,10 @@
 import Link from "next/link";
 import styles from "./MarketingNav.module.css";
 
-export function MarketingNav({ variant = "light" }: { variant?: "light" | "dark" }) {
+export function MarketingNav({ variant = "light" }: { variant?: "light" | "dark" | "board" }) {
+  const tone = variant === "dark" ? styles.dark : variant === "board" ? `${styles.dark} ${styles.board}` : "";
   return (
-    <nav className={`${styles.nav} ${variant === "dark" ? styles.dark : ""}`} aria-label="AVELA marketing and commercial product navigation">
+    <nav className={`${styles.nav} ${tone}`} aria-label="AVELA marketing and commercial product navigation">
       <Link className={styles.brand} href="/">
         <span className={styles.mark} aria-hidden="true" />
         AVELA

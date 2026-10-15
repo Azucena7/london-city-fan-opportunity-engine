@@ -902,21 +902,10 @@ test("pilot weekly example reads the current product opportunity", () => {
   assert.doesNotMatch(page, /\/pilot\/rehearsal/);
 });
 
-test("AVELA commercial home keeps its editorial identity tokens and purposeful motion", () => {
-  const homeCss = read("src/app/commercial-home.module.css");
-  const motionCss = read("src/components/OpportunityEngineStage.module.css");
+test("AVELA product system keeps its identity tokens and app navigation labels", () => {
+  // The commercial home's layout, tokens and motion are checked in the browser (e2e/home.spec.ts).
   const productSystem = read("src/app/product-system.css");
   const appNav = read("src/components/ProductJourneyNav.tsx");
-
-  assert.match(motionCss, /@keyframes flow/);
-  assert.match(motionCss, /prefers-reduced-motion:no-preference/);
-
-  assert.match(homeCss, /--avela-paper:#f8f6f1/i);
-  assert.match(homeCss, /--avela-coral:#f08a6a/i);
-  assert.doesNotMatch(homeCss, /heroProof|\.problem/);
-  assert.match(homeCss, /liveProof/);
-  assert.match(homeCss, /pilotSteps/);
-  assert.doesNotMatch(homeCss, /exampleGrid/);
 
   assert.match(productSystem, /--product-space-xl/);
   assert.match(productSystem, /--product-orange/);
@@ -1029,12 +1018,6 @@ test("commercial case study leads with time-stamped prediction versus observable
 });
 
 
-test("commercial home proof and pilot sections keep their styles", () => {
-  const css = read("src/app/commercial-home.module.css");
-  assert.match(css, /proofFlow/);
-  assert.match(css, /pilotSteps/);
-});
-
 test("AVELA visual system removes olive identity and simplifies club app navigation", () => {
   const nav = read("src/components/ProductJourneyNav.tsx");
   const navCss = read("src/components/ProductJourneyNav.module.css");
@@ -1072,13 +1055,10 @@ test("AVELA uses an application shell with a left sidebar and bounded work area"
   assert.match(system, /max-width:1120px/);
 });
 
-test("commercial and London City surfaces use bounded reading widths and demo framing", () => {
-  const commercial = read("src/app/commercial-home.module.css");
+test("London City surfaces use bounded reading widths and demo framing", () => {
   const live = read("src/components/LondonCityCase.tsx");
   const liveCss = read("src/components/LondonCityLive.module.css");
   const clubs = read("src/components/ClubPilotProposition.tsx");
-  assert.match(commercial, /width:min\(1120px/);
-  assert.doesNotMatch(commercial, /signalTicker/);
   assert.match(live, /PUBLIC DEMO · LONDON CITY/);
   assert.match(liveCss, /width:min\((980|1120)px/);
   assert.match(clubs, /INDEPENDENT PUBLIC PROOF/);
@@ -2061,15 +2041,6 @@ test("work-system routing stays explainable and confirmation-gated", () => {
 
 
 
-test("commercial home uses lightweight decision motion instead of decorative video", () => {
-  const stage = read("src/components/OpportunityEngineStage.tsx");
-  const stageCss = read("src/components/OpportunityEngineStage.module.css");
-  assert.match(stage, /styles\.core/);
-  assert.match(stage, /styles\.outputs/);
-  assert.match(stageCss, /prefers-reduced-motion:no-preference/);
-});
-
-
 test("product shell uses the prepared AVELA navy teal coral identity without changing semantic risk colours", () => {
   const system = read("src/app/product-system.css");
   const nav = read("src/components/ProductJourneyNav.module.css");
@@ -2265,13 +2236,6 @@ test("internal AVELA shell uses the commercial brand mark and marketing-commerci
   assert.match(css, /clip-path:polygon\(0 0,100% 50%,0 100%\)/);
 });
 
-test("commercial mobile hero preserves safe horizontal gutters", () => {
-  const css = read("src/app/commercial-home.module.css");
-  assert.match(css, /padding:42px 20px 38px/);
-  assert.match(css, /heroCopy\{width:100%;min-width:0\}/);
-  assert.match(css, /heroMeta strong\{color:#fff\}/);
-});
-
 test("retired commercial ticker does not leak legacy styles back into the home", () => {
   const css = read("src/app/commercial-home.module.css");
   const page = read("src/app/page.tsx");
@@ -2428,8 +2392,6 @@ test("commercial home stylesheet contains only current home surfaces", () => {
   for (const legacy of ["example","notAnother","roles","valueCreated","capabilityHorizon","storyBridge","signalTicker"]) {
     assert.doesNotMatch(css, new RegExp("\\." + legacy + "(?:[^A-Za-z0-9_-]|$)"));
   }
-  assert.doesNotMatch(css, /1180px/);
-  assert.match(css, /1120px/);
 });
 
 test("For Clubs retires the copy-a-brief interaction in favour of real lead capture", () => {

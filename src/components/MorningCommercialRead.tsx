@@ -14,26 +14,33 @@ export function MorningCommercialRead({ live }: { live: ProductOpportunity | nul
 
   return (
     <section className={styles.wrap} aria-labelledby="morning-read-title">
+      <h2 id="morning-read-title">What a commercial lead reads before the first meeting.</h2>
       <div className={styles.intro}>
-        <span>Morning Commercial Read</span>
-        <h2 id="morning-read-title">What a commercial lead reads before the first meeting.</h2>
         <p>
-          Built from the latest refresh for the London City demonstration, {readAt(currentState.updated_at)}. Signals AVELA
-          cannot read yet are marked, never filled in.
+          The Morning Commercial Read, built from the latest refresh for the London City demonstration. Signals AVELA cannot read
+          yet are marked, never filled in.
         </p>
       </div>
-      <ol className={styles.lines}>
-        {lines.map((line) => (
-          <li key={line.id} className={line.state === "live" ? styles[line.id] : styles.missing}>
-            <span className={styles.label}>{line.label}</span>
-            <div>
-              <strong>{line.headline}</strong>
-              {line.detail ? <small>{line.detail}</small> : null}
-            </div>
-            <span className={styles.state}>{line.state === "live" ? "Live" : "Not connected"}</span>
-          </li>
-        ))}
-      </ol>
+      <div className={styles.stage}>
+        <article className={styles.sheet} data-ui aria-label="Morning Commercial Read">
+          <header>
+            <strong>Morning Commercial Read</strong>
+            <span>{readAt(currentState.updated_at)}</span>
+          </header>
+          <ol className={styles.lines}>
+            {lines.map((line) => (
+              <li key={line.id} className={line.state === "live" ? styles[line.id] : styles.missing}>
+                <span className={styles.label}>{line.label}</span>
+                <div>
+                  <strong>{line.headline}</strong>
+                  {line.detail ? <small>{line.detail}</small> : null}
+                </div>
+                <span className={styles.state}>{line.state === "live" ? "Live" : "Not connected"}</span>
+              </li>
+            ))}
+          </ol>
+        </article>
+      </div>
     </section>
   );
 }

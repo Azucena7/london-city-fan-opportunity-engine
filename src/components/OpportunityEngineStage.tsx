@@ -21,7 +21,7 @@ export function OpportunityEngineStage({ live }: { live: ProductOpportunity | nu
   const liveCount = signals.filter((signal) => signal.state === "live").length;
 
   return (
-    <figure className={styles.engine} aria-label="AVELA Opportunity Engine">
+    <figure className={styles.engine} aria-label="AVELA Opportunity Engine" data-ui>
       <figcaption className={styles.caption}>
         <span>AVELA Opportunity Engine</span>
         <strong>
@@ -41,13 +41,6 @@ export function OpportunityEngineStage({ live }: { live: ProductOpportunity | nu
           </li>
         ))}
       </ul>
-
-      <div className={styles.core} aria-hidden="true">
-        <div className={styles.ring}>
-          <span>AVELA</span>
-          <strong>Signal → decision</strong>
-        </div>
-      </div>
 
       <ol className={styles.outputs} aria-label="What the engine returns">
         <li>
