@@ -7,10 +7,10 @@ main:where(:not(.productAppShell)) :where(p, dd, li) { line-height:1.6; }
 main:where(:not(.productAppShell)) small { font-size:14px; line-height:1.5; }
 main:where(:not(.productAppShell)) :where(article, section, aside, div) { min-width:0; }
 main:where(:not(.productAppShell)) :where(h1,h2,h3,strong,p,dd,a) { overflow-wrap:break-word; }
-/* The commercial home (data-surface) sets its own editorial scale and measure. */
-main:not(.productAppShell):not(.productShell):not([data-surface="commercial-home"]) h1 { font-size:clamp(32px,4.5vw,56px); line-height:1.12; letter-spacing:-.035em; }
-main:not(.productAppShell):not(.productShell):not([data-surface="commercial-home"]) h2 { line-height:1.2; }
-main:not(.productAppShell):not(.productShell):not([data-surface="commercial-home"]) p { max-width:70ch; }
+/* Editorial public pages (data-editorial) set their own scale and measure. */
+main:not(.productAppShell):not(.productShell):not([data-editorial]) h1 { font-size:clamp(32px,4.5vw,56px); line-height:1.12; letter-spacing:-.035em; }
+main:not(.productAppShell):not(.productShell):not([data-editorial]) h2 { line-height:1.2; }
+main:not(.productAppShell):not(.productShell):not([data-editorial]) p { max-width:70ch; }
 button, input, select { font:inherit; }
 button, summary { cursor:pointer; }
 .labHeader { border-color:var(--line); }

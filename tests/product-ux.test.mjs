@@ -1022,7 +1022,7 @@ test("AVELA visual system removes olive identity and simplifies club app navigat
   const nav = read("src/components/ProductJourneyNav.tsx");
   const navCss = read("src/components/ProductJourneyNav.module.css");
   const system = read("src/app/product-system.css");
-  const commercial = read("src/app/commercial-home.module.css");
+  const commercial = read("src/components/editorial.module.css");
   assert.match(nav, /Radar/);
   assert.match(nav, /Campaigns/);
   assert.match(nav, /Learning/);
@@ -1061,7 +1061,7 @@ test("London City surfaces use bounded reading widths and demo framing", () => {
   const clubs = read("src/components/ClubPilotProposition.tsx");
   assert.match(live, /PUBLIC DEMO · LONDON CITY/);
   assert.match(liveCss, /width:min\((980|1120)px/);
-  assert.match(clubs, /INDEPENDENT PUBLIC PROOF/);
+  assert.match(clubs, /Independent public proof\./);
 });
 
 test("Intelligence Sources exposes Blinkfire as public demo evidence without faking private access", () => {
@@ -2247,7 +2247,7 @@ test("commercial positioning stays consistent across metadata and For Clubs", ()
   const layout = read("src/app/layout.tsx");
   const clubs = read("src/components/ClubPilotProposition.tsx");
   assert.match(layout, /The Opportunity Engine for Football Club Marketing & Commercial Teams/);
-  assert.match(clubs, /FOR MARKETING & COMMERCIAL TEAMS/);
+  assert.match(clubs, /For marketing & commercial teams · Opportunity Engine pilot/);
 });
 
 test("commercial mobile navigation collapses secondary links into a menu", () => {
@@ -2415,7 +2415,7 @@ test("commercial pilot pages separate buying story from operating detail", () =>
   const clubs = read("src/components/ClubPilotProposition.tsx");
   const pilot = read("src/app/pilot/page.tsx");
   assert.doesNotMatch(clubs, /<table/);
-  assert.match(clubs, /START WITH WHAT YOU ALREADY HAVE/);
+  assert.match(clubs, /Start with what you already have\./);
   assert.match(clubs, /Define\. Test\. Learn\./);
   assert.doesNotMatch(pilot, /ProductJourneyNav/);
   assert.match(pilot, /MarketingNav/);
@@ -2430,7 +2430,6 @@ test("commercial pilot pages separate buying story from operating detail", () =>
 test("route-specific commercial and case-study CSS is not shipped from the root layout", () => {
   const root = read("src/app/layout.tsx");
   const cases = read("src/app/case-study/layout.tsx");
-  const clubs = read("src/app/for-clubs/layout.tsx");
 
   assert.doesNotMatch(root, /case-study\.css/);
   assert.doesNotMatch(root, /case-study-technical\.css/);
@@ -2439,7 +2438,8 @@ test("route-specific commercial and case-study CSS is not shipped from the root 
   assert.match(cases, /case-study\.css/);
   assert.match(cases, /case-study-technical\.css/);
   assert.match(cases, /case-study-commercial\.css/);
-  assert.match(clubs, /commercial-pilot\.css/);
+  // For Clubs is on the editorial modules now; only London City Live still ships commercial-pilot.css.
+  assert.equal(existsSync("src/app/for-clubs/layout.tsx"), false);
 });
 
 test("Operating Pack stays a public page with its own attribution", () => {

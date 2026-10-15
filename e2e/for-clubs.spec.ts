@@ -1,0 +1,33 @@
+import { expect, test } from "@playwright/test";
+
+// For Clubs as a visitor sees it: the offer, the boundaries it states and the request form.
+
+test("For Clubs states the bounded offer and the London City boundary", async ({ page }) => {
+  await page.goto("/for-clubs");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("See what could change your next 4⁠–⁠6 matches.");
+  await expect(page.getByText("4–6 fixtures · 1–2 priority decisions · measurement agreed up front")).toBeVisible();
+  for (const name of ["Define. Test. Learn.", "What it reads today, and what connects in a pilot.", "You do not need to connect everything before starting."]) {
+    await expect(page.getByRole("heading", { name, exact: true })).toHaveCount(1);
+  }
+  const proof = page.getByRole("region", { name: "London City shows the method without pretending to have private access." });
+  await expect(proof).toContainText("does not imply the club is a customer or has seen or used AVELA");
+  for (const href of await page.locator('main > :not(nav) a[href*="utm_"]').evaluateAll((links) => links.map((link) => link.getAttribute("href")))) {
+    expect(href).toContain("utm_source=for_clubs&utm_medium=internal_cta");
+  }
+});
+
+test("For Clubs switches to Spanish without losing the request form", async ({ page }) => {
+  await page.goto("/for-clubs");
+  await page.getByRole("group", { name: "Language" }).getByRole("button", { name: "Español" }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Mira qué podría cambiar tus próximos");
+  await expect(page.getByLabel("Email de trabajo")).toBeVisible();
+});
+
+test("the pilot request form is labelled and asks for consent before sending", async ({ page }) => {
+  await page.goto("/for-clubs#demo");
+  const form = page.getByRole("region", { name: "Tell us which decision you want to improve." });
+  for (const label of ["Club", "Your role", "Work email", "Priority (optional)"]) await expect(form.getByLabel(label)).toBeVisible();
+  await expect(form.getByRole("checkbox")).toHaveAttribute("required", "");
+  await expect(form.getByRole("button", { name: "Request a conversation →" })).toBeEnabled();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
+});

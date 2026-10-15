@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
+import { MarketingFooter } from "@/components/MarketingFooter";
 import { OpportunityEngineStage } from "@/components/OpportunityEngineStage";
 import { CommercialEcosystem } from "@/components/CommercialEcosystem";
 import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
@@ -9,6 +10,7 @@ import { MorningCommercialRead } from "@/components/MorningCommercialRead";
 import { EngineUseCases, HowTheEngineWorks } from "@/components/EngineStory";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { decisionValidation } from "@/lib/data";
+import ed from "@/components/editorial.module.css";
 import styles from "./commercial-home.module.css";
 
 export const metadata: Metadata = {
@@ -28,29 +30,29 @@ export default function Home() {
   const proof = decisionValidation.cases[0];
 
   return (
-    <main className={styles.shell} data-surface="commercial-home">
+    <main className={ed.surface} data-editorial>
       <MarketingNav variant="board" />
 
-      <section className={styles.board} aria-labelledby="home-title">
-        <div className={styles.titleTile}>
-          <ul className={styles.audiences} aria-label="Built for">
+      <section className={`${ed.board} ${styles.board}`} aria-labelledby="home-title">
+        <div className={`${ed.titleTile} ${styles.titleTile}`}>
+          <ul className={ed.tileMeta} aria-label="Built for">
             <li>Marketing</li>
             <li>Commercial & partnerships</li>
             <li>Fan engagement</li>
           </ul>
           <h1 id="home-title">See what could change the match.</h1>
         </div>
-        <div className={styles.leadTile}>
+        <div className={`${ed.leadTile} ${styles.leadTile}`}>
           <p>
             <strong>The Opportunity Engine for football club marketing & commercial teams.</strong> AVELA connects what is happening
             outside the club with demand, rights and availability inside it — then shows what changed, why it matters and what move is
             worth preparing.
           </p>
-          <Link className={styles.lightButton} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See the London City example</Link>
+          <Link className={ed.lightButton} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=hero">See the London City example</Link>
         </div>
-        <div className={styles.pilotTile}>
+        <div className={`${ed.accentTile} ${styles.pilotTile}`}>
           <p>Prove it on 4–6 of your own fixtures, with the systems you already use.</p>
-          <Link className={styles.inkButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Request a club pilot</Link>
+          <Link className={ed.inkButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=hero#demo">Request a club pilot</Link>
         </div>
         <div className={styles.engineTile}>
           <OpportunityEngineStage live={live} />
@@ -64,8 +66,8 @@ export default function Home() {
           <p>London City is an independent demonstration, not a customer: this is evidence of relevance. The club pilot is a separate test, on your own authorised data.</p>
         </aside>
         <table className={styles.proofTable}>
-          <caption className={styles.visuallyHidden}>The London City hypothesis, in the order it happened</caption>
-          <thead className={styles.visuallyHidden}>
+          <caption className={ed.visuallyHidden}>The London City hypothesis, in the order it happened</caption>
+          <thead className={ed.visuallyHidden}>
             <tr><th scope="col">Date</th><th scope="col">Step</th><th scope="col">What</th></tr>
           </thead>
           <tbody>
@@ -86,9 +88,9 @@ export default function Home() {
             </tr>
           </tbody>
         </table>
-        <div className={styles.actions}>
-          <Link className={styles.coralButton} href="/case-study?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=proof&utm_content=london_city">See the evidence</Link>
-          <Link className={styles.textLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=proof">Open London City Live ↗</Link>
+        <div className={`${ed.actions} ${styles.proofActions}`}>
+          <Link className={ed.coralButton} href="/case-study?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=proof&utm_content=london_city">See the evidence</Link>
+          <Link className={ed.textLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=proof">Open London City Live ↗</Link>
         </div>
       </section>
 
@@ -104,9 +106,9 @@ export default function Home() {
 
       <section className={styles.pilot} aria-labelledby="pilot-title">
         <div className={styles.pilotField}>
-          <h2 id="pilot-title">Prove AVELA on <span className={styles.nowrap}>4–6 fixtures</span> before you integrate more.</h2>
+          <h2 id="pilot-title">Prove AVELA on <span className={ed.nowrap}>4–6 fixtures</span> before you integrate more.</h2>
           <p>Start with one marketing/commercial workflow, a limited fixture window and the systems you already use. Our independent public demonstration shows how the decision changes across Brighton, Everton, Crystal Palace and Manchester City; your pilot uses your own authorised data before deeper integration is earned.</p>
-          <Link className={styles.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=pilot_section#demo">Request a 4–6 fixture pilot</Link>
+          <Link className={ed.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=pilot_section#demo">Request a 4–6 fixture pilot</Link>
         </div>
         <div className={styles.termsField}>
           <dl className={styles.terms}>
@@ -116,8 +118,8 @@ export default function Home() {
             <div><dt>Measured learning</dt><dd>Compare recommendation, decision, execution and result.</dd></div>
           </dl>
           <div className={styles.links}>
-            <Link className={styles.textLink} href="/pilot?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=multi_cycle_proof">See the 4-cycle public demonstration ↗</Link>
-            <Link className={styles.textLink} href="/app/demo?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=pilot_section">Try the guided product demo ↗</Link>
+            <Link className={ed.textLink} href="/pilot?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=multi_cycle_proof">See the 4-cycle public demonstration ↗</Link>
+            <Link className={ed.textLink} href="/app/demo?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=pilot_section">Try the guided product demo ↗</Link>
           </div>
         </div>
       </section>
@@ -126,25 +128,13 @@ export default function Home() {
 
       <section className={styles.finalCta} aria-labelledby="final-title">
         <h2 id="final-title">Turn the next club opportunity into a better decision — without replacing the stack you already use.</h2>
-        <div className={styles.actions}>
-          <Link className={styles.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Request your club pilot</Link>
-          <Link className={styles.textLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=final_cta">See a live fixture decision ↗</Link>
+        <div className={ed.actions}>
+          <Link className={ed.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Request your club pilot</Link>
+          <Link className={ed.textLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=final_cta">See a live fixture decision ↗</Link>
         </div>
       </section>
 
-      <footer className={styles.footer}>
-        <div className={styles.footerColumns}>
-          <p><strong>Product</strong> The Opportunity Engine for football club marketing & commercial teams.</p>
-          <p><strong>Proof</strong> London City Live is an independent public case study.</p>
-          <nav aria-label="Footer">
-            <Link href="/for-clubs">For clubs</Link>
-            <Link href="/pilot">Pilot</Link>
-            <Link href="/case-study">Case study</Link>
-            <Link href="/app/demo">Guided demo</Link>
-          </nav>
-        </div>
-        <p className={styles.wordmark} aria-hidden="true">AVELA</p>
-      </footer>
+      <MarketingFooter />
     </main>
   );
 }

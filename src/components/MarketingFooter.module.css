@@ -1,0 +1,24 @@
+/* The public close: ground and ink inverted, the wordmark across the full width. */
+.footer{
+  display:grid;grid-template-rows:auto 1fr auto;gap:clamp(64px,10vw,160px);
+  margin:0;padding:40px var(--m) 24px;border:0;overflow:hidden;
+  background:var(--navy);color:var(--on-navy-soft);
+}
+.footerColumns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;font-size:var(--small);line-height:1.6}
+.footerColumns strong{display:block;color:var(--on-navy);font-weight:700}
+.footerColumns nav{display:flex;flex-direction:column;gap:4px}
+.footerColumns a{color:var(--on-navy);text-decoration:none}
+.footerColumns a:hover{text-decoration:underline;text-underline-offset:4px}
+.wordmark{
+  grid-row:3;
+  color:var(--on-navy);
+  font-size:clamp(96px,30vw,520px);
+  font-weight:800;
+  line-height:.74;
+  letter-spacing:-.045em;
+  margin-left:-.04em;
+}
+
+@media(max-width:640px){
+  .footerColumns{grid-template-columns:1fr}
+}

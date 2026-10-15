@@ -1,0 +1,101 @@
+/* For Clubs, on the shared editorial system (editorial.module.css). */
+.board{grid-template-columns:minmax(0,42fr) minmax(0,58fr);grid-template-areas:"title title" "lead scope"}
+.titleTile{grid-area:title}
+.titleMeta{grid-column:1/-1;grid-row:1;align-self:start;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px}
+.titleMeta>p{grid-column:auto;grid-row:auto}
+.leadTile{grid-area:lead}
+.leadTile p{max-width:46ch}
+.scopeTile{grid-area:scope}
+.scopeTile .scope{max-width:none;font-size:clamp(28px,3.2vw,52px);line-height:1.08;font-weight:760;letter-spacing:-.03em}
+
+/* What the club gets: a heading on paper, then two fields meeting at a hard edge. */
+.gets{background:var(--paper)}
+.gets h2{max-width:28ch;padding:var(--section) var(--m) 64px}
+.fields{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr)}
+.fields article{display:flex;flex-direction:column;gap:20px;padding:64px var(--m) 72px}
+.fields h3{font-size:clamp(26px,2.4vw,36px);letter-spacing:-.03em}
+.fields p{max-width:44ch;font-size:var(--statement);line-height:1.45}
+.beforeField{background:var(--navy);color:var(--on-navy)}
+.beforeField p{color:var(--on-navy-soft)}
+.afterField{background:var(--sand)}
+
+/* What the engine reads: heading in the left zone, the two reads on the axis. */
+.reads{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);padding:var(--section) var(--m);background:var(--paper)}
+.reads h2{align-self:start;position:sticky;top:96px;padding-right:clamp(24px,4vw,72px);font-size:clamp(30px,3vw,46px)}
+.readRows{display:grid;gap:4px}
+.readRows article{display:grid;grid-template-columns:minmax(0,13em) minmax(0,1fr);gap:8px 32px;padding:28px 24px;background:var(--paper-2)}
+.readRows article:last-child{background:var(--sand-2)}
+.readRows h3{font-size:20px;line-height:1.25;letter-spacing:-.02em}
+.readRows p{line-height:1.6}
+
+/* Start with what you have: a statement cell butted against dark rows. */
+.start{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr)}
+.startStatement{display:flex;flex-direction:column;justify-content:space-between;gap:48px;padding:var(--section) clamp(24px,4vw,72px) var(--section) var(--m);background:var(--sand-2)}
+.startStatement p{max-width:36ch;font-size:var(--statement);line-height:1.45}
+.startRows{display:grid;grid-auto-rows:1fr;margin:0;padding:0;list-style:none;background:var(--navy);color:var(--on-navy)}
+.startRows li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;padding:40px var(--m) 40px clamp(24px,3vw,48px)}
+.startRows li:nth-child(even){background:var(--navy-2)}
+.startRows h3{font-size:clamp(22px,1.9vw,28px);line-height:1.15;letter-spacing:-.025em}
+.startRows p{color:var(--on-navy-soft);line-height:1.55}
+
+/* Define. Test. Learn.: the three words at display size on the coral field. */
+.cycle{display:flex;flex-direction:column;gap:72px;padding:var(--section) var(--m);background:var(--coral);color:var(--navy)}
+.cycle h2{font-size:clamp(56px,9vw,150px);line-height:.9;letter-spacing:-.055em}
+.cycleSteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin:0;padding:0;list-style:none}
+.cycleSteps strong{display:block;margin-bottom:8px;font-size:24px;letter-spacing:-.02em}
+.cycleSteps p{max-width:34ch;line-height:1.55}
+
+/* Independent proof on the navy field: notes in the left zone, cases on the axis. */
+.proof{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);row-gap:56px;padding:var(--section) var(--m);background:var(--navy);color:var(--on-navy)}
+.proof h2{grid-column:1/-1;max-width:30ch}
+.proofNotes{display:flex;flex-direction:column;gap:12px;max-width:44ch;padding-right:clamp(24px,4vw,72px);font-size:16px;line-height:1.6}
+.proofNotes strong{font-weight:700}
+.proofRows{display:grid;gap:4px;align-content:start}
+.proofRows article{display:grid;grid-template-columns:minmax(0,8em) minmax(0,1fr);gap:8px 24px;padding:24px;background:var(--navy-2)}
+.proofRows article a{grid-column:2;justify-self:start}
+.proofRows h3{font-size:24px;letter-spacing:-.02em}
+.proofRows p{color:var(--on-navy-soft);line-height:1.55}
+.proofRows>a{justify-self:start;margin-top:24px}
+
+/* The request: intro in the left zone, the form on the axis. Forms keep their field lines. */
+.request{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);padding:var(--section) var(--m);background:var(--paper-2)}
+.requestIntro{display:flex;flex-direction:column;gap:24px;padding-right:clamp(24px,4vw,72px)}
+.requestIntro h2,.startStatement h2{font-size:clamp(30px,3vw,46px)}
+.requestIntro p{max-width:38ch;font-size:var(--statement);line-height:1.45}
+.requestLinks{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:16px}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;align-content:start}
+.form label{display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:650}
+.wide{grid-column:1/-1}
+.form :is(input,select){
+  min-height:52px;padding:12px 14px;
+  border:1.5px solid #9aa7b4;border-radius:0; /* taste-skill-ignore: form field edge */
+  background:#fffdfa;color:var(--ink);font:inherit;font-weight:500;
+}
+.form :is(input,select):focus-visible{outline:3px solid var(--teal);outline-offset:1px;border-color:var(--navy)}
+.form input::placeholder{color:#6b7a88}
+.commercialHoneypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form .consent{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:12px;font-weight:500;line-height:1.5}
+.form .consent input{min-height:0;padding:0;width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--navy)}
+.submitRow{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;color:var(--ink-soft);font-size:15px}
+.submitRow button{border:0;cursor:pointer}
+.submitRow button:disabled{opacity:.7;cursor:progress}
+.error{grid-column:1/-1;color:#a8381c;font-weight:650}
+.success{display:flex;flex-direction:column;gap:12px;align-self:start;padding:32px;background:var(--navy);color:var(--on-navy)}
+.success strong{font-size:24px}
+.success p{color:var(--on-navy-soft)}
+
+@media(max-width:1080px){
+  .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .fields,.reads,.start,.proof,.request{grid-template-columns:minmax(0,1fr)}
+  .reads{row-gap:40px}
+  .reads h2{position:static;padding-right:0}
+  .proofNotes,.requestIntro{padding-right:0}
+  .requestIntro{margin-bottom:48px}
+  .startStatement{padding-bottom:64px}
+}
+@media(max-width:640px){
+  .board{grid-template-columns:minmax(0,1fr);grid-template-areas:"title" "lead" "scope"}
+  .readRows article,.startRows li,.proofRows article{grid-template-columns:minmax(0,1fr)}
+  .proofRows article a{grid-column:1}
+  .cycleSteps,.form{grid-template-columns:minmax(0,1fr)}
+}

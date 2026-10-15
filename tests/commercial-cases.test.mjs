@@ -57,14 +57,6 @@ test("new commercial views are discoverable from the product and case overview",
   assert.match(overview, /href="\/live\/london-city\/brighton"/);
 });
 
-test("commercial pilot cards and primary link retain readable styling", async () => {
-  const css = await source("src/app/commercial-pilot.css");
-  assert.match(css, /\.commercialHero a\.productButton \{[^}]*color:#fff/);
-  assert.match(css, /\.commercialThreeColumns\{/);
-  assert.match(css, /\.commercialNextStep\{/);
-});
-
-
 test("commercial home connects public proof to the multi-cycle pilot", async () => {
   const home = await source("src/app/page.tsx");
   assert.match(home, /The club pilot is a separate test/);
