@@ -41,6 +41,9 @@ for (const route of [...appRoutes, ...publicRoutes]) {
     await page.waitForLoadState("networkidle");
 
     await expect(page.locator("h1")).toHaveCount(1);
+    // One main landmark per page, holding the page title, so assistive tech can jump to the work.
+    await expect(page.getByRole("main")).toHaveCount(1);
+    await expect(page.getByRole("main").locator("h1")).toHaveCount(1);
     expect(errors, `${route} uncaught errors`).toEqual([]);
   });
 }

@@ -24,7 +24,7 @@ export function AppWorkspaceShell({
   return (
     <div className={styles.shell}>
       <ProductJourneyNav active={active} />
-      <div className={`${styles.frame} productAppShell`}>
+      <main className={`${styles.frame} productAppShell`}>
         <header className={styles.topbar}>
           <div className={styles.contextControls} aria-label="Workspace context">
             <div className={styles.contextChip}>
@@ -63,7 +63,7 @@ export function AppWorkspaceShell({
         </div>
 
         <div className={styles.content}>{children}</div>
-      </div>
+      </main>
     </div>
   );
 }
