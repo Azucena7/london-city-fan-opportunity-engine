@@ -5,8 +5,8 @@ import { expect, test } from "@playwright/test";
 
 test("pilot shows the four public cycles with calendar states and the proof-of-method boundary", async ({ page }) => {
   await page.goto("/pilot");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Point the engine at your next 4–6 fixtures.");
-  const window = page.getByRole("region", { name: "Four cycles. Four different decisions. One learning system." });
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Point the engine at 4–6 fixtures.");
+  const window = page.getByRole("region", { name: "Four cycles, four decisions." });
   const cycles = window.getByRole("listitem");
   await expect(cycles).toHaveCount(4);
   for (const fixture of ["Brighton · 26 Sep", "Everton · 18 Oct", "Crystal Palace · 28 Oct", "Manchester City · 1 Nov"]) {
@@ -19,7 +19,7 @@ test("pilot shows the four public cycles with calendar states and the proof-of-m
 
 test("pilot ends on a decision about AVELA and its links carry pilot attribution", async ({ page }) => {
   await page.goto("/pilot");
-  const paths = page.getByRole("region", { name: "The output is a decision about AVELA too." });
+  const paths = page.getByRole("region", { name: "You decide on AVELA too." });
   for (const path of ["CONTINUE", "ADJUST", "STOP"]) await expect(paths.getByText(path, { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Open the Operating Pack" })).toHaveAttribute("href", /\/pilot\/operating-pack\?utm_source=pilot/);
   for (const href of await page.locator('main > :not(nav) a[href*="utm_"]').evaluateAll((links) => links.map((link) => link.getAttribute("href")))) {

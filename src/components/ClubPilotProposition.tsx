@@ -64,7 +64,7 @@ export function ClubPilotProposition() {
           <LanguageSwitcher />
           <p className={ed.tileMeta}>{es ? "Para equipos de marketing y comercial · Piloto del Opportunity Engine" : "For marketing & commercial teams · Opportunity Engine pilot"}</p>
         </div>
-        <h1>{es ? "Mira qué podría cambiar tus próximos 4\u2060–\u20606 partidos." : "See what could change your next 4\u2060–\u20606 matches."}</h1>
+        <h1>{es ? "Anticípate a tus próximos 4\u2060–\u20606 partidos." : "Read your next 4\u2060–\u20606 matches early."}</h1>
       </div>
       <div className={`${ed.leadTile} ${styles.leadTile}`}>
         <p>{es ? "Un piloto apunta AVELA a tus propios partidos: las señales externas alrededor de cada uno, unidas a tu demanda, derechos y disponibilidad. Antes de cada partido el equipo recibe qué cambió, por qué importa y qué movimiento conviene preparar; el piloto mide si esos movimientos fueron mejores. Trabaja con el stack actual: no hay que integrarlo todo para empezar." : "A pilot points AVELA at your own fixtures: the external signals around each one, joined with your demand, rights and availability. Before every match the team gets what changed, why it matters and the move worth preparing — and the pilot measures whether those moves were better. It works with the existing stack: nothing has to be integrated first."}</p>
@@ -80,7 +80,7 @@ export function ClubPilotProposition() {
     </header>
 
     <section className={styles.gets} aria-labelledby="gets-title">
-      <h2 id="gets-title">{es ? "La señal que importa antes. Aprendizaje utilizable después." : "The signal that matters before. Reusable learning after."}</h2>
+      <h2 id="gets-title">{es ? "Señal antes. Aprendizaje después." : "Signal before. Learning after."}</h2>
       <div className={styles.fields}>
         <article className={styles.beforeField}>
           <h3>{es ? "Antes de actuar" : "Before action"}</h3>
@@ -94,7 +94,7 @@ export function ClubPilotProposition() {
     </section>
 
     <section className={styles.reads} aria-labelledby="engine-reads-title">
-      <h2 id="engine-reads-title">{es ? "Lo que ya lee hoy, y lo que se conecta en un piloto." : "What it reads today, and what connects in a pilot."}</h2>
+      <h2 id="engine-reads-title">{es ? "Lo que lee hoy y lo que añade un piloto." : "Today’s reads, and what a pilot adds."}</h2>
       <div className={styles.readRows}>
         <article>
           <h3>{es ? "Hoy, con fuentes públicas" : "Today, from public sources"}</h3>
@@ -109,7 +109,7 @@ export function ClubPilotProposition() {
 
     <section className={styles.start} aria-labelledby="start-title">
       <div className={styles.startStatement}>
-        <h2 id="start-title">{es ? "No hace falta conectar todo para empezar." : "You do not need to connect everything before starting."}</h2>
+        <h2 id="start-title">{es ? "Empieza sin conectarlo todo." : "Start without connecting everything."}</h2>
         <p>{es ? "Empieza con lo que ya tienes. AVELA no necesita nombres o emails de aficionados para demostrar el flujo de decisión. Los permisos y cualquier acceso privado se acuerdan antes de transferir datos." : "Start with what you already have. AVELA does not need supporter names or emails to prove the decision workflow. Permissions and any private-data access are agreed before transfer."}</p>
       </div>
       <ol className={styles.startRows}>
@@ -129,7 +129,7 @@ export function ClubPilotProposition() {
     </section>
 
     <section className={styles.proof} aria-labelledby="proof-title">
-      <h2 id="proof-title">{es ? "London City muestra el método sin fingir acceso privado." : "London City shows the method without pretending to have private access."}</h2>
+      <h2 id="proof-title">{es ? "Método público, sin acceso privado." : "Public method, no private access."}</h2>
       <aside className={styles.proofNotes}>
         <p><strong>{es ? "Prueba pública independiente." : "Independent public proof."}</strong> {es ? "London City es un caso de demostración independiente. No implica que el club sea cliente, haya visto AVELA o haya utilizado la herramienta." : "London City is an independent demonstration case. It does not imply the club is a customer or has seen or used AVELA."}</p>
         <p>{es ? "La demostración pública muestra cómo debería cambiar la decisión entre Brighton, Everton, Crystal Palace y Manchester City a medida que cambian el contexto, la evidencia y las restricciones." : "The public demonstration shows how the decision should change across Brighton, Everton, Crystal Palace and Manchester City as context, evidence and constraints change."}</p>
@@ -151,7 +151,7 @@ export function ClubPilotProposition() {
 
     <section className={styles.request} id="demo" aria-labelledby="discussion-title">
       <div className={styles.requestIntro}>
-        <h2 id="discussion-title">{es ? "Cuéntanos qué decisión quieres mejorar." : "Tell us which decision you want to improve."}</h2>
+        <h2 id="discussion-title">{es ? "Dinos qué decisión mejorar." : "Name the decision to improve."}</h2>
         <p>{es ? "Cuatro datos bastan para iniciar la conversación. No pedimos datos de aficionados ni acceso a sistemas en este paso." : "Four details are enough to start the conversation. No supporter data or system access is requested at this stage."}</p>
         <div className={styles.requestLinks}>
           <Link className={ed.textLink} href="/app/demo?utm_source=for_clubs&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=next_step">{es ? "Probar la demo guiada →" : "Try the guided demo →"}</Link>

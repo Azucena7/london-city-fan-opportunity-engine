@@ -187,7 +187,7 @@ test("home leads with the Opportunity Engine and keeps live and pilot signals ap
 
 test("home Morning Commercial Read marks unconnected signals instead of filling them in", async ({ page }) => {
   await page.goto("/");
-  const read = page.getByRole("region", { name: "What a commercial lead reads before the first meeting." });
+  const read = page.getByRole("region", { name: "The read before the first meeting." });
   await expect(read).toBeVisible();
   // Transport is either read from a dated TfL snapshot or marked as not connected: never blank.
   await expect(read.getByRole("listitem").filter({ hasText: "Transport" })).toContainText(/Not connected|TfL snapshot of/);

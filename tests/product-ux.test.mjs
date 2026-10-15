@@ -1565,7 +1565,7 @@ test("current AVELA brand surfaces do not regress to the retired lime system", (
 
 test("For Clubs keeps truthful pilot CTAs", () => {
   const clubs = read("src/components/ClubPilotProposition.tsx");
-  assert.match(clubs, /Tell us which decision you want to improve/);
+  assert.match(clubs, /Name the decision to improve/);
   assert.match(clubs, /Try the guided demo/);
   assert.doesNotMatch(clubs, /Copy pilot brief|Prepare a pilot conversation/);
 });
@@ -2402,7 +2402,7 @@ test("For Clubs retires the copy-a-brief interaction in favour of real lead capt
   assert.doesNotMatch(page, /A brief with an opportunity/);
   assert.match(page, /useState<LeadState>/);
   assert.match(page, /Request a club pilot/);
-  assert.match(page, /Tell us which decision you want to improve/);
+  assert.match(page, /Name the decision to improve/);
 });
 
 test("For Clubs CTAs carry readable internal attribution", () => {
@@ -2419,10 +2419,10 @@ test("commercial pilot pages separate buying story from operating detail", () =>
   assert.match(clubs, /Define\. Test\. Learn\./);
   assert.doesNotMatch(pilot, /ProductJourneyNav/);
   assert.match(pilot, /MarketingNav/);
-  assert.match(pilot, /Point the engine at your next 4–6 fixtures/);
-  assert.match(clubs, /What it reads today, and what connects in a pilot/);
+  assert.match(pilot, /Point the engine at 4–6 fixtures/);
+  assert.match(clubs, /Today’s reads, and what a pilot adds/);
   assert.match(clubs, /never filled in/);
-  assert.match(pilot, /The output is a decision about AVELA too/);
+  assert.match(pilot, /You decide on AVELA too/);
   assert.match(pilot, /Open the Operating Pack/);
   assert.doesNotMatch(pilot, /Prepare a club pilot discussion/);
 });

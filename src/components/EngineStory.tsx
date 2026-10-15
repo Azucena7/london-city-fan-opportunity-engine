@@ -18,7 +18,7 @@ const useCases = [
 export function HowTheEngineWorks() {
   return (
     <section className={styles.how} id="how-it-works" aria-labelledby="how-title">
-      <h2 id="how-title">Only the signals that change the decision.</h2>
+      <h2 id="how-title">Only signals that change decisions.</h2>
       <ol className={styles.steps}>
         {steps.map(([title, body]) => (
           <li key={title}>
@@ -35,7 +35,7 @@ export function EngineUseCases() {
   return (
     <section className={styles.cases} aria-labelledby="cases-title">
       <div className={styles.statement}>
-        <h2 id="cases-title">Four decisions the engine is built to change.</h2>
+        <h2 id="cases-title">Four decisions it is built to change.</h2>
         <p>The signal comes first. Internal context validates the opportunity; it never replaces the signal.</p>
       </div>
       <div className={styles.caseList}>

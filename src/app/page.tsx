@@ -60,7 +60,7 @@ export default function Home() {
       </section>
 
       <section className={styles.proof} aria-labelledby="proof-title">
-        <h2 id="proof-title">A time-stamped AVELA hypothesis. What London City announced next.</h2>
+        <h2 id="proof-title">Hypothesis first. Announcement after.</h2>
         <aside className={styles.sideNote}>
           <p>{proof.caveat.en}</p>
           <p>London City is an independent demonstration, not a customer: this is evidence of relevance. The club pilot is a separate test, on your own authorised data.</p>
@@ -106,7 +106,7 @@ export default function Home() {
 
       <section className={styles.pilot} aria-labelledby="pilot-title">
         <div className={styles.pilotField}>
-          <h2 id="pilot-title">Prove AVELA on <span className={ed.nowrap}>4–6 fixtures</span> before you integrate more.</h2>
+          <h2 id="pilot-title">Prove it on <span className={ed.nowrap}>4–6 fixtures</span> first.</h2>
           <p>Start with one marketing/commercial workflow, a limited fixture window and the systems you already use. Our independent public demonstration shows how the decision changes across Brighton, Everton, Crystal Palace and Manchester City; your pilot uses your own authorised data before deeper integration is earned.</p>
           <Link className={ed.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=pilot_section#demo">Request a 4–6 fixture pilot</Link>
         </div>
@@ -127,7 +127,7 @@ export default function Home() {
       <CommercialFAQ />
 
       <section className={styles.finalCta} aria-labelledby="final-title">
-        <h2 id="final-title">Turn the next club opportunity into a better decision — without replacing the stack you already use.</h2>
+        <h2 id="final-title">Better decisions, same stack.</h2>
         <div className={ed.actions}>
           <Link className={ed.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Request your club pilot</Link>
           <Link className={ed.textLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=final_cta">See a live fixture decision ↗</Link>

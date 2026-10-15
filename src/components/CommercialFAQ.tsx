@@ -31,8 +31,8 @@ export function CommercialFAQ() {
   return (
     <section className={styles.wrap} id="faq" aria-labelledby="faq-title">
       <div className={styles.intro}>
-        <h2 id="faq-title">Where AVELA fits — and where it does not.</h2>
-        <p>Questions clubs ask: the essentials a marketing or commercial lead needs before deciding whether to explore a pilot.</p>
+        <h2 id="faq-title">Questions clubs ask.</h2>
+        <p>Where AVELA fits, and where it does not: the essentials a marketing or commercial lead needs before deciding whether to explore a pilot.</p>
       </div>
       <div className={styles.groups}>
         {groups.map((group) => (
