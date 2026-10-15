@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-14T15:24:07.949Z",
+  "checkedAt": "2026-10-15T00:31:41.596Z",
   "scope": "Public reach, search interest and fixture conversion",
   "headline": {
     "en": "Reach matters only when it can be connected to matchday demand",
@@ -2251,6 +2251,81 @@
           "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
         }
       ]
+    },
+    {
+      "id": "audience-auto-2026-10-15",
+      "observedAt": "2026-10-15T00:31:41.596Z",
+      "label": {
+        "en": "Automated public snapshot",
+        "es": "Snapshot público automatizado"
+      },
+      "metrics": [
+        {
+          "key": "lcl-youtube-subscribers",
+          "label": {
+            "en": "London City YouTube subscribers",
+            "es": "Suscriptores de YouTube de London City"
+          },
+          "value": 16900,
+          "displayValue": "16.9K",
+          "unit": "subscribers",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-videos",
+          "label": {
+            "en": "London City public videos",
+            "es": "Vídeos públicos de London City"
+          },
+          "value": 155,
+          "displayValue": "155",
+          "unit": "videos",
+          "state": "measured",
+          "sourceName": "YouTube Data API",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "lcl-youtube-channel-views",
+          "label": {
+            "en": "London City public channel views",
+            "es": "Visualizaciones públicas del canal de London City"
+          },
+          "value": 2491212,
+          "displayValue": "2.5M",
+          "unit": "views",
+          "state": "measured",
+          "sourceName": "London City Lionesses on YouTube",
+          "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
+        },
+        {
+          "key": "eleven-opener-views",
+          "label": {
+            "en": "Eleven TV opener views",
+            "es": "Views del opener en Eleven TV"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "views",
+          "state": "pending",
+          "sourceName": "Eleven TV by Alexia",
+          "sourceUrl": "https://www.youtube.com/"
+        },
+        {
+          "key": "gb-brand-search-index",
+          "label": {
+            "en": "GB brand search index",
+            "es": "Índice de búsqueda de marca en GB"
+          },
+          "value": null,
+          "displayValue": "Pending",
+          "unit": "index",
+          "state": "pending",
+          "sourceName": "Google Trends",
+          "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=GB&q=London%20City%20Lionesses"
+        }
+      ]
     }
   ],
   "impactTimeline": [
@@ -2418,7 +2493,7 @@
             "en": "Published videos",
             "es": "Vídeos publicados"
           },
-          "value": "154",
+          "value": "155",
           "state": "measured"
         },
         {
@@ -2742,8 +2817,8 @@
   "refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-10-14T15:24:07.949Z",
-    "lastSuccessfulAt": "2026-10-14T15:24:07.949Z",
+    "lastAttemptAt": "2026-10-15T00:31:41.596Z",
+    "lastSuccessfulAt": "2026-10-15T00:31:41.596Z",
     "state": "fresh",
     "sources": [
       {
@@ -2751,7 +2826,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-14T15:24:07.949Z",
+        "checkedAt": "2026-10-15T00:31:41.596Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -2759,7 +2834,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-14T15:24:07.949Z",
+        "checkedAt": "2026-10-15T00:31:41.596Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       }
     ]

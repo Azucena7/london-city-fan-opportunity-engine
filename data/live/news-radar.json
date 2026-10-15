@@ -1,9 +1,55 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-14T15:24:10.403Z",
-  "lastSuccessfulAt": "2026-10-14T15:24:10.403Z",
+  "checkedAt": "2026-10-15T00:31:44.564Z",
+  "lastSuccessfulAt": "2026-10-15T00:31:44.564Z",
   "failures": [],
   "items": [
+    {
+      "title": "London City vs. Everton Live Stream of Barclays Women's Super League",
+      "outlet": "CBS Sports",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE94dDdRQ1psODJNVFpSY09ILUZvcDBjU0RQcVE0UktWaHdPR0MxWWxLT1VwMWg5eUxBSmw3WVF3UGhfNTNfUVVpUzRHd0k3cURZajBSVEE1S3dvX1Q1LVZSRHMyUVNEZVpKeFB6T3ZhTnAweHJEeVN3SVAzWW8xVEk?oc=5",
+      "publishedAt": "2026-10-14T20:19:40.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-10-18-eve-h"
+      ],
+      "id": "news-9512699221f8",
+      "firstSeenAt": "2026-10-15T00:31:44.564Z"
+    },
+    {
+      "title": "London City Lionesses - Everton Live - Barclays WSL: Football Scores & Highlights - 18/10/2026",
+      "outlet": "TNT Sports",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQWUpJLUxHQ2hCV0Y2YjNHUzJFUmVLSXpCSzZYOHM2d2IwYjNNdUxxQnYzdEQyQzlWbUVKbWhyX2VPaHkzVG5ZM25YT3NoejdMVHZfSU04TUJGeTFfcG8yZFRxSXBCT0xUSkNaU1k5b2NlQmNwZjQxM24xbkpVY3U1bGExeFd4d2loWjdWYVYtcGtlV2tzZVBVN0tNd0psNW5UT2xZLUhLenNKOWFRNWRYNDFn?oc=5",
+      "publishedAt": "2026-10-14T16:45:02.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [
+        "results"
+      ],
+      "fixtureIds": [
+        "2026-10-18-eve-h"
+      ],
+      "id": "news-266b29bce2ea",
+      "firstSeenAt": "2026-10-15T00:31:44.564Z"
+    },
+    {
+      "title": "The Fantasy Talking Point | Matchweek 6 | BWSL & BWSL2",
+      "outlet": "WSL Football",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE05ZVcya3FqZDFlRHItc1JBRGx5b01Vb01fUnlQTVJfZERfNHpwNDRRaHI3QUd2LVZyM0RhckpWOTJCV2VaeGJJbE5jaS1ESERBd3dZYmpwM0JMa0hya3NsWG05MldQUXBUSTVoYXVxR2FlcjFlc2x5WTRn?oc=5",
+      "publishedAt": "2026-10-14T14:06:54.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-186e5fe822b6",
+      "firstSeenAt": "2026-10-15T00:31:44.564Z"
+    },
     {
       "title": "West Ham vs London City | BWSL",
       "outlet": "WSL Football",
@@ -31,6 +77,22 @@
       ],
       "id": "news-1566eb0dd66d",
       "firstSeenAt": "2026-10-14T08:52:03.437Z"
+    },
+    {
+      "title": "WSL Season Review: Manchester City surge ahead as Arsenal’s title hopes falter",
+      "outlet": "Equalizer Soccer",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOSlU1RXNQZTN2WmswbjdzQ2dWZ0NNZjg2OTJjempjQk9kVDJQdXA0SF85OEdJeWRTclo5c2JmOWI3VXR0T3RfYWJmX3RpV25qeUlLMXV1VEkxc2dWbkhpRF82Nl9wLV9HNWlMODV2a0dfTjNtSm1fS2YyODYweEpjTnF1ZGZVUUlabXdpVFpjamdTQ2FBNG9QY0QyX05OVVB4WUFRaFdHdHhQX2ZaMHJpZHVMS0dNNGc?oc=5",
+      "publishedAt": "2026-10-13T22:07:44.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-11-01-mci-h",
+        "2026-11-15-arsenal-a"
+      ],
+      "id": "news-fd38496c689c",
+      "firstSeenAt": "2026-10-15T00:31:44.564Z"
     },
     {
       "title": "Women’s Internationals | Peacock scores as Young Lionesses put six past Bosnia & Herzegovina",
@@ -200,6 +262,21 @@
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
+      "title": "Women's Super League - London City Lionesses v Manchester United",
+      "outlet": "Reuters Connect",
+      "url": "https://news.google.com/rss/articles/CBMi0AJBVV95cUxORGNfcDJtUkZjRmlERTI3cnhsLXpLemFHb1NITTJXWksyajBmQVlEeng0TzZiOWtxc0t3YUdqSndqUTNvOFBKd0dia0dlc3hmLV94cGtqMUx3TmMyRDJoaHRjeE4zV1doV3dFVXd3c1lua1AzYnRlTUYyWGptNk1kckJrbmthcVIwQUkxOHVQakFCWEZwT19abWFrRTZNbUdMekVUYm5idjZLclJ3bUVFWjdXTFFDbGhZNE5oQTM1ZndSLW81SnBJaWJIZ1FvU0dyaEJ6a0Zfam9xNG0zMTUxYzgyakVUNVAwdjB5aXpCY2F4X29IQ09XRVRJUm1QRzA0MEVRZlhrN3YtYU9Pc3BmMkJ6Wlc5OUdGNFVfYUxTQW5PbHViN3BySFpKRllTbXVLOU9mR3ppRnlzeDlQaGZvclFuZHF1TXJETC0tZ0JXQ1E?oc=5",
+      "publishedAt": "2026-10-06T22:43:23.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-11-01-mci-h"
+      ],
+      "id": "news-e5cffec9ef1e",
+      "firstSeenAt": "2026-10-15T00:31:44.564Z"
+    },
+    {
       "title": "New star signings pushing London City Lionesses to the next level",
       "outlet": "Yahoo Sports",
       "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOTE1mT1k4eFhJamRSRnRYRWRuOUlSOHhUeUNfZ0dDQjZ0anY0QVZYY1V1MnFWNXY3WGtFRFp1bXN4TEJBTEtlVWVkaEFRVm5haEJVRXQ1dm9jRTMwdWVHZjlUbk03OU9RcllBMW9Ec1JmeE9YTjNCN0FQdl9yeDBuVHczd09mYTNZV1E?oc=5",
@@ -348,7 +425,7 @@
       "title": "Alexia Putellas se estrena con doblete con las Lionesses London City",
       "outlet": "SPORT",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSWgtUi0yaFlsY0J1VWQ3M0pETVZpZ3ZOaW0yWXktWi1iV1lKQ3YzWGJMQXc3cTBqeFd1dUMyM2hNclliRmJ0Y2lUT0NQVlMzQTF3MFNhYWpVRW45Z3BaQzlZa0MybHpJMUl1QktWX08xZkFQNUUtclRJNVhNZExwamxOaGtTSkxXaGgtWC1WM0VETzRtZzNBQ0tYVmo3X08zSVZ6dnVCRkl0VWJhSEg4dG1Od9IBswFBVV95cUxNWGtURmdJS05ZVktfeTJ5UWV2UldjWFdlSnhRbDctYlItSzBCM0VYMWVmTHJfMEZJeHlFcmJqNmlZYlZqcU5mMHRQNkJRSHRaQlJQVVNZRHlRLVdjUmxETkczdU96RjRzTHZXU1NLREhmQndySUFnSGVURVk0emoyZ3IxUmZ0djNWNFowZE13VDVLQ1ppRmhOVER6bUE3NE53U2hyY1dicnN1ZVNMWmhHcDFXNA?oc=5",
-      "publishedAt": "2026-10-04T22:19:55.000Z",
+      "publishedAt": "2026-10-05T07:00:00.000Z",
       "feedIds": [
         "alexia-es"
       ],
@@ -752,7 +829,7 @@
       "title": "Alexia Putellas jugará en el London City Lionesses",
       "outlet": "BeSoccer",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOVlpxdGwzdF9RSzBaOEZJZEhRNmRxVDhwWjI3SGN5cmRHVVRoQWJNNDVlMWhqQ0tTWTRNMWdWTFNtR0EtakxLOTNsTDlmMWRqbGE4TzZMbVIwREVFcl9HRHpxRTlKSEFPUUVSXzFSRVRMaVc1bEgxMVNEQVk0OUtJRzNrS3ljUWUxZmhQbVJ0M2JmYkZYclhlQ2UtLUt4Vm_SAaQBQVVfeXFMTW56RXJFS09iM3c1dTJNcTJrWmZkTHZrOEJZMFdvTzMySFFSaWFlM0ZIemlKdWdZUkFEY2g0YVRvcWd3NE1YLWQtMTlpS2wzZko1MV8yeHN1NzBHNUJMN2VfQzhBUU5IMEEwRlJJVUFUVF9mOThpdS1Ld1F2ZVlSVGxnaGlIdnJTZVljZGs2TDNCMTFGR1V4X1ZzYTB2T3dMWHRKeEU?oc=5",
-      "publishedAt": "2026-09-29T21:44:27.000Z",
+      "publishedAt": "2026-09-29T17:09:10.000Z",
       "feedIds": [
         "alexia-es"
       ],
@@ -851,7 +928,7 @@
     {
       "title": "Alexia Putellas marca su primer gol con el London City Lionesses en una victoria crucial sobre el Brighton",
       "outlet": "Goal.com",
-      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOcGNNck80dGNJMkw1NTVuamswSjFXVUo3Nmg5RlQzVkdoVlgxTEYtVjJjRGU3OTdublVELWNWLVNQakpoOHMxbWtFZHY5ZDFVU0cxdHZBX2c4SFNJdG5rSWxSZ0Z1SjFENFl4LWx2NVV1YlZQbFJHVU9wUFdYQUI5bXBOODFtVXcxd0xPd1VidEFob1N3ZXg4NW9uSGJBeWJRODJoLUQ1UDNhWEJ1Ynd6YVVpQS1vSGRtc3VvZDlNYlp5N0prc3llcndxN1IwVWxiNHVnaXRNOHA5RTlCYnRKNlpWSUl4WldybWtLckNyMXc?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOR1dZamV4LTJfdk5QdUYwaXJ4a0s3MGlEUk9XMW40NFQwWVphR0NiWlZrZkVJN1JsUHJUeGhfWXJ2bzc0OXFXTzhvSFIzdkJERExNUGlIaksyUkFSRmtHLS1qRkNob1MyM2Iyak1FU1RUOG9Vb1lnUGpMWjl1TnB4c0VXaTRYck0zMlNOTFFwTkhuZ19uTnpmMmF6YWNPWlN5RGJVMFN5a3ZyMVZEdWZKdFlLRnR1UlptSmUwMmR4cnlXV1VVNWx3ME5yMUVQQ2szNHpLZGVkZjRLcnBhMng0Rm1HdDJ5X3BhS0dkX2xqa1dVREly?oc=5",
       "publishedAt": "2026-09-27T07:00:00.000Z",
       "feedIds": [
         "alexia-es"
@@ -1109,71 +1186,6 @@
       "topics": [],
       "fixtureIds": [],
       "id": "news-a71d42a0544d",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas marca su primer gol con el London City",
-      "outlet": "La Vanguardia",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPNldNWEY0RkpFTGJXMGIyemRrbTdIZm41bFNBUjRsVUlaZk1pZ0FIQzNnNVlQMFFuTllhVF9uNXR5NWtvc0lzaURVblFNV2ZhcVdSZkJENjNDc1MyTkoxU2Z4RmZYNUk3WFA5TFRSb05WZWQ4QS0tTUlpWHlTLU00WkFsWllUMWpzbTVyVTJrcG9BdG9zTWtVSGZkUk9tN3d2WUI4cG9xQndMTVozTVhPVDNjdkFsakI5TkR5ZTBn0gHDAUFVX3lxTFB5UnZ4MndleExNd3BxSGlHeDJQNkh4UHFrMkh3QUpyWnVQQ2dvd25vbmFQT05tWDloNHBxb1NtWTBkZU9FZFFyem1ZN3JVUkkxQllDc2VJVlVJQ2ZYVzRYSnpaQU9IbTVtVS1JU2hpMGJvUHlIbkZ4Qk1QREt6YmdUYXkxVVptMzcwQTVBa0lPU3psQ3M5THFsdWplWENISmpHUUprMlNHc056dUlVXzAxSGNyazdMaTJnRG41RHhjZGR4WQ?oc=5",
-      "publishedAt": "2026-09-26T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-8ca0149da02f",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "London City, un club 100% femenino en construcción alrededor de Alexia",
-      "outlet": "Yahoo",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQcjBSTTk3YzdLTzc3MHhVMUJKYTVOOHFaRUY3VmJGYTNYRzhBLUhNUC1uQS1GU05OdzhVWHpvMG1kV0FKRHBPTUxBZVNfYlNncEVvaFNQMWhqYlZXRjRrX09uLUV6MzRhcDBZd3BPc1dqVHRNZ2ZZX2RPZENnbjBta3dqMl9VZVJnNXE5Z1V3MA?oc=5",
-      "publishedAt": "2026-09-26T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-987d50e369e4",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Primer gol de Alexia Putellas con el London City Lionesses",
-      "outlet": "Mundo Deportivo",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQckUwSjdKLTNIRVJGV1p2VWUzNWxXZWZNX2R4MVE1WExQRDIxZjlXS1Zta0V5eFV2X3ZVYmxhdjRkRXVzR25vdmV6LUdOVHdKWXA4X0RQYU9YMjFXRlJ4cm9hLUlwcTkwVElvVUk1cHp6eTExMTQ5XzFOeHNKTmdGQkFkUWdnZWU5djByc1NtRl83a0UtLUxUZzluamlObUlfNm9XamttclliNWxWa3VFaGp3dmU1QkN2bV9hTdIBygFBVV95cUxNdktCUlQ3N3IzUnE2ZlpxNmlWNkEwQ0FvSDZ6ODR2Nm9iNG5yNDMtVERBblNnRnNfZlE5MnVmcUhKQTlQdXRRRUtRbG55MHRlTENYaHdIVFE3Zm1NcTN6dTB1Um1BQ2cyQnRnclRsOV8xSExGdTAxbXhaSTJkQ2pUR2RmNktQVFpTdks3M3l3OXhGSzJQd0RtajBVVDNUMkhrazB1dWkxa0VCRXhxSGNtRUZRNUdSWkZ0M0xTdnZmTERNSFozNDFiWnFB?oc=5",
-      "publishedAt": "2026-09-26T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-0c074407b6aa",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas y el Balón de Oro: \"Que el fútbol hable por mí\" (entrevista AFP)",
-      "outlet": "Yahoo",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPRTZTeFhQYkxqck1KM2liSnBhcWRuNkJjeTZZbEdlQ1owcXRybkdCcUR3ZVdZZmdtQ25OalVBeGhYbzlXMlhKVWplaVVDT0VTN0IzdkJXdnB3RzRzcXlNSHgwQXFOS1JtNmdNTUlNUWg4dTNlRGdTaG1qc2dhTVFCaEZoaGpCeWpRZWRSeVpCaXJrdjlxZnUySzZmN3R3VFhn?oc=5",
-      "publishedAt": "2026-09-26T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-eb767c13fb98",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "¡Gol de Alexia! La capitana se estrena con el London City",
-      "outlet": "SPORT",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNUzY4cjlhbjhhMjlHczlBdHNsOGNnMEtUSF9rb3VqU3ZNZndhNGE0dVJkUGZoXzNRSzMzbko4V3AtbWlrN2VaNzc5X0pLZ0F1ank3amlXYlJRM2RUV1YxZThEMGdkSzFLQ0NXWmRHWFBYanlrVVNWU1RkdWdneVdmV2VGNnhlQVVhM1RhMmRHZGdMeXd2NUdnNDdtVGlKLWw4N3hnaDV2YmRTQdIBqgFBVV95cUxNUlRyemhjclNuQUN5UWhheHZWdzBFTzdfWUhReU00TlpDZXcxRmtlZ3VSSjcwMEI3R3RDNldvN0R4SGROV1hPU2xfRHJ4bl9TNktSRWtvUUJFeEFwNnZmVXdiT1J4UHFhbjlNUi1tNHA2Q3dDa1lJMV81b0t2LV8tMlJqRWRmTXdFT1JmdDBXRUVtTV9IcHA1SWE0b0xRUFMydkpRcUJnRjU1dw?oc=5",
-      "publishedAt": "2026-09-26T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-0748298c4d96",
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
     }
   ]

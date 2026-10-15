@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-14",
+  "version": "2026-10-15",
   "source": {
     "name": "Transport for London Unified API · Road disruption",
     "url": "https://api.tfl.gov.uk/Road/all/Disruption"
@@ -10,18 +10,18 @@
     "lon": 0.01771
   },
   "radiusKm": 15,
-  "checkedAt": "2026-10-14T15:24:11.859Z",
-  "lastSuccessfulAt": "2026-10-14T15:24:11.859Z",
+  "checkedAt": "2026-10-15T00:31:46.802Z",
+  "lastSuccessfulAt": "2026-10-15T00:31:46.802Z",
   "incidents": [
     {
-      "id": "TIMS-235924",
-      "location": "[A208] COURT ROAD (SE9 ) (Greenwich)",
+      "id": "TIMS-234009",
+      "location": "[A222] ELM ROAD (DA14 ) (Bexley)",
       "severity": "Minimal",
       "category": "Works",
       "subCategory": "Utility works",
-      "startDate": "2026-10-05",
-      "endDate": "2026-10-14",
-      "distanceKm": 6.2,
+      "startDate": "2026-08-29",
+      "endDate": "2026-10-19",
+      "distanceKm": 6.8,
       "material": true
     },
     {
@@ -58,17 +58,6 @@
       "material": true
     },
     {
-      "id": "TIMS-236392",
-      "location": "[A23] BRIXTON HILL (SW2 ,SW9 ) (Lambeth)",
-      "severity": "Minimal",
-      "category": "Collisions",
-      "subCategory": "Vehicle collision",
-      "startDate": "2026-10-14",
-      "endDate": "2026-10-14",
-      "distanceKm": 12,
-      "material": true
-    },
-    {
       "id": "TIMS-236293",
       "location": "[A24] CLAPHAM COMMON SOUTH SIDE (SW4 ) (Lambeth,Wandsworth)",
       "severity": "Minimal",
@@ -77,6 +66,28 @@
       "startDate": "2026-10-12",
       "endDate": "2026-10-17",
       "distanceKm": 13.4,
+      "material": true
+    },
+    {
+      "id": "TIMS-236093",
+      "location": "BLACKSHAW ROAD (SW17 ) (Wandsworth)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "Borough works",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-15",
+      "distanceKm": 13.8,
+      "material": true
+    },
+    {
+      "id": "TIMS-223314",
+      "location": "[A100] TOWER BRIDGE ROAD (EC3N ,SE1 ,SE16 ) (Southwark,Tower Hamlets)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "TfL works",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-15",
+      "distanceKm": 14.2,
       "material": true
     },
     {
@@ -124,17 +135,6 @@
       "material": false
     },
     {
-      "id": "TIMS-234009",
-      "location": "[A222] ELM ROAD (DA14 ) (Bexley)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-08-29",
-      "endDate": "2026-10-19",
-      "distanceKm": 6.8,
-      "material": false
-    },
-    {
       "id": "TIMS-236157",
       "location": "[A20] ELTHAM ROAD (SE12 ,SE9 ) (Greenwich,Lewisham)",
       "severity": "Minimal",
@@ -174,7 +174,7 @@
       "category": "Works",
       "subCategory": "Utility works",
       "startDate": "2026-10-09",
-      "endDate": "2026-10-14",
+      "endDate": "2026-10-23",
       "distanceKm": 7.8,
       "material": false
     },
@@ -245,6 +245,17 @@
       "material": false
     },
     {
+      "id": "TIMS-236057",
+      "location": "[A102] BLACKWALL TUNNEL SOUTHERN APPROACH (SE10 ) (Greenwich)",
+      "severity": "No impact",
+      "category": "Works",
+      "subCategory": "TfL works",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-15",
+      "distanceKm": 11.2,
+      "material": false
+    },
+    {
       "id": "TIMS-236165",
       "location": "[A23] STREATHAM HIGH ROAD (SW16 ) (Lambeth)",
       "severity": "No impact",
@@ -264,17 +275,6 @@
       "startDate": "2026-08-03",
       "endDate": "2027-01-15",
       "distanceKm": 11.3,
-      "material": false
-    },
-    {
-      "id": "TIMS-236197",
-      "location": "[A1206] WESTFERRY ROAD (E14 ) (Tower Hamlets)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-10-12",
-      "endDate": "2026-10-14",
-      "distanceKm": 11.4,
       "material": false
     },
     {
@@ -377,6 +377,17 @@
       "material": false
     },
     {
+      "id": "TIMS-231307",
+      "location": "[A200] CRUCIFIX LANE (SE1 ,SE16 ) (Southwark)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "Network Rail works",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-15",
+      "distanceKm": 14.1,
+      "material": false
+    },
+    {
       "id": "TIMS-235690",
       "location": "[A1205] BURDETT ROAD (E14 ,E3 ) (Tower Hamlets)",
       "severity": "Minimal",
@@ -385,6 +396,17 @@
       "startDate": "2026-10-10",
       "endDate": "2026-11-17",
       "distanceKm": 14.1,
+      "material": false
+    },
+    {
+      "id": "TIMS-234891",
+      "location": "[A1203] THE HIGHWAY (E1 ,E1W ) (Tower Hamlets)",
+      "severity": "No impact",
+      "category": "Works",
+      "subCategory": "Construction activity",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-15",
+      "distanceKm": 14.2,
       "material": false
     },
     {
@@ -427,7 +449,7 @@
       "category": "Works",
       "subCategory": "TfL works",
       "startDate": "2026-09-21",
-      "endDate": "2026-10-14",
+      "endDate": "2026-10-20",
       "distanceKm": 14.5,
       "material": false
     },
@@ -494,17 +516,6 @@
       "subCategory": "Collaborative works",
       "startDate": "2026-04-28",
       "endDate": "2028-01-29",
-      "distanceKm": 14.7,
-      "material": false
-    },
-    {
-      "id": "TIMS-236283",
-      "location": "[A3] BOROUGH HIGH STREET (SE1 ) (Southwark)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-10-12",
-      "endDate": "2026-10-17",
       "distanceKm": 14.7,
       "material": false
     },
