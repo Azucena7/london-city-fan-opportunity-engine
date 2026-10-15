@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
@@ -858,6 +859,16 @@ test("pilot rehearsal exercises aggregate audience, results and causal guardrail
   assert.match(helper, /raw supporter|supporter_id_hash/i);
   assert.match(helper, /fixtureSummaries/);
   assert.match(helper, /repeatCohorts/);
+
+  // Run it: a rehearsal that only exists as source text can break unnoticed.
+  const run = spawnSync(process.execPath, [new URL("../scripts/run-pilot-rehearsal.mjs", import.meta.url).pathname], { encoding: "utf8" });
+  assert.equal(run.status, 0, run.stderr);
+  const output = JSON.parse(run.stdout);
+  assert.equal(output.productionClaim, false);
+  assert.ok(output.results.campaignAttributedTickets > 0);
+  assert.equal(output.interpretation.incrementality, "not-established");
+  // Without previous-fixture rows the repeat cohort is missing, never 0.
+  assert.ok(output.opportunity.audienceState === "requires-second-fixture" ? output.opportunity.addressableRepeatCohort === null : output.opportunity.addressableRepeatCohort >= 0);
 });
 
 
