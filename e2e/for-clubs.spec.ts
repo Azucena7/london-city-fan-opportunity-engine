@@ -19,7 +19,7 @@ test("For Clubs states the bounded offer and the London City boundary", async ({
 test("For Clubs switches to Spanish without losing the request form", async ({ page }) => {
   await page.goto("/for-clubs");
   await page.getByRole("group", { name: "Language" }).getByRole("button", { name: "Español" }).click();
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Mira qué podría cambiar tus próximos");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Anticípate a tus próximos");
   await expect(page.getByLabel("Email de trabajo")).toBeVisible();
 });
 
