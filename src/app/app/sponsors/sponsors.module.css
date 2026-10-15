@@ -40,12 +40,12 @@
 .evidenceList{display:grid;gap:8px}
 .evidenceList article{display:grid;grid-template-columns:auto 1fr;gap:4px 7px;align-items:center;padding:9px;border:1px solid #E5E9EC;border-radius:7px;background:#fff}
 .evidenceList article>strong{font-size:11px}
-.evidenceList article>p{grid-column:1/-1;margin:0!important;font-size:11px}
+.evidenceList article>p{grid-column:1/-1;margin:0;font-size:11px}
 
 .sideRail{display:grid;gap:10px}
 .truthBoundary{padding:16px}
 .truthBoundary p{margin:9px 0 0;color:#74828D;font-size:12px;line-height:1.5}
-.sideRail :global([class*="wrap"]){max-width:none!important;margin:0!important}
+.sideRail :global([class*="wrap"]){max-width:none;margin:0}
 .sideRail :global(section){box-shadow:none}
 .gateList{display:grid;gap:8px}
 .gateList article{padding:10px;border:1px solid #E5E9EC;border-radius:7px;background:#FAFBFB}

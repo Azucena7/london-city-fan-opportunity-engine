@@ -21,7 +21,7 @@
 .drawer>summary{min-height:44px}
 .whenOpen{display:none}
 .drawer[open]>summary .whenClosed{display:none}
-.drawer[open]>summary .whenOpen{display:inline!important}
+.drawer[open]>summary .whenOpen{display:inline}
 @media(pointer:coarse){
   .drawer>summary{min-height:48px}
 }
