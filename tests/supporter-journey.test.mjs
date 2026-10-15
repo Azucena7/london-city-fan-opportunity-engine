@@ -11,7 +11,12 @@ const dataStub = compile(`export const calendar = [
   { id: "2026-10-18-eve-h", date: "2026-10-18", opponent: "Everton" }
 ];
 export const crmTicketingLive = { datasetState: "requires-access", fixtureSummaries: [], repeatCohorts: [] };`);
-const source = (await readFile(new URL("../src/lib/supporterJourney.ts", import.meta.url), "utf8")).replace('"@/lib/data"', JSON.stringify(dataStub));
+const serverStub = compile("export const supabaseConfigured = () => false; export const supabaseRequest = async () => { throw new Error('no network in tests'); };");
+const validatorUrl = new URL("../scripts/lib/crm-aggregate-validate.mjs", import.meta.url).href;
+const source = (await readFile(new URL("../src/lib/supporterJourney.ts", import.meta.url), "utf8"))
+  .replace('"@/lib/data"', JSON.stringify(dataStub))
+  .replace('"@/lib/supabaseServer"', JSON.stringify(serverStub))
+  .replace('"../../scripts/lib/crm-aggregate-validate.mjs"', JSON.stringify(validatorUrl));
 const journey = await import(compile(source));
 
 const aggregate = {
@@ -44,4 +49,9 @@ test("without an authorised club aggregate there is no journey and no audience",
   assert.equal(journey.journeyForFixture(missing, "2026-09-26-bha-h"), null);
   assert.deepEqual(journey.audiencesForFixture(missing, "2026-10-18-eve-h"), []);
   assert.equal(journey.journeyForFixture(aggregate, "2026-09-26-bha-h").tickets, 40);
+});
+
+test("without club storage, every screen reads the repository dataset", async () => {
+  assert.equal((await journey.getSupporterAggregate("club-1")).datasetState, "requires-access");
+  assert.equal((await journey.getSupporterAggregate()).datasetState, "requires-access");
 });

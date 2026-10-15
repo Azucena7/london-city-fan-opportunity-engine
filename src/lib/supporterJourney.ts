@@ -1,10 +1,25 @@
 import { calendar, crmTicketingLive } from "@/lib/data";
+import { supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { validateAggregate } from "../../scripts/lib/crm-aggregate-validate.mjs";
 import type { CrmAudienceDefinition, CrmTicketingFixtureAggregate, CrmTicketingLiveDataset } from "@/lib/models";
 
-// The one place the product reads the club's supporter-journey aggregates from. Screens never
-// read the dataset directly, so moving it to club-scoped storage changes nothing on screen.
-export async function getSupporterAggregate(): Promise<CrmTicketingLiveDataset> {
-  return crmTicketingLive;
+// The one place the product reads the club's supporter-journey aggregates from. A signed-in club
+// reads its own latest upload (club-scoped, RLS-protected); everyone else, and any club without an
+// upload, reads the repository dataset, which in the public build says club data is required.
+export async function getSupporterAggregate(clubId?: string | null): Promise<CrmTicketingLiveDataset> {
+  if (!clubId || !supabaseConfigured()) return crmTicketingLive;
+  try {
+    const response = await supabaseRequest(
+      `/rest/v1/club_journey_aggregates?club_id=eq.${encodeURIComponent(clubId)}&select=dataset&order=uploaded_at.desc&limit=1`
+    );
+    if (!response.ok) return crmTicketingLive;
+    const rows = await response.json() as Array<{ dataset: unknown }>;
+    const dataset = rows[0]?.dataset as CrmTicketingLiveDataset | undefined;
+    // Re-check on read: a stored row that breaks the privacy rules is never shown.
+    return dataset && dataset.datasetState === "club-aggregate" && validateAggregate(dataset).length === 0 ? dataset : crmTicketingLive;
+  } catch {
+    return crmTicketingLive;
+  }
 }
 
 export function journeyForFixture(dataset: CrmTicketingLiveDataset, fixtureId: string | null | undefined): CrmTicketingFixtureAggregate | null {

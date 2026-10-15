@@ -68,7 +68,8 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
     .filter((item) => item.homeAway === "home" && item.status === "scheduled" && item.id !== selectedId)
     .sort((a, b) => a.date.localeCompare(b.date))[0] ?? null;
   const nextLearning = deriveNextFixtureLearning(live, results);
-  const [clubContext, supporterAggregate] = await Promise.all([getCurrentClubOperatingContext(), getSupporterAggregate()]);
+  const clubContext = await getCurrentClubOperatingContext();
+  const supporterAggregate = await getSupporterAggregate(clubContext?.clubId);
   const occupancyNow = occupancySummary(selected?.attendance, selected?.venue, clubContext?.venues ?? []);
   // Closure windows are recomputed per request so a long-running server never shows yesterday's state.
   const scorecard = selected

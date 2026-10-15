@@ -147,6 +147,7 @@ AVELA reads the attendee journey (season tickets, purchases, stadium access) as 
   - consented first-time buyers.
 
   Each carries criteria, a purpose and a rounded size, with `execution: "club-crm"`. AVELA never receives or sends a list of supporters.
+- Club-scoped storage: a club administrator uploads the aggregate from `/app/sources`. The export is aggregated in the browser and only the aggregate is sent. `/api/journey-aggregate` re-checks it with the same rules as the local validator (`scripts/lib/crm-aggregate-validate.mjs`) and stores it in `club_journey_aggregates`. RLS lets members with results access read it and connection administrators upload it. Learning and the brief read the club's latest upload, and the repository dataset otherwise.
 - Small-cell protection: any breakdown or audience below 10 supporters is suppressed to `null`, and audience sizes are rounded to the nearest 10. `scripts/validate-crm-ticketing-live.mjs` rejects a dataset that breaks either rule.
 
 The synthetic rehearsal may use repository-owned `synthetic-demo` rows to validate calculations.

@@ -756,7 +756,7 @@ test("decision confidence requires measured conversion evidence before it can be
 test("repository CRM evidence is aggregate-only and importer never stores supporter hashes", () => {
   const live = JSON.parse(read("data/live/crm-ticketing.json"));
   const importer = read("scripts/import-crm-ticketing.mjs");
-  const validator = read("scripts/validate-crm-ticketing-live.mjs");
+  const validator = read("scripts/lib/crm-aggregate-validate.mjs");
   const pkg = JSON.parse(read("package.json"));
 
   assert.equal(live.scope, "club-crm-ticketing-aggregate");
