@@ -1558,7 +1558,7 @@ test("current AVELA brand surfaces do not regress to the retired lime system", (
     assert.doesNotMatch(source, /#526D00|#C7EA3A|#EAF4B9|#BCD22D|#AFC52D/i, `${path} should use the current AVELA identity`);
   }
   assert.match(read("src/app/app/learning/results.module.css"), /var\(--product-accent\)/);
-  assert.match(read("src/app/pilot/pilot.module.css"), /var\(--product-accent-soft\)/);
+  assert.match(read("src/components/editorial.module.css"), /--teal:#2f8f83/i);
   assert.match(read("src/app/opengraph-image.tsx"), /#2F8F83/);
   assert.match(read("src/app/linkedin-card/route.tsx"), /#2F8F83/);
 });
