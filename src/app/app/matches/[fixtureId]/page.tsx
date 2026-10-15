@@ -8,6 +8,8 @@ import { ProductDataStateLegend } from "@/components/ProductDataStateLegend";
 import { ImpactScenario } from "@/components/ImpactScenario";
 import { MatchSignalControls } from "@/components/MatchSignalControls";
 import { ActivationDraft } from "@/components/ActivationDraft";
+import { CrmAudiences } from "@/components/CrmAudiences";
+import { AUDIENCE_PURPOSE, audienceSizeLabel, audiencesForFixture, describeAudience, getSupporterAggregate } from "@/lib/supporterJourney";
 import { MatchPlanDecision } from "@/components/MatchPlanDecision";
 import { CampaignDeliveryPlanner } from "@/components/CampaignDeliveryPlanner";
 import { DecisionHistoryPanel } from "@/components/DecisionHistoryPanel";
@@ -85,6 +87,13 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
     ? deriveCampaignWorkPackage({ campaign, decisionId: `fixture:${fixture.id}` })
     : null;
   const workRoutingRules = await getWorkRoutingRules(clubContext?.clubId);
+  const supporterAggregate = await getSupporterAggregate();
+  const crmAudiences = audiencesForFixture(supporterAggregate, fixtureId).map((audience) => ({
+    audience,
+    purpose: AUDIENCE_PURPOSE[audience.purpose],
+    description: describeAudience(audience),
+    size: audienceSizeLabel(audience.estimatedSize)
+  }));
   const workRoutingPlan = workPackage
     ? routeWorkPackage({ workPackage, rules: workRoutingRules })
     : null;
@@ -380,6 +389,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           fallbackOwner={live.nextAction.owner}
           fallbackMeasurement={live.nextAction.measurement}
         />
+
+        <CrmAudiences rows={crmAudiences} connected={supporterAggregate.datasetState === "club-aggregate"} />
 
         <div className={styles.actionGrid}>
           {(actions.length ? actions : [{

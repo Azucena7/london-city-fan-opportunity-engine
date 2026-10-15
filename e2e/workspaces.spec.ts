@@ -93,3 +93,22 @@ test("Learning shows when each measurement window can close, without closing it 
   for (const index of [1, 2, 3, 4]) await expect(windows.nth(index)).not.toContainText("Public facts in");
   await expect(learning).toContainText("When each part of this fixture can be closed");
 });
+
+test("without club data, Learning says which supporter and capacity evidence is missing", async ({ page }) => {
+  await open(page, "/app/learning?fixture=2026-09-26-bha-h");
+  const journey = page.getByRole("region", { name: "Supporter journey" });
+  await expect(journey).toContainText("Requires the club's authorised ticketing and access aggregate");
+  await expect(journey.getByRole("link", { name: /Check data sources/ })).toHaveAttribute("href", "/app/sources");
+  const facts = page.getByRole("region", { name: "Observed fixture facts" });
+  await expect(facts).toContainText("Occupancy");
+  await expect(facts).toContainText("Capacity not configured");
+  await expect(facts).not.toContainText(/\d+% of (sellable|total) capacity/);
+});
+
+test("without club data, the brief offers no CRM audience and says why", async ({ page }) => {
+  const main = await open(page, "/app/matches/2026-10-18-eve-h");
+  const audiences = main.getByRole("region", { name: "Audiences for the club CRM" });
+  await expect(audiences).toContainText("Requires the club's authorised ticketing aggregate");
+  await expect(audiences.getByRole("button", { name: "Copy criteria" })).toHaveCount(0);
+  await expect(audiences).toContainText("No supporter list leaves the club's systems");
+});

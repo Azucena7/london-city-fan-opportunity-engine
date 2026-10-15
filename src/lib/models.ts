@@ -726,6 +726,37 @@ export type CrmTicketingFixtureAggregate = {
   consentedBuyers: number;
   campaignAttributedTickets: number;
   postcodeSectors: number;
+  // Journey breakdowns (importer v1.0, additive). Null means not supplied or suppressed, never zero.
+  ticketTypes?: Partial<Record<"season" | "single" | "hospitality" | "complimentary" | "unknown", { tickets: number | null; scans: number | null }>> | null;
+  seasonTicketScanRate?: number | null;
+  entryTiming?: Record<"more-than-60-before" | "60-to-30-before" | "30-to-0-before" | "after-kickoff" | "unknown", number | null> | null;
+  origins?: {
+    all: CrmTicketingOrigins;
+    seasonTicketHolders: CrmTicketingOrigins | null;
+  } | null;
+};
+
+export type CrmTicketingOrigins = {
+  supporters: number | null;
+  districts: Array<{ district: string; supporters: number }>;
+  otherSupporters: number | null;
+};
+
+/** A segment the club CRM builds and sends; AVELA never holds the member list. */
+export type CrmAudienceDefinition = {
+  id: string;
+  purpose: "repeat-attendance" | "season-ticket-retention" | "second-visit";
+  criteria: {
+    consent: "consented";
+    boughtFixture?: string;
+    notBoughtFixture?: string;
+    fixture?: string;
+    ticketType?: string;
+    scanStatus?: string;
+    firstTimeBuyer?: boolean;
+  };
+  estimatedSize: number | null;
+  execution: "club-crm";
 };
 
 export type CrmTicketingRepeatCohortAggregate = {
@@ -744,6 +775,8 @@ export type CrmTicketingLiveDataset = {
   note: LocalizedText;
   fixtureSummaries: CrmTicketingFixtureAggregate[];
   repeatCohorts: CrmTicketingRepeatCohortAggregate[];
+  privacy?: { smallCellThreshold: number; audienceSizesRoundedTo: number };
+  audienceDefinitions?: CrmAudienceDefinition[];
 };
 
 export type CrmTicketingReadiness = {
