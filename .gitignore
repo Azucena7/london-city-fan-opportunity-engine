@@ -10,3 +10,7 @@ data/private/
 secrets/
 test-results/
 playwright-report/
+
+# Design skill outputs (screenshots, snapshots, inspector reports)
+.playwright-cli/
+.taste-skill/

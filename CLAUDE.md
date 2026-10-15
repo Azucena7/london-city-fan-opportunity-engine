@@ -219,6 +219,27 @@ Current AVELA palette:
 
 These are directionally important but may be refined in a frontend exploration if contrast, hierarchy or product quality materially improves.
 
+## Frontend design workflow
+
+Project skills live in `.claude/skills/` (sources, pins and cloud notes in `.claude/skills/README.md`).
+
+Precedence when they disagree: this file's truth rules, positioning and palette → `web-design-guidelines` (accessibility, UX) → `design-taste-frontend` (art direction). A skill never overrides product capability, data semantics or the London City boundary.
+
+Which tool where:
+- **Commercial/public routes** (`/`, `/for-clubs`, `/pilot*`, `/cases`, `/case-study`, `/live/london-city`, `/matchday/*`): `design-taste-frontend` is the main art-direction reference. Use its direction (sector `event` or closest) inside the AVELA palette, and its `scripts/lint.mjs` on changed files.
+- **App routes** (`/app/*`): Taste Skill states it is not for dashboards or app screens. Follow the UX principles and design references above (density, tables, drawers, restrained type); use Taste only for its anti-generic checks, not its layouts.
+- **Visual references** (screenshots, mockups): `image-to-code`. Treat the user's images as the source of truth. Its "generate images first" step is optional here: only with an image tool the user has enabled, and never spending their credits without asking.
+- **Design systems**: consult [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) on demand (clone to a scratch directory). Take principles — density, hierarchy, spacing scales, motion restraint — never a brand's name, logo, colours, typefaces or copy.
+- **Review**: `web-design-guidelines` on every changed UI file.
+- **Browser checks**: `playwright-cli` (`npx -y @playwright/cli@0.1.22`; in the cloud add `--config=.claude/playwright-cli.cloud.json` on `open`). Screenshot 1440, 768 and 390 px, exercise the main interaction, read console errors.
+
+Loop for every web create/improve request:
+1. State the visual direction in a few lines (audience, mood, type, palette within AVELA tokens, motion).
+2. Build responsive for phone, tablet and desktop.
+3. Run Taste lint (public routes) and `web-design-guidelines`; fix findings.
+4. Open with `playwright-cli`, screenshot the three widths, look at the pictures, fix what is visibly wrong.
+5. Repeat 3–4 until clean (at most three rounds), then run the canonical validation below.
+
 ## Mobile navigation
 
 Current mobile primary destinations:
