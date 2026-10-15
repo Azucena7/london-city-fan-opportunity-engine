@@ -12,18 +12,18 @@
 .readinessSurface :global([class*="grid"] article strong){font-size:12px}
 .readinessSurface :global([class*="grid"] article p){font-size:11px;line-height:1.45}
 
-.setupSurface :global([class*="score"]){padding:12px!important;border:1px solid var(--product-line)!important;border-radius:9px!important;background:#FAFBFB!important}
-.setupSurface :global([class*="setupJourney"]){margin-top:12px!important;border:1px solid var(--product-line)!important;border-radius:9px!important;overflow:hidden}
-.setupSurface :global([class*="setupJourney"]>div){padding:10px 12px!important}
-.setupSurface :global([class*="clubBar"]){margin-top:12px!important;padding:12px!important;border:1px solid var(--product-line)!important;border-radius:9px!important;background:#FAFBFB!important}
-.setupSurface :global([class*="grid"]){margin-top:12px!important;gap:10px!important;border-top:0!important}
+.setupSurface :global([class*="score"]){padding:12px;border:1px solid var(--product-line)!important;border-radius:9px;background:#FAFBFB}
+.setupSurface :global([class*="setupJourney"]){margin-top:12px;border:1px solid var(--product-line)!important;border-radius:9px;overflow:hidden}
+.setupSurface :global([class*="setupJourney"]>div){padding:10px 12px}
+.setupSurface :global([class*="clubBar"]){margin-top:12px;padding:12px;border:1px solid var(--product-line)!important;border-radius:9px;background:#FAFBFB}
+.setupSurface :global([class*="grid"]){margin-top:12px;gap:10px;border-top:0}
 .setupSurface :global([class*="grid"] article),.setupSurface :global([class*="grid"] article:nth-child(even)){padding:14px!important;border:1px solid var(--product-line)!important;border-radius:9px!important;background:#fff!important}
-.setupSurface :global([class*="grid"] h2){font-size:15px!important}
-.setupSurface :global([class*="grid"] p){font-size:11px!important;line-height:1.5!important}
-.setupSurface :global([class*="chips"] button){min-height:34px!important;padding:7px 10px!important;border-radius:7px!important;font-size:11px!important}
+.setupSurface :global([class*="grid"] h2){font-size:15px}
+.setupSurface :global([class*="grid"] p){font-size:11px;line-height:1.5}
+.setupSurface :global([class*="chips"] button){min-height:34px;padding:7px 10px;border-radius:7px;font-size:11px}
 .setupSurface :global([class*="ready"]){background:var(--product-navy)!important}
-.setupSurface :global([class*="ready"] h2){color:#fff!important}
-.setupSurface :global([class*="ready"] p){color:#C6D1DA!important}
+.setupSurface :global([class*="ready"] h2){color:#fff}
+.setupSurface :global([class*="ready"] p){color:#C6D1DA}
 
 @media(max-width:800px){.setupSurface :global([class*="grid"]),.readinessSurface :global([class*="grid"]){grid-template-columns:1fr}}
 

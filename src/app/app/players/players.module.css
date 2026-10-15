@@ -31,14 +31,14 @@
 }
 .plannerSurface :global([class*="wrap"]){max-width:none;margin:0;padding:18px}
 .plannerSurface :global([class*="head"]){padding-top:0}
-.plannerSurface :global(h2){font-size:18px!important}
+.plannerSurface :global(h2){font-size:18px}
 .plannerSurface :global(header[class*="head"] h2){font-size:26px!important}
 .plannerSurface :global(h3){font-size:14px}
 .plannerSurface :global(p){font-size:12px;line-height:1.5}
 
 .contractDrawer{margin-top:12px}
-.contractDrawer :global([class*="wrap"]){max-width:none!important;margin:0!important}
-.contractDrawer :global(section){box-shadow:none!important}
+.contractDrawer :global([class*="wrap"]){max-width:none;margin:0}
+.contractDrawer :global(section){box-shadow:none}
 
 @media(max-width:900px){
   .planningBoundary{grid-template-columns:1fr;gap:6px}
