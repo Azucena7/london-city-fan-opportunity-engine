@@ -20,11 +20,11 @@ test("home positions the Opportunity Engine for marketing and commercial teams",
 
 test("home turns the London City proof into a bounded pilot path", async ({ page }) => {
   await page.goto("/");
-  const proof = page.getByRole("region", { name: "A time-stamped AVELA hypothesis. What London City announced next." });
+  const proof = page.getByRole("region", { name: "Hypothesis first. Announcement after." });
   await expect(proof).toBeVisible();
   for (const text of ["AVELA saw", "London City later announced", "evidence of relevance"]) await expect(proof).toContainText(text);
   await expect(proof).toContainText("London City is an independent demonstration, not a customer");
-  const pilot = page.locator("section").filter({ has: page.getByRole("heading", { name: "Prove AVELA on 4–6 fixtures before you integrate more." }) });
+  const pilot = page.locator("section").filter({ has: page.getByRole("heading", { name: "Prove it on 4–6 fixtures first." }) });
   for (const text of ["4–6 fixtures", "1–2 workflows", "Measured learning"]) await expect(pilot).toContainText(text);
 });
 
@@ -32,15 +32,15 @@ test("home sections follow the Opportunity Engine story order", async ({ page })
   await page.goto("/");
   const order = [
     "See what could change the match.",
-    "A time-stamped AVELA hypothesis. What London City announced next.",
-    "What a commercial lead reads before the first meeting.",
-    "Change what happens around the match. Watch the plan change.",
-    "Only the signals that change the decision.",
-    "Four decisions the engine is built to change.",
-    "Keep your specialist tools. AVELA reads across them.",
-    "Prove AVELA on 4–6 fixtures before you integrate more.",
-    "Where AVELA fits — and where it does not.",
-    "Turn the next club opportunity into a better decision — without replacing the stack you already use."
+    "Hypothesis first. Announcement after.",
+    "The read before the first meeting.",
+    "Change the context. Watch the plan.",
+    "Only signals that change decisions.",
+    "Four decisions it is built to change.",
+    "AVELA reads across your tools.",
+    "Prove it on 4–6 fixtures first.",
+    "Questions clubs ask.",
+    "Better decisions, same stack."
   ];
   const tops: number[] = [];
   for (const name of order) {
@@ -53,7 +53,7 @@ test("home sections follow the Opportunity Engine story order", async ({ page })
 
 test("home decision demo changes the plan per scenario and stays labelled as a simulation", async ({ page }) => {
   await page.goto("/");
-  const demo = page.getByRole("region", { name: "Change what happens around the match. Watch the plan change." });
+  const demo = page.getByRole("region", { name: "Change the context. Watch the plan." });
   await expect(demo).toContainText("illustrative product simulation");
   const panel = demo.getByRole("tabpanel");
   await expect(panel).toContainText("Home fixture · Illustrative simulation");
@@ -70,7 +70,7 @@ test("home decision demo changes the plan per scenario and stays labelled as a s
 
 test("home shows AVELA complementing specialist tools rather than replacing them", async ({ page }) => {
   await page.goto("/");
-  const ecosystem = page.getByRole("region", { name: "Keep your specialist tools. AVELA reads across them." });
+  const ecosystem = page.getByRole("region", { name: "AVELA reads across your tools." });
   for (const text of ["Works with your club stack", "are not competitors", "remain systems of record", "Blinkfire / analytics", "CRM / ticketing", "Asana / Monday / Jira"]) {
     await expect(ecosystem).toContainText(text);
   }
@@ -81,7 +81,7 @@ test("home shows AVELA complementing specialist tools rather than replacing them
 
 test("home FAQ states integration, execution and prediction boundaries", async ({ page }) => {
   await page.goto("/");
-  const faq = page.getByRole("region", { name: "Where AVELA fits — and where it does not." });
+  const faq = page.getByRole("region", { name: "Questions clubs ask." });
   for (const question of [
     "Does AVELA replace Blinkfire, CRM, ticketing or BI tools?",
     "Why can’t we just use ChatGPT, Claude or another LLM",
@@ -140,7 +140,7 @@ test("home keeps safe gutters and no sideways scroll on a phone", async ({ page 
     page.getByRole("heading", { level: 1 }),
     page.getByRole("link", { name: "See the London City example" }),
     page.getByRole("link", { name: "Request a club pilot" }),
-    page.getByRole("heading", { name: "Prove AVELA on 4–6 fixtures before you integrate more." })
+    page.getByRole("heading", { name: "Prove it on 4–6 fixtures first." })
   ]) {
     const box = (await locator.boundingBox())!;
     expect(box.x).toBeGreaterThanOrEqual(16);
@@ -162,7 +162,7 @@ test("home proof is a dated record and the FAQ keeps answers one click away", as
   await page.goto("/");
   const record = page.getByRole("table", { name: "The London City hypothesis, in the order it happened" });
   await expect(record.getByRole("rowheader")).toHaveText(["Fixture + wider football", "AVELA saw · time-stamped", "London City later announced"]);
-  const faq = page.getByRole("region", { name: "Where AVELA fits — and where it does not." });
+  const faq = page.getByRole("region", { name: "Questions clubs ask." });
   const question = faq.locator("summary").filter({ hasText: "Does AVELA predict attendance?" });
   await question.click();
   await expect(faq.getByText("does not promise forecasts or a magic score")).toBeVisible();

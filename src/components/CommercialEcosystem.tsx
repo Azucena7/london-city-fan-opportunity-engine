@@ -14,7 +14,7 @@ const inputs = [
 export function CommercialEcosystem() {
   return (
     <section className={styles.wrap} id="integrations" aria-labelledby="ecosystem-title">
-      <h2 id="ecosystem-title">Keep your specialist tools. AVELA reads across them.</h2>
+      <h2 id="ecosystem-title">AVELA reads across your tools.</h2>
       <div className={styles.copy}>
         <p className={styles.lead}>Works with your club stack.</p>
         <p>CRM, Blinkfire, Asana, Monday and Drive are not competitors. They remain systems of record: sources AVELA reads, and the places where the prepared move is executed. External signals sit above them — what is changing around the match that none of them can see.</p>

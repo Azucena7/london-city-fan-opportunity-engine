@@ -75,7 +75,7 @@ export function CommercialDecisionDemo() {
   return (
     <section className={styles.wrap} aria-labelledby="decision-demo-title">
       <div className={styles.intro}>
-        <h2 id="decision-demo-title">Change what happens around the match. Watch the plan change.</h2>
+        <h2 id="decision-demo-title">Change the context. Watch the plan.</h2>
         <p>
           Try it: change the context. This is an illustrative product simulation. Each scenario starts outside the club; internal context then decides
           whether it is worth acting on. Change the context and the audience, channel, message and spend posture change with it.

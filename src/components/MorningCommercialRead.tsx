@@ -14,7 +14,7 @@ export function MorningCommercialRead({ live }: { live: ProductOpportunity | nul
 
   return (
     <section className={styles.wrap} aria-labelledby="morning-read-title">
-      <h2 id="morning-read-title">What a commercial lead reads before the first meeting.</h2>
+      <h2 id="morning-read-title">The read before the first meeting.</h2>
       <div className={styles.intro}>
         <p>
           The Morning Commercial Read, built from the latest refresh for the London City demonstration. Signals AVELA cannot read

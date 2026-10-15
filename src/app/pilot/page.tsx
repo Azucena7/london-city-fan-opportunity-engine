@@ -42,7 +42,7 @@ export default function PilotPage() {
       <header className={`${ed.board} ${styles.board}`}>
         <div className={`${ed.titleTile} ${styles.titleTile}`}>
           <p className={ed.tileMeta}>Focused club pilot · 4–6 fixtures or a bounded campaign window</p>
-          <h1>Point the engine at your next 4–6 fixtures.</h1>
+          <h1>Point the engine at 4–6 fixtures.</h1>
         </div>
         <div className={`${ed.leadTile} ${styles.leadTile}`}>
           <p>
@@ -68,7 +68,7 @@ export default function PilotPage() {
       </section>
 
       <section className={styles.rhythm} aria-labelledby="rhythm-title">
-        <h2 id="rhythm-title">One repeatable rhythm. Four clear moments.</h2>
+        <h2 id="rhythm-title">One rhythm, four moments.</h2>
         <ol className={styles.moments}>
           {cycle.map(([title, body]) => (
             <li key={title}><h3>{title}</h3><p>{body}</p></li>
@@ -77,7 +77,7 @@ export default function PilotPage() {
       </section>
 
       <section className={styles.stack} aria-labelledby="stack-title">
-        <h2 id="stack-title">Add only the context that improves the decision.</h2>
+        <h2 id="stack-title">Add only context that helps.</h2>
         <p className={styles.stackNote}><strong>Start with the current stack.</strong> No rip-and-replace programme is required. The pilot can begin with public context and the strongest authorised aggregates the club can provide.</p>
         <table className={styles.sources}>
           <caption className={ed.visuallyHidden}>Context a pilot can add</caption>
@@ -90,7 +90,7 @@ export default function PilotPage() {
       </section>
 
       <section className={styles.window} aria-labelledby="window-title">
-        <h2 id="window-title">Four cycles. Four different decisions. One learning system.</h2>
+        <h2 id="window-title">Four cycles, four decisions.</h2>
         <aside className={styles.windowNote}>
           <p><strong>Public demonstration · London City (independent case)</strong></p>
           <p>This is how a bounded pilot becomes useful: not by repeating the same dashboard four times, but by testing whether AVELA adapts the decision as fixture context, evidence and commercial constraints change.</p>
@@ -113,7 +113,7 @@ export default function PilotPage() {
 
       <section className={styles.week} aria-labelledby="week-title">
         <div className={styles.weekIntro}>
-          <h2 id="week-title">One decision view, not another dashboard.</h2>
+          <h2 id="week-title">A decision view, not a dashboard.</h2>
           <p>What a live cycle looks like. This example uses the same current match-plan state as the AVELA workspace. Commercial impact remains unfilled until the required audience and conversion evidence exists.</p>
         </div>
         <div className={styles.stage}>
@@ -128,7 +128,7 @@ export default function PilotPage() {
 
       <section className={styles.paths} aria-labelledby="paths-title">
         <div className={styles.pathsIntro}>
-          <h2 id="paths-title">The output is a decision about AVELA too.</h2>
+          <h2 id="paths-title">You decide on AVELA too.</h2>
           <p>End of pilot. The pilot should create enough evidence to choose one of three paths — not automatically justify a bigger implementation.</p>
         </div>
         <ul className={styles.playbook}>
@@ -139,7 +139,7 @@ export default function PilotPage() {
       </section>
 
       <section className={styles.cta} aria-labelledby="cta-title">
-        <h2 id="cta-title">Keep the sales page simple. Put the implementation detail one level deeper.</h2>
+        <h2 id="cta-title">The detail lives one level deeper.</h2>
         <p>Want the operating detail? The Operating Pack covers onboarding, data contract, roles, privacy and measurement design. The guided demo shows the product flow in three minutes.</p>
         <div className={ed.actions}>
           <Link className={ed.coralButton} href="/for-clubs?utm_source=pilot&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Request a club pilot</Link>
