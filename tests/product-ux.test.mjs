@@ -58,10 +58,11 @@ test("Case study separates built product, observed alignment and unproven impact
   const story = read("src/components/LocalizedStoryPage.tsx");
   const technical = read("src/components/LocalizedTechnicalCaseStudy.tsx");
   assert.match(page, /decisionValidation/);
-  assert.match(story, /WHAT IS ACTUALLY DEMONSTRATED/);
-  assert.match(story, /ENGINE HYPOTHESIS/);
-  assert.match(story, /OBSERVED CLUB ACTION/);
+  assert.match(story, /What is actually demonstrated/);
+  assert.match(story, /Engine hypothesis/);
+  assert.match(story, /Observed club action/);
   assert.match(story, /causation claimed/);
+  assert.match(story, /Still to prove/);
   assert.match(technical, /Decision validation/);
   assert.match(technical, /never implies causation/);
 });
@@ -568,10 +569,10 @@ test("the brief rail summarises signals and confidence", () => {
 test("London City Live reads like an editorial case journal", () => {
   const overview = read("src/components/LondonCityCase.tsx");
   const detail = read("src/components/CommercialCaseStory.tsx");
-  assert.match(overview, /PUBLIC DEMO · LONDON CITY/);
-  assert.match(overview, /WHAT THE ENGINE SAW/);
-  assert.match(overview, /WHAT IT RECOMMENDED/);
-  assert.match(overview, /CASE JOURNAL/);
+  assert.match(overview, /Public demo · London City/);
+  assert.match(overview, /What the engine saw/);
+  assert.match(overview, /What it recommended/);
+  assert.match(overview, /Case journal/);
   assert.match(overview, /\/live\/london-city\/brighton/);
   assert.match(detail, /MarketingNav/);
   assert.match(detail, /\/live\/london-city/);
@@ -1004,17 +1005,16 @@ test("Opportunity Brief explains confidence and keeps its cockpit styles", () =>
 
 test("commercial case study leads with time-stamped prediction versus observable reality", () => {
   const story = read("src/components/LocalizedStoryPage.tsx");
-  const css = read("src/app/intelligence-surfaces.css");
-  assert.match(story, /BEFORE THE CLUB ANNOUNCED IT/);
-  assert.match(story, /AVELA SAW/);
-  assert.match(story, /LONDON CITY ANNOUNCED/);
-  assert.match(story, /3<\/b>/);
-  assert.match(story, /WHAT IT DOES SHOW/);
-  assert.match(story, /WHAT IT DOES NOT SHOW/);
+  const css = read("src/components/LocalizedStoryPage.module.css");
+  assert.match(story, /Before the club announced it/);
+  assert.match(story, /<b>\{gapDays\}<\/b>/);
+  assert.match(story, /What it does show/);
+  assert.match(story, /What it does not show/);
   assert.match(story, /Open the full evidence trail/);
   assert.match(story, /AVELA · London City Live Proof/);
-  assert.match(css, /predictionProofFlow/);
-  assert.match(css, /predictionProofBoundary/);
+  assert.match(story, /data-editorial/);
+  assert.match(css, /\.flow\{/);
+  assert.match(css, /\.boundary\{/);
 });
 
 
@@ -1059,8 +1059,9 @@ test("London City surfaces use bounded reading widths and demo framing", () => {
   const live = read("src/components/LondonCityCase.tsx");
   const liveCss = read("src/components/LondonCityLive.module.css");
   const clubs = read("src/components/ClubPilotProposition.tsx");
-  assert.match(live, /PUBLIC DEMO · LONDON CITY/);
-  assert.match(liveCss, /width:min\((980|1120)px/);
+  assert.match(live, /Public demo · London City/);
+  assert.match(live, /data-editorial/);
+  assert.match(liveCss, /max-width:46ch/);
   assert.match(clubs, /Independent public proof\./);
 });
 
