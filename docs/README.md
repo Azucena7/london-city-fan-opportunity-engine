@@ -17,5 +17,7 @@ This directory contains the maintained product, architecture, data and operating
 - [Source register](./source-register.md)
 - [Daily update runbook](./daily-update-runbook.md)
 - [Club private access](./club-private-access.md)
+- [Club data export for a pilot](./pilot-club-data-export.md)
+- [Data processing agreement outline (draft)](./pilot-data-processing-agreement-outline.md)
 
 Runtime behaviour is defined by the application code, tests, persistence schema and live source-health state. These documents explain intent and operating boundaries; they do not override the as-built system.
