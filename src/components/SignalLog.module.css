@@ -1,0 +1,15 @@
+/* The Radar's signal log: a dense table of what arrived and what it measurably changed. */
+.card{position:relative;max-width:1120px;margin:20px auto 0;padding:18px}
+.anchor{position:absolute;top:-80px}
+.summary{margin:8px 0 0;font-size:14px;line-height:1.5}
+.method{max-width:78ch;margin:6px 0 14px;color:var(--product-muted);font-size:12px;line-height:1.5}
+.signal{display:grid;gap:3px}
+.signal strong{font-size:13px;line-height:1.35}
+.signal small{color:var(--product-muted);font-size:12px;line-height:1.4}
+.signal a{color:var(--product-ink);font-weight:750}
+.when{display:flex;flex-wrap:wrap;align-items:center;gap:6px;white-space:nowrap;font-size:12px;font-weight:750;font-variant-numeric:tabular-nums}
+.effect{display:grid;gap:5px;justify-items:start}
+.effect ul{margin:0;padding-left:16px;font-size:12px;line-height:1.45}
+.more{margin-top:12px}
+.more>summary{cursor:pointer;font-size:12px;font-weight:850;color:var(--product-ink);padding:8px 0}
+.more>summary:focus-visible{outline:3px solid var(--product-accent-text);outline-offset:2px}

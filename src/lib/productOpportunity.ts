@@ -141,16 +141,19 @@ function previousHomeFixture(current: CalendarFixture): CalendarFixture | null {
     .sort((a, b) => b.date.localeCompare(a.date))[0] ?? null;
 }
 
-function evidenceSignals(fixtureId: string, campaign: CampaignPlan | null) {
+function evidenceSignals(fixtureId: string, campaign: CampaignPlan | null, excluded?: ReadonlySet<string>) {
   const declaredIds = new Set([
     ...(campaign?.triggerSignalIds ?? []),
     ...(campaign?.contextSignalIds ?? [])
   ]);
   return liveSignals.filter((signal) =>
-    signal.fixtureId === fixtureId ||
-    declaredIds.has(signal.id)
+    (signal.fixtureId === fixtureId || declaredIds.has(signal.id)) &&
+    !excluded?.has(signal.id)
   );
 }
+
+/** Options for reading a fixture as if some signals had not arrived (used by the signal log). */
+export type OpportunityReadOptions = { excludeSignalIds?: ReadonlySet<string> };
 
 function decisionConfidence(
   signals: LiveSignal[],
@@ -201,7 +204,7 @@ function blockerLabels(campaign: CampaignPlan | null) {
     .map((item) => item.label.en);
 }
 
-export function getCurrentProductOpportunity(requestedFixtureId?: string): ProductOpportunity | null {
+export function getCurrentProductOpportunity(requestedFixtureId?: string, options: OpportunityReadOptions = {}): ProductOpportunity | null {
   const current = findCurrentFixture(requestedFixtureId);
   if (!current) return null;
 
@@ -209,7 +212,7 @@ export function getCurrentProductOpportunity(requestedFixtureId?: string): Produ
   const referenceDate = currentProductDate((currentState.updated_at as string | undefined) ?? calendarFixture.date);
   const timing = fixtureTiming(referenceDate, calendarFixture.date);
   const campaign = currentCampaign(calendarFixture.id);
-  const signals = evidenceSignals(calendarFixture.id, campaign);
+  const signals = evidenceSignals(calendarFixture.id, campaign, options.excludeSignalIds);
   const currentFixtureSummary =
     crmTicketingLive.datasetState === "club-aggregate"
       ? crmTicketingLive.fixtureSummaries.find((item) => item.fixtureId === calendarFixture.id) ?? null
