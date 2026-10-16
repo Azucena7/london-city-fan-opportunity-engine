@@ -36,7 +36,7 @@
 @media(max-width:480px){
   /* Phones: the brand keeps its mark (the link is labelled "AVELA home") so the four primary
      destinations fit beside More without scrolling. */
-  .brandCopy{display:none}.brand{min-width:0;padding:5px 2px}
+  .brandCopy{display:none}.brand{min-width:32px;min-height:40px;justify-content:center;padding:5px 2px}
 }
 @media(max-width:400px){
   .primary .workLink{padding:7px 6px}
