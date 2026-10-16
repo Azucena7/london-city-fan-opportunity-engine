@@ -3,20 +3,25 @@
   --product-surface:#FFFFFF;
   --product-surface-2:#F1E9DE;
   --product-ink:#102742;
-  --product-muted:#637282;
+  --product-muted:#5A6877; /* secondary text: 4.5:1 or more on every light app surface */
   --product-line:#D8DEE3;
   --product-accent:#2F8F83;
   --product-accent-text:#267570; /* the accent as small text: 4.5:1 or more on every light app surface, accent-soft included */
   --product-accent-soft:#E3F2EF;
   --product-accent-ink:#FFFFFF;
   --product-signal:#EF8B6C;
+  --product-signal-text:#BA3C14;
   --product-signal-soft:#FCEAE4;
   --product-inverse:#102742;
   --product-inverse-muted:#B6C4D0;
   --product-success:#16845B;
+  --product-success-text:#147752;
   --product-warning:#D78A1E;
+  --product-warning-text:#8F5C14;
   --product-danger:#D94A4A;
+  --product-danger-text:#C62A2A;
   --product-info:#4A70D8;
+  --product-info-text:#355FD3;
   --product-missing:#8A909B;
   --product-navy:#102742;
   --product-navy-2:#173653;
@@ -91,10 +96,10 @@
   font-size:12px;
   font-weight:800;
 }
-.productStatus.success{background:#E6F4EC;color:var(--product-success)}
-.productStatus.warning{background:#FFF2D8;color:var(--product-warning)}
-.productStatus.danger{background:#FBE6E4;color:var(--product-danger)}
-.productStatus.info{background:#E7EFFA;color:var(--product-info)}
+.productStatus.success{background:#E6F4EC;color:var(--product-success-text)}
+.productStatus.warning{background:#FFF2D8;color:var(--product-warning-text)}
+.productStatus.danger{background:#FBE6E4;color:var(--product-danger-text)}
+.productStatus.info{background:#E7EFFA;color:var(--product-info-text)}
 
 .productConfidence{
   display:flex;

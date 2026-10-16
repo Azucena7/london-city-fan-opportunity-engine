@@ -37,10 +37,10 @@
   border-radius:50%;
   background:currentColor;
 }
-.observed{color:var(--product-success)}
+.observed{color:var(--product-success-text)}
 .forecast{color:var(--product-accent-text)}
-.modelled{color:var(--product-warning)}
-.missing{color:var(--product-missing)}
+.modelled{color:var(--product-warning-text)}
+.missing{color:var(--product-muted)}
 
 @media(max-width:600px){
   .legend{width:min(100% - 28px,1120px);margin-bottom:12px}

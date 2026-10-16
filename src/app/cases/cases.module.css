@@ -40,8 +40,8 @@
 .legend div:first-child{border-top:0}
 .legend span{font-size:14px;font-weight:800}
 .legendRepeat{color:#22634a}
-.legendDefend{color:var(--product-info)}
-.legendAcquire{color:var(--product-warning)}
+.legendDefend{color:var(--product-info-text)}
+.legendAcquire{color:var(--product-warning-text)}
 .legend strong{font-size:16px}
 .legend small{color:#47564e;font-size:14px;line-height:1.5}
 .footerRow{margin-bottom:44px;padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:20px}

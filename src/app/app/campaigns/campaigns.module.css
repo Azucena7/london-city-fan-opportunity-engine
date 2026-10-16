@@ -2,9 +2,9 @@
 .campaignSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
 .campaignSummary>section{min-height:100px;padding:14px}
 .campaignSummary span,.campaignSummary strong,.campaignSummary small{display:block}
-.campaignSummary span{color:#637282;font-size:11px;font-weight:850;letter-spacing:.055em;text-transform:uppercase}
+.campaignSummary span{color:var(--product-muted);font-size:11px;font-weight:850;letter-spacing:.055em;text-transform:uppercase}
 .campaignSummary strong{margin-top:9px;font-size:26px;line-height:1;letter-spacing:-.04em}
-.campaignSummary small{margin-top:4px;color:#637282;font-size:11px;line-height:1.4}
+.campaignSummary small{margin-top:4px;color:var(--product-muted);font-size:11px;line-height:1.4}
 
 .primaryDecision{padding:18px;margin-bottom:14px}
 .primaryGrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.65fr) auto;gap:12px;align-items:stretch;margin-top:10px}
@@ -18,9 +18,9 @@
 .primaryFacts>div{padding:13px;background:#fff}
 .primaryFacts>div:last-child{grid-column:1/-1}
 .primaryFacts span,.primaryFacts strong{display:block}
-.primaryFacts span{color:#637282;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
+.primaryFacts span{color:var(--product-muted);font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
 .primaryFacts strong{margin-top:4px;font-size:14px}
-.primaryGrid>a{align-self:stretch;display:flex;align-items:center;justify-content:center;min-width:168px;min-height:42px;padding:10px 12px;border-radius:8px;background:#EF8B6C;color:#fff;text-decoration:none;text-align:center;font-size:12px;font-weight:900}
+.primaryGrid>a{align-self:stretch;display:flex;align-items:center;justify-content:center;min-width:168px;min-height:42px;padding:10px 12px;border-radius:8px;background:#EF8B6C;color:#102742;text-decoration:none;text-align:center;font-size:12px;font-weight:900}
 
 .workspaceGrid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(250px,.25fr);gap:12px;align-items:start}
 .boardCard{padding:16px}
@@ -28,24 +28,24 @@
 .board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px;align-items:start}
 .board>section{min-width:0;border:1px solid #E3E8EB;border-radius:10px;background:#F8FAFB;overflow:hidden}
 .board>section>header{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 12px;border-bottom:1px solid #E3E8EB;background:#F3F6F7}
-.board>section>header span{color:#637282;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.055em}
+.board>section>header span{color:var(--product-muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.055em}
 .board>section>header b{display:grid;place-items:center;min-width:24px;height:24px;border-radius:999px;background:#fff;color:#53636F;font-size:11px}
 .board>section>div{display:grid;gap:9px;padding:9px}
 
 .campaignCard{position:relative;padding:13px;border:1px solid #E2E7EA;border-radius:9px;background:#fff;box-shadow:0 1px 2px rgba(16,39,66,.025)}
 .campaignCard[data-needs-decision="true"]{box-shadow:inset 2px 0 0 #EF8B6C,0 1px 2px rgba(16,39,66,.025)}
 .meta{display:flex;justify-content:space-between;gap:8px;align-items:center}
-.meta small{color:#637282;font-size:11px}
+.meta small{color:var(--product-muted);font-size:11px}
 .campaignCard h3{margin:9px 0 0;font-size:14px;line-height:1.3;letter-spacing:-.015em}
-.campaignCard p{margin:5px 0 0;color:#637282;font-size:11px;line-height:1.5}
+.campaignCard p{margin:5px 0 0;color:var(--product-muted);font-size:11px;line-height:1.5}
 .progressBar{height:4px;margin-top:10px;border-radius:999px;background:#EDF0F2;overflow:hidden}
 .progressBar>span{display:block;height:100%;background:#2F8F83}
 .cardFacts{display:flex;justify-content:space-between;gap:8px;margin-top:8px}
-.cardFacts span{color:#637282;font-size:11px}
+.cardFacts span{color:var(--product-muted);font-size:11px}
 .cardFacts b{color:#405564;font-size:11px}
 .nextDecision{margin-top:9px;padding:9px;border-radius:6px;background:#FFF7F3}
 .nextDecision span,.nextDecision strong{display:block}
-.nextDecision span{color:#B9725A;font-size:11px;font-weight:850;text-transform:uppercase}
+.nextDecision span{color:#985740;font-size:11px;font-weight:850;text-transform:uppercase}
 .nextDecision strong{margin-top:3px;font-size:11px;line-height:1.35}
 .campaignCard>a{display:inline-flex;margin-top:9px;color:var(--product-accent-text);text-decoration:none;font-size:11px;font-weight:900}
 .empty{padding:14px;margin:0;color:#8C98A2;font-size:11px;text-align:center}
@@ -54,9 +54,9 @@
 .quickCard{padding:16px}
 .quickCard>a{display:grid;gap:2px;padding:11px 0;border-top:1px solid #EDF0F2;color:#20364C;text-decoration:none}
 .quickCard>a:first-of-type{margin-top:8px}
-.quickCard>a span{color:#637282;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.045em}
+.quickCard>a span{color:var(--product-muted);font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.045em}
 .quickCard>a strong{font-size:12px}
-.sideRail p{margin:0;color:#73818D;font-size:11px;line-height:1.5}
+.sideRail p{margin:0;color:var(--product-muted);font-size:11px;line-height:1.5}
 
 @media(max-width:1180px){
   .campaignSummary{grid-template-columns:repeat(2,1fr)}
@@ -97,8 +97,8 @@
 .conflictResolution button:disabled{opacity:.55;cursor:not-allowed}
 .reopenRequired,.applyStatus{display:block;margin-top:5px;font-size:11px;line-height:1.4;color:#7C655D}
 
-.lifecycleCard{padding:16px;margin-bottom:12px}.lifecycle{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:12px;border:1px solid #E0E5E8;border-radius:10px;overflow:hidden}.lifecycle>div{position:relative;min-height:86px;padding:13px;background:#FAFBFB;border-right:1px solid #E0E5E8}.lifecycle>div:last-child{border-right:0}.lifecycle span,.lifecycle strong,.lifecycle small{display:block}.lifecycle span{color:#94A0AA;font-size:11px;font-weight:900}.lifecycle strong{margin-top:8px;font-size:12px}.lifecycle small{margin-top:4px;color:#637282;font-size:11px}.lifecycle [data-stage="review"]{background:#FFF7F2}.lifecycle [data-stage="ready"]{background:#F2FAF8}.lifecycle [data-stage="handoff"]{background:#F7F9FA}.lifecycle [data-stage="learning"]{background:#F4F7FA}
-.primaryActions{display:grid;gap:8px;min-width:168px}.primaryActions a{display:flex;align-items:center;justify-content:center;min-height:42px;padding:10px 12px;border-radius:8px;text-decoration:none;text-align:center;font-size:11px;font-weight:900}.primaryActions a:first-child{background:#EF8B6C;color:#fff}.primaryActions a:last-child{border:1px solid #DDE3E7;background:#fff;color:#20364C}
+.lifecycleCard{padding:16px;margin-bottom:12px}.lifecycle{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:12px;border:1px solid #E0E5E8;border-radius:10px;overflow:hidden}.lifecycle>div{position:relative;min-height:86px;padding:13px;background:#FAFBFB;border-right:1px solid #E0E5E8}.lifecycle>div:last-child{border-right:0}.lifecycle span,.lifecycle strong,.lifecycle small{display:block}.lifecycle span{color:var(--product-muted);font-size:11px;font-weight:900}.lifecycle strong{margin-top:8px;font-size:12px}.lifecycle small{margin-top:4px;color:var(--product-muted);font-size:11px}.lifecycle [data-stage="review"]{background:#FFF7F2}.lifecycle [data-stage="ready"]{background:#F2FAF8}.lifecycle [data-stage="handoff"]{background:#F7F9FA}.lifecycle [data-stage="learning"]{background:#F4F7FA}
+.primaryActions{display:grid;gap:8px;min-width:168px}.primaryActions a{display:flex;align-items:center;justify-content:center;min-height:42px;padding:10px 12px;border-radius:8px;text-decoration:none;text-align:center;font-size:11px;font-weight:900}.primaryActions a:first-child{background:#EF8B6C;color:#102742}.primaryActions a:last-child{border:1px solid #DDE3E7;background:#fff;color:#20364C}
 @media(max-width:900px){.lifecycle{grid-template-columns:repeat(3,1fr)}.lifecycle>div:nth-child(3){border-right:0}.primaryActions{grid-column:1/-1;grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.lifecycle{grid-template-columns:1fr 1fr}.lifecycle>div:nth-child(3){border-right:1px solid #E0E5E8}.lifecycle>div:nth-child(even){border-right:0}.primaryActions{grid-template-columns:minmax(0,1fr)}}
 
