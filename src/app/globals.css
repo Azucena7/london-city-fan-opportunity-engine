@@ -1,8 +1,7 @@
 * { box-sizing: border-box; }
 
-/* Base reading tokens shared by every page. The case-study layouts redefine them
-   in case-brand.css; the app and commercial surfaces use the --product-* tokens
-   in product-system.css. */
+/* Base reading tokens shared by every page. The app uses the --product-* tokens in
+   product-system.css; the public pages use the editorial tokens in editorial.module.css. */
 :root {
   --bg: #f3f2ec;
   --surface: #fff;

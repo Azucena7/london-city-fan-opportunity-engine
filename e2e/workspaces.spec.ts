@@ -130,7 +130,7 @@ test("workspace controls carry accessible names and scroll strips are reachable 
   await page.goto("/app/players");
   await expect(page.getByRole("combobox", { name: "Campaign context" })).toBeVisible();
   await page.goto("/app/campaigns");
-  expect(await page.getByRole("progressbar").count()).toBeGreaterThan(0);
+  await expect(page.getByRole("progressbar").first()).toBeVisible();
   await page.goto("/app");
   await expect(page.getByRole("region", { name: "Next 30 days" })).toHaveAttribute("tabindex", "0");
 });

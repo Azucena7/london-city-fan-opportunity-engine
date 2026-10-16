@@ -2370,7 +2370,6 @@ test("core workspace pages keep operational microcopy readable", () => {
 test("commercial product storytelling keeps microcopy at 10px or above", () => {
   const files = [
     "src/app/commercial-home.module.css",
-    "src/app/commercial-pilot.css",
     "src/app/pilot/pilot.module.css",
     "src/components/MarketingNav.module.css",
     "src/components/CommercialDecisionDemo.module.css",
@@ -2432,8 +2431,11 @@ test("route-specific commercial and case-study CSS is not shipped from the root 
   assert.doesNotMatch(root, /commercial-pilot\.css/);
   // Both case studies are on the editorial modules: no route stylesheet and no layout to import one.
   assert.equal(existsSync("src/app/case-study/layout.tsx"), false);
-  // For Clubs is on the editorial modules now; only London City Live still ships commercial-pilot.css.
+  // For Clubs and London City Live are on the editorial modules too: no route stylesheets remain.
   assert.equal(existsSync("src/app/for-clubs/layout.tsx"), false);
+  for (const path of ["src/app/commercial-pilot.css", "src/app/case-brand.css", "src/app/live/london-city/layout.tsx"]) {
+    assert.equal(existsSync(path), false, `${path} was retired with the editorial London City pages`);
+  }
 });
 
 test("Operating Pack stays a public page with its own attribution", () => {
@@ -2477,7 +2479,6 @@ test("shared operational components keep microcopy readable", () => {
     "src/components/DecisionContextTrail.module.css",
     "src/components/MatchdayCompanionWidget.module.css",
     "src/components/PlayerAssetPlanner.module.css",
-    "src/app/commercial-pilot.css",
     "src/components/AccessCenter.module.css"
   ];
   for (const file of files) {
