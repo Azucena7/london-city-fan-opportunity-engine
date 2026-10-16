@@ -197,16 +197,16 @@
   {
     "id": "everton-review-1",
     "fixtureId": "2026-10-18-eve-h",
-    "area": "Marketing",
-    "status": "planned",
-    "due": "2026-10-03",
+    "area": "Ticketing, Matchday Operations & CRM",
+    "status": "next",
+    "due": "2026-10-16",
     "title": {
-      "en": "Review the Everton proposition and assign an owner",
-      "es": "Revisar la propuesta de Everton y asignar responsable"
+      "en": "Issue the final Everton service journey",
+      "es": "Emitir el recorrido final de servicio para Everton"
     },
     "reason": {
-      "en": "Use the official 14:00 kickoff and Oktoberfest offer. Draft only; club approval is pending.",
-      "es": "Usar el horario oficial de las 14:00 y la oferta de Oktoberfest. Solo borrador; falta aprobación del club."
+      "en": "The official guide now confirms the 18 October itinerary: Broomfields 11:00 in the detailed section, Fan Zone 12:00, turnstiles 12:30, kickoff 14:00. Clarify the conflicting 12:00 Broomfields FAQ before early-arrival messaging. Explain exterior access until kickoff and interior access thereafter, no general parking, matchday price increases and the new Dave Roberts Stand hospitality option. Keep the 11-game season-ticket route distinct; do not imply the full-season product is available.",
+      "es": "La guía oficial confirma el programa del 18 de octubre: Broomfields 11:00 en el detalle, Fan Zone 12:00, tornos 12:30, partido 14:00. Aclarar la FAQ contradictoria de Broomfields a las 12:00 antes de promover llegada temprana. Explicar acceso exterior hasta el inicio e interior después, ausencia de parking general, subida de precio en matchday y nueva hospitality Dave Roberts Stand. Diferenciar el abono de 11 partidos; no presentar disponible el abono completo."
     }
   },
   {
@@ -409,6 +409,36 @@
     "reason": {
       "en": "The repository calendar had 20:00 while both official ticket pages confirm 19:00 BST on 21 October. Replace the wrong time in scheduled emails, travel instructions, social and calendar exports; use Chigwell Construction Stadium / Victoria Road, RM10 7XL. Retain the generic fixture-page discrepancy and recheck ticket-page local time before release. This is data correction, not evidence of rescheduling or demand.",
       "es": "El calendario del repositorio tenía las 20:00 y ambas páginas oficiales de entradas confirman las 19:00 BST del 21 de octubre. Sustituir la hora errónea en emails programados, instrucciones de viaje, social y exportaciones de calendario; usar Chigwell Construction Stadium / Victoria Road, RM10 7XL. Conservar la discrepancia de la página genérica y verificar la hora local de las páginas de entradas antes de publicar. Es corrección de datos, no evidencia de reprogramación ni demanda."
+    }
+  },
+  {
+    "id": "everton-partner-activation-measurement-2026-10-16",
+    "fixtureId": "2026-10-18-eve-h",
+    "area": "Commercial Partnerships, Matchday Experience & CRM",
+    "status": "next",
+    "due": "2026-10-17",
+    "title": {
+      "en": "Instrument Everton partner and post-match activations",
+      "es": "Instrumentar las activaciones de partners y pospartido de Everton"
+    },
+    "reason": {
+      "en": "Confirm approved assets and delivery responsibilities for EA SPORTS gaming, Apple TV mosaic/banners and Mastercard retail redemption. Separate family activity from adult beer messaging and retain alcohol-free Block A. Track participation, redemptions, retail/bar spend and post-match dwell independently of attendance; public announcements do not establish contractual scope or campaign lift.",
+      "es": "Confirmar activos aprobados y responsables de entrega para gaming EA SPORTS, mosaico/banners Apple TV y canje retail Mastercard. Separar actividad familiar de mensajes de cerveza para adultos y conservar Block A sin alcohol. Medir participación, canjes, gasto retail/bar y permanencia aparte de asistencia; los anuncios no establecen alcance contractual ni efecto de campaña."
+    }
+  },
+  {
+    "id": "arsenal-away-sale-service-2026-10-16",
+    "fixtureId": "2026-11-15-arsenal-a",
+    "area": "Ticketing, CRM & Supporter Services",
+    "status": "next",
+    "due": "2026-10-16",
+    "title": {
+      "en": "Launch Arsenal priority CRM and schedule access deadlines",
+      "es": "Lanzar CRM prioritario de Arsenal y programar plazos de acceso"
+    },
+    "reason": {
+      "en": "Use priority access now and schedule general-sale CRM for 20 October at 10:00; confirm 15 November, 16:30, Emirates N7 7AJ. Explain tickets for all ages, under-14 accompaniment, ages 0–3 lower-tier row restrictions, enforced seating in blocks 20–23, away alcohol zones and A4 bags. Send accessible parking requests at least 10 days before the match (5 November), commentary requests 72 hours before (12 November) and medical bag exemptions 48 hours before (13 November); confirm exact cutoffs with Supporter Services. Do not promise on-day sales or accessible-space availability.",
+      "es": "Usar la prioridad actual y programar CRM general para el 20 de octubre a las 10:00; confirmar 15 de noviembre, 16:30, Emirates N7 7AJ. Explicar entrada para todas las edades, acompañamiento a menores de 14, restricciones de filas para 0–3, asiento obligatorio en bloques 20–23, alcohol en zona visitante y bolsas A4. Enviar solicitudes de parking accesible al menos 10 días antes (5 noviembre), audiodescripción 72 horas antes (12 noviembre) y exención médica 48 horas antes (13 noviembre); confirmar cortes exactos con Supporter Services. No prometer venta en matchday ni plazas accesibles."
     }
   }
 ]
