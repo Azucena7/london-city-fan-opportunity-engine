@@ -30,6 +30,7 @@ Session state persists only the short-lived Supabase access token in an HttpOnly
 
 1. Keep the installed `CLUB_SUPABASE_URL` and `CLUB_SUPABASE_PUBLISHABLE_KEY` variables in Vercel.
 2. Apply only migrations that have not already been applied to the target Supabase project. Never rewrite an applied migration. Club venues (`20261015120000_club_setup_venues.sql`) and journey aggregates (`20261015150000_club_journey_aggregates.sql`) degrade gracefully until applied: setup and Sources keep working and say what needs the update.
+   Apply them with the **Supabase migrations** workflow (Actions → Supabase migrations → Run workflow). It needs one repository secret, `SUPABASE_DB_URL`: the Session pooler connection string from Supabase → Connect, with the database password. Name the files to run in order; leave **apply** unticked first to check them against the real schema inside a transaction that is rolled back, then run again with **apply** ticked. Each run is one transaction, so a failing file changes nothing. The secret never appears in logs or in the repository.
 3. Keep public signup policy aligned with the pilot model and validate the intended invite / account-creation path.
 4. Test at least two clubs and two roles for cross-club isolation, revocation, expiry and permission denial.
 5. Validate sign-in, access requests, approval, campaign persistence and delivery-effort writes in Preview before relying on the workflow in Production.
