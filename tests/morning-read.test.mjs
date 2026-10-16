@@ -120,3 +120,17 @@ test("rail disruption on a fixture day leads the transport line; clear modes are
   assert.match(railOnly.transport.detail, /Rail status read for 1 of 2 fixture days\./);
   assert.match(railOnly.transport.detail, /Road disruption is not connected yet\./);
 });
+
+test("supporter origins come only from the club aggregate, by postcode district", () => {
+  const missing = byId(buildMorningRead({ ...base, sources: [] })).origins;
+  assert.equal(missing.state, "not-connected");
+  assert.match(missing.headline, /needs the club's ticketing aggregate/);
+  const origins = { fixtureId: "past", supporters: 200, districts: [{ district: "BR1", supporters: 70 }, { district: "SE9", supporters: 30 }, { district: "DA1", supporters: 20 }, { district: "BR2", supporters: 12 }] };
+  const line = byId(buildMorningRead({ ...base, sources: [], origins })).origins;
+  assert.equal(line.state, "live");
+  assert.equal(line.headline, "60% of Past (1 Oct) buyers came from BR1, SE9 and DA1");
+  assert.match(line.detail, /districts under 10 supporters are withheld/);
+  // It sits after transport, so corridors are read next to disruption.
+  const ids = buildMorningRead({ ...base, sources: [], origins }).map((item) => item.id);
+  assert.equal(ids.indexOf("origins"), ids.indexOf("transport") + 1);
+});

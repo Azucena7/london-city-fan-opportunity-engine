@@ -167,3 +167,11 @@ test("home proof is a dated record and the FAQ keeps answers one click away", as
   await question.click();
   await expect(faq.getByText("does not promise forecasts or a magic score")).toBeVisible();
 });
+
+test("home Morning Read marks supporter origins as needing club data in the public build", async ({ page }) => {
+  await page.goto("/");
+  const read = page.getByRole("region", { name: "The read before the first meeting." });
+  const origins = read.getByRole("listitem").filter({ hasText: "Supporter origins" });
+  await expect(origins).toContainText("Not connected");
+  await expect(origins).toContainText("needs the club's ticketing aggregate");
+});

@@ -12,6 +12,12 @@ type RoadIncident = { location: string | null; startDate: string | null; endDate
 type RoadSnapshot = { lastSuccessfulAt: string | null; incidents: RoadIncident[] } | null | undefined;
 type RailDisruption = { line: string; status: string; reason: string | null };
 type RailSnapshot = { lastSuccessfulAt: string | null; days: Array<{ date: string; disruptions: RailDisruption[] }> } | null | undefined;
+/** Where a played fixture's buyers came from, by postcode district, from the club's authorised aggregate. */
+type SupporterOrigins = {
+  fixtureId: string;
+  supporters: number | null;
+  districts: Array<{ district: string; supporters: number }>;
+} | null | undefined;
 type Opportunity = {
   fixtureId: string;
   fixture: { opponent: string };
@@ -23,7 +29,7 @@ type Opportunity = {
 };
 
 export type MorningReadLine = {
-  id: "pressure" | "broadcast" | "weather" | "calendar" | "transport" | "opportunity" | "move";
+  id: "pressure" | "broadcast" | "weather" | "calendar" | "transport" | "origins" | "opportunity" | "move";
   label: string;
   headline: string;
   detail: string | null;
@@ -41,6 +47,7 @@ export type MorningReadInput = {
   moments?: Array<{ fixtureId: string; label: string }>;
   road?: RoadSnapshot;
   rail?: RailSnapshot;
+  origins?: SupporterOrigins;
   horizon?: number;
 };
 
@@ -57,7 +64,7 @@ export function roadClosuresOn(incidents: RoadIncident[], date: string) {
     && (!item.startDate || item.startDate <= date) && (!item.endDate || item.endDate >= date));
 }
 
-export function buildMorningRead({ today, calendar, events, signals, weather, sources, live, moments = [], road = null, rail = null, horizon = 4 }: MorningReadInput): MorningReadLine[] {
+export function buildMorningRead({ today, calendar, events, signals, weather, sources, live, moments = [], road = null, rail = null, origins = null, horizon = 4 }: MorningReadInput): MorningReadLine[] {
   const upcoming = calendar
     .filter((fixture) => fixture.homeAway === "home" && fixture.date >= today && fixture.status !== "final")
     .sort((a, b) => a.date.localeCompare(b.date))
@@ -179,6 +186,8 @@ export function buildMorningRead({ today, calendar, events, signals, weather, so
     });
   }
 
+  lines.push(originsLine(origins, calendar));
+
   if (live) {
     lines.push({
       id: "opportunity",
@@ -197,4 +206,33 @@ export function buildMorningRead({ today, calendar, events, signals, weather, so
   }
 
   return lines;
+}
+
+/**
+ * Where the last observed crowd travelled from, so travel messages and activations can follow the
+ * real corridors. Postcode districts only, from the club's authorised aggregate; without it the
+ * line says so and nothing is inferred from public data.
+ */
+export function originsLine(origins: SupporterOrigins, calendar: Fixture[]): MorningReadLine {
+  const fixture = origins ? calendar.find((item) => item.id === origins.fixtureId) : undefined;
+  if (!origins || !origins.supporters || !origins.districts.length) {
+    return {
+      id: "origins",
+      label: "Supporter origins",
+      headline: "Where supporters travel from needs the club's ticketing aggregate",
+      detail: "Postcode districts come only from the authorised export, counted once per supporter. Nothing is inferred from public data.",
+      state: "not-connected"
+    };
+  }
+  const top = origins.districts.slice(0, 3);
+  const share = Math.round((top.reduce((sum, item) => sum + item.supporters, 0) / origins.supporters) * 100);
+  const where = top.map((item) => item.district).join(", ").replace(/, ([^,]*)$/, " and $1");
+  const label = fixture ? `${fixture.opponent} (${day(fixture.date)})` : origins.fixtureId;
+  return {
+    id: "origins",
+    label: "Supporter origins",
+    headline: `${share}% of ${label} buyers came from ${where}`,
+    detail: "Postcode districts from the club's authorised ticketing aggregate; districts under 10 supporters are withheld. Read it with the transport line before choosing travel messages or route activations.",
+    state: "live"
+  };
 }
