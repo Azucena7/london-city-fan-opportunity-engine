@@ -56,8 +56,25 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
   const shownOpportunities = attentionFilter
     ? radarWithoutCurrent.filter((item) => item.attentionState === attentionFilter.state)
     : radarWithoutCurrent;
-  const urgencyY = (urgency: string) => urgency === "High" ? 18 : urgency === "Medium" ? 48 : 76;
+  // Radar urgency is Immediate / Soon / Watch; higher on the map means more urgent.
+  const urgencyY = (urgency: string) => urgency === "Immediate" ? 18 : urgency === "Soon" ? 47 : 74;
   const opportunityX = (score: number | null) => Math.max(8, Math.min(92, score ?? 18));
+  // Bubbles in the same urgency row that sit within a few points of each other alternate above
+  // and below the row line, so close scores stay readable instead of stacking on one spot.
+  const mapPositions = new Map<string, { left: number; top: number }>();
+  for (const row of ["Immediate", "Soon", "Watch"]) {
+    const items = radar.filter((item) => item.urgency === row).sort((a, b) => opportunityX(a.opportunityScore) - opportunityX(b.opportunityScore));
+    let previousX = -Infinity;
+    let lane = 0;
+    for (const item of items) {
+      const x = opportunityX(item.opportunityScore);
+      lane = x - previousX < 7 ? lane + 1 : 0;
+      previousX = x;
+      // 13% of the map height is more than a bubble even on the 300px phone map.
+      const offset = lane === 0 ? 0 : (lane % 2 ? -1 : 1) * Math.ceil(lane / 2) * 13;
+      mapPositions.set(item.fixtureId, { left: x, top: Math.max(10, Math.min(88, urgencyY(row) + offset)) });
+    }
+  }
 
   const explorerItems = radar.map((item) => {
     const campaign = campaignPlans.campaigns.find((entry) => entry.fixtureId === item.fixtureId) ?? null;
@@ -156,8 +173,8 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
               className={styles.mapPoint}
               data-state={item.attentionState.replaceAll(" ", "").toLowerCase()}
               style={{
-                left: opportunityX(item.opportunityScore) + "%",
-                top: urgencyY(item.urgency) + "%",
+                left: (mapPositions.get(item.fixtureId)?.left ?? opportunityX(item.opportunityScore)) + "%",
+                top: (mapPositions.get(item.fixtureId)?.top ?? urgencyY(item.urgency)) + "%",
                 width: 34 + Math.min(26, item.materialSignalCount * 5),
                 height: 34 + Math.min(26, item.materialSignalCount * 5)
               }}

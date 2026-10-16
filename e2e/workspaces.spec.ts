@@ -134,3 +134,18 @@ test("workspace controls carry accessible names and scroll strips are reachable 
   await page.goto("/app");
   await expect(page.getByRole("region", { name: "Next 30 days" })).toHaveAttribute("tabindex", "0");
 });
+
+test("Radar map places fixtures by urgency and keeps close bubbles apart", async ({ page }) => {
+  await page.goto("/app/matches");
+  const points = page.locator("[class*='mapPoint']");
+  await expect(points.first()).toBeVisible();
+  const boxes = await points.evaluateAll((els) => els.map((el) => { const r = el.getBoundingClientRect(); return { left: r.left, right: r.right, top: r.top, bottom: r.bottom }; }));
+  const rows = new Set(boxes.map((box) => Math.round(box.top / 40)));
+  expect(rows.size).toBeGreaterThan(1);
+  let overlapping = 0;
+  for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+    const a = boxes[i], b = boxes[j];
+    if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 6 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 6) overlapping++;
+  }
+  expect(overlapping).toBe(0);
+});
