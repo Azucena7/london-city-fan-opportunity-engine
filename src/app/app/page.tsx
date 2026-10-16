@@ -241,7 +241,7 @@ export default async function ClubAppHome() {
         </WorkspaceCard>
 
         <WorkspaceCard className={styles.signalCard}>
-          <WorkspaceSectionHeader eyebrow="Signals" title="What changed" action={<Link href="/app/matches">View all →</Link>} />
+          <WorkspaceSectionHeader eyebrow="Signals" title="What changed" action={<Link href="/app/matches#signal-log">Signal log →</Link>} />
           <div className={`${styles.signalList} ${styles.changeFeed}`}>
             {recentChanges.map((item) => (
               <Link href={item.alert.href} key={item.id}>
