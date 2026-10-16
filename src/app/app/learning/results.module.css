@@ -41,7 +41,7 @@
 .windows li b{font-size:11px;color:#5D6B76}
 .windows li small{color:#637282;font-size:11px;line-height:1.4}
 .windows li[data-status="complete"]{border-color:#BFDCD7;background:#F3FAF8}
-.windows li[data-status="complete"] b{color:var(--product-accent)}
+.windows li[data-status="complete"] b{color:var(--product-accent-text)}
 .windows li[data-status="partial"] b{color:#A4532F}
 
 .evidenceDrawer,.interpretation,.next{
@@ -52,7 +52,7 @@
 }
 .evidenceDrawer>summary::-webkit-details-marker,.interpretation>summary::-webkit-details-marker{display:none}
 .evidenceDrawer>summary strong,.interpretation>summary strong{display:block;margin-top:3px;font-size:12px}
-.evidenceDrawer>summary>span,.interpretation>summary>span{color:var(--product-accent);font-size:11px;font-weight:850}
+.evidenceDrawer>summary>span,.interpretation>summary>span{color:var(--product-accent-text);font-size:11px;font-weight:850}
 .evidenceDrawer[open]>summary,.interpretation[open]>summary{border-bottom:1px solid #E5E9EC;background:#FAFCFC}
 .evidenceDrawerBody,.interpretationBody{padding:14px}
 .interpretationBody>p{margin:0 0 10px;color:#637282;font-size:11px;line-height:1.5}

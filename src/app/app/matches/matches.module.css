@@ -82,7 +82,7 @@
 .clubFitCard{padding:16px}
 .clubFitCard p{margin:9px 0 0;color:#637282;font-size:11px;line-height:1.5}
 .clubFitCard p strong{color:#20364C}
-.clubFitCard>a{display:inline-flex;margin-top:10px;color:#2F8F83;text-decoration:none;font-size:11px;font-weight:900}
+.clubFitCard>a{display:inline-flex;margin-top:10px;color:var(--product-accent-text);text-decoration:none;font-size:11px;font-weight:900}
 .clubFitFacts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:11px}
 .clubFitFacts>div{padding:10px;border-radius:7px;background:#F6F8F9}
 .clubFitFacts>div:last-child{grid-column:1/-1}
@@ -100,7 +100,7 @@
 .stateNomaterialopportunity{color:#7C8791}
 .stateActnow{color:#C15F43}
 .stateReview{color:#9A6A12}
-.stateMonitor{color:#2F8F83}
+.stateMonitor{color:var(--product-accent-text)}
 
 @media(max-width:1180px){
   .radarSummary{grid-template-columns:repeat(3,1fr)}

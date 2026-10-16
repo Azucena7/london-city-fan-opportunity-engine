@@ -132,7 +132,7 @@
 .explorePanel>summary span{color:var(--product-muted);font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
 .explorePanel>summary strong{font-size:13px}
 .explorePanel>summary small{color:var(--product-muted);font-size:11px;line-height:1.4}
-.explorePanel>summary>b{color:var(--product-accent);font-size:11px;white-space:nowrap}
+.explorePanel>summary>b{color:var(--product-accent-text);font-size:11px;white-space:nowrap}
 .explorePanel[open]>summary{border-bottom:1px solid var(--product-line);background:#F8FBFA}
 .explorePanel .matrixCard,.explorePanel .pipeline{margin:0;border:0;border-radius:0;box-shadow:none}
 

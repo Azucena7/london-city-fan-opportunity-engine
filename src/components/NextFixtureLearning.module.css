@@ -5,7 +5,7 @@
 .actions{gap:0;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
 .actions article{background:transparent;color:#f3f5f1;border-left:1px solid rgba(255,255,255,.14)}
 .actions article:first-child{border-left:0}
-.actions span{color:var(--product-accent)}
+.actions span{color:var(--product-accent-text)}
 
 
 /* AVELA decision card */
@@ -14,7 +14,7 @@
 .head p,.footer p{color:#C7D2DC}
 .confidence{border-radius:10px;background:rgba(255,255,255,.06)}
 .actions article{background:#fff;color:var(--product-ink)}
-.actions span{color:var(--product-accent)}
+.actions span{color:var(--product-accent-text)}
 .footer a{color:#F3A087}
 
 .learned{margin-top:18px;padding:16px 18px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:rgba(255,255,255,.06)}

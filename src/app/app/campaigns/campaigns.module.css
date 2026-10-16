@@ -24,7 +24,7 @@
 
 .workspaceGrid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(250px,.25fr);gap:12px;align-items:start}
 .boardCard{padding:16px}
-.boardCard [class*="sectionHeader"] a{color:#2F8F83;text-decoration:none;font-size:11px;font-weight:850}
+.boardCard [class*="sectionHeader"] a{color:var(--product-accent-text);text-decoration:none;font-size:11px;font-weight:850}
 .board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px;align-items:start}
 .board>section{min-width:0;border:1px solid #E3E8EB;border-radius:10px;background:#F8FAFB;overflow:hidden}
 .board>section>header{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 12px;border-bottom:1px solid #E3E8EB;background:#F3F6F7}
@@ -47,7 +47,7 @@
 .nextDecision span,.nextDecision strong{display:block}
 .nextDecision span{color:#B9725A;font-size:11px;font-weight:850;text-transform:uppercase}
 .nextDecision strong{margin-top:3px;font-size:11px;line-height:1.35}
-.campaignCard>a{display:inline-flex;margin-top:9px;color:#2F8F83;text-decoration:none;font-size:11px;font-weight:900}
+.campaignCard>a{display:inline-flex;margin-top:9px;color:var(--product-accent-text);text-decoration:none;font-size:11px;font-weight:900}
 .empty{padding:14px;margin:0;color:#8C98A2;font-size:11px;text-align:center}
 
 .sideRail{display:grid;gap:10px}
@@ -82,7 +82,7 @@
 .talentState span{font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.06em;color:var(--product-muted)}
 .talentState strong{font-size:12px;text-transform:capitalize;color:var(--product-ink)}
 .talentState strong[data-status="approved"]{color:#8a5b00}
-.talentState strong[data-status="committed"]{color:var(--product-accent)}
+.talentState strong[data-status="committed"]{color:var(--product-accent-text)}
 .talentState small{font-size:11px;line-height:1.4;color:var(--product-muted)}
 
 .talentConflictAlert{display:grid;gap:2px;padding:7px 8px;border:1px solid #F0D4CA;border-radius:7px;background:#FFF7F3}
@@ -124,7 +124,7 @@
 .portfolioPanel>summary span{color:var(--product-muted);font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
 .portfolioPanel>summary strong{font-size:13px}
 .portfolioPanel>summary small{color:var(--product-muted);font-size:11px;line-height:1.4}
-.portfolioPanel>summary>b{color:var(--product-accent);font-size:11px;white-space:nowrap}
+.portfolioPanel>summary>b{color:var(--product-accent-text);font-size:11px;white-space:nowrap}
 .portfolioPanel[open]>summary{border-bottom:1px solid var(--product-line);background:#F8FBFA}
 .portfolioPanel .lifecycleCard,.portfolioPanel .boardCard{margin:0;border:0;border-radius:0;box-shadow:none}
 .portfolioPanel .campaignSummary{padding:12px 16px 16px;margin:0;background:#F9FAFB}

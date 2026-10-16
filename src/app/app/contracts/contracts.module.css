@@ -38,14 +38,14 @@
 .impactFlow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .impactFlow span,.impactFlow strong{padding:6px 7px;border:1px solid var(--product-line);border-radius:6px;background:#FAFBFB;color:#405564;font-size:11px}
 .impactFlow strong{background:#FCEDE8;color:#A95E45}
-.impactFlow i{color:var(--product-accent);font-style:normal}
+.impactFlow i{color:var(--product-accent-text);font-style:normal}
 
 .sourceRecord{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-top:12px;padding:14px 16px}
 .sourceRecord span,.sourceRecord strong{display:block}
 .sourceRecord span{color:var(--product-muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
 .sourceRecord strong{margin-top:5px;font-size:13px}
 .sourceRecord p{max-width:780px;margin:5px 0 0;color:var(--product-muted);font-size:11px;line-height:1.5}
-.sourceRecord a{flex:0 0 auto;color:var(--product-accent);text-decoration:none;font-size:11px;font-weight:900}
+.sourceRecord a{flex:0 0 auto;color:var(--product-accent-text);text-decoration:none;font-size:11px;font-weight:900}
 
 @media(max-width:1180px){.workspaceGrid{grid-template-columns:1fr}.sideRail{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:820px){.summary{grid-template-columns:1fr 1fr}.truthGrid{grid-template-columns:1fr}.sideRail{grid-template-columns:1fr}}
@@ -56,7 +56,7 @@
 .impactGraphCard,.controlFlowCard{padding:16px}
 .controlFlowCard{container-type:inline-size}
 .impactGraphCard :global([class*="wrap"]){max-width:none;margin:12px 0 0;padding:0}
-.controlFlow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:center;margin-top:14px}.controlFlow>div{min-height:126px;padding:14px;border:1px solid #E3E8EB;border-radius:10px;background:#FAFBFB}.controlFlow>div[data-alert="true"]{border-color:#F1C6B9;background:#FFF4EF}.controlFlow>div>span,.controlFlow>div>strong,.controlFlow>div>small{display:block}.controlFlow>div>span{color:#637282;font-size:11px;font-weight:900}.controlFlow>div>strong{margin-top:14px;font-size:12px;color:#102742}.controlFlow>div>small{margin-top:6px;color:#637282;font-size:11px;line-height:1.4}.controlFlow>i{color:#2F8F83;font-style:normal;font-weight:900}
+.controlFlow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:center;margin-top:14px}.controlFlow>div{min-height:126px;padding:14px;border:1px solid #E3E8EB;border-radius:10px;background:#FAFBFB}.controlFlow>div[data-alert="true"]{border-color:#F1C6B9;background:#FFF4EF}.controlFlow>div>span,.controlFlow>div>strong,.controlFlow>div>small{display:block}.controlFlow>div>span{color:#637282;font-size:11px;font-weight:900}.controlFlow>div>strong{margin-top:14px;font-size:12px;color:#102742}.controlFlow>div>small{margin-top:6px;color:#637282;font-size:11px;line-height:1.4}.controlFlow>i{color:var(--product-accent-text);font-style:normal;font-weight:900}
 @media(max-width:1180px){.contractVisualGrid{grid-template-columns:1fr}.controlFlow{grid-template-columns:1fr auto 1fr auto 1fr auto 1fr}}
 /* The card sits in a narrow column on wide screens too: stack the flow whenever the card is narrow. */
 @container (max-width:620px){.controlFlow{grid-template-columns:repeat(2,minmax(0,1fr))}.controlFlow>i{display:none}.controlFlow>div{min-height:auto}}

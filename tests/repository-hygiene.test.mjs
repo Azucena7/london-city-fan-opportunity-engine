@@ -288,7 +288,9 @@ test("AVELA product eyebrow labels override the case-study accent", () => {
   const css = readFileSync("src/app/product-system.css", "utf8");
   assert.match(css, /\.productShell \.eyebrow/);
   assert.match(css, /\.productAppShell \.eyebrow/);
-  assert.match(css, /color:var\(--product-accent\)/);
+  assert.match(css, /color:var\(--product-accent-text\)/);
+  // Small teal text uses the darker text token, which reaches 4.5:1 on every light app surface.
+  assert.match(css, /--product-accent-text:#267570;/);
 });
 
 

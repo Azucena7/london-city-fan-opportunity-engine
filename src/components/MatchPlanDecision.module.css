@@ -3,7 +3,7 @@
 .status span,.next span{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#6B7883}
 .status strong,.next strong{margin-top:4px;font-size:14px;line-height:1.35;color:var(--product-ink,#102742)}
 .status small{margin-top:4px;font-size:12px;line-height:1.4;color:#6B7883}
-.next a{display:inline-block;margin-top:8px;font-size:13px;font-weight:800;color:var(--product-teal,#2F8F83)}
+.next a{display:inline-block;margin-top:8px;font-size:13px;font-weight:800;color:var(--product-accent-text)}
 .decide{display:grid;gap:10px}
 .decide label{display:grid;gap:4px;font-size:12px;font-weight:700;color:#4F5D69}
 .decide textarea,.decide select{width:100%;padding:8px 10px;border:1px solid var(--product-line,#D8DEE3);border-radius:8px;font:inherit;font-size:13px}

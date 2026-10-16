@@ -38,7 +38,7 @@
 .connectionSteps>div{min-height:118px;padding:14px;background:#FAFBFB;border-right:1px solid var(--product-line)}
 .connectionSteps>div:last-child{border-right:0}
 .connectionSteps span,.connectionSteps strong,.connectionSteps small{display:block}
-.connectionSteps span{color:var(--product-accent);font-size:11px;font-weight:900;letter-spacing:.05em}
+.connectionSteps span{color:var(--product-accent-text);font-size:11px;font-weight:900;letter-spacing:.05em}
 .connectionSteps strong{margin-top:12px;font-size:13px}
 .connectionSteps small{margin-top:5px;color:var(--product-muted);font-size:11px;line-height:1.45}
 .connectionBoundary{display:grid;grid-template-columns:180px 1fr;gap:20px;margin-top:12px;padding:13px 14px;border-left:3px solid var(--product-accent);background:#F3F8F7}

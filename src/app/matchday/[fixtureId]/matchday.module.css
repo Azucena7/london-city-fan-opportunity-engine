@@ -3,7 +3,7 @@
 .top{height:58px;display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid rgba(16,39,66,.12)}
 .brand{text-decoration:none;font-size:11px;font-weight:900;letter-spacing:.08em}.top>span{color:#77848E;font-size:11px}
 .hero{display:grid;grid-template-columns:minmax(0,1.25fr) 320px;gap:56px;align-items:end;padding:70px 0 42px}
-.eyebrow,.sectionHead>span,.help>div>span,.future>span{display:block;color:#2F8F83;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.eyebrow,.sectionHead>span,.help>div>span,.future>span{display:block;color:var(--product-accent-text);font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
 .hero h1{max-width:760px;margin:10px 0 0;font-size:clamp(44px,6.5vw,78px);line-height:.94;letter-spacing:-.055em}.hero p{max-width:650px;color:#667481;font-size:16px;line-height:1.6}
 .hero aside{padding:20px;border:1px solid rgba(16,39,66,.13);border-radius:16px;background:#fff}.hero aside span,.hero aside strong,.hero aside small{display:block}.hero aside span{color:#7E8B95;font-size:11px;text-transform:uppercase}.hero aside strong{margin-top:6px;font-size:24px}.hero aside small{margin-top:8px;color:#6F7D88;font-size:11px;line-height:1.5}
 .status{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(16,39,66,.13);border-bottom:1px solid rgba(16,39,66,.13)}
@@ -27,7 +27,7 @@
 @media(max-width:680px){.weatherBand{grid-template-columns:1fr;gap:8px}}
 
 .ticketing{display:flex;justify-content:space-between;gap:30px;align-items:center;margin-top:18px;padding:24px 28px;border:1px solid rgba(16,39,66,.13);border-radius:18px;background:#EEF7F4}
-.ticketing>div{max-width:720px}.ticketing span{display:block;color:#2F8F83;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.ticketing h2{margin:6px 0 0;font-size:24px;letter-spacing:-.035em}.ticketing p{margin:7px 0 0;color:#65757F;font-size:11px;line-height:1.5}.ticketing a{flex:0 0 auto;padding:11px 14px;border-radius:9px;background:#102742;color:#fff;text-decoration:none;font-size:11px;font-weight:900}
+.ticketing>div{max-width:720px}.ticketing span{display:block;color:var(--product-accent-text);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.ticketing h2{margin:6px 0 0;font-size:24px;letter-spacing:-.035em}.ticketing p{margin:7px 0 0;color:#65757F;font-size:11px;line-height:1.5}.ticketing a{flex:0 0 auto;padding:11px 14px;border-radius:9px;background:#102742;color:#fff;text-decoration:none;font-size:11px;font-weight:900}
 @media(max-width:680px){.ticketing{align-items:flex-start;flex-direction:column;padding:22px}.ticketing a{width:100%;text-align:center}}
 
 
@@ -35,7 +35,7 @@
 .networkGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
 .networkGrid>a{display:flex;min-height:142px;flex-direction:column;padding:18px;border:1px solid rgba(16,39,66,.12);border-radius:14px;background:#fff;color:#102742;text-decoration:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .networkGrid>a:hover{transform:translateY(-2px);border-color:rgba(47,143,131,.45);box-shadow:0 10px 28px rgba(16,39,66,.08)}
-.networkGrid span{color:#2F8F83;font-size:11px;font-weight:900;letter-spacing:.08em}
+.networkGrid span{color:var(--product-accent-text);font-size:11px;font-weight:900;letter-spacing:.08em}
 .networkGrid strong{display:block;margin-top:10px;font-size:15px;line-height:1.3}
 .networkGrid small{display:block;margin-top:auto;padding-top:16px;color:#72808B;font-size:11px;line-height:1.45}
 @media(max-width:760px){.networkGrid{grid-template-columns:1fr}}

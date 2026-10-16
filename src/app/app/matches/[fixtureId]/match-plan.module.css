@@ -133,7 +133,7 @@
   height:30px;
   margin-top:1px;
   border:1px solid var(--product-line);
-  color:var(--product-accent);
+  color:var(--product-accent-text);
   font-size:11px;
   font-weight:900;
   letter-spacing:.06em;
@@ -214,14 +214,14 @@
   width:28px;
   height:28px;
   border:1px solid var(--product-line);
-  color:var(--product-accent);
+  color:var(--product-accent-text);
   font-size:11px;
   font-weight:900;
 }
 .phasePanel>summary>div{display:grid;gap:2px}
 .phasePanel>summary strong{font-size:13px}
 .phasePanel>summary small{color:var(--product-muted);font-size:11px;line-height:1.4}
-.phasePanel>summary>b{color:var(--product-accent);font-size:11px;white-space:nowrap}
+.phasePanel>summary>b{color:var(--product-accent-text);font-size:11px;white-space:nowrap}
 .phasePanel[open]>summary{border-bottom:1px solid var(--product-line);background:#F8FBFA}
 .phasePanel .phaseIntro{
   padding-left:18px;
