@@ -362,7 +362,6 @@ test("case studies stay on the editorial modules, without route stylesheets", ()
 
 test("shared visual system avoids the retired lcl CSS namespace", () => {
   const activeStyles = [
-    "src/app/case-brand.css",
     "src/app/product-ux.css"
   ];
   for (const path of activeStyles) {
@@ -370,7 +369,6 @@ test("shared visual system avoids the retired lcl CSS namespace", () => {
   }
   assert.equal(existsSync("src/app/brand.css"), false);
   assert.doesNotMatch(readFileSync("src/app/layout.tsx", "utf8"), /case-brand\.css/);
-  assert.match(readFileSync("src/app/live/london-city/layout.tsx", "utf8"), /case-brand\.css/);
 });
 
 
@@ -555,9 +553,6 @@ test("active AVELA surfaces use demo and pilot terminology rather than prototype
     assert.doesNotMatch(source, /\bprototype\b|\bprototipo\b/i, `${surface} should use demo, evidence-environment or pilot language`);
   }
 
-  const brand = readFileSync("src/app/case-brand.css", "utf8");
-  assert.doesNotMatch(brand, /prototypeMark/);
-
   const measurement = readFileSync("src/lib/measurement.ts", "utf8");
   assert.match(measurement, /utm_medium"\), "demo"/);
   assert.doesNotMatch(measurement, /utm_medium"\), "prototype"/);
@@ -705,12 +700,12 @@ test("maintained product docs use the current AVELA category and pilot scope", (
   assert.doesNotMatch(pack, /90-day pilot · operating pack|Choose six home fixtures/);
 });
 
-test("London City proof owns its case and shared commercial styles", () => {
+test("London City proof renders from the editorial modules", () => {
   const root = readFileSync("src/app/layout.tsx", "utf8");
-  const live = readFileSync("src/app/live/london-city/layout.tsx", "utf8");
-  assert.doesNotMatch(root, /case-brand\.css/);
-  assert.match(live, /case-brand\.css/);
-  assert.match(live, /commercial-pilot\.css/);
+  assert.doesNotMatch(root, /case-brand\.css|commercial-pilot\.css/);
+  for (const path of ["src/components/LondonCityCase.tsx", "src/components/CommercialCaseStory.tsx"]) {
+    assert.match(readFileSync(path, "utf8"), /editorial\.module\.css/);
+  }
 });
 
 test("ProductJourney navigation CSS is route scoped", () => {
