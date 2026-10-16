@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-15",
+  "version": "2026-10-16",
   "source": {
     "name": "Transport for London Unified API · National Rail line status",
     "url": "https://api.tfl.gov.uk/Line/southeastern,thameslink/Status"
@@ -13,8 +13,8 @@
     "Bromley South",
     "Bromley North"
   ],
-  "checkedAt": "2026-10-15T00:31:47.415Z",
-  "lastSuccessfulAt": "2026-10-15T00:31:47.415Z",
+  "checkedAt": "2026-10-16T00:24:42.036Z",
+  "lastSuccessfulAt": "2026-10-16T00:24:42.036Z",
   "days": [
     {
       "fixtureId": "2026-10-18-eve-h",

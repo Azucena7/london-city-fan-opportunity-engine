@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-15",
+  "version": "2026-10-16",
   "source": {
     "name": "Transport for London Unified API · Road disruption",
     "url": "https://api.tfl.gov.uk/Road/all/Disruption"
@@ -10,8 +10,8 @@
     "lon": 0.01771
   },
   "radiusKm": 15,
-  "checkedAt": "2026-10-15T00:31:46.802Z",
-  "lastSuccessfulAt": "2026-10-15T00:31:46.802Z",
+  "checkedAt": "2026-10-16T00:24:41.533Z",
+  "lastSuccessfulAt": "2026-10-16T00:24:41.533Z",
   "incidents": [
     {
       "id": "TIMS-234009",
@@ -41,7 +41,7 @@
       "severity": "Moderate",
       "category": "Works",
       "subCategory": "Utility works",
-      "startDate": "2026-10-12",
+      "startDate": "2026-10-14",
       "endDate": "2026-10-23",
       "distanceKm": 10.5,
       "material": true
@@ -69,13 +69,24 @@
       "material": true
     },
     {
+      "id": "TIMS-235991",
+      "location": "[A1261] EAST INDIA DOCK ROAD TUNNEL (E14 ) (Tower Hamlets)",
+      "severity": "No impact",
+      "category": "Works",
+      "subCategory": "TfL works",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-16",
+      "distanceKm": 13.6,
+      "material": true
+    },
+    {
       "id": "TIMS-236093",
       "location": "BLACKSHAW ROAD (SW17 ) (Wandsworth)",
       "severity": "Minimal",
       "category": "Works",
       "subCategory": "Borough works",
-      "startDate": "2026-10-14",
-      "endDate": "2026-10-15",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-16",
       "distanceKm": 13.8,
       "material": true
     },
@@ -85,8 +96,8 @@
       "severity": "Minimal",
       "category": "Works",
       "subCategory": "TfL works",
-      "startDate": "2026-10-14",
-      "endDate": "2026-10-15",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-16",
       "distanceKm": 14.2,
       "material": true
     },
@@ -168,6 +179,17 @@
       "material": false
     },
     {
+      "id": "TIMS-236454",
+      "location": "[B238] HONOR OAK PARK (SE23 ) (Lewisham,Southwark)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "Utility works",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-21",
+      "distanceKm": 7.6,
+      "material": false
+    },
+    {
       "id": "TIMS-236170",
       "location": "[A205] LONDON ROAD (SE23 ) (Lewisham)",
       "severity": "Minimal",
@@ -212,6 +234,17 @@
       "material": false
     },
     {
+      "id": "TIMS-236005",
+      "location": "[A205] WELL HALL ROAD (SE18 ,SE3 ,SE9 ) (Greenwich)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "TfL works",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-16",
+      "distanceKm": 9.2,
+      "material": false
+    },
+    {
       "id": "TIMS-236268",
       "location": "[A2] BLACKHEATH ROAD (SE10 ) (Greenwich)",
       "severity": "Moderate",
@@ -234,6 +267,17 @@
       "material": false
     },
     {
+      "id": "TIMS-235772",
+      "location": "[A205] THURLOW PARK ROAD (SE21 ,SE24 ,SE27 ) (Lambeth)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "TfL works",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-16",
+      "distanceKm": 10.2,
+      "material": false
+    },
+    {
       "id": "TIMS-234192",
       "location": "[A2] OLD KENT ROAD (SE14 ,SE15 ) (Lewisham,Southwark)",
       "severity": "Minimal",
@@ -247,11 +291,11 @@
     {
       "id": "TIMS-236057",
       "location": "[A102] BLACKWALL TUNNEL SOUTHERN APPROACH (SE10 ) (Greenwich)",
-      "severity": "No impact",
+      "severity": "Moderate",
       "category": "Works",
       "subCategory": "TfL works",
-      "startDate": "2026-10-14",
-      "endDate": "2026-10-15",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-16",
       "distanceKm": 11.2,
       "material": false
     },
@@ -274,6 +318,17 @@
       "subCategory": "TfL works",
       "startDate": "2026-08-03",
       "endDate": "2027-01-15",
+      "distanceKm": 11.3,
+      "material": false
+    },
+    {
+      "id": "TIMS-235747",
+      "location": "[A23] STREATHAM HIGH ROAD (SW16 ) (Lambeth)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "TfL works",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-16",
       "distanceKm": 11.3,
       "material": false
     },
@@ -344,6 +399,17 @@
       "material": false
     },
     {
+      "id": "TIMS-235894",
+      "location": "MILLENNIUM WAY (SE10 ) (Greenwich)",
+      "severity": "Moderate",
+      "category": "Planned events",
+      "subCategory": "Concert",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-15",
+      "distanceKm": 12.1,
+      "material": false
+    },
+    {
       "id": "TIMS-227966",
       "location": "[A201] NEW KENT ROAD (SE1 ,SE17 ) (Southwark)",
       "severity": "Minimal",
@@ -377,17 +443,6 @@
       "material": false
     },
     {
-      "id": "TIMS-231307",
-      "location": "[A200] CRUCIFIX LANE (SE1 ,SE16 ) (Southwark)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Network Rail works",
-      "startDate": "2026-10-14",
-      "endDate": "2026-10-15",
-      "distanceKm": 14.1,
-      "material": false
-    },
-    {
       "id": "TIMS-235690",
       "location": "[A1205] BURDETT ROAD (E14 ,E3 ) (Tower Hamlets)",
       "severity": "Minimal",
@@ -404,8 +459,8 @@
       "severity": "No impact",
       "category": "Works",
       "subCategory": "Construction activity",
-      "startDate": "2026-10-14",
-      "endDate": "2026-10-15",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-16",
       "distanceKm": 14.2,
       "material": false
     },
@@ -461,17 +516,6 @@
       "subCategory": "Utility works",
       "startDate": "2026-10-12",
       "endDate": "2026-10-17",
-      "distanceKm": 14.5,
-      "material": false
-    },
-    {
-      "id": "TIMS-236132",
-      "location": "[A13] COMMERCIAL ROAD (E1 ) (Tower Hamlets)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-10-08",
-      "endDate": "2026-10-15",
       "distanceKm": 14.5,
       "material": false
     },
