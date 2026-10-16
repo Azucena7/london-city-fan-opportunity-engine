@@ -1,0 +1,81 @@
+name: Supabase migrations
+
+# Applies named files from supabase/migrations to the club Supabase project, by hand only.
+# The connection string lives in the SUPABASE_DB_URL repository secret (Supabase > Connect >
+# Session pooler URI, with the database password) and is never printed or committed.
+# Every run executes all files in one transaction. With "apply" unticked (the default) the
+# transaction is rolled back, so a run checks the SQL against the real schema without changing it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      migrations:
+        description: "Migration file names in supabase/migrations, separated by spaces, in the order to run"
+        required: true
+        default: "20261015120000_club_setup_venues.sql 20261015150000_club_journey_aggregates.sql"
+      apply:
+        description: "Apply for real (leave unticked to check and roll back)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: supabase-migrations
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Build the migration script
+        env:
+          MIGRATIONS: ${{ inputs.migrations }}
+          APPLY: ${{ inputs.apply }}
+        run: |
+          set -euo pipefail
+          script="$RUNNER_TEMP/migrate.sql"
+          {
+            echo '\set ON_ERROR_STOP on'
+            echo 'begin;'
+          } > "$script"
+          count=0
+          for name in $MIGRATIONS; do
+            if ! [[ "$name" =~ ^[0-9]{14}_[a-z0-9_]+\.sql$ ]]; then
+              echo "::error::'$name' is not a migration file name"; exit 1
+            fi
+            if [ ! -f "supabase/migrations/$name" ]; then
+              echo "::error::supabase/migrations/$name does not exist"; exit 1
+            fi
+            echo "\\echo running $name" >> "$script"
+            echo "\\i $GITHUB_WORKSPACE/supabase/migrations/$name" >> "$script"
+            count=$((count + 1))
+          done
+          if [ "$count" -eq 0 ]; then echo "::error::No migrations named"; exit 1; fi
+          if [ "$APPLY" = "true" ]; then echo 'commit;' >> "$script"; else echo 'rollback;' >> "$script"; fi
+          echo "SCRIPT=$script" >> "$GITHUB_ENV"
+          echo "$count migration(s); apply=$APPLY"
+
+      - name: Run against Supabase
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          MIGRATIONS: ${{ inputs.migrations }}
+          APPLY: ${{ inputs.apply }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SUPABASE_DB_URL:-}" ]; then
+            echo "::error::Add the SUPABASE_DB_URL repository secret first (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+          psql "$SUPABASE_DB_URL" --no-psqlrc --quiet -f "$SCRIPT"
+          if [ "$APPLY" = "true" ]; then
+            echo "### Applied" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### Checked and rolled back. Nothing was changed." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          for name in $MIGRATIONS; do echo "- $name" >> "$GITHUB_STEP_SUMMARY"; done

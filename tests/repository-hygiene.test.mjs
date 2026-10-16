@@ -755,3 +755,19 @@ test("the data bot validates refreshed data before pushing to main", () => {
   assert.ok(commit.indexOf("git pull --rebase origin main") < commit.indexOf("git push"), "rebase before pushing");
   assert.ok(workflow.indexOf("Validate refreshed data before publishing") < workflow.indexOf("Commit material updates"));
 });
+
+test("Supabase migrations run by hand, in one transaction, rolled back unless applied", () => {
+  const workflow = readFileSync(".github/workflows/supabase-migrations.yml", "utf8");
+  assert.match(workflow, /on:\n  workflow_dispatch:/);
+  assert.doesNotMatch(workflow, /\n  (push|pull_request|schedule):/);
+  assert.match(workflow, /apply:\n(?:.*\n)*?\s+default: false/);
+  assert.match(workflow, /echo 'begin;'/);
+  assert.match(workflow, /echo 'rollback;'/);
+  assert.match(workflow, /\\set ON_ERROR_STOP on/);
+  // Only real migration files, and the secret only through the environment.
+  assert.match(workflow, /\^\[0-9\]\{14\}_\[a-z0-9_\]\+\\\.sql\$/);
+  assert.match(workflow, /SUPABASE_DB_URL: \$\{\{ secrets\.SUPABASE_DB_URL \}\}/);
+  for (const line of workflow.split("\n").filter((item) => /\$\{\{/.test(item))) {
+    assert.match(line, /^\s+[A-Z_]+: \$\{\{ (inputs|secrets)\.[a-z_A-Z]+ \}\}$/, `inputs and secrets reach scripts only via env: ${line.trim()}`);
+  }
+});
