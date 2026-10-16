@@ -99,7 +99,6 @@ test("public product surfaces stay free of retired product names", () => {
 
 test("canonical surfaces do not link internally through retired redirect routes", () => {
   const paths = [
-    "src/components/NavTabs.tsx",
     "src/components/LocalizedStoryPage.tsx",
     "src/components/LocalizedTechnicalCaseStudy.tsx",
     "src/app/pilot/rehearsal/page.tsx"
@@ -108,14 +107,6 @@ test("canonical surfaces do not link internally through retired redirect routes"
   for (const path of paths) {
     assert.doesNotMatch(readFileSync(path, "utf8"), retiredRoute, `${path} should link directly to a canonical surface`);
   }
-  const analystNav = readFileSync("src/components/NavTabs.tsx", "utf8");
-  assert.match(analystNav, /"\/live\/london-city"/);
-  assert.match(analystNav, /"\/app\/matches"/);
-  assert.match(analystNav, /"\/app\/campaigns"/);
-  assert.match(analystNav, /"\/app\/learning"/);
-  assert.match(analystNav, /"\/app\/players"/);
-  assert.match(analystNav, /"\/app\/season"/);
-  assert.match(analystNav, /"\/app\/sources"/);
 });
 
 test("authentication does not retain an unused Supabase refresh token", () => {
@@ -348,9 +339,7 @@ test("construction-era stylesheet names stay retired", () => {
     assert.equal(existsSync(path), false, `${path} is a construction-era artifact`);
     assert.ok(!layout.includes(path.split("/").at(-1)), `${path} should not be imported`);
   }
-  for (const path of ["src/app/case-study.css", "src/app/case-study-technical.css", "src/app/case-study-commercial.css", "src/app/product-ux.css"]) {
-    assert.equal(existsSync(path), true, `${path} is a canonical stylesheet`);
-  }
+  assert.equal(existsSync("src/app/product-ux.css"), true, "product-ux.css is a canonical stylesheet");
   assert.equal(existsSync("src/app/workspace-structure.css"), false, "retired workspace stylesheet should stay deleted");
   assert.doesNotMatch(layout, /workspace-structure\.css/);
 
@@ -360,24 +349,20 @@ test("construction-era stylesheet names stay retired", () => {
 });
 
 
-test("case study styles stay split in cascade order", () => {
+test("case studies stay on the editorial modules, without route stylesheets", () => {
   const root = readFileSync("src/app/layout.tsx", "utf8");
-  const layout = readFileSync("src/app/case-study/layout.tsx", "utf8");
-  const base = layout.indexOf('import "../case-study.css";');
-  const technical = layout.indexOf('import "../case-study-technical.css";');
-  const commercial = layout.indexOf('import "../case-study-commercial.css";');
-  assert.doesNotMatch(root, /case-study\.css/);
-  assert.ok(base >= 0 && technical > base && commercial > technical);
-  assert.match(readFileSync("src/app/case-study-technical.css", "utf8"), /Technical case study/);
-  assert.match(readFileSync("src/app/case-study-commercial.css", "utf8"), /Evidence-led evaluation case study/);
+  for (const path of ["src/app/case-study.css", "src/app/case-study-technical.css", "src/app/case-study-commercial.css", "src/app/intelligence-surfaces.css", "src/app/case-study/layout.tsx"]) {
+    assert.equal(existsSync(path), false, `${path} was retired with the editorial case studies`);
+  }
+  assert.doesNotMatch(root, /case-study|intelligence-surfaces/);
+  for (const path of ["src/components/LocalizedStoryPage.tsx", "src/components/LocalizedTechnicalCaseStudy.tsx"]) {
+    assert.match(readFileSync(path, "utf8"), /editorial\.module\.css/);
+  }
 });
 
 test("shared visual system avoids the retired lcl CSS namespace", () => {
   const activeStyles = [
     "src/app/case-brand.css",
-    "src/app/case-study.css",
-    "src/app/case-study-technical.css",
-    "src/app/case-study-commercial.css",
     "src/app/product-ux.css"
   ];
   for (const path of activeStyles) {
@@ -386,7 +371,6 @@ test("shared visual system avoids the retired lcl CSS namespace", () => {
   assert.equal(existsSync("src/app/brand.css"), false);
   assert.doesNotMatch(readFileSync("src/app/layout.tsx", "utf8"), /case-brand\.css/);
   assert.match(readFileSync("src/app/live/london-city/layout.tsx", "utf8"), /case-brand\.css/);
-  assert.match(readFileSync("src/app/case-study/layout.tsx", "utf8"), /case-brand\.css/);
 });
 
 
@@ -461,7 +445,6 @@ test("permission migration generator is enforced", () => {
 
 test("active CSS avoids construction-phase labels", () => {
   for (const path of [
-    "src/app/case-study.css",
     "src/app/navigation-v2.css",
     "src/app/product-ux.css"
   ]) {
@@ -572,11 +555,7 @@ test("active AVELA surfaces use demo and pilot terminology rather than prototype
     assert.doesNotMatch(source, /\bprototype\b|\bprototipo\b/i, `${surface} should use demo, evidence-environment or pilot language`);
   }
 
-  const nav = readFileSync("src/components/NavTabs.tsx", "utf8");
   const brand = readFileSync("src/app/case-brand.css", "utf8");
-  assert.match(nav, /evidenceMark/);
-  assert.doesNotMatch(nav, /prototypeMark/);
-  assert.match(brand, /\.evidenceMark/);
   assert.doesNotMatch(brand, /prototypeMark/);
 
   const measurement = readFileSync("src/lib/measurement.ts", "utf8");
@@ -698,20 +677,14 @@ test("WSL attendance stays a reviewed manual snapshot rather than a failing dail
 
 test("feature intelligence styles stay outside the base globals layer", () => {
   const globals = readFileSync("src/app/globals.css", "utf8");
-  const intelligence = readFileSync("src/app/intelligence-surfaces.css", "utf8");
   const ux = readFileSync("src/app/product-ux.css", "utf8");
   const layout = readFileSync("src/app/layout.tsx", "utf8");
 
   assert.ok(globals.length < 35000, "globals.css should remain focused on shared foundation styles");
   assert.doesNotMatch(globals, /\.demandHistory\s*\{/);
   assert.doesNotMatch(globals, /\.sourceHealthCenter\s*\{/);
-  assert.doesNotMatch(intelligence, /\.demandHistory\s*\{/);
-  assert.doesNotMatch(intelligence, /\.sourceHealthCenter\s*\{/);
   assert.match(ux, /\.sourceHealthCenter\s*\{/);
-  assert.match(intelligence, /\.caseStudyPredictionProof\s*\{/);
-  const study = readFileSync("src/app/case-study/layout.tsx", "utf8");
   assert.doesNotMatch(layout, /intelligence-surfaces\.css/);
-  assert.match(study, /intelligence-surfaces\.css/);
 });
 
 test("maintained product docs use the current AVELA category and pilot scope", () => {
@@ -735,11 +708,9 @@ test("maintained product docs use the current AVELA category and pilot scope", (
 test("London City proof owns its case and shared commercial styles", () => {
   const root = readFileSync("src/app/layout.tsx", "utf8");
   const live = readFileSync("src/app/live/london-city/layout.tsx", "utf8");
-  const study = readFileSync("src/app/case-study/layout.tsx", "utf8");
   assert.doesNotMatch(root, /case-brand\.css/);
   assert.match(live, /case-brand\.css/);
   assert.match(live, /commercial-pilot\.css/);
-  assert.match(study, /case-brand\.css/);
 });
 
 test("ProductJourney navigation CSS is route scoped", () => {
@@ -754,29 +725,10 @@ test("ProductJourney navigation CSS is route scoped", () => {
   assert.match(rehearsal, /navigation-v2\.css/);
 });
 
-test("retired demand-history and league-benchmark CSS stays removed", () => {
-  const css = readFileSync("src/app/intelligence-surfaces.css", "utf8");
-  assert.doesNotMatch(css, /\.demandHistory|\.leagueBenchmark/);
-});
-
-test("duplicate global source-health CSS stays removed", () => {
-  const intel = readFileSync("src/app/intelligence-surfaces.css", "utf8");
+test("duplicate global source-health CSS stays in its canonical owner", () => {
   const ux = readFileSync("src/app/product-ux.css", "utf8");
-  assert.doesNotMatch(intel, /\.sourceHealthCenter|\.decisionReliability/);
   assert.match(ux, /\.sourceHealthCenter/);
   assert.match(ux, /\.sourceHealthList/);
-});
-
-test("prediction proof is the only remaining intelligence surface stylesheet", () => {
-  const css = readFileSync("src/app/intelligence-surfaces.css", "utf8");
-  const root = readFileSync("src/app/layout.tsx", "utf8");
-  const study = readFileSync("src/app/case-study/layout.tsx", "utf8");
-
-  assert.match(css, /\.caseStudyPredictionProof/);
-  assert.match(css, /\.predictionProofFlow/);
-  assert.doesNotMatch(css, /\.audienceReach|\.crmReadiness|\.campaignPlan|\.decisionValidation|\.partnerDecisionStrip|\.sourceHealthCenter/);
-  assert.doesNotMatch(root, /intelligence-surfaces\.css/);
-  assert.match(study, /intelligence-surfaces\.css/);
 });
 
 test("retired product shell stylesheet stays deleted", () => {
