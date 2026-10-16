@@ -79,7 +79,7 @@
 .railMetrics strong{display:block;margin-top:3px;font-size:14px}
 .railLinks{display:flex;gap:5px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
 .railLinks a{padding:7px 8px;border:1px solid #E6E8ED;background:#F7F8FA;color:var(--product-ink);text-decoration:none;font-size:11px;font-weight:900}
-.railLinks a:hover{border-color:#D4D0FF;background:#F0EEFF;color:var(--product-accent)}
+.railLinks a:hover{border-color:#D4D0FF;background:#F0EEFF;color:var(--product-accent-text)}
 @media(max-width:900px){
   .campaignContext,.alerts,.playerGrid,.momentum,.packs,.simulator{scroll-margin-top:72px}
   .decisionRail{position:static;grid-template-columns:1fr}
@@ -168,20 +168,20 @@
   cursor:pointer;
 }
 .heroScore{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:22px;background:#F8FBFA;text-align:center}
-.heroScore>strong{display:block;margin-top:6px;font-size:40px;line-height:1;letter-spacing:-.06em;color:var(--product-accent)}
+.heroScore>strong{display:block;margin-top:6px;font-size:40px;line-height:1;letter-spacing:-.06em;color:var(--product-accent-text)}
 .heroScore>small{margin-top:7px;color:var(--product-muted);font-size:11px}
 .heroPlayers{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--product-line)}
 .heroPlayers>div{padding:14px 16px;border-right:1px solid var(--product-line)}
 .heroPlayers>div:last-child{border-right:0}
 .heroPlayers strong,.heroPlayers span,.heroPlayers small{display:block}
 .heroPlayers strong{font-size:13px}
-.heroPlayers span{margin-top:5px;color:var(--product-accent)}
+.heroPlayers span{margin-top:5px;color:var(--product-accent-text)}
 .heroPlayers small{margin-top:4px;color:var(--product-muted);font-size:11px}
 .heroMetrics{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);background:var(--product-line);gap:1px;border-top:1px solid var(--product-line)}
 .heroMetrics>div{padding:14px 16px;background:#fff}
 .heroMetrics strong{display:block;margin-top:5px;font-size:19px}
 .heroWhy{grid-column:1/-1;border-top:1px solid var(--product-line);background:#FBFCFB}
-.heroWhy summary{cursor:pointer;list-style:none;padding:13px 16px;color:var(--product-accent);font-size:11px;font-weight:900}
+.heroWhy summary{cursor:pointer;list-style:none;padding:13px 16px;color:var(--product-accent-text);font-size:11px;font-weight:900}
 .heroWhy summary::-webkit-details-marker{display:none}
 .heroWhy>div{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;padding:0 16px 16px}
 .heroWhy p{margin:0;color:var(--product-muted);font-size:11px;line-height:1.45}
@@ -194,7 +194,7 @@
 .alternativeGrid>article{padding:18px;border:1px solid var(--product-line);border-radius:12px;background:#fff}
 .alternativeGrid .packPlayers>div{background:#F7F9F9;border-radius:7px}
 .alternativeGrid .usePack{border-radius:8px}
-.alternativeGrid .usePack:hover{border-color:var(--product-accent);color:var(--product-accent)}
+.alternativeGrid .usePack:hover{border-color:var(--product-accent);color:var(--product-accent-text)}
 
 .simulator{
   margin-top:18px;
@@ -234,7 +234,7 @@
 .evidenceBody .momentum{border-bottom:0;padding-bottom:10px}
 
 .briefBuilder,.recommendation,.simulator,.evidencePanel,.alerts,.playerGrid,.momentum{scroll-margin-top:96px}
-.railLinks a:hover{border-color:rgba(47,143,131,.35);background:#EAF4F1;color:var(--product-accent)}
+.railLinks a:hover{border-color:rgba(47,143,131,.35);background:#EAF4F1;color:var(--product-accent-text)}
 
 @media(max-width:900px){
   .briefBuilder{grid-template-columns:1fr}
@@ -348,7 +348,7 @@
 }
 .constraintsGate strong{font-size:13px;line-height:1.35}
 .constraintsGate small{color:var(--product-muted);font-size:11px;line-height:1.4}
-.constraintsGate>a{flex:0 0 auto;color:var(--product-accent);font-size:11px;font-weight:900;text-decoration:none}
+.constraintsGate>a{flex:0 0 auto;color:var(--product-accent-text);font-size:11px;font-weight:900;text-decoration:none}
 
 .alternatives{
   border:1px solid var(--product-line);
@@ -370,7 +370,7 @@
 .alternativeHead>div{display:grid;gap:4px}
 .alternativeHead>div>span{color:var(--product-muted);font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
 .alternativeHead>div>strong{font-size:12px;line-height:1.35}
-.alternativeHead>b{color:var(--product-accent);font-size:11px;white-space:nowrap}
+.alternativeHead>b{color:var(--product-accent-text);font-size:11px;white-space:nowrap}
 .alternatives[open]>.alternativeHead{border-bottom:1px solid var(--product-line);background:#F8FBFA}
 .alternativeGrid{padding:12px}
 

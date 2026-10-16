@@ -147,7 +147,7 @@
 
 /* Guided campaign construction */
 .guidedBuilder{display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:start;margin:22px 0 28px;padding:20px;border:1px solid var(--product-line);background:#fff;border-radius:10px}
-.guidedIntro>span{display:block;color:var(--product-accent);font-size:11px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.guidedIntro>span{display:block;color:var(--product-accent-text);font-size:11px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
 .guidedIntro>strong{display:block;margin-top:6px;font-size:16px;line-height:1.35}
 .guidedIntro>small{display:block;margin-top:7px;color:var(--product-muted);font-size:11px;line-height:1.45}
 .guidedSteps{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
@@ -162,7 +162,7 @@
 .guidedStepComplete>span{background:#E7F5EE;color:var(--product-success)}
 .guidedStepComplete strong{color:#4F5662}
 .recipeMap{display:grid;grid-template-columns:minmax(170px,.72fr) 24px minmax(260px,1.35fr) 24px minmax(170px,.72fr);gap:10px;align-items:stretch;margin-top:16px;padding:18px;background:#F7F8FA;border:1px solid var(--product-line);border-radius:8px}
-.recipeMap>i{display:grid;place-items:center;color:var(--product-accent);font-style:normal;font-weight:900}
+.recipeMap>i{display:grid;place-items:center;color:var(--product-accent-text);font-style:normal;font-weight:900}
 .recipeNode,.recipeBranches>div{padding:13px 14px;background:#fff;border:1px solid var(--product-line);border-radius:7px}
 .recipeNode span,.recipeBranches span{display:block;color:var(--product-muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
 .recipeNode strong,.recipeBranches strong{display:block;margin-top:5px;font-size:11px;line-height:1.35}

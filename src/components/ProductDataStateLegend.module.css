@@ -38,7 +38,7 @@
   background:currentColor;
 }
 .observed{color:var(--product-success)}
-.forecast{color:#2F8F83}
+.forecast{color:var(--product-accent-text)}
 .modelled{color:var(--product-warning)}
 .missing{color:var(--product-missing)}
 

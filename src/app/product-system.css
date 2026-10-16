@@ -6,6 +6,7 @@
   --product-muted:#637282;
   --product-line:#D8DEE3;
   --product-accent:#2F8F83;
+  --product-accent-text:#267570; /* the accent as small text: 4.5:1 or more on every light app surface, accent-soft included */
   --product-accent-soft:#E3F2EF;
   --product-accent-ink:#FFFFFF;
   --product-signal:#EF8B6C;
@@ -52,7 +53,7 @@
 
 .productShell .eyebrow,
 .productAppShell .eyebrow{
-  color:var(--product-accent);
+  color:var(--product-accent-text);
 }
 
 .productDataState{
