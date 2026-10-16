@@ -1154,5 +1154,98 @@
         "checkedAt": "2026-10-14"
       }
     ]
+  },
+  {
+    "state": "confirmed",
+    "confidence": "high",
+    "materiality": "high",
+    "observedAt": "2026-10-16T09:27:10+01:00",
+    "sourceName": "London City Lionesses",
+    "id": "everton-final-arrival-hospitality-2026-10-16",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "access",
+    "direction": "mixed",
+    "title": {
+      "en": "Everton guide confirms arrival windows and new hospitality",
+      "es": "La guía de Everton confirma horarios de llegada y nueva hospitality"
+    },
+    "summary": {
+      "en": "The detailed itinerary gives Broomfields 11:00, Fan Zone 12:00, turnstiles 12:30 and kickoff 14:00 on 18 October. External Broomfields access runs until kickoff; internal access starts then. Dave Roberts Stand hospitality opens. Tickets remain available, with matchday price increases; no general parking. The generic FAQ instead implies Broomfields 12:00, so that conflict requires clarification.",
+      "es": "El programa detallado indica Broomfields 11:00, Fan Zone 12:00, tornos 12:30 y partido 14:00 el 18 de octubre. Broomfields tiene acceso exterior hasta el inicio e interior desde entonces. Abre hospitality en Dave Roberts Stand. Quedan entradas, con subida en matchday; no hay parking general. La FAQ genérica implica Broomfields 12:00: requiere aclaración."
+    },
+    "marketingAction": {
+      "en": "Issue segmented arrival, access and price-deadline messages; verify Broomfields timing before early-arrival promotion and separate hospitality conversion from attendance.",
+      "es": "Emitir mensajes segmentados de llegada, acceso y plazo de precio; verificar Broomfields antes de promover llegadas tempranas y separar conversión hospitality de asistencia."
+    },
+    "sourceUrl": "https://www.londoncitylionesses.com/post/fan-guide-london-city-vs-everton",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/fan-guide-london-city-vs-everton",
+        "checkedAt": "2026-10-16"
+      }
+    ]
+  },
+  {
+    "state": "confirmed",
+    "confidence": "high",
+    "materiality": "high",
+    "observedAt": "2026-10-16T09:27:10+01:00",
+    "sourceName": "London City Lionesses",
+    "id": "everton-partner-activations-2026-10-16",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "sponsorship",
+    "direction": "positive",
+    "title": {
+      "en": "Everton adds EA SPORTS, Apple TV and Mastercard activations",
+      "es": "Everton incorpora activaciones de EA SPORTS, Apple TV y Mastercard"
+    },
+    "summary": {
+      "en": "The guide confirms an FC 27 gaming van, Apple TV/Ted Lasso banners and pre-kickoff mosaic, plus a Mastercard bucket-hat offer on in-store spend of £60 or more. Pints & Ponytails runs 11:30–13:30; Sassy Brass hosts the post-match party, with discounted lager 16:00–17:00. These are announced activations, not evidence of contract value or measured outcomes.",
+      "es": "La guía confirma una gaming van de FC 27, banners y mosaico de Apple TV/Ted Lasso y un bucket hat por compras de al menos £60 con Mastercard. Pints & Ponytails funciona 11:30–13:30; Sassy Brass anima la fiesta pospartido, con lager rebajada 16:00–17:00. Son activaciones anunciadas, no valor contractual ni resultados medidos."
+    },
+    "marketingAction": {
+      "en": "Separate family, gaming, sponsor and adult post-match journeys; track participation, redemption and spend independently. Preserve alcohol-free Block A.",
+      "es": "Separar recorridos familiar, gaming, partners y pospartido adulto; medir participación, canje y gasto por separado. Preservar Block A sin alcohol."
+    },
+    "sourceUrl": "https://www.londoncitylionesses.com/post/fan-guide-london-city-vs-everton",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/fan-guide-london-city-vs-everton",
+        "checkedAt": "2026-10-16"
+      }
+    ]
+  },
+  {
+    "state": "confirmed",
+    "confidence": "high",
+    "materiality": "high",
+    "observedAt": "2026-10-16T09:27:10+01:00",
+    "sourceName": "London City Lionesses",
+    "id": "arsenal-away-priority-access-2026-10-16",
+    "fixtureId": "2026-11-15-arsenal-a",
+    "category": "access",
+    "direction": "mixed",
+    "title": {
+      "en": "Arsenal away priority tickets open with access requirements",
+      "es": "Abre la venta prioritaria visitante de Arsenal con requisitos de acceso"
+    },
+    "summary": {
+      "en": "Holders and registered-interest supporters have priority access for 15 November, 16:30 at Emirates; general sale starts 20 October at 10:00. Every age needs a ticket; under-14s require an adult, with seating restrictions for ages 0–3. Away blocks allow alcohol; blocks 20–23 require seating. Bags are limited to A4 unless medically pre-approved. Accessible parking, commentary and medical exemptions require advance requests. Availability is not sales.",
+      "es": "Abonados e interesados registrados tienen prioridad para el 15 de noviembre, 16:30 en Emirates; venta general el 20 de octubre a las 10:00. Todas las edades necesitan entrada; menores de 14 con adulto y restricciones de asiento para 0–3 años. Los bloques visitantes admiten alcohol; 20–23 exigen permanecer sentado. Bolsas hasta A4 salvo exención médica previa. Parking accesible, audiodescripción y exenciones requieren solicitud anticipada. Disponibilidad no equivale a ventas."
+    },
+    "marketingAction": {
+      "en": "Segment priority and general-sale CRM; communicate family, seating, alcohol and bag rules. Schedule accessibility requests before the relevant deadlines and measure purchases separately from attendance.",
+      "es": "Segmentar CRM prioritario y general; comunicar reglas familiares, asiento, alcohol y bolsas. Programar solicitudes accesibles antes de los plazos y medir compras separadamente de asistencia."
+    },
+    "sourceUrl": "https://www.londoncitylionesses.com/post/ticket-information-arsenal-away",
+    "sources": [
+      {
+        "name": "London City Lionesses",
+        "url": "https://www.londoncitylionesses.com/post/ticket-information-arsenal-away",
+        "checkedAt": "2026-10-16"
+      }
+    ]
   }
 ]
