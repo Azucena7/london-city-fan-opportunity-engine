@@ -16,7 +16,7 @@ test("commercial fixture route resolves known cases and rejects unknown cases", 
 
 test("commercial stories distinguish proposals, delivery and commercial outcomes", async () => {
   const story = await source("src/components/CommercialCaseStory.tsx");
-  assert.match(story, /PROPOSED DECISION · NOT ACTIVATED/);
+  assert.match(story, /Proposed decision · not activated/);
   assert.match(story, /Do not approve spend yet/);
   assert.match(story, /An announcement does not establish delivery/);
   assert.match(story, /campaign\.approvals\.map/);
