@@ -4,7 +4,7 @@
   margin-bottom:10px;padding:10px 12px;
   border:1px solid #E0E5E8;border-radius:11px;background:#fff
 }
-.fixturePicker>strong{flex:0 0 auto;margin-right:4px;color:#637282;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
+.fixturePicker>strong{flex:0 0 auto;margin-right:4px;color:var(--product-muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
 .fixturePicker a{flex:0 0 auto;padding:7px 10px;border-radius:6px;color:#60717E;text-decoration:none;font-size:11px;font-weight:800}
 .fixturePicker a[aria-current="page"]{background:#E9F4F2;color:#27776F}
 
@@ -13,33 +13,33 @@
   margin-bottom:12px
 }
 .hero>div,.stateCard{padding:16px;border:1px solid #E0E5E8;border-radius:11px;background:#fff}
-.eyebrow{color:#637282;font-size:11px;font-weight:900;letter-spacing:.055em;text-transform:uppercase}
+.eyebrow{color:var(--product-muted);font-size:11px;font-weight:900;letter-spacing:.055em;text-transform:uppercase}
 .hero h2{margin:5px 0 0;font-size:23px;line-height:1.15;letter-spacing:-.025em}
-.hero>div>p{margin:7px 0 0;color:#637282;font-size:12px;line-height:1.5}
+.hero>div>p{margin:7px 0 0;color:var(--product-muted);font-size:12px;line-height:1.5}
 .stateCard span,.stateCard strong,.stateCard p{display:block}
-.stateCard span{color:#A86A1A;font-size:11px;font-weight:900;text-transform:uppercase}
+.stateCard span{color:#925C17;font-size:11px;font-weight:900;text-transform:uppercase}
 .stateCard strong{margin-top:5px;font-size:13px;line-height:1.4}
-.stateCard p{margin:5px 0 0;color:#637282;font-size:11px;line-height:1.45}
+.stateCard p{margin:5px 0 0;color:var(--product-muted);font-size:11px;line-height:1.45}
 
 .fixtureFacts,.kpis{display:grid;gap:10px;margin-bottom:12px}
 .fixtureFacts{grid-template-columns:repeat(4,1fr)}
 .kpis{grid-template-columns:repeat(4,1fr)}
 .fixtureFacts article,.kpis article{padding:13px 14px;border:1px solid #E1E6E9;border-radius:10px;background:#fff}
 .fixtureFacts span,.fixtureFacts strong,.kpis span,.kpis strong{display:block}
-.fixtureFacts span,.kpis span{color:#637282;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.045em}
+.fixtureFacts span,.kpis span{color:var(--product-muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.045em}
 .fixtureFacts strong{margin-top:5px;font-size:15px}
-.fixtureFacts small{display:block;margin-top:3px;color:#637282;font-size:11px;line-height:1.35}
+.fixtureFacts small{display:block;margin-top:3px;color:var(--product-muted);font-size:11px;line-height:1.35}
 .kpis strong{margin-top:6px;font-size:22px;letter-spacing:-.03em}
-.kpis p{margin:4px 0 0;color:#637282;font-size:11px;line-height:1.4}
+.kpis p{margin:4px 0 0;color:var(--product-muted);font-size:11px;line-height:1.4}
 
 .windows{margin-bottom:12px;padding:13px 14px;border:1px solid #E1E6E9;border-radius:10px;background:#fff}
 .windowsHead strong{display:block;margin-top:3px;font-size:13px}
 .windows ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 0;padding:0;list-style:none}
 .windows li{display:grid;align-content:start;gap:4px;padding:10px;border:1px solid #E7ECEE;border-radius:8px;background:#FBFCFC}
-.windows li span{color:#637282;font-size:11px;font-weight:900;letter-spacing:.04em}
+.windows li span{color:var(--product-muted);font-size:11px;font-weight:900;letter-spacing:.04em}
 .windows li strong{font-size:12px;line-height:1.35}
 .windows li b{font-size:11px;color:#5D6B76}
-.windows li small{color:#637282;font-size:11px;line-height:1.4}
+.windows li small{color:var(--product-muted);font-size:11px;line-height:1.4}
 .windows li[data-status="complete"]{border-color:#BFDCD7;background:#F3FAF8}
 .windows li[data-status="complete"] b{color:var(--product-accent-text)}
 .windows li[data-status="partial"] b{color:#A4532F}
@@ -55,13 +55,13 @@
 .evidenceDrawer>summary>span,.interpretation>summary>span{color:var(--product-accent-text);font-size:11px;font-weight:850}
 .evidenceDrawer[open]>summary,.interpretation[open]>summary{border-bottom:1px solid #E5E9EC;background:#FAFCFC}
 .evidenceDrawerBody,.interpretationBody{padding:14px}
-.interpretationBody>p{margin:0 0 10px;color:#637282;font-size:11px;line-height:1.5}
+.interpretationBody>p{margin:0 0 10px;color:var(--product-muted);font-size:11px;line-height:1.5}
 .interpretationGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
 .interpretationGrid article{padding:11px;border:1px solid #E5E9EC;border-radius:7px;background:#FAFBFB}
 .interpretationGrid span,.interpretationGrid strong{display:block}
-.interpretationGrid span{font-size:11px;color:#637282;font-weight:900;text-transform:uppercase}
+.interpretationGrid span{font-size:11px;color:var(--product-muted);font-weight:900;text-transform:uppercase}
 .interpretationGrid strong{margin-top:4px;font-size:11px;line-height:1.4}
-.interpretationGrid p{margin:4px 0 0;color:#637282;font-size:11px;line-height:1.4}
+.interpretationGrid p{margin:4px 0 0;color:var(--product-muted);font-size:11px;line-height:1.4}
 
 .next{padding:15px}
 .next h2{margin:4px 0 0;font-size:16px;line-height:1.25}
@@ -94,9 +94,9 @@
 .learningStory article::after{content:"";position:absolute;top:50%;right:-7px;z-index:2;width:14px;height:14px;border-top:1px solid #D6DDE2;border-right:1px solid #D6DDE2;background:#fff;transform:translateY(-50%) rotate(45deg)}
 .learningStory article:last-child::after{display:none}
 .learningStory span,.learningStory strong,.learningStory p{display:block}
-.learningStory span{color:#637282;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.learningStory span{color:var(--product-muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
 .learningStory strong{margin-top:16px;font-size:14px;line-height:1.35;color:#102742}
-.learningStory p{margin:8px 0 0;color:#637282;font-size:11px;line-height:1.5}
+.learningStory p{margin:8px 0 0;color:var(--product-muted);font-size:11px;line-height:1.5}
 .learningStory [data-stage="before"]{border-top:3px solid #102742}
 .learningStory [data-stage="action"]{border-top:3px solid #2F8F83}
 .learningStory [data-stage="outcome"]{border-top:3px solid #74C9BB;background:#F8FCFB}

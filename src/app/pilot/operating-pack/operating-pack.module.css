@@ -11,7 +11,7 @@
 .hero h1{margin:10px 0 14px;font-size:clamp(38px,5vw,60px);line-height:1;letter-spacing:-.05em}
 .hero p{margin:0;color:var(--product-muted);font-size:17px;line-height:1.5;max-width:760px}
 .status{padding:20px 0 4px 22px;border-left:3px solid var(--product-warning)}
-.status span{display:block;color:var(--product-warning);font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.status span{display:block;color:var(--product-warning-text);font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
 .status strong{display:block;font-size:19px;line-height:1.3}
 .status p{margin:9px 0 0;color:var(--product-muted);font-size:14px;line-height:1.45}
 
@@ -28,9 +28,9 @@
 
 .coverage{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .coverageTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.coverageTop>span{font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--product-missing)}
-.coverageTop>span[data-state="ready"]{color:var(--product-success)}
-.coverageTop>span[data-state="requires-access"]{color:var(--product-danger)}
+.coverageTop>span{font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--product-muted)}
+.coverageTop>span[data-state="ready"]{color:var(--product-success-text)}
+.coverageTop>span[data-state="requires-access"]{color:var(--product-danger-text)}
 .links{display:flex;gap:12px;margin-top:16px}
 .links a{color:var(--product-ink);text-decoration:none;font-size:12px;font-weight:850;border-bottom:1px solid var(--product-ink)}
 
@@ -62,7 +62,7 @@
 .cta h2{margin:9px 0 0;max-width:780px;font-size:34px;line-height:1.04;letter-spacing:-.04em}
 .actions{display:flex;flex-direction:column;gap:9px}
 .primary,.secondary{display:inline-flex;justify-content:center;padding:11px 16px;border-radius:999px;text-decoration:none;font-size:13px;font-weight:850}
-.primary{background:var(--product-accent);color:var(--product-accent-ink)}
+.primary{background:var(--product-accent-text);color:var(--product-accent-ink)}
 .secondary{border:1px solid rgba(255,255,255,.16);color:#F7F8FA}
 
 @media(max-width:900px){
@@ -180,7 +180,7 @@
 }
 .measurementRule span{
   display:block;
-  color:var(--product-danger);
+  color:var(--product-danger-text);
   font-size:12px;
   font-weight:900;
   letter-spacing:.08em;
