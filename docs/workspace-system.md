@@ -114,9 +114,7 @@ Keep each visual concern owned by one canonical layer. Page modules may extend t
 - `workspace-structure.css`: legacy/public workspace structures and case-study navigation foundations.
 - `product-ux.css`: shared public-product interaction surfaces; avoid redefining navigation unless a legacy surface still depends on it.
 - `readability.css`: reading-surface adjustments only; do not use it as a generic override layer.
-- `case-study.css`: shared case-study foundation.
-- `case-study-technical.css`: technical case-study-only rules.
-- `case-study-commercial.css`: commercial/evidence case-study-only rules.
+- `editorial.module.css`: the public editorial system shared by the commercial pages and both case studies.
 - page/component CSS modules: only local layout and component-specific presentation.
 
 When changing a shared visual rule, edit the canonical owner rather than appending a new "pass", "cleanup" or "refinement" block at the end of another stylesheet. If an override is genuinely required, document why the canonical owner cannot express it.

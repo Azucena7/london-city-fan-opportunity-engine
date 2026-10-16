@@ -199,24 +199,4 @@ html, body {
   background: var(--case-accent);
 }
 
-.evidenceMark {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 18px;
-  padding: 7px 10px;
-  border: 1px solid rgba(50,230,212,.2);
-  border-radius: 999px;
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: .04em;
-}
-
-.evidenceMark::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--case-accent);
-}
 

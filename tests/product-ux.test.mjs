@@ -660,19 +660,15 @@ test("club product starts from fixtures instead of requiring a plan first", () =
   assert.match(nav, /label: "Learning"/);
 });
 
-test("product and analyst branding are intentionally separated", () => {
+test("product navigation keeps product branding and the analyst nav stays retired", () => {
   const productNav = read("src/components/ProductJourneyNav.tsx");
-  const analystNav = read("src/components/NavTabs.tsx");
   assert.match(productNav, /AVELA/);
   assert.match(productNav, /Radar/);
   assert.match(productNav, /Learning/);
   assert.match(productNav, /AVELA website/);
   assert.doesNotMatch(productNav, /Morning brief/);
   assert.doesNotMatch(productNav, /Decision Room/);
-  assert.match(analystNav, /LONDON CITY \/ CASE/);
-  assert.match(analystNav, /Evidence environment/);
-  assert.match(analystNav, /Back to product/);
-  assert.doesNotMatch(analystNav, /FAN OPPORTUNITY LAB/);
+  assert.equal(existsSync("src/components/NavTabs.tsx"), false, "case studies use the shared marketing navigation");
 });
 
 
@@ -2430,15 +2426,12 @@ test("commercial pilot pages separate buying story from operating detail", () =>
 
 test("route-specific commercial and case-study CSS is not shipped from the root layout", () => {
   const root = read("src/app/layout.tsx");
-  const cases = read("src/app/case-study/layout.tsx");
-
   assert.doesNotMatch(root, /case-study\.css/);
   assert.doesNotMatch(root, /case-study-technical\.css/);
   assert.doesNotMatch(root, /case-study-commercial\.css/);
   assert.doesNotMatch(root, /commercial-pilot\.css/);
-  assert.match(cases, /case-study\.css/);
-  assert.match(cases, /case-study-technical\.css/);
-  assert.match(cases, /case-study-commercial\.css/);
+  // Both case studies are on the editorial modules: no route stylesheet and no layout to import one.
+  assert.equal(existsSync("src/app/case-study/layout.tsx"), false);
   // For Clubs is on the editorial modules now; only London City Live still ships commercial-pilot.css.
   assert.equal(existsSync("src/app/for-clubs/layout.tsx"), false);
 });
