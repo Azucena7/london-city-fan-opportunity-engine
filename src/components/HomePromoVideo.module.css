@@ -1,6 +1,6 @@
-/* Product film on the home: sand field, copy on the 42% axis, the vertical film beside it.
+/* Product film on the home: paper field, copy on the 42% axis, the vertical film beside it.
    On narrow screens the film sits between the intro and the step list. */
-.film{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);grid-template-areas:"intro frame" "detail frame";grid-template-rows:auto 1fr;column-gap:clamp(32px,4vw,72px);row-gap:28px;align-items:start;padding:var(--section) var(--m);background:var(--sand-2)}
+.film{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);grid-template-areas:"intro frame" "detail frame";grid-template-rows:auto 1fr;column-gap:clamp(32px,4vw,72px);row-gap:28px;align-items:start;padding:var(--section) var(--m);background:var(--paper)}
 .intro{grid-area:intro;display:grid;gap:18px;align-self:end}
 .intro h2{max-width:14ch}
 .intro p{max-width:42ch;color:var(--ink-soft);font-size:var(--statement);line-height:1.5}

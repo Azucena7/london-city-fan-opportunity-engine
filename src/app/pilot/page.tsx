@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
 import { MarketingFooter } from "@/components/MarketingFooter";
+import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import ed from "@/components/editorial.module.css";
 import styles from "./pilot.module.css";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
@@ -75,6 +76,8 @@ export default function PilotPage() {
           ))}
         </ol>
       </section>
+
+      <CommercialDecisionDemo />
 
       <section className={styles.stack} aria-labelledby="stack-title">
         <h2 id="stack-title">Add only context that helps.</h2>

@@ -1,19 +1,4 @@
-/* How it works: a text page whose steps hang from the axis in one reading column.
-   Use cases: a pale statement cell butted against dark rows told apart by tone. */
-.how{
-  display:grid;
-  grid-template-columns:minmax(0,42fr) minmax(0,58fr);
-  row-gap:64px;
-  padding:var(--section) var(--m);
-  background:var(--paper);
-}
-.how h2{grid-column:1;grid-row:1;align-self:start;position:sticky;top:96px;padding-right:clamp(24px,4vw,72px);font-size:clamp(32px,3.3vw,52px)}
-.steps{grid-column:2;grid-row:1;display:grid;gap:40px;max-width:640px;margin:0;padding:0;list-style:none}
-.steps li{display:grid;grid-template-columns:minmax(0,11em) minmax(0,1fr);gap:8px 32px}
-.steps h3{font-size:22px;line-height:1.25;letter-spacing:-.02em}
-.steps li:nth-child(4) h3{color:#c9603f}
-.steps p{color:var(--ink);font-size:var(--body);line-height:1.6}
-
+/* Use cases: a pale statement cell butted against dark rows told apart by tone. */
 .cases{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr)}
 .statement{
   display:flex;flex-direction:column;justify-content:space-between;gap:48px;
@@ -35,12 +20,9 @@
 .caseList p:last-child span{color:var(--coral)}
 
 @media(max-width:1080px){
-  .how,.cases{grid-template-columns:1fr}
-  .how h2,.steps{grid-column:1;grid-row:auto}
-  .how h2{position:static}
+  .cases{grid-template-columns:1fr}
   .statement{padding-bottom:64px}
 }
 @media(max-width:640px){
-  .steps li{grid-template-columns:1fr}
   .caseList article{grid-template-columns:1fr;gap:12px;padding:28px var(--m)}
 }
