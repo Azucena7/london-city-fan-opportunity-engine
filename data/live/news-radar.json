@@ -1,14 +1,163 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-16T00:24:40.034Z",
-  "lastSuccessfulAt": "2026-10-16T00:24:40.034Z",
+  "checkedAt": "2026-10-17T00:28:59.415Z",
+  "lastSuccessfulAt": "2026-10-17T00:28:59.415Z",
   "failures": [],
   "items": [
+    {
+      "title": "London City Lionesses boss says 'challenge' of WSL can push Putellas to Ballon d'Or",
+      "outlet": "TNT Sports",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQWlFsdWxBRlVVRklVZlJjTzBtUWVqMTJ2S2VwLUZZWEdOQjNwWXJwZlpmM0l0bFZjVnhqOWJqTm9DMzN5dUdyRERWWjZ6Zll1cjZaN092OVRZRHBxcnJ2Z3RDcEptVFBZcVF2UlBKQWpmR21ZSHk0TGRvbGhJdGRfbUVSR2lURk9WeDhHSGI3Y1VoVWJaSFJLSU5fdnZZLThwbTVBWVRheTdyNTNXaTlzQm8ycFRyZUYwSkxWS0gzdTl2eUlpelVoTU1MRERKQ0hnSUJGRkhIQWxicHByQ1ZSaw?oc=5",
+      "publishedAt": "2026-10-16T23:01:00.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-adb927d826ee",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
+    {
+      "title": "London City Lionesses v Everton: Womens Super League Preview",
+      "outlet": "VAVEL.com",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQanlsMVd5d1lnaWwxQ09SRlc5UUxfaDhfOC1Ta2haWFc1b0lNbl9vZXo3U1hoUF83Tl9qenhsNUtfTkpjUUpzbVpGYXZmY3ZaQUx3MzJsMnNJamUyLWFCYVEybjNaTnRSOHYtdDNQd2VkaGExRWFITWhCdmlzY0ZYb3Vsb0FzeDEyWmRmNTA2ZGxBdkFxUzFTS1JqN1JiMGRZbHRNaXdRejZESXE4ZjE2UkpjTFNxVGIxUURlb2loWVRhMHdHc25Qd213c2RyeHc?oc=5",
+      "publishedAt": "2026-10-16T22:08:53.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-10-18-eve-h"
+      ],
+      "id": "news-d7d9102c2541",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
+    {
+      "title": "Blues Prepared For London City Test",
+      "outlet": "Everton FC",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOdlhxdUxVY3MwaFplMzBGbzJ1RFMyVG1pQXliYlhadzBiSmotR0pzT0JlU1hleklEd3J2WHpjMW1TNzdpOEg2MVRnVWZtalo0dHBCWFFTVUVhb3JQT2pZYnN2VFdsNHVrcXg4ZmI0TmhKRHdJRjVHQ1h6WWd0NEtqRkJ1MWxaek1pR0pB?oc=5",
+      "publishedAt": "2026-10-16T20:21:40.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-f47111c085e1",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
+    {
+      "title": "The WSL so far: goal-shy Arsenal, underrated Brighton and more data pointers",
+      "outlet": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPUDFFZXRqQmxzV0NPZm5SeHRRNloxckdEM1JPSWo0WlBuVUctUDJ3OXVrcE9UQVFyMmVaT2ExWk1sSGNhQTR4R0Q3S0RQTDhFTmZSbm9OcWVnUTZEMDVUQW9YOFhhOVBGODNqZG1Vekd5SGZfWTdhX3ZYb2tYWG1EMjZ0ZmtHcHY3V3AxcnlmeUtXVEEyT2t4ZUVKdWJqWGxicmhQb3dTNlhsM1hfT1ZQV1l5VDd1dXEzemZkd0dUU3k?oc=5",
+      "publishedAt": "2026-10-16T15:14:00.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [
+        "results"
+      ],
+      "fixtureIds": [
+        "2026-11-15-arsenal-a",
+        "2026-11-18-bha-h"
+      ],
+      "id": "news-63e148573416",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
+    {
+      "title": "Manchester City vs Brighton Prediction | WSL Match Preview",
+      "outlet": "SheKicks",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPQi03RFF2emliR2JUNzhqR3FZdFItRTQ1V1V3MzE1bFJNbkZPMHZ4N2xfMHlpUzJVQXRmWlNWbmplN0JqQlJBY19LV2FYeldoTGllaXM5Sm9JSXh2MFZUUWNvV0VmRzJWQ0kwNUxyVUZCaW03THNsdjZKQ28wendxZVBLYXdUYjIxbDBuNVRMYU8xUXluclE?oc=5",
+      "publishedAt": "2026-10-16T13:45:42.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-11-01-mci-h",
+        "2026-11-18-bha-h"
+      ],
+      "id": "news-f3aa6f1d120f",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
+    {
+      "title": "London City Lionesses vs Everton prediction: our WSL betting tips",
+      "outlet": "SheKicks",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQYUh4Y0RCcnVxU0huMFpMRW53N09FaUpUUFp0MWY0NGVZVzRhbEFSczkxNGl4QmlGbFNjMC1FMW9lWXl2ZmwzWWJFb2NCMWxGbHVCZGxMeUtRbmJ1WmdqTFBXeFQxXzBhSTBidVZING5MdHB6M1dMSWV3Zk8zaGRvSmpqQTRZYkJTcFhKS2QxUQ?oc=5",
+      "publishedAt": "2026-10-16T13:35:42.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-10-18-eve-h"
+      ],
+      "id": "news-5097edbea16c",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
+    {
+      "title": "London City vs. Everton Live Stream of Barclays Women's Super League",
+      "outlet": "CBS Sports",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE94dDdRQ1psODJNVFpSY09ILUZvcDBjU0RQcVE0UktWaHdPR0MxWWxLT1VwMWg5eUxBSmw3WVF3UGhfNTNfUVVpUzRHd0k3cURZajBSVEE1S3dvX1Q1LVZSRHMyUVNEZVpKeFB6T3ZhTnAweHJEeVN3SVAzWW8xVEk?oc=5",
+      "publishedAt": "2026-10-16T10:45:59.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-10-18-eve-h"
+      ],
+      "id": "news-9512699221f8",
+      "firstSeenAt": "2026-10-15T00:31:44.564Z"
+    },
+    {
+      "title": "Alexia Putellas y el cambio de mentalidad que supuso su llegada al London City Lionesses: \"Lo primero que dijo fue 'quiero ganar la WSL'\"",
+      "outlet": "DAZN",
+      "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxOQ2tGUDE3dzEtWWhQN2l2SXFhbVhMODlUd0Myd2xtNzM4dFBfME0yVTRnZG8yREFfYUdCbktvM29Na1d4N0xtZ0txMHZTaXlUazlpSUJ2cGUyNmhNTldidnpjd2NkMmhoZDFtejBmUElTUGVkQUR1UnlMYmRJTUxTSHRYVU9tUk9NSU00emdRMHhNMWdCMXJNYWhXbkRjbC1JVHJvQjVrUjU4bnVOTmtZci1HamM0RjM2VFhWNEFnM3NDbThIZWRVeW9HQlYwejNjc1RLWVIzSnZuX055T3dEVm1Nbk8taXJnWVdPQWFRNFFEMjN4ZGIweDViV1ZVSHN1SVdWZUJiWmdPQQ?oc=5",
+      "publishedAt": "2026-10-16T08:30:14.000Z",
+      "feedIds": [
+        "alexia-es"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-eb5f86864f0c",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
+    {
+      "title": "WSL Fixtures This Weekend on TV: Chelsea v Spurs at Stamford Bridge",
+      "outlet": "The False 9",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFA4MWt3MC1Xd2xMbk9peGhYWldzYzRZUGxMV3loaGZDdVg4c0d2MV9TV01XdTBaYk9wOUZrRWNuRXQ4WHo4dEowRjJmWkFTY2cyME95YW1GMGc0dGRkUVp1X0h3TXpOTlRYczN2ZmVnalBNRUVB?oc=5",
+      "publishedAt": "2026-10-15T20:36:54.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-76abc100fa5a",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
+    {
+      "title": "Women's Super League predictions: Man City's perfect record expected to continue against Brighton",
+      "outlet": "Soccer News",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPeGs1bzNfcWtVMDFhNjlsVVprQlY1Ri1MTmtUZ25SZ2dER0xwUTZwaTlUbVU3Zm9nVFB0Q1VVd0hWa29ndlk0VENCT05jZS1kWnAwVmRSak54OG82WTVPZEhNU2JHcXVVY2lpWkozY0Q3akEzbVlJcXJnSVVucjZJa0t4Y3Vfd1dHU2Z6cWZ6TGVhb2FWRTV1bjZYQnVtcUNpUWdqLUdZNzNWT3VtaGlpYUg3RlV2alVNYkhZTmxFZXZXVjFKbDlyTA?oc=5",
+      "publishedAt": "2026-10-15T18:35:23.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-11-18-bha-h"
+      ],
+      "id": "news-137a000b7581",
+      "firstSeenAt": "2026-10-17T00:28:59.415Z"
+    },
     {
       "title": "FAN GUIDE: LONDON CITY VS EVERTON",
       "outlet": "London City Lionesses",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1JY1QwbkxvbjNGVjRYeUpWOW52dFFKdl9qaTRhTUthYjZXcmZ0NklIRXBMZjdVTExGQWZES1VUZzNrcUxHb3FyeW16c2pZZURnNzFGam1ocFd2M0lrRlQ1RXNiTy1RRmROSDNNaHM4SzVfT0tFOFk3TTdRblJKZw?oc=5",
-      "publishedAt": "2026-10-15T15:20:14.000Z",
+      "publishedAt": "2026-10-15T15:20:33.000Z",
       "feedIds": [
         "club-uk"
       ],
@@ -96,7 +245,7 @@
       "title": "Triple Threat: Can London City Lionesses’ Attacking Trio Make WSL History?",
       "outlet": "Opta Analyst",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOUXd3QzJHQ1c5TU40UDV0VHZEQjdwZjBrc2NrYkhxcmZsSDZJVjhIQTZKemRNMlZ1dEJsN2tLTTMzZkJJTlZ1c0JZNER0ZmdUQktwYlIzQU9FekRmbGd6bDdmTF82UkxfRWdKRFdka2N6Q2c1UWVFWDFQd3F1N1NGbmgyUEhEU21OQXZyMWYwbXZFbFR6UVJ3Q0FDUFJadktiREZOeWZR?oc=5",
-      "publishedAt": "2026-10-15T06:24:25.000Z",
+      "publishedAt": "2026-10-15T06:29:28.000Z",
       "feedIds": [
         "club-uk",
         "club-wsl-uk"
@@ -118,21 +267,6 @@
       "fixtureIds": [],
       "id": "news-aaa325d956ec",
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "London City vs. Everton Live Stream of Barclays Women's Super League",
-      "outlet": "CBS Sports",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE94dDdRQ1psODJNVFpSY09ILUZvcDBjU0RQcVE0UktWaHdPR0MxWWxLT1VwMWg5eUxBSmw3WVF3UGhfNTNfUVVpUzRHd0k3cURZajBSVEE1S3dvX1Q1LVZSRHMyUVNEZVpKeFB6T3ZhTnAweHJEeVN3SVAzWW8xVEk?oc=5",
-      "publishedAt": "2026-10-14T20:19:40.000Z",
-      "feedIds": [
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [
-        "2026-10-18-eve-h"
-      ],
-      "id": "news-9512699221f8",
-      "firstSeenAt": "2026-10-15T00:31:44.564Z"
     },
     {
       "title": "London City Lionesses - Everton Stats: Football Scores & Results",
@@ -599,20 +733,6 @@
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
-      "title": "Spurs 1-6 London City Lionesses, Women's Super League | Martin Ho's verdict",
-      "outlet": "Tottenham Hotspur",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQaUhFZ0dIOHk4TlQwQkhtcXQzVEZod3dKUFdXdnVBOE80MHRHYnJyY1B5X3dOaUN2T0ZEcUdTZXNFem41WEphaTJ6WWUxV3FId2dvSzFnZktPdF91cWtBTE9vQjBNdVJkRmZfZHZFUVp5MzJMZU5RMG9rdzJIT21FNlZlY3VSaGgzQm5ib2cxS21Rcjc0a1RGcC0tUTl6eWZfUFkwSV9aVFotUE9zRThZT1c1Vnp2d2M?oc=5",
-      "publishedAt": "2026-10-04T18:07:57.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-e6200522dca1",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
       "title": "What are we meant to think of London City Lionesses and their superstars?",
       "outlet": "Yahoo Sports",
       "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTGhGcXVuY0NjY0FLVDRxd0h1dnFwdFg0ZnctR0o5VW5zSGRwX0huLXprQUI4cjhUbFdZUklZdzhKZGNCRnBGYnFXUEhtWDg4SDROWWJWQnFhMkVtZWUxVzFVZVdkak9WclpHR29mN2xudkxINUxHUVUydW9rVE9ENEZ3bVU4S0EyRkE?oc=5",
@@ -636,6 +756,20 @@
       "topics": [],
       "fixtureIds": [],
       "id": "news-3fdddabc8d45",
+      "firstSeenAt": "2026-10-13T15:53:25.524Z"
+    },
+    {
+      "title": "Spurs 1-6 London City Lionesses, Women's Super League | Martin Ho's verdict",
+      "outlet": "Tottenham Hotspur",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQaUhFZ0dIOHk4TlQwQkhtcXQzVEZod3dKUFdXdnVBOE80MHRHYnJyY1B5X3dOaUN2T0ZEcUdTZXNFem41WEphaTJ6WWUxV3FId2dvSzFnZktPdF91cWtBTE9vQjBNdVJkRmZfZHZFUVp5MzJMZU5RMG9rdzJIT21FNlZlY3VSaGgzQm5ib2cxS21Rcjc0a1RGcC0tUTl6eWZfUFkwSV9aVFotUE9zRThZT1c1Vnp2d2M?oc=5",
+      "publishedAt": "2026-10-04T07:00:00.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-e6200522dca1",
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
@@ -1022,140 +1156,6 @@
       "fixtureIds": [],
       "id": "news-e6bc0ca56778",
       "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas jugará en el London City Lionesses",
-      "outlet": "BeSoccer",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOVlpxdGwzdF9RSzBaOEZJZEhRNmRxVDhwWjI3SGN5cmRHVVRoQWJNNDVlMWhqQ0tTWTRNMWdWTFNtR0EtakxLOTNsTDlmMWRqbGE4TzZMbVIwREVFcl9HRHpxRTlKSEFPUUVSXzFSRVRMaVc1bEgxMVNEQVk0OUtJRzNrS3ljUWUxZmhQbVJ0M2JmYkZYclhlQ2UtLUt4Vm_SAaQBQVVfeXFMTW56RXJFS09iM3c1dTJNcTJrWmZkTHZrOEJZMFdvTzMySFFSaWFlM0ZIemlKdWdZUkFEY2g0YVRvcWd3NE1YLWQtMTlpS2wzZko1MV8yeHN1NzBHNUJMN2VfQzhBUU5IMEEwRlJJVUFUVF9mOThpdS1Ld1F2ZVlSVGxnaGlIdnJTZVljZGs2TDNCMTFGR1V4X1ZzYTB2T3dMWHRKeEU?oc=5",
-      "publishedAt": "2026-09-29T17:09:10.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-995ec55291c6",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas, 32 años: \"Los chicos pasan muchas horas en los videojuegos y ahora la mujer practica más deporte\"",
-      "outlet": "El Español",
-      "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxNeU9WOUd0al9nNG9NR1NDTmwxZzRSZUltXzlRY3NFaGsySjZUNnFNUExEZG53VjV5cjNheFpoOWpBS0hhZ3lyQ0tBeWZMOXVWUS02cHQ1M0xxb1kzTVV2RUlnRzFtam54VmFpTFhNV082U3BoZklmR1ZrcjRkLXZwZ19jV2xSbFg3a1REcnFacG1GR3ZjSTZrN0hvNW9iLWlEeWtXenBpVXpCZllVUEkzSUZWei1yb0hFZzFmRzJJdjdFRHc2Q2prUFNIelNqRHZyQmFiVlVYSjk2N1VjNnZ2emFVaDRNbFdadzdKbmdYaElFMVZM0gH6AUFVX3lxTE8zbXE5bWJObElnTUhyVXBDelFNRENxNHpxdG9uZTRPZnI0dE5OX1NobXJ6dDVISWNGZ295RlVVSHJtOElOYk1FTnlIQnF6amdNOXZWMXZHUGszRDhBV2tjQlRkSEtUSXZRdGxvZ1ZCSkJMeWxJbmZBTWRIb1EtdEhZWjV2Z0JnWHpKUHlpcWtLZzktU1F3ckM0VlEybXNnNFAxTXRMYk9KakdkSlFaUjRxNG1WZ0JNRVdabTE4QmJrTnFWRjhHeURmTmdpRnU5c3JsSEhhcHJ4RGNhRlQ0bXFGeGxjVG1TOUt1NDVmSFMzcXU3ejRiVmJ0Y2c?oc=5",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-bc0449549771",
-      "firstSeenAt": "2026-10-14T00:17:39.041Z"
-    },
-    {
-      "title": "Alexia Putellas: \"Mi candidatura al Balón de Oro está hecha; es lo que hago en el campo\"",
-      "outlet": "MARCA",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOSG9aN3R3VVc4ck5MOGxPaEg1X3BYR1lTSzl5ck12b1pFbUZDMzc4M19lM0lZVVZkelZqbERENUdiQ3ZhVFdwTks0YnlZYWFVLVRGT2M4czQtU1RGQnBldldQNUtfOExOdGEzLWdGU2EzSHlwMlo0U1B6cWVOOVJ0WHZMYjlCWHB3WEZoeEhXbnpkanFSUjktaWcyWDbSAZwBQVVfeXFMT3FJLVFCZDVkOC13NzlGdEI4ODBWR0FndEFpWVJudkVqR2ZmeFZPMzdqVnlmMmZlb3NzR1p5LVpNR1lQWFhzZExnTjd0SGUtN1RZRkdxY2c4a2ZQdXBMV1RKV3Y4SjNyM0c5ZjVsZktlLVBfMHFjc3Z5T0pEMTRSWkF3d29yLUl6WFpUc3g4eVVHZ2kyOGlocWVubDR0?oc=5",
-      "publishedAt": "2026-09-28T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-93fdab361c7c",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas deja que el fútbol defienda su candidatura al Balón de Oro",
-      "outlet": "Las Futbolistas",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPYXhfR0lHZjFqcTR5QWZFbTh6UmVtbXdkRV93OU5fdTB1c2QtT081eXNzZ25Pa2ZfS0gyWG93eHpzS0xpWW5PSXVja3NfdnFmQzJ4djZtaElvMXV5bVdiQ2REd3ZlWVAzemt1ZHpubFR6X1dPR0kwUnBFLXdCTF91ZURBdk5lNVpEc0F0Y0xPaEdidHNOQjlobDZBVmJKdjZDb3o5dg?oc=5",
-      "publishedAt": "2026-09-27T12:44:11.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-42db98f909d4",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "WSL: Alexia Putellas scores her first London City Lionesses goal",
-      "outlet": "BBC",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBEanJ3dE9iOG9nSHNuT1hFcEZHV3NWdE9oUDNac1BLcS1kVllzR0NnMm1fR2ZfRHI5UmZHUlppMXNVVXhpTGFKWWFITkFkR01PV3pvQ01mczdDM1FRR0ZYUFBYYlF6UkZO?oc=5",
-      "publishedAt": "2026-09-27T07:00:00.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [
-        "results"
-      ],
-      "fixtureIds": [],
-      "id": "news-416d461366ad",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas scores her first goal for London City Lionesses in crucial victory over Brighton",
-      "outlet": "Goal.com",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPQjdkNkw5SHA3Z1pYelo3UFZJaXJHTWdyc1ljSTJTamh0emFxTFhlb09ZczRoZ0I5dGJ1WUlrd1ZfU1hvbGJxb01MV2pqVWNYUzl0ZWktbHFvUmtGZHpWZ2M3QVVldjBRZk5VOFZieFhhNEVjSm5hd1BmMW9wWWlnZTA0d3N6RkFTSEJPbkpKSVhJUWZGUE96aG9OYXJBVDZTU3NDbmZnWGUyZEdOX3JEMjVLbGJnUUxMMnRVQ3NiR0ZiLThKclp3Wk53?oc=5",
-      "publishedAt": "2026-09-27T07:00:00.000Z",
-      "feedIds": [
-        "club-uk"
-      ],
-      "topics": [
-        "results"
-      ],
-      "fixtureIds": [
-        "2026-11-18-bha-h"
-      ],
-      "id": "news-a57653735b30",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Every WSL game live on Sky this weekend including London City vs Brighton, the Merseyside derby and Chelsea vs Arsenal | Football News",
-      "outlet": "Sky Sports",
-      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPc09DVVJHN3JiRmJKcjFrSnhrZFYxdWxaekxoMnJjeWpZOVRJLTZwT2R3NGRzdTFEZzRwRXB3NERqX3dLUTdQcHFhem1YZzJxTk5rRUoyelVqZ28tZXM2QXRiamFDanRRY1NIMmIyY2JZSTdHeWdicU9pU0xadXpHcWRFVGFUQjFOYmZhWHZZNDJCeEF0UnNpQ0NHbXVfTUFIcDBWVG44aG5nUW5iYnU1RFkzNXhabUdONEdnTFBoaVJpY21OQkZYamRUTnYzeUZZZFV4dnhTbWszT1hkNFU0SmFwV0RzbkJZQjZzbE1IWlAxdnkxWElONDh3?oc=5",
-      "publishedAt": "2026-09-27T07:00:00.000Z",
-      "feedIds": [
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [
-        "2026-11-15-arsenal-a",
-        "2026-11-18-bha-h"
-      ],
-      "id": "news-d69a53874084",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Alexia Putellas marca su primer gol con el London City Lionesses en una victoria crucial sobre el Brighton",
-      "outlet": "Goal.com",
-      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOcGNNck80dGNJMkw1NTVuamswSjFXVUo3Nmg5RlQzVkdoVlgxTEYtVjJjRGU3OTdublVELWNWLVNQakpoOHMxbWtFZHY5ZDFVU0cxdHZBX2c4SFNJdG5rSWxSZ0Z1SjFENFl4LWx2NVV1YlZQbFJHVU9wUFdYQUI5bXBOODFtVXcxd0xPd1VidEFob1N3ZXg4NW9uSGJBeWJRODJoLUQ1UDNhWEJ1Ynd6YVVpQS1vSGRtc3VvZDlNYlp5N0prc3llcndxN1IwVWxiNHVnaXRNOHA5RTlCYnRKNlpWSUl4WldybWtLckNyMXc?oc=5",
-      "publishedAt": "2026-09-27T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [
-        "results"
-      ],
-      "fixtureIds": [
-        "2026-11-18-bha-h"
-      ],
-      "id": "news-1f16760bd2a0",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
-    },
-    {
-      "title": "Every WSL game live on Sky this weekend including London City vs Brighton, the Merseyside derby and Chelsea vs Arsenal",
-      "outlet": "Sky Sports",
-      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPc09DVVJHN3JiRmJKcjFrSnhrZFYxdWxaekxoMnJjeWpZOVRJLTZwT2R3NGRzdTFEZzRwRXB3NERqX3dLUTdQcHFhem1YZzJxTk5rRUoyelVqZ28tZXM2QXRiamFDanRRY1NIMmIyY2JZSTdHeWdicU9pU0xadXpHcWRFVGFUQjFOYmZhWHZZNDJCeEF0UnNpQ0NHbXVfTUFIcDBWVG44aG5nUW5iYnU1RFkzNXhabUdONEdnTFBoaVJpY21OQkZYamRUTnYzeUZZZFV4dnhTbWszT1hkNFU0SmFwV0RzbkJZQjZzbE1IWlAxdnkxWElONDh3?oc=5",
-      "publishedAt": "2026-09-27T07:00:00.000Z",
-      "feedIds": [
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [
-        "2026-11-15-arsenal-a",
-        "2026-11-18-bha-h"
-      ],
-      "id": "news-1382619c1376",
-      "firstSeenAt": "2026-10-14T08:52:03.437Z"
     }
   ]
 }

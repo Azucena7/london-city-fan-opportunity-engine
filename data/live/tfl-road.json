@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-16",
+  "version": "2026-10-17",
   "source": {
     "name": "Transport for London Unified API · Road disruption",
     "url": "https://api.tfl.gov.uk/Road/all/Disruption"
@@ -10,8 +10,8 @@
     "lon": 0.01771
   },
   "radiusKm": 15,
-  "checkedAt": "2026-10-16T00:24:41.533Z",
-  "lastSuccessfulAt": "2026-10-16T00:24:41.533Z",
+  "checkedAt": "2026-10-17T00:29:00.952Z",
+  "lastSuccessfulAt": "2026-10-17T00:29:00.952Z",
   "incidents": [
     {
       "id": "TIMS-234009",
@@ -71,23 +71,12 @@
     {
       "id": "TIMS-235991",
       "location": "[A1261] EAST INDIA DOCK ROAD TUNNEL (E14 ) (Tower Hamlets)",
-      "severity": "No impact",
-      "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-16",
-      "distanceKm": 13.6,
-      "material": true
-    },
-    {
-      "id": "TIMS-236093",
-      "location": "BLACKSHAW ROAD (SW17 ) (Wandsworth)",
       "severity": "Minimal",
       "category": "Works",
-      "subCategory": "Borough works",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-16",
-      "distanceKm": 13.8,
+      "subCategory": "TfL works",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-17",
+      "distanceKm": 13.6,
       "material": true
     },
     {
@@ -96,8 +85,19 @@
       "severity": "Minimal",
       "category": "Works",
       "subCategory": "TfL works",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-17",
+      "distanceKm": 14.2,
+      "material": true
+    },
+    {
+      "id": "TIMS-236105",
+      "location": "[A12] BLACKWALL TUNNEL NORTHERN APPROACH (E14 ,E3 ) (Tower Hamlets)",
+      "severity": "Serious",
+      "category": "Works",
+      "subCategory": "TfL works",
       "startDate": "2026-10-15",
-      "endDate": "2026-10-16",
+      "endDate": "2026-10-17",
       "distanceKm": 14.2,
       "material": true
     },
@@ -143,17 +143,6 @@
       "startDate": "2026-09-14",
       "endDate": "2026-10-25",
       "distanceKm": 6.7,
-      "material": false
-    },
-    {
-      "id": "TIMS-236157",
-      "location": "[A20] ELTHAM ROAD (SE12 ,SE9 ) (Greenwich,Lewisham)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-10-09",
-      "endDate": "2026-10-16",
-      "distanceKm": 7,
       "material": false
     },
     {
@@ -218,30 +207,8 @@
       "category": "Works",
       "subCategory": "Utility works",
       "startDate": "2026-10-08",
-      "endDate": "2026-10-16",
+      "endDate": "2026-10-24",
       "distanceKm": 8,
-      "material": false
-    },
-    {
-      "id": "TIMS-236342",
-      "location": "[A205] LORDSHIP LANE (SE21 ,SE22 ,SE23 ) (Lewisham,Southwark)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-10-13",
-      "endDate": "2026-10-16",
-      "distanceKm": 8.2,
-      "material": false
-    },
-    {
-      "id": "TIMS-236005",
-      "location": "[A205] WELL HALL ROAD (SE18 ,SE3 ,SE9 ) (Greenwich)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-16",
-      "distanceKm": 9.2,
       "material": false
     },
     {
@@ -267,14 +234,25 @@
       "material": false
     },
     {
-      "id": "TIMS-235772",
-      "location": "[A205] THURLOW PARK ROAD (SE21 ,SE24 ,SE27 ) (Lambeth)",
+      "id": "TIMS-236462",
+      "location": "[A206] WOOLWICH ROAD (SE10 ,SE7 ) (Greenwich)",
+      "severity": "Minimal",
+      "category": "Asset issues",
+      "subCategory": "Traffic signal fault",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-16",
+      "distanceKm": 10.6,
+      "material": false
+    },
+    {
+      "id": "TIMS-236475",
+      "location": "[A200] EVELYN STREET (SE8 ) (Lewisham)",
       "severity": "Minimal",
       "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-16",
-      "distanceKm": 10.2,
+      "subCategory": "Utility works",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-28",
+      "distanceKm": 10.9,
       "material": false
     },
     {
@@ -291,22 +269,11 @@
     {
       "id": "TIMS-236057",
       "location": "[A102] BLACKWALL TUNNEL SOUTHERN APPROACH (SE10 ) (Greenwich)",
-      "severity": "Moderate",
+      "severity": "Minimal",
       "category": "Works",
       "subCategory": "TfL works",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-16",
-      "distanceKm": 11.2,
-      "material": false
-    },
-    {
-      "id": "TIMS-236165",
-      "location": "[A23] STREATHAM HIGH ROAD (SW16 ) (Lambeth)",
-      "severity": "No impact",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-10-09",
-      "endDate": "2026-10-16",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-17",
       "distanceKm": 11.2,
       "material": false
     },
@@ -318,17 +285,6 @@
       "subCategory": "TfL works",
       "startDate": "2026-08-03",
       "endDate": "2027-01-15",
-      "distanceKm": 11.3,
-      "material": false
-    },
-    {
-      "id": "TIMS-235747",
-      "location": "[A23] STREATHAM HIGH ROAD (SW16 ) (Lambeth)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-16",
       "distanceKm": 11.3,
       "material": false
     },
@@ -388,6 +344,17 @@
       "material": false
     },
     {
+      "id": "TIMS-236499",
+      "location": "[A206] PLUMSTEAD HIGH STREET (SE18 ) (Greenwich)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "Utility works",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-24",
+      "distanceKm": 11.9,
+      "material": false
+    },
+    {
       "id": "TIMS-231192",
       "location": "[A206] PLUMSTEAD ROAD (SE18 ,SE28 ) (Greenwich)",
       "severity": "Minimal",
@@ -396,17 +363,6 @@
       "startDate": "2026-07-06",
       "endDate": "2026-11-06",
       "distanceKm": 12,
-      "material": false
-    },
-    {
-      "id": "TIMS-235894",
-      "location": "MILLENNIUM WAY (SE10 ) (Greenwich)",
-      "severity": "Moderate",
-      "category": "Planned events",
-      "subCategory": "Concert",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-15",
-      "distanceKm": 12.1,
       "material": false
     },
     {
@@ -456,11 +412,11 @@
     {
       "id": "TIMS-234891",
       "location": "[A1203] THE HIGHWAY (E1 ,E1W ) (Tower Hamlets)",
-      "severity": "No impact",
+      "severity": "Minimal",
       "category": "Works",
       "subCategory": "Construction activity",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-16",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-17",
       "distanceKm": 14.2,
       "material": false
     },
