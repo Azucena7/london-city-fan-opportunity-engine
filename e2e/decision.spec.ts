@@ -190,3 +190,14 @@ test("the brief keeps the decision within reach once its summary scrolls away", 
   await expect(page.getByRole("region", { name: "Human decision" })).toBeInViewport();
   await expect(bar).toBeHidden();
 });
+
+test("the brief shows what the decision stands on before anyone approves it", async ({ page }) => {
+  await page.goto("/app/matches/2026-10-18-eve-h");
+  const inputs = page.getByRole("region", { name: "What this decision stands on" });
+  await expect(inputs).toBeVisible();
+  for (const label of ["Known", "Assumed", "Missing"]) await expect(inputs.getByRole("heading", { name: new RegExp("^" + label + " \\d+$") })).toBeVisible();
+  // Without club data the audience and outcome evidence are missing, never presented as known.
+  await expect(inputs.locator("[data-tone='missing']")).not.toContainText("Nothing");
+  await inputs.getByRole("link", { name: "All evidence →" }).click();
+  await expect(page).toHaveURL(/#signals$/);
+});
