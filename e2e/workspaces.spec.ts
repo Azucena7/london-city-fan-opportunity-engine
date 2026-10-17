@@ -148,4 +148,15 @@ test("Radar map places fixtures by urgency and keeps close bubbles apart", async
     if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 6 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 6) overlapping++;
   }
   expect(overlapping).toBe(0);
+
+test("Radar keeps a signal log that says what each signal measurably changed", async ({ page }) => {
+  await page.goto("/app/matches#signal-log");
+  const log = page.locator("section").filter({ has: page.getByRole("heading", { name: "What arrived and what it changed" }) });
+  await expect(log).toBeVisible();
+  await expect(log.getByText(/signals, \d+ in the last 7 days/)).toBeVisible();
+  const table = log.getByRole("table", { name: /newest first/ });
+  await expect(table.getByRole("row")).not.toHaveCount(0);
+  await expect(table.getByText(/No change|Raised priority|Changed state|Changed confidence|Not on the Radar/).first()).toBeVisible();
+  await page.goto("/app");
+  await expect(page.getByRole("link", { name: "Signal log →" })).toHaveAttribute("href", "/app/matches#signal-log");
 });

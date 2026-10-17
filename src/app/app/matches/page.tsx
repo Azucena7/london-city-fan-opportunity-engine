@@ -10,6 +10,8 @@ import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./matches.module.css";
 import { getDecisionQueue } from "@/lib/decisionQueue";
+import { getCurrentSignalLog } from "@/lib/currentSignalLog";
+import { SignalLog } from "@/components/SignalLog";
 
 export const metadata: Metadata = {
   title: "Opportunity Radar",
@@ -43,7 +45,8 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
   const requested = (await searchParams).attention;
   const attentionFilter = ATTENTION_FILTERS.find((option) => option.value === requested) ?? null;
   // The shared decision queue: the same fixtures and attention order as Home and Executive.
-  const { upcoming, clubContext, radar } = await getDecisionQueue();
+  const { today, upcoming, clubContext, radar } = await getDecisionQueue();
+  const signalLog = getCurrentSignalLog(upcoming.map((fixture) => fixture.id), today);
   const priority = radar[0] ?? null;
   const currentFixture = priority
     ? upcoming.find((fixture) => fixture.id === priority.fixtureId) ?? null
@@ -272,6 +275,8 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
           </WorkspaceDrawer>
         </aside>
       </section>
+
+      <SignalLog entries={signalLog} />
 
       <NewsRadarPanel radar={newsRadar} config={newsRadarConfig} calendar={calendar} />
 

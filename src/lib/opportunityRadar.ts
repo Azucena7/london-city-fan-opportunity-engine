@@ -1,4 +1,4 @@
-import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
+import { getCurrentProductOpportunity, type OpportunityReadOptions } from "@/lib/productOpportunity";
 import type { ClubOperatingContext } from "@/lib/clubOperatingContext";
 
 export type OpportunityRadarItem = {
@@ -132,10 +132,11 @@ function radarState(
 
 export function buildOpportunityRadar(
   fixtureIds: string[],
-  clubContext: ClubOperatingContext | null = null
+  clubContext: ClubOperatingContext | null = null,
+  options: OpportunityReadOptions = {}
 ): OpportunityRadarItem[] {
   return fixtureIds
-    .map((fixtureId) => getCurrentProductOpportunity(fixtureId))
+    .map((fixtureId) => getCurrentProductOpportunity(fixtureId, options))
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
     .map((item) => {
       const materialSignalCount = item.liveSignals.filter((signal) => signal.materiality !== "low").length;
