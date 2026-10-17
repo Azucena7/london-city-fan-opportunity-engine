@@ -1,0 +1,19 @@
+/* Product film on the home: sand field, copy on the 42% axis, the vertical film beside it.
+   On narrow screens the film sits between the intro and the step list. */
+.film{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);grid-template-areas:"intro frame" "detail frame";grid-template-rows:auto 1fr;column-gap:clamp(32px,4vw,72px);row-gap:28px;align-items:start;padding:var(--section) var(--m);background:var(--sand-2)}
+.intro{grid-area:intro;display:grid;gap:18px;align-self:end}
+.intro h2{max-width:14ch}
+.intro p{max-width:42ch;color:var(--ink-soft);font-size:var(--statement);line-height:1.5}
+.detail{grid-area:detail}
+.scenes{display:grid;gap:16px;max-width:46ch;margin:0;padding:0;list-style:none}
+.scenes li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;font-size:var(--small);line-height:1.5}
+.scenes strong{font-weight:760}
+.scenes span{color:var(--ink-soft)}
+.detail .note{margin-top:24px;max-width:46ch;color:var(--ink-soft);font-size:13px;line-height:1.5}
+.frame{grid-area:frame;display:flex;justify-content:center;align-self:center}
+.video{display:block;width:auto;height:min(78svh,760px);max-width:100%;aspect-ratio:9/16;border-radius:18px;background:var(--navy)}
+@media(max-width:860px){
+  .film{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "frame" "detail";grid-template-rows:auto}
+  .video{width:100%;max-width:420px;height:auto}
+  .scenes li{grid-template-columns:96px minmax(0,1fr)}
+}
