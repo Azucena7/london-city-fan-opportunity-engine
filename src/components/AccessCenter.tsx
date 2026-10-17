@@ -29,6 +29,13 @@ const requestableRoles = [
 
 const approvalRoles = [...requestableRoles, ["admin", "Admin"]] as const;
 
+// Clubs are not discoverable: a club admin shares an invitation link, and the requester opens it
+// or pastes it. Any text holding a club id (the link or the bare id) is accepted.
+const clubIdPattern = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
+function clubIdFrom(text: string) {
+  return text.match(clubIdPattern)?.[0].toLowerCase() ?? "";
+}
+
 export function AccessCenter() {
   const [authenticated, setAuthenticated] = useState(false);
   const [configured, setConfigured] = useState<boolean | null>(null);
@@ -38,7 +45,9 @@ export function AccessCenter() {
   const [memberships, setMemberships] = useState<Membership[]>([]);
   const [requests, setRequests] = useState<AccessRequest[]>([]);
   const [pendingReviews, setPendingReviews] = useState<AccessRequest[]>([]);
-  const [clubId, setClubId] = useState("");
+  const [invitation, setInvitation] = useState("");
+  const [copiedClubId, setCopiedClubId] = useState("");
+  const [origin, setOrigin] = useState("");
   const [requestedRole, setRequestedRole] = useState("marketing");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState("Loading account state…");
@@ -88,7 +97,6 @@ export function AccessCenter() {
     setMemberships(Array.isArray(result.memberships) ? result.memberships : []);
     setRequests(Array.isArray(result.requests) ? result.requests : []);
     setPendingReviews(Array.isArray(result.pendingReviews) ? result.pendingReviews : []);
-    setClubId((current) => current || nextClubs[0]?.id || "");
     setMessage("Account state loaded.");
     } catch {
       setConfigured(true);
@@ -102,11 +110,17 @@ export function AccessCenter() {
   }
 
   useEffect(() => {
+    const invited = new URLSearchParams(window.location.search).get("club");
+    if (invited) setInvitation(invited);
+    setOrigin(window.location.origin);
     void refresh();
   }, []);
 
   const activeMemberships = useMemo(() => new Set(memberships.map((membership) => membership.club_id)), [memberships]);
-  const availableClubs = clubs.filter((club) => !activeMemberships.has(club.id));
+  const clubId = clubIdFrom(invitation);
+  const alreadyMember = Boolean(clubId) && activeMemberships.has(clubId);
+  const adminClubs = memberships.filter((membership) => membership.role === "admin");
+  const clubName = (id: string) => clubs.find((club) => club.id === id)?.name ?? "Club";
   const hasMembership = memberships.length > 0;
   const hasPendingRequest = requests.some((request) => request.status === "pending");
   const authFeedback = feedbackCard === "sign-in" ? message : "";
@@ -196,8 +210,18 @@ export function AccessCenter() {
     }
   }
 
+  async function copyInvitation(id: string) {
+    try {
+      await navigator.clipboard.writeText(`${origin}/app/access?club=${id}`);
+      setCopiedClubId(id);
+      setMessage("Invitation link copied.");
+    } catch {
+      setMessage("The invitation link could not be copied. Select it and copy it manually.");
+    }
+  }
+
   async function requestAccess() {
-    if (!clubId) return;
+    if (!clubId || alreadyMember) return;
     setBusy(true);
     setMessage("Sending access request…");
     try {
@@ -210,6 +234,7 @@ export function AccessCenter() {
       setMessage(response.ok ? "Access request submitted for club review." : result.error || "Access request could not be sent.");
       if (response.ok) {
         setNote("");
+        setInvitation("");
         await refresh({ fresh: true });
       }
     } catch {
@@ -332,25 +357,56 @@ export function AccessCenter() {
                 <div className={styles.rows}>
                   {memberships.map((membership) => (
                     <div key={membership.club_id}>
-                      <strong>{clubs.find((club) => club.id === membership.club_id)?.name ?? "Club"}</strong>
+                      <strong>{clubName(membership.club_id)}</strong>
                       <small>{membership.role}</small>
                     </div>
                   ))}
                 </div>
               ) : <p>No active club membership yet. Request access below to unlock an approved club workspace.</p>}
+              {adminClubs.length ? (
+                <div className={styles.invitations}>
+                  <p>Clubs are not listed to other accounts. Share this link with a colleague so they can request access.</p>
+                  {adminClubs.map((membership) => (
+                    <div key={membership.club_id}>
+                      <label>
+                        Invitation link · {clubName(membership.club_id)}
+                        <input readOnly value={`${origin}/app/access?club=${membership.club_id}`} onFocus={(event) => event.currentTarget.select()} />
+                      </label>
+                      <button type="button" onClick={() => void copyInvitation(membership.club_id)}>
+                        {copiedClubId === membership.club_id ? "Copied" : "Copy link"}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </article>
 
             <article>
               <span>02 · Request access</span>
               <h2>Ask the club to add you.</h2>
-              {availableClubs.length ? (
+              <p>Clubs are not listed here. Open the invitation link a club admin sent you, or paste it below.</p>
+              <label>
+                Invitation link
+                <input
+                  value={invitation}
+                  onChange={(event) => setInvitation(event.target.value)}
+                  placeholder="https://…/app/access?club=…"
+                  spellCheck={false}
+                  autoComplete="off"
+                  aria-invalid={Boolean(invitation) && !clubId}
+                  aria-describedby="invitation-state"
+                />
+              </label>
+              <small id="invitation-state" className={styles.invitationState}>
+                {!invitation ? "No invitation link yet." : !clubId ? "This is not a club invitation link." : alreadyMember ? "You are already a member of this club." : "Club invitation recognised."}
+              </small>
+              {clubId && !alreadyMember ? (
                 <>
-                  <label>Club<select value={clubId} onChange={(event) => setClubId(event.target.value)}>{availableClubs.map((club) => <option key={club.id} value={club.id}>{club.name}</option>)}</select></label>
                   <label>Requested role<select value={requestedRole} onChange={(event) => setRequestedRole(event.target.value)}>{requestableRoles.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
                   <label>Context<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="Role, team and why access is needed." /></label>
                   <button type="button" disabled={busy} aria-busy={busy} onClick={() => void requestAccess()}>Request access</button>
                 </>
-              ) : <p>No additional club workspace is available to request from this account.</p>}
+              ) : null}
             </article>
 
             <article>
@@ -360,7 +416,7 @@ export function AccessCenter() {
                 <div className={styles.rows}>
                   {requests.map((request) => (
                     <div key={request.id}>
-                      <strong>{clubs.find((club) => club.id === request.club_id)?.name ?? "Club"}</strong>
+                      <strong>{clubName(request.club_id)}</strong>
                       <small>{request.requested_role} · {request.status}</small>
                     </div>
                   ))}

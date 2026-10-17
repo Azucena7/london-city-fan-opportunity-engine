@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
 import { readJson } from "@/lib/requestGuards";
 
+const clubIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const requestableRoles = new Set(["viewer","marketing","ticketing","business","communications","compliance","direction"]);
 
 export async function GET() {
@@ -51,7 +52,7 @@ export async function POST(request: Request) {
   const requestedRole = typeof body?.requestedRole === "string" ? body.requestedRole : "viewer";
   const note = typeof body?.note === "string" ? body.note.trim().slice(0, 500) : null;
 
-  if (!clubId || !requestableRoles.has(requestedRole)) {
+  if (!clubIdPattern.test(clubId) || !requestableRoles.has(requestedRole)) {
     return NextResponse.json({ error: "A valid club and requested role are required." }, { status: 400 });
   }
 

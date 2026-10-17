@@ -356,7 +356,11 @@ test("pilot access separates identity from club membership and supports admin ap
   assert.match(migration, /create table if not exists public\.club_access_requests/);
   assert.match(migration, /security invoker/);
   assert.match(migration, /campaigns', 'administer'/);
-  assert.match(migration, /authenticated users can discover clubs/);
+  // Clubs are not discoverable; access is requested through an admin's invitation link.
+  assert.match(migration, /members and requesters can read their clubs/);
+  assert.doesNotMatch(migration, /create policy "authenticated users can discover clubs"/);
+  assert.match(read("supabase/migrations/20261017110000_members_see_only_their_clubs.sql"), /members and requesters can read their clubs/);
+  assert.match(access, /\/app\/access\?club=/);
   assert.match(migration, /Authentication alone never grants club access/);
 });
 

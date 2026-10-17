@@ -13,7 +13,7 @@
 .authGrid article:nth-child(even),.grid article:nth-child(even){border-right:0;padding-left:28px}
 .authGrid h2,.grid h2{margin:7px 0 16px;font-size:18px;letter-spacing:-.035em}
 .authGrid label,.grid label{display:grid;gap:7px;margin-top:10px;font-size:11px;font-weight:850;letter-spacing:.07em;text-transform:uppercase;color:var(--product-muted)}
-.authGrid input,.grid select,.grid textarea{min-height:42px;padding:8px 10px;border:1px solid #ccd4ce;background:#fff;color:#132019;font:inherit}
+.authGrid input,.grid input,.grid select,.grid textarea{min-height:42px;padding:8px 10px;border:1px solid #ccd4ce;background:#fff;color:#132019;font:inherit}
 .grid textarea{min-height:80px;resize:vertical}
 .authGrid button,.grid button,.accountBar button{margin-top:14px;min-height:42px;padding:8px 12px;border:1px solid var(--product-navy);background:var(--product-navy);color:#fff;font-size:12px;font-weight:850;cursor:pointer}
 .authGrid button:disabled,.grid button:disabled{opacity:.55}
@@ -52,12 +52,20 @@
   .authGrid article,.authGrid article:nth-child(even),.grid article,.grid article:nth-child(even){border-right:0;padding:22px 0}
   .reviewList>div{grid-template-columns:1fr}.accountBar{align-items:flex-start;flex-direction:column}
   .accessFlow{grid-template-columns:1fr}.accessFlow>div+div{border-left:0;border-top:1px solid var(--product-line)}
-  .authGrid input,.grid select,.grid textarea{width:100%}.authGrid button,.grid button,.accountBar button{width:100%}
+  .authGrid input,.grid input,.grid select,.grid textarea{width:100%}.authGrid button,.grid button,.accountBar button{width:100%}
 }
 
 @media(max-width:800px){
   .authGrid button,.grid button,.accountBar button{min-height:44px}
-  .authGrid input,.grid select,.grid textarea{min-height:44px}
+  .authGrid input,.grid input,.grid select,.grid textarea{min-height:44px}
 }
 .authGrid .linkButton{display:block;width:auto;min-height:0;margin-top:10px;padding:0;border:0;background:transparent;color:var(--product-navy);font-size:12px;font-weight:800;text-decoration:underline;cursor:pointer}
 .authGrid .inlineStatus{margin:10px 0 0;padding:8px 10px;border-radius:8px;background:var(--product-accent-soft,#e8f3f0);color:var(--product-ink);font-size:12px;line-height:1.45}
+
+.invitations{display:grid;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--product-line)}
+.invitations p{margin:0;color:var(--product-muted);font-size:12px;line-height:1.5}
+.invitations>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end}
+.invitations input{min-width:0;font-size:13px}
+.invitations button{margin-top:0}
+.invitationState{display:block;margin-top:6px;font-size:12px;color:var(--product-muted)}
+@media (max-width:520px){.invitations>div{grid-template-columns:1fr}}

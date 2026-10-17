@@ -1,6 +1,7 @@
 -- Database-level privacy guards: a signed-in club administrator calling PostgREST directly cannot
--- store a journey aggregate that breaks the privacy rules, and nobody can file an access request
--- under someone else's email. Runs after every migration; raises on the first failure.
+-- store a journey aggregate that breaks the privacy rules, nobody can file an access request under
+-- someone else's email, and the club list is not discoverable. Runs after every migration; raises
+-- on the first failure.
 begin;
 
 insert into auth.users(id, email) values
@@ -51,6 +52,23 @@ begin
   -- The sign-in email, in any case, is accepted.
   insert into public.club_access_requests(club_id, user_id, email)
   values ('00000000-0000-0000-0000-00000000c001', '00000000-0000-0000-0000-00000000a001', 'ADMIN@club.test');
+end;
+$$;
+
+-- A user with no membership sees no club until they request one through its link, then only that one.
+reset role;
+insert into public.clubs(id, name) values ('00000000-0000-0000-0000-00000000c002', 'Other test club');
+set local role authenticated;
+do $$
+begin
+  perform set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000a002', true);
+  perform set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000a002","email":"fan@example.test"}', true);
+  if exists (select 1 from public.clubs) then raise exception 'Club list is discoverable without membership'; end if;
+  insert into public.club_access_requests(club_id, user_id, email)
+  values ('00000000-0000-0000-0000-00000000c001', '00000000-0000-0000-0000-00000000a002', 'fan@example.test');
+  if (select array_agg(id) from public.clubs) is distinct from array['00000000-0000-0000-0000-00000000c001'::uuid] then
+    raise exception 'A requester should see only the club they requested';
+  end if;
 end;
 $$;
 

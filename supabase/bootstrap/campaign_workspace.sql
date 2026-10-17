@@ -209,11 +209,16 @@ alter table public.club_access_requests enable row level security;
 revoke all on public.club_access_requests from anon;
 grant select, insert, update on public.club_access_requests to authenticated;
 
+-- Clubs are not discoverable: members see their clubs, requesters the club they hold a link for.
 drop policy if exists "authenticated users can discover clubs" on public.clubs;
-create policy "authenticated users can discover clubs"
+drop policy if exists "members and requesters can read their clubs" on public.clubs;
+create policy "members and requesters can read their clubs"
 on public.clubs for select
 to authenticated
-using (coalesce(((select auth.jwt())->>'is_anonymous')::boolean, false) is false);
+using (
+  exists (select 1 from public.club_memberships m where m.club_id = clubs.id and m.user_id = (select auth.uid()) and m.active)
+  or exists (select 1 from public.club_access_requests r where r.club_id = clubs.id and r.user_id = (select auth.uid()) and r.status = 'pending')
+);
 
 drop policy if exists "users can read own access requests" on public.club_access_requests;
 create policy "users can read own access requests"
@@ -298,11 +303,6 @@ using (
 );
 
 drop policy if exists member_clubs on public.clubs;
-drop policy if exists "authenticated users can discover clubs" on public.clubs;
-create policy "authenticated users can discover clubs"
-on public.clubs for select
-to authenticated
-using (coalesce(((select auth.jwt())->>'is_anonymous')::boolean, false) is false);
 
 create index if not exists club_access_requests_reviewed_by_idx on public.club_access_requests(reviewed_by);
 create index if not exists club_setup_updated_by_idx on public.club_setup(updated_by);
