@@ -148,6 +148,7 @@ test("Radar map places fixtures by urgency and keeps close bubbles apart", async
     if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 6 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 6) overlapping++;
   }
   expect(overlapping).toBe(0);
+});
 
 test("Radar keeps a signal log that says what each signal measurably changed", async ({ page }) => {
   await page.goto("/app/matches#signal-log");
