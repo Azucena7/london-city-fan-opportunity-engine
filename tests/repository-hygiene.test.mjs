@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 
 const retiredRootArtifacts = [
   "HOTFIX.md",
@@ -771,5 +771,19 @@ test("Supabase migrations run by hand, in one transaction, rolled back unless ap
   assert.match(workflow, /SUPABASE_DB_URL: \$\{\{ secrets\.SUPABASE_DB_URL \}\}/);
   for (const line of workflow.split("\n").filter((item) => /\$\{\{/.test(item))) {
     assert.match(line, /^\s+[A-Z_]+: \$\{\{ (inputs|secrets)\.[a-z_A-Z]+ \}\}$/, `inputs and secrets reach scripts only via env: ${line.trim()}`);
+  }
+});
+
+test("the quality gate applies every migration to a fresh Postgres", () => {
+  const workflow = readFileSync(".github/workflows/quality-gate.yml", "utf8");
+  assert.match(workflow, /\n  migrations:\n/);
+  assert.match(workflow, /image: postgres:16/);
+  assert.match(workflow, /scripts\/check-migrations\.sh/);
+  const script = readFileSync("scripts/check-migrations.sh", "utf8");
+  assert.match(script, /ON_ERROR_STOP=1/);
+  assert.match(script, /supabase\/migrations\/\*\.sql/);
+  // A function body opened with a single $ cannot be parsed by Postgres.
+  for (const file of readdirSync("supabase/migrations").filter((name) => name.endsWith(".sql"))) {
+    assert.doesNotMatch(readFileSync(`supabase/migrations/${file}`, "utf8"), /^as \$$|^\$;$/m, `${file} uses a single-dollar function body`);
   }
 });

@@ -222,7 +222,7 @@ returns trigger
 language plpgsql
 security invoker
 set search_path=''
-as $
+as $$
 declare
   from_state text;
   to_state text;
@@ -260,7 +260,7 @@ begin
   end if;
   return new;
 end;
-$;
+$$;
 
 revoke all on function public.enforce_rollover_review_permissions() from public, anon;
 grant execute on function public.enforce_rollover_review_permissions() to authenticated;
