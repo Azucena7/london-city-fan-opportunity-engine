@@ -3,6 +3,7 @@ import Link from "next/link";
 import { campaignPlans } from "@/lib/data";
 import { getDecisionQueue } from "@/lib/decisionQueue";
 import { DecisionInbox } from "@/components/DecisionInbox";
+import { ExternalReadCard } from "@/components/ExternalReadCard";
 import { buildDecisionAlerts, decisionSummary, type DecisionPriority } from "@/lib/decisionIntelligence";
 import { getDecisionCenterOpsState } from "@/lib/decisionCenterOverview";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
@@ -144,6 +145,8 @@ export default async function ClubAppHome() {
       title="Today’s decisions"
       subtitle={summary.attention ? summary.attention + " things need your attention today." : "Everything important is currently under control."}
     >
+
+      <ExternalReadCard />
 
       <WorkspaceCard className={styles.attentionInbox} tone="action">
         <WorkspaceSectionHeader

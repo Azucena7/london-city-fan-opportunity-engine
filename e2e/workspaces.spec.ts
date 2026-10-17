@@ -239,3 +239,18 @@ test("Sources filters the register by state and says what each source blocks", a
   await page.goto("/app/sources?state=attention");
   await expect(register).toContainText(/Blocks|Weakens|Lowers confidence in/);
 });
+
+test("Home opens with the external read: what changed outside the club, each family marked read or not connected", async ({ page }) => {
+  await page.goto("/app");
+  const read = page.getByRole("list", { name: "External signals from the latest refresh" });
+  await expect(read).toBeVisible();
+  for (const family of ["Weather", "Transport", "Calendar moments"]) {
+    await expect(read.getByRole("listitem").filter({ hasText: family }).first()).toBeVisible();
+  }
+  // Without a club aggregate, supporter origins are marked, never filled in.
+  await expect(read.getByRole("listitem").filter({ hasText: "Supporter origins" })).toContainText("Not connected");
+  // Anticipate comes before the decision queue.
+  const readTop = (await read.boundingBox())!.y;
+  const inboxTop = (await page.getByRole("region", { name: "Decision inbox" }).boundingBox())!.y;
+  expect(readTop).toBeLessThan(inboxTop);
+});
