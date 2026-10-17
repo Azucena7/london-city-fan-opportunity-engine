@@ -6,6 +6,8 @@ import { mobilityProviderReadiness, railStatusForFixture, summariseMobilityProvi
 import { MatchdayExternalTravelLink, MatchdayOfficialDirectionsLink, MatchdayOfficialTicketingLink, MatchdayUtilityTracker } from "@/components/MatchdayUtilityTracker";
 import { getVerifiedFixtureTicketUrl } from "@/lib/verifiedFixtureTicketing";
 import { getMatchdayWeatherContext } from "@/lib/matchdayWeatherContext";
+import { ROAD_NEAR_KM, roadClosuresOn } from "@/lib/morningRead";
+import tflRoad from "../../../../data/live/tfl-road.json";
 import styles from "./matchday.module.css";
 
 export async function generateMetadata({ params }: { params: Promise<{ fixtureId: string }> }): Promise<Metadata> {
@@ -39,6 +41,13 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
     .format(new Date(fixture.date + "T12:00:00Z"));
   const providerSummary = summariseMobilityProviderReadiness();
   const weather = getMatchdayWeatherContext(fixtureId, fixture.date);
+  const roadClosures = roadClosuresOn(tflRoad.incidents, fixture.date);
+  const roadChecked = tflRoad.lastSuccessfulAt ? new Date(tflRoad.lastSuccessfulAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "Europe/London" }) : null;
+  const roadLine = roadChecked
+    ? roadClosures.length
+      ? `${roadClosures.length} listed closure${roadClosures.length === 1 ? "" : "s"} within ${ROAD_NEAR_KM} km on this day: ${roadClosures.slice(0, 2).map((item) => item.location ?? "location not given").join("; ")}. Checked ${roadChecked}; confirm with TfL before you travel.`
+      : `TfL lists no road closure within ${ROAD_NEAR_KM} km of the ground for this day (checked ${roadChecked}). Works not yet published cannot appear.`
+    : null;
   const rail = railStatusForFixture(fixture.date);
   const railChecked = rail ? new Date(rail.checkedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "Europe/London" }) : null;
   const railLine = rail
@@ -175,7 +184,7 @@ export default async function MatchdayJourneyPage({ params }: { params: Promise<
           {mobilityProviderReadiness.map((provider) => (
             <article key={provider.id} data-state={provider.state}>
               <strong>{provider.label}</strong>
-              <p>{provider.id === "rail" && provider.state === "live" && provider.provider.includes("TfL") ? railLine ?? "Rail status for this day is read once it is among the next four home fixtures." : provider.state === "live" ? provider.scope : provider.fallback}</p>
+              <p>{provider.id === "rail" && provider.state === "live" && provider.provider.includes("TfL") ? railLine ?? "Rail status for this day is read once it is among the next four home fixtures." : provider.id === "road" && provider.state === "live" && roadLine ? roadLine : provider.state === "live" ? provider.scope : provider.fallback}</p>
               <small>{provider.stateLabel} · {provider.provider}</small>
             </article>
           ))}

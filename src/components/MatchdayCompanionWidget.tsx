@@ -57,7 +57,7 @@ export function MatchdayCompanionWidget({
 
       <div className={styles.weather} data-level={weather.materiality}>
         <div>
-          <span>Live weather context</span>
+          <span>Weather forecast · updated daily</span>
           <strong>{weather.state === "forecast" ? (weather.precipitationProbability ?? "—") + "% rain · " + (weather.windKmh ?? "—") + " km/h wind" : "Waiting for operational forecast window"}</strong>
           <small>{weather.source ?? "Open-Meteo"}{weather.generatedAt ? " · updated " + new Date(weather.generatedAt).toLocaleString("en-GB", { timeZone: "Europe/London", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : ""}</small>
         </div>

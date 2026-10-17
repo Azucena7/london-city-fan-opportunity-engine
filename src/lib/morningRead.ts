@@ -1,12 +1,13 @@
 // The Morning Commercial Read: what changed around the next home fixtures, in the order a
 // commercial lead would read it. Every line comes from the latest refresh; a signal family
 // with no connected source says so instead of reading as "nothing happened".
+import { weatherLevel } from "@/lib/weatherThresholds";
 
 type Fixture = { id: string; date: string; kickoff?: string; opponent: string; homeAway: string; status?: string };
 type FixtureScore = { fixtureId: string; level: string; timeGapMinutes?: number | null; distanceKm?: number | null };
 type LandscapeEvent = { name: string; date: string; competition?: string; fixtureScores?: FixtureScore[] };
 type Signal = { id: string; fixtureId?: string; state: string; title: { en: string } };
-type Weather = { valid_for?: string; temperature_max?: number; precipitation_probability_max?: number } | null | undefined;
+type Weather = { valid_for?: string; temperature_max?: number; precipitation_probability_max?: number; wind_speed_max?: number } | null | undefined;
 type HealthSource = { id: string; state: string };
 type RoadIncident = { location: string | null; startDate: string | null; endDate: string | null; distanceKm: number | null; material: boolean };
 type RoadSnapshot = { lastSuccessfulAt: string | null; incidents: RoadIncident[] } | null | undefined;
@@ -112,7 +113,7 @@ export function buildMorningRead({ today, calendar, events, signals, weather, so
       id: "weather",
       label: "Weather",
       headline: forecast
-        ? weather.precipitation_probability_max! >= 50
+        ? weatherLevel(weather.precipitation_probability_max, weather.wind_speed_max) === "high"
           ? `${weather.precipitation_probability_max}% rain risk for ${next.opponent}: prepare the wet-weather message`
           : `${Math.round(weather.temperature_max!)}° and ${weather.precipitation_probability_max}% rain risk for ${next.opponent}: no weather change to the plan`
         : `No forecast yet for ${next.opponent}`,
