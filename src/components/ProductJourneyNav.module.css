@@ -1,26 +1,35 @@
 .sidebar{
   position:fixed;inset:0 auto 0 0;z-index:40;width:220px;
-  padding:18px 12px 14px;display:flex;flex-direction:column;
+  padding:12px 12px 10px;display:flex;flex-direction:column;
   overflow-y:auto;overscroll-behavior:contain; /* short laptop screens: the bottom links stay reachable */
-  background:var(--product-navy,#102742);
+  /* A visible thin scrollbar, and soft shadows at the top or bottom edge only while more links sit
+     beyond it: on a dark sidebar an overlay scrollbar is easy to miss. */
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.3) transparent;
+  background:
+    linear-gradient(var(--product-navy,#102742) 30%,rgba(16,39,66,0)) center top/100% 36px no-repeat local,
+    linear-gradient(rgba(16,39,66,0),var(--product-navy,#102742) 70%) center bottom/100% 36px no-repeat local,
+    linear-gradient(rgba(116,201,187,.22),rgba(116,201,187,0)) center top/100% 14px no-repeat scroll,
+    linear-gradient(rgba(116,201,187,0),rgba(116,201,187,.22)) center bottom/100% 14px no-repeat scroll,
+    var(--product-navy,#102742);
   border-right:1px solid rgba(255,255,255,.08);
   font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-.top{padding:0 8px 14px;border-bottom:1px solid rgba(255,255,255,.10)}
+.top{padding:0 8px 10px;border-bottom:1px solid rgba(255,255,255,.10)}
 .brand{display:flex;align-items:center;gap:11px;color:#F8F6F1;text-decoration:none}
 .brandMark{position:relative;width:24px;height:24px;flex:0 0 auto;clip-path:polygon(0 0,100% 50%,0 100%);background:linear-gradient(135deg,#329c91 0 48%,#f08a6a 48% 72%,#e7d9c6 72%)}
 .brandMark::after{content:"";position:absolute;left:5px;top:7px;width:9px;height:10px;background:#102742;clip-path:polygon(0 0,100% 50%,0 100%)}
 .brandCopy{display:grid;gap:2px}.brandCopy strong{font-size:15px;letter-spacing:.12em}.brandCopy small{color:#A9B8C5;font-size:12px;font-weight:750;letter-spacing:.055em;text-transform:uppercase}
 .workspace{display:block;margin-top:12px;color:#8095A8;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-.primary,.secondary{display:grid;gap:2px;padding-top:14px}.sectionLabel{padding:0 9px 7px;color:#8AA0B1;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
-.workLink{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;min-height:46px;padding:7px 9px;border:1px solid transparent;border-radius:7px;color:#B7C5D1;text-decoration:none}
+.primary,.secondary{display:grid;gap:1px;padding-top:10px}.sectionLabel{padding:0 9px 4px;color:#8AA0B1;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.workLink{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;min-height:38px;padding:5px 9px;border:1px solid transparent;border-radius:7px;color:#B7C5D1;text-decoration:none}
 .workLink:hover{background:rgba(255,255,255,.055);color:#F8F6F1}.workLink strong,.workLink small{display:block}.workLink strong{font-size:12px;line-height:1.2}.workLink small{margin-top:2px;font-size:12px;color:#7F94A6;line-height:1.35}
 .glyph{display:grid;place-items:center;width:26px;height:26px;border:0;border-radius:6px;background:rgba(255,255,255,.045);font-size:12px;font-weight:900;color:#91A5B6}.glyph svg{display:block}
 .active{background:rgba(255,255,255,.09);border-color:transparent;color:#fff;box-shadow:inset 2px 0 0 #74C9BB}.active .glyph{background:rgba(47,143,131,.19);color:#86D8CC}.active small{color:#A9D8D1}
-.secondary{margin-top:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
-.secondary a,.bottom a{min-height:34px;display:flex;align-items:center;padding:7px 8px;border-radius:6px;color:#9FB0BF;text-decoration:none;font-size:12px;font-weight:750}
+.secondary{margin-top:6px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}
+.secondary a,.bottom a{min-height:30px;display:flex;align-items:center;padding:5px 8px;border-radius:6px;color:#9FB0BF;text-decoration:none;font-size:12px;font-weight:750}
 .secondary a:hover,.bottom a:hover,.secondaryActive{background:rgba(255,255,255,.055);color:#fff!important}
-.bottom{margin-top:auto;display:grid;gap:3px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+.bottom{margin-top:auto;display:grid;gap:1px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}
+.sidebar::-webkit-scrollbar{width:8px}.sidebar::-webkit-scrollbar-thumb{border-radius:8px;background:rgba(255,255,255,.28)}.sidebar::-webkit-scrollbar-track{background:transparent}
 .mobileMenu{display:none}
 
 @media(max-width:900px){

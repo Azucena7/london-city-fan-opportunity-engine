@@ -112,3 +112,18 @@ test("the four primary app destinations fit on a phone without scrolling the bar
   expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
   await expect(nav.getByRole("link", { name: /Players/ })).toBeInViewport();
 });
+
+test("on a short laptop screen every sidebar link stays reachable and the current page is in view", async ({ page, isMobile }) => {
+  test.skip(isMobile, "The desktop sidebar only");
+  await page.setViewportSize({ width: 1280, height: 650 });
+  await page.goto("/app/help");
+  await page.waitForLoadState("networkidle");
+  const sidebar = page.getByRole("complementary", { name: "AVELA club app navigation" });
+  // The current page, low in the list, is scrolled into view without moving the page itself.
+  await expect(sidebar.locator("[aria-current='page']").first()).toBeInViewport();
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  // The very last link can be reached and used.
+  const last = sidebar.getByRole("link").last();
+  await last.scrollIntoViewIfNeeded();
+  await expect(last).toBeInViewport();
+});

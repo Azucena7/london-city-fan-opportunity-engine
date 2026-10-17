@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./ProductJourneyNav.module.css";
+import { SidebarActiveIntoView } from "./SidebarActiveIntoView";
 
 type ProductJourneyNavProps = {
   active?: "home" | "campaigns" | "matches" | "demo" | "learning" | "setup" | "access" | "sources" | "executive" | "season" | "players" | "sponsors" | "contracts" | "help";
@@ -70,6 +71,7 @@ export function ProductJourneyNav({ active }: ProductJourneyNavProps) {
 
   return (
     <aside className={styles.sidebar} aria-label="AVELA club app navigation">
+      <SidebarActiveIntoView />
       <div className={styles.top}>
         <Link className={styles.brand} href="/app" aria-label="AVELA home">
           <span className={styles.brandMark} aria-hidden="true" />
