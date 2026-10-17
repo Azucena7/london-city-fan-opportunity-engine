@@ -1,0 +1,33 @@
+.print{min-height:38px;padding:7px 14px;border:1px solid var(--product-ink);border-radius:8px;background:var(--product-ink);color:#fff;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.notice{display:grid;gap:4px;margin-bottom:14px;padding:12px 16px;border:1px solid var(--product-line);border-left:3px solid var(--product-accent-text);border-radius:10px;background:#fff}
+.notice strong{font-size:13px}
+.notice p{margin:0;color:var(--product-muted);font-size:13px;line-height:1.5}
+.cycles{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.cycle{padding:18px 20px;border:1px solid var(--product-line);border-radius:12px;background:#fff;break-inside:avoid}
+.cycle[data-state="ahead"]{background:#FBFCFC}
+.cycle header span{color:var(--product-muted);font-size:11px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.cycle header h2{margin:4px 0 2px;font-size:18px}
+.cycle header small{color:var(--product-muted);font-size:12px}
+.rows{display:grid;gap:0;margin:14px 0 0}
+.rows>div{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding:9px 0;border-top:1px solid #EDF0F2}
+.rows dt{color:var(--product-muted);font-size:12px;font-weight:800}
+.rows dd{margin:0;font-size:13px;line-height:1.5}
+.muted{color:var(--product-muted)}
+.links{display:flex;gap:16px;margin:12px 0 0;font-size:12px}
+.links a{color:var(--product-accent-text);font-weight:800;text-decoration:none}
+.end{margin-top:16px;padding:18px 20px;border:1px solid var(--product-line);border-radius:12px;background:#fff;break-inside:avoid}
+.end h2{margin:0 0 6px;font-size:18px}
+.end p{margin:0;color:var(--product-muted);font-size:13px}
+.end ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 0;padding:0;list-style:none}
+.end li{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--product-line);border-radius:8px}
+.end li b{font-size:13px}
+.end li small{grid-column:2;color:var(--product-muted);font-size:12px;line-height:1.4}
+.box{grid-row:span 2;width:16px;height:16px;margin-top:1px;border:1.5px solid var(--product-ink);border-radius:3px}
+.end .sign{margin-top:16px;color:var(--product-ink)}
+@media(max-width:700px){.rows>div{grid-template-columns:minmax(0,1fr);gap:2px}.end ul{grid-template-columns:minmax(0,1fr)}}
+
+/* Printed or saved as PDF: the app chrome is hidden globally (product-system.css). */
+@media print{
+  .print,.links{display:none!important}
+  .cycle,.end,.notice{border-color:#C9D1D8}
+}

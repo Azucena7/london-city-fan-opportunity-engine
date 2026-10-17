@@ -203,3 +203,14 @@
 .productAppShell :is(h1,h2,h3){color:var(--product-ink)}
 .productAppShell :is(p,small){color:var(--product-muted)}
 .productAppShell :is(article,section,div){box-sizing:border-box}
+
+/* Printing any app screen (e.g. the pilot cycle report saved as PDF) shows the content alone:
+   no sidebar, floating helpers or decision bar, and the content takes the full page width. */
+@media print{
+  aside[aria-label="AVELA club app navigation"],
+  aside[aria-label="Decision bar"],
+  [class*="AskAvelaPanel_launcher"],
+  .skipLink,
+  [class*="AppWorkspaceShell_utility"]{display:none!important}
+  .productAppShell{margin-left:0!important;width:100%!important}
+}

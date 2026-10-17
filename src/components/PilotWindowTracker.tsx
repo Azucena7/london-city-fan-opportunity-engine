@@ -1,17 +1,10 @@
 import Link from "next/link";
 import { calendar, currentState } from "@/lib/data";
 import { currentProductDate } from "@/lib/currentProductDate";
-import { CYCLE_STATE_KEY, PILOT_WINDOW, cycleStates, windowProgress } from "@/lib/pilotWindow";
+import { CYCLE_STATE_KEY, END_OPTIONS, PILOT_WINDOW, cycleStates, windowProgress } from "@/lib/pilotWindow";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { getCurrentProductResults } from "@/lib/productResults";
 import styles from "./PilotWindowTracker.module.css";
-
-const END_OPTIONS = [
-  ["Continue", "Run the same workflows over the next window."],
-  ["Adjust", "Keep going with a changed objective, workflow or measure."],
-  ["Stop", "End the test; the decision record stays with the club."],
-  ["Deepen integration", "Connect authorised club data the window showed was missing."]
-] as const;
 
 /**
  * The pilot window inside the app: each cycle's state, what was recommended, whether outcome
@@ -31,7 +24,10 @@ export function PilotWindowTracker() {
           <h2>{progress.played} of {progress.total} cycles played · {progress.observed} with public outcome evidence</h2>
           <p>London City is an independent demonstration, not a customer. A club pilot replaces public evidence with authorised club data and pre-agreed measures.</p>
         </div>
-        <Link href="/pilot">How the pilot works →</Link>
+        <div className={styles.headLinks}>
+          <Link href="/app/learning/report">Cycle report →</Link>
+          <Link href="/pilot">How the pilot works →</Link>
+        </div>
       </header>
 
       <ol className={styles.cycles}>

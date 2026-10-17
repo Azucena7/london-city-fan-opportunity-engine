@@ -2722,7 +2722,9 @@ test("the pilot window is tracked inside the app, with the end decision left to 
   assert.match(executive, /<PilotWindowTracker \/>/);
   assert.match(tracker, /cycleStates\(calendar, currentProductDate\(currentState\.updated_at\)\)/);
   assert.match(tracker, /End of window · decided by the club/);
-  for (const option of ["Continue", "Adjust", "Stop", "Deepen integration"]) assert.match(tracker, new RegExp(`"${option}"`));
+  // The options live with the window definition, shared by the tracker and the cycle report.
+  assert.match(tracker, /END_OPTIONS\.map/);
+  for (const option of ["Continue", "Adjust", "Stop", "Deepen integration"]) assert.match(read("src/lib/pilotWindow.ts"), new RegExp(`"${option}"`));
   assert.match(tracker, /London City is an independent demonstration, not a customer/);
   assert.match(tracker, /Public evidence only/);
 });

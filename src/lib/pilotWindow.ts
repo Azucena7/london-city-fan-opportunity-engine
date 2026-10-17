@@ -35,6 +35,14 @@ export const PILOT_WINDOW = [
   }
 ] as const;
 
+/** The end-of-window decision, which belongs to the club. */
+export const END_OPTIONS = [
+  ["Continue", "Run the same workflows over the next window."],
+  ["Adjust", "Keep going with a changed objective, workflow or measure."],
+  ["Stop", "End the test; the decision record stays with the club."],
+  ["Deepen integration", "Connect authorised club data the window showed was missing."]
+] as const;
+
 export type CycleState = "Observed" | "Played · evidence pending" | "Active" | "Next";
 
 export const CYCLE_STATE_KEY: Record<CycleState, string> = {
