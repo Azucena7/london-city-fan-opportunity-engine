@@ -221,6 +221,7 @@ test("Campaigns lists fixture and commercial campaigns in one filterable table",
 test("Sources filters the register by state and says what each source blocks", async ({ page }) => {
   await page.goto("/app/sources");
   const register = page.getByRole("table", { name: /Source register/ });
+  await expect(register.locator("tbody tr").first()).toBeVisible();
   const total = await register.locator("tbody tr").count();
   // Each state present is its own filter, and following it shows only that state.
   const filters = page.getByRole("navigation", { name: "Filter the source register" }).getByRole("link");
@@ -230,6 +231,7 @@ test("Sources filters the register by state and says what each source blocks", a
   await stateFilter.click();
   await expect(page).toHaveURL(/state=/);
   const rows = register.locator("tbody tr");
+  await expect(rows.first()).toBeVisible();
   expect(await rows.count()).toBeLessThan(total);
   for (const state of await rows.locator("td:nth-child(2)").allInnerTexts()) expect(state.trim()).toBe(label);
   expect(labels.length).toBeGreaterThan(3);
