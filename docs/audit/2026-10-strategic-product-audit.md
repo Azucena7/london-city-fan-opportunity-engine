@@ -438,7 +438,14 @@ Home = "qué necesita mi atención hoy" (top 3 + lectura externa del día). Rada
 
 ---
 
-## 12. Decisiones que necesitan al fundador (bloquean partes del roadmap)
+## 12. Decisiones del fundador
+
+**Aprobadas el 17‑10‑2026** tal como se proponen abajo. `CLAUDE.md` ya refleja D1, D2 y D3. Para D4–D6 se aplica el criterio por defecto indicado:
+
+- **D4:** mantener las fuentes propias y evaluar PredictHQ durante el primer piloto. No se añade una dependencia SaaS sin beneficio medido.
+- **D5:** primero el webhook genérico. El conector nativo se elige según el stack del primer club.
+- **D6:** contactar con Blinkfire como partner de datos cuando estén hechas las fases 0–1, proponiendo un piloto conjunto con un club suyo de fútbol femenino.
+
 
 - **D1. Categoría y loop.** Opciones:
   - mantener "The Opportunity Engine…" (marca) más "Sports Commercial Decision Intelligence" como descriptor de categoría para compradores;

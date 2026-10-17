@@ -8,11 +8,15 @@ It is not a generic analytics dashboard, CRM, project manager or LLM wrapper. It
 
 Core operating loop:
 
-**Read → Decide → Move → Learn**
+**Anticipate → Decide → Activate → Learn**
+
+(Adopted October 2026, replacing Read → Decide → Move → Learn; Learn includes measurement. Product copy still using the old loop migrates as it is touched.)
 
 Expanded decision flow:
 
-**signal → context → decision → feasibility → execution → evidence → human decision → learning**
+**signal → context → decision → feasibility → activation → execution status → evidence → human decision → learning**
+
+External intelligence is the product core: signals about weather, mobility, competing events, the city calendar, sporting context and audience attention should change what AVELA prioritises, and the user should see why.
 
 The product should make complex cross-functional decisions feel simple on the surface while keeping evidence, assumptions, constraints and confidence inspectable underneath.
 
@@ -24,7 +28,11 @@ Primary external positioning:
 
 Inside the app, "decision workspace" may still describe the working surface (for example the fixture decision workspace), but it is not the product line.
 
-Useful internal/category language:
+Category descriptor (for buyers, partners and analysts, under the brand line):
+
+> Sports commercial decision intelligence
+
+Useful internal language:
 
 > cross-functional decision orchestration
 
@@ -43,6 +51,8 @@ AVELA is different from a general LLM because it is designed around persistent c
 - Do not convert sales into attendance.
 - Do not treat campaign identifiers as proof of incrementality.
 - Do not claim causal impact without an agreed measurement design.
+- Demand or attendance estimates are allowed only from authorised club data, shown as ranges with their source, and with forecast error recorded after each fixture. Until then, a demand-pressure index must be labelled as not a forecast.
+- Keep operational completion ("Delivered") separate from business impact ("Worked").
 - Do not infer supporter identity, CRM conversion or repeat attendance without authorised club data.
 - Keep final commercial decisions human-led.
 - Preserve explicit distinctions between measured, observed, confirmed, forecast, inferred, modelled, missing and pending.
@@ -118,6 +128,14 @@ Historical routes should redirect into canonical AVELA surfaces rather than be m
 - Commercial pilot lead capture
 
 Do not remove product capability merely to simplify the UI.
+
+## Execution boundary
+
+AVELA recommends, explains and records approved decisions; the club's existing tools (Asana, Monday, Jira, Planner or a generic webhook) execute them and stay the source of truth for task status. AVELA reads execution status back into a compact monitor and never becomes a second editable task system.
+
+Internal work-management features (workload and capacity planning, operational request tracking, operational continuity, PM-style campaign boards) are frozen by decision of October 2026: do not extend them; replace them with connectors and the execution monitor. Keep their data until a migration is agreed.
+
+Before adding a capability, check it against the review guide in `docs/audit/2026-10-strategic-product-audit.md` (§11 roadmap, §15 checklist). Do not compete with Blinkfire on sponsorship valuation, brand exposure, broadcast, sponsorship inventory or "chat with your data"; integrate instead.
 
 ## Backend and data boundaries
 
