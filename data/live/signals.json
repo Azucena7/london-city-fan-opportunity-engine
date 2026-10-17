@@ -1103,7 +1103,7 @@
     "state": "forecast",
     "direction": "negative",
     "materiality": "high",
-    "observedAt": "2026-10-17T18:31:35.735Z",
+    "observedAt": "2026-10-17T18:44:42.132Z",
     "title": {
       "en": "Weather risk has entered the action threshold",
       "es": "El riesgo meteorológico ha entrado en el umbral de acción"

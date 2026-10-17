@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-10-17T18:31:35.907Z",
+  "updated_at": "2026-10-17T18:44:42.252Z",
   "status": "active",
   "next_home_fixture_id": "2026-10-18-eve-h",
   "last_completed_home_fixture_id": "2026-09-26-bha-h",
   "weather": {
     "status": "forecast",
     "valid_for": "2026-10-18",
-    "generated_at": "2026-10-17T18:31:35.735Z",
+    "generated_at": "2026-10-17T18:44:42.132Z",
     "precipitation_probability_max": 64,
     "precipitation_sum": 4.5,
     "temperature_max": 14,
@@ -19,42 +19,42 @@
       "fixture_id": "2026-10-18-eve-h",
       "status": "forecast",
       "valid_for": "2026-10-18",
-      "generated_at": "2026-10-17T18:31:35.735Z",
+      "generated_at": "2026-10-17T18:44:42.132Z",
       "precipitation_probability_max": 64,
       "precipitation_sum": 4.5,
       "temperature_max": 14,
       "temperature_min": 7.4,
       "wind_speed_max": 20.9,
-      "previous_precipitation_probability_max": 39,
-      "previous_generated_at": "2026-10-17T00:28:56.128Z",
+      "previous_precipitation_probability_max": 64,
+      "previous_generated_at": "2026-10-17T18:31:35.735Z",
       "source": "Open-Meteo"
     },
     {
       "fixture_id": "2026-10-28-cry-h",
       "status": "forecast",
       "valid_for": "2026-10-28",
-      "generated_at": "2026-10-17T18:31:35.735Z",
+      "generated_at": "2026-10-17T18:44:42.132Z",
       "precipitation_probability_max": 30,
       "precipitation_sum": 0,
       "temperature_max": 11.6,
       "temperature_min": 6.2,
       "wind_speed_max": 10.1,
-      "previous_precipitation_probability_max": null,
-      "previous_generated_at": null,
+      "previous_precipitation_probability_max": 30,
+      "previous_generated_at": "2026-10-17T18:31:35.735Z",
       "source": "Open-Meteo"
     },
     {
       "fixture_id": "2026-11-01-mci-h",
       "status": "forecast",
       "valid_for": "2026-11-01",
-      "generated_at": "2026-10-17T18:31:35.735Z",
+      "generated_at": "2026-10-17T18:44:42.132Z",
       "precipitation_probability_max": null,
       "precipitation_sum": null,
       "temperature_max": null,
       "temperature_min": null,
       "wind_speed_max": null,
       "previous_precipitation_probability_max": null,
-      "previous_generated_at": null,
+      "previous_generated_at": "2026-10-17T18:31:35.735Z",
       "source": "Open-Meteo"
     }
   ],
@@ -65,12 +65,12 @@
   "attention_availability": 35,
   "material_changes": 0,
   "source_failures": [],
-  "public_signal_changes": 1,
+  "public_signal_changes": 0,
   "public_signal_refresh": {
     "automated": true,
     "cadence": "weekly-and-fixture-windows",
-    "lastAttemptAt": "2026-10-17T18:31:35.907Z",
-    "lastSuccessfulAt": "2026-10-17T18:31:35.907Z",
+    "lastAttemptAt": "2026-10-17T18:44:42.252Z",
+    "lastSuccessfulAt": "2026-10-17T18:44:42.252Z",
     "state": "fresh",
     "sources": [
       {
@@ -78,7 +78,7 @@
         "label": "London City YouTube",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-17T18:31:35.907Z",
+        "checkedAt": "2026-10-17T18:44:42.252Z",
         "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
       },
       {
@@ -86,7 +86,7 @@
         "label": "London event landscape",
         "state": "measured",
         "confidence": "high",
-        "checkedAt": "2026-10-17T18:31:35.907Z",
+        "checkedAt": "2026-10-17T18:44:42.252Z",
         "sourceUrl": "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/"
       }
     ]

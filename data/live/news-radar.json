@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-17T18:31:38.593Z",
-  "lastSuccessfulAt": "2026-10-17T18:31:38.593Z",
+  "checkedAt": "2026-10-17T18:44:45.233Z",
+  "lastSuccessfulAt": "2026-10-17T18:44:45.233Z",
   "failures": [],
   "items": [
     {
@@ -57,6 +57,19 @@
       "fixtureIds": [],
       "id": "news-aee7d8826833",
       "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "Kumagai | We will give everything to get the three points",
+      "outlet": "West Ham United",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOUThWNW9WdExJMXZ6R1JQOGM4VXpfbTRMeko2dFp0VTlPMEkzdUN3SVQwaXJuR2xRLUxOQzI2Slh0OEl6d1huc0JOb295clBlOUIxNWYwYkI1TWVuN0RIZVA1TGJ5cnl2cXk4cFdGc0Y3dGpRRlNXc0lUUkRWUmtTRFdMVnlFR0dHcnNYMjUzck8yZw?oc=5",
+      "publishedAt": "2026-10-17T09:50:26.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-79bc2b2b3934",
+      "firstSeenAt": "2026-10-17T18:44:45.233Z"
     },
     {
       "title": "‘It makes Alexia better’ - Maestre believes WSL can help Putellas win third Ballon d’Or",
@@ -1148,20 +1161,6 @@
       "fixtureIds": [],
       "id": "news-7a601e09b005",
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "Spurs vs London City Lionesses, Women's Super League | How to watch, team news, kit colours, key information",
-      "outlet": "Tottenham Hotspur",
-      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPSDlNZ0lENmxRZW9CY2M4LUg1c2JGMHl2WUFBMG1UTVcxdUx1c2lwVTUyNVNmYkdWYWhnYWRmeG1ST2pHOVhiM2N2al9odi00MGk2SFZ0S2NxVlBJcFZPeW84dDhfZ1hRcGZ6MnZBQTBNZnU5UkI2RlBTc0o2ZGFWNm41WWlTTG13cUZmaVRPcFI1a0R0ZEswUDllNDF2NXd2U2VqQmxIdnROVTNUcTVlWTV4QmZ6eURESWdMRmlKV1JVZ2RUZENaYzdpTk51SWtmOTF4c21qc3hPTHMyS0hhYQ?oc=5",
-      "publishedAt": "2026-10-03T07:00:00.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-66ea83bbc88b",
-      "firstSeenAt": "2026-10-14T00:17:39.041Z"
     }
   ]
 }
