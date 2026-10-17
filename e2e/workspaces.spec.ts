@@ -217,3 +217,23 @@ test("Campaigns lists fixture and commercial campaigns in one filterable table",
   await expect(page.getByRole("region", { name: "Campaign list" })).toHaveCount(0);
   await expect(page.getByText("Ready / moving")).toBeVisible();
 });
+
+test("Sources filters the register by state and says what each source blocks", async ({ page }) => {
+  await page.goto("/app/sources");
+  const register = page.getByRole("table", { name: /Source register/ });
+  const total = await register.locator("tbody tr").count();
+  // Each state present is its own filter, and following it shows only that state.
+  const filters = page.getByRole("navigation", { name: "Filter the source register" }).getByRole("link");
+  const labels = await filters.allInnerTexts();
+  const stateFilter = filters.filter({ hasText: /Requires access|Planned|Unavailable|Degraded/ }).first();
+  const label = (await stateFilter.innerText()).replace(/\s*\d+\s*$/, "").trim();
+  await stateFilter.click();
+  await expect(page).toHaveURL(/state=/);
+  const rows = register.locator("tbody tr");
+  expect(await rows.count()).toBeLessThan(total);
+  for (const state of await rows.locator("td:nth-child(2)").allInnerTexts()) expect(state.trim()).toBe(label);
+  expect(labels.length).toBeGreaterThan(3);
+  // A missing required source says what it blocks; a supporting one says it only lowers confidence.
+  await page.goto("/app/sources?state=attention");
+  await expect(register).toContainText(/Blocks|Weakens|Lowers confidence in/);
+});

@@ -32,3 +32,22 @@ test("filters split the register without losing a source", () => {
   assert.equal(parseSourceFilter(["operational"]), "all", "unexpected shapes fall back to all");
   assert.equal(parseSourceFilter("anything"), "all");
 });
+
+test("a source separates the decisions it blocks from the ones it only makes less certain", () => {
+  const rows = registerRows(live);
+  for (const row of rows) {
+    // Every decision it feeds is either blocked by it or supported by it, never both.
+    assert.deepEqual([...row.blocks, ...row.supports].sort(), [...row.usedBy].sort(), row.id);
+    for (const decision of live.decisions) {
+      if (decision.requiredSourceIds.includes(row.id)) assert.ok(row.blocks.includes(decision.label.en), `${row.id} blocks ${decision.label.en}`);
+    }
+  }
+});
+
+test("each stored state can be filtered on its own", () => {
+  const rows = registerRows(live);
+  const states = ["blocked", "not-configured", "degraded", "requires-access", "operational"];
+  const total = states.reduce((sum, state) => sum + filterRows(rows, parseSourceFilter(state)).length, 0);
+  assert.equal(total, rows.length);
+  for (const state of states) for (const row of filterRows(rows, parseSourceFilter(state))) assert.equal(row.state, state);
+});
