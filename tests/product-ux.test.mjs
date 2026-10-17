@@ -274,10 +274,13 @@ test("Opportunity Radar applies club context as advisory fit without changing ev
   assert.match(radar, /matchedObjectives/);
   assert.match(radar, /activationChannels/);
   assert.match(radar, /No direct club-priority match detected yet/);
-  assert.match(radar, /const rank = priorityRank/);
+  assert.match(radar, /const baseRank = priorityRank/);
   const rankFn = radar.slice(radar.indexOf("function priorityRank"), radar.indexOf("const objectiveMatchers"));
   assert.doesNotMatch(rankFn, /ClubOperatingContext|priorityObjectives|connectedChannels|clubContext/);
-  assert.match(radar, /const rank = priorityRank\(\s*item\.score,\s*item\.confidence\.label,\s*item\.daysToFixture,\s*materialSignalCount,\s*item\.decisionState === "READY FOR REVIEW"\s*\)/s);
+  assert.match(radar, /const baseRank = priorityRank\(\s*item\.score,\s*item\.confidence\.label,\s*item\.daysToFixture,\s*materialSignalCount,\s*item\.decisionState === "READY FOR REVIEW"\s*\)/s);
+  // External context reorders from evidence (events, forecast, TfL, calendar), never from club preferences.
+  assert.match(radar, /const rank = baseRank \+ pressure\.points/);
+  assert.doesNotMatch(read("src/lib/contextPressure.ts"), /ClubOperatingContext|priorityObjectives|connectedChannels/);
 
   // Club context is loaded once, in the shared decision queue the Radar reads.
   assert.match(read("src/lib/decisionQueue.ts"), /getCurrentClubOperatingContext/);

@@ -1,5 +1,7 @@
 import { getCurrentProductOpportunity, type OpportunityReadOptions } from "@/lib/productOpportunity";
 import type { ClubOperatingContext } from "@/lib/clubOperatingContext";
+import type { ContextPressure } from "@/lib/contextPressure";
+import { getContextPressure } from "@/lib/currentContextPressure";
 
 export type OpportunityRadarItem = {
   fixtureId: string;
@@ -17,7 +19,11 @@ export type OpportunityRadarItem = {
   materialSignalCount: number;
   lens: string[];
   radarState: "Act now" | "Review" | "Monitor" | "No material opportunity";
+  /** Rank before context pressure: the state (Act now, Review…) is read from this, so the outside world reorders and explains without changing decision rules. */
+  baseRank: number;
+  /** Base rank plus context pressure: the order the Radar and the decision queue use. */
   rank: number;
+  contextPressure: ContextPressure;
   opportunityScore: number | null;
   urgency: "Immediate" | "Soon" | "Watch";
   recentMaterialSignalCount: number;
@@ -140,13 +146,15 @@ export function buildOpportunityRadar(
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
     .map((item) => {
       const materialSignalCount = item.liveSignals.filter((signal) => signal.materiality !== "low").length;
-      const rank = priorityRank(
+      const baseRank = priorityRank(
         item.score,
         item.confidence.label,
         item.daysToFixture,
         materialSignalCount,
         item.decisionState === "READY FOR REVIEW"
       );
+      const pressure = getContextPressure(item.fixtureId, item.fixture.date);
+      const rank = baseRank + pressure.points;
 
       const recentMaterialSignalCount = recentMaterialSignals(
         item.liveSignals.map((signal) => ({
@@ -181,8 +189,10 @@ export function buildOpportunityRadar(
         lens: Array.from(new Set(item.liveSignals.map((signal) => signal.lens)))
           .filter((lens) => lens !== "General context")
           .slice(0, 3),
-        radarState: radarState(rank, item.daysToFixture, item.score, materialSignalCount),
+        radarState: radarState(baseRank, item.daysToFixture, item.score, materialSignalCount),
+        baseRank,
         rank,
+        contextPressure: pressure,
         opportunityScore: item.score,
         urgency: urgencyLabel(item.daysToFixture),
         recentMaterialSignalCount,

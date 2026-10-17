@@ -231,6 +231,11 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
                   <span>{item.opportunityLabel}</span>
                   <strong>{item.opportunity}</strong>
                   <small>{item.materialSignalCount} material · {item.signalCount} total signals</small>
+                  {item.contextPressure.points ? (
+                    <small className={styles.contextLine}>
+                      Outside the club +{item.contextPressure.points}: {item.contextPressure.drivers.slice(0, 2).map((driver) => driver.label).join(" · ")}
+                    </small>
+                  ) : null}
                 </div>
                 <div className={styles.radarScoreline}>
                   <div><span>Score</span><strong>{item.opportunityScore ?? "—"}</strong></div>
