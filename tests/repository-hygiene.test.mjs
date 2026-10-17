@@ -774,6 +774,20 @@ test("Supabase migrations run by hand, in one transaction, rolled back unless ap
   }
 });
 
+test("the quality gate applies every migration to a fresh Postgres", () => {
+  const workflow = readFileSync(".github/workflows/quality-gate.yml", "utf8");
+  assert.match(workflow, /\n  migrations:\n/);
+  assert.match(workflow, /image: postgres:16/);
+  assert.match(workflow, /scripts\/check-migrations\.sh/);
+  const script = readFileSync("scripts/check-migrations.sh", "utf8");
+  assert.match(script, /ON_ERROR_STOP=1/);
+  assert.match(script, /supabase\/migrations\/\*\.sql/);
+  // A function body opened with a single $ cannot be parsed by Postgres.
+  for (const file of readdirSync("supabase/migrations").filter((name) => name.endsWith(".sql"))) {
+    assert.doesNotMatch(readFileSync(`supabase/migrations/${file}`, "utf8"), /^as \$$|^\$;$/m, `${file} uses a single-dollar function body`);
+  }
+});
+
 test("API routes read JSON through the size-capped reader and auth routes refuse cross-site posts", () => {
   const routes = readdirSync("src/app/api", { recursive: true }).filter((path) => String(path).endsWith("route.ts")).map((path) => `src/app/api/${path}`);
   for (const route of routes) {

@@ -49,3 +49,28 @@ jobs:
 
       - name: Browser regression tests (desktop + mobile)
         run: npm run test:e2e
+
+  migrations:
+    # Every migration must apply, in order, to a fresh Postgres before it can reach a project.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Apply every migration to a fresh database
+        env:
+          DATABASE_URL: postgresql://postgres@localhost:5432/postgres
+        run: scripts/check-migrations.sh

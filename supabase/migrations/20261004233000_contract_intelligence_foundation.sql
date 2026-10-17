@@ -200,7 +200,7 @@ returns trigger
 language plpgsql
 security invoker
 set search_path=''
-as $
+as $$
 begin
   if TG_TABLE_NAME = 'contract_documents' then
     if new.lifecycle_state = 'active'
@@ -251,7 +251,7 @@ begin
   end if;
   return new;
 end;
-$;
+$$;
 
 revoke all on function public.enforce_contract_verification_permissions() from public, anon;
 grant execute on function public.enforce_contract_verification_permissions() to authenticated;
