@@ -88,6 +88,7 @@ export default function Home() {
             </tr>
           </tbody>
         </table>
+        <p className={styles.proofCaveat}>Sequence, not cause: London City did not use AVELA, and the announcement was its own decision.</p>
         <div className={`${ed.actions} ${styles.proofActions}`}>
           <Link className={ed.coralButton} href="/case-study?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=proof&utm_content=london_city">See the evidence</Link>
           <Link className={ed.textLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=proof">Open London City Live ↗</Link>

@@ -90,7 +90,7 @@ export function ClubPilotProposition() {
     <section className={styles.tour} aria-labelledby="tour-title">
       <div className={styles.tourCopy}>
         <h2 id="tour-title">{es ? "El producto, en 50 segundos." : "The product, in 50 seconds."}</h2>
-        <p>{es ? "Grabado sobre la aplicación real: leer, decidir, mover y aprender. Demostración con información pública de London City Lionesses, que no es cliente de AVELA. No se muestran datos de ningún club." : "Recorded on the real application: read, decide, move and learn. A demonstration on London City Lionesses public information; London City is not an AVELA customer. No club data is shown."}</p>
+        <p>{es ? "Grabado sobre el espacio de demostración: anticipar, decidir, activar y aprender. Demostración con información pública de London City Lionesses, que no es cliente de AVELA. No se muestran datos de ningún club." : "Recorded on the demonstration workspace: anticipate, decide, activate and learn. A demonstration on London City Lionesses public information; London City is not an AVELA customer. No club data is shown."}</p>
       </div>
       <video
         className={styles.tourVideo}
@@ -233,7 +233,7 @@ export function ClubPilotProposition() {
 
           <label className={styles.consent}>
             <input name="consent" type="checkbox" value="yes" required />
-            <span>{es ? "Acepto que AVELA use estos datos para responder a mi solicitud de piloto. No se solicitan datos de aficionados." : "I agree that AVELA may use these details to respond to my pilot request. No supporter data is requested."}</span>
+            <span>{es ? "Acepto que AVELA use estos datos para responder a mi solicitud de piloto. No se solicitan datos de aficionados." : "I agree that AVELA may use these details to respond to my pilot request. No supporter data is requested."} <Link href="/privacy">{es ? "Privacidad" : "Privacy"}</Link></span>
           </label>
 
           <div className={styles.submitRow}>

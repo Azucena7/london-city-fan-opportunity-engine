@@ -20,7 +20,7 @@ export default function CasesPage() {
         <span className={styles.eyebrow}>Fixture use cases</span>
         <h1>Different fixtures should produce different commercial decisions.</h1>
         <p>
-          The engine should not recommend “push harder” every week. These cases show three distinct commercial jobs — retention, core protection and acquisition — while keeping the underlying composite score in the analyst layer.
+          The engine should not recommend “push harder” every week. These cases show three distinct commercial jobs — retention, core protection and acquisition — each grounded in its own evidence rather than a single score.
         </p>
       </header>
 

@@ -1,7 +1,7 @@
 import styles from "./EngineStory.module.css";
 
 const steps = [
-  ["Signal", "AVELA watches what is happening around each fixture: weather, city events, competing football and calendar moments — and, in a pilot, transport, CRM and ticketing."],
+  ["Signal", "AVELA watches what is happening around each fixture: weather, major events, competing football, calendar moments and road and rail disruption — and, in a pilot, CRM and ticketing."],
   ["Impact", "It asks whether the signal touches attendance, recurrence, timing, a campaign or a partner activation. Most signals do not, and they stay quiet."],
   ["Opportunity or pressure", "When one does, it names the opportunity or the pressure and the evidence behind it, with known, assumed and missing kept apart."],
   ["Prepared decision", "Internal context validates it — who can be reached, what rights allow, who is available — and the result is one move with an owner and a deadline."],
@@ -10,7 +10,7 @@ const steps = [
 
 const useCases = [
   ["Attendance & recurrence", "A same-slot WSL fixture or a Premier League kick-off nearby", "Who to re-invite, with which message, and when."],
-  ["Matchday opportunity", "An England match the same evening, a festival, a dry and mild forecast", "Whether to extend the day, and what to build around the match."],
+  ["Matchday opportunity", "An England match the same evening, a bank holiday weekend, a dry and mild forecast", "Whether to extend the day, and what to build around the match."],
   ["Commercial activation", "A broadcast pick or a partner moment in the calendar", "Which activation to prioritise, and how to sell what the stadium adds."],
   ["Partner & people context", "Partner obligations, player and staff availability", "Whether the move can actually be delivered — and by whom."]
 ] as const;

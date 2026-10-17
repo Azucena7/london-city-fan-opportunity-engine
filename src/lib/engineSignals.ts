@@ -14,7 +14,7 @@ export type EngineSignal = {
 // else is shown as connecting in a pilot, never as a signal AVELA already watches.
 export const ENGINE_SIGNAL_FAMILIES = [
   { id: "weather", label: "Weather", detail: "Matchday forecast", sourceIds: ["open-meteo"] },
-  { id: "city-events", label: "City events", detail: "Concerts, festivals, sport", sourceIds: ["ticketmaster-events"] },
+  { id: "city-events", label: "City events", detail: "Major sport events nearby", sourceIds: ["ticketmaster-events"] },
   { id: "competing-football", label: "Competing football", detail: "Fixtures and broadcast picks", sourceIds: ["ticketmaster-events", "club-public-web"] },
   { id: "calendar", label: "Calendar moments", detail: "Bank holidays, international windows", sourceIds: ["uk-bank-holidays", "fifa-international-windows"] },
   { id: "transport", label: "Transport", detail: "Road and rail disruption", sourceIds: ["tfl-road", "tfl-national-rail", "national-rail-rdm"] },

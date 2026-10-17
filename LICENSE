@@ -1,0 +1,10 @@
+Copyright (c) 2026 AVELA. All rights reserved.
+
+This software, its source code, data models and documentation are proprietary and
+confidential. No licence is granted to use, copy, modify, publish or distribute any part of
+them without prior written permission from the copyright holder.
+
+Third-party components keep their own licences: the npm dependencies listed in
+package.json and package-lock.json, and the vendored skills under .claude/skills/, each with
+its own LICENSE file where provided. Public data used in the demonstration remains subject
+to the terms of its original sources.

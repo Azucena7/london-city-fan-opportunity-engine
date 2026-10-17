@@ -12,6 +12,7 @@ export function MarketingFooter() {
           <Link href="/pilot">Pilot</Link>
           <Link href="/case-study">Case study</Link>
           <Link href="/app/demo">Guided demo</Link>
+          <Link href="/privacy">Privacy</Link>
         </nav>
       </div>
       <p className={styles.wordmark} aria-hidden="true">AVELA</p>

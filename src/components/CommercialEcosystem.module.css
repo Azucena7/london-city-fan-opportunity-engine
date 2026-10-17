@@ -17,6 +17,9 @@
 .inputs th{width:38%;color:var(--ink-soft);font-weight:600}
 .inputs td{font-weight:650}
 .inputs tr:first-child td{color:#c9603f}
+.status{display:inline-block;margin-left:8px;color:var(--ink-soft);font-size:var(--small);font-weight:600;white-space:nowrap}
+.status::before{content:"· "}
+.status[data-status="Live today"]{color:#1f6f65}
 .engine{max-width:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding:28px 24px;background:var(--navy);color:var(--on-navy-soft);font-size:16px}
 .engine strong{color:var(--on-navy);font-size:clamp(24px,2.4vw,34px);letter-spacing:-.03em}
 .outputs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:0;padding:0;list-style:none}
