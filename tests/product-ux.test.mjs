@@ -884,12 +884,12 @@ test("pilot rehearsal is clearly synthetic and reachable from the operating pack
 });
 
 
-test("product cases keep composite score in the analyst layer", () => {
+test("product cases show evidence, not a score", () => {
   const page = read("src/app/cases/page.tsx");
   assert.doesNotMatch(page, />Score</);
   assert.doesNotMatch(page, /planningScore/);
   assert.match(page, /Decision posture/);
-  assert.match(page, /composite score in the analyst layer/);
+  assert.match(page, /grounded in its own evidence rather than a single score/);
 });
 
 

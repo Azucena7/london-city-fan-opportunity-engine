@@ -5,6 +5,7 @@ import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
 import { requireAiAccess } from "@/lib/aiAccess";
+import { AI_MAX_OUTPUT_TOKENS, aiUsageLog } from "@/lib/aiBudget";
 import { readJson } from "@/lib/requestGuards";
 
 type AskIntent = "ask" | "tell" | "change";
@@ -176,6 +177,7 @@ export async function POST(request: Request) {
     },
     body: JSON.stringify({
       model,
+      max_tokens: AI_MAX_OUTPUT_TOKENS,
       messages: [
         {
           role: "system",
@@ -220,8 +222,10 @@ export async function POST(request: Request) {
 
   const payload = await response.json().catch(() => null) as {
     choices?: Array<{ message?: { content?: string | null } }>;
+    usage?: { prompt_tokens?: number; completion_tokens?: number };
     error?: { message?: string };
   } | null;
+  console.info(aiUsageLog("ask-avela", access.user.id, model, payload?.usage));
 
   if (!response.ok) {
     console.error("Ask AVELA gateway error", response.status, payload?.error?.message);

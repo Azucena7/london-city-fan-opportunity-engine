@@ -43,3 +43,13 @@ test("the club page shows a short tour recorded on the real app, labelled as a p
   expect(response.ok()).toBe(true);
   expect(response.headers()["content-type"]).toContain("video/mp4");
 });
+
+test("the pilot form links to a privacy page that names what is collected and who processes it", async ({ page }) => {
+  await page.goto("/for-clubs");
+  await page.getByRole("link", { name: "Privacy" }).first().click();
+  await expect(page).toHaveURL(/\/privacy$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("What this website collects, and why.");
+  for (const text of ["club, role, work email", "Supporter, ticket or order data", "Vercel", "Supabase", "Resend", "withdraw your consent"]) {
+    await expect(page.getByRole("main")).toContainText(text);
+  }
+});

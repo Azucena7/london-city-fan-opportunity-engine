@@ -1,0 +1,8 @@
+/* A reading page: one narrow column on paper, section headings at body scale. */
+.header{display:flex;flex-direction:column;gap:16px;padding:calc(var(--section) * .6) var(--m) 32px;background:var(--paper)}
+.header h1{max-width:20ch;font-size:clamp(34px,4.4vw,60px);line-height:1.02;letter-spacing:-.04em}
+.body{display:grid;gap:40px;padding:16px var(--m) var(--section);background:var(--paper)}
+.body section{display:grid;gap:10px;max-width:68ch}
+.body h2{font-size:clamp(20px,1.8vw,26px);letter-spacing:-.02em}
+.body p{margin:0;line-height:1.6}
+.body a{color:inherit;text-decoration:underline;text-underline-offset:3px}

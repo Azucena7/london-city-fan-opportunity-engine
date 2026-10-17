@@ -27,6 +27,7 @@
 .proofTable :is(td,th){padding:18px 16px;vertical-align:top;text-align:left}
 .proofTable td:first-child{width:5.5em;color:var(--teal-light);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
 .proofTable th{width:12em;color:var(--on-navy-soft);font-size:var(--small);font-weight:600}
+.proofCaveat{grid-column:2;margin:0;color:var(--on-navy-soft);font-size:var(--small)}
 .proofTable tr:last-child th,.proofTable tr:last-child td:first-child{color:var(--coral)}
 .proofActions{grid-column:2}
 
@@ -59,7 +60,7 @@
 @media(max-width:1080px){
   .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"title title" "engine engine" "lead pilot"}
   .proof,.pilot{grid-template-columns:minmax(0,1fr)}
-  .sideNote,.proofTable,.proofActions{grid-column:1}
+  .sideNote,.proofTable,.proofCaveat,.proofActions{grid-column:1}
   .sideNote{padding-right:0;max-width:60ch}
 }
 @media(max-width:640px){

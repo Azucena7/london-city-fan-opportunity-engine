@@ -24,6 +24,7 @@ test("home turns the London City proof into a bounded pilot path", async ({ page
   await expect(proof).toBeVisible();
   for (const text of ["AVELA saw", "London City later announced", "evidence of relevance"]) await expect(proof).toContainText(text);
   await expect(proof).toContainText("London City is an independent demonstration, not a customer");
+  await expect(proof).toContainText("Sequence, not cause");
   const pilot = page.locator("section").filter({ has: page.getByRole("heading", { name: "Prove it on 4–6 fixtures first." }) });
   for (const text of ["4–6 fixtures", "1–2 workflows", "Measured learning"]) await expect(pilot).toContainText(text);
 });
@@ -37,7 +38,7 @@ test("home sections follow the Opportunity Engine story order", async ({ page })
     "Change the context. Watch the plan.",
     "Only signals that change decisions.",
     "Four decisions it is built to change.",
-    "AVELA reads across your tools.",
+    "AVELA works across your tools.",
     "Prove it on 4–6 fixtures first.",
     "Questions clubs ask.",
     "Better decisions, same stack."
@@ -70,9 +71,14 @@ test("home decision demo changes the plan per scenario and stays labelled as a s
 
 test("home shows AVELA complementing specialist tools rather than replacing them", async ({ page }) => {
   await page.goto("/");
-  const ecosystem = page.getByRole("region", { name: "AVELA reads across your tools." });
+  const ecosystem = page.getByRole("region", { name: "AVELA works across your tools." });
   for (const text of ["Works with your club stack", "are not competitors", "remain systems of record", "Blinkfire / analytics", "CRM / ticketing", "Asana / Monday / Jira"]) {
     await expect(ecosystem).toContainText(text);
+  }
+  // No connector is claimed before it exists: each tool says when it applies.
+  await expect(ecosystem.getByRole("row").filter({ hasText: "External signals" })).toContainText("Live today");
+  for (const tool of ["Blinkfire / analytics", "Google / Microsoft calendars", "Asana / Monday / Jira"]) {
+    await expect(ecosystem.getByRole("row").filter({ hasText: tool })).toContainText("Planned");
   }
   const flow = ecosystem.locator('[aria-label="External signals and existing club systems feed the AVELA Opportunity Engine"]');
   await expect(flow).toContainText("Opportunity Engine");

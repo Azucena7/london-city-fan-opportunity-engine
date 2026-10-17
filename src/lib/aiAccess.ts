@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { aiCallAllowed } from "@/lib/aiBudget";
 import { currentSupabaseUser, supabaseConfigured } from "@/lib/supabaseServer";
 
 // AI routes spend model credit, so they are closed by default: only signed-in users whose
@@ -33,6 +34,10 @@ export async function requireAiAccess(): Promise<{ user: AiUser; denied: null } 
   const email = user.email?.trim().toLowerCase();
   if (!email || !user.email_confirmed_at || !allowed.has(email)) {
     return deny(403, "account-not-approved", "Your account is not approved to use AI features.");
+  }
+
+  if (!aiCallAllowed(user.id)) {
+    return deny(429, "rate-limited", "Too many AI requests in a short time. Try again in a few minutes.");
   }
 
   return { user, denied: null };
