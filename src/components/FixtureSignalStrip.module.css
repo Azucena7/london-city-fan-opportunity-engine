@@ -1,0 +1,16 @@
+/* Signals before the plan: a compact list under the decision, open by default. */
+.strip{margin:12px 0;padding:14px 16px;border:1px solid #E0E5E8;border-radius:12px;background:#fff}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.eyebrow{color:var(--product-muted);font-size:12px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.head h2{margin:0;font-size:15px;letter-spacing:-.01em}
+.head a{margin-left:auto;color:var(--product-ink);font-size:12px;font-weight:800}
+.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:12px 0 0;padding:0;list-style:none}
+.list li{display:grid;gap:4px;align-content:start;padding:10px 12px;border-left:3px solid #D8DEE3;border-radius:8px;background:#F8FAFA}
+.list li[data-materiality="high"]{border-left-color:#EF8B6C}
+.list li[data-materiality="medium"]{border-left-color:#D78A1E}
+.state{color:var(--product-muted);font-size:11px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.list strong{font-size:13px;line-height:1.35}
+.list small{color:var(--product-muted);font-size:12px;line-height:1.4}
+.list small a{color:inherit}
+.empty{margin:8px 0 0;color:var(--product-muted);font-size:12px}
+@media(max-width:640px){.head a{margin-left:0}.list li:nth-child(n+4){display:none}}

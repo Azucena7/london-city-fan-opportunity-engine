@@ -28,6 +28,7 @@ import { WorkRoutingPlan } from "@/components/WorkRoutingPlan";
 import { WorkHandoffConfirmation } from "@/components/WorkHandoffConfirmation";
 import { PhaseAnchorOpener } from "@/components/PhaseAnchorOpener";
 import { PhaseScrollSpy } from "@/components/PhaseScrollSpy";
+import { FixtureSignalStrip } from "@/components/FixtureSignalStrip";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { getCurrentPreparedMoves } from "@/lib/currentPreparedMoves";
 import { PreparedMoveCard } from "@/components/PreparedMoveCard";
@@ -187,6 +188,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           </article>
         </div>
       </section>
+
+      <FixtureSignalStrip signals={live.liveSignals} />
 
       {preparedMove ? <PreparedMoveCard draft={preparedMove} /> : null}
 
