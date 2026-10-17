@@ -16,7 +16,6 @@ export const REFRESHED_FILES = [
   "data/seed/calendar.json",
   "data/live/current.json",
   "data/live/signals.json",
-  "data/live/audience-reach.json",
   "data/live/event-landscape.json",
   "data/live/news-radar.json",
   "data/live/bank-holidays.json",

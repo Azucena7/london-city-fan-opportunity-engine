@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ExecutiveShareActions } from "@/components/ExecutiveShareActions";
 import { bankHolidays, calendar, campaignPlans, currentState, internationalWindows } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
+import { schoolHolidayPeriods } from "@/lib/schoolHolidays";
 import { getCurrentPreparedMoves, getPreparationWindowIds } from "@/lib/currentPreparedMoves";
 import { DataTable } from "@/components/DataTable";
 import { PilotWindowTracker } from "@/components/PilotWindowTracker";
@@ -60,7 +61,7 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
   ].slice(0, 4);
   // The portfolio: every upcoming home decision in attention order, so leadership sees what
   // is blocked, what waits on a gate and which calendar moments sit around each fixture.
-  const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows);
+  const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows, schoolHolidayPeriods);
   const preparedMoves = getCurrentPreparedMoves();
   const preparationIds = getPreparationWindowIds();
   const portfolio = radar.map((item) => {

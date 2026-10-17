@@ -4,6 +4,7 @@ import { CalendarRelationshipPanel } from "@/components/CalendarRelationshipPane
 import { TalentPressurePanel } from "@/components/TalentPressurePanel";
 import { bankHolidays, calendar, campaignPlans, currentState, eventLandscape, internationalWindows } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
+import { schoolHolidayPeriods } from "@/lib/schoolHolidays";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { decisionBadge } from "@/lib/decisionQueue";
 import { getCurrentProductResults } from "@/lib/productResults";
@@ -27,7 +28,7 @@ function shortDate(date: string) {
 
 export default async function SeasonIntelligencePage() {
   const homeFixtures = calendar.filter((item) => item.homeAway === "home").sort((a,b) => a.date.localeCompare(b.date));
-  const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows);
+  const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows, schoolHolidayPeriods);
   const fixtureRows = homeFixtures.map((fixture) => {
     const opportunity = getCurrentProductOpportunity(fixture.id);
     const campaign = campaignPlans.campaigns.find((item) => item.fixtureId === fixture.id) ?? null;

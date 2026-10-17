@@ -80,7 +80,7 @@ export function contextPressure({ date, competing, weather, roadClosures, railDi
       label: moments.join(" · "),
       points: Math.min(moments.length * 3, CALENDAR_CAP),
       evidence: "scheduled",
-      source: "GOV.UK / FIFA calendar"
+      source: "GOV.UK, FIFA and council calendars"
     });
   }
 
