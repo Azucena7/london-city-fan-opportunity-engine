@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 import { setSessionCookie, supabaseConfigured, supabasePublicConfig } from "@/lib/supabaseServer";
+import { readJson, sessionWriteRejection } from "@/lib/requestGuards";
 
 export async function POST(request: Request) {
+  // This route sets a session without needing one, so refuse cross-site and non-JSON posts.
+  const rejected = sessionWriteRejection(request);
+  if (rejected) return rejected;
   if (!supabaseConfigured()) {
     return NextResponse.json({ error: "Club accounts are not configured yet." }, { status: 503 });
   }
 
-  const body = await request.json().catch(() => null) as { email?: string; password?: string } | null;
+  const body = await readJson(request) as { email?: string; password?: string } | null;
   const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
   const password = typeof body?.password === "string" ? body.password : "";
 
@@ -32,7 +36,8 @@ export async function POST(request: Request) {
 
   if (!response.ok || !payload?.access_token) {
     return NextResponse.json(
-      { error: payload?.error_description || payload?.msg || "Sign-in failed." },
+      // One message for every failure, so the response never reveals whether an account exists.
+      { error: "Sign-in failed. Check the email and password, and confirm your email address if you have not yet." },
       { status: 401 }
     );
   }

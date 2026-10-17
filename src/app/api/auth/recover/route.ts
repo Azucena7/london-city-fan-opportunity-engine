@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseConfigured, supabasePublicConfig } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 // Sends a Supabase password-recovery email. The answer is the same whether or not an account
 // exists for the address, so this route cannot be used to discover who has an account.
@@ -8,7 +9,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Club accounts are not configured yet." }, { status: 503 });
   }
 
-  const body = await request.json().catch(() => null) as { email?: string } | null;
+  const body = await readJson(request) as { email?: string } | null;
   const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Enter the email address of your account." }, { status: 400 });

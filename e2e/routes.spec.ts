@@ -316,3 +316,17 @@ test("Home, Radar and Executive agree on the #1 decision and the attention count
   await expect(summary.getByText("#1 priority").locator("xpath=..")).toContainText(opponent);
   await expect(summary).toContainText(`${actNow + review} fixture decision`);
 });
+
+test("pages refuse framing and auth routes refuse cross-site or non-JSON posts", async ({ request }) => {
+  const page = await request.get("/app");
+  expect(page.headers()["x-frame-options"]).toBe("DENY");
+  expect(page.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
+  expect(page.headers()["x-content-type-options"]).toBe("nosniff");
+
+  const crossSite = await request.post("/api/auth/login", { headers: { origin: "https://attacker.example", "content-type": "application/json" }, data: { email: "a@b.c", password: "x" } });
+  expect(crossSite.status()).toBe(403);
+  const formPost = await request.post("/api/auth/login", { headers: { "content-type": "text/plain" }, data: '{"email":"a@b.c","password":"x"}' });
+  expect(formPost.status()).toBe(415);
+  const logout = await request.post("/api/auth/logout", { headers: { origin: "https://attacker.example" } });
+  expect(logout.status()).toBe(403);
+});

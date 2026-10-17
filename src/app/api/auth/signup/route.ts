@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { supabaseConfigured, supabasePublicConfig } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 export async function POST(request: Request) {
   if (!supabaseConfigured()) {
     return NextResponse.json({ error: "Club accounts are not configured yet." }, { status: 503 });
   }
 
-  const body = await request.json().catch(() => null) as { email?: string; password?: string } | null;
+  const body = await readJson(request) as { email?: string; password?: string } | null;
   const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
   const password = typeof body?.password === "string" ? body.password : "";
 
@@ -23,9 +24,9 @@ export async function POST(request: Request) {
     cache: "no-store"
   });
 
-  const payload = await response.json().catch(() => null) as { id?: string; email?: string; msg?: string; error_description?: string } | null;
   if (!response.ok) {
-    return NextResponse.json({ error: payload?.error_description || payload?.msg || "Account could not be created." }, { status: response.status });
+    // A generic message, so signup never confirms whether an email already has an account.
+    return NextResponse.json({ error: "The account could not be created. If you already have one, sign in or reset your password." }, { status: response.status === 429 ? 429 : 400 });
   }
 
   return NextResponse.json({

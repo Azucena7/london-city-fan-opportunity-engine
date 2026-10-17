@@ -787,3 +787,21 @@ test("the quality gate applies every migration to a fresh Postgres", () => {
     assert.doesNotMatch(readFileSync(`supabase/migrations/${file}`, "utf8"), /^as \$$|^\$;$/m, `${file} uses a single-dollar function body`);
   }
 });
+
+test("API routes read JSON through the size-capped reader and auth routes refuse cross-site posts", () => {
+  const routes = readdirSync("src/app/api", { recursive: true }).filter((path) => String(path).endsWith("route.ts")).map((path) => `src/app/api/${path}`);
+  for (const route of routes) {
+    assert.doesNotMatch(readFileSync(route, "utf8"), /request\.json\(\)/, `${route} should read JSON with readJson()`);
+  }
+  for (const route of ["src/app/api/auth/login/route.ts", "src/app/api/auth/reset/route.ts"]) {
+    assert.match(readFileSync(route, "utf8"), /sessionWriteRejection\(request\)/);
+  }
+  assert.match(readFileSync("src/app/api/auth/logout/route.ts", "utf8"), /crossSiteRejection\(request\)/);
+  // Auth failures never echo the provider's message, which could reveal whether an account exists.
+  for (const route of ["src/app/api/auth/login/route.ts", "src/app/api/auth/signup/route.ts", "src/app/api/auth/reset/route.ts"]) {
+    assert.doesNotMatch(readFileSync(route, "utf8"), /error_description \|\||payload\?\.msg/);
+  }
+  const config = readFileSync("next.config.mjs", "utf8");
+  assert.match(config, /frame-ancestors 'none'/);
+  assert.match(config, /X-Content-Type-Options/);
+});

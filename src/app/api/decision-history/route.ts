@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 const EVENT_TYPES = new Set(["detected","recommended","changed","reviewed","approved","rejected","committed","executed","measured","learned","context-added","blocked","unblocked"]);
 const SUBJECT_TYPES = new Set(["fixture","campaign","sponsor","player","contract","operations","learning"]);
@@ -31,7 +32,7 @@ export async function POST(request: Request) {
   const user = await currentSupabaseUser();
   if (!user) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
 
-  const body = await request.json().catch(() => null) as Record<string, unknown> | null;
+  const body = await readJson(request) as Record<string, unknown> | null;
   const clubId = safe(body?.clubId, 80);
   const decisionId = safe(body?.decisionId, 180);
   const subjectType = safe(body?.subjectType, 40);

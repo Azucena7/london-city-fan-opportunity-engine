@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseServerConfigured, supabaseServerRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 type LeadBody = {
   clubName?: string;
@@ -26,7 +27,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Lead capture is not configured." }, { status: 503 });
   }
 
-  const body = await request.json().catch(() => null) as LeadBody | null;
+  const body = await readJson(request) as LeadBody | null;
   if (!body) return NextResponse.json({ error: "Invalid request." }, { status: 400 });
 
   // Honeypot: return a neutral success response without storing obvious bot submissions.

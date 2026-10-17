@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 const CASE_STATES = new Set(["planned","handover","ready-to-transition","closed"]);
 const SUCCESSOR_STATES = new Set(["unknown","nominated","confirmed"]);
@@ -61,7 +62,7 @@ export async function POST(request: Request) {
   const user = await currentSupabaseUser();
   if (!user) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
 
-  const body = await request.json().catch(() => null) as Record<string, unknown> | null;
+  const body = await readJson(request) as Record<string, unknown> | null;
   const clubId = safe(body?.clubId, 80);
   const departingRole = safe(body?.departingRole, 120);
   const continuityOwnerRole = safe(body?.continuityOwnerRole, 120);
@@ -128,7 +129,7 @@ export async function PATCH(request: Request) {
   const user = await currentSupabaseUser();
   if (!user) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
 
-  const body = await request.json().catch(() => null) as Record<string, unknown> | null;
+  const body = await readJson(request) as Record<string, unknown> | null;
   const clubId = safe(body?.clubId, 80);
   const target = safe(body?.target, 20);
   const id = safe(body?.id, 80);

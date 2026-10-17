@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 export async function GET(request: Request) {
   if (!supabaseConfigured()) return NextResponse.json({ persistence: "device", events: [] });
@@ -24,7 +25,7 @@ export async function POST(request: Request) {
   const user = await currentSupabaseUser();
   if (!user) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
 
-  const body = await request.json().catch(() => null) as {
+  const body = await readJson(request) as {
     clubId?: string;
     fixtureId?: string;
     itemId?: string;

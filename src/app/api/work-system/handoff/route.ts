@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 const SYSTEMS = new Set(["asana","monday","jira","notion","other"]);
 const CATEGORIES = new Set(["approval","activation","schedule"]);
@@ -18,7 +19,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Authentication required. No external tasks were created." }, { status: 401 });
   }
 
-  const body = await request.json().catch(() => null) as {
+  const body = await readJson(request) as {
     clubId?: string;
     decisionId?: string;
     workPackage?: {

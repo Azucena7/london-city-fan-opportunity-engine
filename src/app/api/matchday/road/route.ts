@@ -95,11 +95,12 @@ export async function GET() {
       incidents
     }, { headers: { "cache-control": "public, max-age=120, stale-while-revalidate=300" } });
   } catch (error) {
+    console.error("TfL road status error", error);
     return NextResponse.json({
       state: "degraded",
       provider: "Transport for London Unified API",
       checkedAt: new Date().toISOString(),
-      reason: error instanceof Error ? error.message : "TfL request failed",
+      reason: "Transport for London could not be reached.",
       incidents: []
     }, { status: 502, headers: { "cache-control": "no-store" } });
   }
