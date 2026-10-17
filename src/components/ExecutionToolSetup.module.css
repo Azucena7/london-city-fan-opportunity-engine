@@ -1,0 +1,28 @@
+.wrap{padding:22px;background:#fff;border:1px solid var(--product-line);border-radius:12px}
+.eyebrow{display:block;color:var(--product-muted);font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.wrap h2{margin:6px 0 0;font-size:20px}
+.wrap>p{max-width:720px;margin:6px 0 0;color:var(--product-muted);font-size:13px;line-height:1.5}
+.state{display:grid;grid-template-columns:1fr 1fr;margin:16px 0 0;border-top:1px solid var(--product-line);border-bottom:1px solid var(--product-line)}
+.state>div{padding:12px 12px 12px 0}
+.state>div+div{padding-left:12px;border-left:1px solid var(--product-line)}
+.state dt{color:var(--product-muted);font-size:11px;font-weight:900;text-transform:uppercase}
+.state dd{margin:4px 0 0;font-size:15px;font-weight:800}
+.state dd[data-ok="false"]{color:var(--product-danger-text)}
+.state small{display:block;margin-top:3px;color:var(--product-muted);font-size:12px;line-height:1.4}
+.form{display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;margin-top:16px}
+.form>label{display:grid;gap:5px;align-content:start}
+.form>label>span,.form legend{color:var(--product-muted);font-size:11px;font-weight:900;text-transform:uppercase}
+.form select,.form input:not([type="checkbox"]){min-height:38px;padding:7px 9px;border:1px solid var(--product-line);border-radius:8px;background:#fff;font:inherit;font-size:13px}
+.form fieldset{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0;padding:0;border:0}
+.form legend{margin-bottom:6px}
+.check{display:flex;gap:9px;align-items:flex-start;padding:10px;border:1px solid var(--product-line);border-radius:8px;cursor:pointer}
+.check input{margin-top:3px}
+.check strong,.check small{display:block}
+.check strong{font-size:13px}
+.check small{margin-top:2px;color:var(--product-muted);font-size:12px;line-height:1.35}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.actions button{min-height:38px;padding:7px 14px;border:0;border-radius:8px;background:var(--product-ink);color:#fff;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.actions button:disabled{opacity:.6;cursor:not-allowed}
+.actions small{color:var(--product-muted);font-size:12px}
+.message{margin:10px 0 0;font-size:12px}
+@media(max-width:760px){.state,.form,.form fieldset{grid-template-columns:1fr}.state>div+div{padding-left:0;border-left:0;border-top:1px solid var(--product-line)}}

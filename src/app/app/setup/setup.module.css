@@ -3,6 +3,7 @@
 
 .readinessSurface,.setupSurface{border:1px solid var(--product-line);border-radius:12px;background:#fff;overflow:hidden}
 .readinessSurface{margin-bottom:12px}
+.executionSurface{margin-bottom:12px;scroll-margin-top:80px}
 .readinessSurface :global([class*="wrap"]),.setupSurface :global([class*="wrap"]),.setupSurface :global([class*="empty"]),.setupSurface :global([class*="loadingState"]){max-width:none;width:100%;margin:0;padding:16px}
 .readinessSurface :global([class*="head"]),.setupSurface :global([class*="head"]){padding:0 0 12px}
 .readinessSurface :global([class*="head"] h2),.setupSurface :global([class*="head"] h2),.setupSurface :global([class*="empty"] h2){font-size:22px;line-height:1.15;letter-spacing:-.025em}
