@@ -121,3 +121,19 @@ test("excluding a signal recalculates the scenario without touching source data"
   await expect(controls).toContainText("Current engine plan");
   await expect(controls).not.toContainText("Excluded temporarily");
 });
+
+test("the brief shows what changed around the fixture right under the decision, without opening a phase", async ({ page }) => {
+  await page.goto(brief);
+  const strip = page.getByRole("region", { name: "What changed around this fixture" });
+  await expect(strip).toBeVisible();
+  const items = strip.getByRole("listitem");
+  await expect(items.first()).toBeVisible();
+  expect(await items.count()).toBeLessThanOrEqual(4);
+  // Each signal keeps its evidence state and source.
+  await expect(items.first()).toContainText(/Measured|Confirmed|Reported|Forecast|Inferred|Waiting/);
+  await expect(items.first().getByRole("link")).toHaveAttribute("href", /^https?:/);
+  await expect(strip.getByRole("link", { name: /exclude & recalculate/ })).toHaveAttribute("href", "#signals");
+  const decisionBottom = await page.getByRole("region", { name: "Decision at a glance" }).evaluate((el) => el.getBoundingClientRect().bottom + window.scrollY);
+  const stripTop = await strip.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+  expect(stripTop).toBeGreaterThanOrEqual(decisionBottom);
+});
