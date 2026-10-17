@@ -164,4 +164,17 @@ Cada paso va en su propia PR, con capturas a 1440, 768 y 390 px y con el lint de
   - La lectura diaria sigue en la app (`/app`, "Outside the club today").
 - **CTA final:** el bloque "Better decisions, same stack." se fusiona con el bloque de piloto, que cierra la página.
 
-**Paso 4 · Recortar `/case-study`:** pendiente.
+**Paso 4 · Recortar `/case-study`:** de 11,2 a 6,7 pantallas en escritorio y de 17,8 a 10,8 en móvil.
+
+- **Se queda lo que es prueba:**
+  - la secuencia de London City y lo que demuestra y lo que no;
+  - construido, observado y pendiente;
+  - las asistencias publicadas, con su fuente;
+  - el brief de Brighton;
+  - el paso al piloto.
+- **Salen cinco secciones de discurso de producto,** que ya cuentan la home y `/pilot`:
+  - el problema;
+  - el sistema operativo de demanda;
+  - las audiencias de alcance a demanda, que además todavía citaba YouTube, ya retirado;
+  - las seis preguntas;
+  - la capa de coordinación.
