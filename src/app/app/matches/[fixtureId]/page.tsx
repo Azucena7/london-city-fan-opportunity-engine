@@ -11,6 +11,7 @@ import { ActivationDraft } from "@/components/ActivationDraft";
 import { CrmAudiences } from "@/components/CrmAudiences";
 import { AUDIENCE_PURPOSE, audienceSizeLabel, audiencesForFixture, describeAudience, getSupporterAggregate } from "@/lib/supporterJourney";
 import { MatchPlanDecision } from "@/components/MatchPlanDecision";
+import { BriefDecisionBar } from "@/components/BriefDecisionBar";
 import { CampaignDeliveryPlanner } from "@/components/CampaignDeliveryPlanner";
 import { DecisionHistoryPanel } from "@/components/DecisionHistoryPanel";
 import { SimilarDecisionsPanel } from "@/components/SimilarDecisionsPanel";
@@ -143,6 +144,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
       </nav>
       <PhaseAnchorOpener />
       <PhaseScrollSpy railLabel="Opportunity workspace sections" phaseIds={BRIEF_PHASE_IDS} />
+      <BriefDecisionBar opponent={fixture.opponent} decisionState={live.decisionState} gateCount={approvals.length} />
 
       <section id="decision" className={styles.decisionCockpit} aria-label="Decision at a glance">
         <div className={styles.decisionLead}>

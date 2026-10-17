@@ -174,3 +174,19 @@ test("the brief says whether the play is feasible, and who owns it, before the b
   await page.getByRole("link", { name: "Check feasibility →" }).click();
   await expect(page.locator("#readiness")).toBeVisible();
 });
+
+test("the brief keeps the decision within reach once its summary scrolls away", async ({ page }) => {
+  await page.goto("/app/matches/2026-10-18-eve-h");
+  await page.waitForLoadState("networkidle");
+  const bar = page.getByRole("complementary", { name: "Decision bar" });
+  // At the top the summary already shows the decision, so the bar stays out of the way.
+  await expect(bar).toBeHidden();
+  await page.evaluate(() => window.scrollTo(0, document.getElementById("decision")!.getBoundingClientRect().bottom + window.scrollY + 400));
+  await expect(bar).toBeVisible();
+  await expect(bar).toContainText(/approval gate|No approval gate open/);
+  // It only links: the decision opens in its own section, where it is recorded.
+  await bar.getByRole("link", { name: /Decide →|Review the hold →/ }).click();
+  await expect(page).toHaveURL(/#human-decision$/);
+  await expect(page.getByRole("region", { name: "Human decision" })).toBeInViewport();
+  await expect(bar).toBeHidden();
+});
