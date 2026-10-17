@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { campaignPlans } from "@/lib/data";
 import { getDecisionQueue } from "@/lib/decisionQueue";
+import { DecisionInbox } from "@/components/DecisionInbox";
 import { buildDecisionAlerts, decisionSummary, type DecisionPriority } from "@/lib/decisionIntelligence";
 import { getDecisionCenterOpsState } from "@/lib/decisionCenterOverview";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
@@ -150,28 +151,24 @@ export default async function ClubAppHome() {
           title="What needs your attention now"
           action={<span className={styles.inboxCount}>{attention.length} open</span>}
         />
-        <div className={styles.attentionList}>
-          {attention.slice(0, 5).map((item, index) => (
-            <Link href={item.href} key={item.id} className={styles.attentionItem} data-priority={item.priority}>
-              <span className={styles.attentionRank}>{String(index + 1).padStart(2, "0")}</span>
-              <div className={styles.attentionCopy}>
-                <div>
-                  <strong>{item.title}</strong>
-                  <DecisionStateBadge state={stateForPriority(item.priority)} label={priorityLabel[item.priority]} />
-                  {item.onHold ? <DecisionStateBadge state="BLOCKED" label="HOLD" /> : null}
-                </div>
-                <p>{item.recommendation}</p>
-                <small>{item.owner ? "Owner: " + item.owner + " · " : ""}{item.changed}</small>
-              </div>
-              <div className={styles.attentionMeta}>
-                <span>{item.category}</span>
-                <strong>{item.deadline}</strong>
-                <b>Open →</b>
-              </div>
-            </Link>
-          ))}
-          {!attention.length ? <div className={styles.attentionEmpty}>No material decision currently needs intervention.</div> : null}
-        </div>
+        <DecisionInbox
+          items={attention.map((item) => ({
+            id: item.id,
+            category: item.category,
+            priority: item.priority,
+            title: item.title,
+            recommendation: item.recommendation,
+            why: item.why,
+            changed: item.changed,
+            owner: item.owner,
+            onHold: item.onHold,
+            href: item.href,
+            deadline: item.deadline,
+            impact: item.impact,
+            confidence: item.confidence,
+            events: item.events.slice(0, 3).map(({ id, at, label, detail }) => ({ id, at, label, detail }))
+          }))}
+        />
       </WorkspaceCard>
 
       <section className={`${styles.metricGrid} ${styles.signalStrip}`} aria-label="Decision health summary">
