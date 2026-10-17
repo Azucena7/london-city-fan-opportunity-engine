@@ -2473,6 +2473,9 @@ test("commercial pilot request captures a real lead through the server-only path
   assert.match(route, /verifyTurnstile\(body\.turnstileToken/);
   assert.ok(route.indexOf("verifyTurnstile(") < route.indexOf("commercial_leads"));
   assert.match(page, /NEXT_PUBLIC_TURNSTILE_SITE_KEY/);
+  // The team is emailed only after the lead is stored; the recipient comes from the environment.
+  assert.ok(route.indexOf("notifyPilotLead(") > route.indexOf("commercial_leads"));
+  assert.match(read("src/lib/leadNotification.ts"), /process\.env\.LEAD_NOTIFY_TO/);
   assert.match(createMigration, /enable row level security/);
   assert.match(lockMigration, /revoke insert on table public\.commercial_leads from anon/);
   assert.match(lockMigration, /revoke insert on table public\.commercial_leads from authenticated/);

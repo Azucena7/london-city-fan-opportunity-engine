@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { supabaseServerConfigured, supabaseServerRequest } from "@/lib/supabaseServer";
 import { readJson } from "@/lib/requestGuards";
 import { verifyTurnstile } from "@/lib/turnstile";
+import { notifyPilotLead } from "@/lib/leadNotification";
 
 type LeadBody = {
   clubName?: string;
@@ -72,6 +73,14 @@ export async function POST(request: Request) {
   if (!response.ok) {
     return NextResponse.json({ error: "Your request could not be saved. Please try again." }, { status: response.status });
   }
+
+  const notification = await notifyPilotLead({
+    clubName, role, workEmail, priority,
+    sourcePath: clean(body.sourcePath, 200),
+    utmSource: clean(body.utmSource, 120),
+    utmCampaign: clean(body.utmCampaign, 120)
+  });
+  if (notification === "failed") console.error("commercial-lead: stored, but the notification email failed");
 
   return NextResponse.json({ submitted: true }, { status: 201 });
 }
