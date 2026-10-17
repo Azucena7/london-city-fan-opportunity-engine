@@ -5,6 +5,7 @@
   /* A visible thin scrollbar, and soft shadows at the top or bottom edge only while more links sit
      beyond it: on a dark sidebar an overlay scrollbar is easy to miss. */
   scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.3) transparent;
+  background:var(--product-navy,#102742);
   background:
     linear-gradient(var(--product-navy,#102742) 30%,rgba(16,39,66,0)) center top/100% 36px no-repeat local,
     linear-gradient(rgba(16,39,66,0),var(--product-navy,#102742) 70%) center bottom/100% 36px no-repeat local,
