@@ -196,3 +196,24 @@ test("Home's decision inbox filters the queue and opens a decision without leavi
     await expect(page.getByRole("dialog")).toHaveCount(0);
   }
 });
+
+test("Campaigns lists fixture and commercial campaigns in one filterable table", async ({ page }) => {
+  await page.goto("/app/campaigns");
+  await page.getByRole("group", { name: "Campaign view" }).getByRole("button", { name: "List" }).click();
+  const list = page.getByRole("region", { name: "Campaign list" });
+  const rows = list.locator("tbody tr");
+  const total = await rows.count();
+  expect(total).toBeGreaterThan(1);
+  await list.getByLabel("Type").selectOption("Commercial");
+  const commercial = await rows.count();
+  expect(commercial).toBeLessThan(total);
+  // Commercial briefs carry no approval state, so none is invented for them.
+  await expect(rows.first()).toContainText("No approval state");
+  await list.getByRole("searchbox").fill("zzzz-none");
+  await list.getByRole("button", { name: "Clear filters" }).click();
+  await expect(rows).toHaveCount(total);
+  await page.getByRole("group", { name: "Campaign view" }).getByRole("button", { name: "Board" }).click();
+  // Back on the board: the list is gone and the board's own column is shown.
+  await expect(page.getByRole("region", { name: "Campaign list" })).toHaveCount(0);
+  await expect(page.getByText("Ready / moving")).toBeVisible();
+});
