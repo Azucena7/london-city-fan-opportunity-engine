@@ -1,0 +1,407 @@
+<!doctype html>
+<!--
+  AVELA promo, 1080×1920. Every frame is a pure function of time: window.seek(t) lays the whole
+  composition out for second t, and render-promo.mjs screenshots it frame by frame. Product images
+  are real screens captured by capture-shots.mjs; nothing in them is retouched.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{--navy:#102742;--navy2:#173653;--teal:#2F8F83;--teal-l:#74C9BB;--coral:#EF8B6C;--sand:#E8DCCB;--paper:#F8F6F1;--muted:#8FA3B6}
+  *{box-sizing:border-box}
+  html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:var(--navy);font-family:"Inter",sans-serif;color:var(--paper);-webkit-font-smoothing:antialiased}
+  .display{font-family:"Inter Display","Inter",sans-serif}
+  #stage{position:absolute;inset:0;overflow:hidden}
+  .layer{position:absolute;inset:0}
+  .bg-grid{background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:120px 120px}
+  .blob{position:absolute;width:1300px;height:1300px;border-radius:50%;filter:blur(40px)}
+  .vignette{background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(5,15,28,.55) 100%)}
+
+  /* Hook */
+  #hook{padding:0 90px;display:flex;flex-direction:column;justify-content:center}
+  .hline{display:block;font-size:136px;line-height:1.04;font-weight:800;letter-spacing:-.035em;white-space:nowrap}
+  .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-right:.22em}
+  .w > span{display:inline-block}
+  .w.hot > span{color:var(--coral)}
+  #hookline{height:10px;width:0;background:var(--teal-l);border-radius:5px;margin-top:18px}
+
+  /* Problem */
+  .chip{position:absolute;left:0;top:0;padding:26px 34px;border-radius:22px;background:var(--navy2);border:1px solid rgba(255,255,255,.12);font-size:38px;font-weight:700;color:var(--sand);white-space:nowrap;box-shadow:0 24px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px}
+  .chip i{width:18px;height:18px;border-radius:50%;display:inline-block}
+  .ptext{position:absolute;left:90px;right:60px;white-space:nowrap;font-size:90px;font-weight:800;letter-spacing:-.035em;line-height:1.05}
+
+  /* Magic */
+  .kicker{position:absolute;left:90px;top:220px;font-size:30px;font-weight:800;letter-spacing:.2em;color:var(--teal-l);text-transform:uppercase}
+  .mhead{position:absolute;left:90px;right:70px;top:290px;font-size:98px;line-height:1.02;font-weight:800;letter-spacing:-.035em}
+  .card{position:absolute;overflow:hidden;border-radius:34px;background:#FBFAF7;box-shadow:0 60px 120px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08)}
+  .card img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none}
+  .ring{position:absolute;border:6px solid var(--coral);border-radius:22px;box-shadow:0 0 0 9999px rgba(16,39,66,0);pointer-events:none}
+  .foot{position:absolute;left:0;right:0;bottom:120px;text-align:center;font-size:26px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+  .tag{display:inline-block;padding:10px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05)}
+
+  /* Wow */
+  #mosaicWrap{position:absolute;inset:0;perspective:1600px;perspective-origin:50% 50%}
+  #plane{position:absolute;left:540px;top:960px;width:2760px;height:2440px;transform-origin:0 0;transform-style:preserve-3d}
+  .tile{position:absolute;border-radius:20px;overflow:hidden;box-shadow:0 50px 90px rgba(0,0,0,.5);outline:2px solid rgba(255,255,255,.1);background:#fff}
+  .tile img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+  #wowText{position:absolute;left:0;right:0;top:820px;text-align:center;font-size:118px;font-weight:800;letter-spacing:-.04em;line-height:1.02;text-shadow:0 10px 50px rgba(0,0,0,.6)}
+  #scrim{background:radial-gradient(ellipse at 50% 50%,rgba(16,39,66,.75) 0%,rgba(16,39,66,.2) 60%,transparent 80%)}
+  #loopWord{position:absolute;left:0;right:0;top:170px;text-align:center;font-size:150px;font-weight:800;letter-spacing:-.04em}
+  #loopSteps{position:absolute;left:0;right:0;top:360px;display:flex;justify-content:center;gap:16px;font-size:30px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  #loopSteps span{color:rgba(255,255,255,.35)}
+  #loopSteps span.on{color:var(--teal-l)}
+  #ripple{position:absolute;border-radius:50%;border:5px solid var(--paper);pointer-events:none}
+
+  /* Reveal */
+  #mark{position:absolute;left:50%;top:560px;width:230px;height:230px;margin-left:-100px}
+  #mark .tri{position:absolute;inset:0;clip-path:polygon(0 0,100% 50%,0 100%);background:linear-gradient(135deg,#329c91 0 48%,#f08a6a 48% 72%,#e7d9c6 72%)}
+  #mark .inner{position:absolute;left:21%;top:29%;width:37%;height:42%;background:var(--navy);clip-path:polygon(0 0,100% 50%,0 100%)}
+  #markGlow{position:absolute;left:50%;top:675px;width:600px;height:600px;margin:-300px 0 0 -300px;border-radius:50%;background:radial-gradient(circle,rgba(47,143,131,.45),transparent 65%)}
+  #word{position:absolute;left:0;right:0;top:850px;text-align:center;font-size:64px;font-weight:800;color:var(--paper)}
+  #line{position:absolute;left:60px;right:60px;top:990px;text-align:center;font-size:96px;line-height:1.04;font-weight:800;letter-spacing:-.035em}
+  #sub{position:absolute;left:110px;right:110px;top:1230px;text-align:center;font-size:36px;line-height:1.35;color:#C9D4DE;font-weight:500}
+  #loop2{position:absolute;left:0;right:0;top:1370px;text-align:center;font-size:28px;font-weight:800;letter-spacing:.14em;color:var(--teal-l);text-transform:uppercase}
+  #cta{position:absolute;left:50%;top:1480px;transform:translateX(-50%);padding:34px 56px;border-radius:999px;background:var(--coral);color:var(--navy);font-size:44px;font-weight:800;white-space:nowrap;overflow:hidden}
+  #cta .shine{position:absolute;top:0;bottom:0;width:120px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg)}
+  #disc{position:absolute;left:90px;right:90px;bottom:90px;text-align:center;font-size:27px;line-height:1.45;color:var(--muted)}
+  #flash{background:var(--paper)}
+  #fade{background:var(--navy)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer bg-grid" id="grid"></div>
+  <div class="blob" id="blobA" style="background:radial-gradient(circle,rgba(47,143,131,.30),transparent 62%)"></div>
+  <div class="blob" id="blobB" style="background:radial-gradient(circle,rgba(239,139,108,.16),transparent 62%)"></div>
+
+  <!-- 1 · Hook -->
+  <div class="layer display" id="hook">
+    <span class="hline"><span class="w"><span>What</span></span><span class="w"><span>changed</span></span></span>
+    <span class="hline"><span class="w hot"><span>outside</span></span></span>
+    <span class="hline"><span class="w"><span>your</span></span><span class="w"><span>club</span></span></span>
+    <span class="hline"><span class="w"><span>this</span></span><span class="w"><span>week?</span></span></span>
+    <div id="hookline"></div>
+  </div>
+
+  <!-- 2 · Problem -->
+  <div class="layer display" id="problem">
+    <div class="chip"><i style="background:#EF8B6C"></i>Rival kick-off, same slot</div>
+    <div class="chip"><i style="background:#74C9BB"></i>Rain forecast</div>
+    <div class="chip"><i style="background:#E8DCCB"></i>Rail works</div>
+    <div class="chip"><i style="background:#EF8B6C"></i>International window</div>
+    <div class="chip"><i style="background:#74C9BB"></i>Ticketing export.csv</div>
+    <div class="chip"><i style="background:#E8DCCB"></i>Task board</div>
+    <div class="chip"><i style="background:#EF8B6C"></i>plan_v7_FINAL.xlsx</div>
+    <div class="ptext" id="p1" style="top:1400px">Signals everywhere.</div>
+    <div class="ptext" id="p2" style="top:1510px;color:var(--coral)">Decisions nowhere.</div>
+  </div>
+  <div class="layer" id="wipe" style="background:var(--teal)"></div>
+
+  <!-- 3 · Magic -->
+  <div class="layer display" id="magic">
+    <div class="kicker" id="kick"></div>
+    <div class="mhead" data-cap="0">The world outside your club, read every morning.</div>
+    <div class="mhead" data-cap="1">Context reorders the radar. And says why.</div>
+    <div class="mhead" data-cap="2">Approved work lands in your team’s tool.</div>
+    <div class="card" data-cap="0"><img src="shots/outside.png"><div class="ring"></div></div>
+    <div class="card" data-cap="1"><img src="shots/radar-ranked.png"><div class="ring"></div></div>
+    <div class="card" data-cap="2"><img src="shots/monitor.png"><div class="ring"></div></div>
+    <div class="foot"><span class="tag" id="footTag">Real AVELA screens · demonstration data from public sources</span></div>
+  </div>
+
+  <!-- 4 · Wow -->
+  <div class="layer" id="wow">
+    <div id="mosaicWrap"><div id="plane"></div></div>
+    <div class="layer" id="scrim"></div>
+    <div id="wowText" class="display">Every signal.<br><span style="color:var(--teal-l)">One decision.</span></div>
+    <div class="card" id="inboxCard"><img src="shots/outside.png"><img src="shots/brief-glance.png"><img src="shots/monitor.png"><img src="shots/delivered-worked.png"></div>
+    <div id="ripple"></div>
+    <div id="loopWord" class="display"></div>
+    <div id="loopSteps"><span>Anticipate</span><span>→</span><span>Decide</span><span>→</span><span>Activate</span><span>→</span><span>Learn</span></div>
+  </div>
+
+  <!-- 5 · Reveal -->
+  <div class="layer display" id="reveal">
+    <div id="markGlow"></div>
+    <div id="mark"><div class="tri"></div><div class="inner"></div></div>
+    <div id="word">AVELA</div>
+    <div id="line">Know your club’s<br>next move.</div>
+    <div id="sub">The Opportunity Engine for football club marketing &amp; commercial teams</div>
+    <div id="loop2">Anticipate → Decide → Activate → Learn</div>
+    <div id="cta">Request a club pilot →<div class="shine"></div></div>
+    <div id="disc">Product screens show a demonstration built on public London City Lionesses information; execution status uses sample tasks. London City is not an AVELA customer.</div>
+  </div>
+
+  <div class="layer vignette"></div>
+  <div class="layer" id="flash"></div>
+  <div class="layer" id="fade"></div>
+</div>
+
+<script type="module">
+import { CUES, HOOK_WORDS } from "./timeline.mjs";
+
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const lerp = (a, b, p) => a + (b - a) * p;
+const E = {
+  out: (p) => 1 - Math.pow(1 - p, 3),
+  in: (p) => p * p * p,
+  inOut: (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2),
+  expo: (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p)),
+  back: (p) => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); }
+};
+const show = (el, on) => { el.style.visibility = on ? "visible" : "hidden"; };
+const scene = (el, on) => { el.style.display = on ? "" : "none"; };
+const style = (el, o) => Object.assign(el.style, o);
+
+/** Interpolates a list of [time, value] keyframes (value: number or array) with an easing. */
+function keys(t, list, ease = E.inOut) {
+  if (t <= list[0][0]) return list[0][1];
+  for (let k = 1; k < list.length; k++) {
+    const [t0, v0] = list[k - 1], [t1, v1] = list[k];
+    if (t <= t1) {
+      const p = ease((t - t0) / (t1 - t0));
+      return Array.isArray(v0) ? v0.map((v, i) => lerp(v, v1[i], p)) : lerp(v0, v1, p);
+    }
+  }
+  return list[list.length - 1][1];
+}
+
+/** Virtual camera: fit the image rect [x,y,w,h] into a card of cw×ch; returns the transform used. */
+function camera(img, rect, cw, ch) {
+  const [x, y, w, h] = rect;
+  const s = Math.min(cw / w, ch / h);
+  const tx = cw / 2 - (x + w / 2) * s, ty = ch / 2 - (y + h / 2) * s;
+  img.style.transform = `translate(${tx}px,${ty}px) scale(${s})`;
+  return { s, tx, ty };
+}
+function placeRing(ring, cam, rect, p) {
+  const [x, y, w, h] = rect; const pad = 14;
+  style(ring, { left: cam.tx + x * cam.s - pad + "px", top: cam.ty + y * cam.s - pad + "px", width: w * cam.s + pad * 2 + "px", height: h * cam.s + pad * 2 + "px", opacity: p, transform: `scale(${lerp(1.12, 1, E.out(p))})` });
+}
+
+// ---------- Mosaic tiles
+const tiles = [
+  ["home", 0, 0, 1152, 720, 40], ["radar", 1200, 0, 1152, 720, 0], ["m-home", 2400, 0, 360, 780, 140],
+  ["brief", 0, 770, 1152, 720, 0], ["sources", 1200, 770, 1152, 720, 90], ["m-brief", 2400, 830, 360, 780, 50],
+  ["learning", 0, 1540, 1152, 720, 70], ["campaigns", 1200, 1540, 1152, 720, 0], ["m-radar", 2400, 1660, 360, 780, 110]
+];
+const plane = $("#plane");
+for (const [name, x, y, w, h, z] of tiles) {
+  const d = document.createElement("div");
+  d.className = "tile";
+  style(d, { left: x + "px", top: y + "px", width: w + "px", height: h + "px", transform: `translateZ(${z}px)` });
+  d.innerHTML = `<img src="shots/${name}.png">`;
+  plane.appendChild(d);
+}
+
+// ---------- Hook word timing
+const words = $$("#hook .w > span");
+const chips = $$(".chip");
+const chipHome = [[70, 300, -6], [640, 250, 5], [120, 620, 4], [560, 700, -4], [90, 960, -3], [600, 1040, 6], [250, 1230, -2]];
+const chipFrom = [[-700, -300], [900, -400], [-800, 100], [900, 200], [-800, 300], [900, 500], [0, 900]];
+
+const magicCaps = [
+  { kick: "01 · Anticipate", cardH: 640, top: 760, foot: "Real AVELA screens · demonstration data from public sources",
+    path: [[0.5, [0, 0, 2352, 902]], [1.9, [0, 0, 2352, 902]], [3.4, [0, 110, 1700, 900]], [5.2, [0, 125, 1180, 790]]],
+    ring: [30, 150, 1150, 100] },
+  { kick: "02 · Opportunity Radar", cardH: 700, top: 740, foot: "Real AVELA screens · demonstration data from public sources",
+    path: [[0.5, [0, 0, 1768, 1250]], [1.9, [0, 0, 1768, 1250]], [3.4, [0, 700, 1768, 1290]], [5.2, [300, 860, 960, 700]]],
+    ring: [530, 1105, 715, 85] },
+  { kick: "03 · Activate", cardH: 800, top: 720, foot: "Real AVELA screen · execution status shown with sample tasks",
+    path: [[0.5, [0, 0, 2164, 1328]], [1.9, [0, 0, 2164, 1328]], [3.4, [0, 200, 1900, 1300]], [4.4, [0, 250, 1050, 875]]],
+    ring: [0, 295, 540, 135] }
+];
+const capStart = [9, 14, 19];
+
+// Wow card: framing per screen (image px), in beat order
+const inboxRects = [
+  [0, 0, 1300, 902],      // outside.png: signal labels and headlines
+  [0, 40, 1270, 920],     // brief-glance.png: the recommended play
+  [0, 40, 1300, 1290],    // monitor.png: delivered, in progress, blocked
+  null                    // delivered-worked.png: whole image, set once loaded
+];
+
+window.seek = function seek(t) {
+  // Background drift
+  style($("#blobA"), { left: 60 + Math.sin(t * 0.21) * 160 - 300 + "px", top: 100 + Math.cos(t * 0.17) * 200 + "px" });
+  style($("#blobB"), { left: 300 + Math.cos(t * 0.19) * 180 + "px", top: 900 + Math.sin(t * 0.23) * 220 + "px" });
+  $("#grid").style.opacity = t < 24 ? 1 : t < 36 ? 0.4 : 1;
+
+  // ---- 1 · Hook (0–3)
+  const hookOn = t < 3.2;
+  scene($("#hook"), hookOn);
+  if (hookOn) {
+    words.forEach((w, i) => {
+      const p = E.out(prog(t, CUES.words[i], CUES.words[i] + 0.38));
+      style(w, { transform: `translateY(${lerp(105, 0, p)}%)`, filter: `blur(${lerp(10, 0, p)}px)` });
+    });
+    $("#hookline").style.width = E.out(prog(t, 2.2, 2.7)) * 620 + "px";
+    const out = E.in(prog(t, 2.65, 3.15));
+    style($("#hook"), { transform: `scale(${lerp(1, 1.6, out)})`, opacity: 1 - out, filter: `blur(${out * 14}px)` });
+  }
+
+  // ---- 2 · Problem (3–9)
+  const probOn = t >= 2.9 && t < 9.2;
+  scene($("#problem"), probOn);
+  if (probOn) {
+    const conv = E.in(prog(t, 7.7, 8.75));
+    chips.forEach((c, i) => {
+      const p = E.back(prog(t, CUES.chips[i], CUES.chips[i] + 0.6));
+      const [hx, hy, hr] = chipHome[i]; const [fx, fy] = chipFrom[i];
+      const jitter = t > 6.4 && t < 7.7 ? Math.sin(t * 47 + i * 3) * 9 : 0;
+      let x = lerp(hx + fx, hx, p) + Math.sin(t * 1.3 + i) * 10 + jitter;
+      let y = lerp(hy + fy, hy, p) + Math.cos(t * 1.1 + i * 2) * 10;
+      x = lerp(x, 540 - 180, conv); y = lerp(y, 860, conv);
+      style(c, { transform: `translate(${x}px,${y}px) rotate(${hr * (1 - conv) + jitter * 0.3}deg) scale(${lerp(1, 0.15, conv)})`, opacity: Math.min(prog(t, CUES.chips[i], CUES.chips[i] + 0.15), 1 - conv) });
+    });
+    const p1 = E.out(prog(t, 3.8, 4.4)), p2 = E.out(prog(t, 5.5, 6.1)), fadeText = prog(t, 7.6, 8.2);
+    style($("#p1"), { opacity: p1 * (1 - fadeText), transform: `translateY(${lerp(60, 0, p1)}px)` });
+    style($("#p2"), { opacity: p2 * (1 - fadeText), transform: `translateY(${lerp(60, 0, p2)}px)` });
+  }
+  // Teal iris between problem and magic
+  const iris = prog(t, 8.6, 9.1), irisOut = prog(t, 9.05, 9.5);
+  show($("#wipe"), t > 8.6 && t < 9.5);
+  style($("#wipe"), { clipPath: `circle(${E.in(iris) * 1200}px at 540px 860px)`, opacity: 1 - irisOut });
+
+  // ---- 3 · Magic (9–24)
+  const magicOn = t >= 9 && t < 24.2;
+  scene($("#magic"), magicOn);
+  if (magicOn) {
+    const k = t < 14 ? 0 : t < 19 ? 1 : 2;
+    const local = t - capStart[k];
+    const kp = E.out(prog(local, 0, 0.5));
+    style($("#kick"), { opacity: kp, transform: `translateX(${lerp(-40, 0, kp)}px)` });
+    $("#kick").textContent = magicCaps[k].kick;
+    $("#footTag").textContent = magicCaps[k].foot;
+    $$(".mhead").forEach((h, i) => {
+      const inP = E.out(prog(t, capStart[i], capStart[i] + 0.6));
+      const outP = i < 2 ? E.in(prog(t, capStart[i] + 4.65, capStart[i] + 5.0)) : 0;
+      show(h, t >= capStart[i] - 0.1 && outP < 1);
+      style(h, { opacity: inP * (1 - outP), transform: `translateY(${lerp(80, 0, inP) - outP * 80}px)`, filter: `blur(${(1 - inP) * 12 + outP * 12}px)` });
+    });
+    $$("#magic .card").forEach((c, i) => {
+      const cap = magicCaps[i];
+      const l = t - capStart[i];
+      const inP = E.out(prog(l, 0, 0.8));
+      const outP = i < 2 ? E.inOut(prog(l, 4.6, 5.15)) : 0;
+      const on = l > -0.1 && outP < 1;
+      show(c, on);
+      if (!on) return;
+      const cw = 960, ch = cap.cardH;
+      // Last card: everything rushes toward the viewer into the impact
+      const rush = i === 2 ? E.in(prog(t, 23.25, 24.0)) : 0;
+      style(c, {
+        left: "60px", top: cap.top + "px", width: cw + "px", height: ch + "px",
+        opacity: inP * (1 - outP),
+        transform: `perspective(1600px) translateY(${lerp(320, 0, inP) - outP * 260}px) rotateX(${lerp(28, 0, inP) - outP * 14}deg) scale(${lerp(0.88, 1, inP) * lerp(1, 0.86, outP) * lerp(1, 3.2, rush)})`,
+        filter: `blur(${outP * 14 + rush * 18}px)`
+      });
+      const img = c.querySelector("img");
+      const cam = camera(img, keys(l, cap.path), cw, ch);
+      placeRing(c.querySelector(".ring"), cam, cap.ring, E.out(prog(l, 3.3, 3.7)) * (1 - outP));
+    });
+    $("#magic .foot").style.opacity = prog(t, 9.4, 10) * (1 - prog(t, 23.2, 23.7));
+    style($("#magic .mhead[data-cap='2']"), { opacity: (1 - prog(t, 23.2, 23.7)) * E.out(prog(t, 19, 19.6)) });
+    $("#kick").style.opacity = kp * (1 - prog(t, 23.2, 23.7));
+  }
+
+  // ---- 4 · Wow (24–36)
+  const wowOn = t >= 23.9 && t < 36.3;
+  scene($("#wow"), wowOn);
+  if (wowOn) {
+    // Fly-over: a tilted wall of real screens, camera rushing in on the hit, then sweeping across
+    const flatten = E.inOut(prog(t, 28.4, 29.8));
+    const target = keys(t, [[24, [2050, 1950]], [26.2, [1700, 1300]], [28.4, [900, 600]], [29.8, [576, 330]]], E.inOut);
+    const z = keys(t, [[24, -3400], [25.4, -1100], [28.4, -700], [29.8, -230]], (p) => E.expo(p));
+    const rx = lerp(56, 0, flatten), rz = lerp(-30, 0, flatten);
+    plane.style.transform = `translateZ(${z}px) rotateX(${rx}deg) rotateZ(${rz}deg) translate(${-target[0]}px,${-target[1]}px)`;
+    const mosaicOut = prog(t, 29.6, 30.05);
+    $("#mosaicWrap").style.opacity = 1 - mosaicOut;
+    $("#mosaicWrap").style.filter = `blur(${Math.max(0, 1 - prog(t, 24, 24.6)) * 10}px)`;
+    show($("#mosaicWrap"), t < 30.1);
+
+    const wt = E.back(prog(t, 24.25, 24.75)), wtOut = prog(t, 27.9, 28.4);
+    style($("#wowText"), { opacity: Math.min(1, prog(t, 24.25, 24.45)) * (1 - wtOut), transform: `scale(${lerp(1.5, 1, wt) * lerp(1, 0.9, wtOut)})`, filter: `blur(${wtOut * 10}px)` });
+    $("#scrim").style.opacity = (1 - prog(t, 27.9, 28.6)) * prog(t, 24.1, 24.4);
+
+    // Inbox: one decision, read → decide → move → learn on the beat, then the click
+    const ib = $("#inboxCard");
+    const inP = prog(t, 29.65, 30.1);
+    show(ib, t >= 29.6);
+    const cw = 1000, ch = 1000, cx = 40, cy = 560;
+    const r = inboxRects;
+    // One real screen per beat: anticipate → decide → activate → learn, cross-faded on the hit
+    const imgs = [...ib.querySelectorAll("img")];
+    const shown = Math.max(0, CUES.beats.reduce((n, b) => (t >= b - 0.15 ? n + 1 : n), 0) - 1);
+    // The final push goes through the button: enlarge the card itself to fill the frame
+    const thru = E.in(prog(t, 34.35, 35.6));
+    style(ib, { left: lerp(cx, -40, thru) + "px", top: lerp(cy, -40, thru) + "px", width: lerp(cw, 1160, thru) + "px", height: lerp(ch, 2000, thru) + "px", borderRadius: lerp(34, 0, thru) + "px", opacity: inP, transform: `scale(${lerp(0.94, 1, E.out(inP))})` });
+    let cam = null;
+    imgs.forEach((im, i) => {
+      const c = camera(im, r[i], lerp(cw, 1160, thru), lerp(ch, 2000, thru));
+      if (i === shown) cam = c;
+      const fadeIn = i === 0 ? 1 : prog(t, CUES.beats[i] - 0.15, CUES.beats[i] + 0.1);
+      const fadeOut = i < 3 ? prog(t, CUES.beats[i + 1] - 0.15, CUES.beats[i + 1] + 0.1) : 0;
+      im.style.opacity = Math.min(fadeIn, 1 - fadeOut);
+    });
+
+    const beatIdx = CUES.beats.reduce((n, b) => (t >= b ? n + 1 : n), 0) - 1;
+    const labels = ["Anticipate", "Decide", "Activate", "Learn"];
+    const lw = $("#loopWord");
+    if (beatIdx >= 0 && t < 34.3) {
+      const bp = E.back(prog(t, CUES.beats[beatIdx], CUES.beats[beatIdx] + 0.3));
+      lw.textContent = labels[beatIdx];
+      style(lw, { opacity: prog(t, CUES.beats[beatIdx], CUES.beats[beatIdx] + 0.08), transform: `scale(${lerp(1.35, 1, bp)})`, color: beatIdx % 2 ? "var(--coral)" : "var(--paper)" });
+    } else lw.style.opacity = 0;
+    $$("#loopSteps span").forEach((s, i) => s.classList.toggle("on", i % 2 === 0 && i / 2 <= beatIdx));
+    $("#loopSteps").style.opacity = prog(t, 29.9, 30.2) * (1 - prog(t, 34.2, 34.5));
+
+    // The hit on "Learn" lands on the card centre, then the camera pushes through it
+    const rp = prog(t, CUES.click, CUES.click + 0.5);
+    const bx = ib.offsetLeft + ib.offsetWidth / 2, by = ib.offsetTop + ib.offsetHeight / 2;
+    const rr = lerp(20, 160, E.out(rp));
+    style($("#ripple"), { left: bx - rr + "px", top: by - rr + "px", width: rr * 2 + "px", height: rr * 2 + "px", opacity: t >= CUES.click ? (1 - rp) : 0 });
+  }
+
+  // ---- 5 · Reveal (36–45)
+  const revOn = t >= 35.4;
+  scene($("#reveal"), revOn);
+  if (revOn) {
+    const bg = prog(t, 35.4, 36.0);
+    $("#reveal").style.background = `rgba(16,39,66,${bg})`;
+    const m = prog(t, 36.05, 36.75);
+    style($("#mark"), { transform: `scale(${E.back(m)}) rotate(${lerp(-90, 0, E.out(m))}deg)`, opacity: Math.min(1, m * 3) });
+    const g = prog(t, 36.0, 37.2);
+    style($("#markGlow"), { opacity: Math.sin(g * Math.PI) * 0.9 + 0.25 * prog(t, 36.6, 37.4), transform: `scale(${lerp(0.4, 1.4, E.out(g))})` });
+    const wp = E.out(prog(t, 36.5, 37.2));
+    style($("#word"), { opacity: wp, letterSpacing: lerp(0.5, 0.22, wp) + "em" });
+    const lp = E.out(prog(t, 37.3, 38.1));
+    style($("#line"), { opacity: lp, transform: `translateY(${lerp(60, 0, lp)}px)`, filter: `blur(${(1 - lp) * 10}px)` });
+    const sp = E.out(prog(t, 38.4, 39.0));
+    style($("#sub"), { opacity: sp, transform: `translateY(${lerp(30, 0, sp)}px)` });
+    $("#loop2").style.opacity = E.out(prog(t, 39.3, 39.9));
+    const cp = E.back(prog(t, CUES.cta, CUES.cta + 0.5));
+    style($("#cta"), { opacity: Math.min(1, prog(t, CUES.cta, CUES.cta + 0.2)), transform: `translateX(-50%) scale(${lerp(0.7, 1, cp)})` });
+    $("#cta .shine").style.left = lerp(-200, 900, prog(t, 41.6, 42.5)) + "px";
+    $("#disc").style.opacity = E.out(prog(t, 41.0, 41.8));
+  }
+
+  // ---- Global accents
+  const fl = Math.max(1 - prog(t, CUES.impact, CUES.impact + 0.45), 0) * (t >= CUES.impact ? 1 : 0);
+  const fl2 = t >= CUES.reveal - 0.05 ? Math.max(0, 1 - prog(t, CUES.reveal - 0.05, CUES.reveal + 0.35)) * 0.0 : 0;
+  $("#flash").style.opacity = Math.max(fl * 0.85, fl2);
+  $("#fade").style.opacity = Math.max(1 - prog(t, 0, 0.2), prog(t, 44.1, 44.9));
+};
+
+await Promise.all([...document.images].map((i) => i.decode().catch(() => {})));
+const dwImg = document.querySelectorAll("#inboxCard img")[3];
+inboxRects[3] = [0, 0, dwImg.naturalWidth, dwImg.naturalHeight];
+await document.fonts.ready;
+window.ready = true;
+</script>
+</body>
+</html>
