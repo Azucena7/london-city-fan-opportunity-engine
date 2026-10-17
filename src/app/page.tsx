@@ -8,6 +8,7 @@ import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import { CommercialFAQ } from "@/components/CommercialFAQ";
 import { MorningCommercialRead } from "@/components/MorningCommercialRead";
 import { EngineUseCases, HowTheEngineWorks } from "@/components/EngineStory";
+import { HomePromoVideo } from "@/components/HomePromoVideo";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { decisionValidation } from "@/lib/data";
 import ed from "@/components/editorial.module.css";
@@ -58,6 +59,8 @@ export default function Home() {
           <OpportunityEngineStage live={live} />
         </div>
       </section>
+
+      <HomePromoVideo />
 
       <section className={styles.proof} aria-labelledby="proof-title">
         <h2 id="proof-title">Hypothesis first. Announcement after.</h2>
