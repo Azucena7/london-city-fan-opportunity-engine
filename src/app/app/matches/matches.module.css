@@ -70,6 +70,7 @@
 .radarMatch small{display:block;margin-top:2px;color:var(--product-muted);font-size:11px;line-height:1.35}
 .radarOpportunity strong{display:block;margin-top:3px;font-size:12px;line-height:1.4}
 .radarOpportunity small{display:block;margin-top:3px;color:var(--product-muted);font-size:11px;line-height:1.35}
+.radarOpportunity .contextLine{color:#8A4A33;font-weight:700}
 .radarScoreline{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .radarScoreline>div{min-width:0;padding:8px;border-radius:6px;background:#F6F8F9}
 .radarScoreline span,.radarScoreline strong{display:block}

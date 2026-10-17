@@ -92,3 +92,24 @@ Live Score =
 ```
 
 Fixture Appeal is currently an expert heuristic and should be replaced/calibrated using observed demand once enough games are logged.
+
+## 7. Context Pressure (Radar order, October 2026)
+
+The Radar rank now adds a transparent **context pressure** from the latest refresh
+(`src/lib/contextPressure.ts`, loaded by `src/lib/currentContextPressure.ts`):
+
+| Family | Rule | Points | Evidence |
+|---|---|---|---|
+| Competing events | 3 per high overlap + 1 per medium overlap (event landscape) | max 9 | scheduled |
+| Weather | matchday forecast at the shared high / medium level (`weatherThresholds.ts`) | 6 / 3 | forecast |
+| Transport | any TfL road closure within 5 km or rail disruption on the day | 6 | reported |
+| Calendar | 3 per calendar moment (bank holiday, international window) | max 4 | scheduled |
+
+Total is capped at 20. Rules:
+
+- `rank = baseRank + contextPressure.points` sets the order of the Radar and the decision queue.
+- The attention state (Act now, Review, Monitor) is still read from `baseRank`: the outside
+  world reorders and explains, it does not change decision rules.
+- Every point has a named driver, a source and an evidence state, shown on the Radar row
+  ("Outside the club +N: …").
+- It is attention, not a forecast: it never estimates attendance or demand.
