@@ -220,7 +220,7 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
           {shownOpportunities.length ? null : <p className={styles.radarEmpty}>No other upcoming fixture is in this state.</p>}
           <div className={styles.radarList}>
             {shownOpportunities.map((item) => (
-              <Link href={"/app/matches/" + item.fixtureId} className={[styles.radarFixture, styles.futureFixture].join(" ")} key={item.fixtureId}>
+              <Link href={"/app/matches/" + item.fixtureId} className={[styles.radarFixture, styles.futureFixture].join(" ")} data-state={item.attentionState.replaceAll(" ", "").toLowerCase()} key={item.fixtureId}>
                 <div className={styles.radarRank}>#{radar.indexOf(item) + 1}</div>
                 <div className={styles.radarMatch}>
                   <span>{formatDate(item.date)} · {item.kickoff ?? "TBC"}</span>
