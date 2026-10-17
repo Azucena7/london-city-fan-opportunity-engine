@@ -1,0 +1,22 @@
+/* A dense read: one row per signal family, label · what changed · source state. */
+.card{padding:16px 18px;margin-top:12px}
+.card .updated{color:var(--product-muted);font-size:12px;font-weight:600;letter-spacing:0;text-transform:none;white-space:nowrap}
+.lines{display:grid;margin:10px 0 0;padding:0;list-style:none;border-top:1px solid #E5E9EC}
+.lines li{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:12px;align-items:start;padding:10px 2px;border-bottom:1px solid #EDF0F2}
+.label{color:var(--product-muted);font-size:12px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;padding-top:1px}
+.copy{display:grid;gap:3px;min-width:0}
+.copy strong{font-size:13px;line-height:1.4}
+.copy small{color:var(--product-muted);font-size:12px;line-height:1.45}
+.state{font-size:12px;font-weight:800;color:#26776F;white-space:nowrap}
+.lines li[data-state="not-connected"] .copy strong{color:var(--product-muted);font-weight:650}
+.lines li[data-state="not-connected"] .state{color:#5E6870}
+.foot{margin:10px 0 0;color:var(--product-muted);font-size:12px}
+.foot a{color:var(--product-ink);font-weight:800}
+@media(max-width:640px){
+  .lines li{grid-template-columns:minmax(0,1fr) auto}
+  .label{grid-column:1/-1}
+  .card .updated{white-space:normal;text-align:right}
+  /* On a phone the headline carries the read; the supporting detail stays on larger screens. */
+  .copy small{display:none}
+  .lines li{padding:8px 2px}
+}
