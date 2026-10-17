@@ -3,6 +3,7 @@ import Link from "next/link";
 import { calendar, campaignPlans, currentState } from "@/lib/data";
 import { currentProductDate } from "@/lib/currentProductDate";
 import { demoCommercialCampaigns } from "@/lib/clubStrategy";
+import { CampaignViews, type CampaignListRow } from "@/components/CampaignViews";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import { CommercialCampaignBoard } from "@/components/CommercialCampaignBoard";
@@ -45,6 +46,34 @@ export default function CampaignsPage() {
     return started ? "Handoff" : "Ready";
   };
   const lifecycleStages = ["Draft", "Review", "Ready", "Handoff", "Learning"] as const;
+  const shortDate = (value: string) => new Date(value + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+  const listRows: CampaignListRow[] = [
+    ...campaignRows.map((item) => {
+      const date = calendar.find((entry) => entry.id === item.campaign.fixtureId)?.date ?? "";
+      return {
+        id: item.campaign.id,
+        title: item.campaign.title.en,
+        kind: "Fixture" as const,
+        stage: lifecycleStage(item),
+        when: date,
+        whenLabel: fixtureLabel(item.campaign.fixtureId),
+        owner: null,
+        next: item.needsDecision ? item.campaign.nextApproval?.en ?? "Review required" : `${item.approvalCount}/${item.approvalTotal} approvals ready`,
+        href: "/app/matches/" + item.campaign.fixtureId
+      };
+    }),
+    ...demoCommercialCampaigns.map((item) => ({
+      id: item.id,
+      title: item.name,
+      kind: "Commercial" as const,
+      stage: null,
+      when: item.activationDate,
+      whenLabel: "Activates " + shortDate(item.activationDate),
+      owner: item.owner || null,
+      next: item.playerNeed > 0 ? `Plan ${item.playerNeed} player${item.playerNeed === 1 ? "" : "s"} for ${item.channel}` : `Plan ${item.channel} activation`,
+      href: "/app/players?campaign=" + item.id
+    }))
+  ];
 
   return (
     <AppWorkspaceShell
@@ -114,6 +143,7 @@ export default function CampaignsPage() {
             title="All campaign work"
             action={<Link href="/app/season">Calendar view →</Link>}
           />
+          <CampaignViews rows={listRows} board={
           <div className={styles.board}>
             <section>
               <header><span>Needs decision</span><b>{needsDecision.length}</b></header>
@@ -162,6 +192,7 @@ export default function CampaignsPage() {
               </div>
             </section>
           </div>
+          } />
         </WorkspaceCard>
 
         <aside className={styles.sideRail}>
