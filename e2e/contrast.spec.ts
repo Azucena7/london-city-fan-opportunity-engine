@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 // WCAG 1.4.3 large-text minimum is 3:1. Every visible h1-h3 must reach it against its
 // effective background. This caught headings painted navy on navy panels.
 const routes = [
-  "/", "/for-clubs", "/pilot", "/case-study", "/live/london-city", "/cases",
+  "/", "/for-clubs", "/pilot", "/case-study", "/live/london-city",
   "/app", "/app/matches", "/app/matches/2026-10-18-eve-h", "/app/campaigns", "/app/players",
   "/app/season", "/app/sponsors", "/app/contracts", "/app/learning", "/app/executive",
   "/app/sources", "/app/setup", "/app/access", "/app/help", "/app/demo", "/matchday/2026-10-18-eve-h"

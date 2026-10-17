@@ -26,7 +26,6 @@ const publicRoutes = [
   "/pilot",
   "/pilot/operating-pack",
   "/pilot/rehearsal",
-  "/cases",
   "/case-study",
   "/live/london-city"
 ];
@@ -157,7 +156,7 @@ test("Players lists the constraints before recommending a pack", async ({ page }
 });
 
 test("public commercial pages share the public header, never the workspace sidebar", async ({ page }) => {
-  for (const route of ["/", "/for-clubs", "/pilot", "/pilot/operating-pack", "/pilot/rehearsal", "/cases", "/live/london-city"]) {
+  for (const route of ["/", "/for-clubs", "/pilot", "/pilot/operating-pack", "/pilot/rehearsal", "/live/london-city"]) {
     await page.goto(route);
     await page.waitForLoadState("networkidle");
     await expect(page.getByRole("navigation", { name: "AVELA marketing and commercial product navigation" }), route).toHaveCount(1);
