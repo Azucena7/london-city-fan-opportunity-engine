@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
 import { requireAiAccess } from "@/lib/aiAccess";
+import { readJson } from "@/lib/requestGuards";
 
 type DraftType = "crm-email" | "vertical-video";
 
@@ -34,7 +35,7 @@ export async function POST(request: Request) {
   const access = await requireAiAccess();
   if (access.denied) return access.denied;
 
-  const body = await request.json().catch(() => null) as DraftRequest | null;
+  const body = await readJson(request) as DraftRequest | null;
   const type = body?.type;
 
   if (!isDraftType(type)) {
@@ -55,8 +56,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error: "AI generation is not configured yet.",
-        configured: false,
-        requiredEnvironment: "AI_GATEWAY_API_KEY or VERCEL_OIDC_TOKEN"
+        configured: false
       },
       { status: 503 }
     );
@@ -155,8 +155,9 @@ export async function POST(request: Request) {
   } | null;
 
   if (!response.ok) {
+    console.error("Campaign draft gateway error", response.status, payload?.error?.message);
     return NextResponse.json(
-      { error: payload?.error?.message || "The AI provider could not generate this draft." },
+      { error: "The AI provider could not generate this draft. Try again in a moment." },
       { status: 502 }
     );
   }

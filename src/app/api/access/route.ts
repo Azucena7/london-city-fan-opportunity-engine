@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 const requestableRoles = new Set(["viewer","marketing","ticketing","business","communications","compliance","direction"]);
 
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
   const user = await currentSupabaseUser();
   if (!user || !user.email) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
 
-  const body = await request.json().catch(() => null) as { clubId?: string; requestedRole?: string; note?: string } | null;
+  const body = await readJson(request) as { clubId?: string; requestedRole?: string; note?: string } | null;
   const clubId = typeof body?.clubId === "string" ? body.clubId.trim() : "";
   const requestedRole = typeof body?.requestedRole === "string" ? body.requestedRole : "viewer";
   const note = typeof body?.note === "string" ? body.note.trim().slice(0, 500) : null;

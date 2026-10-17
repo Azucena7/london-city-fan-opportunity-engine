@@ -45,10 +45,11 @@ export async function GET() {
       daily: raw.daily
     });
   } catch (error) {
+    console.error("Weather provider error", error);
     return NextResponse.json(
       {
         status: "unavailable",
-        reason: error instanceof Error ? error.message : "Unknown weather error"
+        reason: "The weather provider could not be reached."
       },
       { status: 500 }
     );

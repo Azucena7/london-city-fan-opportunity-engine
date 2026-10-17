@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 function safeCampaign(value: string) {
   return value.trim().slice(0, 160);
@@ -35,7 +36,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ camp
 
   const { campaignId: rawCampaignId } = await params;
   const campaignId = safeCampaign(rawCampaignId);
-  const body = await request.json().catch(() => null) as {
+  const body = await readJson(request) as {
     clubId?: string;
     status?: "selected" | "approved" | "committed";
     selectedPlayerIds?: string[];

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
 import { sanitiseVenues } from "@/lib/clubVenues";
+import { readJson } from "@/lib/requestGuards";
 
 export async function GET(request: Request) {
   if (!supabaseConfigured()) return NextResponse.json({ persistence: "device", setup: null });
@@ -26,7 +27,7 @@ export async function PUT(request: Request) {
   const user = await currentSupabaseUser();
   if (!user) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
 
-  const body = await request.json().catch(() => null) as {
+  const body = await readJson(request) as {
     clubId?: string;
     fixtureSource?: "manual" | "calendar-feed" | "ticketing";
     connectedChannels?: string[];

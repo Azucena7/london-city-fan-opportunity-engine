@@ -1,15 +1,19 @@
 import { NextResponse } from "next/server";
 import { setSessionCookie, supabaseConfigured, supabasePublicConfig } from "@/lib/supabaseServer";
+import { readJson, sessionWriteRejection } from "@/lib/requestGuards";
 
 // Completes a password reset: the recovery link from Supabase carries a short-lived access
 // token, which is allowed to set a new password for its own account. On success the person is
 // signed in with that session.
 export async function POST(request: Request) {
+  // This route sets a session without needing one, so refuse cross-site and non-JSON posts.
+  const rejected = sessionWriteRejection(request);
+  if (rejected) return rejected;
   if (!supabaseConfigured()) {
     return NextResponse.json({ error: "Club accounts are not configured yet." }, { status: 503 });
   }
 
-  const body = await request.json().catch(() => null) as { accessToken?: string; password?: string; expiresIn?: number } | null;
+  const body = await readJson(request) as { accessToken?: string; password?: string; expiresIn?: number } | null;
   const accessToken = typeof body?.accessToken === "string" ? body.accessToken.trim() : "";
   const password = typeof body?.password === "string" ? body.password : "";
   if (!accessToken) {
@@ -28,10 +32,9 @@ export async function POST(request: Request) {
   }).catch(() => null);
 
   if (!response?.ok) {
-    const payload = await response?.json().catch(() => null) as { msg?: string; error_description?: string } | null;
     const expired = response?.status === 401 || response?.status === 403;
     return NextResponse.json({
-      error: expired ? "This reset link has expired. Request a new one." : payload?.error_description || payload?.msg || "The password could not be changed."
+      error: expired ? "This reset link has expired. Request a new one." : "The password could not be changed. Request a new reset link and try again."
     }, { status: response?.status ?? 502 });
   }
 
