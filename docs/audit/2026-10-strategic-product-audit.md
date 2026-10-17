@@ -378,6 +378,18 @@ Home = "qué necesita mi atención hoy" (top 3 + lectura externa del día). Rada
 | 1 | #514 | Presión de contexto: el entorno reordena el Radar con puntos explicados (estado sin cambios) |
 | 1 | #515 | Previsión por partido dentro de 16 días y aviso de cambio de previsión |
 | 1 | #516 | Conciertos y festivales en recintos grandes como eventos de ciudad |
+| 1 | #518 | Huelgas de transporte como señal propia |
+| 1 | #519 | Esquema de señal: confianza, alcance geográfico, caducidad y clase de evidencia |
+| 1 | #520 | Retirada del alcance de YouTube |
+| 1 | #521 | Vacaciones escolares (Bromley y vecinos) con fuente oficial, aún sin verificar |
+| 2 | #522 | Webhook genérico firmado: envío idempotente del paquete aprobado y lectura de estado |
+
+**Fase 2 en revisión:**
+
+- Monitor de ejecución en la ficha: envío solo tras confirmación, Delivered "x de y" sin %, en curso, bloqueadas, en riesgo (48 h).
+- Herramienta de ejecución elegida en `/app/setup` (Asana, Monday, Jira, Notion u otra) y qué tipo de trabajo se envía.
+- Gestión interna congelada (D3): seguimiento de peticiones, capacidad y continuidad operativa ocultos tras `AVELA_INTERNAL_WORK_MANAGEMENT`. Sus APIs y datos se mantienen hasta acordar la migración. Disponibilidad y huecos de calendario se quedan: son viabilidad, no gestión de tareas.
+- Falta: separar Delivered de Worked en Learning, y luego el vídeo.
 
 **Reubicado por decisión del fundador:**
 
@@ -386,8 +398,7 @@ Home = "qué necesita mi atención hoy" (top 3 + lectura externa del día). Rada
 
 **Pendiente de la fase 1:**
 
-- Vacaciones escolares: requiere fichero con las fechas del council (Bromley) con fuente y revisión anual. Pendiente de confirmar fuente.
-- Huelgas como señal propia.
+- Vacaciones escolares: marcar como verificadas cuando el club o el fundador confirme las fechas en la página del council de Bromley. Hasta entonces no generan momentos de calendario.
 - Esquema de señal completo: zona, caducidad, confianza tipada y tipo de evidencia.
 
 ### Fase 0: Quick wins (1–2 semanas, sin cambios de arquitectura)

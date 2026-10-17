@@ -21,6 +21,7 @@ import { OperationalHandoffs } from "@/components/OperationalHandoffs";
 import { AvailabilityPlanner } from "@/components/AvailabilityPlanner";
 import { CalendarSlotFinder } from "@/components/CalendarSlotFinder";
 import { OperationalCapacityPanel } from "@/components/OperationalCapacityPanel";
+import { internalWorkManagementVisible } from "@/lib/frozenFeatures";
 import { MatchdayCompanionWidget } from "@/components/MatchdayCompanionWidget";
 import { ExternalWorkPackagePreview } from "@/components/ExternalWorkPackagePreview";
 import { ExternalExecutionSync } from "@/components/ExternalExecutionSync";
@@ -283,10 +284,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           <span className={styles.phaseNumber}>02</span>
           <div>
             <span className={styles.eyebrow}>Can we actually do it?</span>
-            <h2>Check availability, timing and capacity before the club commits.</h2>
+            <h2>Check availability and timing before the club commits.</h2>
           </div>
         </div>
-        <p>An attractive idea still has to survive the real calendar, player constraints and workload.</p>
+        <p>An attractive idea still has to survive the real calendar and player constraints.</p>
       </section>
 
       <AvailabilityPlanner
@@ -299,7 +300,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
         fixtureLabel={`London City v ${fixture.opponent}`}
       />
 
-      <OperationalCapacityPanel
+      {internalWorkManagementVisible() ? <OperationalCapacityPanel
         windowStart={currentState.updated_at}
         windowEnd={`${fixture.date}T23:59:59Z`}
         plan={{
@@ -312,7 +313,7 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           externalParties: handoffActivations.length,
           unknownInputs: Math.min(5, live.missing.length)
         }}
-      />
+      /> : null}
 
       <MatchdayCompanionWidget
         fixtureId={fixture.id}
@@ -449,12 +450,12 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
 
         <ExternalExecutionSync decisionId={`fixture:${fixture.id}`} />
 
-        <OperationalHandoffs
+        {internalWorkManagementVisible() ? <OperationalHandoffs
           decisionId={`fixture:${fixture.id}`}
           fixtureLabel={`London City v ${fixture.opponent}`}
           eventAt={fixture.date ? `${fixture.date}T${fixture.kickoff ?? "12:00"}:00` : null}
           recommendation={campaign?.title.en ?? preparedMove?.move ?? live.recommendedAction}
-        />
+        /> : null}
       </section>
 
       </details>

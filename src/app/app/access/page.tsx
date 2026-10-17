@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AccessCenter } from "@/components/AccessCenter";
 import { OperationalContinuity } from "@/components/OperationalContinuity";
+import { internalWorkManagementVisible } from "@/lib/frozenFeatures";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./access.module.css";
@@ -43,11 +44,13 @@ export default function AccessPage() {
       <div className={styles.accessSurface}>
         <AccessCenter />
       </div>
-      <div className={styles.continuity}>
-        <WorkspaceDrawer label="Operational continuity" title="Handover & role-change protocol">
-          <OperationalContinuity />
-        </WorkspaceDrawer>
-      </div>
+      {internalWorkManagementVisible() ? (
+        <div className={styles.continuity}>
+          <WorkspaceDrawer label="Operational continuity" title="Handover & role-change protocol">
+            <OperationalContinuity />
+          </WorkspaceDrawer>
+        </div>
+      ) : null}
     </AppWorkspaceShell>
   );
 }
