@@ -382,7 +382,7 @@ Home = "qué necesita mi atención hoy" (top 3 + lectura externa del día). Rada
 **Reubicado por decisión del fundador:**
 
 - **Vídeo promocional:** se hace al cierre de la fase 2, cuando el producto enseñe "señal → prioridad → tarea externa → Delivered/Worked". Se regenera con `scripts/video/`.
-- **Alcance de YouTube:** se queda en la fase 1, como señal de atención dentro del esquema de señal. No se hace ahora.
+- **Alcance de YouTube: retirado.** La medición de redes (impacto de campañas, momentum de jugadoras) es terreno de Blinkfire o de la herramienta social del club. AVELA lo recibirá como dato de entrada vía la integración de la fase 5 (selección de jugadoras, oportunidades disparadas por un pico de atención, "observado, no atribuido" en el informe), nunca con monitorización propia.
 
 **Pendiente de la fase 1:**
 

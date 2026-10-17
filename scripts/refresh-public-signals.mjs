@@ -2,13 +2,10 @@ import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { parseMensFootballFixtures, parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
 
-const AUDIENCE_PATH = new URL("../data/live/audience-reach.json", import.meta.url);
 const CALENDAR_PATH = new URL("../data/seed/calendar.json", import.meta.url);
 const CURRENT_PATH = new URL("../data/live/current.json", import.meta.url);
 const EVENT_LANDSCAPE_PATH = new URL("../data/live/event-landscape.json", import.meta.url);
 const SOURCE_HEALTH_PATH = new URL("../data/live/source-health.json", import.meta.url);
-const YOUTUBE_URL = "https://www.youtube.com/@LondonCityLionesses";
-const YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/channels";
 const TICKETMASTER_API_URL = "https://app.ticketmaster.com/discovery/v2/events.json";
 const TICKETMASTER_SOURCE_URL = "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/";
 const WSL_FIXTURES_URL = "https://womensleagues.thefa.com/fixtures/";
@@ -27,12 +24,6 @@ function londonIsoDate(value = new Date()) {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit"
   }).format(value);
-}
-
-function compactDisplay(value) {
-  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(value < 10_000_000 ? 1 : 0)}M`;
-  if (value >= 1_000) return `${(value / 1_000).toFixed(value < 100_000 ? 1 : 0)}K`;
-  return value.toLocaleString("en-GB");
 }
 
 async function fetchResponse(url, source) {
@@ -55,31 +46,6 @@ async function fetchJson(url, source) {
   return (await fetchResponse(url, source)).json();
 }
 
-function integerOrNull(value) {
-  if (value === undefined || value === null || value === "") return null;
-  const number = Number(value);
-  return Number.isSafeInteger(number) && number >= 0 ? number : null;
-}
-
-export function parseYoutubeChannelResponse(payload) {
-  const channel = payload?.items?.[0];
-  if (!channel) throw new Error("YouTube channel was not found");
-  const subscribers = integerOrNull(channel.statistics?.subscriberCount);
-  const videos = integerOrNull(channel.statistics?.videoCount);
-  const channelViews = integerOrNull(channel.statistics?.viewCount);
-  if (subscribers === null) throw new Error("YouTube subscriber count was not returned");
-  return { channelId: channel.id, subscribers, videos, channelViews };
-}
-
-async function fetchYoutubeChannel(apiKey) {
-  if (!apiKey) throw new Error("YOUTUBE_API_KEY is not configured");
-  const params = new URLSearchParams({
-    part: "statistics",
-    forHandle: "LondonCityLionesses",
-    key: apiKey
-  });
-  return parseYoutubeChannelResponse(await fetchJson(`${YOUTUBE_API_URL}?${params}`, "YouTube Data API"));
-}
 
 function dateDistance(left, right) {
   return Math.round(Math.abs(new Date(`${left}T12:00:00Z`) - new Date(`${right}T12:00:00Z`)) / 86_400_000);
@@ -202,57 +168,8 @@ function updateSourceHealth(sourceHealth, attemptedAt, results) {
   };
 }
 
-function metric(key, label, value, unit, sourceName, sourceUrl) {
-  return {
-    key,
-    label,
-    value,
-    displayValue: value === null ? "Pending" : compactDisplay(value),
-    unit,
-    state: value === null ? "pending" : "measured",
-    sourceName,
-    sourceUrl
-  };
-}
-
-function milestoneFixture(calendar, today) {
-  const target = new Date(`${today}T12:00:00Z`).getTime();
-  return calendar.find((fixture) => {
-    if (fixture.homeAway !== "home") return false;
-    const days = Math.round((target - new Date(`${fixture.date}T12:00:00Z`).getTime()) / 86_400_000);
-    return [-7, 1, 7, 30].includes(days);
-  });
-}
-
-function shouldAppendSnapshot(latest, metrics, today, fixture) {
-  if (!latest) return true;
-  const changed = metrics.some((item) => {
-    const previous = latest.metrics.find((candidate) => candidate.key === item.key);
-    return item.value !== null && previous?.value !== item.value;
-  });
-  const age = Math.floor((new Date(`${today}T12:00:00Z`) - new Date(latest.observedAt)) / 86_400_000);
-  const fixtureWindowMissing = fixture && latest.fixtureId !== fixture.id;
-  return changed || age >= 7 || Boolean(fixtureWindowMissing);
-}
-
-function updateYoutubeChannel(audience, publicData) {
-  return audience.channels.map((channel) => {
-    if (channel.id !== "lcl-youtube") return channel;
-    return {
-      ...channel,
-      state: "measured",
-      metrics: [
-        { label: { en: "Public subscribers", es: "Suscriptores públicos" }, value: compactDisplay(publicData.subscribers), state: "measured" },
-        ...(publicData.videos === null ? [] : [{ label: { en: "Published videos", es: "Vídeos publicados" }, value: publicData.videos.toLocaleString("en-GB"), state: "measured" }]),
-        ...(publicData.channelViews === null ? [] : [{ label: { en: "Public channel views", es: "Visualizaciones públicas del canal" }, value: publicData.channelViews.toLocaleString("en-GB"), state: "measured" }])
-      ]
-    };
-  });
-}
-
 export async function refreshPublicSignals(now = new Date()) {
-  const [audience, calendar, current, eventLandscape, sourceHealth] = await Promise.all([
-    readFile(AUDIENCE_PATH, "utf8").then(JSON.parse),
+  const [calendar, current, eventLandscape, sourceHealth] = await Promise.all([
     readFile(CALENDAR_PATH, "utf8").then(JSON.parse),
     readFile(CURRENT_PATH, "utf8").then(JSON.parse),
     readFile(EVENT_LANDSCAPE_PATH, "utf8").then(JSON.parse),
@@ -262,49 +179,8 @@ export async function refreshPublicSignals(now = new Date()) {
   const today = londonIsoDate(now);
   const sources = [];
   const failures = [];
-  let nextAudience = audience;
   let nextEventLandscape = eventLandscape;
-  let appendedAudienceSnapshot = false;
   const healthResults = {};
-
-  try {
-    const youtube = await fetchYoutubeChannel(process.env.YOUTUBE_API_KEY);
-    const latest = audience.snapshots.at(-1);
-    const metrics = [
-      metric("lcl-youtube-subscribers", { en: "London City YouTube subscribers", es: "Suscriptores de YouTube de London City" }, youtube.subscribers, "subscribers", "London City Lionesses on YouTube", YOUTUBE_URL),
-      metric("lcl-youtube-videos", { en: "London City public videos", es: "Vídeos públicos de London City" }, youtube.videos, "videos", "YouTube Data API", YOUTUBE_URL),
-      metric("lcl-youtube-channel-views", { en: "London City public channel views", es: "Visualizaciones públicas del canal de London City" }, youtube.channelViews, "views", "London City Lionesses on YouTube", YOUTUBE_URL),
-      ...(latest?.metrics.filter((item) => !item.key.startsWith("lcl-youtube-")) ?? [])
-    ];
-    const fixture = milestoneFixture(calendar, today);
-    appendedAudienceSnapshot = shouldAppendSnapshot(latest, metrics, today, fixture);
-    nextAudience = {
-      ...audience,
-      checkedAt: attemptedAt,
-      channels: updateYoutubeChannel(audience, youtube),
-      snapshots: appendedAudienceSnapshot ? [...audience.snapshots, {
-        id: `audience-auto-${today}`,
-        observedAt: attemptedAt,
-        label: { en: "Automated public snapshot", es: "Snapshot público automatizado" },
-        ...(fixture ? { fixtureId: fixture.id } : {}),
-        metrics
-      }] : audience.snapshots
-    };
-    sources.push({ id: "lcl-youtube", label: "London City YouTube", state: "measured", confidence: "high", checkedAt: attemptedAt, sourceUrl: YOUTUBE_URL });
-    healthResults["youtube-public"] = {
-      ok: true,
-      secret: "YOUTUBE_API_KEY",
-      note: {
-        en: "Channel statistics are refreshed through the official YouTube Data API.",
-        es: "Las estadísticas del canal se actualizan mediante la API oficial de YouTube Data."
-      }
-    };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "YouTube refresh failed";
-    failures.push(`YouTube: ${message}`);
-    sources.push({ id: "lcl-youtube", label: "London City YouTube", state: "waiting", confidence: "unavailable", checkedAt: attemptedAt, sourceUrl: YOUTUBE_URL, message });
-    healthResults["youtube-public"] = { ok: false, secret: "YOUTUBE_API_KEY", message };
-  }
 
   const window = ticketmasterWindow(calendar, today);
   if (window) {
@@ -362,36 +238,33 @@ export async function refreshPublicSignals(now = new Date()) {
 
 
   const successfulSources = sources.filter((source) => source.state === "measured").length;
-  nextAudience = {
-    ...nextAudience,
-    refresh: {
-      automated: true,
-      cadence: "weekly-and-fixture-windows",
-      lastAttemptAt: attemptedAt,
-      lastSuccessfulAt: successfulSources ? attemptedAt : audience.refresh?.lastSuccessfulAt ?? null,
-      state: failures.length ? (successfulSources ? "partial" : "waiting") : "fresh",
-      sources
-    }
+  const refresh = {
+    automated: true,
+    cadence: "weekly-and-fixture-windows",
+    lastAttemptAt: attemptedAt,
+    lastSuccessfulAt: successfulSources ? attemptedAt : current.public_signal_refresh?.lastSuccessfulAt ?? null,
+    state: failures.length ? (successfulSources ? "partial" : "waiting") : "fresh",
+    sources
   };
-  const materialChanges = Number(appendedAudienceSnapshot);
+  // Event-landscape changes are reported by the landscape itself; no public metric snapshot is kept.
+  const materialChanges = 0;
   const nextCurrent = {
     ...current,
     updated_at: attemptedAt,
     public_signal_changes: materialChanges,
-    public_signal_refresh: nextAudience.refresh,
+    public_signal_refresh: refresh,
     source_failures: [...new Set([...(current.source_failures ?? []).filter((item) => !/^YouTube:|^Ticketmaster:|^WSL attendance:/.test(item)), ...failures])]
   };
   const nextSourceHealth = updateSourceHealth(sourceHealth, attemptedAt, healthResults);
 
   if (!DRY_RUN) {
     await Promise.all([
-      writeFile(AUDIENCE_PATH, `${JSON.stringify(nextAudience, null, 2)}\n`),
       writeFile(CURRENT_PATH, `${JSON.stringify(nextCurrent, null, 2)}\n`),
       writeFile(EVENT_LANDSCAPE_PATH, `${JSON.stringify(nextEventLandscape, null, 2)}\n`),
       writeFile(SOURCE_HEALTH_PATH, `${JSON.stringify(nextSourceHealth, null, 2)}\n`)
     ]);
   }
-  return { today, materialChanges, appendedAudienceSnapshot, eventCount: nextEventLandscape.events.length, failures, sources };
+  return { today, materialChanges, eventCount: nextEventLandscape.events.length, failures, sources };
 }
 
 if (fileURLToPath(import.meta.url) === process.argv[1]) {

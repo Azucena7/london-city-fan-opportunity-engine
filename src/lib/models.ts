@@ -240,35 +240,6 @@ export type AudienceReadinessItem = {
   action: LocalizedText;
 };
 
-export type AudienceReachData = {
-  checkedAt: string;
-  scope: string;
-  headline: LocalizedText;
-  principle: LocalizedText;
-  channels: AudienceChannel[];
-  snapshots: AudienceSnapshot[];
-  impactTimeline: AudienceImpactEvent[];
-  measurementReadiness: AudienceReadinessItem[];
-  funnel: Array<{ id: string; label: LocalizedText; measure: LocalizedText }>;
-  searchPlan: {
-    terms: string[];
-    markets: string[];
-    windows: string[];
-    annotations: Array<{ date: string; event: LocalizedText }>;
-  };
-  fixtureTests: Array<{
-    fixtureId: string;
-    date: string;
-    opponent: string;
-    stage: string;
-    attendance: number | null;
-    distribution: string;
-    conversionState: string;
-    nextAction: LocalizedText;
-  }>;
-  refresh?: PublicSignalRefresh;
-};
-
 export type SearchDemandState = "measured" | "insufficient-sample" | "source-unavailable" | "requires-access";
 
 export type SearchDemandData = {
