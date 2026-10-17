@@ -53,3 +53,9 @@ test("a forecast that moved by 10 points or more says so; small moves stay quiet
   const small = contextPressure({ ...quiet, weather: { validFor: "2026-10-18", rainProbability: 64, previousRainProbability: 58 } });
   assert.doesNotMatch(small.drivers[0].label, /from/);
 });
+
+test("a disruption TfL attributes to strike action says so", () => {
+  const result = contextPressure({ ...quiet, railDisruptions: ["Southeastern part suspended"], strike: true });
+  assert.match(result.drivers[0].label, /^Strike or industrial action · rail: Southeastern part suspended$/);
+  assert.equal(result.drivers[0].points, 6);
+});

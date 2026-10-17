@@ -32,6 +32,13 @@
       "query": "\"Alexia Putellas\" \"London City\"",
       "language": "es",
       "country": "ES"
+    },
+    {
+      "id": "transport-strikes-uk",
+      "label": "Rail and transport strikes around Bromley (UK)",
+      "query": "(strike OR \"industrial action\") (Southeastern OR Thameslink OR \"Southern rail\" OR TfL OR \"London buses\" OR Bromley)",
+      "language": "en-GB",
+      "country": "GB"
     }
   ],
   "topics": [
@@ -124,6 +131,17 @@
         "brace",
         "goleada",
         "doblete"
+      ]
+    },
+    {
+      "id": "transport-strike",
+      "label": "Transport strike",
+      "keywords": [
+        "strike",
+        "strikes",
+        "industrial action",
+        "walkout",
+        "walk-out"
       ]
     }
   ],
