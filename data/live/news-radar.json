@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-17T18:44:45.233Z",
-  "lastSuccessfulAt": "2026-10-17T18:44:45.233Z",
+  "checkedAt": "2026-10-17T19:15:04.034Z",
+  "lastSuccessfulAt": "2026-10-17T19:15:04.034Z",
   "failures": [],
   "items": [
     {
@@ -18,6 +18,21 @@
       "fixtureIds": [],
       "id": "news-74ba65421552",
       "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "Sophie Hillyerd joins Sheffield United on an emergency loan",
+      "outlet": "London City Lionesses",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOenhVdl8yTU5QOEJuazFZWEozY0JkaFNvWXd1d2doNWozQlV1N1o5YjdQQThkWVR6cTYwUVNESGk3b19nUUx1V1cxSXRiWk56UEMyalY1WVVfRmVmQk1LMWkyT2lrX3VaNS1GUVd4SlB4OTJONGRIZWw2ZTZXWW44dUhoRmEtRURfTXBXVHZRYUd5bXJvZmdVY1g5UlM5YXRsblE?oc=5",
+      "publishedAt": "2026-10-17T18:04:01.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [
+        "squad"
+      ],
+      "fixtureIds": [],
+      "id": "news-2c20e2964023",
+      "firstSeenAt": "2026-10-17T19:15:04.034Z"
     },
     {
       "title": "Women's Super League",
@@ -1147,20 +1162,6 @@
       ],
       "id": "news-b04d2d01bb03",
       "firstSeenAt": "2026-10-17T18:31:38.593Z"
-    },
-    {
-      "title": "Tottenham Hotspur v London City Lionesses: Women’s Super League Preview",
-      "outlet": "VAVEL.com",
-      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPTUY2Y084aUNpUEFFdHZsUWFQTGstWUlMREJDZzgtYWxRQ283aFN3dVREYXR5aHBEUU50ZlNMV0JwZk45MVR3enYwY2pSVm9jVjV0LXRxWUFvc2VuSGxsbmZfOHB5ZGtWcFhLYzdqQUtROVJ0VHp3SEpyYkJHeGg5T1hIMmpQa1NiMUF0NFJ1d2lqdXlURTNfNTQ0M2I4VjAwZUlYU1dXYktFSjdRRmNTbVJPTjNqUFhkMEpkblFyNS1TUk9Xa3hqUkJrUWVzWEFPMDQ3Q3RNc01GNGNv?oc=5",
-      "publishedAt": "2026-10-03T18:19:54.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-7a601e09b005",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
     }
   ]
 }
