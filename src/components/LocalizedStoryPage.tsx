@@ -8,55 +8,6 @@ import type { DecisionValidationData } from "@/lib/models";
 import ed from "@/components/editorial.module.css";
 import styles from "./LocalizedStoryPage.module.css";
 
-type Localized = { en: string; es: string };
-
-const productViews: Array<{ title: Localized; text: Localized; href: string; cta: Localized }> = [
-  {
-    title: { en: "Home", es: "Inicio" }, href: "/app",
-    text: { en: "What matters before the next fixture, and which action deserves attention now.", es: "Qué importa antes del próximo partido y qué acción merece atención ahora." },
-    cta: { en: "Open Home", es: "Abrir Inicio" }
-  },
-  {
-    title: { en: "Opportunity Radar", es: "Radar de oportunidades" }, href: "/app/matches",
-    text: { en: "A fixture-led operating plan instead of a passive list of dates.", es: "Un plan operativo por partido en lugar de una lista pasiva de fechas." },
-    cta: { en: "Open Opportunity Radar", es: "Abrir Radar de oportunidades" }
-  },
-  {
-    title: { en: "Territory signals", es: "Señales territoriales" }, href: "/app/matches",
-    text: { en: "Where local acquisition opportunity appears strongest before access friction is tested.", es: "Dónde parece más fuerte la oportunidad de captación local antes de probar la fricción de acceso." },
-    cta: { en: "Open Radar", es: "Abrir Radar" }
-  },
-  {
-    title: { en: "Matchday access signals", es: "Señales de acceso al partido" }, href: "/app/matches",
-    text: { en: "Whether supporters from priority areas can realistically reach the ground on matchday.", es: "Si los aficionados de zonas prioritarias pueden llegar realmente al estadio el día de partido." },
-    cta: { en: "Review fixture signals", es: "Revisar señales del partido" }
-  },
-  {
-    title: { en: "Campaign opportunities", es: "Oportunidades de campaña" }, href: "/app/campaigns",
-    text: { en: "Which experience concepts are worth testing before they are treated as products.", es: "Qué conceptos de experiencia merece la pena probar antes de tratarlos como productos." },
-    cta: { en: "Open Campaigns", es: "Abrir Campañas" }
-  },
-  {
-    title: { en: "Learning", es: "Aprendizaje" }, href: "/app/learning",
-    text: { en: "Whether there is enough evidence to act, and how prior hypotheses compare with observable reality.", es: "Si existe suficiente evidencia para actuar y cómo se comparan las hipótesis previas con la realidad observable." },
-    cta: { en: "Open Learning", es: "Abrir Aprendizaje" }
-  }
-];
-
-const operatingLoop: Array<{ label: Localized; text: Localized }> = [
-  { label: { en: "Find", es: "Localizar" }, text: { en: "Where is qualified local demand?", es: "¿Dónde está la demanda local cualificada?" } },
-  { label: { en: "Read", es: "Interpretar" }, text: { en: "What changed around the fixture?", es: "¿Qué ha cambiado alrededor del partido?" } },
-  { label: { en: "Activate", es: "Activar" }, text: { en: "Which campaign can the team execute?", es: "¿Qué campaña puede ejecutar el equipo?" } },
-  { label: { en: "Measure", es: "Medir" }, text: { en: "Did attention become attendance?", es: "¿La atención se convirtió en asistencia?" } },
-  { label: { en: "Learn", es: "Aprender" }, text: { en: "Who returned within 30/60/90 days?", es: "¿Quién volvió en 30/60/90 días?" } }
-];
-
-const valueCards: Array<{ title: Localized; text: Localized }> = [
-  { title: { en: "Marketing", es: "Marketing" }, text: { en: "Prioritised audiences, messages, channels, assets and execution windows.", es: "Audiencias, mensajes, canales, piezas y ventanas de ejecución priorizadas." } },
-  { title: { en: "Ticketing & CRM", es: "Ticketing y CRM" }, text: { en: "A shared path from campaign ID to ticket, scan, no-show and repeat visit.", es: "Un recorrido común desde el ID de campaña hasta entrada, acceso, no-show y repetición." } },
-  { title: { en: "Fan engagement", es: "Fan engagement" }, text: { en: "Fixture-specific journeys that reduce access, timing and weather friction.", es: "Recorridos específicos por partido que reducen fricción de acceso, horario y tiempo." } },
-  { title: { en: "Commercial", es: "Comercial" }, text: { en: "Evidence-led propositions for local partners, community activation and sponsorship.", es: "Propuestas basadas en evidencia para partners locales, comunidad y patrocinio." } }
-];
 
 const dayMs = 86_400_000;
 
@@ -65,7 +16,6 @@ const dayMs = 86_400_000;
 export function LocalizedStoryPage({ validation }: { validation: DecisionValidationData }) {
   const { lang } = useLanguage();
   const es = lang === "es";
-  const pick = (value: Localized) => value[es ? "es" : "en"];
   const validationCase = validation.cases[0];
   const aligned = validationCase.dimensions.filter((item) => item.state === "aligned").length;
   const partial = validationCase.dimensions.filter((item) => item.state === "partial").length;
@@ -135,34 +85,6 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
           <div><h3>{es ? "Lo que no prueba" : "What it does not show"}</h3><p>{validationCase.caveat[lang]}</p></div>
         </div>
         <Link className={ed.textLink} href="/app/learning">{es ? "Abrir la evidencia completa ↗" : "Open the full evidence trail ↗"}</Link>
-      </section>
-
-      <section className={styles.problem} aria-labelledby="problem-title">
-        <div className={styles.intro}>
-          <p className={styles.label}>{es ? "El problema comercial" : "The commercial problem"}</p>
-          <h2 id="problem-title">{es ? "Cada partido genera decisiones. Los datos suelen vivir separados." : "Every fixture creates decisions. The data usually lives apart."}</h2>
-          <p>{es
-            ? "Un club femenino independiente necesita construir hábito, no solo vender un partido. Pero calendario, atención digital, asistencia, territorio, transporte, campañas y repetición suelen analizarse en herramientas distintas o demasiado tarde."
-            : "An independent women's club needs to build habit, not only sell one match. Yet fixtures, digital attention, attendance, territory, travel, campaigns and repeat behaviour are often analysed in different tools or too late."}</p>
-        </div>
-        <dl className={styles.rows}>
-          <div><dt>{es ? "¿Dónde?" : "Where?"}</dt><dd>{es ? "Qué territorios contienen demanda alcanzable y relevante." : "Which territories contain relevant, reachable demand."}</dd></div>
-          <div><dt>{es ? "¿Cuándo?" : "When?"}</dt><dd>{es ? "Qué señales hacen que una jornada requiera más captación o servicio." : "Which signals make a matchweek require more acquisition or service."}</dd></div>
-          <div><dt>{es ? "¿Qué hacer?" : "What next?"}</dt><dd>{es ? "Cómo traducir el análisis en una campaña concreta y aprobable." : "How to turn analysis into a concrete, approvable campaign."}</dd></div>
-          <div><dt>{es ? "¿Funcionó?" : "Did it work?"}</dt><dd>{es ? "Qué generó compra, acceso y repetición, no solo alcance." : "What created purchase, scan and repeat, not just reach."}</dd></div>
-        </dl>
-      </section>
-
-      <section className={styles.thesis} aria-labelledby="thesis-title">
-        <h2 id="thesis-title">{es ? "Un sistema operativo de demanda para cada partido." : "A demand operating system for every fixture."}</h2>
-        <p>{es
-          ? "La herramienta no intenta producir otra capa de reporting. Organiza evidencia pública y, cuando exista, información privada del club en un bucle de decisión con responsables, aprobaciones y medición."
-          : "The product is not trying to create another reporting layer. It organises public evidence and, when available, private club data into a decision loop with owners, approvals and measurement."}</p>
-        <ol className={styles.loop}>
-          {operatingLoop.map((item) => (
-            <li key={item.label.en}><strong>{pick(item.label)}</strong><span>{pick(item.text)}</span></li>
-          ))}
-        </ol>
       </section>
 
       <section className={styles.maturity} aria-labelledby="maturity-title">
@@ -243,49 +165,6 @@ export function LocalizedStoryPage({ validation }: { validation: DecisionValidat
             {["Back to Bromley", "The next chapter", "Alexia → London City", "Matchday confidence"].map((item) => <li key={item}>{item}</li>)}
           </ul>
         </div>
-      </section>
-
-      <section className={styles.funnel} aria-labelledby="funnel-title">
-        <div className={styles.intro}>
-          <p className={styles.label}>{es ? "De alcance a demanda" : "From reach to demand"}</p>
-          <h2 id="funnel-title">{es ? "No sumar audiencias distintas. Conectarlas." : "Do not add unlike audiences. Connect them."}</h2>
-          <p>{es ? "YouTube, Eleven TV, televisión, búsquedas, entradas y asistencia se mantienen como métricas diferentes dentro del mismo recorrido." : "YouTube, Eleven TV, broadcast, search, tickets and attendance remain different measures inside the same journey."}</p>
-        </div>
-        <ol className={styles.stages}>
-          {[es ? "Alcance" : "Reach", es ? "Interacción" : "Engage", es ? "Intención" : "Intent", es ? "Compra / acceso" : "Buy / scan", es ? "Repetición" : "Repeat"].map((item, index) => (
-            <li key={item} data-restricted={index > 2 ? "" : undefined}>
-              <strong>{item}</strong>
-              <span>{index > 2 ? (es ? "requiere acceso" : "requires access") : (es ? "señal pública / instrumentable" : "public / instrumentable")}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className={styles.product} aria-labelledby="product-title">
-        <div className={styles.intro}>
-          <p className={styles.label}>{es ? "El producto" : "The product"}</p>
-          <h2 id="product-title">{es ? "Seis preguntas operativas. Un mismo sistema." : "Six operating questions. One system."}</h2>
-          <p>{es ? "La navegación evita otro dashboard infinito y lleva a cada equipo desde la decisión hacia la evidencia necesaria." : "The navigation avoids another endless dashboard and takes each team from the decision to the evidence it needs."}</p>
-        </div>
-        <div className={styles.views}>
-          {productViews.map((view) => (
-            <article key={view.title.en}>
-              <h3>{pick(view.title)}</h3>
-              <p>{pick(view.text)}</p>
-              <Link className={ed.textLink} href={view.href}>{pick(view.cta)} ↗</Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.value} aria-labelledby="value-title">
-        <h2 id="value-title">{es ? "Una capa de coordinación para equipos con poco tiempo." : "A coordination layer for teams with limited time."}</h2>
-        <dl className={styles.valueGrid}>
-          {valueCards.map((card) => <div key={card.title.en}><dt>{pick(card.title)}</dt><dd>{pick(card.text)}</dd></div>)}
-        </dl>
-        <blockquote className={styles.quote}>
-          {es ? "La oportunidad no es tener más datos. Es cerrar mejor el recorrido entre señal, decisión, campaña y aprendizaje." : "The opportunity is not more data. It is closing the loop from signal to decision, campaign and learning."}
-        </blockquote>
       </section>
 
       <section className={styles.next} aria-labelledby="next-title">

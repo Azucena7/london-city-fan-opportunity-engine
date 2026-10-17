@@ -9,11 +9,11 @@
 .disclosureTile p{max-width:40ch}
 
 .label{color:var(--ink-soft);font-size:var(--small);font-weight:650}
-.problem h2,.maturity h2,.metrics h2,.campaign h2,.funnel h2,.product h2,.next h2{font-size:clamp(30px,3vw,42px)}
+.maturity h2,.metrics h2,.campaign h2,.next h2{font-size:clamp(30px,3vw,42px)}
 /* The left-zone introduction shared by the axis sections. */
 .intro{display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding-right:clamp(24px,4vw,72px)}
 .intro>p:not(.label){max-width:44ch;line-height:1.6}
-.problem,.metrics,.campaign,.funnel,.product,.next{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);padding:var(--section) var(--m)}
+.metrics,.campaign,.next{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);padding:var(--section) var(--m)}
 
 /* Prediction versus observable reality, on the navy field. */
 .prediction{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);gap:24px 0;padding:var(--section) var(--m);background:var(--navy);color:var(--on-navy)}
@@ -41,22 +41,6 @@
 .boundary h3{font-size:22px;letter-spacing:-.02em}
 .boundary p{line-height:1.6}
 .prediction>a{justify-self:start}
-
-/* The commercial problem: four questions as rows on the axis. */
-.problem{background:var(--paper)}
-.rows{display:grid;gap:4px;margin:0}
-.rows div{display:grid;grid-template-columns:minmax(0,9em) minmax(0,1fr);gap:8px 32px;padding:24px;background:var(--paper-2)}
-.rows dt{font-size:22px;font-weight:760;letter-spacing:-.02em}
-.rows dd{margin:0;line-height:1.6}
-
-/* The proposition and its loop, on the coral field. */
-.thesis{display:flex;flex-direction:column;gap:32px;padding:var(--section) var(--m);background:var(--coral);color:var(--navy)}
-.thesis h2{max-width:22ch;font-size:clamp(40px,5.6vw,88px);line-height:.95;letter-spacing:-.05em}
-.thesis>p{max-width:60ch;font-size:var(--statement);line-height:1.45}
-.loop{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:32px;margin:40px 0 0;padding:0;list-style:none}
-.loop li{display:flex;flex-direction:column;gap:8px}
-.loop strong{font-size:24px;letter-spacing:-.02em}
-.loop span{line-height:1.5}
 
 /* Built, observed, still to prove: three fields, three states. */
 .maturity{padding:var(--section) 0 0;background:var(--paper)}
@@ -104,30 +88,6 @@
 .playbooks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin:0;padding:0;list-style:none}
 .playbooks li{padding:16px 20px;background:var(--sand);font-weight:700}
 
-/* From reach to demand: five stages, the last two need club access. */
-.funnel{background:var(--paper-2)}
-.stages{display:grid;gap:4px;margin:0;padding:0;list-style:none}
-.stages li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 24px;padding:20px 24px;background:var(--paper)}
-.stages strong{font-size:22px;letter-spacing:-.02em}
-.stages span{color:var(--ink-soft);font-size:var(--small);font-weight:650}
-.stages [data-restricted]{background:var(--navy-2);color:var(--on-navy)}
-.stages [data-restricted] span{color:var(--coral)}
-
-/* The product: six views on the axis. */
-.product{background:var(--paper)}
-.views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
-.views article{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:28px 24px;background:var(--paper-2)}
-.views h3{font-size:22px;line-height:1.2;letter-spacing:-.02em}
-.views p{flex:1;line-height:1.55}
-
-/* Value for the club, closed by the statement on navy. */
-.value{display:flex;flex-direction:column;gap:48px;padding:var(--section) var(--m);background:var(--sand)}
-.value h2{max-width:26ch}
-.valueGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin:0}
-.valueGrid dt{margin-bottom:8px;font-size:22px;font-weight:760;letter-spacing:-.02em}
-.valueGrid dd{margin:0;line-height:1.55}
-.quote{max-width:34ch;margin:24px 0 0;padding:40px;background:var(--navy);color:var(--on-navy);font-size:clamp(24px,2.4vw,36px);font-weight:650;line-height:1.25;letter-spacing:-.02em}
-
 /* From demo to pilot. */
 .next{background:var(--paper)}
 .next .intro>div{margin-top:16px}
@@ -142,20 +102,17 @@
 
 @media(max-width:1080px){
   .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .problem,.metrics,.campaign,.funnel,.product,.next{grid-template-columns:minmax(0,1fr);row-gap:48px}
+  .metrics,.campaign,.next{grid-template-columns:minmax(0,1fr);row-gap:48px}
   .intro{padding-right:0}
   .flow{grid-template-columns:minmax(0,1fr)}
   .flow .gap{flex-direction:row;justify-content:flex-start;align-items:baseline;gap:10px;padding:16px 24px}
   .readout{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .loop{grid-template-columns:repeat(3,minmax(0,1fr))}
   .states{grid-template-columns:minmax(0,1fr)}
-  .valueGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .rail{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:640px){
   .board{grid-template-columns:minmax(0,1fr);grid-template-areas:"title" "lead" "disclosure"}
-  .boundary,.metricGrid,.views,.valueGrid,.playbooks,.loop{grid-template-columns:minmax(0,1fr)}
+  .boundary,.metricGrid,.playbooks{grid-template-columns:minmax(0,1fr)}
   .briefFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .rows div,.pilotSteps div{grid-template-columns:minmax(0,1fr)}
-  .quote{padding:28px 24px}
+  .pilotSteps div{grid-template-columns:minmax(0,1fr)}
 }
