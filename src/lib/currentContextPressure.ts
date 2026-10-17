@@ -1,6 +1,7 @@
 import tflRoad from "../../data/live/tfl-road.json";
-import { bankHolidays, calendar, currentState, eventLandscape, internationalWindows } from "@/lib/data";
+import { bankHolidays, calendar, eventLandscape, internationalWindows } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
+import { forecastForFixture } from "@/lib/fixtureForecast";
 import { contextPressure, type ContextPressure } from "@/lib/contextPressure";
 import { railStatusForFixture } from "@/lib/mobilityProviderReadiness";
 import { roadClosuresOn } from "@/lib/morningRead";
@@ -12,7 +13,7 @@ export function getContextPressure(fixtureId: string, date: string): ContextPres
       .filter((score) => score.fixtureId === fixtureId)
       .map((score) => ({ level: score.level, name: event.name }))
   );
-  const weather = currentState.weather;
+  const weather = forecastForFixture(fixtureId, date);
   const rail = railStatusForFixture(date);
   const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows)
     .filter((moment) => moment.fixtureId === fixtureId)
@@ -24,7 +25,8 @@ export function getContextPressure(fixtureId: string, date: string): ContextPres
     weather: weather ? {
       validFor: weather.valid_for,
       rainProbability: weather.precipitation_probability_max,
-      windKmh: (weather as { wind_speed_max?: number }).wind_speed_max
+      windKmh: weather.wind_speed_max,
+      previousRainProbability: weather.previous_precipitation_probability_max
     } : null,
     roadClosures: roadClosuresOn(tflRoad.incidents, date).length,
     railDisruptions: rail ? rail.disruptions.map((item) => `${item.line} ${item.status.toLowerCase()}`) : [],

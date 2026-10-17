@@ -46,3 +46,10 @@ test("pressure is capped so context reorders the Radar without swamping it", () 
   assert.equal(busy.drivers.find((driver) => driver.family === "competing-events").points, 9);
   assert.equal(busy.drivers.find((driver) => driver.family === "calendar").points, 4);
 });
+
+test("a forecast that moved by 10 points or more says so; small moves stay quiet", () => {
+  const up = contextPressure({ ...quiet, weather: { validFor: "2026-10-18", rainProbability: 64, previousRainProbability: 20 } });
+  assert.match(up.drivers[0].label, /64% rain risk on matchday \(up from 20%\)/);
+  const small = contextPressure({ ...quiet, weather: { validFor: "2026-10-18", rainProbability: 64, previousRainProbability: 58 } });
+  assert.doesNotMatch(small.drivers[0].label, /from/);
+});

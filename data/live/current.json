@@ -14,6 +14,22 @@
     "wind_speed_max": 19.4,
     "source": "Open-Meteo"
   },
+  "weather_by_fixture": [
+    {
+      "fixture_id": "2026-10-18-eve-h",
+      "status": "forecast",
+      "valid_for": "2026-10-18",
+      "generated_at": "2026-10-17T00:28:56.128Z",
+      "precipitation_probability_max": 39,
+      "precipitation_sum": 3.3,
+      "temperature_max": 13.1,
+      "temperature_min": 7,
+      "wind_speed_max": 19.4,
+      "previous_precipitation_probability_max": null,
+      "previous_generated_at": null,
+      "source": "Open-Meteo"
+    }
+  ],
   "attendance_momentum": {
     "score": 90,
     "basis": "5,402 measured attendance at the Manchester United opener"

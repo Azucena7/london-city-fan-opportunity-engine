@@ -1,4 +1,4 @@
-import { currentState } from "@/lib/data";
+import { forecastForFixture } from "@/lib/fixtureForecast";
 import { weatherLevel } from "@/lib/weatherThresholds";
 
 export type MatchdayWeatherContext = {
@@ -15,15 +15,13 @@ export type MatchdayWeatherContext = {
 };
 
 export function getMatchdayWeatherContext(fixtureId: string, fixtureDate: string): MatchdayWeatherContext {
-  const weather = currentState.weather;
-  const isCurrentHome = currentState.next_home_fixture_id === fixtureId;
-  const validForFixture = weather?.status === "forecast" && weather?.valid_for === fixtureDate;
+  const weather = forecastForFixture(fixtureId, fixtureDate);
 
-  if (!isCurrentHome || !validForFixture) {
+  if (!weather) {
     return {
       state: "waiting",
-      source: weather?.source ?? "Open-Meteo",
-      generatedAt: weather?.generated_at ?? null,
+      source: "Open-Meteo",
+      generatedAt: null,
       precipitationProbability: null,
       precipitationMm: null,
       windKmh: null,
