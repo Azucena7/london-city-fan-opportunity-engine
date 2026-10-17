@@ -14,6 +14,9 @@ function forecastSignal(base, weather) {
     direction: adverse ? "negative" : "positive",
     materiality: adverse ? "high" : "low",
     observedAt: weather.generated_at,
+    // A matchday forecast speaks for that day only.
+    validUntil: weather.valid_for,
+    geoScope: "venue",
     title: adverse
       ? { en: "Weather risk has entered the action threshold", es: "El riesgo meteorológico ha entrado en el umbral de acción" }
       : { en: "Matchday weather is currently low risk", es: "El riesgo meteorológico actual para el matchday es bajo" },

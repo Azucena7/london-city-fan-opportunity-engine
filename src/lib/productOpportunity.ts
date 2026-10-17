@@ -9,6 +9,7 @@ import {
 import type { CampaignPlan, CalendarFixture, Fixture, LiveSignal } from "@/lib/models";
 import { classifyWomensFootballSignal, type WomensFootballSignalLens } from "@/lib/womensFootballSignals";
 import { currentProductDate } from "@/lib/currentProductDate";
+import { isExpired } from "@/lib/signalSchema";
 
 
 export type ProductEvidenceState = "known" | "assumption" | "missing";
@@ -146,9 +147,12 @@ function evidenceSignals(fixtureId: string, campaign: CampaignPlan | null, exclu
     ...(campaign?.triggerSignalIds ?? []),
     ...(campaign?.contextSignalIds ?? [])
   ]);
+  const today = currentProductDate(currentState.updated_at);
   return liveSignals.filter((signal) =>
     (signal.fixtureId === fixtureId || declaredIds.has(signal.id)) &&
-    !excluded?.has(signal.id)
+    !excluded?.has(signal.id) &&
+    // An expired signal stays in the log but no longer informs the decision.
+    !isExpired(signal, today)
   );
 }
 
