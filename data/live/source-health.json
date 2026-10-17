@@ -41,25 +41,6 @@
       "lastAttemptAt": "2026-10-17T18:44:41.310Z"
     },
     {
-      "id": "youtube-public",
-      "label": {
-        "en": "London City YouTube",
-        "es": "YouTube de London City"
-      },
-      "category": "audience",
-      "access": "api-key",
-      "state": "operational",
-      "method": "official-api",
-      "cadence": "weekly-and-fixture-windows",
-      "lastSuccessfulAt": "2026-10-17T18:44:42.252Z",
-      "ownerAction": null,
-      "note": {
-        "en": "Channel statistics are refreshed through the official YouTube Data API.",
-        "es": "Las estadísticas del canal se actualizan mediante la API oficial de YouTube Data."
-      },
-      "lastAttemptAt": "2026-10-17T18:44:42.252Z"
-    },
-    {
       "id": "ticketmaster-events",
       "label": {
         "en": "London event landscape",
@@ -370,7 +351,6 @@
       },
       "route": "/today",
       "requiredSourceIds": [
-        "youtube-public",
         "ticketmaster-events"
       ],
       "supportingSourceIds": [

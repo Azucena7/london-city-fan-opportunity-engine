@@ -74,14 +74,6 @@
     "state": "fresh",
     "sources": [
       {
-        "id": "lcl-youtube",
-        "label": "London City YouTube",
-        "state": "measured",
-        "confidence": "high",
-        "checkedAt": "2026-10-17T18:44:42.252Z",
-        "sourceUrl": "https://www.youtube.com/@LondonCityLionesses"
-      },
-      {
         "id": "ticketmaster-events",
         "label": "London event landscape",
         "state": "measured",

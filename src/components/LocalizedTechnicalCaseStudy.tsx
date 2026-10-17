@@ -198,7 +198,7 @@ export function LocalizedTechnicalCaseStudy() {
           <li><strong>{es ? "Modelos de decisión" : "Decision models"}</strong><code>Territory · demand · audience · matchweek</code></li>
           <li><strong>{es ? "Contratos y estados" : "Contracts & states"}</strong><code>fixtureId · campaignId · source · confidence</code></li>
           <li><strong>{es ? "Datos normalizados" : "Normalised data"}</strong><code>calendar · attendance · signals · journeys</code></li>
-          <li><strong>{es ? "Fuentes" : "Sources"}</strong><code>club · WSL · weather · transport · YouTube · search</code></li>
+          <li><strong>{es ? "Fuentes" : "Sources"}</strong><code>club · WSL · weather · transport · events · calendar</code></li>
         </ol>
       </section>
 
@@ -227,7 +227,7 @@ export function LocalizedTechnicalCaseStudy() {
         <div className={styles.sourceGrid}>
           <article><p className={styles.label}>{es ? "Diario" : "Daily"}</p><h3>{es ? "Calendario y resultados" : "Fixtures & results"}</h3><p>{es ? "Fuente oficial, cambios de horario y cierre postpartido." : "Official source, schedule changes and post-match closure."}</p></article>
           <article><p className={styles.label}>{es ? "Diario / ventanas" : "Daily / windows"}</p><h3>{es ? "Meteorología y viaje" : "Weather & travel"}</h3><p>{es ? "Actualización de matchweek sin convertir forecast en certeza." : "Matchweek refresh without treating a forecast as certainty."}</p></article>
-          <article><p className={styles.label}>{es ? "Semanal + T±" : "Weekly + T±"}</p><h3>{es ? "Audiencia pública" : "Public audience"}</h3><p>{es ? "YouTube, búsquedas, broadcast y anotaciones de eventos." : "YouTube, search, broadcast and event annotations."}</p></article>
+          <article><p className={styles.label}>{es ? "Semanal + T±" : "Weekly + T±"}</p><h3>{es ? "Eventos y atención" : "Events & attention"}</h3><p>{es ? "Eventos que compiten, retransmisiones y noticias. La medición social queda en Blinkfire o la herramienta del club." : "Competing events, broadcast picks and news. Social measurement stays with Blinkfire or the club\u2019s social tool."}</p></article>
           <article><p className={styles.label}>{es ? "Postpartido" : "Post-match"}</p><h3>{es ? "Asistencia y benchmark" : "Attendance & benchmark"}</h3><p>{es ? "Observación oficial, muestra visible y mediana comparable." : "Official observation, visible sample and comparable median."}</p></article>
         </div>
       </section>
