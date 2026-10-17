@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { supabaseServerConfigured, supabaseServerRequest } from "@/lib/supabaseServer";
 import { readJson } from "@/lib/requestGuards";
+import { verifyTurnstile } from "@/lib/turnstile";
+import { notifyPilotLead } from "@/lib/leadNotification";
 
 type LeadBody = {
   clubName?: string;
@@ -9,6 +11,7 @@ type LeadBody = {
   priority?: string;
   consent?: boolean;
   website?: string;
+  turnstileToken?: string;
   sourcePath?: string;
   utmSource?: string;
   utmMedium?: string;
@@ -33,6 +36,12 @@ export async function POST(request: Request) {
   // Honeypot: return a neutral success response without storing obvious bot submissions.
   if (clean(body.website, 200)) {
     return NextResponse.json({ submitted: true });
+  }
+
+  // Bot check before anything is validated or stored; skipped until the Turnstile keys are set.
+  const remoteIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
+  if (!(await verifyTurnstile(body.turnstileToken, remoteIp))) {
+    return NextResponse.json({ error: "The anti-bot check did not pass. Please try again." }, { status: 403 });
   }
 
   const clubName = clean(body.clubName, 120);
@@ -64,6 +73,14 @@ export async function POST(request: Request) {
   if (!response.ok) {
     return NextResponse.json({ error: "Your request could not be saved. Please try again." }, { status: response.status });
   }
+
+  const notification = await notifyPilotLead({
+    clubName, role, workEmail, priority,
+    sourcePath: clean(body.sourcePath, 200),
+    utmSource: clean(body.utmSource, 120),
+    utmCampaign: clean(body.utmCampaign, 120)
+  });
+  if (notification === "failed") console.error("commercial-lead: stored, but the notification email failed");
 
   return NextResponse.json({ submitted: true }, { status: 201 });
 }

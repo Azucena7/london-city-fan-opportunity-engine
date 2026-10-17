@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Script from "next/script";
 import { FormEvent, useState } from "react";
 import { MarketingNav } from "./MarketingNav";
 import { MarketingFooter } from "./MarketingFooter";
@@ -11,6 +12,10 @@ import ed from "./editorial.module.css";
 import styles from "./ClubPilotProposition.module.css";
 
 type LeadState = "idle" | "submitting" | "success" | "error";
+
+// Cloudflare Turnstile renders only when its public site key is set at build time.
+const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
+type TurnstileApi = { reset: (widget?: string) => void };
 
 export function ClubPilotProposition() {
   const { lang } = useLanguage();
@@ -39,6 +44,7 @@ export function ClubPilotProposition() {
         priority: data.get("priority"),
         consent: data.get("consent") === "yes",
         website: data.get("website"),
+        turnstileToken: data.get("cf-turnstile-response"),
         sourcePath: window.location.pathname,
         ...attribution
       })
@@ -48,6 +54,8 @@ export function ClubPilotProposition() {
       const payload = await response?.json().catch(() => null) as { error?: string } | null;
       setLeadError(payload?.error || (es ? "No se ha podido enviar. Inténtalo de nuevo." : "Your request could not be sent. Please try again."));
       setLeadState("error");
+      // A Turnstile token is single-use: issue a fresh one for the retry.
+      (window as unknown as { turnstile?: TurnstileApi }).turnstile?.reset();
       return;
     }
 
@@ -196,6 +204,13 @@ export function ClubPilotProposition() {
             Website
             <input name="website" tabIndex={-1} autoComplete="off" />
           </label>
+
+          {turnstileSiteKey ? (
+            <>
+              <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+              <div className={`cf-turnstile ${styles.wide}`} data-sitekey={turnstileSiteKey} data-language={lang} data-appearance="interaction-only" />
+            </>
+          ) : null}
 
           <label className={styles.consent}>
             <input name="consent" type="checkbox" value="yes" required />
