@@ -1,9 +1,112 @@
 {
   "version": "1.0",
-  "checkedAt": "2026-10-17T00:28:59.415Z",
-  "lastSuccessfulAt": "2026-10-17T00:28:59.415Z",
+  "checkedAt": "2026-10-17T18:31:38.593Z",
+  "lastSuccessfulAt": "2026-10-17T18:31:38.593Z",
   "failures": [],
   "items": [
+    {
+      "title": "Sophie Hillyerd joins Sheffield United on an emergency loan",
+      "outlet": "www.londoncitylionesses.com",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOenhVdl8yTU5QOEJuazFZWEozY0JkaFNvWXd1d2doNWozQlV1N1o5YjdQQThkWVR6cTYwUVNESGk3b19nUUx1V1cxSXRiWk56UEMyalY1WVVfRmVmQk1LMWkyT2lrX3VaNS1GUVd4SlB4OTJONGRIZWw2ZTZXWW44dUhoRmEtRURfTXBXVHZRYUd5bXJvZmdVY1g5UlM5YXRsblE?oc=5",
+      "publishedAt": "2026-10-17T18:04:01.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [
+        "squad"
+      ],
+      "fixtureIds": [],
+      "id": "news-74ba65421552",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "Women's Super League",
+      "outlet": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1ncndIWHBzZTdKU0k0X0RHZ2tpT3QtWFdCZDdscmxuS0YxTmpNTXJ2eDNWMm81QkpkUndYYUgzdHh4Vk92d2xobDE1NDNhdEpVdi1icmtSZHJjQQ?oc=5",
+      "publishedAt": "2026-10-17T17:57:39.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-98370af5bcbf",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "Sunday's Fantasy Matchweek 6 Stick or Twist? | BWSL & BWSL2",
+      "outlet": "WSL Football",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQQmZtMTg4THVMUmhET1BFU01XVWdndGpIVF85aTJCQUdsRURhR29seXpVZjNXX3Y3RVBUc3FQN0hJMzlKOF84aVItUVhsb2lfSXRWaHQyYWh1Zjc3bjhDRGtGMjIzWVZjdnVQc2FwejV5cV9ycU1nXzNsYTJpNnk5ag?oc=5",
+      "publishedAt": "2026-10-17T16:30:00.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-827ba5d023ee",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "Training Gallery | Hammers get set for Eagles test",
+      "outlet": "West Ham United",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOY0VOSHgtMHhLYlcteHpCUGs3MXRlZFNLdl80TzZuczN5T3hIb2JQVURxUUtlQ1JpYjVCcGlIOHNKZ3JHdWI3R0Z0cXBWZzJuVFpQZ0lDRFJoYWF3ekIxWDhfX0RlWEpKc19DLWNwTGg4M3VFbFlpQVAzS2V4dDE4SmpwZjAzdjgy?oc=5",
+      "publishedAt": "2026-10-17T14:03:06.000Z",
+      "feedIds": [
+        "club-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-aee7d8826833",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "‘It makes Alexia better’ - Maestre believes WSL can help Putellas win third Ballon d’Or",
+      "outlet": "TNT Sports",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOcTNkaXo0eDdJWTlsZERkYkhfTWQ5b1RhcDNhZ21XS3NWN0J4R3hQMUNWMC1zRUdVTzRMcks3MWZ0bjZzdmZNRVVBODdObmNGV3ZSWWxwRjJvT3BPYmtHRF9aM0M0Ukx2T3hJVEdMdWEtZ2ZuOWg3Uk11SkVXejVwMWpkNS1wQ1cxX2VBYlE2bkZBS2J0M2J3eF9uWGxFMDFvbU5uZUxhWlAzRDJicl8yaEhTcEhRQXJ4a0lPdDBpa3N6Z1AwdUNoNFNoSFBzWXVtNmF2T3hJUDM1aVU?oc=5",
+      "publishedAt": "2026-10-17T08:11:00.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [
+        "results"
+      ],
+      "fixtureIds": [],
+      "id": "news-14d46380be3c",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "London City Lionesses vs Everton: Women's Super League stats & head-to-head",
+      "outlet": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE4tWEFqZGR6QmllV3RZdGJETDZJcDN2X2J4QjhHSmFtWU5BUDRyRmJtdVA3OTU0Vl9LYlBFMEZFZkpEa3VacHRyNW9VZk9aTWZDbjlJTFhKZ25FaWNoVGI4NzdmMHB2Zw?oc=5",
+      "publishedAt": "2026-10-17T03:39:20.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-10-18-eve-h"
+      ],
+      "id": "news-4574fef843c9",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "Manchester City vs Brighton & Hove Albion: Women's Super League stats & head-to-head",
+      "outlet": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBRUVNCbmRWVktuWGwzU190bFhwSXVkQ3FsWFl6TFVIZ09pYTNXUDRFY0ZFNjZ5ZUtvTFZoLV9URHBhYlR0V1N1R2wyOGpNTTF2T2t3TkE1U2xTdUdtUTU1aVd5OWxHQQ?oc=5",
+      "publishedAt": "2026-10-17T03:23:47.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-11-01-mci-h",
+        "2026-11-18-bha-h"
+      ],
+      "id": "news-0bb6b49e5eb1",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
     {
       "title": "London City Lionesses boss says 'challenge' of WSL can push Putellas to Ballon d'Or",
       "outlet": "TNT Sports",
@@ -186,6 +289,19 @@
       "firstSeenAt": "2026-10-16T00:24:40.034Z"
     },
     {
+      "title": "Man Utd vs London City | BWSL",
+      "outlet": "WSL Football",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNN3V1MFh0QVd0cGRFTUNKbW5FcElIR3dFNE13UVVPeGtxOG80Yi1XbkMxd1ZXODc5Nkh3dG8wMWRQUGpnMTkyZXNkUndpb2xEZTRDOVFkLXJYMlA3VTJFbDVwZ2hWdzkwOVEwcEhrY2VUOTdocGJRYndiRzdzMVU0bzBrMHZCclBMMVVlSFJaYWtJbUJaT05ab3plTW42SDJFT2s2djlSS09XSk0?oc=5",
+      "publishedAt": "2026-10-15T14:51:14.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-5319486aeeb8",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
       "title": "London City for Europe?! + Fantasy WSL Expert Tips | The Huddle Ep 7 | Barclays WSL 26/27",
       "outlet": "WSL Football",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNZXdWMmpBM3pRbFB2NWNJWEVJU0MwWDBoTU1tZVdDcWlzTGxoMGNkcUlTTGI3NVNSNnExYzNFZGRkZDJ6VlNoTXM1RU9vYW45MzY0VkptbVBUYi1fcDc2QkJaTFcwTnFjTkRPNDNBemF3VVhzZGU1YUE5R1p2aWFhNHN6UVpLdnc4TWI2NlNMdjdNUmx2YTgwMTFOeUVSaHRNSkFDY2xXUllRUnhPOWQ3WTcwc2Fqdw?oc=5",
@@ -256,17 +372,17 @@
       "firstSeenAt": "2026-10-16T00:24:40.034Z"
     },
     {
-      "title": "WSL TV schedule 2026/27: Women's Super League coverage, TV fixtures and live stream",
-      "outlet": "Radio Times",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNX2l3cThDbmRPVV9OVXVlTHpzNWY0VTBzZHotZDJkdFJqUVhDR3hfZFlQZGU2NXNvRXMtLTVqMVBvX2JJQ3pISjBHQ2ZHRVUtTmlCWDJTUXE1ODRGNzFQV1lJQzZOR1Y3Zi1zQ3l1bW5QckhxWDdUMnZ1MWtwSmF5Z1RvWWs5NHJ3Z05ScHVn?oc=5",
-      "publishedAt": "2026-10-15T05:28:22.000Z",
+      "title": "Chelsea vs London City | BWSL",
+      "outlet": "WSL Football",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVERlS1M1cy1CMTdXdGJleVdsUXlvajI0dkQxbnN5aThRcUF0VFFVXzNLbDhMSXcwT2RuT3dZOWdsT3pRT0tET0VtY0N0N2lkWDFJa2htZ0pZb3ZIYnl3NERGVllnX0pkbGYyVm1PbHoxTEJSUkNjeUtuc0VBUTJoMmFKZHVTcGJZU1I1cEFUb2hHRGV0QW0wLVlYaXVJTzlaNDN1U1FmWVpvWFU?oc=5",
+      "publishedAt": "2026-10-14T23:18:36.000Z",
       "feedIds": [
         "club-wsl-uk"
       ],
       "topics": [],
       "fixtureIds": [],
-      "id": "news-aaa325d956ec",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
+      "id": "news-6814d69994bd",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
     },
     {
       "title": "London City Lionesses - Everton Stats: Football Scores & Results",
@@ -315,17 +431,17 @@
       "firstSeenAt": "2026-10-15T00:31:44.564Z"
     },
     {
-      "title": "West Ham vs London City | BWSL",
-      "outlet": "WSL Football",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNTkRWWFM3YndJeEVUa19kMXFzM250anVLTllYSlZvVXdGbXNZcThDVmVZSWQ3eG01djYxUnU4WmRwUTFINTlEc2NiYnpoLVA3SHBSUGlZT1M4TXRCMEdyRjZVYzgwV0xkNTZHSUtCLW9WNjNjNzF2LVhrdDFMdzlCQkhXek1NeG11WTZMbkxJSXAxOVRuekZyYW04VDNqVVVidEp4TXh2STdsY1ZF?oc=5",
-      "publishedAt": "2026-10-14T03:23:02.000Z",
+      "title": "WSL TV schedule 2026/27: Women's Super League coverage, TV fixtures and live stream",
+      "outlet": "Radio Times",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNX2l3cThDbmRPVV9OVXVlTHpzNWY0VTBzZHotZDJkdFJqUVhDR3hfZFlQZGU2NXNvRXMtLTVqMVBvX2JJQ3pISjBHQ2ZHRVUtTmlCWDJTUXE1ODRGNzFQV1lJQzZOR1Y3Zi1zQ3l1bW5QckhxWDdUMnZ1MWtwSmF5Z1RvWWs5NHJ3Z05ScHVn?oc=5",
+      "publishedAt": "2026-10-14T07:00:00.000Z",
       "feedIds": [
         "club-wsl-uk"
       ],
       "topics": [],
       "fixtureIds": [],
-      "id": "news-17fdcd851dee",
-      "firstSeenAt": "2026-10-14T08:52:03.437Z"
+      "id": "news-aaa325d956ec",
+      "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
       "title": "London City Lionesses W v Birmingham W 08/11/2026, Player stats",
@@ -442,22 +558,6 @@
       "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
-      "title": "Diani stars as London City Lionesses hit Tottenham for six in 6-1 WSL win",
-      "outlet": "SheKicks",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPS3NCTU1ISFpTNHY0dVp0SlBXeWh6R1pnM1VyRFhpaWFaMW5FYjRwWHVnU2hiVjlGYWFHMFJvcGxLOUJnd3VqWDdYZXJscVFtSlUxVkNnZ1Z6X0gxOUZxdEJsNk1TOVZjUHZ2cFc5aV85c0lMTjhBWTVRSEl0WndrR2RBSWpjTkVmSkF2Z3VXUzJqaTJKbURNaE9kOTk?oc=5",
-      "publishedAt": "2026-10-09T16:12:46.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [
-        "results"
-      ],
-      "fixtureIds": [],
-      "id": "news-eb61eb0a1adf",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
       "title": "Revamp of town playing field moves step closer as potential designs under way",
       "outlet": "Eastern Daily Press",
       "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQYUczcllCMEMwX1dUQjU5RzNtMjZvRDVNRkl2TVdoVFFjVmhJSG9MQjQwX3pqTlhHWjh1WkYwNkd4UG93cEFxTnZnMHM3MmxjSzRzaWsxU3FpcVhhLWUzY0VRUTdpeHNHWlJRSUYwVHhRenNHbm5aRkZpaW55T3VmZlZxWFAxTFAweVJIRV9EVHYxTnlBYkE?oc=5",
@@ -482,6 +582,22 @@
       "fixtureIds": [],
       "id": "news-e8b8338a83d9",
       "firstSeenAt": "2026-10-14T00:17:39.041Z"
+    },
+    {
+      "title": "Diani stars as London City Lionesses hit Tottenham for six in 6-1 WSL win",
+      "outlet": "SheKicks",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPS3NCTU1ISFpTNHY0dVp0SlBXeWh6R1pnM1VyRFhpaWFaMW5FYjRwWHVnU2hiVjlGYWFHMFJvcGxLOUJnd3VqWDdYZXJscVFtSlUxVkNnZ1Z6X0gxOUZxdEJsNk1TOVZjUHZ2cFc5aV85c0lMTjhBWTVRSEl0WndrR2RBSWpjTkVmSkF2Z3VXUzJqaTJKbURNaE9kOTk?oc=5",
+      "publishedAt": "2026-10-09T07:00:00.000Z",
+      "feedIds": [
+        "club-uk",
+        "club-wsl-uk"
+      ],
+      "topics": [
+        "results"
+      ],
+      "fixtureIds": [],
+      "id": "news-eb61eb0a1adf",
+      "firstSeenAt": "2026-10-13T15:53:25.524Z"
     },
     {
       "title": "Ticket Sales Information: London City vs Birmingham City",
@@ -992,6 +1108,34 @@
       "firstSeenAt": "2026-10-16T00:24:40.034Z"
     },
     {
+      "title": "Match Preview: Tottenham Hotspur vs London City",
+      "outlet": "London City Lionesses",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNM0dVUmRTcFYwRUU4YkhIVXBYNmtIdC1PTGdwM1JzOHExU18xcDkxZWxibXVsdmJkOFVVMlRYTFVMTzJnUWRvT2U5SWo1dXc3LWVacy1NclExRDhTck9SR3F2MWdnNW5lbFpfUGVZWVVFNVdzdWVlekVsTC1SM2hiUFpVWHE4dGkwWXN6LXFmZXk?oc=5",
+      "publishedAt": "2026-10-04T07:00:00.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [],
+      "id": "news-b3039911f4c4",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
+      "title": "Women's Super League live on Sky this weekend: Man City to hand further punishment to Renee Slegers and Arsenal?",
+      "outlet": "Sky Sports",
+      "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxOWFVNYTB3ZlIwN0NNYjZoaFlfYjBfaTdfcUpCTU9waWpZYmN0SzlGdjQ2MzNkUFhwaFlwdUtBQ1Rfc2d3cTUyaXBKcUtkMGxRRUpmNDF2QmRJcFNlX2otWHZFRGtGaDBFYlJuR0N0b3k1Tk5BeXF6a1FPbTZJSzJqVk9DaWlmV3NCSGk0bzdncTZKOV9GRjhvaVNManFsTlVrMVJacVY4eEpCeE1RcmttZTkzamVvSjR1QkV0YUZ2OGlEWnhyeUV5dDdETzdCSGR6YUR4UG5VenFUQVJyV3d5QjNrLVlwQm1vOG5jdGpmVQ?oc=5",
+      "publishedAt": "2026-10-04T07:00:00.000Z",
+      "feedIds": [
+        "club-wsl-uk"
+      ],
+      "topics": [],
+      "fixtureIds": [
+        "2026-11-15-arsenal-a"
+      ],
+      "id": "news-b04d2d01bb03",
+      "firstSeenAt": "2026-10-17T18:31:38.593Z"
+    },
+    {
       "title": "Tottenham Hotspur v London City Lionesses: Women’s Super League Preview",
       "outlet": "VAVEL.com",
       "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPTUY2Y084aUNpUEFFdHZsUWFQTGstWUlMREJDZzgtYWxRQ283aFN3dVREYXR5aHBEUU50ZlNMV0JwZk45MVR3enYwY2pSVm9jVjV0LXRxWUFvc2VuSGxsbmZfOHB5ZGtWcFhLYzdqQUtROVJ0VHp3SEpyYkJHeGg5T1hIMmpQa1NiMUF0NFJ1d2lqdXlURTNfNTQ0M2I4VjAwZUlYU1dXYktFSjdRRmNTbVJPTjNqUFhkMEpkblFyNS1TUk9Xa3hqUkJrUWVzWEFPMDQ3Q3RNc01GNGNv?oc=5",
@@ -1009,7 +1153,7 @@
       "title": "Spurs vs London City Lionesses, Women's Super League | How to watch, team news, kit colours, key information",
       "outlet": "Tottenham Hotspur",
       "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPSDlNZ0lENmxRZW9CY2M4LUg1c2JGMHl2WUFBMG1UTVcxdUx1c2lwVTUyNVNmYkdWYWhnYWRmeG1ST2pHOVhiM2N2al9odi00MGk2SFZ0S2NxVlBJcFZPeW84dDhfZ1hRcGZ6MnZBQTBNZnU5UkI2RlBTc0o2ZGFWNm41WWlTTG13cUZmaVRPcFI1a0R0ZEswUDllNDF2NXd2U2VqQmxIdnROVTNUcTVlWTV4QmZ6eURESWdMRmlKV1JVZ2RUZENaYzdpTk51SWtmOTF4c21qc3hPTHMyS0hhYQ?oc=5",
-      "publishedAt": "2026-10-03T08:00:00.000Z",
+      "publishedAt": "2026-10-03T07:00:00.000Z",
       "feedIds": [
         "club-uk",
         "club-wsl-uk"
@@ -1018,144 +1162,6 @@
       "fixtureIds": [],
       "id": "news-66ea83bbc88b",
       "firstSeenAt": "2026-10-14T00:17:39.041Z"
-    },
-    {
-      "title": "Tottenham vs London City Lionesses Prediction: WSL Preview",
-      "outlet": "Opta Analyst",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNWDNjM1hDQWhqZjVkU280TnZiZWI0QXFkajZHVFZVd08tOUVyT1lIZGRkT2cwdllaTVJxT1JQVjZ4M3RqZ2MwMGRMTEdaVVBLcHQzVVhZNHdaLVk1YkN0Ynd1RnRPcXNlVXlJMHU3MUR5UDBiRUFrYThZSVZpVThKNjdxanZzdnA3YnlEQmg3cnRobGxnN0MxalBNY3BVUQ?oc=5",
-      "publishedAt": "2026-10-03T07:00:00.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-d2290d9c3b6d",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "Tottenham Hotspur - London City Lionesses Live - Barclays WSL: Football Scores & Highlights - 04/10/2026",
-      "outlet": "TNT Sports",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQdTBqeHJGZlFEdUdtaTJBTHZvY3d4SExJWmdBVk9CSzVjU01IMU9HQm4xV1RkX3JSQ0dNaDJsNC0wakFDSVJPcUQwLXZqSmFMbUo1VTFCQ0tlVTJUbERHRWVKc3hveENraG5NemxUYzlUb1M5dHN1R2djSE11eE1XQy1RaDlNeGdPLWQxSVpzak1Lbm9zR1BBZDRoSmw0dnl4VEdsNjh1RDdYcm9SVVVxcmdHZ3p0YzNPNXcxWTk2Yw?oc=5",
-      "publishedAt": "2026-10-03T06:52:31.000Z",
-      "feedIds": [
-        "club-wsl-uk"
-      ],
-      "topics": [
-        "results"
-      ],
-      "fixtureIds": [],
-      "id": "news-1a2ad8b533e3",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "Are London City Lionesses primed to disrupt the WSL?",
-      "outlet": "Sportcal",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOamEwT005QlFhM0l5MFBGUUxqaTAzZFhxcTk1VHhIY1YtNE9FemVubFpKZ1dpaTBrXzN1UWFTWjFaM2NQdUs1MFRLV20wd3UyLVlLcE44OHhyOGRvUmVKT0VBU0xlVzNGMXUzNVhZMHFHVnZTd1IzdE1LV0J4MVd0YVNKZlBkNWFSNWhaRkxla2FQWlhVWmdSUg?oc=5",
-      "publishedAt": "2026-10-02T15:10:26.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-84cab4d3fa19",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "Presser Points | Spurs vs London City Lionesses, Women's Super League",
-      "outlet": "Tottenham Hotspur",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQMThxdVVTMTdGT3QzVmRqZUVVcjhzaTA1UXpXZjAyd0hqMEQyR1VUUHRFaFo0TmlPMU1TNjdHYUxLTzdUOEdfV2wyZUFFaFJIRTBYSkJXNWNPZ2hJQXY1LWZlNVliUzJFNG9lLTBIMDVuaW45aWNtdlE0LXRBakdmWTN2NmZfYlhEc19OUzVnSHdSSkFVeS1IbEN3ejlDcmh2RE5hamNZeFpwY3dIOHRxOQ?oc=5",
-      "publishedAt": "2026-10-02T09:35:49.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-50e58a3cd9a2",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "Team news | Spurs vs London City Lionesses, Women's Super League",
-      "outlet": "Tottenham Hotspur",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQRGpuQmFvY3Y5RTZVYXg3ZE5IcmNRamU3amxjY3RIVGdNOG9xdEo4MTBpLUxQNEt5ekk1ZTZYZ0ZYRDZBYWRFc1pCTmM4ZzV1a19WTDYwcThhVFFqR0plaldCZndHYlpDdFc5VkVXRWFkc0piVzBkdVdCVUpld0hNZjlsRWYtSDZpSVFFSWRiNzFBN3hQTnpXVHRXZmVYdjE2YjlKUWZFMXMwUQ?oc=5",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "feedIds": [
-        "club-uk",
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-1476e423014e",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "El ‘efecto Alexia’ se nota en el London City: 9 puntos de 12 posibles",
-      "outlet": "Artículo 14",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPc2tpVWhfVUlENlQyZVFwdklIVUp1Nk1xMS13SmduZnNMd183ZExvUHp1SzA5RE12M0NLa3QwX3dGNTF1MHFVeXlHeHplbl9NbEJoVVoyR0l3dk9jSkdKaExxSG9ibVpIeUcxSFhGb3JQMzVUNk1RRXpub3pLbldMRFUyTE1JT1k0NkduSEpiQmx6cldRcm5Cdnh3VEdzUmJyR2cxeUlvSkFfSV9HUHY1QWxJckJqQQ?oc=5",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "feedIds": [
-        "alexia-es"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-fc45f13234e4",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "Tottenham vs London City Lionesses: WSL preview, predictions, team news and TV info",
-      "outlet": "Yahoo Sports",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPQUJRaFVzMnlTb25abnR2WnlQTXZPNm9yVHVSc3dCMWIwU1NpOHZGT0Mza01NVkFucVFkeXhna0l6LWVFclJPMVhRV3hoWVlJY3hMcGEzS3Z4MFJ5RWU1MFB0dmpSenZOSGhQVDNOVHNqYldWbzNXeEZZVkNkeHA0dVRvaTNPOGVxUlRz?oc=5",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "feedIds": [
-        "club-wsl-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-8c012c29b6dc",
-      "firstSeenAt": "2026-10-16T00:24:40.034Z"
-    },
-    {
-      "title": "Ipswich Town vs London City Lionesses: Women's Players Cup stats & head-to-head",
-      "outlet": "BBC",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1DTkMzNEd0dnN2ejNYUGEtWnJGRlFmX1gxYTFVeTdxS1NMbExuWDJSTzNmeTlMXzNZZ3liaGt1OXJCdUVyMVBXQnRvLVhMVlhkNjQydEJCSWZzLUZFVWUwTVFCMA?oc=5",
-      "publishedAt": "2026-09-30T07:00:00.000Z",
-      "feedIds": [
-        "club-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-9d3b7d1ae75a",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "TOWN 0 LONDON CITY LIONESSES 1",
-      "outlet": "Ipswich Town FC",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNbkVHejlZYl84STRNRWw4dy03YkJXMnRoLWJtUXZuZ3FBRU05WVdUb0RXTTRHRUhsMDNpWl9tSUEwRWFfdE9jYVN4Slg4S25FRjBRdDBON2daTXpyVFlGTDRtR2ctZzk0UGJHN3ZsckJtVVBWbjUxeFZxck1oSHpfZkU4VQ?oc=5",
-      "publishedAt": "2026-09-30T07:00:00.000Z",
-      "feedIds": [
-        "club-uk"
-      ],
-      "topics": [],
-      "fixtureIds": [],
-      "id": "news-f6d76e0ae4ad",
-      "firstSeenAt": "2026-10-13T15:53:25.524Z"
-    },
-    {
-      "title": "Resolute Town stand firm against star-studded WSL opposition but fall to late defeat",
-      "outlet": "East Anglian Daily Times",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQTUlkRnEyNEZRS3VxV3I0empnY3pPQ080TjB0SUJpajNsMmFrRlp0LWoyNVF6anRwbzNjT2tyX3V0b0lhRFhLUHJjcmlTZVdrYkExM3dtWG9MQ3hLTlZ5S0RURDlHWVVsUWpZa1Q0RXJfR1NROURUdHVaSWhtdnYwZVdHUk1YYlZUNlpLbFE5VnZiSEVU?oc=5",
-      "publishedAt": "2026-09-30T07:00:00.000Z",
-      "feedIds": [
-        "club-uk"
-      ],
-      "topics": [
-        "results"
-      ],
-      "fixtureIds": [],
-      "id": "news-e6bc0ca56778",
-      "firstSeenAt": "2026-10-13T15:58:11.244Z"
     }
   ]
 }

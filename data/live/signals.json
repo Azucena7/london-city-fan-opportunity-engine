@@ -1101,20 +1101,20 @@
     "fixtureId": "2026-10-18-eve-h",
     "category": "weather",
     "state": "forecast",
-    "direction": "positive",
-    "materiality": "low",
-    "observedAt": "2026-10-17T00:28:56.128Z",
+    "direction": "negative",
+    "materiality": "high",
+    "observedAt": "2026-10-17T18:31:35.735Z",
     "title": {
-      "en": "Matchday weather is currently low risk",
-      "es": "El riesgo meteorológico actual para el matchday es bajo"
+      "en": "Weather risk has entered the action threshold",
+      "es": "El riesgo meteorológico ha entrado en el umbral de acción"
     },
     "summary": {
-      "en": "39% maximum rain probability, 3.3 mm and 19.4 km/h maximum wind. Forecast, not measured weather.",
-      "es": "39% de probabilidad máxima de lluvia, 3.3 mm y viento máximo de 19.4 km/h. Es forecast, no tiempo medido."
+      "en": "64% maximum rain probability, 4.5 mm and 20.9 km/h maximum wind. Forecast, not measured weather.",
+      "es": "64% de probabilidad máxima de lluvia, 4.5 mm y viento máximo de 20.9 km/h. Es forecast, no tiempo medido."
     },
     "marketingAction": {
-      "en": "Keep normal acquisition active and retain service messaging as a contingency.",
-      "es": "Mantener activa la captación normal y conservar mensajes de servicio como contingencia."
+      "en": "Prioritise access, covered arrival and service messaging; review outdoor activations.",
+      "es": "Priorizar acceso, llegada cubierta y mensajes de servicio; revisar activaciones exteriores."
     },
     "sourceName": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/"

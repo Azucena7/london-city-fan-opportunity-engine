@@ -5,8 +5,8 @@
     "name": "GOV.UK bank holidays",
     "url": "https://www.gov.uk/bank-holidays.json"
   },
-  "checkedAt": "2026-10-17T00:29:00.560Z",
-  "lastSuccessfulAt": "2026-10-17T00:29:00.560Z",
+  "checkedAt": "2026-10-17T18:31:39.690Z",
+  "lastSuccessfulAt": "2026-10-17T18:31:39.690Z",
   "events": [
     {
       "date": "2026-12-25",

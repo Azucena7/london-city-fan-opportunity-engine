@@ -10,8 +10,8 @@
     "lon": 0.01771
   },
   "radiusKm": 15,
-  "checkedAt": "2026-10-17T00:29:00.952Z",
-  "lastSuccessfulAt": "2026-10-17T00:29:00.952Z",
+  "checkedAt": "2026-10-17T18:31:40.022Z",
+  "lastSuccessfulAt": "2026-10-17T18:31:40.022Z",
   "incidents": [
     {
       "id": "TIMS-234009",
@@ -58,48 +58,26 @@
       "material": true
     },
     {
-      "id": "TIMS-236293",
-      "location": "[A24] CLAPHAM COMMON SOUTH SIDE (SW4 ) (Lambeth,Wandsworth)",
+      "id": "TIMS-236071",
+      "location": "CHARLES STREET (E16 ) (Newham)",
+      "severity": "No impact",
+      "category": "Planned events",
+      "subCategory": "Sporting",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-17",
+      "distanceKm": 12.5,
+      "material": true
+    },
+    {
+      "id": "TIMS-233911",
+      "location": "[A21] MASONS HILL (BR1 ,BR2 ) (Bromley)",
       "severity": "Minimal",
       "category": "Works",
       "subCategory": "Utility works",
-      "startDate": "2026-10-12",
-      "endDate": "2026-10-17",
-      "distanceKm": 13.4,
-      "material": true
-    },
-    {
-      "id": "TIMS-235991",
-      "location": "[A1261] EAST INDIA DOCK ROAD TUNNEL (E14 ) (Tower Hamlets)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-16",
-      "endDate": "2026-10-17",
-      "distanceKm": 13.6,
-      "material": true
-    },
-    {
-      "id": "TIMS-223314",
-      "location": "[A100] TOWER BRIDGE ROAD (EC3N ,SE1 ,SE16 ) (Southwark,Tower Hamlets)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-16",
-      "endDate": "2026-10-17",
-      "distanceKm": 14.2,
-      "material": true
-    },
-    {
-      "id": "TIMS-236105",
-      "location": "[A12] BLACKWALL TUNNEL NORTHERN APPROACH (E14 ,E3 ) (Tower Hamlets)",
-      "severity": "Serious",
-      "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-15",
-      "endDate": "2026-10-17",
-      "distanceKm": 14.2,
-      "material": true
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-18",
+      "distanceKm": 0.8,
+      "material": false
     },
     {
       "id": "TIMS-236272",
@@ -234,17 +212,6 @@
       "material": false
     },
     {
-      "id": "TIMS-236462",
-      "location": "[A206] WOOLWICH ROAD (SE10 ,SE7 ) (Greenwich)",
-      "severity": "Minimal",
-      "category": "Asset issues",
-      "subCategory": "Traffic signal fault",
-      "startDate": "2026-10-16",
-      "endDate": "2026-10-16",
-      "distanceKm": 10.6,
-      "material": false
-    },
-    {
       "id": "TIMS-236475",
       "location": "[A200] EVELYN STREET (SE8 ) (Lewisham)",
       "severity": "Minimal",
@@ -264,17 +231,6 @@
       "startDate": "2026-10-01",
       "endDate": "2026-10-19",
       "distanceKm": 11,
-      "material": false
-    },
-    {
-      "id": "TIMS-236057",
-      "location": "[A102] BLACKWALL TUNNEL SOUTHERN APPROACH (SE10 ) (Greenwich)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "TfL works",
-      "startDate": "2026-10-16",
-      "endDate": "2026-10-17",
-      "distanceKm": 11.2,
       "material": false
     },
     {
@@ -366,6 +322,28 @@
       "material": false
     },
     {
+      "id": "TIMS-235786",
+      "location": "[A2] OLD KENT ROAD (SE1 ,SE15 ) (Southwark)",
+      "severity": "Minimal",
+      "category": "Works",
+      "subCategory": "Utility works",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-18",
+      "distanceKm": 12,
+      "material": false
+    },
+    {
+      "id": "TIMS-236041",
+      "location": "MILLENNIUM WAY (SE10 ) (Greenwich)",
+      "severity": "No impact",
+      "category": "Planned events",
+      "subCategory": "Sporting",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-17",
+      "distanceKm": 12.2,
+      "material": false
+    },
+    {
       "id": "TIMS-227966",
       "location": "[A201] NEW KENT ROAD (SE1 ,SE17 ) (Southwark)",
       "severity": "Minimal",
@@ -388,17 +366,6 @@
       "material": false
     },
     {
-      "id": "TIMS-235934",
-      "location": "[A3] NEWINGTON BUTTS (SE1 ,SE11 ,SE17 ) (Lambeth,Southwark)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-10-05",
-      "endDate": "2026-10-17",
-      "distanceKm": 14,
-      "material": false
-    },
-    {
       "id": "TIMS-235690",
       "location": "[A1205] BURDETT ROAD (E14 ,E3 ) (Tower Hamlets)",
       "severity": "Minimal",
@@ -407,17 +374,6 @@
       "startDate": "2026-10-10",
       "endDate": "2026-11-17",
       "distanceKm": 14.1,
-      "material": false
-    },
-    {
-      "id": "TIMS-234891",
-      "location": "[A1203] THE HIGHWAY (E1 ,E1W ) (Tower Hamlets)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Construction activity",
-      "startDate": "2026-10-16",
-      "endDate": "2026-10-17",
-      "distanceKm": 14.2,
       "material": false
     },
     {
@@ -483,17 +439,6 @@
       "subCategory": "Utility works",
       "startDate": "2026-02-11",
       "endDate": "2027-04-15",
-      "distanceKm": 14.6,
-      "material": false
-    },
-    {
-      "id": "TIMS-235472",
-      "location": "[A1205] BURDETT ROAD (E1 ,E14 ,E3 ) (Tower Hamlets)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-10-10",
-      "endDate": "2026-10-10",
       "distanceKm": 14.6,
       "material": false
     },
