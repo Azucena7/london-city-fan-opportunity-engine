@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { ClubSetup } from "@/components/ClubSetup";
 import { ClubPilotReadiness } from "@/components/ClubPilotReadiness";
+import { ExecutionToolSetup } from "@/components/ExecutionToolSetup";
 import { WorkspaceCard, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./setup.module.css";
 
@@ -66,6 +67,10 @@ export default function ClubSetupPage() {
           <p>A configured credential is not the same as a healthy source. AVELA keeps setup state, health, freshness and permission state separate so the club always knows what evidence is actually usable.</p>
         </div>
       </WorkspaceCard>
+      </div>
+
+      <div id="execution-tool" className={styles.executionSurface}>
+        <ExecutionToolSetup />
       </div>
 
       <div className={styles.readinessSurface}>
