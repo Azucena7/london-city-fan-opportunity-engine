@@ -1,12 +1,5 @@
-import { parseTicketmasterEvents, parseYoutubeChannelResponse } from "./refresh-public-signals.mjs";
+import { parseTicketmasterEvents } from "./refresh-public-signals.mjs";
 import { parseMensFootballFixtures, parseOfficialLeagueFixtures, rankEventCompetition } from "./event-competition.mjs";
-
-const youtube = parseYoutubeChannelResponse({
-  items: [{ id: "channel-1", statistics: { subscriberCount: "14700", videoCount: "143", viewCount: "2020027" } }]
-});
-if (youtube.subscribers !== 14_700 || youtube.videos !== 143 || youtube.channelViews !== 2_020_027) {
-  throw new Error("YouTube Data API parser failed");
-}
 
 const ticketmaster = parseTicketmasterEvents({
   _embedded: { events: [{
@@ -95,4 +88,4 @@ if (ranked.some((event) => event.name === "Repeated exhibition admission")) {
   throw new Error("Repeated miscellaneous admission filtering failed");
 }
 
-console.log(JSON.stringify({ youtube, ticketmasterEvents: ticketmaster.length, leagueFixtures: leagueFixtures.length, mensFootballFixtures: mensFootballFixtures.length, relevantEvents: ranked.length }, null, 2));
+console.log(JSON.stringify({ ticketmasterEvents: ticketmaster.length, leagueFixtures: leagueFixtures.length, mensFootballFixtures: mensFootballFixtures.length, relevantEvents: ranked.length }, null, 2));

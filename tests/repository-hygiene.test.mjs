@@ -226,8 +226,7 @@ test("canonical public surfaces use the AVELA production host", () => {
     "data/contracts/experience-demand.schema.json",
     "data/contracts/partner-commercial-pack.schema.json",
     "data/contracts/experiment-measurement.schema.json",
-    "data/contracts/mobility-partnership.schema.json",
-    "data/live/audience-reach.json"
+    "data/contracts/mobility-partnership.schema.json"
   ];
   for (const path of paths) {
     const source = readFileSync(path, "utf8");

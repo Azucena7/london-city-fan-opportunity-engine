@@ -10,8 +10,8 @@
     "lon": 0.01771
   },
   "radiusKm": 15,
-  "checkedAt": "2026-10-17T18:44:47.586Z",
-  "lastSuccessfulAt": "2026-10-17T18:44:47.586Z",
+  "checkedAt": "2026-10-17T19:15:05.740Z",
+  "lastSuccessfulAt": "2026-10-17T19:15:05.740Z",
   "incidents": [
     {
       "id": "TIMS-234009",
@@ -110,17 +110,6 @@
       "startDate": "2026-09-30",
       "endDate": "2026-11-13",
       "distanceKm": 6.5,
-      "material": false
-    },
-    {
-      "id": "TIMS-234342",
-      "location": "[A21] RUSHEY GREEN (SE6 ) (Lewisham)",
-      "severity": "Minimal",
-      "category": "Works",
-      "subCategory": "Utility works",
-      "startDate": "2026-09-14",
-      "endDate": "2026-10-25",
-      "distanceKm": 6.7,
       "material": false
     },
     {

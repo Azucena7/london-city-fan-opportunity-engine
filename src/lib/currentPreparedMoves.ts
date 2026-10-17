@@ -1,5 +1,6 @@
 import { bankHolidays, calendar, campaignPlans, currentState, eventLandscape, internationalWindows, liveSignals } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
+import { schoolHolidayPeriods } from "@/lib/schoolHolidays";
 import { currentProductDate } from "@/lib/currentProductDate";
 import { buildPreparedMoves, preparationWindow } from "@/lib/preparedMoves";
 
@@ -10,7 +11,7 @@ export function getCurrentPreparedMoves() {
     fixtures: calendar,
     signals: liveSignals,
     events: eventLandscape.events,
-    moments: calendarMoments(calendar, bankHolidays.events, internationalWindows.windows),
+    moments: calendarMoments(calendar, bankHolidays.events, internationalWindows.windows, schoolHolidayPeriods),
     weather: currentState.weather,
     plannedFixtureIds: new Set(campaignPlans.campaigns.map((campaign) => campaign.fixtureId))
   });
