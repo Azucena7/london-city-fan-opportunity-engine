@@ -805,3 +805,11 @@ test("API routes read JSON through the size-capped reader and auth routes refuse
   assert.match(config, /frame-ancestors 'none'/);
   assert.match(config, /X-Content-Type-Options/);
 });
+
+test("the database enforces aggregate privacy and the requester's own email", () => {
+  const migration = readFileSync("supabase/migrations/20261017090000_enforce_aggregate_privacy_and_request_email.sql", "utf8");
+  assert.match(migration, /create trigger enforce_journey_aggregate_privacy\s+before insert or update on public\.club_journey_aggregates/);
+  assert.match(migration, /lower\(email\) = lower\(\(select auth\.jwt\(\)\) ->> 'email'\)/);
+  // The behaviour is exercised against a real Postgres by the quality gate's migrations job.
+  assert.match(readFileSync("scripts/check-migrations.sh", "utf8"), /supabase\/tests\/privacy_guards\.sql/);
+});
