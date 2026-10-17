@@ -342,3 +342,19 @@ test("Executive shows one tile per area of club work, each opening its workspace
   // Without the club's ticketing data, played outcomes are not presented as measured.
   await expect(tiles.filter({ hasText: "Learning" })).toContainText(/Not measured|Outcomes measured/);
 });
+
+test("the pilot cycle report covers every cycle and leaves the end decision to the club", async ({ page }) => {
+  await page.goto("/app/learning/report");
+  const cycles = page.locator("main ol > li");
+  await expect(cycles).toHaveCount(4);
+  await expect(page.getByText("London City is not an AVELA customer")).toBeVisible();
+  // A played cycle says what happened without turning attendance into sales; a future one is not reported.
+  await expect(cycles.first()).toContainText("not ticket sales");
+  await expect(cycles.last()).toContainText("Not played yet.");
+  const end = page.getByRole("region", { name: "The club's decision for the next window" });
+  for (const option of ["Continue", "Adjust", "Stop", "Deepen integration"]) await expect(end).toContainText(option);
+  await expect(page.getByRole("button", { name: "Print or save as PDF" })).toBeVisible();
+  // The pilot tracker on Executive links here.
+  await page.goto("/app/executive");
+  await expect(page.getByRole("link", { name: "Cycle report →" })).toHaveAttribute("href", "/app/learning/report");
+});
