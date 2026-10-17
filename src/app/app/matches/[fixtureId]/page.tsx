@@ -12,6 +12,7 @@ import { CrmAudiences } from "@/components/CrmAudiences";
 import { AUDIENCE_PURPOSE, audienceSizeLabel, audiencesForFixture, describeAudience, getSupporterAggregate } from "@/lib/supporterJourney";
 import { MatchPlanDecision } from "@/components/MatchPlanDecision";
 import { BriefDecisionBar } from "@/components/BriefDecisionBar";
+import { DecisionInputs } from "@/components/DecisionInputs";
 import { CampaignDeliveryPlanner } from "@/components/CampaignDeliveryPlanner";
 import { DecisionHistoryPanel } from "@/components/DecisionHistoryPanel";
 import { SimilarDecisionsPanel } from "@/components/SimilarDecisionsPanel";
@@ -261,6 +262,8 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           </div>
           <p>{live.decisionState === "HOLD" ? live.primaryBlocker : "The evidence supports review, but club approval still controls activation."}</p>
         </div>
+
+        <DecisionInputs known={live.known} assumptions={live.assumptions} missing={live.missing} />
 
         <details className={styles.changeCourse}>
           <summary>What would make AVELA change this recommendation?</summary>
