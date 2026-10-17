@@ -18,6 +18,7 @@ import { occupancySummary } from "@/lib/clubVenues";
 import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, EvidenceStateBadge } from "@/components/WorkspaceUI";
 import { DecisionHandoffStrip } from "@/components/DecisionHandoffStrip";
+import { DeliveredWorked } from "@/components/DeliveredWorked";
 
 export const metadata: Metadata = {
   title: "Learning",
@@ -154,6 +155,17 @@ export default async function ResultsLearningPage({ searchParams }: { searchPara
           <p>{nextFixture ? "Apply to " + nextFixture.opponent + " · " + nextFixture.date : "No next home fixture is currently available."}</p>
         </article>
       </section>
+
+      {selectedId ? (
+        <DeliveredWorked
+          fixtureId={selectedId}
+          workedMeasured={Boolean(measured)}
+          worked={measured ? `${results?.campaignAttributedTickets?.toLocaleString("en-GB") ?? "Observed"} attributed tickets` : "Not measured yet"}
+          workedDetail={measured
+            ? "Observed club evidence. Attribution is not incrementality without an agreed measurement design."
+            : live?.nextAction.measurement ? `To be measured with club data: ${live.nextAction.measurement}` : "Waiting for authorised post-match evidence."}
+        />
+      ) : null}
 
       {selected ? <section className={styles.fixtureFacts} aria-label="Observed fixture facts">
         <article><span>Sporting result · London City first</span><strong>{selected.result ? `${selected.result.for}–${selected.result.against}` : "Not available yet"}</strong></article>
