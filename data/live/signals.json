@@ -1247,5 +1247,41 @@
         "checkedAt": "2026-10-16"
       }
     ]
+  },
+  {
+    "id": "everton-pretzel-crm-draw-2026-10-17",
+    "fixtureId": "2026-10-18-eve-h",
+    "category": "demand",
+    "state": "confirmed",
+    "confidence": "high",
+    "direction": "mixed",
+    "materiality": "medium",
+    "observedAt": "2026-10-17T09:37:34+01:00",
+    "title": {
+      "en": "Everton adds a five-prize draw and CRM entry route",
+      "es": "Everton añade un sorteo de cinco premios y una ruta de captación CRM"
+    },
+    "summary": {
+      "en": "The updated guide links a five-Jellycat-Pretzel draw. The live form closes at the 60th match minute on 18 October, requires no purchase and presents a separate marketing opt-in. Age wording conflicts: 18+ eligibility, under-18 parental consent and an under-13 notice. Entry volume, opt-ins and ticket conversion are unpublished.",
+      "es": "La guía actualizada enlaza un sorteo de cinco Jellycat Pretzel. El formulario cierra en el minuto 60 del 18 de octubre, no exige compra y muestra un opt-in de marketing separado. La edad es contradictoria: elegibilidad 18+, consentimiento para menores de 18 y aviso para menores de 13. No publica registros, opt-ins ni conversión."
+    },
+    "marketingAction": {
+      "en": "Tag the draw separately from ticketing; clarify eligibility before targeting minors. Keep entries, consented CRM contacts, purchases and scans distinct; entry does not establish attendance or marketing consent.",
+      "es": "Etiquetar el sorteo aparte de ticketing; aclarar elegibilidad antes de dirigirse a menores. Separar registros, contactos consentidos, compras y scans; participar no demuestra asistencia ni consentimiento comercial."
+    },
+    "sourceName": "London City Lionesses",
+    "sourceUrl": "https://mail.londoncitylionesses.com/p/7ZHQ-1YM/winapretzel",
+    "sources": [
+      {
+        "name": "London City Lionesses live competition form",
+        "url": "https://mail.londoncitylionesses.com/p/7ZHQ-1YM/winapretzel",
+        "checkedAt": "2026-10-17"
+      },
+      {
+        "name": "London City Lionesses fan guide",
+        "url": "https://www.londoncitylionesses.com/post/fan-guide-london-city-vs-everton",
+        "checkedAt": "2026-10-17"
+      }
+    ]
   }
 ]
