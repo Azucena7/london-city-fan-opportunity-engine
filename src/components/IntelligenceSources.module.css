@@ -55,6 +55,7 @@
 .register{min-width:0}
 .registerCategory{display:block;margin-top:2px;font-size:11px;font-weight:700;text-transform:capitalize;color:var(--product-muted)}
 .registerMuted{color:var(--product-muted)}
+.registerAffects{display:grid;gap:4px}.registerAffects b{font-weight:800;color:var(--product-ink)}
 .registerState{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:850;white-space:nowrap;background:#FFF1EC;color:#8A3A22}
 .registerState[data-state="operational"]{background:#E8F4F1;color:#1F6B61}
 .registerState[data-state="degraded"]{background:#FFF6DF;color:#7A5A00}
