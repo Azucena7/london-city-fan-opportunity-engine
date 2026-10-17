@@ -1,0 +1,19 @@
+/* Sits above the Ask AVELA launcher (fixed bottom-right), so neither covers the other. */
+.bar{position:fixed;left:50%;bottom:76px;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;width:min(760px,calc(100% - 32px));padding:10px 12px 10px 16px;border:1px solid var(--product-line);border-radius:12px;background:#fff;box-shadow:0 10px 30px rgba(16,39,66,.16);transform:translateX(-50%)}
+.bar[hidden]{display:none}
+/* Above 900px the 220px sidebar is fixed on the left: centre the bar on the content beside it. */
+@media(min-width:901px){.bar{left:calc(50% + 110px);width:min(760px,calc(100% - 252px))}}
+.state{display:grid;grid-template-columns:auto auto;column-gap:8px;align-items:baseline;min-width:0}
+.state span{grid-column:1/-1;color:var(--product-muted);font-size:11px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.state strong{font-size:13px;color:var(--product-accent-text)}
+.state strong[data-hold]{color:var(--product-danger-text)}
+.state small{color:var(--product-muted);font-size:12px}
+.actions{display:flex;gap:8px;flex-shrink:0}
+.actions a{display:inline-flex;align-items:center;min-height:40px;padding:8px 12px;border:1px solid var(--product-line);border-radius:8px;color:var(--product-ink);font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap}
+.actions a.primary{border-color:var(--product-ink);background:var(--product-ink);color:#fff}
+@media(max-width:560px){
+  .bar{bottom:64px;width:calc(100% - 16px);flex-wrap:wrap;gap:8px}
+  .actions{width:100%}
+  .actions a{flex:1;justify-content:center}
+}
+@media(prefers-reduced-motion:no-preference){.bar{animation:rise .16s ease-out}@keyframes rise{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}}
