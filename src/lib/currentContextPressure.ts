@@ -1,6 +1,7 @@
 import tflRoad from "../../data/live/tfl-road.json";
 import { bankHolidays, calendar, eventLandscape, internationalWindows } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
+import { schoolHolidayPeriods } from "@/lib/schoolHolidays";
 import { forecastForFixture } from "@/lib/fixtureForecast";
 import { contextPressure, type ContextPressure } from "@/lib/contextPressure";
 import { railStatusForFixture } from "@/lib/mobilityProviderReadiness";
@@ -17,7 +18,7 @@ export function getContextPressure(fixtureId: string, date: string): ContextPres
   );
   const weather = forecastForFixture(fixtureId, date);
   const rail = railStatusForFixture(date);
-  const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows)
+  const moments = calendarMoments(calendar, bankHolidays.events, internationalWindows.windows, schoolHolidayPeriods)
     .filter((moment) => moment.fixtureId === fixtureId)
     .map((moment) => moment.label);
 

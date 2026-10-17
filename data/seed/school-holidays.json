@@ -1,0 +1,131 @@
+{
+  "version": "1.0",
+  "note": {
+    "en": "Council-recommended school holidays for the areas around the home ground. They bind community and voluntary-controlled schools only; academies, free and faith schools may set their own dates. A period counts in the Radar only once its verification is 'verified' against the council's own page. Summer holidays are left out: their end dates were not confirmed and the season has finished by then.",
+    "es": "Vacaciones escolares recomendadas por los councils de la zona del estadio. Solo obligan a los colegios del council; academias, free schools y colegios religiosos pueden tener fechas propias. Un periodo solo cuenta en el Radar cuando su verificación es 'verified' contra la página oficial del council. Las vacaciones de verano no se incluyen: sus fechas de fin no están confirmadas y la temporada ya ha terminado."
+  },
+  "academicYear": "2026/27",
+  "layers": [
+    {
+      "id": "bromley",
+      "label": "Bromley (home ground)",
+      "role": "primary",
+      "authorities": [
+        "London Borough of Bromley"
+      ],
+      "sources": [
+        {
+          "name": "Bromley Council · school term dates 2026/27",
+          "url": "https://www.bromley.gov.uk/schools-colleges/school-term-dates/3"
+        }
+      ],
+      "verification": "reported-unverified",
+      "verificationNote": "Dates read from search results of the official page; the page itself could not be opened from the build environment. Holidays without stated dates are the days between a term's last day and the next term's first day.",
+      "periods": [
+        {
+          "id": "bromley-october-2026",
+          "kind": "half-term",
+          "label": "October half-term (two weeks)",
+          "start": "2026-10-19",
+          "end": "2026-10-30"
+        },
+        {
+          "id": "bromley-christmas-2026",
+          "kind": "holiday",
+          "label": "Christmas holiday",
+          "start": "2026-12-19",
+          "end": "2027-01-03"
+        },
+        {
+          "id": "bromley-february-2027",
+          "kind": "half-term",
+          "label": "February half-term",
+          "start": "2027-02-15",
+          "end": "2027-02-19"
+        },
+        {
+          "id": "bromley-easter-2027",
+          "kind": "holiday",
+          "label": "Easter holiday",
+          "start": "2027-03-26",
+          "end": "2027-04-11"
+        },
+        {
+          "id": "bromley-may-2027",
+          "kind": "half-term",
+          "label": "May half-term",
+          "start": "2027-05-31",
+          "end": "2027-06-04"
+        }
+      ]
+    },
+    {
+      "id": "se-london-neighbours",
+      "label": "Lewisham, Greenwich, Bexley and Croydon",
+      "role": "secondary",
+      "authorities": [
+        "London Borough of Lewisham",
+        "Royal Borough of Greenwich",
+        "London Borough of Bexley",
+        "London Borough of Croydon"
+      ],
+      "sources": [
+        {
+          "name": "Lewisham Council · school term dates",
+          "url": "https://lewisham.gov.uk/myservices/education/schools/school-term-dates"
+        },
+        {
+          "name": "Royal Greenwich · term dates 2026-2027",
+          "url": "https://www.royalgreenwich.gov.uk/schools-and-education/school-term-dates/term-dates-2026-2027"
+        },
+        {
+          "name": "Bexley Council · school term dates 2026-2027",
+          "url": "https://www.bexley.gov.uk/services/schools-and-education/school-term-and-holiday-dates/school-term-dates-2026-2027"
+        },
+        {
+          "name": "Croydon Council · term dates 2026 to 2027 (PDF)",
+          "url": "https://www.croydon.gov.uk/sites/default/files/2025-09/Term-dates-2026-to-2027.pdf"
+        }
+      ],
+      "verification": "reported-unverified",
+      "verificationNote": "The four councils report the same pattern. Croydon's web page and PDF disagree on the last day of the Christmas holiday (1 or 2 January); three Bexley primaries take 19–30 October.",
+      "periods": [
+        {
+          "id": "neighbours-october-2026",
+          "kind": "half-term",
+          "label": "October half-term",
+          "start": "2026-10-26",
+          "end": "2026-10-30"
+        },
+        {
+          "id": "neighbours-christmas-2026",
+          "kind": "holiday",
+          "label": "Christmas holiday",
+          "start": "2026-12-21",
+          "end": "2027-01-01"
+        },
+        {
+          "id": "neighbours-february-2027",
+          "kind": "half-term",
+          "label": "February half-term",
+          "start": "2027-02-15",
+          "end": "2027-02-19"
+        },
+        {
+          "id": "neighbours-easter-2027",
+          "kind": "holiday",
+          "label": "Easter holiday",
+          "start": "2027-03-26",
+          "end": "2027-04-09"
+        },
+        {
+          "id": "neighbours-may-2027",
+          "kind": "half-term",
+          "label": "May half-term",
+          "start": "2027-05-31",
+          "end": "2027-06-04"
+        }
+      ]
+    }
+  ]
+}

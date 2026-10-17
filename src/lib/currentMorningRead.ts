@@ -3,6 +3,7 @@ import tflRail from "../../data/live/tfl-rail.json";
 import tflRoad from "../../data/live/tfl-road.json";
 import { bankHolidays, calendar, crmTicketingLive, currentState, eventLandscape, internationalWindows, liveSignals } from "@/lib/data";
 import { calendarMoments } from "@/lib/calendarMoments";
+import { schoolHolidayPeriods } from "@/lib/schoolHolidays";
 import { currentProductDate } from "@/lib/currentProductDate";
 import { buildMorningRead } from "@/lib/morningRead";
 import type { ProductOpportunity } from "@/lib/productOpportunity";
@@ -24,7 +25,7 @@ export function getCurrentMorningRead(live: ProductOpportunity | null) {
     weather: currentState.weather,
     sources: sourceHealth.sources,
     live,
-    moments: calendarMoments(calendar, bankHolidays.events, internationalWindows.windows),
+    moments: calendarMoments(calendar, bankHolidays.events, internationalWindows.windows, schoolHolidayPeriods),
     road: tflRoad,
     rail: tflRail,
     origins: latestOrigins()
