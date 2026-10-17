@@ -1,11 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import ts from "typescript";
+import { loadLib } from "./lib/load-ts.mjs";
 
-const source = await readFile(new URL("../src/lib/morningRead.ts", import.meta.url), "utf8");
-const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { buildMorningRead, roadClosuresOn } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+const { buildMorningRead, roadClosuresOn } = await loadLib("morningRead");
 
 const calendar = [
   { id: "past", date: "2026-10-01", opponent: "Past", homeAway: "home", status: "final" },

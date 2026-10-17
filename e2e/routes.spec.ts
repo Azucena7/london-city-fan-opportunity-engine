@@ -358,3 +358,11 @@ test("the pilot cycle report covers every cycle and leaves the end decision to t
   await page.goto("/app/executive");
   await expect(page.getByRole("link", { name: "Cycle report →" })).toHaveAttribute("href", "/app/learning/report");
 });
+
+test("the fan matchday page reads road closures near the ground for the fixture day, with the check date", async ({ page }) => {
+  await page.goto("/matchday/2026-10-18-eve-h");
+  const readiness = page.locator("article").filter({ has: page.getByText("Road & traffic", { exact: true }) });
+  await expect(readiness).toContainText(/(listed closure|no road closure) within 5 km/);
+  await expect(readiness).toContainText(/[Cc]hecked \d{1,2} [A-Z][a-z]{2}/);
+  await expect(page.getByText("Live weather context")).toHaveCount(0);
+});

@@ -1,6 +1,7 @@
 // Engine drafts: one prepared move for each upcoming home fixture that has no curated campaign
 // plan, derived only from signals AVELA already holds. A draft is a starting point for the
 // club team — it carries no audience size, budget or forecast, and every gate stays open.
+import { weatherLevel } from "@/lib/weatherThresholds";
 
 type Fixture = { id: string; date: string; opponent: string; homeAway: string; status?: string };
 type Signal = {
@@ -17,7 +18,7 @@ type Signal = {
 type FixtureScore = { fixtureId: string; level: string; timeGapMinutes?: number | null };
 type LandscapeEvent = { name: string; fixtureScores?: FixtureScore[] };
 type Moment = { fixtureId: string; kind: string; label: string };
-type Weather = { valid_for?: string; precipitation_probability_max?: number } | null | undefined;
+type Weather = { valid_for?: string; precipitation_probability_max?: number; wind_speed_max?: number } | null | undefined;
 
 export type PreparedMoveReason = { label: string; source: string };
 
@@ -126,7 +127,7 @@ export function buildPreparedMoves({ today, fixtures, signals, events, moments, 
     const holiday = fixtureMoments.find((moment) => moment.kind === "bank-holiday");
     const afterWindow = fixtureMoments.find((moment) => moment.kind === "after-window");
     const beforeWindow = fixtureMoments.find((moment) => moment.kind === "before-window");
-    const wet = weather?.valid_for === fixture.date && (weather.precipitation_probability_max ?? 0) >= 50;
+    const wet = weather?.valid_for === fixture.date && weatherLevel(weather.precipitation_probability_max, weather.wind_speed_max) === "high";
 
     const because: PreparedMoveReason[] = [
       ...curated.map((signal) => ({ label: signal.title.en, source: signal.sourceName })),

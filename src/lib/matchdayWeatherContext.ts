@@ -1,4 +1,5 @@
 import { currentState } from "@/lib/data";
+import { weatherLevel } from "@/lib/weatherThresholds";
 
 export type MatchdayWeatherContext = {
   state: "forecast" | "waiting";
@@ -35,8 +36,9 @@ export function getMatchdayWeatherContext(fixtureId: string, fixtureDate: string
 
   const rain = typeof weather.precipitation_probability_max === "number" ? weather.precipitation_probability_max : null;
   const wind = typeof weather.wind_speed_max === "number" ? weather.wind_speed_max : null;
-  const high = (rain ?? 0) >= 60 || (wind ?? 0) >= 45;
-  const medium = !high && ((rain ?? 0) >= 35 || (wind ?? 0) >= 30);
+  const level = weatherLevel(rain, wind);
+  const high = level === "high";
+  const medium = level === "medium";
 
   return {
     state: "forecast",
