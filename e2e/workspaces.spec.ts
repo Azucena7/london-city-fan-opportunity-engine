@@ -213,5 +213,7 @@ test("Campaigns lists fixture and commercial campaigns in one filterable table",
   await list.getByRole("button", { name: "Clear filters" }).click();
   await expect(rows).toHaveCount(total);
   await page.getByRole("group", { name: "Campaign view" }).getByRole("button", { name: "Board" }).click();
-  await expect(page.getByText("Needs decision").first()).toBeVisible();
+  // Back on the board: the list is gone and the board's own column is shown.
+  await expect(page.getByRole("region", { name: "Campaign list" })).toHaveCount(0);
+  await expect(page.getByText("Ready / moving")).toBeVisible();
 });
