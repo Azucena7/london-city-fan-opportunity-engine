@@ -166,8 +166,6 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
       <WorkspaceCard className={styles.opportunityMapCard}>
         <WorkspaceSectionHeader eyebrow="Opportunity map" title="See urgency and opportunity at a glance" action={<span className={styles.mapHint}>Bubble size = material signals</span>} />
         <div className={styles.opportunityMap} role="group" aria-label="Opportunity versus urgency map. Higher position means greater urgency; further right means higher opportunity score.">
-          <span className={styles.axisY}>Urgency</span>
-          <span className={styles.axisX}>Opportunity →</span>
           <div className={styles.mapGrid} />
           {radar.map((item) => (
             <Link
@@ -187,6 +185,11 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
               <small>{item.opportunityScore ?? "—"}</small>
             </Link>
           ))}
+        </div>
+        {/* Axis labels sit under the plot, so no bubble can cover them. */}
+        <div className={styles.mapAxes} aria-hidden="true">
+          <span>↑ Urgency</span>
+          <span>Opportunity →</span>
         </div>
         <div className={styles.mapLegend} aria-label="Opportunity map legend">
           <span data-tone="act">Act now</span><span data-tone="review">Review</span><span data-tone="monitor">Monitor</span><span data-tone="none">No material opportunity</span>
