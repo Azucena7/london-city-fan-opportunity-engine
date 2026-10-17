@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 
 const retiredRootArtifacts = [
   "HOTFIX.md",
@@ -772,4 +772,22 @@ test("Supabase migrations run by hand, in one transaction, rolled back unless ap
   for (const line of workflow.split("\n").filter((item) => /\$\{\{/.test(item))) {
     assert.match(line, /^\s+[A-Z_]+: \$\{\{ (inputs|secrets)\.[a-z_A-Z]+ \}\}$/, `inputs and secrets reach scripts only via env: ${line.trim()}`);
   }
+});
+
+test("API routes read JSON through the size-capped reader and auth routes refuse cross-site posts", () => {
+  const routes = readdirSync("src/app/api", { recursive: true }).filter((path) => String(path).endsWith("route.ts")).map((path) => `src/app/api/${path}`);
+  for (const route of routes) {
+    assert.doesNotMatch(readFileSync(route, "utf8"), /request\.json\(\)/, `${route} should read JSON with readJson()`);
+  }
+  for (const route of ["src/app/api/auth/login/route.ts", "src/app/api/auth/reset/route.ts"]) {
+    assert.match(readFileSync(route, "utf8"), /sessionWriteRejection\(request\)/);
+  }
+  assert.match(readFileSync("src/app/api/auth/logout/route.ts", "utf8"), /crossSiteRejection\(request\)/);
+  // Auth failures never echo the provider's message, which could reveal whether an account exists.
+  for (const route of ["src/app/api/auth/login/route.ts", "src/app/api/auth/signup/route.ts", "src/app/api/auth/reset/route.ts"]) {
+    assert.doesNotMatch(readFileSync(route, "utf8"), /error_description \|\||payload\?\.msg/);
+  }
+  const config = readFileSync("next.config.mjs", "utf8");
+  assert.match(config, /frame-ancestors 'none'/);
+  assert.match(config, /X-Content-Type-Options/);
 });

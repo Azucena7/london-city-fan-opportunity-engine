@@ -1699,7 +1699,7 @@ test("AI routes are closed unless the caller is an approved signed-in account", 
     const guard = route.indexOf("await requireAiAccess()");
     assert.ok(guard > 0, path + " must call requireAiAccess");
     assert.ok(guard < route.indexOf("AI_GATEWAY_API_KEY"), path + " must check access before using the gateway");
-    assert.ok(guard < route.indexOf("request.json()"), path + " must check access before reading the request");
+    assert.ok(guard < route.indexOf("readJson(request)"), path + " must check access before reading the request");
   }
   const panel = read("src/components/AskAvelaPanel.tsx");
   assert.match(panel, /limited to approved accounts/);

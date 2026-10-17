@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 function safeKey(value: string) {
   return value.trim().slice(0, 160);
@@ -35,7 +36,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ camp
 
   const { campaignKey: rawCampaignKey } = await params;
   const campaignKey = safeKey(rawCampaignKey);
-  const body = await request.json().catch(() => null) as {
+  const body = await readJson(request) as {
     clubId?: string;
     campaignKind?: "fixture" | "commercial";
     fixtureId?: string | null;

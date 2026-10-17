@@ -5,6 +5,7 @@ import { getCurrentClubOperatingContext } from "@/lib/clubOperatingContext";
 import { buildOpportunityRadar } from "@/lib/opportunityRadar";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
 import { requireAiAccess } from "@/lib/aiAccess";
+import { readJson } from "@/lib/requestGuards";
 
 type AskIntent = "ask" | "tell" | "change";
 
@@ -44,7 +45,7 @@ export async function POST(request: Request) {
   const access = await requireAiAccess();
   if (access.denied) return access.denied;
 
-  const body = await request.json().catch(() => null) as {
+  const body = await readJson(request) as {
     fixtureId?: string;
     message?: string;
     clubId?: string;
@@ -223,7 +224,8 @@ export async function POST(request: Request) {
   } | null;
 
   if (!response.ok) {
-    return NextResponse.json({ error: payload?.error?.message || "Ask AVELA could not respond." }, { status: 502 });
+    console.error("Ask AVELA gateway error", response.status, payload?.error?.message);
+    return NextResponse.json({ error: "Ask AVELA could not respond. Try again in a moment." }, { status: 502 });
   }
 
   const content = payload?.choices?.[0]?.message?.content;

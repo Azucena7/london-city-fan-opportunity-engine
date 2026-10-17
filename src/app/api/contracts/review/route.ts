@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 const REVIEW_STATES = new Set(["needs-review","verified","rejected"]);
 
@@ -52,7 +53,7 @@ export async function PATCH(request: Request) {
   const user = await currentSupabaseUser();
   if (!user) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
 
-  const body = await request.json().catch(() => null) as Record<string, unknown> | null;
+  const body = await readJson(request) as Record<string, unknown> | null;
   const clubId = safe(body?.clubId, 80);
   const clauseId = safe(body?.clauseId, 80);
   const reviewState = safe(body?.reviewState, 40);

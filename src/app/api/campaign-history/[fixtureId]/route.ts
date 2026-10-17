@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentSupabaseUser, supabaseConfigured, supabaseRequest } from "@/lib/supabaseServer";
+import { readJson } from "@/lib/requestGuards";
 
 export async function GET(request: Request, { params }: { params: Promise<{ fixtureId: string }> }) {
   if (!supabaseConfigured()) return NextResponse.json({ persistence: "device", events: [] });
@@ -25,7 +26,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ fix
 
   const { fixtureId: rawFixtureId } = await params;
   const fixtureId = rawFixtureId.trim().slice(0, 160);
-  const body = await request.json().catch(() => null) as {
+  const body = await readJson(request) as {
     clubId?: string;
     eventKey?: string;
     eventType?: "review" | "draft-generated" | "reserve" | "release" | "launch-handoff";
