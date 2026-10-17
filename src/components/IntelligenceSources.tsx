@@ -2,7 +2,7 @@ import Link from "next/link";
 import sourceHealth from "../../data/live/source-health.json";
 import { DataTable } from "@/components/DataTable";
 import { FilterBar } from "@/components/FilterBar";
-import { filterRows, registerRows, type RegisterRow, type SourceFilter } from "@/lib/sourceRegister";
+import { filterRows, registerRows, stateLabel, type RegisterRow, type SourceFilter } from "@/lib/sourceRegister";
 import styles from "./IntelligenceSources.module.css";
 
 const sources = [
@@ -154,7 +154,16 @@ const registerColumns = [
   { key: "source", header: "Source", cell: (row: RegisterRow) => <>{row.name}<small className={styles.registerCategory}>{row.category}</small></> },
   { key: "state", header: "State", cell: (row: RegisterRow) => <span className={styles.registerState} data-state={row.state}>{row.stateLabel}</span> },
   { key: "fresh", header: "Last successful", cell: (row: RegisterRow) => row.lastSuccessfulAt ? formatDay(row.lastSuccessfulAt) : <span className={styles.registerMuted}>{row.state === "requires-access" ? "Private evidence needs club permission" : row.state === "not-configured" ? "Connection not configured yet" : row.state === "blocked" ? "Evidence currently blocked" : "No recent refresh available"}</span> },
-  { key: "used", header: "Feeds decisions", cell: (row: RegisterRow) => row.usedBy.length ? row.usedBy.join(" · ") : <span className={styles.registerMuted}>Context only</span> },
+  {
+    key: "used",
+    header: "What it affects",
+    cell: (row: RegisterRow) => row.usedBy.length ? (
+      <span className={styles.registerAffects}>
+        {row.blocks.length ? <span><b>{row.state === "operational" ? "Required for" : row.state === "degraded" ? "Weakens" : "Blocks"}</b> {row.blocks.join(" · ")}</span> : null}
+        {row.supports.length ? <span><b>{row.state === "operational" ? "Supports" : "Lowers confidence in"}</b> {row.supports.join(" · ")}</span> : null}
+      </span>
+    ) : <span className={styles.registerMuted}>Context only</span>
+  },
   { key: "next", header: "Next step", cell: (row: RegisterRow) => row.nextStep ?? <span className={styles.registerMuted}>No action needed</span> }
 ];
 
@@ -200,7 +209,11 @@ export function IntelligenceSources({ filter = "all" }: { filter?: SourceFilter 
             options={[
               { value: "all", label: "All sources", count: register.length },
               { value: "attention", label: "Needs attention", count: register.length - operational },
-              { value: "operational", label: "Healthy", count: operational }
+              { value: "operational", label: "Healthy", count: operational },
+              // One option per state that is present, so a click shows exactly those sources.
+              ...(["blocked", "not-configured", "requires-access", "degraded"] as const)
+                .map((state) => ({ value: state, label: stateLabel(state), count: register.filter((row) => row.state === state).length }))
+                .filter((option) => option.count > 0)
             ]}
           />
           <DataTable

@@ -24,10 +24,15 @@ export type RegisterRow = {
   stateLabel: string;
   lastSuccessfulAt: string | null;
   usedBy: string[];
+  /** Decisions that cannot be made without this source (it is required for them). */
+  blocks: string[];
+  /** Decisions it only supports: without it they go ahead with lower confidence. */
+  supports: string[];
   nextStep: string | null;
 };
 
-export type SourceFilter = "all" | "attention" | "operational";
+/** All, the two groups, or one stored state (blocked, not-configured, degraded, requires-access). */
+export type SourceFilter = "all" | "attention" | "operational" | "blocked" | "not-configured" | "degraded" | "requires-access";
 
 // Display labels follow the source states in the AI working agreement (planned, configured,
 // verifying, healthy, degraded, unavailable); the stored states in source-health.json are unchanged.
@@ -59,18 +64,25 @@ export function registerRows(health: { sources: RegisterSource[]; decisions: Reg
       usedBy: health.decisions
         .filter((decision) => decision.requiredSourceIds.includes(source.id) || decision.supportingSourceIds.includes(source.id))
         .map((decision) => decision.label.en),
+      blocks: health.decisions.filter((decision) => decision.requiredSourceIds.includes(source.id)).map((decision) => decision.label.en),
+      supports: health.decisions
+        .filter((decision) => decision.supportingSourceIds.includes(source.id) && !decision.requiredSourceIds.includes(source.id))
+        .map((decision) => decision.label.en),
       // Without a named owner action, the source note says what is missing.
       nextStep: source.state === "operational" ? null : source.ownerAction?.en ?? source.note.en
     }))
     .sort((a, b) => STATE_ORDER.indexOf(a.state) - STATE_ORDER.indexOf(b.state) || a.name.localeCompare(b.name));
 }
 
+const FILTERS: SourceFilter[] = ["all", "attention", "operational", "blocked", "not-configured", "degraded", "requires-access"];
+
 export function parseSourceFilter(value: string | string[] | undefined): SourceFilter {
-  return value === "attention" || value === "operational" ? value : "all";
+  return typeof value === "string" && (FILTERS as string[]).includes(value) ? value as SourceFilter : "all";
 }
 
 export function filterRows(rows: RegisterRow[], filter: SourceFilter) {
   if (filter === "operational") return rows.filter((row) => row.state === "operational");
   if (filter === "attention") return rows.filter((row) => row.state !== "operational");
-  return rows;
+  if (filter === "all") return rows;
+  return rows.filter((row) => row.state === filter);
 }
