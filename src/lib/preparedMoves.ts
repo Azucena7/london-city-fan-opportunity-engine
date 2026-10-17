@@ -132,7 +132,7 @@ export function buildPreparedMoves({ today, fixtures, signals, events, moments, 
     const because: PreparedMoveReason[] = [
       ...curated.map((signal) => ({ label: signal.title.en, source: signal.sourceName })),
       ...(clash ? [{ label: `${clash.event.name}${clash.score.timeGapMinutes === 0 ? " in the same slot" : " in a nearby slot"}`, source: "Event landscape" }] : []),
-      ...fixtureMoments.map((moment) => ({ label: moment.label, source: moment.kind === "bank-holiday" ? "GOV.UK bank holidays" : "FIFA international windows" })),
+      ...fixtureMoments.map((moment) => ({ label: moment.label, source: moment.kind === "bank-holiday" ? "GOV.UK bank holidays" : moment.kind === "school-holiday" ? "Council school term dates" : "FIFA international windows" })),
       ...(wet ? [{ label: `${weather?.precipitation_probability_max}% rain risk on matchday`, source: "Open-Meteo forecast" }] : [])
     ];
     if (!because.length) return [];
