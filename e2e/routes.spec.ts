@@ -330,3 +330,15 @@ test("pages refuse framing and auth routes refuse cross-site or non-JSON posts",
   const logout = await request.post("/api/auth/logout", { headers: { origin: "https://attacker.example" } });
   expect(logout.status()).toBe(403);
 });
+
+test("Executive shows one tile per area of club work, each opening its workspace", async ({ page }) => {
+  await page.goto("/app/executive");
+  const domains = page.getByRole("region", { name: "Across the club" });
+  const tiles = domains.getByRole("link");
+  await expect(tiles).toHaveCount(4);
+  for (const [label, href] of [["Campaigns", "/app/campaigns"], ["Sources", "/app/sources?state=attention"], ["Calendar pressure", "/app/season"], ["Learning", "/app/learning"]]) {
+    await expect(tiles.filter({ hasText: label })).toHaveAttribute("href", href);
+  }
+  // Without the club's ticketing data, played outcomes are not presented as measured.
+  await expect(tiles.filter({ hasText: "Learning" })).toContainText(/Not measured|Outcomes measured/);
+});

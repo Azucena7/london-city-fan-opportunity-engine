@@ -13,6 +13,10 @@ import { AppWorkspaceShell } from "@/components/AppWorkspaceShell";
 import { DecisionStateBadge, WorkspaceCard, WorkspaceDrawer, WorkspaceSectionHeader } from "@/components/WorkspaceUI";
 import styles from "./executive.module.css";
 import { decisionBadge, getDecisionQueue } from "@/lib/decisionQueue";
+import { ExecutiveDomains, type DomainTile } from "@/components/ExecutiveDomains";
+import { demoCommercialCampaigns } from "@/lib/clubStrategy";
+import { registerRows } from "@/lib/sourceRegister";
+import sourceHealth from "../../../../data/live/source-health.json";
 
 export const metadata: Metadata = {
   title: "Executive view",
@@ -22,7 +26,7 @@ export const metadata: Metadata = {
 export default async function ExecutiveViewPage({ searchParams }: { searchParams: Promise<{ fixture?: string }> }) {
   const params = await searchParams;
   // The shared decision queue: the same fixtures and attention order as Home and Radar.
-  const { radar } = await getDecisionQueue();
+  const { radar, today, calendarRelationships } = await getDecisionQueue();
   const selectedId = params.fixture && calendar.some((item) => item.id === params.fixture)
     ? params.fixture
     : radar[0]?.fixtureId ?? currentState.next_home_fixture_id;
@@ -79,6 +83,58 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
     };
   });
 
+  // Across the club: one tile per workspace, from data each workspace already shows.
+  const campaignsWaiting = campaignPlans.campaigns.filter((item) => item.approvals.some((approval) => approval.state !== "ready")).length;
+  const sources = registerRows(sourceHealth);
+  const sourcesBlocking = sources.filter((row) => row.state !== "operational" && row.state !== "degraded" && row.blocks.length > 0);
+  const horizon = new Date(today + "T00:00:00Z");
+  horizon.setUTCDate(horizon.getUTCDate() + 30);
+  const pressure = calendarRelationships.filter((item) => item.date >= today && item.date <= horizon.toISOString().slice(0, 10));
+  const played = calendar.filter((item) => item.homeAway === "home" && (item.status === "final" || item.date < today));
+  const playedMeasured = played.filter((item) => getCurrentProductResults(item.id)?.state === "measured").length;
+  const domainTiles: DomainTile[] = [
+    {
+      key: "campaigns",
+      label: "Campaigns",
+      state: campaignsWaiting ? "attention" : "clear",
+      stateLabel: campaignsWaiting ? "Waiting on approval" : "No approval waiting",
+      metric: campaignsWaiting + " of " + campaignPlans.campaigns.length,
+      detail: "Fixture campaigns with an open gate · " + demoCommercialCampaigns.length + " commercial-calendar drafts",
+      href: "/app/campaigns",
+      linkLabel: "Open campaigns"
+    },
+    {
+      key: "sources",
+      label: "Sources",
+      state: sourcesBlocking.length ? "attention" : "clear",
+      stateLabel: sourcesBlocking.length ? "Blocking decisions" : "Nothing blocked",
+      metric: sources.filter((row) => row.state === "operational").length + " of " + sources.length + " healthy",
+      detail: sourcesBlocking.length ? sourcesBlocking.length + " missing source" + (sourcesBlocking.length === 1 ? " blocks" : "s block") + " a decision until connected" : "Every required source is available",
+      href: "/app/sources?state=attention",
+      linkLabel: "Check sources"
+    },
+    {
+      key: "calendar",
+      label: "Calendar pressure",
+      state: pressure.length ? "attention" : "clear",
+      stateLabel: pressure.length ? "Moments to plan around" : "No pressure in 30 days",
+      metric: String(pressure.length),
+      detail: "Calendar relationships in the next 30 days (international windows, holidays, clashes)",
+      href: "/app/season",
+      linkLabel: "Open calendar"
+    },
+    {
+      key: "learning",
+      label: "Learning",
+      state: played.length === 0 ? "unknown" : playedMeasured === played.length ? "clear" : "unknown",
+      stateLabel: playedMeasured ? "Outcomes measured" : "Not measured",
+      metric: playedMeasured + " of " + played.length,
+      detail: playedMeasured === played.length ? "Played home fixtures with measured outcomes" : "Played home fixtures with measured outcomes · the rest need the club's ticketing data",
+      href: "/app/learning",
+      linkLabel: "Open learning"
+    }
+  ];
+
   const flow = [
     { label: "Signals", state: radarItem?.materialSignalCount ? "ready" : "muted" },
     { label: "Opportunity", state: radarItem?.opportunityScore ? "ready" : "muted" },
@@ -129,6 +185,8 @@ export default async function ExecutiveViewPage({ searchParams }: { searchParams
           </div>
         </div>
       </section>
+
+      <ExecutiveDomains tiles={domainTiles} />
 
       <section className={styles.portfolio} aria-label="Decision portfolio">
         <WorkspaceSectionHeader eyebrow="Decision portfolio" title={"The next " + radar.length + " home decisions, in attention order"} />
