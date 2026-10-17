@@ -177,22 +177,6 @@ test("the public navigation reaches product, pilot and proof pages, and /cases l
   await expect(page).toHaveURL(/\/case-study$/);
 });
 
-test("the public navigation reaches product, pilot and proof pages, and /cases lands on the case study", async ({ page }) => {
-  // On phones the links sit in the Menu disclosure; open it first.
-  const follow = async (name: string) => {
-    const menu = nav(page).getByText("Menu", { exact: true });
-    if (await menu.isVisible()) await menu.click();
-    await nav(page).getByRole("link", { name, exact: true }).locator("visible=true").first().click();
-  };
-  await page.goto("/for-clubs");
-  await follow("Pilot");
-  await expect(page).toHaveURL(/\/pilot\?/);
-  await follow("Proof");
-  await expect(page).toHaveURL(/\/case-study\?/);
-  await page.goto("/cases");
-  await expect(page).toHaveURL(/\/case-study$/);
-});
-
 test("the home shows the product film right after the hero, light until played", async ({ page }) => {
   await page.goto("/");
   const film = page.getByRole("region", { name: "The loop, in 45 seconds." });
