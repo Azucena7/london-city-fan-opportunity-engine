@@ -4,10 +4,8 @@ import { MarketingNav } from "@/components/MarketingNav";
 import { MarketingFooter } from "@/components/MarketingFooter";
 import { OpportunityEngineStage } from "@/components/OpportunityEngineStage";
 import { CommercialEcosystem } from "@/components/CommercialEcosystem";
-import { CommercialDecisionDemo } from "@/components/CommercialDecisionDemo";
 import { CommercialFAQ } from "@/components/CommercialFAQ";
-import { MorningCommercialRead } from "@/components/MorningCommercialRead";
-import { EngineUseCases, HowTheEngineWorks } from "@/components/EngineStory";
+import { EngineUseCases } from "@/components/EngineStory";
 import { HomePromoVideo } from "@/components/HomePromoVideo";
 import { getCurrentProductOpportunity } from "@/lib/productOpportunity";
 import { decisionValidation } from "@/lib/data";
@@ -62,6 +60,8 @@ export default function Home() {
 
       <HomePromoVideo />
 
+      <EngineUseCases />
+
       <section className={styles.proof} aria-labelledby="proof-title">
         <h2 id="proof-title">Hypothesis first. Announcement after.</h2>
         <aside className={styles.sideNote}>
@@ -98,15 +98,9 @@ export default function Home() {
         </div>
       </section>
 
-      <MorningCommercialRead live={live} />
-
-      <CommercialDecisionDemo />
-
-      <HowTheEngineWorks />
-
-      <EngineUseCases />
-
       <CommercialEcosystem />
+
+      <CommercialFAQ />
 
       <section className={styles.pilot} aria-labelledby="pilot-title">
         <div className={styles.pilotField}>
@@ -125,16 +119,6 @@ export default function Home() {
             <Link className={ed.textLink} href="/pilot?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=multi_cycle_proof">See the 4-cycle public demonstration ↗</Link>
             <Link className={ed.textLink} href="/app/demo?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=guided_demo&utm_content=pilot_section">Try the guided product demo ↗</Link>
           </div>
-        </div>
-      </section>
-
-      <CommercialFAQ />
-
-      <section className={styles.finalCta} aria-labelledby="final-title">
-        <h2 id="final-title">Better decisions, same stack.</h2>
-        <div className={ed.actions}>
-          <Link className={ed.coralButton} href="/for-clubs?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=club_pilot&utm_content=final_cta#demo">Request your club pilot</Link>
-          <Link className={ed.textLink} href="/live/london-city?utm_source=avela_home&utm_medium=internal_cta&utm_campaign=live_case&utm_content=final_cta">See a live fixture decision ↗</Link>
         </div>
       </section>
 

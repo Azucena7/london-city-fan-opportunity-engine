@@ -184,13 +184,8 @@ test("home leads with the Opportunity Engine and keeps live and pilot signals ap
   expect(await page.locator("main").evaluate((main) => main.getBoundingClientRect().width)).toBe(width);
 });
 
-test("home Morning Commercial Read marks unconnected signals instead of filling them in", async ({ page }) => {
-  await page.goto("/");
-  const read = page.getByRole("region", { name: "The read before the first meeting." });
-  await expect(read).toBeVisible();
-  // Transport is either read from a dated TfL snapshot or marked as not connected: never blank.
-  await expect(read.getByRole("listitem").filter({ hasText: "Transport" })).toContainText(/Not connected|TfL snapshot of/);
-  await expect(read.getByRole("listitem").filter({ hasText: "Recommended next move" })).toContainText("Live");
+test("the pilot simulator switches scenario and keeps the travel move", async ({ page }) => {
+  await page.goto("/pilot");
   await page.getByRole("tab", { name: /Rail disruption/ }).click();
   await expect(page.getByRole("tabpanel")).toContainText("Send a travel plan with the reminder");
 });

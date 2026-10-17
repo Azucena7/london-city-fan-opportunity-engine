@@ -33,15 +33,12 @@ test("home sections follow the Opportunity Engine story order", async ({ page })
   await page.goto("/");
   const order = [
     "See what could change the match.",
-    "Hypothesis first. Announcement after.",
-    "The read before the first meeting.",
-    "Change the context. Watch the plan.",
-    "Only signals that change decisions.",
+    "The loop, in 45 seconds.",
     "Four decisions it is built to change.",
+    "Hypothesis first. Announcement after.",
     "AVELA works across your tools.",
-    "Prove it on 4–6 fixtures first.",
     "Questions clubs ask.",
-    "Better decisions, same stack."
+    "Prove it on 4–6 fixtures first."
   ];
   const tops: number[] = [];
   for (const name of order) {
@@ -50,23 +47,6 @@ test("home sections follow the Opportunity Engine story order", async ({ page })
     tops.push(await heading.evaluate((element) => element.getBoundingClientRect().top + window.scrollY));
   }
   expect(tops).toEqual([...tops].sort((a, b) => a - b));
-});
-
-test("home decision demo changes the plan per scenario and stays labelled as a simulation", async ({ page }) => {
-  await page.goto("/");
-  const demo = page.getByRole("region", { name: "Change the context. Watch the plan." });
-  await expect(demo).toContainText("illustrative product simulation");
-  const panel = demo.getByRole("tabpanel");
-  await expect(panel).toContainText("Home fixture · Illustrative simulation");
-  await expect(panel).toContainText("Marketing & commercial decision");
-  for (const label of ["Recommended marketing play", "Audience", "Channel", "Spend posture"]) await expect(panel).toContainText(label);
-  for (const tab of ["Competing kick-off", "Rail disruption", "Broadcast pick"]) await expect(demo.getByRole("tab", { name: new RegExp(tab) })).toHaveCount(1);
-  await expect(demo).not.toContainText(/LIVE SIMULATION|Monitoring live context/);
-
-  const before = await panel.innerText();
-  await demo.getByRole("tab", { name: /Broadcast pick/ }).click();
-  await expect(demo.getByRole("tab", { name: /Broadcast pick/ })).toHaveAttribute("aria-selected", "true");
-  expect(await panel.innerText()).not.toBe(before);
 });
 
 test("home shows AVELA complementing specialist tools rather than replacing them", async ({ page }) => {
@@ -131,7 +111,7 @@ test("home and navigation calls to action are truthful and carry internal attrib
   const hrefOf = (name: string) => home.locator("a").filter({ hasText: name }).first().getAttribute("href");
   expect(await hrefOf("Request a club pilot")).toContain("utm_campaign=club_pilot");
   expect(await hrefOf("Try the guided product demo")).toContain("utm_campaign=guided_demo");
-  expect(await hrefOf("See a live fixture decision")).toMatch(/^\/live\/london-city\?utm_source=avela_home.*utm_campaign=live_case/);
+  expect(await hrefOf("Open London City Live")).toMatch(/^\/live\/london-city\?utm_source=avela_home.*utm_campaign=live_case/);
   for (const href of await home.locator('a[href*="utm_"]').evaluateAll((links) => links.map((link) => link.getAttribute("href")))) {
     expect(href).toContain("utm_medium=internal_cta");
   }
@@ -174,12 +154,11 @@ test("home proof is a dated record and the FAQ keeps answers one click away", as
   await expect(faq.getByText("does not promise forecasts or a magic score")).toBeVisible();
 });
 
-test("home Morning Read marks supporter origins as needing club data in the public build", async ({ page }) => {
+test("home hero marks club-data signals as pilot-only instead of filling them in", async ({ page }) => {
   await page.goto("/");
-  const read = page.getByRole("region", { name: "The read before the first meeting." });
-  const origins = read.getByRole("listitem").filter({ hasText: "Supporter origins" });
-  await expect(origins).toContainText("Not connected");
-  await expect(origins).toContainText("needs the club's ticketing aggregate");
+  const signals = page.getByRole("list", { name: "Signals around the match" });
+  await expect(signals.getByRole("listitem").filter({ hasText: "CRM and ticketing" })).toContainText("In a pilot");
+  await expect(signals.getByRole("listitem").filter({ hasText: "Weather" })).toContainText("Reading now");
 });
 
 test("the public navigation reaches product, pilot and proof pages, and /cases lands on the case study", async ({ page }) => {

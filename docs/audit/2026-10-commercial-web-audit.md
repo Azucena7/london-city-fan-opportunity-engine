@@ -142,3 +142,26 @@ En móvil, el mismo orden. "Request pilot" se queda siempre visible, como ahora.
 | 4 | Recortar `/case-study` a la secuencia y lo que demuestra | Medio | Bajo |
 
 Cada paso va en su propia PR, con capturas a 1440, 768 y 390 px y con el lint de Taste.
+
+## 5. Estado
+
+**Paso 1 · Navegación (PR #530):**
+
+- Menú Product · Pilot · Proof · FAQ, con los botones Open demo y Request pilot.
+- `/cases` redirige a `/case-study`.
+
+**Pasos 2 y 3 · Home y piloto (en una sola PR):**
+
+- **Home:** hero → vídeo → "Four decisions" → prueba → "Works across your tools" → FAQ → bloque de piloto. Mide **8,9 pantallas** en escritorio (antes 13,5 con el vídeo) y **13,8** en móvil (antes unas 20,5).
+- **`/pilot`:** recibe el simulador "Change the context. Watch the plan.", junto al método. Pasa de 7,3 a 8,8 pantallas.
+
+**Cambios respecto a la propuesta:**
+
+- **FAQ:** se queda en la home, en desplegables, en lugar de pasar a `/for-clubs`. `/for-clubs` es bilingüe y la FAQ solo existe en inglés. Moverla habría dejado preguntas en inglés dentro de la versión en español. El enlace "FAQ" del menú sigue apuntando a `/#faq`.
+- **Morning Read y "Only signals that change decisions":** se retiran en lugar de moverse.
+  - Morning Read repetía la lista de señales del hero, que ya marca qué se lee hoy ("Reading now") y qué llega con el piloto ("In a pilot").
+  - "Only signals…" repetía el ritmo de `/pilot` ("One rhythm, four moments").
+  - La lectura diaria sigue en la app (`/app`, "Outside the club today").
+- **CTA final:** el bloque "Better decisions, same stack." se fusiona con el bloque de piloto, que cierra la página.
+
+**Paso 4 · Recortar `/case-study`:** pendiente.

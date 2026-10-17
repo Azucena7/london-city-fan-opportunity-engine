@@ -29,3 +29,20 @@ test("pilot ends on a decision about AVELA and its links carry pilot attribution
   await expect(page.locator("main")).not.toContainText("\\n");
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
 });
+
+test("pilot decision demo changes the plan per scenario and stays labelled as a simulation", async ({ page }) => {
+  await page.goto("/pilot");
+  const demo = page.getByRole("region", { name: "Change the context. Watch the plan." });
+  await expect(demo).toContainText("illustrative product simulation");
+  const panel = demo.getByRole("tabpanel");
+  await expect(panel).toContainText("Home fixture · Illustrative simulation");
+  await expect(panel).toContainText("Marketing & commercial decision");
+  for (const label of ["Recommended marketing play", "Audience", "Channel", "Spend posture"]) await expect(panel).toContainText(label);
+  for (const tab of ["Competing kick-off", "Rail disruption", "Broadcast pick"]) await expect(demo.getByRole("tab", { name: new RegExp(tab) })).toHaveCount(1);
+  await expect(demo).not.toContainText(/LIVE SIMULATION|Monitoring live context/);
+
+  const before = await panel.innerText();
+  await demo.getByRole("tab", { name: /Broadcast pick/ }).click();
+  await expect(demo.getByRole("tab", { name: /Broadcast pick/ })).toHaveAttribute("aria-selected", "true");
+  expect(await panel.innerText()).not.toBe(before);
+});
