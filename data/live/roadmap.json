@@ -440,5 +440,20 @@
       "en": "Use priority access now and schedule general-sale CRM for 20 October at 10:00; confirm 15 November, 16:30, Emirates N7 7AJ. Explain tickets for all ages, under-14 accompaniment, ages 0–3 lower-tier row restrictions, enforced seating in blocks 20–23, away alcohol zones and A4 bags. Send accessible parking requests at least 10 days before the match (5 November), commentary requests 72 hours before (12 November) and medical bag exemptions 48 hours before (13 November); confirm exact cutoffs with Supporter Services. Do not promise on-day sales or accessible-space availability.",
       "es": "Usar la prioridad actual y programar CRM general para el 20 de octubre a las 10:00; confirmar 15 de noviembre, 16:30, Emirates N7 7AJ. Explicar entrada para todas las edades, acompañamiento a menores de 14, restricciones de filas para 0–3, asiento obligatorio en bloques 20–23, alcohol en zona visitante y bolsas A4. Enviar solicitudes de parking accesible al menos 10 días antes (5 noviembre), audiodescripción 72 horas antes (12 noviembre) y exención médica 48 horas antes (13 noviembre); confirmar cortes exactos con Supporter Services. No prometer venta en matchday ni plazas accesibles."
     }
+  },
+  {
+    "id": "everton-draw-consent-eligibility-review-2026-10-17",
+    "fixtureId": "2026-10-18-eve-h",
+    "area": "CRM, Matchday Marketing & Data Protection",
+    "status": "next",
+    "due": "2026-10-17",
+    "title": {
+      "en": "Validate and instrument the Everton prize-draw journey",
+      "es": "Validar e instrumentar el recorrido del sorteo de Everton"
+    },
+    "reason": {
+      "en": "The live five-prize draw closes at the 60th minute of Everton on 18 October and offers a separate marketing opt-in. Resolve inconsistent age wording before targeting minors; confirm approved terms and communications. Use the official form/QR, retain consent status and campaign tags, and measure entries, eligible opt-ins and subsequent ticket purchases separately. Do not treat entry as ticket purchase, attendance or automatic marketing permission.",
+      "es": "El sorteo activo de cinco premios cierra en el minuto 60 de Everton el 18 de octubre y ofrece un opt-in comercial separado. Resolver la edad contradictoria antes de dirigirse a menores; confirmar términos y mensajes aprobados. Usar formulario/QR oficial, conservar estado de consentimiento y etiquetas y medir por separado registros, opt-ins elegibles y compras posteriores. No equiparar participación a compra, asistencia o permiso comercial automático."
+    }
   }
 ]
