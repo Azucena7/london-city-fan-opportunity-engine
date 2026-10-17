@@ -181,3 +181,17 @@ test("home Morning Read marks supporter origins as needing club data in the publ
   await expect(origins).toContainText("Not connected");
   await expect(origins).toContainText("needs the club's ticketing aggregate");
 });
+
+test("the home shows the product film right after the hero, light until played", async ({ page }) => {
+  await page.goto("/");
+  const film = page.getByRole("region", { name: "The loop, in 45 seconds." });
+  const video = film.locator("video");
+  await expect(video).toHaveAttribute("poster", "/media/avela-promo-poster.jpg");
+  await expect(video).toHaveAttribute("preload", "none");
+  expect(await video.evaluate((v: HTMLVideoElement) => v.muted && v.controls)).toBe(true);
+  await expect(film).toContainText("London City is not an AVELA customer");
+  await expect(film).toContainText("sample tasks");
+  for (const step of ["Anticipate", "Decide", "Activate", "Learn"]) await expect(film.getByText(step, { exact: true })).toBeVisible();
+  const headings = await page.locator("main h2").allTextContents();
+  expect(headings[0]).toBe("The loop, in 45 seconds.");
+});
