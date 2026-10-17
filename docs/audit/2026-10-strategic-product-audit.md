@@ -365,6 +365,31 @@ Home = "qué necesita mi atención hoy" (top 3 + lectura externa del día). Rada
 
 **Criterios:** dolor del cliente · impacto comercial · diferenciación · demostrabilidad · disponibilidad de datos · coste. **No se prioriza nada por el mero hecho de estar ya construido.**
 
+### Estado a 17‑10‑2026
+
+**Hecho (fusionado en `main`):**
+
+| Fase | PR | Qué |
+|---|---|---|
+| 0 | #510 | Afirmaciones de la web con estado Live today / In a pilot / Planned, `/privacy`, LICENSE, límites de IA, `.env.example` completo |
+| 0 | #511 | "Outside the club today" al inicio de `/app` |
+| 0 | #512 | Señales del partido justo bajo la decisión en la ficha |
+| 0 | #513 | Una sola escala de tiempo, etiquetas "updated daily", cortes de carretera en `/matchday` |
+| 1 | #514 | Presión de contexto: el entorno reordena el Radar con puntos explicados (estado sin cambios) |
+| 1 | #515 | Previsión por partido dentro de 16 días y aviso de cambio de previsión |
+| 1 | #516 | Conciertos y festivales en recintos grandes como eventos de ciudad |
+
+**Reubicado por decisión del fundador:**
+
+- **Vídeo promocional:** se hace al cierre de la fase 2, cuando el producto enseñe "señal → prioridad → tarea externa → Delivered/Worked". Se regenera con `scripts/video/`.
+- **Alcance de YouTube:** se queda en la fase 1, como señal de atención dentro del esquema de señal. No se hace ahora.
+
+**Pendiente de la fase 1:**
+
+- Vacaciones escolares: requiere fichero con las fechas del council (Bromley) con fuente y revisión anual. Pendiente de confirmar fuente.
+- Huelgas como señal propia.
+- Esquema de señal completo: zona, caducidad, confianza tipada y tipo de evidencia.
+
 ### Fase 0: Quick wins (1–2 semanas, sin cambios de arquitectura)
 
 | P | Cambio | Criterio de aceptación |
