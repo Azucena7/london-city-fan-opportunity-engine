@@ -115,11 +115,11 @@ test("home FAQ states integration, execution and prediction boundaries", async (
 test("home and navigation calls to action are truthful and carry internal attribution", async ({ page }) => {
   await page.goto("/");
   const navigation = nav(page);
-  for (const label of ["How it fits", "Live case", "FAQ", "Open workspace", "Request pilot"]) {
+  for (const label of ["Product", "Pilot", "Proof", "FAQ", "Open demo", "Request pilot"]) {
     await expect(navigation.locator("a").filter({ hasText: label }).first()).toHaveCount(1);
   }
   // The workspace entry is the guided demo, not a bare jump into the Radar.
-  for (const href of await navigation.locator("a").filter({ hasText: "Open workspace" }).evaluateAll((links) => links.map((link) => link.getAttribute("href")))) {
+  for (const href of await navigation.locator("a").filter({ hasText: "Open demo" }).evaluateAll((links) => links.map((link) => link.getAttribute("href")))) {
     expect(href).toContain("/app/demo?utm_source=avela_nav");
   }
   await expect(navigation.locator('a[href="/app/matches"]')).toHaveCount(0);
@@ -180,4 +180,20 @@ test("home Morning Read marks supporter origins as needing club data in the publ
   const origins = read.getByRole("listitem").filter({ hasText: "Supporter origins" });
   await expect(origins).toContainText("Not connected");
   await expect(origins).toContainText("needs the club's ticketing aggregate");
+});
+
+test("the public navigation reaches product, pilot and proof pages, and /cases lands on the case study", async ({ page }) => {
+  // On phones the links sit in the Menu disclosure; open it first.
+  const follow = async (name: string) => {
+    const menu = nav(page).getByText("Menu", { exact: true });
+    if (await menu.isVisible()) await menu.click();
+    await nav(page).getByRole("link", { name, exact: true }).locator("visible=true").first().click();
+  };
+  await page.goto("/for-clubs");
+  await follow("Pilot");
+  await expect(page).toHaveURL(/\/pilot\?/);
+  await follow("Proof");
+  await expect(page).toHaveURL(/\/case-study\?/);
+  await page.goto("/cases");
+  await expect(page).toHaveURL(/\/case-study$/);
 });

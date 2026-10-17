@@ -37,6 +37,7 @@ const historicalClubRedirects = [
 const historicalProofRedirects = [
   { source: "/story", destination: "/case-study" },
   { source: "/method", destination: "/case-study" },
+  { source: "/cases", destination: "/case-study" },
   { source: "/london-city", destination: "/live/london-city" },
   { source: "/london-city/:case", destination: "/live/london-city/:case" }
 ];

@@ -634,13 +634,12 @@ test("legacy club routes redirect into the fixture-first workspace", () => {
 });
 
 test("commercial surfaces route users into the simplified club journey", () => {
-  const cases = read("src/app/cases/page.tsx");
   const pilot = read("src/app/pilot/page.tsx");
   const demo = read("src/app/app/demo/page.tsx");
   const demoTour = read("src/components/DemoTour.tsx");
   const operatingPack = read("src/app/pilot/operating-pack/page.tsx");
   const caseOverview = read("src/components/LondonCityCase.tsx");
-  for (const source of [cases, pilot, demo, operatingPack, caseOverview]) {
+  for (const source of [pilot, demo, operatingPack, caseOverview]) {
     assert.doesNotMatch(source, /href="\/brief"/);
     assert.doesNotMatch(source, /href="\/opportunity"/);
     assert.doesNotMatch(source, /href="\/decision-room"/);
@@ -887,12 +886,10 @@ test("pilot rehearsal is clearly synthetic and reachable from the operating pack
 });
 
 
-test("product cases show evidence, not a score", () => {
-  const page = read("src/app/cases/page.tsx");
-  assert.doesNotMatch(page, />Score</);
-  assert.doesNotMatch(page, /planningScore/);
-  assert.match(page, /Decision posture/);
-  assert.match(page, /grounded in its own evidence rather than a single score/);
+test("the orphaned /cases page redirects to the case study", () => {
+  const config = read("next.config.mjs");
+  assert.match(config, /\{ source: "\/cases", destination: "\/case-study" \}/);
+  assert.equal(existsSync("src/app/cases/page.tsx"), false);
 });
 
 
