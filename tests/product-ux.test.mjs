@@ -2469,6 +2469,10 @@ test("commercial pilot request captures a real lead through the server-only path
   assert.match(route, /supabaseServerRequest/);
   assert.match(route, /return=minimal/);
   assert.match(route, /Honeypot/);
+  // Bot check runs before validation and storage; the widget only renders with a public site key.
+  assert.match(route, /verifyTurnstile\(body\.turnstileToken/);
+  assert.ok(route.indexOf("verifyTurnstile(") < route.indexOf("commercial_leads"));
+  assert.match(page, /NEXT_PUBLIC_TURNSTILE_SITE_KEY/);
   assert.match(createMigration, /enable row level security/);
   assert.match(lockMigration, /revoke insert on table public\.commercial_leads from anon/);
   assert.match(lockMigration, /revoke insert on table public\.commercial_leads from authenticated/);

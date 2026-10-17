@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseServerConfigured, supabaseServerRequest } from "@/lib/supabaseServer";
 import { readJson } from "@/lib/requestGuards";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 type LeadBody = {
   clubName?: string;
@@ -9,6 +10,7 @@ type LeadBody = {
   priority?: string;
   consent?: boolean;
   website?: string;
+  turnstileToken?: string;
   sourcePath?: string;
   utmSource?: string;
   utmMedium?: string;
@@ -33,6 +35,12 @@ export async function POST(request: Request) {
   // Honeypot: return a neutral success response without storing obvious bot submissions.
   if (clean(body.website, 200)) {
     return NextResponse.json({ submitted: true });
+  }
+
+  // Bot check before anything is validated or stored; skipped until the Turnstile keys are set.
+  const remoteIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
+  if (!(await verifyTurnstile(body.turnstileToken, remoteIp))) {
+    return NextResponse.json({ error: "The anti-bot check did not pass. Please try again." }, { status: 403 });
   }
 
   const clubName = clean(body.clubName, 120);
