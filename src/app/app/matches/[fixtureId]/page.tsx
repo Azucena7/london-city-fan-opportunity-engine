@@ -447,7 +447,10 @@ export default async function MatchPlanPage({ params }: { params: Promise<{ fixt
           />
         ) : null}
 
-        <ExternalExecutionSync decisionId={`fixture:${fixture.id}`} />
+        <ExternalExecutionSync
+          decisionId={`fixture:${fixture.id}`}
+          workItems={workPackage ? workPackage.items.map(({ key, title, category }) => ({ key, title, category })) : []}
+        />
 
         <OperationalHandoffs
           decisionId={`fixture:${fixture.id}`}

@@ -137,3 +137,43 @@ test("the brief shows what changed around the fixture right under the decision, 
   const stripTop = await strip.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
   expect(stripTop).toBeGreaterThanOrEqual(decisionBottom);
 });
+
+test("the execution monitor sends a proposed package only after confirmation and keeps Delivered apart from Worked", async ({ page }) => {
+  let sent = false;
+  const dispatched: Array<Record<string, unknown>> = [];
+  await page.route("**/api/auth/session", (route) => route.fulfill({
+    json: { configured: true, authenticated: true, clubs: [{ id: "club-1", name: "Demo club", role: "admin" }] }
+  }));
+  await page.route("**/api/work-system/status**", (route) => route.fulfill({ json: {
+    enabled: true,
+    connections: [{ id: "conn-1", system: "asana", label: "Club Asana", state: "connected" }],
+    packages: [{
+      id: "pkg-1", connection_id: "conn-1", package_key: "wp-everton", title: "Everton activation",
+      sync_state: sent ? "synced" : "proposed", item_count: 2, completed_count: sent ? 1 : 0, blocked_count: sent ? 1 : 0, estimated_minutes: 90
+    }],
+    items: sent ? [
+      { id: "i1", package_id: "pkg-1", package_item_key: "approve", state: "done", last_sync_at: "2026-10-14T09:00:00Z" },
+      { id: "i2", package_id: "pkg-1", package_item_key: "send-crm", state: "blocked", blocker_label: "Consent list pending", due_at: "2026-10-15T09:00:00Z", last_sync_at: "2026-10-14T09:00:00Z" }
+    ] : []
+  } }));
+  await page.route("**/api/work-system/dispatch", async (route) => {
+    dispatched.push(route.request().postDataJSON() as Record<string, unknown>);
+    sent = true;
+    await route.fulfill({ json: { sent: true, message: "Sent to the work tool." } });
+  });
+
+  await page.goto(brief);
+  await page.evaluate(() => document.querySelectorAll("details").forEach((panel) => { panel.open = true; }));
+  const monitor = page.getByRole("region", { name: "External execution sync" });
+  await monitor.getByRole("button", { name: /Send to Club Asana/ }).click();
+  expect(dispatched).toHaveLength(0);
+  await monitor.getByRole("button", { name: "Confirm and send" }).click();
+  await expect(monitor.getByRole("status")).toContainText("Sent to the work tool.");
+  expect(dispatched[0]).toMatchObject({ clubId: "club-1", packageKey: "wp-everton", confirm: true });
+
+  const summary = monitor.getByLabel("Execution monitor");
+  await expect(summary).toContainText("1 of 2");
+  await expect(summary).not.toContainText("%");
+  await expect(monitor).toContainText("Consent list pending");
+  await expect(monitor).toContainText("Delivered is not Worked");
+});

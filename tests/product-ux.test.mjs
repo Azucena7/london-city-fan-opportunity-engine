@@ -1994,7 +1994,10 @@ test("external work sync stores only the operational projection AVELA needs", ()
 
   assert.match(page, /ExternalExecutionSync/);
   assert.match(component, /Only operational state required for decision intelligence is synced back/);
-  assert.match(component, /External system owns task execution/);
+  assert.match(component, /external system owns task execution/i);
+  // Delivered (the tool's report) is never shown as Worked (the measured outcome).
+  assert.match(component, /Delivered is not Worked/);
+  assert.doesNotMatch(component, /pct|"%"/);
   assert.match(component, /does not duplicate comments, attachments or full task history/);
   assert.match(component, /safeExternalUrl/);
   assert.ok(component.includes("^https:\\/\\/"));
