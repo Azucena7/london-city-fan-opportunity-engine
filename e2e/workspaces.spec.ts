@@ -164,3 +164,35 @@ test("Radar keeps a signal log that says what each signal measurably changed", a
   await page.goto("/app");
   await expect(page.getByRole("link", { name: "Signal log →" })).toHaveAttribute("href", "/app/matches#signal-log");
 });
+
+test("Home's decision inbox filters the queue and opens a decision without leaving the page", async ({ page, isMobile }) => {
+  await page.goto("/app");
+  const inbox = page.getByRole("region", { name: "Decision inbox" });
+  const rows = inbox.locator("ol > li");
+  await expect(rows.first()).toBeVisible();
+  const total = await rows.count();
+  // Tabs narrow the list; counts on each tab match what it shows.
+  const review = inbox.getByRole("button", { name: /^Review \d+$/ });
+  const reviewCount = Number((await review.innerText()).match(/\d+/)![0]);
+  await review.click();
+  await expect(rows).toHaveCount(reviewCount);
+  await inbox.getByRole("button", { name: /^All open \d+$/ }).click();
+  await expect(rows).toHaveCount(total);
+  // A search with no match offers to clear the filters.
+  await inbox.getByRole("searchbox").fill("zzzz-no-such-decision");
+  await expect(inbox.getByText("No open decision matches these filters.")).toBeVisible();
+  await inbox.getByRole("button", { name: "Clear filters" }).click();
+  await expect(rows).toHaveCount(total);
+  // Selecting a row shows its summary beside the list, or in a sheet on phones; the URL stays.
+  const title = await rows.first().locator("strong").first().innerText();
+  await rows.first().getByRole("button").click();
+  const detail = isMobile ? page.getByRole("dialog") : page.getByRole("complementary", { name: "Selected decision" });
+  await expect(detail.getByRole("heading", { name: title })).toBeVisible();
+  await expect(detail.getByText("AVELA recommends")).toBeVisible();
+  await expect(detail.getByRole("link", { name: "Open to decide →" })).toHaveAttribute("href", /^\/app\//);
+  await expect(page).toHaveURL(/\/app$/);
+  if (isMobile) {
+    await detail.getByRole("button", { name: "Close" }).click();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+  }
+});
