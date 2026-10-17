@@ -87,6 +87,25 @@ export function ClubPilotProposition() {
       </div>
     </header>
 
+    <section className={styles.tour} aria-labelledby="tour-title">
+      <div className={styles.tourCopy}>
+        <h2 id="tour-title">{es ? "El producto, en 50 segundos." : "The product, in 50 seconds."}</h2>
+        <p>{es ? "Grabado sobre la aplicación real: leer, decidir, mover y aprender. Demostración con información pública de London City Lionesses, que no es cliente de AVELA. No se muestran datos de ningún club." : "Recorded on the real application: read, decide, move and learn. A demonstration on London City Lionesses public information; London City is not an AVELA customer. No club data is shown."}</p>
+      </div>
+      <video
+        className={styles.tourVideo}
+        src="/media/avela-tour.mp4"
+        poster="/media/avela-tour-poster.jpg"
+        controls
+        muted
+        playsInline
+        preload="none"
+        width={1280}
+        height={720}
+        aria-label={es ? "Recorrido de 50 segundos por AVELA, con subtítulos en inglés" : "A 50-second tour of AVELA, with captions"}
+      />
+    </section>
+
     <section className={styles.gets} aria-labelledby="gets-title">
       <h2 id="gets-title">{es ? "Señal antes. Aprendizaje después." : "Signal before. Learning after."}</h2>
       <div className={styles.fields}>

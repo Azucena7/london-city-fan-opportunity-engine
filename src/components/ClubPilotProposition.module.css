@@ -73,7 +73,7 @@
 }
 .form :is(input,select):focus-visible{outline:3px solid var(--teal);outline-offset:1px;border-color:var(--navy)}
 .form input::placeholder{color:#6b7a88}
-.commercialHoneypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.commercialHoneypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden} /* taste-skill-ignore: visually hidden bot trap, not a divider */
 .form .consent{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:12px;font-weight:500;line-height:1.5}
 .form .consent input{min-height:0;padding:0;width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--navy)}
 .submitRow{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;color:var(--ink-soft);font-size:15px}
@@ -99,3 +99,9 @@
   .proofRows article a{grid-column:1}
   .cycleSteps,.form{grid-template-columns:minmax(0,1fr)}
 }
+
+.tour{display:grid;grid-template-columns:minmax(0,34fr) minmax(0,66fr);gap:40px;align-items:center;padding:var(--section) var(--m);background:var(--paper)}
+.tourCopy h2{max-width:16ch;margin:0 0 16px}
+.tourCopy p{max-width:44ch;margin:0;line-height:1.55}
+.tourVideo{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:14px;background:#102742}
+@media(max-width:860px){.tour{grid-template-columns:minmax(0,1fr);gap:20px}}

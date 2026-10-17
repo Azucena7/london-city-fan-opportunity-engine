@@ -31,3 +31,15 @@ test("the pilot request form is labelled and asks for consent before sending", a
   await expect(form.getByRole("button", { name: "Request a conversation →" })).toBeEnabled();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
 });
+
+test("the club page shows a short tour recorded on the real app, labelled as a public demonstration", async ({ page }) => {
+  await page.goto("/for-clubs");
+  const tour = page.getByRole("region", { name: /The product, in 50 seconds/ });
+  const video = tour.locator("video");
+  await expect(video).toHaveAttribute("src", "/media/avela-tour.mp4");
+  await expect(video).toHaveAttribute("poster", "/media/avela-tour-poster.jpg");
+  await expect(tour).toContainText("London City is not an AVELA customer");
+  const response = await page.request.get("/media/avela-tour.mp4");
+  expect(response.ok()).toBe(true);
+  expect(response.headers()["content-type"]).toContain("video/mp4");
+});
