@@ -1117,7 +1117,9 @@
       "es": "Priorizar acceso, llegada cubierta y mensajes de servicio; revisar activaciones exteriores."
     },
     "sourceName": "Open-Meteo",
-    "sourceUrl": "https://open-meteo.com/"
+    "sourceUrl": "https://open-meteo.com/",
+    "validUntil": "2026-10-18",
+    "geoScope": "venue"
   },
   {
     "id": "fixture-west-ham-calendar-correction-2026-10-14",

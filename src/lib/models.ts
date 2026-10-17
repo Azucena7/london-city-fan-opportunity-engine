@@ -63,6 +63,14 @@ export type LiveSignal = {
   marketingAction: LocalizedText;
   sourceName: string;
   sourceUrl: string;
+  /** How sure the reviewer is of the signal itself; absent means not yet rated, never "high". */
+  confidence?: "high" | "medium" | "low";
+  /** The area the signal speaks for, from the ground outwards. */
+  geoScope?: "venue" | "local" | "london" | "national";
+  /** Last date (YYYY-MM-DD) the signal can inform a decision; after it, it stops counting. */
+  validUntil?: string;
+  relatedFixtureIds?: string[];
+  sources?: Array<{ name: string; url: string }>;
 };
 
 export type EventLandscapeData = {
