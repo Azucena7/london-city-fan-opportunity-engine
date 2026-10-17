@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { reviewedKickoff } from "./lib/fixture-kickoff.mjs";
 import { applyWeatherSignal } from "./lib/weather-signal.mjs";
+import { FORECAST_WINDOW_DAYS, fixtureForecasts } from "./lib/weather-forecasts.mjs";
 
 const FIXTURES_URL = "https://www.londoncitylionesses.com/fixtures";
 const CALENDAR_PATH = new URL("../data/seed/calendar.json", import.meta.url);
@@ -121,33 +122,32 @@ function materialChangeCount(before, after) {
   return after.filter((item) => JSON.stringify(previous.get(item.id)) !== JSON.stringify(item)).length;
 }
 
-async function fetchWeather(nextHome) {
-  if (!nextHome) return { weather: { status: "waiting", reason: "No upcoming home fixture" }, attempted: false, ok: true };
-  const days = Math.ceil((new Date(`${nextHome.date}T12:00:00Z`) - new Date()) / 86400000);
-  if (days > 16) return { weather: { status: "waiting", reason: "Operational forecast window not yet reliable" }, attempted: false, ok: true };
+async function fetchWeather(nextHome, homeFixtures, previousForecasts) {
+  if (!nextHome) return { weather: { status: "waiting", reason: "No upcoming home fixture" }, forecasts: [], attempted: false, ok: true };
+  const inWindow = homeFixtures.filter((fixture) => Math.ceil((new Date(`${fixture.date}T12:00:00Z`) - new Date()) / 86400000) <= FORECAST_WINDOW_DAYS);
+  if (!inWindow.length) return { weather: { status: "waiting", reason: "Operational forecast window not yet reliable" }, forecasts: [], attempted: false, ok: true };
   const url = new URL("https://api.open-meteo.com/v1/forecast");
   url.search = new URLSearchParams({
-    latitude: "51.3908", longitude: "0.0183", timezone: "Europe/London", forecast_days: "16",
+    latitude: "51.3908", longitude: "0.0183", timezone: "Europe/London", forecast_days: String(FORECAST_WINDOW_DAYS),
     daily: "precipitation_probability_max,precipitation_sum,temperature_2m_max,temperature_2m_min,wind_speed_10m_max"
   }).toString();
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Weather provider returned ${response.status}`);
   const data = await response.json();
-  const index = data.daily?.time?.indexOf(nextHome.date) ?? -1;
-  if (index < 0) return { weather: { status: "waiting", reason: "Fixture date not present in forecast" }, attempted: true, ok: true };
-  return {
-    weather: {
-    status: "forecast", valid_for: nextHome.date, generated_at: new Date().toISOString(),
-    precipitation_probability_max: data.daily.precipitation_probability_max?.[index] ?? null,
-    precipitation_sum: data.daily.precipitation_sum?.[index] ?? null,
-    temperature_max: data.daily.temperature_2m_max?.[index] ?? null,
-    temperature_min: data.daily.temperature_2m_min?.[index] ?? null,
-    wind_speed_max: data.daily.wind_speed_10m_max?.[index] ?? null,
-    source: "Open-Meteo"
-    },
-    attempted: true,
-    ok: true
+  const forecasts = fixtureForecasts(data.daily, inWindow, previousForecasts, new Date().toISOString());
+  const next = forecasts.find((item) => item.fixture_id === nextHome.id);
+  if (!next) return { weather: { status: "waiting", reason: "Fixture date not present in forecast" }, forecasts, attempted: true, ok: true };
+  // The next-home weather keeps its original shape: the brief, Morning Read and signal read it.
+  const weather = {
+    status: next.status, valid_for: next.valid_for, generated_at: next.generated_at,
+    precipitation_probability_max: next.precipitation_probability_max,
+    precipitation_sum: next.precipitation_sum,
+    temperature_max: next.temperature_max,
+    temperature_min: next.temperature_min,
+    wind_speed_max: next.wind_speed_max,
+    source: next.source
   };
+  return { weather, forecasts, attempted: true, ok: true };
 }
 
 function updateCoreSourceHealth(sourceHealth, attemptedAt, results) {
@@ -193,10 +193,12 @@ async function main() {
   const nextHome = scheduled.find((item) => item.homeAway === "home") ?? null;
   const completedHome = [...calendar].reverse().find((item) => item.homeAway === "home" && item.status !== "scheduled") ?? null;
   let weatherResult;
-  try { weatherResult = await fetchWeather(nextHome); }
+  const homeFixtures = scheduled.filter((item) => item.homeAway === "home");
+  try { weatherResult = await fetchWeather(nextHome, homeFixtures, current.weather_by_fixture ?? []); }
   catch (error) {
     weatherResult = {
       weather: { status: "waiting", reason: error instanceof Error ? error.message : "Weather refresh failed" },
+      forecasts: [],
       attempted: true,
       ok: false
     };
@@ -212,6 +214,7 @@ async function main() {
     next_home_fixture_id: nextHome?.id ?? null,
     last_completed_home_fixture_id: completedHome?.id ?? null,
     weather,
+    weather_by_fixture: weatherResult.forecasts,
     material_changes: materialChangeCount(existing, calendar),
     source_failures: fixtureRefresh.ok ? [] : [`Club fixtures: ${fixtureRefresh.message}`]
   };

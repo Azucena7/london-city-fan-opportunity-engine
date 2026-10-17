@@ -17,13 +17,19 @@ export type ContextPressure = { points: number; drivers: ContextDriver[] };
 export type ContextPressureInput = {
   date: string;
   competing: Array<{ level: string; name: string }>;
-  weather?: { validFor?: string; rainProbability?: number | null; windKmh?: number | null } | null;
+  weather?: { validFor?: string; rainProbability?: number | null; windKmh?: number | null; previousRainProbability?: number | null } | null;
   roadClosures: number;
   railDisruptions: string[];
   moments: string[];
 };
 
 export const CONTEXT_PRESSURE_CAP = 20;
+
+/** " (up from 20%)" when the rain risk moved by 10 points or more since the previous refresh. */
+function forecastChange(previous: number | null | undefined, current: number | null | undefined) {
+  if (previous == null || current == null || Math.abs(current - previous) < 10) return "";
+  return ` (${current > previous ? "up" : "down"} from ${previous}%)`;
+}
 const COMPETING_CAP = 9;
 const CALENDAR_CAP = 4;
 
@@ -50,7 +56,7 @@ export function contextPressure({ date, competing, weather, roadClosures, railDi
     if (level !== "low") {
       drivers.push({
         family: "weather",
-        label: `${weather.rainProbability ?? 0}% rain risk${weather.windKmh ? `, ${Math.round(weather.windKmh)} km/h wind` : ""} on matchday`,
+        label: `${weather.rainProbability ?? 0}% rain risk${weather.windKmh ? `, ${Math.round(weather.windKmh)} km/h wind` : ""} on matchday${forecastChange(weather.previousRainProbability, weather.rainProbability)}`,
         points: level === "high" ? 6 : 3,
         evidence: "forecast",
         source: "Open-Meteo"
