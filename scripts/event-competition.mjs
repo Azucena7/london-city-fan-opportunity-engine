@@ -2,6 +2,10 @@ const HOME_GROUND = { latitude: 51.3911137, longitude: 0.0182409 };
 const WSL_FIXTURES_URL = "https://womensleagues.thefa.com/fixtures/";
 
 const MAJOR_VENUE = /(wembley|the o2|tottenham hotspur|emirates|london stadium|stamford bridge|twickenham|royal albert hall|lord'?s|the oval|all england|centre court|copper box)/i;
+// Concerts, shows and festivals compete for the same free day, transport and spend when they
+// are at a stadium or arena-scale venue, or billed as a festival. Routine venues stay out.
+const CITY_EVENT_CATEGORY = /^(music|arts & theatre)$/i;
+const FESTIVAL = /festival/i;
 const MAJOR_SPORT_EVENT = /(final|international|world cup|euro cup|six nations|wimbledon|laver cup|nfl london|test match|the ashes|grand slam|championship)/i;
 const LONDON_PREMIER_LEAGUE = new Set(["Arsenal", "Brentford", "Chelsea", "Crystal Palace", "Fulham", "Spurs"]);
 const LONDON_EFL = new Set(["AFC Wimbledon", "Bromley", "Charlton Athletic", "Leyton Orient", "Millwall", "Queens Park Rangers", "West Ham United"]);
@@ -184,6 +188,10 @@ function competitionForFixture(event, fixture) {
     audienceScore = 28;
     scaleScore = 18;
     reasons.push(localised("Nationally prominent men's fixture", "Partido masculino de atención nacional"));
+  } else if (event.kind === "major-city-event") {
+    audienceScore = 18;
+    scaleScore = MAJOR_VENUE.test(`${event.venue} ${event.name}`) ? 16 : 10;
+    reasons.push(localised("Major concert, show or festival the same day", "Gran concierto, espectáculo o festival el mismo día"));
   } else {
     audienceScore = 20;
     scaleScore = MAJOR_VENUE.test(`${event.venue} ${event.name}`) ? 16 : 10;
@@ -326,13 +334,17 @@ export function parseOfficialLeagueFixtures(html, fixtures) {
 
 export function rankEventCompetition(rawEvents, fixtures) {
   const grouped = new Map();
-  for (const event of rawEvents) {
+  for (let event of rawEvents) {
     const isStructuredFixture = event.kind && event.kind !== "public-event";
     const isMajorSport = event.kind === "public-event"
       && event.category === "Sports"
       && MAJOR_SPORT_EVENT.test(`${event.name} ${event.genre ?? ""}`)
       && MAJOR_VENUE.test(`${event.venue} ${event.name}`);
-    if (!isStructuredFixture && !isMajorSport) continue;
+    const isMajorCityEvent = event.kind === "public-event"
+      && CITY_EVENT_CATEGORY.test(event.category ?? "")
+      && (MAJOR_VENUE.test(`${event.venue} ${event.name}`) || FESTIVAL.test(event.name));
+    if (!isStructuredFixture && !isMajorSport && !isMajorCityEvent) continue;
+    if (isMajorCityEvent) event = { ...event, kind: "major-city-event" };
     const key = isStructuredFixture
       ? event.id
       : `${normalise(event.name)}|${normalise(event.venue)}|${event.date}`;

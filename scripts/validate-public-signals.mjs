@@ -79,6 +79,18 @@ if (!directLeagueCompetition || directLeagueCompetition.level !== "high" || dire
 if (ranked.some((event) => event.kind === "public-event")) {
   throw new Error("Routine cultural and entertainment filtering failed");
 }
+
+// A concert at an arena-scale venue the same day stays in, as a city event, not as football.
+const cityRanked = rankEventCompetition([
+  { ...ticketmaster[0], id: "o2-concert", name: "Arena tour", venue: "The O2", time: "15:00:00", latitude: 51.5030, longitude: 0.0032 },
+  { ...ticketmaster[0], id: "pub-gig", name: "Local gig", venue: "Small club", time: "17:00:00" }
+], [fixture]);
+if (!cityRanked.some((event) => event.id === "o2-concert" && event.kind === "major-city-event")) {
+  throw new Error("Major concerts at arena-scale venues must be kept as city events");
+}
+if (cityRanked.some((event) => event.id === "pub-gig")) {
+  throw new Error("Routine venues must stay filtered out");
+}
 if (ranked.some((event) => event.name === "Repeated exhibition admission")) {
   throw new Error("Repeated miscellaneous admission filtering failed");
 }
