@@ -20,6 +20,8 @@ export type ContextPressureInput = {
   weather?: { validFor?: string; rainProbability?: number | null; windKmh?: number | null; previousRainProbability?: number | null } | null;
   roadClosures: number;
   railDisruptions: string[];
+  /** TfL names strike or industrial action as the reason for a disruption on the day. */
+  strike?: boolean;
   moments: string[];
 };
 
@@ -33,7 +35,7 @@ function forecastChange(previous: number | null | undefined, current: number | n
 const COMPETING_CAP = 9;
 const CALENDAR_CAP = 4;
 
-export function contextPressure({ date, competing, weather, roadClosures, railDisruptions, moments }: ContextPressureInput): ContextPressure {
+export function contextPressure({ date, competing, weather, roadClosures, railDisruptions, strike = false, moments }: ContextPressureInput): ContextPressure {
   const drivers: ContextDriver[] = [];
 
   const high = competing.filter((event) => event.level === "high");
@@ -69,7 +71,7 @@ export function contextPressure({ date, competing, weather, roadClosures, railDi
       roadClosures > 0 ? `${roadClosures} road closure${roadClosures === 1 ? "" : "s"} within 5 km` : null,
       railDisruptions.length ? `rail: ${railDisruptions.join(", ")}` : null
     ].filter(Boolean);
-    drivers.push({ family: "transport", label: parts.join(" · "), points: 6, evidence: "reported", source: "TfL" });
+    drivers.push({ family: "transport", label: `${strike ? "Strike or industrial action · " : ""}${parts.join(" · ")}`, points: 6, evidence: "reported", source: "TfL" });
   }
 
   if (moments.length) {

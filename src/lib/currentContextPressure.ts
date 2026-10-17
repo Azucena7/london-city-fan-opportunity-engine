@@ -6,6 +6,8 @@ import { contextPressure, type ContextPressure } from "@/lib/contextPressure";
 import { railStatusForFixture } from "@/lib/mobilityProviderReadiness";
 import { roadClosuresOn } from "@/lib/morningRead";
 
+const STRIKE = /strike|industrial action|walk-?out/i;
+
 /** Context pressure for one fixture from the latest refresh: events, forecast, TfL and calendar. */
 export function getContextPressure(fixtureId: string, date: string): ContextPressure {
   const competing = eventLandscape.events.flatMap((event) =>
@@ -30,6 +32,7 @@ export function getContextPressure(fixtureId: string, date: string): ContextPres
     } : null,
     roadClosures: roadClosuresOn(tflRoad.incidents, date).length,
     railDisruptions: rail ? rail.disruptions.map((item) => `${item.line} ${item.status.toLowerCase()}`) : [],
+    strike: Boolean(rail?.disruptions.some((item) => STRIKE.test(`${item.status} ${item.reason ?? ""}`))),
     moments
   });
 }
