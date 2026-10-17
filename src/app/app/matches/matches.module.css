@@ -63,8 +63,19 @@
   text-decoration:none;
 }
 .radarFixture:hover{background:#FAFCFC}
+/* Row rhythm: a quiet alternate tint and a state edge (same colour family as the state badge) */
+.radarList .radarFixture{padding-left:10px;box-shadow:inset 3px 0 0 var(--radar-edge,transparent)}
+.radarList .radarFixture:nth-child(even){background:#F7F9F9}
+.radarList .radarFixture:nth-child(even) .radarScoreline>div{background:#fff}
+.radarList .radarFixture:hover{background:#EEF5F4}
+.radarList .radarFixture:focus-visible{outline:2px solid var(--product-ink);outline-offset:-2px}
+.radarFixture[data-state="actnow"]{--radar-edge:#EF8B6C}
+.radarFixture[data-state="review"]{--radar-edge:#D9AE5F}
+.radarFixture[data-state="monitor"]{--radar-edge:#2F8F83}
+.radarFixture[data-state="nomaterialopportunity"]{--radar-edge:#C3CDD5}
+.radarFixture[data-state="actnow"] .radarRank{background:#FCE7DF;color:#8A3B22}
 .futureFixture{min-height:82px}
-.radarRank{color:var(--product-muted);font-size:11px;font-weight:900}
+.radarRank{display:inline-grid;place-items:center;justify-self:start;min-width:28px;height:22px;padding:0 6px;border-radius:6px;background:#EDF1F3;color:#33475B;font-size:11px;font-weight:900}
 .radarMatch span,.radarOpportunity span{display:block;color:var(--product-muted);font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.045em}
 .radarMatch strong{display:block;margin-top:3px;font-size:13px}
 .radarMatch small{display:block;margin-top:2px;color:var(--product-muted);font-size:11px;line-height:1.35}
